@@ -1,0 +1,55 @@
+# Flutter / Dart
+.dart_tool/
+.flutter-plugins
+.flutter-plugins-dependencies
+.packages
+.pub-cache/
+.pub/
+build/
+*.dart.js
+*.js_
+*.js.deps
+*.js.map
+
+# IDE
+.idea/
+.vscode/
+*.iml
+*.ipr
+*.iws
+.atom/
+
+# macOS
+.DS_Store
+*.dmg
+
+# Windows
+Thumbs.db
+desktop.ini
+
+# Log / Temp
+*.log
+*.pyc
+*.swp
+*.swo
+*~
+.buildlog/
+
+# Firebase (hassas bilgi — her geliştirici kendi yapılandırır)
+# firebase_options.dart — Template olarak commit edilecek, gerçek anahtarlar değil
+google-services.json
+GoogleService-Info.plist
+
+# Environment
+.env
+.env.*
+
+# Coverage
+coverage/
+*.lcov
+
+# Generated files (build_runner tarafından üretilir — gerekirse yeniden üretilir)
+# *.g.dart → commit ediyoruz çünkü CI'da build_runner çalışmayabilir
+
+# Pubspec lock (Flutter projelerinde commit edilir — tutarlı bağımlılıklar)
+# pubspec.lock → commit ediyoruz
