@@ -44,6 +44,14 @@ GoogleService-Info.plist
 .env
 .env.*
 
+# Android signing (hassas — her geliştirici kendisi oluşturur)
+android/key.properties
+*.jks
+*.keystore
+
+# Android local
+android/local.properties
+
 # Coverage
 coverage/
 *.lcov
