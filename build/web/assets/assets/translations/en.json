@@ -1,0 +1,79 @@
+{
+  "app": {
+    "name": "LÛTKE",
+    "tagline": "Zimanê Kurdî",
+    "description": "Learn Kurmanji Kurdish"
+  },
+  "nav": {
+    "home": "Home",
+    "lessons": "Lessons",
+    "practice": "Practice",
+    "profile": "Profile",
+    "search": "Search"
+  },
+  "onboarding": {
+    "welcome": "Welcome to LÛTKE",
+    "subtitle": "Let's start learning Kurmanji",
+    "heritage_title": "Are you a heritage speaker?",
+    "heritage_desc": "If Kurmanji is spoken in your family or you learned it as a child",
+    "level_select": "Select your level",
+    "daily_goal": "Daily goal",
+    "goal_10": "10 words",
+    "goal_20": "20 words",
+    "goal_30": "30 words",
+    "start": "Start!",
+    "skip": "Skip"
+  },
+  "home": {
+    "daily_goal": "Daily Goal",
+    "streak": "Day Streak",
+    "due_cards": "Cards Due",
+    "continue": "Continue",
+    "new_lesson": "New Lesson",
+    "review": "Review"
+  },
+  "lesson": {
+    "correct": "Correct!",
+    "incorrect": "Incorrect",
+    "again": "Again",
+    "hard": "Hard",
+    "good": "Good",
+    "easy": "Easy",
+    "show_answer": "Show Answer",
+    "complete": "Lesson Complete!",
+    "xp_earned": "+{xp} XP earned"
+  },
+  "levels": {
+    "a1": "Beginner (A1)",
+    "a2": "Elementary (A2)",
+    "b1": "Pre-Intermediate (B1)",
+    "b2": "Intermediate (B2)",
+    "c1": "Advanced (C1)",
+    "c2": "Mastery (C2)"
+  },
+  "profile": {
+    "title": "My Profile",
+    "stats": "Statistics",
+    "settings": "Settings",
+    "logout": "Log Out",
+    "total_words": "Total Words",
+    "accuracy": "Accuracy",
+    "streak_days": "Day Streak"
+  },
+  "auth": {
+    "login": "Log In",
+    "register": "Register",
+    "email": "Email",
+    "password": "Password",
+    "name": "Full Name",
+    "forgot_password": "Forgot Password",
+    "anonymous": "Continue as Guest",
+    "already_member": "Already a member?",
+    "not_member": "Not a member?"
+  },
+  "errors": {
+    "no_internet": "No internet connection",
+    "general": "An error occurred",
+    "retry": "Retry"
+  }
+}
