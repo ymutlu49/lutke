@@ -134,31 +134,6 @@ class HomeScreen extends ConsumerWidget {
                     ref: ref,
                   ),
 
-                  const SizedBox(height: AppSpacing.lg),
-
-                  // ════════════════════════════════════════════════
-                  // 4) ACTIVITY GRID — 2x2 shortcuts
-                  // ════════════════════════════════════════════════
-                  Padding(
-                    padding: const EdgeInsets.only(bottom: AppSpacing.md),
-                    child: Row(
-                      children: [
-                        Icon(Icons.grid_view_rounded, size: 22, color: AppColors.primary),
-                        const SizedBox(width: AppSpacing.sm),
-                        Text(
-                          'Çalakiyên Fêrbûnê',
-                          style: AppTypography.headingSmall.copyWith(
-                            color: AppColors.textPrimary,
-                            fontWeight: FontWeight.w700,
-                          ),
-                        ),
-                      ],
-                    ),
-                  ).animate().fadeIn(delay: 300.ms),
-
-                  // ── 2x2 Activity Grid (4 items only) ──────────
-                  _ActivityGrid(userId: userId, dailyStats: dailyStats),
-
                   const SizedBox(height: AppSpacing.sm),
 
                   // ── Günlük Ödül ─────────────────────────────

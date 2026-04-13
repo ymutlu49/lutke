@@ -71,7 +71,7 @@ abstract class AppRoutes {
   static const quiz              = '/home/quiz';
   static const sentenceBuilder   = '/home/sentence-builder';
   static const wordMatch         = '/home/word-match';
-  static const grammar           = '/home/grammar';
+  static const grammar           = '/grammar';
   static const story             = '/home/story';
   static const review            = '/home/review';
   static const progressMap       = '/progress-map';
@@ -258,7 +258,17 @@ GoRouter appRouter(AppRouterRef ref) {
             ],
           ),
 
-          // Tab 2: Çand (Kültür)
+          // Tab 2: Rêziman (Gramer)
+          StatefulShellBranch(
+            routes: [
+              GoRoute(
+                path: AppRoutes.grammar,
+                builder: (_, __) => const GrammarTipsScreen(),
+              ),
+            ],
+          ),
+
+          // Tab 3: Çand (Kültür)
           StatefulShellBranch(
             routes: [
               GoRoute(
@@ -268,7 +278,7 @@ GoRouter appRouter(AppRouterRef ref) {
             ],
           ),
 
-          // Tab 3: Profîl
+          // Tab 4: Profîl
           StatefulShellBranch(
             routes: [
               GoRoute(
@@ -455,16 +465,22 @@ class _PersistentBottomNav extends StatelessWidget {
                 onTap: () => onTap(1),
               ),
               _Tab(
-                icon: Icons.music_note_rounded,
-                label: 'Çand',
+                icon: Icons.auto_stories_rounded,
+                label: 'Rêziman',
                 isActive: currentIndex == 2,
                 onTap: () => onTap(2),
               ),
               _Tab(
-                icon: Icons.person_rounded,
-                label: 'Profîl',
+                icon: Icons.music_note_rounded,
+                label: 'Çand',
                 isActive: currentIndex == 3,
                 onTap: () => onTap(3),
+              ),
+              _Tab(
+                icon: Icons.person_rounded,
+                label: 'Profîl',
+                isActive: currentIndex == 4,
+                onTap: () => onTap(4),
               ),
             ],
           ),
