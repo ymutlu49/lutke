@@ -53,14 +53,16 @@ class LutkeLogo extends StatelessWidget {
   }
 
   Widget _buildIcon() {
-    return SizedBox(
-      width: size,
-      height: size,
-      child: Image.asset(
-        _assetForSize(size),
-        fit: BoxFit.contain,
-        filterQuality: FilterQuality.medium,
-        errorBuilder: (_, __, ___) => _fallbackIcon(size),
+    return ClipOval(
+      child: SizedBox(
+        width: size,
+        height: size,
+        child: Image.asset(
+          _assetForSize(size),
+          fit: BoxFit.cover,
+          filterQuality: FilterQuality.medium,
+          errorBuilder: (_, __, ___) => _fallbackIcon(size),
+        ),
       ),
     );
   }
@@ -124,14 +126,16 @@ class LutkeLogo extends StatelessWidget {
     return Row(
       mainAxisSize: MainAxisSize.min,
       children: [
-        SizedBox(
-          width: size,
-          height: size,
-          child: Image.asset(
-            _assetForSize(size),
-            fit: BoxFit.contain,
-            filterQuality: FilterQuality.medium,
-            errorBuilder: (_, __, ___) => _fallbackIcon(size),
+        ClipOval(
+          child: SizedBox(
+            width: size,
+            height: size,
+            child: Image.asset(
+              _assetForSize(size),
+              fit: BoxFit.cover,
+              filterQuality: FilterQuality.medium,
+              errorBuilder: (_, __, ___) => _fallbackIcon(size),
+            ),
           ),
         ),
 

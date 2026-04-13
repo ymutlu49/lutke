@@ -333,8 +333,8 @@ class _CulturePlaceholder extends StatelessWidget {
         elevation: 0,
         title: Row(
           children: [
-            Image.asset('assets/images/logo_128.png', width: 36, height: 36,
-              filterQuality: FilterQuality.medium),
+            ClipOval(child: Image.asset('assets/images/logo_128.png', width: 44, height: 44, fit: BoxFit.cover,
+              filterQuality: FilterQuality.medium)),
             const SizedBox(width: 10),
             Text('Çand — Kültür',
               style: TextStyle(
