@@ -6,6 +6,7 @@ import 'package:go_router/go_router.dart';
 import '../../core/constants/app_colors.dart';
 import '../../core/constants/app_typography.dart';
 import '../../core/constants/app_spacing.dart';
+import '../../shared/providers/language_mode_provider.dart';
 import 'cultural_entities.dart';
 
 // ════════════════════════════════════════════════════════════════
@@ -98,25 +99,28 @@ class _CulturalRewardCardState extends State<CulturalRewardCard> {
 
                 Gap.md,
 
-                // Türkçe çeviri toggle
-                _ToggleSection(
-                  label: 'Türkçe çeviri',
-                  isOpen: _showTranslation,
-                  onToggle: () =>
-                      setState(() => _showTranslation = !_showTranslation),
-                  child: Text(
-                    widget.item.turkishContent,
-                    style: AppTypography.body.copyWith(
-                      color: AppColors.textSecondary,
-                      height: 1.7,
-                      fontStyle: widget.item.type == CulturalContentType.poem ||
-                              widget.item.type == CulturalContentType.song
-                          ? FontStyle.italic
-                          : FontStyle.normal,
+                // Türkçe çeviri toggle — only when showTurkish
+                Consumer(builder: (_, ref, __) {
+                  if (!ref.watch(showTurkishProvider)) return const SizedBox.shrink();
+                  return _ToggleSection(
+                    label: 'Türkçe çeviri',
+                    isOpen: _showTranslation,
+                    onToggle: () =>
+                        setState(() => _showTranslation = !_showTranslation),
+                    child: Text(
+                      widget.item.turkishContent,
+                      style: AppTypography.body.copyWith(
+                        color: AppColors.textSecondary,
+                        height: 1.7,
+                        fontStyle: widget.item.type == CulturalContentType.poem ||
+                                widget.item.type == CulturalContentType.song
+                            ? FontStyle.italic
+                            : FontStyle.normal,
+                      ),
+                      textAlign: TextAlign.center,
                     ),
-                    textAlign: TextAlign.center,
-                  ),
-                ).animate(delay: 500.ms).fadeIn(),
+                  ).animate(delay: 500.ms).fadeIn();
+                }),
 
                 // Kültürel arka plan notu
                 if (widget.item.backgroundNote != null) ...[
@@ -237,8 +241,11 @@ class _CardHeader extends StatelessWidget {
               Text(item.typeLabel,
                   style: AppTypography.captionStrong
                       .copyWith(color: _accentColor)),
-              // Türkçe tür — ikincil
-              Text(item.typeTurkish, style: AppTypography.caption),
+              // Türkçe tür — ikincil (only when showTurkish)
+              Consumer(builder: (_, ref, __) {
+                if (!ref.watch(showTurkishProvider)) return const SizedBox.shrink();
+                return Text(item.typeTurkish, style: AppTypography.caption);
+              }),
             ],
           ),
           const Spacer(),
@@ -252,13 +259,16 @@ class _CardHeader extends StatelessWidget {
               color: AppColors.success.withOpacity(0.12),
               borderRadius: AppRadius.full,
             ),
-            child: Text(
-              'Azad · Ücretsiz',
-              style: AppTypography.caption.copyWith(
-                color: AppColors.success,
-                fontSize: 10,
-              ),
-            ),
+            child: Consumer(builder: (_, ref, __) {
+              final showTr = ref.watch(showTurkishProvider);
+              return Text(
+                showTr ? 'Azad · Ücretsiz' : 'Azad',
+                style: AppTypography.caption.copyWith(
+                  color: AppColors.success,
+                  fontSize: 10,
+                ),
+              );
+            }),
           ),
         ],
       ),
@@ -435,15 +445,17 @@ class CulturalScreen extends ConsumerWidget {
                         style: AppTypography.headline.copyWith(
                           color: AppColors.primary,
                         )),
-                    // Türkçe ikincil
-                    Text('Kültür Yolu',
-                        style: AppTypography.caption),
-                    Gap.sm,
-                    Text(
-                      'Türküler, atasözleri, şiirler — Kürt kültürünün özü.\n'
-                      'Bu içeriklerin tümü ücretsizdir.',
-                      style: AppTypography.body.muted,
-                    ),
+                    // Türkçe ikincil — only when showTurkish
+                    if (ref.watch(showTurkishProvider)) ...[
+                      Text('Kültür Yolu',
+                          style: AppTypography.caption),
+                      Gap.sm,
+                      Text(
+                        'Türküler, atasözleri, şiirler — Kürt kültürünün özü.\n'
+                        'Bu içeriklerin tümü ücretsizdir.',
+                        style: AppTypography.body.muted,
+                      ),
+                    ],
                   ],
                 ).animate().fadeIn(duration: 400.ms),
               ),
@@ -565,16 +577,22 @@ class _NewrozBanner extends StatelessWidget {
                         style: AppTypography.kurmanjiCard.copyWith(
                           color: AppColors.accent,
                         )),
-                    // Türkçe — küçük, ikincil
-                    Text('Kürt Yeni Yılı — 21 Mart',
-                        style: AppTypography.caption),
+                    // Türkçe — küçük, ikincil (only when showTurkish)
+                    Consumer(builder: (_, ref, __) {
+                      if (!ref.watch(showTurkishProvider)) return const SizedBox.shrink();
+                      return Text('Kürt Yeni Yılı — 21 Mart',
+                          style: AppTypography.caption);
+                    }),
                     Gap.xs,
-                    Text(
-                      'Kawa\'nın hikayesini keşfet',
-                      style: AppTypography.caption.copyWith(
-                        color: AppColors.textSecondary,
-                      ),
-                    ),
+                    Consumer(builder: (_, ref, __) {
+                      final showTr = ref.watch(showTurkishProvider);
+                      return Text(
+                        showTr ? 'Kawa\'nın hikayesini keşfet' : 'Çîroka Kawa bibîne',
+                        style: AppTypography.caption.copyWith(
+                          color: AppColors.textSecondary,
+                        ),
+                      );
+                    }),
                   ],
                 ),
               ),
@@ -664,8 +682,11 @@ class _CulturalListTile extends StatelessWidget {
                     color: AppColors.primaryDark,
                   )),
               Gap.xs,
-              // Türkçe — ikincil
-              Text(item.turkishTitle, style: AppTypography.caption),
+              // Türkçe — ikincil (only when showTurkish)
+              Consumer(builder: (_, ref, __) {
+                if (!ref.watch(showTurkishProvider)) return const SizedBox.shrink();
+                return Text(item.turkishTitle, style: AppTypography.caption);
+              }),
               Gap.sm,
               // İçerik önizleme
               Text(
@@ -703,8 +724,11 @@ class CulturalDetailScreen extends StatelessWidget {
             // Kurmancî başlık — birincil
             Text(item.typeLabel,
                 style: AppTypography.label.copyWith(color: AppColors.primary)),
-            // Türkçe — ikincil
-            Text(item.typeTurkish, style: AppTypography.caption),
+            // Türkçe — ikincil (only when showTurkish)
+            Consumer(builder: (_, ref, __) {
+              if (!ref.watch(showTurkishProvider)) return const SizedBox.shrink();
+              return Text(item.typeTurkish, style: AppTypography.caption);
+            }),
           ],
         ),
         centerTitle: true,
@@ -801,14 +825,17 @@ class _NewrozScreenState extends State<NewrozScreen>
 
                 Gap.xs,
 
-                // Türkçe — ikincil
-                Text(
-                  'Nevruz Kutlu Olsun!',
-                  style: AppTypography.body.copyWith(
-                    color: AppColors.accent.withOpacity(0.7),
-                  ),
-                  textAlign: TextAlign.center,
-                ).animate(delay: 500.ms).fadeIn(),
+                // Türkçe — ikincil (only when showTurkish)
+                Consumer(builder: (_, ref, __) {
+                  if (!ref.watch(showTurkishProvider)) return const SizedBox.shrink();
+                  return Text(
+                    'Nevruz Kutlu Olsun!',
+                    style: AppTypography.body.copyWith(
+                      color: AppColors.accent.withOpacity(0.7),
+                    ),
+                    textAlign: TextAlign.center,
+                  ).animate(delay: 500.ms).fadeIn();
+                }),
 
                 Gap.xl,
 

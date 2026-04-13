@@ -124,16 +124,12 @@ class TtsService {
 
 final ttsServiceProvider = Provider<TtsService>((_) => TtsService());
 
-/// Web SpeechSynthesis ile Türkçe seslendirme (Kurmancî'ye fonetik yakın)
+/// Web SpeechSynthesis — Kurdish-first voice strategy
 ///
-/// JavaScript'te çalışır:
-/// ```js
-/// const utterance = new SpeechSynthesisUtterance(text);
-/// utterance.lang = 'tr-TR'; // Türkçe — Kurmancî fonetik benzerliği
-/// utterance.rate = 0.85;    // Biraz yavaş — öğrenci dostu
-/// utterance.pitch = 1.0;
-/// speechSynthesis.speak(utterance);
-/// ```
+/// Strateji:
+/// 1. Önce Kurdish (ku-*) seslendirici aranır
+/// 2. Bulunamazsa Türkçe (tr-TR) fallback — Kurmancî'ye fonetik yakın
+/// 3. O da yoksa lang='tr-TR' ile varsayılan ses
 ///
 /// Bu fonksiyon web ortamında dart:js_interop ile çağrılır.
 String getWebTtsScript(String text) {
@@ -145,8 +141,52 @@ String getWebTtsScript(String text) {
   return '''
     (function() {
       const u = new SpeechSynthesisUtterance('$escaped');
-      u.lang = 'tr-TR';
-      u.rate = 0.85;
+      const voices = speechSynthesis.getVoices();
+      const kurdish = voices.find(v => v.lang.startsWith('ku'));
+      const turkish = voices.find(v => v.lang.startsWith('tr'));
+      if (kurdish) {
+        u.voice = kurdish;
+        u.lang = kurdish.lang;
+      } else if (turkish) {
+        u.voice = turkish;
+        u.lang = 'tr-TR';
+      } else {
+        u.lang = 'tr-TR';
+      }
+      u.rate = 0.82;
+      u.pitch = 1.0;
+      speechSynthesis.cancel();
+      speechSynthesis.speak(u);
+    })();
+  ''';
+}
+
+/// Yavaş seslendirme — öğrenci için ekstra yavaş tempo
+///
+/// Dinleme alıştırmalarında "yavaş mod" için kullanılır.
+/// rate: 0.6 — belirgin şekilde yavaş, heceler duyulabilir.
+String getWebTtsScriptSlow(String text) {
+  final escaped = text
+      .replaceAll("'", "\\'")
+      .replaceAll('"', '\\"')
+      .replaceAll('\n', ' ');
+
+  return '''
+    (function() {
+      const u = new SpeechSynthesisUtterance('$escaped');
+      const voices = speechSynthesis.getVoices();
+      const kurdish = voices.find(v => v.lang.startsWith('ku'));
+      const turkish = voices.find(v => v.lang.startsWith('tr'));
+      if (kurdish) {
+        u.voice = kurdish;
+        u.lang = kurdish.lang;
+      } else if (turkish) {
+        u.voice = turkish;
+        u.lang = 'tr-TR';
+      } else {
+        u.lang = 'tr-TR';
+      }
+      u.rate = 0.6;
       u.pitch = 1.0;
       speechSynthesis.cancel();
       speechSynthesis.speak(u);

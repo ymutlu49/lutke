@@ -328,8 +328,8 @@ class _ListeningScreenState extends ConsumerState<ListeningScreen>
     });
   }
 
-  /// Play TTS for given text at a specific rate (for correct answer auto-play)
-  void _playTts(String text, {double rate = 0.85}) {
+  /// Play TTS for given text — Kurdish-first voice strategy
+  void _playTts(String text, {double rate = 0.82}) {
     if (!kIsWeb) return;
     final escaped = text
         .replaceAll("'", "\\'")
@@ -338,7 +338,18 @@ class _ListeningScreenState extends ConsumerState<ListeningScreen>
     final script = '''
       (function() {
         const u = new SpeechSynthesisUtterance('$escaped');
-        u.lang = 'tr-TR';
+        const voices = speechSynthesis.getVoices();
+        const kurdish = voices.find(v => v.lang.startsWith('ku'));
+        const turkish = voices.find(v => v.lang.startsWith('tr'));
+        if (kurdish) {
+          u.voice = kurdish;
+          u.lang = kurdish.lang;
+        } else if (turkish) {
+          u.voice = turkish;
+          u.lang = 'tr-TR';
+        } else {
+          u.lang = 'tr-TR';
+        }
         u.rate = $rate;
         u.pitch = 1.0;
         speechSynthesis.cancel();

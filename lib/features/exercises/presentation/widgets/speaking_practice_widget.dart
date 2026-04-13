@@ -67,8 +67,8 @@ class _SpeakingPracticeWidgetState
 
   SpeakingPracticeExercise get _ex => widget.exercise;
 
-  /// Play TTS directly for shadow reading or encouragement
-  void _playTtsDirect(String text, {double rate = 0.85}) {
+  /// Play TTS directly — Kurdish-first voice strategy
+  void _playTtsDirect(String text, {double rate = 0.82}) {
     if (!kIsWeb) return;
     final escaped = text
         .replaceAll("'", "\\'")
@@ -77,7 +77,18 @@ class _SpeakingPracticeWidgetState
     final script = '''
       (function() {
         const u = new SpeechSynthesisUtterance('$escaped');
-        u.lang = 'tr-TR';
+        const voices = speechSynthesis.getVoices();
+        const kurdish = voices.find(v => v.lang.startsWith('ku'));
+        const turkish = voices.find(v => v.lang.startsWith('tr'));
+        if (kurdish) {
+          u.voice = kurdish;
+          u.lang = kurdish.lang;
+        } else if (turkish) {
+          u.voice = turkish;
+          u.lang = 'tr-TR';
+        } else {
+          u.lang = 'tr-TR';
+        }
         u.rate = $rate;
         u.pitch = 1.0;
         speechSynthesis.cancel();
@@ -733,9 +744,10 @@ class _ComparePhase extends StatelessWidget {
             Text(labelKu,
                 style: TextStyle(
                     fontSize: 11, fontWeight: FontWeight.w700, color: color)),
-            Text(labelTr,
-                style: TextStyle(
-                    fontSize: 9, color: color.withOpacity(0.7))),
+            if (showTurkish)
+              Text(labelTr,
+                  style: TextStyle(
+                      fontSize: 9, color: color.withOpacity(0.7))),
           ],
         ),
       ),

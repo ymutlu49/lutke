@@ -8,9 +8,11 @@
 import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../core/constants/app_colors.dart';
 import '../../core/constants/app_typography.dart';
+import '../../shared/providers/language_mode_provider.dart';
 import 'cultural_entities.dart';
 
 // ────────────────────────────────────────────────────────────────
@@ -636,24 +638,28 @@ class _ProverbCardState extends State<_ProverbCard> {
                 ],
               ),
 
-              const SizedBox(height: 10),
-
-              // Turkce anlam
-              Container(
-                width: double.infinity,
-                padding: const EdgeInsets.all(12),
-                decoration: BoxDecoration(
-                  color: AppColors.backgroundPrimary,
-                  borderRadius: BorderRadius.circular(10),
-                ),
-                child: Text(
-                  item.turkishContent,
-                  style: AppTypography.translation.copyWith(
-                    fontSize: 13,
-                    height: 1.5,
+              // Turkce anlam — only when showTurkish
+              Consumer(builder: (_, ref, __) {
+                if (!ref.watch(showTurkishProvider)) return const SizedBox.shrink();
+                return Padding(
+                  padding: const EdgeInsets.only(top: 10),
+                  child: Container(
+                    width: double.infinity,
+                    padding: const EdgeInsets.all(12),
+                    decoration: BoxDecoration(
+                      color: AppColors.backgroundPrimary,
+                      borderRadius: BorderRadius.circular(10),
+                    ),
+                    child: Text(
+                      item.turkishContent,
+                      style: AppTypography.translation.copyWith(
+                        fontSize: 13,
+                        height: 1.5,
+                      ),
+                    ),
                   ),
-                ),
-              ),
+                );
+              }),
 
               // Genisletilmis icerik
               if (_expanded) ...[
@@ -791,34 +797,37 @@ class _EnrichedCultureCardState extends State<_EnrichedCultureCard> {
               if (_expanded) ...[
                 const SizedBox(height: 12),
 
-                // Turkce ceviri kutusu
-                Container(
-                  width: double.infinity,
-                  padding: const EdgeInsets.all(12),
-                  decoration: BoxDecoration(
-                    color: AppColors.backgroundPrimary,
-                    borderRadius: BorderRadius.circular(10),
-                  ),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        'Tirkî — Türkçe',
-                        style: AppTypography.labelSmall.copyWith(
-                          color: AppColors.textTertiary,
+                // Turkce ceviri kutusu — only when showTurkish
+                Consumer(builder: (_, ref, __) {
+                  if (!ref.watch(showTurkishProvider)) return const SizedBox.shrink();
+                  return Container(
+                    width: double.infinity,
+                    padding: const EdgeInsets.all(12),
+                    decoration: BoxDecoration(
+                      color: AppColors.backgroundPrimary,
+                      borderRadius: BorderRadius.circular(10),
+                    ),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          'Tirkî — Türkçe',
+                          style: AppTypography.labelSmall.copyWith(
+                            color: AppColors.textTertiary,
+                          ),
                         ),
-                      ),
-                      const SizedBox(height: 4),
-                      Text(
-                        item.turkishContent,
-                        style: AppTypography.translation.copyWith(
-                          fontSize: 14,
-                          height: 1.5,
+                        const SizedBox(height: 4),
+                        Text(
+                          item.turkishContent,
+                          style: AppTypography.translation.copyWith(
+                            fontSize: 14,
+                            height: 1.5,
+                          ),
                         ),
-                      ),
-                    ],
-                  ),
-                ),
+                      ],
+                    ),
+                  );
+                }),
 
                 // Arka plan notu
                 if (item.backgroundNote != null) ...[

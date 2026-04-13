@@ -6,6 +6,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../core/constants/app_colors.dart';
 import '../../core/constants/app_typography.dart';
 import '../../core/constants/app_spacing.dart';
+import '../../shared/providers/language_mode_provider.dart';
 import '../lessons/domain/lesson_entities.dart';
 import 'gamification_provider.dart';
 
@@ -304,11 +305,13 @@ class AchievementBadgeGrid extends ConsumerWidget {
                 fontWeight: FontWeight.w600,
               ),
             ),
-            Gap.hXs,
-            Text(
-              '/ Rozetlerim',
-              style: AppTypography.caption,
-            ),
+            if (ref.watch(showTurkishProvider)) ...[
+              Gap.hXs,
+              Text(
+                '/ Rozetlerim',
+                style: AppTypography.caption,
+              ),
+            ],
             const Spacer(),
             Container(
               padding: const EdgeInsets.symmetric(
@@ -451,17 +454,20 @@ class _AchievementBadgeTile extends StatelessWidget {
             maxLines: 1,
             overflow: TextOverflow.ellipsis,
           ),
-          // Türkçe ad
-          Text(
-            isEarned ? badge.turkishName : '???',
-            style: AppTypography.caption.copyWith(
-              color: AppColors.textTertiary,
-              fontSize: 10,
-            ),
-            textAlign: TextAlign.center,
-            maxLines: 1,
-            overflow: TextOverflow.ellipsis,
-          ),
+          // Türkçe ad — only when showTurkish
+          Consumer(builder: (_, ref, __) {
+            if (!ref.watch(showTurkishProvider)) return const SizedBox.shrink();
+            return Text(
+              isEarned ? badge.turkishName : '???',
+              style: AppTypography.caption.copyWith(
+                color: AppColors.textTertiary,
+                fontSize: 10,
+              ),
+              textAlign: TextAlign.center,
+              maxLines: 1,
+              overflow: TextOverflow.ellipsis,
+            );
+          }),
         ],
       ),
     )
@@ -553,13 +559,16 @@ class _BadgeDetailSheet extends StatelessWidget {
 
           Gap.xs,
 
-          // Türkçe ad
-          Text(
-            badge.turkishName,
-            style: AppTypography.body.copyWith(
-              color: AppColors.textSecondary,
-            ),
-          ).animate().fadeIn(delay: 200.ms),
+          // Türkçe ad — only when showTurkish
+          Consumer(builder: (_, ref, __) {
+            if (!ref.watch(showTurkishProvider)) return const SizedBox.shrink();
+            return Text(
+              badge.turkishName,
+              style: AppTypography.body.copyWith(
+                color: AppColors.textSecondary,
+              ),
+            ).animate().fadeIn(delay: 200.ms);
+          }),
 
           Gap.md,
 
@@ -1349,13 +1358,16 @@ class _BadgeOverlayContent extends StatelessWidget {
 
                       Gap.xs,
 
-                      // Türkçe ikincil
-                      Text(
-                        badge.turkishName,
-                        style: AppTypography.caption,
-                      )
-                          .animate(delay: 900.ms)
-                          .fadeIn(duration: 400.ms),
+                      // Türkçe ikincil — only when showTurkish
+                      Consumer(builder: (_, ref, __) {
+                        if (!ref.watch(showTurkishProvider)) return const SizedBox.shrink();
+                        return Text(
+                          badge.turkishName,
+                          style: AppTypography.caption,
+                        )
+                            .animate(delay: 900.ms)
+                            .fadeIn(duration: 400.ms);
+                      }),
 
                       Gap.xs,
 

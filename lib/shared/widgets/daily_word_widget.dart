@@ -93,9 +93,9 @@ String _emojiForKat(String kat) => switch (kat) {
 }
 
 /// Cinsiyet gostergesi
-String _genderLabel(String cins) => switch (cins) {
-  'nêr'    => 'nêr (eril)',
-  'mê'     => 'mê (disil)',
+String _genderLabel(String cins, bool showTr) => switch (cins) {
+  'nêr'    => showTr ? 'nêr (eril)' : 'nêr',
+  'mê'     => showTr ? 'mê (dişil)' : 'mê',
   _        => '',
 };
 
@@ -114,7 +114,7 @@ class _DailyWordWidgetState extends ConsumerState<DailyWordWidget> {
     final showTurkish = ref.watch(showTurkishProvider);
     final word = _getDailyWord();
     final emoji = _emojiForKat(word.kat);
-    final genderText = _genderLabel(word.cins);
+    final genderText = _genderLabel(word.cins, showTurkish);
 
     // Ornek cumle: heritage listesinden ilkini al
     final exampleSentence = word.her.isNotEmpty
@@ -214,8 +214,8 @@ class _DailyWordWidgetState extends ConsumerState<DailyWordWidget> {
               ),
             ),
 
-          // Gramer notu
-          if (word.not_.isNotEmpty) ...[
+          // Gramer notu (Türkçe içerikli — sadece KU/TR modda göster)
+          if (word.not_.isNotEmpty && showTurkish) ...[
             const SizedBox(height: AppSpacing.sm),
             Container(
               width: double.infinity,

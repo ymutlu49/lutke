@@ -5,7 +5,9 @@ import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../core/constants/app_colors.dart';
+import '../../core/services/sound_service.dart';
 import '../../core/services/tts_service.dart';
+import '../providers/language_mode_provider.dart';
 
 // Conditional import: web uses dart:js_interop, other platforms get a no-op stub
 import '../../core/services/js_eval_stub.dart'
@@ -50,9 +52,10 @@ class _SpeakButtonState extends ConsumerState<SpeakButton> {
 
     try {
       if (kIsWeb) {
-        // PRIMARY: Web SpeechSynthesis (instant, offline, Turkish voice)
+        // PRIMARY: Web SpeechSynthesis (instant, offline, Kurdish-first voice)
         if (!mounted) return;
         setState(() { _loading = false; _playing = true; });
+        SoundService.playClick(); // Subtle click feedback when TTS starts
         _speakWithWebSpeech(widget.text);
 
         // Also try HuggingFace in background for higher quality (optional)
@@ -252,7 +255,9 @@ class LargeSpeakButton extends ConsumerWidget {
                   ),
                 const SizedBox(height: 4),
                 Text(
-                  'Guhdarî bike — Dinle',
+                  ref.watch(showTurkishProvider)
+                      ? 'Guhdarî bike — Dinle'
+                      : 'Guhdarî bike',
                   style: TextStyle(
                     fontSize: 11,
                     color: AppColors.primary.withOpacity(0.6),
