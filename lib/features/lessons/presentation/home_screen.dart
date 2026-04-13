@@ -47,37 +47,54 @@ class HomeScreen extends ConsumerWidget {
           SafeArea(
         child: CustomScrollView(
           slivers: [
-            // ── Üst Bar ──────────────────────────────────────────
-            SliverAppBar(
-              floating: true,
-              backgroundColor: AppColors.backgroundPrimary,
-              elevation: 0,
-              toolbarHeight: 56,
-              titleSpacing: AppSpacing.md,
-              title: GestureDetector(
-                onLongPress: () => context.push(AppRoutes.admin),
-                child: LutkeLogo.brandHorizontal(iconSize: 44),
-              ),
-              actions: [
-                // Dil modu toggle
-                _LanguageModeToggle(),
-                const SizedBox(width: 4),
-              ],
-            ),
-
             // ── İçerik ───────────────────────────────────────────
             SliverPadding(
               padding: const EdgeInsets.symmetric(horizontal: AppSpacing.md),
               sliver: SliverList(
                 delegate: SliverChildListDelegate([
-                  const SizedBox(height: AppSpacing.sm),
+                  const SizedBox(height: AppSpacing.md),
 
-                  // Heritage veya Genel yola göre selamlama
-                  _WelcomeSection(isHeritage: profile.isHeritage),
+                  // ── Kompakt Header: Logo + Selamlama + Toggle ──
+                  Row(
+                    children: [
+                      // Logo
+                      GestureDetector(
+                        onLongPress: () => context.push(AppRoutes.admin),
+                        child: ClipOval(
+                          child: SizedBox(
+                            width: 48, height: 48,
+                            child: Image.asset('assets/images/logo_128.png',
+                              fit: BoxFit.cover, filterQuality: FilterQuality.medium),
+                          ),
+                        ),
+                      ),
+                      const SizedBox(width: 12),
+                      // Selamlama + alt yazı
+                      Expanded(
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              profile.isHeritage ? 'Xêr hatî, heval!' : 'Xêr hatî!',
+                              style: AppTypography.headingSmall.copyWith(
+                                color: AppColors.textPrimary, fontWeight: FontWeight.w700),
+                            ),
+                            Text(
+                              'Îro çi fêr dibî?',
+                              style: AppTypography.caption.copyWith(
+                                color: AppColors.textSecondary),
+                            ),
+                          ],
+                        ),
+                      ),
+                      // Dil toggle
+                      _LanguageModeToggle(),
+                    ],
+                  ),
 
                   const SizedBox(height: AppSpacing.md),
 
-                  // ── Peyva Roje — Gunun Kelimesi ────────────────
+                  // ── Peyva Rojê — Gunun Kelimesi ────────────────
                   const DailyWordWidget(),
 
                   const SizedBox(height: AppSpacing.md),
