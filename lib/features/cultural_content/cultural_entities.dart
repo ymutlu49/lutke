@@ -6,8 +6,7 @@
 // Zeynep TikTok'tan öğreniyor, Hasan türküler "içinde bir yerde
 // duruyor" diyor. Bu içerik ek özellik değil, zorunlu çekirdek.
 //
-// Kaynak: Institut Kurde Paris, Osman Aslanoğlu Dil Kartları,
-// Bedir Han & Lescot, Kürt edebiyat geleneği
+// Kaynak: Institut Kurde Paris, Bedir Han & Lescot, Kürt edebiyat geleneği
 // ════════════════════════════════════════════════════════════════
 
 enum CulturalContentType {

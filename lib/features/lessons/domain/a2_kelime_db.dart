@@ -6,7 +6,7 @@
 /// Kaynak doğrulama:
 /// [BH] Bedir Han & Lescot (1990) — cinsiyet, çekim
 /// [TH] Thackston (2006) — fiil sistemleri §60–140
-/// [AS] Aslanoğlu Dil Kartları (2017) — pratik kelimeler
+/// [AS] Pratik Dil Kartları (2017) — pratik kelimeler
 /// [AZ] Arizona Üniversitesi (Ekici, 1800 kelime) — ders sırası
 /// [FB] Ferhenga Birûskî (Chyet, 2003) — altın standart sözlük
 ///
@@ -4320,7 +4320,7 @@ const kA2EkKelimeler10 = [
 
   (id:'a2_1952', ku:'Ferhenga kurdî', tr:'Kürtçe sözlük', en:'Kurdish dictionary',
    cins:'mê', ez:'ferhenga kurdî', kat:'perwerde', zor:0.79,
-   not:'"Ferheng" + "kurdî". Ferhenga Birûskî, Aslanoğlu sözlükleri.',
+   not:'"Ferheng" + "kurdî". Ferhenga Birûskî.',
    her:['Ferhenga kurdî bikar tînim.', 'Di ferhenga kurdî de.'],
    gen:['Ferhenga kurdî', 'Ferhenga Birûskî']),
 

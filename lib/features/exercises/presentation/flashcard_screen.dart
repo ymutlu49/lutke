@@ -1160,6 +1160,33 @@ class _ScorePill extends StatelessWidget {
   }
 }
 
+/// Kategori -> emoji eslesmesi (flashcard icin)
+String _emojiForCategory(String kat) => switch (kat) {
+  'silav' || 'selamlama' => '\u{1F44B}',
+  'malbat'               => '\u{1F468}\u{200D}\u{1F469}\u{200D}\u{1F467}\u{200D}\u{1F466}',
+  'xwarin'               => '\u{1F37D}\u{FE0F}',
+  'vexwarin'             => '\u{1F964}',
+  'mêwe' || 'mewe'       => '\u{1F34E}',
+  'ajal'                 => '\u{1F43E}',
+  'reng'                 => '\u{1F3A8}',
+  'jimar'                => '\u{1F522}',
+  'mal'                  => '\u{1F3E0}',
+  'cil'                  => '\u{1F455}',
+  'beden'                => '\u{1FAC1}',
+  'tendurist'            => '\u{1F48A}',
+  'pîşe' || 'pise'       => '\u{1F477}',
+  'dem'                  => '\u{23F0}',
+  'roj'                  => '\u{1F4C5}',
+  'demsal'               => '\u{1F326}\u{FE0F}',
+  'cih'                  => '\u{1F4CD}',
+  'gihanî'               => '\u{1F697}',
+  'leker'                => '\u{1F3C3}',
+  'xweza'                => '\u{1F33F}',
+  'perwerde'             => '\u{1F4DA}',
+  'alfabe'               => '\u{1F524}',
+  _                      => '',
+};
+
 class _CategoryBadge extends StatelessWidget {
   final String category;
   const _CategoryBadge({required this.category});
@@ -1183,6 +1210,7 @@ class _CategoryBadge extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final emoji = _emojiForCategory(category);
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
       decoration: BoxDecoration(
@@ -1191,7 +1219,7 @@ class _CategoryBadge extends StatelessWidget {
         border: Border.all(color: AppColors.primary.withOpacity(0.15)),
       ),
       child: Text(
-        _displayName,
+        emoji.isNotEmpty ? '$emoji $_displayName' : _displayName,
         style: AppTypography.labelSmall.copyWith(
           color: AppColors.primary,
           fontWeight: FontWeight.w600,

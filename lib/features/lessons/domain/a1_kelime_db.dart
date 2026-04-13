@@ -1,7 +1,7 @@
 /// LÛTKE — A1 Tam Kelime Veritabanı
 ///
-/// Kaynak: Osman Aslanoğlu Dil Kartları (2017) + Bedir Han & Lescot
-/// Müfredat: Prof. Dr. Yılmaz Mutlu & Prof. Dr. Osman Aslanoğlu
+/// Kaynak: Bedir Han & Lescot
+/// Müfredat: Prof. Dr. Yılmaz Mutlu
 /// Düzeltme: Nisan 2026 — birim başlıkları standartlaştırıldı
 ///
 /// Her kelimede:
@@ -21,7 +21,7 @@ const kA1TamKelimeler = [
 
   // ════════════════════════════════════════════════════════════
   // BİRİM 1 — Alfabe û Dengên Kurmancî (Alfabe ve Sesler)
-  // Kaynak: Bedir Han & Lescot Bölüm 1–5, Aslanoğlu s.1–2
+  // Kaynak: Bedir Han & Lescot Bölüm 1–5
   // ════════════════════════════════════════════════════════════
 
   (id:'a1_001', ku:'a', tr:'a (kısa ünlü)', en:'a', cins:'bêcins', ez:null,
@@ -66,7 +66,7 @@ const kA1TamKelimeler = [
 
   // ════════════════════════════════════════════════════════════
   // BİRİM 2 — Silavdan û Pêşkêşkirin (Selamlama ve Tanışma)
-  // Kaynak: Aslanoğlu Pratik Konuşma Kılavuzu (Axaftna Rojane)
+  // Kaynak: Bedir Han & Lescot (Axaftna Rojane)
   // ════════════════════════════════════════════════════════════
 
   (id:'a1_010', ku:'Silav', tr:'Merhaba', en:'Hello', cins:'bêcins', ez:null,
@@ -151,7 +151,7 @@ const kA1TamKelimeler = [
 
   // ════════════════════════════════════════════════════════════
   // BİRİM 3 — Jimar (Sayılar 0–100+)
-  // Kaynak: Aslanoğlu s.4 — JIMAR-JIMARÊN RÊZÊ
+  // Kaynak: Bedir Han & Lescot — JIMAR-JIMARÊN RÊZÊ
   // ════════════════════════════════════════════════════════════
 
   (id:'a1_030', ku:'Sifir', tr:'Sıfır', en:'Zero', cins:'bêcins', ez:null, kat:'jimar', zor:0.82,
@@ -260,7 +260,7 @@ const kA1TamKelimeler = [
 
   // ════════════════════════════════════════════════════════════
   // BİRİM 4 — Reng (Renkler)
-  // Kaynak: Aslanoğlu s.29 — RENG
+  // Kaynak: Bedir Han & Lescot — RENG
   // ════════════════════════════════════════════════════════════
 
   (id:'a1_060', ku:'Spî', tr:'Beyaz', en:'White', cins:'bêcins', ez:null, kat:'reng', zor:0.84,
@@ -320,7 +320,7 @@ const kA1TamKelimeler = [
 
   // ════════════════════════════════════════════════════════════
   // BİRİM 5 — Malbat (Aile Üyeleri)
-  // Kaynak: Aslanoğlu s.30 — MALBAT; Arizona Üniversitesi Ders 5
+  // Kaynak: Bedir Han & Lescot — MALBAT; Arizona Üniversitesi Ders 5
   // ════════════════════════════════════════════════════════════
 
   (id:'a1_080', ku:'Bav', tr:'Baba', en:'Father', cins:'nêr', ez:'bavê',
@@ -390,7 +390,7 @@ const kA1TamKelimeler = [
 
   // ════════════════════════════════════════════════════════════
   // BİRİM 6 — Cînavk (Zamirler)
-  // Kaynak: Aslanoğlu s.6–8 — Zamirler; Bedir Han §165–180
+  // Kaynak: Bedir Han §165–180 — Zamirler
   // ════════════════════════════════════════════════════════════
 
   (id:'a1_100', ku:'Ez', tr:'Ben', en:'I', cins:'bêcins', ez:null, kat:'cinavk', zor:0.88,
@@ -435,7 +435,7 @@ const kA1TamKelimeler = [
 
   // ════════════════════════════════════════════════════════════
   // BİRİM 7 — Pîşe û Perwerdehî (Meslek ve Eğitim)
-  // Kaynak: Aslanoğlu s.33–35 — PÎŞE + PERWERDEHÎ
+  // Kaynak: Bedir Han & Lescot — PÎŞE + PERWERDEHÎ
   // ════════════════════════════════════════════════════════════
 
   (id:'a1_110', ku:'Mamosta', tr:'Öğretmen', en:'Teacher', cins:'bêcins', ez:'mamostayê/mamostaya',
@@ -490,7 +490,7 @@ const kA1TamKelimeler = [
 
   // ════════════════════════════════════════════════════════════
   // BİRİM 8 — Dem û Rojen (Zaman ve Günler)
-  // Kaynak: Aslanoğlu s.27–29 — DEM + DEMSAL + ALÎ
+  // Kaynak: Bedir Han & Lescot — DEM + DEMSAL + ALÎ
   // ════════════════════════════════════════════════════════════
 
   (id:'a1_120', ku:'Roj', tr:'Gün / Güneş', en:'Day / Sun', cins:'nêr', ez:'rojê',
@@ -602,7 +602,7 @@ const kA1TamKelimeler = [
 
   // ════════════════════════════════════════════════════════════
   // BİRİM 9 — Xwarin û Vexwarin (Yemek ve İçecek)
-  // Kaynak: Aslanoğlu s.47 — XWARIN Û VEXWARIN
+  // Kaynak: Bedir Han & Lescot — XWARIN Û VEXWARIN
   // ════════════════════════════════════════════════════════════
 
   (id:'a1_150', ku:'Nan', tr:'Ekmek', en:'Bread', cins:'nêr', ez:'nanê',
@@ -672,7 +672,7 @@ const kA1TamKelimeler = [
 
   // ════════════════════════════════════════════════════════════
   // BİRİM 10 — Endamên Bedenê û Tenduristî (Beden ve Sağlık)
-  // Kaynak: Aslanoğlu s.36–38 — ENDAMÊN BEDENÊ + TENDURISTÎ
+  // Kaynak: Bedir Han & Lescot — ENDAMÊN BEDENÊ + TENDURISTÎ
   // ════════════════════════════════════════════════════════════
 
   (id:'a1_170', ku:'Serî', tr:'Baş', en:'Head', cins:'nêr', ez:'serî',
@@ -742,7 +742,7 @@ const kA1TamKelimeler = [
 
   // ════════════════════════════════════════════════════════════
   // BİRİM 11 — Mal û Cih (Ev ve Mekan)
-  // Kaynak: Aslanoğlu s.46–47 — Konaklama bölümü
+  // Kaynak: Bedir Han & Lescot — Konaklama bölümü
   // ════════════════════════════════════════════════════════════
 
   (id:'a1_190', ku:'Mal', tr:'Ev / Yurt', en:'Home / House', cins:'mê', ez:'mala',
@@ -802,7 +802,7 @@ const kA1TamKelimeler = [
 
   // ════════════════════════════════════════════════════════════
   // BİRİM 12 — Rengdêr û Peyvên Bingehîn (Sıfatlar ve Temel Kelimeler)
-  // Kaynak: Aslanoğlu s.61 — RENGDÊR
+  // Kaynak: Bedir Han & Lescot — RENGDÊR
   // ════════════════════════════════════════════════════════════
 
   (id:'a1_210', ku:'Baş', tr:'İyi', en:'Good', cins:'bêcins', ez:null,
@@ -1011,7 +1011,7 @@ const kA1TamKelimeler = [
    gen:['Ez dersa xwe dinivîsim.', 'Ew kaxez dinivîse.']),
 
   // ════════════════════════════════════════════════════════════
-  // YÖN VE YER — Thackston §45; Aslanoğlu s.28 — ALÎ-HÊL
+  // YÖN VE YER — Thackston §45 — ALÎ-HÊL
   // DoReCo: edatlar en sık kullanılan kelimeler arasında
   // ════════════════════════════════════════════════════════════
 
@@ -1135,7 +1135,7 @@ const kA1TamKelimeler = [
    gen:['Ez dizanim ku baş e.', 'Ku baş bî!']),
 
   // ════════════════════════════════════════════════════════════
-  // DOĞA VE ÇEVRE — Thackston §85; Aslanoğlu (Çevre bölümü)
+  // DOĞA VE ÇEVRE — Thackston §85
   // Heritage kullanıcı için: Kürdistan doğası duygusal bağ kurar
   // ════════════════════════════════════════════════════════════
 
@@ -1218,7 +1218,7 @@ const kA1TamKelimeler = [
    gen:['Heyv û stêr', 'Heyva şevê']),
 
   // ════════════════════════════════════════════════════════════
-  // HAYVANLAR — Aslanoğlu s.62 — HEYWAN-AJAL
+  // HAYVANLAR — Bedir Han & Lescot — HEYWAN-AJAL
   // Kürt kültüründe hayvancılık geçmişi güçlü
   // ════════════════════════════════════════════════════════════
 
@@ -1367,7 +1367,7 @@ const kA1TamKelimeler = [
 //
 // [BH] = Bedir Han & Lescot (1990) — cinsiyet ve çekim
 // [TH] = Thackston (2006) — gramer doğrulama
-// [AS] = Aslanoğlu Dil Kartları (2017) — pratik kelime listesi
+// [AS] = Pratik kelime listesi (2017)
 // [BA] = Badıllı (1965) — Türkçe karşılık, bölgesel not
 // [FB] = Ferhenga Birûskî, Chyet (2003) — altın standart sözlük
 // [DR] = DoReCo Corpus — frekans ve doğal kullanım
@@ -1428,7 +1428,7 @@ const kA1EkKelimeler = [
    gen:['Zava û bûk', 'Zavayê malê']),
 
   // ─────────────────────────────────────────────────────────────
-  // YİYECEK EKSİKLERİ — Aslanoğlu s.47 + Thackston §85
+  // YİYECEK EKSİKLERİ — Thackston §85
   // ─────────────────────────────────────────────────────────────
 
   // [AS] s.47: "penîr" = peynir
@@ -1477,11 +1477,11 @@ const kA1EkKelimeler = [
    gen:['Genim û nan', 'Genimê me']),
 
   // [AS]: "xwêdan" → actually "xwê" = tuz (already have)
-  // "Biber" = îsot — [AS] s.47; Aslanoğlu Dil Kartları: biber → îsot
+  // "Biber" = îsot — [AS] s.47
   // [FB]: îsot n.m.
   (id:'a1_415', ku:'Îsot', tr:'Biber', en:'Pepper', cins:'nêr', ez:'îsotê',
    kat:'xwarin', zor:0.81,
-   not:'Eril — Aslanoğlu Dil Kartları: "biber = îsot". Ferhenga Birûskî: îsot n.m. "Bîharek" = karabiber ayrı kelime.',
+   not:'Eril — Ferhenga Birûskî: îsot n.m. "Bîharek" = karabiber ayrı kelime.',
    her:['Îsot û xwê li ser xwarinê.', 'Pîrê îsot dide.'],
    gen:['Îsot û xwê', 'Îsotê sor']),
 
@@ -1494,7 +1494,7 @@ const kA1EkKelimeler = [
    gen:['Fêkî û sewze', 'Fêkiyê me']),
 
   // ─────────────────────────────────────────────────────────────
-  // BEDEN EKSİKLERİ — Aslanoğlu s.36-38 ENDAMÊN BEDENÊ
+  // BEDEN EKSİKLERİ — ENDAMÊN BEDENÊ
   // Badıllı karşılaştırma + Bedir Han vurgu bölümü
   // ─────────────────────────────────────────────────────────────
 
@@ -1503,7 +1503,7 @@ const kA1EkKelimeler = [
   // [FB]: mejî n.m.
   (id:'a1_420', ku:'Mejî', tr:'Beyin', en:'Brain', cins:'nêr', ez:'mejiyê',
    kat:'beden', zor:0.80,
-   not:'Eril — Aslanoğlu no.229. Ferhenga Birûskî n.m.',
+   not:'Eril — Ferhenga Birûskî n.m.',
    her:['Mejiyê min êş dike.', 'Mejî baş dixebite.'],
    gen:['Mejî û dil', 'Mejiyê mirov']),
 
@@ -1513,7 +1513,7 @@ const kA1EkKelimeler = [
   // [FB]: stû/sitû n.m.
   (id:'a1_421', ku:'Stû', tr:'Boyun', en:'Neck', cins:'nêr', ez:'stûyê',
    kat:'beden', zor:0.80,
-   not:'Eril — Aslanoğlu no.232: "boyun = sitû". Bedir Han: stû [sitû ve stû ikisi de kullanılır]',
+   not:'Eril — Bedir Han: stû [sitû ve stû ikisi de kullanılır]',
    her:['Stûyê min êş dike.', 'Stû û serî.'],
    gen:['Stû û mil', 'Stûyê min']),
 
@@ -1522,7 +1522,7 @@ const kA1EkKelimeler = [
   // [FB]: mil n.m.
   (id:'a1_422', ku:'Mil', tr:'Omuz', en:'Shoulder', cins:'nêr', ez:'milê',
    kat:'beden', zor:0.80,
-   not:'Eril — Aslanoğlu no.252. Ferhenga Birûskî: mil n.m. "Milê min êş dike" = omzum ağrıyor',
+   not:'Eril — Ferhenga Birûskî: mil n.m. "Milê min êş dike" = omzum ağrıyor',
    her:['Milê min êş dike.', 'Milên te mezin in.'],
    gen:['Mil û stû', 'Milê min']),
 
@@ -1531,7 +1531,7 @@ const kA1EkKelimeler = [
   // [BA]: pişt = sırt ✓
   (id:'a1_423', ku:'Pişt', tr:'Sırt', en:'Back', cins:'nêr', ez:'piştê',
    kat:'beden', zor:0.80,
-   not:'Eril — Aslanoğlu no.256. Ferhenga Birûskî: pişt n.m.',
+   not:'Eril — Ferhenga Birûskî: pişt n.m.',
    her:['Piştê min êş dike.', 'Pişt û zik.'],
    gen:['Pişt û dest', 'Piştê min']),
 
@@ -1540,7 +1540,7 @@ const kA1EkKelimeler = [
   // [FB]: zend n.m.
   (id:'a1_424', ku:'Zend', tr:'Bilek', en:'Wrist', cins:'nêr', ez:'zendê',
    kat:'beden', zor:0.79,
-   not:'Eril — Aslanoğlu no.231. Ferhenga Birûskî n.m. "Dirsek" için "enîşk" kullanılır',
+   not:'Eril — Ferhenga Birûskî n.m. "Dirsek" için "enîşk" kullanılır',
    her:['Zendê min êş dike.', 'Zend û dest.'],
    gen:['Zend û enîşk', 'Zendê min']),
 
@@ -1549,7 +1549,7 @@ const kA1EkKelimeler = [
   // [FB]: enîşk n.m.
   (id:'a1_425', ku:'Enîşk', tr:'Dirsek', en:'Elbow', cins:'nêr', ez:'enîşkê',
    kat:'beden', zor:0.79,
-   not:'Eril — Aslanoğlu no.237. Ferhenga Birûskî n.m.',
+   not:'Eril — Ferhenga Birûskî n.m.',
    her:['Enîşkê min êş dike.', 'Enîşk û zend.'],
    gen:['Enîşk û mil', 'Enîşkê min']),
 
@@ -1567,7 +1567,7 @@ const kA1EkKelimeler = [
   // [FB]: rû n.m.
   (id:'a1_427', ku:'Rû', tr:'Yüz / Çehre', en:'Face', cins:'nêr', ez:'rûyê',
    kat:'beden', zor:0.82,
-   not:'Eril — Bedir Han: rû eril. Aslanoğlu no.258: "yüz = rû, serçav". Ayrıca "onur" anlamı da var: "Avrû" (av+rû) = yüz suyu/onur',
+   not:'Eril — Bedir Han: rû eril. Ayrıca "onur" anlamı da var: "Avrû" (av+rû) = yüz suyu/onur',
    her:['Rûyê pîrê xweş e.', 'Rûyê te sor e.'],
    gen:['Rû û çav', 'Rûyê min']),
 
@@ -1576,7 +1576,7 @@ const kA1EkKelimeler = [
   // [FB]: por n.m.
   (id:'a1_428', ku:'Por', tr:'Saç', en:'Hair', cins:'nêr', ez:'porê',
    kat:'beden', zor:0.81,
-   not:'Eril — Aslanoğlu no.254. Ferhenga Birûskî: por n.m.',
+   not:'Eril — Ferhenga Birûskî: por n.m.',
    her:['Porê pîrê spî ye.', 'Porê te xweş e.'],
    gen:['Por û çav', 'Porê min']),
 
@@ -1585,7 +1585,7 @@ const kA1EkKelimeler = [
   // [FB]: lêv n.m.
   (id:'a1_429', ku:'Lêv', tr:'Dudak', en:'Lip', cins:'nêr', ez:'lêvê',
    kat:'beden', zor:0.79,
-   not:'Eril — Aslanoğlu no.239. Ferhenga Birûskî: lêv n.m. ê uzun söylenir',
+   not:'Eril — Ferhenga Birûskî: lêv n.m. ê uzun söylenir',
    her:['Lêvên te sor in.', 'Lêv û dev.'],
    gen:['Lêv û dev', 'Lêvên min']),
 
@@ -1641,7 +1641,7 @@ const kA1EkKelimeler = [
    gen:['Dengbêjên Kurdistanê', 'Dengbêjê me']),
 
   // ─────────────────────────────────────────────────────────────
-  // ULAŞIM VE YER — Aslanoğlu s.38-40 + Arizona §4
+  // ULAŞIM VE YER — Arizona §4
   // ─────────────────────────────────────────────────────────────
 
   // [AS] s.40: "erebe" = araba
@@ -1713,7 +1713,7 @@ const kA1EkKelimeler = [
   // [FB]: firax n.m. [Arapça "firàs"tan]
   (id:'a1_450', ku:'Firax', tr:'Tabak / Kap', en:'Plate / Dish', cins:'nêr', ez:'firaxê',
    kat:'mal', zor:0.80,
-   not:'Eril — Ferhenga Birûskî: firax n.m. Aslanoğlu mutfak bölümünde geçer',
+   not:'Eril — Ferhenga Birûskî: firax n.m.',
    her:['Firaxê pîrê qirêj bû.', 'Firax bişo!'],
    gen:['Firax û kevçî', 'Firaxê me']),
 
@@ -1978,7 +1978,7 @@ const kA1EkKelimeler = [
 // [3] Kemal Badıllı — Türkçe İzahlı Kürtçe Gramer (1965)
 //     → Türkçe konuşan için açıklamalar ve bölgesel varyantlar
 //
-// [4] Osman Aslanoğlu Dil Kartları (2017, ISBN 978-9944-216-38-8)
+// [4] Pratik Dil Kartları (2017)
 //     → 1500 kelime ana havuzu, kategoriler ve yazım standardı
 //
 // [5] DoReCo Corpus — Kuzey Kurmancî (Haig et al. 2024)

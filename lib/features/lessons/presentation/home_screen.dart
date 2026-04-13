@@ -13,7 +13,6 @@ import '../../../core/services/auth_service.dart';
 import '../data/lesson_repository.dart';
 import '../domain/lesson_entities.dart';
 import '../domain/a1_kelime_db.dart';
-import '../../../shared/widgets/lutke_logo.dart';
 import '../../../shared/widgets/streak_widget.dart';
 import '../../../shared/widgets/daily_word_widget.dart';
 import '../../../shared/providers/language_mode_provider.dart';
@@ -56,13 +55,14 @@ class HomeScreen extends ConsumerWidget {
 
                   // ── Kompakt Header: Logo + Selamlama + Toggle ──
                   Row(
+                    crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
-                      // Logo
+                      // Logo 40px
                       GestureDetector(
                         onLongPress: () => context.push(AppRoutes.admin),
                         child: ClipOval(
                           child: SizedBox(
-                            width: 48, height: 48,
+                            width: 40, height: 40,
                             child: Image.asset('assets/images/logo_128.png',
                               fit: BoxFit.cover, filterQuality: FilterQuality.medium),
                           ),
@@ -73,12 +73,14 @@ class HomeScreen extends ConsumerWidget {
                       Expanded(
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
+                          mainAxisSize: MainAxisSize.min,
                           children: [
                             Text(
                               profile.isHeritage ? 'Xêr hatî, heval!' : 'Xêr hatî!',
                               style: AppTypography.headingSmall.copyWith(
                                 color: AppColors.textPrimary, fontWeight: FontWeight.w700),
                             ),
+                            const SizedBox(height: 2),
                             Text(
                               'Îro çi fêr dibî?',
                               style: AppTypography.caption.copyWith(
@@ -87,7 +89,7 @@ class HomeScreen extends ConsumerWidget {
                           ],
                         ),
                       ),
-                      // Dil toggle
+                      // KU/TR dil toggle
                       _LanguageModeToggle(),
                     ],
                   ),
@@ -180,69 +182,7 @@ class HomeScreen extends ConsumerWidget {
   }
 }
 
-// ════════════════════════════════════════════════════════════════
-// SELAMLAMA — Heritage / Genel yol ayrımı
-// İlke 0.5: Kurmancî birinci dil; 1.1: Heritage özel pedagoji
-// ════════════════════════════════════════════════════════════════
-
-class _WelcomeSection extends StatelessWidget {
-  final bool isHeritage;
-  const _WelcomeSection({required this.isHeritage});
-
-  @override
-  Widget build(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        // Kurmancî birincil — İlke §0.5
-        Text(
-          isHeritage ? 'Xêr hatî, heval!' : 'Xêr hatî!',
-          style: AppTypography.headingLarge.copyWith(
-            color: AppColors.textPrimary,
-            fontWeight: FontWeight.w700,
-          ),
-        ).animate().fadeIn(duration: 400.ms).slideX(begin: -0.1),
-
-        const SizedBox(height: 4),
-
-        Text(
-          isHeritage
-              ? 'Zimanê xwe vegerîne — her gav pêngav e.'
-              : 'Îro çi fêr dibî?',
-          style: AppTypography.bodyMedium.copyWith(
-            color: AppColors.textSecondary,
-          ),
-        ).animate().fadeIn(delay: 100.ms, duration: 400.ms),
-
-        // Heritage kullanıcısına bağlam notu (ilke §1.1)
-        if (isHeritage) ...[
-          const SizedBox(height: AppSpacing.sm),
-          Container(
-            padding: const EdgeInsets.symmetric(
-                horizontal: AppSpacing.md, vertical: AppSpacing.xs),
-            decoration: BoxDecoration(
-              color: AppColors.primary.withOpacity(0.08),
-              borderRadius: BorderRadius.circular(8),
-            ),
-            child: Row(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                Icon(Icons.home_outlined,
-                    size: 16, color: AppColors.primary),
-                const SizedBox(width: 6),
-                Text(
-                  'Rêya Malê',
-                  style: AppTypography.caption.copyWith(
-                      color: AppColors.primary),
-                ),
-              ],
-            ),
-          ).animate().fadeIn(delay: 200.ms),
-        ],
-      ],
-    );
-  }
-}
+// (_WelcomeSection kaldirildi — header icinde inline olarak yazildi)
 
 // ════════════════════════════════════════════════════════════════
 // STREAK ROZETI

@@ -7,6 +7,11 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../core/constants/app_colors.dart';
 import '../../core/services/tts_service.dart';
 
+// Conditional import: web uses dart:js_interop, other platforms get a no-op stub
+import '../../core/services/js_eval_stub.dart'
+    if (dart.library.js_interop) '../../core/services/js_eval_web.dart'
+    as js_bridge;
+
 /// Kurmancî kelime seslendirme butonu.
 ///
 /// Tıklanınca:
@@ -41,37 +46,54 @@ class _SpeakButtonState extends ConsumerState<SpeakButton> {
   Future<void> _speak() async {
     if (_loading || _playing) return;
 
-    setState(() => _loading = true);
+    setState(() { _loading = true; });
 
     try {
-      final tts = ref.read(ttsServiceProvider);
-      final audioUrl = await tts.synthesize(widget.text)
-          .timeout(const Duration(seconds: 8), onTimeout: () => null);
-
-      if (!mounted) return;
-
-      if (audioUrl != null) {
-        // HuggingFace başarılı — audio URL'yi oynat
-        setState(() { _loading = false; _playing = true; });
-        // Web'de audio element ile oynat
-        _playWebAudio(audioUrl);
-      } else {
-        // Fallback: Web SpeechSynthesis
+      if (kIsWeb) {
+        // PRIMARY: Web SpeechSynthesis (instant, offline, Turkish voice)
+        if (!mounted) return;
         setState(() { _loading = false; _playing = true; });
         _speakWithWebSpeech(widget.text);
+
+        // Also try HuggingFace in background for higher quality (optional)
+        _tryHuggingFaceInBackground(widget.text);
+      } else {
+        // Non-web: try HuggingFace only
+        final tts = ref.read(ttsServiceProvider);
+        final audioUrl = await tts.synthesize(widget.text)
+            .timeout(const Duration(seconds: 8), onTimeout: () => null);
+
+        if (!mounted) return;
+        setState(() { _loading = false; _playing = true; });
+        if (audioUrl != null) {
+          _playWebAudio(audioUrl);
+        }
       }
     } catch (_) {
-      // Son çare: Web SpeechSynthesis
+      // Fallback: Web SpeechSynthesis
       if (mounted) {
         setState(() { _loading = false; _playing = true; });
         _speakWithWebSpeech(widget.text);
       }
     }
 
-    // 3 saniye sonra playing durumunu sıfırla
-    Future.delayed(const Duration(seconds: 3), () {
+    // Reset playing state after estimated speech duration
+    final estimatedDuration = (widget.text.split(' ').length * 0.5 + 1.5)
+        .clamp(2.0, 8.0)
+        .toInt();
+    Future.delayed(Duration(seconds: estimatedDuration), () {
       if (mounted) setState(() => _playing = false);
     });
+  }
+
+  /// Try HuggingFace TTS in background — does not block the UI.
+  /// If it returns audio, it will be available for future plays.
+  void _tryHuggingFaceInBackground(String text) {
+    final tts = ref.read(ttsServiceProvider);
+    tts.synthesize(text)
+        .timeout(const Duration(seconds: 10), onTimeout: () => null)
+        .then((_) {}) // Result cached for future use
+        .catchError((_) {}); // Ignore errors silently
   }
 
   void _playWebAudio(String url) {
@@ -93,27 +115,12 @@ class _SpeakButtonState extends ConsumerState<SpeakButton> {
   }
 
   void _evalJs(String script) {
-    // Web'de JavaScript çalıştır
+    if (!kIsWeb) return;
     try {
-      // ignore: avoid_web_libraries_in_flutter
-      // dart:js_interop kullanımı
-      if (kIsWeb) {
-        // Web platformunda eval çalıştır
-        _webEval(script);
-      }
+      js_bridge.evalJs(script);
     } catch (e) {
       if (kDebugMode) debugPrint('JS eval error: $e');
     }
-  }
-
-  void _webEval(String script) {
-    // Web'de doğrudan çalıştırma — html package kullanmadan
-    // Bu fonksiyon web build'de çalışır
-    try {
-      // Web SpeechSynthesis doğrudan JavaScript ile çalışır
-      // Flutter web'de window.eval yerine dart:js_interop kullanılır
-      // Şimdilik placeholder — gerçek implementasyon web-specific
-    } catch (_) {}
   }
 
   @override
@@ -161,9 +168,19 @@ class _SpeakButtonState extends ConsumerState<SpeakButton> {
     );
 
     if (_playing) {
-      button = button.animate(onPlay: (c) => c.repeat(reverse: true))
-          .scale(begin: const Offset(1, 1), end: const Offset(1.08, 1.08),
-              duration: 400.ms);
+      button = button
+          .animate(onPlay: (c) => c.repeat(reverse: true))
+          .scale(
+            begin: const Offset(1, 1),
+            end: const Offset(1.12, 1.12),
+            duration: 500.ms,
+            curve: Curves.easeInOut,
+          )
+          .then()
+          .shimmer(
+            duration: 800.ms,
+            color: color.withOpacity(0.3),
+          );
     }
 
     if (!widget.showLabel) return button;

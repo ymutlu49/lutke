@@ -4,7 +4,7 @@
 /// Her maddeyi işaretleyerek beta testine geçin.
 ///
 /// Tarih: Nisan 2026
-/// Proje: Prof. Dr. Yılmaz Mutlu & Prof. Dr. Osman Aslanoğlu
+/// Proje: Prof. Dr. Yılmaz Mutlu
 
 // ════════════════════════════════════════════════════════════════
 // FAZ 0 — TEMEL ALTYAPИ ✓

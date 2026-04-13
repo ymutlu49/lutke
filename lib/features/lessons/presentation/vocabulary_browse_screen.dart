@@ -57,6 +57,53 @@ Color _categoryColor(String kat) {
   return _kCategoryColors[key] ?? AppColors.primary;
 }
 
+/// Kategori -> emoji eslesmesi (gorsel baglamsal ipucu)
+String _emojiForCategory(String kat) => switch (kat) {
+  'silav' || 'selamlama' => '\u{1F44B}',
+  'malbat'               => '\u{1F468}\u{200D}\u{1F469}\u{200D}\u{1F467}\u{200D}\u{1F466}',
+  'xwarin'               => '\u{1F37D}\u{FE0F}',
+  'vexwarin'             => '\u{1F964}',
+  'mêwe' || 'mewe'       => '\u{1F34E}',
+  'ajal'                 => '\u{1F43E}',
+  'reng'                 => '\u{1F3A8}',
+  'jimar'                => '\u{1F522}',
+  'mal'                  => '\u{1F3E0}',
+  'cil'                  => '\u{1F455}',
+  'beden'                => '\u{1FAC1}',
+  'tendurist'            => '\u{1F48A}',
+  'pîşe' || 'pise'       => '\u{1F477}',
+  'dem'                  => '\u{23F0}',
+  'roj'                  => '\u{1F4C5}',
+  'demsal'               => '\u{1F326}\u{FE0F}',
+  'cih'                  => '\u{1F4CD}',
+  'gihanî'               => '\u{1F697}',
+  'leker'                => '\u{1F3C3}',
+  'xweza'                => '\u{1F33F}',
+  'perwerde'             => '\u{1F4DA}',
+  'çand' || 'cand'       => '\u{1F3AD}',
+  'alfabe'               => '\u{1F524}',
+  'cinavk'               => '\u{1F464}',
+  'rengder'              => '\u{1F4DD}',
+  'daçek' || 'dacek'     => '\u{1F517}',
+  'temel'                => '\u{1F4A1}',
+  'dua'                  => '\u{1F932}',
+  'peyvben'              => '\u{1F500}',
+  'pirs'                 => '\u{2753}',
+  'bun'                  => '\u{2728}',
+  _                      => '',
+};
+
+/// Seviye -> emoji eslesmesi
+String _emojiForLevel(String level) => switch (level) {
+  'A1' => '\u{1F331}',
+  'A2' => '\u{1F33F}',
+  'B1' => '\u{1F333}',
+  'B2' => '\u{1F3D4}\u{FE0F}',
+  'C1' => '\u{2B50}',
+  'C2' => '\u{1F451}',
+  _    => '',
+};
+
 /// Her seviyenin adı ve kelime listesi
 class _LevelData {
   final String name;
@@ -853,7 +900,7 @@ class _LevelSectionState extends State<_LevelSection> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        widget.level.label,
+                        '${_emojiForLevel(widget.level.name)} ${widget.level.label}',
                         style: AppTypography.labelMedium.copyWith(
                           color: AppColors.textPrimary,
                           fontWeight: FontWeight.w600,
@@ -979,14 +1026,29 @@ class _WordCard extends StatelessWidget {
                         tag: 'word_${word.id}',
                         child: Material(
                           color: Colors.transparent,
-                          child: _HighlightedText(
-                            text: ku,
-                            query: searchQuery,
-                            style: AppTypography.kurmanjiCard.copyWith(
-                              color: AppColors.textPrimary,
-                              fontWeight: FontWeight.w600,
-                            ),
-                            highlightColor: AppColors.primary,
+                          child: Row(
+                            mainAxisSize: MainAxisSize.min,
+                            children: [
+                              if (_emojiForCategory(kat).isNotEmpty)
+                                Padding(
+                                  padding: const EdgeInsets.only(right: 4),
+                                  child: Text(
+                                    _emojiForCategory(kat),
+                                    style: const TextStyle(fontSize: 14),
+                                  ),
+                                ),
+                              Flexible(
+                                child: _HighlightedText(
+                                  text: ku,
+                                  query: searchQuery,
+                                  style: AppTypography.kurmanjiCard.copyWith(
+                                    color: AppColors.textPrimary,
+                                    fontWeight: FontWeight.w600,
+                                  ),
+                                  highlightColor: AppColors.primary,
+                                ),
+                              ),
+                            ],
                           ),
                         ),
                       ),

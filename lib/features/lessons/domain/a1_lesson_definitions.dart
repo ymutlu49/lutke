@@ -4,7 +4,7 @@ import 'a1_kelime_db.dart';
 // ════════════════════════════════════════════════════════════════
 // A1 — 20 DERS TANIMI
 //
-// Kaynak: Müfredat belgesi (Prof. Dr. Mutlu & Aslanoğlu)
+// Kaynak: Müfredat belgesi (Prof. Dr. Mutlu)
 // İlkeler: Arizona Üniversitesi ders sırası + CEFR A1 standartları
 //
 // Ders yapısı:

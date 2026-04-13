@@ -421,7 +421,7 @@ class _LevelBadge extends StatelessWidget {
           borderRadius: BorderRadius.circular(20),
         ),
         child: Text(
-          'Seviye $levelNum — $level',
+          'Ast $levelNum — $level',
           style: AppTypography.caption.copyWith(
             color: Colors.white,
             fontWeight: FontWeight.w700,

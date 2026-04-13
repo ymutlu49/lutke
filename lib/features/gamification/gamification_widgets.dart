@@ -66,7 +66,7 @@ class XPProgressBar extends ConsumerWidget {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Text(
-                        'Seviye $numLevel',
+                        'Ast $numLevel',
                         style: AppTypography.captionStrong.copyWith(
                           color: AppColors.primary,
                           fontWeight: FontWeight.w700,
@@ -807,7 +807,7 @@ class _LevelUpContentState extends State<_LevelUpContent>
 
                           // Seviye metni
                           Text(
-                            'Seviye ${widget.newLevel}',
+                            'Ast ${widget.newLevel}',
                             style: AppTypography.headline.copyWith(
                               color: AppColors.primaryDark,
                               fontWeight: FontWeight.w700,

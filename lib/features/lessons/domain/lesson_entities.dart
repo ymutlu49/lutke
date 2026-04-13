@@ -324,7 +324,7 @@ const kBadges = [
 // ════════════════════════════════════════════════════════════════
 
 /// Uygulamanın ilk açılışında SQLite'a yüklenen A1 kelime listesi.
-/// Kaynak: Osman Aslanoğlu Dil Kartları + Bedir Han & Lescot
+/// Kaynak: Bedir Han & Lescot
 /// Birim başlıkları Nisan 2026 düzeltmesiyle güncellenmiştir.
 const kA1SeedCards = [
   // ── Birim 2: Silavdan û Pêşkêşkirin (Selamlama ve Tanışma) ──
