@@ -75,71 +75,95 @@ class HomeScreen extends ConsumerWidget {
 
                   const SizedBox(height: AppSpacing.sm),
 
-                  // ── XP İlerleme Çubuğu ──────────────────────
-                  const XPProgressBar(compact: true),
-
-                  const SizedBox(height: AppSpacing.sm),
-
-                  // ── Günlük Ödül ─────────────────────────────
-                  const DailyRewardWidget(),
-
-                  const SizedBox(height: AppSpacing.sm),
-
-                  // ── Streak & Günlük Hedef Kartı ──────────────
-                  const CompactStreakCard(),
-
-                  const SizedBox(height: AppSpacing.sm),
-
-                  // ── Günlük özet kartı ─────────────────────────
+                  // ── Günlük özet kartı (streak, XP, seviye) ────
                   dailyStats.when(
                     data: (stats) => _DailySummaryCard(stats: stats, level: profile.currentLevel.toUpperCase()),
                     loading: () => _DailySummaryCard(stats: null, level: profile.currentLevel.toUpperCase()),
                     error: (_, __) => _DailySummaryCard(stats: null, level: profile.currentLevel.toUpperCase()),
                   ),
 
+                  const SizedBox(height: AppSpacing.sm),
+
+                  // ── XP İlerleme Çubuğu ──────────────────────
+                  const XPProgressBar(compact: true),
+
+                  const SizedBox(height: AppSpacing.sm),
+
+                  // ── Streak & Günlük Hedef Kartı ──────────────
+                  const CompactStreakCard(),
+
                   const SizedBox(height: AppSpacing.lg),
 
-                  // ── Quiz Butonu — Ders Bide! ─────────────────
+                  // ════════════════════════════════════════════════
+                  // AKTİVİTELER — Öğrenme eylemleri
+                  // ════════════════════════════════════════════════
+
+                  // ── Dersê Bide! — Ana quiz butonu (büyük, belirgin) ──
                   const _StartQuizButton(),
 
-                  const SizedBox(height: AppSpacing.lg),
-
-                  // Haftalık ritim (streak değil — ilke §Bölüm 9b bulgu #3)
-                  dailyStats.when(
-                    data: (stats) => _WeeklyRhythmCard(stats: stats),
-                    loading: () => const _WeeklyRhythmCard(stats: null),
-                    error: (_, __) => const _WeeklyRhythmCard(stats: null),
-                  ),
-
                   const SizedBox(height: AppSpacing.md),
 
-                  // Günlük tekrar butonu — birincil aksiyon
-                  dailyStats.when(
-                    data: (stats) => _DailyReviewButton(
-                      dueCount: stats.dueCount,
-                      userId: userId,
-                    ),
-                    loading: () => const _DailyReviewButton(dueCount: 0, userId: ''),
-                    error: (_, __) => const _DailyReviewButton(dueCount: 0, userId: ''),
+                  // ── Flashcard & Tekrar — yan yana kartlar ────
+                  Row(
+                    children: [
+                      // Flashcard kartı
+                      Expanded(
+                        child: _ActivityCard(
+                          icon: Icons.style_rounded,
+                          label: 'Flashcard',
+                          subtitle: 'Swipe bike',
+                          gradientColors: [AppColors.accent, AppColors.accentWarm],
+                          onTap: () => context.push(AppRoutes.flashcard),
+                          delay: 180,
+                        ),
+                      ),
+                      const SizedBox(width: AppSpacing.sm),
+                      // Günlük tekrar kartı
+                      Expanded(
+                        child: dailyStats.when(
+                          data: (stats) => _ActivityCard(
+                            icon: Icons.replay_rounded,
+                            label: 'Dubare',
+                            subtitle: '${stats.dueCount} kart',
+                            gradientColors: [AppColors.primary, AppColors.primaryDark],
+                            onTap: () => context.push(
+                              AppRoutes.lesson,
+                              extra: {'mode': 'review', 'userId': userId},
+                            ),
+                            delay: 220,
+                          ),
+                          loading: () => _ActivityCard(
+                            icon: Icons.replay_rounded,
+                            label: 'Dubare',
+                            subtitle: '0 kart',
+                            gradientColors: [AppColors.primary, AppColors.primaryDark],
+                            onTap: null,
+                            delay: 220,
+                          ),
+                          error: (_, __) => _ActivityCard(
+                            icon: Icons.replay_rounded,
+                            label: 'Dubare',
+                            subtitle: '0 kart',
+                            gradientColors: [AppColors.primary, AppColors.primaryDark],
+                            onTap: null,
+                            delay: 220,
+                          ),
+                        ),
+                      ),
+                    ],
                   ),
 
-                  const SizedBox(height: AppSpacing.md),
+                  const SizedBox(height: AppSpacing.sm),
 
-                  // Flashcard hızlı erişim butonu
-                  _FlashcardQuickAction(),
+                  // ── Günlük Ödül ─────────────────────────────
+                  const DailyRewardWidget(),
 
                   const SizedBox(height: AppSpacing.lg),
 
-                  // Seviye ilerleme kartı
-                  currentLevelProgress.when(
-                    data: (progress) => _LevelProgressCard(progress: progress),
-                    loading: () => const _LevelProgressCard(progress: null),
-                    error: (_, __) => const _LevelProgressCard(progress: null),
-                  ),
+                  // ════════════════════════════════════════════════
+                  // SKILL TREE — Öğrenme yolu
+                  // ════════════════════════════════════════════════
 
-                  const SizedBox(height: AppSpacing.lg),
-
-                  // Skill Tree — Duolingo benzeri ogrenme yolu
                   _SkillTreePath(
                     userId: userId,
                     currentLevel: profile.currentLevelNum,
@@ -696,6 +720,88 @@ class _FlashcardQuickAction extends StatelessWidget {
         ),
       ),
     ).animate().fadeIn(delay: 220.ms).slideX(begin: 0.05);
+  }
+}
+
+// ════════════════════════════════════════════════════════════════
+// AKTİVİTE KARTI — Fêrbûn sekmesi için büyük, renkli kart
+// ════════════════════════════════════════════════════════════════
+
+class _ActivityCard extends StatelessWidget {
+  final IconData icon;
+  final String label;
+  final String subtitle;
+  final List<Color> gradientColors;
+  final VoidCallback? onTap;
+  final int delay;
+
+  const _ActivityCard({
+    required this.icon,
+    required this.label,
+    required this.subtitle,
+    required this.gradientColors,
+    required this.onTap,
+    this.delay = 150,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return GestureDetector(
+      onTap: onTap,
+      child: Container(
+        padding: const EdgeInsets.symmetric(
+          horizontal: AppSpacing.md,
+          vertical: AppSpacing.lg,
+        ),
+        decoration: BoxDecoration(
+          gradient: LinearGradient(
+            colors: gradientColors,
+            begin: Alignment.topLeft,
+            end: Alignment.bottomRight,
+          ),
+          borderRadius: BorderRadius.circular(20),
+          boxShadow: [
+            BoxShadow(
+              color: gradientColors.first.withOpacity(0.35),
+              blurRadius: 14,
+              offset: const Offset(0, 6),
+            ),
+          ],
+        ),
+        child: Column(
+          children: [
+            Container(
+              width: 52,
+              height: 52,
+              decoration: BoxDecoration(
+                color: Colors.white.withOpacity(0.2),
+                shape: BoxShape.circle,
+              ),
+              child: Icon(icon, color: Colors.white, size: 28),
+            ),
+            const SizedBox(height: AppSpacing.sm),
+            Text(
+              label,
+              style: AppTypography.labelLarge.copyWith(
+                color: Colors.white,
+                fontWeight: FontWeight.w700,
+              ),
+            ),
+            const SizedBox(height: 2),
+            Text(
+              subtitle,
+              style: AppTypography.caption.copyWith(
+                color: Colors.white.withOpacity(0.8),
+              ),
+            ),
+          ],
+        ),
+      ),
+    ).animate().fadeIn(delay: Duration(milliseconds: delay)).scale(
+          begin: const Offset(0.95, 0.95),
+          duration: 300.ms,
+          curve: Curves.easeOut,
+        );
   }
 }
 

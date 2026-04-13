@@ -32,6 +32,7 @@ const _kTabs = <_TabItem>[
   _TabItem(label: 'Helbest', type: CulturalContentType.poem, icon: Icons.auto_stories_rounded),
   _TabItem(label: 'Cejna', type: CulturalContentType.celebration, icon: Icons.celebration_rounded),
   _TabItem(label: 'Nîşe', type: CulturalContentType.culturalNote, icon: Icons.info_outline_rounded),
+  _TabItem(label: 'Kesayetên Dîrokî', type: CulturalContentType.historicalFigure, icon: Icons.person_pin_rounded),
 ];
 
 // ────────────────────────────────────────────────────────────────
@@ -46,6 +47,7 @@ IconData _typeIcon(CulturalContentType type) => switch (type) {
   CulturalContentType.story => Icons.menu_book_rounded,
   CulturalContentType.foodTradition => Icons.restaurant_rounded,
   CulturalContentType.culturalNote => Icons.info_outline_rounded,
+  CulturalContentType.historicalFigure => Icons.person_pin_rounded,
 };
 
 Color _typeColor(CulturalContentType type) => switch (type) {
@@ -56,6 +58,7 @@ Color _typeColor(CulturalContentType type) => switch (type) {
   CulturalContentType.story => const Color(0xFF2196F3),
   CulturalContentType.foodTradition => const Color(0xFF795548),
   CulturalContentType.culturalNote => const Color(0xFF607D8B),
+  CulturalContentType.historicalFigure => const Color(0xFF5D4037),
 };
 
 String _levelLabel(int level) => switch (level) {

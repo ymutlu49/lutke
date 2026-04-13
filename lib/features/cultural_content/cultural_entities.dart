@@ -18,6 +18,7 @@ enum CulturalContentType {
   celebration,   // Cejna — Kutlama (Newroz, Îd...)
   foodTradition, // Xwarina — Yemek geleneği
   culturalNote,  // Nîşe — Kültürel not
+  historicalFigure, // Kesayetên Dîrokî — Tarihi Kişilikler
 }
 
 class CulturalItem {
@@ -55,6 +56,7 @@ class CulturalItem {
         CulturalContentType.celebration => 'Cejna',
         CulturalContentType.foodTradition => 'Xwarina',
         CulturalContentType.culturalNote => 'Nîşe',
+        CulturalContentType.historicalFigure => 'Kesayetên Dîrokî',
       };
 
   String get typeTurkish => switch (type) {
@@ -65,6 +67,7 @@ class CulturalItem {
         CulturalContentType.celebration => 'Kutlama',
         CulturalContentType.foodTradition => 'Yemek Geleneği',
         CulturalContentType.culturalNote => 'Kültürel Not',
+        CulturalContentType.historicalFigure => 'Tarihi Kişilik',
       };
 }
 
@@ -1057,6 +1060,288 @@ const kCulturalItems = [
     unitId: 'a2_u12',
     keywords: ['ziman', 'qedîm', 'çiya', 'çem', 'dil', 'Cegerxwîn'],
     audioAsset: 'assets/audio/cultural/c_a2_013.mp3',
+  ),
+
+  // ── Kesayetên Dîrokî — Tarihi Kürt Kişilikleri ──────────────
+
+  CulturalItem(
+    id: 'cf_001',
+    type: CulturalContentType.historicalFigure,
+    kurmanjTitle: 'Ehmedê Xanî (1650–1707)',
+    turkishTitle: 'Ahmed-i Hani (1650–1707)',
+    kurmanjContent:
+        '"Heke yek ji me Kurdan bihatana, pêşeng biketana, '
+        'ger me yekîtî biketana, ew ê me desthilatdar biketana."\n\n'
+        'Ehmedê Xanî helbestvan û fîlozofê kurd ê sedsala 17an e. '
+        'Berhema wî ya herî navdar Mem û Zîn e — destana evînê ya '
+        'ku di heman demê de bangê yekîtiya kurdan dike. '
+        'Xanî di medreseyê de mamostetî dikir û bi sê zimanan '
+        '(Kurmancî, Erebî, Farisî) dinivîsî.',
+    turkishContent:
+        '"Eğer bizden bir Kürt öne çıksaydı, önder olsaydı, '
+        'birlik sağlasaydık, bizi egemen kılarlardı."\n\n'
+        'Ahmed-i Hani, 17. yüzyılın Kürt şair ve filozofudur. '
+        'En ünlü eseri Mem ve Zin\'dir — aynı zamanda Kürt birliğine '
+        'çağrı yapan bir aşk destanıdır. '
+        'Hani medresede öğretmenlik yapmış ve üç dilde '
+        '(Kürtçe, Arapça, Farsça) eser vermiştir.',
+    backgroundNote:
+        'Mem û Zîn Kürt edebiyatının en önemli eseridir. '
+        'Xanî aynı zamanda Nûbihara Biçûkan adlı ilk Kürtçe '
+        'sözlüğü de yazmıştır. UNESCO tarafından tanınan bir eserdir.',
+    level: 3,
+    unitId: 'b1_u1',
+    keywords: ['Xanî', 'Mem û Zîn', 'yekîtî', 'helbest', 'pêşeng', 'desthilatdar'],
+  ),
+
+  CulturalItem(
+    id: 'cf_002',
+    type: CulturalContentType.historicalFigure,
+    kurmanjTitle: 'Melayê Cizîrî (1570–1640)',
+    turkishTitle: 'Molla Ciziri (1570–1640)',
+    kurmanjContent:
+        '"Dîwana min ew bihişta adimê ye, '
+        'Ku tê de gul û sunbul û nesrîn e."\n\n'
+        'Melayê Cizîrî helbestvanê mezin ê tasewufê ye. '
+        'Dîwana wî bi Kurmancî ye û di edebiyata kurdî de '
+        'cihekî sereke digire. Melayê Cizîrî li Cizîrê (Botan) jiyaye '
+        'û helbestên wî li ser evîn, Xwedê û xwezayê ne.',
+    turkishContent:
+        '"Divanım Adem\'in cennetidir, '
+        'İçinde güller, sümbüller ve nergisler vardır."\n\n'
+        'Molla Ciziri büyük bir tasavvuf şairidir. '
+        'Divanı Kürtçe olup Kürt edebiyatında temel bir yere sahiptir. '
+        'Cizre\'de (Botan) yaşamış olup şiirleri aşk, Tanrı ve '
+        'doğa üzerinedir.',
+    backgroundNote:
+        'Melayê Cizîrî Kurmancî edebiyatının ilk büyük şairi kabul edilir. '
+        'Dîwanı 2000\'den fazla beyit içerir ve Kürt kimliğinin '
+        'edebî temellerinden biridir.',
+    level: 3,
+    unitId: 'b1_u1',
+    keywords: ['Cizîrî', 'Dîwan', 'tasewuf', 'helbest', 'Botan', 'gul'],
+  ),
+
+  CulturalItem(
+    id: 'cf_003',
+    type: CulturalContentType.historicalFigure,
+    kurmanjTitle: 'Seîdê Kurdî / Bediüzzaman Said Nursî (1878–1960)',
+    turkishTitle: 'Said Nursi / Bediüzzaman (1878–1960)',
+    kurmanjContent:
+        '"Meşrûtîyet û hurrîyet û dadperwerî — '
+        'ev bingehên pêşveçûna gelan in."\n\n'
+        'Seîdê Kurdî zanayekî kurd ê sedsala 19–20an e. '
+        'Ji Bîtlîsê ye û li ser perwerde, mafên gelan û '
+        'azadiya ramanê gelek nivîsiye. Wî dixwest ku '
+        'zanîngeha kurdî li Rojhilata Anadoliyê were avakirin.',
+    turkishContent:
+        '"Meşrutiyet, hürriyet ve adalet — '
+        'bunlar milletlerin ilerlemesinin temellerdir."\n\n'
+        'Said-i Kürdi, 19–20. yüzyılın Kürt düşünürüdür. '
+        'Bitlisli olup eğitim, halkların hakları ve düşünce '
+        'özgürlüğü üzerine çok yazmıştır. Doğu Anadolu\'da '
+        'bir Kürt üniversitesi kurulmasını savunmuştur.',
+    backgroundNote:
+        'Said Nursî erken dönemde Kürt kimliğiyle tanınmış, '
+        'daha sonra İslami düşünce eserleriyle (Risale-i Nur) '
+        'geniş kitlelere ulaşmıştır. Kürt eğitim tarihinde '
+        'önemli bir figürdür.',
+    level: 3,
+    unitId: 'b1_u2',
+    keywords: ['Seîdê Kurdî', 'perwerde', 'hurrîyet', 'zanîngeh', 'dadperwerî'],
+  ),
+
+  CulturalItem(
+    id: 'cf_004',
+    type: CulturalContentType.historicalFigure,
+    kurmanjTitle: 'Mistefa Barzanî (1903–1979)',
+    turkishTitle: 'Mustafa Barzani (1903–1979)',
+    kurmanjContent:
+        '"Divê em ji bo azadî û mafên xwe bişewitin."\n\n'
+        'Mistefa Barzanî serokê tevgera neteweyî ya kurdî ye. '
+        'Li Başûrê Kurdistanê (Iraqê) ji bo mafên kurdan '
+        'bi dehsalan şer kir. Di sala 1946an de Komara Mehabadê '
+        'de wezîfedar bû. Navê wî di dîroka kurdan de '
+        'wek sembolê berxwedanê tê zanîn.',
+    turkishContent:
+        '"Özgürlük ve haklarımız için yanmalıyız."\n\n'
+        'Mustafa Barzani, Kürt ulusal hareketinin lideridir. '
+        'Güney Kürdistan\'da (Irak) Kürt hakları için onlarca yıl '
+        'mücadele etmiştir. 1946\'da Mahabad Cumhuriyeti\'nde '
+        'görev almıştır. Adı Kürt tarihinde direniş sembolü '
+        'olarak bilinir.',
+    backgroundNote:
+        'Barzanî ailesi Kürt siyasi tarihinin en önemli '
+        'ailelerinden biridir. Mistefa Barzanî\'nin mirası '
+        'bugünkü Kürdistan Bölgesel Yönetimi\'nin temelini oluşturur.',
+    level: 3,
+    unitId: 'b1_u2',
+    keywords: ['Barzanî', 'azadî', 'berxwedan', 'Mehabad', 'maf', 'neteweyî'],
+  ),
+
+  CulturalItem(
+    id: 'cf_005',
+    type: CulturalContentType.historicalFigure,
+    kurmanjTitle: 'Celadet Alî Bedirxan (1893–1951)',
+    turkishTitle: 'Celadet Ali Bedirhan (1893–1951)',
+    kurmanjContent:
+        '"Ziman jiyana neteweye ye. Bê ziman neteweyekê nikare bijî."\n\n'
+        'Celadet Alî Bedirxan alfabeya latînî ya Kurmancî '
+        'afirandiye. Kovara Hawar (1932–1943) li Şamê weşand '
+        'û bi vê rêyê Kurmancî bi tîpên latînî hat standardkirin. '
+        'Ew di dîroka zimanê kurdî de kesayetekî sereke ye.',
+    turkishContent:
+        '"Dil bir milletin hayatıdır. Dil olmadan bir millet yaşayamaz."\n\n'
+        'Celadet Ali Bedirhan, Kurmancî Latin alfabesini '
+        'oluşturmuştur. Şam\'da Hawar dergisini (1932–1943) yayımlamış '
+        've bu sayede Kurmancî Latin harfleriyle standartlaşmıştır. '
+        'Kürt dil tarihinin en önemli isimlerinden biridir.',
+    backgroundNote:
+        'Hawar dergisi modern Kurmancî yazı dilinin temelini atmıştır. '
+        'Bedirxan\'ın oluşturduğu alfabe bugün hâlâ kullanılmaktadır. '
+        'LUTKE uygulamasında kullanılan harfler de bu alfabeye dayanır.',
+    level: 3,
+    unitId: 'b1_u3',
+    keywords: ['Bedirxan', 'Hawar', 'alfabe', 'ziman', 'latînî', 'neteweyî'],
+  ),
+
+  CulturalItem(
+    id: 'cf_006',
+    type: CulturalContentType.historicalFigure,
+    kurmanjTitle: 'Cegerxwîn (1903–1984)',
+    turkishTitle: 'Cegerxwin (1903–1984)',
+    kurmanjContent:
+        '"Ez im çiya, ez im çem, ez im Kurdistan."\n\n'
+        'Cegerxwîn (navê wî yê rastî Şêxmûs Hesen e) '
+        'helbestvanê şoreşger ê kurd e. Bi sedan helbest nivîsîne '
+        'ku tê de evîna welêt, azadî û berxwedanê vedibêje. '
+        'Wî Kurmancî wek zimanê edebî û siyasî pêş xistiye.',
+    turkishContent:
+        '"Ben dağım, ben nehirim, ben Kürdistan\'ım."\n\n'
+        'Cegerxwin (asıl adı Şeyhmus Hasan), Kürt devrimci '
+        'şairidir. Yüzlerce şiir yazmış olup şiirlerinde '
+        'vatan sevgisi, özgürlük ve direniş işlenmiştir. '
+        'Kurmancîyi edebi ve siyasi bir dil olarak geliştirmiştir.',
+    backgroundNote:
+        'Cegerxwîn adı "ciğeri yanık" anlamına gelir. '
+        'Kürt şiirinde ulusal bilincin sembolüdür. '
+        'Eserleri Kürt diasporasında nesiller boyu okunmuştur.',
+    level: 3,
+    unitId: 'b1_u3',
+    keywords: ['Cegerxwîn', 'şoreş', 'çiya', 'Kurdistan', 'azadî', 'helbest'],
+  ),
+
+  CulturalItem(
+    id: 'cf_007',
+    type: CulturalContentType.historicalFigure,
+    kurmanjTitle: 'Şêx Seîd (1865–1925)',
+    turkishTitle: 'Şeyh Said (1865–1925)',
+    kurmanjContent:
+        'Şêx Seîd di sala 1925an de li Bakurê Kurdistanê '
+        'serhildanekê rêxistin kir. Ew ji bo mafên kurdan '
+        'û azadiya olî rabû. Serhildana wî yek ji '
+        'tevgerên herî girîng ên dîroka kurdî ye.\n\n'
+        'Navê wî di bîra gelê kurd de wek sembolê '
+        'berxwedanê dimîne.',
+    turkishContent:
+        'Şeyh Said 1925 yılında Kuzey Kürdistan\'da '
+        'bir ayaklanma düzenlemiştir. Kürt hakları ve '
+        'dini özgürlük için ayağa kalkmıştır. Ayaklanması '
+        'Kürt tarihinin en önemli hareketlerinden biridir.\n\n'
+        'Adı Kürt halkının hafızasında direniş sembolü '
+        'olarak yaşamaktadır.',
+    backgroundNote:
+        '1925 serhildanı Cumhuriyet tarihinde önemli bir dönüm '
+        'noktasıdır. Şêx Seîd Kürt kimlik bilincinin '
+        'erken dönem figürlerinden biridir.',
+    level: 3,
+    unitId: 'b1_u4',
+    keywords: ['Şêx Seîd', 'serhildan', 'berxwedan', 'Bakur', 'azadî', '1925'],
+  ),
+
+  CulturalItem(
+    id: 'cf_008',
+    type: CulturalContentType.historicalFigure,
+    kurmanjTitle: 'Nûredîn Zaza (1919–2000)',
+    turkishTitle: 'Nureddin Zaza (1919–2000)',
+    kurmanjContent:
+        'Nûredîn Zaza zimannasê kurd ê navdar e. '
+        'Li ser zimanê kurdî gelek lêkolîn kiriye û '
+        'ferhengên kurdî amade kiriye. Di heman demê de '
+        'siyasetmedarekî kurd bû û '
+        'di damezrandina Partiya Demokrat a Kurdistana Sûriyê de '
+        'rolê wî hebû.\n\n'
+        'Berhemên wî ji bo standardkirina Kurmancî girîng in.',
+    turkishContent:
+        'Nureddin Zaza ünlü bir Kürt dilbilimci ve sözlükçüdür. '
+        'Kürt dili üzerine çok sayıda araştırma yapmış ve '
+        'Kürtçe sözlükler hazırlamıştır. Aynı zamanda Kürt '
+        'siyasetçisi olup Suriye Kürdistan Demokrat Partisi\'nin '
+        'kuruluşunda rolü olmuştur.\n\n'
+        'Eserleri Kurmancînin standartlaşması için önemlidir.',
+    backgroundNote:
+        'Zaza\'nın otobiyografisi Kürt aydın tarihinin '
+        'önemli kaynaklarından biridir. Kürt dilinin akademik '
+        'çalışmasına büyük katkıda bulunmuştur.',
+    level: 3,
+    unitId: 'b1_u4',
+    keywords: ['Zaza', 'zimannas', 'ferheng', 'lêkolîn', 'standardkirin'],
+  ),
+
+  CulturalItem(
+    id: 'cf_009',
+    type: CulturalContentType.historicalFigure,
+    kurmanjTitle: 'Rewşen Bedirxan (1909–1992)',
+    turkishTitle: 'Rewşen Bedirhan (1909–1992)',
+    kurmanjContent:
+        'Rewşen Bedirxan yekem rojnamevanê jin ê kurd e. '
+        'Di kovara Hawar de nivîsiye û ji bo mafên jinên kurd '
+        'xebat kiriye. Ew keça Emîn Alî Bedirxan û '
+        'xwişka Celadet Alî Bedirxan e.\n\n'
+        'Rewşen ji bo perwerde û wekheviya jinê li nav '
+        'civaka kurdî pêşeng bû.',
+    turkishContent:
+        'Rewşen Bedirhan ilk Kürt kadın gazetecisidir. '
+        'Hawar dergisinde yazılar yazmış ve Kürt kadın hakları '
+        'için mücadele etmiştir. Emin Ali Bedirhan\'ın kızı ve '
+        'Celadet Ali Bedirhan\'ın kız kardeşidir.\n\n'
+        'Rewşen, Kürt toplumunda kadın eğitimi ve eşitliği '
+        'için öncü olmuştur.',
+    backgroundNote:
+        'Rewşen Bedirxan Kürt kadın hareketinin sembol isimlerindendir. '
+        'Bedirxan ailesi Kürt kültür ve siyaset tarihinde '
+        'merkezi bir rol oynamıştır.',
+    level: 3,
+    unitId: 'b1_u5',
+    keywords: ['Rewşen', 'Bedirxan', 'rojnamevan', 'jin', 'Hawar', 'maf'],
+  ),
+
+  CulturalItem(
+    id: 'cf_010',
+    type: CulturalContentType.historicalFigure,
+    kurmanjTitle: 'Yilmaz Güney (1937–1984)',
+    turkishTitle: 'Yilmaz Güney (1937–1984)',
+    kurmanjContent:
+        'Yilmaz Güney derhênerê kurd ê cîhanî ye. '
+        'Fîlmê wî yê Yol di sala 1982an de li Cannesê '
+        'Xelata Palmê ya Zêrîn wergirt. Di fîlmên xwe de '
+        'jiyana kurdan, hejarî û berxwedanê nîşan daye.\n\n'
+        'Güney gotiye ku sînema divê dengê '
+        'kesên bêdeng be.',
+    turkishContent:
+        'Yilmaz Güney dünyaca ünlü Kürt yönetmendir. '
+        'Yol filmi 1982\'de Cannes\'da Altın Palmiye ödülünü '
+        'kazanmıştır. Filmlerinde Kürt yaşamını, yoksulluğu '
+        've direnişi işlemiştir.\n\n'
+        'Güney sinemanın sessiz kalanların sesi '
+        'olması gerektiğini söylemiştir.',
+    backgroundNote:
+        'Yilmaz Güney Kürt kültürel kimliğinin uluslararası '
+        'arenada tanınmasında önemli bir rol oynamıştır. '
+        'Palme d\'Or alan ilk Türkiyeli yönetmendir.',
+    level: 3,
+    unitId: 'b1_u5',
+    keywords: ['Güney', 'sînema', 'Yol', 'Cannes', 'Palmê Zêrîn', 'derhêner'],
   ),
 ];
 

@@ -74,80 +74,85 @@ class _SplashScreenState extends ConsumerState<SplashScreen> {
     final screenWidth = MediaQuery.of(context).size.width;
 
     return Scaffold(
-      body: Container(
-        decoration: const BoxDecoration(
-          gradient: LinearGradient(
-            begin: Alignment.topCenter,
-            end: Alignment.bottomCenter,
-            colors: [
-              AppColors.primary,
-              AppColors.primaryDark,
-            ],
-          ),
-        ),
-        child: SafeArea(
-          child: Center(
-            child: Column(
-              children: [
+      body: Center(
+        child: ConstrainedBox(
+          constraints: const BoxConstraints(maxWidth: 480),
+          child: Container(
+            decoration: const BoxDecoration(
+              gradient: LinearGradient(
+                begin: Alignment.topCenter,
+                end: Alignment.bottomCenter,
+                colors: [
+                  AppColors.primary,
+                  AppColors.primaryDark,
+                ],
+              ),
+            ),
+            child: SafeArea(
+              child: Center(
+                child: Column(
+                  children: [
 
-                const Spacer(flex: 3),
+                    const Spacer(flex: 3),
 
-                // Logo — merkezi marka widget'ı
-                LutkeLogo.splash(screenWidth: screenWidth),
+                    // Logo — merkezi marka widget'ı
+                    LutkeLogo.splash(screenWidth: screenWidth),
 
-                const Spacer(flex: 2),
+                    const Spacer(flex: 2),
 
-                // Hoş geldin mesajı — Kurmancî (İlke §0.5, §2)
-                Text(
-                  'Xêr hatî.',
-                  style: TextStyle(
-                    fontSize: 22,
-                    fontWeight: FontWeight.w600,
-                    color: Colors.white.withOpacity(0.9),
-                    fontStyle: FontStyle.italic,
-                  ),
-                )
-                    .animate()
-                    .fadeIn(delay: 1200.ms, duration: 800.ms)
-                    .slideY(begin: 0.3, curve: Curves.easeOut),
+                    // Hoş geldin mesajı — Kurmancî (İlke §0.5, §2)
+                    Text(
+                      'Xêr hatî.',
+                      style: TextStyle(
+                        fontSize: 22,
+                        fontWeight: FontWeight.w600,
+                        color: Colors.white.withOpacity(0.9),
+                        fontStyle: FontStyle.italic,
+                      ),
+                    )
+                        .animate()
+                        .fadeIn(delay: 1200.ms, duration: 800.ms)
+                        .slideY(begin: 0.3, curve: Curves.easeOut),
 
-                const SizedBox(height: 8),
+                    const SizedBox(height: 8),
 
-                if (ref.watch(showTurkishProvider))
-                  Text(
-                    'Bi xêr hatî — Welcome',
-                    style: TextStyle(
-                      fontSize: 13,
-                      color: Colors.white.withOpacity(0.6),
-                    ),
-                  ).animate().fadeIn(delay: 1600.ms, duration: 600.ms),
+                    if (ref.watch(showTurkishProvider))
+                      Text(
+                        'Bi xêr hatî — Welcome',
+                        style: TextStyle(
+                          fontSize: 13,
+                          color: Colors.white.withOpacity(0.6),
+                        ),
+                      ).animate().fadeIn(delay: 1600.ms, duration: 600.ms),
 
-                const Spacer(flex: 2),
+                    const Spacer(flex: 2),
 
-                // Yükleniyor göstergesi
-                SizedBox(
-                  width: 32,
-                  height: 32,
-                  child: CircularProgressIndicator(
-                    strokeWidth: 2.5,
-                    color: Colors.white.withOpacity(0.6),
-                  ),
-                ).animate().fadeIn(delay: 2000.ms),
+                    // Yükleniyor göstergesi
+                    SizedBox(
+                      width: 32,
+                      height: 32,
+                      child: CircularProgressIndicator(
+                        strokeWidth: 2.5,
+                        color: Colors.white.withOpacity(0.6),
+                      ),
+                    ).animate().fadeIn(delay: 2000.ms),
 
-                const Spacer(flex: 1),
+                    const Spacer(flex: 1),
 
-                // Çêker bilgisi
-                Text(
-                  'Çêker: Prof. Dr. Yılmaz Mutlu',
-                  style: TextStyle(
-                    fontSize: 12,
-                    color: Colors.white.withOpacity(0.4),
-                    letterSpacing: 0.5,
-                  ),
-                ).animate().fadeIn(delay: 2200.ms, duration: 600.ms),
+                    // Çêker bilgisi
+                    Text(
+                      'Çêker: Prof. Dr. Yılmaz Mutlu',
+                      style: TextStyle(
+                        fontSize: 12,
+                        color: Colors.white.withOpacity(0.4),
+                        letterSpacing: 0.5,
+                      ),
+                    ).animate().fadeIn(delay: 2200.ms, duration: 600.ms),
 
-                const SizedBox(height: 24),
-              ],
+                    const SizedBox(height: 24),
+                  ],
+                ),
+              ),
             ),
           ),
         ),
