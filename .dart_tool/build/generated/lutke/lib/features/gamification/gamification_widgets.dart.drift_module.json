@@ -1,0 +1,13 @@
+{
+  "elements": {},
+  "imports": [
+    "package:flutter/material.dart",
+    "package:flutter_animate/flutter_animate.dart",
+    "package:flutter_riverpod/flutter_riverpod.dart",
+    "package:lutke/core/constants/app_colors.dart",
+    "package:lutke/core/constants/app_typography.dart",
+    "package:lutke/core/constants/app_spacing.dart",
+    "package:lutke/features/lessons/domain/lesson_entities.dart",
+    "package:lutke/features/gamification/gamification_provider.dart"
+  ]
+}

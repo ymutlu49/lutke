@@ -1,0 +1,9 @@
+{
+  "elements": {},
+  "imports": [
+    "package:flutter_riverpod/flutter_riverpod.dart",
+    "package:shared_preferences/shared_preferences.dart",
+    "package:lutke/features/lessons/domain/lesson_entities.dart",
+    "package:lutke/features/lessons/data/lesson_repository.dart"
+  ]
+}

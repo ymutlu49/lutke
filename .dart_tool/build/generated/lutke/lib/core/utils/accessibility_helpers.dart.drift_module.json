@@ -1,0 +1,10 @@
+{
+  "elements": {},
+  "imports": [
+    "package:flutter/material.dart",
+    "package:flutter/semantics.dart",
+    "package:lutke/core/constants/app_colors.dart",
+    "package:lutke/core/constants/app_typography.dart",
+    "package:lutke/core/constants/app_spacing.dart"
+  ]
+}
