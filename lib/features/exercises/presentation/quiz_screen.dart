@@ -508,48 +508,24 @@ class _QuizScreenState extends ConsumerState<QuizScreen>
     );
   }
 
-  // ── Kategori Emoji Haritası ────────────────────────────────────
+  // ── Kurmancî Soru Yardımcıları ─────────────────────────────────
 
-  static String _emojiForKat(String kat) => switch (kat) {
-    'silav' || 'selamlama' => '👋',
-    'malbat' => '👨‍👩‍👧‍👦',
-    'xwarin' => '🍽️',
-    'vexwarin' => '🥤',
-    'mêwe' || 'mewe' => '🍎',
-    'ajal' || 'heywan' => '🐾',
-    'reng' => '🎨',
-    'jimar' => '🔢',
-    'mal' => '🏠',
-    'cil' => '👕',
-    'beden' => '🫀',
-    'tendurist' => '🏥',
-    'pîşe' || 'pise' => '👷',
-    'dem' => '⏰',
-    'roj' => '📅',
-    'demsal' => '🌦️',
-    'cih' => '📍',
-    'gihanî' => '🚗',
-    'leker' => '🏃',
-    'xweza' => '🌿',
-    'perwerde' => '📚',
-    'çand' || 'cand' => '🎭',
-    'alfabe' => '🔤',
-    'cinavk' => '👤',
-    'rengder' => '📝',
-    'daçek' || 'dacek' => '🔗',
-    'temel' => '💡',
-    'dua' => '🤲',
-    'peyvben' => '🔀',
-    'pirs' => '❓',
-    'bun' => '✨',
-    _ => '📖',
-  };
+  /// Heritage cümleden kelimeyi gizle
+  String _maskWord(String sentence, String word) {
+    // Kelimeyi ve ezafe formlarını gizle
+    var masked = sentence;
+    final forms = [word, '${word}ê', '${word}a', '${word}î', '${word}an'];
+    for (final form in forms) {
+      masked = masked.replaceAll(form, '____');
+      masked = masked.replaceAll(form.toLowerCase(), '____');
+    }
+    return masked;
+  }
 
   // ── 1. Translation: Kurmancî -> Tirkî ────────────────────────
 
   Widget _buildTranslationQuestion(_QuizQuestion q) {
     if (_showTurkish) {
-      // KU/TR: Kurmancî kelime → Türkçe seçenekler
       return Column(
         key: ValueKey('translation_${q.word.id}'),
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -563,36 +539,38 @@ class _QuizScreenState extends ConsumerState<QuizScreen>
       );
     }
 
-    // Tenê Kurmancî: Emoji + kategori ipucu → Kurmancî kelime seçenekleri
-    final emoji = _emojiForKat(q.word.kat);
-    final hint = (q.word.her is List && (q.word.her as List).isNotEmpty)
-        ? (q.word.her as List)[0].toString().replaceAll(q.word.ku, '____')
-        : '$emoji ${q.word.kat}';
+    // Tenê Kurmancî: Heritage cümle (kelime gizli) → doğru kelimeyi seç
+    final sentences = q.word.her;
+    String hint;
+    if (sentences is List && sentences.isNotEmpty) {
+      hint = _maskWord(sentences[0].toString(), q.word.ku);
+      // Eğer kelime gizlenemedi (cümlede yok), farklı ipucu göster
+      if (!hint.contains('____')) {
+        hint = '____  (${q.word.kat})';
+      }
+    } else {
+      hint = '____  (${q.word.kat})';
+    }
 
     return Column(
       key: ValueKey('translation_${q.word.id}'),
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        _buildInstruction('Kîjan peyv rast e?', '', showTr: false),
+        _buildInstruction('Kîjan peyv cihê vala dagire?', '', showTr: false),
         Gap.lg,
-        // Emoji büyük göster + cümle ipucu
         Center(
-          child: Column(
-            children: [
-              Text(emoji, style: const TextStyle(fontSize: 56)),
-              Gap.sm,
-              Container(
-                padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 12),
-                decoration: BoxDecoration(
-                  color: AppColors.primarySurface,
-                  borderRadius: BorderRadius.circular(16),
-                ),
-                child: Text(hint,
-                  style: AppTypography.kurmanji.copyWith(
-                    color: AppColors.textPrimary, fontSize: 16),
-                  textAlign: TextAlign.center),
-              ),
-            ],
+          child: Container(
+            margin: const EdgeInsets.symmetric(horizontal: 16),
+            padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 16),
+            decoration: BoxDecoration(
+              color: AppColors.primarySurface,
+              borderRadius: BorderRadius.circular(20),
+              border: Border.all(color: AppColors.primary.withOpacity(0.15)),
+            ),
+            child: Text(hint,
+              style: AppTypography.kurmanji.copyWith(
+                color: AppColors.textPrimary, fontSize: 18, height: 1.5),
+              textAlign: TextAlign.center),
           ),
         ),
         const SizedBox(height: AppSpacing.questionToOptions),
@@ -618,24 +596,39 @@ class _QuizScreenState extends ConsumerState<QuizScreen>
       );
     }
 
-    // Tenê Kurmancî: Emoji + Kurmancî tanım → kelime seçenekleri
-    final emoji = _emojiForKat(q.word.kat);
+    // Tenê Kurmancî: Kurmancî tanım/not → doğru kelimeyi seç
+    final notText = q.word.not_ ?? '';
+    // Not alanından kısa bir tanım çıkar
+    String definition = notText.length > 5
+        ? notText.split('.').first.replaceAll(q.word.ku, '____')
+        : q.word.kat;
 
     return Column(
       key: ValueKey('reverse_${q.word.id}'),
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        _buildInstruction('Ev wêne kîjan peyvê nîşan dide?', '', showTr: false),
+        _buildInstruction('Kîjan peyv rast e?', '', showTr: false),
         Gap.lg,
         Center(
-          child: Column(
-            children: [
-              Text(emoji, style: const TextStyle(fontSize: 72)),
-              Gap.sm,
-              Text(q.word.kat.toUpperCase(),
-                style: TextStyle(fontSize: 13, color: AppColors.textSecondary,
-                  fontWeight: FontWeight.w600, letterSpacing: 1)),
-            ],
+          child: Container(
+            margin: const EdgeInsets.symmetric(horizontal: 16),
+            padding: const EdgeInsets.all(20),
+            decoration: BoxDecoration(
+              color: AppColors.backgroundSecondary,
+              borderRadius: BorderRadius.circular(20),
+              border: Border.all(color: AppColors.border),
+            ),
+            child: Column(
+              children: [
+                Text('📖', style: const TextStyle(fontSize: 32)),
+                Gap.sm,
+                Text(definition,
+                  style: AppTypography.body.copyWith(
+                    color: AppColors.textPrimary, fontSize: 15, height: 1.4),
+                  textAlign: TextAlign.center,
+                  maxLines: 3, overflow: TextOverflow.ellipsis),
+              ],
+            ),
           ),
         ),
         const SizedBox(height: AppSpacing.questionToOptions),
@@ -742,27 +735,23 @@ class _QuizScreenState extends ConsumerState<QuizScreen>
         if (_showTurkish)
           _buildWordCard(q.word.tr, isKurmanji: false)
         else
-          // Kurmancî modda: emoji + heritage cümle (kelime ____ ile gizlenmiş)
+          // Kurmancî modda: heritage cümle (kelime gizli)
           Center(
-            child: Column(
-              children: [
-                Text(_emojiForKat(q.word.kat), style: const TextStyle(fontSize: 48)),
-                Gap.sm,
-                Container(
-                  padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 12),
-                  decoration: BoxDecoration(
-                    color: AppColors.primarySurface,
-                    borderRadius: BorderRadius.circular(16),
-                  ),
-                  child: Text(
-                    (q.word.her is List && (q.word.her as List).isNotEmpty)
-                        ? (q.word.her as List)[0].toString().replaceAll(q.word.ku, '____')
-                        : '${q.word.kat}: ____',
-                    style: AppTypography.kurmanji.copyWith(fontSize: 16),
-                    textAlign: TextAlign.center,
-                  ),
-                ),
-              ],
+            child: Container(
+              margin: const EdgeInsets.symmetric(horizontal: 16),
+              padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 16),
+              decoration: BoxDecoration(
+                color: AppColors.primarySurface,
+                borderRadius: BorderRadius.circular(20),
+                border: Border.all(color: AppColors.primary.withOpacity(0.15)),
+              ),
+              child: Text(
+                (q.word.her is List && (q.word.her as List).isNotEmpty)
+                    ? _maskWord((q.word.her as List)[0].toString(), q.word.ku)
+                    : '____  (${q.word.kat})',
+                style: AppTypography.kurmanji.copyWith(fontSize: 18, height: 1.5),
+                textAlign: TextAlign.center,
+              ),
             ),
           ),
 
@@ -1209,7 +1198,7 @@ class _QuizScreenState extends ConsumerState<QuizScreen>
     };
 
     // Kategori emoji
-    final emoji = _emojiForKat(word.kat);
+    const emoji = '📖';
 
     showModalBottomSheet(
       context: context,
