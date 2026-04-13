@@ -106,7 +106,7 @@ class LessonRepository {
     2 => kA2TamListe,
     3 => kB1Temam,
     4 => kB2Temam2,
-    5 => kC1Temam,
+    5 => kC1Nihayi5,
     6 => kC2Temam,
     _ => kA1TamKelimeler,
   };
