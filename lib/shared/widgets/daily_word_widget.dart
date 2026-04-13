@@ -147,7 +147,7 @@ class _DailyWordWidgetState extends ConsumerState<DailyWordWidget> {
           Row(
             children: [
               Text(
-                '$emoji Peyva Roje',
+                '$emoji Peyva Rojê',
                 style: AppTypography.labelSmall.copyWith(
                   color: AppColors.primary,
                   fontWeight: FontWeight.w600,
@@ -288,7 +288,7 @@ class _DailyWordWidgetState extends ConsumerState<DailyWordWidget> {
                               color: AppColors.success, size: 20),
                           const SizedBox(width: 8),
                           Text(
-                            'Bask! Peyv hat ferkirin.',
+                            'Baş e! Peyv hat fêrkirin.',
                             style: AppTypography.label.copyWith(
                               color: AppColors.success,
                               fontWeight: FontWeight.w600,
@@ -311,7 +311,7 @@ class _DailyWordWidgetState extends ConsumerState<DailyWordWidget> {
                         elevation: 0,
                       ),
                       child: Text(
-                        'Fer bum!',
+                        'Fêr bûm!',
                         style: AppTypography.labelLarge.copyWith(
                           color: Colors.white,
                           fontWeight: FontWeight.w700,

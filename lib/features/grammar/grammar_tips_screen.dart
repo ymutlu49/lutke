@@ -40,7 +40,7 @@ class _GrammarTipsScreenState extends ConsumerState<GrammarTipsScreen> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              'Reziman',
+              'Rêziman',
               style: AppTypography.headline.copyWith(fontSize: 20),
             ),
             if (showTurkish)
@@ -441,7 +441,7 @@ final _grammarTopics = <_GrammarTopic>[
   _GrammarTopic(
     icon: Icons.abc_rounded,
     color: AppColors.primary,
-    titleKu: 'Alfabe u Dengen Kurmanci',
+    titleKu: 'Alfabe û Dengên Kurmancî',
     titleTr: 'Alfabe ve Sesler',
     level: 'A1',
     rules: [

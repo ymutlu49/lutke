@@ -1208,7 +1208,7 @@ class _ScoreView extends StatelessWidget {
 
           // Mesaj
           Text(
-            isPerfect ? 'Pir basi!' : 'Basi!',
+            isPerfect ? 'Pir başî!' : 'Başî!',
             style: AppTypography.kurmanjiLarge.copyWith(
               color: isPerfect ? AppColors.success : AppColors.primary,
             ),
@@ -1288,7 +1288,7 @@ class _ScoreView extends StatelessWidget {
             TextButton(
               onPressed: onRestart,
               child: Text(
-                'Ji nû ve dest pe bike',
+                'Ji nû ve dest pê bike',
                 style: AppTypography.label.copyWith(
                   color: AppColors.textSecondary,
                 ),

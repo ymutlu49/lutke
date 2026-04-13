@@ -410,7 +410,7 @@ class _ListeningScreenState extends ConsumerState<ListeningScreen>
         ),
         body: Center(
           child: Text(
-            'Kelime havuzu yeterli degil.',
+            'Peyvên bes tune ne.',
             style: AppTypography.bodyLarge.copyWith(color: AppColors.textSecondary),
           ),
         ),
@@ -734,11 +734,11 @@ class _QuestionPrompt extends StatelessWidget {
           'Bu cumle ne diyor?',
         ),
       _ListeningQuestionType.wordFind => (
-          'Kijan peyv di hevoke de heye?',
+          'Kîjan peyv di hevokê de heye?',
           'Hangi kelime cumlede var?',
         ),
       _ListeningQuestionType.fillBlank => (
-          'Hevoke temam bike',
+          'Hevokê temam bike',
           'Cumleyi tamamla',
         ),
     };
@@ -921,8 +921,8 @@ class _ResultsSheet extends StatelessWidget {
 
           Text(
             isGreat
-                ? 'Guhdariya te pir baso e!'
-                : 'Her gav pir hejayiye ke tu hewl didi!',
+                ? 'Guhdariya te pir baş e!'
+                : 'Her gav pir hêjayî ye ku tu hewl didî!',
             textAlign: TextAlign.center,
             style: AppTypography.bodyLarge.copyWith(
               color: AppColors.textSecondary,

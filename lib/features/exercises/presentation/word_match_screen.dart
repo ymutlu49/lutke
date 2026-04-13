@@ -657,7 +657,7 @@ class _WordMatchScreenState extends ConsumerState<WordMatchScreen>
               // Tebrik mesaji
               Text(
                 stars == 3
-                    ? 'Piroz be! 🎉'
+                    ? 'Pîroz be! 🎉'
                     : stars == 2
                         ? 'Baş e!'
                         : 'Berdewam bike!',

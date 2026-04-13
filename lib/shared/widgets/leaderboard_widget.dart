@@ -174,7 +174,7 @@ class LeaderboardWidget extends ConsumerWidget {
                 ),
                 const SizedBox(width: AppSpacing.sm),
                 Text(
-                  'Pesibazi',
+                  'Pêşbazî',
                   style: AppTypography.title.copyWith(
                     color: AppColors.textPrimary,
                   ),
@@ -190,7 +190,7 @@ class LeaderboardWidget extends ConsumerWidget {
                     borderRadius: BorderRadius.circular(AppSpacing.radiusFull),
                   ),
                   child: Text(
-                    'Ve hefteye',
+                    'Vê hefteyê',
                     style: AppTypography.caption.copyWith(
                       color: AppColors.primary,
                       fontWeight: FontWeight.w500,
