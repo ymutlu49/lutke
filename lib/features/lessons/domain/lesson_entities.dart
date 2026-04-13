@@ -309,11 +309,11 @@ const kBadges = [
     emoji: '\u{1F3B5}', // musical note
   ),
   BadgeModel(
-    id: 'cirokvan',
+    id: 'çîrokvan',
     kurmanjName: 'Çîrokvan',
     turkishName: 'Hikayeci',
     description: 'B1 edebiyat modülü tamamlandı',
-    iconAsset: 'assets/images/badges/cirokvan.png',
+    iconAsset: 'assets/images/badges/çîrokvan.png',
     condition: 'b1_literature',
     emoji: '\u{1F4D6}', // open book
   ),

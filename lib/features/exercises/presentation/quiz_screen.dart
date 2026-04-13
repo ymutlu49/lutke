@@ -1511,7 +1511,7 @@ class _QuizScreenState extends ConsumerState<QuizScreen>
     final String motivationalKu;
     final String motivationalTr;
     if (accuracy == 100) {
-      motivationalKu = 'Piroz be! Tu pispor i!';
+      motivationalKu = 'Pîroz be! Tu pispor i!';
       motivationalTr = 'Tebrikler! Uzmansin!';
     } else if (accuracy >= 80) {
       motivationalKu = 'Zede bas! Pes dikevi!';
@@ -1671,7 +1671,7 @@ class _QuizScreenState extends ConsumerState<QuizScreen>
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
-                            'Peyveni ve dersi',
+                            'Peyvên ve dersi',
                             style: AppTypography.label.copyWith(
                               color: AppColors.textSecondary,
                             ),

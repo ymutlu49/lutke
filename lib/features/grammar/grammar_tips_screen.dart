@@ -8,9 +8,9 @@ import '../../core/constants/app_spacing.dart';
 import '../../shared/providers/language_mode_provider.dart';
 
 // ════════════════════════════════════════════════════════════════
-// REZIMAN — Kurmancî Gramer Rehberi (A1–B1)
-// Duolingo "Tips" tarzı: konu kartları + genisleyen detay.
-// Ilke 0.5: Kurmanci birincil dil.
+// RÊZIMAN — Kurmancî Gramer Rehberi (A1–B1)
+// Duolingo "Tips" tarzı: konu kartları + genişleyen detay.
+// Îlke 0.5: Kurmancî bîrincîl dil.
 // ════════════════════════════════════════════════════════════════
 
 class GrammarTipsScreen extends ConsumerStatefulWidget {
@@ -137,7 +137,7 @@ class _GrammarTopicCard extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                // ── Baslik satiri ──────────────────────────────
+                // ── Başlık satırı ──────────────────────────────
                 Padding(
                   padding: const EdgeInsets.all(AppSpacing.md),
                   child: Row(
@@ -206,7 +206,7 @@ class _GrammarTopicCard extends StatelessWidget {
                   ),
                 ),
 
-                // ── Genisleyen icerik ──────────────────────────
+                // ── Genişleyen içerik ──────────────────────────
                 AnimatedCrossFade(
                   firstChild: const SizedBox.shrink(),
                   secondChild: _TopicContent(topic: topic, showTurkish: showTurkish),
@@ -238,7 +238,7 @@ class _GrammarTopicCard extends StatelessWidget {
 }
 
 // ════════════════════════════════════════════════════════════════
-// KONU ICERIGI — Kurallar + Ornekler
+// KONU İÇERİĞİ — Kurallar + Örnekler
 // ════════════════════════════════════════════════════════════════
 
 class _TopicContent extends StatelessWidget {
@@ -297,20 +297,20 @@ class _TopicContent extends StatelessWidget {
                 ),
                 if (showTurkish)
                   Text(
-                    '  (Ornekler)',
+                    '  (Örnekler)',
                     style: AppTypography.caption,
                   ),
               ],
             ),
             const SizedBox(height: AppSpacing.sm),
 
-            // Ornek kutulari
+            // Örnek kutuları
             ...topic.examples.map(
               (ex) => _ExampleBox(example: ex, showTurkish: showTurkish),
             ),
           ],
 
-          // Ipucu notu
+          // İpucu notu
           if (topic.tip != null) ...[
             const SizedBox(height: AppSpacing.sm),
             Container(
@@ -346,7 +346,7 @@ class _TopicContent extends StatelessWidget {
 }
 
 // ════════════════════════════════════════════════════════════════
-// ORNEK KUTUSU
+// ÖRNEK KUTUSU
 // ════════════════════════════════════════════════════════════════
 
 class _ExampleBox extends StatelessWidget {
@@ -369,7 +369,7 @@ class _ExampleBox extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          // Kurmanci — birincil, buyuk
+          // Kurmancî — birincil, büyük
           Text(
             example.ku,
             style: AppTypography.kurmanjiCard.copyWith(
@@ -400,7 +400,7 @@ class _ExampleBox extends StatelessWidget {
 }
 
 // ════════════════════════════════════════════════════════════════
-// VERi MODELLERi
+// VERİ MODELLERİ
 // ════════════════════════════════════════════════════════════════
 
 class _GrammarExample {
@@ -445,51 +445,51 @@ final _grammarTopics = <_GrammarTopic>[
     titleTr: 'Alfabe ve Sesler',
     level: 'A1',
     rules: [
-      'Kurmanci 31 tip hene. Tiplerin Latini bi kar tinin.',
-      'Tiplerin taybet: e, i, u, x, q, w',
-      'e — wek "e" ya direg (mer, ser, ber)',
-      'i — wek "i" ya direg (ji, sir, mir)',
-      'u — wek "u" ya direg (ku, tu, du)',
-      'x — dengeki guleki ye, wek "ch" ya Elmani',
-      'q — ji "k" ye qultir e, ji qirika ve te',
-      'w — wek "w" ya Inglizi (war, ew, diwar)',
+      'Kurmancî 31 tîp hene. Tîpên Latînî bi kar tînin.',
+      'Tîpên taybet: ê, î, û, x, q, w',
+      'ê — wek "e" ya dirêj (mêr, sêr, bêr)',
+      'î — wek "i" ya dirêj (jî, şîr, mîr)',
+      'û — wek "u" ya dirêj (kû, tû, dû)',
+      'x — dengekî gulekî ye, wek "ch" ya Elmanî',
+      'q — ji "k" ye qûltir e, ji qirika ve tê',
+      'w — wek "w" ya Îngîlîzî (war, ew, dîwar)',
     ],
     examples: [
-      _GrammarExample(ku: 'e: ser, ber, der', tr: 'bas, on, kapi'),
-      _GrammarExample(ku: 'i: mir, sir, ji', tr: 'emir, sir, -den'),
-      _GrammarExample(ku: 'u: ku, tu, du', tr: 'nerede, sen, iki'),
-      _GrammarExample(ku: 'x: xwendin, xaniy', tr: 'okumak, ev'),
+      _GrammarExample(ku: 'ê: sêr, bêr, dêr', tr: 'baş, ön, kapı'),
+      _GrammarExample(ku: 'î: mîr, şîr, jî', tr: 'emir, süt, -den'),
+      _GrammarExample(ku: 'û: kû, tû, dû', tr: 'nerede, sen, iki'),
+      _GrammarExample(ku: 'x: xwendin, xanî', tr: 'okumak, ev'),
     ],
-    tip: 'Kurmanci de her tip yek deng dide. Tiplerin beden guherinin tune ye!',
+    tip: 'Kurmancî de her tîp yek deng dide. Tîpên bedên guherînin tune ye!',
   ),
 
-  // 2. Navder u Zayend
+  // 2. Navdêr û Zayend
   _GrammarTopic(
     icon: Icons.category_rounded,
     color: AppColors.accent,
-    titleKu: 'Navder u Zayend',
-    titleTr: 'Isimler ve Cinsiyet',
+    titleKu: 'Navdêr û Zayend',
+    titleTr: 'İsimler ve Cinsiyet',
     level: 'A1',
     rules: [
-      'Her navderek Kurmanci ya ner (erkek) an me (disi) ye.',
-      'Piran navdere bi girsegiyan diqedin ner in.',
-      'Piran navdere bi denglikan diqedin me ne.',
-      'Ner: kiteb, kes, dar, av, nan',
-      'Me: mal, der, pirtuk, ax, cade',
+      'Her navdêrek Kurmancî ya nêr (erkek) an mê (dişi) ye.',
+      'Pîran navdêrê bi girsegîyan diqedin nêr in.',
+      'Pîran navdêrê bi denglîkan diqedin mê ne.',
+      'Nêr: kitêb, kes, dar, av, nan',
+      'Mê: mal, dêr, pirtûk, ax, cade',
     ],
     examples: [
       _GrammarExample(
-        ku: 'kiteb (ner) — kiteba min',
-        tr: 'kitap (eril) — benim kitabim',
-        note: 'Ner: -e ezafe',
+        ku: 'kitêb (nêr) — kitêba min',
+        tr: 'kitap (eril) — benim kitabım',
+        note: 'Nêr: -ê ezafe',
       ),
       _GrammarExample(
-        ku: 'mal (me) — mala min',
-        tr: 'ev (disil) — benim evim',
-        note: 'Me: -a ezafe',
+        ku: 'mal (mê) — mala min',
+        tr: 'ev (dişil) — benim evim',
+        note: 'Mê: -a ezafe',
       ),
     ],
-    tip: 'Zayende navderan bi birkirin lazim e. Di ferhenge de N (ner) an J (me) dinivisin.',
+    tip: 'Zayendê navdêran bi bîrkirîn lazim e. Di ferhengê de N (nêr) an J (mê) dinivîsîn.',
   ),
 
   // 3. Ezafe
@@ -497,22 +497,22 @@ final _grammarTopics = <_GrammarTopic>[
     icon: Icons.link_rounded,
     color: const Color(0xFF7C4DFF),
     titleKu: 'Ezafe',
-    titleTr: 'Ezafe Yapisi (Tamlama)',
+    titleTr: 'Ezafe Yapısı (Tamlama)',
     level: 'A1',
     rules: [
-      'Ezafe navderan bi hev ve giridade.',
-      'Ner: -e (deste min = elim)',
-      'Me: -a (mala min = evim)',
-      'Pirjimar: -en (malten me = evlerimiz)',
-      'Ezafe di navbera navder u cinavkan de te.',
+      'Ezafe navdêran bi hev ve girêdide.',
+      'Nêr: -ê (destê min = elim)',
+      'Mê: -a (mala min = evim)',
+      'Pîrjimar: -ên (maltên me = evlerimiz)',
+      'Ezafe di navbêra navdêr û cinavkan de tê.',
     ],
     examples: [
-      _GrammarExample(ku: 'deste min', tr: 'elim', note: 'dest (ner) + -e + min'),
-      _GrammarExample(ku: 'mala min', tr: 'evim', note: 'mal (me) + -a + min'),
-      _GrammarExample(ku: 'kiteba te', tr: 'senin kitabin', note: 'kiteb (ner) + -a? => dikkat: kiteb me ye!'),
-      _GrammarExample(ku: 'nave wi', tr: 'onun adi', note: 'nav (ner) + -e + wi'),
+      _GrammarExample(ku: 'destê min', tr: 'elim', note: 'dest (nêr) + -ê + min'),
+      _GrammarExample(ku: 'mala min', tr: 'evim', note: 'mal (mê) + -a + min'),
+      _GrammarExample(ku: 'kitêba te', tr: 'senin kitabın', note: 'kitêb (mê) + -a + te'),
+      _GrammarExample(ku: 'navê wî', tr: 'onun adı', note: 'nav (nêr) + -ê + wî'),
     ],
-    tip: 'Ezafe, Kurmanci nin en giring qaideye ye. Her roj bikar bine!',
+    tip: 'Ezafe, Kurmancî nin en girîng qaîdeye ye. Her roj bikar bîne!',
   ),
 
   // 4. Cinavk
@@ -523,173 +523,173 @@ final _grammarTopics = <_GrammarTopic>[
     titleTr: 'Zamirler',
     level: 'A1',
     rules: [
-      'Cinavken kes — rewsa rast (navoki):',
+      'Cinavkên kes — rewşa rast (navokî):',
       '  ez (ben), tu (sen), ew (o)',
-      '  em (biz), hun (siz), ew (onlar)',
-      'Rewsa berz (tewang):',
-      '  min (beni/benim), te (seni/senin), wi/we (onu/onun)',
-      '  me (bizi/bizim), we (sizi/sizin), wan (onlari/onlarin)',
-      'Rewsa berz di dema bori de ji bo kerdox te bikaranin!',
+      '  em (biz), hûn (siz), ew (onlar)',
+      'Rewşa berz (tewang):',
+      '  min (beni/benim), te (seni/senin), wî/wê (onu/onun)',
+      '  me (bizi/bizim), we (sizi/sizin), wan (onları/onların)',
+      'Rewşa berz di dema borî de ji bo kerdox tê bikaranîn!',
     ],
     examples: [
-      _GrammarExample(ku: 'Ez dixwinim.', tr: 'Ben okuyorum.', note: 'Niha: cinavka rast'),
-      _GrammarExample(ku: 'Min xwend.', tr: 'Ben okudum.', note: 'Bori: cinavka berz (ergatif!)'),
-      _GrammarExample(ku: 'Ew diaxive.', tr: 'O konusuyor.'),
-      _GrammarExample(ku: 'Wi got.', tr: 'O (erkek) soyledi.'),
+      _GrammarExample(ku: 'Ez dixwînim.', tr: 'Ben okuyorum.', note: 'Niha: cinavka rast'),
+      _GrammarExample(ku: 'Min xwend.', tr: 'Ben okudum.', note: 'Borî: cinavka berz (ergatîf!)'),
+      _GrammarExample(ku: 'Ew diaxive.', tr: 'O konuşuyor.'),
+      _GrammarExample(ku: 'Wî got.', tr: 'O (erkek) söyledi.'),
     ],
-    tip: 'Di dema bori de kerdox di rewsa berz de ye. Eva ergatif e — ji Tirkiye re cuda ye!',
+    tip: 'Di dema borî de kerdox di rewşa berz de ye. Eva ergatîf e — ji Tirkiyê re cuda ye!',
   ),
 
-  // 5. Leker — Dema Niha
+  // 5. Lêker — Dema Niha
   _GrammarTopic(
     icon: Icons.play_arrow_rounded,
     color: const Color(0xFF0288D1),
-    titleKu: 'Leker — Dema Niha',
-    titleTr: 'Fiiller — Simdiki Zaman',
+    titleKu: 'Lêker — Dema Niha',
+    titleTr: 'Fiiller — Şimdiki Zaman',
     level: 'A1',
     rules: [
-      'Pesgiliya di- + koka leker + pasvilla kes:',
-      '  ez di-xwin-im (ben okuyorum)',
-      '  tu di-xwin-i (sen okuyorsun)',
-      '  ew di-xwin-e (o okuyor)',
-      '  em di-xwin-in (biz okuyoruz)',
-      '  hun di-xwin-in (siz okuyorsunuz)',
-      '  ew di-xwin-in (onlar okuyorlar)',
-      'Lekeren bi "di" ve dest pe dikin, du "di" nabe: diaxive (ne di-diaxive).',
+      'Pêşgilîya di- + koka lêker + paşvilla kes:',
+      '  ez di-xwîn-im (ben okuyorum)',
+      '  tu di-xwîn-î (sen okuyorsun)',
+      '  ew di-xwîn-e (o okuyor)',
+      '  em di-xwîn-in (biz okuyoruz)',
+      '  hûn di-xwîn-in (siz okuyorsunuz)',
+      '  ew di-xwîn-in (onlar okuyorlar)',
+      'Lêkerên bi "di" ve dest pê dikin, du "di" nabe: diaxive (ne di-diaxive).',
     ],
     examples: [
-      _GrammarExample(ku: 'Ez dixwinim.', tr: 'Ben okuyorum.'),
-      _GrammarExample(ku: 'Tu diaxivi.', tr: 'Sen konusuyorsun.'),
-      _GrammarExample(ku: 'Em dicin.', tr: 'Biz gidiyoruz.'),
+      _GrammarExample(ku: 'Ez dixwînim.', tr: 'Ben okuyorum.'),
+      _GrammarExample(ku: 'Tu diaxivî.', tr: 'Sen konuşuyorsun.'),
+      _GrammarExample(ku: 'Em diçin.', tr: 'Biz gidiyoruz.'),
       _GrammarExample(ku: 'Ew nan dixwin.', tr: 'Onlar ekmek yiyor.'),
     ],
-    tip: 'Pesgiliya "di-" her dem heye. Eger kok bi "di-" dest pe bike, yek "di" bes e.',
+    tip: 'Pêşgilîya "di-" her dem heye. Eger kok bi "di-" dest pê bike, yek "di" bes e.',
   ),
 
-  // 6. Leker — Dema Bori
+  // 6. Lêker — Dema Borî
   _GrammarTopic(
     icon: Icons.history_rounded,
     color: const Color(0xFF6D4C9F),
-    titleKu: 'Leker — Dema Bori',
-    titleTr: 'Fiiller — Gecmis Zaman',
+    titleKu: 'Lêker — Dema Borî',
+    titleTr: 'Fiiller — Geçmiş Zaman',
     level: 'A2',
     rules: [
-      'Ergatif avahiy: Di dema bori de kerdox rewsa berz digire!',
-      'Lekeren veguhezi (transitif): MIN dit. (Ben gordum.)',
-      '  Kerdox (min) di rewsa berz de ye.',
-      'Lekeren neveguhezi (intransitif): EZ catim. (Ben gittim.)',
-      '  Kerdox (ez) di rewsa rast de dimane.',
-      'Koka bori ji masdar hat:',
-      '  xwendin → xwend, ditin → dit, cun → cu',
+      'Ergatîf avahî: Di dema borî de kerdox rewşa berz digire!',
+      'Lêkerên veguhêzî (transîtîf): MIN dît. (Ben gördüm.)',
+      '  Kerdox (min) di rewşa berz de ye.',
+      'Lêkerên neveguhêzî (întransîtîf): EZ çûm. (Ben gittim.)',
+      '  Kerdox (ez) di rewşa rast de dimîne.',
+      'Koka borî ji masdar hat:',
+      '  xwendin → xwend, dîtin → dît, çûn → çû',
     ],
     examples: [
-      _GrammarExample(ku: 'Min dit.', tr: 'Ben gordum.', note: 'Veguhezi: min (berz) + dit'),
-      _GrammarExample(ku: 'Te xwend.', tr: 'Sen okudun.', note: 'Veguhezi: te (berz) + xwend'),
-      _GrammarExample(ku: 'Ez catim.', tr: 'Ben gittim.', note: 'Neveguhezi: ez (rast) + catim'),
-      _GrammarExample(ku: 'Em hatin.', tr: 'Biz geldik.', note: 'Neveguhezi: em (rast) + hatin'),
+      _GrammarExample(ku: 'Min dît.', tr: 'Ben gördüm.', note: 'Veguhêzî: min (berz) + dît'),
+      _GrammarExample(ku: 'Te xwend.', tr: 'Sen okudun.', note: 'Veguhêzî: te (berz) + xwend'),
+      _GrammarExample(ku: 'Ez çûm.', tr: 'Ben gittim.', note: 'Neveguhêzî: ez (rast) + çûm'),
+      _GrammarExample(ku: 'Em hatin.', tr: 'Biz geldik.', note: 'Neveguhêzî: em (rast) + hatin'),
     ],
-    tip: 'Ergatif, Kurmanci nin en cuda taybetiye ye. "MIN dit" = Ben gordum — "min" ne "beni" ye, kerdox e!',
+    tip: 'Ergatîf, Kurmancî nin en cuda taybetîye ye. "MIN dît" = Ben gördüm — "min" ne "beni" ye, kerdox e!',
   ),
 
-  // 7. Neyini
+  // 7. Neyînî
   _GrammarTopic(
     icon: Icons.block_rounded,
     color: AppColors.errorSoft,
-    titleKu: 'Neyini',
+    titleKu: 'Neyînî',
     titleTr: 'Olumsuzluk',
     level: 'A2',
     rules: [
-      'Dema niha: na- li sawe di- te:',
-      '  dixwinim → naxwinim (okumuyorum)',
-      'Dema bori: ne- pesgiliya ye:',
-      '  xwend → nexwend (okumadi)',
+      'Dema niha: na- li şawê di- tê:',
+      '  dixwînim → naxwînim (okumuyorum)',
+      'Dema borî: ne- pêşgilîya ye:',
+      '  xwend → nexwend (okumadı)',
       'Fermankar (emir): me- an ne-:',
-      '  mexwine! (okuma!), nece! (gitme!)',
+      '  mexwîne! (okuma!), neçe! (gitme!)',
     ],
     examples: [
-      _GrammarExample(ku: 'Ez naxwinim.', tr: 'Ben okumuyorum.'),
-      _GrammarExample(ku: 'Tu naciy.', tr: 'Sen gitmiyorsun.'),
-      _GrammarExample(ku: 'Wi nexwend.', tr: 'O okumadi.'),
-      _GrammarExample(ku: 'Mexwine!', tr: 'Okuma!', note: 'Fermankar — neyini'),
+      _GrammarExample(ku: 'Ez naxwînim.', tr: 'Ben okumuyorum.'),
+      _GrammarExample(ku: 'Tu naçî.', tr: 'Sen gitmiyorsun.'),
+      _GrammarExample(ku: 'Wî nexwend.', tr: 'O okumadı.'),
+      _GrammarExample(ku: 'Mexwîne!', tr: 'Okuma!', note: 'Fermankar — neyînî'),
     ],
-    tip: 'Niha: di- → na-. Bori: ne- li ber kok. Du qaideyen hasan!',
+    tip: 'Niha: di- → na-. Borî: ne- li ber kok. Du qaîdeyên hêsan!',
   ),
 
-  // 8. Dacek
+  // 8. Daçek
   _GrammarTopic(
     icon: Icons.swap_horiz_rounded,
     color: const Color(0xFF00897B),
-    titleKu: 'Dacek',
-    titleTr: 'Edat ve Cevre-Edatlar',
+    titleKu: 'Daçek',
+    titleTr: 'Edat ve Çevre-Edatlar',
     level: 'A2',
     rules: [
-      'di...de — di nav ... de (icinde):',
-      '  di male de (evde)',
-      'ji...re — ji bo ... re (icin):',
-      '  ji min re (benim icin)',
+      'di...de — di nav ... de (içinde):',
+      '  di malê de (evde)',
+      'ji...re — ji bo ... re (için):',
+      '  ji min re (benim için)',
       'li — li ... (de, da):',
-      '  li male (evde), li bazare (carsida)',
+      '  li malê (evde), li bazarê (çarşıda)',
       'bi — bi ... (ile):',
       '  bi dest (elle), bi hev re (birlikte)',
     ],
     examples: [
-      _GrammarExample(ku: 'Ez di male de me.', tr: 'Ben evdeyim.'),
-      _GrammarExample(ku: 'Ji min re beje.', tr: 'Bana soyle.'),
-      _GrammarExample(ku: 'Ew li dibistane ye.', tr: 'O okulda.'),
-      _GrammarExample(ku: 'Em bi hev re dicin.', tr: 'Birlikte gidiyoruz.'),
+      _GrammarExample(ku: 'Ez di malê de me.', tr: 'Ben evdeyim.'),
+      _GrammarExample(ku: 'Ji min re bêje.', tr: 'Bana söyle.'),
+      _GrammarExample(ku: 'Ew li dibistanê ye.', tr: 'O okulda.'),
+      _GrammarExample(ku: 'Em bi hev re diçin.', tr: 'Birlikte gidiyoruz.'),
     ],
-    tip: 'Daceken Kurmanci piran du-par in (circum-position): di...de, ji...re. Her du paran ji bi birkinin!',
+    tip: 'Daçekên Kurmancî pîran du-par in (circum-position): di...de, ji...re. Her du paran jî bi bîrkinin!',
   ),
 
-  // 9. Pirjimar
+  // 9. Pîrjimar
   _GrammarTopic(
     icon: Icons.format_list_numbered_rounded,
     color: const Color(0xFFEF6C00),
-    titleKu: 'Pirjimar',
-    titleTr: 'Cogul',
+    titleKu: 'Pîrjimar',
+    titleTr: 'Çoğul',
     level: 'A2',
     rules: [
-      'Pasvilla pirjimar: -an',
-      '  zarok → zarokan (cocuklar)',
-      '  kiteb → kiteban (kitaplar)',
-      'Hinek navder bi -in an -en pirjimar dibin:',
+      'Paşvilla pîrjimar: -an',
+      '  zarok → zarokan (çocuklar)',
+      '  kitêb → kitêban (kitaplar)',
+      'Hinên navdêr bi -in an -ên pîrjimar dibin:',
       '  mirov → mirovan (insanlar)',
-      'Ezafe di pirjimar de: -en',
-      '  malten me (evlerimiz)',
+      'Ezafe di pîrjimar de: -ên',
+      '  maltên me (evlerimiz)',
     ],
     examples: [
-      _GrammarExample(ku: 'zarok → zarokan', tr: 'cocuk → cocuklar'),
-      _GrammarExample(ku: 'dar → daran', tr: 'agac → agaclar'),
-      _GrammarExample(ku: 'malten me', tr: 'evlerimiz', note: 'Pirjimar ezafe: -en'),
-      _GrammarExample(ku: 'kiteben wi', tr: 'onun kitaplari', note: 'Pirjimar ezafe: -en'),
+      _GrammarExample(ku: 'zarok → zarokan', tr: 'çocuk → çocuklar'),
+      _GrammarExample(ku: 'dar → daran', tr: 'ağaç → ağaçlar'),
+      _GrammarExample(ku: 'maltên me', tr: 'evlerimiz', note: 'Pîrjimar ezafe: -ên'),
+      _GrammarExample(ku: 'kitêbên wî', tr: 'onun kitapları', note: 'Pîrjimar ezafe: -ên'),
     ],
-    tip: 'Piran navder + -an = pirjimar. Hasan e!',
+    tip: 'Pîran navdêr + -an = pîrjimar. Hêsan e!',
   ),
 
-  // 10. Hevoken Rojane
+  // 10. Hevokên Rojane
   _GrammarTopic(
     icon: Icons.chat_bubble_outline_rounded,
     color: AppColors.primaryDark,
-    titleKu: 'Hevoken Rojane',
-    titleTr: 'Gunluk Cumleler',
+    titleKu: 'Hevokên Rojane',
+    titleTr: 'Günlük Cümleler',
     level: 'A1',
     rules: [
-      'Silaven roje:',
-      '  Roj bas! (Gunaydin!)',
-      '  Eves bas! (Iyi aksamlar!)',
-      '  Bi xatire te! (Hosca kal!)',
-      'Pirsyaren bingeh:',
-      '  Tu cawa yi? (Nasilsin?)',
-      '  Ez basm, spas. (Iyiyim, tesekkurler.)',
-      '  Nave te ci ye? (Adin ne?)',
-      '  Nave min ... e. (Adim ...)',
+      'Silavên rojê:',
+      '  Roj baş! (Günaydın!)',
+      '  Êvar baş! (İyi akşamlar!)',
+      '  Bi xatirê te! (Hoşça kal!)',
+      'Pirsyarên bingehîn:',
+      '  Tu çawa yî? (Nasılsın?)',
+      '  Ez başim, spas. (İyiyim, teşekkürler.)',
+      '  Navê te çi ye? (Adın ne?)',
+      '  Navê min ... e. (Adım ...)',
     ],
     examples: [
-      _GrammarExample(ku: 'Roj bas! Tu cawa yi?', tr: 'Gunaydin! Nasilsin?'),
-      _GrammarExample(ku: 'Ez basm, spas. Tu?', tr: 'Iyiyim, tesekkurler. Sen?'),
-      _GrammarExample(ku: 'Nave min Amed e.', tr: 'Adim Amed.'),
-      _GrammarExample(ku: 'Xatira te! Sibe bibinim.', tr: 'Hosca kal! Yarin goruselim.'),
+      _GrammarExample(ku: 'Roj baş! Tu çawa yî?', tr: 'Günaydın! Nasılsın?'),
+      _GrammarExample(ku: 'Ez başim, spas. Tu?', tr: 'İyiyim, teşekkürler. Sen?'),
+      _GrammarExample(ku: 'Navê min Amed e.', tr: 'Adım Amed.'),
+      _GrammarExample(ku: 'Xatirê te! Sibê bibînim.', tr: 'Hoşça kal! Yarın görüşelim.'),
     ],
-    tip: '"Spas" (tesekkur) u "xer hati" (hosgeldin) — her roj bikar bine!',
+    tip: '"Spas" (teşekkür) û "xêr hatî" (hoşgeldin) — her roj bikar bîne!',
   ),
 ];

@@ -603,7 +603,7 @@ class _BadgeDetailSheet extends StatelessWidget {
 
 // ════════════════════════════════════════════════════════════════
 // 3. LEVEL-UP CELEBRATION OVERLAY
-// Tam ekran — konfeti animasyonu + "Piroz be!" mesajı
+// Tam ekran — konfeti animasyonu + "Pîroz be!" mesajı
 // ════════════════════════════════════════════════════════════════
 
 class LevelUpCelebrationOverlay extends ConsumerWidget {
@@ -783,9 +783,9 @@ class _LevelUpContentState extends State<_LevelUpContent>
 
                           Gap.lg,
 
-                          // "Piroz be!" — Kurmancî birincil
+                          // "Pîroz be!" — Kurmancî birincil
                           Text(
-                            'Piroz be!',
+                            'Pîroz be!',
                             style: AppTypography.kurmanjiLarge.copyWith(
                               color: AppColors.accent,
                               fontWeight: FontWeight.w700,

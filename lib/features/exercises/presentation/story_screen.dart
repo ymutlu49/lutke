@@ -1272,7 +1272,7 @@ class _ScoreView extends StatelessWidget {
                 elevation: 0,
               ),
               child: Text(
-                isLastStory ? 'Biqedine' : 'Ciroka din',
+                isLastStory ? 'Biqedine' : 'Çîroka din',
                 style: AppTypography.labelLarge.copyWith(
                   color: Colors.white,
                 ),

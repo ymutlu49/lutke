@@ -10,7 +10,7 @@ import '../../core/constants/app_typography.dart';
 import '../providers/streak_provider.dart';
 
 // ════════════════════════════════════════════════════════════════
-// MINI LEADERBOARD — Pesibazi (Motivasyonel Siralama)
+// MINI LEADERBOARD — Pêşbazî (Motivasyonel Siralama)
 //
 // Ilke §4b: Destekleyici gamification — rekabet degil motivasyon.
 // 5 bot + kullanici, haftalik XP siralamasi.
