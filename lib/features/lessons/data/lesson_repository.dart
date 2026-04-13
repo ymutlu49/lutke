@@ -103,7 +103,7 @@ class LessonRepository {
 
   List<dynamic> _wordsForLevel(int level) => switch (level) {
     1 => kA1TamKelimeler,
-    2 => kA2TamKelimeler,
+    2 => kA2TamListe,
     3 => kB1Temam,
     4 => kB2Temam2,
     5 => kC1Temam,
