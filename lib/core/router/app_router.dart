@@ -19,6 +19,7 @@ import '../../features/profile/profile_screen.dart';
 import '../constants/app_colors.dart';
 import '../constants/app_typography.dart';
 import '../services/auth_service.dart';
+import '../services/sound_service.dart';
 import '../../features/cultural_content/culture_screen.dart';
 import '../../features/exercises/presentation/flashcard_screen.dart';
 import '../../features/exercises/presentation/quiz_screen.dart';
@@ -276,7 +277,10 @@ class _AppShell extends StatelessWidget {
       body: shell,
       bottomNavigationBar: _PersistentBottomNav(
         currentIndex: shell.currentIndex,
-        onTap: (i) => shell.goBranch(i, initialLocation: i == shell.currentIndex),
+        onTap: (i) {
+          SoundService.playClick();
+          shell.goBranch(i, initialLocation: i == shell.currentIndex);
+        },
       ),
     );
   }

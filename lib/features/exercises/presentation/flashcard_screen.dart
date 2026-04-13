@@ -10,7 +10,9 @@ import '../../../core/constants/app_spacing.dart';
 import '../../../core/constants/app_typography.dart';
 import '../../../shared/providers/language_mode_provider.dart';
 import '../../../shared/providers/review_provider.dart';
+import '../../../shared/widgets/speak_button.dart';
 import '../../lessons/domain/a1_kelime_db.dart';
+import '../../../core/services/sound_service.dart';
 
 // ════════════════════════════════════════════════════════════════
 // FLASHCARD EKRANI — Tinder-Style Swipeable Kartlar
@@ -256,6 +258,7 @@ class _FlashcardScreenState extends ConsumerState<FlashcardScreen>
 
   void _flipCard() {
     HapticFeedback.lightImpact();
+    SoundService.playFlip();
     if (_showFront) {
       _flipController.forward();
     } else {
@@ -640,15 +643,30 @@ class _FlashcardScreenState extends ConsumerState<FlashcardScreen>
                       ),
                     ),
 
-                  // Ana kelime
-                  Text(
-                    card.kurmanji,
-                    style: AppTypography.displayKurmanji.copyWith(
-                      fontSize: card.kurmanji.length > 12 ? 28 : 36,
-                      color: AppColors.primary,
-                      fontWeight: FontWeight.w700,
-                    ),
-                    textAlign: TextAlign.center,
+                  // Ana kelime + speak button
+                  Row(
+                    mainAxisSize: MainAxisSize.min,
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Flexible(
+                        child: Text(
+                          card.kurmanji,
+                          style: AppTypography.displayKurmanji.copyWith(
+                            fontSize: card.kurmanji.length > 12 ? 28 : 36,
+                            color: AppColors.primary,
+                            fontWeight: FontWeight.w700,
+                          ),
+                          textAlign: TextAlign.center,
+                        ),
+                      ),
+                      const SizedBox(width: 8),
+                      // TTS speak button — tap to hear pronunciation
+                      SpeakButton(
+                        text: card.kurmanji,
+                        size: 36,
+                        color: AppColors.primary,
+                      ),
+                    ],
                   ),
 
                   const SizedBox(height: AppSpacing.md),

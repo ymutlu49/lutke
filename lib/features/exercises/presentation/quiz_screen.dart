@@ -13,6 +13,7 @@ import '../../../shared/providers/language_mode_provider.dart';
 import '../../../shared/providers/review_provider.dart';
 import '../../lessons/domain/a1_kelime_db.dart';
 import '../../lessons/domain/a2_kelime_db.dart';
+import '../../../core/services/sound_service.dart';
 
 // ════════════════════════════════════════════════════════════════
 // QUIZ SESSION — 4 Egzersiz Tipi, 10 Soru, Duolingo Tarzı
@@ -204,6 +205,8 @@ class _QuizScreenState extends ConsumerState<QuizScreen>
   int? _selectedOptionIndex;
   String _typedAnswer = '';
   bool _sessionComplete = false;
+  bool _variantAccepted = false; // True when e->ê etc. variant was accepted
+  String _variantNote = ''; // Note about which variant was accepted
 
   /// Per-question results: true = correct, false = wrong.
   final List<bool> _questionResults = [];
@@ -251,6 +254,36 @@ class _QuizScreenState extends ConsumerState<QuizScreen>
       final expected = q.word.ku.trim().toLowerCase();
       final distance = _levenshteinDistance(userInput, expected);
       correct = distance <= 2;
+
+      // Accept common Kurmancî variants: e->ê, i->î, u->û, c->ç, s->ş
+      if (!correct) {
+        final normalized = userInput
+            .replaceAll('e', 'ê')
+            .replaceAll('i', 'î')
+            .replaceAll('u', 'û')
+            .replaceAll('c', 'ç')
+            .replaceAll('s', 'ş');
+        final normalizedDist = _levenshteinDistance(normalized, expected);
+        if (normalizedDist <= 1) {
+          correct = true;
+          _variantAccepted = true;
+          // Build a note about which characters should be used
+          final notes = <String>[];
+          if (expected.contains('ê') && userInput.contains('e'))
+            notes.add('ê bi xêr');
+          if (expected.contains('î') && userInput.contains('i'))
+            notes.add('î bi xêr');
+          if (expected.contains('û') && userInput.contains('u'))
+            notes.add('û bi xêr');
+          if (expected.contains('ç') && userInput.contains('c'))
+            notes.add('ç bi xêr');
+          if (expected.contains('ş') && userInput.contains('s'))
+            notes.add('ş bi xêr');
+          _variantNote = notes.isNotEmpty
+              ? '${notes.join(', ')} — tîpên Kurmancî bi kar bîne'
+              : '';
+        }
+      }
     } else {
       // Multiple choice
       if (optionIndex == null) return;
@@ -279,10 +312,12 @@ class _QuizScreenState extends ConsumerState<QuizScreen>
       _correctCount++;
       _correctFlashController.forward(from: 0.0);
       HapticFeedback.lightImpact();
+      SoundService.playCorrect();
     } else {
       _hearts = (_hearts - 1).clamp(0, 3);
       _shakeController.forward(from: 0.0);
       HapticFeedback.heavyImpact();
+      SoundService.playWrong();
       // Smart Review: zayıf kelime olarak kaydet
       ref.read(reviewProvider.notifier).addWeakWord(q.word.id);
     }
@@ -307,6 +342,8 @@ class _QuizScreenState extends ConsumerState<QuizScreen>
       _isCorrect = false;
       _selectedOptionIndex = null;
       _typedAnswer = '';
+      _variantAccepted = false;
+      _variantNote = '';
       _typingController.clear();
     });
   }
@@ -799,6 +836,14 @@ class _QuizScreenState extends ConsumerState<QuizScreen>
           ),
         ),
 
+        // ── Kurmancî special characters keyboard ──────────
+        if (!_answered) ...[
+          const SizedBox(height: AppSpacing.sm),
+          _KurmanciKeyboard(controller: _typingController, onChanged: (v) {
+            setState(() => _typedAnswer = v);
+          }),
+        ],
+
         Gap.md,
 
         // Submit button (typing only)
@@ -835,14 +880,23 @@ class _QuizScreenState extends ConsumerState<QuizScreen>
   }
 
   Widget _buildTypingFeedback(_QuizQuestion q) {
+    final expected = q.word.ku.trim();
+    final userInput = _typedAnswer.trim();
+
     return Container(
       padding: const EdgeInsets.all(AppSpacing.md),
       decoration: BoxDecoration(
-        color: _isCorrect ? AppColors.successSurface : AppColors.errorSurface,
+        color: _isCorrect
+            ? (_variantAccepted
+                ? AppColors.warningSurface
+                : AppColors.successSurface)
+            : AppColors.errorSurface,
         borderRadius: BorderRadius.circular(AppSpacing.radiusMd),
         border: Border.all(
           color: _isCorrect
-              ? AppColors.success.withOpacity(0.3)
+              ? (_variantAccepted
+                  ? AppColors.warning.withOpacity(0.3)
+                  : AppColors.success.withOpacity(0.3))
               : AppColors.errorSoft.withOpacity(0.3),
         ),
       ),
@@ -852,26 +906,90 @@ class _QuizScreenState extends ConsumerState<QuizScreen>
           Row(
             children: [
               Icon(
-                _isCorrect ? Icons.check_circle : Icons.cancel,
-                color: _isCorrect ? AppColors.success : AppColors.errorSoft,
+                _isCorrect
+                    ? (_variantAccepted
+                        ? Icons.info_rounded
+                        : Icons.check_circle)
+                    : Icons.cancel,
+                color: _isCorrect
+                    ? (_variantAccepted
+                        ? AppColors.warning
+                        : AppColors.success)
+                    : AppColors.errorSoft,
                 size: 20,
               ),
               const SizedBox(width: 8),
-              Text(
-                _isCorrect ? 'Aferin!' : 'Rast bersiv:',
-                style: AppTypography.label.copyWith(
-                  color: _isCorrect ? AppColors.success : AppColors.errorSoft,
-                  fontWeight: FontWeight.w600,
+              Expanded(
+                child: Text(
+                  _isCorrect
+                      ? (_variantAccepted ? 'Nêzîk e!' : 'Aferin!')
+                      : 'Rast bersiv:',
+                  style: AppTypography.label.copyWith(
+                    color: _isCorrect
+                        ? (_variantAccepted
+                            ? AppColors.warning
+                            : AppColors.success)
+                        : AppColors.errorSoft,
+                    fontWeight: FontWeight.w600,
+                  ),
                 ),
               ),
             ],
           ),
+
+          // Variant accepted note
+          if (_variantAccepted && _variantNote.isNotEmpty) ...[
+            const SizedBox(height: 6),
+            Container(
+              padding: const EdgeInsets.symmetric(
+                horizontal: 8,
+                vertical: 4,
+              ),
+              decoration: BoxDecoration(
+                color: AppColors.warning.withOpacity(0.1),
+                borderRadius: BorderRadius.circular(6),
+              ),
+              child: Text(
+                _variantNote,
+                style: AppTypography.caption.copyWith(
+                  color: AppColors.warning,
+                  fontWeight: FontWeight.w600,
+                  fontSize: 11,
+                ),
+              ),
+            ),
+          ],
+
+          // Character-by-character comparison on wrong answer
           if (!_isCorrect) ...[
-            const SizedBox(height: 8),
+            const SizedBox(height: 10),
+            // User's input with char-by-char coloring
             Text(
-              q.word.ku,
-              style: AppTypography.kurmanji
-                  .copyWith(color: AppColors.textPrimary),
+              'Bersiva te:',
+              style: AppTypography.caption.copyWith(
+                color: AppColors.textTertiary,
+              ),
+            ),
+            const SizedBox(height: 4),
+            _CharByCharComparison(
+              userInput: userInput,
+              expected: expected,
+            ),
+            const SizedBox(height: 10),
+            // Correct answer
+            Text(
+              'Bersiva rast:',
+              style: AppTypography.caption.copyWith(
+                color: AppColors.textTertiary,
+              ),
+            ),
+            const SizedBox(height: 4),
+            Text(
+              expected,
+              style: AppTypography.kurmanji.copyWith(
+                color: AppColors.success,
+                fontWeight: FontWeight.w600,
+              ),
             ),
           ],
         ],
@@ -2086,5 +2204,143 @@ class _AccuracyRing extends StatelessWidget {
         ],
       ),
     );
+  }
+}
+
+// ════════════════════════════════════════════════════════════════
+// KURMANCÎ KEYBOARD — Özel karakter butonları
+// ════════════════════════════════════════════════════════════════
+
+class _KurmanciKeyboard extends StatelessWidget {
+  final TextEditingController controller;
+  final ValueChanged<String> onChanged;
+
+  /// Kurmancî special characters shown as tappable chips
+  static const List<String> _chars = ['ê', 'î', 'û', 'ç', 'ş', 'x', 'q', 'w'];
+
+  const _KurmanciKeyboard({
+    required this.controller,
+    required this.onChanged,
+  });
+
+  void _insertChar(String char) {
+    final text = controller.text;
+    final selection = controller.selection;
+    final cursorPos = selection.isValid ? selection.baseOffset : text.length;
+
+    final newText = text.substring(0, cursorPos) +
+        char +
+        text.substring(cursorPos);
+    controller.text = newText;
+    controller.selection = TextSelection.collapsed(
+      offset: cursorPos + char.length,
+    );
+    onChanged(newText);
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Wrap(
+      spacing: 6,
+      runSpacing: 6,
+      alignment: WrapAlignment.center,
+      children: _chars.map((char) {
+        return GestureDetector(
+          onTap: () {
+            HapticFeedback.selectionClick();
+            _insertChar(char);
+          },
+          child: Container(
+            constraints: const BoxConstraints(minWidth: 38),
+            padding: const EdgeInsets.symmetric(
+              horizontal: 10,
+              vertical: 8,
+            ),
+            decoration: BoxDecoration(
+              color: AppColors.surface,
+              borderRadius: BorderRadius.circular(8),
+              border: Border.all(color: AppColors.borderMedium),
+              boxShadow: [
+                BoxShadow(
+                  color: Colors.black.withOpacity(0.06),
+                  blurRadius: 3,
+                  offset: const Offset(0, 1),
+                ),
+              ],
+            ),
+            child: Text(
+              char,
+              textAlign: TextAlign.center,
+              style: AppTypography.kurmanjiCard.copyWith(
+                color: AppColors.primary,
+                fontWeight: FontWeight.w700,
+              ),
+            ),
+          ),
+        );
+      }).toList(),
+    );
+  }
+}
+
+// ════════════════════════════════════════════════════════════════
+// CHAR-BY-CHAR COMPARISON — Harf harf karşılaştırma
+// ════════════════════════════════════════════════════════════════
+
+class _CharByCharComparison extends StatelessWidget {
+  final String userInput;
+  final String expected;
+
+  const _CharByCharComparison({
+    required this.userInput,
+    required this.expected,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    final maxLen = userInput.length > expected.length
+        ? userInput.length
+        : expected.length;
+    final spans = <InlineSpan>[];
+
+    for (int i = 0; i < maxLen; i++) {
+      if (i < userInput.length) {
+        final userChar = userInput[i];
+        final isCorrect =
+            i < expected.length && userChar.toLowerCase() == expected[i].toLowerCase();
+        final isMissing = i >= expected.length;
+
+        spans.add(TextSpan(
+          text: userChar,
+          style: AppTypography.kurmanji.copyWith(
+            color: isCorrect
+                ? AppColors.success
+                : isMissing
+                    ? AppColors.textTertiary
+                    : AppColors.errorSoft,
+            fontWeight: FontWeight.w600,
+            backgroundColor: isCorrect
+                ? AppColors.success.withOpacity(0.08)
+                : isMissing
+                    ? Colors.transparent
+                    : AppColors.errorSoft.withOpacity(0.08),
+          ),
+        ));
+      } else {
+        // Missing characters from user input
+        spans.add(TextSpan(
+          text: expected[i],
+          style: AppTypography.kurmanji.copyWith(
+            color: AppColors.textTertiary,
+            fontWeight: FontWeight.w400,
+            decoration: TextDecoration.underline,
+            decorationColor: AppColors.textTertiary.withOpacity(0.5),
+            decorationStyle: TextDecorationStyle.dashed,
+          ),
+        ));
+      }
+    }
+
+    return Text.rich(TextSpan(children: spans));
   }
 }

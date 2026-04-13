@@ -192,11 +192,13 @@ class _StoryScreenState extends ConsumerState<StoryScreen> {
   int _currentStoryIndex = 0;
   int _revealedLineCount = 0;
   bool _storyComplete = false;
+  bool _showVocabSection = false; // Fêrgeh section before quiz
   int _currentQuestionIndex = 0;
   int _correctAnswers = 0;
   int? _selectedOption;
   bool _answered = false;
   bool _quizComplete = false;
+  bool _slowReadMode = false; // "Hêdî bixwîne" mode
 
   StoryData get _currentStory => kStoryList[_currentStoryIndex];
   HeritageDialogue get _dialogue => _currentStory.dialogue;
@@ -233,12 +235,24 @@ class _StoryScreenState extends ConsumerState<StoryScreen> {
       setState(() {
         _revealedLineCount++;
       });
+    } else if (!_showVocabSection) {
+      // Tüm satırlar gösterildi — Fêrgeh (vocab) bölümünü göster
+      setState(() {
+        _showVocabSection = true;
+      });
     } else {
-      // Tüm satırlar gösterildi — quiz'e geç
+      // Fêrgeh bölümünden quiz'e geç
       setState(() {
         _storyComplete = true;
       });
     }
+  }
+
+  void _skipToQuiz() {
+    setState(() {
+      _showVocabSection = false;
+      _storyComplete = true;
+    });
   }
 
   void _selectAnswer(int index) {
@@ -272,6 +286,7 @@ class _StoryScreenState extends ConsumerState<StoryScreen> {
         _currentStoryIndex++;
         _revealedLineCount = 1;
         _storyComplete = false;
+        _showVocabSection = false;
         _currentQuestionIndex = 0;
         _correctAnswers = 0;
         _selectedOption = null;
@@ -290,6 +305,7 @@ class _StoryScreenState extends ConsumerState<StoryScreen> {
       _currentStoryIndex = 0;
       _revealedLineCount = 1;
       _storyComplete = false;
+      _showVocabSection = false;
       _currentQuestionIndex = 0;
       _correctAnswers = 0;
       _selectedOption = null;
@@ -320,6 +336,20 @@ class _StoryScreenState extends ConsumerState<StoryScreen> {
         ),
         centerTitle: true,
         actions: [
+          // "Hêdî bixwîne" toggle — slow reading mode
+          IconButton(
+            icon: Icon(
+              _slowReadMode
+                  ? Icons.text_increase_rounded
+                  : Icons.text_fields_rounded,
+              color: _slowReadMode
+                  ? AppColors.primary
+                  : AppColors.textSecondary,
+              size: 22,
+            ),
+            tooltip: 'Hêdî bixwîne',
+            onPressed: () => setState(() => _slowReadMode = !_slowReadMode),
+          ),
           // Hikaye ilerleme göstergesi
           Padding(
             padding: const EdgeInsets.only(right: AppSpacing.md),
@@ -366,14 +396,20 @@ class _StoryScreenState extends ConsumerState<StoryScreen> {
                         onSelect: _selectAnswer,
                         onNext: _nextQuestion,
                       )
-                    : _StoryView(
-                        dialogue: _dialogue,
-                        revealedCount: _revealedLineCount,
-                        speakerColorMap: _speakerColorMap,
-                        speakers: _speakers,
-                        showTurkish: showTurkish,
-                        onTap: _revealNextLine,
-                      ),
+                    : _showVocabSection
+                        ? _VocabSectionView(
+                            dialogue: _dialogue,
+                            onContinue: _skipToQuiz,
+                          )
+                        : _StoryView(
+                            dialogue: _dialogue,
+                            revealedCount: _revealedLineCount,
+                            speakerColorMap: _speakerColorMap,
+                            speakers: _speakers,
+                            showTurkish: showTurkish,
+                            slowReadMode: _slowReadMode,
+                            onTap: _revealNextLine,
+                          ),
           ),
         ],
       ),
@@ -425,6 +461,7 @@ class _StoryView extends StatelessWidget {
   final Map<String, Color> speakerColorMap;
   final List<String> speakers;
   final bool showTurkish;
+  final bool slowReadMode;
   final VoidCallback onTap;
 
   const _StoryView({
@@ -434,6 +471,7 @@ class _StoryView extends StatelessWidget {
     required this.speakers,
     required this.showTurkish,
     required this.onTap,
+    this.slowReadMode = false,
   });
 
   @override
@@ -467,12 +505,56 @@ class _StoryView extends StatelessWidget {
             ),
           ),
 
+          // ── Reading progress indicator (Rêza X / Y) ────────
+          if (!isAllRevealed)
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: AppSpacing.md),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text(
+                    'Rêza $revealedCount / ${dialogue.lines.length}',
+                    style: AppTypography.caption.copyWith(
+                      color: AppColors.textTertiary,
+                    ),
+                  ),
+                  if (slowReadMode)
+                    Container(
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: 8,
+                        vertical: 3,
+                      ),
+                      decoration: BoxDecoration(
+                        color: AppColors.primarySurface,
+                        borderRadius: AppRadius.full,
+                      ),
+                      child: Row(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          Icon(Icons.text_increase_rounded,
+                              size: 12, color: AppColors.primary),
+                          const SizedBox(width: 4),
+                          Text(
+                            'Hêdî bixwîne',
+                            style: AppTypography.caption.copyWith(
+                              color: AppColors.primary,
+                              fontSize: 10,
+                              fontWeight: FontWeight.w600,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                ],
+              ),
+            ),
+
           // ── Diyalog Baloncukları ────────────────────────────
           Expanded(
             child: ListView.builder(
-              padding: const EdgeInsets.symmetric(
+              padding: EdgeInsets.symmetric(
                 horizontal: AppSpacing.md,
-                vertical: AppSpacing.sm,
+                vertical: slowReadMode ? AppSpacing.md : AppSpacing.sm,
               ),
               itemCount: revealedCount,
               itemBuilder: (context, index) {
@@ -488,6 +570,7 @@ class _StoryView extends StatelessWidget {
                   speakerColor: color,
                   showTurkish: showTurkish,
                   keyWords: dialogue.keyWords,
+                  slowReadMode: slowReadMode,
                 ).animate().fadeIn(duration: 350.ms).slideY(
                       begin: 0.15,
                       duration: 350.ms,
@@ -544,6 +627,7 @@ class _ChatBubble extends StatelessWidget {
   final Color speakerColor;
   final bool showTurkish;
   final List<String> keyWords;
+  final bool slowReadMode;
 
   const _ChatBubble({
     required this.line,
@@ -551,124 +635,211 @@ class _ChatBubble extends StatelessWidget {
     required this.speakerColor,
     required this.showTurkish,
     required this.keyWords,
+    this.slowReadMode = false,
   });
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.only(bottom: AppSpacing.sm),
-      child: Row(
-        mainAxisAlignment:
-            isLeft ? MainAxisAlignment.start : MainAxisAlignment.end,
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          if (isLeft) _Avatar(name: line.speaker, color: speakerColor),
-          if (isLeft) const SizedBox(width: AppSpacing.sm),
-          Flexible(
-            child: Column(
-              crossAxisAlignment: isLeft
-                  ? CrossAxisAlignment.start
-                  : CrossAxisAlignment.end,
-              children: [
-                // Konuşmacı adı
-                Padding(
-                  padding: EdgeInsets.only(
-                    left: isLeft ? 4 : 0,
-                    right: isLeft ? 0 : 4,
-                    bottom: 2,
-                  ),
-                  child: Text(
-                    line.speaker,
-                    style: AppTypography.labelSmall.copyWith(
-                      color: speakerColor,
-                      fontWeight: FontWeight.w600,
-                    ),
-                  ),
-                ),
+    // Slow read mode: bigger text style, more spacing
+    final textStyle = slowReadMode
+        ? AppTypography.kurmanjiCard.copyWith(
+            fontSize: 20,
+            height: 1.6,
+            letterSpacing: 0.3,
+          )
+        : AppTypography.kurmanjiCard;
 
-                // Balon
-                Container(
-                  constraints: BoxConstraints(
-                    maxWidth: MediaQuery.of(context).size.width * 0.72,
-                  ),
-                  padding: const EdgeInsets.symmetric(
-                    horizontal: AppSpacing.md,
-                    vertical: AppSpacing.sm + 2,
-                  ),
-                  decoration: BoxDecoration(
-                    color: isLeft
-                        ? AppColors.backgroundSecondary
-                        : speakerColor.withOpacity(0.1),
-                    borderRadius: BorderRadius.only(
-                      topLeft: Radius.circular(
-                          isLeft ? AppSpacing.radiusXs : AppSpacing.radiusLg),
-                      topRight: Radius.circular(
-                          isLeft ? AppSpacing.radiusLg : AppSpacing.radiusXs),
-                      bottomLeft:
-                          const Radius.circular(AppSpacing.radiusLg),
-                      bottomRight:
-                          const Radius.circular(AppSpacing.radiusLg),
-                    ),
-                    border: Border.all(
-                      color: isLeft
-                          ? AppColors.borderLight
-                          : speakerColor.withOpacity(0.2),
-                    ),
-                    boxShadow: [
-                      BoxShadow(
-                        color: Colors.black.withOpacity(0.04),
-                        blurRadius: 6,
-                        offset: const Offset(0, 2),
+    // Extract vocabulary words from this line for inline tooltip
+    final lineWords = line.kurmanci.split(' ');
+    final lineVocab = <String, String>{};
+    for (final w in lineWords) {
+      final clean = w.replaceAll(RegExp(r'[.,!?;:]'), '').toLowerCase();
+      for (final entry in _kVocabDefinitions.entries) {
+        if (clean == entry.key.toLowerCase() ||
+            clean.startsWith(entry.key.toLowerCase())) {
+          lineVocab[entry.key] = entry.value;
+        }
+      }
+    }
+
+    return Padding(
+      padding: EdgeInsets.only(
+        bottom: slowReadMode ? AppSpacing.md + 4 : AppSpacing.sm,
+      ),
+      child: Column(
+        crossAxisAlignment:
+            isLeft ? CrossAxisAlignment.start : CrossAxisAlignment.end,
+        children: [
+          Row(
+            mainAxisAlignment:
+                isLeft ? MainAxisAlignment.start : MainAxisAlignment.end,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              if (isLeft) _Avatar(name: line.speaker, color: speakerColor),
+              if (isLeft) const SizedBox(width: AppSpacing.sm),
+              Flexible(
+                child: Column(
+                  crossAxisAlignment: isLeft
+                      ? CrossAxisAlignment.start
+                      : CrossAxisAlignment.end,
+                  children: [
+                    // Konuşmacı adı
+                    Padding(
+                      padding: EdgeInsets.only(
+                        left: isLeft ? 4 : 0,
+                        right: isLeft ? 0 : 4,
+                        bottom: 2,
                       ),
-                    ],
-                  ),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      // Kurmancî metin — anahtar kelimeler vurgulu
-                      _HighlightedText(
-                        text: line.kurmanci,
-                        keyWords: keyWords,
-                        style: AppTypography.kurmanjiCard,
-                      ),
-                      if (showTurkish) ...[
-                        const SizedBox(height: 4),
-                        Text(
-                          line.turkish,
-                          style: AppTypography.translation.copyWith(
-                            fontSize: 12,
-                          ),
+                      child: Text(
+                        line.speaker,
+                        style: AppTypography.labelSmall.copyWith(
+                          color: speakerColor,
+                          fontWeight: FontWeight.w600,
+                          fontSize: slowReadMode ? 13 : null,
                         ),
-                      ],
-                      // Gramer notu (varsa)
-                      if (line.grammarNote != null && showTurkish) ...[
-                        const SizedBox(height: 4),
-                        Container(
-                          padding: const EdgeInsets.symmetric(
-                            horizontal: 6,
-                            vertical: 3,
+                      ),
+                    ),
+
+                    // Balon
+                    Container(
+                      constraints: BoxConstraints(
+                        maxWidth: MediaQuery.of(context).size.width *
+                            (slowReadMode ? 0.82 : 0.72),
+                      ),
+                      padding: EdgeInsets.symmetric(
+                        horizontal: slowReadMode
+                            ? AppSpacing.md + 4
+                            : AppSpacing.md,
+                        vertical: slowReadMode
+                            ? AppSpacing.sm + 6
+                            : AppSpacing.sm + 2,
+                      ),
+                      decoration: BoxDecoration(
+                        color: isLeft
+                            ? AppColors.backgroundSecondary
+                            : speakerColor.withOpacity(0.1),
+                        borderRadius: BorderRadius.only(
+                          topLeft: Radius.circular(
+                              isLeft ? AppSpacing.radiusXs : AppSpacing.radiusLg),
+                          topRight: Radius.circular(
+                              isLeft ? AppSpacing.radiusLg : AppSpacing.radiusXs),
+                          bottomLeft:
+                              const Radius.circular(AppSpacing.radiusLg),
+                          bottomRight:
+                              const Radius.circular(AppSpacing.radiusLg),
+                        ),
+                        border: Border.all(
+                          color: isLeft
+                              ? AppColors.borderLight
+                              : speakerColor.withOpacity(0.2),
+                        ),
+                        boxShadow: [
+                          BoxShadow(
+                            color: Colors.black.withOpacity(0.04),
+                            blurRadius: 6,
+                            offset: const Offset(0, 2),
                           ),
-                          decoration: BoxDecoration(
-                            color: AppColors.primarySurface,
-                            borderRadius: AppRadius.sm,
+                        ],
+                      ),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          // Kurmancî metin — anahtar kelimeler vurgulu
+                          _HighlightedText(
+                            text: line.kurmanci,
+                            keyWords: keyWords,
+                            style: textStyle,
                           ),
-                          child: Text(
-                            line.grammarNote!,
+                          if (showTurkish) ...[
+                            SizedBox(height: slowReadMode ? 6 : 4),
+                            Text(
+                              line.turkish,
+                              style: AppTypography.translation.copyWith(
+                                fontSize: slowReadMode ? 14 : 12,
+                              ),
+                            ),
+                          ],
+                          // Gramer notu (varsa)
+                          if (line.grammarNote != null && showTurkish) ...[
+                            const SizedBox(height: 4),
+                            Container(
+                              padding: const EdgeInsets.symmetric(
+                                horizontal: 6,
+                                vertical: 3,
+                              ),
+                              decoration: BoxDecoration(
+                                color: AppColors.primarySurface,
+                                borderRadius: AppRadius.sm,
+                              ),
+                              child: Text(
+                                line.grammarNote!,
+                                style: AppTypography.caption.copyWith(
+                                  fontSize: slowReadMode ? 11 : 10,
+                                  color: AppColors.primaryDark,
+                                ),
+                              ),
+                            ),
+                          ],
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              if (!isLeft) const SizedBox(width: AppSpacing.sm),
+              if (!isLeft) _Avatar(name: line.speaker, color: speakerColor),
+            ],
+          ),
+
+          // ── Inline vocabulary tooltip for key words in this line ──
+          if (lineVocab.isNotEmpty)
+            Padding(
+              padding: EdgeInsets.only(
+                left: isLeft ? 48 : 0,
+                right: isLeft ? 0 : 48,
+                top: 4,
+              ),
+              child: Wrap(
+                spacing: 6,
+                runSpacing: 4,
+                children: lineVocab.entries.map((entry) {
+                  return Container(
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 8,
+                      vertical: 3,
+                    ),
+                    decoration: BoxDecoration(
+                      color: AppColors.primarySurface,
+                      borderRadius: AppRadius.full,
+                      border: Border.all(
+                        color: AppColors.primary.withOpacity(0.15),
+                      ),
+                    ),
+                    child: Text.rich(
+                      TextSpan(
+                        children: [
+                          TextSpan(
+                            text: entry.key,
                             style: AppTypography.caption.copyWith(
+                              color: AppColors.primary,
+                              fontWeight: FontWeight.w700,
                               fontSize: 10,
-                              color: AppColors.primaryDark,
                             ),
                           ),
-                        ),
-                      ],
-                    ],
-                  ),
-                ),
-              ],
+                          TextSpan(
+                            text: ' — ${entry.value}',
+                            style: AppTypography.caption.copyWith(
+                              color: AppColors.textSecondary,
+                              fontSize: 10,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  );
+                }).toList(),
+              ),
             ),
-          ),
-          if (!isLeft) const SizedBox(width: AppSpacing.sm),
-          if (!isLeft) _Avatar(name: line.speaker, color: speakerColor),
         ],
       ),
     );
@@ -892,6 +1063,192 @@ class _VocabTooltipDialog extends StatelessWidget {
                 curve: Curves.easeOut,
               ),
         ),
+      ),
+    );
+  }
+}
+
+// ════════════════════════════════════════════════════════════════
+// FÊRGEH (VOCABULARY) SECTION — Yeni kelimeler bölümü
+// ════════════════════════════════════════════════════════════════
+
+class _VocabSectionView extends StatelessWidget {
+  final HeritageDialogue dialogue;
+  final VoidCallback onContinue;
+
+  const _VocabSectionView({
+    required this.dialogue,
+    required this.onContinue,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    // Collect all vocabulary words from this dialogue
+    final vocabEntries = <MapEntry<String, String>>[];
+    final seenKeys = <String>{};
+    for (final line in dialogue.lines) {
+      final words = line.kurmanci.split(' ');
+      for (final w in words) {
+        final clean = w.replaceAll(RegExp(r'[.,!?;:]'), '').toLowerCase();
+        for (final entry in _kVocabDefinitions.entries) {
+          if ((clean == entry.key.toLowerCase() ||
+                  clean.startsWith(entry.key.toLowerCase())) &&
+              !seenKeys.contains(entry.key)) {
+            seenKeys.add(entry.key);
+            vocabEntries.add(entry);
+          }
+        }
+      }
+    }
+
+    return Padding(
+      padding: const EdgeInsets.all(AppSpacing.md),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: [
+          const SizedBox(height: AppSpacing.sm),
+
+          // Header
+          Row(
+            children: [
+              Container(
+                width: 40,
+                height: 40,
+                decoration: BoxDecoration(
+                  color: AppColors.accentSurface,
+                  shape: BoxShape.circle,
+                ),
+                child: const Icon(
+                  Icons.menu_book_rounded,
+                  color: AppColors.accent,
+                  size: 22,
+                ),
+              ),
+              const SizedBox(width: AppSpacing.md),
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      'Fergeh',
+                      style: AppTypography.kurmanjiLarge.copyWith(
+                        color: AppColors.textPrimary,
+                      ),
+                    ),
+                    Text(
+                      'Peyvên nû yên vê cirokê',
+                      style: AppTypography.caption.copyWith(
+                        color: AppColors.textSecondary,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ],
+          ).animate().fadeIn(duration: 400.ms),
+
+          const SizedBox(height: AppSpacing.md),
+
+          // Vocabulary list
+          Expanded(
+            child: ListView.builder(
+              itemCount: vocabEntries.length,
+              itemBuilder: (context, index) {
+                final entry = vocabEntries[index];
+                return Container(
+                  margin: const EdgeInsets.only(bottom: AppSpacing.sm),
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: AppSpacing.md,
+                    vertical: AppSpacing.sm + 2,
+                  ),
+                  decoration: BoxDecoration(
+                    color: AppColors.backgroundSecondary,
+                    borderRadius: AppRadius.md,
+                    border: Border.all(color: AppColors.borderLight),
+                  ),
+                  child: Row(
+                    children: [
+                      // Number badge
+                      Container(
+                        width: 28,
+                        height: 28,
+                        decoration: BoxDecoration(
+                          color: AppColors.primarySurface,
+                          shape: BoxShape.circle,
+                        ),
+                        child: Center(
+                          child: Text(
+                            '${index + 1}',
+                            style: AppTypography.labelSmall.copyWith(
+                              color: AppColors.primary,
+                              fontWeight: FontWeight.w700,
+                            ),
+                          ),
+                        ),
+                      ),
+                      const SizedBox(width: AppSpacing.md),
+                      // Kurmancî word
+                      Expanded(
+                        child: Text(
+                          entry.key,
+                          style: AppTypography.kurmanjiCard.copyWith(
+                            color: AppColors.primary,
+                            fontWeight: FontWeight.w600,
+                          ),
+                        ),
+                      ),
+                      // Definition
+                      Expanded(
+                        child: Text(
+                          entry.value,
+                          style: AppTypography.body.copyWith(
+                            color: AppColors.textSecondary,
+                          ),
+                          textAlign: TextAlign.end,
+                        ),
+                      ),
+                    ],
+                  ),
+                ).animate().fadeIn(
+                      delay: Duration(milliseconds: 60 * index),
+                      duration: 300.ms,
+                    );
+              },
+            ),
+          ),
+
+          // Continue to quiz button
+          const SizedBox(height: AppSpacing.sm),
+          SizedBox(
+            width: double.infinity,
+            child: ElevatedButton.icon(
+              onPressed: onContinue,
+              icon: const Icon(Icons.quiz_rounded, size: 20),
+              label: Text(
+                'Pirs bide!',
+                style: AppTypography.labelLarge.copyWith(
+                  color: Colors.white,
+                ),
+              ),
+              style: ElevatedButton.styleFrom(
+                backgroundColor: AppColors.primary,
+                foregroundColor: Colors.white,
+                padding:
+                    const EdgeInsets.symmetric(vertical: AppSpacing.md),
+                shape: RoundedRectangleBorder(
+                  borderRadius: AppRadius.md,
+                ),
+                elevation: 0,
+              ),
+            ),
+          ).animate().fadeIn(delay: 400.ms).slideY(
+                begin: 0.2,
+                duration: 300.ms,
+                curve: Curves.easeOut,
+              ),
+
+          const SizedBox(height: AppSpacing.md),
+        ],
       ),
     );
   }

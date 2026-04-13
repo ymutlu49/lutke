@@ -1,3 +1,6 @@
+import 'dart:math';
+
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -9,6 +12,11 @@ import '../../../../core/services/audio_service.dart';
 import '../../../../core/utils/fsrs_algorithm.dart';
 import '../../../../shared/providers/language_mode_provider.dart';
 import '../../../lessons/domain/entities/exercise.dart';
+
+// Conditional import for direct TTS calls
+import '../../../../core/services/js_eval_stub.dart'
+    if (dart.library.js_interop) '../../../../core/services/js_eval_web.dart'
+    as js_bridge;
 
 // ════════════════════════════════════════════════════════════════
 // KONUŞMA PRATİĞİ — LÛTKE
@@ -44,8 +52,42 @@ class _SpeakingPracticeWidgetState
   bool _isRecording = false;
   bool _hasRecording = false;
   int? _selfAssessment; // 0=kötü, 1=yakın, 2=iyi
+  bool _isShadowReading = false; // Shadow reading mode
+  String? _encouragementMessage; // Kurmanci encouragement after attempt
+  int _attemptCount = 0; // Track attempts for encouragement variety
+
+  // Kurmanci encouragement messages
+  static const _encouragements = [
+    'Pir bas!',         // Very good!
+    'Berdewam bike!',   // Keep going!
+    'Denge te xwes e!', // Your voice is nice!
+    'Aferin!',          // Well done!
+    'Bes baş e!',       // Good enough!
+  ];
 
   SpeakingPracticeExercise get _ex => widget.exercise;
+
+  /// Play TTS directly for shadow reading or encouragement
+  void _playTtsDirect(String text, {double rate = 0.85}) {
+    if (!kIsWeb) return;
+    final escaped = text
+        .replaceAll("'", "\\'")
+        .replaceAll('"', '\\"')
+        .replaceAll('\n', ' ');
+    final script = '''
+      (function() {
+        const u = new SpeechSynthesisUtterance('$escaped');
+        u.lang = 'tr-TR';
+        u.rate = $rate;
+        u.pitch = 1.0;
+        speechSynthesis.cancel();
+        speechSynthesis.speak(u);
+      })();
+    ''';
+    try {
+      js_bridge.evalJs(script);
+    } catch (_) {}
+  }
 
   void _playReference() {
     if (_ex.audioAsset != null) {
@@ -63,12 +105,29 @@ class _SpeakingPracticeWidgetState
       if (_isRecording) {
         _isRecording = false;
         _hasRecording = true;
+        _attemptCount++;
+        // Show random encouragement message
+        _encouragementMessage =
+            _encouragements[Random().nextInt(_encouragements.length)];
         _phase = _SpeakingPhase.compare;
       } else {
         _isRecording = true;
+        _encouragementMessage = null;
       }
     });
     // TODO: record paketi ile gerçek kayıt
+  }
+
+  /// Start shadow reading: TTS plays, user repeats simultaneously
+  void _startShadowReading() {
+    setState(() => _isShadowReading = true);
+    _playTtsDirect(_ex.targetText, rate: 0.75); // Slower for shadow reading
+    // Reset after estimated duration
+    final words = _ex.targetText.split(' ').length;
+    final durationSec = ((words * 0.6 + 2.0)).clamp(3.0, 10.0).toInt();
+    Future.delayed(Duration(seconds: durationSec), () {
+      if (mounted) setState(() => _isShadowReading = false);
+    });
   }
 
   void _playRecording() {
@@ -152,6 +211,37 @@ class _SpeakingPracticeWidgetState
 
           const SizedBox(height: AppSpacing.xl),
 
+          // Encouragement message (shown after recording attempt)
+          if (_encouragementMessage != null)
+            Padding(
+              padding: const EdgeInsets.only(bottom: AppSpacing.sm),
+              child: Container(
+                padding: const EdgeInsets.symmetric(
+                  horizontal: AppSpacing.md,
+                  vertical: AppSpacing.sm,
+                ),
+                decoration: BoxDecoration(
+                  color: const Color(0xFF4CAF50).withOpacity(0.1),
+                  borderRadius: BorderRadius.circular(16),
+                  border: Border.all(
+                    color: const Color(0xFF4CAF50).withOpacity(0.3),
+                  ),
+                ),
+                child: Text(
+                  _encouragementMessage!,
+                  style: AppTypography.kurmanji.copyWith(
+                    color: const Color(0xFF4CAF50),
+                    fontWeight: FontWeight.w700,
+                  ),
+                  textAlign: TextAlign.center,
+                ),
+              ),
+            ).animate().fadeIn(duration: 300.ms).scale(
+                  begin: const Offset(0.8, 0.8),
+                  duration: 400.ms,
+                  curve: Curves.elasticOut,
+                ),
+
           // 3 aşamalı akış
           _PhaseIndicator(phase: _phase),
 
@@ -168,7 +258,9 @@ class _SpeakingPracticeWidgetState
               _SpeakingPhase.record => _RecordPhase(
                   onToggleRecord: _toggleRecording,
                   isRecording: _isRecording,
+                  isShadowReading: _isShadowReading,
                   onPlayReference: _playReference,
+                  onShadowRead: _startShadowReading,
                   showTurkish: ref.watch(showTurkishProvider),
                 ),
               _SpeakingPhase.compare => _ComparePhase(
@@ -177,6 +269,7 @@ class _SpeakingPracticeWidgetState
                   assessment: _selfAssessment,
                   onAssess: _assess,
                   showTurkish: ref.watch(showTurkishProvider),
+                  targetText: _ex.targetText,
                 ),
             },
           ),
@@ -347,13 +440,17 @@ class _ListenPhase extends StatelessWidget {
 class _RecordPhase extends StatelessWidget {
   final VoidCallback onToggleRecord;
   final bool isRecording;
+  final bool isShadowReading;
   final VoidCallback onPlayReference;
+  final VoidCallback onShadowRead;
   final bool showTurkish;
 
   const _RecordPhase({
     required this.onToggleRecord,
     required this.isRecording,
+    required this.isShadowReading,
     required this.onPlayReference,
+    required this.onShadowRead,
     required this.showTurkish,
   });
 
@@ -366,9 +463,15 @@ class _RecordPhase extends StatelessWidget {
           Text(
             isRecording
                 ? (showTurkish ? 'Dinliyorum...' : 'Listening...')
-                : (showTurkish ? 'Şimdi sen söyle:' : 'Now you speak:'),
+                : isShadowReading
+                    ? (showTurkish ? 'Birlikte tekrarla!' : 'Repeat together!')
+                    : (showTurkish ? 'Simdi sen soyle:' : 'Now you speak:'),
             style: AppTypography.bodyMedium.copyWith(
-              color: isRecording ? AppColors.accent : AppColors.textSecondary,
+              color: isRecording
+                  ? AppColors.accent
+                  : isShadowReading
+                      ? AppColors.primary
+                      : AppColors.textSecondary,
             ),
           ),
           const SizedBox(height: AppSpacing.lg),
@@ -398,14 +501,40 @@ class _RecordPhase extends StatelessWidget {
             ),
           ),
           const SizedBox(height: AppSpacing.md),
-          // Yeniden dinle butonu
-          TextButton.icon(
-            onPressed: onPlayReference,
-            icon: Icon(Icons.replay, size: 16, color: AppColors.primary),
-            label: Text(
-              'Dîsa guhdarî bike',
-              style: AppTypography.caption.copyWith(color: AppColors.primary),
-            ),
+          // Action buttons row
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              // Yeniden dinle butonu
+              TextButton.icon(
+                onPressed: onPlayReference,
+                icon: Icon(Icons.replay, size: 16, color: AppColors.primary),
+                label: Text(
+                  'Disa guhdari bike',
+                  style: AppTypography.caption.copyWith(color: AppColors.primary),
+                ),
+              ),
+              const SizedBox(width: 8),
+              // Shadow reading button
+              TextButton.icon(
+                onPressed: isShadowReading ? null : onShadowRead,
+                icon: Icon(
+                  Icons.record_voice_over_rounded,
+                  size: 16,
+                  color: isShadowReading
+                      ? AppColors.primary.withOpacity(0.4)
+                      : AppColors.accent,
+                ),
+                label: Text(
+                  isShadowReading ? 'Bi hev re...' : 'Bi hev re bixwine',
+                  style: AppTypography.caption.copyWith(
+                    color: isShadowReading
+                        ? AppColors.accent.withOpacity(0.4)
+                        : AppColors.accent,
+                  ),
+                ),
+              ),
+            ],
           ),
         ],
       ),
@@ -421,6 +550,7 @@ class _ComparePhase extends StatelessWidget {
   final int? assessment;
   final ValueChanged<int> onAssess;
   final bool showTurkish;
+  final String targetText;
 
   const _ComparePhase({
     required this.onPlayReference,
@@ -428,67 +558,131 @@ class _ComparePhase extends StatelessWidget {
     required this.assessment,
     required this.onAssess,
     required this.showTurkish,
+    required this.targetText,
   });
+
+  /// Split text into syllable-like chunks for highlighting
+  List<String> _splitSyllables(String text) {
+    final words = text.split(' ');
+    final syllables = <String>[];
+    for (final word in words) {
+      if (word.length <= 3) {
+        syllables.add(word);
+      } else {
+        // Simple syllable split: every 2-3 chars
+        int i = 0;
+        while (i < word.length) {
+          final remaining = word.length - i;
+          final chunkLen = remaining <= 4 ? remaining : (remaining > 5 ? 3 : 2);
+          syllables.add(word.substring(i, i + chunkLen));
+          i += chunkLen;
+        }
+        // Add space marker after word (except last)
+        if (word != words.last) syllables.add(' ');
+      }
+      if (word != words.last && (word.length <= 3)) {
+        syllables.add(' ');
+      }
+    }
+    return syllables;
+  }
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      mainAxisSize: MainAxisSize.min,
-      children: [
-        Text(
-          showTurkish ? 'İkisini karşılaştır:' : 'Compare the two:',
-          style: AppTypography.bodyMedium.copyWith(
-            color: AppColors.textSecondary,
-          ),
-        ),
-        const SizedBox(height: AppSpacing.lg),
-
-        // İki ses butonu
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          children: [
-            _compareBtn(
-              showTurkish ? 'Anadil' : 'Native',
-              Icons.record_voice_over_outlined,
-              AppColors.primary,
-              onPlayReference,
+    return SingleChildScrollView(
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          // Syllable-highlighted target text
+          Padding(
+            padding: const EdgeInsets.only(bottom: AppSpacing.md),
+            child: Wrap(
+              alignment: WrapAlignment.center,
+              children: _splitSyllables(targetText).asMap().entries.map((entry) {
+                final idx = entry.key;
+                final syl = entry.value;
+                if (syl == ' ') return const SizedBox(width: 6);
+                return Container(
+                  margin: const EdgeInsets.symmetric(horizontal: 1, vertical: 2),
+                  padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 3),
+                  decoration: BoxDecoration(
+                    color: AppColors.primary.withOpacity(0.08 + (idx % 3) * 0.04),
+                    borderRadius: BorderRadius.circular(6),
+                    border: Border.all(
+                      color: AppColors.primary.withOpacity(0.15),
+                    ),
+                  ),
+                  child: Text(
+                    syl,
+                    style: AppTypography.kurmanji.copyWith(
+                      color: AppColors.primary,
+                      fontWeight: FontWeight.w600,
+                      letterSpacing: 0.5,
+                    ),
+                  ),
+                ).animate().fadeIn(
+                      delay: Duration(milliseconds: idx * 60),
+                      duration: 200.ms,
+                    );
+              }).toList(),
             ),
-            _compareBtn(
-              showTurkish ? 'Senin sesin' : 'Your voice',
-              Icons.mic_outlined,
-              AppColors.accent,
-              onPlayRecording,
-            ),
-          ],
-        ),
-
-        const SizedBox(height: AppSpacing.xl),
-
-        // Öz değerlendirme
-        Text(
-          showTurkish ? 'Nasıl hissettirdi?' : 'How did it feel?',
-          style: AppTypography.bodySmall.copyWith(
-            color: AppColors.textSecondary,
           ),
-        ),
-        const SizedBox(height: AppSpacing.md),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            _assessBtn(0, 'Dîsa bicerib',
-                showTurkish ? 'Tekrar dene' : 'Try again',
-                const Color(0xFFFF9800), Icons.replay_rounded),
-            const SizedBox(width: 12),
-            _assessBtn(1, 'Nêzîk bû',
-                showTurkish ? 'Yakındı' : 'Close',
-                AppColors.primary, Icons.thumb_up_outlined),
-            const SizedBox(width: 12),
-            _assessBtn(2, 'Gelek baş!',
-                showTurkish ? 'Çok iyi!' : 'Very good!',
-                const Color(0xFF4CAF50), Icons.stars_rounded),
-          ],
-        ),
-      ],
+
+          Text(
+            showTurkish ? 'Ikisini karsilastir:' : 'Compare the two:',
+            style: AppTypography.bodyMedium.copyWith(
+              color: AppColors.textSecondary,
+            ),
+          ),
+          const SizedBox(height: AppSpacing.lg),
+
+          // Iki ses butonu
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: [
+              _compareBtn(
+                showTurkish ? 'Anadil' : 'Native',
+                Icons.record_voice_over_outlined,
+                AppColors.primary,
+                onPlayReference,
+              ),
+              _compareBtn(
+                showTurkish ? 'Senin sesin' : 'Your voice',
+                Icons.mic_outlined,
+                AppColors.accent,
+                onPlayRecording,
+              ),
+            ],
+          ),
+
+          const SizedBox(height: AppSpacing.xl),
+
+          // Oz degerlendirme
+          Text(
+            showTurkish ? 'Nasil hissettirdi?' : 'How did it feel?',
+            style: AppTypography.bodySmall.copyWith(
+              color: AppColors.textSecondary,
+            ),
+          ),
+          const SizedBox(height: AppSpacing.md),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              _assessBtn(0, 'Disa bicerib',
+                  showTurkish ? 'Tekrar dene' : 'Try again',
+                  const Color(0xFFFF9800), Icons.replay_rounded),
+              const SizedBox(width: 12),
+              _assessBtn(1, 'Nezik bu',
+                  showTurkish ? 'Yakindi' : 'Close',
+                  AppColors.primary, Icons.thumb_up_outlined),
+              const SizedBox(width: 12),
+              _assessBtn(2, 'Gelek bas!',
+                  showTurkish ? 'Cok iyi!' : 'Very good!',
+                  const Color(0xFF4CAF50), Icons.stars_rounded),
+            ],
+          ),
+        ],
+      ),
     );
   }
 

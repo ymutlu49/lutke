@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'dart:math';
 
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_animate/flutter_animate.dart';
@@ -12,6 +13,11 @@ import '../../../core/constants/app_spacing.dart';
 import '../../../core/constants/app_typography.dart';
 import '../../../shared/widgets/speak_button.dart';
 import '../../lessons/domain/a1_kelime_db.dart';
+
+// Conditional import for direct TTS calls
+import '../../../core/services/js_eval_stub.dart'
+    if (dart.library.js_interop) '../../../core/services/js_eval_web.dart'
+    as js_bridge;
 
 // ════════════════════════════════════════════════════════════════
 // LISTENING COMPREHENSION — Guhdarî bike
@@ -271,6 +277,7 @@ class _ListeningScreenState extends ConsumerState<ListeningScreen>
   bool _answered = false;
   String? _selectedOption;
   bool _sentenceRevealed = false;
+  bool _isPlaying = false; // TTS playback state for waveform
 
   // Typewriter animation
   String _displayedText = '';
@@ -321,6 +328,51 @@ class _ListeningScreenState extends ConsumerState<ListeningScreen>
     });
   }
 
+  /// Play TTS for given text at a specific rate (for correct answer auto-play)
+  void _playTts(String text, {double rate = 0.85}) {
+    if (!kIsWeb) return;
+    final escaped = text
+        .replaceAll("'", "\\'")
+        .replaceAll('"', '\\"')
+        .replaceAll('\n', ' ');
+    final script = '''
+      (function() {
+        const u = new SpeechSynthesisUtterance('$escaped');
+        u.lang = 'tr-TR';
+        u.rate = $rate;
+        u.pitch = 1.0;
+        speechSynthesis.cancel();
+        speechSynthesis.speak(u);
+      })();
+    ''';
+    try {
+      js_bridge.evalJs(script);
+    } catch (_) {}
+  }
+
+  /// Replay current sentence TTS with speed setting
+  void _replayTts() {
+    if (_questions.isEmpty) return;
+    final sentence = _questions[_currentIndex].sentence;
+    final rate = _isSlowMode ? 0.7 : 0.85;
+    _playTts(sentence, rate: rate);
+    setState(() => _isPlaying = true);
+    // Estimate duration and reset playing state
+    final words = sentence.split(' ').length;
+    final durationSec = ((words * 0.5 + 1.5) / rate).clamp(2.0, 10.0).toInt();
+    Future.delayed(Duration(seconds: durationSec), () {
+      if (mounted) setState(() => _isPlaying = false);
+    });
+  }
+
+  /// Auto-play the correct answer via TTS after answering
+  void _playCorrectAnswer() {
+    if (_questions.isEmpty) return;
+    final question = _questions[_currentIndex];
+    // Play the full sentence so user hears correct pronunciation
+    _playTts(question.sentence, rate: 0.8);
+  }
+
   void _onOptionSelected(String option) {
     if (_answered) return;
 
@@ -341,8 +393,13 @@ class _ListeningScreenState extends ConsumerState<ListeningScreen>
       }
     });
 
-    // Sonraki soruya gec
-    Future.delayed(const Duration(milliseconds: 1200), () {
+    // Auto-play correct answer TTS so user hears the right pronunciation
+    Future.delayed(const Duration(milliseconds: 400), () {
+      if (mounted) _playCorrectAnswer();
+    });
+
+    // Sonraki soruya gec (increased delay to allow TTS to finish)
+    Future.delayed(const Duration(milliseconds: 2200), () {
       if (!mounted) return;
       if (_hearts <= 0 || _currentIndex >= _questions.length - 1) {
         _showResults();
@@ -351,6 +408,7 @@ class _ListeningScreenState extends ConsumerState<ListeningScreen>
           _currentIndex++;
           _answered = false;
           _selectedOption = null;
+          _isPlaying = false;
         });
         _startTypewriter();
       }
@@ -501,14 +559,19 @@ class _ListeningScreenState extends ConsumerState<ListeningScreen>
                 padding: const EdgeInsets.symmetric(horizontal: AppSpacing.md),
                 child: Column(
                   children: [
-                    // Speaker button + sentence
+                    // Speaker button + sentence + waveform
                     _AudioSimulationCard(
                       sentence: question.sentence,
                       displayedText: _displayedText,
                       sentenceRevealed: _sentenceRevealed,
                       isSlowMode: _isSlowMode,
+                      isPlaying: _isPlaying,
                       onToggleSpeed: _toggleSpeed,
-                      onReplay: _startTypewriter,
+                      onReplay: () {
+                        _startTypewriter();
+                        _replayTts();
+                      },
+                      onReplayTts: _replayTts,
                     ),
 
                     const SizedBox(height: AppSpacing.lg),
@@ -571,16 +634,20 @@ class _AudioSimulationCard extends StatelessWidget {
   final String displayedText;
   final bool sentenceRevealed;
   final bool isSlowMode;
+  final bool isPlaying;
   final VoidCallback onToggleSpeed;
   final VoidCallback onReplay;
+  final VoidCallback onReplayTts;
 
   const _AudioSimulationCard({
     required this.sentence,
     required this.displayedText,
     required this.sentenceRevealed,
     required this.isSlowMode,
+    required this.isPlaying,
     required this.onToggleSpeed,
     required this.onReplay,
+    required this.onReplayTts,
   });
 
   @override
@@ -615,32 +682,53 @@ class _AudioSimulationCard extends StatelessWidget {
                 color: AppColors.primary,
               ),
               const SizedBox(width: AppSpacing.md),
-              // Replay button
+              // "Dubare guhdari bike" (Listen again) button
               GestureDetector(
-                onTap: onReplay,
-                child: Container(
-                  width: 44,
-                  height: 44,
-                  decoration: BoxDecoration(
-                    color: AppColors.primary.withOpacity(0.1),
-                    shape: BoxShape.circle,
-                    border: Border.all(
-                      color: AppColors.primary.withOpacity(0.2),
+                onTap: onReplayTts,
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Container(
+                      width: 44,
+                      height: 44,
+                      decoration: BoxDecoration(
+                        color: AppColors.primary.withOpacity(0.1),
+                        shape: BoxShape.circle,
+                        border: Border.all(
+                          color: AppColors.primary.withOpacity(0.2),
+                        ),
+                      ),
+                      child: const Icon(
+                        Icons.replay_rounded,
+                        color: AppColors.primary,
+                        size: 22,
+                      ),
                     ),
-                  ),
-                  child: const Icon(
-                    Icons.replay_rounded,
-                    color: AppColors.primary,
-                    size: 22,
-                  ),
+                    const SizedBox(height: 4),
+                    Text(
+                      'Dubare\nguhdarî bike',
+                      textAlign: TextAlign.center,
+                      style: TextStyle(
+                        fontSize: 9,
+                        color: AppColors.primary.withOpacity(0.7),
+                        fontWeight: FontWeight.w500,
+                        height: 1.2,
+                      ),
+                    ),
+                  ],
                 ),
               ),
             ],
           ),
 
-          const SizedBox(height: AppSpacing.md),
+          const SizedBox(height: AppSpacing.sm),
 
-          // Speed toggle
+          // Waveform animation during playback
+          _WaveformAnimation(isPlaying: isPlaying),
+
+          const SizedBox(height: AppSpacing.sm),
+
+          // Speed toggle with explicit rate values
           GestureDetector(
             onTap: onToggleSpeed,
             child: Container(
@@ -669,7 +757,7 @@ class _AudioSimulationCard extends StatelessWidget {
                   ),
                   const SizedBox(width: 6),
                   Text(
-                    isSlowMode ? 'Hedi' : 'Normal',
+                    isSlowMode ? 'Hedi (0.7x)' : 'Normal (1.0x)',
                     style: AppTypography.labelSmall.copyWith(
                       color: isSlowMode ? AppColors.accent : AppColors.textSecondary,
                       fontWeight: FontWeight.w600,
@@ -715,6 +803,72 @@ class _AudioSimulationCard extends StatelessWidget {
         ],
       ),
     ).animate().fadeIn(duration: 400.ms).slideY(begin: -0.05);
+  }
+}
+
+// ════════════════════════════════════════════════════════════════
+// WAVEFORM ANIMATION — Animated bars during TTS playback
+// ════════════════════════════════════════════════════════════════
+
+class _WaveformAnimation extends StatelessWidget {
+  final bool isPlaying;
+  const _WaveformAnimation({required this.isPlaying});
+
+  @override
+  Widget build(BuildContext context) {
+    if (!isPlaying) {
+      // Static small bars when not playing
+      return SizedBox(
+        height: 24,
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: List.generate(7, (i) {
+            return Container(
+              width: 3,
+              height: 6,
+              margin: const EdgeInsets.symmetric(horizontal: 2),
+              decoration: BoxDecoration(
+                color: AppColors.primary.withOpacity(0.2),
+                borderRadius: BorderRadius.circular(2),
+              ),
+            );
+          }),
+        ),
+      );
+    }
+
+    // Animated waveform bars
+    return SizedBox(
+      height: 28,
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: List.generate(7, (i) {
+          // Different delays per bar for wave effect
+          final delay = (i * 80).ms;
+          final maxHeight = [14.0, 22.0, 18.0, 26.0, 18.0, 22.0, 14.0][i];
+          return Container(
+            width: 3,
+            height: maxHeight,
+            margin: const EdgeInsets.symmetric(horizontal: 2),
+            decoration: BoxDecoration(
+              color: AppColors.primary,
+              borderRadius: BorderRadius.circular(2),
+            ),
+          )
+              .animate(
+                onPlay: (c) => c.repeat(reverse: true),
+              )
+              .scaleY(
+                begin: 0.3,
+                end: 1.0,
+                delay: delay,
+                duration: 400.ms,
+                curve: Curves.easeInOut,
+              )
+              .fadeIn(duration: 200.ms);
+        }),
+      ),
+    );
   }
 }
 
