@@ -43,13 +43,13 @@ abstract class AppRoutes {
   static const vocabulary       = '/vocabulary';
   static const culture          = '/culture';
   static const profile          = '/profile';
-  static const lesson           = '/lesson';
+  static const lesson           = '/home/lesson';
   static const settings         = '/settings';
   static const welcome          = '/welcome';
   static const admin            = '/admin';
   static const wordDetail       = '/word-detail';
-  static const flashcard        = '/flashcard';
-  static const quiz             = '/quiz';
+  static const flashcard        = '/home/flashcard';
+  static const quiz             = '/home/quiz';
 }
 
 // ════════════════════════════════════════════════════════════════
@@ -126,12 +126,36 @@ GoRouter appRouter(AppRouterRef ref) {
       StatefulShellRoute.indexedStack(
         builder: (context, state, shell) => _AppShell(shell: shell),
         branches: [
-          // Tab 0: Fêrbûn (Ana sayfa)
+          // Tab 0: Fêrbûn (Ana sayfa + quiz/flashcard alt sayfaları)
           StatefulShellBranch(
             routes: [
               GoRoute(
                 path: AppRoutes.home,
                 builder: (_, __) => const HomeScreen(),
+                routes: [
+                  GoRoute(
+                    path: 'quiz',
+                    builder: (_, state) {
+                      final extra = state.extra as Map<String, dynamic>?;
+                      return QuizScreen(level: extra?['level'] as String? ?? 'A1');
+                    },
+                  ),
+                  GoRoute(
+                    path: 'flashcard',
+                    builder: (_, __) => const FlashcardScreen(),
+                  ),
+                  GoRoute(
+                    path: 'lesson',
+                    builder: (_, state) {
+                      final extra = state.extra as Map<String, dynamic>?;
+                      return LessonScreen(
+                        mode: extra?['mode'] as String? ?? 'lesson',
+                        lessonId: extra?['lessonId'] as String?,
+                        userId: extra?['userId'] as String? ?? 'anonymous',
+                      );
+                    },
+                  ),
+                ],
               ),
             ],
           ),
@@ -168,18 +192,7 @@ GoRouter appRouter(AppRouterRef ref) {
         ],
       ),
 
-      // ── Shell dışı sayfalar (tam ekran) ─────────────────────
-      GoRoute(
-        path: AppRoutes.lesson,
-        builder: (_, state) {
-          final extra = state.extra as Map<String, dynamic>?;
-          return LessonScreen(
-            mode: extra?['mode'] as String? ?? 'lesson',
-            lessonId: extra?['lessonId'] as String?,
-            userId: extra?['userId'] as String? ?? 'anonymous',
-          );
-        },
-      ),
+      // ── Shell dışı sayfalar ─────────────────────────────────
       GoRoute(
         path: AppRoutes.admin,
         builder: (_, __) => const AdminPanelScreen(),
@@ -196,18 +209,6 @@ GoRouter appRouter(AppRouterRef ref) {
             word: extra['word'],
             levelColor: extra['levelColor'] as Color? ?? AppColors.primary,
           );
-        },
-      ),
-      GoRoute(
-        path: AppRoutes.flashcard,
-        builder: (_, __) => const FlashcardScreen(),
-      ),
-      GoRoute(
-        path: AppRoutes.quiz,
-        builder: (_, state) {
-          final extra = state.extra as Map<String, dynamic>?;
-          final level = extra?['level'] as String? ?? 'A1';
-          return QuizScreen(level: level);
         },
       ),
     ],

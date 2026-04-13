@@ -132,7 +132,19 @@ class _SplashScreenState extends ConsumerState<SplashScreen> {
                   ),
                 ).animate().fadeIn(delay: 2000.ms),
 
-                const SizedBox(height: 32),
+                const Spacer(flex: 1),
+
+                // Çêker bilgisi
+                Text(
+                  'Çêker: Prof. Dr. Yılmaz Mutlu',
+                  style: TextStyle(
+                    fontSize: 12,
+                    color: Colors.white.withOpacity(0.4),
+                    letterSpacing: 0.5,
+                  ),
+                ).animate().fadeIn(delay: 2200.ms, duration: 600.ms),
+
+                const SizedBox(height: 24),
               ],
             ),
           ),
