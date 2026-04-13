@@ -75,5 +75,29 @@
     "no_internet": "No internet connection",
     "general": "An error occurred",
     "retry": "Retry"
+  },
+  "child": {
+    "welcome": "Welcome!",
+    "play": "Play",
+    "my_words": "My Words",
+    "profile": "Me",
+    "star": "Star",
+    "stars": "Stars",
+    "great_job": "Great job!",
+    "good_job": "Good!",
+    "try_again": "Try again!",
+    "parent_settings": "Parent Settings",
+    "enter_pin": "Enter PIN",
+    "mascot_name": "Bizer",
+    "mascot_greeting": "Bizer is with you",
+    "how_old": "How old are you?",
+    "lets_learn": "Let's learn Kurdish together!",
+    "ready": "Bizer is ready!",
+    "start": "Start!",
+    "weekly": "My Week",
+    "words_learned": "Words learned",
+    "lessons_done": "Lessons done",
+    "my_lessons": "My Lessons",
+    "locked": "Not yet unlocked"
   }
 }
