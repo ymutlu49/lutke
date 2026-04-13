@@ -73,9 +73,9 @@ List<_QuizWord> _loadWordsForLevel(String level) {
     _ => kA1TamKelimeler,
   };
 
-  // Sadece anlamli kelime/soz olanları al (alfabe harfleri haric)
+  // Tüm kelimeleri al (alfabe harfleri dahil — açıklamaları quiz'de kullanılır)
   return raw
-      .where((r) => r.ku.length > 1 && r.tr.length > 1)
+      .where((r) => r.ku.isNotEmpty && r.tr.isNotEmpty)
       .map((r) => _QuizWord(
         id: r.id, ku: r.ku, tr: r.tr, en: r.en,
         kat: r.kat ?? '', cins: r.cins ?? '', not_: r.not ?? '',
@@ -92,9 +92,11 @@ List<_QuizQuestion> _generateQuizSession({
 }) {
   final allWords = _loadWordsForLevel(level);
   // Filter by category if provided, but keep allWords for distractors
-  final poolWords = category != null
+  var poolWords = category != null
       ? allWords.where((w) => w.kat == category).toList()
       : allWords;
+  // Kategori yetersizse tüm seviye kelimelerinden quiz oluştur
+  if (poolWords.length < 4) poolWords = allWords;
   if (poolWords.length < 4) return [];
   // Adjust questionCount if category has fewer words
   final effectiveCount = poolWords.length < questionCount ? poolWords.length : questionCount;
