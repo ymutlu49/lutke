@@ -280,7 +280,7 @@ const kA1TamKelimeler = [
 
   (id:'a1_063', ku:'Kesk', tr:'Yeşil', en:'Green', cins:'bêcins', ez:null, kat:'reng', zor:0.84,
    not:'"Kesk" — k+s+k, Kürt bayrağının ortasındaki renk',
-   her:['Çiyayên Kurdistanê kesk in.', 'Sebzeyên kesk xweş in.'],
+   her:['Çiyayên Kurdistanê kesk in.', 'Sewzeyên kesk xweş in.'],
    gen:['Rengê kesk', 'Dar kesk e.']),
 
   (id:'a1_064', ku:'Şîn', tr:'Mavi', en:'Blue', cins:'bêcins', ez:null, kat:'reng', zor:0.84,
@@ -290,7 +290,7 @@ const kA1TamKelimeler = [
 
   (id:'a1_065', ku:'Zer', tr:'Sarı', en:'Yellow', cins:'bêcins', ez:null, kat:'reng', zor:0.84,
    not:'"Zer" — kısa ve net',
-   her:['Güneş zer e, pîrê!', 'Pêlên zer in.'],
+   her:['Tav zer e, pîrê!', 'Pêlên zer in.'],
    gen:['Rengê zer', 'Tavê zer e.']),
 
   (id:'a1_066', ku:'Gewr', tr:'Gri', en:'Grey', cins:'bêcins', ez:null, kat:'reng', zor:0.80,
@@ -418,7 +418,7 @@ const kA1TamKelimeler = [
    her:['Hûn çawa ne, pîrê û kal?', 'Hûn bi xêr hatîn!'],
    gen:['Hûn kî ne?', 'Hûn xwendekar in.']),
 
-  (id:'a1_105', ku:'Ew (çoğul)', tr:'Onlar', en:'They', cins:'bêcins', ez:null, kat:'cinavk', zor:0.84,
+  (id:'a1_105', ku:'Ew (pirjimar)', tr:'Onlar', en:'They', cins:'bêcins', ez:null, kat:'cinavk', zor:0.84,
    not:'3.çoğul da "ew" — eğik: "wan". Tekille aynı yazım, bağlamdan anlaşılır',
    her:['Ew malbata me ne.', 'Ew hatine malê.'],
    gen:['Ew xwendekar in.', 'Ew li bajarê ne.']),
@@ -653,7 +653,7 @@ const kA1TamKelimeler = [
   (id:'a1_159', ku:'Xwê', tr:'Tuz', en:'Salt', cins:'nêr', ez:'xwêyê',
    kat:'xwarin', zor:0.82, not:'Eril — x sesi gırtlaktan! "Nan û xwê" = ekmek ve tuz = misafirperverlik sembolü',
    her:['Nan û xwê bide mêvanê xwe, pîrê.', 'Xwê dike?'],
-   gen:['Xwê û biber', 'Xwêyê me']),
+   gen:['Xwê û îsot', 'Xwêyê me']),
 
   (id:'a1_160', ku:'Sêv', tr:'Elma', en:'Apple', cins:'mê', ez:'sêva',
    kat:'mêwe', zor:0.83, not:'Dişil — ê uzun',
@@ -1476,14 +1476,14 @@ const kA1EkKelimeler = [
    her:['Cotkarê min genim çand.', 'Genim û birinc.'],
    gen:['Genim û nan', 'Genimê me']),
 
-  // [AS]: "xwêdan" → actually "xwê" = tuz (already have) 
-  // "Biber" = biber — [AS] s.47
-  // [FB]: biber n.m.
-  (id:'a1_415', ku:'Biber', tr:'Biber', en:'Pepper', cins:'nêr', ez:'biberê',
+  // [AS]: "xwêdan" → actually "xwê" = tuz (already have)
+  // "Biber" = îsot — [AS] s.47; Aslanoğlu Dil Kartları: biber → îsot
+  // [FB]: îsot n.m.
+  (id:'a1_415', ku:'Îsot', tr:'Biber', en:'Pepper', cins:'nêr', ez:'îsotê',
    kat:'xwarin', zor:0.81,
-   not:'Eril — Bedir Han bileşik kelime bölümünde "biber" = geniş/büyük anlamıyla da geçer ama yiyecek olarak da kullanılır. Ferhenga Birûskî yiyecek anlamı için n.m.',
-   her:['Biber û xwê li ser xwarinê.', 'Pîrê biber dide.'],
-   gen:['Biber û xwê', 'Biberê sor']),
+   not:'Eril — Aslanoğlu Dil Kartları: "biber = îsot". Ferhenga Birûskî: îsot n.m. "Bîharek" = karabiber ayrı kelime.',
+   her:['Îsot û xwê li ser xwarinê.', 'Pîrê îsot dide.'],
+   gen:['Îsot û xwê', 'Îsotê sor']),
 
   // [AS]: "fêkî" = meyve (genel)
   // [FB]: fêkî n.m.
@@ -1491,7 +1491,7 @@ const kA1EkKelimeler = [
    kat:'mêwe', zor:0.81,
    not:'Eril — Ferhenga Birûskî: n.m. [Arapça "fâkihe"den]. Tüm meyveler için üst kavram',
    her:['Pîrê fêkî dide me.', 'Fêkiyên bihar xweş in.'],
-   gen:['Fêkî û sebze', 'Fêkiyê me']),
+   gen:['Fêkî û sewze', 'Fêkiyê me']),
 
   // ─────────────────────────────────────────────────────────────
   // BEDEN EKSİKLERİ — Aslanoğlu s.36-38 ENDAMÊN BEDENÊ
@@ -1900,7 +1900,7 @@ const kA1EkKelimeler = [
    gen:['Çawa ye?', 'Xweş e, spas!']),
 
   // [TH] + [FB]: "Bi xatirê we" = güle güle (çoğul)
-  (id:'a1_494', ku:'Bi xatirê we', tr:'Güle güle (çoğule)', en:'Goodbye (to a group)', cins:'bêcins', ez:null,
+  (id:'a1_494', ku:'Bi xatirê we', tr:'Güle güle (çoğul)', en:'Goodbye (to a group)', cins:'bêcins', ez:null,
    kat:'selamlama', zor:0.81,
    not:'"Bi xatirê we" = (siz) güle gidin. "Bi xatirê te" = (sen) güle git. Thackston veda selamları',
    her:['Bi xatirê we, malbato!', 'Bi xatirê we, pîrê û kal!'],

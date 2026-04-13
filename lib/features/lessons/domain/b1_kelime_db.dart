@@ -1226,11 +1226,11 @@ final kB1EkKelimeler3 = [
    her:["Destan dirêj e.", "Destanê kurdî gelek in."],
    gen:["Destan û helbest", "Destanê kurdî"]),
 
-  (id:"b1_713", ku:"Masal", tr:"Masal", en:"Fairy tale",
-   cins:"nêr", ez:"masalê", kat:"edebiyat", zor:0.73,
-   not:"Eril — [FB]: masal n.m. \"Pîrê masal got\" = büyükanne masal anlattı.",
-   her:["Pîrê masaleke xweş got.", "Masal û çîrok."],
-   gen:["Masal û çîrok", "Masalê kurdî"]),
+  (id:"b1_713", ku:"Çîrok", tr:"Masal", en:"Fairy tale",
+   cins:"mê", ez:"çîrokê", kat:"edebiyat", zor:0.73,
+   not:"Dişil — [FB]: çîrok n.f. \"Pîrê çîrok got\" = büyükanne masal anlattı.",
+   her:["Pîrê çîrokeke xweş got.", "Çîrok û destan."],
+   gen:["Çîrok û destan", "Çîroka kurdî"]),
 
   // GÜNLÜK İFADELER — Diyalog tamam
   (id:"b1_720", ku:"Nexweşiya dilê", tr:"Kalp hastalığı", en:"Heart disease",
@@ -1518,10 +1518,10 @@ final kB1EkKelimeler2 = [
    not:"Eril — [BH]: cînavk = zamir. \"Cînavkên şexsî\" = kişi zamirleri.",
    her:["Ev cînavk e.", "Cînavkên kurdî."], gen:["Cînavk û navdêr", "Cînavkê me"]),
 
-  (id:"b1_475", ku:"Kök", tr:"Kök (dilbilgisi)", en:"Root / Stem",
-   cins:"nêr", ez:"kökê", kat:"rêziman", zor:0.71,
+  (id:"b1_475", ku:"Kok", tr:"Kök (dilbilgisi)", en:"Root / Stem",
+   cins:"nêr", ez:"kokê", kat:"rêziman", zor:0.71,
    not:"Eril — \"Koka lêkerê\" = fiilin kökü. [BH] morfoloji terminolojisi. \"Pêşgir\" = önek, \"paşgir\" = sonek (ikisi de Kurmancî özgün).",
-   her:["Koka \"çûn\"ê çi ye?", "Kök û paşgir."], gen:["Kök û paşgir", "Koka lêkerê"]),
+   her:["Koka \"çûn\"ê çi ye?", "Kok û paşgir."], gen:["Kok û paşgir", "Koka lêkerê"]),
 
   // ─────────────────────────────────────────────────────────────
   // KURUM VE ÖRGÜT KELİMELERİ
@@ -3366,11 +3366,11 @@ final kB1Buyuk7 = [
    her:["Çand û zimanê kurdî.", "Di çand û zimanê de."],
    gen:["Çand û ziman", "Çanda û zimanê me"]),
 
-  (id:"b1_ed08", ku:"Sembol", tr:"Sembol", en:"Symbol",
-   cins:"nêr", ez:"sembolê", kat:"edebiyat", zor:0.71,
-   not:"Eril — uluslararası terim. \"Sembola azadiyê.\"",
-   her:["Ev sembol e.", "Sembola Newrozê."],
-   gen:["Sembol û mana", "Sembola azadiyê"]),
+  (id:"b1_ed08", ku:"Nîşane", tr:"Sembol", en:"Symbol",
+   cins:"mê", ez:"nîşaneyê", kat:"edebiyat", zor:0.71,
+   not:"Dişil — [AS]: nîşane n.f. = sembol, işaret. \"Nîşaneya azadiyê.\"",
+   her:["Ev nîşane ye.", "Nîşaneya Newrozê."],
+   gen:["Nîşane û mana", "Nîşaneya azadiyê"]),
 
   (id:"b1_ed09", ku:"Vegotina devkî", tr:"Sözlü anlatım", en:"Oral narration",
    cins:"mê", ez:"vegotina devkî", kat:"edebiyat", zor:0.69,
@@ -3574,13 +3574,13 @@ final kB1_Giyim = [  // GİYİM VE GÖRÜNÜŞ — 40 kelime
    cins:"mê", ez:"kirasê", kat:"cil", zor:0.74,
    not:"Dişil — [AS]: \"gömlek = kiras\" ✓.",
    her:["Kiras xweş e.", "Kirasê nû."],
-   gen:["Kiras û pantolon", "Kirasê me"]),
+   gen:["Kiras û pantol", "Kirasê me"]),
 
-  (id:"b1_c02b", ku:"Pantolon", tr:"Pantolon", en:"Trousers / Pants",
-   cins:"nêr", ez:"pantolonê", kat:"cil", zor:0.74,
-   not:"Eril — [AS]: \"pantolon\" ✓.",
-   her:["Pantolon li xwe kir.", "Pantolonê reş."],
-   gen:["Pantolon û kiras", "Pantolonê me"]),
+  (id:"b1_c02b", ku:"Pantol", tr:"Pantolon", en:"Trousers / Pants",
+   cins:"nêr", ez:"pantolê", kat:"cil", zor:0.74,
+   not:"Eril — [AS]: \"pantol\" ✓. Kurmancî formu.",
+   her:["Pantol li xwe kir.", "Pantolê reş."],
+   gen:["Pantol û kiras", "Pantolê me"]),
 
   (id:"b1_c03b", ku:"Kember", tr:"Kemer", en:"Belt",
    cins:"nêr", ez:"kemberê", kat:"cil", zor:0.71,
@@ -3846,11 +3846,11 @@ final kB1_Teknoloji = [  // TEKNOLOJİ VE MEDYA — 60 kelime
    gen:["Ragihandin û medya", "Ragihandina me"]),
 
   // Spor
-  (id:"b1_tk16", ku:"Spor", tr:"Spor", en:"Sport",
-   cins:"nêr", ez:"sporê", kat:"spor", zor:0.74,
-   not:"Eril — uluslararası terim.",
-   her:["Spor dikim.", "Sporê dilêzim."],
-   gen:["Spor û tenduristî", "Sporê me"]),
+  (id:"b1_tk16", ku:"Werzîş", tr:"Spor", en:"Sport",
+   cins:"mê", ez:"werzîşê", kat:"spor", zor:0.74,
+   not:"Dişil — [AS]: werzîş n.f. = spor. \"Werzîş ji tenduristiyê re baş e.\"",
+   her:["Werzîş dikim.", "Werzîşê dilêzim."],
+   gen:["Werzîş û tenduristî", "Werzîşa me"]),
 
   (id:"b1_tk17", ku:"Futbol", tr:"Futbol", en:"Football / Soccer",
    cins:"nêr", ez:"futbolê", kat:"spor", zor:0.76,
@@ -4302,11 +4302,11 @@ final kB1_Xwarin = [
    her:["Fasûlî pijandiye.", "Şorba fasûliyê."],
    gen:["Fasûlî û nîsk", "Fasûlîyê me"]),
 
-  (id:"b1_xw12", ku:"Sebze", tr:"Sebze", en:"Vegetable",
-   cins:"mê", ez:"sebzê", kat:"xwarin", zor:0.74,
-   not:"Dişil — [AS] ✓. \"Sebzeya fêkî\" = meyve-sebze.",
-   her:["Sebze sax e.", "Sebze û fêkî."],
-   gen:["Sebze û fêkî", "Sebzeya me"]),
+  (id:"b1_xw12", ku:"Sewze", tr:"Sebze", en:"Vegetable",
+   cins:"mê", ez:"sewzê", kat:"xwarin", zor:0.74,
+   not:"Dişil — [AS] ✓. \"Sewzeya fêkî\" = meyve-sebze.",
+   her:["Sewze sax e.", "Sewze û fêkî."],
+   gen:["Sewze û fêkî", "Sewzeya me"]),
 
   (id:"b1_xw13", ku:"Karûs", tr:"Havuç", en:"Carrot",
    cins:"nêr", ez:"karûsê", kat:"xwarin", zor:0.70,
@@ -7230,11 +7230,11 @@ final kB1_Spor = [
    her:["Werzişa rojane lazim e.", "Werzişa rojane dikim."],
    gen:["Werzişa rojane", "Werzişa me"]),
 
-  (id:"b1_sp11", ku:"Grûba spor", tr:"Spor grubu", en:"Sports group",
-   cins:"mê", ez:"grûba spor", kat:"spor", zor:0.68,
-   not:"\"Grûb\" + \"spor\".",
-   her:["Grûba spor hat.", "Di grûba spor de ne."],
-   gen:["Grûba spor", "Grûba me"]),
+  (id:"b1_sp11", ku:"Grûba werzîşê", tr:"Spor grubu", en:"Sports group",
+   cins:"mê", ez:"grûba werzîşê", kat:"spor", zor:0.68,
+   not:"\"Grûb\" + \"werzîş\".",
+   her:["Grûba werzîşê hat.", "Di grûba werzîşê de ne."],
+   gen:["Grûba werzîşê", "Grûba me"]),
 
   (id:"b1_sp12", ku:"Stadyom", tr:"Stadyum", en:"Stadium",
    cins:"nêr", ez:"stadyomê", kat:"cih", zor:0.71,
@@ -7847,9 +7847,9 @@ final kB1_Bitirim = [
   (id:"b1_ct05",ku:"Avdana zeviyê",tr:"Tarla sulaması",en:"Field irrigation",
    cins:"mê",ez:"avdana zeviyê",kat:"cotkarî",zor:0.69,
    not:"\"Avdan\"+\"zeviyê\".",her:["Avdana zeviyê lazim e.","Di avdana zeviyê de."],gen:["Avdana zeviyê","Avdana me"]),
-  (id:"b1_ct06",ku:"Sebzefiroş",tr:"Sebzeci",en:"Vegetable seller",
-   cins:"bêcins",ez:"sebzefiroşê",kat:"pîşe",zor:0.70,
-   not:"\"Sebze\"+\"firoş\".",her:["Sebzefiroş hat.","Sebzefiroşê bazarê."],gen:["Sebzefiroş û fêkîfiroş","Sebzefiroşê me"]),
+  (id:"b1_ct06",ku:"Sewzefiroş",tr:"Sebzeci",en:"Vegetable seller",
+   cins:"bêcins",ez:"sewzefiroşê",kat:"pîşe",zor:0.70,
+   not:"\"Sewze\"+\"firoş\".",her:["Sewzefiroş hat.","Sewzefiroşê bazarê."],gen:["Sewzefiroş û fêkîfiroş","Sewzefiroşê me"]),
   (id:"b1_ct07",ku:"Baxvanî",tr:"Bahçıvanlık",en:"Gardening",
    cins:"mê",ez:"baxvaniyê",kat:"cotkarî",zor:0.69,
    not:"\"Bax\"+\"vanî\".",her:["Baxvanî dikim.","Di baxvaniyê de."],gen:["Baxvanî û çandinî","Baxvanîya me"]),

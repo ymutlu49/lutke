@@ -606,10 +606,10 @@ final kB2EkKelimeler = [
    not:"Eril — uluslararası terim. \"Kurmancîde \"îstiare\" de kullanılır.",
    her:["Ev metafor e.", "Metaforên Xanî."], gen:["Metafor û sembol", "Metaforê me"]),
 
-  (id:"b2_211", ku:"Sembol", tr:"Sembol", en:"Symbol",
-   cins:"nêr", ez:"sembolê", kat:"edebiyat", zor:0.68,
-   not:"Eril — [FB]: sembol n.m. \"Agir sembola azadiyê ye\" = ateş özgürlüğün sembolüdür.",
-   her:["Agir sembola azadiyê ye.", "Sembol baş e."], gen:["Sembol û metafor", "Sembolê me"]),
+  (id:"b2_211", ku:"Nîşane", tr:"Sembol", en:"Symbol",
+   cins:"mê", ez:"nîşaneyê", kat:"edebiyat", zor:0.68,
+   not:"Dişil — [FB]: nîşane n.f. \"Agir nîşaneya azadiyê ye\" = ateş özgürlüğün sembolüdür. \"Sîmbol\" de kullanılır.",
+   her:["Agir nîşaneya azadiyê ye.", "Nîşane baş e."], gen:["Nîşane û metafor", "Nîşaneya me"]),
 
   (id:"b2_212", ku:"Rîtim", tr:"Ritim", en:"Rhythm",
    cins:"nêr", ez:"rîtimê", kat:"edebiyat", zor:0.67,
@@ -909,11 +909,11 @@ final kB2EkKelimeler2 = [
    gen:["Vegêrîn û çûn", "Vegerî!"]),
 
   // ── HUKUK VE YÖNETİM TAM ──────────────────────────────────
-  (id:"b2_330", ku:"Parlamento", tr:"Parlamento", en:"Parliament",
-   cins:"nêr", ez:"parlamentoyê", kat:"siyaset", zor:0.70,
-   not:"Eril — uluslararası terim.",
-   her:["Parlamento biryar da.", "Di parlamentoyê de nîqaş bû."],
-   gen:["Parlamento û hikûmet", "Parlamentoya Kurdistanê"]),
+  (id:"b2_330", ku:"Parlament", tr:"Parlamento", en:"Parliament",
+   cins:"nêr", ez:"parlamentê", kat:"siyaset", zor:0.70,
+   not:"Eril — uluslararası terim. \"Parlamenta Kurdistanê\".",
+   her:["Parlament biryar da.", "Di parlamentê de nîqaş bû."],
+   gen:["Parlament û hikûmet", "Parlamenta Kurdistanê"]),
 
   (id:"b2_331", ku:"Serok", tr:"Başkan / Lider", en:"President / Leader",
    cins:"nêr", ez:"serokê", kat:"siyaset", zor:0.73,
