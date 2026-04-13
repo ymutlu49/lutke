@@ -2,11 +2,13 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_animate/flutter_animate.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../../core/constants/app_colors.dart';
 import '../../../core/constants/app_spacing.dart';
 import '../../../core/constants/app_typography.dart';
+import '../../../shared/providers/language_mode_provider.dart';
 import '../../lessons/domain/a1_kelime_db.dart';
 
 // ════════════════════════════════════════════════════════════════
@@ -15,14 +17,14 @@ import '../../lessons/domain/a1_kelime_db.dart';
 // Dokunma = Kartı çevir (ön: Kurmancî, arka: TR + EN + örnek)
 // ════════════════════════════════════════════════════════════════
 
-class FlashcardScreen extends StatefulWidget {
+class FlashcardScreen extends ConsumerStatefulWidget {
   const FlashcardScreen({super.key});
 
   @override
-  State<FlashcardScreen> createState() => _FlashcardScreenState();
+  ConsumerState<FlashcardScreen> createState() => _FlashcardScreenState();
 }
 
-class _FlashcardScreenState extends State<FlashcardScreen>
+class _FlashcardScreenState extends ConsumerState<FlashcardScreen>
     with TickerProviderStateMixin {
   // ── Veri ────────────────────────────────────────────────────
   late List<_FlashcardItem> _cards;
@@ -624,7 +626,9 @@ class _FlashcardScreenState extends State<FlashcardScreen>
                         ),
                       ),
                       child: Text(
-                        card.cinsiyet == 'nêr' ? 'nêr (eril)' : 'mê (dişil)',
+                        card.cinsiyet == 'nêr'
+                            ? (ref.watch(showTurkishProvider) ? 'nêr (eril)' : 'nêr')
+                            : (ref.watch(showTurkishProvider) ? 'mê (dişil)' : 'mê'),
                         style: AppTypography.labelSmall.copyWith(
                           color: card.cinsiyet == 'nêr'
                               ? const Color(0xFF2196F3)
@@ -726,13 +730,15 @@ class _FlashcardScreenState extends State<FlashcardScreen>
             const Divider(height: 1),
             const SizedBox(height: AppSpacing.md),
 
-            // Türkçe çeviri
-            _TranslationRow(
-              flag: '🇹🇷',
-              label: 'Tirkî',
-              text: card.turkce,
-            ),
-            const SizedBox(height: AppSpacing.sm),
+            // Türkçe çeviri — tenê dema showTurkish aktîf e
+            if (ref.watch(showTurkishProvider)) ...[
+              _TranslationRow(
+                flag: '🇹🇷',
+                label: 'Tirkî',
+                text: card.turkce,
+              ),
+              const SizedBox(height: AppSpacing.sm),
+            ],
 
             // İngilizce çeviri
             _TranslationRow(
@@ -835,7 +841,7 @@ class _FlashcardScreenState extends State<FlashcardScreen>
                     const SizedBox(width: 8),
                     Expanded(
                       child: Text(
-                        'Cinsiyet: ${card.cinsiyet == 'nêr' ? 'Nêr (Eril)' : 'Mê (Dişil)'}${card.ezafe != null ? ' — Ezafe: ${card.ezafe}' : ''}',
+                        'Cinsiyet: ${card.cinsiyet == 'nêr' ? (ref.watch(showTurkishProvider) ? 'Nêr (Eril)' : 'Nêr') : (ref.watch(showTurkishProvider) ? 'Mê (Dişil)' : 'Mê')}${card.ezafe != null ? ' — Ezafe: ${card.ezafe}' : ''}',
                         style: AppTypography.caption.copyWith(
                           color: AppColors.primary,
                           fontWeight: FontWeight.w500,
@@ -944,7 +950,9 @@ class _FlashcardScreenState extends State<FlashcardScreen>
           const SizedBox(height: AppSpacing.xs),
 
           Text(
-            'Flashcard oturumunu tamamladın',
+            ref.watch(showTurkishProvider)
+                ? 'Flashcard oturumunu tamamladın'
+                : 'Danişîna flashcardê temam bû',
             style: AppTypography.body.copyWith(
               color: AppColors.textSecondary,
             ),

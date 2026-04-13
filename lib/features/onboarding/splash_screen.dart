@@ -9,6 +9,7 @@ import '../../core/constants/app_typography.dart';
 import '../../core/router/app_router.dart';
 import '../../core/services/auth_service.dart';
 import '../../shared/widgets/lutke_logo.dart';
+import '../../shared/providers/language_mode_provider.dart';
 
 // ════════════════════════════════════════════════════════════════
 // SPLASH EKRANI — LÛTKE
@@ -112,13 +113,14 @@ class _SplashScreenState extends ConsumerState<SplashScreen> {
 
                 const SizedBox(height: 8),
 
-                Text(
-                  'Hoş geldiniz — Welcome',
-                  style: TextStyle(
-                    fontSize: 13,
-                    color: Colors.white.withOpacity(0.6),
-                  ),
-                ).animate().fadeIn(delay: 1600.ms, duration: 600.ms),
+                if (ref.watch(showTurkishProvider))
+                  Text(
+                    'Hoş geldiniz — Welcome',
+                    style: TextStyle(
+                      fontSize: 13,
+                      color: Colors.white.withOpacity(0.6),
+                    ),
+                  ).animate().fadeIn(delay: 1600.ms, duration: 600.ms),
 
                 const Spacer(flex: 2),
 

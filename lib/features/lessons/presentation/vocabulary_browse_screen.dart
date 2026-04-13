@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -8,6 +9,7 @@ import '../../../core/constants/app_colors.dart';
 import '../../../core/constants/app_typography.dart';
 import '../../../core/constants/app_spacing.dart';
 import '../../../shared/widgets/speak_button.dart';
+import '../../../shared/providers/language_mode_provider.dart';
 import '../domain/a1_kelime_db.dart';
 import '../domain/a2_kelime_db.dart';
 import '../domain/b1_kelime_db.dart';
@@ -70,15 +72,15 @@ class _LevelData {
   });
 }
 
-class VocabularyBrowseScreen extends StatefulWidget {
+class VocabularyBrowseScreen extends ConsumerStatefulWidget {
   const VocabularyBrowseScreen({super.key});
 
   @override
-  State<VocabularyBrowseScreen> createState() =>
+  ConsumerState<VocabularyBrowseScreen> createState() =>
       _VocabularyBrowseScreenState();
 }
 
-class _VocabularyBrowseScreenState extends State<VocabularyBrowseScreen>
+class _VocabularyBrowseScreenState extends ConsumerState<VocabularyBrowseScreen>
     with SingleTickerProviderStateMixin {
   final TextEditingController _searchController = TextEditingController();
   final FocusNode _searchFocusNode = FocusNode();
@@ -114,37 +116,37 @@ class _VocabularyBrowseScreenState extends State<VocabularyBrowseScreen>
     _levels = [
       _LevelData(
         name: 'A1',
-        label: 'A1 — Destpêk (Başlangıç)',
+        label: 'A1 — Destpêk',
         color: const Color(0xFF4CAF50),
         words: kA1TamListe,
       ),
       _LevelData(
         name: 'A2',
-        label: 'A2 — Bingehîn (Temel)',
+        label: 'A2 — Bingehîn',
         color: const Color(0xFF8BC34A),
         words: kA2TamListe,
       ),
       _LevelData(
         name: 'B1',
-        label: 'B1 — Navîn (Orta)',
+        label: 'B1 — Navîn',
         color: const Color(0xFFFF9800),
         words: kB1All,
       ),
       _LevelData(
         name: 'B2',
-        label: 'B2 — Navîn-Jor (Orta-Üst)',
+        label: 'B2 — Navîn-Jor',
         color: const Color(0xFFFF5722),
         words: kB2All,
       ),
       _LevelData(
         name: 'C1',
-        label: 'C1 — Pêşkeftî (İleri)',
+        label: 'C1 — Pêşkeftî',
         color: const Color(0xFF9C27B0),
         words: kC1All,
       ),
       _LevelData(
         name: 'C2',
-        label: 'C2 — Sertî (Ustalık)',
+        label: 'C2 — Sertî',
         color: const Color(0xFF673AB7),
         words: kC2All,
       ),
@@ -441,7 +443,9 @@ class _VocabularyBrowseScreenState extends State<VocabularyBrowseScreen>
                     style: AppTypography.body
                         .copyWith(color: AppColors.textPrimary),
                     decoration: InputDecoration(
-                      hintText: 'Peyv bigere... (ku / tr / en)',
+                      hintText: ref.watch(showTurkishProvider)
+                          ? 'Peyv bigere... (ku / tr / en)'
+                          : 'Peyv bigere... (ku / en)',
                       hintStyle: AppTypography.body
                           .copyWith(color: AppColors.textTertiary),
                       prefixIcon: const Icon(Icons.search,
@@ -879,17 +883,23 @@ class _LevelSectionState extends State<_LevelSection> {
             final id = word.id as String;
             final isExpanded = widget.expandedWords.contains(id);
 
-            return _WordCard(
+            return Consumer(
+              builder: (context, ref, _) {
+              final showTurkish = ref.watch(showTurkishProvider);
+              return _WordCard(
               word: word,
               levelColor: widget.level.color,
               isExpanded: isExpanded,
               searchQuery: widget.searchQuery,
+              showTurkish: showTurkish,
               onTap: () => widget.onToggleWord(id),
               onNavigateDetail: () {
                 context.push('/word-detail', extra: {
                   'word': word,
                   'levelColor': widget.level.color,
                 });
+              },
+            );
               },
             );
           }),
@@ -909,6 +919,7 @@ class _WordCard extends StatelessWidget {
   final Color levelColor;
   final bool isExpanded;
   final String searchQuery;
+  final bool showTurkish;
   final VoidCallback onTap;
   final VoidCallback onNavigateDetail;
 
@@ -917,6 +928,7 @@ class _WordCard extends StatelessWidget {
     required this.levelColor,
     required this.isExpanded,
     required this.searchQuery,
+    required this.showTurkish,
     required this.onTap,
     required this.onNavigateDetail,
   });
@@ -981,19 +993,21 @@ class _WordCard extends StatelessWidget {
                       const SizedBox(height: 2),
                       Row(
                         children: [
-                          Flexible(
-                            child: _HighlightedText(
-                              text: tr,
-                              query: searchQuery,
-                              style: AppTypography.caption.copyWith(
-                                color: AppColors.textSecondary,
+                          if (showTurkish) ...[
+                            Flexible(
+                              child: _HighlightedText(
+                                text: tr,
+                                query: searchQuery,
+                                style: AppTypography.caption.copyWith(
+                                  color: AppColors.textSecondary,
+                                ),
+                                highlightColor: AppColors.accent,
                               ),
-                              highlightColor: AppColors.accent,
                             ),
-                          ),
-                          Text('  |  ',
-                              style: AppTypography.caption.copyWith(
-                                  color: AppColors.textSecondary)),
+                            Text('  |  ',
+                                style: AppTypography.caption.copyWith(
+                                    color: AppColors.textSecondary)),
+                          ],
                           Flexible(
                             child: _HighlightedText(
                               text: en,
@@ -1107,7 +1121,7 @@ class _WordCard extends StatelessWidget {
               if (gen.isNotEmpty) ...[
                 const SizedBox(height: 6),
                 _SentenceSection(
-                  title: 'Genel (Giştî)',
+                  title: 'Giştî',
                   sentences: gen,
                   color: AppColors.accent,
                 ),

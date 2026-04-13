@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:share_plus/share_plus.dart';
 
@@ -7,6 +8,7 @@ import '../../../core/constants/app_colors.dart';
 import '../../../core/constants/app_typography.dart';
 import '../../../core/constants/app_spacing.dart';
 import '../../../shared/widgets/speak_button.dart';
+import '../../../shared/providers/language_mode_provider.dart';
 
 // ════════════════════════════════════════════════════════════════
 // KELİME DETAY EKRANI — Tam ekran kelime görünümü
@@ -14,7 +16,7 @@ import '../../../shared/widgets/speak_button.dart';
 // Hero animasyonu + flutter_animate stagger giriş efektleri.
 // ════════════════════════════════════════════════════════════════
 
-class WordDetailScreen extends StatelessWidget {
+class WordDetailScreen extends ConsumerWidget {
   final dynamic word;
   final Color levelColor;
 
@@ -31,9 +33,9 @@ class WordDetailScreen extends StatelessWidget {
         _ => const Color(0xFF9E9E9E),      // grey for bêcins
       };
 
-  String _genderLabel(String cins) => switch (cins) {
-        'mê' => 'Dişil (mê)',
-        'nêr' => 'Eril (nêr)',
+  String _genderLabel(String cins, {required bool showTurkish}) => switch (cins) {
+        'mê' => showTurkish ? 'Dişil (mê)' : 'Mê',
+        'nêr' => showTurkish ? 'Eril (nêr)' : 'Nêr',
         _ => 'Bêcins',
       };
 
@@ -44,23 +46,37 @@ class WordDetailScreen extends StatelessWidget {
       };
 
   // ── Telaffuz ipucu üret ─────────────────────────────────────
-  String _pronunciationHint(String ku) {
+  String _pronunciationHint(String ku, {required bool showTurkish}) {
     final hints = <String>[];
-    if (ku.contains('x')) hints.add('x = girtlak "h" (Arapca x gibi)');
-    if (ku.contains('q')) hints.add('q = kalin k (girtlaktan)');
-    if (ku.contains('w')) hints.add('w = Ingilizce "w" (dudak yuvarlak)');
-    if (ku.contains('e') && !ku.contains('ê')) hints.add('e = schwa (belirsiz unlu)');
-    if (ku.contains('ê')) hints.add('e = uzun e (Fransizca e gibi)');
-    if (ku.contains('î')) hints.add('i = uzun i');
-    if (ku.contains('û')) hints.add('u = uzun u');
-    if (ku.contains('ç')) hints.add('c = Turkce c');
-    if (ku.contains('ş')) hints.add('s = Turkce s');
-    if (hints.isEmpty) return 'Okunusu Turkce ile benzer';
+    if (showTurkish) {
+      if (ku.contains('x')) hints.add('x = girtlak "h" (Arapca x gibi)');
+      if (ku.contains('q')) hints.add('q = kalin k (girtlaktan)');
+      if (ku.contains('w')) hints.add('w = Ingilizce "w" (dudak yuvarlak)');
+      if (ku.contains('e') && !ku.contains('ê')) hints.add('e = schwa (belirsiz unlu)');
+      if (ku.contains('ê')) hints.add('e = uzun e (Fransizca e gibi)');
+      if (ku.contains('î')) hints.add('i = uzun i');
+      if (ku.contains('û')) hints.add('u = uzun u');
+      if (ku.contains('ç')) hints.add('c = Turkce c');
+      if (ku.contains('ş')) hints.add('s = Turkce s');
+      if (hints.isEmpty) return 'Okunusu Turkce ile benzer';
+    } else {
+      if (ku.contains('x')) hints.add('x = dengê qirika (throaty h)');
+      if (ku.contains('q')) hints.add('q = k-ya qûr (deep k)');
+      if (ku.contains('w')) hints.add('w = English "w" (lêv gir)');
+      if (ku.contains('e') && !ku.contains('ê')) hints.add('e = schwa (dengek nenas)');
+      if (ku.contains('ê')) hints.add('ê = e-ya dirêj (long e)');
+      if (ku.contains('î')) hints.add('î = î-ya dirêj (long i)');
+      if (ku.contains('û')) hints.add('û = û-ya dirêj (long u)');
+      if (ku.contains('ç')) hints.add('ç = ç (ch)');
+      if (ku.contains('ş')) hints.add('ş = ş (sh)');
+      if (hints.isEmpty) return 'Bilêvkirin hêsan e';
+    }
     return hints.join('\n');
   }
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final showTurkish = ref.watch(showTurkishProvider);
     final ku = word.ku as String;
     final tr = word.tr as String;
     final en = word.en as String;
@@ -104,6 +120,7 @@ class WordDetailScreen extends StatelessWidget {
                 cins: cins,
                 genderColor: genderClr,
                 wordId: id,
+                showTurkish: showTurkish,
               ),
             ),
           ),
@@ -119,13 +136,13 @@ class WordDetailScreen extends StatelessWidget {
                 // 0) Seslendirme Butonu
                 LargeSpeakButton(
                   text: ku,
-                  subtitle: tr,
+                  subtitle: showTurkish ? tr : en,
                 ).animate().fadeIn(duration: 400.ms).slideY(begin: 0.1, end: 0),
 
                 const SizedBox(height: AppSpacing.md),
 
                 // 1) Telaffuz Rehberi
-                _PronunciationCard(hint: _pronunciationHint(ku))
+                _PronunciationCard(hint: _pronunciationHint(ku, showTurkish: showTurkish))
                     .animate()
                     .fadeIn(duration: 400.ms, delay: 100.ms)
                     .slideY(begin: 0.1, end: 0),
@@ -136,7 +153,7 @@ class WordDetailScreen extends StatelessWidget {
                 _GrammarCard(
                   cins: cins,
                   genderColor: genderClr,
-                  genderLabel: _genderLabel(cins),
+                  genderLabel: _genderLabel(cins, showTurkish: showTurkish),
                   genderIcon: _genderIcon(cins),
                   ez: ez,
                   kat: kat,
@@ -203,6 +220,7 @@ class _HeroSection extends StatelessWidget {
   final String cins;
   final Color genderColor;
   final String wordId;
+  final bool showTurkish;
 
   const _HeroSection({
     required this.ku,
@@ -211,6 +229,7 @@ class _HeroSection extends StatelessWidget {
     required this.cins,
     required this.genderColor,
     required this.wordId,
+    required this.showTurkish,
   });
 
   @override
@@ -266,21 +285,23 @@ class _HeroSection extends StatelessWidget {
                 const SizedBox(height: AppSpacing.sm),
 
                 // Turkce ceviri
-                Text(
-                  tr,
-                  style: AppTypography.bodyLarge.copyWith(
-                    color: AppColors.textPrimary,
-                    fontWeight: FontWeight.w500,
+                if (showTurkish)
+                  Text(
+                    tr,
+                    style: AppTypography.bodyLarge.copyWith(
+                      color: AppColors.textPrimary,
+                      fontWeight: FontWeight.w500,
+                    ),
+                    textAlign: TextAlign.center,
                   ),
-                  textAlign: TextAlign.center,
-                ),
-                const SizedBox(height: 4),
+                if (showTurkish) const SizedBox(height: 4),
 
                 // Ingilizce ceviri
                 Text(
                   en,
                   style: AppTypography.body.copyWith(
-                    color: AppColors.textSecondary,
+                    color: showTurkish ? AppColors.textSecondary : AppColors.textPrimary,
+                    fontWeight: showTurkish ? FontWeight.w400 : FontWeight.w500,
                   ),
                   textAlign: TextAlign.center,
                 ),
@@ -327,7 +348,7 @@ class _PronunciationCard extends StatelessWidget {
               ),
               const SizedBox(width: AppSpacing.sm),
               Text(
-                'Telaffuz Rehberi',
+                'Rêbera Bilêvkirinê',
                 style: AppTypography.labelMedium.copyWith(
                   color: AppColors.textPrimary,
                   fontWeight: FontWeight.w600,
@@ -448,7 +469,7 @@ class _GrammarCard extends StatelessWidget {
           Row(
             children: [
               Text(
-                'Zorluk',
+                'Zehmetî',
                 style: AppTypography.caption.copyWith(
                   color: AppColors.textSecondary,
                   fontWeight: FontWeight.w500,
@@ -566,7 +587,7 @@ class _ExampleSentencesSection extends StatelessWidget {
               ),
               const SizedBox(width: AppSpacing.sm),
               Text(
-                'Nimune Hevok (Ornek Cumleler)',
+                'Nimûne Hevok',
                 style: AppTypography.labelMedium.copyWith(
                   color: AppColors.textPrimary,
                   fontWeight: FontWeight.w600,
@@ -589,7 +610,7 @@ class _ExampleSentencesSection extends StatelessWidget {
           if (gen.isNotEmpty) ...[
             const SizedBox(height: AppSpacing.sm),
             _SentenceGroup(
-              title: 'Genel (Gisti)',
+              title: 'Giştî',
               sentences: gen,
               accentColor: AppColors.accent,
             ),
@@ -680,7 +701,7 @@ class _GrammarNoteCard extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  'Gramer Notu',
+                  'Nota Rêzimanî',
                   style: AppTypography.labelMedium.copyWith(
                     color: AppColors.textPrimary,
                     fontWeight: FontWeight.w600,
@@ -741,7 +762,7 @@ class _RelatedWordsPlaceholder extends StatelessWidget {
               ),
               const SizedBox(width: AppSpacing.sm),
               Text(
-                'Peyvine Tere (Ilgili Kelimeler)',
+                'Peyvên Têkildar',
                 style: AppTypography.labelMedium.copyWith(
                   color: AppColors.textPrimary,
                   fontWeight: FontWeight.w600,
@@ -777,7 +798,7 @@ class _RelatedWordsPlaceholder extends StatelessWidget {
           ),
           const SizedBox(height: 6),
           Text(
-            'Bu kategorideki diger kelimeleri gormek icin "Peyv" sekmesinde "$kat" ile arama yapin.',
+            'Ji bo dîtina peyvên din ên vê kategoriyê, di beşa "Peyv" de bi "$kat" bigere.',
             style: AppTypography.caption.copyWith(
               color: AppColors.textTertiary,
               height: 1.5,
@@ -824,7 +845,7 @@ class _QuickActionsState extends State<_QuickActions> {
             icon: _isBookmarked
                 ? Icons.bookmark_rounded
                 : Icons.bookmark_border_rounded,
-            label: 'Ezberle',
+            label: 'Ji bîr neke',
             color: AppColors.primary,
             isActive: _isBookmarked,
             onTap: () {
@@ -832,8 +853,8 @@ class _QuickActionsState extends State<_QuickActions> {
               ScaffoldMessenger.of(context).showSnackBar(
                 SnackBar(
                   content: Text(_isBookmarked
-                      ? '${widget.ku} tekrar listesine eklendi'
-                      : '${widget.ku} tekrar listesinden cikarildi'),
+                      ? '${widget.ku} li lîsteya dubare hat zêdekirin'
+                      : '${widget.ku} ji lîsteya dubare hat derxistin'),
                   duration: const Duration(seconds: 2),
                   behavior: SnackBarBehavior.floating,
                   shape: RoundedRectangleBorder(
@@ -850,13 +871,13 @@ class _QuickActionsState extends State<_QuickActions> {
         Expanded(
           child: _ActionButton(
             icon: Icons.share_rounded,
-            label: 'Paylas',
+            label: 'Parve bike',
             color: AppColors.accent,
             isActive: false,
             onTap: () {
-              final text = '${widget.ku} — ${widget.tr} / ${widget.en}'
+              final text = '${widget.ku} — ${widget.en}'
                   '\n(${widget.cins})'
-                  '\n\nLUTKE ile Kurmanci ogreniyorum!';
+                  '\n\nBi LÛTKE Kurmancî hîn dibim!';
               Share.share(text);
             },
           ),
@@ -869,7 +890,7 @@ class _QuickActionsState extends State<_QuickActions> {
             icon: _isKnown
                 ? Icons.check_circle_rounded
                 : Icons.check_circle_outline_rounded,
-            label: 'Biliyorum',
+            label: 'Ez dizanim',
             color: AppColors.success,
             isActive: _isKnown,
             onTap: () {
@@ -877,8 +898,8 @@ class _QuickActionsState extends State<_QuickActions> {
               ScaffoldMessenger.of(context).showSnackBar(
                 SnackBar(
                   content: Text(_isKnown
-                      ? '${widget.ku} bilinen olarak isaretlendi'
-                      : '${widget.ku} isareti kaldirildi'),
+                      ? '${widget.ku} wek zanîn hat nîşankirin'
+                      : '${widget.ku} nîşan hat rakirin'),
                   duration: const Duration(seconds: 2),
                   behavior: SnackBarBehavior.floating,
                   shape: RoundedRectangleBorder(

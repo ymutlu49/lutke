@@ -9,6 +9,7 @@ import 'package:go_router/go_router.dart';
 import '../../../core/constants/app_colors.dart';
 import '../../../core/constants/app_spacing.dart';
 import '../../../core/constants/app_typography.dart';
+import '../../../shared/providers/language_mode_provider.dart';
 import '../../lessons/domain/a1_kelime_db.dart';
 import '../../lessons/domain/a2_kelime_db.dart';
 
@@ -290,7 +291,7 @@ class _QuizScreenState extends ConsumerState<QuizScreen>
               Icon(Icons.warning_amber_rounded,
                   size: 48, color: AppColors.textSecondary),
               Gap.md,
-              Text('Bu seviyede yeterli kelime yok.',
+              Text('Di vê astê de peyv bes nine.',
                   style: AppTypography.body
                       .copyWith(color: AppColors.textSecondary)),
             ],
@@ -320,7 +321,7 @@ class _QuizScreenState extends ConsumerState<QuizScreen>
               ),
             ),
 
-            // Devam button
+            // Berdewam button
             if (_answered) _buildContinueButton(),
           ],
         ),
@@ -475,7 +476,8 @@ class _QuizScreenState extends ConsumerState<QuizScreen>
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         // Instruction
-        _buildInstruction('Ev peyv bi Tirkî çi ye?', 'Bu kelime Turkce ne demek?'),
+        _buildInstruction('Ev peyv bi Tirkî çi ye?', 'Bu kelime Turkce ne demek?',
+            showTr: ref.watch(showTurkishProvider)),
 
         Gap.lg,
 
@@ -498,7 +500,8 @@ class _QuizScreenState extends ConsumerState<QuizScreen>
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         _buildInstruction(
-            'Ev peyv bi Kurmancî çi ye?', 'Bu kelimenin Kurmancisi ne?'),
+            'Ev peyv bi Kurmancî çi ye?', 'Bu kelimenin Kurmancisi ne?',
+            showTr: ref.watch(showTurkishProvider)),
 
         Gap.lg,
 
@@ -520,7 +523,8 @@ class _QuizScreenState extends ConsumerState<QuizScreen>
       key: ValueKey('listening_${q.word.id}'),
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        _buildInstruction('Guh bide u bersivê bide', 'Dinle ve cevapla'),
+        _buildInstruction('Guh bide u bersivê bide', 'Dinle ve cevapla',
+            showTr: ref.watch(showTurkishProvider)),
 
         Gap.lg,
 
@@ -598,7 +602,8 @@ class _QuizScreenState extends ConsumerState<QuizScreen>
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         _buildInstruction(
-            'Ev peyvê bi Kurmancî binivîse', 'Bu kelimeyi Kurmancica yaz'),
+            'Ev peyvê bi Kurmancî binivîse', 'Bu kelimeyi Kurmancica yaz',
+            showTr: ref.watch(showTurkishProvider)),
 
         Gap.lg,
 
@@ -731,16 +736,18 @@ class _QuizScreenState extends ConsumerState<QuizScreen>
 
   // ── Shared Widgets ────────────────────────────────────────────
 
-  Widget _buildInstruction(String kuText, String trText) {
+  Widget _buildInstruction(String kuText, String trText, {required bool showTr}) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(kuText,
             style: AppTypography.title.copyWith(color: AppColors.textPrimary)),
-        const SizedBox(height: 4),
-        Text(trText,
-            style: AppTypography.translation
-                .copyWith(color: AppColors.textSecondary)),
+        if (showTr) ...[
+          const SizedBox(height: 4),
+          Text(trText,
+              style: AppTypography.translation
+                  .copyWith(color: AppColors.textSecondary)),
+        ],
       ],
     );
   }
@@ -953,7 +960,7 @@ class _QuizScreenState extends ConsumerState<QuizScreen>
 
             Gap.md,
 
-            // Devam button
+            // Berdewam button
             SizedBox(
               width: double.infinity,
               child: ElevatedButton(
@@ -969,7 +976,7 @@ class _QuizScreenState extends ConsumerState<QuizScreen>
                   ),
                   elevation: 0,
                 ),
-                child: Text('Devam',
+                child: Text('Berdewam',
                     style: AppTypography.labelLarge
                         .copyWith(color: Colors.white, fontWeight: FontWeight.w700)),
               ),
@@ -1032,17 +1039,30 @@ class _QuizScreenState extends ConsumerState<QuizScreen>
   // ── End Screen ────────────────────────────────────────────────
 
   Widget _buildEndScreen() {
+    final showTr = ref.watch(showTurkishProvider);
     final accuracy = _questions.isNotEmpty
         ? (_correctCount / _questions.length * 100).round()
         : 0;
 
-    final motivationalMessage = _hearts > 0
+    final motivationalKu = _hearts > 0
         ? (accuracy >= 80
             ? 'Geleki bask! Tu zimane xwe bas dizani!'
             : accuracy >= 50
                 ? 'Bask e! Her roj ferbuve!'
                 : 'Bersiv xelet in bes tu ber bi pesdahatin ve dici!')
         : 'Xem neke! Cardin biceribine.';
+
+    final motivationalTr = _hearts > 0
+        ? (accuracy >= 80
+            ? 'Harika! Dilini cok iyi biliyorsun!'
+            : accuracy >= 50
+                ? 'Guzel! Her gun ogrenmeye devam!'
+                : 'Hatalar olsa da ilerliyorsun!')
+        : 'Uzulme! Tekrar dene.';
+
+    final motivationalMessage = showTr
+        ? '$motivationalKu\n$motivationalTr'
+        : motivationalKu;
 
     return Scaffold(
       backgroundColor: AppColors.backgroundPrimary,

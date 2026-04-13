@@ -9,6 +9,7 @@ import '../../../core/constants/app_typography.dart';
 import '../../../core/constants/app_spacing.dart';
 import '../../../core/utils/fsrs_algorithm.dart';
 import '../../../core/services/analytics_service.dart';
+import '../../../shared/providers/language_mode_provider.dart';
 import '../../../shared/widgets/exercise_widgets.dart';
 import '../data/lesson_repository.dart';
 
@@ -388,12 +389,17 @@ class _CardFront extends StatelessWidget {
 
                   const SizedBox(height: AppSpacing.sm),
 
-                  Text(
-                    'Cevabı gör • Bersivê bibîne',
-                    style: AppTypography.bodyMedium.copyWith(
-                      color: AppColors.textSecondary,
-                      fontWeight: FontWeight.w500,
-                    ),
+                  Consumer(
+                    builder: (context, ref, _) {
+                      final showTr = ref.watch(showTurkishProvider);
+                      return Text(
+                        showTr ? 'Cevabı gör • Bersivê bibîne' : 'Bersivê bibîne',
+                        style: AppTypography.bodyMedium.copyWith(
+                          color: AppColors.textSecondary,
+                          fontWeight: FontWeight.w500,
+                        ),
+                      );
+                    },
                   ),
                 ],
               ),
@@ -695,7 +701,7 @@ class _LoadingView extends StatelessWidget {
             CircularProgressIndicator(color: AppColors.primary),
             const SizedBox(height: AppSpacing.md),
             Text(
-              'Kart hazır dibin...',  // Kartlar hazırlanıyor
+              'Kart amade dibin...',  // Kartlar hazırlanıyor
               style: AppTypography.bodyMedium
                   .copyWith(color: AppColors.textSecondary),
             ),

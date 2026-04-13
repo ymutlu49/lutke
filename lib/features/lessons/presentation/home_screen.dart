@@ -217,7 +217,7 @@ class _WelcomeSection extends StatelessWidget {
                     size: 16, color: AppColors.primary),
                 const SizedBox(width: 6),
                 Text(
-                  'Rêya Malê — Heritage Yolu',
+                  'Rêya Malê',
                   style: AppTypography.caption.copyWith(
                       color: AppColors.primary),
                 ),
@@ -931,6 +931,7 @@ class _SkillTreePath extends StatelessWidget {
             isCompleted: isCompleted,
             isCurrent: isCurrent,
             isLocked: isLocked,
+            showTurkish: ref.watch(showTurkishProvider),
             onTap: !isLocked
                 ? () => context.push(AppRoutes.vocabulary)
                 : null,
@@ -952,6 +953,7 @@ class _SkillTreeNode extends StatelessWidget {
   final bool isCompleted;
   final bool isCurrent;
   final bool isLocked;
+  final bool showTurkish;
   final VoidCallback? onTap;
 
   const _SkillTreeNode({
@@ -961,6 +963,7 @@ class _SkillTreeNode extends StatelessWidget {
     required this.isCompleted,
     required this.isCurrent,
     required this.isLocked,
+    required this.showTurkish,
     this.onTap,
   });
 
@@ -1041,7 +1044,9 @@ class _SkillTreeNode extends StatelessWidget {
 
                 // Alt baslik + kelime sayisi
                 Text(
-                  '${unit.trTitle} · ${unit.wordCount} peyv',
+                  showTurkish
+                      ? '${unit.trTitle} · ${unit.wordCount} peyv'
+                      : '${unit.wordCount} peyv',
                   style: AppTypography.caption.copyWith(
                     color: AppColors.textTertiary,
                     fontSize: 10,
@@ -1281,7 +1286,7 @@ class _LutkeBottomNav extends StatelessWidget {
                     ScaffoldMessenger.of(context).showSnackBar(
                       SnackBar(
                         content: const Text(
-                          'Çand bölümü yakında aktif olacak',
+                          'Beşa Çandê zû tê',
                           style: TextStyle(fontSize: 13),
                         ),
                         behavior: SnackBarBehavior.floating,
@@ -1447,7 +1452,7 @@ class _LanguageModeToggle extends ConsumerWidget {
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
             content: Text(
-              isKuTr ? 'Tenê Kurmancî — Sadece Kürtçe' : 'Kurmancî + Türkçe',
+              isKuTr ? 'Tenê Kurmancî' : 'Kurmancî + Tirkî',
               style: const TextStyle(fontSize: 13),
             ),
             behavior: SnackBarBehavior.floating,

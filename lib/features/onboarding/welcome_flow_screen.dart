@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../core/constants/app_colors.dart';
 import '../../core/constants/app_typography.dart';
 import '../../core/router/app_router.dart';
+import '../../shared/providers/language_mode_provider.dart';
 
 // ════════════════════════════════════════════════════════════════
 // WELCOME FLOW — LÛTKE
@@ -229,16 +231,21 @@ class _WelcomePage extends StatelessWidget {
 
           const SizedBox(height: 12),
 
-          // Alt açıklama — Türkçe
-          Text(
-            'Kurmancî öğrenmenin en etkili yolu',
-            textAlign: TextAlign.center,
-            style: AppTypography.bodyLarge.copyWith(
-              color: AppColors.textSecondary,
-            ),
-          )
-              .animate()
-              .fadeIn(delay: 700.ms, duration: 500.ms),
+          // Alt açıklama — Türkçe (only when showTurkish)
+          Consumer(
+            builder: (context, ref, _) {
+              if (!ref.watch(showTurkishProvider)) return const SizedBox.shrink();
+              return Text(
+                'Kurmancî öğrenmenin en etkili yolu',
+                textAlign: TextAlign.center,
+                style: AppTypography.bodyLarge.copyWith(
+                  color: AppColors.textSecondary,
+                ),
+              )
+                  .animate()
+                  .fadeIn(delay: 700.ms, duration: 500.ms);
+            },
+          ),
 
           const Spacer(flex: 2),
 
@@ -308,15 +315,20 @@ class _GoalPage extends StatelessWidget {
 
           const SizedBox(height: 12),
 
-          Text(
-            'Hedefini sonra da değiştirebilirsin',
-            textAlign: TextAlign.center,
-            style: AppTypography.body.copyWith(
-              color: AppColors.textTertiary,
-            ),
-          )
-              .animate()
-              .fadeIn(delay: 300.ms, duration: 400.ms),
+          Consumer(
+            builder: (context, ref, _) {
+              if (!ref.watch(showTurkishProvider)) return const SizedBox.shrink();
+              return Text(
+                'Hedefini sonra da değiştirebilirsin',
+                textAlign: TextAlign.center,
+                style: AppTypography.body.copyWith(
+                  color: AppColors.textTertiary,
+                ),
+              )
+                  .animate()
+                  .fadeIn(delay: 300.ms, duration: 400.ms);
+            },
+          ),
 
           const SizedBox(height: 36),
 
@@ -435,16 +447,21 @@ class _ReadyPage extends StatelessWidget {
 
           const SizedBox(height: 8),
 
-          Text(
-            'Hazırsın!',
-            textAlign: TextAlign.center,
-            style: AppTypography.headline.copyWith(
-              color: AppColors.textSecondary,
-              fontWeight: FontWeight.w400,
-            ),
-          )
-              .animate()
-              .fadeIn(delay: 450.ms, duration: 400.ms),
+          Consumer(
+            builder: (context, ref, _) {
+              if (!ref.watch(showTurkishProvider)) return const SizedBox.shrink();
+              return Text(
+                'Hazırsın!',
+                textAlign: TextAlign.center,
+                style: AppTypography.headline.copyWith(
+                  color: AppColors.textSecondary,
+                  fontWeight: FontWeight.w400,
+                ),
+              )
+                  .animate()
+                  .fadeIn(delay: 450.ms, duration: 400.ms);
+            },
+          ),
 
           const SizedBox(height: 40),
 
@@ -566,11 +583,16 @@ class _GoalCard extends StatelessWidget {
                     ),
                   ),
                   const SizedBox(height: 2),
-                  Text(
-                    turkishLabel,
-                    style: AppTypography.caption.copyWith(
-                      color: AppColors.textTertiary,
-                    ),
+                  Consumer(
+                    builder: (context, ref, _) {
+                      if (!ref.watch(showTurkishProvider)) return const SizedBox.shrink();
+                      return Text(
+                        turkishLabel,
+                        style: AppTypography.caption.copyWith(
+                          color: AppColors.textTertiary,
+                        ),
+                      );
+                    },
                   ),
                 ],
               ),
@@ -653,9 +675,14 @@ class _StatBadge extends StatelessWidget {
             fontWeight: FontWeight.w600,
           ),
         ),
-        Text(
-          turkishLabel,
-          style: AppTypography.caption.copyWith(fontSize: 11),
+        Consumer(
+          builder: (context, ref, _) {
+            if (!ref.watch(showTurkishProvider)) return const SizedBox.shrink();
+            return Text(
+              turkishLabel,
+              style: AppTypography.caption.copyWith(fontSize: 11),
+            );
+          },
         ),
       ],
     )
