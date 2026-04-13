@@ -14,6 +14,7 @@ import '../../../shared/providers/review_provider.dart';
 import '../../lessons/domain/a1_kelime_db.dart';
 import '../../lessons/domain/a2_kelime_db.dart';
 import '../../../core/services/sound_service.dart';
+import '../../../shared/utils/word_emoji_map.dart';
 
 // ════════════════════════════════════════════════════════════════
 // QUIZ SESSION — 4 Egzersiz Tipi, 10 Soru, Duolingo Tarzı
@@ -569,7 +570,7 @@ class _QuizScreenState extends ConsumerState<QuizScreen>
         children: [
           _buildInstruction('Ev peyv bi Tirkî çi ye?', '', showTr: false),
           Gap.lg,
-          _buildWordCard(q.word.ku, isKurmanji: true),
+          _buildWordCard(q.word.ku, isKurmanji: true, kat: q.word.kat),
           const SizedBox(height: AppSpacing.questionToOptions),
           ..._buildOptionButtons(q),
         ],
@@ -1015,7 +1016,8 @@ class _QuizScreenState extends ConsumerState<QuizScreen>
     );
   }
 
-  Widget _buildWordCard(String word, {required bool isKurmanji}) {
+  Widget _buildWordCard(String word, {required bool isKurmanji, String kat = ''}) {
+    final wordEmoji = isKurmanji ? emojiForWord(word, kat) : '';
     return Center(
       child: Container(
         constraints: const BoxConstraints(minWidth: 180),
@@ -1032,12 +1034,22 @@ class _QuizScreenState extends ConsumerState<QuizScreen>
             ),
           ],
         ),
-        child: Text(
-          word,
-          textAlign: TextAlign.center,
-          style: isKurmanji
-              ? AppTypography.kurmanjiLarge
-              : AppTypography.headline.copyWith(color: AppColors.textPrimary),
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            if (wordEmoji.isNotEmpty)
+              Padding(
+                padding: const EdgeInsets.only(bottom: 8),
+                child: Text(wordEmoji, style: const TextStyle(fontSize: 32)),
+              ),
+            Text(
+              word,
+              textAlign: TextAlign.center,
+              style: isKurmanji
+                  ? AppTypography.kurmanjiLarge
+                  : AppTypography.headline.copyWith(color: AppColors.textPrimary),
+            ),
+          ],
         ),
       ),
     ).animate().fadeIn(duration: 300.ms).scale(
@@ -1315,8 +1327,10 @@ class _QuizScreenState extends ConsumerState<QuizScreen>
       _        => '',
     };
 
-    // Kategori emoji
-    const emoji = '📖';
+    // Kategori emoji (kelime bazli, fallback: kitap)
+    final emoji = emojiForWord(word.ku, word.kat).isNotEmpty
+        ? emojiForWord(word.ku, word.kat)
+        : '\u{1F4D6}';
 
     showModalBottomSheet(
       context: context,

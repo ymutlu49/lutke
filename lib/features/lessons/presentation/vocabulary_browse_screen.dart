@@ -16,6 +16,7 @@ import '../domain/b1_kelime_db.dart';
 import '../domain/b2_kelime_db.dart';
 import '../domain/c1_kelime_db.dart';
 import '../domain/c2_kelime_db.dart';
+import '../../../shared/utils/word_emoji_map.dart';
 
 // ════════════════════════════════════════════════════════════════
 // KELİME TARAYICI — Tüm seviyelerdeki kelimeleri görüntüle
@@ -1029,11 +1030,11 @@ class _WordCard extends StatelessWidget {
                           child: Row(
                             mainAxisSize: MainAxisSize.min,
                             children: [
-                              if (_emojiForCategory(kat).isNotEmpty)
+                              if (emojiForWord(ku, kat).isNotEmpty)
                                 Padding(
                                   padding: const EdgeInsets.only(right: 4),
                                   child: Text(
-                                    _emojiForCategory(kat),
+                                    emojiForWord(ku, kat),
                                     style: const TextStyle(fontSize: 14),
                                   ),
                                 ),

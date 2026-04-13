@@ -13,6 +13,7 @@ import '../../../shared/providers/review_provider.dart';
 import '../../../shared/widgets/speak_button.dart';
 import '../../lessons/domain/a1_kelime_db.dart';
 import '../../../core/services/sound_service.dart';
+import '../../../shared/utils/word_emoji_map.dart';
 
 // ════════════════════════════════════════════════════════════════
 // FLASHCARD EKRANI — Tinder-Style Swipeable Kartlar
@@ -643,6 +644,16 @@ class _FlashcardScreenState extends ConsumerState<FlashcardScreen>
                       ),
                     ),
 
+                  // Kelime emojisi (gorsel ipucu)
+                  if (emojiForWord(card.kurmanji, card.kategori).isNotEmpty)
+                    Padding(
+                      padding: const EdgeInsets.only(bottom: 8),
+                      child: Text(
+                        emojiForWord(card.kurmanji, card.kategori),
+                        style: const TextStyle(fontSize: 40),
+                      ),
+                    ),
+
                   // Ana kelime + speak button
                   Row(
                     mainAxisSize: MainAxisSize.min,
@@ -1160,7 +1171,8 @@ class _ScorePill extends StatelessWidget {
   }
 }
 
-/// Kategori -> emoji eslesmesi (flashcard icin)
+/// Kategori -> emoji eslesmesi (flashcard icin, fallback olarak kullanilir)
+/// Kelime bazli emoji icin emojiForWord() kullanilir (word_emoji_map.dart)
 String _emojiForCategory(String kat) => switch (kat) {
   'silav' || 'selamlama' => '\u{1F44B}',
   'malbat'               => '\u{1F468}\u{200D}\u{1F469}\u{200D}\u{1F467}\u{200D}\u{1F466}',

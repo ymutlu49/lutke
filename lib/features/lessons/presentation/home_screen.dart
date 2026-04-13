@@ -14,7 +14,7 @@ import '../data/lesson_repository.dart';
 import '../domain/lesson_entities.dart';
 import '../domain/a1_kelime_db.dart';
 import '../../../shared/widgets/streak_widget.dart';
-import '../../../shared/widgets/daily_word_widget.dart';
+// daily_word_widget import removed — widget no longer on home screen
 import '../../../shared/providers/language_mode_provider.dart';
 import '../../../shared/providers/review_provider.dart';
 import '../../gamification/gamification_widgets.dart';
@@ -53,7 +53,9 @@ class HomeScreen extends ConsumerWidget {
                 delegate: SliverChildListDelegate([
                   const SizedBox(height: AppSpacing.md),
 
-                  // ── Kompakt Header: Logo + Selamlama + Toggle ──
+                  // ════════════════════════════════════════════════
+                  // 1) COMPACT HEADER: mascot + Xêr hatî + KU/TR
+                  // ════════════════════════════════════════════════
                   Row(
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
@@ -94,35 +96,49 @@ class HomeScreen extends ConsumerWidget {
 
                   const SizedBox(height: AppSpacing.md),
 
-                  // ── Peyva Rojê — Gunun Kelimesi ────────────────
-                  const DailyWordWidget(),
-
-                  const SizedBox(height: AppSpacing.md),
-
-                  // ── Günlük özet kartı (streak, XP, seviye) ────
+                  // ════════════════════════════════════════════════
+                  // 2) COMPACT STREAK BAR: streak, XP, level
+                  // ════════════════════════════════════════════════
                   dailyStats.when(
                     data: (stats) => _DailySummaryCard(stats: stats, level: profile.currentLevel.toUpperCase()),
                     loading: () => _DailySummaryCard(stats: null, level: profile.currentLevel.toUpperCase()),
                     error: (_, __) => _DailySummaryCard(stats: null, level: profile.currentLevel.toUpperCase()),
                   ),
 
-                  const SizedBox(height: AppSpacing.sm),
+                  const SizedBox(height: AppSpacing.lg),
 
-                  // ── XP İlerleme Çubuğu ──────────────────────
-                  const XPProgressBar(compact: true),
+                  // ════════════════════════════════════════════════
+                  // 3) LEARNING PATH — Main focus of the home screen
+                  //    Visual mountain/path with nodes (always visible)
+                  // ════════════════════════════════════════════════
+                  Padding(
+                    padding: const EdgeInsets.only(bottom: AppSpacing.md),
+                    child: Row(
+                      children: [
+                        Icon(Icons.route_rounded, size: 22, color: AppColors.primary),
+                        const SizedBox(width: AppSpacing.sm),
+                        Text(
+                          'Rêya Fêrbûnê',
+                          style: AppTypography.headingSmall.copyWith(
+                            color: AppColors.textPrimary,
+                            fontWeight: FontWeight.w700,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ).animate().fadeIn(delay: 160.ms),
 
-                  const SizedBox(height: AppSpacing.sm),
-
-                  // ── Streak & Günlük Hedef Kartı ──────────────
-                  const CompactStreakCard(),
+                  _SkillTreePath(
+                    userId: userId,
+                    currentLevel: profile.currentLevelNum,
+                    ref: ref,
+                  ),
 
                   const SizedBox(height: AppSpacing.lg),
 
                   // ════════════════════════════════════════════════
-                  // AKTİVİTELER — Çalakiyên Fêrbûnê (Learning Activities)
+                  // 4) ACTIVITY GRID — 2x2 shortcuts
                   // ════════════════════════════════════════════════
-
-                  // Section header
                   Padding(
                     padding: const EdgeInsets.only(bottom: AppSpacing.md),
                     child: Row(
@@ -138,27 +154,15 @@ class HomeScreen extends ConsumerWidget {
                         ),
                       ],
                     ),
-                  ).animate().fadeIn(delay: 160.ms),
+                  ).animate().fadeIn(delay: 300.ms),
 
-                  // ── 2-column Activity Grid ──────────────────
+                  // ── 2x2 Activity Grid (4 items only) ──────────
                   _ActivityGrid(userId: userId, dailyStats: dailyStats),
 
                   const SizedBox(height: AppSpacing.sm),
 
                   // ── Günlük Ödül ─────────────────────────────
                   const DailyRewardWidget(),
-
-                  const SizedBox(height: AppSpacing.lg),
-
-                  // ════════════════════════════════════════════════
-                  // SKILL TREE — Öğrenme yolu (collapsible)
-                  // ════════════════════════════════════════════════
-
-                  _CollapsibleSkillTree(
-                    userId: userId,
-                    currentLevel: profile.currentLevelNum,
-                    ref: ref,
-                  ),
 
                   const SizedBox(height: AppSpacing.xl),
                 ]),
@@ -761,7 +765,7 @@ class _ActivityGrid extends ConsumerWidget {
                   AppRoutes.quiz,
                   extra: {'level': 'A1'},
                 ),
-                delay: 180,
+                delay: 320,
               ),
             ),
             const SizedBox(width: AppSpacing.sm),
@@ -772,7 +776,7 @@ class _ActivityGrid extends ConsumerWidget {
                 subtitle: '454 peyv',
                 gradientColors: [AppColors.accent, AppColors.accentWarm],
                 onTap: () => context.push(AppRoutes.flashcard),
-                delay: 220,
+                delay: 360,
               ),
             ),
           ],
@@ -780,65 +784,7 @@ class _ActivityGrid extends ConsumerWidget {
 
         const SizedBox(height: AppSpacing.sm),
 
-        // ── Row 2: Hevok Ava Bike (Sentence Builder) + Peyv Hevdû Bike (Word Match) ──
-        Row(
-          children: [
-            Expanded(
-              child: _ActivityGridCard(
-                emoji: '\u{1F9E9}',
-                label: 'Hevok Ava Bike',
-                subtitle: 'Peyvên rêz bike',
-                gradientColors: [const Color(0xFF7C4DFF), const Color(0xFF651FFF)],
-                onTap: () => context.push(AppRoutes.sentenceBuilder),
-                delay: 260,
-              ),
-            ),
-            const SizedBox(width: AppSpacing.sm),
-            Expanded(
-              child: _ActivityGridCard(
-                emoji: '\u{1F517}',
-                label: 'Peyv Hevdû Bike',
-                subtitle: 'Hevjot bike',
-                gradientColors: [const Color(0xFF2196F3), const Color(0xFF1565C0)],
-                onTap: () => context.push(AppRoutes.wordMatch),
-                delay: 300,
-              ),
-            ),
-          ],
-        ),
-
-        const SizedBox(height: AppSpacing.sm),
-
-        // ── Row 3: Çîrok (Story) + Guhdarî (Listening) ──
-        Row(
-          children: [
-            Expanded(
-              child: _ActivityGridCard(
-                emoji: '\u{1F4D6}',
-                label: 'Çîrok',
-                subtitle: 'Bixwîne û fêr bibe',
-                gradientColors: [const Color(0xFFFF8A65), const Color(0xFFE64A19)],
-                onTap: () => context.push(AppRoutes.story),
-                delay: 340,
-              ),
-            ),
-            const SizedBox(width: AppSpacing.sm),
-            Expanded(
-              child: _ActivityGridCard(
-                emoji: '\u{1F3A7}',
-                label: 'Guhdarî',
-                subtitle: 'Guh bide',
-                gradientColors: [const Color(0xFF26A69A), const Color(0xFF00796B)],
-                onTap: () => context.push(AppRoutes.listening),
-                delay: 380,
-              ),
-            ),
-          ],
-        ),
-
-        const SizedBox(height: AppSpacing.sm),
-
-        // ── Row 4: Rêziman (Grammar) + Dubare (Smart Review) ──
+        // ── Row 2: Rêziman (Grammar) + Dubare (Smart Review) ──
         Row(
           children: [
             Expanded(
@@ -848,7 +794,7 @@ class _ActivityGrid extends ConsumerWidget {
                 subtitle: 'Gramer bike',
                 gradientColors: [const Color(0xFF3F51B5), const Color(0xFF283593)],
                 onTap: () => context.push(AppRoutes.grammar),
-                delay: 420,
+                delay: 400,
               ),
             ),
             const SizedBox(width: AppSpacing.sm),
@@ -859,7 +805,7 @@ class _ActivityGrid extends ConsumerWidget {
                 subtitle: '${ref.watch(reviewDueCountProvider)} peyv',
                 gradientColors: [const Color(0xFF43A047), const Color(0xFF2E7D32)],
                 onTap: () => context.push(AppRoutes.review),
-                delay: 460,
+                delay: 440,
               ),
             ),
           ],
@@ -984,7 +930,7 @@ class _CollapsibleSkillTree extends StatefulWidget {
 }
 
 class _CollapsibleSkillTreeState extends State<_CollapsibleSkillTree> {
-  bool _isExpanded = false;
+  bool _isExpanded = true;
 
   @override
   Widget build(BuildContext context) {
@@ -1278,12 +1224,35 @@ class _SkillTreePath extends StatelessWidget {
             isCurrent: isCurrent,
             isLocked: isLocked,
             showTurkish: ref.watch(showTurkishProvider),
-            onTap: !isLocked
+            onTap: isCurrent
                 ? () => context.push(
                     AppRoutes.quiz,
                     extra: {'level': 'A1', 'category': unit.katKey},
                   )
-                : null,
+                : isCompleted
+                    ? () => context.push(
+                        AppRoutes.vocabulary,
+                        extra: {'category': unit.katKey},
+                      )
+                    : isLocked
+                        ? () {
+                            ScaffoldMessenger.of(context).showSnackBar(
+                              SnackBar(
+                                content: const Text(
+                                  'Pêşî waneyên berê temam bike',
+                                  style: TextStyle(fontSize: 13),
+                                ),
+                                behavior: SnackBarBehavior.floating,
+                                shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(12)),
+                                duration: const Duration(seconds: 2),
+                              ),
+                            );
+                          }
+                        : () => context.push(
+                            AppRoutes.quiz,
+                            extra: {'level': 'A1', 'category': unit.katKey},
+                          ),
           );
         }),
       ],
@@ -1334,8 +1303,8 @@ class _SkillTreeNode extends StatelessWidget {
     final alignment = _nodeAlignment();
     final isLast = index == totalCount - 1;
 
-    // Node boyutlari
-    final nodeSize = isCurrent ? 76.0 : 64.0;
+    // Node boyutlari — larger for mountain-path feel
+    final nodeSize = isCurrent ? 88.0 : 74.0;
 
     // Renkler
     final nodeColor = isCompleted
@@ -1523,9 +1492,9 @@ class _PathConnector extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: 36,
+      height: 42,
       child: CustomPaint(
-        size: const Size(double.infinity, 36),
+        size: const Size(double.infinity, 42),
         painter: _PathPainter(
           fromX: (fromAlignment.x + 1) / 2,
           toX: (toAlignment.x + 1) / 2,
