@@ -125,6 +125,7 @@ class LutkeLogo extends StatelessWidget {
   Widget _buildHorizontal() {
     return Row(
       mainAxisSize: MainAxisSize.min,
+      crossAxisAlignment: CrossAxisAlignment.center,
       children: [
         ClipOval(
           child: SizedBox(
@@ -139,17 +140,33 @@ class LutkeLogo extends StatelessWidget {
           ),
         ),
 
-        SizedBox(width: size * 0.25),
+        SizedBox(width: size * 0.15),
 
-        Text(
-          'LÛTKE',
-          style: TextStyle(
-            fontSize: size * 0.6,
-            fontWeight: FontWeight.w800,
-            color: AppColors.textPrimary,
-            letterSpacing: 1.2,
-            height: 1,
-          ),
+        Column(
+          mainAxisSize: MainAxisSize.min,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              'LÛTKE',
+              style: TextStyle(
+                fontSize: size * 0.52,
+                fontWeight: FontWeight.w900,
+                color: AppColors.primary,
+                letterSpacing: 0.8,
+                height: 1,
+              ),
+            ),
+            Text(
+              'Zimanê Kurdî',
+              style: TextStyle(
+                fontSize: size * 0.2,
+                fontWeight: FontWeight.w400,
+                color: AppColors.textSecondary,
+                letterSpacing: 0.3,
+                height: 1.3,
+              ),
+            ),
+          ],
         ),
       ],
     );

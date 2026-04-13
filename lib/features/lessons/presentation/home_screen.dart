@@ -15,6 +15,7 @@ import '../domain/lesson_entities.dart';
 import '../domain/a1_kelime_db.dart';
 import '../../../shared/widgets/lutke_logo.dart';
 import '../../../shared/widgets/streak_widget.dart';
+import '../../../shared/providers/language_mode_provider.dart';
 import '../../gamification/gamification_widgets.dart';
 
 // ════════════════════════════════════════════════════════════════
@@ -55,6 +56,11 @@ class HomeScreen extends ConsumerWidget {
                 onLongPress: () => context.push(AppRoutes.admin),
                 child: LutkeLogo.brandHorizontal(iconSize: 44),
               ),
+              actions: [
+                // Dil modu toggle
+                _LanguageModeToggle(),
+                const SizedBox(width: 4),
+              ],
             ),
 
             // ── İçerik ───────────────────────────────────────────
@@ -1422,5 +1428,66 @@ class _StartQuizButton extends StatelessWidget {
           duration: 300.ms,
           curve: Curves.easeOut,
         );
+  }
+}
+
+// ════════════════════════════════════════════════════════════════
+// DİL MODU TOGGLE — KU/TR veya KU only
+// ════════════════════════════════════════════════════════════════
+
+class _LanguageModeToggle extends ConsumerWidget {
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final mode = ref.watch(languageModeProvider);
+    final isKuTr = mode == LanguageMode.kuTr;
+
+    return GestureDetector(
+      onTap: () {
+        ref.read(languageModeProvider.notifier).toggle();
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text(
+              isKuTr ? 'Tenê Kurmancî — Sadece Kürtçe' : 'Kurmancî + Türkçe',
+              style: const TextStyle(fontSize: 13),
+            ),
+            behavior: SnackBarBehavior.floating,
+            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+            duration: const Duration(seconds: 2),
+          ),
+        );
+      },
+      child: Container(
+        padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
+        decoration: BoxDecoration(
+          color: isKuTr
+              ? AppColors.primary.withOpacity(0.1)
+              : const Color(0xFFFFF3E0),
+          borderRadius: BorderRadius.circular(20),
+          border: Border.all(
+            color: isKuTr
+                ? AppColors.primary.withOpacity(0.3)
+                : const Color(0xFFFF9800).withOpacity(0.3),
+          ),
+        ),
+        child: Row(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Text('KU',
+              style: TextStyle(
+                fontSize: 11, fontWeight: FontWeight.w800,
+                color: AppColors.primary)),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 3),
+              child: Text('/', style: TextStyle(fontSize: 10, color: AppColors.textSecondary)),
+            ),
+            Text(isKuTr ? 'TR' : '—',
+              style: TextStyle(
+                fontSize: 11, fontWeight: FontWeight.w800,
+                color: isKuTr ? const Color(0xFFFF9800) : AppColors.textSecondary.withOpacity(0.4),
+                decoration: isKuTr ? null : TextDecoration.lineThrough)),
+          ],
+        ),
+      ),
+    );
   }
 }
