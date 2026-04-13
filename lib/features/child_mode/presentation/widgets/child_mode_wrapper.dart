@@ -171,7 +171,7 @@ class _WarningBanner extends StatelessWidget {
             const SizedBox(width: 12),
             Expanded(
               child: Text(
-                '$remainingMinutes deqîqe ma! Bizer jî westiya ye.',
+                '$remainingMinutes deqîqe ma! Karok jî westiya ye.',
                 style: const TextStyle(
                   color: Colors.white,
                   fontSize: 14,

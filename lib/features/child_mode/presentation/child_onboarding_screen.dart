@@ -15,7 +15,7 @@ import 'widgets/pin_entry_widget.dart';
 // 3 adımlı basit akış:
 //   1. Yaş seçimi (7, 8, 9, 10)
 //   2. Ebeveyn PIN kurulumu
-//   3. Maskot karşılama ("Bizer")
+//   3. Maskot karşılama ("Karok")
 // ════════════════════════════════════════════════════════════════
 
 class ChildOnboardingScreen extends ConsumerStatefulWidget {
@@ -113,7 +113,7 @@ class _AgeStep extends StatelessWidget {
         const SizedBox(height: 24),
 
         Text(
-          'Silav! Ez Bizer im!',
+          'Silav! Ez Karok im!',
           style: ChildTypography.display.copyWith(color: ChildColors.primary),
         ).animate().fadeIn(delay: 300.ms),
 
@@ -300,7 +300,7 @@ class _MascotWelcome extends StatelessWidget {
         const SizedBox(height: 24),
 
         Text(
-          'Bizer amade ye!',
+          'Karok amade ye!',
           style: ChildTypography.display.copyWith(color: ChildColors.primary),
         ).animate().fadeIn(delay: 400.ms),
 

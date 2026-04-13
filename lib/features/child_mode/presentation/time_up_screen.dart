@@ -59,7 +59,7 @@ class TimeUpScreen extends StatelessWidget {
               const SizedBox(height: 12),
 
               Text(
-                'Bizer jî razê.\nSibê em dîsa bilîzin!',
+                'Karok jî razê.\nSibê em dîsa bilîzin!',
                 style: ChildTypography.bodyLarge.copyWith(
                   color: ChildColors.textSecondary,
                 ),

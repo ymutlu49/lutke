@@ -48,7 +48,7 @@ class ChildProfileScreen extends ConsumerWidget {
 
               const SizedBox(height: 12),
               Text(
-                'Bizer',
+                'Karok',
                 style: ChildTypography.headline.copyWith(
                   color: ChildColors.primary,
                 ),
