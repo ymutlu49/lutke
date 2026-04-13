@@ -112,6 +112,16 @@ abstract class AppColors {
   static const borderStrong = Color(0xFF1A7B6B);
 
   // ──────────────────────────────────────────────────────────────
+  // ALIASES — Diğer dosyalarda kullanılan kısayollar
+  // ──────────────────────────────────────────────────────────────
+
+  /// Genel yüzey rengi = backgroundSecondary (beyaz)
+  static const surface = backgroundSecondary;
+
+  /// Genel kenarlık = borderLight
+  static const border = borderLight;
+
+  // ──────────────────────────────────────────────────────────────
   // DARK MODE — Koyu Tema
   // ──────────────────────────────────────────────────────────────
 

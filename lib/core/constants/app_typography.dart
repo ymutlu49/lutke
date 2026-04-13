@@ -175,6 +175,31 @@ abstract class AppTypography {
     color: AppColors.textTertiary,
   );
 
+  // ──────────────────────────────────────────────────────────────
+  // ALIASES — Diğer dosyalarda kullanılan kısayollar
+  // ──────────────────────────────────────────────────────────────
+
+  /// bodySmall = caption (12sp)
+  static const bodySmall = caption;
+
+  /// bodyMedium = body (14sp)
+  static const bodyMedium = body;
+
+  /// labelMedium = label (14sp, w500)
+  static const labelMedium = label;
+
+  /// headingLarge = display (28sp, w700)
+  static const headingLarge = display;
+
+  /// headingSmall = title (18sp, w600)
+  static const headingSmall = title;
+
+  /// headingMedium = title (18sp, w600) — alias
+  static const headingMedium = title;
+
+  /// displayMedium = display (28sp, w700) — alias
+  static const displayMedium = display;
+
   static const captionStrong = TextStyle(
     fontFamily: _fontFamily,
     fontSize: 12,

@@ -704,7 +704,8 @@ const kCulturalItems = [
     keywords: ['Bakur', 'Başûr', 'Rojhilat', 'Rojava', 'sînor', 'dabeşkirin'],
     audioAsset: 'assets/audio/cultural/c_b2_003.mp3',
   ),
-];
+
+  // ── A2+ Ek Kültürel İçerik ─────────────────────────────────
 
   CulturalItem(
     id: 'c_a2_002',

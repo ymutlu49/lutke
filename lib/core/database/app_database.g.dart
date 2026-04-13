@@ -1,13 +1,207 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
-// ignore_for_file: type=lint
+
 part of 'app_database.dart';
 
-// ════════════════════════════════════════════════════════════════
-// Drift tarafından otomatik üretilen kod
-// dart run build_runner build --delete-conflicting-outputs
-// ════════════════════════════════════════════════════════════════
+// ignore_for_file: type=lint
+class $VocabularyCardsTable extends VocabularyCards
+    with TableInfo<$VocabularyCardsTable, VocabularyCard> {
+  @override
+  final GeneratedDatabase attachedDatabase;
+  final String? _alias;
+  $VocabularyCardsTable(this.attachedDatabase, [this._alias]);
+  static const VerificationMeta _idMeta = const VerificationMeta('id');
+  @override
+  late final GeneratedColumn<String> id = GeneratedColumn<String>(
+      'id', aliasedName, false,
+      type: DriftSqlType.string, requiredDuringInsert: true);
+  static const VerificationMeta _kurmanjiMeta =
+      const VerificationMeta('kurmanji');
+  @override
+  late final GeneratedColumn<String> kurmanji = GeneratedColumn<String>(
+      'kurmanji', aliasedName, false,
+      type: DriftSqlType.string, requiredDuringInsert: true);
+  static const VerificationMeta _turkishMeta =
+      const VerificationMeta('turkish');
+  @override
+  late final GeneratedColumn<String> turkish = GeneratedColumn<String>(
+      'turkish', aliasedName, false,
+      type: DriftSqlType.string, requiredDuringInsert: true);
+  static const VerificationMeta _englishMeta =
+      const VerificationMeta('english');
+  @override
+  late final GeneratedColumn<String> english = GeneratedColumn<String>(
+      'english', aliasedName, true,
+      type: DriftSqlType.string, requiredDuringInsert: false);
+  static const VerificationMeta _audioUrlMeta =
+      const VerificationMeta('audioUrl');
+  @override
+  late final GeneratedColumn<String> audioUrl = GeneratedColumn<String>(
+      'audio_url', aliasedName, true,
+      type: DriftSqlType.string, requiredDuringInsert: false);
+  static const VerificationMeta _genderMeta = const VerificationMeta('gender');
+  @override
+  late final GeneratedColumn<String> gender = GeneratedColumn<String>(
+      'gender', aliasedName, false,
+      type: DriftSqlType.string,
+      requiredDuringInsert: false,
+      defaultValue: const Constant('bêcins'));
+  static const VerificationMeta _categoryMeta =
+      const VerificationMeta('category');
+  @override
+  late final GeneratedColumn<String> category = GeneratedColumn<String>(
+      'category', aliasedName, false,
+      type: DriftSqlType.string, requiredDuringInsert: true);
+  static const VerificationMeta _levelMeta = const VerificationMeta('level');
+  @override
+  late final GeneratedColumn<int> level = GeneratedColumn<int>(
+      'level', aliasedName, false,
+      type: DriftSqlType.int,
+      requiredDuringInsert: false,
+      defaultValue: const Constant(1));
+  static const VerificationMeta _sentencesHeritageMeta =
+      const VerificationMeta('sentencesHeritage');
+  @override
+  late final GeneratedColumn<String> sentencesHeritage =
+      GeneratedColumn<String>('sentences_heritage', aliasedName, false,
+          type: DriftSqlType.string,
+          requiredDuringInsert: false,
+          defaultValue: const Constant('[]'));
+  static const VerificationMeta _sentencesGeneralMeta =
+      const VerificationMeta('sentencesGeneral');
+  @override
+  late final GeneratedColumn<String> sentencesGeneral = GeneratedColumn<String>(
+      'sentences_general', aliasedName, false,
+      type: DriftSqlType.string,
+      requiredDuringInsert: false,
+      defaultValue: const Constant('[]'));
+  static const VerificationMeta _initialDifficultyMeta =
+      const VerificationMeta('initialDifficulty');
+  @override
+  late final GeneratedColumn<double> initialDifficulty =
+      GeneratedColumn<double>('initial_difficulty', aliasedName, false,
+          type: DriftSqlType.double,
+          requiredDuringInsert: false,
+          defaultValue: const Constant(0.75));
+  @override
+  List<GeneratedColumn> get $columns => [
+        id,
+        kurmanji,
+        turkish,
+        english,
+        audioUrl,
+        gender,
+        category,
+        level,
+        sentencesHeritage,
+        sentencesGeneral,
+        initialDifficulty
+      ];
+  @override
+  String get aliasedName => _alias ?? actualTableName;
+  @override
+  String get actualTableName => $name;
+  static const String $name = 'vocabulary_cards';
+  @override
+  VerificationContext validateIntegrity(Insertable<VocabularyCard> instance,
+      {bool isInserting = false}) {
+    final context = VerificationContext();
+    final data = instance.toColumns(true);
+    if (data.containsKey('id')) {
+      context.handle(_idMeta, id.isAcceptableOrUnknown(data['id']!, _idMeta));
+    } else if (isInserting) {
+      context.missing(_idMeta);
+    }
+    if (data.containsKey('kurmanji')) {
+      context.handle(_kurmanjiMeta,
+          kurmanji.isAcceptableOrUnknown(data['kurmanji']!, _kurmanjiMeta));
+    } else if (isInserting) {
+      context.missing(_kurmanjiMeta);
+    }
+    if (data.containsKey('turkish')) {
+      context.handle(_turkishMeta,
+          turkish.isAcceptableOrUnknown(data['turkish']!, _turkishMeta));
+    } else if (isInserting) {
+      context.missing(_turkishMeta);
+    }
+    if (data.containsKey('english')) {
+      context.handle(_englishMeta,
+          english.isAcceptableOrUnknown(data['english']!, _englishMeta));
+    }
+    if (data.containsKey('audio_url')) {
+      context.handle(_audioUrlMeta,
+          audioUrl.isAcceptableOrUnknown(data['audio_url']!, _audioUrlMeta));
+    }
+    if (data.containsKey('gender')) {
+      context.handle(_genderMeta,
+          gender.isAcceptableOrUnknown(data['gender']!, _genderMeta));
+    }
+    if (data.containsKey('category')) {
+      context.handle(_categoryMeta,
+          category.isAcceptableOrUnknown(data['category']!, _categoryMeta));
+    } else if (isInserting) {
+      context.missing(_categoryMeta);
+    }
+    if (data.containsKey('level')) {
+      context.handle(
+          _levelMeta, level.isAcceptableOrUnknown(data['level']!, _levelMeta));
+    }
+    if (data.containsKey('sentences_heritage')) {
+      context.handle(
+          _sentencesHeritageMeta,
+          sentencesHeritage.isAcceptableOrUnknown(
+              data['sentences_heritage']!, _sentencesHeritageMeta));
+    }
+    if (data.containsKey('sentences_general')) {
+      context.handle(
+          _sentencesGeneralMeta,
+          sentencesGeneral.isAcceptableOrUnknown(
+              data['sentences_general']!, _sentencesGeneralMeta));
+    }
+    if (data.containsKey('initial_difficulty')) {
+      context.handle(
+          _initialDifficultyMeta,
+          initialDifficulty.isAcceptableOrUnknown(
+              data['initial_difficulty']!, _initialDifficultyMeta));
+    }
+    return context;
+  }
 
-// ── VocabularyCard DATA CLASS ─────────────────────────────────
+  @override
+  Set<GeneratedColumn> get $primaryKey => {id};
+  @override
+  VocabularyCard map(Map<String, dynamic> data, {String? tablePrefix}) {
+    final effectivePrefix = tablePrefix != null ? '$tablePrefix.' : '';
+    return VocabularyCard(
+      id: attachedDatabase.typeMapping
+          .read(DriftSqlType.string, data['${effectivePrefix}id'])!,
+      kurmanji: attachedDatabase.typeMapping
+          .read(DriftSqlType.string, data['${effectivePrefix}kurmanji'])!,
+      turkish: attachedDatabase.typeMapping
+          .read(DriftSqlType.string, data['${effectivePrefix}turkish'])!,
+      english: attachedDatabase.typeMapping
+          .read(DriftSqlType.string, data['${effectivePrefix}english']),
+      audioUrl: attachedDatabase.typeMapping
+          .read(DriftSqlType.string, data['${effectivePrefix}audio_url']),
+      gender: attachedDatabase.typeMapping
+          .read(DriftSqlType.string, data['${effectivePrefix}gender'])!,
+      category: attachedDatabase.typeMapping
+          .read(DriftSqlType.string, data['${effectivePrefix}category'])!,
+      level: attachedDatabase.typeMapping
+          .read(DriftSqlType.int, data['${effectivePrefix}level'])!,
+      sentencesHeritage: attachedDatabase.typeMapping.read(
+          DriftSqlType.string, data['${effectivePrefix}sentences_heritage'])!,
+      sentencesGeneral: attachedDatabase.typeMapping.read(
+          DriftSqlType.string, data['${effectivePrefix}sentences_general'])!,
+      initialDifficulty: attachedDatabase.typeMapping.read(
+          DriftSqlType.double, data['${effectivePrefix}initial_difficulty'])!,
+    );
+  }
+
+  @override
+  $VocabularyCardsTable createAlias(String alias) {
+    return $VocabularyCardsTable(attachedDatabase, alias);
+  }
+}
 
 class VocabularyCard extends DataClass implements Insertable<VocabularyCard> {
   final String id;
@@ -21,29 +215,30 @@ class VocabularyCard extends DataClass implements Insertable<VocabularyCard> {
   final String sentencesHeritage;
   final String sentencesGeneral;
   final double initialDifficulty;
-
-  const VocabularyCard({
-    required this.id,
-    required this.kurmanji,
-    required this.turkish,
-    this.english,
-    this.audioUrl,
-    required this.gender,
-    required this.category,
-    required this.level,
-    required this.sentencesHeritage,
-    required this.sentencesGeneral,
-    required this.initialDifficulty,
-  });
-
+  const VocabularyCard(
+      {required this.id,
+      required this.kurmanji,
+      required this.turkish,
+      this.english,
+      this.audioUrl,
+      required this.gender,
+      required this.category,
+      required this.level,
+      required this.sentencesHeritage,
+      required this.sentencesGeneral,
+      required this.initialDifficulty});
   @override
   Map<String, Expression> toColumns(bool nullToAbsent) {
     final map = <String, Expression>{};
     map['id'] = Variable<String>(id);
     map['kurmanji'] = Variable<String>(kurmanji);
     map['turkish'] = Variable<String>(turkish);
-    if (!nullToAbsent || english != null) map['english'] = Variable<String?>(english);
-    if (!nullToAbsent || audioUrl != null) map['audio_url'] = Variable<String?>(audioUrl);
+    if (!nullToAbsent || english != null) {
+      map['english'] = Variable<String>(english);
+    }
+    if (!nullToAbsent || audioUrl != null) {
+      map['audio_url'] = Variable<String>(audioUrl);
+    }
     map['gender'] = Variable<String>(gender);
     map['category'] = Variable<String>(category);
     map['level'] = Variable<int>(level);
@@ -58,8 +253,12 @@ class VocabularyCard extends DataClass implements Insertable<VocabularyCard> {
       id: Value(id),
       kurmanji: Value(kurmanji),
       turkish: Value(turkish),
-      english: english == null && nullToAbsent ? const Value.absent() : Value(english),
-      audioUrl: audioUrl == null && nullToAbsent ? const Value.absent() : Value(audioUrl),
+      english: english == null && nullToAbsent
+          ? const Value.absent()
+          : Value(english),
+      audioUrl: audioUrl == null && nullToAbsent
+          ? const Value.absent()
+          : Value(audioUrl),
       gender: Value(gender),
       category: Value(category),
       level: Value(level),
@@ -77,16 +276,15 @@ class VocabularyCard extends DataClass implements Insertable<VocabularyCard> {
       kurmanji: serializer.fromJson<String>(json['kurmanji']),
       turkish: serializer.fromJson<String>(json['turkish']),
       english: serializer.fromJson<String?>(json['english']),
-      audioUrl: serializer.fromJson<String?>(json['audio_url']),
+      audioUrl: serializer.fromJson<String?>(json['audioUrl']),
       gender: serializer.fromJson<String>(json['gender']),
       category: serializer.fromJson<String>(json['category']),
       level: serializer.fromJson<int>(json['level']),
-      sentencesHeritage: serializer.fromJson<String>(json['sentences_heritage']),
-      sentencesGeneral: serializer.fromJson<String>(json['sentences_general']),
-      initialDifficulty: serializer.fromJson<double>(json['initial_difficulty']),
+      sentencesHeritage: serializer.fromJson<String>(json['sentencesHeritage']),
+      sentencesGeneral: serializer.fromJson<String>(json['sentencesGeneral']),
+      initialDifficulty: serializer.fromJson<double>(json['initialDifficulty']),
     );
   }
-
   @override
   Map<String, dynamic> toJson({ValueSerializer? serializer}) {
     serializer ??= driftRuntimeOptions.defaultSerializer;
@@ -95,65 +293,110 @@ class VocabularyCard extends DataClass implements Insertable<VocabularyCard> {
       'kurmanji': serializer.toJson<String>(kurmanji),
       'turkish': serializer.toJson<String>(turkish),
       'english': serializer.toJson<String?>(english),
-      'audio_url': serializer.toJson<String?>(audioUrl),
+      'audioUrl': serializer.toJson<String?>(audioUrl),
       'gender': serializer.toJson<String>(gender),
       'category': serializer.toJson<String>(category),
       'level': serializer.toJson<int>(level),
-      'sentences_heritage': serializer.toJson<String>(sentencesHeritage),
-      'sentences_general': serializer.toJson<String>(sentencesGeneral),
-      'initial_difficulty': serializer.toJson<double>(initialDifficulty),
+      'sentencesHeritage': serializer.toJson<String>(sentencesHeritage),
+      'sentencesGeneral': serializer.toJson<String>(sentencesGeneral),
+      'initialDifficulty': serializer.toJson<double>(initialDifficulty),
     };
   }
 
-  VocabularyCard copyWith({
-    String? id,
-    String? kurmanji,
-    String? turkish,
-    Value<String?> english = const Value.absent(),
-    Value<String?> audioUrl = const Value.absent(),
-    String? gender,
-    String? category,
-    int? level,
-    String? sentencesHeritage,
-    String? sentencesGeneral,
-    double? initialDifficulty,
-  }) => VocabularyCard(
-    id: id ?? this.id,
-    kurmanji: kurmanji ?? this.kurmanji,
-    turkish: turkish ?? this.turkish,
-    english: english.present ? english.value : this.english,
-    audioUrl: audioUrl.present ? audioUrl.value : this.audioUrl,
-    gender: gender ?? this.gender,
-    category: category ?? this.category,
-    level: level ?? this.level,
-    sentencesHeritage: sentencesHeritage ?? this.sentencesHeritage,
-    sentencesGeneral: sentencesGeneral ?? this.sentencesGeneral,
-    initialDifficulty: initialDifficulty ?? this.initialDifficulty,
-  );
+  VocabularyCard copyWith(
+          {String? id,
+          String? kurmanji,
+          String? turkish,
+          Value<String?> english = const Value.absent(),
+          Value<String?> audioUrl = const Value.absent(),
+          String? gender,
+          String? category,
+          int? level,
+          String? sentencesHeritage,
+          String? sentencesGeneral,
+          double? initialDifficulty}) =>
+      VocabularyCard(
+        id: id ?? this.id,
+        kurmanji: kurmanji ?? this.kurmanji,
+        turkish: turkish ?? this.turkish,
+        english: english.present ? english.value : this.english,
+        audioUrl: audioUrl.present ? audioUrl.value : this.audioUrl,
+        gender: gender ?? this.gender,
+        category: category ?? this.category,
+        level: level ?? this.level,
+        sentencesHeritage: sentencesHeritage ?? this.sentencesHeritage,
+        sentencesGeneral: sentencesGeneral ?? this.sentencesGeneral,
+        initialDifficulty: initialDifficulty ?? this.initialDifficulty,
+      );
+  VocabularyCard copyWithCompanion(VocabularyCardsCompanion data) {
+    return VocabularyCard(
+      id: data.id.present ? data.id.value : this.id,
+      kurmanji: data.kurmanji.present ? data.kurmanji.value : this.kurmanji,
+      turkish: data.turkish.present ? data.turkish.value : this.turkish,
+      english: data.english.present ? data.english.value : this.english,
+      audioUrl: data.audioUrl.present ? data.audioUrl.value : this.audioUrl,
+      gender: data.gender.present ? data.gender.value : this.gender,
+      category: data.category.present ? data.category.value : this.category,
+      level: data.level.present ? data.level.value : this.level,
+      sentencesHeritage: data.sentencesHeritage.present
+          ? data.sentencesHeritage.value
+          : this.sentencesHeritage,
+      sentencesGeneral: data.sentencesGeneral.present
+          ? data.sentencesGeneral.value
+          : this.sentencesGeneral,
+      initialDifficulty: data.initialDifficulty.present
+          ? data.initialDifficulty.value
+          : this.initialDifficulty,
+    );
+  }
 
   @override
   String toString() {
     return (StringBuffer('VocabularyCard(')
           ..write('id: $id, ')
           ..write('kurmanji: $kurmanji, ')
-          ..write('turkish: $turkish')
+          ..write('turkish: $turkish, ')
+          ..write('english: $english, ')
+          ..write('audioUrl: $audioUrl, ')
+          ..write('gender: $gender, ')
+          ..write('category: $category, ')
+          ..write('level: $level, ')
+          ..write('sentencesHeritage: $sentencesHeritage, ')
+          ..write('sentencesGeneral: $sentencesGeneral, ')
+          ..write('initialDifficulty: $initialDifficulty')
           ..write(')'))
         .toString();
   }
 
   @override
-  int get hashCode => Object.hash(id, kurmanji, turkish, gender, category, level);
-
+  int get hashCode => Object.hash(
+      id,
+      kurmanji,
+      turkish,
+      english,
+      audioUrl,
+      gender,
+      category,
+      level,
+      sentencesHeritage,
+      sentencesGeneral,
+      initialDifficulty);
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
       (other is VocabularyCard &&
-          other.id == id &&
-          other.kurmanji == kurmanji &&
-          other.turkish == turkish);
+          other.id == this.id &&
+          other.kurmanji == this.kurmanji &&
+          other.turkish == this.turkish &&
+          other.english == this.english &&
+          other.audioUrl == this.audioUrl &&
+          other.gender == this.gender &&
+          other.category == this.category &&
+          other.level == this.level &&
+          other.sentencesHeritage == this.sentencesHeritage &&
+          other.sentencesGeneral == this.sentencesGeneral &&
+          other.initialDifficulty == this.initialDifficulty);
 }
-
-// ── VocabularyCardsCompanion ──────────────────────────────────
 
 class VocabularyCardsCompanion extends UpdateCompanion<VocabularyCard> {
   final Value<String> id;
@@ -167,7 +410,7 @@ class VocabularyCardsCompanion extends UpdateCompanion<VocabularyCard> {
   final Value<String> sentencesHeritage;
   final Value<String> sentencesGeneral;
   final Value<double> initialDifficulty;
-
+  final Value<int> rowid;
   const VocabularyCardsCompanion({
     this.id = const Value.absent(),
     this.kurmanji = const Value.absent(),
@@ -180,54 +423,371 @@ class VocabularyCardsCompanion extends UpdateCompanion<VocabularyCard> {
     this.sentencesHeritage = const Value.absent(),
     this.sentencesGeneral = const Value.absent(),
     this.initialDifficulty = const Value.absent(),
+    this.rowid = const Value.absent(),
   });
-
   VocabularyCardsCompanion.insert({
     required String id,
     required String kurmanji,
     required String turkish,
-    Value<String?> english = const Value.absent(),
-    Value<String?> audioUrl = const Value.absent(),
-    Value<String> gender = const Value('bêcins'),
+    this.english = const Value.absent(),
+    this.audioUrl = const Value.absent(),
+    this.gender = const Value.absent(),
     required String category,
-    Value<int> level = const Value(1),
-    Value<String> sentencesHeritage = const Value('[]'),
-    Value<String> sentencesGeneral = const Value('[]'),
-    Value<double> initialDifficulty = const Value(0.75),
-  }) : id = Value(id),
-       kurmanji = Value(kurmanji),
-       turkish = Value(turkish),
-       english = english,
-       audioUrl = audioUrl,
-       gender = gender,
-       category = Value(category),
-       level = level,
-       sentencesHeritage = sentencesHeritage,
-       sentencesGeneral = sentencesGeneral,
-       initialDifficulty = initialDifficulty;
+    this.level = const Value.absent(),
+    this.sentencesHeritage = const Value.absent(),
+    this.sentencesGeneral = const Value.absent(),
+    this.initialDifficulty = const Value.absent(),
+    this.rowid = const Value.absent(),
+  })  : id = Value(id),
+        kurmanji = Value(kurmanji),
+        turkish = Value(turkish),
+        category = Value(category);
+  static Insertable<VocabularyCard> custom({
+    Expression<String>? id,
+    Expression<String>? kurmanji,
+    Expression<String>? turkish,
+    Expression<String>? english,
+    Expression<String>? audioUrl,
+    Expression<String>? gender,
+    Expression<String>? category,
+    Expression<int>? level,
+    Expression<String>? sentencesHeritage,
+    Expression<String>? sentencesGeneral,
+    Expression<double>? initialDifficulty,
+    Expression<int>? rowid,
+  }) {
+    return RawValuesInsertable({
+      if (id != null) 'id': id,
+      if (kurmanji != null) 'kurmanji': kurmanji,
+      if (turkish != null) 'turkish': turkish,
+      if (english != null) 'english': english,
+      if (audioUrl != null) 'audio_url': audioUrl,
+      if (gender != null) 'gender': gender,
+      if (category != null) 'category': category,
+      if (level != null) 'level': level,
+      if (sentencesHeritage != null) 'sentences_heritage': sentencesHeritage,
+      if (sentencesGeneral != null) 'sentences_general': sentencesGeneral,
+      if (initialDifficulty != null) 'initial_difficulty': initialDifficulty,
+      if (rowid != null) 'rowid': rowid,
+    });
+  }
+
+  VocabularyCardsCompanion copyWith(
+      {Value<String>? id,
+      Value<String>? kurmanji,
+      Value<String>? turkish,
+      Value<String?>? english,
+      Value<String?>? audioUrl,
+      Value<String>? gender,
+      Value<String>? category,
+      Value<int>? level,
+      Value<String>? sentencesHeritage,
+      Value<String>? sentencesGeneral,
+      Value<double>? initialDifficulty,
+      Value<int>? rowid}) {
+    return VocabularyCardsCompanion(
+      id: id ?? this.id,
+      kurmanji: kurmanji ?? this.kurmanji,
+      turkish: turkish ?? this.turkish,
+      english: english ?? this.english,
+      audioUrl: audioUrl ?? this.audioUrl,
+      gender: gender ?? this.gender,
+      category: category ?? this.category,
+      level: level ?? this.level,
+      sentencesHeritage: sentencesHeritage ?? this.sentencesHeritage,
+      sentencesGeneral: sentencesGeneral ?? this.sentencesGeneral,
+      initialDifficulty: initialDifficulty ?? this.initialDifficulty,
+      rowid: rowid ?? this.rowid,
+    );
+  }
 
   @override
   Map<String, Expression> toColumns(bool nullToAbsent) {
     final map = <String, Expression>{};
-    if (id.present) map['id'] = Variable<String>(id.value);
-    if (kurmanji.present) map['kurmanji'] = Variable<String>(kurmanji.value);
-    if (turkish.present) map['turkish'] = Variable<String>(turkish.value);
-    if (english.present) map['english'] = Variable<String?>(english.value);
-    if (audioUrl.present) map['audio_url'] = Variable<String?>(audioUrl.value);
-    if (gender.present) map['gender'] = Variable<String>(gender.value);
-    if (category.present) map['category'] = Variable<String>(category.value);
-    if (level.present) map['level'] = Variable<int>(level.value);
-    if (sentencesHeritage.present) map['sentences_heritage'] = Variable<String>(sentencesHeritage.value);
-    if (sentencesGeneral.present) map['sentences_general'] = Variable<String>(sentencesGeneral.value);
-    if (initialDifficulty.present) map['initial_difficulty'] = Variable<double>(initialDifficulty.value);
+    if (id.present) {
+      map['id'] = Variable<String>(id.value);
+    }
+    if (kurmanji.present) {
+      map['kurmanji'] = Variable<String>(kurmanji.value);
+    }
+    if (turkish.present) {
+      map['turkish'] = Variable<String>(turkish.value);
+    }
+    if (english.present) {
+      map['english'] = Variable<String>(english.value);
+    }
+    if (audioUrl.present) {
+      map['audio_url'] = Variable<String>(audioUrl.value);
+    }
+    if (gender.present) {
+      map['gender'] = Variable<String>(gender.value);
+    }
+    if (category.present) {
+      map['category'] = Variable<String>(category.value);
+    }
+    if (level.present) {
+      map['level'] = Variable<int>(level.value);
+    }
+    if (sentencesHeritage.present) {
+      map['sentences_heritage'] = Variable<String>(sentencesHeritage.value);
+    }
+    if (sentencesGeneral.present) {
+      map['sentences_general'] = Variable<String>(sentencesGeneral.value);
+    }
+    if (initialDifficulty.present) {
+      map['initial_difficulty'] = Variable<double>(initialDifficulty.value);
+    }
+    if (rowid.present) {
+      map['rowid'] = Variable<int>(rowid.value);
+    }
     return map;
   }
 
   @override
-  String toString() => 'VocabularyCardsCompanion(id: $id, kurmanji: $kurmanji)';
+  String toString() {
+    return (StringBuffer('VocabularyCardsCompanion(')
+          ..write('id: $id, ')
+          ..write('kurmanji: $kurmanji, ')
+          ..write('turkish: $turkish, ')
+          ..write('english: $english, ')
+          ..write('audioUrl: $audioUrl, ')
+          ..write('gender: $gender, ')
+          ..write('category: $category, ')
+          ..write('level: $level, ')
+          ..write('sentencesHeritage: $sentencesHeritage, ')
+          ..write('sentencesGeneral: $sentencesGeneral, ')
+          ..write('initialDifficulty: $initialDifficulty, ')
+          ..write('rowid: $rowid')
+          ..write(')'))
+        .toString();
+  }
 }
 
-// ── FsrsReview DATA CLASS ─────────────────────────────────────
+class $FsrsReviewsTable extends FsrsReviews
+    with TableInfo<$FsrsReviewsTable, FsrsReview> {
+  @override
+  final GeneratedDatabase attachedDatabase;
+  final String? _alias;
+  $FsrsReviewsTable(this.attachedDatabase, [this._alias]);
+  static const VerificationMeta _idMeta = const VerificationMeta('id');
+  @override
+  late final GeneratedColumn<int> id = GeneratedColumn<int>(
+      'id', aliasedName, false,
+      hasAutoIncrement: true,
+      type: DriftSqlType.int,
+      requiredDuringInsert: false,
+      defaultConstraints:
+          GeneratedColumn.constraintIsAlways('PRIMARY KEY AUTOINCREMENT'));
+  static const VerificationMeta _cardIdMeta = const VerificationMeta('cardId');
+  @override
+  late final GeneratedColumn<String> cardId = GeneratedColumn<String>(
+      'card_id', aliasedName, false,
+      type: DriftSqlType.string, requiredDuringInsert: true);
+  static const VerificationMeta _userIdMeta = const VerificationMeta('userId');
+  @override
+  late final GeneratedColumn<String> userId = GeneratedColumn<String>(
+      'user_id', aliasedName, false,
+      type: DriftSqlType.string, requiredDuringInsert: true);
+  static const VerificationMeta _stabilityMeta =
+      const VerificationMeta('stability');
+  @override
+  late final GeneratedColumn<double> stability = GeneratedColumn<double>(
+      'stability', aliasedName, false,
+      type: DriftSqlType.double,
+      requiredDuringInsert: false,
+      defaultValue: const Constant(1.0));
+  static const VerificationMeta _difficultyMeta =
+      const VerificationMeta('difficulty');
+  @override
+  late final GeneratedColumn<double> difficulty = GeneratedColumn<double>(
+      'difficulty', aliasedName, false,
+      type: DriftSqlType.double,
+      requiredDuringInsert: false,
+      defaultValue: const Constant(5.0));
+  static const VerificationMeta _retrievabilityMeta =
+      const VerificationMeta('retrievability');
+  @override
+  late final GeneratedColumn<double> retrievability = GeneratedColumn<double>(
+      'retrievability', aliasedName, false,
+      type: DriftSqlType.double,
+      requiredDuringInsert: false,
+      defaultValue: const Constant(0.9));
+  static const VerificationMeta _stateMeta = const VerificationMeta('state');
+  @override
+  late final GeneratedColumn<String> state = GeneratedColumn<String>(
+      'state', aliasedName, false,
+      type: DriftSqlType.string,
+      requiredDuringInsert: false,
+      defaultValue: const Constant('new'));
+  static const VerificationMeta _reviewCountMeta =
+      const VerificationMeta('reviewCount');
+  @override
+  late final GeneratedColumn<int> reviewCount = GeneratedColumn<int>(
+      'review_count', aliasedName, false,
+      type: DriftSqlType.int,
+      requiredDuringInsert: false,
+      defaultValue: const Constant(0));
+  static const VerificationMeta _lapseCountMeta =
+      const VerificationMeta('lapseCount');
+  @override
+  late final GeneratedColumn<int> lapseCount = GeneratedColumn<int>(
+      'lapse_count', aliasedName, false,
+      type: DriftSqlType.int,
+      requiredDuringInsert: false,
+      defaultValue: const Constant(0));
+  static const VerificationMeta _wasCorrectMeta =
+      const VerificationMeta('wasCorrect');
+  @override
+  late final GeneratedColumn<bool> wasCorrect = GeneratedColumn<bool>(
+      'was_correct', aliasedName, false,
+      type: DriftSqlType.bool,
+      requiredDuringInsert: false,
+      defaultConstraints:
+          GeneratedColumn.constraintIsAlways('CHECK ("was_correct" IN (0, 1))'),
+      defaultValue: const Constant(true));
+  static const VerificationMeta _lastReviewMeta =
+      const VerificationMeta('lastReview');
+  @override
+  late final GeneratedColumn<DateTime> lastReview = GeneratedColumn<DateTime>(
+      'last_review', aliasedName, true,
+      type: DriftSqlType.dateTime, requiredDuringInsert: false);
+  static const VerificationMeta _dueDateMeta =
+      const VerificationMeta('dueDate');
+  @override
+  late final GeneratedColumn<DateTime> dueDate = GeneratedColumn<DateTime>(
+      'due_date', aliasedName, false,
+      type: DriftSqlType.dateTime, requiredDuringInsert: true);
+  @override
+  List<GeneratedColumn> get $columns => [
+        id,
+        cardId,
+        userId,
+        stability,
+        difficulty,
+        retrievability,
+        state,
+        reviewCount,
+        lapseCount,
+        wasCorrect,
+        lastReview,
+        dueDate
+      ];
+  @override
+  String get aliasedName => _alias ?? actualTableName;
+  @override
+  String get actualTableName => $name;
+  static const String $name = 'fsrs_reviews';
+  @override
+  VerificationContext validateIntegrity(Insertable<FsrsReview> instance,
+      {bool isInserting = false}) {
+    final context = VerificationContext();
+    final data = instance.toColumns(true);
+    if (data.containsKey('id')) {
+      context.handle(_idMeta, id.isAcceptableOrUnknown(data['id']!, _idMeta));
+    }
+    if (data.containsKey('card_id')) {
+      context.handle(_cardIdMeta,
+          cardId.isAcceptableOrUnknown(data['card_id']!, _cardIdMeta));
+    } else if (isInserting) {
+      context.missing(_cardIdMeta);
+    }
+    if (data.containsKey('user_id')) {
+      context.handle(_userIdMeta,
+          userId.isAcceptableOrUnknown(data['user_id']!, _userIdMeta));
+    } else if (isInserting) {
+      context.missing(_userIdMeta);
+    }
+    if (data.containsKey('stability')) {
+      context.handle(_stabilityMeta,
+          stability.isAcceptableOrUnknown(data['stability']!, _stabilityMeta));
+    }
+    if (data.containsKey('difficulty')) {
+      context.handle(
+          _difficultyMeta,
+          difficulty.isAcceptableOrUnknown(
+              data['difficulty']!, _difficultyMeta));
+    }
+    if (data.containsKey('retrievability')) {
+      context.handle(
+          _retrievabilityMeta,
+          retrievability.isAcceptableOrUnknown(
+              data['retrievability']!, _retrievabilityMeta));
+    }
+    if (data.containsKey('state')) {
+      context.handle(
+          _stateMeta, state.isAcceptableOrUnknown(data['state']!, _stateMeta));
+    }
+    if (data.containsKey('review_count')) {
+      context.handle(
+          _reviewCountMeta,
+          reviewCount.isAcceptableOrUnknown(
+              data['review_count']!, _reviewCountMeta));
+    }
+    if (data.containsKey('lapse_count')) {
+      context.handle(
+          _lapseCountMeta,
+          lapseCount.isAcceptableOrUnknown(
+              data['lapse_count']!, _lapseCountMeta));
+    }
+    if (data.containsKey('was_correct')) {
+      context.handle(
+          _wasCorrectMeta,
+          wasCorrect.isAcceptableOrUnknown(
+              data['was_correct']!, _wasCorrectMeta));
+    }
+    if (data.containsKey('last_review')) {
+      context.handle(
+          _lastReviewMeta,
+          lastReview.isAcceptableOrUnknown(
+              data['last_review']!, _lastReviewMeta));
+    }
+    if (data.containsKey('due_date')) {
+      context.handle(_dueDateMeta,
+          dueDate.isAcceptableOrUnknown(data['due_date']!, _dueDateMeta));
+    } else if (isInserting) {
+      context.missing(_dueDateMeta);
+    }
+    return context;
+  }
+
+  @override
+  Set<GeneratedColumn> get $primaryKey => {id};
+  @override
+  FsrsReview map(Map<String, dynamic> data, {String? tablePrefix}) {
+    final effectivePrefix = tablePrefix != null ? '$tablePrefix.' : '';
+    return FsrsReview(
+      id: attachedDatabase.typeMapping
+          .read(DriftSqlType.int, data['${effectivePrefix}id'])!,
+      cardId: attachedDatabase.typeMapping
+          .read(DriftSqlType.string, data['${effectivePrefix}card_id'])!,
+      userId: attachedDatabase.typeMapping
+          .read(DriftSqlType.string, data['${effectivePrefix}user_id'])!,
+      stability: attachedDatabase.typeMapping
+          .read(DriftSqlType.double, data['${effectivePrefix}stability'])!,
+      difficulty: attachedDatabase.typeMapping
+          .read(DriftSqlType.double, data['${effectivePrefix}difficulty'])!,
+      retrievability: attachedDatabase.typeMapping
+          .read(DriftSqlType.double, data['${effectivePrefix}retrievability'])!,
+      state: attachedDatabase.typeMapping
+          .read(DriftSqlType.string, data['${effectivePrefix}state'])!,
+      reviewCount: attachedDatabase.typeMapping
+          .read(DriftSqlType.int, data['${effectivePrefix}review_count'])!,
+      lapseCount: attachedDatabase.typeMapping
+          .read(DriftSqlType.int, data['${effectivePrefix}lapse_count'])!,
+      wasCorrect: attachedDatabase.typeMapping
+          .read(DriftSqlType.bool, data['${effectivePrefix}was_correct'])!,
+      lastReview: attachedDatabase.typeMapping
+          .read(DriftSqlType.dateTime, data['${effectivePrefix}last_review']),
+      dueDate: attachedDatabase.typeMapping
+          .read(DriftSqlType.dateTime, data['${effectivePrefix}due_date'])!,
+    );
+  }
+
+  @override
+  $FsrsReviewsTable createAlias(String alias) {
+    return $FsrsReviewsTable(attachedDatabase, alias);
+  }
+}
 
 class FsrsReview extends DataClass implements Insertable<FsrsReview> {
   final int id;
@@ -242,22 +802,19 @@ class FsrsReview extends DataClass implements Insertable<FsrsReview> {
   final bool wasCorrect;
   final DateTime? lastReview;
   final DateTime dueDate;
-
-  const FsrsReview({
-    required this.id,
-    required this.cardId,
-    required this.userId,
-    required this.stability,
-    required this.difficulty,
-    required this.retrievability,
-    required this.state,
-    required this.reviewCount,
-    required this.lapseCount,
-    required this.wasCorrect,
-    this.lastReview,
-    required this.dueDate,
-  });
-
+  const FsrsReview(
+      {required this.id,
+      required this.cardId,
+      required this.userId,
+      required this.stability,
+      required this.difficulty,
+      required this.retrievability,
+      required this.state,
+      required this.reviewCount,
+      required this.lapseCount,
+      required this.wasCorrect,
+      this.lastReview,
+      required this.dueDate});
   @override
   Map<String, Expression> toColumns(bool nullToAbsent) {
     final map = <String, Expression>{};
@@ -272,13 +829,12 @@ class FsrsReview extends DataClass implements Insertable<FsrsReview> {
     map['lapse_count'] = Variable<int>(lapseCount);
     map['was_correct'] = Variable<bool>(wasCorrect);
     if (!nullToAbsent || lastReview != null) {
-      map['last_review'] = Variable<DateTime?>(lastReview);
+      map['last_review'] = Variable<DateTime>(lastReview);
     }
     map['due_date'] = Variable<DateTime>(dueDate);
     return map;
   }
 
-  @override
   FsrsReviewsCompanion toCompanion(bool nullToAbsent) {
     return FsrsReviewsCompanion(
       id: Value(id),
@@ -291,36 +847,150 @@ class FsrsReview extends DataClass implements Insertable<FsrsReview> {
       reviewCount: Value(reviewCount),
       lapseCount: Value(lapseCount),
       wasCorrect: Value(wasCorrect),
-      lastReview: lastReview == null && nullToAbsent ? const Value.absent() : Value(lastReview),
+      lastReview: lastReview == null && nullToAbsent
+          ? const Value.absent()
+          : Value(lastReview),
       dueDate: Value(dueDate),
     );
   }
 
+  factory FsrsReview.fromJson(Map<String, dynamic> json,
+      {ValueSerializer? serializer}) {
+    serializer ??= driftRuntimeOptions.defaultSerializer;
+    return FsrsReview(
+      id: serializer.fromJson<int>(json['id']),
+      cardId: serializer.fromJson<String>(json['cardId']),
+      userId: serializer.fromJson<String>(json['userId']),
+      stability: serializer.fromJson<double>(json['stability']),
+      difficulty: serializer.fromJson<double>(json['difficulty']),
+      retrievability: serializer.fromJson<double>(json['retrievability']),
+      state: serializer.fromJson<String>(json['state']),
+      reviewCount: serializer.fromJson<int>(json['reviewCount']),
+      lapseCount: serializer.fromJson<int>(json['lapseCount']),
+      wasCorrect: serializer.fromJson<bool>(json['wasCorrect']),
+      lastReview: serializer.fromJson<DateTime?>(json['lastReview']),
+      dueDate: serializer.fromJson<DateTime>(json['dueDate']),
+    );
+  }
   @override
-  Map<String, dynamic> toJson({ValueSerializer? serializer}) => {};
+  Map<String, dynamic> toJson({ValueSerializer? serializer}) {
+    serializer ??= driftRuntimeOptions.defaultSerializer;
+    return <String, dynamic>{
+      'id': serializer.toJson<int>(id),
+      'cardId': serializer.toJson<String>(cardId),
+      'userId': serializer.toJson<String>(userId),
+      'stability': serializer.toJson<double>(stability),
+      'difficulty': serializer.toJson<double>(difficulty),
+      'retrievability': serializer.toJson<double>(retrievability),
+      'state': serializer.toJson<String>(state),
+      'reviewCount': serializer.toJson<int>(reviewCount),
+      'lapseCount': serializer.toJson<int>(lapseCount),
+      'wasCorrect': serializer.toJson<bool>(wasCorrect),
+      'lastReview': serializer.toJson<DateTime?>(lastReview),
+      'dueDate': serializer.toJson<DateTime>(dueDate),
+    };
+  }
 
-  factory FsrsReview.fromJson(Map<String, dynamic> json, {ValueSerializer? serializer}) =>
+  FsrsReview copyWith(
+          {int? id,
+          String? cardId,
+          String? userId,
+          double? stability,
+          double? difficulty,
+          double? retrievability,
+          String? state,
+          int? reviewCount,
+          int? lapseCount,
+          bool? wasCorrect,
+          Value<DateTime?> lastReview = const Value.absent(),
+          DateTime? dueDate}) =>
       FsrsReview(
-        id: json['id'] as int,
-        cardId: json['card_id'] as String,
-        userId: json['user_id'] as String,
-        stability: (json['stability'] as num).toDouble(),
-        difficulty: (json['difficulty'] as num).toDouble(),
-        retrievability: (json['retrievability'] as num).toDouble(),
-        state: json['state'] as String,
-        reviewCount: json['review_count'] as int,
-        lapseCount: json['lapse_count'] as int,
-        wasCorrect: json['was_correct'] as bool,
-        lastReview: json['last_review'] != null
-            ? DateTime.fromMillisecondsSinceEpoch(json['last_review'] as int)
-            : null,
-        dueDate: DateTime.fromMillisecondsSinceEpoch(json['due_date'] as int),
+        id: id ?? this.id,
+        cardId: cardId ?? this.cardId,
+        userId: userId ?? this.userId,
+        stability: stability ?? this.stability,
+        difficulty: difficulty ?? this.difficulty,
+        retrievability: retrievability ?? this.retrievability,
+        state: state ?? this.state,
+        reviewCount: reviewCount ?? this.reviewCount,
+        lapseCount: lapseCount ?? this.lapseCount,
+        wasCorrect: wasCorrect ?? this.wasCorrect,
+        lastReview: lastReview.present ? lastReview.value : this.lastReview,
+        dueDate: dueDate ?? this.dueDate,
       );
+  FsrsReview copyWithCompanion(FsrsReviewsCompanion data) {
+    return FsrsReview(
+      id: data.id.present ? data.id.value : this.id,
+      cardId: data.cardId.present ? data.cardId.value : this.cardId,
+      userId: data.userId.present ? data.userId.value : this.userId,
+      stability: data.stability.present ? data.stability.value : this.stability,
+      difficulty:
+          data.difficulty.present ? data.difficulty.value : this.difficulty,
+      retrievability: data.retrievability.present
+          ? data.retrievability.value
+          : this.retrievability,
+      state: data.state.present ? data.state.value : this.state,
+      reviewCount:
+          data.reviewCount.present ? data.reviewCount.value : this.reviewCount,
+      lapseCount:
+          data.lapseCount.present ? data.lapseCount.value : this.lapseCount,
+      wasCorrect:
+          data.wasCorrect.present ? data.wasCorrect.value : this.wasCorrect,
+      lastReview:
+          data.lastReview.present ? data.lastReview.value : this.lastReview,
+      dueDate: data.dueDate.present ? data.dueDate.value : this.dueDate,
+    );
+  }
 
   @override
-  int get hashCode => id;
+  String toString() {
+    return (StringBuffer('FsrsReview(')
+          ..write('id: $id, ')
+          ..write('cardId: $cardId, ')
+          ..write('userId: $userId, ')
+          ..write('stability: $stability, ')
+          ..write('difficulty: $difficulty, ')
+          ..write('retrievability: $retrievability, ')
+          ..write('state: $state, ')
+          ..write('reviewCount: $reviewCount, ')
+          ..write('lapseCount: $lapseCount, ')
+          ..write('wasCorrect: $wasCorrect, ')
+          ..write('lastReview: $lastReview, ')
+          ..write('dueDate: $dueDate')
+          ..write(')'))
+        .toString();
+  }
+
   @override
-  bool operator ==(Object other) => other is FsrsReview && other.id == id;
+  int get hashCode => Object.hash(
+      id,
+      cardId,
+      userId,
+      stability,
+      difficulty,
+      retrievability,
+      state,
+      reviewCount,
+      lapseCount,
+      wasCorrect,
+      lastReview,
+      dueDate);
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      (other is FsrsReview &&
+          other.id == this.id &&
+          other.cardId == this.cardId &&
+          other.userId == this.userId &&
+          other.stability == this.stability &&
+          other.difficulty == this.difficulty &&
+          other.retrievability == this.retrievability &&
+          other.state == this.state &&
+          other.reviewCount == this.reviewCount &&
+          other.lapseCount == this.lapseCount &&
+          other.wasCorrect == this.wasCorrect &&
+          other.lastReview == this.lastReview &&
+          other.dueDate == this.dueDate);
 }
 
 class FsrsReviewsCompanion extends UpdateCompanion<FsrsReview> {
@@ -336,7 +1006,6 @@ class FsrsReviewsCompanion extends UpdateCompanion<FsrsReview> {
   final Value<bool> wasCorrect;
   final Value<DateTime?> lastReview;
   final Value<DateTime> dueDate;
-
   const FsrsReviewsCompanion({
     this.id = const Value.absent(),
     this.cardId = const Value.absent(),
@@ -351,114 +1020,1243 @@ class FsrsReviewsCompanion extends UpdateCompanion<FsrsReview> {
     this.lastReview = const Value.absent(),
     this.dueDate = const Value.absent(),
   });
+  FsrsReviewsCompanion.insert({
+    this.id = const Value.absent(),
+    required String cardId,
+    required String userId,
+    this.stability = const Value.absent(),
+    this.difficulty = const Value.absent(),
+    this.retrievability = const Value.absent(),
+    this.state = const Value.absent(),
+    this.reviewCount = const Value.absent(),
+    this.lapseCount = const Value.absent(),
+    this.wasCorrect = const Value.absent(),
+    this.lastReview = const Value.absent(),
+    required DateTime dueDate,
+  })  : cardId = Value(cardId),
+        userId = Value(userId),
+        dueDate = Value(dueDate);
+  static Insertable<FsrsReview> custom({
+    Expression<int>? id,
+    Expression<String>? cardId,
+    Expression<String>? userId,
+    Expression<double>? stability,
+    Expression<double>? difficulty,
+    Expression<double>? retrievability,
+    Expression<String>? state,
+    Expression<int>? reviewCount,
+    Expression<int>? lapseCount,
+    Expression<bool>? wasCorrect,
+    Expression<DateTime>? lastReview,
+    Expression<DateTime>? dueDate,
+  }) {
+    return RawValuesInsertable({
+      if (id != null) 'id': id,
+      if (cardId != null) 'card_id': cardId,
+      if (userId != null) 'user_id': userId,
+      if (stability != null) 'stability': stability,
+      if (difficulty != null) 'difficulty': difficulty,
+      if (retrievability != null) 'retrievability': retrievability,
+      if (state != null) 'state': state,
+      if (reviewCount != null) 'review_count': reviewCount,
+      if (lapseCount != null) 'lapse_count': lapseCount,
+      if (wasCorrect != null) 'was_correct': wasCorrect,
+      if (lastReview != null) 'last_review': lastReview,
+      if (dueDate != null) 'due_date': dueDate,
+    });
+  }
+
+  FsrsReviewsCompanion copyWith(
+      {Value<int>? id,
+      Value<String>? cardId,
+      Value<String>? userId,
+      Value<double>? stability,
+      Value<double>? difficulty,
+      Value<double>? retrievability,
+      Value<String>? state,
+      Value<int>? reviewCount,
+      Value<int>? lapseCount,
+      Value<bool>? wasCorrect,
+      Value<DateTime?>? lastReview,
+      Value<DateTime>? dueDate}) {
+    return FsrsReviewsCompanion(
+      id: id ?? this.id,
+      cardId: cardId ?? this.cardId,
+      userId: userId ?? this.userId,
+      stability: stability ?? this.stability,
+      difficulty: difficulty ?? this.difficulty,
+      retrievability: retrievability ?? this.retrievability,
+      state: state ?? this.state,
+      reviewCount: reviewCount ?? this.reviewCount,
+      lapseCount: lapseCount ?? this.lapseCount,
+      wasCorrect: wasCorrect ?? this.wasCorrect,
+      lastReview: lastReview ?? this.lastReview,
+      dueDate: dueDate ?? this.dueDate,
+    );
+  }
 
   @override
   Map<String, Expression> toColumns(bool nullToAbsent) {
     final map = <String, Expression>{};
-    if (id.present) map['id'] = Variable<int>(id.value);
-    if (cardId.present) map['card_id'] = Variable<String>(cardId.value);
-    if (userId.present) map['user_id'] = Variable<String>(userId.value);
-    if (stability.present) map['stability'] = Variable<double>(stability.value);
-    if (difficulty.present) map['difficulty'] = Variable<double>(difficulty.value);
-    if (retrievability.present) map['retrievability'] = Variable<double>(retrievability.value);
-    if (state.present) map['state'] = Variable<String>(state.value);
-    if (reviewCount.present) map['review_count'] = Variable<int>(reviewCount.value);
-    if (lapseCount.present) map['lapse_count'] = Variable<int>(lapseCount.value);
-    if (wasCorrect.present) map['was_correct'] = Variable<bool>(wasCorrect.value);
-    if (lastReview.present) map['last_review'] = Variable<DateTime?>(lastReview.value);
-    if (dueDate.present) map['due_date'] = Variable<DateTime>(dueDate.value);
+    if (id.present) {
+      map['id'] = Variable<int>(id.value);
+    }
+    if (cardId.present) {
+      map['card_id'] = Variable<String>(cardId.value);
+    }
+    if (userId.present) {
+      map['user_id'] = Variable<String>(userId.value);
+    }
+    if (stability.present) {
+      map['stability'] = Variable<double>(stability.value);
+    }
+    if (difficulty.present) {
+      map['difficulty'] = Variable<double>(difficulty.value);
+    }
+    if (retrievability.present) {
+      map['retrievability'] = Variable<double>(retrievability.value);
+    }
+    if (state.present) {
+      map['state'] = Variable<String>(state.value);
+    }
+    if (reviewCount.present) {
+      map['review_count'] = Variable<int>(reviewCount.value);
+    }
+    if (lapseCount.present) {
+      map['lapse_count'] = Variable<int>(lapseCount.value);
+    }
+    if (wasCorrect.present) {
+      map['was_correct'] = Variable<bool>(wasCorrect.value);
+    }
+    if (lastReview.present) {
+      map['last_review'] = Variable<DateTime>(lastReview.value);
+    }
+    if (dueDate.present) {
+      map['due_date'] = Variable<DateTime>(dueDate.value);
+    }
     return map;
   }
 
   @override
-  String toString() => 'FsrsReviewsCompanion(cardId: $cardId, state: $state)';
+  String toString() {
+    return (StringBuffer('FsrsReviewsCompanion(')
+          ..write('id: $id, ')
+          ..write('cardId: $cardId, ')
+          ..write('userId: $userId, ')
+          ..write('stability: $stability, ')
+          ..write('difficulty: $difficulty, ')
+          ..write('retrievability: $retrievability, ')
+          ..write('state: $state, ')
+          ..write('reviewCount: $reviewCount, ')
+          ..write('lapseCount: $lapseCount, ')
+          ..write('wasCorrect: $wasCorrect, ')
+          ..write('lastReview: $lastReview, ')
+          ..write('dueDate: $dueDate')
+          ..write(')'))
+        .toString();
+  }
 }
 
-// ── EarnedBadge DATA CLASS ────────────────────────────────────
+class $CompletedLessonsTable extends CompletedLessons
+    with TableInfo<$CompletedLessonsTable, CompletedLesson> {
+  @override
+  final GeneratedDatabase attachedDatabase;
+  final String? _alias;
+  $CompletedLessonsTable(this.attachedDatabase, [this._alias]);
+  static const VerificationMeta _idMeta = const VerificationMeta('id');
+  @override
+  late final GeneratedColumn<int> id = GeneratedColumn<int>(
+      'id', aliasedName, false,
+      hasAutoIncrement: true,
+      type: DriftSqlType.int,
+      requiredDuringInsert: false,
+      defaultConstraints:
+          GeneratedColumn.constraintIsAlways('PRIMARY KEY AUTOINCREMENT'));
+  static const VerificationMeta _userIdMeta = const VerificationMeta('userId');
+  @override
+  late final GeneratedColumn<String> userId = GeneratedColumn<String>(
+      'user_id', aliasedName, false,
+      type: DriftSqlType.string, requiredDuringInsert: true);
+  static const VerificationMeta _lessonIdMeta =
+      const VerificationMeta('lessonId');
+  @override
+  late final GeneratedColumn<String> lessonId = GeneratedColumn<String>(
+      'lesson_id', aliasedName, false,
+      type: DriftSqlType.string, requiredDuringInsert: true);
+  static const VerificationMeta _completedAtMeta =
+      const VerificationMeta('completedAt');
+  @override
+  late final GeneratedColumn<DateTime> completedAt = GeneratedColumn<DateTime>(
+      'completed_at', aliasedName, false,
+      type: DriftSqlType.dateTime, requiredDuringInsert: true);
+  static const VerificationMeta _correctCountMeta =
+      const VerificationMeta('correctCount');
+  @override
+  late final GeneratedColumn<int> correctCount = GeneratedColumn<int>(
+      'correct_count', aliasedName, false,
+      type: DriftSqlType.int,
+      requiredDuringInsert: false,
+      defaultValue: const Constant(0));
+  static const VerificationMeta _totalCountMeta =
+      const VerificationMeta('totalCount');
+  @override
+  late final GeneratedColumn<int> totalCount = GeneratedColumn<int>(
+      'total_count', aliasedName, false,
+      type: DriftSqlType.int,
+      requiredDuringInsert: false,
+      defaultValue: const Constant(0));
+  static const VerificationMeta _xpEarnedMeta =
+      const VerificationMeta('xpEarned');
+  @override
+  late final GeneratedColumn<int> xpEarned = GeneratedColumn<int>(
+      'xp_earned', aliasedName, false,
+      type: DriftSqlType.int,
+      requiredDuringInsert: false,
+      defaultValue: const Constant(0));
+  static const VerificationMeta _durationSecondsMeta =
+      const VerificationMeta('durationSeconds');
+  @override
+  late final GeneratedColumn<int> durationSeconds = GeneratedColumn<int>(
+      'duration_seconds', aliasedName, false,
+      type: DriftSqlType.int,
+      requiredDuringInsert: false,
+      defaultValue: const Constant(0));
+  @override
+  List<GeneratedColumn> get $columns => [
+        id,
+        userId,
+        lessonId,
+        completedAt,
+        correctCount,
+        totalCount,
+        xpEarned,
+        durationSeconds
+      ];
+  @override
+  String get aliasedName => _alias ?? actualTableName;
+  @override
+  String get actualTableName => $name;
+  static const String $name = 'completed_lessons';
+  @override
+  VerificationContext validateIntegrity(Insertable<CompletedLesson> instance,
+      {bool isInserting = false}) {
+    final context = VerificationContext();
+    final data = instance.toColumns(true);
+    if (data.containsKey('id')) {
+      context.handle(_idMeta, id.isAcceptableOrUnknown(data['id']!, _idMeta));
+    }
+    if (data.containsKey('user_id')) {
+      context.handle(_userIdMeta,
+          userId.isAcceptableOrUnknown(data['user_id']!, _userIdMeta));
+    } else if (isInserting) {
+      context.missing(_userIdMeta);
+    }
+    if (data.containsKey('lesson_id')) {
+      context.handle(_lessonIdMeta,
+          lessonId.isAcceptableOrUnknown(data['lesson_id']!, _lessonIdMeta));
+    } else if (isInserting) {
+      context.missing(_lessonIdMeta);
+    }
+    if (data.containsKey('completed_at')) {
+      context.handle(
+          _completedAtMeta,
+          completedAt.isAcceptableOrUnknown(
+              data['completed_at']!, _completedAtMeta));
+    } else if (isInserting) {
+      context.missing(_completedAtMeta);
+    }
+    if (data.containsKey('correct_count')) {
+      context.handle(
+          _correctCountMeta,
+          correctCount.isAcceptableOrUnknown(
+              data['correct_count']!, _correctCountMeta));
+    }
+    if (data.containsKey('total_count')) {
+      context.handle(
+          _totalCountMeta,
+          totalCount.isAcceptableOrUnknown(
+              data['total_count']!, _totalCountMeta));
+    }
+    if (data.containsKey('xp_earned')) {
+      context.handle(_xpEarnedMeta,
+          xpEarned.isAcceptableOrUnknown(data['xp_earned']!, _xpEarnedMeta));
+    }
+    if (data.containsKey('duration_seconds')) {
+      context.handle(
+          _durationSecondsMeta,
+          durationSeconds.isAcceptableOrUnknown(
+              data['duration_seconds']!, _durationSecondsMeta));
+    }
+    return context;
+  }
 
-class EarnedBadge extends DataClass implements Insertable<EarnedBadge> {
+  @override
+  Set<GeneratedColumn> get $primaryKey => {id};
+  @override
+  CompletedLesson map(Map<String, dynamic> data, {String? tablePrefix}) {
+    final effectivePrefix = tablePrefix != null ? '$tablePrefix.' : '';
+    return CompletedLesson(
+      id: attachedDatabase.typeMapping
+          .read(DriftSqlType.int, data['${effectivePrefix}id'])!,
+      userId: attachedDatabase.typeMapping
+          .read(DriftSqlType.string, data['${effectivePrefix}user_id'])!,
+      lessonId: attachedDatabase.typeMapping
+          .read(DriftSqlType.string, data['${effectivePrefix}lesson_id'])!,
+      completedAt: attachedDatabase.typeMapping
+          .read(DriftSqlType.dateTime, data['${effectivePrefix}completed_at'])!,
+      correctCount: attachedDatabase.typeMapping
+          .read(DriftSqlType.int, data['${effectivePrefix}correct_count'])!,
+      totalCount: attachedDatabase.typeMapping
+          .read(DriftSqlType.int, data['${effectivePrefix}total_count'])!,
+      xpEarned: attachedDatabase.typeMapping
+          .read(DriftSqlType.int, data['${effectivePrefix}xp_earned'])!,
+      durationSeconds: attachedDatabase.typeMapping
+          .read(DriftSqlType.int, data['${effectivePrefix}duration_seconds'])!,
+    );
+  }
+
+  @override
+  $CompletedLessonsTable createAlias(String alias) {
+    return $CompletedLessonsTable(attachedDatabase, alias);
+  }
+}
+
+class CompletedLesson extends DataClass implements Insertable<CompletedLesson> {
   final int id;
   final String userId;
-  final String badgeId;
-  final DateTime earnedAt;
-
-  const EarnedBadge({
-    required this.id,
-    required this.userId,
-    required this.badgeId,
-    required this.earnedAt,
-  });
-
+  final String lessonId;
+  final DateTime completedAt;
+  final int correctCount;
+  final int totalCount;
+  final int xpEarned;
+  final int durationSeconds;
+  const CompletedLesson(
+      {required this.id,
+      required this.userId,
+      required this.lessonId,
+      required this.completedAt,
+      required this.correctCount,
+      required this.totalCount,
+      required this.xpEarned,
+      required this.durationSeconds});
   @override
-  Map<String, Expression> toColumns(bool nullToAbsent) => {
-    'id': Variable<int>(id),
-    'user_id': Variable<String>(userId),
-    'badge_id': Variable<String>(badgeId),
-    'earned_at': Variable<DateTime>(earnedAt),
-  };
+  Map<String, Expression> toColumns(bool nullToAbsent) {
+    final map = <String, Expression>{};
+    map['id'] = Variable<int>(id);
+    map['user_id'] = Variable<String>(userId);
+    map['lesson_id'] = Variable<String>(lessonId);
+    map['completed_at'] = Variable<DateTime>(completedAt);
+    map['correct_count'] = Variable<int>(correctCount);
+    map['total_count'] = Variable<int>(totalCount);
+    map['xp_earned'] = Variable<int>(xpEarned);
+    map['duration_seconds'] = Variable<int>(durationSeconds);
+    return map;
+  }
 
-  EarnedBadgesCompanion toCompanion(bool nullToAbsent) => EarnedBadgesCompanion(
-    id: Value(id),
-    userId: Value(userId),
-    badgeId: Value(badgeId),
-    earnedAt: Value(earnedAt),
-  );
+  CompletedLessonsCompanion toCompanion(bool nullToAbsent) {
+    return CompletedLessonsCompanion(
+      id: Value(id),
+      userId: Value(userId),
+      lessonId: Value(lessonId),
+      completedAt: Value(completedAt),
+      correctCount: Value(correctCount),
+      totalCount: Value(totalCount),
+      xpEarned: Value(xpEarned),
+      durationSeconds: Value(durationSeconds),
+    );
+  }
 
+  factory CompletedLesson.fromJson(Map<String, dynamic> json,
+      {ValueSerializer? serializer}) {
+    serializer ??= driftRuntimeOptions.defaultSerializer;
+    return CompletedLesson(
+      id: serializer.fromJson<int>(json['id']),
+      userId: serializer.fromJson<String>(json['userId']),
+      lessonId: serializer.fromJson<String>(json['lessonId']),
+      completedAt: serializer.fromJson<DateTime>(json['completedAt']),
+      correctCount: serializer.fromJson<int>(json['correctCount']),
+      totalCount: serializer.fromJson<int>(json['totalCount']),
+      xpEarned: serializer.fromJson<int>(json['xpEarned']),
+      durationSeconds: serializer.fromJson<int>(json['durationSeconds']),
+    );
+  }
   @override
-  Map<String, dynamic> toJson({ValueSerializer? serializer}) => {};
-  factory EarnedBadge.fromJson(Map<String, dynamic> json, {ValueSerializer? serializer}) =>
-      EarnedBadge(
-        id: json['id'] as int,
-        userId: json['user_id'] as String,
-        badgeId: json['badge_id'] as String,
-        earnedAt: DateTime.fromMillisecondsSinceEpoch(json['earned_at'] as int),
+  Map<String, dynamic> toJson({ValueSerializer? serializer}) {
+    serializer ??= driftRuntimeOptions.defaultSerializer;
+    return <String, dynamic>{
+      'id': serializer.toJson<int>(id),
+      'userId': serializer.toJson<String>(userId),
+      'lessonId': serializer.toJson<String>(lessonId),
+      'completedAt': serializer.toJson<DateTime>(completedAt),
+      'correctCount': serializer.toJson<int>(correctCount),
+      'totalCount': serializer.toJson<int>(totalCount),
+      'xpEarned': serializer.toJson<int>(xpEarned),
+      'durationSeconds': serializer.toJson<int>(durationSeconds),
+    };
+  }
+
+  CompletedLesson copyWith(
+          {int? id,
+          String? userId,
+          String? lessonId,
+          DateTime? completedAt,
+          int? correctCount,
+          int? totalCount,
+          int? xpEarned,
+          int? durationSeconds}) =>
+      CompletedLesson(
+        id: id ?? this.id,
+        userId: userId ?? this.userId,
+        lessonId: lessonId ?? this.lessonId,
+        completedAt: completedAt ?? this.completedAt,
+        correctCount: correctCount ?? this.correctCount,
+        totalCount: totalCount ?? this.totalCount,
+        xpEarned: xpEarned ?? this.xpEarned,
+        durationSeconds: durationSeconds ?? this.durationSeconds,
       );
+  CompletedLesson copyWithCompanion(CompletedLessonsCompanion data) {
+    return CompletedLesson(
+      id: data.id.present ? data.id.value : this.id,
+      userId: data.userId.present ? data.userId.value : this.userId,
+      lessonId: data.lessonId.present ? data.lessonId.value : this.lessonId,
+      completedAt:
+          data.completedAt.present ? data.completedAt.value : this.completedAt,
+      correctCount: data.correctCount.present
+          ? data.correctCount.value
+          : this.correctCount,
+      totalCount:
+          data.totalCount.present ? data.totalCount.value : this.totalCount,
+      xpEarned: data.xpEarned.present ? data.xpEarned.value : this.xpEarned,
+      durationSeconds: data.durationSeconds.present
+          ? data.durationSeconds.value
+          : this.durationSeconds,
+    );
+  }
 
   @override
-  int get hashCode => id;
+  String toString() {
+    return (StringBuffer('CompletedLesson(')
+          ..write('id: $id, ')
+          ..write('userId: $userId, ')
+          ..write('lessonId: $lessonId, ')
+          ..write('completedAt: $completedAt, ')
+          ..write('correctCount: $correctCount, ')
+          ..write('totalCount: $totalCount, ')
+          ..write('xpEarned: $xpEarned, ')
+          ..write('durationSeconds: $durationSeconds')
+          ..write(')'))
+        .toString();
+  }
+
   @override
-  bool operator ==(Object other) => other is EarnedBadge && other.id == id;
+  int get hashCode => Object.hash(id, userId, lessonId, completedAt,
+      correctCount, totalCount, xpEarned, durationSeconds);
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      (other is CompletedLesson &&
+          other.id == this.id &&
+          other.userId == this.userId &&
+          other.lessonId == this.lessonId &&
+          other.completedAt == this.completedAt &&
+          other.correctCount == this.correctCount &&
+          other.totalCount == this.totalCount &&
+          other.xpEarned == this.xpEarned &&
+          other.durationSeconds == this.durationSeconds);
 }
 
-class EarnedBadgesCompanion extends UpdateCompanion<EarnedBadge> {
+class CompletedLessonsCompanion extends UpdateCompanion<CompletedLesson> {
   final Value<int> id;
   final Value<String> userId;
-  final Value<String> badgeId;
-  final Value<DateTime> earnedAt;
-
-  const EarnedBadgesCompanion({
+  final Value<String> lessonId;
+  final Value<DateTime> completedAt;
+  final Value<int> correctCount;
+  final Value<int> totalCount;
+  final Value<int> xpEarned;
+  final Value<int> durationSeconds;
+  const CompletedLessonsCompanion({
     this.id = const Value.absent(),
     this.userId = const Value.absent(),
-    this.badgeId = const Value.absent(),
-    this.earnedAt = const Value.absent(),
+    this.lessonId = const Value.absent(),
+    this.completedAt = const Value.absent(),
+    this.correctCount = const Value.absent(),
+    this.totalCount = const Value.absent(),
+    this.xpEarned = const Value.absent(),
+    this.durationSeconds = const Value.absent(),
   });
-
-  EarnedBadgesCompanion.insert({
+  CompletedLessonsCompanion.insert({
+    this.id = const Value.absent(),
     required String userId,
-    required String badgeId,
-    required DateTime earnedAt,
-  })  : id = const Value.absent(),
-        userId = Value(userId),
-        badgeId = Value(badgeId),
-        earnedAt = Value(earnedAt);
+    required String lessonId,
+    required DateTime completedAt,
+    this.correctCount = const Value.absent(),
+    this.totalCount = const Value.absent(),
+    this.xpEarned = const Value.absent(),
+    this.durationSeconds = const Value.absent(),
+  })  : userId = Value(userId),
+        lessonId = Value(lessonId),
+        completedAt = Value(completedAt);
+  static Insertable<CompletedLesson> custom({
+    Expression<int>? id,
+    Expression<String>? userId,
+    Expression<String>? lessonId,
+    Expression<DateTime>? completedAt,
+    Expression<int>? correctCount,
+    Expression<int>? totalCount,
+    Expression<int>? xpEarned,
+    Expression<int>? durationSeconds,
+  }) {
+    return RawValuesInsertable({
+      if (id != null) 'id': id,
+      if (userId != null) 'user_id': userId,
+      if (lessonId != null) 'lesson_id': lessonId,
+      if (completedAt != null) 'completed_at': completedAt,
+      if (correctCount != null) 'correct_count': correctCount,
+      if (totalCount != null) 'total_count': totalCount,
+      if (xpEarned != null) 'xp_earned': xpEarned,
+      if (durationSeconds != null) 'duration_seconds': durationSeconds,
+    });
+  }
+
+  CompletedLessonsCompanion copyWith(
+      {Value<int>? id,
+      Value<String>? userId,
+      Value<String>? lessonId,
+      Value<DateTime>? completedAt,
+      Value<int>? correctCount,
+      Value<int>? totalCount,
+      Value<int>? xpEarned,
+      Value<int>? durationSeconds}) {
+    return CompletedLessonsCompanion(
+      id: id ?? this.id,
+      userId: userId ?? this.userId,
+      lessonId: lessonId ?? this.lessonId,
+      completedAt: completedAt ?? this.completedAt,
+      correctCount: correctCount ?? this.correctCount,
+      totalCount: totalCount ?? this.totalCount,
+      xpEarned: xpEarned ?? this.xpEarned,
+      durationSeconds: durationSeconds ?? this.durationSeconds,
+    );
+  }
 
   @override
   Map<String, Expression> toColumns(bool nullToAbsent) {
     final map = <String, Expression>{};
-    if (id.present) map['id'] = Variable<int>(id.value);
-    if (userId.present) map['user_id'] = Variable<String>(userId.value);
-    if (badgeId.present) map['badge_id'] = Variable<String>(badgeId.value);
-    if (earnedAt.present) map['earned_at'] = Variable<DateTime>(earnedAt.value);
+    if (id.present) {
+      map['id'] = Variable<int>(id.value);
+    }
+    if (userId.present) {
+      map['user_id'] = Variable<String>(userId.value);
+    }
+    if (lessonId.present) {
+      map['lesson_id'] = Variable<String>(lessonId.value);
+    }
+    if (completedAt.present) {
+      map['completed_at'] = Variable<DateTime>(completedAt.value);
+    }
+    if (correctCount.present) {
+      map['correct_count'] = Variable<int>(correctCount.value);
+    }
+    if (totalCount.present) {
+      map['total_count'] = Variable<int>(totalCount.value);
+    }
+    if (xpEarned.present) {
+      map['xp_earned'] = Variable<int>(xpEarned.value);
+    }
+    if (durationSeconds.present) {
+      map['duration_seconds'] = Variable<int>(durationSeconds.value);
+    }
     return map;
   }
 
   @override
-  String toString() => 'EarnedBadgesCompanion(userId: $userId, badgeId: $badgeId)';
+  String toString() {
+    return (StringBuffer('CompletedLessonsCompanion(')
+          ..write('id: $id, ')
+          ..write('userId: $userId, ')
+          ..write('lessonId: $lessonId, ')
+          ..write('completedAt: $completedAt, ')
+          ..write('correctCount: $correctCount, ')
+          ..write('totalCount: $totalCount, ')
+          ..write('xpEarned: $xpEarned, ')
+          ..write('durationSeconds: $durationSeconds')
+          ..write(')'))
+        .toString();
+  }
 }
 
-// ── UserProfile DATA CLASS ────────────────────────────────────
+class $UserProgressTable extends UserProgress
+    with TableInfo<$UserProgressTable, UserProgressData> {
+  @override
+  final GeneratedDatabase attachedDatabase;
+  final String? _alias;
+  $UserProgressTable(this.attachedDatabase, [this._alias]);
+  static const VerificationMeta _idMeta = const VerificationMeta('id');
+  @override
+  late final GeneratedColumn<int> id = GeneratedColumn<int>(
+      'id', aliasedName, false,
+      hasAutoIncrement: true,
+      type: DriftSqlType.int,
+      requiredDuringInsert: false,
+      defaultConstraints:
+          GeneratedColumn.constraintIsAlways('PRIMARY KEY AUTOINCREMENT'));
+  static const VerificationMeta _userIdMeta = const VerificationMeta('userId');
+  @override
+  late final GeneratedColumn<String> userId = GeneratedColumn<String>(
+      'user_id', aliasedName, false,
+      type: DriftSqlType.string, requiredDuringInsert: true);
+  static const VerificationMeta _lessonIdMeta =
+      const VerificationMeta('lessonId');
+  @override
+  late final GeneratedColumn<String> lessonId = GeneratedColumn<String>(
+      'lesson_id', aliasedName, false,
+      type: DriftSqlType.string, requiredDuringInsert: true);
+  static const VerificationMeta _completedAtMeta =
+      const VerificationMeta('completedAt');
+  @override
+  late final GeneratedColumn<int> completedAt = GeneratedColumn<int>(
+      'completed_at', aliasedName, false,
+      type: DriftSqlType.int, requiredDuringInsert: true);
+  static const VerificationMeta _correctCountMeta =
+      const VerificationMeta('correctCount');
+  @override
+  late final GeneratedColumn<int> correctCount = GeneratedColumn<int>(
+      'correct_count', aliasedName, false,
+      type: DriftSqlType.int, requiredDuringInsert: true);
+  static const VerificationMeta _totalCountMeta =
+      const VerificationMeta('totalCount');
+  @override
+  late final GeneratedColumn<int> totalCount = GeneratedColumn<int>(
+      'total_count', aliasedName, false,
+      type: DriftSqlType.int, requiredDuringInsert: true);
+  static const VerificationMeta _xpEarnedMeta =
+      const VerificationMeta('xpEarned');
+  @override
+  late final GeneratedColumn<int> xpEarned = GeneratedColumn<int>(
+      'xp_earned', aliasedName, false,
+      type: DriftSqlType.int, requiredDuringInsert: true);
+  static const VerificationMeta _durationSecondsMeta =
+      const VerificationMeta('durationSeconds');
+  @override
+  late final GeneratedColumn<int> durationSeconds = GeneratedColumn<int>(
+      'duration_seconds', aliasedName, false,
+      type: DriftSqlType.int, requiredDuringInsert: true);
+  @override
+  List<GeneratedColumn> get $columns => [
+        id,
+        userId,
+        lessonId,
+        completedAt,
+        correctCount,
+        totalCount,
+        xpEarned,
+        durationSeconds
+      ];
+  @override
+  String get aliasedName => _alias ?? actualTableName;
+  @override
+  String get actualTableName => $name;
+  static const String $name = 'user_progress';
+  @override
+  VerificationContext validateIntegrity(Insertable<UserProgressData> instance,
+      {bool isInserting = false}) {
+    final context = VerificationContext();
+    final data = instance.toColumns(true);
+    if (data.containsKey('id')) {
+      context.handle(_idMeta, id.isAcceptableOrUnknown(data['id']!, _idMeta));
+    }
+    if (data.containsKey('user_id')) {
+      context.handle(_userIdMeta,
+          userId.isAcceptableOrUnknown(data['user_id']!, _userIdMeta));
+    } else if (isInserting) {
+      context.missing(_userIdMeta);
+    }
+    if (data.containsKey('lesson_id')) {
+      context.handle(_lessonIdMeta,
+          lessonId.isAcceptableOrUnknown(data['lesson_id']!, _lessonIdMeta));
+    } else if (isInserting) {
+      context.missing(_lessonIdMeta);
+    }
+    if (data.containsKey('completed_at')) {
+      context.handle(
+          _completedAtMeta,
+          completedAt.isAcceptableOrUnknown(
+              data['completed_at']!, _completedAtMeta));
+    } else if (isInserting) {
+      context.missing(_completedAtMeta);
+    }
+    if (data.containsKey('correct_count')) {
+      context.handle(
+          _correctCountMeta,
+          correctCount.isAcceptableOrUnknown(
+              data['correct_count']!, _correctCountMeta));
+    } else if (isInserting) {
+      context.missing(_correctCountMeta);
+    }
+    if (data.containsKey('total_count')) {
+      context.handle(
+          _totalCountMeta,
+          totalCount.isAcceptableOrUnknown(
+              data['total_count']!, _totalCountMeta));
+    } else if (isInserting) {
+      context.missing(_totalCountMeta);
+    }
+    if (data.containsKey('xp_earned')) {
+      context.handle(_xpEarnedMeta,
+          xpEarned.isAcceptableOrUnknown(data['xp_earned']!, _xpEarnedMeta));
+    } else if (isInserting) {
+      context.missing(_xpEarnedMeta);
+    }
+    if (data.containsKey('duration_seconds')) {
+      context.handle(
+          _durationSecondsMeta,
+          durationSeconds.isAcceptableOrUnknown(
+              data['duration_seconds']!, _durationSecondsMeta));
+    } else if (isInserting) {
+      context.missing(_durationSecondsMeta);
+    }
+    return context;
+  }
 
-class UserProfileData extends DataClass implements Insertable<UserProfileData> {
+  @override
+  Set<GeneratedColumn> get $primaryKey => {id};
+  @override
+  UserProgressData map(Map<String, dynamic> data, {String? tablePrefix}) {
+    final effectivePrefix = tablePrefix != null ? '$tablePrefix.' : '';
+    return UserProgressData(
+      id: attachedDatabase.typeMapping
+          .read(DriftSqlType.int, data['${effectivePrefix}id'])!,
+      userId: attachedDatabase.typeMapping
+          .read(DriftSqlType.string, data['${effectivePrefix}user_id'])!,
+      lessonId: attachedDatabase.typeMapping
+          .read(DriftSqlType.string, data['${effectivePrefix}lesson_id'])!,
+      completedAt: attachedDatabase.typeMapping
+          .read(DriftSqlType.int, data['${effectivePrefix}completed_at'])!,
+      correctCount: attachedDatabase.typeMapping
+          .read(DriftSqlType.int, data['${effectivePrefix}correct_count'])!,
+      totalCount: attachedDatabase.typeMapping
+          .read(DriftSqlType.int, data['${effectivePrefix}total_count'])!,
+      xpEarned: attachedDatabase.typeMapping
+          .read(DriftSqlType.int, data['${effectivePrefix}xp_earned'])!,
+      durationSeconds: attachedDatabase.typeMapping
+          .read(DriftSqlType.int, data['${effectivePrefix}duration_seconds'])!,
+    );
+  }
+
+  @override
+  $UserProgressTable createAlias(String alias) {
+    return $UserProgressTable(attachedDatabase, alias);
+  }
+}
+
+class UserProgressData extends DataClass
+    implements Insertable<UserProgressData> {
+  final int id;
+  final String userId;
+  final String lessonId;
+  final int completedAt;
+  final int correctCount;
+  final int totalCount;
+  final int xpEarned;
+  final int durationSeconds;
+  const UserProgressData(
+      {required this.id,
+      required this.userId,
+      required this.lessonId,
+      required this.completedAt,
+      required this.correctCount,
+      required this.totalCount,
+      required this.xpEarned,
+      required this.durationSeconds});
+  @override
+  Map<String, Expression> toColumns(bool nullToAbsent) {
+    final map = <String, Expression>{};
+    map['id'] = Variable<int>(id);
+    map['user_id'] = Variable<String>(userId);
+    map['lesson_id'] = Variable<String>(lessonId);
+    map['completed_at'] = Variable<int>(completedAt);
+    map['correct_count'] = Variable<int>(correctCount);
+    map['total_count'] = Variable<int>(totalCount);
+    map['xp_earned'] = Variable<int>(xpEarned);
+    map['duration_seconds'] = Variable<int>(durationSeconds);
+    return map;
+  }
+
+  UserProgressCompanion toCompanion(bool nullToAbsent) {
+    return UserProgressCompanion(
+      id: Value(id),
+      userId: Value(userId),
+      lessonId: Value(lessonId),
+      completedAt: Value(completedAt),
+      correctCount: Value(correctCount),
+      totalCount: Value(totalCount),
+      xpEarned: Value(xpEarned),
+      durationSeconds: Value(durationSeconds),
+    );
+  }
+
+  factory UserProgressData.fromJson(Map<String, dynamic> json,
+      {ValueSerializer? serializer}) {
+    serializer ??= driftRuntimeOptions.defaultSerializer;
+    return UserProgressData(
+      id: serializer.fromJson<int>(json['id']),
+      userId: serializer.fromJson<String>(json['userId']),
+      lessonId: serializer.fromJson<String>(json['lessonId']),
+      completedAt: serializer.fromJson<int>(json['completedAt']),
+      correctCount: serializer.fromJson<int>(json['correctCount']),
+      totalCount: serializer.fromJson<int>(json['totalCount']),
+      xpEarned: serializer.fromJson<int>(json['xpEarned']),
+      durationSeconds: serializer.fromJson<int>(json['durationSeconds']),
+    );
+  }
+  @override
+  Map<String, dynamic> toJson({ValueSerializer? serializer}) {
+    serializer ??= driftRuntimeOptions.defaultSerializer;
+    return <String, dynamic>{
+      'id': serializer.toJson<int>(id),
+      'userId': serializer.toJson<String>(userId),
+      'lessonId': serializer.toJson<String>(lessonId),
+      'completedAt': serializer.toJson<int>(completedAt),
+      'correctCount': serializer.toJson<int>(correctCount),
+      'totalCount': serializer.toJson<int>(totalCount),
+      'xpEarned': serializer.toJson<int>(xpEarned),
+      'durationSeconds': serializer.toJson<int>(durationSeconds),
+    };
+  }
+
+  UserProgressData copyWith(
+          {int? id,
+          String? userId,
+          String? lessonId,
+          int? completedAt,
+          int? correctCount,
+          int? totalCount,
+          int? xpEarned,
+          int? durationSeconds}) =>
+      UserProgressData(
+        id: id ?? this.id,
+        userId: userId ?? this.userId,
+        lessonId: lessonId ?? this.lessonId,
+        completedAt: completedAt ?? this.completedAt,
+        correctCount: correctCount ?? this.correctCount,
+        totalCount: totalCount ?? this.totalCount,
+        xpEarned: xpEarned ?? this.xpEarned,
+        durationSeconds: durationSeconds ?? this.durationSeconds,
+      );
+  UserProgressData copyWithCompanion(UserProgressCompanion data) {
+    return UserProgressData(
+      id: data.id.present ? data.id.value : this.id,
+      userId: data.userId.present ? data.userId.value : this.userId,
+      lessonId: data.lessonId.present ? data.lessonId.value : this.lessonId,
+      completedAt:
+          data.completedAt.present ? data.completedAt.value : this.completedAt,
+      correctCount: data.correctCount.present
+          ? data.correctCount.value
+          : this.correctCount,
+      totalCount:
+          data.totalCount.present ? data.totalCount.value : this.totalCount,
+      xpEarned: data.xpEarned.present ? data.xpEarned.value : this.xpEarned,
+      durationSeconds: data.durationSeconds.present
+          ? data.durationSeconds.value
+          : this.durationSeconds,
+    );
+  }
+
+  @override
+  String toString() {
+    return (StringBuffer('UserProgressData(')
+          ..write('id: $id, ')
+          ..write('userId: $userId, ')
+          ..write('lessonId: $lessonId, ')
+          ..write('completedAt: $completedAt, ')
+          ..write('correctCount: $correctCount, ')
+          ..write('totalCount: $totalCount, ')
+          ..write('xpEarned: $xpEarned, ')
+          ..write('durationSeconds: $durationSeconds')
+          ..write(')'))
+        .toString();
+  }
+
+  @override
+  int get hashCode => Object.hash(id, userId, lessonId, completedAt,
+      correctCount, totalCount, xpEarned, durationSeconds);
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      (other is UserProgressData &&
+          other.id == this.id &&
+          other.userId == this.userId &&
+          other.lessonId == this.lessonId &&
+          other.completedAt == this.completedAt &&
+          other.correctCount == this.correctCount &&
+          other.totalCount == this.totalCount &&
+          other.xpEarned == this.xpEarned &&
+          other.durationSeconds == this.durationSeconds);
+}
+
+class UserProgressCompanion extends UpdateCompanion<UserProgressData> {
+  final Value<int> id;
+  final Value<String> userId;
+  final Value<String> lessonId;
+  final Value<int> completedAt;
+  final Value<int> correctCount;
+  final Value<int> totalCount;
+  final Value<int> xpEarned;
+  final Value<int> durationSeconds;
+  const UserProgressCompanion({
+    this.id = const Value.absent(),
+    this.userId = const Value.absent(),
+    this.lessonId = const Value.absent(),
+    this.completedAt = const Value.absent(),
+    this.correctCount = const Value.absent(),
+    this.totalCount = const Value.absent(),
+    this.xpEarned = const Value.absent(),
+    this.durationSeconds = const Value.absent(),
+  });
+  UserProgressCompanion.insert({
+    this.id = const Value.absent(),
+    required String userId,
+    required String lessonId,
+    required int completedAt,
+    required int correctCount,
+    required int totalCount,
+    required int xpEarned,
+    required int durationSeconds,
+  })  : userId = Value(userId),
+        lessonId = Value(lessonId),
+        completedAt = Value(completedAt),
+        correctCount = Value(correctCount),
+        totalCount = Value(totalCount),
+        xpEarned = Value(xpEarned),
+        durationSeconds = Value(durationSeconds);
+  static Insertable<UserProgressData> custom({
+    Expression<int>? id,
+    Expression<String>? userId,
+    Expression<String>? lessonId,
+    Expression<int>? completedAt,
+    Expression<int>? correctCount,
+    Expression<int>? totalCount,
+    Expression<int>? xpEarned,
+    Expression<int>? durationSeconds,
+  }) {
+    return RawValuesInsertable({
+      if (id != null) 'id': id,
+      if (userId != null) 'user_id': userId,
+      if (lessonId != null) 'lesson_id': lessonId,
+      if (completedAt != null) 'completed_at': completedAt,
+      if (correctCount != null) 'correct_count': correctCount,
+      if (totalCount != null) 'total_count': totalCount,
+      if (xpEarned != null) 'xp_earned': xpEarned,
+      if (durationSeconds != null) 'duration_seconds': durationSeconds,
+    });
+  }
+
+  UserProgressCompanion copyWith(
+      {Value<int>? id,
+      Value<String>? userId,
+      Value<String>? lessonId,
+      Value<int>? completedAt,
+      Value<int>? correctCount,
+      Value<int>? totalCount,
+      Value<int>? xpEarned,
+      Value<int>? durationSeconds}) {
+    return UserProgressCompanion(
+      id: id ?? this.id,
+      userId: userId ?? this.userId,
+      lessonId: lessonId ?? this.lessonId,
+      completedAt: completedAt ?? this.completedAt,
+      correctCount: correctCount ?? this.correctCount,
+      totalCount: totalCount ?? this.totalCount,
+      xpEarned: xpEarned ?? this.xpEarned,
+      durationSeconds: durationSeconds ?? this.durationSeconds,
+    );
+  }
+
+  @override
+  Map<String, Expression> toColumns(bool nullToAbsent) {
+    final map = <String, Expression>{};
+    if (id.present) {
+      map['id'] = Variable<int>(id.value);
+    }
+    if (userId.present) {
+      map['user_id'] = Variable<String>(userId.value);
+    }
+    if (lessonId.present) {
+      map['lesson_id'] = Variable<String>(lessonId.value);
+    }
+    if (completedAt.present) {
+      map['completed_at'] = Variable<int>(completedAt.value);
+    }
+    if (correctCount.present) {
+      map['correct_count'] = Variable<int>(correctCount.value);
+    }
+    if (totalCount.present) {
+      map['total_count'] = Variable<int>(totalCount.value);
+    }
+    if (xpEarned.present) {
+      map['xp_earned'] = Variable<int>(xpEarned.value);
+    }
+    if (durationSeconds.present) {
+      map['duration_seconds'] = Variable<int>(durationSeconds.value);
+    }
+    return map;
+  }
+
+  @override
+  String toString() {
+    return (StringBuffer('UserProgressCompanion(')
+          ..write('id: $id, ')
+          ..write('userId: $userId, ')
+          ..write('lessonId: $lessonId, ')
+          ..write('completedAt: $completedAt, ')
+          ..write('correctCount: $correctCount, ')
+          ..write('totalCount: $totalCount, ')
+          ..write('xpEarned: $xpEarned, ')
+          ..write('durationSeconds: $durationSeconds')
+          ..write(')'))
+        .toString();
+  }
+}
+
+class $UserProfilesTable extends UserProfiles
+    with TableInfo<$UserProfilesTable, UserProfile> {
+  @override
+  final GeneratedDatabase attachedDatabase;
+  final String? _alias;
+  $UserProfilesTable(this.attachedDatabase, [this._alias]);
+  static const VerificationMeta _userIdMeta = const VerificationMeta('userId');
+  @override
+  late final GeneratedColumn<String> userId = GeneratedColumn<String>(
+      'user_id', aliasedName, false,
+      type: DriftSqlType.string, requiredDuringInsert: true);
+  static const VerificationMeta _displayNameMeta =
+      const VerificationMeta('displayName');
+  @override
+  late final GeneratedColumn<String> displayName = GeneratedColumn<String>(
+      'display_name', aliasedName, false,
+      type: DriftSqlType.string,
+      requiredDuringInsert: false,
+      defaultValue: const Constant(''));
+  static const VerificationMeta _segmentMeta =
+      const VerificationMeta('segment');
+  @override
+  late final GeneratedColumn<String> segment = GeneratedColumn<String>(
+      'segment', aliasedName, false,
+      type: DriftSqlType.string,
+      requiredDuringInsert: false,
+      defaultValue: const Constant('heritageKurdish'));
+  static const VerificationMeta _currentLevelMeta =
+      const VerificationMeta('currentLevel');
+  @override
+  late final GeneratedColumn<String> currentLevel = GeneratedColumn<String>(
+      'current_level', aliasedName, false,
+      type: DriftSqlType.string,
+      requiredDuringInsert: false,
+      defaultValue: const Constant('a1'));
+  static const VerificationMeta _interfaceLanguageMeta =
+      const VerificationMeta('interfaceLanguage');
+  @override
+  late final GeneratedColumn<String> interfaceLanguage =
+      GeneratedColumn<String>('interface_language', aliasedName, false,
+          type: DriftSqlType.string,
+          requiredDuringInsert: false,
+          defaultValue: const Constant('tr'));
+  static const VerificationMeta _dailyGoalCardsMeta =
+      const VerificationMeta('dailyGoalCards');
+  @override
+  late final GeneratedColumn<int> dailyGoalCards = GeneratedColumn<int>(
+      'daily_goal_cards', aliasedName, false,
+      type: DriftSqlType.int,
+      requiredDuringInsert: false,
+      defaultValue: const Constant(20));
+  static const VerificationMeta _streakDaysMeta =
+      const VerificationMeta('streakDays');
+  @override
+  late final GeneratedColumn<int> streakDays = GeneratedColumn<int>(
+      'streak_days', aliasedName, false,
+      type: DriftSqlType.int,
+      requiredDuringInsert: false,
+      defaultValue: const Constant(0));
+  static const VerificationMeta _totalXpMeta =
+      const VerificationMeta('totalXp');
+  @override
+  late final GeneratedColumn<int> totalXp = GeneratedColumn<int>(
+      'total_xp', aliasedName, false,
+      type: DriftSqlType.int,
+      requiredDuringInsert: false,
+      defaultValue: const Constant(0));
+  static const VerificationMeta _dyslexiaModeMeta =
+      const VerificationMeta('dyslexiaMode');
+  @override
+  late final GeneratedColumn<bool> dyslexiaMode = GeneratedColumn<bool>(
+      'dyslexia_mode', aliasedName, false,
+      type: DriftSqlType.bool,
+      requiredDuringInsert: false,
+      defaultConstraints: GeneratedColumn.constraintIsAlways(
+          'CHECK ("dyslexia_mode" IN (0, 1))'),
+      defaultValue: const Constant(false));
+  static const VerificationMeta _animationsEnabledMeta =
+      const VerificationMeta('animationsEnabled');
+  @override
+  late final GeneratedColumn<bool> animationsEnabled = GeneratedColumn<bool>(
+      'animations_enabled', aliasedName, false,
+      type: DriftSqlType.bool,
+      requiredDuringInsert: false,
+      defaultConstraints: GeneratedColumn.constraintIsAlways(
+          'CHECK ("animations_enabled" IN (0, 1))'),
+      defaultValue: const Constant(true));
+  static const VerificationMeta _isHeritageMeta =
+      const VerificationMeta('isHeritage');
+  @override
+  late final GeneratedColumn<bool> isHeritage = GeneratedColumn<bool>(
+      'is_heritage', aliasedName, false,
+      type: DriftSqlType.bool,
+      requiredDuringInsert: false,
+      defaultConstraints:
+          GeneratedColumn.constraintIsAlways('CHECK ("is_heritage" IN (0, 1))'),
+      defaultValue: const Constant(false));
+  static const VerificationMeta _lastActiveDateMeta =
+      const VerificationMeta('lastActiveDate');
+  @override
+  late final GeneratedColumn<DateTime> lastActiveDate =
+      GeneratedColumn<DateTime>('last_active_date', aliasedName, true,
+          type: DriftSqlType.dateTime, requiredDuringInsert: false);
+  @override
+  List<GeneratedColumn> get $columns => [
+        userId,
+        displayName,
+        segment,
+        currentLevel,
+        interfaceLanguage,
+        dailyGoalCards,
+        streakDays,
+        totalXp,
+        dyslexiaMode,
+        animationsEnabled,
+        isHeritage,
+        lastActiveDate
+      ];
+  @override
+  String get aliasedName => _alias ?? actualTableName;
+  @override
+  String get actualTableName => $name;
+  static const String $name = 'user_profiles';
+  @override
+  VerificationContext validateIntegrity(Insertable<UserProfile> instance,
+      {bool isInserting = false}) {
+    final context = VerificationContext();
+    final data = instance.toColumns(true);
+    if (data.containsKey('user_id')) {
+      context.handle(_userIdMeta,
+          userId.isAcceptableOrUnknown(data['user_id']!, _userIdMeta));
+    } else if (isInserting) {
+      context.missing(_userIdMeta);
+    }
+    if (data.containsKey('display_name')) {
+      context.handle(
+          _displayNameMeta,
+          displayName.isAcceptableOrUnknown(
+              data['display_name']!, _displayNameMeta));
+    }
+    if (data.containsKey('segment')) {
+      context.handle(_segmentMeta,
+          segment.isAcceptableOrUnknown(data['segment']!, _segmentMeta));
+    }
+    if (data.containsKey('current_level')) {
+      context.handle(
+          _currentLevelMeta,
+          currentLevel.isAcceptableOrUnknown(
+              data['current_level']!, _currentLevelMeta));
+    }
+    if (data.containsKey('interface_language')) {
+      context.handle(
+          _interfaceLanguageMeta,
+          interfaceLanguage.isAcceptableOrUnknown(
+              data['interface_language']!, _interfaceLanguageMeta));
+    }
+    if (data.containsKey('daily_goal_cards')) {
+      context.handle(
+          _dailyGoalCardsMeta,
+          dailyGoalCards.isAcceptableOrUnknown(
+              data['daily_goal_cards']!, _dailyGoalCardsMeta));
+    }
+    if (data.containsKey('streak_days')) {
+      context.handle(
+          _streakDaysMeta,
+          streakDays.isAcceptableOrUnknown(
+              data['streak_days']!, _streakDaysMeta));
+    }
+    if (data.containsKey('total_xp')) {
+      context.handle(_totalXpMeta,
+          totalXp.isAcceptableOrUnknown(data['total_xp']!, _totalXpMeta));
+    }
+    if (data.containsKey('dyslexia_mode')) {
+      context.handle(
+          _dyslexiaModeMeta,
+          dyslexiaMode.isAcceptableOrUnknown(
+              data['dyslexia_mode']!, _dyslexiaModeMeta));
+    }
+    if (data.containsKey('animations_enabled')) {
+      context.handle(
+          _animationsEnabledMeta,
+          animationsEnabled.isAcceptableOrUnknown(
+              data['animations_enabled']!, _animationsEnabledMeta));
+    }
+    if (data.containsKey('is_heritage')) {
+      context.handle(
+          _isHeritageMeta,
+          isHeritage.isAcceptableOrUnknown(
+              data['is_heritage']!, _isHeritageMeta));
+    }
+    if (data.containsKey('last_active_date')) {
+      context.handle(
+          _lastActiveDateMeta,
+          lastActiveDate.isAcceptableOrUnknown(
+              data['last_active_date']!, _lastActiveDateMeta));
+    }
+    return context;
+  }
+
+  @override
+  Set<GeneratedColumn> get $primaryKey => {userId};
+  @override
+  UserProfile map(Map<String, dynamic> data, {String? tablePrefix}) {
+    final effectivePrefix = tablePrefix != null ? '$tablePrefix.' : '';
+    return UserProfile(
+      userId: attachedDatabase.typeMapping
+          .read(DriftSqlType.string, data['${effectivePrefix}user_id'])!,
+      displayName: attachedDatabase.typeMapping
+          .read(DriftSqlType.string, data['${effectivePrefix}display_name'])!,
+      segment: attachedDatabase.typeMapping
+          .read(DriftSqlType.string, data['${effectivePrefix}segment'])!,
+      currentLevel: attachedDatabase.typeMapping
+          .read(DriftSqlType.string, data['${effectivePrefix}current_level'])!,
+      interfaceLanguage: attachedDatabase.typeMapping.read(
+          DriftSqlType.string, data['${effectivePrefix}interface_language'])!,
+      dailyGoalCards: attachedDatabase.typeMapping
+          .read(DriftSqlType.int, data['${effectivePrefix}daily_goal_cards'])!,
+      streakDays: attachedDatabase.typeMapping
+          .read(DriftSqlType.int, data['${effectivePrefix}streak_days'])!,
+      totalXp: attachedDatabase.typeMapping
+          .read(DriftSqlType.int, data['${effectivePrefix}total_xp'])!,
+      dyslexiaMode: attachedDatabase.typeMapping
+          .read(DriftSqlType.bool, data['${effectivePrefix}dyslexia_mode'])!,
+      animationsEnabled: attachedDatabase.typeMapping.read(
+          DriftSqlType.bool, data['${effectivePrefix}animations_enabled'])!,
+      isHeritage: attachedDatabase.typeMapping
+          .read(DriftSqlType.bool, data['${effectivePrefix}is_heritage'])!,
+      lastActiveDate: attachedDatabase.typeMapping.read(
+          DriftSqlType.dateTime, data['${effectivePrefix}last_active_date']),
+    );
+  }
+
+  @override
+  $UserProfilesTable createAlias(String alias) {
+    return $UserProfilesTable(attachedDatabase, alias);
+  }
+}
+
+class UserProfile extends DataClass implements Insertable<UserProfile> {
   final String userId;
   final String displayName;
   final String segment;
@@ -470,75 +2268,208 @@ class UserProfileData extends DataClass implements Insertable<UserProfileData> {
   final bool dyslexiaMode;
   final bool animationsEnabled;
   final bool isHeritage;
-
-  const UserProfileData({
-    required this.userId,
-    required this.displayName,
-    required this.segment,
-    required this.currentLevel,
-    required this.interfaceLanguage,
-    required this.dailyGoalCards,
-    required this.streakDays,
-    required this.totalXp,
-    required this.dyslexiaMode,
-    required this.animationsEnabled,
-    required this.isHeritage,
-  });
-
+  final DateTime? lastActiveDate;
+  const UserProfile(
+      {required this.userId,
+      required this.displayName,
+      required this.segment,
+      required this.currentLevel,
+      required this.interfaceLanguage,
+      required this.dailyGoalCards,
+      required this.streakDays,
+      required this.totalXp,
+      required this.dyslexiaMode,
+      required this.animationsEnabled,
+      required this.isHeritage,
+      this.lastActiveDate});
   @override
-  Map<String, Expression> toColumns(bool nullToAbsent) => {
-    'user_id': Variable<String>(userId),
-    'display_name': Variable<String>(displayName),
-    'segment': Variable<String>(segment),
-    'current_level': Variable<String>(currentLevel),
-    'interface_language': Variable<String>(interfaceLanguage),
-    'daily_goal_cards': Variable<int>(dailyGoalCards),
-    'streak_days': Variable<int>(streakDays),
-    'total_xp': Variable<int>(totalXp),
-    'dyslexia_mode': Variable<bool>(dyslexiaMode),
-    'animations_enabled': Variable<bool>(animationsEnabled),
-    'is_heritage': Variable<bool>(isHeritage),
-  };
+  Map<String, Expression> toColumns(bool nullToAbsent) {
+    final map = <String, Expression>{};
+    map['user_id'] = Variable<String>(userId);
+    map['display_name'] = Variable<String>(displayName);
+    map['segment'] = Variable<String>(segment);
+    map['current_level'] = Variable<String>(currentLevel);
+    map['interface_language'] = Variable<String>(interfaceLanguage);
+    map['daily_goal_cards'] = Variable<int>(dailyGoalCards);
+    map['streak_days'] = Variable<int>(streakDays);
+    map['total_xp'] = Variable<int>(totalXp);
+    map['dyslexia_mode'] = Variable<bool>(dyslexiaMode);
+    map['animations_enabled'] = Variable<bool>(animationsEnabled);
+    map['is_heritage'] = Variable<bool>(isHeritage);
+    if (!nullToAbsent || lastActiveDate != null) {
+      map['last_active_date'] = Variable<DateTime>(lastActiveDate);
+    }
+    return map;
+  }
 
-  @override
-  UserProfilesCompanion toCompanion(bool nullToAbsent) => UserProfilesCompanion(
-    userId: Value(userId),
-    displayName: Value(displayName),
-    segment: Value(segment),
-    currentLevel: Value(currentLevel),
-    interfaceLanguage: Value(interfaceLanguage),
-    dailyGoalCards: Value(dailyGoalCards),
-    streakDays: Value(streakDays),
-    totalXp: Value(totalXp),
-    dyslexiaMode: Value(dyslexiaMode),
-    animationsEnabled: Value(animationsEnabled),
-    isHeritage: Value(isHeritage),
-  );
+  UserProfilesCompanion toCompanion(bool nullToAbsent) {
+    return UserProfilesCompanion(
+      userId: Value(userId),
+      displayName: Value(displayName),
+      segment: Value(segment),
+      currentLevel: Value(currentLevel),
+      interfaceLanguage: Value(interfaceLanguage),
+      dailyGoalCards: Value(dailyGoalCards),
+      streakDays: Value(streakDays),
+      totalXp: Value(totalXp),
+      dyslexiaMode: Value(dyslexiaMode),
+      animationsEnabled: Value(animationsEnabled),
+      isHeritage: Value(isHeritage),
+      lastActiveDate: lastActiveDate == null && nullToAbsent
+          ? const Value.absent()
+          : Value(lastActiveDate),
+    );
+  }
 
+  factory UserProfile.fromJson(Map<String, dynamic> json,
+      {ValueSerializer? serializer}) {
+    serializer ??= driftRuntimeOptions.defaultSerializer;
+    return UserProfile(
+      userId: serializer.fromJson<String>(json['userId']),
+      displayName: serializer.fromJson<String>(json['displayName']),
+      segment: serializer.fromJson<String>(json['segment']),
+      currentLevel: serializer.fromJson<String>(json['currentLevel']),
+      interfaceLanguage: serializer.fromJson<String>(json['interfaceLanguage']),
+      dailyGoalCards: serializer.fromJson<int>(json['dailyGoalCards']),
+      streakDays: serializer.fromJson<int>(json['streakDays']),
+      totalXp: serializer.fromJson<int>(json['totalXp']),
+      dyslexiaMode: serializer.fromJson<bool>(json['dyslexiaMode']),
+      animationsEnabled: serializer.fromJson<bool>(json['animationsEnabled']),
+      isHeritage: serializer.fromJson<bool>(json['isHeritage']),
+      lastActiveDate: serializer.fromJson<DateTime?>(json['lastActiveDate']),
+    );
+  }
   @override
-  Map<String, dynamic> toJson({ValueSerializer? serializer}) => {};
-  factory UserProfileData.fromJson(Map<String, dynamic> j, {ValueSerializer? s}) =>
-      UserProfileData(
-        userId: j['user_id'] as String,
-        displayName: j['display_name'] as String? ?? '',
-        segment: j['segment'] as String? ?? 'absoluteBeginner',
-        currentLevel: j['current_level'] as String? ?? 'a1',
-        interfaceLanguage: j['interface_language'] as String? ?? 'tr',
-        dailyGoalCards: j['daily_goal_cards'] as int? ?? 20,
-        streakDays: j['streak_days'] as int? ?? 0,
-        totalXp: j['total_xp'] as int? ?? 0,
-        dyslexiaMode: j['dyslexia_mode'] as bool? ?? false,
-        animationsEnabled: j['animations_enabled'] as bool? ?? true,
-        isHeritage: j['is_heritage'] as bool? ?? false,
+  Map<String, dynamic> toJson({ValueSerializer? serializer}) {
+    serializer ??= driftRuntimeOptions.defaultSerializer;
+    return <String, dynamic>{
+      'userId': serializer.toJson<String>(userId),
+      'displayName': serializer.toJson<String>(displayName),
+      'segment': serializer.toJson<String>(segment),
+      'currentLevel': serializer.toJson<String>(currentLevel),
+      'interfaceLanguage': serializer.toJson<String>(interfaceLanguage),
+      'dailyGoalCards': serializer.toJson<int>(dailyGoalCards),
+      'streakDays': serializer.toJson<int>(streakDays),
+      'totalXp': serializer.toJson<int>(totalXp),
+      'dyslexiaMode': serializer.toJson<bool>(dyslexiaMode),
+      'animationsEnabled': serializer.toJson<bool>(animationsEnabled),
+      'isHeritage': serializer.toJson<bool>(isHeritage),
+      'lastActiveDate': serializer.toJson<DateTime?>(lastActiveDate),
+    };
+  }
+
+  UserProfile copyWith(
+          {String? userId,
+          String? displayName,
+          String? segment,
+          String? currentLevel,
+          String? interfaceLanguage,
+          int? dailyGoalCards,
+          int? streakDays,
+          int? totalXp,
+          bool? dyslexiaMode,
+          bool? animationsEnabled,
+          bool? isHeritage,
+          Value<DateTime?> lastActiveDate = const Value.absent()}) =>
+      UserProfile(
+        userId: userId ?? this.userId,
+        displayName: displayName ?? this.displayName,
+        segment: segment ?? this.segment,
+        currentLevel: currentLevel ?? this.currentLevel,
+        interfaceLanguage: interfaceLanguage ?? this.interfaceLanguage,
+        dailyGoalCards: dailyGoalCards ?? this.dailyGoalCards,
+        streakDays: streakDays ?? this.streakDays,
+        totalXp: totalXp ?? this.totalXp,
+        dyslexiaMode: dyslexiaMode ?? this.dyslexiaMode,
+        animationsEnabled: animationsEnabled ?? this.animationsEnabled,
+        isHeritage: isHeritage ?? this.isHeritage,
+        lastActiveDate:
+            lastActiveDate.present ? lastActiveDate.value : this.lastActiveDate,
       );
+  UserProfile copyWithCompanion(UserProfilesCompanion data) {
+    return UserProfile(
+      userId: data.userId.present ? data.userId.value : this.userId,
+      displayName:
+          data.displayName.present ? data.displayName.value : this.displayName,
+      segment: data.segment.present ? data.segment.value : this.segment,
+      currentLevel: data.currentLevel.present
+          ? data.currentLevel.value
+          : this.currentLevel,
+      interfaceLanguage: data.interfaceLanguage.present
+          ? data.interfaceLanguage.value
+          : this.interfaceLanguage,
+      dailyGoalCards: data.dailyGoalCards.present
+          ? data.dailyGoalCards.value
+          : this.dailyGoalCards,
+      streakDays:
+          data.streakDays.present ? data.streakDays.value : this.streakDays,
+      totalXp: data.totalXp.present ? data.totalXp.value : this.totalXp,
+      dyslexiaMode: data.dyslexiaMode.present
+          ? data.dyslexiaMode.value
+          : this.dyslexiaMode,
+      animationsEnabled: data.animationsEnabled.present
+          ? data.animationsEnabled.value
+          : this.animationsEnabled,
+      isHeritage:
+          data.isHeritage.present ? data.isHeritage.value : this.isHeritage,
+      lastActiveDate: data.lastActiveDate.present
+          ? data.lastActiveDate.value
+          : this.lastActiveDate,
+    );
+  }
 
   @override
-  int get hashCode => userId.hashCode;
+  String toString() {
+    return (StringBuffer('UserProfile(')
+          ..write('userId: $userId, ')
+          ..write('displayName: $displayName, ')
+          ..write('segment: $segment, ')
+          ..write('currentLevel: $currentLevel, ')
+          ..write('interfaceLanguage: $interfaceLanguage, ')
+          ..write('dailyGoalCards: $dailyGoalCards, ')
+          ..write('streakDays: $streakDays, ')
+          ..write('totalXp: $totalXp, ')
+          ..write('dyslexiaMode: $dyslexiaMode, ')
+          ..write('animationsEnabled: $animationsEnabled, ')
+          ..write('isHeritage: $isHeritage, ')
+          ..write('lastActiveDate: $lastActiveDate')
+          ..write(')'))
+        .toString();
+  }
+
   @override
-  bool operator ==(Object other) => other is UserProfileData && other.userId == userId;
+  int get hashCode => Object.hash(
+      userId,
+      displayName,
+      segment,
+      currentLevel,
+      interfaceLanguage,
+      dailyGoalCards,
+      streakDays,
+      totalXp,
+      dyslexiaMode,
+      animationsEnabled,
+      isHeritage,
+      lastActiveDate);
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      (other is UserProfile &&
+          other.userId == this.userId &&
+          other.displayName == this.displayName &&
+          other.segment == this.segment &&
+          other.currentLevel == this.currentLevel &&
+          other.interfaceLanguage == this.interfaceLanguage &&
+          other.dailyGoalCards == this.dailyGoalCards &&
+          other.streakDays == this.streakDays &&
+          other.totalXp == this.totalXp &&
+          other.dyslexiaMode == this.dyslexiaMode &&
+          other.animationsEnabled == this.animationsEnabled &&
+          other.isHeritage == this.isHeritage &&
+          other.lastActiveDate == this.lastActiveDate);
 }
 
-class UserProfilesCompanion extends UpdateCompanion<UserProfileData> {
+class UserProfilesCompanion extends UpdateCompanion<UserProfile> {
   final Value<String> userId;
   final Value<String> displayName;
   final Value<String> segment;
@@ -550,7 +2481,8 @@ class UserProfilesCompanion extends UpdateCompanion<UserProfileData> {
   final Value<bool> dyslexiaMode;
   final Value<bool> animationsEnabled;
   final Value<bool> isHeritage;
-
+  final Value<DateTime?> lastActiveDate;
+  final Value<int> rowid;
   const UserProfilesCompanion({
     this.userId = const Value.absent(),
     this.displayName = const Value.absent(),
@@ -563,380 +2495,1858 @@ class UserProfilesCompanion extends UpdateCompanion<UserProfileData> {
     this.dyslexiaMode = const Value.absent(),
     this.animationsEnabled = const Value.absent(),
     this.isHeritage = const Value.absent(),
+    this.lastActiveDate = const Value.absent(),
+    this.rowid = const Value.absent(),
   });
+  UserProfilesCompanion.insert({
+    required String userId,
+    this.displayName = const Value.absent(),
+    this.segment = const Value.absent(),
+    this.currentLevel = const Value.absent(),
+    this.interfaceLanguage = const Value.absent(),
+    this.dailyGoalCards = const Value.absent(),
+    this.streakDays = const Value.absent(),
+    this.totalXp = const Value.absent(),
+    this.dyslexiaMode = const Value.absent(),
+    this.animationsEnabled = const Value.absent(),
+    this.isHeritage = const Value.absent(),
+    this.lastActiveDate = const Value.absent(),
+    this.rowid = const Value.absent(),
+  }) : userId = Value(userId);
+  static Insertable<UserProfile> custom({
+    Expression<String>? userId,
+    Expression<String>? displayName,
+    Expression<String>? segment,
+    Expression<String>? currentLevel,
+    Expression<String>? interfaceLanguage,
+    Expression<int>? dailyGoalCards,
+    Expression<int>? streakDays,
+    Expression<int>? totalXp,
+    Expression<bool>? dyslexiaMode,
+    Expression<bool>? animationsEnabled,
+    Expression<bool>? isHeritage,
+    Expression<DateTime>? lastActiveDate,
+    Expression<int>? rowid,
+  }) {
+    return RawValuesInsertable({
+      if (userId != null) 'user_id': userId,
+      if (displayName != null) 'display_name': displayName,
+      if (segment != null) 'segment': segment,
+      if (currentLevel != null) 'current_level': currentLevel,
+      if (interfaceLanguage != null) 'interface_language': interfaceLanguage,
+      if (dailyGoalCards != null) 'daily_goal_cards': dailyGoalCards,
+      if (streakDays != null) 'streak_days': streakDays,
+      if (totalXp != null) 'total_xp': totalXp,
+      if (dyslexiaMode != null) 'dyslexia_mode': dyslexiaMode,
+      if (animationsEnabled != null) 'animations_enabled': animationsEnabled,
+      if (isHeritage != null) 'is_heritage': isHeritage,
+      if (lastActiveDate != null) 'last_active_date': lastActiveDate,
+      if (rowid != null) 'rowid': rowid,
+    });
+  }
+
+  UserProfilesCompanion copyWith(
+      {Value<String>? userId,
+      Value<String>? displayName,
+      Value<String>? segment,
+      Value<String>? currentLevel,
+      Value<String>? interfaceLanguage,
+      Value<int>? dailyGoalCards,
+      Value<int>? streakDays,
+      Value<int>? totalXp,
+      Value<bool>? dyslexiaMode,
+      Value<bool>? animationsEnabled,
+      Value<bool>? isHeritage,
+      Value<DateTime?>? lastActiveDate,
+      Value<int>? rowid}) {
+    return UserProfilesCompanion(
+      userId: userId ?? this.userId,
+      displayName: displayName ?? this.displayName,
+      segment: segment ?? this.segment,
+      currentLevel: currentLevel ?? this.currentLevel,
+      interfaceLanguage: interfaceLanguage ?? this.interfaceLanguage,
+      dailyGoalCards: dailyGoalCards ?? this.dailyGoalCards,
+      streakDays: streakDays ?? this.streakDays,
+      totalXp: totalXp ?? this.totalXp,
+      dyslexiaMode: dyslexiaMode ?? this.dyslexiaMode,
+      animationsEnabled: animationsEnabled ?? this.animationsEnabled,
+      isHeritage: isHeritage ?? this.isHeritage,
+      lastActiveDate: lastActiveDate ?? this.lastActiveDate,
+      rowid: rowid ?? this.rowid,
+    );
+  }
 
   @override
   Map<String, Expression> toColumns(bool nullToAbsent) {
     final map = <String, Expression>{};
-    if (userId.present) map['user_id'] = Variable<String>(userId.value);
-    if (displayName.present) map['display_name'] = Variable<String>(displayName.value);
-    if (segment.present) map['segment'] = Variable<String>(segment.value);
-    if (currentLevel.present) map['current_level'] = Variable<String>(currentLevel.value);
-    if (interfaceLanguage.present) map['interface_language'] = Variable<String>(interfaceLanguage.value);
-    if (dailyGoalCards.present) map['daily_goal_cards'] = Variable<int>(dailyGoalCards.value);
-    if (streakDays.present) map['streak_days'] = Variable<int>(streakDays.value);
-    if (totalXp.present) map['total_xp'] = Variable<int>(totalXp.value);
-    if (dyslexiaMode.present) map['dyslexia_mode'] = Variable<bool>(dyslexiaMode.value);
-    if (animationsEnabled.present) map['animations_enabled'] = Variable<bool>(animationsEnabled.value);
-    if (isHeritage.present) map['is_heritage'] = Variable<bool>(isHeritage.value);
+    if (userId.present) {
+      map['user_id'] = Variable<String>(userId.value);
+    }
+    if (displayName.present) {
+      map['display_name'] = Variable<String>(displayName.value);
+    }
+    if (segment.present) {
+      map['segment'] = Variable<String>(segment.value);
+    }
+    if (currentLevel.present) {
+      map['current_level'] = Variable<String>(currentLevel.value);
+    }
+    if (interfaceLanguage.present) {
+      map['interface_language'] = Variable<String>(interfaceLanguage.value);
+    }
+    if (dailyGoalCards.present) {
+      map['daily_goal_cards'] = Variable<int>(dailyGoalCards.value);
+    }
+    if (streakDays.present) {
+      map['streak_days'] = Variable<int>(streakDays.value);
+    }
+    if (totalXp.present) {
+      map['total_xp'] = Variable<int>(totalXp.value);
+    }
+    if (dyslexiaMode.present) {
+      map['dyslexia_mode'] = Variable<bool>(dyslexiaMode.value);
+    }
+    if (animationsEnabled.present) {
+      map['animations_enabled'] = Variable<bool>(animationsEnabled.value);
+    }
+    if (isHeritage.present) {
+      map['is_heritage'] = Variable<bool>(isHeritage.value);
+    }
+    if (lastActiveDate.present) {
+      map['last_active_date'] = Variable<DateTime>(lastActiveDate.value);
+    }
+    if (rowid.present) {
+      map['rowid'] = Variable<int>(rowid.value);
+    }
     return map;
   }
 
   @override
-  String toString() => 'UserProfilesCompanion(userId: $userId)';
-}
-
-// ── AppDatabase MIXIN ─────────────────────────────────────────
-
-mixin _$AppDatabase on GeneratedDatabase {
-  $VocabularyCardsTable get vocabularyCards =>
-      LazyDatabase(() async => $VocabularyCardsTable(attachedDatabase))
-          as $VocabularyCardsTable;
-  $FsrsReviewsTable get fsrsReviews =>
-      LazyDatabase(() async => $FsrsReviewsTable(attachedDatabase))
-          as $FsrsReviewsTable;
-  $CompletedLessonsTable get completedLessons =>
-      LazyDatabase(() async => $CompletedLessonsTable(attachedDatabase))
-          as $CompletedLessonsTable;
-  $UserProfilesTable get userProfiles =>
-      LazyDatabase(() async => $UserProfilesTable(attachedDatabase))
-          as $UserProfilesTable;
-  $EarnedBadgesTable get earnedBadges =>
-      LazyDatabase(() async => $EarnedBadgesTable(attachedDatabase))
-          as $EarnedBadgesTable;
-}
-
-// ── Tablo Sınıfları ───────────────────────────────────────────
-
-class $VocabularyCardsTable extends VocabularyCards
-    with TableInfo<$VocabularyCardsTable, VocabularyCard> {
-  final GeneratedDatabase attachedDatabase;
-  $VocabularyCardsTable(this.attachedDatabase);
-
-  @override
-  List<GeneratedColumn> get $columns => [
-        GeneratedColumn<String>('id', aliasedName, false,
-            type: DriftSqlType.string),
-        GeneratedColumn<String>('kurmanji', aliasedName, false,
-            type: DriftSqlType.string),
-        GeneratedColumn<String>('turkish', aliasedName, false,
-            type: DriftSqlType.string),
-        GeneratedColumn<String?>('english', aliasedName, true,
-            type: DriftSqlType.string),
-        GeneratedColumn<String?>('audio_url', aliasedName, true,
-            type: DriftSqlType.string),
-        GeneratedColumn<String>('gender', aliasedName, false,
-            type: DriftSqlType.string, defaultValue: const Constant('bêcins')),
-        GeneratedColumn<String>('category', aliasedName, false,
-            type: DriftSqlType.string),
-        GeneratedColumn<int>('level', aliasedName, false,
-            type: DriftSqlType.int, defaultValue: const Constant(1)),
-        GeneratedColumn<String>('sentences_heritage', aliasedName, false,
-            type: DriftSqlType.string, defaultValue: const Constant('[]')),
-        GeneratedColumn<String>('sentences_general', aliasedName, false,
-            type: DriftSqlType.string, defaultValue: const Constant('[]')),
-        GeneratedColumn<double>('initial_difficulty', aliasedName, false,
-            type: DriftSqlType.double, defaultValue: const Constant(0.75)),
-      ];
-
-  @override
-  String get aliasedName => _alias ?? 'vocabulary_cards';
-  @override
-  String get actualTableName => 'vocabulary_cards';
-  String? _alias;
-
-  @override
-  $VocabularyCardsTable createAlias(String alias) {
-    return $VocabularyCardsTable(attachedDatabase).._alias = alias;
-  }
-
-  @override
-  Set<GeneratedColumn> get $primaryKey => {$columns[0]};
-
-  @override
-  VocabularyCard map(Map<String, dynamic> data, {String? tablePrefix}) {
-    final p = tablePrefix != null ? '$tablePrefix.' : '';
-    return VocabularyCard(
-      id: data['${p}id'] as String,
-      kurmanji: data['${p}kurmanji'] as String,
-      turkish: data['${p}turkish'] as String,
-      english: data['${p}english'] as String?,
-      audioUrl: data['${p}audio_url'] as String?,
-      gender: data['${p}gender'] as String? ?? 'bêcins',
-      category: data['${p}category'] as String,
-      level: data['${p}level'] as int? ?? 1,
-      sentencesHeritage: data['${p}sentences_heritage'] as String? ?? '[]',
-      sentencesGeneral: data['${p}sentences_general'] as String? ?? '[]',
-      initialDifficulty: (data['${p}initial_difficulty'] as num?)?.toDouble() ?? 0.75,
-    );
-  }
-}
-
-class $FsrsReviewsTable extends FsrsReviews
-    with TableInfo<$FsrsReviewsTable, FsrsReview> {
-  final GeneratedDatabase attachedDatabase;
-  $FsrsReviewsTable(this.attachedDatabase);
-
-  @override
-  List<GeneratedColumn> get $columns => [
-        GeneratedColumn<int>('id', aliasedName, false,
-            hasAutoIncrement: true, type: DriftSqlType.int),
-        GeneratedColumn<String>('card_id', aliasedName, false,
-            type: DriftSqlType.string),
-        GeneratedColumn<String>('user_id', aliasedName, false,
-            type: DriftSqlType.string),
-        GeneratedColumn<double>('stability', aliasedName, false,
-            type: DriftSqlType.double, defaultValue: const Constant(1.0)),
-        GeneratedColumn<double>('difficulty', aliasedName, false,
-            type: DriftSqlType.double, defaultValue: const Constant(5.0)),
-        GeneratedColumn<double>('retrievability', aliasedName, false,
-            type: DriftSqlType.double, defaultValue: const Constant(0.9)),
-        GeneratedColumn<String>('state', aliasedName, false,
-            type: DriftSqlType.string, defaultValue: const Constant('new')),
-        GeneratedColumn<int>('review_count', aliasedName, false,
-            type: DriftSqlType.int, defaultValue: const Constant(0)),
-        GeneratedColumn<int>('lapse_count', aliasedName, false,
-            type: DriftSqlType.int, defaultValue: const Constant(0)),
-        GeneratedColumn<bool>('was_correct', aliasedName, false,
-            type: DriftSqlType.bool, defaultValue: const Constant(true)),
-        GeneratedColumn<DateTime?>('last_review', aliasedName, true,
-            type: DriftSqlType.dateTime),
-        GeneratedColumn<DateTime>('due_date', aliasedName, false,
-            type: DriftSqlType.dateTime),
-      ];
-
-  @override
-  String get aliasedName => _alias ?? 'fsrs_reviews';
-  @override
-  String get actualTableName => 'fsrs_reviews';
-  String? _alias;
-
-  @override
-  $FsrsReviewsTable createAlias(String alias) =>
-      $FsrsReviewsTable(attachedDatabase).._alias = alias;
-
-  @override
-  Set<GeneratedColumn> get $primaryKey => {$columns[0]};
-
-  @override
-  FsrsReview map(Map<String, dynamic> data, {String? tablePrefix}) {
-    final p = tablePrefix != null ? '$tablePrefix.' : '';
-    return FsrsReview(
-      id: data['${p}id'] as int,
-      cardId: data['${p}card_id'] as String,
-      userId: data['${p}user_id'] as String,
-      stability: (data['${p}stability'] as num?)?.toDouble() ?? 1.0,
-      difficulty: (data['${p}difficulty'] as num?)?.toDouble() ?? 5.0,
-      retrievability: (data['${p}retrievability'] as num?)?.toDouble() ?? 0.9,
-      state: data['${p}state'] as String? ?? 'new',
-      reviewCount: data['${p}review_count'] as int? ?? 0,
-      lapseCount: data['${p}lapse_count'] as int? ?? 0,
-      wasCorrect: data['${p}was_correct'] as bool? ?? true,
-      lastReview: data['${p}last_review'] as DateTime?,
-      dueDate: data['${p}due_date'] as DateTime? ?? DateTime.now(),
-    );
-  }
-}
-
-class $CompletedLessonsTable extends CompletedLessons
-    with TableInfo<$CompletedLessonsTable, CompletedLessonData> {
-  final GeneratedDatabase attachedDatabase;
-  $CompletedLessonsTable(this.attachedDatabase);
-
-  @override
-  List<GeneratedColumn> get $columns => [
-        GeneratedColumn<int>('id', aliasedName, false,
-            hasAutoIncrement: true, type: DriftSqlType.int),
-        GeneratedColumn<String>('user_id', aliasedName, false,
-            type: DriftSqlType.string),
-        GeneratedColumn<String>('lesson_id', aliasedName, false,
-            type: DriftSqlType.string),
-        GeneratedColumn<DateTime>('completed_at', aliasedName, false,
-            type: DriftSqlType.dateTime),
-        GeneratedColumn<int>('correct_count', aliasedName, false,
-            type: DriftSqlType.int, defaultValue: const Constant(0)),
-        GeneratedColumn<int>('total_count', aliasedName, false,
-            type: DriftSqlType.int, defaultValue: const Constant(0)),
-        GeneratedColumn<int>('xp_earned', aliasedName, false,
-            type: DriftSqlType.int, defaultValue: const Constant(0)),
-        GeneratedColumn<int>('duration_seconds', aliasedName, false,
-            type: DriftSqlType.int, defaultValue: const Constant(0)),
-      ];
-
-  @override
-  String get aliasedName => _alias ?? 'completed_lessons';
-  @override
-  String get actualTableName => 'completed_lessons';
-  String? _alias;
-
-  @override
-  $CompletedLessonsTable createAlias(String alias) =>
-      $CompletedLessonsTable(attachedDatabase).._alias = alias;
-
-  @override
-  Set<GeneratedColumn> get $primaryKey => {$columns[0]};
-
-  @override
-  CompletedLessonData map(Map<String, dynamic> data, {String? tablePrefix}) {
-    final p = tablePrefix != null ? '$tablePrefix.' : '';
-    return CompletedLessonData(
-      id: data['${p}id'] as int,
-      userId: data['${p}user_id'] as String,
-      lessonId: data['${p}lesson_id'] as String,
-      completedAt: data['${p}completed_at'] as DateTime? ?? DateTime.now(),
-      correctCount: data['${p}correct_count'] as int? ?? 0,
-      totalCount: data['${p}total_count'] as int? ?? 0,
-      xpEarned: data['${p}xp_earned'] as int? ?? 0,
-      durationSeconds: data['${p}duration_seconds'] as int? ?? 0,
-    );
-  }
-}
-
-class CompletedLessonData extends DataClass
-    implements Insertable<CompletedLessonData> {
-  final int id;
-  final String userId;
-  final String lessonId;
-  final DateTime completedAt;
-  final int correctCount;
-  final int totalCount;
-  final int xpEarned;
-  final int durationSeconds;
-
-  const CompletedLessonData({
-    required this.id,
-    required this.userId,
-    required this.lessonId,
-    required this.completedAt,
-    required this.correctCount,
-    required this.totalCount,
-    required this.xpEarned,
-    required this.durationSeconds,
-  });
-
-  @override
-  Map<String, Expression> toColumns(bool nullToAbsent) => {};
-  @override
-  Map<String, dynamic> toJson({ValueSerializer? serializer}) => {};
-  factory CompletedLessonData.fromJson(Map<String, dynamic> j, {ValueSerializer? s}) =>
-      CompletedLessonData(
-        id: j['id'] as int,
-        userId: j['user_id'] as String,
-        lessonId: j['lesson_id'] as String,
-        completedAt: DateTime.fromMillisecondsSinceEpoch(j['completed_at'] as int),
-        correctCount: j['correct_count'] as int? ?? 0,
-        totalCount: j['total_count'] as int? ?? 0,
-        xpEarned: j['xp_earned'] as int? ?? 0,
-        durationSeconds: j['duration_seconds'] as int? ?? 0,
-      );
-
-  @override
-  int get hashCode => id;
-  @override
-  bool operator ==(Object other) => other is CompletedLessonData && other.id == id;
-}
-
-class $UserProfilesTable extends UserProfiles
-    with TableInfo<$UserProfilesTable, UserProfileData> {
-  final GeneratedDatabase attachedDatabase;
-  $UserProfilesTable(this.attachedDatabase);
-
-  @override
-  List<GeneratedColumn> get $columns => [
-        GeneratedColumn<String>('user_id', aliasedName, false,
-            type: DriftSqlType.string),
-        GeneratedColumn<String>('display_name', aliasedName, false,
-            type: DriftSqlType.string, defaultValue: const Constant('')),
-        GeneratedColumn<String>('segment', aliasedName, false,
-            type: DriftSqlType.string),
-        GeneratedColumn<String>('current_level', aliasedName, false,
-            type: DriftSqlType.string, defaultValue: const Constant('a1')),
-        GeneratedColumn<String>('interface_language', aliasedName, false,
-            type: DriftSqlType.string, defaultValue: const Constant('tr')),
-        GeneratedColumn<int>('daily_goal_cards', aliasedName, false,
-            type: DriftSqlType.int, defaultValue: const Constant(20)),
-        GeneratedColumn<int>('streak_days', aliasedName, false,
-            type: DriftSqlType.int, defaultValue: const Constant(0)),
-        GeneratedColumn<int>('total_xp', aliasedName, false,
-            type: DriftSqlType.int, defaultValue: const Constant(0)),
-        GeneratedColumn<bool>('dyslexia_mode', aliasedName, false,
-            type: DriftSqlType.bool, defaultValue: const Constant(false)),
-        GeneratedColumn<bool>('animations_enabled', aliasedName, false,
-            type: DriftSqlType.bool, defaultValue: const Constant(true)),
-        GeneratedColumn<bool>('is_heritage', aliasedName, false,
-            type: DriftSqlType.bool, defaultValue: const Constant(false)),
-      ];
-
-  @override
-  String get aliasedName => _alias ?? 'user_profiles';
-  @override
-  String get actualTableName => 'user_profiles';
-  String? _alias;
-
-  @override
-  $UserProfilesTable createAlias(String alias) =>
-      $UserProfilesTable(attachedDatabase).._alias = alias;
-
-  @override
-  Set<GeneratedColumn> get $primaryKey => {$columns[0]};
-
-  @override
-  UserProfileData map(Map<String, dynamic> data, {String? tablePrefix}) {
-    final p = tablePrefix != null ? '$tablePrefix.' : '';
-    return UserProfileData(
-      userId: data['${p}user_id'] as String,
-      displayName: data['${p}display_name'] as String? ?? '',
-      segment: data['${p}segment'] as String? ?? 'absoluteBeginner',
-      currentLevel: data['${p}current_level'] as String? ?? 'a1',
-      interfaceLanguage: data['${p}interface_language'] as String? ?? 'tr',
-      dailyGoalCards: data['${p}daily_goal_cards'] as int? ?? 20,
-      streakDays: data['${p}streak_days'] as int? ?? 0,
-      totalXp: data['${p}total_xp'] as int? ?? 0,
-      dyslexiaMode: data['${p}dyslexia_mode'] as bool? ?? false,
-      animationsEnabled: data['${p}animations_enabled'] as bool? ?? true,
-      isHeritage: data['${p}is_heritage'] as bool? ?? false,
-    );
+  String toString() {
+    return (StringBuffer('UserProfilesCompanion(')
+          ..write('userId: $userId, ')
+          ..write('displayName: $displayName, ')
+          ..write('segment: $segment, ')
+          ..write('currentLevel: $currentLevel, ')
+          ..write('interfaceLanguage: $interfaceLanguage, ')
+          ..write('dailyGoalCards: $dailyGoalCards, ')
+          ..write('streakDays: $streakDays, ')
+          ..write('totalXp: $totalXp, ')
+          ..write('dyslexiaMode: $dyslexiaMode, ')
+          ..write('animationsEnabled: $animationsEnabled, ')
+          ..write('isHeritage: $isHeritage, ')
+          ..write('lastActiveDate: $lastActiveDate, ')
+          ..write('rowid: $rowid')
+          ..write(')'))
+        .toString();
   }
 }
 
 class $EarnedBadgesTable extends EarnedBadges
     with TableInfo<$EarnedBadgesTable, EarnedBadge> {
+  @override
   final GeneratedDatabase attachedDatabase;
-  $EarnedBadgesTable(this.attachedDatabase);
+  final String? _alias;
+  $EarnedBadgesTable(this.attachedDatabase, [this._alias]);
+  static const VerificationMeta _idMeta = const VerificationMeta('id');
+  @override
+  late final GeneratedColumn<int> id = GeneratedColumn<int>(
+      'id', aliasedName, false,
+      hasAutoIncrement: true,
+      type: DriftSqlType.int,
+      requiredDuringInsert: false,
+      defaultConstraints:
+          GeneratedColumn.constraintIsAlways('PRIMARY KEY AUTOINCREMENT'));
+  static const VerificationMeta _userIdMeta = const VerificationMeta('userId');
+  @override
+  late final GeneratedColumn<String> userId = GeneratedColumn<String>(
+      'user_id', aliasedName, false,
+      type: DriftSqlType.string, requiredDuringInsert: true);
+  static const VerificationMeta _badgeIdMeta =
+      const VerificationMeta('badgeId');
+  @override
+  late final GeneratedColumn<String> badgeId = GeneratedColumn<String>(
+      'badge_id', aliasedName, false,
+      type: DriftSqlType.string, requiredDuringInsert: true);
+  static const VerificationMeta _earnedAtMeta =
+      const VerificationMeta('earnedAt');
+  @override
+  late final GeneratedColumn<DateTime> earnedAt = GeneratedColumn<DateTime>(
+      'earned_at', aliasedName, false,
+      type: DriftSqlType.dateTime, requiredDuringInsert: true);
+  @override
+  List<GeneratedColumn> get $columns => [id, userId, badgeId, earnedAt];
+  @override
+  String get aliasedName => _alias ?? actualTableName;
+  @override
+  String get actualTableName => $name;
+  static const String $name = 'earned_badges';
+  @override
+  VerificationContext validateIntegrity(Insertable<EarnedBadge> instance,
+      {bool isInserting = false}) {
+    final context = VerificationContext();
+    final data = instance.toColumns(true);
+    if (data.containsKey('id')) {
+      context.handle(_idMeta, id.isAcceptableOrUnknown(data['id']!, _idMeta));
+    }
+    if (data.containsKey('user_id')) {
+      context.handle(_userIdMeta,
+          userId.isAcceptableOrUnknown(data['user_id']!, _userIdMeta));
+    } else if (isInserting) {
+      context.missing(_userIdMeta);
+    }
+    if (data.containsKey('badge_id')) {
+      context.handle(_badgeIdMeta,
+          badgeId.isAcceptableOrUnknown(data['badge_id']!, _badgeIdMeta));
+    } else if (isInserting) {
+      context.missing(_badgeIdMeta);
+    }
+    if (data.containsKey('earned_at')) {
+      context.handle(_earnedAtMeta,
+          earnedAt.isAcceptableOrUnknown(data['earned_at']!, _earnedAtMeta));
+    } else if (isInserting) {
+      context.missing(_earnedAtMeta);
+    }
+    return context;
+  }
 
   @override
-  List<GeneratedColumn> get $columns => [
-        GeneratedColumn<int>('id', aliasedName, false,
-            hasAutoIncrement: true, type: DriftSqlType.int),
-        GeneratedColumn<String>('user_id', aliasedName, false,
-            type: DriftSqlType.string),
-        GeneratedColumn<String>('badge_id', aliasedName, false,
-            type: DriftSqlType.string),
-        GeneratedColumn<DateTime>('earned_at', aliasedName, false,
-            type: DriftSqlType.dateTime),
-      ];
-
-  @override
-  String get aliasedName => _alias ?? 'earned_badges';
-  @override
-  String get actualTableName => 'earned_badges';
-  String? _alias;
-
-  @override
-  $EarnedBadgesTable createAlias(String alias) =>
-      $EarnedBadgesTable(attachedDatabase).._alias = alias;
-
-  @override
-  Set<GeneratedColumn> get $primaryKey => {$columns[0]};
-
+  Set<GeneratedColumn> get $primaryKey => {id};
   @override
   EarnedBadge map(Map<String, dynamic> data, {String? tablePrefix}) {
-    final p = tablePrefix != null ? '$tablePrefix.' : '';
+    final effectivePrefix = tablePrefix != null ? '$tablePrefix.' : '';
     return EarnedBadge(
-      id: data['${p}id'] as int,
-      userId: data['${p}user_id'] as String,
-      badgeId: data['${p}badge_id'] as String,
-      earnedAt: data['${p}earned_at'] as DateTime? ?? DateTime.now(),
+      id: attachedDatabase.typeMapping
+          .read(DriftSqlType.int, data['${effectivePrefix}id'])!,
+      userId: attachedDatabase.typeMapping
+          .read(DriftSqlType.string, data['${effectivePrefix}user_id'])!,
+      badgeId: attachedDatabase.typeMapping
+          .read(DriftSqlType.string, data['${effectivePrefix}badge_id'])!,
+      earnedAt: attachedDatabase.typeMapping
+          .read(DriftSqlType.dateTime, data['${effectivePrefix}earned_at'])!,
     );
   }
+
+  @override
+  $EarnedBadgesTable createAlias(String alias) {
+    return $EarnedBadgesTable(attachedDatabase, alias);
+  }
+}
+
+class EarnedBadge extends DataClass implements Insertable<EarnedBadge> {
+  final int id;
+  final String userId;
+  final String badgeId;
+  final DateTime earnedAt;
+  const EarnedBadge(
+      {required this.id,
+      required this.userId,
+      required this.badgeId,
+      required this.earnedAt});
+  @override
+  Map<String, Expression> toColumns(bool nullToAbsent) {
+    final map = <String, Expression>{};
+    map['id'] = Variable<int>(id);
+    map['user_id'] = Variable<String>(userId);
+    map['badge_id'] = Variable<String>(badgeId);
+    map['earned_at'] = Variable<DateTime>(earnedAt);
+    return map;
+  }
+
+  EarnedBadgesCompanion toCompanion(bool nullToAbsent) {
+    return EarnedBadgesCompanion(
+      id: Value(id),
+      userId: Value(userId),
+      badgeId: Value(badgeId),
+      earnedAt: Value(earnedAt),
+    );
+  }
+
+  factory EarnedBadge.fromJson(Map<String, dynamic> json,
+      {ValueSerializer? serializer}) {
+    serializer ??= driftRuntimeOptions.defaultSerializer;
+    return EarnedBadge(
+      id: serializer.fromJson<int>(json['id']),
+      userId: serializer.fromJson<String>(json['userId']),
+      badgeId: serializer.fromJson<String>(json['badgeId']),
+      earnedAt: serializer.fromJson<DateTime>(json['earnedAt']),
+    );
+  }
+  @override
+  Map<String, dynamic> toJson({ValueSerializer? serializer}) {
+    serializer ??= driftRuntimeOptions.defaultSerializer;
+    return <String, dynamic>{
+      'id': serializer.toJson<int>(id),
+      'userId': serializer.toJson<String>(userId),
+      'badgeId': serializer.toJson<String>(badgeId),
+      'earnedAt': serializer.toJson<DateTime>(earnedAt),
+    };
+  }
+
+  EarnedBadge copyWith(
+          {int? id, String? userId, String? badgeId, DateTime? earnedAt}) =>
+      EarnedBadge(
+        id: id ?? this.id,
+        userId: userId ?? this.userId,
+        badgeId: badgeId ?? this.badgeId,
+        earnedAt: earnedAt ?? this.earnedAt,
+      );
+  EarnedBadge copyWithCompanion(EarnedBadgesCompanion data) {
+    return EarnedBadge(
+      id: data.id.present ? data.id.value : this.id,
+      userId: data.userId.present ? data.userId.value : this.userId,
+      badgeId: data.badgeId.present ? data.badgeId.value : this.badgeId,
+      earnedAt: data.earnedAt.present ? data.earnedAt.value : this.earnedAt,
+    );
+  }
+
+  @override
+  String toString() {
+    return (StringBuffer('EarnedBadge(')
+          ..write('id: $id, ')
+          ..write('userId: $userId, ')
+          ..write('badgeId: $badgeId, ')
+          ..write('earnedAt: $earnedAt')
+          ..write(')'))
+        .toString();
+  }
+
+  @override
+  int get hashCode => Object.hash(id, userId, badgeId, earnedAt);
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      (other is EarnedBadge &&
+          other.id == this.id &&
+          other.userId == this.userId &&
+          other.badgeId == this.badgeId &&
+          other.earnedAt == this.earnedAt);
+}
+
+class EarnedBadgesCompanion extends UpdateCompanion<EarnedBadge> {
+  final Value<int> id;
+  final Value<String> userId;
+  final Value<String> badgeId;
+  final Value<DateTime> earnedAt;
+  const EarnedBadgesCompanion({
+    this.id = const Value.absent(),
+    this.userId = const Value.absent(),
+    this.badgeId = const Value.absent(),
+    this.earnedAt = const Value.absent(),
+  });
+  EarnedBadgesCompanion.insert({
+    this.id = const Value.absent(),
+    required String userId,
+    required String badgeId,
+    required DateTime earnedAt,
+  })  : userId = Value(userId),
+        badgeId = Value(badgeId),
+        earnedAt = Value(earnedAt);
+  static Insertable<EarnedBadge> custom({
+    Expression<int>? id,
+    Expression<String>? userId,
+    Expression<String>? badgeId,
+    Expression<DateTime>? earnedAt,
+  }) {
+    return RawValuesInsertable({
+      if (id != null) 'id': id,
+      if (userId != null) 'user_id': userId,
+      if (badgeId != null) 'badge_id': badgeId,
+      if (earnedAt != null) 'earned_at': earnedAt,
+    });
+  }
+
+  EarnedBadgesCompanion copyWith(
+      {Value<int>? id,
+      Value<String>? userId,
+      Value<String>? badgeId,
+      Value<DateTime>? earnedAt}) {
+    return EarnedBadgesCompanion(
+      id: id ?? this.id,
+      userId: userId ?? this.userId,
+      badgeId: badgeId ?? this.badgeId,
+      earnedAt: earnedAt ?? this.earnedAt,
+    );
+  }
+
+  @override
+  Map<String, Expression> toColumns(bool nullToAbsent) {
+    final map = <String, Expression>{};
+    if (id.present) {
+      map['id'] = Variable<int>(id.value);
+    }
+    if (userId.present) {
+      map['user_id'] = Variable<String>(userId.value);
+    }
+    if (badgeId.present) {
+      map['badge_id'] = Variable<String>(badgeId.value);
+    }
+    if (earnedAt.present) {
+      map['earned_at'] = Variable<DateTime>(earnedAt.value);
+    }
+    return map;
+  }
+
+  @override
+  String toString() {
+    return (StringBuffer('EarnedBadgesCompanion(')
+          ..write('id: $id, ')
+          ..write('userId: $userId, ')
+          ..write('badgeId: $badgeId, ')
+          ..write('earnedAt: $earnedAt')
+          ..write(')'))
+        .toString();
+  }
+}
+
+abstract class _$AppDatabase extends GeneratedDatabase {
+  _$AppDatabase(QueryExecutor e) : super(e);
+  $AppDatabaseManager get managers => $AppDatabaseManager(this);
+  late final $VocabularyCardsTable vocabularyCards =
+      $VocabularyCardsTable(this);
+  late final $FsrsReviewsTable fsrsReviews = $FsrsReviewsTable(this);
+  late final $CompletedLessonsTable completedLessons =
+      $CompletedLessonsTable(this);
+  late final $UserProgressTable userProgress = $UserProgressTable(this);
+  late final $UserProfilesTable userProfiles = $UserProfilesTable(this);
+  late final $EarnedBadgesTable earnedBadges = $EarnedBadgesTable(this);
+  @override
+  Iterable<TableInfo<Table, Object?>> get allTables =>
+      allSchemaEntities.whereType<TableInfo<Table, Object?>>();
+  @override
+  List<DatabaseSchemaEntity> get allSchemaEntities => [
+        vocabularyCards,
+        fsrsReviews,
+        completedLessons,
+        userProgress,
+        userProfiles,
+        earnedBadges
+      ];
+}
+
+typedef $$VocabularyCardsTableCreateCompanionBuilder = VocabularyCardsCompanion
+    Function({
+  required String id,
+  required String kurmanji,
+  required String turkish,
+  Value<String?> english,
+  Value<String?> audioUrl,
+  Value<String> gender,
+  required String category,
+  Value<int> level,
+  Value<String> sentencesHeritage,
+  Value<String> sentencesGeneral,
+  Value<double> initialDifficulty,
+  Value<int> rowid,
+});
+typedef $$VocabularyCardsTableUpdateCompanionBuilder = VocabularyCardsCompanion
+    Function({
+  Value<String> id,
+  Value<String> kurmanji,
+  Value<String> turkish,
+  Value<String?> english,
+  Value<String?> audioUrl,
+  Value<String> gender,
+  Value<String> category,
+  Value<int> level,
+  Value<String> sentencesHeritage,
+  Value<String> sentencesGeneral,
+  Value<double> initialDifficulty,
+  Value<int> rowid,
+});
+
+class $$VocabularyCardsTableFilterComposer
+    extends Composer<_$AppDatabase, $VocabularyCardsTable> {
+  $$VocabularyCardsTableFilterComposer({
+    required super.$db,
+    required super.$table,
+    super.joinBuilder,
+    super.$addJoinBuilderToRootComposer,
+    super.$removeJoinBuilderFromRootComposer,
+  });
+  ColumnFilters<String> get id => $composableBuilder(
+      column: $table.id, builder: (column) => ColumnFilters(column));
+
+  ColumnFilters<String> get kurmanji => $composableBuilder(
+      column: $table.kurmanji, builder: (column) => ColumnFilters(column));
+
+  ColumnFilters<String> get turkish => $composableBuilder(
+      column: $table.turkish, builder: (column) => ColumnFilters(column));
+
+  ColumnFilters<String> get english => $composableBuilder(
+      column: $table.english, builder: (column) => ColumnFilters(column));
+
+  ColumnFilters<String> get audioUrl => $composableBuilder(
+      column: $table.audioUrl, builder: (column) => ColumnFilters(column));
+
+  ColumnFilters<String> get gender => $composableBuilder(
+      column: $table.gender, builder: (column) => ColumnFilters(column));
+
+  ColumnFilters<String> get category => $composableBuilder(
+      column: $table.category, builder: (column) => ColumnFilters(column));
+
+  ColumnFilters<int> get level => $composableBuilder(
+      column: $table.level, builder: (column) => ColumnFilters(column));
+
+  ColumnFilters<String> get sentencesHeritage => $composableBuilder(
+      column: $table.sentencesHeritage,
+      builder: (column) => ColumnFilters(column));
+
+  ColumnFilters<String> get sentencesGeneral => $composableBuilder(
+      column: $table.sentencesGeneral,
+      builder: (column) => ColumnFilters(column));
+
+  ColumnFilters<double> get initialDifficulty => $composableBuilder(
+      column: $table.initialDifficulty,
+      builder: (column) => ColumnFilters(column));
+}
+
+class $$VocabularyCardsTableOrderingComposer
+    extends Composer<_$AppDatabase, $VocabularyCardsTable> {
+  $$VocabularyCardsTableOrderingComposer({
+    required super.$db,
+    required super.$table,
+    super.joinBuilder,
+    super.$addJoinBuilderToRootComposer,
+    super.$removeJoinBuilderFromRootComposer,
+  });
+  ColumnOrderings<String> get id => $composableBuilder(
+      column: $table.id, builder: (column) => ColumnOrderings(column));
+
+  ColumnOrderings<String> get kurmanji => $composableBuilder(
+      column: $table.kurmanji, builder: (column) => ColumnOrderings(column));
+
+  ColumnOrderings<String> get turkish => $composableBuilder(
+      column: $table.turkish, builder: (column) => ColumnOrderings(column));
+
+  ColumnOrderings<String> get english => $composableBuilder(
+      column: $table.english, builder: (column) => ColumnOrderings(column));
+
+  ColumnOrderings<String> get audioUrl => $composableBuilder(
+      column: $table.audioUrl, builder: (column) => ColumnOrderings(column));
+
+  ColumnOrderings<String> get gender => $composableBuilder(
+      column: $table.gender, builder: (column) => ColumnOrderings(column));
+
+  ColumnOrderings<String> get category => $composableBuilder(
+      column: $table.category, builder: (column) => ColumnOrderings(column));
+
+  ColumnOrderings<int> get level => $composableBuilder(
+      column: $table.level, builder: (column) => ColumnOrderings(column));
+
+  ColumnOrderings<String> get sentencesHeritage => $composableBuilder(
+      column: $table.sentencesHeritage,
+      builder: (column) => ColumnOrderings(column));
+
+  ColumnOrderings<String> get sentencesGeneral => $composableBuilder(
+      column: $table.sentencesGeneral,
+      builder: (column) => ColumnOrderings(column));
+
+  ColumnOrderings<double> get initialDifficulty => $composableBuilder(
+      column: $table.initialDifficulty,
+      builder: (column) => ColumnOrderings(column));
+}
+
+class $$VocabularyCardsTableAnnotationComposer
+    extends Composer<_$AppDatabase, $VocabularyCardsTable> {
+  $$VocabularyCardsTableAnnotationComposer({
+    required super.$db,
+    required super.$table,
+    super.joinBuilder,
+    super.$addJoinBuilderToRootComposer,
+    super.$removeJoinBuilderFromRootComposer,
+  });
+  GeneratedColumn<String> get id =>
+      $composableBuilder(column: $table.id, builder: (column) => column);
+
+  GeneratedColumn<String> get kurmanji =>
+      $composableBuilder(column: $table.kurmanji, builder: (column) => column);
+
+  GeneratedColumn<String> get turkish =>
+      $composableBuilder(column: $table.turkish, builder: (column) => column);
+
+  GeneratedColumn<String> get english =>
+      $composableBuilder(column: $table.english, builder: (column) => column);
+
+  GeneratedColumn<String> get audioUrl =>
+      $composableBuilder(column: $table.audioUrl, builder: (column) => column);
+
+  GeneratedColumn<String> get gender =>
+      $composableBuilder(column: $table.gender, builder: (column) => column);
+
+  GeneratedColumn<String> get category =>
+      $composableBuilder(column: $table.category, builder: (column) => column);
+
+  GeneratedColumn<int> get level =>
+      $composableBuilder(column: $table.level, builder: (column) => column);
+
+  GeneratedColumn<String> get sentencesHeritage => $composableBuilder(
+      column: $table.sentencesHeritage, builder: (column) => column);
+
+  GeneratedColumn<String> get sentencesGeneral => $composableBuilder(
+      column: $table.sentencesGeneral, builder: (column) => column);
+
+  GeneratedColumn<double> get initialDifficulty => $composableBuilder(
+      column: $table.initialDifficulty, builder: (column) => column);
+}
+
+class $$VocabularyCardsTableTableManager extends RootTableManager<
+    _$AppDatabase,
+    $VocabularyCardsTable,
+    VocabularyCard,
+    $$VocabularyCardsTableFilterComposer,
+    $$VocabularyCardsTableOrderingComposer,
+    $$VocabularyCardsTableAnnotationComposer,
+    $$VocabularyCardsTableCreateCompanionBuilder,
+    $$VocabularyCardsTableUpdateCompanionBuilder,
+    (
+      VocabularyCard,
+      BaseReferences<_$AppDatabase, $VocabularyCardsTable, VocabularyCard>
+    ),
+    VocabularyCard,
+    PrefetchHooks Function()> {
+  $$VocabularyCardsTableTableManager(
+      _$AppDatabase db, $VocabularyCardsTable table)
+      : super(TableManagerState(
+          db: db,
+          table: table,
+          createFilteringComposer: () =>
+              $$VocabularyCardsTableFilterComposer($db: db, $table: table),
+          createOrderingComposer: () =>
+              $$VocabularyCardsTableOrderingComposer($db: db, $table: table),
+          createComputedFieldComposer: () =>
+              $$VocabularyCardsTableAnnotationComposer($db: db, $table: table),
+          updateCompanionCallback: ({
+            Value<String> id = const Value.absent(),
+            Value<String> kurmanji = const Value.absent(),
+            Value<String> turkish = const Value.absent(),
+            Value<String?> english = const Value.absent(),
+            Value<String?> audioUrl = const Value.absent(),
+            Value<String> gender = const Value.absent(),
+            Value<String> category = const Value.absent(),
+            Value<int> level = const Value.absent(),
+            Value<String> sentencesHeritage = const Value.absent(),
+            Value<String> sentencesGeneral = const Value.absent(),
+            Value<double> initialDifficulty = const Value.absent(),
+            Value<int> rowid = const Value.absent(),
+          }) =>
+              VocabularyCardsCompanion(
+            id: id,
+            kurmanji: kurmanji,
+            turkish: turkish,
+            english: english,
+            audioUrl: audioUrl,
+            gender: gender,
+            category: category,
+            level: level,
+            sentencesHeritage: sentencesHeritage,
+            sentencesGeneral: sentencesGeneral,
+            initialDifficulty: initialDifficulty,
+            rowid: rowid,
+          ),
+          createCompanionCallback: ({
+            required String id,
+            required String kurmanji,
+            required String turkish,
+            Value<String?> english = const Value.absent(),
+            Value<String?> audioUrl = const Value.absent(),
+            Value<String> gender = const Value.absent(),
+            required String category,
+            Value<int> level = const Value.absent(),
+            Value<String> sentencesHeritage = const Value.absent(),
+            Value<String> sentencesGeneral = const Value.absent(),
+            Value<double> initialDifficulty = const Value.absent(),
+            Value<int> rowid = const Value.absent(),
+          }) =>
+              VocabularyCardsCompanion.insert(
+            id: id,
+            kurmanji: kurmanji,
+            turkish: turkish,
+            english: english,
+            audioUrl: audioUrl,
+            gender: gender,
+            category: category,
+            level: level,
+            sentencesHeritage: sentencesHeritage,
+            sentencesGeneral: sentencesGeneral,
+            initialDifficulty: initialDifficulty,
+            rowid: rowid,
+          ),
+          withReferenceMapper: (p0) => p0
+              .map((e) => (e.readTable(table), BaseReferences(db, table, e)))
+              .toList(),
+          prefetchHooksCallback: null,
+        ));
+}
+
+typedef $$VocabularyCardsTableProcessedTableManager = ProcessedTableManager<
+    _$AppDatabase,
+    $VocabularyCardsTable,
+    VocabularyCard,
+    $$VocabularyCardsTableFilterComposer,
+    $$VocabularyCardsTableOrderingComposer,
+    $$VocabularyCardsTableAnnotationComposer,
+    $$VocabularyCardsTableCreateCompanionBuilder,
+    $$VocabularyCardsTableUpdateCompanionBuilder,
+    (
+      VocabularyCard,
+      BaseReferences<_$AppDatabase, $VocabularyCardsTable, VocabularyCard>
+    ),
+    VocabularyCard,
+    PrefetchHooks Function()>;
+typedef $$FsrsReviewsTableCreateCompanionBuilder = FsrsReviewsCompanion
+    Function({
+  Value<int> id,
+  required String cardId,
+  required String userId,
+  Value<double> stability,
+  Value<double> difficulty,
+  Value<double> retrievability,
+  Value<String> state,
+  Value<int> reviewCount,
+  Value<int> lapseCount,
+  Value<bool> wasCorrect,
+  Value<DateTime?> lastReview,
+  required DateTime dueDate,
+});
+typedef $$FsrsReviewsTableUpdateCompanionBuilder = FsrsReviewsCompanion
+    Function({
+  Value<int> id,
+  Value<String> cardId,
+  Value<String> userId,
+  Value<double> stability,
+  Value<double> difficulty,
+  Value<double> retrievability,
+  Value<String> state,
+  Value<int> reviewCount,
+  Value<int> lapseCount,
+  Value<bool> wasCorrect,
+  Value<DateTime?> lastReview,
+  Value<DateTime> dueDate,
+});
+
+class $$FsrsReviewsTableFilterComposer
+    extends Composer<_$AppDatabase, $FsrsReviewsTable> {
+  $$FsrsReviewsTableFilterComposer({
+    required super.$db,
+    required super.$table,
+    super.joinBuilder,
+    super.$addJoinBuilderToRootComposer,
+    super.$removeJoinBuilderFromRootComposer,
+  });
+  ColumnFilters<int> get id => $composableBuilder(
+      column: $table.id, builder: (column) => ColumnFilters(column));
+
+  ColumnFilters<String> get cardId => $composableBuilder(
+      column: $table.cardId, builder: (column) => ColumnFilters(column));
+
+  ColumnFilters<String> get userId => $composableBuilder(
+      column: $table.userId, builder: (column) => ColumnFilters(column));
+
+  ColumnFilters<double> get stability => $composableBuilder(
+      column: $table.stability, builder: (column) => ColumnFilters(column));
+
+  ColumnFilters<double> get difficulty => $composableBuilder(
+      column: $table.difficulty, builder: (column) => ColumnFilters(column));
+
+  ColumnFilters<double> get retrievability => $composableBuilder(
+      column: $table.retrievability,
+      builder: (column) => ColumnFilters(column));
+
+  ColumnFilters<String> get state => $composableBuilder(
+      column: $table.state, builder: (column) => ColumnFilters(column));
+
+  ColumnFilters<int> get reviewCount => $composableBuilder(
+      column: $table.reviewCount, builder: (column) => ColumnFilters(column));
+
+  ColumnFilters<int> get lapseCount => $composableBuilder(
+      column: $table.lapseCount, builder: (column) => ColumnFilters(column));
+
+  ColumnFilters<bool> get wasCorrect => $composableBuilder(
+      column: $table.wasCorrect, builder: (column) => ColumnFilters(column));
+
+  ColumnFilters<DateTime> get lastReview => $composableBuilder(
+      column: $table.lastReview, builder: (column) => ColumnFilters(column));
+
+  ColumnFilters<DateTime> get dueDate => $composableBuilder(
+      column: $table.dueDate, builder: (column) => ColumnFilters(column));
+}
+
+class $$FsrsReviewsTableOrderingComposer
+    extends Composer<_$AppDatabase, $FsrsReviewsTable> {
+  $$FsrsReviewsTableOrderingComposer({
+    required super.$db,
+    required super.$table,
+    super.joinBuilder,
+    super.$addJoinBuilderToRootComposer,
+    super.$removeJoinBuilderFromRootComposer,
+  });
+  ColumnOrderings<int> get id => $composableBuilder(
+      column: $table.id, builder: (column) => ColumnOrderings(column));
+
+  ColumnOrderings<String> get cardId => $composableBuilder(
+      column: $table.cardId, builder: (column) => ColumnOrderings(column));
+
+  ColumnOrderings<String> get userId => $composableBuilder(
+      column: $table.userId, builder: (column) => ColumnOrderings(column));
+
+  ColumnOrderings<double> get stability => $composableBuilder(
+      column: $table.stability, builder: (column) => ColumnOrderings(column));
+
+  ColumnOrderings<double> get difficulty => $composableBuilder(
+      column: $table.difficulty, builder: (column) => ColumnOrderings(column));
+
+  ColumnOrderings<double> get retrievability => $composableBuilder(
+      column: $table.retrievability,
+      builder: (column) => ColumnOrderings(column));
+
+  ColumnOrderings<String> get state => $composableBuilder(
+      column: $table.state, builder: (column) => ColumnOrderings(column));
+
+  ColumnOrderings<int> get reviewCount => $composableBuilder(
+      column: $table.reviewCount, builder: (column) => ColumnOrderings(column));
+
+  ColumnOrderings<int> get lapseCount => $composableBuilder(
+      column: $table.lapseCount, builder: (column) => ColumnOrderings(column));
+
+  ColumnOrderings<bool> get wasCorrect => $composableBuilder(
+      column: $table.wasCorrect, builder: (column) => ColumnOrderings(column));
+
+  ColumnOrderings<DateTime> get lastReview => $composableBuilder(
+      column: $table.lastReview, builder: (column) => ColumnOrderings(column));
+
+  ColumnOrderings<DateTime> get dueDate => $composableBuilder(
+      column: $table.dueDate, builder: (column) => ColumnOrderings(column));
+}
+
+class $$FsrsReviewsTableAnnotationComposer
+    extends Composer<_$AppDatabase, $FsrsReviewsTable> {
+  $$FsrsReviewsTableAnnotationComposer({
+    required super.$db,
+    required super.$table,
+    super.joinBuilder,
+    super.$addJoinBuilderToRootComposer,
+    super.$removeJoinBuilderFromRootComposer,
+  });
+  GeneratedColumn<int> get id =>
+      $composableBuilder(column: $table.id, builder: (column) => column);
+
+  GeneratedColumn<String> get cardId =>
+      $composableBuilder(column: $table.cardId, builder: (column) => column);
+
+  GeneratedColumn<String> get userId =>
+      $composableBuilder(column: $table.userId, builder: (column) => column);
+
+  GeneratedColumn<double> get stability =>
+      $composableBuilder(column: $table.stability, builder: (column) => column);
+
+  GeneratedColumn<double> get difficulty => $composableBuilder(
+      column: $table.difficulty, builder: (column) => column);
+
+  GeneratedColumn<double> get retrievability => $composableBuilder(
+      column: $table.retrievability, builder: (column) => column);
+
+  GeneratedColumn<String> get state =>
+      $composableBuilder(column: $table.state, builder: (column) => column);
+
+  GeneratedColumn<int> get reviewCount => $composableBuilder(
+      column: $table.reviewCount, builder: (column) => column);
+
+  GeneratedColumn<int> get lapseCount => $composableBuilder(
+      column: $table.lapseCount, builder: (column) => column);
+
+  GeneratedColumn<bool> get wasCorrect => $composableBuilder(
+      column: $table.wasCorrect, builder: (column) => column);
+
+  GeneratedColumn<DateTime> get lastReview => $composableBuilder(
+      column: $table.lastReview, builder: (column) => column);
+
+  GeneratedColumn<DateTime> get dueDate =>
+      $composableBuilder(column: $table.dueDate, builder: (column) => column);
+}
+
+class $$FsrsReviewsTableTableManager extends RootTableManager<
+    _$AppDatabase,
+    $FsrsReviewsTable,
+    FsrsReview,
+    $$FsrsReviewsTableFilterComposer,
+    $$FsrsReviewsTableOrderingComposer,
+    $$FsrsReviewsTableAnnotationComposer,
+    $$FsrsReviewsTableCreateCompanionBuilder,
+    $$FsrsReviewsTableUpdateCompanionBuilder,
+    (FsrsReview, BaseReferences<_$AppDatabase, $FsrsReviewsTable, FsrsReview>),
+    FsrsReview,
+    PrefetchHooks Function()> {
+  $$FsrsReviewsTableTableManager(_$AppDatabase db, $FsrsReviewsTable table)
+      : super(TableManagerState(
+          db: db,
+          table: table,
+          createFilteringComposer: () =>
+              $$FsrsReviewsTableFilterComposer($db: db, $table: table),
+          createOrderingComposer: () =>
+              $$FsrsReviewsTableOrderingComposer($db: db, $table: table),
+          createComputedFieldComposer: () =>
+              $$FsrsReviewsTableAnnotationComposer($db: db, $table: table),
+          updateCompanionCallback: ({
+            Value<int> id = const Value.absent(),
+            Value<String> cardId = const Value.absent(),
+            Value<String> userId = const Value.absent(),
+            Value<double> stability = const Value.absent(),
+            Value<double> difficulty = const Value.absent(),
+            Value<double> retrievability = const Value.absent(),
+            Value<String> state = const Value.absent(),
+            Value<int> reviewCount = const Value.absent(),
+            Value<int> lapseCount = const Value.absent(),
+            Value<bool> wasCorrect = const Value.absent(),
+            Value<DateTime?> lastReview = const Value.absent(),
+            Value<DateTime> dueDate = const Value.absent(),
+          }) =>
+              FsrsReviewsCompanion(
+            id: id,
+            cardId: cardId,
+            userId: userId,
+            stability: stability,
+            difficulty: difficulty,
+            retrievability: retrievability,
+            state: state,
+            reviewCount: reviewCount,
+            lapseCount: lapseCount,
+            wasCorrect: wasCorrect,
+            lastReview: lastReview,
+            dueDate: dueDate,
+          ),
+          createCompanionCallback: ({
+            Value<int> id = const Value.absent(),
+            required String cardId,
+            required String userId,
+            Value<double> stability = const Value.absent(),
+            Value<double> difficulty = const Value.absent(),
+            Value<double> retrievability = const Value.absent(),
+            Value<String> state = const Value.absent(),
+            Value<int> reviewCount = const Value.absent(),
+            Value<int> lapseCount = const Value.absent(),
+            Value<bool> wasCorrect = const Value.absent(),
+            Value<DateTime?> lastReview = const Value.absent(),
+            required DateTime dueDate,
+          }) =>
+              FsrsReviewsCompanion.insert(
+            id: id,
+            cardId: cardId,
+            userId: userId,
+            stability: stability,
+            difficulty: difficulty,
+            retrievability: retrievability,
+            state: state,
+            reviewCount: reviewCount,
+            lapseCount: lapseCount,
+            wasCorrect: wasCorrect,
+            lastReview: lastReview,
+            dueDate: dueDate,
+          ),
+          withReferenceMapper: (p0) => p0
+              .map((e) => (e.readTable(table), BaseReferences(db, table, e)))
+              .toList(),
+          prefetchHooksCallback: null,
+        ));
+}
+
+typedef $$FsrsReviewsTableProcessedTableManager = ProcessedTableManager<
+    _$AppDatabase,
+    $FsrsReviewsTable,
+    FsrsReview,
+    $$FsrsReviewsTableFilterComposer,
+    $$FsrsReviewsTableOrderingComposer,
+    $$FsrsReviewsTableAnnotationComposer,
+    $$FsrsReviewsTableCreateCompanionBuilder,
+    $$FsrsReviewsTableUpdateCompanionBuilder,
+    (FsrsReview, BaseReferences<_$AppDatabase, $FsrsReviewsTable, FsrsReview>),
+    FsrsReview,
+    PrefetchHooks Function()>;
+typedef $$CompletedLessonsTableCreateCompanionBuilder
+    = CompletedLessonsCompanion Function({
+  Value<int> id,
+  required String userId,
+  required String lessonId,
+  required DateTime completedAt,
+  Value<int> correctCount,
+  Value<int> totalCount,
+  Value<int> xpEarned,
+  Value<int> durationSeconds,
+});
+typedef $$CompletedLessonsTableUpdateCompanionBuilder
+    = CompletedLessonsCompanion Function({
+  Value<int> id,
+  Value<String> userId,
+  Value<String> lessonId,
+  Value<DateTime> completedAt,
+  Value<int> correctCount,
+  Value<int> totalCount,
+  Value<int> xpEarned,
+  Value<int> durationSeconds,
+});
+
+class $$CompletedLessonsTableFilterComposer
+    extends Composer<_$AppDatabase, $CompletedLessonsTable> {
+  $$CompletedLessonsTableFilterComposer({
+    required super.$db,
+    required super.$table,
+    super.joinBuilder,
+    super.$addJoinBuilderToRootComposer,
+    super.$removeJoinBuilderFromRootComposer,
+  });
+  ColumnFilters<int> get id => $composableBuilder(
+      column: $table.id, builder: (column) => ColumnFilters(column));
+
+  ColumnFilters<String> get userId => $composableBuilder(
+      column: $table.userId, builder: (column) => ColumnFilters(column));
+
+  ColumnFilters<String> get lessonId => $composableBuilder(
+      column: $table.lessonId, builder: (column) => ColumnFilters(column));
+
+  ColumnFilters<DateTime> get completedAt => $composableBuilder(
+      column: $table.completedAt, builder: (column) => ColumnFilters(column));
+
+  ColumnFilters<int> get correctCount => $composableBuilder(
+      column: $table.correctCount, builder: (column) => ColumnFilters(column));
+
+  ColumnFilters<int> get totalCount => $composableBuilder(
+      column: $table.totalCount, builder: (column) => ColumnFilters(column));
+
+  ColumnFilters<int> get xpEarned => $composableBuilder(
+      column: $table.xpEarned, builder: (column) => ColumnFilters(column));
+
+  ColumnFilters<int> get durationSeconds => $composableBuilder(
+      column: $table.durationSeconds,
+      builder: (column) => ColumnFilters(column));
+}
+
+class $$CompletedLessonsTableOrderingComposer
+    extends Composer<_$AppDatabase, $CompletedLessonsTable> {
+  $$CompletedLessonsTableOrderingComposer({
+    required super.$db,
+    required super.$table,
+    super.joinBuilder,
+    super.$addJoinBuilderToRootComposer,
+    super.$removeJoinBuilderFromRootComposer,
+  });
+  ColumnOrderings<int> get id => $composableBuilder(
+      column: $table.id, builder: (column) => ColumnOrderings(column));
+
+  ColumnOrderings<String> get userId => $composableBuilder(
+      column: $table.userId, builder: (column) => ColumnOrderings(column));
+
+  ColumnOrderings<String> get lessonId => $composableBuilder(
+      column: $table.lessonId, builder: (column) => ColumnOrderings(column));
+
+  ColumnOrderings<DateTime> get completedAt => $composableBuilder(
+      column: $table.completedAt, builder: (column) => ColumnOrderings(column));
+
+  ColumnOrderings<int> get correctCount => $composableBuilder(
+      column: $table.correctCount,
+      builder: (column) => ColumnOrderings(column));
+
+  ColumnOrderings<int> get totalCount => $composableBuilder(
+      column: $table.totalCount, builder: (column) => ColumnOrderings(column));
+
+  ColumnOrderings<int> get xpEarned => $composableBuilder(
+      column: $table.xpEarned, builder: (column) => ColumnOrderings(column));
+
+  ColumnOrderings<int> get durationSeconds => $composableBuilder(
+      column: $table.durationSeconds,
+      builder: (column) => ColumnOrderings(column));
+}
+
+class $$CompletedLessonsTableAnnotationComposer
+    extends Composer<_$AppDatabase, $CompletedLessonsTable> {
+  $$CompletedLessonsTableAnnotationComposer({
+    required super.$db,
+    required super.$table,
+    super.joinBuilder,
+    super.$addJoinBuilderToRootComposer,
+    super.$removeJoinBuilderFromRootComposer,
+  });
+  GeneratedColumn<int> get id =>
+      $composableBuilder(column: $table.id, builder: (column) => column);
+
+  GeneratedColumn<String> get userId =>
+      $composableBuilder(column: $table.userId, builder: (column) => column);
+
+  GeneratedColumn<String> get lessonId =>
+      $composableBuilder(column: $table.lessonId, builder: (column) => column);
+
+  GeneratedColumn<DateTime> get completedAt => $composableBuilder(
+      column: $table.completedAt, builder: (column) => column);
+
+  GeneratedColumn<int> get correctCount => $composableBuilder(
+      column: $table.correctCount, builder: (column) => column);
+
+  GeneratedColumn<int> get totalCount => $composableBuilder(
+      column: $table.totalCount, builder: (column) => column);
+
+  GeneratedColumn<int> get xpEarned =>
+      $composableBuilder(column: $table.xpEarned, builder: (column) => column);
+
+  GeneratedColumn<int> get durationSeconds => $composableBuilder(
+      column: $table.durationSeconds, builder: (column) => column);
+}
+
+class $$CompletedLessonsTableTableManager extends RootTableManager<
+    _$AppDatabase,
+    $CompletedLessonsTable,
+    CompletedLesson,
+    $$CompletedLessonsTableFilterComposer,
+    $$CompletedLessonsTableOrderingComposer,
+    $$CompletedLessonsTableAnnotationComposer,
+    $$CompletedLessonsTableCreateCompanionBuilder,
+    $$CompletedLessonsTableUpdateCompanionBuilder,
+    (
+      CompletedLesson,
+      BaseReferences<_$AppDatabase, $CompletedLessonsTable, CompletedLesson>
+    ),
+    CompletedLesson,
+    PrefetchHooks Function()> {
+  $$CompletedLessonsTableTableManager(
+      _$AppDatabase db, $CompletedLessonsTable table)
+      : super(TableManagerState(
+          db: db,
+          table: table,
+          createFilteringComposer: () =>
+              $$CompletedLessonsTableFilterComposer($db: db, $table: table),
+          createOrderingComposer: () =>
+              $$CompletedLessonsTableOrderingComposer($db: db, $table: table),
+          createComputedFieldComposer: () =>
+              $$CompletedLessonsTableAnnotationComposer($db: db, $table: table),
+          updateCompanionCallback: ({
+            Value<int> id = const Value.absent(),
+            Value<String> userId = const Value.absent(),
+            Value<String> lessonId = const Value.absent(),
+            Value<DateTime> completedAt = const Value.absent(),
+            Value<int> correctCount = const Value.absent(),
+            Value<int> totalCount = const Value.absent(),
+            Value<int> xpEarned = const Value.absent(),
+            Value<int> durationSeconds = const Value.absent(),
+          }) =>
+              CompletedLessonsCompanion(
+            id: id,
+            userId: userId,
+            lessonId: lessonId,
+            completedAt: completedAt,
+            correctCount: correctCount,
+            totalCount: totalCount,
+            xpEarned: xpEarned,
+            durationSeconds: durationSeconds,
+          ),
+          createCompanionCallback: ({
+            Value<int> id = const Value.absent(),
+            required String userId,
+            required String lessonId,
+            required DateTime completedAt,
+            Value<int> correctCount = const Value.absent(),
+            Value<int> totalCount = const Value.absent(),
+            Value<int> xpEarned = const Value.absent(),
+            Value<int> durationSeconds = const Value.absent(),
+          }) =>
+              CompletedLessonsCompanion.insert(
+            id: id,
+            userId: userId,
+            lessonId: lessonId,
+            completedAt: completedAt,
+            correctCount: correctCount,
+            totalCount: totalCount,
+            xpEarned: xpEarned,
+            durationSeconds: durationSeconds,
+          ),
+          withReferenceMapper: (p0) => p0
+              .map((e) => (e.readTable(table), BaseReferences(db, table, e)))
+              .toList(),
+          prefetchHooksCallback: null,
+        ));
+}
+
+typedef $$CompletedLessonsTableProcessedTableManager = ProcessedTableManager<
+    _$AppDatabase,
+    $CompletedLessonsTable,
+    CompletedLesson,
+    $$CompletedLessonsTableFilterComposer,
+    $$CompletedLessonsTableOrderingComposer,
+    $$CompletedLessonsTableAnnotationComposer,
+    $$CompletedLessonsTableCreateCompanionBuilder,
+    $$CompletedLessonsTableUpdateCompanionBuilder,
+    (
+      CompletedLesson,
+      BaseReferences<_$AppDatabase, $CompletedLessonsTable, CompletedLesson>
+    ),
+    CompletedLesson,
+    PrefetchHooks Function()>;
+typedef $$UserProgressTableCreateCompanionBuilder = UserProgressCompanion
+    Function({
+  Value<int> id,
+  required String userId,
+  required String lessonId,
+  required int completedAt,
+  required int correctCount,
+  required int totalCount,
+  required int xpEarned,
+  required int durationSeconds,
+});
+typedef $$UserProgressTableUpdateCompanionBuilder = UserProgressCompanion
+    Function({
+  Value<int> id,
+  Value<String> userId,
+  Value<String> lessonId,
+  Value<int> completedAt,
+  Value<int> correctCount,
+  Value<int> totalCount,
+  Value<int> xpEarned,
+  Value<int> durationSeconds,
+});
+
+class $$UserProgressTableFilterComposer
+    extends Composer<_$AppDatabase, $UserProgressTable> {
+  $$UserProgressTableFilterComposer({
+    required super.$db,
+    required super.$table,
+    super.joinBuilder,
+    super.$addJoinBuilderToRootComposer,
+    super.$removeJoinBuilderFromRootComposer,
+  });
+  ColumnFilters<int> get id => $composableBuilder(
+      column: $table.id, builder: (column) => ColumnFilters(column));
+
+  ColumnFilters<String> get userId => $composableBuilder(
+      column: $table.userId, builder: (column) => ColumnFilters(column));
+
+  ColumnFilters<String> get lessonId => $composableBuilder(
+      column: $table.lessonId, builder: (column) => ColumnFilters(column));
+
+  ColumnFilters<int> get completedAt => $composableBuilder(
+      column: $table.completedAt, builder: (column) => ColumnFilters(column));
+
+  ColumnFilters<int> get correctCount => $composableBuilder(
+      column: $table.correctCount, builder: (column) => ColumnFilters(column));
+
+  ColumnFilters<int> get totalCount => $composableBuilder(
+      column: $table.totalCount, builder: (column) => ColumnFilters(column));
+
+  ColumnFilters<int> get xpEarned => $composableBuilder(
+      column: $table.xpEarned, builder: (column) => ColumnFilters(column));
+
+  ColumnFilters<int> get durationSeconds => $composableBuilder(
+      column: $table.durationSeconds,
+      builder: (column) => ColumnFilters(column));
+}
+
+class $$UserProgressTableOrderingComposer
+    extends Composer<_$AppDatabase, $UserProgressTable> {
+  $$UserProgressTableOrderingComposer({
+    required super.$db,
+    required super.$table,
+    super.joinBuilder,
+    super.$addJoinBuilderToRootComposer,
+    super.$removeJoinBuilderFromRootComposer,
+  });
+  ColumnOrderings<int> get id => $composableBuilder(
+      column: $table.id, builder: (column) => ColumnOrderings(column));
+
+  ColumnOrderings<String> get userId => $composableBuilder(
+      column: $table.userId, builder: (column) => ColumnOrderings(column));
+
+  ColumnOrderings<String> get lessonId => $composableBuilder(
+      column: $table.lessonId, builder: (column) => ColumnOrderings(column));
+
+  ColumnOrderings<int> get completedAt => $composableBuilder(
+      column: $table.completedAt, builder: (column) => ColumnOrderings(column));
+
+  ColumnOrderings<int> get correctCount => $composableBuilder(
+      column: $table.correctCount,
+      builder: (column) => ColumnOrderings(column));
+
+  ColumnOrderings<int> get totalCount => $composableBuilder(
+      column: $table.totalCount, builder: (column) => ColumnOrderings(column));
+
+  ColumnOrderings<int> get xpEarned => $composableBuilder(
+      column: $table.xpEarned, builder: (column) => ColumnOrderings(column));
+
+  ColumnOrderings<int> get durationSeconds => $composableBuilder(
+      column: $table.durationSeconds,
+      builder: (column) => ColumnOrderings(column));
+}
+
+class $$UserProgressTableAnnotationComposer
+    extends Composer<_$AppDatabase, $UserProgressTable> {
+  $$UserProgressTableAnnotationComposer({
+    required super.$db,
+    required super.$table,
+    super.joinBuilder,
+    super.$addJoinBuilderToRootComposer,
+    super.$removeJoinBuilderFromRootComposer,
+  });
+  GeneratedColumn<int> get id =>
+      $composableBuilder(column: $table.id, builder: (column) => column);
+
+  GeneratedColumn<String> get userId =>
+      $composableBuilder(column: $table.userId, builder: (column) => column);
+
+  GeneratedColumn<String> get lessonId =>
+      $composableBuilder(column: $table.lessonId, builder: (column) => column);
+
+  GeneratedColumn<int> get completedAt => $composableBuilder(
+      column: $table.completedAt, builder: (column) => column);
+
+  GeneratedColumn<int> get correctCount => $composableBuilder(
+      column: $table.correctCount, builder: (column) => column);
+
+  GeneratedColumn<int> get totalCount => $composableBuilder(
+      column: $table.totalCount, builder: (column) => column);
+
+  GeneratedColumn<int> get xpEarned =>
+      $composableBuilder(column: $table.xpEarned, builder: (column) => column);
+
+  GeneratedColumn<int> get durationSeconds => $composableBuilder(
+      column: $table.durationSeconds, builder: (column) => column);
+}
+
+class $$UserProgressTableTableManager extends RootTableManager<
+    _$AppDatabase,
+    $UserProgressTable,
+    UserProgressData,
+    $$UserProgressTableFilterComposer,
+    $$UserProgressTableOrderingComposer,
+    $$UserProgressTableAnnotationComposer,
+    $$UserProgressTableCreateCompanionBuilder,
+    $$UserProgressTableUpdateCompanionBuilder,
+    (
+      UserProgressData,
+      BaseReferences<_$AppDatabase, $UserProgressTable, UserProgressData>
+    ),
+    UserProgressData,
+    PrefetchHooks Function()> {
+  $$UserProgressTableTableManager(_$AppDatabase db, $UserProgressTable table)
+      : super(TableManagerState(
+          db: db,
+          table: table,
+          createFilteringComposer: () =>
+              $$UserProgressTableFilterComposer($db: db, $table: table),
+          createOrderingComposer: () =>
+              $$UserProgressTableOrderingComposer($db: db, $table: table),
+          createComputedFieldComposer: () =>
+              $$UserProgressTableAnnotationComposer($db: db, $table: table),
+          updateCompanionCallback: ({
+            Value<int> id = const Value.absent(),
+            Value<String> userId = const Value.absent(),
+            Value<String> lessonId = const Value.absent(),
+            Value<int> completedAt = const Value.absent(),
+            Value<int> correctCount = const Value.absent(),
+            Value<int> totalCount = const Value.absent(),
+            Value<int> xpEarned = const Value.absent(),
+            Value<int> durationSeconds = const Value.absent(),
+          }) =>
+              UserProgressCompanion(
+            id: id,
+            userId: userId,
+            lessonId: lessonId,
+            completedAt: completedAt,
+            correctCount: correctCount,
+            totalCount: totalCount,
+            xpEarned: xpEarned,
+            durationSeconds: durationSeconds,
+          ),
+          createCompanionCallback: ({
+            Value<int> id = const Value.absent(),
+            required String userId,
+            required String lessonId,
+            required int completedAt,
+            required int correctCount,
+            required int totalCount,
+            required int xpEarned,
+            required int durationSeconds,
+          }) =>
+              UserProgressCompanion.insert(
+            id: id,
+            userId: userId,
+            lessonId: lessonId,
+            completedAt: completedAt,
+            correctCount: correctCount,
+            totalCount: totalCount,
+            xpEarned: xpEarned,
+            durationSeconds: durationSeconds,
+          ),
+          withReferenceMapper: (p0) => p0
+              .map((e) => (e.readTable(table), BaseReferences(db, table, e)))
+              .toList(),
+          prefetchHooksCallback: null,
+        ));
+}
+
+typedef $$UserProgressTableProcessedTableManager = ProcessedTableManager<
+    _$AppDatabase,
+    $UserProgressTable,
+    UserProgressData,
+    $$UserProgressTableFilterComposer,
+    $$UserProgressTableOrderingComposer,
+    $$UserProgressTableAnnotationComposer,
+    $$UserProgressTableCreateCompanionBuilder,
+    $$UserProgressTableUpdateCompanionBuilder,
+    (
+      UserProgressData,
+      BaseReferences<_$AppDatabase, $UserProgressTable, UserProgressData>
+    ),
+    UserProgressData,
+    PrefetchHooks Function()>;
+typedef $$UserProfilesTableCreateCompanionBuilder = UserProfilesCompanion
+    Function({
+  required String userId,
+  Value<String> displayName,
+  Value<String> segment,
+  Value<String> currentLevel,
+  Value<String> interfaceLanguage,
+  Value<int> dailyGoalCards,
+  Value<int> streakDays,
+  Value<int> totalXp,
+  Value<bool> dyslexiaMode,
+  Value<bool> animationsEnabled,
+  Value<bool> isHeritage,
+  Value<DateTime?> lastActiveDate,
+  Value<int> rowid,
+});
+typedef $$UserProfilesTableUpdateCompanionBuilder = UserProfilesCompanion
+    Function({
+  Value<String> userId,
+  Value<String> displayName,
+  Value<String> segment,
+  Value<String> currentLevel,
+  Value<String> interfaceLanguage,
+  Value<int> dailyGoalCards,
+  Value<int> streakDays,
+  Value<int> totalXp,
+  Value<bool> dyslexiaMode,
+  Value<bool> animationsEnabled,
+  Value<bool> isHeritage,
+  Value<DateTime?> lastActiveDate,
+  Value<int> rowid,
+});
+
+class $$UserProfilesTableFilterComposer
+    extends Composer<_$AppDatabase, $UserProfilesTable> {
+  $$UserProfilesTableFilterComposer({
+    required super.$db,
+    required super.$table,
+    super.joinBuilder,
+    super.$addJoinBuilderToRootComposer,
+    super.$removeJoinBuilderFromRootComposer,
+  });
+  ColumnFilters<String> get userId => $composableBuilder(
+      column: $table.userId, builder: (column) => ColumnFilters(column));
+
+  ColumnFilters<String> get displayName => $composableBuilder(
+      column: $table.displayName, builder: (column) => ColumnFilters(column));
+
+  ColumnFilters<String> get segment => $composableBuilder(
+      column: $table.segment, builder: (column) => ColumnFilters(column));
+
+  ColumnFilters<String> get currentLevel => $composableBuilder(
+      column: $table.currentLevel, builder: (column) => ColumnFilters(column));
+
+  ColumnFilters<String> get interfaceLanguage => $composableBuilder(
+      column: $table.interfaceLanguage,
+      builder: (column) => ColumnFilters(column));
+
+  ColumnFilters<int> get dailyGoalCards => $composableBuilder(
+      column: $table.dailyGoalCards,
+      builder: (column) => ColumnFilters(column));
+
+  ColumnFilters<int> get streakDays => $composableBuilder(
+      column: $table.streakDays, builder: (column) => ColumnFilters(column));
+
+  ColumnFilters<int> get totalXp => $composableBuilder(
+      column: $table.totalXp, builder: (column) => ColumnFilters(column));
+
+  ColumnFilters<bool> get dyslexiaMode => $composableBuilder(
+      column: $table.dyslexiaMode, builder: (column) => ColumnFilters(column));
+
+  ColumnFilters<bool> get animationsEnabled => $composableBuilder(
+      column: $table.animationsEnabled,
+      builder: (column) => ColumnFilters(column));
+
+  ColumnFilters<bool> get isHeritage => $composableBuilder(
+      column: $table.isHeritage, builder: (column) => ColumnFilters(column));
+
+  ColumnFilters<DateTime> get lastActiveDate => $composableBuilder(
+      column: $table.lastActiveDate,
+      builder: (column) => ColumnFilters(column));
+}
+
+class $$UserProfilesTableOrderingComposer
+    extends Composer<_$AppDatabase, $UserProfilesTable> {
+  $$UserProfilesTableOrderingComposer({
+    required super.$db,
+    required super.$table,
+    super.joinBuilder,
+    super.$addJoinBuilderToRootComposer,
+    super.$removeJoinBuilderFromRootComposer,
+  });
+  ColumnOrderings<String> get userId => $composableBuilder(
+      column: $table.userId, builder: (column) => ColumnOrderings(column));
+
+  ColumnOrderings<String> get displayName => $composableBuilder(
+      column: $table.displayName, builder: (column) => ColumnOrderings(column));
+
+  ColumnOrderings<String> get segment => $composableBuilder(
+      column: $table.segment, builder: (column) => ColumnOrderings(column));
+
+  ColumnOrderings<String> get currentLevel => $composableBuilder(
+      column: $table.currentLevel,
+      builder: (column) => ColumnOrderings(column));
+
+  ColumnOrderings<String> get interfaceLanguage => $composableBuilder(
+      column: $table.interfaceLanguage,
+      builder: (column) => ColumnOrderings(column));
+
+  ColumnOrderings<int> get dailyGoalCards => $composableBuilder(
+      column: $table.dailyGoalCards,
+      builder: (column) => ColumnOrderings(column));
+
+  ColumnOrderings<int> get streakDays => $composableBuilder(
+      column: $table.streakDays, builder: (column) => ColumnOrderings(column));
+
+  ColumnOrderings<int> get totalXp => $composableBuilder(
+      column: $table.totalXp, builder: (column) => ColumnOrderings(column));
+
+  ColumnOrderings<bool> get dyslexiaMode => $composableBuilder(
+      column: $table.dyslexiaMode,
+      builder: (column) => ColumnOrderings(column));
+
+  ColumnOrderings<bool> get animationsEnabled => $composableBuilder(
+      column: $table.animationsEnabled,
+      builder: (column) => ColumnOrderings(column));
+
+  ColumnOrderings<bool> get isHeritage => $composableBuilder(
+      column: $table.isHeritage, builder: (column) => ColumnOrderings(column));
+
+  ColumnOrderings<DateTime> get lastActiveDate => $composableBuilder(
+      column: $table.lastActiveDate,
+      builder: (column) => ColumnOrderings(column));
+}
+
+class $$UserProfilesTableAnnotationComposer
+    extends Composer<_$AppDatabase, $UserProfilesTable> {
+  $$UserProfilesTableAnnotationComposer({
+    required super.$db,
+    required super.$table,
+    super.joinBuilder,
+    super.$addJoinBuilderToRootComposer,
+    super.$removeJoinBuilderFromRootComposer,
+  });
+  GeneratedColumn<String> get userId =>
+      $composableBuilder(column: $table.userId, builder: (column) => column);
+
+  GeneratedColumn<String> get displayName => $composableBuilder(
+      column: $table.displayName, builder: (column) => column);
+
+  GeneratedColumn<String> get segment =>
+      $composableBuilder(column: $table.segment, builder: (column) => column);
+
+  GeneratedColumn<String> get currentLevel => $composableBuilder(
+      column: $table.currentLevel, builder: (column) => column);
+
+  GeneratedColumn<String> get interfaceLanguage => $composableBuilder(
+      column: $table.interfaceLanguage, builder: (column) => column);
+
+  GeneratedColumn<int> get dailyGoalCards => $composableBuilder(
+      column: $table.dailyGoalCards, builder: (column) => column);
+
+  GeneratedColumn<int> get streakDays => $composableBuilder(
+      column: $table.streakDays, builder: (column) => column);
+
+  GeneratedColumn<int> get totalXp =>
+      $composableBuilder(column: $table.totalXp, builder: (column) => column);
+
+  GeneratedColumn<bool> get dyslexiaMode => $composableBuilder(
+      column: $table.dyslexiaMode, builder: (column) => column);
+
+  GeneratedColumn<bool> get animationsEnabled => $composableBuilder(
+      column: $table.animationsEnabled, builder: (column) => column);
+
+  GeneratedColumn<bool> get isHeritage => $composableBuilder(
+      column: $table.isHeritage, builder: (column) => column);
+
+  GeneratedColumn<DateTime> get lastActiveDate => $composableBuilder(
+      column: $table.lastActiveDate, builder: (column) => column);
+}
+
+class $$UserProfilesTableTableManager extends RootTableManager<
+    _$AppDatabase,
+    $UserProfilesTable,
+    UserProfile,
+    $$UserProfilesTableFilterComposer,
+    $$UserProfilesTableOrderingComposer,
+    $$UserProfilesTableAnnotationComposer,
+    $$UserProfilesTableCreateCompanionBuilder,
+    $$UserProfilesTableUpdateCompanionBuilder,
+    (
+      UserProfile,
+      BaseReferences<_$AppDatabase, $UserProfilesTable, UserProfile>
+    ),
+    UserProfile,
+    PrefetchHooks Function()> {
+  $$UserProfilesTableTableManager(_$AppDatabase db, $UserProfilesTable table)
+      : super(TableManagerState(
+          db: db,
+          table: table,
+          createFilteringComposer: () =>
+              $$UserProfilesTableFilterComposer($db: db, $table: table),
+          createOrderingComposer: () =>
+              $$UserProfilesTableOrderingComposer($db: db, $table: table),
+          createComputedFieldComposer: () =>
+              $$UserProfilesTableAnnotationComposer($db: db, $table: table),
+          updateCompanionCallback: ({
+            Value<String> userId = const Value.absent(),
+            Value<String> displayName = const Value.absent(),
+            Value<String> segment = const Value.absent(),
+            Value<String> currentLevel = const Value.absent(),
+            Value<String> interfaceLanguage = const Value.absent(),
+            Value<int> dailyGoalCards = const Value.absent(),
+            Value<int> streakDays = const Value.absent(),
+            Value<int> totalXp = const Value.absent(),
+            Value<bool> dyslexiaMode = const Value.absent(),
+            Value<bool> animationsEnabled = const Value.absent(),
+            Value<bool> isHeritage = const Value.absent(),
+            Value<DateTime?> lastActiveDate = const Value.absent(),
+            Value<int> rowid = const Value.absent(),
+          }) =>
+              UserProfilesCompanion(
+            userId: userId,
+            displayName: displayName,
+            segment: segment,
+            currentLevel: currentLevel,
+            interfaceLanguage: interfaceLanguage,
+            dailyGoalCards: dailyGoalCards,
+            streakDays: streakDays,
+            totalXp: totalXp,
+            dyslexiaMode: dyslexiaMode,
+            animationsEnabled: animationsEnabled,
+            isHeritage: isHeritage,
+            lastActiveDate: lastActiveDate,
+            rowid: rowid,
+          ),
+          createCompanionCallback: ({
+            required String userId,
+            Value<String> displayName = const Value.absent(),
+            Value<String> segment = const Value.absent(),
+            Value<String> currentLevel = const Value.absent(),
+            Value<String> interfaceLanguage = const Value.absent(),
+            Value<int> dailyGoalCards = const Value.absent(),
+            Value<int> streakDays = const Value.absent(),
+            Value<int> totalXp = const Value.absent(),
+            Value<bool> dyslexiaMode = const Value.absent(),
+            Value<bool> animationsEnabled = const Value.absent(),
+            Value<bool> isHeritage = const Value.absent(),
+            Value<DateTime?> lastActiveDate = const Value.absent(),
+            Value<int> rowid = const Value.absent(),
+          }) =>
+              UserProfilesCompanion.insert(
+            userId: userId,
+            displayName: displayName,
+            segment: segment,
+            currentLevel: currentLevel,
+            interfaceLanguage: interfaceLanguage,
+            dailyGoalCards: dailyGoalCards,
+            streakDays: streakDays,
+            totalXp: totalXp,
+            dyslexiaMode: dyslexiaMode,
+            animationsEnabled: animationsEnabled,
+            isHeritage: isHeritage,
+            lastActiveDate: lastActiveDate,
+            rowid: rowid,
+          ),
+          withReferenceMapper: (p0) => p0
+              .map((e) => (e.readTable(table), BaseReferences(db, table, e)))
+              .toList(),
+          prefetchHooksCallback: null,
+        ));
+}
+
+typedef $$UserProfilesTableProcessedTableManager = ProcessedTableManager<
+    _$AppDatabase,
+    $UserProfilesTable,
+    UserProfile,
+    $$UserProfilesTableFilterComposer,
+    $$UserProfilesTableOrderingComposer,
+    $$UserProfilesTableAnnotationComposer,
+    $$UserProfilesTableCreateCompanionBuilder,
+    $$UserProfilesTableUpdateCompanionBuilder,
+    (
+      UserProfile,
+      BaseReferences<_$AppDatabase, $UserProfilesTable, UserProfile>
+    ),
+    UserProfile,
+    PrefetchHooks Function()>;
+typedef $$EarnedBadgesTableCreateCompanionBuilder = EarnedBadgesCompanion
+    Function({
+  Value<int> id,
+  required String userId,
+  required String badgeId,
+  required DateTime earnedAt,
+});
+typedef $$EarnedBadgesTableUpdateCompanionBuilder = EarnedBadgesCompanion
+    Function({
+  Value<int> id,
+  Value<String> userId,
+  Value<String> badgeId,
+  Value<DateTime> earnedAt,
+});
+
+class $$EarnedBadgesTableFilterComposer
+    extends Composer<_$AppDatabase, $EarnedBadgesTable> {
+  $$EarnedBadgesTableFilterComposer({
+    required super.$db,
+    required super.$table,
+    super.joinBuilder,
+    super.$addJoinBuilderToRootComposer,
+    super.$removeJoinBuilderFromRootComposer,
+  });
+  ColumnFilters<int> get id => $composableBuilder(
+      column: $table.id, builder: (column) => ColumnFilters(column));
+
+  ColumnFilters<String> get userId => $composableBuilder(
+      column: $table.userId, builder: (column) => ColumnFilters(column));
+
+  ColumnFilters<String> get badgeId => $composableBuilder(
+      column: $table.badgeId, builder: (column) => ColumnFilters(column));
+
+  ColumnFilters<DateTime> get earnedAt => $composableBuilder(
+      column: $table.earnedAt, builder: (column) => ColumnFilters(column));
+}
+
+class $$EarnedBadgesTableOrderingComposer
+    extends Composer<_$AppDatabase, $EarnedBadgesTable> {
+  $$EarnedBadgesTableOrderingComposer({
+    required super.$db,
+    required super.$table,
+    super.joinBuilder,
+    super.$addJoinBuilderToRootComposer,
+    super.$removeJoinBuilderFromRootComposer,
+  });
+  ColumnOrderings<int> get id => $composableBuilder(
+      column: $table.id, builder: (column) => ColumnOrderings(column));
+
+  ColumnOrderings<String> get userId => $composableBuilder(
+      column: $table.userId, builder: (column) => ColumnOrderings(column));
+
+  ColumnOrderings<String> get badgeId => $composableBuilder(
+      column: $table.badgeId, builder: (column) => ColumnOrderings(column));
+
+  ColumnOrderings<DateTime> get earnedAt => $composableBuilder(
+      column: $table.earnedAt, builder: (column) => ColumnOrderings(column));
+}
+
+class $$EarnedBadgesTableAnnotationComposer
+    extends Composer<_$AppDatabase, $EarnedBadgesTable> {
+  $$EarnedBadgesTableAnnotationComposer({
+    required super.$db,
+    required super.$table,
+    super.joinBuilder,
+    super.$addJoinBuilderToRootComposer,
+    super.$removeJoinBuilderFromRootComposer,
+  });
+  GeneratedColumn<int> get id =>
+      $composableBuilder(column: $table.id, builder: (column) => column);
+
+  GeneratedColumn<String> get userId =>
+      $composableBuilder(column: $table.userId, builder: (column) => column);
+
+  GeneratedColumn<String> get badgeId =>
+      $composableBuilder(column: $table.badgeId, builder: (column) => column);
+
+  GeneratedColumn<DateTime> get earnedAt =>
+      $composableBuilder(column: $table.earnedAt, builder: (column) => column);
+}
+
+class $$EarnedBadgesTableTableManager extends RootTableManager<
+    _$AppDatabase,
+    $EarnedBadgesTable,
+    EarnedBadge,
+    $$EarnedBadgesTableFilterComposer,
+    $$EarnedBadgesTableOrderingComposer,
+    $$EarnedBadgesTableAnnotationComposer,
+    $$EarnedBadgesTableCreateCompanionBuilder,
+    $$EarnedBadgesTableUpdateCompanionBuilder,
+    (
+      EarnedBadge,
+      BaseReferences<_$AppDatabase, $EarnedBadgesTable, EarnedBadge>
+    ),
+    EarnedBadge,
+    PrefetchHooks Function()> {
+  $$EarnedBadgesTableTableManager(_$AppDatabase db, $EarnedBadgesTable table)
+      : super(TableManagerState(
+          db: db,
+          table: table,
+          createFilteringComposer: () =>
+              $$EarnedBadgesTableFilterComposer($db: db, $table: table),
+          createOrderingComposer: () =>
+              $$EarnedBadgesTableOrderingComposer($db: db, $table: table),
+          createComputedFieldComposer: () =>
+              $$EarnedBadgesTableAnnotationComposer($db: db, $table: table),
+          updateCompanionCallback: ({
+            Value<int> id = const Value.absent(),
+            Value<String> userId = const Value.absent(),
+            Value<String> badgeId = const Value.absent(),
+            Value<DateTime> earnedAt = const Value.absent(),
+          }) =>
+              EarnedBadgesCompanion(
+            id: id,
+            userId: userId,
+            badgeId: badgeId,
+            earnedAt: earnedAt,
+          ),
+          createCompanionCallback: ({
+            Value<int> id = const Value.absent(),
+            required String userId,
+            required String badgeId,
+            required DateTime earnedAt,
+          }) =>
+              EarnedBadgesCompanion.insert(
+            id: id,
+            userId: userId,
+            badgeId: badgeId,
+            earnedAt: earnedAt,
+          ),
+          withReferenceMapper: (p0) => p0
+              .map((e) => (e.readTable(table), BaseReferences(db, table, e)))
+              .toList(),
+          prefetchHooksCallback: null,
+        ));
+}
+
+typedef $$EarnedBadgesTableProcessedTableManager = ProcessedTableManager<
+    _$AppDatabase,
+    $EarnedBadgesTable,
+    EarnedBadge,
+    $$EarnedBadgesTableFilterComposer,
+    $$EarnedBadgesTableOrderingComposer,
+    $$EarnedBadgesTableAnnotationComposer,
+    $$EarnedBadgesTableCreateCompanionBuilder,
+    $$EarnedBadgesTableUpdateCompanionBuilder,
+    (
+      EarnedBadge,
+      BaseReferences<_$AppDatabase, $EarnedBadgesTable, EarnedBadge>
+    ),
+    EarnedBadge,
+    PrefetchHooks Function()>;
+
+class $AppDatabaseManager {
+  final _$AppDatabase _db;
+  $AppDatabaseManager(this._db);
+  $$VocabularyCardsTableTableManager get vocabularyCards =>
+      $$VocabularyCardsTableTableManager(_db, _db.vocabularyCards);
+  $$FsrsReviewsTableTableManager get fsrsReviews =>
+      $$FsrsReviewsTableTableManager(_db, _db.fsrsReviews);
+  $$CompletedLessonsTableTableManager get completedLessons =>
+      $$CompletedLessonsTableTableManager(_db, _db.completedLessons);
+  $$UserProgressTableTableManager get userProgress =>
+      $$UserProgressTableTableManager(_db, _db.userProgress);
+  $$UserProfilesTableTableManager get userProfiles =>
+      $$UserProfilesTableTableManager(_db, _db.userProfiles);
+  $$EarnedBadgesTableTableManager get earnedBadges =>
+      $$EarnedBadgesTableTableManager(_db, _db.earnedBadges);
 }

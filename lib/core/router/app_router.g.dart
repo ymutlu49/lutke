@@ -1,29 +1,26 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
-// ignore_for_file: type=lint
-// ignore_for_file: unused_element, deprecated_member_use
 
 part of 'app_router.dart';
 
-// ════════════════════════════════════════════════════════════════
-// Riverpod tarafından otomatik üretilen kod
-// dart run build_runner build --delete-conflicting-outputs
-// ════════════════════════════════════════════════════════════════
+// **************************************************************************
+// RiverpodGenerator
+// **************************************************************************
 
-String _$appRouterHash() => r'lutke_app_router_v1';
+String _$appRouterHash() => r'8dea2c31c1bfff6ee2d64ba3f3f0da01632900ee';
 
-/// GoRouter provider — @riverpod annotation ile üretilmiş
-/// Kaynak: lib/core/router/app_router.dart → appRouter()
-final appRouterProvider = Provider<GoRouter>((ref) {
-  return appRouter(AppRouterRef._(ref));
-});
+/// See also [appRouter].
+@ProviderFor(appRouter)
+final appRouterProvider = AutoDisposeProvider<GoRouter>.internal(
+  appRouter,
+  name: r'appRouterProvider',
+  debugGetCreateSourceHash:
+      const bool.fromEnvironment('dart.vm.product') ? null : _$appRouterHash,
+  dependencies: null,
+  allTransitiveDependencies: null,
+);
 
-class AppRouterRef {
-  final Ref _ref;
-  AppRouterRef._(this._ref);
-
-  T watch<T>(ProviderListenable<T> provider) => _ref.watch(provider);
-  T read<T>(ProviderListenable<T> provider) => _ref.read(provider);
-  void listen<T>(ProviderListenable<T> provider, void Function(T?, T) listener) =>
-      _ref.listen(provider, listener);
-  void onDispose(void Function() cb) => _ref.onDispose(cb);
-}
+@Deprecated('Will be removed in 3.0. Use Ref instead')
+// ignore: unused_element
+typedef AppRouterRef = AutoDisposeProviderRef<GoRouter>;
+// ignore_for_file: type=lint
+// ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member, deprecated_member_use_from_same_package

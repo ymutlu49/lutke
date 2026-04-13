@@ -2,7 +2,7 @@ import 'dart:convert';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:drift/drift.dart' show Value;
 
-import '../../../core/database/app_database.dart';
+import '../../../core/database/app_database.dart' hide UserProfile;
 import '../../../core/utils/fsrs_algorithm.dart';
 import '../../../core/utils/user_segment.dart';
 import '../domain/lesson_entities.dart';

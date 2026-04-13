@@ -1993,10 +1993,10 @@ const kA1EkKelimeler = [
 
 
 // ════════════════════════════════════════════════════════════════
-// A1 EK KELİMELER — 106 kelime (AS + BH + TH kaynaklı)
+// A1 EK KELİMELER 2 — 106 kelime (AS + BH + TH kaynaklı)
 // ════════════════════════════════════════════════════════════════
 
-const kA1EkKelimeler = [
+const kA1EkKelimeler2 = [
 
   // ── GİYECEK — [AS] s.54 CİLÛBERG ─────────────────────────
   (id:'a1_500', ku:'Kiras', tr:'Gömlek / Elbise', en:'Shirt / Dress',
@@ -2683,7 +2683,7 @@ const kA1Son7 = [
 ];
 
 final kA1TamListe = [
-  ...kA1Kelimeler,
+  ...kA1TamKelimeler,
   ...kA1EkKelimeler,
   ...kA1EkKelimeler2,
   ...kA1EkKelimeler3,

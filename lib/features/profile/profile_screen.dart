@@ -104,7 +104,7 @@ class ProfileScreen extends ConsumerWidget {
 
                   // ── Motivasyon Çapası ─────────────────────
                   // İlke §9b bulgu #2
-                  _MotivationCard(motivation: profile.motivation.labelTr),
+                  _MotivationCard(motivation: profile.motivation.name),
 
                   const SizedBox(height: AppSpacing.lg),
 

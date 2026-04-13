@@ -1,4 +1,4 @@
-import '../../core/utils/fsrs_algorithm.dart';
+import '../../../core/utils/fsrs_algorithm.dart';
 
 // ════════════════════════════════════════════════════════════════
 // VOCABULARY CARD DOMAIN MODELİ

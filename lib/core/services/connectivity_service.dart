@@ -1,6 +1,10 @@
 import 'dart:async';
 import 'package:connectivity_plus/connectivity_plus.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import '../constants/app_colors.dart';
+import '../constants/app_typography.dart';
+import '../constants/app_spacing.dart';
 
 // ════════════════════════════════════════════════════════════════
 // BAĞLANTI DURUMU
@@ -53,11 +57,6 @@ final isOnlineProvider = Provider<bool>((ref) {
 // ════════════════════════════════════════════════════════════════
 // ÇEVRİMDIŞI BANNER WİDGET'I
 // ════════════════════════════════════════════════════════════════
-
-import 'package:flutter/material.dart';
-import '../constants/app_colors.dart';
-import '../constants/app_typography.dart';
-import '../constants/app_spacing.dart';
 
 class OfflineBanner extends ConsumerWidget {
   const OfflineBanner({super.key});

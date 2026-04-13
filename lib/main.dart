@@ -122,14 +122,11 @@ class _LutkeAppState extends ConsumerState<LutkeApp> {
       // Uygulama genelinde hata yakalama (widget hatası)
       builder: (context, child) {
         if (_seedError) {
-          return Directionality(
-            textDirection: TextDirection.ltr,
-            child: Banner(
-              message: 'Seed hatası',
-              location: BannerLocation.topEnd,
-              color: Colors.orange,
-              child: child!,
-            ),
+          return Banner(
+            message: 'Seed hatası',
+            location: BannerLocation.topEnd,
+            color: Colors.orange,
+            child: child!,
           );
         }
         return child!;

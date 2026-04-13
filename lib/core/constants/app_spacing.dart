@@ -101,6 +101,7 @@ class Gap {
   static const Widget md = SizedBox(height: AppSpacing.md);
   static const Widget lg = SizedBox(height: AppSpacing.lg);
   static const Widget xl = SizedBox(height: AppSpacing.xl);
+  static const Widget xxl = SizedBox(height: AppSpacing.xxl);
 
   static const Widget hXs = SizedBox(width: AppSpacing.xs);
   static const Widget hSm = SizedBox(width: AppSpacing.sm);

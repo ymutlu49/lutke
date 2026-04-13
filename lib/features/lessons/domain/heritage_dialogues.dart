@@ -568,13 +568,8 @@ const kDialogueDersa = HeritageDialogue(
 );
 
 // ════════════════════════════════════════════════════════════════
-// TÜM DİYALOGLAR
+// A1 TÜM DİYALOGLAR
 // ════════════════════════════════════════════════════════════════
-
-  kDialogueB1Ninni,
-  kDialogueB1Mezar,
-  kDialogueB1Heval,
-];
 
 // ════════════════════════════════════════════════════════════════
 // B1 DİYALOGLARI — 3 Sahne

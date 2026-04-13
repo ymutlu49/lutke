@@ -97,6 +97,13 @@ class FSRSCard {
     );
   }
 
+  /// Yeni kart oluşturmak için kısa yol.
+  factory FSRSCard.newCard(String cardId) => FSRSCard(
+    cardId: cardId,
+    state: CardState.newCard,
+    dueDate: DateTime.now(),
+  );
+
   bool get isNew => state == CardState.newCard;
   bool get isDue => dueDate == null || dueDate!.isBefore(DateTime.now());
 
@@ -428,12 +435,5 @@ class FSRSAlgorithm {
   }
 }
 
-// ── FSRSCard FACTORY ────────────────────────────────────────
-extension FSRSCardFactory on FSRSCard {
-  /// Yeni kart oluşturmak için kısa yol.
-  static FSRSCard newCard(String cardId) => FSRSCard(
-    cardId: cardId,
-    state: CardState.newCard,
-    dueDate: DateTime.now(),
-  );
-}
+// FSRSCard.newCard factory constructor is now defined directly
+// in the FSRSCard class above.

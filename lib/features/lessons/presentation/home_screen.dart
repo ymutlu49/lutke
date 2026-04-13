@@ -9,6 +9,7 @@ import '../../../core/constants/app_spacing.dart';
 import '../../../core/router/app_router.dart';
 import '../../../core/services/auth_service.dart';
 import '../data/lesson_repository.dart';
+import '../domain/lesson_entities.dart';
 
 // ════════════════════════════════════════════════════════════════
 // ANA SAYFA — İLERLEME HARİTASI
