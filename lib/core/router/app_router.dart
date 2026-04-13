@@ -290,6 +290,54 @@ GoRouter appRouter(AppRouterRef ref) {
         ],
       ),
 
+      // ── Etkinlikler (shell dışı — unit hub'dan erişim) ─────
+      GoRoute(
+        path: '/activity/quiz',
+        builder: (_, state) {
+          final extra = state.extra as Map<String, dynamic>?;
+          return QuizScreen(
+            level: extra?['level'] as String? ?? 'A1',
+            category: extra?['category'] as String?,
+          );
+        },
+      ),
+      GoRoute(
+        path: '/activity/flashcard',
+        builder: (_, state) {
+          final extra = state.extra as Map<String, dynamic>?;
+          return FlashcardScreen(
+            category: extra?['category'] as String?,
+          );
+        },
+      ),
+      GoRoute(
+        path: '/activity/listening',
+        builder: (_, state) {
+          final extra = state.extra as Map<String, dynamic>?;
+          return ListeningScreen(
+            category: extra?['category'] as String?,
+          );
+        },
+      ),
+      GoRoute(
+        path: '/activity/sentence-builder',
+        builder: (_, state) {
+          final extra = state.extra as Map<String, dynamic>?;
+          return SentenceBuilderScreen(
+            category: extra?['category'] as String?,
+          );
+        },
+      ),
+      GoRoute(
+        path: '/activity/word-match',
+        builder: (_, state) {
+          final extra = state.extra as Map<String, dynamic>?;
+          return WordMatchScreen(
+            category: extra?['category'] as String?,
+          );
+        },
+      ),
+
       // ── Birim Hub — Durak detay ekranı ────────────────────
       GoRoute(
         path: AppRoutes.unitHub,
