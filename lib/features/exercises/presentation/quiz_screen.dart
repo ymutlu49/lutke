@@ -493,32 +493,93 @@ class _QuizScreenState extends ConsumerState<QuizScreen>
     );
   }
 
+  // ── Kategori Emoji Haritası ────────────────────────────────────
+
+  static String _emojiForKat(String kat) => switch (kat) {
+    'silav' || 'selamlama' => '👋',
+    'malbat' => '👨‍👩‍👧‍👦',
+    'xwarin' => '🍽️',
+    'vexwarin' => '🥤',
+    'mêwe' || 'mewe' => '🍎',
+    'ajal' || 'heywan' => '🐾',
+    'reng' => '🎨',
+    'jimar' => '🔢',
+    'mal' => '🏠',
+    'cil' => '👕',
+    'beden' => '🫀',
+    'tendurist' => '🏥',
+    'pîşe' || 'pise' => '👷',
+    'dem' => '⏰',
+    'roj' => '📅',
+    'demsal' => '🌦️',
+    'cih' => '📍',
+    'gihanî' => '🚗',
+    'leker' => '🏃',
+    'xweza' => '🌿',
+    'perwerde' => '📚',
+    'çand' || 'cand' => '🎭',
+    'alfabe' => '🔤',
+    'cinavk' => '👤',
+    'rengder' => '📝',
+    'daçek' || 'dacek' => '🔗',
+    'temel' => '💡',
+    'dua' => '🤲',
+    'peyvben' => '🔀',
+    'pirs' => '❓',
+    'bun' => '✨',
+    _ => '📖',
+  };
+
   // ── 1. Translation: Kurmancî -> Tirkî ────────────────────────
 
   Widget _buildTranslationQuestion(_QuizQuestion q) {
-    // KU/TR: Kurmancî kelime → Türkçe seçenekler
-    // Tenê Kurmancî: Kurmancî cümle/tanım → Kurmancî kelime seçenekleri
-    final String questionText;
-    final String instruction;
     if (_showTurkish) {
-      questionText = q.word.ku;
-      instruction = 'Ev peyv bi Tirkî çi ye?';
-    } else {
-      // Kürtçe modda: heritage cümle veya not alanını göster
-      final sentences = q.word.her;
-      questionText = (sentences is List && sentences.isNotEmpty)
-          ? sentences[0]
-          : 'Ev peyvê çi ye? (${q.word.kat})';
-      instruction = 'Ev hevok kîjan peyvê vedibêje?';
+      // KU/TR: Kurmancî kelime → Türkçe seçenekler
+      return Column(
+        key: ValueKey('translation_${q.word.id}'),
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          _buildInstruction('Ev peyv bi Tirkî çi ye?', '', showTr: false),
+          Gap.lg,
+          _buildWordCard(q.word.ku, isKurmanji: true),
+          const SizedBox(height: AppSpacing.questionToOptions),
+          ..._buildOptionButtons(q),
+        ],
+      );
     }
+
+    // Tenê Kurmancî: Emoji + kategori ipucu → Kurmancî kelime seçenekleri
+    final emoji = _emojiForKat(q.word.kat);
+    final hint = (q.word.her is List && (q.word.her as List).isNotEmpty)
+        ? (q.word.her as List)[0].toString().replaceAll(q.word.ku, '____')
+        : '$emoji ${q.word.kat}';
 
     return Column(
       key: ValueKey('translation_${q.word.id}'),
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        _buildInstruction(instruction, '', showTr: false),
+        _buildInstruction('Kîjan peyv rast e?', '', showTr: false),
         Gap.lg,
-        _buildWordCard(questionText, isKurmanji: true),
+        // Emoji büyük göster + cümle ipucu
+        Center(
+          child: Column(
+            children: [
+              Text(emoji, style: const TextStyle(fontSize: 56)),
+              Gap.sm,
+              Container(
+                padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 12),
+                decoration: BoxDecoration(
+                  color: AppColors.primarySurface,
+                  borderRadius: BorderRadius.circular(16),
+                ),
+                child: Text(hint,
+                  style: AppTypography.kurmanji.copyWith(
+                    color: AppColors.textPrimary, fontSize: 16),
+                  textAlign: TextAlign.center),
+              ),
+            ],
+          ),
+        ),
         const SizedBox(height: AppSpacing.questionToOptions),
         ..._buildOptionButtons(q),
       ],
@@ -528,24 +589,40 @@ class _QuizScreenState extends ConsumerState<QuizScreen>
   // ── 2. Reverse Translation ────────────────────────────────────
 
   Widget _buildReverseTranslationQuestion(_QuizQuestion q) {
-    final String questionText;
-    final String instruction;
     if (_showTurkish) {
-      questionText = q.word.tr;
-      instruction = 'Ev peyv bi Kurmancî çi ye?';
-    } else {
-      // Kürtçe modda: kategori + ipucu göster
-      questionText = '${q.word.kat.toUpperCase()} — ?';
-      instruction = 'Kîjan peyv vê kategoriyê ye?';
+      return Column(
+        key: ValueKey('reverse_${q.word.id}'),
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          _buildInstruction('Ev peyv bi Kurmancî çi ye?', '', showTr: false),
+          Gap.lg,
+          _buildWordCard(q.word.tr, isKurmanji: false),
+          const SizedBox(height: AppSpacing.questionToOptions),
+          ..._buildOptionButtons(q),
+        ],
+      );
     }
+
+    // Tenê Kurmancî: Emoji + Kurmancî tanım → kelime seçenekleri
+    final emoji = _emojiForKat(q.word.kat);
 
     return Column(
       key: ValueKey('reverse_${q.word.id}'),
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        _buildInstruction(instruction, '', showTr: false),
+        _buildInstruction('Ev wêne kîjan peyvê nîşan dide?', '', showTr: false),
         Gap.lg,
-        _buildWordCard(questionText, isKurmanji: !_showTurkish),
+        Center(
+          child: Column(
+            children: [
+              Text(emoji, style: const TextStyle(fontSize: 72)),
+              Gap.sm,
+              Text(q.word.kat.toUpperCase(),
+                style: TextStyle(fontSize: 13, color: AppColors.textSecondary,
+                  fontWeight: FontWeight.w600, letterSpacing: 1)),
+            ],
+          ),
+        ),
         const SizedBox(height: AppSpacing.questionToOptions),
         ..._buildOptionButtons(q),
       ],
@@ -646,15 +723,33 @@ class _QuizScreenState extends ConsumerState<QuizScreen>
 
         Gap.lg,
 
-        // Soru: KU/TR modda Türkçe, Kurmancî modda cümle/ipucu
-        _buildWordCard(
-          _showTurkish
-              ? q.word.tr
-              : ((q.word.her is List && (q.word.her as List).isNotEmpty)
-                  ? (q.word.her as List)[0]
-                  : q.word.ku),
-          isKurmanji: !_showTurkish,
-        ),
+        // Soru gösterimi
+        if (_showTurkish)
+          _buildWordCard(q.word.tr, isKurmanji: false)
+        else
+          // Kurmancî modda: emoji + heritage cümle (kelime ____ ile gizlenmiş)
+          Center(
+            child: Column(
+              children: [
+                Text(_emojiForKat(q.word.kat), style: const TextStyle(fontSize: 48)),
+                Gap.sm,
+                Container(
+                  padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 12),
+                  decoration: BoxDecoration(
+                    color: AppColors.primarySurface,
+                    borderRadius: BorderRadius.circular(16),
+                  ),
+                  child: Text(
+                    (q.word.her is List && (q.word.her as List).isNotEmpty)
+                        ? (q.word.her as List)[0].toString().replaceAll(q.word.ku, '____')
+                        : '${q.word.kat}: ____',
+                    style: AppTypography.kurmanji.copyWith(fontSize: 16),
+                    textAlign: TextAlign.center,
+                  ),
+                ),
+              ],
+            ),
+          ),
 
         const SizedBox(height: AppSpacing.questionToOptions),
 
