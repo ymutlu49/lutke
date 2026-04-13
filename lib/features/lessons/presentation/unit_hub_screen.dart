@@ -132,7 +132,7 @@ class UnitHubScreen extends ConsumerWidget {
                       descTr: 'Bilgini test et',
                       showTr: showTr,
                       color: AppColors.primary,
-                      onTap: () => context.push(
+                      onTap: () => context.go(
                         AppRoutes.quiz,
                         extra: {'level': 'A1', 'category': category},
                       ),
@@ -147,7 +147,7 @@ class UnitHubScreen extends ConsumerWidget {
                       descTr: 'Kartlarla \u00f6\u011fren',
                       showTr: showTr,
                       color: AppColors.accent,
-                      onTap: () => context.push(AppRoutes.flashcard, extra: {'category': category}),
+                      onTap: () => context.go(AppRoutes.flashcard, extra: {'category': category}),
                     ).animate().fadeIn(delay: 200.ms).slideY(begin: 0.05),
 
                     const SizedBox(height: 14),
@@ -159,7 +159,7 @@ class UnitHubScreen extends ConsumerWidget {
                       descTr: 'Dinle ve se\u00e7',
                       showTr: showTr,
                       color: const Color(0xFF2196F3),
-                      onTap: () => context.push(AppRoutes.listening, extra: {'category': category}),
+                      onTap: () => context.go(AppRoutes.listening, extra: {'category': category}),
                     ).animate().fadeIn(delay: 300.ms).slideY(begin: 0.05),
 
                     const SizedBox(height: 14),
@@ -171,7 +171,7 @@ class UnitHubScreen extends ConsumerWidget {
                       descTr: 'C\u00fcmle kur',
                       showTr: showTr,
                       color: const Color(0xFF9C27B0),
-                      onTap: () => context.push(AppRoutes.sentenceBuilder, extra: {'category': category}),
+                      onTap: () => context.go(AppRoutes.sentenceBuilder, extra: {'category': category}),
                     ).animate().fadeIn(delay: 400.ms).slideY(begin: 0.05),
 
                     const SizedBox(height: 14),
@@ -183,7 +183,7 @@ class UnitHubScreen extends ConsumerWidget {
                       descTr: 'Kelime e\u015fle\u015ftir',
                       showTr: showTr,
                       color: const Color(0xFFFF5722),
-                      onTap: () => context.push(AppRoutes.wordMatch, extra: {'category': category}),
+                      onTap: () => context.go(AppRoutes.wordMatch, extra: {'category': category}),
                     ).animate().fadeIn(delay: 500.ms).slideY(begin: 0.05),
 
                     const SizedBox(height: 24),
