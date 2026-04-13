@@ -1045,7 +1045,10 @@ class _QuizScreenState extends ConsumerState<QuizScreen>
       }
 
       Widget optionWidget = GestureDetector(
-        onTap: _answered ? null : () => _submitAnswer(optionIndex: i),
+        onTap: _answered ? null : () {
+          SoundService.playTap();
+          _submitAnswer(optionIndex: i);
+        },
         child: AnimatedContainer(
           duration: const Duration(milliseconds: 250),
           width: double.infinity,

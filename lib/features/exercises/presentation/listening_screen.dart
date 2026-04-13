@@ -13,6 +13,7 @@ import '../../../core/constants/app_spacing.dart';
 import '../../../core/constants/app_typography.dart';
 import '../../../shared/widgets/speak_button.dart';
 import '../../lessons/domain/a1_kelime_db.dart';
+import '../../../core/services/sound_service.dart';
 
 // Conditional import for direct TTS calls
 import '../../../core/services/js_eval_stub.dart'
@@ -393,6 +394,7 @@ class _ListeningScreenState extends ConsumerState<ListeningScreen>
   void _onOptionSelected(String option) {
     if (_answered) return;
 
+    SoundService.playTap();
     HapticFeedback.lightImpact();
 
     final question = _questions[_currentIndex];
@@ -403,9 +405,11 @@ class _ListeningScreenState extends ConsumerState<ListeningScreen>
       _selectedOption = option;
       if (isCorrect) {
         _correctCount++;
+        SoundService.playCorrect();
         HapticFeedback.mediumImpact();
       } else {
         _hearts = (_hearts - 1).clamp(0, 3);
+        SoundService.playWrong();
         HapticFeedback.heavyImpact();
       }
     });

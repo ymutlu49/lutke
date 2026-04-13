@@ -209,8 +209,10 @@ class _FlashcardScreenState extends ConsumerState<FlashcardScreen>
     // Sonucu kaydet
     if (_swipeResult == _SwipeDirection.right) {
       _knewCount++;
+      SoundService.playCorrect();
     } else {
       _didntKnowCount++;
+      SoundService.playWrong();
       // Smart Review: zayıf kelime olarak kaydet
       ref.read(reviewProvider.notifier).addWeakWord(_cards[_currentIndex].id);
     }

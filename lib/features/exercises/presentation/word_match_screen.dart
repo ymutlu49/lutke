@@ -11,6 +11,7 @@ import '../../../core/constants/app_spacing.dart';
 import '../../../core/constants/app_typography.dart';
 import '../../../shared/providers/language_mode_provider.dart';
 import '../../lessons/domain/a1_kelime_db.dart';
+import '../../../core/services/sound_service.dart';
 
 // ════════════════════════════════════════════════════════════════
 // WORD MATCH — Peyvan Bike! (Kelime Eslestirme Oyunu)
@@ -186,6 +187,7 @@ class _WordMatchScreenState extends ConsumerState<WordMatchScreen>
   // ── Sol sutun dokunma ────────────────────────────────────────
   void _onLeftTap(int index) {
     if (_matchedIndices.contains(index)) return;
+    SoundService.playTap();
     HapticFeedback.selectionClick();
 
     setState(() {
@@ -221,6 +223,7 @@ class _WordMatchScreenState extends ConsumerState<WordMatchScreen>
 
     if (leftIdx == rightActualIdx) {
       // Dogru eslestirme
+      SoundService.playCorrect();
       HapticFeedback.mediumImpact();
 
       final colorIdx = _matchedIndices.length % _matchColors.length;
@@ -243,6 +246,7 @@ class _WordMatchScreenState extends ConsumerState<WordMatchScreen>
       }
     } else {
       // Yanlis eslestirme
+      SoundService.playWrong();
       HapticFeedback.heavyImpact();
       _totalWrong++;
       _wrongAttempts++;
