@@ -1761,6 +1761,23 @@ class _AccountActions extends StatelessWidget {
 
         if (isAnonymous) const SizedBox(height: AppSpacing.sm),
 
+        // Lûtke Zarok — Çocuk Modu
+        OutlinedButton.icon(
+          onPressed: () => context.go(AppRoutes.childOnboarding),
+          icon: const Text('🐐', style: TextStyle(fontSize: 18)),
+          label: const Text('Lûtke Zarok — Moda Zarokan'),
+          style: OutlinedButton.styleFrom(
+            minimumSize: const Size(double.infinity, 52),
+            side: const BorderSide(color: AppColors.primary),
+            foregroundColor: AppColors.primary,
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(14),
+            ),
+          ),
+        ),
+
+        const SizedBox(height: AppSpacing.sm),
+
         // Çıkış
         OutlinedButton.icon(
           onPressed: _signOut,

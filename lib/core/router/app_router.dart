@@ -30,6 +30,14 @@ import '../../features/grammar/grammar_tips_screen.dart';
 import '../../features/exercises/presentation/smart_review_screen.dart';
 import '../../features/lessons/presentation/progress_map_screen.dart';
 import '../../features/exercises/presentation/listening_screen.dart';
+import '../../features/child_mode/presentation/child_home_screen.dart';
+import '../../features/child_mode/presentation/child_vocabulary_screen.dart';
+import '../../features/child_mode/presentation/child_profile_screen.dart';
+import '../../features/child_mode/presentation/child_onboarding_screen.dart';
+import '../../features/child_mode/presentation/child_progress_map_screen.dart';
+import '../../features/child_mode/presentation/parental_controls_screen.dart';
+import '../../features/child_mode/presentation/widgets/child_mode_wrapper.dart';
+import '../../shared/providers/child_mode_provider.dart';
 
 part 'app_router.g.dart';
 
@@ -65,6 +73,15 @@ abstract class AppRoutes {
   static const review            = '/home/review';
   static const progressMap       = '/progress-map';
   static const listening         = '/home/listening';
+
+  // ── Lûtke Zarok (Çocuk Modu) ────────────────────────────────
+  static const childOnboarding       = '/child/onboarding';
+  static const childHome             = '/child/home';
+  static const childWords            = '/child/words';
+  static const childProfile          = '/child/profile';
+  static const childLesson           = '/child/home/lesson';
+  static const childParentalControls = '/child/parental-controls';
+  static const childProgressMap      = '/child/progress-map';
 }
 
 // ════════════════════════════════════════════════════════════════
@@ -234,6 +251,73 @@ GoRouter appRouter(AppRouterRef ref) {
         ],
       ),
 
+      // ── Lûtke Zarok — Çocuk Onboarding ────────────────────
+      GoRoute(
+        path: AppRoutes.childOnboarding,
+        builder: (_, __) => const ChildOnboardingScreen(),
+      ),
+
+      // ── Lûtke Zarok — 3 sekmeli çocuk navigasyonu ────────
+      StatefulShellRoute.indexedStack(
+        builder: (context, state, shell) => ChildModeWrapper(
+          child: _ChildAppShell(shell: shell),
+        ),
+        branches: [
+          // Tab 0: Lîstik (Oyna)
+          StatefulShellBranch(
+            routes: [
+              GoRoute(
+                path: AppRoutes.childHome,
+                builder: (_, __) => const ChildHomeScreen(),
+                routes: [
+                  GoRoute(
+                    path: 'lesson',
+                    builder: (_, state) {
+                      final extra = state.extra as Map<String, dynamic>?;
+                      return LessonScreen(
+                        mode: 'child',
+                        lessonId: extra?['lessonId'] as String?,
+                        userId: extra?['userId'] as String? ?? 'anonymous',
+                      );
+                    },
+                  ),
+                ],
+              ),
+            ],
+          ),
+
+          // Tab 1: Peyvên min (Kelimelerim)
+          StatefulShellBranch(
+            routes: [
+              GoRoute(
+                path: AppRoutes.childWords,
+                builder: (_, __) => const ChildVocabularyScreen(),
+              ),
+            ],
+          ),
+
+          // Tab 2: Ez (Profilim)
+          StatefulShellBranch(
+            routes: [
+              GoRoute(
+                path: AppRoutes.childProfile,
+                builder: (_, __) => const ChildProfileScreen(),
+              ),
+            ],
+          ),
+        ],
+      ),
+
+      // ── Çocuk — Ebeveyn Kontrol Paneli ────────────────────
+      GoRoute(
+        path: AppRoutes.childParentalControls,
+        builder: (_, __) => const ParentalControlsScreen(),
+      ),
+      GoRoute(
+        path: AppRoutes.childProgressMap,
+        builder: (_, __) => const ChildProgressMapScreen(),
+      ),
+
       // ── Shell dışı sayfalar ─────────────────────────────────
       GoRoute(
         path: AppRoutes.admin,
@@ -391,6 +475,134 @@ class _Tab extends StatelessWidget {
                 fontSize: 11,
                 fontWeight: isActive ? FontWeight.w700 : FontWeight.w500,
                 color: isActive ? AppColors.primary : Colors.grey.shade500,
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+// ════════════════════════════════════════════════════════════════
+// CHILD APP SHELL — 3 sekmeli çocuk navigasyonu
+// ════════════════════════════════════════════════════════════════
+
+class _ChildAppShell extends StatelessWidget {
+  final StatefulNavigationShell shell;
+  const _ChildAppShell({required this.shell});
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: shell,
+      bottomNavigationBar: _ChildBottomNav(
+        currentIndex: shell.currentIndex,
+        onTap: (i) {
+          SoundService.playClick();
+          shell.goBranch(i, initialLocation: i == shell.currentIndex);
+        },
+      ),
+    );
+  }
+}
+
+class _ChildBottomNav extends StatelessWidget {
+  final int currentIndex;
+  final ValueChanged<int> onTap;
+
+  const _ChildBottomNav({required this.currentIndex, required this.onTap});
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      decoration: BoxDecoration(
+        color: Colors.white,
+        boxShadow: [
+          BoxShadow(
+            color: Colors.black.withOpacity(0.06),
+            blurRadius: 12,
+            offset: const Offset(0, -1),
+          ),
+        ],
+      ),
+      child: SafeArea(
+        top: false,
+        child: Padding(
+          padding: const EdgeInsets.symmetric(vertical: 8),
+          child: Row(
+            children: [
+              _ChildTab(
+                icon: Icons.play_circle_filled_rounded,
+                label: 'Lîstik',
+                isActive: currentIndex == 0,
+                onTap: () => onTap(0),
+              ),
+              _ChildTab(
+                icon: Icons.auto_stories_rounded,
+                label: 'Peyvên min',
+                isActive: currentIndex == 1,
+                onTap: () => onTap(1),
+              ),
+              _ChildTab(
+                icon: Icons.face_rounded,
+                label: 'Ez',
+                isActive: currentIndex == 2,
+                onTap: () => onTap(2),
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+class _ChildTab extends StatelessWidget {
+  final IconData icon;
+  final String label;
+  final bool isActive;
+  final VoidCallback onTap;
+
+  const _ChildTab({
+    required this.icon,
+    required this.label,
+    required this.isActive,
+    required this.onTap,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Expanded(
+      child: GestureDetector(
+        onTap: onTap,
+        behavior: HitTestBehavior.opaque,
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            AnimatedContainer(
+              duration: const Duration(milliseconds: 200),
+              width: 56,
+              height: 36,
+              decoration: BoxDecoration(
+                color: isActive
+                    ? AppColors.primary.withOpacity(0.12)
+                    : Colors.transparent,
+                borderRadius: BorderRadius.circular(18),
+              ),
+              child: Icon(
+                icon,
+                size: 28,
+                color: isActive ? AppColors.primary : Colors.grey.shade400,
+              ),
+            ),
+            const SizedBox(height: 2),
+            Text(
+              label,
+              style: TextStyle(
+                fontSize: 13,
+                fontWeight: isActive ? FontWeight.w700 : FontWeight.w500,
+                color: isActive ? AppColors.primary : Colors.grey.shade400,
               ),
             ),
           ],

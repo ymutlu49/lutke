@@ -31,7 +31,7 @@ class LessonCompletionOverlay extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      color: AppColors.background.withOpacity(0.95),
+      color: AppColors.backgroundPrimary.withOpacity(0.95),
       child: SafeArea(
         child: Padding(
           padding: const EdgeInsets.all(AppSpacing.xl),

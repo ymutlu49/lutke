@@ -200,6 +200,8 @@ class _CardHeader extends StatelessWidget {
         CulturalContentType.story => AppColors.accent,
         CulturalContentType.celebration => AppColors.accent,
         CulturalContentType.foodTradition => AppColors.success,
+        CulturalContentType.culturalNote => AppColors.primaryLight,
+        CulturalContentType.historicalFigure => AppColors.primaryDark,
       };
 
   IconData get _icon => switch (item.type) {
@@ -209,6 +211,8 @@ class _CardHeader extends StatelessWidget {
         CulturalContentType.story => Icons.menu_book,
         CulturalContentType.celebration => Icons.celebration,
         CulturalContentType.foodTradition => Icons.restaurant,
+        CulturalContentType.culturalNote => Icons.info_outline,
+        CulturalContentType.historicalFigure => Icons.person_outline,
       };
 
   @override

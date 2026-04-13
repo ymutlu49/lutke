@@ -78,8 +78,24 @@ class UserProfiles extends Table {
   BoolColumn get isHeritage => boolean().withDefault(const Constant(false))();
   DateTimeColumn get lastActiveDate => dateTime().nullable()();
 
+  // ── Lûtke Zarok (Çocuk Modu) ──────────────────────────────
+  BoolColumn get isChildMode => boolean().withDefault(const Constant(false))();
+  IntColumn get childAge => integer().nullable()();
+  TextColumn get parentPin => text().nullable()();
+  IntColumn get dailyTimeLimitMinutes => integer().withDefault(const Constant(30))();
+
   @override
   Set<Column> get primaryKey => {userId};
+}
+
+class ChildSessionLogs extends Table {
+  IntColumn get id => integer().autoIncrement()();
+  TextColumn get userId => text()();
+  DateTimeColumn get sessionStart => dateTime()();
+  DateTimeColumn get sessionEnd => dateTime().nullable()();
+  IntColumn get durationMinutes => integer().withDefault(const Constant(0))();
+  IntColumn get exercisesCompleted => integer().withDefault(const Constant(0))();
+  IntColumn get wordsLearned => integer().withDefault(const Constant(0))();
 }
 
 class EarnedBadges extends Table {
@@ -100,12 +116,13 @@ class EarnedBadges extends Table {
   UserProgress,
   UserProfiles,
   EarnedBadges,
+  ChildSessionLogs,
 ])
 class AppDatabase extends _$AppDatabase {
   AppDatabase() : super(_openConnection());
 
   @override
-  int get schemaVersion => 3;
+  int get schemaVersion => 4;
 
   @override
   MigrationStrategy get migration => MigrationStrategy(
@@ -113,6 +130,14 @@ class AppDatabase extends _$AppDatabase {
     onUpgrade: (m, from, to) async {
       if (from < 2) await m.createTable(completedLessons);
       if (from < 3) await m.addColumn(fsrsReviews, fsrsReviews.wasCorrect);
+      if (from < 4) {
+        // Lûtke Zarok — Çocuk Modu
+        await m.addColumn(userProfiles, userProfiles.isChildMode);
+        await m.addColumn(userProfiles, userProfiles.childAge);
+        await m.addColumn(userProfiles, userProfiles.parentPin);
+        await m.addColumn(userProfiles, userProfiles.dailyTimeLimitMinutes);
+        await m.createTable(childSessionLogs);
+      }
     },
   );
 

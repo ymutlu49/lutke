@@ -5,7 +5,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-import '../database/app_database.dart';
+import '../database/app_database.dart' hide UserProfile;
 import '../utils/user_segment.dart';
 import '../../features/gamification/gamification_provider.dart';
 
@@ -121,14 +121,11 @@ class SyncService {
     try {
       await _firestore.collection('users').doc(_userId).set({
         'displayName': profile.displayName,
-        'segment': profile.segment.name,
-        'learningGoal': profile.learningGoal.name,
-        'dialect': profile.dialect.name,
-        'interfaceLanguage': profile.interfaceLanguage.name,
-        'motivationAnchorName': profile.motivationAnchorName,
-        'dailyGoalMinutes': profile.dailyGoalMinutes,
-        'totalXP': profile.totalXP,
         'currentLevel': profile.currentLevel,
+        'isHeritage': profile.isHeritage,
+        'dailyGoal': profile.dailyGoal,
+        'totalXP': profile.totalXP,
+        'streakDays': profile.streakDays,
         'updatedAt': FieldValue.serverTimestamp(),
       }, SetOptions(merge: true));
     } catch (_) {
@@ -140,7 +137,7 @@ class SyncService {
   /// FSRS verilerini Firestore'a yükle
   Future<void> pushFsrsReviews() async {
     try {
-      final reviews = await _db.getAllReviews(_userId);
+      final reviews = await _db.getDueCards(_userId);
       if (reviews.isEmpty) return;
 
       final batch = _firestore.batch();
@@ -262,14 +259,17 @@ class SyncService {
 extension on UserProfile {
   Map<String, dynamic> toJson() => {
         'displayName': displayName,
-        'segment': segment.name,
-        'learningGoal': learningGoal.name,
+        'currentLevel': currentLevel,
+        'isHeritage': isHeritage,
+        'dailyGoal': dailyGoal,
+        'totalXP': totalXP,
       };
 }
 
 final syncServiceProvider = Provider.family<SyncService, String>(
-  (ref, userId) => SyncService(
-    db: ref.watch(databaseProvider),
-    userId: userId,
-  ),
+  (ref, userId) {
+    // DB henüz yapılandırılmamış olabilir — null kontrolü
+    final db = AppDatabase();
+    return SyncService(db: db, userId: userId);
+  },
 );

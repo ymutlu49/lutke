@@ -73,6 +73,12 @@ class UserProfile {
   final bool dyslexiaMode;
   final bool animationsEnabled;
 
+  // ── Lûtke Zarok (Çocuk Modu) ──────────────────────────────
+  final bool isChildMode;
+  final int? childAge; // 7-10
+  final String? parentPin; // SHA-256 hash, 4 haneli PIN
+  final int dailyTimeLimitMinutes; // Ebeveyn kontrol: günlük süre limiti
+
   const UserProfile({
     required this.userId,
     this.displayName = '',
@@ -90,6 +96,10 @@ class UserProfile {
     this.interfaceLanguage = 'tr',
     this.dyslexiaMode = false,
     this.animationsEnabled = true,
+    this.isChildMode = false,
+    this.childAge,
+    this.parentPin,
+    this.dailyTimeLimitMinutes = 30,
   });
 
   // ── Hesaplanmış Özellikler ────────────────────────────────
@@ -133,6 +143,10 @@ class UserProfile {
     String? interfaceLanguage,
     bool? dyslexiaMode,
     bool? animationsEnabled,
+    bool? isChildMode,
+    int? childAge,
+    String? parentPin,
+    int? dailyTimeLimitMinutes,
   }) => UserProfile(
     userId: userId ?? this.userId,
     displayName: displayName ?? this.displayName,
@@ -150,6 +164,10 @@ class UserProfile {
     interfaceLanguage: interfaceLanguage ?? this.interfaceLanguage,
     dyslexiaMode: dyslexiaMode ?? this.dyslexiaMode,
     animationsEnabled: animationsEnabled ?? this.animationsEnabled,
+    isChildMode: isChildMode ?? this.isChildMode,
+    childAge: childAge ?? this.childAge,
+    parentPin: parentPin ?? this.parentPin,
+    dailyTimeLimitMinutes: dailyTimeLimitMinutes ?? this.dailyTimeLimitMinutes,
   );
 
   // ── Firestore Serialization ───────────────────────────────
@@ -172,6 +190,10 @@ class UserProfile {
     interfaceLanguage: data['interfaceLanguage'] as String? ?? 'tr',
     dyslexiaMode: data['dyslexiaMode'] as bool? ?? false,
     animationsEnabled: data['animationsEnabled'] as bool? ?? true,
+    isChildMode: data['isChildMode'] as bool? ?? false,
+    childAge: data['childAge'] as int?,
+    parentPin: data['parentPin'] as String?,
+    dailyTimeLimitMinutes: data['dailyTimeLimitMinutes'] as int? ?? 30,
   );
 
   Map<String, dynamic> toFirestore() => {
@@ -189,9 +211,13 @@ class UserProfile {
     'interfaceLanguage': interfaceLanguage,
     'dyslexiaMode': dyslexiaMode,
     'animationsEnabled': animationsEnabled,
+    'isChildMode': isChildMode,
+    'childAge': childAge,
+    'parentPin': parentPin,
+    'dailyTimeLimitMinutes': dailyTimeLimitMinutes,
   };
 
   @override
   String toString() => 'UserProfile($userId, ${currentLevel.label}, '
-      'isHeritage:$isHeritage, streak:$streakDays)';
+      'isHeritage:$isHeritage, isChild:$isChildMode, streak:$streakDays)';
 }

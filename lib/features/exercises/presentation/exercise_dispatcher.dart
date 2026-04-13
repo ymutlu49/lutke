@@ -3,11 +3,12 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../../core/utils/fsrs_algorithm.dart';
 import '../../../shared/providers/language_mode_provider.dart';
-import '../../../shared/widgets/exercise_widgets.dart';
+import '../../../shared/widgets/exercise_widgets.dart' as widgets;
 import '../../lessons/domain/entities/exercise.dart';
 import 'widgets/fill_in_blank_widget.dart';
 import 'widgets/minimal_pair_widget.dart';
 import 'widgets/speaking_practice_widget.dart';
+import '../../child_mode/presentation/widgets/picture_match_widget.dart';
 
 // ════════════════════════════════════════════════════════════════
 // EGZERSİZ DİSPATCHER — Strategy Pattern
@@ -41,27 +42,27 @@ class ExerciseDispatcher extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return switch (exercise) {
-      ListenAndSelectExercise ex => MultipleChoiceExercise(
+      ListenAndSelectExercise ex => widgets.MultipleChoiceExercise(
         question: ex.kurmanjiText,
         options: ex.options,
         correctIndex: ex.correctIndex,
         onRating: onRating,
       ),
 
-      MultipleChoiceExercise ex => MultipleChoiceExercise(
+      MultipleChoiceExercise ex => widgets.MultipleChoiceExercise(
         question: ex.prompt,
         options: ex.options,
         correctIndex: ex.correctIndex,
         onRating: onRating,
       ),
 
-      TypingExercise ex => TypingExercise(
+      TypingExercise ex => widgets.TypingExercise(
         prompt: ex.promptTr,
         answer: ex.correctKurmanji,
         onRating: onRating,
       ),
 
-      SentenceOrderExercise ex => SentenceOrderExercise(
+      SentenceOrderExercise ex => widgets.SentenceOrderExercise(
         wordTokens: ex.shuffledWords,
         correctOrder: ex.correctOrder,
         onRating: onRating,
@@ -83,6 +84,11 @@ class ExerciseDispatcher extends StatelessWidget {
       ),
 
       CulturalContentExercise ex => _CulturalCard(
+        exercise: ex,
+        onRating: onRating,
+      ),
+
+      PictureMatchExercise ex => PictureMatchWidget(
         exercise: ex,
         onRating: onRating,
       ),

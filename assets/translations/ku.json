@@ -75,5 +75,29 @@
     "no_internet": "Pêwendiya Internetê tune",
     "general": "Xeletiyek çêbû",
     "retry": "Dîsa biceribîne"
+  },
+  "child": {
+    "welcome": "Bi xêr hatî!",
+    "play": "Lîstik",
+    "my_words": "Peyvên min",
+    "profile": "Ez",
+    "star": "Stêrk",
+    "stars": "Stêrk",
+    "great_job": "Aferin!",
+    "good_job": "Baş e!",
+    "try_again": "Dîsa biceribîne!",
+    "parent_settings": "Mîhengên dê û bav",
+    "enter_pin": "PIN binivîse",
+    "mascot_name": "Bizer",
+    "mascot_greeting": "Bizer bi te re ye",
+    "how_old": "Tu çend salî yî?",
+    "lets_learn": "Em bi hev re Kurmancî fêr bibin!",
+    "ready": "Bizer amade ye!",
+    "start": "Dest pê bike!",
+    "weekly": "Hefteya min",
+    "words_learned": "Peyvên fêrbûyî",
+    "lessons_done": "Waneyên temam",
+    "my_lessons": "Waneyên min",
+    "locked": "Hêj vekirî nîne"
   }
 }

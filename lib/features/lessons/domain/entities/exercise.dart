@@ -55,6 +55,11 @@ enum ExerciseType {
     labelKu: 'Çanda Kurdî',
     labelTr: 'Kürt kültürü',
     heritagePriority: 3,
+  ),
+  pictureMatch(
+    labelKu: 'Wêne û peyv',
+    labelTr: 'Resim ve kelime eşleştir',
+    heritagePriority: 2,
   );
 
   final String labelKu;
@@ -349,3 +354,38 @@ class CulturalContentExercise extends Exercise {
 }
 
 enum CulturalType { proverb, poem, song, story }
+
+// ── Resim Eşleştirme (Lûtke Zarok) ─────────────────────────
+// Çocuklar kelimeyi emoji/resim ile eşleştirir.
+
+class PictureWordPair {
+  final String emoji;
+  final String word;
+  final String translation;
+
+  const PictureWordPair({
+    required this.emoji,
+    required this.word,
+    required this.translation,
+  });
+}
+
+class PictureMatchExercise extends Exercise {
+  final List<PictureWordPair> pairs;
+
+  const PictureMatchExercise({
+    required super.id,
+    required this.pairs,
+    super.xpReward = 12,
+    super.cardId,
+  }) : super(type: ExerciseType.pictureMatch);
+
+  @override
+  bool checkAnswer(dynamic userAnswer) {
+    // userAnswer: Map<String, String> (emoji → word eşleşmesi)
+    if (userAnswer is Map<String, String>) {
+      return pairs.every((p) => userAnswer[p.emoji] == p.word);
+    }
+    return false;
+  }
+}

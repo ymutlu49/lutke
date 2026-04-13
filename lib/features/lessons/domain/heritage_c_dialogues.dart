@@ -1,4 +1,62 @@
+// ════════════════════════════════════════════════════════════════
+// HERİTAGE DİYALOG MODELLERİ
+// ════════════════════════════════════════════════════════════════
 
+class DialogueCharacter {
+  final String id;
+  final String name;
+  final int age;
+  final String description;
+  final String avatarAsset;
+  final bool isHeritage;
+
+  const DialogueCharacter({
+    required this.id,
+    required this.name,
+    required this.age,
+    required this.description,
+    required this.avatarAsset,
+    this.isHeritage = false,
+  });
+}
+
+class DialogueLine {
+  final String speakerId;
+  final String kurmanci;
+  final String turkish;
+  final String? grammarNote;
+  final String? culturalNote;
+  final String? audioAsset;
+
+  const DialogueLine({
+    required this.speakerId,
+    required this.kurmanci,
+    required this.turkish,
+    this.grammarNote,
+    this.culturalNote,
+    this.audioAsset,
+  });
+}
+
+class HeritageDialogue {
+  final String id;
+  final String title;
+  final String turkishTitle;
+  final int level;
+  final String lessonId;
+  final List<DialogueCharacter> characters;
+  final List<DialogueLine> lines;
+
+  const HeritageDialogue({
+    required this.id,
+    required this.title,
+    required this.turkishTitle,
+    required this.level,
+    required this.lessonId,
+    required this.characters,
+    required this.lines,
+  });
+}
 
 // ════════════════════════════════════════════════════════════════
 // C1-C2 HERİTAGE DİYALOGLARI (3 sahne)

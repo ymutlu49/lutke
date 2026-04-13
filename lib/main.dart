@@ -7,7 +7,9 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:easy_localization/easy_localization.dart';
 
 import 'core/constants/app_theme.dart';
+import 'core/constants/child_theme.dart';
 import 'core/router/app_router.dart';
+import 'shared/providers/child_mode_provider.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -68,12 +70,13 @@ class LutkeApp extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final router = ref.watch(appRouterProvider);
+    final isChild = ref.watch(isChildModeProvider);
 
     return MaterialApp.router(
-      title: 'LÛTKE — Zimanê Kurdî',
-      theme: AppTheme.light,
-      darkTheme: AppTheme.dark,
-      themeMode: ThemeMode.system,
+      title: isChild ? 'LÛTKE ZAROK' : 'LÛTKE — Zimanê Kurdî',
+      theme: isChild ? ChildAppTheme.light : AppTheme.light,
+      darkTheme: isChild ? null : AppTheme.dark,
+      themeMode: isChild ? ThemeMode.light : ThemeMode.system,
       localizationsDelegates: context.localizationDelegates,
       supportedLocales: context.supportedLocales,
       locale: context.locale,

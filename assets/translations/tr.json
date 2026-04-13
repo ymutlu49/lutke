@@ -75,5 +75,29 @@
     "no_internet": "İnternet bağlantısı yok",
     "general": "Bir hata oluştu",
     "retry": "Tekrar Dene"
+  },
+  "child": {
+    "welcome": "Hoş geldin!",
+    "play": "Oyna",
+    "my_words": "Kelimelerim",
+    "profile": "Ben",
+    "star": "Yıldız",
+    "stars": "Yıldız",
+    "great_job": "Harika!",
+    "good_job": "İyi!",
+    "try_again": "Tekrar dene!",
+    "parent_settings": "Ebeveyn Ayarları",
+    "enter_pin": "PIN girin",
+    "mascot_name": "Bizer",
+    "mascot_greeting": "Bizer seninle",
+    "how_old": "Kaç yaşındasın?",
+    "lets_learn": "Birlikte Kürtçe öğrenelim!",
+    "ready": "Bizer hazır!",
+    "start": "Başla!",
+    "weekly": "Haftam",
+    "words_learned": "Öğrenilen kelime",
+    "lessons_done": "Tamamlanan ders",
+    "my_lessons": "Derslerim",
+    "locked": "Henüz açılmadı"
   }
 }

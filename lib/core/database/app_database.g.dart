@@ -2121,6 +2121,36 @@ class $UserProfilesTable extends UserProfiles
   late final GeneratedColumn<DateTime> lastActiveDate =
       GeneratedColumn<DateTime>('last_active_date', aliasedName, true,
           type: DriftSqlType.dateTime, requiredDuringInsert: false);
+  static const VerificationMeta _isChildModeMeta =
+      const VerificationMeta('isChildMode');
+  @override
+  late final GeneratedColumn<bool> isChildMode = GeneratedColumn<bool>(
+      'is_child_mode', aliasedName, false,
+      type: DriftSqlType.bool,
+      requiredDuringInsert: false,
+      defaultConstraints: GeneratedColumn.constraintIsAlways(
+          'CHECK ("is_child_mode" IN (0, 1))'),
+      defaultValue: const Constant(false));
+  static const VerificationMeta _childAgeMeta =
+      const VerificationMeta('childAge');
+  @override
+  late final GeneratedColumn<int> childAge = GeneratedColumn<int>(
+      'child_age', aliasedName, true,
+      type: DriftSqlType.int, requiredDuringInsert: false);
+  static const VerificationMeta _parentPinMeta =
+      const VerificationMeta('parentPin');
+  @override
+  late final GeneratedColumn<String> parentPin = GeneratedColumn<String>(
+      'parent_pin', aliasedName, true,
+      type: DriftSqlType.string, requiredDuringInsert: false);
+  static const VerificationMeta _dailyTimeLimitMinutesMeta =
+      const VerificationMeta('dailyTimeLimitMinutes');
+  @override
+  late final GeneratedColumn<int> dailyTimeLimitMinutes = GeneratedColumn<int>(
+      'daily_time_limit_minutes', aliasedName, false,
+      type: DriftSqlType.int,
+      requiredDuringInsert: false,
+      defaultValue: const Constant(30));
   @override
   List<GeneratedColumn> get $columns => [
         userId,
@@ -2134,7 +2164,11 @@ class $UserProfilesTable extends UserProfiles
         dyslexiaMode,
         animationsEnabled,
         isHeritage,
-        lastActiveDate
+        lastActiveDate,
+        isChildMode,
+        childAge,
+        parentPin,
+        dailyTimeLimitMinutes
       ];
   @override
   String get aliasedName => _alias ?? actualTableName;
@@ -2214,6 +2248,26 @@ class $UserProfilesTable extends UserProfiles
           lastActiveDate.isAcceptableOrUnknown(
               data['last_active_date']!, _lastActiveDateMeta));
     }
+    if (data.containsKey('is_child_mode')) {
+      context.handle(
+          _isChildModeMeta,
+          isChildMode.isAcceptableOrUnknown(
+              data['is_child_mode']!, _isChildModeMeta));
+    }
+    if (data.containsKey('child_age')) {
+      context.handle(_childAgeMeta,
+          childAge.isAcceptableOrUnknown(data['child_age']!, _childAgeMeta));
+    }
+    if (data.containsKey('parent_pin')) {
+      context.handle(_parentPinMeta,
+          parentPin.isAcceptableOrUnknown(data['parent_pin']!, _parentPinMeta));
+    }
+    if (data.containsKey('daily_time_limit_minutes')) {
+      context.handle(
+          _dailyTimeLimitMinutesMeta,
+          dailyTimeLimitMinutes.isAcceptableOrUnknown(
+              data['daily_time_limit_minutes']!, _dailyTimeLimitMinutesMeta));
+    }
     return context;
   }
 
@@ -2247,6 +2301,14 @@ class $UserProfilesTable extends UserProfiles
           .read(DriftSqlType.bool, data['${effectivePrefix}is_heritage'])!,
       lastActiveDate: attachedDatabase.typeMapping.read(
           DriftSqlType.dateTime, data['${effectivePrefix}last_active_date']),
+      isChildMode: attachedDatabase.typeMapping
+          .read(DriftSqlType.bool, data['${effectivePrefix}is_child_mode'])!,
+      childAge: attachedDatabase.typeMapping
+          .read(DriftSqlType.int, data['${effectivePrefix}child_age']),
+      parentPin: attachedDatabase.typeMapping
+          .read(DriftSqlType.string, data['${effectivePrefix}parent_pin']),
+      dailyTimeLimitMinutes: attachedDatabase.typeMapping.read(DriftSqlType.int,
+          data['${effectivePrefix}daily_time_limit_minutes'])!,
     );
   }
 
@@ -2269,6 +2331,10 @@ class UserProfile extends DataClass implements Insertable<UserProfile> {
   final bool animationsEnabled;
   final bool isHeritage;
   final DateTime? lastActiveDate;
+  final bool isChildMode;
+  final int? childAge;
+  final String? parentPin;
+  final int dailyTimeLimitMinutes;
   const UserProfile(
       {required this.userId,
       required this.displayName,
@@ -2281,7 +2347,11 @@ class UserProfile extends DataClass implements Insertable<UserProfile> {
       required this.dyslexiaMode,
       required this.animationsEnabled,
       required this.isHeritage,
-      this.lastActiveDate});
+      this.lastActiveDate,
+      required this.isChildMode,
+      this.childAge,
+      this.parentPin,
+      required this.dailyTimeLimitMinutes});
   @override
   Map<String, Expression> toColumns(bool nullToAbsent) {
     final map = <String, Expression>{};
@@ -2299,6 +2369,14 @@ class UserProfile extends DataClass implements Insertable<UserProfile> {
     if (!nullToAbsent || lastActiveDate != null) {
       map['last_active_date'] = Variable<DateTime>(lastActiveDate);
     }
+    map['is_child_mode'] = Variable<bool>(isChildMode);
+    if (!nullToAbsent || childAge != null) {
+      map['child_age'] = Variable<int>(childAge);
+    }
+    if (!nullToAbsent || parentPin != null) {
+      map['parent_pin'] = Variable<String>(parentPin);
+    }
+    map['daily_time_limit_minutes'] = Variable<int>(dailyTimeLimitMinutes);
     return map;
   }
 
@@ -2318,6 +2396,14 @@ class UserProfile extends DataClass implements Insertable<UserProfile> {
       lastActiveDate: lastActiveDate == null && nullToAbsent
           ? const Value.absent()
           : Value(lastActiveDate),
+      isChildMode: Value(isChildMode),
+      childAge: childAge == null && nullToAbsent
+          ? const Value.absent()
+          : Value(childAge),
+      parentPin: parentPin == null && nullToAbsent
+          ? const Value.absent()
+          : Value(parentPin),
+      dailyTimeLimitMinutes: Value(dailyTimeLimitMinutes),
     );
   }
 
@@ -2337,6 +2423,11 @@ class UserProfile extends DataClass implements Insertable<UserProfile> {
       animationsEnabled: serializer.fromJson<bool>(json['animationsEnabled']),
       isHeritage: serializer.fromJson<bool>(json['isHeritage']),
       lastActiveDate: serializer.fromJson<DateTime?>(json['lastActiveDate']),
+      isChildMode: serializer.fromJson<bool>(json['isChildMode']),
+      childAge: serializer.fromJson<int?>(json['childAge']),
+      parentPin: serializer.fromJson<String?>(json['parentPin']),
+      dailyTimeLimitMinutes:
+          serializer.fromJson<int>(json['dailyTimeLimitMinutes']),
     );
   }
   @override
@@ -2355,6 +2446,10 @@ class UserProfile extends DataClass implements Insertable<UserProfile> {
       'animationsEnabled': serializer.toJson<bool>(animationsEnabled),
       'isHeritage': serializer.toJson<bool>(isHeritage),
       'lastActiveDate': serializer.toJson<DateTime?>(lastActiveDate),
+      'isChildMode': serializer.toJson<bool>(isChildMode),
+      'childAge': serializer.toJson<int?>(childAge),
+      'parentPin': serializer.toJson<String?>(parentPin),
+      'dailyTimeLimitMinutes': serializer.toJson<int>(dailyTimeLimitMinutes),
     };
   }
 
@@ -2370,7 +2465,11 @@ class UserProfile extends DataClass implements Insertable<UserProfile> {
           bool? dyslexiaMode,
           bool? animationsEnabled,
           bool? isHeritage,
-          Value<DateTime?> lastActiveDate = const Value.absent()}) =>
+          Value<DateTime?> lastActiveDate = const Value.absent(),
+          bool? isChildMode,
+          Value<int?> childAge = const Value.absent(),
+          Value<String?> parentPin = const Value.absent(),
+          int? dailyTimeLimitMinutes}) =>
       UserProfile(
         userId: userId ?? this.userId,
         displayName: displayName ?? this.displayName,
@@ -2385,6 +2484,11 @@ class UserProfile extends DataClass implements Insertable<UserProfile> {
         isHeritage: isHeritage ?? this.isHeritage,
         lastActiveDate:
             lastActiveDate.present ? lastActiveDate.value : this.lastActiveDate,
+        isChildMode: isChildMode ?? this.isChildMode,
+        childAge: childAge.present ? childAge.value : this.childAge,
+        parentPin: parentPin.present ? parentPin.value : this.parentPin,
+        dailyTimeLimitMinutes:
+            dailyTimeLimitMinutes ?? this.dailyTimeLimitMinutes,
       );
   UserProfile copyWithCompanion(UserProfilesCompanion data) {
     return UserProfile(
@@ -2415,6 +2519,13 @@ class UserProfile extends DataClass implements Insertable<UserProfile> {
       lastActiveDate: data.lastActiveDate.present
           ? data.lastActiveDate.value
           : this.lastActiveDate,
+      isChildMode:
+          data.isChildMode.present ? data.isChildMode.value : this.isChildMode,
+      childAge: data.childAge.present ? data.childAge.value : this.childAge,
+      parentPin: data.parentPin.present ? data.parentPin.value : this.parentPin,
+      dailyTimeLimitMinutes: data.dailyTimeLimitMinutes.present
+          ? data.dailyTimeLimitMinutes.value
+          : this.dailyTimeLimitMinutes,
     );
   }
 
@@ -2432,7 +2543,11 @@ class UserProfile extends DataClass implements Insertable<UserProfile> {
           ..write('dyslexiaMode: $dyslexiaMode, ')
           ..write('animationsEnabled: $animationsEnabled, ')
           ..write('isHeritage: $isHeritage, ')
-          ..write('lastActiveDate: $lastActiveDate')
+          ..write('lastActiveDate: $lastActiveDate, ')
+          ..write('isChildMode: $isChildMode, ')
+          ..write('childAge: $childAge, ')
+          ..write('parentPin: $parentPin, ')
+          ..write('dailyTimeLimitMinutes: $dailyTimeLimitMinutes')
           ..write(')'))
         .toString();
   }
@@ -2450,7 +2565,11 @@ class UserProfile extends DataClass implements Insertable<UserProfile> {
       dyslexiaMode,
       animationsEnabled,
       isHeritage,
-      lastActiveDate);
+      lastActiveDate,
+      isChildMode,
+      childAge,
+      parentPin,
+      dailyTimeLimitMinutes);
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
@@ -2466,7 +2585,11 @@ class UserProfile extends DataClass implements Insertable<UserProfile> {
           other.dyslexiaMode == this.dyslexiaMode &&
           other.animationsEnabled == this.animationsEnabled &&
           other.isHeritage == this.isHeritage &&
-          other.lastActiveDate == this.lastActiveDate);
+          other.lastActiveDate == this.lastActiveDate &&
+          other.isChildMode == this.isChildMode &&
+          other.childAge == this.childAge &&
+          other.parentPin == this.parentPin &&
+          other.dailyTimeLimitMinutes == this.dailyTimeLimitMinutes);
 }
 
 class UserProfilesCompanion extends UpdateCompanion<UserProfile> {
@@ -2482,6 +2605,10 @@ class UserProfilesCompanion extends UpdateCompanion<UserProfile> {
   final Value<bool> animationsEnabled;
   final Value<bool> isHeritage;
   final Value<DateTime?> lastActiveDate;
+  final Value<bool> isChildMode;
+  final Value<int?> childAge;
+  final Value<String?> parentPin;
+  final Value<int> dailyTimeLimitMinutes;
   final Value<int> rowid;
   const UserProfilesCompanion({
     this.userId = const Value.absent(),
@@ -2496,6 +2623,10 @@ class UserProfilesCompanion extends UpdateCompanion<UserProfile> {
     this.animationsEnabled = const Value.absent(),
     this.isHeritage = const Value.absent(),
     this.lastActiveDate = const Value.absent(),
+    this.isChildMode = const Value.absent(),
+    this.childAge = const Value.absent(),
+    this.parentPin = const Value.absent(),
+    this.dailyTimeLimitMinutes = const Value.absent(),
     this.rowid = const Value.absent(),
   });
   UserProfilesCompanion.insert({
@@ -2511,6 +2642,10 @@ class UserProfilesCompanion extends UpdateCompanion<UserProfile> {
     this.animationsEnabled = const Value.absent(),
     this.isHeritage = const Value.absent(),
     this.lastActiveDate = const Value.absent(),
+    this.isChildMode = const Value.absent(),
+    this.childAge = const Value.absent(),
+    this.parentPin = const Value.absent(),
+    this.dailyTimeLimitMinutes = const Value.absent(),
     this.rowid = const Value.absent(),
   }) : userId = Value(userId);
   static Insertable<UserProfile> custom({
@@ -2526,6 +2661,10 @@ class UserProfilesCompanion extends UpdateCompanion<UserProfile> {
     Expression<bool>? animationsEnabled,
     Expression<bool>? isHeritage,
     Expression<DateTime>? lastActiveDate,
+    Expression<bool>? isChildMode,
+    Expression<int>? childAge,
+    Expression<String>? parentPin,
+    Expression<int>? dailyTimeLimitMinutes,
     Expression<int>? rowid,
   }) {
     return RawValuesInsertable({
@@ -2541,6 +2680,11 @@ class UserProfilesCompanion extends UpdateCompanion<UserProfile> {
       if (animationsEnabled != null) 'animations_enabled': animationsEnabled,
       if (isHeritage != null) 'is_heritage': isHeritage,
       if (lastActiveDate != null) 'last_active_date': lastActiveDate,
+      if (isChildMode != null) 'is_child_mode': isChildMode,
+      if (childAge != null) 'child_age': childAge,
+      if (parentPin != null) 'parent_pin': parentPin,
+      if (dailyTimeLimitMinutes != null)
+        'daily_time_limit_minutes': dailyTimeLimitMinutes,
       if (rowid != null) 'rowid': rowid,
     });
   }
@@ -2558,6 +2702,10 @@ class UserProfilesCompanion extends UpdateCompanion<UserProfile> {
       Value<bool>? animationsEnabled,
       Value<bool>? isHeritage,
       Value<DateTime?>? lastActiveDate,
+      Value<bool>? isChildMode,
+      Value<int?>? childAge,
+      Value<String?>? parentPin,
+      Value<int>? dailyTimeLimitMinutes,
       Value<int>? rowid}) {
     return UserProfilesCompanion(
       userId: userId ?? this.userId,
@@ -2572,6 +2720,11 @@ class UserProfilesCompanion extends UpdateCompanion<UserProfile> {
       animationsEnabled: animationsEnabled ?? this.animationsEnabled,
       isHeritage: isHeritage ?? this.isHeritage,
       lastActiveDate: lastActiveDate ?? this.lastActiveDate,
+      isChildMode: isChildMode ?? this.isChildMode,
+      childAge: childAge ?? this.childAge,
+      parentPin: parentPin ?? this.parentPin,
+      dailyTimeLimitMinutes:
+          dailyTimeLimitMinutes ?? this.dailyTimeLimitMinutes,
       rowid: rowid ?? this.rowid,
     );
   }
@@ -2615,6 +2768,19 @@ class UserProfilesCompanion extends UpdateCompanion<UserProfile> {
     if (lastActiveDate.present) {
       map['last_active_date'] = Variable<DateTime>(lastActiveDate.value);
     }
+    if (isChildMode.present) {
+      map['is_child_mode'] = Variable<bool>(isChildMode.value);
+    }
+    if (childAge.present) {
+      map['child_age'] = Variable<int>(childAge.value);
+    }
+    if (parentPin.present) {
+      map['parent_pin'] = Variable<String>(parentPin.value);
+    }
+    if (dailyTimeLimitMinutes.present) {
+      map['daily_time_limit_minutes'] =
+          Variable<int>(dailyTimeLimitMinutes.value);
+    }
     if (rowid.present) {
       map['rowid'] = Variable<int>(rowid.value);
     }
@@ -2636,6 +2802,10 @@ class UserProfilesCompanion extends UpdateCompanion<UserProfile> {
           ..write('animationsEnabled: $animationsEnabled, ')
           ..write('isHeritage: $isHeritage, ')
           ..write('lastActiveDate: $lastActiveDate, ')
+          ..write('isChildMode: $isChildMode, ')
+          ..write('childAge: $childAge, ')
+          ..write('parentPin: $parentPin, ')
+          ..write('dailyTimeLimitMinutes: $dailyTimeLimitMinutes, ')
           ..write('rowid: $rowid')
           ..write(')'))
         .toString();
@@ -2899,6 +3069,403 @@ class EarnedBadgesCompanion extends UpdateCompanion<EarnedBadge> {
   }
 }
 
+class $ChildSessionLogsTable extends ChildSessionLogs
+    with TableInfo<$ChildSessionLogsTable, ChildSessionLog> {
+  @override
+  final GeneratedDatabase attachedDatabase;
+  final String? _alias;
+  $ChildSessionLogsTable(this.attachedDatabase, [this._alias]);
+  static const VerificationMeta _idMeta = const VerificationMeta('id');
+  @override
+  late final GeneratedColumn<int> id = GeneratedColumn<int>(
+      'id', aliasedName, false,
+      hasAutoIncrement: true,
+      type: DriftSqlType.int,
+      requiredDuringInsert: false,
+      defaultConstraints:
+          GeneratedColumn.constraintIsAlways('PRIMARY KEY AUTOINCREMENT'));
+  static const VerificationMeta _userIdMeta = const VerificationMeta('userId');
+  @override
+  late final GeneratedColumn<String> userId = GeneratedColumn<String>(
+      'user_id', aliasedName, false,
+      type: DriftSqlType.string, requiredDuringInsert: true);
+  static const VerificationMeta _sessionStartMeta =
+      const VerificationMeta('sessionStart');
+  @override
+  late final GeneratedColumn<DateTime> sessionStart = GeneratedColumn<DateTime>(
+      'session_start', aliasedName, false,
+      type: DriftSqlType.dateTime, requiredDuringInsert: true);
+  static const VerificationMeta _sessionEndMeta =
+      const VerificationMeta('sessionEnd');
+  @override
+  late final GeneratedColumn<DateTime> sessionEnd = GeneratedColumn<DateTime>(
+      'session_end', aliasedName, true,
+      type: DriftSqlType.dateTime, requiredDuringInsert: false);
+  static const VerificationMeta _durationMinutesMeta =
+      const VerificationMeta('durationMinutes');
+  @override
+  late final GeneratedColumn<int> durationMinutes = GeneratedColumn<int>(
+      'duration_minutes', aliasedName, false,
+      type: DriftSqlType.int,
+      requiredDuringInsert: false,
+      defaultValue: const Constant(0));
+  static const VerificationMeta _exercisesCompletedMeta =
+      const VerificationMeta('exercisesCompleted');
+  @override
+  late final GeneratedColumn<int> exercisesCompleted = GeneratedColumn<int>(
+      'exercises_completed', aliasedName, false,
+      type: DriftSqlType.int,
+      requiredDuringInsert: false,
+      defaultValue: const Constant(0));
+  static const VerificationMeta _wordsLearnedMeta =
+      const VerificationMeta('wordsLearned');
+  @override
+  late final GeneratedColumn<int> wordsLearned = GeneratedColumn<int>(
+      'words_learned', aliasedName, false,
+      type: DriftSqlType.int,
+      requiredDuringInsert: false,
+      defaultValue: const Constant(0));
+  @override
+  List<GeneratedColumn> get $columns => [
+        id,
+        userId,
+        sessionStart,
+        sessionEnd,
+        durationMinutes,
+        exercisesCompleted,
+        wordsLearned
+      ];
+  @override
+  String get aliasedName => _alias ?? actualTableName;
+  @override
+  String get actualTableName => $name;
+  static const String $name = 'child_session_logs';
+  @override
+  VerificationContext validateIntegrity(Insertable<ChildSessionLog> instance,
+      {bool isInserting = false}) {
+    final context = VerificationContext();
+    final data = instance.toColumns(true);
+    if (data.containsKey('id')) {
+      context.handle(_idMeta, id.isAcceptableOrUnknown(data['id']!, _idMeta));
+    }
+    if (data.containsKey('user_id')) {
+      context.handle(_userIdMeta,
+          userId.isAcceptableOrUnknown(data['user_id']!, _userIdMeta));
+    } else if (isInserting) {
+      context.missing(_userIdMeta);
+    }
+    if (data.containsKey('session_start')) {
+      context.handle(
+          _sessionStartMeta,
+          sessionStart.isAcceptableOrUnknown(
+              data['session_start']!, _sessionStartMeta));
+    } else if (isInserting) {
+      context.missing(_sessionStartMeta);
+    }
+    if (data.containsKey('session_end')) {
+      context.handle(
+          _sessionEndMeta,
+          sessionEnd.isAcceptableOrUnknown(
+              data['session_end']!, _sessionEndMeta));
+    }
+    if (data.containsKey('duration_minutes')) {
+      context.handle(
+          _durationMinutesMeta,
+          durationMinutes.isAcceptableOrUnknown(
+              data['duration_minutes']!, _durationMinutesMeta));
+    }
+    if (data.containsKey('exercises_completed')) {
+      context.handle(
+          _exercisesCompletedMeta,
+          exercisesCompleted.isAcceptableOrUnknown(
+              data['exercises_completed']!, _exercisesCompletedMeta));
+    }
+    if (data.containsKey('words_learned')) {
+      context.handle(
+          _wordsLearnedMeta,
+          wordsLearned.isAcceptableOrUnknown(
+              data['words_learned']!, _wordsLearnedMeta));
+    }
+    return context;
+  }
+
+  @override
+  Set<GeneratedColumn> get $primaryKey => {id};
+  @override
+  ChildSessionLog map(Map<String, dynamic> data, {String? tablePrefix}) {
+    final effectivePrefix = tablePrefix != null ? '$tablePrefix.' : '';
+    return ChildSessionLog(
+      id: attachedDatabase.typeMapping
+          .read(DriftSqlType.int, data['${effectivePrefix}id'])!,
+      userId: attachedDatabase.typeMapping
+          .read(DriftSqlType.string, data['${effectivePrefix}user_id'])!,
+      sessionStart: attachedDatabase.typeMapping.read(
+          DriftSqlType.dateTime, data['${effectivePrefix}session_start'])!,
+      sessionEnd: attachedDatabase.typeMapping
+          .read(DriftSqlType.dateTime, data['${effectivePrefix}session_end']),
+      durationMinutes: attachedDatabase.typeMapping
+          .read(DriftSqlType.int, data['${effectivePrefix}duration_minutes'])!,
+      exercisesCompleted: attachedDatabase.typeMapping.read(
+          DriftSqlType.int, data['${effectivePrefix}exercises_completed'])!,
+      wordsLearned: attachedDatabase.typeMapping
+          .read(DriftSqlType.int, data['${effectivePrefix}words_learned'])!,
+    );
+  }
+
+  @override
+  $ChildSessionLogsTable createAlias(String alias) {
+    return $ChildSessionLogsTable(attachedDatabase, alias);
+  }
+}
+
+class ChildSessionLog extends DataClass implements Insertable<ChildSessionLog> {
+  final int id;
+  final String userId;
+  final DateTime sessionStart;
+  final DateTime? sessionEnd;
+  final int durationMinutes;
+  final int exercisesCompleted;
+  final int wordsLearned;
+  const ChildSessionLog(
+      {required this.id,
+      required this.userId,
+      required this.sessionStart,
+      this.sessionEnd,
+      required this.durationMinutes,
+      required this.exercisesCompleted,
+      required this.wordsLearned});
+  @override
+  Map<String, Expression> toColumns(bool nullToAbsent) {
+    final map = <String, Expression>{};
+    map['id'] = Variable<int>(id);
+    map['user_id'] = Variable<String>(userId);
+    map['session_start'] = Variable<DateTime>(sessionStart);
+    if (!nullToAbsent || sessionEnd != null) {
+      map['session_end'] = Variable<DateTime>(sessionEnd);
+    }
+    map['duration_minutes'] = Variable<int>(durationMinutes);
+    map['exercises_completed'] = Variable<int>(exercisesCompleted);
+    map['words_learned'] = Variable<int>(wordsLearned);
+    return map;
+  }
+
+  ChildSessionLogsCompanion toCompanion(bool nullToAbsent) {
+    return ChildSessionLogsCompanion(
+      id: Value(id),
+      userId: Value(userId),
+      sessionStart: Value(sessionStart),
+      sessionEnd: sessionEnd == null && nullToAbsent
+          ? const Value.absent()
+          : Value(sessionEnd),
+      durationMinutes: Value(durationMinutes),
+      exercisesCompleted: Value(exercisesCompleted),
+      wordsLearned: Value(wordsLearned),
+    );
+  }
+
+  factory ChildSessionLog.fromJson(Map<String, dynamic> json,
+      {ValueSerializer? serializer}) {
+    serializer ??= driftRuntimeOptions.defaultSerializer;
+    return ChildSessionLog(
+      id: serializer.fromJson<int>(json['id']),
+      userId: serializer.fromJson<String>(json['userId']),
+      sessionStart: serializer.fromJson<DateTime>(json['sessionStart']),
+      sessionEnd: serializer.fromJson<DateTime?>(json['sessionEnd']),
+      durationMinutes: serializer.fromJson<int>(json['durationMinutes']),
+      exercisesCompleted: serializer.fromJson<int>(json['exercisesCompleted']),
+      wordsLearned: serializer.fromJson<int>(json['wordsLearned']),
+    );
+  }
+  @override
+  Map<String, dynamic> toJson({ValueSerializer? serializer}) {
+    serializer ??= driftRuntimeOptions.defaultSerializer;
+    return <String, dynamic>{
+      'id': serializer.toJson<int>(id),
+      'userId': serializer.toJson<String>(userId),
+      'sessionStart': serializer.toJson<DateTime>(sessionStart),
+      'sessionEnd': serializer.toJson<DateTime?>(sessionEnd),
+      'durationMinutes': serializer.toJson<int>(durationMinutes),
+      'exercisesCompleted': serializer.toJson<int>(exercisesCompleted),
+      'wordsLearned': serializer.toJson<int>(wordsLearned),
+    };
+  }
+
+  ChildSessionLog copyWith(
+          {int? id,
+          String? userId,
+          DateTime? sessionStart,
+          Value<DateTime?> sessionEnd = const Value.absent(),
+          int? durationMinutes,
+          int? exercisesCompleted,
+          int? wordsLearned}) =>
+      ChildSessionLog(
+        id: id ?? this.id,
+        userId: userId ?? this.userId,
+        sessionStart: sessionStart ?? this.sessionStart,
+        sessionEnd: sessionEnd.present ? sessionEnd.value : this.sessionEnd,
+        durationMinutes: durationMinutes ?? this.durationMinutes,
+        exercisesCompleted: exercisesCompleted ?? this.exercisesCompleted,
+        wordsLearned: wordsLearned ?? this.wordsLearned,
+      );
+  ChildSessionLog copyWithCompanion(ChildSessionLogsCompanion data) {
+    return ChildSessionLog(
+      id: data.id.present ? data.id.value : this.id,
+      userId: data.userId.present ? data.userId.value : this.userId,
+      sessionStart: data.sessionStart.present
+          ? data.sessionStart.value
+          : this.sessionStart,
+      sessionEnd:
+          data.sessionEnd.present ? data.sessionEnd.value : this.sessionEnd,
+      durationMinutes: data.durationMinutes.present
+          ? data.durationMinutes.value
+          : this.durationMinutes,
+      exercisesCompleted: data.exercisesCompleted.present
+          ? data.exercisesCompleted.value
+          : this.exercisesCompleted,
+      wordsLearned: data.wordsLearned.present
+          ? data.wordsLearned.value
+          : this.wordsLearned,
+    );
+  }
+
+  @override
+  String toString() {
+    return (StringBuffer('ChildSessionLog(')
+          ..write('id: $id, ')
+          ..write('userId: $userId, ')
+          ..write('sessionStart: $sessionStart, ')
+          ..write('sessionEnd: $sessionEnd, ')
+          ..write('durationMinutes: $durationMinutes, ')
+          ..write('exercisesCompleted: $exercisesCompleted, ')
+          ..write('wordsLearned: $wordsLearned')
+          ..write(')'))
+        .toString();
+  }
+
+  @override
+  int get hashCode => Object.hash(id, userId, sessionStart, sessionEnd,
+      durationMinutes, exercisesCompleted, wordsLearned);
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      (other is ChildSessionLog &&
+          other.id == this.id &&
+          other.userId == this.userId &&
+          other.sessionStart == this.sessionStart &&
+          other.sessionEnd == this.sessionEnd &&
+          other.durationMinutes == this.durationMinutes &&
+          other.exercisesCompleted == this.exercisesCompleted &&
+          other.wordsLearned == this.wordsLearned);
+}
+
+class ChildSessionLogsCompanion extends UpdateCompanion<ChildSessionLog> {
+  final Value<int> id;
+  final Value<String> userId;
+  final Value<DateTime> sessionStart;
+  final Value<DateTime?> sessionEnd;
+  final Value<int> durationMinutes;
+  final Value<int> exercisesCompleted;
+  final Value<int> wordsLearned;
+  const ChildSessionLogsCompanion({
+    this.id = const Value.absent(),
+    this.userId = const Value.absent(),
+    this.sessionStart = const Value.absent(),
+    this.sessionEnd = const Value.absent(),
+    this.durationMinutes = const Value.absent(),
+    this.exercisesCompleted = const Value.absent(),
+    this.wordsLearned = const Value.absent(),
+  });
+  ChildSessionLogsCompanion.insert({
+    this.id = const Value.absent(),
+    required String userId,
+    required DateTime sessionStart,
+    this.sessionEnd = const Value.absent(),
+    this.durationMinutes = const Value.absent(),
+    this.exercisesCompleted = const Value.absent(),
+    this.wordsLearned = const Value.absent(),
+  })  : userId = Value(userId),
+        sessionStart = Value(sessionStart);
+  static Insertable<ChildSessionLog> custom({
+    Expression<int>? id,
+    Expression<String>? userId,
+    Expression<DateTime>? sessionStart,
+    Expression<DateTime>? sessionEnd,
+    Expression<int>? durationMinutes,
+    Expression<int>? exercisesCompleted,
+    Expression<int>? wordsLearned,
+  }) {
+    return RawValuesInsertable({
+      if (id != null) 'id': id,
+      if (userId != null) 'user_id': userId,
+      if (sessionStart != null) 'session_start': sessionStart,
+      if (sessionEnd != null) 'session_end': sessionEnd,
+      if (durationMinutes != null) 'duration_minutes': durationMinutes,
+      if (exercisesCompleted != null) 'exercises_completed': exercisesCompleted,
+      if (wordsLearned != null) 'words_learned': wordsLearned,
+    });
+  }
+
+  ChildSessionLogsCompanion copyWith(
+      {Value<int>? id,
+      Value<String>? userId,
+      Value<DateTime>? sessionStart,
+      Value<DateTime?>? sessionEnd,
+      Value<int>? durationMinutes,
+      Value<int>? exercisesCompleted,
+      Value<int>? wordsLearned}) {
+    return ChildSessionLogsCompanion(
+      id: id ?? this.id,
+      userId: userId ?? this.userId,
+      sessionStart: sessionStart ?? this.sessionStart,
+      sessionEnd: sessionEnd ?? this.sessionEnd,
+      durationMinutes: durationMinutes ?? this.durationMinutes,
+      exercisesCompleted: exercisesCompleted ?? this.exercisesCompleted,
+      wordsLearned: wordsLearned ?? this.wordsLearned,
+    );
+  }
+
+  @override
+  Map<String, Expression> toColumns(bool nullToAbsent) {
+    final map = <String, Expression>{};
+    if (id.present) {
+      map['id'] = Variable<int>(id.value);
+    }
+    if (userId.present) {
+      map['user_id'] = Variable<String>(userId.value);
+    }
+    if (sessionStart.present) {
+      map['session_start'] = Variable<DateTime>(sessionStart.value);
+    }
+    if (sessionEnd.present) {
+      map['session_end'] = Variable<DateTime>(sessionEnd.value);
+    }
+    if (durationMinutes.present) {
+      map['duration_minutes'] = Variable<int>(durationMinutes.value);
+    }
+    if (exercisesCompleted.present) {
+      map['exercises_completed'] = Variable<int>(exercisesCompleted.value);
+    }
+    if (wordsLearned.present) {
+      map['words_learned'] = Variable<int>(wordsLearned.value);
+    }
+    return map;
+  }
+
+  @override
+  String toString() {
+    return (StringBuffer('ChildSessionLogsCompanion(')
+          ..write('id: $id, ')
+          ..write('userId: $userId, ')
+          ..write('sessionStart: $sessionStart, ')
+          ..write('sessionEnd: $sessionEnd, ')
+          ..write('durationMinutes: $durationMinutes, ')
+          ..write('exercisesCompleted: $exercisesCompleted, ')
+          ..write('wordsLearned: $wordsLearned')
+          ..write(')'))
+        .toString();
+  }
+}
+
 abstract class _$AppDatabase extends GeneratedDatabase {
   _$AppDatabase(QueryExecutor e) : super(e);
   $AppDatabaseManager get managers => $AppDatabaseManager(this);
@@ -2910,6 +3477,8 @@ abstract class _$AppDatabase extends GeneratedDatabase {
   late final $UserProgressTable userProgress = $UserProgressTable(this);
   late final $UserProfilesTable userProfiles = $UserProfilesTable(this);
   late final $EarnedBadgesTable earnedBadges = $EarnedBadgesTable(this);
+  late final $ChildSessionLogsTable childSessionLogs =
+      $ChildSessionLogsTable(this);
   @override
   Iterable<TableInfo<Table, Object?>> get allTables =>
       allSchemaEntities.whereType<TableInfo<Table, Object?>>();
@@ -2920,7 +3489,8 @@ abstract class _$AppDatabase extends GeneratedDatabase {
         completedLessons,
         userProgress,
         userProfiles,
-        earnedBadges
+        earnedBadges,
+        childSessionLogs
       ];
 }
 
@@ -3907,6 +4477,10 @@ typedef $$UserProfilesTableCreateCompanionBuilder = UserProfilesCompanion
   Value<bool> animationsEnabled,
   Value<bool> isHeritage,
   Value<DateTime?> lastActiveDate,
+  Value<bool> isChildMode,
+  Value<int?> childAge,
+  Value<String?> parentPin,
+  Value<int> dailyTimeLimitMinutes,
   Value<int> rowid,
 });
 typedef $$UserProfilesTableUpdateCompanionBuilder = UserProfilesCompanion
@@ -3923,6 +4497,10 @@ typedef $$UserProfilesTableUpdateCompanionBuilder = UserProfilesCompanion
   Value<bool> animationsEnabled,
   Value<bool> isHeritage,
   Value<DateTime?> lastActiveDate,
+  Value<bool> isChildMode,
+  Value<int?> childAge,
+  Value<String?> parentPin,
+  Value<int> dailyTimeLimitMinutes,
   Value<int> rowid,
 });
 
@@ -3973,6 +4551,19 @@ class $$UserProfilesTableFilterComposer
 
   ColumnFilters<DateTime> get lastActiveDate => $composableBuilder(
       column: $table.lastActiveDate,
+      builder: (column) => ColumnFilters(column));
+
+  ColumnFilters<bool> get isChildMode => $composableBuilder(
+      column: $table.isChildMode, builder: (column) => ColumnFilters(column));
+
+  ColumnFilters<int> get childAge => $composableBuilder(
+      column: $table.childAge, builder: (column) => ColumnFilters(column));
+
+  ColumnFilters<String> get parentPin => $composableBuilder(
+      column: $table.parentPin, builder: (column) => ColumnFilters(column));
+
+  ColumnFilters<int> get dailyTimeLimitMinutes => $composableBuilder(
+      column: $table.dailyTimeLimitMinutes,
       builder: (column) => ColumnFilters(column));
 }
 
@@ -4026,6 +4617,19 @@ class $$UserProfilesTableOrderingComposer
   ColumnOrderings<DateTime> get lastActiveDate => $composableBuilder(
       column: $table.lastActiveDate,
       builder: (column) => ColumnOrderings(column));
+
+  ColumnOrderings<bool> get isChildMode => $composableBuilder(
+      column: $table.isChildMode, builder: (column) => ColumnOrderings(column));
+
+  ColumnOrderings<int> get childAge => $composableBuilder(
+      column: $table.childAge, builder: (column) => ColumnOrderings(column));
+
+  ColumnOrderings<String> get parentPin => $composableBuilder(
+      column: $table.parentPin, builder: (column) => ColumnOrderings(column));
+
+  ColumnOrderings<int> get dailyTimeLimitMinutes => $composableBuilder(
+      column: $table.dailyTimeLimitMinutes,
+      builder: (column) => ColumnOrderings(column));
 }
 
 class $$UserProfilesTableAnnotationComposer
@@ -4072,6 +4676,18 @@ class $$UserProfilesTableAnnotationComposer
 
   GeneratedColumn<DateTime> get lastActiveDate => $composableBuilder(
       column: $table.lastActiveDate, builder: (column) => column);
+
+  GeneratedColumn<bool> get isChildMode => $composableBuilder(
+      column: $table.isChildMode, builder: (column) => column);
+
+  GeneratedColumn<int> get childAge =>
+      $composableBuilder(column: $table.childAge, builder: (column) => column);
+
+  GeneratedColumn<String> get parentPin =>
+      $composableBuilder(column: $table.parentPin, builder: (column) => column);
+
+  GeneratedColumn<int> get dailyTimeLimitMinutes => $composableBuilder(
+      column: $table.dailyTimeLimitMinutes, builder: (column) => column);
 }
 
 class $$UserProfilesTableTableManager extends RootTableManager<
@@ -4112,6 +4728,10 @@ class $$UserProfilesTableTableManager extends RootTableManager<
             Value<bool> animationsEnabled = const Value.absent(),
             Value<bool> isHeritage = const Value.absent(),
             Value<DateTime?> lastActiveDate = const Value.absent(),
+            Value<bool> isChildMode = const Value.absent(),
+            Value<int?> childAge = const Value.absent(),
+            Value<String?> parentPin = const Value.absent(),
+            Value<int> dailyTimeLimitMinutes = const Value.absent(),
             Value<int> rowid = const Value.absent(),
           }) =>
               UserProfilesCompanion(
@@ -4127,6 +4747,10 @@ class $$UserProfilesTableTableManager extends RootTableManager<
             animationsEnabled: animationsEnabled,
             isHeritage: isHeritage,
             lastActiveDate: lastActiveDate,
+            isChildMode: isChildMode,
+            childAge: childAge,
+            parentPin: parentPin,
+            dailyTimeLimitMinutes: dailyTimeLimitMinutes,
             rowid: rowid,
           ),
           createCompanionCallback: ({
@@ -4142,6 +4766,10 @@ class $$UserProfilesTableTableManager extends RootTableManager<
             Value<bool> animationsEnabled = const Value.absent(),
             Value<bool> isHeritage = const Value.absent(),
             Value<DateTime?> lastActiveDate = const Value.absent(),
+            Value<bool> isChildMode = const Value.absent(),
+            Value<int?> childAge = const Value.absent(),
+            Value<String?> parentPin = const Value.absent(),
+            Value<int> dailyTimeLimitMinutes = const Value.absent(),
             Value<int> rowid = const Value.absent(),
           }) =>
               UserProfilesCompanion.insert(
@@ -4157,6 +4785,10 @@ class $$UserProfilesTableTableManager extends RootTableManager<
             animationsEnabled: animationsEnabled,
             isHeritage: isHeritage,
             lastActiveDate: lastActiveDate,
+            isChildMode: isChildMode,
+            childAge: childAge,
+            parentPin: parentPin,
+            dailyTimeLimitMinutes: dailyTimeLimitMinutes,
             rowid: rowid,
           ),
           withReferenceMapper: (p0) => p0
@@ -4333,6 +4965,210 @@ typedef $$EarnedBadgesTableProcessedTableManager = ProcessedTableManager<
     ),
     EarnedBadge,
     PrefetchHooks Function()>;
+typedef $$ChildSessionLogsTableCreateCompanionBuilder
+    = ChildSessionLogsCompanion Function({
+  Value<int> id,
+  required String userId,
+  required DateTime sessionStart,
+  Value<DateTime?> sessionEnd,
+  Value<int> durationMinutes,
+  Value<int> exercisesCompleted,
+  Value<int> wordsLearned,
+});
+typedef $$ChildSessionLogsTableUpdateCompanionBuilder
+    = ChildSessionLogsCompanion Function({
+  Value<int> id,
+  Value<String> userId,
+  Value<DateTime> sessionStart,
+  Value<DateTime?> sessionEnd,
+  Value<int> durationMinutes,
+  Value<int> exercisesCompleted,
+  Value<int> wordsLearned,
+});
+
+class $$ChildSessionLogsTableFilterComposer
+    extends Composer<_$AppDatabase, $ChildSessionLogsTable> {
+  $$ChildSessionLogsTableFilterComposer({
+    required super.$db,
+    required super.$table,
+    super.joinBuilder,
+    super.$addJoinBuilderToRootComposer,
+    super.$removeJoinBuilderFromRootComposer,
+  });
+  ColumnFilters<int> get id => $composableBuilder(
+      column: $table.id, builder: (column) => ColumnFilters(column));
+
+  ColumnFilters<String> get userId => $composableBuilder(
+      column: $table.userId, builder: (column) => ColumnFilters(column));
+
+  ColumnFilters<DateTime> get sessionStart => $composableBuilder(
+      column: $table.sessionStart, builder: (column) => ColumnFilters(column));
+
+  ColumnFilters<DateTime> get sessionEnd => $composableBuilder(
+      column: $table.sessionEnd, builder: (column) => ColumnFilters(column));
+
+  ColumnFilters<int> get durationMinutes => $composableBuilder(
+      column: $table.durationMinutes,
+      builder: (column) => ColumnFilters(column));
+
+  ColumnFilters<int> get exercisesCompleted => $composableBuilder(
+      column: $table.exercisesCompleted,
+      builder: (column) => ColumnFilters(column));
+
+  ColumnFilters<int> get wordsLearned => $composableBuilder(
+      column: $table.wordsLearned, builder: (column) => ColumnFilters(column));
+}
+
+class $$ChildSessionLogsTableOrderingComposer
+    extends Composer<_$AppDatabase, $ChildSessionLogsTable> {
+  $$ChildSessionLogsTableOrderingComposer({
+    required super.$db,
+    required super.$table,
+    super.joinBuilder,
+    super.$addJoinBuilderToRootComposer,
+    super.$removeJoinBuilderFromRootComposer,
+  });
+  ColumnOrderings<int> get id => $composableBuilder(
+      column: $table.id, builder: (column) => ColumnOrderings(column));
+
+  ColumnOrderings<String> get userId => $composableBuilder(
+      column: $table.userId, builder: (column) => ColumnOrderings(column));
+
+  ColumnOrderings<DateTime> get sessionStart => $composableBuilder(
+      column: $table.sessionStart,
+      builder: (column) => ColumnOrderings(column));
+
+  ColumnOrderings<DateTime> get sessionEnd => $composableBuilder(
+      column: $table.sessionEnd, builder: (column) => ColumnOrderings(column));
+
+  ColumnOrderings<int> get durationMinutes => $composableBuilder(
+      column: $table.durationMinutes,
+      builder: (column) => ColumnOrderings(column));
+
+  ColumnOrderings<int> get exercisesCompleted => $composableBuilder(
+      column: $table.exercisesCompleted,
+      builder: (column) => ColumnOrderings(column));
+
+  ColumnOrderings<int> get wordsLearned => $composableBuilder(
+      column: $table.wordsLearned,
+      builder: (column) => ColumnOrderings(column));
+}
+
+class $$ChildSessionLogsTableAnnotationComposer
+    extends Composer<_$AppDatabase, $ChildSessionLogsTable> {
+  $$ChildSessionLogsTableAnnotationComposer({
+    required super.$db,
+    required super.$table,
+    super.joinBuilder,
+    super.$addJoinBuilderToRootComposer,
+    super.$removeJoinBuilderFromRootComposer,
+  });
+  GeneratedColumn<int> get id =>
+      $composableBuilder(column: $table.id, builder: (column) => column);
+
+  GeneratedColumn<String> get userId =>
+      $composableBuilder(column: $table.userId, builder: (column) => column);
+
+  GeneratedColumn<DateTime> get sessionStart => $composableBuilder(
+      column: $table.sessionStart, builder: (column) => column);
+
+  GeneratedColumn<DateTime> get sessionEnd => $composableBuilder(
+      column: $table.sessionEnd, builder: (column) => column);
+
+  GeneratedColumn<int> get durationMinutes => $composableBuilder(
+      column: $table.durationMinutes, builder: (column) => column);
+
+  GeneratedColumn<int> get exercisesCompleted => $composableBuilder(
+      column: $table.exercisesCompleted, builder: (column) => column);
+
+  GeneratedColumn<int> get wordsLearned => $composableBuilder(
+      column: $table.wordsLearned, builder: (column) => column);
+}
+
+class $$ChildSessionLogsTableTableManager extends RootTableManager<
+    _$AppDatabase,
+    $ChildSessionLogsTable,
+    ChildSessionLog,
+    $$ChildSessionLogsTableFilterComposer,
+    $$ChildSessionLogsTableOrderingComposer,
+    $$ChildSessionLogsTableAnnotationComposer,
+    $$ChildSessionLogsTableCreateCompanionBuilder,
+    $$ChildSessionLogsTableUpdateCompanionBuilder,
+    (
+      ChildSessionLog,
+      BaseReferences<_$AppDatabase, $ChildSessionLogsTable, ChildSessionLog>
+    ),
+    ChildSessionLog,
+    PrefetchHooks Function()> {
+  $$ChildSessionLogsTableTableManager(
+      _$AppDatabase db, $ChildSessionLogsTable table)
+      : super(TableManagerState(
+          db: db,
+          table: table,
+          createFilteringComposer: () =>
+              $$ChildSessionLogsTableFilterComposer($db: db, $table: table),
+          createOrderingComposer: () =>
+              $$ChildSessionLogsTableOrderingComposer($db: db, $table: table),
+          createComputedFieldComposer: () =>
+              $$ChildSessionLogsTableAnnotationComposer($db: db, $table: table),
+          updateCompanionCallback: ({
+            Value<int> id = const Value.absent(),
+            Value<String> userId = const Value.absent(),
+            Value<DateTime> sessionStart = const Value.absent(),
+            Value<DateTime?> sessionEnd = const Value.absent(),
+            Value<int> durationMinutes = const Value.absent(),
+            Value<int> exercisesCompleted = const Value.absent(),
+            Value<int> wordsLearned = const Value.absent(),
+          }) =>
+              ChildSessionLogsCompanion(
+            id: id,
+            userId: userId,
+            sessionStart: sessionStart,
+            sessionEnd: sessionEnd,
+            durationMinutes: durationMinutes,
+            exercisesCompleted: exercisesCompleted,
+            wordsLearned: wordsLearned,
+          ),
+          createCompanionCallback: ({
+            Value<int> id = const Value.absent(),
+            required String userId,
+            required DateTime sessionStart,
+            Value<DateTime?> sessionEnd = const Value.absent(),
+            Value<int> durationMinutes = const Value.absent(),
+            Value<int> exercisesCompleted = const Value.absent(),
+            Value<int> wordsLearned = const Value.absent(),
+          }) =>
+              ChildSessionLogsCompanion.insert(
+            id: id,
+            userId: userId,
+            sessionStart: sessionStart,
+            sessionEnd: sessionEnd,
+            durationMinutes: durationMinutes,
+            exercisesCompleted: exercisesCompleted,
+            wordsLearned: wordsLearned,
+          ),
+          withReferenceMapper: (p0) => p0
+              .map((e) => (e.readTable(table), BaseReferences(db, table, e)))
+              .toList(),
+          prefetchHooksCallback: null,
+        ));
+}
+
+typedef $$ChildSessionLogsTableProcessedTableManager = ProcessedTableManager<
+    _$AppDatabase,
+    $ChildSessionLogsTable,
+    ChildSessionLog,
+    $$ChildSessionLogsTableFilterComposer,
+    $$ChildSessionLogsTableOrderingComposer,
+    $$ChildSessionLogsTableAnnotationComposer,
+    $$ChildSessionLogsTableCreateCompanionBuilder,
+    $$ChildSessionLogsTableUpdateCompanionBuilder,
+    (
+      ChildSessionLog,
+      BaseReferences<_$AppDatabase, $ChildSessionLogsTable, ChildSessionLog>
+    ),
+    ChildSessionLog,
+    PrefetchHooks Function()>;
 
 class $AppDatabaseManager {
   final _$AppDatabase _db;
@@ -4349,4 +5185,6 @@ class $AppDatabaseManager {
       $$UserProfilesTableTableManager(_db, _db.userProfiles);
   $$EarnedBadgesTableTableManager get earnedBadges =>
       $$EarnedBadgesTableTableManager(_db, _db.earnedBadges);
+  $$ChildSessionLogsTableTableManager get childSessionLogs =>
+      $$ChildSessionLogsTableTableManager(_db, _db.childSessionLogs);
 }
