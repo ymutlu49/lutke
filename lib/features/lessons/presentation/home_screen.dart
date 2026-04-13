@@ -1197,11 +1197,11 @@ class _SkillTreePath extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final units = _buildA1SkillUnits();
-    // İlk 3 birim açık (unlocked), ilk birim aktif, geri kalan kilitli
-    // Gerçek uygulamada completedLessons provider'dan alınır
+    // Tüm birimler erişilebilir — MVP'de kilit yok
+    // İlerleme takibi sonra SharedPreferences/DB'den gelecek
     const completedCount = 0;
     const currentIndex = 0;
-    const unlockedCount = 3; // İlk 3 node erişilebilir
+    final unlockedCount = units.length; // Tüm duraklar açık
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
