@@ -2880,11 +2880,11 @@ final kB1EkKelimeler6 = [
    her:["Di herêmê de ne.", "Herêma Kurdistanê."],
    gen:["Herêm û navçe", "Herêma me"]),
 
-  (id:"b1_1352", ku:"Xelk", tr:"Halk / İnsanlar", en:"People / Folk",
-   cins:"nêr", ez:"xelkê", kat:"civakî", zor:0.72,
-   not:"Eril — [FB]: xelk n.m. \"Xelkê vî bajêr.\"",
-   her:["Xelk hat.", "Xelkê me baş in."],
-   gen:["Xelk û gel", "Xelkê me"]),
+  (id:"b1_1352", ku:"Gel", tr:"Halk / İnsanlar", en:"People / Folk",
+   cins:"nêr", ez:"gelê", kat:"civakî", zor:0.72,
+   not:"Eril — [FB]: gel n.m. \"Gelê vî bajêr.\"",
+   her:["Gel hat.", "Gelê me baş in."],
+   gen:["Gel û mirov", "Gelê me"]),
 
   (id:"b1_1353", ku:"Ciwanan", tr:"Gençler", en:"Youth / Young people",
    cins:"bêcins", ez:"ciwanên", kat:"civakî", zor:0.72,
@@ -6217,11 +6217,11 @@ final kB1_T1 = [
    her:["Gel û mirov.", "Di nav gel û mirovan de."],
    gen:["Gel û mirov", "Gela me"]),
 
-  (id:"b1_t1_22", ku:"Nûnertiya xelkê", tr:"Halk temsilciliği", en:"People\'s representation",
-   cins:"mê", ez:"nûnertiya xelkê", kat:"siyaset", zor:0.69,
-   not:"\"Nûnertî\" + \"xelkê\".",
-   her:["Nûnertiya xelkê.", "Di nûnertiya xelkê de."],
-   gen:["Nûnertiya xelkê", "Nûnertiya me"]),
+  (id:"b1_t1_22", ku:"Nûnertiya gelê", tr:"Halk temsilciliği", en:"People\'s representation",
+   cins:"mê", ez:"nûnertiya gelê", kat:"siyaset", zor:0.69,
+   not:"\"Nûnertî\" + \"gelê\".",
+   her:["Nûnertiya gelê.", "Di nûnertiya gelê de."],
+   gen:["Nûnertiya gelê", "Nûnertiya me"]),
 
   (id:"b1_t1_23", ku:"Têkilîya navgel", tr:"Toplumlar arası ilişki", en:"Inter-community relation",
    cins:"mê", ez:"têkilîya navgel", kat:"civakî", zor:0.68,

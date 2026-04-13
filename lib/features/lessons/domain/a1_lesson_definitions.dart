@@ -626,7 +626,7 @@ final kA1Lessons = <LessonModel>[
 
   LessonModel(
     id: 'a1_l10',
-    kurmanjTitle: 'Pîrê û Kal',
+    kurmanjTitle: 'Dapîr û Bapîr',
     turkishTitle: 'Büyükanne ve Büyükbaba',
     unitNumber: 5,
     lessonNumber: 2,
@@ -635,22 +635,22 @@ final kA1Lessons = <LessonModel>[
     targetCardIds: ['a1_084', 'a1_085', 'a1_086', 'a1_087', 'a1_088', 'a1_089'],
     estimatedMinutes: 9,
     exercises: [
-      _listenSelect(id: 'piree_ex1', ku: 'Pîrê', prompt: 'Ne anlama geliyor?',
-          options: ['Büyükbaba', 'Teyze', 'Büyükanne', 'Nine'], correctIndex: 2,
+      _listenSelect(id: 'piree_ex1', ku: 'Dapîr', prompt: 'Ne anlama geliyor?',
+          options: ['Büyükbaba', 'Teyze', 'Büyükanne', 'Hala'], correctIndex: 2,
           audio: 'assets/audio/a1/piree.mp3',
-          grammarNote: '"Pîrê" = büyükanne (dişil/mê). Ezafe: "pîrêya min". Heritage kullanıcı için en duygusal kelime!'),
+          grammarNote: '"Dapîr" = büyükanne (dişil/mê). Ezafe: "dapîra min". "Pîrê" de kullanılır.'),
       _listenSelect(id: 'kal_ex1', ku: 'Kal', prompt: 'Ne anlama geliyor?',
           options: ['Baba', 'Dede/Büyükbaba', 'Amca', 'Dayı'], correctIndex: 1,
           audio: 'assets/audio/a1/kal.mp3',
-          grammarNote: '"Kal" = büyükbaba/dede (eril/nêr). "Bapîr" de kullanılır'),
+          grammarNote: '"Kal" = büyükbaba (eril/nêr). "Bapîr" de kullanılır'),
       _fillBlank(
         id: 'pireya_fill_ex1',
         before: 'Ez ji',
         after: 'ya xwe hez dikim.',
         turkish: 'Büyükannemden çok seviyorum.',
-        options: ['kal', 'bav', 'pîrê', 'ap'],
+        options: ['kal', 'bav', 'dapîr', 'ap'],
         correctIndex: 2,
-        grammarNote: '"Ji … hez kirin" = sevmek. "Pîrêya xwe" = kendi büyükannem',
+        grammarNote: '"Ji … hez kirin" = sevmek. "Dapîra xwe" = kendi büyükannem',
       ),
       _multiChoice(
         id: 'ap_xalti_ex1',
@@ -667,7 +667,7 @@ final kA1Lessons = <LessonModel>[
       ),
       _speaking(
         id: 'piree_speak',
-        ku: 'Pîrêya min Kurmancî dizane.',
+        ku: 'Dapîra min Kurmancî dizane.',
         tr: 'Büyükannem Kurmancî biliyor.',
       ),
     ],
@@ -784,7 +784,7 @@ final kA1Lessons = <LessonModel>[
     lessonNumber: 1,
     level: 1,
     path: LessonPath.general,
-    targetCardIds: _kartsFromKat(['pise', 'perwerde']),
+    targetCardIds: _kartsFromKat(['pîşe', 'perwerde']),
     estimatedMinutes: 8,
     exercises: [
       _listenSelect(id: 'mamosta_ex1', ku: 'Mamosta', prompt: 'Ne anlama geliyor?',

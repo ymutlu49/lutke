@@ -137,7 +137,10 @@ GoRouter appRouter(AppRouterRef ref) {
                     path: 'quiz',
                     builder: (_, state) {
                       final extra = state.extra as Map<String, dynamic>?;
-                      return QuizScreen(level: extra?['level'] as String? ?? 'A1');
+                      return QuizScreen(
+                        level: extra?['level'] as String? ?? 'A1',
+                        category: extra?['category'] as String?,
+                      );
                     },
                   ),
                   GoRoute(

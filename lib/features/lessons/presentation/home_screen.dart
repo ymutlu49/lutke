@@ -124,7 +124,7 @@ class HomeScreen extends ConsumerWidget {
                           data: (stats) => _ActivityCard(
                             icon: Icons.replay_rounded,
                             label: 'Dubare',
-                            subtitle: '${stats.dueCount} kart',
+                            subtitle: '${stats.dueCount} peld',
                             gradientColors: [AppColors.primary, AppColors.primaryDark],
                             onTap: () => context.push(
                               AppRoutes.lesson,
@@ -135,7 +135,7 @@ class HomeScreen extends ConsumerWidget {
                           loading: () => _ActivityCard(
                             icon: Icons.replay_rounded,
                             label: 'Dubare',
-                            subtitle: '0 kart',
+                            subtitle: '0 peld',
                             gradientColors: [AppColors.primary, AppColors.primaryDark],
                             onTap: null,
                             delay: 220,
@@ -143,7 +143,7 @@ class HomeScreen extends ConsumerWidget {
                           error: (_, __) => _ActivityCard(
                             icon: Icons.replay_rounded,
                             label: 'Dubare',
-                            subtitle: '0 kart',
+                            subtitle: '0 peld',
                             gradientColors: [AppColors.primary, AppColors.primaryDark],
                             onTap: null,
                             delay: 220,
@@ -613,7 +613,7 @@ class _DailyReviewButton extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    hasCards ? 'Tekrar bike — $dueCount kart' : 'Îro temam e! ✓',
+                    hasCards ? 'Tekrar bike — $dueCount peld' : 'Îro temam e! ✓',
                     style: AppTypography.labelLarge.copyWith(
                       color: hasCards ? Colors.white : AppColors.textSecondary,
                       fontWeight: FontWeight.w700,
@@ -622,7 +622,7 @@ class _DailyReviewButton extends StatelessWidget {
                   Text(
                     hasCards
                         ? 'FSRS-5 — pir bibîre, zûtir pêş bikeve'
-                        : 'Tev kart hatiye xwendin',
+                        : 'Hemû peld hatine xwendin',
                     style: AppTypography.caption.copyWith(
                       color: hasCards
                           ? Colors.white.withOpacity(0.85)
@@ -933,7 +933,7 @@ List<_SkillTreeUnit> _buildA1SkillUnits() {
     ('reng',      'Reng',              'Renkler',                Icons.palette_rounded),
     ('malbat',    'Malbat',            'Aile',                   Icons.family_restroom_rounded),
     ('cinavk',    'Cinavk',            'Zamirler',               Icons.person_rounded),
-    ('pise',      'Pise',              'Meslekler',              Icons.work_rounded),
+    ('pîşe',      'Pîşe',              'Meslekler',              Icons.work_rounded),
     ('perwerde',  'Perwerde',          'Egitim',                 Icons.school_rounded),
     ('dem',       'Dem',               'Zaman',                  Icons.access_time_rounded),
     ('roj',       'Roj',               'Gunler',                 Icons.calendar_today_rounded),
@@ -949,7 +949,7 @@ List<_SkillTreeUnit> _buildA1SkillUnits() {
     ('temel',     'Peyvên Bingehîn',  'Temel Kelimeler',        Icons.auto_stories_rounded),
     ('leker',     'Leker',             'Fiiller',                Icons.directions_run_rounded),
     ('xweza',     'Xweza',             'Doga',                   Icons.park_rounded),
-    ('heywan',    'Heywan',            'Hayvanlar',              Icons.pets_rounded),
+    ('ajal',      'Ajal',              'Hayvanlar',              Icons.pets_rounded),
     ('cil',       'Cil',               'Giysiler',               Icons.dry_cleaning_rounded),
     ('daçek',     'Daçek',             'Edatlar',                Icons.compare_arrows_rounded),
     ('pirs',      'Pirs',              'Sorular',                Icons.help_outline_rounded),
@@ -998,10 +998,11 @@ class _SkillTreePath extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final units = _buildA1SkillUnits();
-    // Simülasyon: ilk 2 birim tamamlanmis, 3. birim aktif, geri kalan kilitli
-    // Gercek uygulamada completedLessons provider'dan alinir
-    const completedCount = 2;
-    const currentIndex = 2;
+    // İlk 3 birim açık (unlocked), ilk birim aktif, geri kalan kilitli
+    // Gerçek uygulamada completedLessons provider'dan alınır
+    const completedCount = 0;
+    const currentIndex = 0;
+    const unlockedCount = 3; // İlk 3 node erişilebilir
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -1013,7 +1014,7 @@ class _SkillTreePath extends StatelessWidget {
               Icon(Icons.route_rounded, size: 22, color: AppColors.primary),
               const SizedBox(width: AppSpacing.sm),
               Text(
-                'Reya Ferbune', // Ogrenme Yolu
+                'Rêya Fêrbûnê', // Öğrenme Yolu
                 style: AppTypography.headingSmall.copyWith(
                     color: AppColors.textPrimary, fontWeight: FontWeight.w700),
               ),
@@ -1021,14 +1022,15 @@ class _SkillTreePath extends StatelessWidget {
           ),
         ),
 
-        // Skill tree nodelari
+        // Skill tree nodeları
         ...units.asMap().entries.map((entry) {
           final i = entry.key;
           final unit = entry.value;
 
           final isCompleted = i < completedCount;
           final isCurrent = i == currentIndex;
-          final isLocked = i > currentIndex;
+          final isUnlocked = i < unlockedCount; // İlk 3 node açık
+          final isLocked = !isCompleted && !isCurrent && !isUnlocked;
 
           return _SkillTreeNode(
             unit: unit,
@@ -1039,7 +1041,10 @@ class _SkillTreePath extends StatelessWidget {
             isLocked: isLocked,
             showTurkish: ref.watch(showTurkishProvider),
             onTap: !isLocked
-                ? () => context.push(AppRoutes.vocabulary)
+                ? () => context.push(
+                    AppRoutes.quiz,
+                    extra: {'level': 'A1', 'category': unit.katKey},
+                  )
                 : null,
           );
         }),
@@ -1159,6 +1164,26 @@ class _SkillTreeNode extends StatelessWidget {
                   ),
                   textAlign: TextAlign.center,
                 ),
+
+                // Aktif node: "Dest pê bike!" etiketi
+                if (isCurrent) ...[
+                  const SizedBox(height: 4),
+                  Container(
+                    padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
+                    decoration: BoxDecoration(
+                      color: AppColors.primary,
+                      borderRadius: BorderRadius.circular(12),
+                    ),
+                    child: Text(
+                      'Dest pê bike!',
+                      style: AppTypography.caption.copyWith(
+                        color: Colors.white,
+                        fontWeight: FontWeight.w700,
+                        fontSize: 11,
+                      ),
+                    ),
+                  ),
+                ],
               ],
             ),
           ).animate().fadeIn(delay: (200 + index * 60).ms, duration: 350.ms)

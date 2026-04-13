@@ -56,14 +56,14 @@ class HeritageDialogue {
 }
 
 // ════════════════════════════════════════════════════════════════
-// DİYALOG 1 — Çayê Pîrê
+// DİYALOG 1 — Çayê Dapîrê
 // Büyükanneyle çay — en duygusal sahne
 // Persona: Elif (24, İstanbul) büyükannesini ziyaret ediyor.
 // ════════════════════════════════════════════════════════════════
 
 const kDialoguePiree = HeritageDialogue(
   id: 'dlg_piree_cay',
-  kurmanjTitle: 'Çayê Pîrê',
+  kurmanjTitle: 'Çayê Dapîrê',
   turkishTitle: 'Büyükannenin Çayı',
   lessonId: 'a1_l10',
   scene:
@@ -85,8 +85,8 @@ const kDialoguePiree = HeritageDialogue(
       audioAsset: 'assets/audio/heritage/dlg1_01.mp3',
     ),
     DialogueLine(
-      speaker: 'Pîrê',
-      speakerRole: 'Pîrê',
+      speaker: 'Dapîr',
+      speakerRole: 'Dapîr',
       kurmanci: 'Silav, keça min! Bi xêr hatî!',
       turkish: 'Merhaba, kızım! Hoş geldin!',
       grammarNote: '"Keça min" = kızım (dişil ezafe: keç + -a + min).',
@@ -102,8 +102,8 @@ const kDialoguePiree = HeritageDialogue(
       audioAsset: 'assets/audio/heritage/dlg1_03.mp3',
     ),
     DialogueLine(
-      speaker: 'Pîrê',
-      speakerRole: 'Pîrê',
+      speaker: 'Dapîr',
+      speakerRole: 'Dapîr',
       kurmanci: 'Ez baş im, spas. Tu çawa yî, kuro?',
       turkish: 'İyiyim, teşekkürler. Sen nasılsın, yavrum?',
       grammarNote: '"Kuro" — sevgi hitabı, cinsiyetten bağımsız kullanılır.',
@@ -118,8 +118,8 @@ const kDialoguePiree = HeritageDialogue(
       audioAsset: 'assets/audio/heritage/dlg1_05.mp3',
     ),
     DialogueLine(
-      speaker: 'Pîrê',
-      speakerRole: 'Pîrê',
+      speaker: 'Dapîr',
+      speakerRole: 'Dapîr',
       kurmanci: 'Rûne, rûne! Ezê çay bikim.',
       turkish: 'Otur, otur! Çay yapayım.',
       grammarNote: '"Rûne!" = otur! (emir). "Ezê … bikim" = yapacağım (gelecek).',
@@ -135,8 +135,8 @@ const kDialoguePiree = HeritageDialogue(
       audioAsset: 'assets/audio/heritage/dlg1_07.mp3',
     ),
     DialogueLine(
-      speaker: 'Pîrê',
-      speakerRole: 'Pîrê',
+      speaker: 'Dapîr',
+      speakerRole: 'Dapîr',
       kurmanci: 'Gelek spas, keça min. Tu Kurmancî hîn dibî?',
       turkish: 'Çok teşekkürler kızım. Kurmancî öğreniyor musun?',
       grammarNote: '"Hîn dibî" = öğreniyorsun.',
@@ -151,8 +151,8 @@ const kDialoguePiree = HeritageDialogue(
       audioAsset: 'assets/audio/heritage/dlg1_09.mp3',
     ),
     DialogueLine(
-      speaker: 'Pîrê',
-      speakerRole: 'Pîrê',
+      speaker: 'Dapîr',
+      speakerRole: 'Dapîr',
       kurmanci: 'Gelek xweş e! Ziman dermanê dilê mirov e.',
       turkish: 'Çok güzel! Dil, insanın kalbinin ilacıdır.',
       culturalNote: 'Atalar sözü — heritage kullanıcı için diyaloğun doruk noktası.',
@@ -408,8 +408,8 @@ const kDialogueMalbat = HeritageDialogue(
       audioAsset: 'assets/audio/heritage/dlg4_01.mp3',
     ),
     DialogueLine(
-      speaker: 'Pîrê',
-      speakerRole: 'Pîrê',
+      speaker: 'Dapîr',
+      speakerRole: 'Dapîr',
       kurmanci: 'Bi xêr hatîn, malbato! Werin hundurê!',
       turkish: 'Hoş geldiniz, ailem! İçeri gelin!',
       grammarNote: '"Malbato" = ailem (sevgi hitabı). "Hundurê" = içeri.',
@@ -425,8 +425,8 @@ const kDialogueMalbat = HeritageDialogue(
       audioAsset: 'assets/audio/heritage/dlg4_03.mp3',
     ),
     DialogueLine(
-      speaker: 'Pîrê',
-      speakerRole: 'Pîrê',
+      speaker: 'Dapîr',
+      speakerRole: 'Dapîr',
       kurmanci: 'Ez baş im, keça min. Spas. Zarokên we çawa ne?',
       turkish: 'İyiyim kızım. Teşekkürler. Çocuklarınız nasıl?',
       grammarNote: '"Zarokên we" = çocuklarınız (zarok + -ên çoğul + we sizin).',
@@ -443,8 +443,8 @@ const kDialogueMalbat = HeritageDialogue(
       audioAsset: 'assets/audio/heritage/dlg4_05.mp3',
     ),
     DialogueLine(
-      speaker: 'Pîrê',
-      speakerRole: 'Pîrê',
+      speaker: 'Dapîr',
+      speakerRole: 'Dapîr',
       kurmanci: 'Çi ye ev? Lazim nebû! Gelek spas, kurê min.',
       turkish: 'Bu ne? Gerekmezdi! Çok teşekkürler, oğlum.',
       grammarNote: '"Lazim nebû" = gerekmezdi (geçmiş olumsuz).',
@@ -452,8 +452,8 @@ const kDialogueMalbat = HeritageDialogue(
       audioAsset: 'assets/audio/heritage/dlg4_06.mp3',
     ),
     DialogueLine(
-      speaker: 'Pîrê',
-      speakerRole: 'Pîrê',
+      speaker: 'Dapîr',
+      speakerRole: 'Dapîr',
       kurmanci: 'Hemî rûnin! Ezê çay bikim.',
       turkish: 'Hepiniz oturun! Çay yapayım.',
       grammarNote: '"Hemî rûnin!" = hepiniz oturun (çoğul emir).',
@@ -463,14 +463,14 @@ const kDialogueMalbat = HeritageDialogue(
 );
 
 // ════════════════════════════════════════════════════════════════
-// DİYALOG 5 — Pîrê Mamostayê Min e
+// DİYALOG 5 — Dapîr Mamostayê Min e
 // Büyükannem Öğretmenim
 // Persona: Narin (31) büyükannesinden kelime öğreniyor.
 // ════════════════════════════════════════════════════════════════
 
 const kDialogueDersa = HeritageDialogue(
   id: 'dlg_dersa_piree',
-  kurmanjTitle: 'Pîrê Mamostayê Min e',
+  kurmanjTitle: 'Dapîr Mamostayê Min e',
   turkishTitle: 'Büyükannem Öğretmenim',
   lessonId: 'a1_l05',
   scene:
@@ -491,8 +491,8 @@ const kDialogueDersa = HeritageDialogue(
       audioAsset: 'assets/audio/heritage/dlg5_01.mp3',
     ),
     DialogueLine(
-      speaker: 'Pîrê',
-      speakerRole: 'Pîrê',
+      speaker: 'Dapîr',
+      speakerRole: 'Dapîr',
       kurmanci: '"Derî" ye. Ev derî ye.',
       turkish: '"Derî". Bu kapıdır.',
       grammarNote: '"Ev derî ye" = bu kapıdır (gösterme + isim + bûn).',
@@ -507,8 +507,8 @@ const kDialogueDersa = HeritageDialogue(
       audioAsset: 'assets/audio/heritage/dlg5_03.mp3',
     ),
     DialogueLine(
-      speaker: 'Pîrê',
-      speakerRole: 'Pîrê',
+      speaker: 'Dapîr',
+      speakerRole: 'Dapîr',
       kurmanci: 'Erê, rast e! Tu baş dibêjî!',
       turkish: 'Evet, doğru! Çok iyi söylüyorsun!',
       grammarNote: '"Tu baş dibêjî" = iyi söylüyorsun (bêjin 2.tekil).',
@@ -523,8 +523,8 @@ const kDialogueDersa = HeritageDialogue(
       audioAsset: 'assets/audio/heritage/dlg5_05.mp3',
     ),
     DialogueLine(
-      speaker: 'Pîrê',
-      speakerRole: 'Pîrê',
+      speaker: 'Dapîr',
+      speakerRole: 'Dapîr',
       kurmanci: '"Pencere" ye — heman e! Weke Tirkî.',
       turkish: '"Pencere" — aynısı! Türkçe gibi.',
       grammarNote: '"Heman e" = aynısı. "Weke" = gibi.',
@@ -540,8 +540,8 @@ const kDialogueDersa = HeritageDialogue(
       audioAsset: 'assets/audio/heritage/dlg5_07.mp3',
     ),
     DialogueLine(
-      speaker: 'Pîrê',
-      speakerRole: 'Pîrê',
+      speaker: 'Dapîr',
+      speakerRole: 'Dapîr',
       kurmanci: 'Û tu xwendekarê baştirîn î!',
       turkish: 'Ve sen en iyi öğrencisin!',
       grammarNote: '"Baştirîn" = en iyi (üstünlük derecesi: baş + -tirîn).',
@@ -556,8 +556,8 @@ const kDialogueDersa = HeritageDialogue(
       audioAsset: 'assets/audio/heritage/dlg5_09.mp3',
     ),
     DialogueLine(
-      speaker: 'Pîrê',
-      speakerRole: 'Pîrê',
+      speaker: 'Dapîr',
+      speakerRole: 'Dapîr',
       kurmanci: 'Ez jî ji te hez dikim, keça min. Ziman jiyana me ye.',
       turkish: 'Ben de seni seviyorum kızım. Dil, bizim hayatımız.',
       grammarNote: '"Ez jî" = ben de. "Jiyana me ye" = bizim hayatımız.',
@@ -575,11 +575,11 @@ const kDialogueDersa = HeritageDialogue(
 // B1 DİYALOGLARI — 3 Sahne
 // ════════════════════════════════════════════════════════════════
 
-// B1 Sahne 1: Pîrê û Ninni — Büyükanne ninni söylerken
+// B1 Sahne 1: Dapîr û Ninni — Büyükanne ninni söylerken
 // Odak: sürekli geçmiş (digot), ergatif, kültürel bellek
 const kDialogueB1Ninni = HeritageDialogue(
   id: 'b1_dlg_ninni',
-  title: 'Loriya Pîrê',
+  title: 'Loriya Dapîrê',
   turkishTitle: 'Büyükannenin Ninnisi',
   level: 3,
   lessonId: 'b1_l18',

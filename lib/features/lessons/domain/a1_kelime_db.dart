@@ -343,15 +343,15 @@ const kA1TamKelimeler = [
    her:['Xwişka min li dibistanê ye.', 'Xwişka te çawa ye?'],
    gen:['Xwişk û bira', 'Xwişka wê']),
 
-  (id:'a1_084', ku:'Pîrê', tr:'Büyükanne', en:'Grandmother', cins:'mê', ez:'pîrêya',
-   kat:'malbat', zor:0.84, not:'Dişil — ezafe: pîrêya min. Heritage kullanıcı için en duygusal kelime',
-   her:['Pîrêya min Kurmancî dizane.', 'Ez ji pîrêya xwe hez dikim.'],
-   gen:['Pîrêya wî', 'Pîrê û kal']),
+  (id:'a1_084', ku:'Dapîr', tr:'Büyükanne', en:'Grandmother', cins:'mê', ez:'dapîra',
+   kat:'malbat', zor:0.84, not:'Dişil — ezafe: dapîra min. "Pîrê" de kullanılır. Heritage kullanıcı için en duygusal kelime',
+   her:['Dapîra min Kurmancî dizane.', 'Ez ji dapîra xwe hez dikim.'],
+   gen:['Dapîra wî', 'Dapîr û bapîr']),
 
-  (id:'a1_085', ku:'Kal', tr:'Büyükbaba / Dede', en:'Grandfather', cins:'nêr', ez:'kalê',
+  (id:'a1_085', ku:'Kal', tr:'Büyükbaba', en:'Grandfather', cins:'nêr', ez:'kalê',
    kat:'malbat', zor:0.84, not:'Eril — ezafe: kalê min. "Bapîr" da denir',
    her:['Kalê min li gundê ye.', 'Ez kalê xwe dixwazim bibînim.'],
-   gen:['Kalê wî', 'Kal û pîrê']),
+   gen:['Kalê wî', 'Bapîr û dapîr']),
 
   (id:'a1_086', ku:'Ap', tr:'Amca (baba tarafı)', en:"Father's brother", cins:'nêr', ez:'apê',
    kat:'malbat', zor:0.80, not:'Eril — baba tarafı amca. Anne tarafı: "mam" (bölgesel)',
@@ -439,32 +439,32 @@ const kA1TamKelimeler = [
   // ════════════════════════════════════════════════════════════
 
   (id:'a1_110', ku:'Mamosta', tr:'Öğretmen', en:'Teacher', cins:'bêcins', ez:'mamostayê/mamostaya',
-   kat:'pise', zor:0.83, not:'Eril/dişil için aynı kelime — sadece ezafe değişir',
+   kat:'pîşe', zor:0.83, not:'Eril/dişil için aynı kelime — sadece ezafe değişir',
    her:['Mamostayê min baş e.', 'Bavê min mamosta ye.'],
    gen:['Mamosta û xwendekar', 'Mamostaya me']),
 
   (id:'a1_111', ku:'Xwendekar', tr:'Öğrenci', en:'Student', cins:'bêcins', ez:'xwendekarê/xwendekara',
-   kat:'pise', zor:0.82, not:'"Xwend" = okudu + "-ekar" = yapan. x sesi gırtlaktan!',
+   kat:'pîşe', zor:0.82, not:'"Xwend" = okudu + "-ekar" = yapan. x sesi gırtlaktan!',
    her:['Ez xwendekarê dibistanê me.', 'Xwişka min xwendekar e.'],
    gen:['Xwendekar û mamosta', 'Xwendekarên baş']),
 
   (id:'a1_112', ku:'Bijîşk', tr:'Doktor / Hekim', en:'Doctor', cins:'bêcins', ez:'bijîşkê/bijîşka',
-   kat:'pise', zor:0.80, not:'"Bijîşk" saf Kurmancî kelime. "Doktor" da kullanılır ama bijîşk daha özgün',
+   kat:'pîşe', zor:0.80, not:'"Bijîşk" saf Kurmancî kelime. "Doktor" da kullanılır ama bijîşk daha özgün',
    her:['Dêya min bijîşk e.', 'Bijîşkê me baş e.'],
    gen:['Bijîşk û nexweş', 'Bijîşka me']),
 
   (id:'a1_113', ku:'Karker', tr:'İşçi', en:'Worker', cins:'bêcins', ez:'karkerê/karkera',
-   kat:'pise', zor:0.80, not:'"Kar" = iş + "-ker" = yapan',
+   kat:'pîşe', zor:0.80, not:'"Kar" = iş + "-ker" = yapan',
    her:['Bavê min karker e.', 'Karkerên baş in.'],
    gen:['Karker û bazirgan', 'Karkerê me']),
 
   (id:'a1_114', ku:'Cotkar', tr:'Çiftçi', en:'Farmer', cins:'bêcins', ez:'cotkarê/cotkara',
-   kat:'pise', zor:0.79, not:'"Cot" = çift/çiftlik + "-kar" = yapan',
+   kat:'pîşe', zor:0.79, not:'"Cot" = çift/çiftlik + "-kar" = yapan',
    her:['Kalê min cotkar e.', 'Cotkarên Kurdistanê.'],
    gen:['Cotkar û şivan', 'Cotkarê me']),
 
   (id:'a1_115', ku:'Şivan', tr:'Çoban', en:'Shepherd', cins:'bêcins', ez:'şivanê/şivana',
-   kat:'pise', zor:0.79, not:'Kürt kültüründe köklü meslek — geleneksel yaşamın simgesi',
+   kat:'pîşe', zor:0.79, not:'Kürt kültüründe köklü meslek — geleneksel yaşamın simgesi',
    her:['Kalê min şivan bû.', 'Şivanê me li çiyayê ye.'],
    gen:['Şivan û mî', 'Şivanê Kurdistanê']),
 
@@ -1223,37 +1223,37 @@ const kA1TamKelimeler = [
   // ════════════════════════════════════════════════════════════
 
   (id:'a1_295', ku:'Kûçik', tr:'Köpek', en:'Dog', cins:'nêr', ez:'kûçikê',
-   kat:'heywan', zor:0.83,
+   kat:'ajal', zor:0.83,
    not:'Eril — û uzun söylenir',
    her:['Kûçikê me baş e.', 'Kûçik li baxçeyê ye.'],
    gen:['Kûçik û pisîk', 'Kûçikê malê']),
 
   (id:'a1_296', ku:'Pisîk', tr:'Kedi', en:'Cat', cins:'mê', ez:'pisîka',
-   kat:'heywan', zor:0.83,
+   kat:'ajal', zor:0.83,
    not:'Dişil — î uzun',
    her:['Pisîka pîrê spî ye.', 'Pisîk li malê ye.'],
    gen:['Pisîk û kûçik', 'Pisîka min']),
 
   (id:'a1_297', ku:'Hesp', tr:'At', en:'Horse', cins:'nêr', ez:'hespê',
-   kat:'heywan', zor:0.82,
+   kat:'ajal', zor:0.82,
    not:'Eril — Kürt kültüründe at saygın hayvan. Thackston §126\'da örnek olarak kullanılır',
    her:['Kalê min hespek hebû.', 'Hesp û ker.'],
    gen:['Hespê spî', 'Hesp û ga']),
 
   (id:'a1_298', ku:'Bizin', tr:'Keçi', en:'Goat', cins:'mê', ez:'bizina',
-   kat:'heywan', zor:0.81,
+   kat:'ajal', zor:0.81,
    not:'Dişil — "Şîrê bizinê" = keçi sütü (çok geçer)',
    her:['Şîrê bizina pîrê xweş e.', 'Bizin li çiyayê ye.'],
    gen:['Bizin û mî', 'Bizinên spî']),
 
   (id:'a1_299', ku:'Mî', tr:'Koyun', en:'Sheep', cins:'mê', ez:'miya',
-   kat:'heywan', zor:0.81,
+   kat:'ajal', zor:0.81,
    not:'Dişil',
    her:['Miya kalê min mezin e.', 'Şivan û mî.'],
    gen:['Mî û bizin', 'Miya spî']),
 
   (id:'a1_300', ku:'Çêlek', tr:'İnek', en:'Cow', cins:'mê', ez:'çêleka',
-   kat:'heywan', zor:0.80,
+   kat:'ajal', zor:0.80,
    not:'Dişil',
    her:['Çêleka me şîr dide.', 'Çêlek li gundê ye.'],
    gen:['Çêlek û ga', 'Çêleka me']),
@@ -2198,25 +2198,25 @@ const kA1EkKelimeler2 = [
 
   // ── HAYVAN EK ─────────────────────────────────────────────
   (id:'a1_560', ku:'Çûçik', tr:'Kuş', en:'Bird',
-   cins:'nêr', ez:'çûçikê', kat:'heywan', zor:0.82,
+   cins:'nêr', ez:'çûçikê', kat:'ajal', zor:0.82,
    not:'Eril — [FB]: çûçik n.m. "Çûçikê spî" = beyaz kuş.',
    her:['Çûçik difire.', 'Çûçik distirê.'],
    gen:['Çûçik û masî', 'Çûçikê xweş']),
 
   (id:'a1_561', ku:'Masî', tr:'Balık', en:'Fish',
-   cins:'nêr', ez:'masiyê', kat:'heywan', zor:0.82,
+   cins:'nêr', ez:'masiyê', kat:'ajal', zor:0.82,
    not:'Eril — [AS]: "balık = masî" ✓. [FB]: masî n.m.',
    her:['Masî di avê de ye.', 'Masî dixwim.'],
    gen:['Masî û goşt', 'Masiyê avê']),
 
   (id:'a1_562', ku:'Hirç', tr:'Ayı', en:'Bear',
-   cins:'nêr', ez:'hirçê', kat:'heywan', zor:0.80,
+   cins:'nêr', ez:'hirçê', kat:'ajal', zor:0.80,
    not:'Eril — [FB]: hirç n.m. Kürdistan dağlarında yaşar.',
    her:['Hirç di çiyayê de ye.', 'Hirç mezin e.'],
    gen:['Hirç û gur', 'Hirçê çiyayê']),
 
   (id:'a1_563', ku:'Rovî', tr:'Tilki', en:'Fox',
-   cins:'nêr', ez:'roviyê', kat:'heywan', zor:0.80,
+   cins:'nêr', ez:'roviyê', kat:'ajal', zor:0.80,
    not:'Eril — [FB]: rovî n.m. Atasözlerinde akıllı hayvan.',
    her:['Rovî zîrek e.', 'Rovî di daristanê de ye.'],
    gen:['Rovî û gur', 'Rovîyê zîrek']),
@@ -2604,25 +2604,25 @@ const kA1FerkeraDersler = [
   // ── HAYVAN — [Fêrkera D.4] ─────────────────────────────────────
 
   (id:'a1_fk_18', ku:'Ajel', tr:'Hayvan', en:'Animal',
-   cins:'nêr', ez:'ajelê', kat:'heywan', zor:0.83,
+   cins:'nêr', ez:'ajelê', kat:'ajal', zor:0.83,
    not:'Eril — [Fêrkera D.4] ✓: "ajel" = hayvan (genel). "Heywan" Arapça kökenli alternatif.',
    her:['Ajel gund e.', 'Ajelên me.'],
    gen:['Ajel û çûçik', 'Ajelên me']),
 
   (id:'a1_fk_19', ku:'Mirîşk', tr:'Tavuk', en:'Chicken',
-   cins:'mê', ez:'mirîşkê', kat:'heywan', zor:0.82,
+   cins:'mê', ez:'mirîşkê', kat:'ajal', zor:0.82,
    not:'Dişil — [Fêrkera D.4] ✓: "mirîşk" = tavuk.',
    her:['Mirîşk dixwe.', 'Mirîşkên me.'],
    gen:['Mirîşk û dîk', 'Mirîşkên me']),
 
   (id:'a1_fk_20', ku:'Bizin', tr:'Keçi', en:'Goat',
-   cins:'mê', ez:'bizinê', kat:'heywan', zor:0.81,
+   cins:'mê', ez:'bizinê', kat:'ajal', zor:0.81,
    not:'Dişil — [Fêrkera D.4] ✓: "bizin" = keçi.',
    her:['Bizin şîr dide.', 'Bizinên me.'],
    gen:['Bizin û mî', 'Bizinên me']),
 
   (id:'a1_fk_21', ku:'Beran', tr:'Koç', en:'Ram',
-   cins:'nêr', ez:'beranê', kat:'heywan', zor:0.80,
+   cins:'nêr', ez:'beranê', kat:'ajal', zor:0.80,
    not:'Eril — [Fêrkera D.4] ✓: "beran" = koç (erkek koyun).',
    her:['Beran xurt e.', 'Beranê me.'],
    gen:['Beran û mî', 'Beranê me']),
@@ -2633,6 +2633,360 @@ const kA1FerkeraDersler = [
    her:['Firîngî sor e.', 'Firîngî û birinc.'],
    gen:['Firîngî û sêv', 'Firîngîyên sor']),
 
+];
+
+// ════════════════════════════════════════════════════════════
+// EK KELİMELER 4 — Eksik Kategoriler Takviyesi
+// Nisan 2026 — düşük sayılı kategorilere ek kelimeler
+// ════════════════════════════════════════════════════════════
+
+const kA1EkKelimeler4 = [
+
+  // ── Vexwarin (İçecekler) ──────────────────────────────────
+
+  (id:'a1_ek401', ku:'Ava germ', tr:'Sıcak su', en:'Hot water',
+   cins:'mê', ez:'ava germ', kat:'vexwarin', zor:0.78,
+   not:'Dişil — "av" (su) dişil + "germ" (sıcak). "Ava germ" = sıcak su.',
+   her:['Ava germ bixwe, pîrê!', 'Dê ava germ çêdike.'],
+   gen:['Ava germ û çay', 'Ava germ bixwe.']),
+
+  (id:'a1_ek402', ku:'Şerbet', tr:'Şerbet', en:'Sherbet',
+   cins:'nêr', ez:'şerbetê', kat:'vexwarin', zor:0.72,
+   not:'Eril — [Farsça kök]. "Şerbetê Newrozê" = Nevruz şerbeti.',
+   her:['Şerbet xweş e!', 'Pîrê şerbet çêkir.'],
+   gen:['Şerbet û av', 'Şerbetê me']),
+
+  (id:'a1_ek403', ku:'Lîmonata', tr:'Limonata', en:'Lemonade',
+   cins:'mê', ez:'lîmonatê', kat:'vexwarin', zor:0.75,
+   not:'Dişil — "lîmon" (limon) + "-ata". Havînê tê vexwarin.',
+   her:['Lîmonata havînê xweş e.', 'Dê lîmonata çêkir.'],
+   gen:['Lîmonata û av', 'Lîmonatê bixwe.']),
+
+  (id:'a1_ek404', ku:'Şerbeta porteqalî', tr:'Portakal suyu', en:'Orange juice',
+   cins:'mê', ez:'şerbeta porteqalî', kat:'vexwarin', zor:0.70,
+   not:'Dişil — "şerbet" + "porteqalî" (portakallı). Bileşik isim.',
+   her:['Şerbeta porteqalî bixwe!', 'Zarok şerbeta porteqalî hez dikin.'],
+   gen:['Şerbeta porteqalî û sêv', 'Şerbeta porteqalî xweş e.']),
+
+  (id:'a1_ek405', ku:'Dew', tr:'Ayran', en:'Ayran / Buttermilk',
+   cins:'nêr', ez:'dewê', kat:'vexwarin', zor:0.76,
+   not:'Eril — Ferhenga Birûskî: dew n.m. Mast û av. Kürt mutfağının temel içeceği.',
+   her:['Dewê pîrê xweş e!', 'Dew û nan bixwe.'],
+   gen:['Dew û mast', 'Dewê me']),
+
+  (id:'a1_ek406', ku:'Şîrê germ', tr:'Sıcak süt', en:'Hot milk',
+   cins:'nêr', ez:'şîrê germ', kat:'vexwarin', zor:0.74,
+   not:'Eril — "şîr" (süt) eril + "germ" (sıcak). Zarokan re tê vexwarin.',
+   her:['Şîrê germ bixwe, zaroka min!', 'Pîrê şîrê germ dide.'],
+   gen:['Şîrê germ û nan', 'Şîrê germ bixwe.']),
+
+  // ── Mêwe (Meyveler) ───────────────────────────────────────
+
+  (id:'a1_ek407', ku:'Mûz', tr:'Muz', en:'Banana',
+   cins:'nêr', ez:'mûzê', kat:'mêwe', zor:0.78,
+   not:'Eril — "mûz" standart form. Zer e û xweş e.',
+   her:['Mûz zer e.', 'Zarok mûz hez dikin.'],
+   gen:['Mûz û sêv', 'Mûzê min']),
+
+  (id:'a1_ek408', ku:'Hirmî', tr:'Armut', en:'Pear',
+   cins:'mê', ez:'hirmiyê', kat:'mêwe', zor:0.72,
+   not:'Dişil — Ferhenga Birûskî: hirmî n.f. "Hirmî û sêv" = armut ve elma.',
+   her:['Hirmî xweş e, pîrê!', 'Hirmî û sêv bixwe.'],
+   gen:['Hirmî û sêv', 'Hirmiyê me']),
+
+  (id:'a1_ek409', ku:'Zebeş', tr:'Karpuz', en:'Watermelon',
+   cins:'nêr', ez:'zebeşê', kat:'mêwe', zor:0.70,
+   not:'Eril — Ferhenga Birûskî: zebeş n.m. Havînê tê xwarin.',
+   her:['Zebeş havînê xweş e!', 'Zebeşê sor bixwe.'],
+   gen:['Zebeş û pepûk', 'Zebeşê me']),
+
+  (id:'a1_ek410', ku:'Fîstiq', tr:'Fıstık', en:'Pistachio',
+   cins:'nêr', ez:'fîstiqê', kat:'mêwe', zor:0.68,
+   not:'Eril — Ferhenga Birûskî: fîstiq n.m. Kurtuluş bölgesinin meşhur ürünü.',
+   her:['Fîstiq kesk e.', 'Fîstiqên me xweş in.'],
+   gen:['Fîstiq û gûz', 'Fîstiqê me']),
+
+  (id:'a1_ek411', ku:'Gûz', tr:'Ceviz', en:'Walnut',
+   cins:'nêr', ez:'gûzê', kat:'mêwe', zor:0.70,
+   not:'Eril — Ferhenga Birûskî: gûz n.m. "Dara gûzê" = ceviz ağacı.',
+   her:['Gûz xweş e!', 'Dara gûzê li baxçê ye.'],
+   gen:['Gûz û fîstiq', 'Gûzê me']),
+
+  (id:'a1_ek412', ku:'Pepûk', tr:'Kavun', en:'Melon',
+   cins:'nêr', ez:'pepûkê', kat:'mêwe', zor:0.72,
+   not:'Eril — Ferhenga Birûskî: pepûk n.m. Havînê tê xwarin.',
+   her:['Pepûk xweş e!', 'Pepûkê zer bixwe.'],
+   gen:['Pepûk û zebeş', 'Pepûkê me']),
+
+  // ── Tendurist (Sağlık) ────────────────────────────────────
+
+  (id:'a1_ek413', ku:'Ta', tr:'Ateş / Humma', en:'Fever',
+   cins:'mê', ez:'tayê', kat:'tendurist', zor:0.72,
+   not:'Dişil — "Ta" = ateş (vücut ısısı). "Ta min heye" = ateşim var.',
+   her:['Ta min heye, pîrê!', 'Dê, ta min bilind e.'],
+   gen:['Ta û nexweşî', 'Ta min heye.']),
+
+  (id:'a1_ek414', ku:'Birîn', tr:'Yara', en:'Wound',
+   cins:'mê', ez:'birînê', kat:'tendurist', zor:0.70,
+   not:'Dişil — Ferhenga Birûskî: birîn n.f. "Birîna min" = yaram.',
+   her:['Birîna min êş dike.', 'Bijîşk birînê paqij kir.'],
+   gen:['Birîn û derman', 'Birîna min']),
+
+  (id:'a1_ek415', ku:'Derman', tr:'İlaç', en:'Medicine',
+   cins:'nêr', ez:'dermanê', kat:'tendurist', zor:0.75,
+   not:'Eril — Ferhenga Birûskî: derman n.m. "Ziman dermanê dilê mirov e" = Dil insanın kalbinin ilacıdır.',
+   her:['Derman bixwe, pîrê!', 'Bijîşk derman da min.'],
+   gen:['Derman û bijîşk', 'Dermanê min']),
+
+  (id:'a1_ek416', ku:'Serêş', tr:'Baş ağrısı', en:'Headache',
+   cins:'nêr', ez:'serêşê', kat:'tendurist', zor:0.72,
+   not:'Eril — "ser" (kafa) + "êş" (ağrı). Bileşik kelime.',
+   her:['Serêşê min heye.', 'Derman ji serêşê re.'],
+   gen:['Serêş û derman', 'Serêşê min']),
+
+  (id:'a1_ek417', ku:'Kuxik', tr:'Öksürük', en:'Cough',
+   cins:'mê', ez:'kuxikê', kat:'tendurist', zor:0.68,
+   not:'Dişil — "Kuxik" = öksürük. Zivistanê gelek tê.',
+   her:['Kuxika min heye.', 'Ji kuxikê derman bixwe.'],
+   gen:['Kuxik û ta', 'Kuxika min']),
+
+  (id:'a1_ek418', ku:'Dermangeh', tr:'Eczane', en:'Pharmacy',
+   cins:'mê', ez:'dermangehê', kat:'tendurist', zor:0.70,
+   not:'Dişil — "derman" (ilaç) + "-geh" (yer eki). "Dermangeh" = eczane.',
+   her:['Em diçin dermangehê.', 'Dermangeh li kuçeyê ye.'],
+   gen:['Dermangeh û nexweşxane', 'Dermangehê me']),
+
+  // ── Demsal / Hewa (Mevsim / Hava) ────────────────────────
+
+  (id:'a1_ek419', ku:'Ba', tr:'Rüzgar', en:'Wind',
+   cins:'nêr', ez:'bayê', kat:'demsal', zor:0.75,
+   not:'Eril — Ferhenga Birûskî: ba n.m. "Ba dikişîne" = rüzgar esiyor.',
+   her:['Ba dikişîne, pîrê!', 'Bayê sar e.'],
+   gen:['Ba û baran', 'Bayê germ']),
+
+  (id:'a1_ek420', ku:'Ewr', tr:'Bulut', en:'Cloud',
+   cins:'nêr', ez:'ewrê', kat:'demsal', zor:0.72,
+   not:'Eril — Ferhenga Birûskî: ewr n.m. "Esman bi ewran e" = gökyüzü bulutlu.',
+   her:['Ewr li esmên e.', 'Ewrên reş hatin.'],
+   gen:['Ewr û baran', 'Ewrên spî']),
+
+  (id:'a1_ek421', ku:'Şil', tr:'Islak / Nemli', en:'Wet / Damp',
+   cins:'bêcins', ez:null, kat:'demsal', zor:0.70,
+   not:'Değişmez sıfat — "Erd şil e" = toprak ıslak.',
+   her:['Erd şil e, pîrê.', 'Piştî baranê şil e.'],
+   gen:['Şil û hişk', 'Ew şil e.']),
+
+  (id:'a1_ek422', ku:'Hişk', tr:'Kuru', en:'Dry',
+   cins:'bêcins', ez:null, kat:'demsal', zor:0.70,
+   not:'Değişmez sıfat — "Havîn hişk e" = yaz kurak.',
+   her:['Erd hişk e.', 'Havîn hişk e, pîrê.'],
+   gen:['Hişk û şil', 'Ew hişk e.']),
+
+  // ── Pîşe (Meslekler) ─────────────────────────────────────
+
+  (id:'a1_ek423', ku:'Mamoste', tr:'Öğretmen', en:'Teacher',
+   cins:'bêcins', ez:'mamosteyê/mamosteya', kat:'pîşe', zor:0.80,
+   not:'"Mamoste" formel kayıt. "Mamosta" da kullanılır. Her iki form doğru.',
+   her:['Mamoste baş e.', 'Mamosteyê me jîr e.'],
+   gen:['Mamoste û xwendekar', 'Mamosteyê me']),
+
+  (id:'a1_ek424', ku:'Nanpêj', tr:'Fırıncı', en:'Baker',
+   cins:'nêr', ez:'nanpêjê', kat:'pîşe', zor:0.72,
+   not:'Eril — "nan" (ekmek) + "pêj" (pişirmek). "Nanpêj nan dipêje" = fırıncı ekmek pişirir.',
+   her:['Nanpêj nan dipêje.', 'Nanpêjê gundê me.'],
+   gen:['Nanpêj û nan', 'Nanpêjê me']),
+
+  (id:'a1_ek425', ku:'Şofêr', tr:'Şoför', en:'Driver',
+   cins:'nêr', ez:'şofêrê', kat:'pîşe', zor:0.76,
+   not:'Eril — [Fransızca "chauffeur"dan]. "Şofêrê basê" = otobüs şoförü.',
+   her:['Şofêr erebe dajo.', 'Şofêrê basê.'],
+   gen:['Şofêr û erebe', 'Şofêrê me']),
+
+  (id:'a1_ek426', ku:'Berdar', tr:'Berber', en:'Barber',
+   cins:'nêr', ez:'berdarê', kat:'pîşe', zor:0.70,
+   not:'Eril — Ferhenga Birûskî: berdar n.m. "Ber" (ön) + "dar" (tutan).',
+   her:['Berdar porê min kir.', 'Berdarê gundê me.'],
+   gen:['Berdar û pîşe', 'Berdarê me']),
+
+  // ── Çand (Kültür) ─────────────────────────────────────────
+
+  (id:'a1_ek427', ku:'Newroz', tr:'Nevruz', en:'Newroz / Kurdish New Year',
+   cins:'nêr', ez:'Newrozê', kat:'çand', zor:0.80,
+   not:'Eril — "New" (yeni) + "roz" (gün). 21 Adarê. Kürt kültürünün en önemli bayramı.',
+   her:['Newroz pîroz be!', 'Newrozê em govend digirin.'],
+   gen:['Newroz û bihar', 'Newrozê pîroz!']),
+
+  (id:'a1_ek428', ku:'Govend', tr:'Halay / Halk dansı', en:'Traditional circle dance',
+   cins:'mê', ez:'govenda', kat:'çand', zor:0.72,
+   not:'Dişil — Ferhenga Birûskî: govend n.f. "Govend girtin" = halay çekmek.',
+   her:['Em govend digirin!', 'Govenda Newrozê xweş e.'],
+   gen:['Govend û stran', 'Govenda me']),
+
+  (id:'a1_ek429', ku:'Çîrok', tr:'Masal / Hikaye', en:'Story / Tale',
+   cins:'mê', ez:'çîroka', kat:'çand', zor:0.74,
+   not:'Dişil — Ferhenga Birûskî: çîrok n.f. "Çîrokek ji min re bêje" = bana bir masal anlat.',
+   her:['Pîrê çîrokê dibêje.', 'Çîroka pîrê xweş e!'],
+   gen:['Çîrok û stran', 'Çîroka me']),
+
+  (id:'a1_ek430', ku:'Lorî', tr:'Ninni', en:'Lullaby',
+   cins:'mê', ez:'loriyê', kat:'çand', zor:0.70,
+   not:'Dişil — "Lorî" = ninni. Dêya zaroka re lorî dibêje.',
+   her:['Dê lorî dibêje.', 'Loriya pîrê xweş e.'],
+   gen:['Lorî û stran', 'Loriya me']),
+
+  (id:'a1_ek431', ku:'Cejn', tr:'Bayram', en:'Festival / Holiday',
+   cins:'nêr', ez:'cejnê', kat:'çand', zor:0.76,
+   not:'Eril — Ferhenga Birûskî: cejn n.m. "Cejnê pîroz be!" = bayramınız kutlu olsun.',
+   her:['Cejn pîroz be!', 'Cejnê em dicivin.'],
+   gen:['Cejn û Newroz', 'Cejnê me']),
+
+  // ── Gihanî (Ulaşım) ──────────────────────────────────────
+
+  (id:'a1_ek432', ku:'Keştî', tr:'Gemi', en:'Ship',
+   cins:'mê', ez:'keştiyê', kat:'gihanî', zor:0.70,
+   not:'Dişil — Ferhenga Birûskî: keştî n.f. "Keştî li deryayê ye" = gemi denizdedir.',
+   her:['Keştî li deryayê ye.', 'Keştiyeke mezin.'],
+   gen:['Keştî û balafir', 'Keştiya me']),
+
+  (id:'a1_ek433', ku:'Metro', tr:'Metro', en:'Subway / Metro',
+   cins:'nêr', ez:'metroyê', kat:'gihanî', zor:0.74,
+   not:'Eril — [Fransızca "métro"dan]. "Metroyê bajêr" = şehir metrosu.',
+   her:['Ez bi metroyê diçim.', 'Metro zû ye.'],
+   gen:['Metro û bas', 'Metroyê bajêr']),
+
+  (id:'a1_ek434', ku:'Bisiklêt', tr:'Bisiklet', en:'Bicycle',
+   cins:'mê', ez:'bisiklêtê', kat:'gihanî', zor:0.72,
+   not:'Dişil — [Fransızca "bicyclette"den]. "Bi bisiklêtê" = bisikletle.',
+   her:['Ez bi bisiklêtê diçim.', 'Bisiklêta min nû ye.'],
+   gen:['Bisiklêt û erebe', 'Bisiklêta me']),
+
+  (id:'a1_ek435', ku:'Otobûs', tr:'Otobüs', en:'Bus',
+   cins:'nêr', ez:'otobûsê', kat:'gihanî', zor:0.76,
+   not:'Eril — "Otobûs" alternatif form. "Bas" da kullanılır.',
+   her:['Otobûs hat!', 'Em bi otobûsê diçin.'],
+   gen:['Otobûs û trên', 'Otobûsê bajêr']),
+
+  (id:'a1_ek436', ku:'Firoke', tr:'Uçak (alternatif)', en:'Airplane',
+   cins:'mê', ez:'firokê', kat:'gihanî', zor:0.70,
+   not:'Dişil — "Firoke" alternatif form. "Balafir" da kullanılır.',
+   her:['Firoke li esmên e.', 'Firokê mezin hat.'],
+   gen:['Firoke û balafir', 'Firokê me']),
+
+  // ── Cil (Giysi) ───────────────────────────────────────────
+
+  (id:'a1_ek437', ku:'Şal', tr:'Şal / Poşu', en:'Shawl',
+   cins:'nêr', ez:'şalê', kat:'cil', zor:0.74,
+   not:'Eril — "Şal û şapik" = geleneksel Kürt erkek giyimi.',
+   her:['Şalê kurdî xweş e.', 'Bavê min şal li xwe dike.'],
+   gen:['Şal û kiras', 'Şalê min']),
+
+  (id:'a1_ek438', ku:'Kumik', tr:'Şapka', en:'Hat / Cap',
+   cins:'nêr', ez:'kumikê', kat:'cil', zor:0.72,
+   not:'Eril — Ferhenga Birûskî: kumik n.m. "Kumik li xwe kirin" = şapka takmak.',
+   her:['Kumik li xwe bike!', 'Kumikê bavê min.'],
+   gen:['Kumik û kiras', 'Kumikê min']),
+
+  (id:'a1_ek439', ku:'Qebayet', tr:'Palto / Mont', en:'Coat / Overcoat',
+   cins:'mê', ez:'qebayetê', kat:'cil', zor:0.70,
+   not:'Dişil — "Qebayet" = palto. Zivistanê tê li xwekirin.',
+   her:['Qebayet li xwe bike, sar e!', 'Qebayeta min nû ye.'],
+   gen:['Qebayet û kiras', 'Qebayeta min']),
+
+  (id:'a1_ek440', ku:'Şapik', tr:'Yelek', en:'Vest / Waistcoat',
+   cins:'nêr', ez:'şapikê', kat:'cil', zor:0.72,
+   not:'Eril — "Şal û şapik" = geleneksel kıyafet. Şapik = yelek.',
+   her:['Şapik li xwe kir.', 'Şapikê kurdî.'],
+   gen:['Şapik û şal', 'Şapikê min']),
+
+  (id:'a1_ek441', ku:'Destmal', tr:'Mendil / Eşarp', en:'Scarf / Handkerchief',
+   cins:'nêr', ez:'destmalê', kat:'cil', zor:0.70,
+   not:'Eril — "dest" (el) + "mal" (silme). Hem mendil hem eşarp.',
+   her:['Destmal li xwe kir.', 'Destmalê spî.'],
+   gen:['Destmal û kumik', 'Destmalê min']),
+
+  // ── Dua (Dua / Dilek) ─────────────────────────────────────
+
+  (id:'a1_ek442', ku:'Bi xêr hatî', tr:'Hoş geldin', en:'Welcome',
+   cins:'bêcins', ez:null, kat:'dua', zor:0.80,
+   not:'"Bi xêr hatî" = hoş geldin. "Bi xêr hatine" = çoğul form.',
+   her:['Bi xêr hatî, hevalê min!', 'Bi xêr hatî malê!'],
+   gen:['Bi xêr hatî û bi xêr man.', 'Bi xêr hatine!']),
+
+  (id:'a1_ek443', ku:'Xwedê ji te razî be', tr:'Allah senden razı olsun', en:'May God be pleased with you',
+   cins:'bêcins', ez:null, kat:'dua', zor:0.68,
+   not:'Dua — teşekkür yerine de kullanılır. "Razî" = memnun.',
+   her:['Xwedê ji te razî be, pîrê!', 'Xwedê ji we razî be.'],
+   gen:['Xwedê ji te razî be.', 'Spas, Xwedê razî be.']),
+
+  (id:'a1_ek444', ku:'Xwedê xêrê bide', tr:'Allah hayır versin', en:'May God give blessings',
+   cins:'bêcins', ez:null, kat:'dua', zor:0.68,
+   not:'Dua — iyi dilek. "Xêr" = hayır, iyilik.',
+   her:['Xwedê xêrê bide te!', 'Xwedê xêrê bide we!'],
+   gen:['Xwedê xêrê bide.', 'Bi xêr û xweşî.']),
+
+  (id:'a1_ek445', ku:'Oxir be', tr:'Hayırlı olsun', en:'May it be blessed',
+   cins:'bêcins', ez:null, kat:'dua', zor:0.70,
+   not:'Dua — tebrik ve iyi dilek. "Oxir" = hayırlı, bereketli.',
+   her:['Oxir be, hevalê min!', 'Mala te oxir be!'],
+   gen:['Oxir be û pîroz be.', 'Oxir be!']),
+
+  (id:'a1_ek446', ku:'Bimîne bi xêr', tr:'Hoşça kal', en:'Goodbye / Stay well',
+   cins:'bêcins', ez:null, kat:'dua', zor:0.75,
+   not:'"Bimîne bi xêr" = hoşça kal (kalana). "Bi xatirê te" de denir.',
+   her:['Bimîne bi xêr, pîrê!', 'Bimîne bi xêr, dê!'],
+   gen:['Bimîne bi xêr.', 'Bi xatirê te.']),
+
+  (id:'a1_ek447', ku:'Xwedê bihêle', tr:'Allah bağışlasın', en:'May God forgive',
+   cins:'bêcins', ez:null, kat:'dua', zor:0.66,
+   not:'Dua — af dileme. "Bihêle" = bağışla/bırak.',
+   her:['Xwedê bihêle!', 'Xwedê bihêle, pîrê.'],
+   gen:['Xwedê bihêle.', 'Bihêle, Xwedê.']),
+
+  // ── Bun (Varoluş / Olma) ─────────────────────────────────
+
+  (id:'a1_ek448', ku:'Tunebûn', tr:'Yokluk / Olmama', en:'Non-existence',
+   cins:'bêcins', ez:null, kat:'bun', zor:0.70,
+   not:'"Tune" = yok + "bûn" = olma. "Tunebûn" = yokluk. "Tune ye" = yok.',
+   her:['Av tune ye, pîrê.', 'Nan tune ye.'],
+   gen:['Tunebûn û hebûn', 'Tune ye.']),
+
+  (id:'a1_ek449', ku:'Man', tr:'Kalmak', en:'To stay / To remain',
+   cins:'bêcins', ez:null, kat:'bun', zor:0.72,
+   not:'"Man" = kalmak. "Ez mam" = kaldım. "Bimîne" = kal.',
+   her:['Ez li malê mam.', 'Bimîne, pîrê!'],
+   gen:['Man û çûn', 'Ez dimînim.']),
+
+  (id:'a1_ek450', ku:'Çêbûn', tr:'Oluşmak / Doğmak', en:'To be born / To come into being',
+   cins:'bêcins', ez:null, kat:'bun', zor:0.68,
+   not:'"Çê" + "bûn" = oluşmak, doğmak. "Ew çêbû" = o doğdu.',
+   her:['Zarok çêbû!', 'Ev çêbû.'],
+   gen:['Çêbûn û jiyan', 'Ew çêbû.']),
+
+  (id:'a1_ek451', ku:'Jiyan', tr:'Yaşam / Hayat', en:'Life',
+   cins:'mê', ez:'jiyanê', kat:'bun', zor:0.74,
+   not:'Dişil — "Jiyan" = hayat/yaşam. "Jiyan xweş e" = hayat güzel.',
+   her:['Jiyan xweş e, pîrê!', 'Jiyana me baş e.'],
+   gen:['Jiyan û bun', 'Jiyana me']),
+
+  // ── Peyvben (Bileşik Kelimeler) ───────────────────────────
+
+  (id:'a1_ek452', ku:'Her dem', tr:'Her zaman', en:'Always',
+   cins:'bêcins', ez:null, kat:'peyvben', zor:0.76,
+   not:'"Her" (her) + "dem" (zaman). "Her dem" = her zaman.',
+   her:['Her dem xweş e, pîrê!', 'Ez her dem tê me.'],
+   gen:['Her dem û carinan', 'Her dem baş e.']),
+
+  (id:'a1_ek453', ku:'Carinan', tr:'Bazen', en:'Sometimes',
+   cins:'bêcins', ez:null, kat:'peyvben', zor:0.74,
+   not:'"Car" (kez) + "-inan". "Carinan" = bazen.',
+   her:['Carinan baran dibare.', 'Carinan ez diçim gund.'],
+   gen:['Carinan û her dem', 'Carinan baş e.']),
+
+  (id:'a1_ek454', ku:'Bi tenê', tr:'Yalnız / Tek başına', en:'Alone',
+   cins:'bêcins', ez:null, kat:'peyvben', zor:0.72,
+   not:'"Bi" (ile) + "tenê" (tek). "Bi tenê" = tek başına.',
+   her:['Ez bi tenê me, pîrê.', 'Ew bi tenê diçe.'],
+   gen:['Bi tenê û bi hev re', 'Bi tenê man.']),
 ];
 
 // A1 nihai liste
@@ -2687,6 +3041,7 @@ final kA1TamListe = [
   ...kA1EkKelimeler,
   ...kA1EkKelimeler2,
   ...kA1EkKelimeler3,
+  ...kA1EkKelimeler4,
   ...kA1FerkeraDersler,
   ...kA1Son7,
 ];

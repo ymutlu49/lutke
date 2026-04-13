@@ -75,18 +75,25 @@ List<_QuizWord> _loadWordsForLevel(String level) {
 
 List<_QuizQuestion> _generateQuizSession({
   required String level,
+  String? category,
   int questionCount = 10,
   bool showTurkish = true,
 }) {
   final allWords = _loadWordsForLevel(level);
-  if (allWords.length < 10) return [];
+  // Filter by category if provided, but keep allWords for distractors
+  final poolWords = category != null
+      ? allWords.where((w) => w.kat == category).toList()
+      : allWords;
+  if (poolWords.length < 4) return [];
+  // Adjust questionCount if category has fewer words
+  final effectiveCount = poolWords.length < questionCount ? poolWords.length : questionCount;
 
   final rng = Random();
-  final shuffled = List<_QuizWord>.from(allWords)..shuffle(rng);
-  final sessionWords = shuffled.take(questionCount).toList();
+  final shuffled = List<_QuizWord>.from(poolWords)..shuffle(rng);
+  final sessionWords = shuffled.take(effectiveCount).toList();
 
   // Egzersiz tipi dagitimi: ~3 translation, ~3 reverse, ~2 listening, ~2 typing
-  final types = <_ExerciseType>[
+  final baseTypes = <_ExerciseType>[
     _ExerciseType.translation,
     _ExerciseType.translation,
     _ExerciseType.translation,
@@ -98,9 +105,11 @@ List<_QuizQuestion> _generateQuizSession({
     _ExerciseType.typing,
     _ExerciseType.typing,
   ]..shuffle(rng);
+  // Ensure types list matches effectiveCount
+  final types = List.generate(effectiveCount, (i) => baseTypes[i % baseTypes.length]);
 
   final questions = <_QuizQuestion>[];
-  for (int i = 0; i < questionCount; i++) {
+  for (int i = 0; i < effectiveCount; i++) {
     final word = sessionWords[i];
     final type = types[i];
     List<String> options = [];
@@ -166,7 +175,8 @@ int _levenshteinDistance(String a, String b) {
 
 class QuizScreen extends ConsumerStatefulWidget {
   final String level;
-  const QuizScreen({super.key, this.level = 'A1'});
+  final String? category;
+  const QuizScreen({super.key, this.level = 'A1', this.category});
 
   @override
   ConsumerState<QuizScreen> createState() => _QuizScreenState();
@@ -195,7 +205,7 @@ class _QuizScreenState extends ConsumerState<QuizScreen>
   void initState() {
     super.initState();
     _showTurkish = ref.read(showTurkishProvider);
-    _questions = _generateQuizSession(level: widget.level, showTurkish: _showTurkish);
+    _questions = _generateQuizSession(level: widget.level, category: widget.category, showTurkish: _showTurkish);
 
     _shakeController = AnimationController(
       vsync: this,
@@ -1236,7 +1246,7 @@ class _QuizScreenState extends ConsumerState<QuizScreen>
                       // Restart quiz
                       setState(() {
                         _questions =
-                            _generateQuizSession(level: widget.level, showTurkish: _showTurkish);
+                            _generateQuizSession(level: widget.level, category: widget.category, showTurkish: _showTurkish);
                         _currentIndex = 0;
                         _hearts = 3;
                         _xp = 0;

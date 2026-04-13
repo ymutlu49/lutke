@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_animate/flutter_animate.dart';
@@ -12,6 +14,7 @@ import '../../../core/services/analytics_service.dart';
 import '../../../shared/providers/language_mode_provider.dart';
 import '../../../shared/widgets/exercise_widgets.dart';
 import '../data/lesson_repository.dart';
+import '../domain/a1_kelime_db.dart';
 
 // ════════════════════════════════════════════════════════════════
 // DERS EKRANI — LÛTKE
@@ -74,26 +77,28 @@ class _LessonScreenState extends ConsumerState<LessonScreen> {
 
   Future<void> _loadCards() async {
     try {
-      final repo = ref.read(lessonRepositoryProvider);
-      List<VocabularyCardModel> cards;
+      // Statik listeden yükle — DB bağlantısı gerekmez
+      final allWords = kA1TamKelimeler
+          .where((w) => w.kat != 'alfabe') // Alfabe kartlarını atla
+          .toList();
+      final rng = Random();
+      final shuffled = [...allWords]..shuffle(rng);
+      final limit = widget.mode == 'review' ? 15 : (widget.lessonId != null ? 20 : 15);
+      final selected = shuffled.take(limit).toList();
 
-      if (widget.mode == 'review') {
-        final profile = ref.read(userProfileProvider);
-        cards = await repo.getDueCards(
-          userId: widget.userId,
-          profile: profile,
-        ).timeout(const Duration(seconds: 5), onTimeout: () => []);
-      } else if (widget.lessonId != null) {
-        cards = await repo.getNewCards(
-          level: ref.read(userProfileProvider).currentLevelNum,
-          limit: 20,
-        ).timeout(const Duration(seconds: 5), onTimeout: () => []);
-      } else {
-        cards = await repo.getNewCards(
-          level: ref.read(userProfileProvider).currentLevelNum,
-          limit: 15,
-        ).timeout(const Duration(seconds: 5), onTimeout: () => []);
-      }
+      // VocabularyCardModel'e dönüştür
+      final cards = selected.map((w) => VocabularyCardModel(
+        id: w.id,
+        kurmanji: w.ku,
+        turkish: w.tr,
+        english: w.en,
+        category: w.kat,
+        gender: w.cins,
+        level: 1,
+        fsrsCard: FSRSCard(cardId: w.id, state: CardState.newCard, dueDate: DateTime.now()),
+        sentencesHeritage: (w.her as List).cast<String>(),
+        sentencesGeneral: (w.gen as List).cast<String>(),
+      )).toList();
 
       if (mounted) {
         setState(() {
@@ -102,7 +107,7 @@ class _LessonScreenState extends ConsumerState<LessonScreen> {
         });
       }
     } catch (_) {
-      // DB hatası — boş liste göster
+      // Hata — boş liste göster
       if (mounted) setState(() => _loading = false);
     }
 
@@ -612,7 +617,7 @@ class _CompletionView extends StatelessWidget {
                       SizedBox(
                         width: statWidth,
                         child: _CompletionStat(
-                          label: 'Kart',
+                          label: 'Peld',
                           value: '$totalSeen',
                           icon: Icons.layers_outlined,
                         ),
@@ -714,7 +719,7 @@ class _LoadingView extends StatelessWidget {
             CircularProgressIndicator(color: AppColors.primary),
             const SizedBox(height: AppSpacing.md),
             Text(
-              'Kart amade dibin...',  // Kartlar hazırlanıyor
+              'Peld amade dibin...',  // Kartlar hazırlanıyor
               style: AppTypography.bodyMedium
                   .copyWith(color: AppColors.textSecondary),
             ),
@@ -740,7 +745,7 @@ class _EmptyView extends StatelessWidget {
                 size: 72, color: AppColors.primary.withOpacity(0.6)),
             const SizedBox(height: AppSpacing.lg),
             Text(
-              'Hemû kart hatiye xwendin!',  // Tüm kartlar okundu!
+              'Hemû peld hatine xwendin!',  // Tüm kartlar okundu!
               style: AppTypography.headingSmall.copyWith(
                   color: AppColors.textPrimary, fontWeight: FontWeight.w700),
             ),

@@ -684,7 +684,7 @@ class _FlashcardScreenState extends ConsumerState<FlashcardScreen>
                 ),
                 const SizedBox(width: 6),
                 Text(
-                  'Kartê bide ser ku wateya wê bibîne',
+                  'Peldê bide ser ku wateya wê bibîne',
                   style: AppTypography.caption.copyWith(
                     color: AppColors.textTertiary,
                   ),
@@ -1170,10 +1170,11 @@ class _CategoryBadge extends StatelessWidget {
         'fiil' => 'Lêker',
         'yemek' => 'Xwarin',
         'giyim' => 'Cil',
-        'hayvan' => 'Heywan',
+        'ajal' => 'Ajal',
         'doga' => 'Xweza',
         'sayi' => 'Hejmar',
         'zaman' => 'Dem',
+        'pîşe' => 'Pîşe',
         _ => category,
       };
 
