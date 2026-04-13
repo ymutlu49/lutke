@@ -1,6 +1,6 @@
 import 'package:flutter/foundation.dart';
 import '../services/js_eval_stub.dart'
-    if (dart.library.js_interop) '../services/js_eval_web.dart' as js;
+    if (dart.library.html) '../services/js_eval_web.dart' as js;
 
 // ════════════════════════════════════════════════════════════════
 // SOUND SERVICE — Web Audio API ile sentezlenmiş UI sesleri

@@ -364,7 +364,7 @@ class _FlashcardScreenState extends ConsumerState<FlashcardScreen>
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  'Flashcard',
+                  'Peld',
                   style: AppTypography.title.copyWith(
                     color: AppColors.textPrimary,
                   ),
@@ -962,8 +962,8 @@ class _FlashcardScreenState extends ConsumerState<FlashcardScreen>
 
           Text(
             ref.watch(showTurkishProvider)
-                ? 'Flashcard oturumunu tamamladın'
-                : 'Danişîna flashcardê temam bû',
+                ? 'Peld danişîna temam bû'
+                : 'Danişîna peldan temam bû',
             style: AppTypography.body.copyWith(
               color: AppColors.textSecondary,
             ),

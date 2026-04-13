@@ -9,7 +9,7 @@ import '../../core/services/tts_service.dart';
 
 // Conditional import: web uses dart:js_interop, other platforms get a no-op stub
 import '../../core/services/js_eval_stub.dart'
-    if (dart.library.js_interop) '../../core/services/js_eval_web.dart'
+    if (dart.library.html) '../../core/services/js_eval_web.dart'
     as js_bridge;
 
 /// Kurmancî kelime seslendirme butonu.

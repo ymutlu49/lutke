@@ -626,7 +626,7 @@ class _FlashcardQuickAction extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    'Flashcard',
+                    'Peld',
                     style: AppTypography.labelLarge.copyWith(
                       color: AppColors.textPrimary,
                       fontWeight: FontWeight.w700,

@@ -16,7 +16,7 @@ import '../../lessons/domain/a1_kelime_db.dart';
 
 // Conditional import for direct TTS calls
 import '../../../core/services/js_eval_stub.dart'
-    if (dart.library.js_interop) '../../../core/services/js_eval_web.dart'
+    if (dart.library.html) '../../../core/services/js_eval_web.dart'
     as js_bridge;
 
 // ════════════════════════════════════════════════════════════════
