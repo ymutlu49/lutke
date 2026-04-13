@@ -792,7 +792,7 @@ class _QuizScreenState extends ConsumerState<QuizScreen>
               contentPadding: const EdgeInsets.symmetric(
                   horizontal: AppSpacing.md, vertical: AppSpacing.md),
             ),
-            onChanged: (v) => _typedAnswer = v,
+            onChanged: (v) => setState(() => _typedAnswer = v),
             onSubmitted: (_) {
               if (!_answered) _submitAnswer(typed: _typedAnswer);
             },
