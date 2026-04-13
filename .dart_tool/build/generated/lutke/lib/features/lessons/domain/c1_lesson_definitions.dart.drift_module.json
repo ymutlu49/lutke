@@ -1,6 +1,0 @@
-{
-  "elements": {},
-  "imports": [
-    "package:lutke/features/lessons/domain/lesson_entities.dart"
-  ]
-}

@@ -1,6 +1,0 @@
-{
-  "elements": {},
-  "imports": [
-    "package:lutke/core/database/connection/native.dart"
-  ]
-}

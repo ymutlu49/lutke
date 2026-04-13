@@ -1,8 +1,0 @@
-{
-  "elements": {},
-  "imports": [
-    "package:lutke/core/errors/failures.dart",
-    "package:lutke/features/lessons/domain/entities/lesson.dart",
-    "package:lutke/features/lessons/domain/repositories/lesson_repository_interface.dart"
-  ]
-}
