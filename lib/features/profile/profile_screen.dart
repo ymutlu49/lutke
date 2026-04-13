@@ -56,10 +56,7 @@ class ProfileScreen extends ConsumerWidget {
               floating: true,
               backgroundColor: AppColors.backgroundPrimary,
               elevation: 0,
-              leading: IconButton(
-                icon: const Icon(Icons.arrow_back_ios_new),
-                onPressed: () => context.pop(),
-              ),
+              automaticallyImplyLeading: false,
               title: Text(
                 'Profîla min',
                 style: AppTypography.headingSmall.copyWith(

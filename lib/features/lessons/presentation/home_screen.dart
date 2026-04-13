@@ -33,7 +33,7 @@ class HomeScreen extends ConsumerWidget {
 
     return Scaffold(
       backgroundColor: AppColors.backgroundPrimary,
-      bottomNavigationBar: _LutkeBottomNav(currentIndex: 0),
+      // Bottom nav artık shell'de — burada kaldırıldı
       body: SafeArea(
         child: CustomScrollView(
           slivers: [

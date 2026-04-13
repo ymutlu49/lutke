@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
@@ -13,15 +14,13 @@ import '../../features/onboarding/motivation_anchor_screen.dart';
 import '../../features/onboarding/onboarding_screens.dart';
 import '../../features/onboarding/first_lesson_screen.dart';
 import '../../features/profile/profile_screen.dart';
+import '../constants/app_colors.dart';
 import '../services/auth_service.dart';
 
-// Otomatik oluşturulan kod: dart run build_runner build
 part 'app_router.g.dart';
 
 // ════════════════════════════════════════════════════════════════
 // ROTALAR — LÛTKE
-// İlke §2: Onboarding → Heritage/Genel yol ayrımı
-// İlke §0.5: Her yol Kurmancî dünyasında başlar
 // ════════════════════════════════════════════════════════════════
 
 abstract class AppRoutes {
@@ -35,18 +34,27 @@ abstract class AppRoutes {
   static const register         = '/auth/register';
   static const login            = '/auth/login';
   static const home             = '/home';
-  static const lesson           = '/lesson';
-  static const profile          = '/profile';
-  static const settings         = '/settings';
   static const vocabulary       = '/vocabulary';
+  static const culture          = '/culture';
+  static const profile          = '/profile';
+  static const lesson           = '/lesson';
+  static const settings         = '/settings';
   static const admin            = '/admin';
 }
+
+// ════════════════════════════════════════════════════════════════
+// SHELL — Kalıcı alt navigasyon
+// ════════════════════════════════════════════════════════════════
+
+final _shellKey = GlobalKey<NavigatorState>();
+final _rootKey = GlobalKey<NavigatorState>();
 
 @riverpod
 GoRouter appRouter(AppRouterRef ref) {
   final authState = ref.watch(authStateProvider);
 
   return GoRouter(
+    navigatorKey: _rootKey,
     initialLocation: AppRoutes.splash,
     debugLogDiagnostics: false,
 
@@ -61,60 +69,94 @@ GoRouter appRouter(AppRouterRef ref) {
     },
 
     routes: [
-
-      // ── SPLASH ─────────────────────────────────────────────
+      // ── Splash & Onboarding (shell dışı) ───────────────────
       GoRoute(
         path: AppRoutes.splash,
-        builder: (context, state) => const SplashScreen(),
+        builder: (_, __) => const SplashScreen(),
       ),
-
-      // ── ONBOARDING ─────────────────────────────────────────
-      // §2: "Feel first, play second"
-      // §9b bulgu #1: pasif anlama testi
       GoRoute(
         path: AppRoutes.passiveTest,
-        builder: (context, state) => const PassiveTestScreen(),
+        builder: (_, __) => const PassiveTestScreen(),
       ),
       GoRoute(
         path: AppRoutes.motivationAnchor,
-        builder: (context, state) => const MotivationAnchorScreen(),
+        builder: (_, __) => const MotivationAnchorScreen(),
       ),
       GoRoute(
         path: AppRoutes.dialectSelect,
-        builder: (context, state) => const DialectSelectScreen(),
+        builder: (_, __) => const DialectSelectScreen(),
       ),
       GoRoute(
         path: AppRoutes.scenarioSelect,
-        builder: (context, state) => const ScenarioSelectScreen(),
+        builder: (_, __) => const ScenarioSelectScreen(),
       ),
       GoRoute(
         path: AppRoutes.goalSelect,
-        builder: (context, state) => const GoalSelectScreen(),
+        builder: (_, __) => const GoalSelectScreen(),
       ),
       GoRoute(
         path: AppRoutes.firstLesson,
-        builder: (context, state) => const FirstLessonScreen(),
+        builder: (_, __) => const FirstLessonScreen(),
       ),
-
-      // ── AUTH ───────────────────────────────────────────────
       GoRoute(
         path: AppRoutes.register,
-        builder: (context, state) => const RegisterScreen(),
+        builder: (_, __) => const RegisterScreen(),
       ),
       GoRoute(
         path: AppRoutes.login,
-        builder: (context, state) => const RegisterScreen(isLogin: true),
+        builder: (_, __) => const RegisterScreen(isLogin: true),
       ),
 
-      // ── ANA UYGULAMA ───────────────────────────────────────
-      GoRoute(
-        path: AppRoutes.home,
-        builder: (context, state) => const HomeScreen(),
+      // ── Ana uygulama — Shell ile kalıcı bottom nav ─────────
+      StatefulShellRoute.indexedStack(
+        builder: (context, state, shell) => _AppShell(shell: shell),
+        branches: [
+          // Tab 0: Fêrbûn (Ana sayfa)
+          StatefulShellBranch(
+            routes: [
+              GoRoute(
+                path: AppRoutes.home,
+                builder: (_, __) => const HomeScreen(),
+              ),
+            ],
+          ),
+
+          // Tab 1: Peyv (Kelimeler)
+          StatefulShellBranch(
+            routes: [
+              GoRoute(
+                path: AppRoutes.vocabulary,
+                builder: (_, __) => const VocabularyBrowseScreen(),
+              ),
+            ],
+          ),
+
+          // Tab 2: Çand (Kültür)
+          StatefulShellBranch(
+            routes: [
+              GoRoute(
+                path: AppRoutes.culture,
+                builder: (_, __) => const _CulturePlaceholder(),
+              ),
+            ],
+          ),
+
+          // Tab 3: Profîl
+          StatefulShellBranch(
+            routes: [
+              GoRoute(
+                path: AppRoutes.profile,
+                builder: (_, __) => const ProfileScreen(),
+              ),
+            ],
+          ),
+        ],
       ),
 
+      // ── Shell dışı sayfalar (tam ekran) ─────────────────────
       GoRoute(
         path: AppRoutes.lesson,
-        builder: (context, state) {
+        builder: (_, state) {
           final extra = state.extra as Map<String, dynamic>?;
           return LessonScreen(
             mode: extra?['mode'] as String? ?? 'lesson',
@@ -123,28 +165,210 @@ GoRouter appRouter(AppRouterRef ref) {
           );
         },
       ),
-
-      GoRoute(
-        path: AppRoutes.profile,
-        builder: (context, state) => const ProfileScreen(),
-      ),
-
-      GoRoute(
-        path: AppRoutes.vocabulary,
-        builder: (context, state) => const VocabularyBrowseScreen(),
-      ),
-
       GoRoute(
         path: AppRoutes.admin,
-        builder: (context, state) => const AdminPanelScreen(),
+        builder: (_, __) => const AdminPanelScreen(),
       ),
-
       GoRoute(
         path: AppRoutes.settings,
-        builder: (context, state) => const SettingsScreen(),
+        builder: (_, __) => const SettingsScreen(),
       ),
     ],
 
-    errorBuilder: (context, state) => ErrorScreen(error: state.error),
+    errorBuilder: (_, state) => ErrorScreen(error: state.error),
   );
+}
+
+// ════════════════════════════════════════════════════════════════
+// APP SHELL — 4 sekmeli kalıcı navigasyon
+// ════════════════════════════════════════════════════════════════
+
+class _AppShell extends StatelessWidget {
+  final StatefulNavigationShell shell;
+  const _AppShell({required this.shell});
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: shell,
+      bottomNavigationBar: _PersistentBottomNav(
+        currentIndex: shell.currentIndex,
+        onTap: (i) => shell.goBranch(i, initialLocation: i == shell.currentIndex),
+      ),
+    );
+  }
+}
+
+class _PersistentBottomNav extends StatelessWidget {
+  final int currentIndex;
+  final ValueChanged<int> onTap;
+
+  const _PersistentBottomNav({
+    required this.currentIndex,
+    required this.onTap,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      decoration: BoxDecoration(
+        color: Colors.white,
+        boxShadow: [
+          BoxShadow(
+            color: Colors.black.withOpacity(0.06),
+            blurRadius: 12,
+            offset: const Offset(0, -1),
+          ),
+        ],
+      ),
+      child: SafeArea(
+        top: false,
+        child: Padding(
+          padding: const EdgeInsets.symmetric(vertical: 6),
+          child: Row(
+            children: [
+              _Tab(
+                icon: Icons.menu_book_rounded,
+                label: 'Fêrbûn',
+                isActive: currentIndex == 0,
+                onTap: () => onTap(0),
+              ),
+              _Tab(
+                icon: Icons.translate_rounded,
+                label: 'Peyv',
+                isActive: currentIndex == 1,
+                onTap: () => onTap(1),
+              ),
+              _Tab(
+                icon: Icons.music_note_rounded,
+                label: 'Çand',
+                isActive: currentIndex == 2,
+                onTap: () => onTap(2),
+              ),
+              _Tab(
+                icon: Icons.person_rounded,
+                label: 'Profîl',
+                isActive: currentIndex == 3,
+                onTap: () => onTap(3),
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+class _Tab extends StatelessWidget {
+  final IconData icon;
+  final String label;
+  final bool isActive;
+  final VoidCallback onTap;
+
+  const _Tab({
+    required this.icon,
+    required this.label,
+    required this.isActive,
+    required this.onTap,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Expanded(
+      child: GestureDetector(
+        onTap: onTap,
+        behavior: HitTestBehavior.opaque,
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            AnimatedContainer(
+              duration: const Duration(milliseconds: 200),
+              width: 48,
+              height: 28,
+              decoration: BoxDecoration(
+                color: isActive
+                    ? AppColors.primary.withOpacity(0.12)
+                    : Colors.transparent,
+                borderRadius: BorderRadius.circular(14),
+              ),
+              child: Icon(
+                icon,
+                size: 22,
+                color: isActive ? AppColors.primary : Colors.grey.shade500,
+              ),
+            ),
+            const SizedBox(height: 2),
+            Text(
+              label,
+              style: TextStyle(
+                fontSize: 11,
+                fontWeight: isActive ? FontWeight.w700 : FontWeight.w500,
+                color: isActive ? AppColors.primary : Colors.grey.shade500,
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+// ════════════════════════════════════════════════════════════════
+// KÜLTÜR PLACEHOLDER
+// ════════════════════════════════════════════════════════════════
+
+class _CulturePlaceholder extends StatelessWidget {
+  const _CulturePlaceholder();
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      backgroundColor: AppColors.backgroundPrimary,
+      appBar: AppBar(
+        backgroundColor: AppColors.backgroundPrimary,
+        elevation: 0,
+        title: Text(
+          'Çand — Kültür',
+          style: TextStyle(
+            color: AppColors.textPrimary,
+            fontWeight: FontWeight.w700,
+          ),
+        ),
+      ),
+      body: Center(
+        child: Padding(
+          padding: const EdgeInsets.all(32),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Icon(
+                Icons.music_note_rounded,
+                size: 64,
+                color: AppColors.primary.withOpacity(0.3),
+              ),
+              const SizedBox(height: 16),
+              Text(
+                'Kültürel içerikler hazırlanıyor',
+                style: TextStyle(
+                  fontSize: 18,
+                  fontWeight: FontWeight.w600,
+                  color: AppColors.textPrimary,
+                ),
+                textAlign: TextAlign.center,
+              ),
+              const SizedBox(height: 8),
+              Text(
+                'Atasözleri, türküler, Newroz ve daha fazlası\nyakında burada olacak.',
+                style: TextStyle(
+                  fontSize: 14,
+                  color: AppColors.textSecondary,
+                ),
+                textAlign: TextAlign.center,
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
 }
