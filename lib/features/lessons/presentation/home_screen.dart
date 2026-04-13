@@ -10,6 +10,7 @@ import '../../../core/router/app_router.dart';
 import '../../../core/services/auth_service.dart';
 import '../data/lesson_repository.dart';
 import '../domain/lesson_entities.dart';
+import '../../../shared/widgets/lutke_logo.dart';
 
 // ════════════════════════════════════════════════════════════════
 // ANA SAYFA — İLERLEME HARİTASI
@@ -43,29 +44,7 @@ class HomeScreen extends ConsumerWidget {
               elevation: 0,
               toolbarHeight: 56,
               titleSpacing: AppSpacing.md,
-              title: Row(
-                children: [
-                  Image.asset(
-                    'assets/images/logo_128.png',
-                    width: 36,
-                    height: 36,
-                    errorBuilder: (_, __, ___) => Icon(
-                      Icons.school_rounded,
-                      color: AppColors.primary,
-                      size: 32,
-                    ),
-                  ),
-                  const SizedBox(width: 8),
-                  Text(
-                    'LÛTKE',
-                    style: AppTypography.headingSmall.copyWith(
-                      color: AppColors.primary,
-                      fontWeight: FontWeight.w800,
-                      letterSpacing: 1.5,
-                    ),
-                  ),
-                ],
-              ),
+              title: LutkeLogo.brandHorizontal(iconSize: 32),
             ),
 
             // ── İçerik ───────────────────────────────────────────

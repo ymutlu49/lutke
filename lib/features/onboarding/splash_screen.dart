@@ -7,6 +7,7 @@ import '../../core/constants/app_colors.dart';
 import '../../core/constants/app_typography.dart';
 import '../../core/router/app_router.dart';
 import '../../core/services/auth_service.dart';
+import '../../shared/widgets/lutke_logo.dart';
 
 // ════════════════════════════════════════════════════════════════
 // SPLASH EKRANI — LÛTKE
@@ -54,7 +55,6 @@ class _SplashScreenState extends ConsumerState<SplashScreen> {
   @override
   Widget build(BuildContext context) {
     final screenWidth = MediaQuery.of(context).size.width;
-    final logoSize = (screenWidth * 0.30).clamp(80.0, 160.0);
 
     return Scaffold(
       body: Container(
@@ -75,61 +75,8 @@ class _SplashScreenState extends ConsumerState<SplashScreen> {
 
                 const Spacer(flex: 3),
 
-                // Logo — canlandırmalı giriş
-                Container(
-                  width: logoSize,
-                  height: logoSize,
-                  decoration: BoxDecoration(
-                    color: Colors.white,
-                    shape: BoxShape.circle,
-                    boxShadow: [
-                      BoxShadow(
-                        color: Colors.black.withOpacity(0.1),
-                        blurRadius: 24,
-                        offset: const Offset(0, 8),
-                      ),
-                    ],
-                  ),
-                  padding: EdgeInsets.all(logoSize * 0.11),
-                  child: Image.asset(
-                    'assets/images/logo_512.png',
-                    fit: BoxFit.contain,
-                  ),
-                )
-                    .animate()
-                    .scale(
-                      begin: const Offset(0, 0),
-                      curve: Curves.elasticOut,
-                      duration: 800.ms,
-                    )
-                    .then()
-                    .shimmer(duration: 1200.ms, color: Colors.white30),
-
-                const Spacer(flex: 1),
-
-                // Uygulama adı
-                Text(
-                  'LÛTKE',
-                  style: TextStyle(
-                    fontSize: 40,
-                    fontWeight: FontWeight.w900,
-                    color: Colors.white,
-                    letterSpacing: 6,
-                  ),
-                ).animate().fadeIn(delay: 400.ms, duration: 600.ms),
-
-                const SizedBox(height: 8),
-
-                // Kurmancî alt başlık — İlke §0.5
-                Text(
-                  'Zimanê Kurdî',
-                  style: TextStyle(
-                    fontSize: 18,
-                    fontWeight: FontWeight.w400,
-                    color: Colors.white.withOpacity(0.85),
-                    letterSpacing: 2,
-                  ),
-                ).animate().fadeIn(delay: 600.ms, duration: 600.ms),
+                // Logo — merkezi marka widget'ı
+                LutkeLogo.splash(screenWidth: screenWidth),
 
                 const Spacer(flex: 2),
 

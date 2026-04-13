@@ -163,23 +163,32 @@ class _ProfileHeader extends StatelessWidget {
       ),
       child: Row(
         children: [
-          // Avatar — Logo ile
+          // Avatar — kullanıcı baş harfi
           Container(
             width: 64,
             height: 64,
             decoration: BoxDecoration(
-              color: Colors.white,
+              gradient: LinearGradient(
+                colors: [
+                  AppColors.primary,
+                  AppColors.primary.withOpacity(0.7),
+                ],
+                begin: Alignment.topLeft,
+                end: Alignment.bottomRight,
+              ),
               shape: BoxShape.circle,
-              boxShadow: [
-                BoxShadow(
-                  color: AppColors.primary.withOpacity(0.15),
-                  blurRadius: 12,
-                  offset: const Offset(0, 4),
-                ),
-              ],
             ),
-            padding: const EdgeInsets.all(8),
-            child: Image.asset('assets/images/logo_128.png', fit: BoxFit.contain),
+            child: Center(
+              child: Text(
+                displayName.isNotEmpty ? displayName[0].toUpperCase() : 'H',
+                style: const TextStyle(
+                  fontSize: 28,
+                  fontWeight: FontWeight.w700,
+                  color: Colors.white,
+                  height: 1,
+                ),
+              ),
+            ),
           ),
           const SizedBox(width: AppSpacing.md),
 

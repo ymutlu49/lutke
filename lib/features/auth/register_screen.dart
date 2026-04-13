@@ -9,6 +9,7 @@ import '../../core/constants/app_spacing.dart';
 import '../../core/router/app_router.dart';
 import '../../core/services/auth_service.dart';
 import '../../core/utils/user_segment.dart';
+import '../../shared/widgets/lutke_logo.dart';
 
 // ════════════════════════════════════════════════════════════════
 // KAYIT / GİRİŞ EKRANI — LÛTKE
@@ -417,41 +418,9 @@ class _Header extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        // Logo
-        Container(
-          width: 80,
-          height: 80,
-          decoration: BoxDecoration(
-            color: Colors.white,
-            shape: BoxShape.circle,
-            boxShadow: [
-              BoxShadow(
-                color: AppColors.primary.withOpacity(0.15),
-                blurRadius: 16,
-                offset: const Offset(0, 4),
-              ),
-            ],
-          ),
-          padding: const EdgeInsets.all(12),
-          child: Image.asset('assets/images/logo_128.png', fit: BoxFit.contain),
-        ).animate().scale(
-              begin: const Offset(0, 0),
-              curve: Curves.elasticOut,
-              duration: 500.ms,
-            ),
+        LutkeLogo.brand(iconSize: 72, animated: true),
 
         const SizedBox(height: AppSpacing.md),
-
-        Text(
-          'LÛTKE',
-          style: AppTypography.headingLarge.copyWith(
-            color: AppColors.primary,
-            fontWeight: FontWeight.w900,
-            letterSpacing: 3,
-          ),
-        ),
-
-        const SizedBox(height: 4),
 
         Text(
           isLogin
@@ -459,7 +428,7 @@ class _Header extends StatelessWidget {
               : 'Zimanê xwe vegerîne', // Dilini geri al
           style: AppTypography.bodyMedium
               .copyWith(color: AppColors.textSecondary),
-        ).animate().fadeIn(delay: 200.ms),
+        ).animate().fadeIn(delay: 400.ms, duration: 400.ms),
       ],
     );
   }
