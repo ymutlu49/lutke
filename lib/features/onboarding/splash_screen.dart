@@ -27,136 +27,113 @@ class SplashScreen extends ConsumerStatefulWidget {
 }
 
 class _SplashScreenState extends ConsumerState<SplashScreen> {
-  @override
-  void initState() {
-    super.initState();
-    _navigate();
-  }
-
-  Future<void> _navigate() async {
-    // Splash animasyonu ile paralel olarak onboarding durumunu kontrol et
-    final prefsFuture = SharedPreferences.getInstance();
-    await Future.delayed(2800.ms);
-    if (!mounted) return;
-
-    final prefs = await prefsFuture;
-    final onboardingComplete = prefs.getBool('onboarding_complete') ?? false;
-
-    if (!mounted) return;
-
-    // İlk kullanıcılar welcome flow'a, diğerleri doğrudan home'a
-    if (!onboardingComplete) {
-      context.go(AppRoutes.welcome);
-      return;
-    }
-
-    try {
-      final authState = ref.read(authStateProvider);
-      authState.when(
-        data: (user) {
-          if (user != null) {
-            context.go(AppRoutes.home);
-          } else {
-            context.go(AppRoutes.home); // Firebase yok — doğrudan home
-          }
-        },
-        loading: () => context.go(AppRoutes.home),
-        error: (_, __) => context.go(AppRoutes.home),
-      );
-    } catch (_) {
-      // Firebase hatasında bile home'a git
-      if (mounted) context.go(AppRoutes.home);
-    }
-  }
 
   @override
   Widget build(BuildContext context) {
     final screenWidth = MediaQuery.of(context).size.width;
 
     return Scaffold(
-      body: Center(
-        child: ConstrainedBox(
-          constraints: const BoxConstraints(maxWidth: 480),
+      backgroundColor: AppColors.primaryDark,
+      body: SafeArea(
+        child: Center(
           child: Container(
+            constraints: const BoxConstraints(maxWidth: 480),
             decoration: const BoxDecoration(
               gradient: LinearGradient(
                 begin: Alignment.topCenter,
                 end: Alignment.bottomCenter,
-                colors: [
-                  AppColors.primary,
-                  AppColors.primaryDark,
-                ],
+                colors: [AppColors.primary, AppColors.primaryDark],
               ),
             ),
-            child: SafeArea(
-              child: Center(
-                child: Column(
-                  children: [
+            child: Column(
+              children: [
 
-                    const Spacer(flex: 3),
+                const Spacer(flex: 3),
 
-                    // Logo — merkezi marka widget'ı
-                    LutkeLogo.splash(screenWidth: screenWidth),
+                // Logo
+                LutkeLogo.splash(screenWidth: screenWidth > 480 ? 480 : screenWidth),
 
-                    const Spacer(flex: 2),
+                const Spacer(flex: 1),
 
-                    // Hoş geldin mesajı — Kurmancî (İlke §0.5, §2)
-                    Text(
-                      'Xêr hatî.',
-                      style: TextStyle(
-                        fontSize: 22,
-                        fontWeight: FontWeight.w600,
-                        color: Colors.white.withOpacity(0.9),
-                        fontStyle: FontStyle.italic,
-                      ),
-                    )
-                        .animate()
-                        .fadeIn(delay: 1200.ms, duration: 800.ms)
-                        .slideY(begin: 0.3, curve: Curves.easeOut),
+                // Xêr hatî
+                Text('Xêr hatî.',
+                  style: TextStyle(fontSize: 22, fontWeight: FontWeight.w600,
+                    color: Colors.white.withOpacity(0.9), fontStyle: FontStyle.italic),
+                ).animate().fadeIn(delay: 1200.ms, duration: 800.ms)
+                    .slideY(begin: 0.3, curve: Curves.easeOut),
 
-                    const SizedBox(height: 8),
+                const SizedBox(height: 8),
 
-                    if (ref.watch(showTurkishProvider))
-                      Text(
-                        'Bi xêr hatî — Welcome',
-                        style: TextStyle(
-                          fontSize: 13,
-                          color: Colors.white.withOpacity(0.6),
+                if (ref.watch(showTurkishProvider))
+                  Text('Bi xêr hatî — Welcome',
+                    style: TextStyle(fontSize: 13, color: Colors.white.withOpacity(0.6)),
+                  ).animate().fadeIn(delay: 1600.ms, duration: 600.ms),
+
+                const Spacer(flex: 2),
+
+                // Giriş butonları
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 32),
+                  child: Column(
+                    children: [
+                      // Ana giriş butonu
+                      SizedBox(
+                        width: double.infinity,
+                        height: 52,
+                        child: ElevatedButton(
+                          onPressed: () => _navigateTo(AppRoutes.home),
+                          style: ElevatedButton.styleFrom(
+                            backgroundColor: Colors.white,
+                            foregroundColor: AppColors.primary,
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(16)),
+                            elevation: 0,
+                          ),
+                          child: const Text('Dest pê bike',
+                            style: TextStyle(fontSize: 16, fontWeight: FontWeight.w700)),
                         ),
-                      ).animate().fadeIn(delay: 1600.ms, duration: 600.ms),
+                      ).animate().fadeIn(delay: 1800.ms).slideY(begin: 0.2),
 
-                    const Spacer(flex: 2),
+                      const SizedBox(height: 12),
 
-                    // Yükleniyor göstergesi
-                    SizedBox(
-                      width: 32,
-                      height: 32,
-                      child: CircularProgressIndicator(
-                        strokeWidth: 2.5,
-                        color: Colors.white.withOpacity(0.6),
-                      ),
-                    ).animate().fadeIn(delay: 2000.ms),
-
-                    const Spacer(flex: 1),
-
-                    // Çêker bilgisi
-                    Text(
-                      'Çêker: Prof. Dr. Yılmaz Mutlu',
-                      style: TextStyle(
-                        fontSize: 12,
-                        color: Colors.white.withOpacity(0.4),
-                        letterSpacing: 0.5,
-                      ),
-                    ).animate().fadeIn(delay: 2200.ms, duration: 600.ms),
-
-                    const SizedBox(height: 24),
-                  ],
+                      // Hesap giriş
+                      SizedBox(
+                        width: double.infinity,
+                        height: 48,
+                        child: OutlinedButton(
+                          onPressed: () => _navigateTo(AppRoutes.register),
+                          style: OutlinedButton.styleFrom(
+                            foregroundColor: Colors.white,
+                            side: BorderSide(color: Colors.white.withOpacity(0.4)),
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(16)),
+                          ),
+                          child: const Text('Têketin / Tomarkirin',
+                            style: TextStyle(fontSize: 14, fontWeight: FontWeight.w500)),
+                        ),
+                      ).animate().fadeIn(delay: 2000.ms).slideY(begin: 0.2),
+                    ],
+                  ),
                 ),
-              ),
+
+                const Spacer(flex: 1),
+
+                // Çêker bilgisi
+                Text('Çêker: Prof. Dr. Yılmaz Mutlu',
+                  style: TextStyle(fontSize: 12, color: Colors.white.withOpacity(0.4),
+                    letterSpacing: 0.5),
+                ).animate().fadeIn(delay: 2200.ms, duration: 600.ms),
+
+                const SizedBox(height: 24),
+              ],
             ),
           ),
         ),
       ),
     );
+  }
+
+  void _navigateTo(String route) {
+    context.go(route);
   }
 }
