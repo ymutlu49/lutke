@@ -71,16 +71,9 @@ class ParentalControlsScreen extends ConsumerWidget {
             SizedBox(
               width: double.infinity,
               child: OutlinedButton.icon(
-                onPressed: () async {
-                  await ref
-                      .read(isChildModeProvider.notifier)
-                      .setChildMode(false);
-                  if (context.mounted) {
-                    context.go(AppRoutes.home);
-                  }
-                },
+                onPressed: () => context.go(AppRoutes.modeSelect),
                 icon: const Icon(Icons.swap_horiz_rounded),
-                label: const Text('Yetişkin Moduna Geç'),
+                label: const Text('Modê biguherîne'),
               ),
             ),
 

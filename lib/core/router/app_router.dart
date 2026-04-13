@@ -30,6 +30,7 @@ import '../../features/grammar/grammar_tips_screen.dart';
 import '../../features/exercises/presentation/smart_review_screen.dart';
 import '../../features/lessons/presentation/progress_map_screen.dart';
 import '../../features/exercises/presentation/listening_screen.dart';
+import '../../features/child_mode/presentation/mode_selection_screen.dart';
 import '../../features/child_mode/presentation/child_home_screen.dart';
 import '../../features/child_mode/presentation/child_vocabulary_screen.dart';
 import '../../features/child_mode/presentation/child_profile_screen.dart';
@@ -55,6 +56,7 @@ abstract class AppRoutes {
   static const firstLesson      = '/onboarding/first-lesson';
   static const register         = '/auth/register';
   static const login            = '/auth/login';
+  static const modeSelect       = '/mode-select';
   static const home             = '/home';
   static const vocabulary       = '/vocabulary';
   static const culture          = '/culture';
@@ -107,7 +109,7 @@ GoRouter appRouter(AppRouterRef ref) {
       final isOnWelcome = state.matchedLocation == AppRoutes.welcome;
 
       if (isOnSplash || isOnWelcome) return null;
-      if (isLoggedIn && isOnAuth) return AppRoutes.home;
+      if (isLoggedIn && isOnAuth) return AppRoutes.modeSelect;
       return null;
     },
 
@@ -116,6 +118,10 @@ GoRouter appRouter(AppRouterRef ref) {
       GoRoute(
         path: AppRoutes.splash,
         builder: (_, __) => const SplashScreen(),
+      ),
+      GoRoute(
+        path: AppRoutes.modeSelect,
+        builder: (_, __) => const ModeSelectionScreen(),
       ),
       GoRoute(
         path: AppRoutes.welcome,

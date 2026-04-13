@@ -1761,11 +1761,11 @@ class _AccountActions extends StatelessWidget {
 
         if (isAnonymous) const SizedBox(height: AppSpacing.sm),
 
-        // Lûtke Zarok — Çocuk Modu
+        // Mod Değiştir (Yetişkin ↔ Çocuk)
         OutlinedButton.icon(
-          onPressed: () => context.go(AppRoutes.childOnboarding),
-          icon: const Text('🐐', style: TextStyle(fontSize: 18)),
-          label: const Text('Lûtke Zarok — Moda Zarokan'),
+          onPressed: () => context.go(AppRoutes.modeSelect),
+          icon: const Icon(Icons.swap_horiz_rounded, size: 20),
+          label: const Text('Modê biguherîne'),
           style: OutlinedButton.styleFrom(
             minimumSize: const Size(double.infinity, 52),
             side: const BorderSide(color: AppColors.primary),

@@ -97,7 +97,7 @@ class SplashScreen extends ConsumerWidget {
                     width: double.infinity,
                     height: 56,
                     child: ElevatedButton.icon(
-                      onPressed: () => context.go(AppRoutes.home),
+                      onPressed: () => context.go(AppRoutes.modeSelect),
                       icon: const Icon(Icons.play_arrow_rounded, size: 24),
                       label: Text('Fêrbûnê dest pê bike',
                         style: TextStyle(fontSize: 17, fontWeight: FontWeight.w700)),
@@ -123,22 +123,6 @@ class SplashScreen extends ConsumerWidget {
                       style: TextStyle(fontSize: 13)),
                   ).animate().fadeIn(delay: 1200.ms),
 
-                  const SizedBox(height: 8),
-
-                  // ── Lûtke Zarok (Çocuk Modu) ─────────────────
-                  OutlinedButton.icon(
-                    onPressed: () => context.go(AppRoutes.childOnboarding),
-                    icon: const Text('🐐', style: TextStyle(fontSize: 18)),
-                    label: const Text('Lûtke Zarok',
-                      style: TextStyle(fontSize: 14, fontWeight: FontWeight.w600)),
-                    style: OutlinedButton.styleFrom(
-                      foregroundColor: Colors.white,
-                      side: BorderSide(color: Colors.white.withOpacity(0.4)),
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(14)),
-                      padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 10),
-                    ),
-                  ).animate().fadeIn(delay: 1300.ms),
 
                   const Spacer(flex: 1),
 
