@@ -8,16 +8,20 @@ import '../../features/auth/register_screen.dart';
 import '../../features/lessons/presentation/home_screen.dart';
 import '../../features/lessons/presentation/lesson_screen.dart';
 import '../../features/lessons/presentation/vocabulary_browse_screen.dart';
+import '../../features/lessons/presentation/word_detail_screen.dart';
 import '../../features/onboarding/splash_screen.dart';
 import '../../features/onboarding/passive_test_screen.dart';
 import '../../features/onboarding/motivation_anchor_screen.dart';
 import '../../features/onboarding/onboarding_screens.dart';
 import '../../features/onboarding/first_lesson_screen.dart';
+import '../../features/onboarding/welcome_flow_screen.dart';
 import '../../features/profile/profile_screen.dart';
 import '../constants/app_colors.dart';
 import '../constants/app_typography.dart';
 import '../services/auth_service.dart';
-import '../../features/cultural_content/cultural_entities.dart';
+import '../../features/cultural_content/culture_screen.dart';
+import '../../features/exercises/presentation/flashcard_screen.dart';
+import '../../features/exercises/presentation/quiz_screen.dart';
 
 part 'app_router.g.dart';
 
@@ -41,7 +45,11 @@ abstract class AppRoutes {
   static const profile          = '/profile';
   static const lesson           = '/lesson';
   static const settings         = '/settings';
+  static const welcome          = '/welcome';
   static const admin            = '/admin';
+  static const wordDetail       = '/word-detail';
+  static const flashcard        = '/flashcard';
+  static const quiz             = '/quiz';
 }
 
 // ════════════════════════════════════════════════════════════════
@@ -64,8 +72,9 @@ GoRouter appRouter(AppRouterRef ref) {
       final isLoggedIn = authState.value != null;
       final isOnAuth = state.matchedLocation.startsWith('/auth');
       final isOnSplash = state.matchedLocation == AppRoutes.splash;
+      final isOnWelcome = state.matchedLocation == AppRoutes.welcome;
 
-      if (isOnSplash) return null;
+      if (isOnSplash || isOnWelcome) return null;
       if (isLoggedIn && isOnAuth) return AppRoutes.home;
       return null;
     },
@@ -75,6 +84,10 @@ GoRouter appRouter(AppRouterRef ref) {
       GoRoute(
         path: AppRoutes.splash,
         builder: (_, __) => const SplashScreen(),
+      ),
+      GoRoute(
+        path: AppRoutes.welcome,
+        builder: (_, __) => const WelcomeFlowScreen(),
       ),
       GoRoute(
         path: AppRoutes.passiveTest,
@@ -138,7 +151,7 @@ GoRouter appRouter(AppRouterRef ref) {
             routes: [
               GoRoute(
                 path: AppRoutes.culture,
-                builder: (_, __) => const _CulturePlaceholder(),
+                builder: (_, __) => const CultureScreen(),
               ),
             ],
           ),
@@ -174,6 +187,28 @@ GoRouter appRouter(AppRouterRef ref) {
       GoRoute(
         path: AppRoutes.settings,
         builder: (_, __) => const SettingsScreen(),
+      ),
+      GoRoute(
+        path: AppRoutes.wordDetail,
+        builder: (_, state) {
+          final extra = state.extra as Map<String, dynamic>;
+          return WordDetailScreen(
+            word: extra['word'],
+            levelColor: extra['levelColor'] as Color? ?? AppColors.primary,
+          );
+        },
+      ),
+      GoRoute(
+        path: AppRoutes.flashcard,
+        builder: (_, __) => const FlashcardScreen(),
+      ),
+      GoRoute(
+        path: AppRoutes.quiz,
+        builder: (_, state) {
+          final extra = state.extra as Map<String, dynamic>?;
+          final level = extra?['level'] as String? ?? 'A1';
+          return QuizScreen(level: level);
+        },
       ),
     ],
 
@@ -316,185 +351,6 @@ class _Tab extends StatelessWidget {
 }
 
 // ════════════════════════════════════════════════════════════════
-// KÜLTÜR PLACEHOLDER
+// KÜLTÜR EKRANI -> culture_screen.dart'a taşındı
 // ════════════════════════════════════════════════════════════════
 
-class _CulturePlaceholder extends StatelessWidget {
-  const _CulturePlaceholder();
-
-  @override
-  Widget build(BuildContext context) {
-    final items = kCulturalItems;
-
-    return Scaffold(
-      backgroundColor: AppColors.backgroundPrimary,
-      appBar: AppBar(
-        backgroundColor: AppColors.backgroundPrimary,
-        elevation: 0,
-        title: Row(
-          children: [
-            ClipOval(child: Image.asset('assets/images/logo_128.png', width: 44, height: 44, fit: BoxFit.cover,
-              filterQuality: FilterQuality.medium)),
-            const SizedBox(width: 10),
-            Text('Çand — Kültür',
-              style: TextStyle(
-                color: AppColors.textPrimary,
-                fontWeight: FontWeight.w700)),
-          ],
-        ),
-        actions: [
-          Padding(
-            padding: const EdgeInsets.only(right: 16),
-            child: Center(
-              child: Text('${items.length} içerik',
-                style: TextStyle(fontSize: 13, color: AppColors.textSecondary)),
-            ),
-          ),
-        ],
-      ),
-      body: ListView.builder(
-        padding: const EdgeInsets.all(16),
-        itemCount: items.length,
-        itemBuilder: (context, index) {
-          final item = items[index];
-          return _CultureCard(item: item);
-        },
-      ),
-    );
-  }
-}
-
-class _CultureCard extends StatefulWidget {
-  final CulturalItem item;
-  const _CultureCard({required this.item});
-
-  @override
-  State<_CultureCard> createState() => _CultureCardState();
-}
-
-class _CultureCardState extends State<_CultureCard> {
-  bool _expanded = false;
-
-  IconData _typeIcon(CulturalContentType type) => switch (type) {
-    CulturalContentType.proverb => Icons.format_quote_rounded,
-    CulturalContentType.song => Icons.music_note_rounded,
-    CulturalContentType.celebration => Icons.celebration_rounded,
-    CulturalContentType.poem => Icons.auto_stories_rounded,
-    CulturalContentType.story => Icons.menu_book_rounded,
-    CulturalContentType.foodTradition => Icons.restaurant_rounded,
-    CulturalContentType.culturalNote => Icons.info_outline_rounded,
-  };
-
-  Color _typeColor(CulturalContentType type) => switch (type) {
-    CulturalContentType.proverb => const Color(0xFF4CAF50),
-    CulturalContentType.song => const Color(0xFFE91E63),
-    CulturalContentType.celebration => const Color(0xFFFF9800),
-    CulturalContentType.poem => const Color(0xFF9C27B0),
-    CulturalContentType.story => const Color(0xFF2196F3),
-    CulturalContentType.foodTradition => const Color(0xFF795548),
-    CulturalContentType.culturalNote => const Color(0xFF607D8B),
-  };
-
-  @override
-  Widget build(BuildContext context) {
-    final item = widget.item;
-    final color = _typeColor(item.type);
-
-    return Card(
-      margin: const EdgeInsets.only(bottom: 12),
-      elevation: 0,
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(16),
-        side: BorderSide(color: color.withOpacity(0.15)),
-      ),
-      child: InkWell(
-        borderRadius: BorderRadius.circular(16),
-        onTap: () => setState(() => _expanded = !_expanded),
-        child: Padding(
-          padding: const EdgeInsets.all(16),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Row(
-                children: [
-                  Container(
-                    width: 40, height: 40,
-                    decoration: BoxDecoration(
-                      color: color.withOpacity(0.1),
-                      borderRadius: BorderRadius.circular(12),
-                    ),
-                    child: Icon(_typeIcon(item.type), color: color, size: 22),
-                  ),
-                  const SizedBox(width: 12),
-                  Expanded(
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(item.kurmanjTitle,
-                          style: const TextStyle(fontSize: 15, fontWeight: FontWeight.w700)),
-                        const SizedBox(height: 2),
-                        Text(item.turkishTitle,
-                          style: TextStyle(fontSize: 13, color: AppColors.textSecondary)),
-                      ],
-                    ),
-                  ),
-                  Icon(_expanded ? Icons.expand_less : Icons.expand_more,
-                    color: AppColors.textSecondary),
-                ],
-              ),
-
-              if (_expanded) ...[
-                const SizedBox(height: 12),
-                const Divider(height: 1),
-                const SizedBox(height: 12),
-
-                // Kurmancî içerik
-                Text(item.kurmanjContent,
-                  style: const TextStyle(fontSize: 14, height: 1.6)),
-
-                const SizedBox(height: 12),
-
-                // Türkçe içerik
-                Container(
-                  padding: const EdgeInsets.all(12),
-                  decoration: BoxDecoration(
-                    color: AppColors.backgroundSecondary,
-                    borderRadius: BorderRadius.circular(12),
-                  ),
-                  child: Text(item.turkishContent,
-                    style: TextStyle(fontSize: 13, height: 1.5,
-                      color: AppColors.textSecondary)),
-                ),
-
-                if (item.backgroundNote != null) ...[
-                  const SizedBox(height: 8),
-                  Text('📝 ${item.backgroundNote!}',
-                    style: TextStyle(fontSize: 12, color: AppColors.textSecondary,
-                      fontStyle: FontStyle.italic)),
-                ],
-
-                const SizedBox(height: 8),
-                Row(
-                  children: [
-                    Container(
-                      padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 3),
-                      decoration: BoxDecoration(
-                        color: color.withOpacity(0.1),
-                        borderRadius: BorderRadius.circular(8),
-                      ),
-                      child: Text(item.typeLabel,
-                        style: TextStyle(fontSize: 11, color: color, fontWeight: FontWeight.w600)),
-                    ),
-                    const SizedBox(width: 8),
-                    Text('Seviye ${item.level}',
-                      style: TextStyle(fontSize: 11, color: AppColors.textSecondary)),
-                  ],
-                ),
-              ],
-            ],
-          ),
-        ),
-      ),
-    );
-  }
-}

@@ -1,3 +1,5 @@
+import 'dart:math' as math;
+
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -10,7 +12,10 @@ import '../../../core/router/app_router.dart';
 import '../../../core/services/auth_service.dart';
 import '../data/lesson_repository.dart';
 import '../domain/lesson_entities.dart';
+import '../domain/a1_kelime_db.dart';
 import '../../../shared/widgets/lutke_logo.dart';
+import '../../../shared/widgets/streak_widget.dart';
+import '../../gamification/gamification_widgets.dart';
 
 // ════════════════════════════════════════════════════════════════
 // ANA SAYFA — İLERLEME HARİTASI
@@ -34,7 +39,9 @@ class HomeScreen extends ConsumerWidget {
     return Scaffold(
       backgroundColor: AppColors.backgroundPrimary,
       // Bottom nav artık shell'de — burada kaldırıldı
-      body: SafeArea(
+      body: Stack(
+        children: [
+          SafeArea(
         child: CustomScrollView(
           slivers: [
             // ── Üst Bar ──────────────────────────────────────────
@@ -62,12 +69,32 @@ class HomeScreen extends ConsumerWidget {
 
                   const SizedBox(height: AppSpacing.sm),
 
+                  // ── XP İlerleme Çubuğu ──────────────────────
+                  const XPProgressBar(compact: true),
+
+                  const SizedBox(height: AppSpacing.sm),
+
+                  // ── Günlük Ödül ─────────────────────────────
+                  const DailyRewardWidget(),
+
+                  const SizedBox(height: AppSpacing.sm),
+
+                  // ── Streak & Günlük Hedef Kartı ──────────────
+                  const CompactStreakCard(),
+
+                  const SizedBox(height: AppSpacing.sm),
+
                   // ── Günlük özet kartı ─────────────────────────
                   dailyStats.when(
                     data: (stats) => _DailySummaryCard(stats: stats, level: profile.currentLevel.toUpperCase()),
                     loading: () => _DailySummaryCard(stats: null, level: profile.currentLevel.toUpperCase()),
                     error: (_, __) => _DailySummaryCard(stats: null, level: profile.currentLevel.toUpperCase()),
                   ),
+
+                  const SizedBox(height: AppSpacing.lg),
+
+                  // ── Quiz Butonu — Ders Bide! ─────────────────
+                  const _StartQuizButton(),
 
                   const SizedBox(height: AppSpacing.lg),
 
@@ -90,6 +117,11 @@ class HomeScreen extends ConsumerWidget {
                     error: (_, __) => const _DailyReviewButton(dueCount: 0, userId: ''),
                   ),
 
+                  const SizedBox(height: AppSpacing.md),
+
+                  // Flashcard hızlı erişim butonu
+                  _FlashcardQuickAction(),
+
                   const SizedBox(height: AppSpacing.lg),
 
                   // Seviye ilerleme kartı
@@ -101,8 +133,8 @@ class HomeScreen extends ConsumerWidget {
 
                   const SizedBox(height: AppSpacing.lg),
 
-                  // Birim haritası
-                  _UnitMapSection(
+                  // Skill Tree — Duolingo benzeri ogrenme yolu
+                  _SkillTreePath(
                     userId: userId,
                     currentLevel: profile.currentLevelNum,
                     ref: ref,
@@ -114,6 +146,15 @@ class HomeScreen extends ConsumerWidget {
             ),
           ],
         ),
+      ),
+
+          // ── Gamification Overlay'ler ────────────────────────
+          // Level-up kutlaması
+          const LevelUpCelebrationOverlay(),
+
+          // Rozet kazanımı
+          const BadgeEarnedOverlay(),
+        ],
       ),
     );
   }
@@ -576,6 +617,83 @@ class _DailyReviewButton extends StatelessWidget {
 }
 
 // ════════════════════════════════════════════════════════════════
+// FLASHCARD HIZLI ERİŞİM BUTONU
+// ════════════════════════════════════════════════════════════════
+
+class _FlashcardQuickAction extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return GestureDetector(
+      onTap: () => context.push(AppRoutes.flashcard),
+      child: Container(
+        padding: const EdgeInsets.all(AppSpacing.md),
+        decoration: BoxDecoration(
+          color: AppColors.surface,
+          borderRadius: BorderRadius.circular(20),
+          border: Border.all(
+            color: AppColors.accent.withOpacity(0.2),
+          ),
+          boxShadow: [
+            BoxShadow(
+              color: AppColors.accent.withOpacity(0.08),
+              blurRadius: 12,
+              offset: const Offset(0, 4),
+            ),
+          ],
+        ),
+        child: Row(
+          children: [
+            Container(
+              width: 48,
+              height: 48,
+              decoration: BoxDecoration(
+                gradient: LinearGradient(
+                  colors: [AppColors.accent, AppColors.accentWarm],
+                  begin: Alignment.topLeft,
+                  end: Alignment.bottomRight,
+                ),
+                borderRadius: BorderRadius.circular(14),
+              ),
+              child: const Icon(
+                Icons.style_rounded,
+                color: Colors.white,
+                size: 24,
+              ),
+            ),
+            const SizedBox(width: AppSpacing.md),
+            Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    'Flashcard',
+                    style: AppTypography.labelLarge.copyWith(
+                      color: AppColors.textPrimary,
+                      fontWeight: FontWeight.w700,
+                    ),
+                  ),
+                  Text(
+                    'Peyvan bi swipe fêr bibe',
+                    style: AppTypography.caption.copyWith(
+                      color: AppColors.textSecondary,
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            Icon(
+              Icons.arrow_forward_ios,
+              size: 14,
+              color: AppColors.accent.withOpacity(0.6),
+            ),
+          ],
+        ),
+      ),
+    ).animate().fadeIn(delay: 220.ms).slideX(begin: 0.05);
+  }
+}
+
+// ════════════════════════════════════════════════════════════════
 // SEVİYE İLERLEME KARTI
 // ════════════════════════════════════════════════════════════════
 
@@ -662,16 +780,104 @@ class _LevelProgressCard extends StatelessWidget {
 }
 
 // ════════════════════════════════════════════════════════════════
-// BİRİM HARİTASI
+// SKILL TREE UNIT MODELİ
+// A1 kelime DB'sinden kategorilere göre birim oluşturur
+// ════════════════════════════════════════════════════════════════
+
+class _SkillTreeUnit {
+  final String id;
+  final String katKey;
+  final String kuTitle;
+  final String trTitle;
+  final IconData icon;
+  final int wordCount;
+  final int unitIndex;
+
+  const _SkillTreeUnit({
+    required this.id,
+    required this.katKey,
+    required this.kuTitle,
+    required this.trTitle,
+    required this.icon,
+    required this.wordCount,
+    required this.unitIndex,
+  });
+}
+
+/// A1 kelime DB'sindeki kategorilerden birim listesi oluşturur.
+/// Sıralama müfredata uygun.
+List<_SkillTreeUnit> _buildA1SkillUnits() {
+  // Kategori -> kelime sayısı haritası
+  final catCounts = <String, int>{};
+  for (final k in kA1TamKelimeler) {
+    catCounts[k.kat] = (catCounts[k.kat] ?? 0) + 1;
+  }
+
+  // Müfredat sırasına göre birimler
+  const unitDefs = <(String kat, String ku, String tr, IconData icon)>[
+    ('alfabe',    'Alfabe',            'Alfabe ve Sesler',       Icons.text_fields_rounded),
+    ('selamlama', 'Silav',             'Selamlama',              Icons.waving_hand_rounded),
+    ('jimar',     'Jimar',             'Sayilar',                Icons.tag_rounded),
+    ('reng',      'Reng',              'Renkler',                Icons.palette_rounded),
+    ('malbat',    'Malbat',            'Aile',                   Icons.family_restroom_rounded),
+    ('cinavk',    'Cinavk',            'Zamirler',               Icons.person_rounded),
+    ('pise',      'Pise',              'Meslekler',              Icons.work_rounded),
+    ('perwerde',  'Perwerde',          'Egitim',                 Icons.school_rounded),
+    ('dem',       'Dem',               'Zaman',                  Icons.access_time_rounded),
+    ('roj',       'Roj',               'Gunler',                 Icons.calendar_today_rounded),
+    ('demsal',    'Demsal',            'Mevsimler',              Icons.wb_sunny_rounded),
+    ('xwarin',    'Xwarin',            'Yemek',                  Icons.restaurant_rounded),
+    ('vexwarin',  'Vexwarin',          'Icecek',                 Icons.local_cafe_rounded),
+    ('mêwe',      'Mêwe',              'Meyve',                  Icons.eco_rounded),
+    ('beden',     'Beden',             'Beden',                  Icons.accessibility_new_rounded),
+    ('tendurist', 'Tendurist',         'Saglik',                 Icons.health_and_safety_rounded),
+    ('mal',       'Mal',               'Ev ve Mekan',            Icons.home_rounded),
+    ('cih',       'Cih',               'Yer ve Mekan',           Icons.location_on_rounded),
+    ('rengder',   'Rengder',           'Sifatlar',               Icons.format_color_text_rounded),
+    ('temel',     'Peyvên Bingehîn',  'Temel Kelimeler',        Icons.auto_stories_rounded),
+    ('leker',     'Leker',             'Fiiller',                Icons.directions_run_rounded),
+    ('xweza',     'Xweza',             'Doga',                   Icons.park_rounded),
+    ('heywan',    'Heywan',            'Hayvanlar',              Icons.pets_rounded),
+    ('cil',       'Cil',               'Giysiler',               Icons.dry_cleaning_rounded),
+    ('daçek',     'Daçek',             'Edatlar',                Icons.compare_arrows_rounded),
+    ('pirs',      'Pirs',              'Sorular',                Icons.help_outline_rounded),
+    ('silav',     'Axaftin',           'Gunluk Konusmalar',      Icons.chat_rounded),
+    ('gihanî',    'Gihanî',            'Ulasim',                 Icons.directions_bus_rounded),
+    ('peyvben',   'Peyvên Bêhnvedanê', 'Duygular',              Icons.sentiment_satisfied_rounded),
+    ('bun',       'Bûn',               'Olmak Fiili',            Icons.lightbulb_rounded),
+    ('çand',      'Çand',              'Kultur',                 Icons.museum_rounded),
+    ('dua',       'Dua',               'Dua ve Dilekler',        Icons.volunteer_activism_rounded),
+  ];
+
+  final units = <_SkillTreeUnit>[];
+  for (var i = 0; i < unitDefs.length; i++) {
+    final (kat, ku, tr, icon) = unitDefs[i];
+    final count = catCounts[kat];
+    if (count == null || count == 0) continue;
+    units.add(_SkillTreeUnit(
+      id: 'unit_$kat',
+      katKey: kat,
+      kuTitle: ku,
+      trTitle: tr,
+      icon: icon,
+      wordCount: count,
+      unitIndex: units.length,
+    ));
+  }
+  return units;
+}
+
+// ════════════════════════════════════════════════════════════════
+// SKILL TREE PATH — Duolingo benzeri kıvrımlı yol
 // İlke §7.1: Heritage / Genel yol; §2: İlişki senaryoları
 // ════════════════════════════════════════════════════════════════
 
-class _UnitMapSection extends StatelessWidget {
+class _SkillTreePath extends StatelessWidget {
   final String userId;
   final int currentLevel;
   final WidgetRef ref;
 
-  const _UnitMapSection({
+  const _SkillTreePath({
     required this.userId,
     required this.currentLevel,
     required this.ref,
@@ -679,144 +885,334 @@ class _UnitMapSection extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final lessons = ref.watch(levelLessonsProvider(currentLevel));
+    final units = _buildA1SkillUnits();
+    // Simülasyon: ilk 2 birim tamamlanmis, 3. birim aktif, geri kalan kilitli
+    // Gercek uygulamada completedLessons provider'dan alinir
+    const completedCount = 2;
+    const currentIndex = 2;
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Padding(
           padding: const EdgeInsets.only(bottom: AppSpacing.md),
-          child: Text(
-            'Waneyên te', // Derslerim
-            style: AppTypography.headingSmall.copyWith(
-                color: AppColors.textPrimary, fontWeight: FontWeight.w700),
+          child: Row(
+            children: [
+              Icon(Icons.route_rounded, size: 22, color: AppColors.primary),
+              const SizedBox(width: AppSpacing.sm),
+              Text(
+                'Reya Ferbune', // Ogrenme Yolu
+                style: AppTypography.headingSmall.copyWith(
+                    color: AppColors.textPrimary, fontWeight: FontWeight.w700),
+              ),
+            ],
           ),
         ),
 
-        // Ders kartları — birim haritası
-        ...lessons.take(12).toList().asMap().entries.map((entry) {
+        // Skill tree nodelari
+        ...units.asMap().entries.map((entry) {
           final i = entry.key;
-          final lesson = entry.value;
-          return _LessonCard(
-            lesson: lesson,
-            index: i,
-            isUnlocked: true, // Tüm dersler açık — kelime tarayıcıya yönlendirir
-            onTap: () => context.push(AppRoutes.vocabulary),
-          ).animate().fadeIn(delay: (300 + i * 50).ms);
-        }),
+          final unit = entry.value;
 
-        if (lessons.length > 12)
-          Padding(
-            padding: const EdgeInsets.only(top: AppSpacing.md),
-            child: Center(
-              child: TextButton.icon(
-                onPressed: () {},
-                icon: const Icon(Icons.grid_view_rounded, size: 18),
-                label: const Text('Hemû waneyan nîşan bide'),
-                style: TextButton.styleFrom(
-                    foregroundColor: AppColors.primary),
-              ),
-            ),
-          ),
+          final isCompleted = i < completedCount;
+          final isCurrent = i == currentIndex;
+          final isLocked = i > currentIndex;
+
+          return _SkillTreeNode(
+            unit: unit,
+            index: i,
+            totalCount: units.length,
+            isCompleted: isCompleted,
+            isCurrent: isCurrent,
+            isLocked: isLocked,
+            onTap: !isLocked
+                ? () => context.push(AppRoutes.vocabulary)
+                : null,
+          );
+        }),
       ],
     );
   }
 }
 
-class _LessonCard extends StatelessWidget {
-  final LessonModel lesson;
-  final int index;
-  final bool isUnlocked;
-  final VoidCallback onTap;
+// ════════════════════════════════════════════════════════════════
+// SKILL TREE NODE — Tek bir birim dugumu
+// ════════════════════════════════════════════════════════════════
 
-  const _LessonCard({
-    required this.lesson,
+class _SkillTreeNode extends StatelessWidget {
+  final _SkillTreeUnit unit;
+  final int index;
+  final int totalCount;
+  final bool isCompleted;
+  final bool isCurrent;
+  final bool isLocked;
+  final VoidCallback? onTap;
+
+  const _SkillTreeNode({
+    required this.unit,
     required this.index,
-    required this.isUnlocked,
-    required this.onTap,
+    required this.totalCount,
+    required this.isCompleted,
+    required this.isCurrent,
+    required this.isLocked,
+    this.onTap,
+  });
+
+  // Zigzag pattern: saga ve sola sirayla kaydir
+  Alignment _nodeAlignment() {
+    // Her 2 satirda bir yon degistir (Duolingo pattern)
+    final cycle = index % 4;
+    switch (cycle) {
+      case 0: return Alignment.center;
+      case 1: return const Alignment(0.55, 0);
+      case 2: return Alignment.center;
+      case 3: return const Alignment(-0.55, 0);
+      default: return Alignment.center;
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final alignment = _nodeAlignment();
+    final isLast = index == totalCount - 1;
+
+    // Node boyutlari
+    final nodeSize = isCurrent ? 76.0 : 64.0;
+
+    // Renkler
+    final nodeColor = isCompleted
+        ? AppColors.success
+        : isCurrent
+            ? AppColors.primary
+            : AppColors.backgroundTertiary;
+
+    final borderColor = isCompleted
+        ? AppColors.success
+        : isCurrent
+            ? AppColors.primaryDark
+            : AppColors.border;
+
+    final iconColor = isCompleted || isCurrent
+        ? Colors.white
+        : AppColors.textTertiary;
+
+    final textColor = isLocked
+        ? AppColors.textTertiary
+        : AppColors.textPrimary;
+
+    return Column(
+      children: [
+        // Baglanti cizgisi (ilk node haric)
+        if (index > 0)
+          _PathConnector(
+            fromAlignment: _prevAlignment(),
+            toAlignment: alignment,
+            isCompleted: isCompleted || isCurrent,
+          ),
+
+        // Node
+        Align(
+          alignment: alignment,
+          child: GestureDetector(
+            onTap: onTap,
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                // Ana daire
+                _buildNodeCircle(nodeSize, nodeColor, borderColor, iconColor),
+
+                const SizedBox(height: 6),
+
+                // Baslik
+                Text(
+                  unit.kuTitle,
+                  style: AppTypography.labelMedium.copyWith(
+                    color: textColor,
+                    fontWeight: isCurrent ? FontWeight.w700 : FontWeight.w600,
+                  ),
+                  textAlign: TextAlign.center,
+                ),
+
+                // Alt baslik + kelime sayisi
+                Text(
+                  '${unit.trTitle} · ${unit.wordCount} peyv',
+                  style: AppTypography.caption.copyWith(
+                    color: AppColors.textTertiary,
+                    fontSize: 10,
+                  ),
+                  textAlign: TextAlign.center,
+                ),
+              ],
+            ),
+          ).animate().fadeIn(delay: (200 + index * 60).ms, duration: 350.ms)
+              .slideY(begin: 0.15, duration: 350.ms, curve: Curves.easeOut),
+        ),
+
+        // Son node'dan sonra bosluk
+        if (isLast) const SizedBox(height: AppSpacing.md),
+      ],
+    );
+  }
+
+  Widget _buildNodeCircle(
+      double size, Color color, Color border, Color iconColor) {
+    final circle = Container(
+      width: size,
+      height: size,
+      decoration: BoxDecoration(
+        shape: BoxShape.circle,
+        color: color,
+        border: Border.all(color: border, width: isCurrent ? 3.5 : 2.5),
+        boxShadow: [
+          if (isCurrent)
+            BoxShadow(
+              color: AppColors.primary.withOpacity(0.35),
+              blurRadius: 18,
+              spreadRadius: 2,
+            ),
+          if (isCompleted)
+            BoxShadow(
+              color: AppColors.success.withOpacity(0.25),
+              blurRadius: 10,
+              spreadRadius: 1,
+            ),
+          if (!isLocked)
+            BoxShadow(
+              color: Colors.black.withOpacity(0.08),
+              blurRadius: 6,
+              offset: const Offset(0, 3),
+            ),
+        ],
+      ),
+      child: Center(
+        child: isCompleted
+            ? Icon(Icons.check_rounded, color: iconColor, size: size * 0.4)
+            : isLocked
+                ? Icon(Icons.lock_rounded, color: iconColor, size: size * 0.35)
+                : Icon(unit.icon, color: iconColor, size: size * 0.4),
+      ),
+    );
+
+    // Aktif node: pulsing animasyonu
+    if (isCurrent) {
+      return circle
+          .animate(onPlay: (c) => c.repeat(reverse: true))
+          .scale(
+            begin: const Offset(1.0, 1.0),
+            end: const Offset(1.08, 1.08),
+            duration: 1200.ms,
+            curve: Curves.easeInOut,
+          );
+    }
+
+    return circle;
+  }
+
+  Alignment _prevAlignment() {
+    if (index == 0) return Alignment.center;
+    final prevCycle = (index - 1) % 4;
+    switch (prevCycle) {
+      case 0: return Alignment.center;
+      case 1: return const Alignment(0.55, 0);
+      case 2: return Alignment.center;
+      case 3: return const Alignment(-0.55, 0);
+      default: return Alignment.center;
+    }
+  }
+}
+
+// ════════════════════════════════════════════════════════════════
+// PATH CONNECTOR — Nodelar arasi baglanti cizgisi
+// ════════════════════════════════════════════════════════════════
+
+class _PathConnector extends StatelessWidget {
+  final Alignment fromAlignment;
+  final Alignment toAlignment;
+  final bool isCompleted;
+
+  const _PathConnector({
+    required this.fromAlignment,
+    required this.toAlignment,
+    required this.isCompleted,
   });
 
   @override
   Widget build(BuildContext context) {
-    return Opacity(
-      opacity: isUnlocked ? 1.0 : 0.5,
-      child: GestureDetector(
-        onTap: isUnlocked ? onTap : null,
-        child: Container(
-          constraints: const BoxConstraints(minHeight: 48),
-          margin: const EdgeInsets.only(bottom: AppSpacing.sm),
-          padding: const EdgeInsets.all(AppSpacing.md),
-          decoration: BoxDecoration(
-            color: AppColors.surface,
-            borderRadius: BorderRadius.circular(16),
-            border: Border.all(
-              color: isUnlocked
-                  ? AppColors.primary.withOpacity(0.15)
-                  : AppColors.border,
-            ),
-            boxShadow: [
-              BoxShadow(
-                color: Colors.black.withOpacity(0.04),
-                blurRadius: 6,
-                offset: const Offset(0, 2),
-              ),
-            ],
-          ),
-          child: Row(
-            children: [
-              // Ders numarası
-              Container(
-                width: 44,
-                height: 44,
-                decoration: BoxDecoration(
-                  color: isUnlocked
-                      ? AppColors.primary.withOpacity(0.12)
-                      : AppColors.backgroundSecondary,
-                  shape: BoxShape.circle,
-                ),
-                child: Center(
-                  child: isUnlocked
-                      ? Text(
-                          '${index + 1}',
-                          style: AppTypography.labelLarge.copyWith(
-                              color: AppColors.primary,
-                              fontWeight: FontWeight.w700),
-                        )
-                      : Icon(Icons.lock_outline,
-                          size: 18, color: AppColors.textSecondary),
-                ),
-              ),
-              const SizedBox(width: AppSpacing.md),
-
-              // Ders bilgisi — Kurmancî önce (İlke §0.5)
-              Expanded(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      lesson.kuTitle,
-                      style: AppTypography.labelLarge.copyWith(
-                          color: AppColors.textPrimary,
-                          fontWeight: FontWeight.w600),
-                    ),
-                    Text(
-                      lesson.trTitle,
-                      style: AppTypography.caption.copyWith(
-                          color: AppColors.textSecondary),
-                    ),
-                  ],
-                ),
-              ),
-
-              if (isUnlocked)
-                Icon(Icons.arrow_forward_ios,
-                    size: 14, color: AppColors.textSecondary),
-            ],
-          ),
+    return SizedBox(
+      height: 36,
+      child: CustomPaint(
+        size: const Size(double.infinity, 36),
+        painter: _PathPainter(
+          fromX: (fromAlignment.x + 1) / 2,
+          toX: (toAlignment.x + 1) / 2,
+          isCompleted: isCompleted,
         ),
       ),
     );
   }
+}
+
+class _PathPainter extends CustomPainter {
+  final double fromX;
+  final double toX;
+  final bool isCompleted;
+
+  _PathPainter({
+    required this.fromX,
+    required this.toX,
+    required this.isCompleted,
+  });
+
+  @override
+  void paint(Canvas canvas, Size size) {
+    final paint = Paint()
+      ..color = isCompleted
+          ? AppColors.primary.withOpacity(0.5)
+          : AppColors.border
+      ..strokeWidth = 3.0
+      ..style = PaintingStyle.stroke
+      ..strokeCap = StrokeCap.round;
+
+    // Dashed line icin path
+    final startX = size.width * fromX;
+    final endX = size.width * toX;
+
+    final path = Path();
+    path.moveTo(startX, 0);
+
+    // Eger ayni x hizasindalarsa duz cizgi, degilse egri
+    if ((startX - endX).abs() < 10) {
+      path.lineTo(endX, size.height);
+    } else {
+      // Cubic bezier ile kivrilan yol
+      path.cubicTo(
+        startX, size.height * 0.4,
+        endX, size.height * 0.6,
+        endX, size.height,
+      );
+    }
+
+    // Dotted pattern
+    final dashPath = Path();
+    const dashLen = 6.0;
+    const gapLen = 4.0;
+    final metrics = path.computeMetrics();
+    for (final metric in metrics) {
+      var distance = 0.0;
+      while (distance < metric.length) {
+        final end = math.min(distance + dashLen, metric.length);
+        final extracted = metric.extractPath(distance, end);
+        dashPath.addPath(extracted, Offset.zero);
+        distance += dashLen + gapLen;
+      }
+    }
+
+    canvas.drawPath(dashPath, paint);
+  }
+
+  @override
+  bool shouldRepaint(covariant _PathPainter old) =>
+      old.fromX != fromX || old.toX != toX || old.isCompleted != isCompleted;
 }
 
 // ════════════════════════════════════════════════════════════════
@@ -948,5 +1344,83 @@ class _NavItem extends StatelessWidget {
         ),
       ),
     );
+  }
+}
+
+// ════════════════════════════════════════════════════════════════
+// QUIZ BUTONU — "Ders Bide!" (Start Lesson)
+// Ana sayfada belirgin, Duolingo tarzı quiz oturumu başlatıcı
+// ════════════════════════════════════════════════════════════════
+
+class _StartQuizButton extends StatelessWidget {
+  const _StartQuizButton();
+
+  @override
+  Widget build(BuildContext context) {
+    return GestureDetector(
+      onTap: () => context.push(AppRoutes.quiz, extra: {'level': 'A1'}),
+      child: Container(
+        padding: const EdgeInsets.all(AppSpacing.md),
+        decoration: BoxDecoration(
+          gradient: const LinearGradient(
+            colors: [AppColors.accent, AppColors.accentWarm],
+            begin: Alignment.topLeft,
+            end: Alignment.bottomRight,
+          ),
+          borderRadius: BorderRadius.circular(20),
+          boxShadow: [
+            BoxShadow(
+              color: AppColors.accent.withOpacity(0.35),
+              blurRadius: 16,
+              offset: const Offset(0, 6),
+            ),
+          ],
+        ),
+        child: Row(
+          children: [
+            Container(
+              width: 52,
+              height: 52,
+              decoration: BoxDecoration(
+                color: Colors.white.withOpacity(0.2),
+                shape: BoxShape.circle,
+              ),
+              child: const Icon(
+                Icons.quiz_rounded,
+                color: Colors.white,
+                size: 28,
+              ),
+            ),
+            const SizedBox(width: AppSpacing.md),
+            Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    'Ders Bide!',
+                    style: AppTypography.labelLarge.copyWith(
+                      color: Colors.white,
+                      fontWeight: FontWeight.w700,
+                    ),
+                  ),
+                  Text(
+                    '10 pirs — werger, guhdarikirin, nivisan',
+                    style: AppTypography.caption.copyWith(
+                      color: Colors.white.withOpacity(0.85),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            Icon(Icons.arrow_forward_ios,
+                color: Colors.white.withOpacity(0.8), size: 16),
+          ],
+        ),
+      ),
+    ).animate().fadeIn(delay: 180.ms).scale(
+          begin: const Offset(0.97, 0.97),
+          duration: 300.ms,
+          curve: Curves.easeOut,
+        );
   }
 }

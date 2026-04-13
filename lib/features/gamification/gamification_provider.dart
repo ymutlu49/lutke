@@ -151,23 +151,93 @@ class WeeklyRhythmState {
 // GAMIFICATION STATE
 // ════════════════════════════════════════════════════════════════
 
+// ════════════════════════════════════════════════════════════════
+// SEVİYE SİSTEMİ — Numerik seviyeler (XP tabanlı)
+// Gamification seviyesi, CEFR seviyesinden bağımsızdır.
+// ════════════════════════════════════════════════════════════════
+
+abstract class LevelSystem {
+  /// Her seviye için gereken kümülatif XP
+  static int xpForLevel(int level) {
+    if (level <= 1) return 0;
+    // Seviye 2: 100, 3: 250, 4: 500, 5: 800, 6: 1200, ...
+    // Formül: level^2 * 25 + level * 25
+    return (level * level * 25) + (level * 25);
+  }
+
+  /// XP'den seviye hesapla
+  static int levelFromXP(int totalXP) {
+    int lvl = 1;
+    while (xpForLevel(lvl + 1) <= totalXP) {
+      lvl++;
+    }
+    return lvl;
+  }
+
+  /// Mevcut seviyedeki ilerleme (0.0 - 1.0)
+  static double progressInLevel(int totalXP) {
+    final currentLevel = levelFromXP(totalXP);
+    final currentThreshold = xpForLevel(currentLevel);
+    final nextThreshold = xpForLevel(currentLevel + 1);
+    final range = nextThreshold - currentThreshold;
+    if (range <= 0) return 1.0;
+    return ((totalXP - currentThreshold) / range).clamp(0.0, 1.0);
+  }
+
+  /// Bir sonraki seviyeye kadar kalan XP
+  static int xpToNextLevel(int totalXP) {
+    final currentLevel = levelFromXP(totalXP);
+    return xpForLevel(currentLevel + 1) - totalXP;
+  }
+
+  /// Mevcut seviyede kazanılan XP
+  static int xpInCurrentLevel(int totalXP) {
+    final currentLevel = levelFromXP(totalXP);
+    return totalXP - xpForLevel(currentLevel);
+  }
+
+  /// Mevcut seviyenin XP aralığı
+  static int xpRangeForCurrentLevel(int totalXP) {
+    final currentLevel = levelFromXP(totalXP);
+    return xpForLevel(currentLevel + 1) - xpForLevel(currentLevel);
+  }
+}
+
+// ════════════════════════════════════════════════════════════════
+// GAMIFICATION STATE
+// ════════════════════════════════════════════════════════════════
+
 class GamificationState {
   final int totalXP;
   final int levelXP;        // Bu seviyede kazanılan XP
   final int xpToNextLevel;  // Bir sonraki seviyeye kadar kalan
-  final String level;       // A1, A2, B1, B2
+  final String level;       // A1, A2, B1, B2 (CEFR)
+  final int numericLevel;   // Gamification seviyesi (1, 2, 3, ...)
   final WeeklyRhythmState weeklyRhythm;
   final List<String> earnedBadgeIds;
   final String? newlyEarnedBadgeId; // Animasyon için
+  final bool showLevelUp;           // Seviye atlama animasyonu
+  final int previousLevel;          // Seviye atlama karşılaştırması
+  final DateTime? lastDailyReward;  // Son günlük ödül tarihi
+  final bool dailyRewardAvailable;  // Bugün ödül alınabilir mi?
+  final int perfectScoreCount;      // Mükemmel skor sayısı
+  final int totalWordsLearned;      // Toplam öğrenilen kelime
 
   const GamificationState({
     this.totalXP = 0,
     this.levelXP = 0,
     this.xpToNextLevel = 200,
     this.level = 'A1',
+    this.numericLevel = 1,
     required this.weeklyRhythm,
     this.earnedBadgeIds = const [],
     this.newlyEarnedBadgeId,
+    this.showLevelUp = false,
+    this.previousLevel = 0,
+    this.lastDailyReward,
+    this.dailyRewardAvailable = true,
+    this.perfectScoreCount = 0,
+    this.totalWordsLearned = 0,
   });
 
   GamificationState copyWith({
@@ -175,24 +245,37 @@ class GamificationState {
     int? levelXP,
     int? xpToNextLevel,
     String? level,
+    int? numericLevel,
     WeeklyRhythmState? weeklyRhythm,
     List<String>? earnedBadgeIds,
     String? newlyEarnedBadgeId,
+    bool? showLevelUp,
+    int? previousLevel,
+    DateTime? lastDailyReward,
+    bool? dailyRewardAvailable,
+    int? perfectScoreCount,
+    int? totalWordsLearned,
   }) =>
       GamificationState(
         totalXP: totalXP ?? this.totalXP,
         levelXP: levelXP ?? this.levelXP,
         xpToNextLevel: xpToNextLevel ?? this.xpToNextLevel,
         level: level ?? this.level,
+        numericLevel: numericLevel ?? this.numericLevel,
         weeklyRhythm: weeklyRhythm ?? this.weeklyRhythm,
         earnedBadgeIds: earnedBadgeIds ?? this.earnedBadgeIds,
         newlyEarnedBadgeId: newlyEarnedBadgeId,
+        showLevelUp: showLevelUp ?? this.showLevelUp,
+        previousLevel: previousLevel ?? this.previousLevel,
+        lastDailyReward: lastDailyReward ?? this.lastDailyReward,
+        dailyRewardAvailable: dailyRewardAvailable ?? this.dailyRewardAvailable,
+        perfectScoreCount: perfectScoreCount ?? this.perfectScoreCount,
+        totalWordsLearned: totalWordsLearned ?? this.totalWordsLearned,
       );
 
-  double get levelProgress =>
-      xpToNextLevel > 0 ? (levelXP / xpToNextLevel).clamp(0.0, 1.0) : 1.0;
+  double get levelProgress => LevelSystem.progressInLevel(totalXP);
 
-  // Seviye XP eşikleri
+  // CEFR seviye XP eşikleri
   static const Map<String, int> _levelThresholds = {
     'A1': 500,
     'A2': 1500,
@@ -217,6 +300,7 @@ class GamificationState {
 
 class GamificationNotifier extends StateNotifier<GamificationState> {
   static const _kPrefsKey = 'gamification_state';
+  static const int dailyRewardXP = 50;
 
   GamificationNotifier()
       : super(GamificationState(
@@ -234,20 +318,37 @@ class GamificationNotifier extends StateNotifier<GamificationState> {
         final xp = data['totalXP'] as int? ?? 0;
         final level = GamificationState.levelFromXP(xp);
         final levelThreshold = GamificationState.thresholdForLevel(level);
+        final numLevel = LevelSystem.levelFromXP(xp);
 
         // Hafta kontrolü — yeni hafta başlamış mı?
         final rhythm = WeeklyRhythmState.fromJson(
             data['weeklyRhythm'] as Map<String, dynamic>);
         final updatedRhythm = _checkWeekAdvance(rhythm);
 
+        // Günlük ödül kontrolü
+        DateTime? lastDaily;
+        final lastDailyStr = data['lastDailyReward'] as String?;
+        if (lastDailyStr != null) {
+          lastDaily = DateTime.tryParse(lastDailyStr);
+        }
+        final now = DateTime.now();
+        final todayStart = DateTime(now.year, now.month, now.day);
+        final isDailyAvailable = lastDaily == null ||
+            lastDaily.isBefore(todayStart);
+
         state = GamificationState(
           totalXP: xp,
           levelXP: data['levelXP'] as int? ?? 0,
           xpToNextLevel: levelThreshold,
           level: level,
+          numericLevel: numLevel,
           weeklyRhythm: updatedRhythm,
           earnedBadgeIds:
               (data['earnedBadgeIds'] as List?)?.cast<String>() ?? [],
+          lastDailyReward: lastDaily,
+          dailyRewardAvailable: isDailyAvailable,
+          perfectScoreCount: data['perfectScoreCount'] as int? ?? 0,
+          totalWordsLearned: data['totalWordsLearned'] as int? ?? 0,
         );
       } catch (_) {
         // Bozuk veri — initial state ile devam
@@ -276,6 +377,9 @@ class GamificationNotifier extends StateNotifier<GamificationState> {
         'levelXP': state.levelXP,
         'weeklyRhythm': state.weeklyRhythm.toJson(),
         'earnedBadgeIds': state.earnedBadgeIds,
+        'lastDailyReward': state.lastDailyReward?.toIso8601String(),
+        'perfectScoreCount': state.perfectScoreCount,
+        'totalWordsLearned': state.totalWordsLearned,
       }),
     );
   }
@@ -283,21 +387,62 @@ class GamificationNotifier extends StateNotifier<GamificationState> {
   // ── XP Ekleme ─────────────────────────────────────────────────
 
   Future<void> addXP(int amount) async {
+    final oldLevel = LevelSystem.levelFromXP(state.totalXP);
     final newTotal = state.totalXP + amount;
+    final newNumericLevel = LevelSystem.levelFromXP(newTotal);
     final newLevelXP = state.levelXP + amount;
     final newLevel = GamificationState.levelFromXP(newTotal);
     final threshold = GamificationState.thresholdForLevel(newLevel);
+    final leveledUp = newNumericLevel > oldLevel;
 
     state = state.copyWith(
       totalXP: newTotal,
       levelXP: newLevelXP > threshold ? newLevelXP - threshold : newLevelXP,
       xpToNextLevel: threshold,
       level: newLevel,
+      numericLevel: newNumericLevel,
+      showLevelUp: leveledUp,
+      previousLevel: leveledUp ? oldLevel : state.previousLevel,
     );
 
     // Bugünü aktif gün olarak işaretle
     await markTodayActive();
     await _saveToPrefs();
+  }
+
+  // ── Günlük Ödül ────────────────────────────────────────────────
+
+  Future<bool> claimDailyReward() async {
+    if (!state.dailyRewardAvailable) return false;
+
+    final now = DateTime.now();
+    final oldLevel = LevelSystem.levelFromXP(state.totalXP);
+    final newTotal = state.totalXP + dailyRewardXP;
+    final newNumericLevel = LevelSystem.levelFromXP(newTotal);
+    final newLevel = GamificationState.levelFromXP(newTotal);
+    final threshold = GamificationState.thresholdForLevel(newLevel);
+    final leveledUp = newNumericLevel > oldLevel;
+
+    state = state.copyWith(
+      totalXP: newTotal,
+      levelXP: LevelSystem.xpInCurrentLevel(newTotal),
+      xpToNextLevel: threshold,
+      level: newLevel,
+      numericLevel: newNumericLevel,
+      lastDailyReward: now,
+      dailyRewardAvailable: false,
+      showLevelUp: leveledUp,
+      previousLevel: leveledUp ? oldLevel : state.previousLevel,
+    );
+
+    await markTodayActive();
+    await _saveToPrefs();
+    return true;
+  }
+
+  /// Seviye atlama animasyonu gösterildikten sonra temizle
+  void clearLevelUp() {
+    state = state.copyWith(showLevelUp: false);
   }
 
   // ── Ders Tamamlama ────────────────────────────────────────────
@@ -341,15 +486,44 @@ class GamificationNotifier extends StateNotifier<GamificationState> {
     await _saveToPrefs();
   }
 
+  // ── Mükemmel Skor Kaydet ────────────────────────────────────────
+
+  Future<void> recordPerfectScore() async {
+    state = state.copyWith(
+      perfectScoreCount: state.perfectScoreCount + 1,
+    );
+    await _saveToPrefs();
+  }
+
+  // ── Kelime Sayısı Güncelle ─────────────────────────────────────
+
+  Future<void> updateWordsLearned(int count) async {
+    state = state.copyWith(
+      totalWordsLearned: state.totalWordsLearned + count,
+    );
+    await _saveToPrefs();
+  }
+
   // ── Rozet Kontrolü ─────────────────────────────────────────────
 
   Future<List<String>> _checkBadges({int wordCount = 0}) async {
     final newBadges = <String>[];
     final existing = Set<String>.from(state.earnedBadgeIds);
 
-    // İlk ders rozeti
+    // İlk ders rozeti — Destpeker
     if (!existing.contains('destpeker')) {
       newBadges.add('destpeker');
+    }
+
+    // 100 kelime — Zimanzan
+    if (state.totalWordsLearned >= 100 && !existing.contains('zimanzan')) {
+      newBadges.add('zimanzan');
+    }
+
+    // 7 gün streak (hafta hedefi tamamlama) — Hefteya Temam
+    if (state.weeklyRhythm.weekGoalMet &&
+        !existing.contains('hefteya_temam')) {
+      newBadges.add('hefteya_temam');
     }
 
     // 4 hafta aktif — Serbestî rozeti
@@ -358,9 +532,26 @@ class GamificationNotifier extends StateNotifier<GamificationState> {
       newBadges.add('serbesti');
     }
 
-    // Kelime sayısı rozetleri (mock — Faz 2'de DB'den gelecek)
-    if (state.totalXP >= 500 && !existing.contains('zimanzan')) {
-      newBadges.add('zimanzan');
+    // 500 XP — XP Koleksiyoncusu
+    if (state.totalXP >= 500 && !existing.contains('xp_500')) {
+      newBadges.add('xp_500');
+    }
+
+    // Mükemmel skor — Rast 100%
+    if (state.perfectScoreCount >= 1 &&
+        !existing.contains('rast_100')) {
+      newBadges.add('rast_100');
+    }
+
+    // A1 tamamlandı
+    if (state.totalXP >= GamificationState.thresholdForLevel('A1') &&
+        !existing.contains('a1_qediya')) {
+      newBadges.add('a1_qediya');
+    }
+
+    // Malbatvan — 10 aile kelimesi
+    if (!existing.contains('malbatvan') && wordCount >= 10) {
+      newBadges.add('malbatvan');
     }
 
     if (newBadges.isNotEmpty) {

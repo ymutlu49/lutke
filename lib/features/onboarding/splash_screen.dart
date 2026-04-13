@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../core/constants/app_colors.dart';
 import '../../core/constants/app_typography.dart';
@@ -32,8 +33,21 @@ class _SplashScreenState extends ConsumerState<SplashScreen> {
   }
 
   Future<void> _navigate() async {
+    // Splash animasyonu ile paralel olarak onboarding durumunu kontrol et
+    final prefsFuture = SharedPreferences.getInstance();
     await Future.delayed(2800.ms);
     if (!mounted) return;
+
+    final prefs = await prefsFuture;
+    final onboardingComplete = prefs.getBool('onboarding_complete') ?? false;
+
+    if (!mounted) return;
+
+    // İlk kullanıcılar welcome flow'a, diğerleri doğrudan home'a
+    if (!onboardingComplete) {
+      context.go(AppRoutes.welcome);
+      return;
+    }
 
     try {
       final authState = ref.read(authStateProvider);

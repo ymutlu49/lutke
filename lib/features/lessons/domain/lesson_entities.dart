@@ -200,6 +200,7 @@ class BadgeModel {
   final String iconAsset;
   final int xpRequired;      // Kazanmak için gereken XP (veya 0)
   final String? condition;   // Özel koşul açıklaması
+  final String emoji;        // Rozet emojisi (asset yokken fallback)
 
   const BadgeModel({
     required this.id,
@@ -209,18 +210,68 @@ class BadgeModel {
     required this.iconAsset,
     this.xpRequired = 0,
     this.condition,
+    this.emoji = '\u{1F3C5}', // default medal emoji
   });
 }
 
 // Tüm rozetler — Araştırma bulgularına göre kültürel kimlik odaklı
 const kBadges = [
+  // ── Temel rozetler (yeni gamification sistemi) ──────────────
   BadgeModel(
     id: 'destpeker',
-    kurmanjName: 'Destpêker',
-    turkishName: 'Başlayan',
+    kurmanjName: 'Destpêk',
+    turkishName: 'Başlangıç',
     description: 'İlk ders tamamlandı',
     iconAsset: 'assets/images/badges/destpeker.png',
+    emoji: '\u{1F525}', // fire
   ),
+  BadgeModel(
+    id: 'zimanzan',
+    kurmanjName: '100 Peyv',
+    turkishName: '100 Kelime',
+    description: '100 kelime öğrenildi',
+    iconAsset: 'assets/images/badges/zimanzan.png',
+    xpRequired: 0,
+    condition: 'words_100',
+    emoji: '\u{1F4DA}', // books
+  ),
+  BadgeModel(
+    id: 'hefteya_temam',
+    kurmanjName: 'Hefteya Temam',
+    turkishName: 'Hafta Tamam',
+    description: 'Haftalık hedef tamamlandı',
+    iconAsset: 'assets/images/badges/hefteya_temam.png',
+    condition: 'weekly_goal',
+    emoji: '\u{1F3C6}', // trophy
+  ),
+  BadgeModel(
+    id: 'a1_qediya',
+    kurmanjName: 'A1 Qediya',
+    turkishName: 'A1 Tamamlandı',
+    description: 'A1 seviyesi tamamlandı',
+    iconAsset: 'assets/images/badges/a1_qediya.png',
+    xpRequired: 500,
+    emoji: '\u{2B50}', // star
+  ),
+  BadgeModel(
+    id: 'xp_500',
+    kurmanjName: '500 XP',
+    turkishName: '500 XP',
+    description: '500 XP toplandı',
+    iconAsset: 'assets/images/badges/xp_500.png',
+    xpRequired: 500,
+    emoji: '\u{1F48E}', // gem
+  ),
+  BadgeModel(
+    id: 'rast_100',
+    kurmanjName: 'Rast 100%',
+    turkishName: 'Mükemmel Skor',
+    description: 'Bir derste %100 doğruluk',
+    iconAsset: 'assets/images/badges/rast_100.png',
+    condition: 'perfect_score',
+    emoji: '\u{1F3AF}', // target
+  ),
+  // ── Kültürel rozetler (orijinal) ────────────────────────────
   BadgeModel(
     id: 'malbatvan',
     kurmanjName: 'Malbatvan',
@@ -228,30 +279,7 @@ const kBadges = [
     description: '10 aile kelimesi öğrenildi',
     iconAsset: 'assets/images/badges/malbatvan.png',
     condition: 'family_words_10',
-  ),
-  BadgeModel(
-    id: 'zimanzan',
-    kurmanjName: 'Zimanzan',
-    turkishName: 'Dil Bilen',
-    description: '100 kelime öğrenildi',
-    iconAsset: 'assets/images/badges/zimanzan.png',
-    xpRequired: 500,
-  ),
-  BadgeModel(
-    id: 'newrozvan',
-    kurmanjName: 'Newrozvan',
-    turkishName: 'Nevruz Kutlayanı',
-    description: 'Newroz modülü tamamlandı',
-    iconAsset: 'assets/images/badges/newrozvan.png',
-    condition: 'newroz_module',
-  ),
-  BadgeModel(
-    id: 'stranbej',
-    kurmanjName: 'Stranbêj',
-    turkishName: 'Türkücü',
-    description: '50 dinleme egzersizi tamamlandı',
-    iconAsset: 'assets/images/badges/stranbej.png',
-    condition: 'listening_50',
+    emoji: '\u{1F46A}', // family
   ),
   BadgeModel(
     id: 'serbesti',
@@ -260,6 +288,25 @@ const kBadges = [
     description: '4 hafta aktif kaldı',
     iconAsset: 'assets/images/badges/serbesti.png',
     condition: 'weeks_active_4',
+    emoji: '\u{1F54A}', // dove
+  ),
+  BadgeModel(
+    id: 'newrozvan',
+    kurmanjName: 'Newrozvan',
+    turkishName: 'Nevruz Kutlayanı',
+    description: 'Newroz modülü tamamlandı',
+    iconAsset: 'assets/images/badges/newrozvan.png',
+    condition: 'newroz_module',
+    emoji: '\u{1F525}', // fire
+  ),
+  BadgeModel(
+    id: 'stranbej',
+    kurmanjName: 'Stranbêj',
+    turkishName: 'Türkücü',
+    description: '50 dinleme egzersizi tamamlandı',
+    iconAsset: 'assets/images/badges/stranbej.png',
+    condition: 'listening_50',
+    emoji: '\u{1F3B5}', // musical note
   ),
   BadgeModel(
     id: 'cirokvan',
@@ -268,6 +315,7 @@ const kBadges = [
     description: 'B1 edebiyat modülü tamamlandı',
     iconAsset: 'assets/images/badges/cirokvan.png',
     condition: 'b1_literature',
+    emoji: '\u{1F4D6}', // open book
   ),
 ];
 
