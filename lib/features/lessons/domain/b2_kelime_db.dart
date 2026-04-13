@@ -2709,3 +2709,6 @@ final kB2_Tamam = [
    gen:["Xebata hevpar", "Xebata me"]),
 ];
 final kB2Temam2 = [...kB2_Tamam];
+
+// TÜM kelimeler — vocabulary_browse_screen tarafından kullanılır
+final kB2All = [...kB2Kelimeler, ...kB2EkKelimeler, ...kB2EkKelimeler2, ...kB2EkKelimeler3, ...kB2EkKelimeler4, ...kB2FerkeraEk, ...kB2Buyuk, ...kB2_Akademik, ...kB2_Hukuk, ...kB2_Kultur2, ...kB2_Son2, ...kB2_Final, ...kB2_Kapanis, ...kB2_Son90, ...kB2_Final46, ...kB2_Son18, ...kB2_Tamam];

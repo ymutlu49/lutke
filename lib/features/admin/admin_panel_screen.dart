@@ -43,10 +43,10 @@ class _AdminPanelScreenState extends State<AdminPanelScreen>
     _levels = [
       _LevelInfo('A1', kA1TamListe, const Color(0xFF4CAF50)),
       _LevelInfo('A2', kA2TamListe, const Color(0xFF8BC34A)),
-      _LevelInfo('B1', kB1Temam, const Color(0xFFFF9800)),
-      _LevelInfo('B2', kB2Temam2, const Color(0xFFFF5722)),
-      _LevelInfo('C1', kC1Nihayi5, const Color(0xFF9C27B0)),
-      _LevelInfo('C2', kC2Temam, const Color(0xFF673AB7)),
+      _LevelInfo('B1', kB1All, const Color(0xFFFF9800)),
+      _LevelInfo('B2', kB2All, const Color(0xFFFF5722)),
+      _LevelInfo('C1', kC1All, const Color(0xFF9C27B0)),
+      _LevelInfo('C2', kC2All, const Color(0xFF673AB7)),
     ];
     _allWords = [];
     for (final level in _levels) {

@@ -8659,3 +8659,6 @@ final kB1Temam = [
   ...kB1TamListeNihayi,
   ...kB1_SonTam,
 ];
+
+// TUM kelimeler
+final kB1All = [...kB1Kelimeler, ...kB1EkKelimeler, ...kB1EkKelimeler3, ...kB1EkKelimeler2, ...kB1EkKelimeler4, ...kB1EkKelimeler5, ...kB1EkKelimeler6, ...kB1EkKelimeler7, ...kB1Buyuk1, ...kB1Buyuk2, ...kB1Buyuk3, ...kB1Buyuk4, ...kB1Buyuk5, ...kB1Buyuk6, ...kB1Buyuk7, ...kB1_Ev, ...kB1_Giyim, ...kB1_Yolculuk, ...kB1_Teknoloji, ...kB1_Saglik, ...kB1_Is, ...kB1_Doga, ...kB1_Kultur2, ...kB1_Xwarin, ...kB1_Malbat, ...kB1_Jiyan, ...kB1_Leker, ...kB1_Reziman, ...kB1_Perwerde, ...kB1_Dacek2, ...kB1_Rengder, ...kB1_Cih, ...kB1_Beden, ...kB1_Huner, ...kB1_Dernav, ...kB1_Son, ...kB1_T1, ...kB1_T2, ...kB1_T3, ...kB1_T4, ...kB1_T5, ...kB1_T6, ...kB1_T7, ...kB1_T8, ...kB1_Ziman2, ...kB1_Kar2, ...kB1_Spor, ...kB1_Dema, ...kB1_Cand2, ...kB1_Dirok2, ...kB1_Genel, ...kB1_Tamam, ...kB1_Bitirim, ...kB1_B1Final, ...kB1_Kapanis, ...kB1_SonTam];

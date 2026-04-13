@@ -1284,3 +1284,6 @@ final kC2_Son9 = [
 ];
 
 final kC2Temam = [...kC2_Son9];
+
+// TÜM kelimeler — vocabulary_browse_screen tarafından kullanılır
+final kC2All = [...kC2Kelimeler, ...kC2_Genisleme, ...kC2_Buyuk, ...kC2_Buyuk2, ...kC2_Buyuk_ext, ...kC2_Tamamlama, ...kC2_Son109, ...kC2_Son80, ...kC2_Bitis, ...kC2_Tamam35, ...kC2_Son9];

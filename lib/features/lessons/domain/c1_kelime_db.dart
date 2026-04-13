@@ -2256,3 +2256,6 @@ final kC1_Tamam9 = [
   (id:"c1_958", ku:"Serkeftina çandî ya gelêrî", tr:"Halkın kültürel başarısı", en:"Cultural success of the people", cins:"mê", ez:"serkeftina çandî ya gelêrî", kat:"çand", zor:0.60, not:"\"Serkeftin\"+\"çandî\"+\"gelêrî\".", her:["Serkeftina çandî ya gelêrî.","Di serkeftina çandî ya gelêrî de."], gen:["Serkeftina çandî ya gelêrî","Serkeftina me"]),
 ];
 final kC1Nihayi5 = [...kC1_Tamam9];
+
+// TÜM kelimeler — vocabulary_browse_screen tarafından kullanılır
+final kC1All = [...kC1Kelimeler, ...kC1_Genisleme, ...kC1_Buyuk, ...kC1_Buyuk2, ...kC1_Buyuk3, ...kC1_Buyuk_ext, ...kC1_Tamamlama, ...kC1_168, ...kC1_Son117, ...kC1_KalanGrup, ...kC1_Son49, ...kC1_Bitis, ...kC1_Tamam9];

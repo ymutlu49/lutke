@@ -66,25 +66,25 @@ class _VocabularyBrowseScreenState extends State<VocabularyBrowseScreen> {
         name: 'B1',
         label: 'B1 — Navîn (Orta)',
         color: const Color(0xFFFF9800),
-        words: kB1Temam,
+        words: kB1All,
       ),
       _LevelData(
         name: 'B2',
         label: 'B2 — Navîn-Jor (Orta-Üst)',
         color: const Color(0xFFFF5722),
-        words: kB2Temam2,
+        words: kB2All,
       ),
       _LevelData(
         name: 'C1',
         label: 'C1 — Pêşkeftî (İleri)',
         color: const Color(0xFF9C27B0),
-        words: kC1Nihayi5,
+        words: kC1All,
       ),
       _LevelData(
         name: 'C2',
         label: 'C2 — Sertî (Ustalık)',
         color: const Color(0xFF673AB7),
-        words: kC2Temam,
+        words: kC2All,
       ),
     ];
   }

@@ -108,13 +108,13 @@ class LessonRepository {
   }
 
   List<dynamic> _wordsForLevel(int level) => switch (level) {
-    1 => kA1TamKelimeler,
+    1 => kA1TamListe,
     2 => kA2TamListe,
-    3 => kB1Temam,
-    4 => kB2Temam2,
-    5 => kC1Nihayi5,
-    6 => kC2Temam,
-    _ => kA1TamKelimeler,
+    3 => kB1All,
+    4 => kB2All,
+    5 => kC1All,
+    6 => kC2All,
+    _ => kA1TamListe,
   };
 
   // ── KARTLAR ───────────────────────────────────────────────

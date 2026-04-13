@@ -11,12 +11,13 @@
 // ════════════════════════════════════════════════════════════════
 
 enum CulturalContentType {
-  proverb,    // Gotinên pêşiyan — Atasözü
-  song,       // Stran — Türkü
-  poem,       // Helbest — Şiir
-  story,      // Çîrok — Hikaye
-  celebration,// Cejna — Kutlama (Newroz, Îd...)
+  proverb,       // Gotinên pêşiyan — Atasözü
+  song,          // Stran — Türkü
+  poem,          // Helbest — Şiir
+  story,         // Çîrok — Hikaye
+  celebration,   // Cejna — Kutlama (Newroz, Îd...)
   foodTradition, // Xwarina — Yemek geleneği
+  culturalNote,  // Nîşe — Kültürel not
 }
 
 class CulturalItem {
@@ -53,6 +54,7 @@ class CulturalItem {
         CulturalContentType.story => 'Çîrok',
         CulturalContentType.celebration => 'Cejna',
         CulturalContentType.foodTradition => 'Xwarina',
+        CulturalContentType.culturalNote => 'Nîşe',
       };
 
   String get typeTurkish => switch (type) {
@@ -62,6 +64,7 @@ class CulturalItem {
         CulturalContentType.story => 'Hikaye',
         CulturalContentType.celebration => 'Kutlama',
         CulturalContentType.foodTradition => 'Yemek Geleneği',
+        CulturalContentType.culturalNote => 'Kültürel Not',
       };
 }
 
