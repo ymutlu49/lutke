@@ -1058,7 +1058,7 @@ class _QuizScreenState extends ConsumerState<QuizScreen>
             : accuracy >= 50
                 ? 'Guzel! Her gun ogrenmeye devam!'
                 : 'Hatalar olsa da ilerliyorsun!')
-        : 'Uzulme! Tekrar dene.';
+        : 'Xemgîn nebe! Dîsa biceribîne.';
 
     final motivationalMessage = showTr
         ? '$motivationalKu\n$motivationalTr'

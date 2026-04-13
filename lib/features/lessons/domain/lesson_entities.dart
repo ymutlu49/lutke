@@ -228,8 +228,8 @@ const kBadges = [
   BadgeModel(
     id: 'zimanzan',
     kurmanjName: '100 Peyv',
-    turkishName: '100 Kelime',
-    description: '100 kelime öğrenildi',
+    turkishName: '100 Peyv',
+    description: '100 peyv hatin fêrkirin',
     iconAsset: 'assets/images/badges/zimanzan.png',
     xpRequired: 0,
     condition: 'words_100',
@@ -285,7 +285,7 @@ const kBadges = [
     id: 'serbesti',
     kurmanjName: 'Serbestî',
     turkishName: 'Özgürlük',
-    description: '4 hafta aktif kaldı',
+    description: '4 hefte çalak ma',
     iconAsset: 'assets/images/badges/serbesti.png',
     condition: 'weeks_active_4',
     emoji: '\u{1F54A}', // dove

@@ -535,8 +535,8 @@ class _LearningStatsDashboard extends StatelessWidget {
             ),
             // Ders İlerlemesi
             _CircularProgressCard(
-              title: 'Ders',
-              subtitle: '$completedLessons / $totalLessons ders',
+              title: 'Wane',
+              subtitle: '$completedLessons / $totalLessons wane',
               progress: totalLessons > 0
                   ? completedLessons / totalLessons
                   : 0.0,
@@ -1237,7 +1237,7 @@ class _QuickActionsSection extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
-          'Zû biçe',
+          'Zû bike',
           style: AppTypography.labelLarge.copyWith(
             color: AppColors.textPrimary,
             fontWeight: FontWeight.w700,
@@ -1260,7 +1260,7 @@ class _QuickActionsSection extends StatelessWidget {
             const SizedBox(width: AppSpacing.sm),
             Expanded(
               child: _QuickActionButton(
-                label: 'Kelîme Lîste',
+                label: 'Peyvên Kurmancî',
                 icon: Icons.list_alt_rounded,
                 color: const Color(0xFF5C6BC0),
                 onTap: () => context.go(AppRoutes.vocabulary),
@@ -1277,7 +1277,7 @@ class _QuickActionsSection extends StatelessWidget {
               foregroundColor: AppColors.textTertiary,
               textStyle: AppTypography.caption,
             ),
-            child: const Text('Admin Panel'),
+            child: const Text('Panêla Rêvebiriyê'),
           ),
         ),
       ],

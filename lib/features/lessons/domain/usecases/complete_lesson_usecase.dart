@@ -27,7 +27,7 @@ class CompleteLessonUseCase {
     required LessonSessionState session,
   }) async {
     if (!session.isCompleted) {
-      return const Err(DatabaseFailure(message: 'Ders henüz tamamlanmadı'));
+      return const Err(DatabaseFailure(message: 'Wane hêj temam nebûye'));
     }
 
     // 1. Dersi tamamlandı olarak işaretle

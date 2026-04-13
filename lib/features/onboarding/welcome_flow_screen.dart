@@ -472,7 +472,7 @@ class _ReadyPage extends StatelessWidget {
               _StatBadge(
                 value: '3,900+',
                 label: 'peyv',
-                turkishLabel: 'kelime',
+                turkishLabel: 'peyv',
                 delay: 600,
               ),
               _StatBadge(
@@ -483,8 +483,8 @@ class _ReadyPage extends StatelessWidget {
               ),
               _StatBadge(
                 value: '137',
-                label: 'ders',
-                turkishLabel: 'ders',
+                label: 'wane',
+                turkishLabel: 'wane',
                 delay: 900,
               ),
             ],

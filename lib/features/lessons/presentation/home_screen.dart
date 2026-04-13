@@ -1514,7 +1514,7 @@ class _StartQuizButton extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    'Ders Bide!',
+                    'Waneyê Bide!',
                     style: AppTypography.labelLarge.copyWith(
                       color: Colors.white,
                       fontWeight: FontWeight.w700,

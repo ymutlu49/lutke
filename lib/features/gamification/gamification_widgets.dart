@@ -1520,7 +1520,7 @@ class WeeklyRhythmWidget extends ConsumerWidget {
                   style: AppTypography.kurmanjiCard
                       .copyWith(color: AppColors.primary)),
               Gap.hXs,
-              Text('/ Bu hafta', style: AppTypography.caption),
+              Text('/ Vê hefteyê', style: AppTypography.caption),
               const Spacer(),
               Text(
                 '${rhythm.activeDayCount} / ${WeeklyRhythmState.weekGoalDays} roj',
