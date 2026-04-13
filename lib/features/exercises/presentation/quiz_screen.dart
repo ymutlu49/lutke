@@ -579,40 +579,14 @@ class _QuizScreenState extends ConsumerState<QuizScreen>
       );
     }
 
-    // Tenê Kurmancî: Heritage cümle (kelime gizli) → doğru kelimeyi seç
-    final sentences = q.word.her;
-    String hint;
-    if (sentences is List && sentences.isNotEmpty) {
-      hint = _maskWord(sentences[0].toString(), q.word.ku);
-      // Eğer kelime gizlenemedi (cümlede yok), farklı ipucu göster
-      if (!hint.contains('____')) {
-        hint = '____  (${q.word.kat})';
-      }
-    } else {
-      hint = '____  (${q.word.kat})';
-    }
-
+    // Tenê Kurmancî: Kelimeyi göster → doğru anlamını seç
     return Column(
       key: ValueKey('translation_${q.word.id}'),
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        _buildInstruction('Kîjan peyv cihê vala dagire?', '', showTr: false),
+        _buildInstruction('Ev peyv çi ye?', '', showTr: false),
         Gap.lg,
-        Center(
-          child: Container(
-            margin: const EdgeInsets.symmetric(horizontal: 16),
-            padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 16),
-            decoration: BoxDecoration(
-              color: AppColors.primarySurface,
-              borderRadius: BorderRadius.circular(20),
-              border: Border.all(color: AppColors.primary.withOpacity(0.15)),
-            ),
-            child: Text(hint,
-              style: AppTypography.kurmanji.copyWith(
-                color: AppColors.textPrimary, fontSize: 18, height: 1.5),
-              textAlign: TextAlign.center),
-          ),
-        ),
+        _buildWordCard(q.word.ku, isKurmanji: true, kat: q.word.kat),
         const SizedBox(height: AppSpacing.questionToOptions),
         ..._buildOptionButtons(q),
       ],
@@ -636,12 +610,17 @@ class _QuizScreenState extends ConsumerState<QuizScreen>
       );
     }
 
-    // Tenê Kurmancî: Kurmancî tanım/not → doğru kelimeyi seç
-    final notText = q.word.not_ ?? '';
-    // Not alanından kısa bir tanım çıkar
-    String definition = notText.length > 5
-        ? notText.split('.').first.replaceAll(q.word.ku, '____')
-        : q.word.kat;
+    // Tenê Kurmancî: Heritage cümle göster → doğru kelimeyi seç
+    final sentences = q.word.her;
+    String hint;
+    if (sentences is List && sentences.isNotEmpty) {
+      hint = _maskWord(sentences[0].toString(), q.word.ku);
+      if (!hint.contains('____')) {
+        hint = '____';
+      }
+    } else {
+      hint = '____';
+    }
 
     return Column(
       key: ValueKey('reverse_${q.word.id}'),
@@ -652,23 +631,16 @@ class _QuizScreenState extends ConsumerState<QuizScreen>
         Center(
           child: Container(
             margin: const EdgeInsets.symmetric(horizontal: 16),
-            padding: const EdgeInsets.all(20),
+            padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 16),
             decoration: BoxDecoration(
-              color: AppColors.backgroundSecondary,
+              color: AppColors.primarySurface,
               borderRadius: BorderRadius.circular(20),
-              border: Border.all(color: AppColors.border),
+              border: Border.all(color: AppColors.primary.withOpacity(0.15)),
             ),
-            child: Column(
-              children: [
-                Text('📖', style: const TextStyle(fontSize: 32)),
-                Gap.sm,
-                Text(definition,
-                  style: AppTypography.body.copyWith(
-                    color: AppColors.textPrimary, fontSize: 15, height: 1.4),
-                  textAlign: TextAlign.center,
-                  maxLines: 3, overflow: TextOverflow.ellipsis),
-              ],
-            ),
+            child: Text(hint,
+              style: AppTypography.kurmanji.copyWith(
+                color: AppColors.textPrimary, fontSize: 18, height: 1.5),
+              textAlign: TextAlign.center),
           ),
         ),
         const SizedBox(height: AppSpacing.questionToOptions),
@@ -775,7 +747,7 @@ class _QuizScreenState extends ConsumerState<QuizScreen>
         if (_showTurkish)
           _buildWordCard(q.word.tr, isKurmanji: false)
         else
-          // Kurmancî modda: heritage cümle (kelime gizli)
+          // Kurmancî modda: heritage cümle göster, kelimeyi yaz
           Center(
             child: Container(
               margin: const EdgeInsets.symmetric(horizontal: 16),
@@ -788,7 +760,7 @@ class _QuizScreenState extends ConsumerState<QuizScreen>
               child: Text(
                 (q.word.her is List && (q.word.her as List).isNotEmpty)
                     ? _maskWord((q.word.her as List)[0].toString(), q.word.ku)
-                    : '____  (${q.word.kat})',
+                    : '____',
                 style: AppTypography.kurmanji.copyWith(fontSize: 18, height: 1.5),
                 textAlign: TextAlign.center,
               ),
