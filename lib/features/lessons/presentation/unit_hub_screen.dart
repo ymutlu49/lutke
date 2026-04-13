@@ -127,9 +127,9 @@ class UnitHubScreen extends ConsumerWidget {
                   children: [
                     _ActivityCard(
                       emoji: '📝',
-                      titleKu: 'Quiz',
-                      descKu: 'Peyvan biceribîne',
-                      descTr: 'Kelimeleri test et',
+                      titleKu: 'Ceribandin',
+                      descKu: 'Zanîna xwe biceribîne',
+                      descTr: 'Bilgini test et',
                       showTr: showTr,
                       color: AppColors.primary,
                       onTap: () => context.push(
@@ -142,9 +142,9 @@ class UnitHubScreen extends ConsumerWidget {
 
                     _ActivityCard(
                       emoji: '🃏',
-                      titleKu: 'Flashcard',
-                      descKu: 'Kartên peyvan',
-                      descTr: 'Kelime kartları',
+                      titleKu: 'Peld',
+                      descKu: 'Bi peldan fêr bibe',
+                      descTr: 'Kartlarla \u00f6\u011fren',
                       showTr: showTr,
                       color: AppColors.accent,
                       onTap: () => context.push(AppRoutes.flashcard, extra: {'category': category}),
@@ -154,9 +154,9 @@ class UnitHubScreen extends ConsumerWidget {
 
                     _ActivityCard(
                       emoji: '🔊',
-                      titleKu: 'Guhdarîkirin',
-                      descKu: 'Guh bide û hilbijêre',
-                      descTr: 'Dinle ve seç',
+                      titleKu: 'Guhdar\u00eekirin',
+                      descKu: 'Guh bide \u00fb hilbij\u00eare',
+                      descTr: 'Dinle ve se\u00e7',
                       showTr: showTr,
                       color: const Color(0xFF2196F3),
                       onTap: () => context.push(AppRoutes.listening, extra: {'category': category}),
@@ -166,9 +166,9 @@ class UnitHubScreen extends ConsumerWidget {
 
                     _ActivityCard(
                       emoji: '🧩',
-                      titleKu: 'Hevoka çêke',
-                      descKu: 'Peyvan bi rêz bike',
-                      descTr: 'Cümle kur',
+                      titleKu: 'Hevok\u00ea \u00e7\u00eake',
+                      descKu: 'Peyvan bi r\u00eaz bike',
+                      descTr: 'C\u00fcmle kur',
                       showTr: showTr,
                       color: const Color(0xFF9C27B0),
                       onTap: () => context.push(AppRoutes.sentenceBuilder, extra: {'category': category}),
@@ -178,9 +178,9 @@ class UnitHubScreen extends ConsumerWidget {
 
                     _ActivityCard(
                       emoji: '🔗',
-                      titleKu: 'Lihevhatin',
-                      descKu: 'Peyv û wateyan li hev bîne',
-                      descTr: 'Kelime eşleştir',
+                      titleKu: 'L\u00eehevhat\u00een',
+                      descKu: 'Peyv \u00fb wateyan li hev b\u00eene',
+                      descTr: 'Kelime e\u015fle\u015ftir',
                       showTr: showTr,
                       color: const Color(0xFFFF5722),
                       onTap: () => context.push(AppRoutes.wordMatch, extra: {'category': category}),

@@ -899,40 +899,19 @@ class _QuestionPrompt extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final (question, subtitle) = switch (type) {
-      _ListeningQuestionType.meaning => (
-          'Ev hevok çi dibêje?',
-          'Bu cumle ne diyor?',
-        ),
-      _ListeningQuestionType.wordFind => (
-          'Kîjan peyv di hevokê de heye?',
-          'Hangi kelime cumlede var?',
-        ),
-      _ListeningQuestionType.fillBlank => (
-          'Hevokê temam bike',
-          'Cumleyi tamamla',
-        ),
+    final question = switch (type) {
+      _ListeningQuestionType.meaning => 'Ev hevok çi dibêje?',
+      _ListeningQuestionType.wordFind => 'Kîjan peyv di hevokê de heye?',
+      _ListeningQuestionType.fillBlank => 'Hevokê temam bike',
     };
 
-    return Column(
-      children: [
-        Text(
-          question,
-          textAlign: TextAlign.center,
-          style: AppTypography.title.copyWith(
-            color: AppColors.textPrimary,
-            fontWeight: FontWeight.w700,
-          ),
-        ),
-        const SizedBox(height: 4),
-        Text(
-          subtitle,
-          textAlign: TextAlign.center,
-          style: AppTypography.caption.copyWith(
-            color: AppColors.textTertiary,
-          ),
-        ),
-      ],
+    return Text(
+      question,
+      textAlign: TextAlign.center,
+      style: AppTypography.title.copyWith(
+        color: AppColors.textPrimary,
+        fontWeight: FontWeight.w700,
+      ),
     ).animate().fadeIn(delay: 150.ms, duration: 300.ms);
   }
 }
@@ -1078,7 +1057,7 @@ class _ResultsSheet extends StatelessWidget {
 
           // Emoji & Title
           Text(
-            isGreat ? 'Aferin!' : 'Bes e!',
+            isGreat ? 'Pîroz be!' : 'Baş e!',
             style: AppTypography.display.copyWith(
               color: AppColors.textPrimary,
             ),
