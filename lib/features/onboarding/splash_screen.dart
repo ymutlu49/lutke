@@ -32,24 +32,26 @@ class _SplashScreenState extends ConsumerState<SplashScreen> {
   }
 
   Future<void> _navigate() async {
-    // Animasyon için bekle
     await Future.delayed(2800.ms);
     if (!mounted) return;
 
-    final authState = ref.read(authStateProvider);
-    authState.when(
-      data: (user) {
-        if (user != null) {
-          // Giriş yapmış → doğrudan ana sayfa
-          context.go(AppRoutes.home);
-        } else {
-          // Giriş yapmamış → onboarding
-          context.go(AppRoutes.passiveTest);
-        }
-      },
-      loading: () => context.go(AppRoutes.passiveTest),
-      error: (_, __) => context.go(AppRoutes.passiveTest),
-    );
+    try {
+      final authState = ref.read(authStateProvider);
+      authState.when(
+        data: (user) {
+          if (user != null) {
+            context.go(AppRoutes.home);
+          } else {
+            context.go(AppRoutes.home); // Firebase yok — doğrudan home
+          }
+        },
+        loading: () => context.go(AppRoutes.home),
+        error: (_, __) => context.go(AppRoutes.home),
+      );
+    } catch (_) {
+      // Firebase hatasında bile home'a git
+      if (mounted) context.go(AppRoutes.home);
+    }
   }
 
   @override

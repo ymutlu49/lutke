@@ -15,7 +15,12 @@ import '../utils/user_segment.dart';
 final authServiceProvider = Provider<AuthService>((ref) => AuthService());
 
 final authStateProvider = StreamProvider<User?>((ref) {
-  return ref.watch(authServiceProvider).authStateStream;
+  try {
+    return ref.watch(authServiceProvider).authStateStream;
+  } catch (_) {
+    // Firebase yapılandırılmamış — null döndür
+    return Stream.value(null);
+  }
 });
 
 final currentUserProvider = Provider<User?>((ref) {

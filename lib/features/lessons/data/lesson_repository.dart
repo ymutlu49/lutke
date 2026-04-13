@@ -43,10 +43,14 @@ const Map<int, int> kLevelWordCount = {
 // PROVIDERS
 // ════════════════════════════════════════════════════════════════
 
-final databaseProvider = Provider<AppDatabase>((ref) {
-  final db = AppDatabase();
-  ref.onDispose(db.close);
-  return db;
+final databaseProvider = Provider<AppDatabase?>((ref) {
+  try {
+    final db = AppDatabase();
+    ref.onDispose(db.close);
+    return db;
+  } catch (_) {
+    return null; // Web'de DB oluşturulamıyorsa null döner
+  }
 });
 
 final lessonRepositoryProvider = Provider<LessonRepository>((ref) {
@@ -69,20 +73,22 @@ final userProfileProvider = Provider<UserProfile>((ref) {
 // ════════════════════════════════════════════════════════════════
 
 class LessonRepository {
-  final AppDatabase _db;
+  final AppDatabase? _db;
   LessonRepository(this._db);
+
+  bool get _hasDb => _db != null;
 
   // ── SEED ──────────────────────────────────────────────────
 
-  /// İlk açılışta tüm seviyeleri yükle
   Future<void> seedAllLevels() async {
+    if (!_hasDb) return; // DB yoksa (web) atla
     for (var i = 1; i <= 6; i++) {
       await _seedLevel(i);
     }
   }
 
   Future<void> _seedLevel(int levelNum) async {
-    final existing = await _db.getCardsByLevel(levelNum);
+    final existing = await _db!.getCardsByLevel(levelNum);
     if (existing.isNotEmpty) return;
 
     final words = _wordsForLevel(levelNum);
@@ -98,7 +104,7 @@ class LessonRepository {
       gender: Value(k.cins),
     )).toList();
 
-    await _db.batchInsertCards(companions);
+    await _db!.batchInsertCards(companions);
   }
 
   List<dynamic> _wordsForLevel(int level) => switch (level) {
@@ -117,10 +123,10 @@ class LessonRepository {
     required String userId,
     required UserProfile profile,
   }) async {
-    final reviews = await _db.getDueCards(userId);
+    final reviews = await _db!.getDueCards(userId);
     final result = <VocabularyCardModel>[];
     for (final r in reviews) {
-      final card = await _db.getCard(r.cardId);
+      final card = await _db!.getCard(r.cardId);
       if (card == null) continue;
       result.add(_toModel(card, FSRSCard(
         cardId: r.cardId,
@@ -141,19 +147,19 @@ class LessonRepository {
     required int level,
     required int limit,
   }) async {
-    final cards = await _db.getNewCardsByLevel(level, limit);
+    final cards = await _db!.getNewCardsByLevel(level, limit);
     return cards.map((c) => _toModel(c, FSRSCard.newCard(c.id))).toList();
   }
 
   Future<List<VocabularyCardModel>> getCardsByCategory(
       String category, int level) async {
-    final cards = await _db.getCardsByCategory(category, level);
+    final cards = await _db!.getCardsByCategory(category, level);
     return cards.map((c) => _toModel(c, FSRSCard.newCard(c.id))).toList();
   }
 
   Future<List<VocabularyCardModel>> searchCards(String query) async {
     if (query.trim().isEmpty) return [];
-    final cards = await _db.searchCards(query.trim());
+    final cards = await _db!.searchCards(query.trim());
     return cards.map((c) => _toModel(c, FSRSCard.newCard(c.id))).toList();
   }
 
@@ -164,10 +170,10 @@ class LessonRepository {
     required String cardId,
     required Rating rating,
   }) async {
-    final existing = await _db.getReview(userId, cardId);
+    final existing = await _db!.getReview(userId, cardId);
     if (existing == null) {
       final updated = FSRSAlgorithm.schedule(FSRSCard.newCard(cardId), rating);
-      await _db.createReview(userId, cardId, updated);
+      await _db!.createReview(userId, cardId, updated);
     } else {
       final fsrs = FSRSCard(
         cardId: cardId,
@@ -180,7 +186,7 @@ class LessonRepository {
         reviewCount: existing.reviewCount,
         lapseCount: existing.lapseCount,
       );
-      await _db.updateReview(userId, cardId, FSRSAlgorithm.schedule(fsrs, rating));
+      await _db!.updateReview(userId, cardId, FSRSAlgorithm.schedule(fsrs, rating));
     }
   }
 
@@ -202,20 +208,20 @@ class LessonRepository {
   ];
 
   Future<void> markLessonComplete(String userId, String lessonId) =>
-      _db.markLessonComplete(userId, lessonId);
+      _db!.markLessonComplete(userId, lessonId);
 
   Future<Set<String>> getCompletedLessons(String userId) =>
-      _db.getCompletedLessons(userId);
+      _db!.getCompletedLessons(userId);
 
   // ── İSTATİSTİK ───────────────────────────────────────────
 
   Future<DailyStats> getDailyStats(String userId) async {
-    final reviews = await _db.getReviewsForDate(userId, DateTime.now());
+    final reviews = await _db!.getReviewsForDate(userId, DateTime.now());
     return DailyStats(
       totalReviewed: reviews.length,
       correctCount: reviews.where((r) => r.wasCorrect).length,
-      dueCount: await _db.getDueCardCount(userId),
-      streakDays: await _db.getStreakDays(userId),
+      dueCount: await _db!.getDueCardCount(userId),
+      streakDays: await _db!.getStreakDays(userId),
       xpToday: reviews.length * 10,
     );
   }
@@ -226,10 +232,10 @@ class LessonRepository {
       level: level,
       levelName: kLevelNames[level] ?? 'A1',
       totalCards: total,
-      learnedCards: await _db.getLearnedCardCount(userId, level),
-      masteredCards: await _db.getMasteredCardCount(userId, level),
+      learnedCards: await _db!.getLearnedCardCount(userId, level),
+      masteredCards: await _db!.getMasteredCardCount(userId, level),
       completionPercent: total > 0
-          ? (await _db.getLearnedCardCount(userId, level)) / total
+          ? (await _db!.getLearnedCardCount(userId, level)) / total
           : 0.0,
     );
   }
@@ -341,17 +347,32 @@ final levelLessonsProvider =
 
 final levelProgressProvider =
     FutureProvider.family<LevelProgress, ({String userId, int level})>(
-        (ref, args) {
-  return ref.watch(lessonRepositoryProvider)
-      .getLevelProgress(args.userId, args.level);
+        (ref, args) async {
+  try {
+    return await ref.watch(lessonRepositoryProvider)
+        .getLevelProgress(args.userId, args.level);
+  } catch (_) {
+    return LevelProgress(
+      level: args.level, levelName: kLevelNames[args.level] ?? 'A1',
+      totalCards: 0, learnedCards: 0, masteredCards: 0, completionPercent: 0,
+    );
+  }
 });
 
 final dailyStatsProvider =
-    FutureProvider.family<DailyStats, String>((ref, userId) {
-  return ref.watch(lessonRepositoryProvider).getDailyStats(userId);
+    FutureProvider.family<DailyStats, String>((ref, userId) async {
+  try {
+    return await ref.watch(lessonRepositoryProvider).getDailyStats(userId);
+  } catch (_) {
+    return DailyStats(totalReviewed: 0, correctCount: 0, dueCount: 0, streakDays: 0, xpToday: 0);
+  }
 });
 
 final searchResultsProvider =
-    FutureProvider.family<List<VocabularyCardModel>, String>((ref, query) {
-  return ref.watch(lessonRepositoryProvider).searchCards(query);
+    FutureProvider.family<List<VocabularyCardModel>, String>((ref, query) async {
+  try {
+    return await ref.watch(lessonRepositoryProvider).searchCards(query);
+  } catch (_) {
+    return [];
+  }
 });
