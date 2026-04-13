@@ -26,17 +26,30 @@ class ProfileScreen extends ConsumerWidget {
     final profile = ref.watch(userProfileProvider);
     final userId = user?.uid ?? 'anonymous';
 
-    final dailyStats = ref.watch(dailyStatsProvider(userId));
+    // Güvenli provider erişimi — DB hatalarında çökmez
+    AsyncValue<dynamic>? dailyStats;
+    try {
+      dailyStats = ref.watch(dailyStatsProvider(userId));
+    } catch (_) {
+      dailyStats = null;
+    }
 
-    // Tüm seviyeler için ilerleme
-    final levelProgresses = [1,2,3,4,5,6].map(
-      (lvl) => ref.watch(levelProgressProvider((userId: userId, level: lvl))),
-    ).toList();
+    var levelProgresses = <AsyncValue<LevelProgress>>[];
+    try {
+      levelProgresses = [1,2,3,4,5,6].map(
+        (lvl) => ref.watch(levelProgressProvider((userId: userId, level: lvl))),
+      ).toList();
+    } catch (_) {}
+
+    final screenWidth = MediaQuery.of(context).size.width;
 
     return Scaffold(
       backgroundColor: AppColors.backgroundPrimary,
       body: SafeArea(
-        child: CustomScrollView(
+        child: Center(
+          child: ConstrainedBox(
+            constraints: const BoxConstraints(maxWidth: 480),
+            child: CustomScrollView(
           slivers: [
             // ── Üst Bar ──────────────────────────────────────
             SliverAppBar(
@@ -48,12 +61,11 @@ class ProfileScreen extends ConsumerWidget {
                 onPressed: () => context.pop(),
               ),
               title: Text(
-                'Profîla min', // Profilim — Kurmancî (İlke §0.5)
+                'Profîla min',
                 style: AppTypography.headingSmall.copyWith(
                     color: AppColors.textPrimary, fontWeight: FontWeight.w700),
               ),
               actions: [
-                // Ayarlar
                 IconButton(
                   icon: const Icon(Icons.settings_outlined),
                   onPressed: () => context.push(AppRoutes.settings),
@@ -78,17 +90,22 @@ class ProfileScreen extends ConsumerWidget {
                   const SizedBox(height: AppSpacing.lg),
 
                   // ── Özet İstatistikler ────────────────────
-                  dailyStats.when(
-                    data: (s) => _StatsRow(
-                      totalReviewed: s.totalReviewed,
-                      accuracy: s.accuracy,
-                      streakDays: s.streakDays,
-                      xpToday: s.xpToday,
-                    ),
-                    loading: () => const _StatsRow(
+                  if (dailyStats != null)
+                    dailyStats.when(
+                      data: (s) => _StatsRow(
+                        totalReviewed: s.totalReviewed,
+                        accuracy: s.accuracy,
+                        streakDays: s.streakDays,
+                        xpToday: s.xpToday,
+                      ),
+                      loading: () => const _StatsRow(
+                        totalReviewed: 0, accuracy: 0, streakDays: 0, xpToday: 0),
+                      error: (_, __) => const _StatsRow(
+                        totalReviewed: 0, accuracy: 0, streakDays: 0, xpToday: 0),
+                    )
+                  else
+                    const _StatsRow(
                       totalReviewed: 0, accuracy: 0, streakDays: 0, xpToday: 0),
-                    error: (_, __) => const SizedBox.shrink(),
-                  ),
 
                   const SizedBox(height: AppSpacing.lg),
 
@@ -125,6 +142,8 @@ class ProfileScreen extends ConsumerWidget {
               ),
             ),
           ],
+        ),
+          ),
         ),
       ),
     );

@@ -865,10 +865,19 @@ class _LutkeBottomNav extends StatelessWidget {
                 icon: Icons.refresh_rounded,
                 label: 'Dubare',
                 isSelected: currentIndex == 1,
-                onTap: () => context.push(
-                  AppRoutes.lesson,
-                  extra: {'mode': 'review'},
-                ),
+                onTap: () {
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    SnackBar(
+                      content: Text(
+                        'Tekrar kartları henüz hazır değil — FSRS zamanı gelince aktif olacak',
+                        style: TextStyle(fontSize: 13),
+                      ),
+                      behavior: SnackBarBehavior.floating,
+                      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+                      duration: const Duration(seconds: 2),
+                    ),
+                  );
+                },
               ),
               _NavItem(
                 icon: Icons.music_note_rounded,

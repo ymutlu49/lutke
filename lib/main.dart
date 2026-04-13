@@ -119,17 +119,38 @@ class _LutkeAppState extends ConsumerState<LutkeApp> {
       // Debug banner kapalı
       debugShowCheckedModeBanner: false,
 
-      // Uygulama genelinde hata yakalama (widget hatası)
+      // Telefon ekran boyutu simülasyonu (web'de) + hata yakalama
       builder: (context, child) {
+        Widget content = child!;
+
         if (_seedError) {
-          return Banner(
+          content = Banner(
             message: 'Seed hatası',
             location: BannerLocation.topEnd,
             color: Colors.orange,
-            child: child!,
+            child: content,
           );
         }
-        return child!;
+
+        // Web'de mobil genişlik sınırlaması
+        return Center(
+          child: Container(
+            constraints: const BoxConstraints(maxWidth: 480),
+            decoration: BoxDecoration(
+              color: Theme.of(context).scaffoldBackgroundColor,
+              boxShadow: MediaQuery.of(context).size.width > 480
+                  ? [
+                      BoxShadow(
+                        color: Colors.black.withOpacity(0.08),
+                        blurRadius: 32,
+                        spreadRadius: 0,
+                      ),
+                    ]
+                  : null,
+            ),
+            child: content,
+          ),
+        );
       },
     );
   }

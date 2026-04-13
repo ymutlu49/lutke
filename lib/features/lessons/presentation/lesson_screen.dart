@@ -72,39 +72,41 @@ class _LessonScreenState extends ConsumerState<LessonScreen> {
   }
 
   Future<void> _loadCards() async {
-    final repo = ref.read(lessonRepositoryProvider);
-    List<VocabularyCardModel> cards;
+    try {
+      final repo = ref.read(lessonRepositoryProvider);
+      List<VocabularyCardModel> cards;
 
-    if (widget.mode == 'review') {
-      // FSRS tekrar kuyruğu
-      final profile = ref.read(userProfileProvider);
-      cards = await repo.getDueCards(
-        userId: widget.userId,
-        profile: profile,
-      );
-    } else if (widget.lessonId != null) {
-      // Belirli ders — yeni kartlar
-      cards = await repo.getNewCards(
-        level: ref.read(userProfileProvider).currentLevelNum,
-        limit: 20,
-      );
-    } else {
-      // Genel yeni kartlar
-      cards = await repo.getNewCards(
-        level: ref.read(userProfileProvider).currentLevelNum,
-        limit: 15,
-      );
+      if (widget.mode == 'review') {
+        final profile = ref.read(userProfileProvider);
+        cards = await repo.getDueCards(
+          userId: widget.userId,
+          profile: profile,
+        ).timeout(const Duration(seconds: 5), onTimeout: () => []);
+      } else if (widget.lessonId != null) {
+        cards = await repo.getNewCards(
+          level: ref.read(userProfileProvider).currentLevelNum,
+          limit: 20,
+        ).timeout(const Duration(seconds: 5), onTimeout: () => []);
+      } else {
+        cards = await repo.getNewCards(
+          level: ref.read(userProfileProvider).currentLevelNum,
+          limit: 15,
+        ).timeout(const Duration(seconds: 5), onTimeout: () => []);
+      }
+
+      if (mounted) {
+        setState(() {
+          _cards = cards;
+          _loading = false;
+        });
+      }
+    } catch (_) {
+      // DB hatası — boş liste göster
+      if (mounted) setState(() => _loading = false);
     }
 
-    if (mounted) {
-      setState(() {
-        _cards = cards;
-        _loading = false;
-      });
-    }
-
-    // Analitik — İlke §analytics
-    ref.read(analyticsServiceProvider).logAppOpen();
+    // Analitik
+    try { ref.read(analyticsServiceProvider).logAppOpen(); } catch (_) {}
   }
 
   // ── FSRS DEĞERLENDİRME ─────────────────────────────────────
