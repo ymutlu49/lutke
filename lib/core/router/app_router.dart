@@ -2,9 +2,11 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
+import '../../features/admin/admin_panel_screen.dart';
 import '../../features/auth/register_screen.dart';
 import '../../features/lessons/presentation/home_screen.dart';
 import '../../features/lessons/presentation/lesson_screen.dart';
+import '../../features/lessons/presentation/vocabulary_browse_screen.dart';
 import '../../features/onboarding/splash_screen.dart';
 import '../../features/onboarding/passive_test_screen.dart';
 import '../../features/onboarding/motivation_anchor_screen.dart';
@@ -36,6 +38,8 @@ abstract class AppRoutes {
   static const lesson           = '/lesson';
   static const profile          = '/profile';
   static const settings         = '/settings';
+  static const vocabulary       = '/vocabulary';
+  static const admin            = '/admin';
 }
 
 @riverpod
@@ -123,6 +127,16 @@ GoRouter appRouter(AppRouterRef ref) {
       GoRoute(
         path: AppRoutes.profile,
         builder: (context, state) => const ProfileScreen(),
+      ),
+
+      GoRoute(
+        path: AppRoutes.vocabulary,
+        builder: (context, state) => const VocabularyBrowseScreen(),
+      ),
+
+      GoRoute(
+        path: AppRoutes.admin,
+        builder: (context, state) => const AdminPanelScreen(),
       ),
 
       GoRoute(

@@ -44,7 +44,10 @@ class HomeScreen extends ConsumerWidget {
               elevation: 0,
               toolbarHeight: 56,
               titleSpacing: AppSpacing.md,
-              title: LutkeLogo.brandHorizontal(iconSize: 32),
+              title: GestureDetector(
+                onLongPress: () => context.push(AppRoutes.admin),
+                child: LutkeLogo.brandHorizontal(iconSize: 32),
+              ),
             ),
 
             // ── İçerik ───────────────────────────────────────────
@@ -697,11 +700,8 @@ class _UnitMapSection extends StatelessWidget {
           return _LessonCard(
             lesson: lesson,
             index: i,
-            isUnlocked: i <= 1, // İlk 2 ders açık, geri kalan kilitli (MVP)
-            onTap: () => context.push(
-              AppRoutes.lesson,
-              extra: {'lessonId': lesson.id, 'userId': userId},
-            ),
+            isUnlocked: true, // Tüm dersler açık — kelime tarayıcıya yönlendirir
+            onTap: () => context.push(AppRoutes.vocabulary),
           ).animate().fadeIn(delay: (300 + i * 50).ms);
         }),
 
@@ -851,47 +851,52 @@ class _LutkeBottomNav extends StatelessWidget {
             bottom: bottomPadding > 0 ? 0 : 8,
           ),
           child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
-              _NavItem(
-                icon: Icons.menu_book_rounded,
-                label: 'Fêrbûn',
-                isSelected: currentIndex == 0,
-                onTap: () {
-                  // Already on home
-                },
+              Expanded(
+                child: _NavItem(
+                  icon: Icons.menu_book_rounded,
+                  label: 'Fêrbûn',
+                  isSelected: currentIndex == 0,
+                  onTap: () {
+                    // Already on home
+                  },
+                ),
               ),
-              _NavItem(
-                icon: Icons.refresh_rounded,
-                label: 'Dubare',
-                isSelected: currentIndex == 1,
-                onTap: () {
-                  ScaffoldMessenger.of(context).showSnackBar(
-                    SnackBar(
-                      content: Text(
-                        'Tekrar kartları henüz hazır değil — FSRS zamanı gelince aktif olacak',
-                        style: TextStyle(fontSize: 13),
+              Expanded(
+                child: _NavItem(
+                  icon: Icons.translate_rounded,
+                  label: 'Peyv',
+                  isSelected: currentIndex == 1,
+                  onTap: () => context.push(AppRoutes.vocabulary),
+                ),
+              ),
+              Expanded(
+                child: _NavItem(
+                  icon: Icons.music_note_rounded,
+                  label: 'Çand',
+                  isSelected: currentIndex == 2,
+                  onTap: () {
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      SnackBar(
+                        content: const Text(
+                          'Çand bölümü yakında aktif olacak',
+                          style: TextStyle(fontSize: 13),
+                        ),
+                        behavior: SnackBarBehavior.floating,
+                        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+                        duration: const Duration(seconds: 2),
                       ),
-                      behavior: SnackBarBehavior.floating,
-                      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
-                      duration: const Duration(seconds: 2),
-                    ),
-                  );
-                },
+                    );
+                  },
+                ),
               ),
-              _NavItem(
-                icon: Icons.music_note_rounded,
-                label: 'Çand',
-                isSelected: currentIndex == 2,
-                onTap: () {
-                  // TODO: Navigate to culture screen when available
-                },
-              ),
-              _NavItem(
-                icon: Icons.person_rounded,
-                label: 'Profîl',
-                isSelected: currentIndex == 3,
-                onTap: () => context.push(AppRoutes.profile),
+              Expanded(
+                child: _NavItem(
+                  icon: Icons.person_rounded,
+                  label: 'Profîl',
+                  isSelected: currentIndex == 3,
+                  onTap: () => context.push(AppRoutes.profile),
+                ),
               ),
             ],
           ),
@@ -920,7 +925,6 @@ class _NavItem extends StatelessWidget {
       onTap: onTap,
       behavior: HitTestBehavior.opaque,
       child: SizedBox(
-        width: MediaQuery.of(context).size.width / 4,
         height: 48,
         child: Column(
           mainAxisSize: MainAxisSize.min,
