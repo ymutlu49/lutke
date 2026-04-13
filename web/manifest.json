@@ -1,11 +1,11 @@
 {
-    "name": "lutke",
-    "short_name": "lutke",
+    "name": "LÛTKE — Zimanê Kurdî",
+    "short_name": "LÛTKE",
     "start_url": ".",
     "display": "standalone",
-    "background_color": "#0175C2",
-    "theme_color": "#0175C2",
-    "description": "A new Flutter project.",
+    "background_color": "#EDF7F4",
+    "theme_color": "#1A7B6B",
+    "description": "Kurmancî dil öğretim uygulaması — Kurdish Language Learning App",
     "orientation": "portrait-primary",
     "prefer_related_applications": false,
     "icons": [

@@ -63,22 +63,23 @@ class _SplashScreenState extends ConsumerState<SplashScreen> {
 
               // Logo — canlandırmalı giriş
               Container(
-                width: 120,
-                height: 120,
+                width: 140,
+                height: 140,
                 decoration: BoxDecoration(
-                  color: Colors.white.withOpacity(0.15),
+                  color: Colors.white,
                   shape: BoxShape.circle,
-                ),
-                child: Center(
-                  child: Text(
-                    'L',
-                    style: TextStyle(
-                      fontSize: 64,
-                      fontWeight: FontWeight.w900,
-                      color: Colors.white,
-                      letterSpacing: -2,
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.black.withOpacity(0.1),
+                      blurRadius: 24,
+                      offset: const Offset(0, 8),
                     ),
-                  ),
+                  ],
+                ),
+                padding: const EdgeInsets.all(16),
+                child: Image.asset(
+                  'assets/images/logo_512.png',
+                  fit: BoxFit.contain,
                 ),
               )
                   .animate()
