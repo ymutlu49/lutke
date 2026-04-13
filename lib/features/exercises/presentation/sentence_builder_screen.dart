@@ -30,7 +30,8 @@ class _SentenceQuestion {
 }
 
 class SentenceBuilderScreen extends ConsumerStatefulWidget {
-  const SentenceBuilderScreen({super.key});
+  final String? category;
+  const SentenceBuilderScreen({super.key, this.category});
 
   @override
   ConsumerState<SentenceBuilderScreen> createState() =>
@@ -92,7 +93,12 @@ class _SentenceBuilderScreenState extends ConsumerState<SentenceBuilderScreen>
     final rng = Random();
     final pool = <_SentenceQuestion>[];
 
-    for (final word in kA1TamKelimeler) {
+    var source = kA1TamKelimeler.toList();
+    if (widget.category != null && widget.category!.isNotEmpty) {
+      final filtered = source.where((w) => w.kat == widget.category).toList();
+      if (filtered.length >= 3) source = filtered;
+    }
+    for (final word in source) {
       final herList = word.her as List<dynamic>?;
       if (herList == null || herList.isEmpty) continue;
 

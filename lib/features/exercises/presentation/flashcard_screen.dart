@@ -22,7 +22,8 @@ import '../../../shared/utils/word_emoji_map.dart';
 // ════════════════════════════════════════════════════════════════
 
 class FlashcardScreen extends ConsumerStatefulWidget {
-  const FlashcardScreen({super.key});
+  final String? category;
+  const FlashcardScreen({super.key, this.category});
 
   @override
   ConsumerState<FlashcardScreen> createState() => _FlashcardScreenState();
@@ -65,10 +66,12 @@ class _FlashcardScreenState extends ConsumerState<FlashcardScreen>
   void initState() {
     super.initState();
 
-    // Kelime listesinden rastgele seç
-    final allWords = kA1TamKelimeler
-        .where((w) => w.kat != 'alfabe') // Alfabe kartlarını atla
-        .toList();
+    // Kelime listesinden rastgele seç (kategori filtresi varsa uygula)
+    var allWords = kA1TamKelimeler.toList();
+    if (widget.category != null && widget.category!.isNotEmpty) {
+      final filtered = allWords.where((w) => w.kat == widget.category).toList();
+      if (filtered.length >= 4) allWords = filtered;
+    }
     allWords.shuffle(Random());
     _cards = allWords
         .take(_sessionCardCount)

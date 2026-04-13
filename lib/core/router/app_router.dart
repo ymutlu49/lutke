@@ -186,15 +186,30 @@ GoRouter appRouter(AppRouterRef ref) {
                   ),
                   GoRoute(
                     path: 'flashcard',
-                    builder: (_, __) => const FlashcardScreen(),
+                    builder: (_, state) {
+                      final extra = state.extra as Map<String, dynamic>?;
+                      return FlashcardScreen(
+                        category: extra?['category'] as String?,
+                      );
+                    },
                   ),
                   GoRoute(
                     path: 'sentence-builder',
-                    builder: (_, __) => const SentenceBuilderScreen(),
+                    builder: (_, state) {
+                      final extra = state.extra as Map<String, dynamic>?;
+                      return SentenceBuilderScreen(
+                        category: extra?['category'] as String?,
+                      );
+                    },
                   ),
                   GoRoute(
                     path: 'word-match',
-                    builder: (_, __) => const WordMatchScreen(),
+                    builder: (_, state) {
+                      final extra = state.extra as Map<String, dynamic>?;
+                      return WordMatchScreen(
+                        category: extra?['category'] as String?,
+                      );
+                    },
                   ),
                   GoRoute(
                     path: 'grammar',
@@ -210,7 +225,12 @@ GoRouter appRouter(AppRouterRef ref) {
                   ),
                   GoRoute(
                     path: 'listening',
-                    builder: (_, __) => const ListeningScreen(),
+                    builder: (_, state) {
+                      final extra = state.extra as Map<String, dynamic>?;
+                      return ListeningScreen(
+                        category: extra?['category'] as String?,
+                      );
+                    },
                   ),
                   GoRoute(
                     path: 'lesson',

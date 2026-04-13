@@ -76,8 +76,13 @@ class _ListeningQuestion {
 
 // ── Kelime Havuzu ──────────────────────────────────────────────
 
-List<_ListeningWord> _loadListeningWords() {
-  return kA1TamKelimeler
+List<_ListeningWord> _loadListeningWords({String? category}) {
+  var source = kA1TamKelimeler.toList();
+  if (category != null && category.isNotEmpty) {
+    final filtered = source.where((r) => r.kat == category).toList();
+    if (filtered.length >= 4) source = filtered;
+  }
+  return source
       .where((r) => r.ku.length > 1 && r.tr.length > 1 && (r.her as List).isNotEmpty)
       .map((r) => _ListeningWord(
             id: r.id,
@@ -91,8 +96,8 @@ List<_ListeningWord> _loadListeningWords() {
 
 // ── Soru Üretici ───────────────────────────────────────────────
 
-List<_ListeningQuestion> _generateListeningSession({int questionCount = 8}) {
-  final allWords = _loadListeningWords();
+List<_ListeningQuestion> _generateListeningSession({int questionCount = 8, String? category}) {
+  final allWords = _loadListeningWords(category: category);
   if (allWords.length < 6) return [];
 
   final rng = Random();
@@ -261,7 +266,8 @@ List<_ListeningQuestion> _generateListeningSession({int questionCount = 8}) {
 // ════════════════════════════════════════════════════════════════
 
 class ListeningScreen extends ConsumerStatefulWidget {
-  const ListeningScreen({super.key});
+  final String? category;
+  const ListeningScreen({super.key, this.category});
 
   @override
   ConsumerState<ListeningScreen> createState() => _ListeningScreenState();
@@ -286,7 +292,7 @@ class _ListeningScreenState extends ConsumerState<ListeningScreen>
   @override
   void initState() {
     super.initState();
-    _questions = _generateListeningSession(questionCount: 8);
+    _questions = _generateListeningSession(questionCount: 8, category: widget.category);
     if (_questions.isNotEmpty) {
       _startTypewriter();
     }
@@ -442,7 +448,7 @@ class _ListeningScreenState extends ConsumerState<ListeningScreen>
         onRetry: () {
           Navigator.of(context).pop();
           setState(() {
-            _questions = _generateListeningSession(questionCount: 8);
+            _questions = _generateListeningSession(questionCount: 8, category: widget.category);
             _currentIndex = 0;
             _correctCount = 0;
             _hearts = 3;

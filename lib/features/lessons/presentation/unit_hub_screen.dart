@@ -147,7 +147,7 @@ class UnitHubScreen extends ConsumerWidget {
                       descTr: 'Kelime kartları',
                       showTr: showTr,
                       color: AppColors.accent,
-                      onTap: () => context.push(AppRoutes.flashcard),
+                      onTap: () => context.push(AppRoutes.flashcard, extra: {'category': category}),
                     ).animate().fadeIn(delay: 200.ms).slideY(begin: 0.05),
 
                     const SizedBox(height: 14),
@@ -159,7 +159,7 @@ class UnitHubScreen extends ConsumerWidget {
                       descTr: 'Dinle ve seç',
                       showTr: showTr,
                       color: const Color(0xFF2196F3),
-                      onTap: () => context.push(AppRoutes.listening),
+                      onTap: () => context.push(AppRoutes.listening, extra: {'category': category}),
                     ).animate().fadeIn(delay: 300.ms).slideY(begin: 0.05),
 
                     const SizedBox(height: 14),
@@ -171,7 +171,7 @@ class UnitHubScreen extends ConsumerWidget {
                       descTr: 'Cümle kur',
                       showTr: showTr,
                       color: const Color(0xFF9C27B0),
-                      onTap: () => context.push(AppRoutes.sentenceBuilder),
+                      onTap: () => context.push(AppRoutes.sentenceBuilder, extra: {'category': category}),
                     ).animate().fadeIn(delay: 400.ms).slideY(begin: 0.05),
 
                     const SizedBox(height: 14),
@@ -183,7 +183,7 @@ class UnitHubScreen extends ConsumerWidget {
                       descTr: 'Kelime eşleştir',
                       showTr: showTr,
                       color: const Color(0xFFFF5722),
-                      onTap: () => context.push(AppRoutes.wordMatch),
+                      onTap: () => context.push(AppRoutes.wordMatch, extra: {'category': category}),
                     ).animate().fadeIn(delay: 500.ms).slideY(begin: 0.05),
 
                     const SizedBox(height: 24),

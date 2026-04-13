@@ -27,7 +27,8 @@ import '../../lessons/domain/a1_kelime_db.dart';
 // ════════════════════════════════════════════════════════════════
 
 class WordMatchScreen extends ConsumerStatefulWidget {
-  const WordMatchScreen({super.key});
+  final String? category;
+  const WordMatchScreen({super.key, this.category});
 
   @override
   ConsumerState<WordMatchScreen> createState() => _WordMatchScreenState();
@@ -86,9 +87,12 @@ class _WordMatchScreenState extends ConsumerState<WordMatchScreen>
   void initState() {
     super.initState();
 
-    _allWords = kA1TamKelimeler
-        .where((w) => w.kat != 'alfabe')
-        .toList();
+    var source = kA1TamKelimeler.toList();
+    if (widget.category != null && widget.category!.isNotEmpty) {
+      final filtered = source.where((w) => w.kat == widget.category).toList();
+      if (filtered.length >= 6) source = filtered;
+    }
+    _allWords = source;
 
     _shakeController = AnimationController(
       vsync: this,
