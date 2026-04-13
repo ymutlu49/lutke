@@ -1224,35 +1224,16 @@ class _SkillTreePath extends StatelessWidget {
             isCurrent: isCurrent,
             isLocked: isLocked,
             showTurkish: ref.watch(showTurkishProvider),
-            onTap: isCurrent
-                ? () => context.push(
-                    AppRoutes.quiz,
-                    extra: {'level': 'A1', 'category': unit.katKey},
-                  )
-                : isCompleted
-                    ? () => context.push(
-                        AppRoutes.vocabulary,
-                        extra: {'category': unit.katKey},
-                      )
-                    : isLocked
-                        ? () {
-                            ScaffoldMessenger.of(context).showSnackBar(
-                              SnackBar(
-                                content: const Text(
-                                  'Pêşî waneyên berê temam bike',
-                                  style: TextStyle(fontSize: 13),
-                                ),
-                                behavior: SnackBarBehavior.floating,
-                                shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(12)),
-                                duration: const Duration(seconds: 2),
-                              ),
-                            );
-                          }
-                        : () => context.push(
-                            AppRoutes.quiz,
-                            extra: {'level': 'A1', 'category': unit.katKey},
-                          ),
+            onTap: () => context.push(
+              AppRoutes.unitHub,
+              extra: {
+                'category': unit.katKey,
+                'titleKu': unit.kuTitle,
+                'titleTr': unit.trTitle,
+                'icon': unit.icon,
+                'wordCount': unit.wordCount,
+              },
+            ),
           );
         }),
       ],

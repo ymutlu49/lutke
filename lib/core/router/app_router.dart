@@ -30,6 +30,7 @@ import '../../features/grammar/grammar_tips_screen.dart';
 import '../../features/exercises/presentation/smart_review_screen.dart';
 import '../../features/lessons/presentation/progress_map_screen.dart';
 import '../../features/exercises/presentation/listening_screen.dart';
+import '../../features/lessons/presentation/unit_hub_screen.dart';
 import '../../features/child_mode/presentation/mode_selection_screen.dart';
 import '../../features/child_mode/presentation/child_home_screen.dart';
 import '../../features/child_mode/presentation/child_vocabulary_screen.dart';
@@ -75,6 +76,8 @@ abstract class AppRoutes {
   static const review            = '/home/review';
   static const progressMap       = '/progress-map';
   static const listening         = '/home/listening';
+
+  static const unitHub               = '/unit-hub';
 
   // ── Lûtke Zarok (Çocuk Modu) ────────────────────────────────
   static const childOnboarding       = '/child/onboarding';
@@ -255,6 +258,21 @@ GoRouter appRouter(AppRouterRef ref) {
             ],
           ),
         ],
+      ),
+
+      // ── Birim Hub — Durak detay ekranı ────────────────────
+      GoRoute(
+        path: AppRoutes.unitHub,
+        builder: (_, state) {
+          final extra = state.extra as Map<String, dynamic>? ?? {};
+          return UnitHubScreen(
+            category: extra['category'] as String? ?? '',
+            titleKu: extra['titleKu'] as String? ?? '',
+            titleTr: extra['titleTr'] as String? ?? '',
+            icon: extra['icon'] as IconData? ?? Icons.menu_book_rounded,
+            wordCount: extra['wordCount'] as int? ?? 0,
+          );
+        },
       ),
 
       // ── Lûtke Zarok — Çocuk Onboarding ────────────────────
