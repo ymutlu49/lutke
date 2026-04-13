@@ -734,38 +734,15 @@ class _QuizScreenState extends ConsumerState<QuizScreen>
       key: ValueKey('typing_${q.word.id}'),
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        _buildInstruction(
-            _showTurkish
-                ? 'Ev peyvê bi Kurmancî binivîse'
-                : 'Vê peyvê binivîse',
-            '',
-            showTr: false),
+        _buildInstruction('Vê peyvê binivîse', '', showTr: false),
 
         Gap.lg,
 
-        // Soru gösterimi
-        if (_showTurkish)
-          _buildWordCard(q.word.tr, isKurmanji: false)
-        else
-          // Kurmancî modda: heritage cümle göster, kelimeyi yaz
-          Center(
-            child: Container(
-              margin: const EdgeInsets.symmetric(horizontal: 16),
-              padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 16),
-              decoration: BoxDecoration(
-                color: AppColors.primarySurface,
-                borderRadius: BorderRadius.circular(20),
-                border: Border.all(color: AppColors.primary.withOpacity(0.15)),
-              ),
-              child: Text(
-                (q.word.her is List && (q.word.her as List).isNotEmpty)
-                    ? _maskWord((q.word.her as List)[0].toString(), q.word.ku)
-                    : '____',
-                style: AppTypography.kurmanji.copyWith(fontSize: 18, height: 1.5),
-                textAlign: TextAlign.center,
-              ),
-            ),
-          ),
+        // Soru gösterimi — her iki modda da kelime kartı göster
+        _buildWordCard(
+          _showTurkish ? q.word.tr : q.word.ku,
+          isKurmanji: !_showTurkish,
+        ),
 
         const SizedBox(height: AppSpacing.questionToOptions),
 
@@ -797,7 +774,7 @@ class _QuizScreenState extends ConsumerState<QuizScreen>
             textAlign: TextAlign.center,
             style: AppTypography.kurmanji,
             decoration: InputDecoration(
-              hintText: 'Kurmancî bersiv...',
+              hintText: 'Bersiva xwe binivîse...',
               hintStyle: AppTypography.body
                   .copyWith(color: AppColors.textTertiary),
               border: InputBorder.none,
