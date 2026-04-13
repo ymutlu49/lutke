@@ -57,15 +57,13 @@ class HomeScreen extends ConsumerWidget {
                   Row(
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
-                      // Logo 40px
+                      // Mascot 40px
                       GestureDetector(
                         onLongPress: () => context.push(AppRoutes.admin),
-                        child: ClipOval(
-                          child: SizedBox(
-                            width: 40, height: 40,
-                            child: Image.asset('assets/images/logo_128.png',
-                              fit: BoxFit.cover, filterQuality: FilterQuality.medium),
-                          ),
+                        child: SizedBox(
+                          width: 40, height: 40,
+                          child: Image.asset('assets/images/mascot_64.png',
+                            fit: BoxFit.contain, filterQuality: FilterQuality.medium),
                         ),
                       ),
                       const SizedBox(width: 12),
@@ -1471,7 +1469,11 @@ class _SkillTreeNode extends StatelessWidget {
             ? Icon(Icons.check_rounded, color: iconColor, size: size * 0.4)
             : isLocked
                 ? Icon(Icons.lock_rounded, color: iconColor, size: size * 0.35)
-                : Icon(unit.icon, color: iconColor, size: size * 0.4),
+                : isCurrent
+                    ? Image.asset('assets/images/mascot_64.png',
+                        width: size * 0.55, height: size * 0.55,
+                        filterQuality: FilterQuality.medium)
+                    : Icon(unit.icon, color: iconColor, size: size * 0.4),
       ),
     );
 

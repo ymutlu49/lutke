@@ -741,8 +741,9 @@ class _EmptyView extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Icon(Icons.check_circle_outline,
-                size: 72, color: AppColors.primary.withOpacity(0.6)),
+            Image.asset('assets/images/mascot_128.png',
+                width: 100, height: 100,
+                filterQuality: FilterQuality.medium),
             const SizedBox(height: AppSpacing.lg),
             Text(
               'Hemû peld hatine xwendin!',  // Tüm kartlar okundu!

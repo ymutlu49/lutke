@@ -919,30 +919,12 @@ class _FlashcardScreenState extends ConsumerState<FlashcardScreen>
         children: [
           const SizedBox(height: AppSpacing.xxl),
 
-          // Kutlama
-          Container(
+          // Mascot kutlama
+          Image.asset(
+            'assets/images/mascot_128.png',
             width: 100,
             height: 100,
-            decoration: BoxDecoration(
-              shape: BoxShape.circle,
-              gradient: LinearGradient(
-                colors: [AppColors.primary, AppColors.primaryLight],
-                begin: Alignment.topLeft,
-                end: Alignment.bottomRight,
-              ),
-              boxShadow: [
-                BoxShadow(
-                  color: AppColors.primary.withOpacity(0.3),
-                  blurRadius: 24,
-                  offset: const Offset(0, 8),
-                ),
-              ],
-            ),
-            child: const Icon(
-              Icons.celebration_rounded,
-              size: 48,
-              color: Colors.white,
-            ),
+            filterQuality: FilterQuality.medium,
           ).animate().scale(
                 begin: const Offset(0.5, 0.5),
                 duration: 600.ms,

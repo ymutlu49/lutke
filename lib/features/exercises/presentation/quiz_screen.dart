@@ -1671,6 +1671,18 @@ class _QuizScreenState extends ConsumerState<QuizScreen>
                 children: [
                   Gap.md,
 
+                  // ── Mascot (happy or encouraging) ────────────
+                  Image.asset(
+                    'assets/images/mascot_128.png',
+                    width: 128,
+                    height: 128,
+                    filterQuality: FilterQuality.medium,
+                  ).animate()
+                      .fadeIn(duration: 500.ms)
+                      .slideY(begin: -0.3, curve: Curves.easeOut),
+
+                  Gap.sm,
+
                   // ── 1. Accuracy Ring ─────────────────────────
                   _AccuracyRing(
                     accuracy: accuracyFraction,

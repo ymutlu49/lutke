@@ -597,11 +597,9 @@ class _SmartReviewScreenState extends ConsumerState<SmartReviewScreen>
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Icon(
-              Icons.emoji_events_rounded,
-              size: 80,
-              color: AppColors.accent,
-            ),
+            Image.asset('assets/images/mascot_128.png',
+              width: 100, height: 100,
+              filterQuality: FilterQuality.medium),
             const SizedBox(height: AppSpacing.lg),
             Text(
               'Peyv ji bo dubareyê tune!',

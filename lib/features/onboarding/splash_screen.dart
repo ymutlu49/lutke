@@ -53,6 +53,16 @@ class _SplashScreenState extends ConsumerState<SplashScreen> {
                 // Logo
                 LutkeLogo.splash(screenWidth: screenWidth > 480 ? 480 : screenWidth),
 
+                const SizedBox(height: 16),
+
+                // Mascot — pezkuvî
+                Image.asset('assets/images/mascot_128.png',
+                  width: 80, height: 80,
+                  filterQuality: FilterQuality.medium,
+                ).animate()
+                    .fadeIn(delay: 800.ms, duration: 600.ms)
+                    .slideY(begin: 0.4, curve: Curves.easeOut),
+
                 const Spacer(flex: 1),
 
                 // Xêr hatî
