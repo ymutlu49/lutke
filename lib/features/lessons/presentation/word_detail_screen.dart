@@ -6,6 +6,7 @@ import 'package:share_plus/share_plus.dart';
 import '../../../core/constants/app_colors.dart';
 import '../../../core/constants/app_typography.dart';
 import '../../../core/constants/app_spacing.dart';
+import '../../../shared/widgets/speak_button.dart';
 
 // ════════════════════════════════════════════════════════════════
 // KELİME DETAY EKRANI — Tam ekran kelime görünümü
@@ -112,6 +113,14 @@ class WordDetailScreen extends StatelessWidget {
             padding: const EdgeInsets.symmetric(horizontal: AppSpacing.md),
             sliver: SliverList(
               delegate: SliverChildListDelegate([
+
+                const SizedBox(height: AppSpacing.md),
+
+                // 0) Seslendirme Butonu
+                LargeSpeakButton(
+                  text: ku,
+                  subtitle: tr,
+                ).animate().fadeIn(duration: 400.ms).slideY(begin: 0.1, end: 0),
 
                 const SizedBox(height: AppSpacing.md),
 

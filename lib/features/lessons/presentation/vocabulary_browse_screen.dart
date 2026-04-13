@@ -7,6 +7,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import '../../../core/constants/app_colors.dart';
 import '../../../core/constants/app_typography.dart';
 import '../../../core/constants/app_spacing.dart';
+import '../../../shared/widgets/speak_button.dart';
 import '../domain/a1_kelime_db.dart';
 import '../domain/a2_kelime_db.dart';
 import '../domain/b1_kelime_db.dart';
@@ -955,6 +956,9 @@ class _WordCard extends StatelessWidget {
             // Ana satir: ku, tr, en, kategori
             Row(
               children: [
+                // Ses butonu
+                SpeakButton(text: ku, size: 34, color: levelColor),
+                const SizedBox(width: 8),
                 Expanded(
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
