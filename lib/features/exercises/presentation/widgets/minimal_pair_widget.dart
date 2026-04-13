@@ -7,6 +7,7 @@ import '../../../../core/constants/app_typography.dart';
 import '../../../../core/constants/app_spacing.dart';
 import '../../../../core/services/audio_service.dart';
 import '../../../../core/utils/fsrs_algorithm.dart';
+import '../../../../shared/providers/language_mode_provider.dart';
 import '../../../lessons/domain/entities/exercise.dart';
 
 // ════════════════════════════════════════════════════════════════
@@ -81,7 +82,9 @@ class _MinimalPairWidgetState extends ConsumerState<MinimalPairWidget> {
           ),
           const SizedBox(height: 4),
           Text(
-            'Hangi kelimeyi duydun?',
+            ref.watch(showTurkishProvider)
+                ? 'Hangi kelimeyi duydun?'
+                : 'Which word did you hear?',
             style: AppTypography.caption.copyWith(
               color: AppColors.textSecondary.withOpacity(0.6),
               fontSize: 11,

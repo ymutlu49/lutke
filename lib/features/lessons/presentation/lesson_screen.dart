@@ -223,32 +223,41 @@ class _LessonScreenState extends ConsumerState<LessonScreen> {
     );
   }
 
+  /// Dil moduna göre çeviri metni: Türkçe veya İngilizce fallback
+  String _translationText(VocabularyCardModel card) {
+    final showTr = ref.watch(showTurkishProvider);
+    return showTr ? card.turkish : (card.english ?? card.turkish);
+  }
+
   Widget _buildExercise(VocabularyCardModel card) {
+    final translation = _translationText(card);
+
     switch (_currentExerciseType) {
       case ExerciseType.flashcard:
         // Kart + cevabı göster + FSRS derecelendirme
         return _FlashcardExercise(
           card: card,
+          translation: translation,
           showAnswer: _showAnswer,
           onShowAnswer: () => setState(() => _showAnswer = true),
           onRating: _onRating,
         );
 
       case ExerciseType.multipleChoice:
-        // Kurmancî → Türkçe çok seçenek
+        // Kurmancî → çeviri çok seçenek
         final allCards = _cards;
         final options = _buildOptions(card, allCards);
         return MultipleChoiceExercise(
           question: card.kurmanji,
           options: options,
-          correctIndex: options.indexOf(card.turkish),
+          correctIndex: options.indexOf(translation),
           onRating: _onRating,
         );
 
       case ExerciseType.typing:
-        // Türkçe → Kurmancî yazma
+        // Çeviri → Kurmancî yazma
         return TypingExercise(
-          prompt: card.turkish,
+          prompt: translation,
           answer: card.kurmanji,
           onRating: _onRating,
         );
@@ -259,6 +268,7 @@ class _LessonScreenState extends ConsumerState<LessonScreen> {
           // Fallback: flashcard
           return _FlashcardExercise(
             card: card,
+            translation: translation,
             showAnswer: _showAnswer,
             onShowAnswer: () => setState(() => _showAnswer = true),
             onRating: _onRating,
@@ -284,14 +294,15 @@ class _LessonScreenState extends ConsumerState<LessonScreen> {
 
   List<String> _buildOptions(
       VocabularyCardModel card, List<VocabularyCardModel> allCards) {
+    final correctText = _translationText(card);
     final distractors = allCards
-        .where((c) => c.id != card.id && c.turkish != card.turkish)
-        .map((c) => c.turkish)
+        .where((c) => c.id != card.id && _translationText(c) != correctText)
+        .map((c) => _translationText(c))
         .toSet()
         .take(3)
         .toList();
 
-    final options = [card.turkish, ...distractors];
+    final options = [correctText, ...distractors];
     options.shuffle();
     return options;
   }
@@ -303,12 +314,14 @@ class _LessonScreenState extends ConsumerState<LessonScreen> {
 
 class _FlashcardExercise extends StatelessWidget {
   final VocabularyCardModel card;
+  final String translation;
   final bool showAnswer;
   final VoidCallback onShowAnswer;
   final OnRating onRating;
 
   const _FlashcardExercise({
     required this.card,
+    required this.translation,
     required this.showAnswer,
     required this.onShowAnswer,
     required this.onRating,
@@ -319,7 +332,7 @@ class _FlashcardExercise extends StatelessWidget {
     return showAnswer
         ? FSRSRatingCard(
             kurmanji: card.kurmanji,
-            turkish: card.turkish,
+            turkish: translation,
             gender: card.gender,
             sentences: card.sentencesHeritage,
             onRating: onRating,

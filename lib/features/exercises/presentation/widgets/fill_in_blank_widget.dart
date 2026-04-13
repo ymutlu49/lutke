@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../../../core/constants/app_colors.dart';
 import '../../../../core/constants/app_typography.dart';
 import '../../../../core/constants/app_spacing.dart';
 import '../../../../core/utils/fsrs_algorithm.dart';
+import '../../../../shared/providers/language_mode_provider.dart';
 import '../../../lessons/domain/entities/exercise.dart';
 
 // ═══════════════════════════════════════════════════���════════════
@@ -18,7 +20,7 @@ import '../../../lessons/domain/entities/exercise.dart';
 //   2. Serbest yazım: Doğrudan yaz (İlke §3.4: yazma %20)
 // ══════════════════════════��═════════════════════════════════════
 
-class FillInBlankWidget extends StatefulWidget {
+class FillInBlankWidget extends ConsumerStatefulWidget {
   final FillInBlankExercise exercise;
   final void Function(Rating rating) onRating;
 
@@ -29,10 +31,10 @@ class FillInBlankWidget extends StatefulWidget {
   });
 
   @override
-  State<FillInBlankWidget> createState() => _FillInBlankWidgetState();
+  ConsumerState<FillInBlankWidget> createState() => _FillInBlankWidgetState();
 }
 
-class _FillInBlankWidgetState extends State<FillInBlankWidget> {
+class _FillInBlankWidgetState extends ConsumerState<FillInBlankWidget> {
   String? _selectedOption;
   final _textController = TextEditingController();
   bool _checked = false;
@@ -66,6 +68,7 @@ class _FillInBlankWidgetState extends State<FillInBlankWidget> {
 
   @override
   Widget build(BuildContext context) {
+    final showTurkish = ref.watch(showTurkishProvider);
     return Padding(
       padding: const EdgeInsets.all(AppSpacing.md),
       child: Column(
@@ -81,7 +84,7 @@ class _FillInBlankWidgetState extends State<FillInBlankWidget> {
           ),
           const SizedBox(height: 4),
           Text(
-            'Boşluğu doldur',
+            showTurkish ? 'Boşluğu doldur' : 'Fill in the blank',
             style: AppTypography.caption.copyWith(
               color: AppColors.textSecondary.withOpacity(0.6),
               fontSize: 11,
@@ -151,7 +154,7 @@ class _FillInBlankWidgetState extends State<FillInBlankWidget> {
               ),
             )
           else
-            _CompactRatingRow(onRating: widget.onRating),
+            _CompactRatingRow(onRating: widget.onRating, showTurkish: showTurkish),
         ],
       ),
     );
@@ -453,22 +456,23 @@ class _GrammarNote extends StatelessWidget {
 
 class _CompactRatingRow extends StatelessWidget {
   final void Function(Rating rating) onRating;
-  const _CompactRatingRow({required this.onRating});
+  final bool showTurkish;
+  const _CompactRatingRow({required this.onRating, required this.showTurkish});
 
   @override
   Widget build(BuildContext context) {
     return Row(
       children: [
-        _ratingBtn('Dubare', 'Tekrar', const Color(0xFFEF5350),
+        _ratingBtn('Dubare', showTurkish ? 'Tekrar' : 'Again', const Color(0xFFEF5350),
             Icons.refresh_rounded, () => onRating(Rating.again)),
         const SizedBox(width: 8),
-        _ratingBtn('Dijwar', 'Zor', const Color(0xFFFF9800),
+        _ratingBtn('Dijwar', showTurkish ? 'Zor' : 'Hard', const Color(0xFFFF9800),
             Icons.sentiment_dissatisfied_outlined, () => onRating(Rating.hard)),
         const SizedBox(width: 8),
-        _ratingBtn('Baş', 'İyi', const Color(0xFF4CAF50),
+        _ratingBtn('Baş', showTurkish ? 'İyi' : 'Good', const Color(0xFF4CAF50),
             Icons.sentiment_satisfied_outlined, () => onRating(Rating.good)),
         const SizedBox(width: 8),
-        _ratingBtn('Hêsan', 'Kolay', const Color(0xFF2196F3),
+        _ratingBtn('Hêsan', showTurkish ? 'Kolay' : 'Easy', const Color(0xFF2196F3),
             Icons.sentiment_very_satisfied_outlined, () => onRating(Rating.easy)),
       ],
     );

@@ -7,6 +7,7 @@ import '../../../../core/constants/app_typography.dart';
 import '../../../../core/constants/app_spacing.dart';
 import '../../../../core/services/audio_service.dart';
 import '../../../../core/utils/fsrs_algorithm.dart';
+import '../../../../shared/providers/language_mode_provider.dart';
 import '../../../lessons/domain/entities/exercise.dart';
 
 // ════════════════════════════════════════════════════════════════
@@ -96,7 +97,9 @@ class _SpeakingPracticeWidgetState
           ),
           const SizedBox(height: 4),
           Text(
-            'Söyle ve dinle',
+            ref.watch(showTurkishProvider)
+                ? 'Söyle ve dinle'
+                : 'Speak and listen',
             style: AppTypography.caption.copyWith(
               color: AppColors.textSecondary.withOpacity(0.6),
               fontSize: 11,
@@ -132,7 +135,8 @@ class _SpeakingPracticeWidgetState
                   ),
                   textAlign: TextAlign.center,
                 ),
-                if (_ex.targetTranslation != null) ...[
+                if (_ex.targetTranslation != null &&
+                    ref.watch(showTurkishProvider)) ...[
                   const SizedBox(height: 8),
                   Text(
                     _ex.targetTranslation!,
@@ -159,17 +163,20 @@ class _SpeakingPracticeWidgetState
               _SpeakingPhase.listen => _ListenPhase(
                   onPlay: _playReference,
                   isPlaying: audioState.isPlaying,
+                  showTurkish: ref.watch(showTurkishProvider),
                 ),
               _SpeakingPhase.record => _RecordPhase(
                   onToggleRecord: _toggleRecording,
                   isRecording: _isRecording,
                   onPlayReference: _playReference,
+                  showTurkish: ref.watch(showTurkishProvider),
                 ),
               _SpeakingPhase.compare => _ComparePhase(
                   onPlayReference: _playReference,
                   onPlayRecording: _playRecording,
                   assessment: _selfAssessment,
                   onAssess: _assess,
+                  showTurkish: ref.watch(showTurkishProvider),
                 ),
             },
           ),
@@ -287,8 +294,9 @@ class _PhaseIndicator extends StatelessWidget {
 class _ListenPhase extends StatelessWidget {
   final VoidCallback onPlay;
   final bool isPlaying;
+  final bool showTurkish;
 
-  const _ListenPhase({required this.onPlay, required this.isPlaying});
+  const _ListenPhase({required this.onPlay, required this.isPlaying, required this.showTurkish});
 
   @override
   Widget build(BuildContext context) {
@@ -297,7 +305,9 @@ class _ListenPhase extends StatelessWidget {
         mainAxisSize: MainAxisSize.min,
         children: [
           Text(
-            'Anadil konuşucusunu dinle:',
+            showTurkish
+                ? 'Anadil konuşucusunu dinle:'
+                : 'Listen to the native speaker:',
             style: AppTypography.bodyMedium.copyWith(
               color: AppColors.textSecondary,
             ),
@@ -338,11 +348,13 @@ class _RecordPhase extends StatelessWidget {
   final VoidCallback onToggleRecord;
   final bool isRecording;
   final VoidCallback onPlayReference;
+  final bool showTurkish;
 
   const _RecordPhase({
     required this.onToggleRecord,
     required this.isRecording,
     required this.onPlayReference,
+    required this.showTurkish,
   });
 
   @override
@@ -352,7 +364,9 @@ class _RecordPhase extends StatelessWidget {
         mainAxisSize: MainAxisSize.min,
         children: [
           Text(
-            isRecording ? 'Dinliyorum...' : 'Şimdi sen söyle:',
+            isRecording
+                ? (showTurkish ? 'Dinliyorum...' : 'Listening...')
+                : (showTurkish ? 'Şimdi sen söyle:' : 'Now you speak:'),
             style: AppTypography.bodyMedium.copyWith(
               color: isRecording ? AppColors.accent : AppColors.textSecondary,
             ),
@@ -406,12 +420,14 @@ class _ComparePhase extends StatelessWidget {
   final VoidCallback onPlayRecording;
   final int? assessment;
   final ValueChanged<int> onAssess;
+  final bool showTurkish;
 
   const _ComparePhase({
     required this.onPlayReference,
     required this.onPlayRecording,
     required this.assessment,
     required this.onAssess,
+    required this.showTurkish,
   });
 
   @override
@@ -420,7 +436,7 @@ class _ComparePhase extends StatelessWidget {
       mainAxisSize: MainAxisSize.min,
       children: [
         Text(
-          'İkisini karşılaştır:',
+          showTurkish ? 'İkisini karşılaştır:' : 'Compare the two:',
           style: AppTypography.bodyMedium.copyWith(
             color: AppColors.textSecondary,
           ),
@@ -432,13 +448,13 @@ class _ComparePhase extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
             _compareBtn(
-              'Anadil',
+              showTurkish ? 'Anadil' : 'Native',
               Icons.record_voice_over_outlined,
               AppColors.primary,
               onPlayReference,
             ),
             _compareBtn(
-              'Senin sesin',
+              showTurkish ? 'Senin sesin' : 'Your voice',
               Icons.mic_outlined,
               AppColors.accent,
               onPlayRecording,
@@ -450,7 +466,7 @@ class _ComparePhase extends StatelessWidget {
 
         // Öz değerlendirme
         Text(
-          'Nasıl hissettirdi?',
+          showTurkish ? 'Nasıl hissettirdi?' : 'How did it feel?',
           style: AppTypography.bodySmall.copyWith(
             color: AppColors.textSecondary,
           ),
@@ -459,13 +475,16 @@ class _ComparePhase extends StatelessWidget {
         Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            _assessBtn(0, 'Dîsa bicerib', 'Tekrar dene',
+            _assessBtn(0, 'Dîsa bicerib',
+                showTurkish ? 'Tekrar dene' : 'Try again',
                 const Color(0xFFFF9800), Icons.replay_rounded),
             const SizedBox(width: 12),
-            _assessBtn(1, 'Nêzîk bû', 'Yakındı',
+            _assessBtn(1, 'Nêzîk bû',
+                showTurkish ? 'Yakındı' : 'Close',
                 AppColors.primary, Icons.thumb_up_outlined),
             const SizedBox(width: 12),
-            _assessBtn(2, 'Gelek baş!', 'Çok iyi!',
+            _assessBtn(2, 'Gelek baş!',
+                showTurkish ? 'Çok iyi!' : 'Very good!',
                 const Color(0xFF4CAF50), Icons.stars_rounded),
           ],
         ),

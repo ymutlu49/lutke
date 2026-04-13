@@ -31,8 +31,14 @@ class _QuizWord {
   final String id;
   final String ku;
   final String tr;
+  final String en;
+  final String kat;
+  final List<dynamic> her;
 
-  const _QuizWord({required this.id, required this.ku, required this.tr});
+  const _QuizWord({
+    required this.id, required this.ku, required this.tr, required this.en,
+    this.kat = '', this.her = const [],
+  });
 }
 
 /// Egzersiz tipleri.
@@ -63,13 +69,14 @@ List<_QuizWord> _loadWordsForLevel(String level) {
   // Sadece anlamli kelime/soz olanları al (alfabe harfleri haric)
   return raw
       .where((r) => r.ku.length > 1 && r.tr.length > 1)
-      .map((r) => _QuizWord(id: r.id, ku: r.ku, tr: r.tr))
+      .map((r) => _QuizWord(id: r.id, ku: r.ku, tr: r.tr, en: r.en, kat: r.kat ?? '', her: r.her ?? []))
       .toList();
 }
 
 List<_QuizQuestion> _generateQuizSession({
   required String level,
   int questionCount = 10,
+  bool showTurkish = true,
 }) {
   final allWords = _loadWordsForLevel(level);
   if (allWords.length < 10) return [];
@@ -100,22 +107,22 @@ List<_QuizQuestion> _generateQuizSession({
 
     if (type != _ExerciseType.typing) {
       // 4 secenek olustur: 1 dogru + 3 yanlis
-      final isKuOptions =
-          type == _ExerciseType.reverseTranslation; // Kurmancî secenekler
-      final correctAnswer = isKuOptions ? word.ku : word.tr;
-
-      // Yanlis secenekler icin diger kelimelerden sec
-      final distractors = allWords
-          .where((w) => w.id != word.id)
-          .toList()
-        ..shuffle(rng);
-
-      final wrongOptions = distractors
-          .take(3)
-          .map((w) => isKuOptions ? w.ku : w.tr)
-          .toList();
-
-      options = [correctAnswer, ...wrongOptions]..shuffle(rng);
+      if (showTurkish) {
+        // KU/TR modu: Kurmancî kelime → Türkçe seçenekler
+        final isKuOptions = type == _ExerciseType.reverseTranslation;
+        final correctAnswer = isKuOptions ? word.ku : word.tr;
+        final distractors = allWords.where((w) => w.id != word.id).toList()..shuffle(rng);
+        final wrongOptions = distractors.take(3).map((w) => isKuOptions ? w.ku : w.tr).toList();
+        options = [correctAnswer, ...wrongOptions]..shuffle(rng);
+      } else {
+        // Tenê Kurmancî: Tüm seçenekler Kurmancî
+        // Translation: Kurmancî cümle/tanım → Kurmancî kelime seçenekleri
+        // Reverse: Kurmancî kelime → Kurmancî tanım/kategori seçenekleri
+        final correctAnswer = word.ku;
+        final distractors = allWords.where((w) => w.id != word.id).toList()..shuffle(rng);
+        final wrongOptions = distractors.take(3).map((w) => w.ku).toList();
+        options = [correctAnswer, ...wrongOptions]..shuffle(rng);
+      }
     }
 
     questions.add(_QuizQuestion(type: type, word: word, options: options));
@@ -168,6 +175,7 @@ class QuizScreen extends ConsumerStatefulWidget {
 class _QuizScreenState extends ConsumerState<QuizScreen>
     with TickerProviderStateMixin {
   late List<_QuizQuestion> _questions;
+  late bool _showTurkish;
   int _currentIndex = 0;
   int _hearts = 3;
   int _xp = 0;
@@ -186,7 +194,8 @@ class _QuizScreenState extends ConsumerState<QuizScreen>
   @override
   void initState() {
     super.initState();
-    _questions = _generateQuizSession(level: widget.level);
+    _showTurkish = ref.read(showTurkishProvider);
+    _questions = _generateQuizSession(level: widget.level, showTurkish: _showTurkish);
 
     _shakeController = AnimationController(
       vsync: this,
@@ -226,8 +235,14 @@ class _QuizScreenState extends ConsumerState<QuizScreen>
       _selectedOptionIndex = optionIndex;
 
       final selected = q.options[optionIndex];
-      final isKuOptions = q.type == _ExerciseType.reverseTranslation;
-      final correctAnswer = isKuOptions ? q.word.ku : q.word.tr;
+      final String correctAnswer;
+      if (_showTurkish) {
+        final isKuOptions = q.type == _ExerciseType.reverseTranslation;
+        correctAnswer = isKuOptions ? q.word.ku : q.word.tr;
+      } else {
+        // Tenê Kurmancî: seçenekler hep Kurmancî, doğru cevap = word.ku
+        correctAnswer = q.word.ku;
+      }
       correct = selected == correctAnswer;
     }
 
@@ -471,46 +486,57 @@ class _QuizScreenState extends ConsumerState<QuizScreen>
   // ── 1. Translation: Kurmancî -> Tirkî ────────────────────────
 
   Widget _buildTranslationQuestion(_QuizQuestion q) {
+    // KU/TR: Kurmancî kelime → Türkçe seçenekler
+    // Tenê Kurmancî: Kurmancî cümle/tanım → Kurmancî kelime seçenekleri
+    final String questionText;
+    final String instruction;
+    if (_showTurkish) {
+      questionText = q.word.ku;
+      instruction = 'Ev peyv bi Tirkî çi ye?';
+    } else {
+      // Kürtçe modda: heritage cümle veya not alanını göster
+      final sentences = q.word.her;
+      questionText = (sentences is List && sentences.isNotEmpty)
+          ? sentences[0]
+          : 'Ev peyvê çi ye? (${q.word.kat})';
+      instruction = 'Ev hevok kîjan peyvê vedibêje?';
+    }
+
     return Column(
       key: ValueKey('translation_${q.word.id}'),
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        // Instruction
-        _buildInstruction('Ev peyv bi Tirkî çi ye?', 'Bu kelime Turkce ne demek?',
-            showTr: ref.watch(showTurkishProvider)),
-
+        _buildInstruction(instruction, '', showTr: false),
         Gap.lg,
-
-        // Kurmancî word card
-        _buildWordCard(q.word.ku, isKurmanji: true),
-
+        _buildWordCard(questionText, isKurmanji: true),
         const SizedBox(height: AppSpacing.questionToOptions),
-
-        // Options
         ..._buildOptionButtons(q),
       ],
     );
   }
 
-  // ── 2. Reverse Translation: Tirkî -> Kurmancî ────────────────
+  // ── 2. Reverse Translation ────────────────────────────────────
 
   Widget _buildReverseTranslationQuestion(_QuizQuestion q) {
+    final String questionText;
+    final String instruction;
+    if (_showTurkish) {
+      questionText = q.word.tr;
+      instruction = 'Ev peyv bi Kurmancî çi ye?';
+    } else {
+      // Kürtçe modda: kategori + ipucu göster
+      questionText = '${q.word.kat.toUpperCase()} — ?';
+      instruction = 'Kîjan peyv vê kategoriyê ye?';
+    }
+
     return Column(
       key: ValueKey('reverse_${q.word.id}'),
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        _buildInstruction(
-            'Ev peyv bi Kurmancî çi ye?', 'Bu kelimenin Kurmancisi ne?',
-            showTr: ref.watch(showTurkishProvider)),
-
+        _buildInstruction(instruction, '', showTr: false),
         Gap.lg,
-
-        // Turkish word card
-        _buildWordCard(q.word.tr, isKurmanji: false),
-
+        _buildWordCard(questionText, isKurmanji: !_showTurkish),
         const SizedBox(height: AppSpacing.questionToOptions),
-
-        // Options (Kurmancî)
         ..._buildOptionButtons(q),
       ],
     );
@@ -523,8 +549,8 @@ class _QuizScreenState extends ConsumerState<QuizScreen>
       key: ValueKey('listening_${q.word.id}'),
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        _buildInstruction('Guh bide u bersivê bide', 'Dinle ve cevapla',
-            showTr: ref.watch(showTurkishProvider)),
+        _buildInstruction('Guh bide û bersivê bide', 'Dinle ve cevapla',
+            showTr: _showTurkish),
 
         Gap.lg,
 
@@ -602,13 +628,23 @@ class _QuizScreenState extends ConsumerState<QuizScreen>
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         _buildInstruction(
-            'Ev peyvê bi Kurmancî binivîse', 'Bu kelimeyi Kurmancica yaz',
-            showTr: ref.watch(showTurkishProvider)),
+            _showTurkish
+                ? 'Ev peyvê bi Kurmancî binivîse'
+                : 'Vê peyvê binivîse',
+            '',
+            showTr: false),
 
         Gap.lg,
 
-        // Turkish word
-        _buildWordCard(q.word.tr, isKurmanji: false),
+        // Soru: KU/TR modda Türkçe, Kurmancî modda cümle/ipucu
+        _buildWordCard(
+          _showTurkish
+              ? q.word.tr
+              : ((q.word.her is List && (q.word.her as List).isNotEmpty)
+                  ? (q.word.her as List)[0]
+                  : q.word.ku),
+          isKurmanji: !_showTurkish,
+        ),
 
         const SizedBox(height: AppSpacing.questionToOptions),
 
@@ -789,8 +825,13 @@ class _QuizScreenState extends ConsumerState<QuizScreen>
       final i = entry.key;
       final option = entry.value;
 
-      final isKuOption = q.type == _ExerciseType.reverseTranslation;
-      final correctAnswer = isKuOption ? q.word.ku : q.word.tr;
+      final String correctAnswer;
+      if (_showTurkish) {
+        final isKuOption = q.type == _ExerciseType.reverseTranslation;
+        correctAnswer = isKuOption ? q.word.ku : q.word.tr;
+      } else {
+        correctAnswer = q.word.ku;
+      }
       final isThisCorrect = option == correctAnswer;
       final isSelected = _selectedOptionIndex == i;
 
@@ -866,7 +907,7 @@ class _QuizScreenState extends ConsumerState<QuizScreen>
               Expanded(
                 child: Text(
                   option,
-                  style: (isKuOption
+                  style: (!_showTurkish || q.type == _ExerciseType.reverseTranslation
                           ? AppTypography.kurmanjiCard
                           : AppTypography.bodyLarge)
                       .copyWith(color: textColor),
@@ -939,7 +980,9 @@ class _QuizScreenState extends ConsumerState<QuizScreen>
                   child: Text(
                     _isCorrect
                         ? _getCorrectMessage()
-                        : '${_currentQuestion.word.ku} = ${_currentQuestion.word.tr}',
+                        : _showTurkish
+                            ? '${_currentQuestion.word.ku} = ${_currentQuestion.word.tr}'
+                            : 'Bersiva rast: ${_currentQuestion.word.ku}',
                     style: AppTypography.label.copyWith(
                       color:
                           _isCorrect ? AppColors.success : AppColors.errorSoft,
@@ -1193,7 +1236,7 @@ class _QuizScreenState extends ConsumerState<QuizScreen>
                       // Restart quiz
                       setState(() {
                         _questions =
-                            _generateQuizSession(level: widget.level);
+                            _generateQuizSession(level: widget.level, showTurkish: _showTurkish);
                         _currentIndex = 0;
                         _hearts = 3;
                         _xp = 0;

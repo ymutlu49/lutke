@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_animate/flutter_animate.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../core/constants/app_colors.dart';
 import '../../core/constants/app_typography.dart';
 import '../../core/constants/app_spacing.dart';
 import '../../core/utils/fsrs_algorithm.dart';
+import '../providers/language_mode_provider.dart';
 
 // ════════════════════════════════════════════════════════════════
 // EGZERSİZ WİDGET'LARI — LÛTKE
@@ -22,9 +24,10 @@ import '../../core/utils/fsrs_algorithm.dart';
 
 typedef OnRating = void Function(Rating rating);
 
-class FSRSRatingCard extends StatelessWidget {
+class FSRSRatingCard extends ConsumerWidget {
   final String kurmanji;
   final String turkish;
+  final String? english;
   final String? gender;          // cins bilgisi (mê/nêr/bêcins)
   final List<String> sentences;  // Örnek cümleler
   final OnRating onRating;
@@ -33,13 +36,18 @@ class FSRSRatingCard extends StatelessWidget {
     super.key,
     required this.kurmanji,
     required this.turkish,
+    this.english,
     this.gender,
     this.sentences = const [],
     required this.onRating,
   });
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final showTurkish = ref.watch(showTurkishProvider);
+    // Caller provides the appropriate translation text (Turkish or English).
+    // If caller passes Turkish directly, use english fallback in Kurdish-only mode.
+    final translationText = showTurkish ? turkish : (english ?? turkish);
     return Column(
       children: [
         // Kelime kartı
@@ -97,9 +105,9 @@ class FSRSRatingCard extends StatelessWidget {
 
                 const SizedBox(height: AppSpacing.sm),
 
-                // Türkçe çeviri — ikincil (İlke §0.5)
+                // Translation — conditional (İlke §0.5)
                 Text(
-                  turkish,
+                  translationText,
                   style: AppTypography.bodyLarge.copyWith(
                     color: AppColors.textSecondary,
                   ),
@@ -153,73 +161,78 @@ class _FSRSRatingRow extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     // 2x2 grid on mobile for better touch targets
-    return Column(
-      mainAxisSize: MainAxisSize.min,
-      children: [
-        Row(
+    return Consumer(
+      builder: (context, ref, _) {
+        final showTurkish = ref.watch(showTurkishProvider);
+        return Column(
+          mainAxisSize: MainAxisSize.min,
           children: [
-            // Again — Dubare (yeniden gör — ceza değil)
-            Expanded(
-              child: _RatingButton(
-                kuLabel: 'Dubare',   // Tekrar
-                trLabel: 'Ji nû ve',
-                color: const Color(0xFFEF5350),
-                icon: Icons.refresh_rounded,
-                onTap: () {
-                  HapticFeedback.mediumImpact();
-                  onRating(Rating.again);
-                },
-              ),
+            Row(
+              children: [
+                // Again — Dubare
+                Expanded(
+                  child: _RatingButton(
+                    kuLabel: 'Dubare',
+                    trLabel: showTurkish ? 'Ji nû ve' : 'Again',
+                    color: const Color(0xFFEF5350),
+                    icon: Icons.refresh_rounded,
+                    onTap: () {
+                      HapticFeedback.mediumImpact();
+                      onRating(Rating.again);
+                    },
+                  ),
+                ),
+                const SizedBox(width: 8),
+                // Hard — Dijwar
+                Expanded(
+                  child: _RatingButton(
+                    kuLabel: 'Dijwar',
+                    trLabel: showTurkish ? 'Dijwar' : 'Hard',
+                    color: const Color(0xFFFF9800),
+                    icon: Icons.sentiment_dissatisfied_outlined,
+                    onTap: () {
+                      HapticFeedback.mediumImpact();
+                      onRating(Rating.hard);
+                    },
+                  ),
+                ),
+              ],
             ),
-            const SizedBox(width: 8),
-            // Hard — Dijwar
-            Expanded(
-              child: _RatingButton(
-                kuLabel: 'Dijwar',
-                trLabel: 'Dijwar',
-                color: const Color(0xFFFF9800),
-                icon: Icons.sentiment_dissatisfied_outlined,
-                onTap: () {
-                  HapticFeedback.mediumImpact();
-                  onRating(Rating.hard);
-                },
-              ),
+            const SizedBox(height: 8),
+            Row(
+              children: [
+                // Good — Baş
+                Expanded(
+                  child: _RatingButton(
+                    kuLabel: 'Baş',
+                    trLabel: showTurkish ? 'Baş' : 'Good',
+                    color: const Color(0xFF4CAF50),
+                    icon: Icons.sentiment_satisfied_outlined,
+                    onTap: () {
+                      HapticFeedback.mediumImpact();
+                      onRating(Rating.good);
+                    },
+                  ),
+                ),
+                const SizedBox(width: 8),
+                // Easy — Hêsan
+                Expanded(
+                  child: _RatingButton(
+                    kuLabel: 'Hêsan',
+                    trLabel: showTurkish ? 'Hêsan' : 'Easy',
+                    color: const Color(0xFF2196F3),
+                    icon: Icons.sentiment_very_satisfied_outlined,
+                    onTap: () {
+                      HapticFeedback.mediumImpact();
+                      onRating(Rating.easy);
+                    },
+                  ),
+                ),
+              ],
             ),
           ],
-        ),
-        const SizedBox(height: 8),
-        Row(
-          children: [
-            // Good — Baş
-            Expanded(
-              child: _RatingButton(
-                kuLabel: 'Baş',
-                trLabel: 'Baş',
-                color: const Color(0xFF4CAF50),
-                icon: Icons.sentiment_satisfied_outlined,
-                onTap: () {
-                  HapticFeedback.mediumImpact();
-                  onRating(Rating.good);
-                },
-              ),
-            ),
-            const SizedBox(width: 8),
-            // Easy — Hêsan
-            Expanded(
-              child: _RatingButton(
-                kuLabel: 'Hêsan',
-                trLabel: 'Hêsan',
-                color: const Color(0xFF2196F3),
-                icon: Icons.sentiment_very_satisfied_outlined,
-                onTap: () {
-                  HapticFeedback.mediumImpact();
-                  onRating(Rating.easy);
-                },
-              ),
-            ),
-          ],
-        ),
-      ],
+        );
+      },
     );
   }
 }
@@ -517,13 +530,15 @@ class _OptionButton extends StatelessWidget {
 // ════════════════════════════════════════════════════════════════
 
 class TypingExercise extends StatefulWidget {
-  final String prompt;    // Türkçe → Kurmancî yaz
+  final String prompt;    // Turkish prompt
+  final String? promptEn; // English prompt (for Kurdish-only mode)
   final String answer;    // Doğru Kurmancî
   final OnRating onRating;
 
   const TypingExercise({
     super.key,
     required this.prompt,
+    this.promptEn,
     required this.answer,
     required this.onRating,
   });
@@ -576,6 +591,12 @@ class _TypingExerciseState extends State<TypingExercise> {
 
   @override
   Widget build(BuildContext context) {
+    return Consumer(
+      builder: (context, ref, _) {
+    final showTurkish = ref.watch(showTurkishProvider);
+    final displayPrompt = showTurkish
+        ? widget.prompt
+        : (widget.promptEn ?? widget.prompt);
     return Padding(
       padding: const EdgeInsets.all(AppSpacing.md),
       child: Column(
@@ -591,13 +612,13 @@ class _TypingExerciseState extends State<TypingExercise> {
             child: Column(
               children: [
                 Text(
-                  'Bi Kurmancî binivîse:',  // Kurmancî yaz
+                  'Bi Kurmancî binivîse:',
                   style: AppTypography.caption
                       .copyWith(color: AppColors.textSecondary),
                 ),
                 const SizedBox(height: AppSpacing.sm),
                 Text(
-                  widget.prompt,
+                  displayPrompt,
                   style: AppTypography.headingSmall.copyWith(
                       color: AppColors.textPrimary,
                       fontWeight: FontWeight.w600),
@@ -621,7 +642,7 @@ class _TypingExerciseState extends State<TypingExercise> {
               color: Colors.black87,
             ),
             decoration: InputDecoration(
-              hintText: 'Li vir binivîse...',  // Buraya yaz
+              hintText: 'Li vir binivîse...',
               hintStyle: TextStyle(
                 fontSize: 20,
                 color: AppColors.textSecondary.withOpacity(0.5),
@@ -711,7 +732,7 @@ class _TypingExerciseState extends State<TypingExercise> {
                     borderRadius: BorderRadius.circular(16)),
               ),
               child: Text(
-                'Kontrol bike',  // Kontrol et
+                'Kontrol bike',
                 style: AppTypography.labelLarge.copyWith(
                     color: Colors.white,
                     fontWeight: FontWeight.w700,
@@ -725,6 +746,8 @@ class _TypingExerciseState extends State<TypingExercise> {
           const SizedBox(height: AppSpacing.md),
         ],
       ),
+    );
+      },
     );
   }
 }

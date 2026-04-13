@@ -730,21 +730,11 @@ class _FlashcardScreenState extends ConsumerState<FlashcardScreen>
             const Divider(height: 1),
             const SizedBox(height: AppSpacing.md),
 
-            // Türkçe çeviri — tenê dema showTurkish aktîf e
-            if (ref.watch(showTurkishProvider)) ...[
-              _TranslationRow(
-                flag: '🇹🇷',
-                label: 'Tirkî',
-                text: card.turkce,
-              ),
-              const SizedBox(height: AppSpacing.sm),
-            ],
-
-            // İngilizce çeviri
+            // Çeviri — Tirkî an Inglîzî li gor moda zimanê
             _TranslationRow(
-              flag: '🇬🇧',
-              label: 'Inglîzî',
-              text: card.ingilizce,
+              flag: ref.watch(showTurkishProvider) ? '🇹🇷' : '🇬🇧',
+              label: ref.watch(showTurkishProvider) ? 'Tirkî' : 'English',
+              text: ref.watch(showTurkishProvider) ? card.turkce : card.ingilizce,
             ),
             const SizedBox(height: AppSpacing.md),
 

@@ -279,6 +279,7 @@ class VocabularyCardModel {
   final String id;
   final String kurmanji;
   final String turkish;
+  final String? english;
   final String category;
   final String gender;
   final int level;
@@ -288,6 +289,7 @@ class VocabularyCardModel {
 
   const VocabularyCardModel({
     required this.id, required this.kurmanji, required this.turkish,
+    this.english,
     required this.category, required this.gender, required this.level,
     required this.fsrsCard, required this.sentencesHeritage,
     required this.sentencesGeneral,

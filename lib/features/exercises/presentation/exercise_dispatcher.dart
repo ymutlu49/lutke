@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../../core/utils/fsrs_algorithm.dart';
+import '../../../shared/providers/language_mode_provider.dart';
 import '../../../shared/widgets/exercise_widgets.dart';
 import '../../lessons/domain/entities/exercise.dart';
 import 'widgets/fill_in_blank_widget.dart';
@@ -90,14 +92,15 @@ class ExerciseDispatcher extends StatelessWidget {
 
 // ── Kültürel İçerik Kartı (basit — mevcut cultural_widgets'a köprü) ─
 
-class _CulturalCard extends StatelessWidget {
+class _CulturalCard extends ConsumerWidget {
   final CulturalContentExercise exercise;
   final OnRatingCallback onRating;
 
   const _CulturalCard({required this.exercise, required this.onRating});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final showTurkish = ref.watch(showTurkishProvider);
     return Padding(
       padding: const EdgeInsets.all(16),
       child: Column(
@@ -130,15 +133,16 @@ class _CulturalCard extends StatelessWidget {
           ),
           const SizedBox(height: 16),
 
-          // Türkçe çeviri — küçük
-          Text(
-            exercise.contentTr,
-            style: TextStyle(
-              fontSize: 14,
-              color: const Color(0xFF4A5A6A).withOpacity(0.8),
+          // Translation — only when Turkish mode is on
+          if (showTurkish)
+            Text(
+              exercise.contentTr,
+              style: TextStyle(
+                fontSize: 14,
+                color: const Color(0xFF4A5A6A).withOpacity(0.8),
+              ),
+              textAlign: TextAlign.center,
             ),
-            textAlign: TextAlign.center,
-          ),
 
           // Kaynak
           if (exercise.source != null) ...[

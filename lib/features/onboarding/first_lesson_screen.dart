@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../../core/constants/app_colors.dart';
 import '../../../core/constants/app_typography.dart';
 import '../../../core/constants/app_spacing.dart';
 import '../../../core/router/app_router.dart';
+import '../../../shared/providers/language_mode_provider.dart';
 
 /// İlk Ders Ekranı — Kayıtsız 3 Alıştırma
 ///
@@ -21,18 +23,24 @@ import '../../../core/router/app_router.dart';
 class _Exercise {
   final String type; // 'listen_select', 'complete', 'speak'
   final String kurmanjText;
-  final String translation;
-  final List<String>? options;
+  final String translation;       // Turkish translation
+  final String translationEn;     // English translation (Kurdish-only mode)
+  final List<String>? options;    // Turkish options
+  final List<String>? optionsEn;  // English options (Kurdish-only mode)
   final int? correctIndex;
-  final String? hint;
+  final String? hint;             // Turkish hint
+  final String? hintEn;           // English hint (Kurdish-only mode)
 
   const _Exercise({
     required this.type,
     required this.kurmanjText,
     required this.translation,
+    required this.translationEn,
     this.options,
+    this.optionsEn,
     this.correctIndex,
     this.hint,
+    this.hintEn,
   });
 }
 
@@ -41,38 +49,47 @@ const _exercises = [
     type: 'listen_select',
     kurmanjText: 'Silav',
     translation: 'Merhaba',
+    translationEn: 'Hello',
     options: ['Merhaba', 'Teşekkür', 'Günaydın', 'İyi geceler'],
+    optionsEn: ['Hello', 'Thank you', 'Good morning', 'Good night'],
     correctIndex: 0,
     hint: 'Kürtçede en yaygın selamlama',
+    hintEn: 'The most common greeting in Kurdish',
   ),
   _Exercise(
     type: 'listen_select',
     kurmanjText: 'Spas',
     translation: 'Teşekkür ederim',
+    translationEn: 'Thank you',
     options: ['Özür dilerim', 'Hoşça kal', 'Teşekkür ederim', 'Tamam'],
+    optionsEn: ['I\'m sorry', 'Goodbye', 'Thank you', 'OK'],
     correctIndex: 2,
     hint: '"Spas" — kalp sıcaklığıyla söylenir',
+    hintEn: '"Spas" — said with heartfelt warmth',
   ),
   _Exercise(
     type: 'listen_select',
     kurmanjText: 'Baş e',
     translation: 'İyi / Tamam',
+    translationEn: 'Good / OK',
     options: ['Hayır', 'İyi / Tamam', 'Belki', 'Bilmiyorum'],
+    optionsEn: ['No', 'Good / OK', 'Maybe', 'I don\'t know'],
     correctIndex: 1,
     hint: '"Baş" — iyi demek. "Baş e" — iyi/tamam demek.',
+    hintEn: '"Baş" — means good. "Baş e" — means good/OK.',
   ),
 ];
 
 // ── Ekran ────────────────────────────────────────────────────────
 
-class FirstLessonScreen extends StatefulWidget {
+class FirstLessonScreen extends ConsumerStatefulWidget {
   const FirstLessonScreen({super.key});
 
   @override
-  State<FirstLessonScreen> createState() => _FirstLessonScreenState();
+  ConsumerState<FirstLessonScreen> createState() => _FirstLessonScreenState();
 }
 
-class _FirstLessonScreenState extends State<FirstLessonScreen> {
+class _FirstLessonScreenState extends ConsumerState<FirstLessonScreen> {
   int _currentIndex = 0;
   int? _selectedAnswer;
   bool _isAnswered = false;
@@ -149,9 +166,14 @@ class _FirstLessonScreenState extends State<FirstLessonScreen> {
                     Gap.lg,
 
                     // Yönerge
-                    Text(
-                      'Ne anlama geliyor?',
-                      style: AppTypography.headline,
+                    Builder(
+                      builder: (context) {
+                        final showTr = ref.watch(showTurkishProvider);
+                        return Text(
+                          showTr ? 'Ne anlama geliyor?' : 'Wateya wê çi ye?',
+                          style: AppTypography.headline,
+                        );
+                      },
                     ).animate(key: ValueKey(_currentIndex)).fadeIn(duration: 300.ms),
 
                     Gap.xl,
@@ -165,7 +187,12 @@ class _FirstLessonScreenState extends State<FirstLessonScreen> {
                     Gap.xl,
 
                     // Seçenekler
-                    ...(_current.options ?? []).asMap().entries.map((entry) {
+                    ...(() {
+                      final showTr = ref.watch(showTurkishProvider);
+                      final opts = showTr
+                          ? (_current.options ?? [])
+                          : (_current.optionsEn ?? _current.options ?? []);
+                      return opts.asMap().entries.map((entry) {
                       final i = entry.key;
                       final option = entry.value;
                       return Padding(
@@ -183,7 +210,8 @@ class _FirstLessonScreenState extends State<FirstLessonScreen> {
                           delay: Duration(milliseconds: 100 + i * 60),
                         ),
                       );
-                    }),
+                    });
+                    })(),
                   ],
                 ),
               ),
@@ -194,8 +222,10 @@ class _FirstLessonScreenState extends State<FirstLessonScreen> {
               _AnswerFeedbackBar(
                 isCorrect: _selectedAnswer == _current.correctIndex,
                 hint: _current.hint ?? '',
+                hintEn: _current.hintEn ?? '',
                 kurmanjWord: _current.kurmanjText,
                 translation: _current.translation,
+                translationEn: _current.translationEn,
                 onNext: _next,
                 isLast: _currentIndex >= _exercises.length - 1,
               ),
@@ -208,15 +238,15 @@ class _FirstLessonScreenState extends State<FirstLessonScreen> {
 
 // ── Kelime Kartı ─────────────────────────────────────────────────
 
-class _WordCard extends StatefulWidget {
+class _WordCard extends ConsumerStatefulWidget {
   final _Exercise exercise;
   const _WordCard({required this.exercise});
 
   @override
-  State<_WordCard> createState() => _WordCardState();
+  ConsumerState<_WordCard> createState() => _WordCardState();
 }
 
-class _WordCardState extends State<_WordCard> {
+class _WordCardState extends ConsumerState<_WordCard> {
   bool _isPlaying = false;
 
   @override
@@ -265,9 +295,14 @@ class _WordCardState extends State<_WordCard> {
               ),
             ),
             Gap.xs,
-            Text(
-              'Sesi duy',
-              style: AppTypography.caption.copyWith(color: AppColors.primary),
+            Builder(
+              builder: (context) {
+                final showTr = ref.watch(showTurkishProvider);
+                return Text(
+                  showTr ? 'Sesi duy' : 'Deng lê bide',
+                  style: AppTypography.caption.copyWith(color: AppColors.primary),
+                );
+              },
             ),
           ],
         ),
@@ -357,28 +392,35 @@ class _AnswerButton extends StatelessWidget {
 
 // ── Alt Geri Bildirim Barı ───────────────────────────────────────
 
-class _AnswerFeedbackBar extends StatelessWidget {
+class _AnswerFeedbackBar extends ConsumerWidget {
   final bool isCorrect;
   final String hint;
+  final String hintEn;
   final String kurmanjWord;
   final String translation;
+  final String translationEn;
   final VoidCallback onNext;
   final bool isLast;
 
   const _AnswerFeedbackBar({
     required this.isCorrect,
     required this.hint,
+    required this.hintEn,
     required this.kurmanjWord,
     required this.translation,
+    required this.translationEn,
     required this.onNext,
     required this.isLast,
   });
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final showTr = ref.watch(showTurkishProvider);
     final bgColor = isCorrect ? AppColors.successSurface : AppColors.errorSurface;
     final accentColor = isCorrect ? AppColors.success : AppColors.errorSoft;
     final bottomPadding = MediaQuery.of(context).padding.bottom;
+    final displayTranslation = showTr ? translation : translationEn;
+    final displayHint = showTr ? hint : hintEn;
 
     return Container(
       padding: EdgeInsets.fromLTRB(
@@ -413,13 +455,13 @@ class _AnswerFeedbackBar extends StatelessWidget {
             Gap.xs,
             // Doğru cevap
             Text(
-              '$kurmanjWord = $translation',
+              '$kurmanjWord = $displayTranslation',
               style: AppTypography.body.copyWith(color: accentColor),
             ),
           ],
-          if (hint.isNotEmpty) ...[
+          if (displayHint.isNotEmpty) ...[
             Gap.xs,
-            Text(hint, style: AppTypography.caption.copyWith(color: accentColor)),
+            Text(displayHint, style: AppTypography.caption.copyWith(color: accentColor)),
           ],
           Gap.md,
           ElevatedButton(
