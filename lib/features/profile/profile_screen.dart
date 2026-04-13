@@ -57,10 +57,15 @@ class ProfileScreen extends ConsumerWidget {
               backgroundColor: AppColors.backgroundPrimary,
               elevation: 0,
               automaticallyImplyLeading: false,
-              title: Text(
-                'Profîla min',
-                style: AppTypography.headingSmall.copyWith(
-                    color: AppColors.textPrimary, fontWeight: FontWeight.w700),
+              title: Row(
+                children: [
+                  Image.asset('assets/images/logo_128.png', width: 36, height: 36,
+                    filterQuality: FilterQuality.medium),
+                  const SizedBox(width: 10),
+                  Text('Profîla min',
+                    style: AppTypography.headingSmall.copyWith(
+                      color: AppColors.textPrimary, fontWeight: FontWeight.w700)),
+                ],
               ),
               actions: [
                 IconButton(

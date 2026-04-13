@@ -46,7 +46,7 @@ class HomeScreen extends ConsumerWidget {
               titleSpacing: AppSpacing.md,
               title: GestureDetector(
                 onLongPress: () => context.push(AppRoutes.admin),
-                child: LutkeLogo.brandHorizontal(iconSize: 32),
+                child: LutkeLogo.brandHorizontal(iconSize: 40),
               ),
             ),
 

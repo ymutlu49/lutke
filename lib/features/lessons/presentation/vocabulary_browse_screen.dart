@@ -129,13 +129,15 @@ class _VocabularyBrowseScreenState extends State<VocabularyBrowseScreen> {
       appBar: AppBar(
         backgroundColor: AppColors.backgroundPrimary,
         elevation: 0,
-        leading: IconButton(
-          icon: const Icon(Icons.arrow_back, color: AppColors.textPrimary),
-          onPressed: () => context.pop(),
-        ),
-        title: Text(
-          'Peyvên Kurmancî',
-          style: AppTypography.headingSmall.copyWith(color: AppColors.textPrimary),
+        automaticallyImplyLeading: false,
+        title: Row(
+          children: [
+            Image.asset('assets/images/logo_128.png', width: 36, height: 36,
+              filterQuality: FilterQuality.medium),
+            const SizedBox(width: 10),
+            Text('Peyvên Kurmancî',
+              style: AppTypography.headingSmall.copyWith(color: AppColors.textPrimary)),
+          ],
         ),
         actions: [
           Center(

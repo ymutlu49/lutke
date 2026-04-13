@@ -327,12 +327,16 @@ class _CulturePlaceholder extends StatelessWidget {
       appBar: AppBar(
         backgroundColor: AppColors.backgroundPrimary,
         elevation: 0,
-        title: Text(
-          'Çand — Kültür',
-          style: TextStyle(
-            color: AppColors.textPrimary,
-            fontWeight: FontWeight.w700,
-          ),
+        title: Row(
+          children: [
+            Image.asset('assets/images/logo_128.png', width: 36, height: 36,
+              filterQuality: FilterQuality.medium),
+            const SizedBox(width: 10),
+            Text('Çand — Kültür',
+              style: TextStyle(
+                color: AppColors.textPrimary,
+                fontWeight: FontWeight.w700)),
+          ],
         ),
       ),
       body: Center(
