@@ -144,7 +144,7 @@ class _RegisterScreenState extends ConsumerState<RegisterScreen> {
                 if (!_isLogin) ...[
                   _buildField(
                     ctrl: _nameCtrl,
-                    label: 'Nav — Ad',
+                    label: 'Nav',
                     hint: 'Navê xwe binivîse',
                     icon: Icons.person_outline,
                     validator: (v) {
@@ -158,7 +158,7 @@ class _RegisterScreenState extends ConsumerState<RegisterScreen> {
                 // E-posta
                 _buildField(
                   ctrl: _emailCtrl,
-                  label: 'E-name — E-posta',
+                  label: 'E-name',
                   hint: 'e-name@mînak.com',
                   icon: Icons.email_outlined,
                   keyboardType: TextInputType.emailAddress,
@@ -175,7 +175,7 @@ class _RegisterScreenState extends ConsumerState<RegisterScreen> {
                 // Şifre
                 _buildField(
                   ctrl: _passCtrl,
-                  label: 'Şîfre — Parola',
+                  label: 'Şîfre',
                   hint: '••••••••',
                   icon: Icons.lock_outline,
                   obscure: !_passVisible,
@@ -290,7 +290,7 @@ class _RegisterScreenState extends ConsumerState<RegisterScreen> {
                       Expanded(child: Divider()),
                       Padding(
                         padding: EdgeInsets.symmetric(horizontal: 12),
-                        child: Text('an jî — ya da'),
+                        child: Text('an jî'),
                       ),
                       Expanded(child: Divider()),
                     ],
@@ -302,7 +302,7 @@ class _RegisterScreenState extends ConsumerState<RegisterScreen> {
                   onPressed: _loading ? null : _loginAnonymously,
                   icon: const Icon(Icons.person_outline),
                   label: Text(
-                    'Bê hesab dewam bike — Hesapsız devam',
+                    'Bê hesab dewam bike',
                     style: AppTypography.labelMedium
                         .copyWith(color: AppColors.textPrimary),
                   ),

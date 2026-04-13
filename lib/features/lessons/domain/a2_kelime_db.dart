@@ -70,7 +70,7 @@ const kA2Kelimeler = [
    cins:'nêr', ez:'navendê',
    kat:'cih', zor:0.82,
    not:'Eril — [FB]: navend n.m. "Navendê bajarê" = şehir merkezi',
-   her:['Em diçin navendê bajêr.', 'Navend nêzîk e.'],
+   her:['Em diçin navendê bajarê.', 'Navend nêzîk e.'],
    gen:['Navend û derdor', 'Li navendê ye.']),
 
   (id:'a2_011', ku:'Kolan', tr:'Sokak', en:'Street',
@@ -78,20 +78,20 @@ const kA2Kelimeler = [
    kat:'cih', zor:0.82,
    not:'Eril — [FB]: kolan n.m. [AS] şehir bölümünde. "Li kolanê" = sokakta',
    her:['Kolan dirêj e.', 'Em li kolanê ne.'],
-   gen:['Kolan û rê', 'Kolanê mezin']),
+   gen:['Kolan û rê', 'Kolanê mezin e.']),
 
   (id:'a2_012', ku:'Bazar', tr:'Pazar / Çarşı', en:'Market / Bazaar',
    cins:'nêr', ez:'bazarê',
    kat:'cih', zor:0.83,
    not:'Eril — [FB]: bazar n.m. [AS]: "PAZARLAR / BAZAR". Kürt kültüründe bazar sadece alışveriş değil, buluşma yeri',
-   her:['Em diçin bazarê.', 'Bazarê bajêr mezin e.'],
+   her:['Em diçin bazarê.', 'Bazarê bajarê mezin e.'],
    gen:['Bazar û dikan', 'Li bazarê ye.']),
 
   (id:'a2_013', ku:'Dikan', tr:'Dükkan / Mağaza', en:'Shop / Store',
    cins:'mê', ez:'dikana',
    kat:'cih', zor:0.82,
    not:'Dişil — [FB]: dikan n.f. [AS]: "dükkan = dikan" ✓',
-   her:['Dîkana pîrê nêzîk e.', 'Ez diçim dikana.'],
+   her:['Dikana pîrê nêzîk e.', 'Ez diçim dikanê.'],
    gen:['Dikan û bazar', 'Dikana nû']),
 
   (id:'a2_014', ku:'Nexweşxane', tr:'Hastane', en:'Hospital',
@@ -158,7 +158,7 @@ const kA2Kelimeler = [
   (id:'a2_032', ku:'Dikire', tr:'Satın alıyor', en:'(He/She) buys',
    cins:'bêcins', ez:null, kat:'leker', zor:0.79,
    not:'"Di-kir-e" — kirîn fiili 3.tekil. [TH] §65: kirîn = to buy',
-   her:['Dêya min nan dikire.', 'Tu çi dikire?'],
+   her:['Dêya min nan dikire.', 'Tu çi dikirî?'],
    gen:['Ew pirtûk dikire.', 'Em erebe dikirîn.']),
 
   (id:'a2_033', ku:'Dixebite', tr:'Çalışıyor (aktif)', en:'Works',
@@ -187,11 +187,11 @@ const kA2Kelimeler = [
    her:['Zarok ket.', 'Bahoz ket.'],
    gen:['Ew ket.', 'Ez ketim.']),
 
-  (id:'a2_037', ku:'Rakir', tr:'Kalktı', en:'Got up',
+  (id:'a2_037', ku:'Rabû', tr:'Kalktı', en:'Got up',
    cins:'bêcins', ez:null, kat:'leker', zor:0.79,
-   not:'Geçmiş — rabûn fiili. [TH] §68',
-   her:['Pîrê zû rakir.', 'Tu kengî rakir?'],
-   gen:['Ew sibê rakir.', 'Ez dereng rakirim.']),
+   not:'Geçmiş geçişsiz — rabûn fiili. [TH] §68: rabûn = to get up (geçişsiz)',
+   her:['Pîrê zû rabû.', 'Tu kengî rabûyî?'],
+   gen:['Ew sibê rabû.', 'Ez dereng rabûm.']),
 
   // Gelecek zaman — dê + şimdiki zaman formu
   // [BH] §185: "ê" veya "dê" + fiil
@@ -222,7 +222,7 @@ const kA2Kelimeler = [
    cins:'nêr', ez:'zewacê',
    kat:'malbat', zor:0.80,
    not:'Eril — [FB]: zewac n.m. [Arapça "zivâc"tan]. "Zewacê xweş be!" = düğününüz kutlu olsun',
-   her:['Zewaca birê min bû.', 'Zewacê we pîroz be!'],
+   her:['Zewacê birê min bû.', 'Zewacê we pîroz be!'],
    gen:['Zewac û malbat', 'Di zewacê de']),
 
   (id:'a2_042', ku:'Zarok', tr:'Çocuk', en:'Child',
@@ -335,7 +335,7 @@ const kA2Kelimeler = [
    kat:'bazirganî', zor:0.83,
    not:'Dişil — [FB]: pare n.f. "Pareyên min" = param. "Pera" da kullanılır',
    her:['Pareyên min nîne!', 'Çend pare dixwazî?'],
-   gen:['Pare û kredit', 'Pareyê min']),
+   gen:['Pare û kredit', 'Para min']),
 
   (id:'a2_065', ku:'Kredit karti', tr:'Kredi kartı', en:'Credit card',
    cins:'nêr', ez:'kredit kartê',
@@ -381,7 +381,7 @@ const kA2Kelimeler = [
    cins:'nêr', ez:'biletê',
    kat:'rêwîtî', zor:0.82,
    not:'Eril — [FB]: bilet n.m. [Fransızca]. "Biletekî bixerim" = bir bilet satın alayım',
-   her:['Bilet kirim.', 'Bilet bi çendê ye?'],
+   her:['Min bilet kirî.', 'Bilet bi çendê ye?'],
    gen:['Bilet û rêwîtî', 'Biletê balafirê']),
 
   (id:'a2_074', ku:'Sefer', tr:'Sefer / Gidiş', en:'Trip / Departure',
@@ -395,7 +395,7 @@ const kA2Kelimeler = [
    cins:'nêr', ez:'pasaportê',
    kat:'rêwîtî', zor:0.79,
    not:'Eril — uluslararası terim, Kurmancîde aynen kullanılır',
-   her:['Pasaporta te hazır e?', 'Pasaport lazim e.'],
+   her:['Pasaportê te hazir e?', 'Pasaport lazim e.'],
    gen:['Pasaport û vîze', 'Pasaportê min']),
 
   // ════════════════════════════════════════════════════════════
@@ -420,7 +420,7 @@ const kA2Kelimeler = [
    kat:'perwerde', zor:0.82,
    not:'Dişil — [FB]: wane n.f. [AS] no.161: "ders = wane" ✓. "Wanê xweş be!" = dersler güzel olsun',
    her:['Waneyên Kurmancî xweş in.', 'Kengî wane heye?'],
-   gen:['Wane û sinif', 'Di waneyê de']),
+   gen:['Wane û sinif', 'Di wanê de']),
 
   (id:'a2_083', ku:'Sinif', tr:'Sınıf', en:'Classroom',
    cins:'nêr', ez:'sinifê',
@@ -432,7 +432,7 @@ const kA2Kelimeler = [
   (id:'a2_084', ku:'Xwandî', tr:'Okudu / Öğrendi', en:'Read / Studied (past)',
    cins:'bêcins', ez:null, kat:'perwerde', zor:0.80,
    not:'Geçmiş — xwendin fiili geçişsiz değil, geçişli (ergatif!). A2\'de tanıtım. [TH] §68',
-   her:['Xwişka min gelek xwand.', 'Tu pirtûka xwand?'],
+   her:['Xwişka min gelek xwand.', 'Te pirtûk xwand?'],
    gen:['Ew gelek xwandiye.', 'Min pirtûk xwand.']),
 
   (id:'a2_085', ku:'Îmtîhan', tr:'Sınav', en:'Exam',
@@ -458,7 +458,7 @@ const kA2Kelimeler = [
    cins:'mê', ez:'germahiyê',
    kat:'tendurist', zor:0.81,
    not:'Dişil — [BH] s.278 bileşik: "Germahî, diş., ısı (germ + -ahî sonek)". [FB]: germahî n.f.',
-   her:['Germahiya min heye.', 'Zarokê min germahî ye.'],
+   her:['Germahiya min heye.', 'Germahiya zarokê min heye.'],
    gen:['Germahî û serêşî', 'Germahiya min']),
 
   (id:'a2_092', ku:'Derman', tr:'İlaç', en:'Medicine',
@@ -520,7 +520,7 @@ const kA2Kelimeler = [
   (id:'a2_105', ku:'Malê paqij kirin', tr:'Ev temizlemek', en:'To clean the house',
    cins:'bêcins', ez:null, kat:'jiyan', zor:0.79,
    not:'"Paqij kirin" = temizlemek. "Malê paqij dikim" = evi temizliyorum',
-   her:['Sibê malê paqij dikim.', 'Dêya min malê paqij kir.'],
+   her:['Sibê ez malê paqij dikim.', 'Dêya min mal paqij kir.'],
    gen:['Mal paqij kirin', 'Malê paqij bike!']),
 
   // ════════════════════════════════════════════════════════════
@@ -553,7 +553,7 @@ const kA2Kelimeler = [
    cins:'nêr', ez:'bilbilê',
    kat:'heywan', zor:0.81,
    not:'Eril — [FB]: bilbil n.m. Kürt şiirinde sevgilinin simgesi. Cegerxwîn şiirlerinde sık geçer',
-   her:['Bilbil li baxçeyê strîn dike.', 'Dengê bilbilê xweş e.'],
+   her:['Bilbil li baxçeyê stran dike.', 'Dengê bilbilê xweş e.'],
    gen:['Bilbil û gul', 'Bilbilê baxçeyê']),
 
   (id:'a2_114', ku:'Daristan', tr:'Orman', en:'Forest',
@@ -621,7 +621,7 @@ const kA2Kelimeler = [
    cins:'bêcins', ez:null, kat:'daçek', zor:0.81,
    not:'"Ji ber ku" = çünkü. [TH] §: subordinating conjunctions. [AZ] Ders 14',
    her:['Ez neçûm ji ber ku nexweş bûm.', 'Pîrê hat ji ber ku me xwest.'],
-   gen:['Ji ber ku baş e.', 'Ez hatin ji ber ku dixwastim.']),
+   gen:['Ji ber ku baş e.', 'Ez hatim ji ber ku dixwastim.']),
 
   (id:'a2_131', ku:'Ger', tr:'Eğer', en:'If',
    cins:'bêcins', ez:null, kat:'daçek', zor:0.81,

@@ -393,7 +393,7 @@ class _CardFront extends StatelessWidget {
                     builder: (context, ref, _) {
                       final showTr = ref.watch(showTurkishProvider);
                       return Text(
-                        showTr ? 'Cevabı gör • Bersivê bibîne' : 'Bersivê bibîne',
+                        'Bersivê bibîne',
                         style: AppTypography.bodyMedium.copyWith(
                           color: AppColors.textSecondary,
                           fontWeight: FontWeight.w500,

@@ -236,7 +236,7 @@ class _WelcomePage extends StatelessWidget {
             builder: (context, ref, _) {
               if (!ref.watch(showTurkishProvider)) return const SizedBox.shrink();
               return Text(
-                'Kurmancî öğrenmenin en etkili yolu',
+                'Rêya herî bandor a hînbûna Kurmancî',
                 textAlign: TextAlign.center,
                 style: AppTypography.bodyLarge.copyWith(
                   color: AppColors.textSecondary,
@@ -319,7 +319,7 @@ class _GoalPage extends StatelessWidget {
             builder: (context, ref, _) {
               if (!ref.watch(showTurkishProvider)) return const SizedBox.shrink();
               return Text(
-                'Hedefini sonra da değiştirebilirsin',
+                'Tu dikarî paşê jî armanca xwe biguherînî',
                 textAlign: TextAlign.center,
                 style: AppTypography.body.copyWith(
                   color: AppColors.textTertiary,
@@ -451,7 +451,7 @@ class _ReadyPage extends StatelessWidget {
             builder: (context, ref, _) {
               if (!ref.watch(showTurkishProvider)) return const SizedBox.shrink();
               return Text(
-                'Hazırsın!',
+                'Tu amade yî!',
                 textAlign: TextAlign.center,
                 style: AppTypography.headline.copyWith(
                   color: AppColors.textSecondary,

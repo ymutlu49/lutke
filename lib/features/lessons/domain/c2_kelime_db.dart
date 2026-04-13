@@ -27,7 +27,7 @@ final kC2Kelimeler = [
   (id:"c2_003", ku:"Heyam", tr:"Dönem / Çağ (şiirsel)", en:"Era (poetic)",
    cins:"nêr", ez:"heyamê", kat:"edebiyat", zor:0.50,
    not:"Eril — [BH]: heyam n.m. \"Heyamê zêrîn\" = altın çağ.",
-   her:["Di heyamê de.", "Heyama zêrîn."],
+   her:["Di heyamê de.", "Heyamê zêrîn."],
    gen:["Heyam û serdem", "Heyamê zêrîn"]),
 
   (id:"c2_004", ku:"Meyxane", tr:"Meyhane (mecazi)", en:"Tavern (metaphorical)",
@@ -97,7 +97,7 @@ final kC2Kelimeler = [
   (id:"c2_021", ku:"Dîplomasi", tr:"Diplomasi", en:"Diplomacy",
    cins:"mê", ez:"dîplomasiyê", kat:"siyaset", zor:0.51,
    not:"Dişil — uluslararası terim.",
-   her:["Dîplomasîya kurdî.", "Di dîplomasiyê de."],
+   her:["Dîplomasiya kurdî.", "Di dîplomasiyê de."],
    gen:["Dîplomasi û têkoşîn", "Dîplomasîya me"]),
 
   (id:"c2_022", ku:"Mîmarîya ewlehiyê", tr:"Güvenlik mimarisi", en:"Security architecture",
@@ -141,7 +141,7 @@ final kC2Kelimeler = [
   (id:"c2_033", ku:"Navok", tr:"İçerik / Öz", en:"Content / Essence",
    cins:"nêr", ez:"navokê", kat:"ziman", zor:0.53,
    not:"Eril — \"nav\" + \"-ok\". [BH]: navok n.m.",
-   her:["Navokê gotarê.", "Navoka metnê."],
+   her:["Navokê gotarê.", "Navokê metnê."],
    gen:["Navok û şêwe", "Navoka me"]),
 
   (id:"c2_034", ku:"Şêweya derbirînê", tr:"Anlatım biçimi", en:"Mode of expression",
@@ -202,7 +202,7 @@ final kC2Kelimeler = [
   (id:"c2_060", ku:"Bi awayekî pir zelal", tr:"Çok açık bir şekilde", en:"Very clearly",
    cins:"bêcins", ez:null, kat:"daçek", zor:0.55,
    not:"\"Bi awayekî\" + \"pir zelal\". C2 düzeyi söylem.",
-   her:["Bi awayekî pir zelal axivî.", "Bi awayekî zelal nivisand."],
+   her:["Bi awayekî pir zelal axivî.", "Bi awayekî zelal nivîsand."],
    gen:["Bi awayekî pir zelal", "Zelal û kûr"]),
 
   (id:"c2_061", ku:"Ji perspektîfa", tr:"Perspektifinden", en:"From the perspective of",

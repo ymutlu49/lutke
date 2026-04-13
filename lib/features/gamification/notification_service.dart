@@ -80,8 +80,8 @@ class LutkeNotificationService {
 
     final title = 'LÛTKE — Zimanê Kurdî';
     final body = anchorName != null && anchorName.isNotEmpty
-        ? '$anchorName ji te hêviyê dike — bugün pratik yap!'
-        : 'Îro jî Kurmancî bimîne! — Bugün de Kurmancîyle kal';
+        ? '$anchorName ji te hêviyê dike — îro pratîk bike!'
+        : 'Îro jî bi Kurmancî bimîne!';
 
     await _plugin.zonedSchedule(
       _dailyNotifId,
@@ -91,8 +91,8 @@ class LutkeNotificationService {
       NotificationDetails(
         android: AndroidNotificationDetails(
           _dailyChannelId,
-          'Günlük Hatırlatıcı',
-          channelDescription: 'LÛTKE günlük pratik bildirimi',
+          'Bîranîna Rojane',
+          channelDescription: 'Agahdariya pratîka rojane ya LÛTKE',
           importance: Importance.high,
           priority: Priority.high,
           styleInformation: BigTextStyleInformation(body),
@@ -117,18 +117,18 @@ class LutkeNotificationService {
   }) async {
     await _plugin.cancel(_weeklyNotifId);
 
-    final title = 'Bu haftaki özet — Haftalık LÛTKE';
+    final title = 'Kurteya heftanê — LÛTKE';
     String body;
 
     if (activeDays >= WeeklyGoal.targetDays) {
       body = anchorName != null
-          ? '$anchorName için bu hafta hedefi tamamladın! 🎉 $activeDays gün aktif'
-          : 'Haftalık hedefi tamamladın! 🎉 $activeDays gün aktif kaldın';
+          ? '$anchorName — vê heftê armanc hat temamkirin! 🎉 $activeDays roj çalak'
+          : 'Armanca heftanê hat temamkirin! 🎉 $activeDays roj çalak bûyî';
     } else {
       final remaining = WeeklyGoal.targetDays - activeDays;
       body = anchorName != null
-          ? '$anchorName için $activeDays gün aktif oldun. $remaining gün daha mükemmel olurdu!'
-          : 'Bu hafta $activeDays gün aktiftin. Haftaya daha iyisini yapabilirsin!';
+          ? '$anchorName — $activeDays roj çalak bûyî. $remaining roj din bêkêmasî bûya!'
+          : 'Vê heftê $activeDays roj çalak bûyî. Heftê tu dikarî çêtir bikî!';
     }
 
     // Her Pazar 19:00'da
@@ -140,8 +140,8 @@ class LutkeNotificationService {
       NotificationDetails(
         android: AndroidNotificationDetails(
           _weeklyChannelId,
-          'Haftalık Özet',
-          channelDescription: 'LÛTKE haftalık ilerleme özeti',
+          'Kurteya Heftanê',
+          channelDescription: 'Kurteya pêşveçûna heftane ya LÛTKE',
           importance: Importance.defaultImportance,
           styleInformation: BigTextStyleInformation(body),
         ),
@@ -160,8 +160,8 @@ class LutkeNotificationService {
   }) async {
     await _plugin.show(
       _badgeNotifId,
-      'Xelat hat! — Rozet kazandın!',
-      '$badgeKurmanjiName ($badgeTurkishName) rozetini kazandın! 🏆',
+      'Xelat hat! — Nîşan hat bidestxistin!',
+      'Te nîşana $badgeKurmanjiName ($badgeTurkishName) bi dest xist! 🏆',
       const NotificationDetails(
         android: AndroidNotificationDetails(
           _badgeChannelId,

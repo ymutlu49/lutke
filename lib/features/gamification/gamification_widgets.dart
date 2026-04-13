@@ -1141,7 +1141,7 @@ class _ClaimedDailyReward extends StatelessWidget {
           ),
           const SizedBox(width: AppSpacing.sm),
           Text(
-            'Xelata rojane hat bistînin',
+            'Xelata rojane hat wergirtin',
             style: AppTypography.caption.copyWith(
               color: AppColors.success,
               fontWeight: FontWeight.w500,
@@ -1329,7 +1329,7 @@ class _BadgeOverlayContent extends StatelessWidget {
                       Gap.xs,
 
                       Text(
-                        'Rozet kazandın!',
+                        'Nîşan hat bidestxistin!',
                         style: AppTypography.caption.muted,
                       )
                           .animate(delay: 700.ms)
@@ -1494,7 +1494,7 @@ class WeeklyRhythmWidget extends ConsumerWidget {
   final String? anchorName;
   const WeeklyRhythmWidget({super.key, this.anchorName});
 
-  static const _dayLabels = ['Pzt', 'Sal', 'Çar', 'Per', 'Cum', 'Cmt', 'Paz'];
+  static const _dayLabels = ['Dş', 'Sş', 'Çş', 'Pş', 'În', 'Şe', 'Yk'];
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -1693,7 +1693,7 @@ class WeeklySummaryCard extends ConsumerWidget {
                   style: AppTypography.streakCounter),
               Text('Hefte',
                   style: AppTypography.caption.primary),
-              Text('Haftalık seri',
+              Text('Rêza heftanê',
                   style: AppTypography.caption.muted),
             ],
           ),

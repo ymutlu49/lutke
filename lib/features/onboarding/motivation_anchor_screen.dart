@@ -36,11 +36,11 @@ class _MotivationAnchorScreenState
 
   // Öneri isimleri — doğal, kültürel
   static const _suggestions = [
-    'Büyükannem',
-    'Annem',
-    'Babam',
-    'Dedem',
-    'Kardeşim',
+    'Dapîra min',
+    'Diya min',
+    'Bavê min',
+    'Bapîrê min',
+    'Xwişk/Birayê min',
   ];
 
   @override
@@ -109,7 +109,7 @@ class _MotivationAnchorScreenState
                       Gap.xs,
 
                       Text(
-                        'Kimin için öğreniyorsun?',
+                        'Tu ji bo kê hîn dibî?',
                         style: AppTypography.body.muted,
                         textAlign: TextAlign.center,
                       ).animate(delay: 200.ms).fadeIn(duration: 400.ms),
@@ -118,8 +118,8 @@ class _MotivationAnchorScreenState
 
                       // ── Açıklama ────────────────────────────────────
                       Text(
-                        'Kürtçe öğrenince ilk aklına gelen kişinin adını yaz. '
-                        'Büyükannen, annen, deden, kardeşin — kim olursa.',
+                        'Gava tu Kurmancî hîn dibî, navê kesê ku pêşî tê bîra te binivîse. '
+                        'Dapîra te, diya te, bapîrê te, xwişka te — kî be.',
                         style: AppTypography.body,
                         textAlign: TextAlign.center,
                       ).animate(delay: 350.ms).fadeIn(duration: 400.ms),
@@ -198,7 +198,7 @@ class _MotivationAnchorScreenState
                         minimumSize: const Size(double.infinity, AppSpacing.touchMin),
                       ),
                       child: Text(
-                        'Şimdi değil, atla',
+                        'Niha na, derbas bibe',
                         style: AppTypography.label.copyWith(
                           color: AppColors.textTertiary,
                         ),
@@ -235,7 +235,7 @@ class _NameInput extends StatelessWidget {
       ),
       textAlign: TextAlign.center,
       decoration: InputDecoration(
-        hintText: 'Büyükannem Fatma...',
+        hintText: 'Dapîra min Fatma...',
         hintStyle: AppTypography.bodyLarge.copyWith(
           color: AppColors.textTertiary,
         ),
@@ -317,14 +317,14 @@ class _PreviewCard extends StatelessWidget {
       child: Column(
         children: [
           Text(
-            'Bildirimler şöyle görünecek:',
+            'Agahdarî wê wiha xuya bibin:',
             style: AppTypography.captionStrong.copyWith(
               color: AppColors.textSecondary,
             ),
           ),
           Gap.sm,
           Text(
-            '"$name için bugün 10 dakika pratik yaptın!"',
+            '"Ji bo $name îro 10 deqîqe pratîk hat kirin!"',
             style: AppTypography.body.copyWith(
               color: AppColors.primaryDark,
               fontStyle: FontStyle.italic,
@@ -333,7 +333,7 @@ class _PreviewCard extends StatelessWidget {
           ),
           Gap.xs,
           Text(
-            '"$name\'i görmeden önce harika olacak!"',
+            '"Berî ku tu $name bibînî dê pir xweş be!"',
             style: AppTypography.body.copyWith(
               color: AppColors.primaryDark,
               fontStyle: FontStyle.italic,

@@ -79,7 +79,7 @@ final kB2Kelimeler = [
   (id:"b2_020", ku:"Li ber ketin", tr:"Çalışmak / Uğraşmak", en:"To work on / strive",
    cins:"bêcins", ez:null, kat:"bileşik_leker", zor:0.65,
    not:"\"Li ber\" + \"ketin\" = -e karşı düşmek → üzerinde çalışmak. [FB]: li ber ketin v.comp. B1\'de geçmedi, B2\'de tam öğretim",
-   her:["Em li ber pirsgirêkê dikevim.", "Ew li ber xwendinê dikeve."],
+   her:["Em li ber pirsgirêkê dikevin.", "Ew li ber xwendinê dikeve."],
    gen:["Li ber ketin", "Li ber dixebite."]),
 
   (id:"b2_021", ku:"Ser ketin", tr:"Başarmak / Üstün gelmek", en:"To succeed / overcome",
@@ -124,7 +124,7 @@ final kB2Kelimeler = [
   // ════════════════════════════════════════════════════════════
 
   (id:"b2_030", ku:"Ragihandin", tr:"İletişim / Haberleşme", en:"Communication / Media",
-   cins:"mê", ez:"ragihanndinê", kat:"medya", zor:0.67,
+   cins:"mê", ez:"ragihandinê", kat:"medya", zor:0.67,
    not:"Dişil — [FB]: ragihandin n.f. (aynı zamanda \"bildirmek\" fiili). \"Medyaya Kurdî\" = Kürt medyası",
    her:["Ragihandina kurdî geş dibe.", "Di ragihandina hevdem de…."],
    gen:["Ragihandin û rojname", "Ragihandina me"]),
@@ -209,7 +209,7 @@ final kB2Kelimeler = [
   (id:"b2_047", ku:"Têgeh", tr:"Kavram", en:"Concept",
    cins:"nêr", ez:"têgehê", kat:"soyut", zor:0.64,
    not:"Eril — [FB]: têgeh n.m. Akademik ve felsefi yazımda kullanılır",
-   her:["Têgeha azadiyê.", "Têgehên bingehîn."],
+   her:["Têgehê azadiyê.", "Têgehên bingehîn."],
    gen:["Têgeh û teorî", "Têgehên sereke"]),
 
   (id:"b2_048", ku:"Nîqaş", tr:"Tartışma / Müzakere", en:"Discussion / Debate",
@@ -394,7 +394,7 @@ final kB2Kelimeler = [
    gen:["Civak û dewlet", "Civaka me"]),
 
   (id:"b2_101", ku:"Civaknas", tr:"Sosyolog / Sosyoloji", en:"Sociologist / Sociology",
-   cins:"bêcins", ez:"civaknaê", kat:"civaknas", zor:0.64,
+   cins:"bêcins", ez:"civaknasî", kat:"civaknas", zor:0.64,
    not:"\"Civak\" + \"-nas\" (bilen). Kurmancî özgün türetme. \"Civaknas\" hem sosyolog hem sosyoloji",
    her:["Civaknas pirsgirêkê analîz dike.", "Civaknas û psîkolojînas."],
    gen:["Civaknas û rewşenbîr", "Civaknas e."]),

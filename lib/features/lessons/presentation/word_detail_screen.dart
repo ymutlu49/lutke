@@ -34,8 +34,8 @@ class WordDetailScreen extends ConsumerWidget {
       };
 
   String _genderLabel(String cins, {required bool showTurkish}) => switch (cins) {
-        'mê' => showTurkish ? 'Dişil (mê)' : 'Mê',
-        'nêr' => showTurkish ? 'Eril (nêr)' : 'Nêr',
+        'mê' => 'Mê',
+        'nêr' => 'Nêr',
         _ => 'Bêcins',
       };
 

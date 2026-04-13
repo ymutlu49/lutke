@@ -41,8 +41,8 @@ class AccessibleOptionButton extends StatelessWidget {
     final base = turkishText != null
         ? '$kurmanjText — $turkishText'
         : kurmanjText;
-    if (isCorrect) return '$base — Doğru cevap';
-    if (isWrong) return '$base — Yanlış cevap';
+    if (isCorrect) return '$base — Bersiva rast';
+    if (isWrong) return '$base — Bersiva çewt';
     return base;
   }
 
@@ -106,14 +106,14 @@ class AccessibleOptionButton extends StatelessWidget {
                     child: Icon(Icons.check_circle,
                         color: AppColors.success, size: 18,
                         // Ekran okuyucu için semantik anlam
-                        semanticLabel: 'Doğru'),
+                        semanticLabel: 'Rast'),
                   ),
                 if (isWrong)
                   Padding(
                     padding: const EdgeInsets.only(right: AppSpacing.sm),
                     child: Icon(Icons.cancel_outlined,
                         color: AppColors.errorSoft, size: 18,
-                        semanticLabel: 'Yanlış'),
+                        semanticLabel: 'Çewt'),
                   ),
                 Expanded(
                   child: Text(kurmanjText,

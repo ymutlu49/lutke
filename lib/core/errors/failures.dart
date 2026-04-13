@@ -54,32 +54,32 @@ class AuthFailure extends Failure {
     final (type, message, messageKu) = switch (code) {
       'email-already-in-use' => (
         AuthFailureType.emailInUse,
-        'Bu e-posta zaten kayıtlı.',
-        'Ev e-peyam berê hatiye tomar kirin.',
+        'Ev e-name berê hatiye tomar kirin.',
+        'Ev e-name berê hatiye tomar kirin.',
       ),
       'wrong-password' || 'invalid-credential' => (
         AuthFailureType.wrongPassword,
-        'E-posta veya şifre hatalı.',
-        'E-peyam an şîfre xelet e.',
+        'E-name an şîfre çewt e.',
+        'E-name an şîfre çewt e.',
       ),
       'user-not-found' => (
         AuthFailureType.userNotFound,
-        'Kullanıcı bulunamadı.',
+        'Bikarhêner nehate dîtin.',
         'Bikarhêner nehate dîtin.',
       ),
       'weak-password' => (
         AuthFailureType.weakPassword,
-        'Şifre en az 6 karakter olmalıdır.',
+        'Şîfre divê herî kêm 6 tîp be.',
         'Şîfre divê herî kêm 6 tîp be.',
       ),
       'network-request-failed' => (
         AuthFailureType.network,
-        'İnternet bağlantınızı kontrol edin.',
+        'Girêdana xwe ya înternetê kontrol bikin.',
         'Girêdana xwe ya înternetê kontrol bikin.',
       ),
       _ => (
         AuthFailureType.unknown,
-        'Bir hata oluştu: $code',
+        'Çewtî derket: $code',
         'Çewtîyek çêbû.',
       ),
     };

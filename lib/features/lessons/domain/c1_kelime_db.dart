@@ -56,7 +56,7 @@ final kC1Kelimeler = [
   (id:"c1_007", ku:"Baxçe", tr:"Bahçe", en:"Garden",
    cins:"nêr", ez:"baxçê", kat:"edebiyat", zor:0.63,
    not:"Eril — [BH]: baxçe n.m. Klasik metafor. \"Xanî Kurdistan bi baxçe şiband.\"",
-   her:["Li baxçê ne.", "Baxçeya gulê."],
+   her:["Li baxçê ne.", "Baxçeyê gulê."],
    gen:["Baxçe û çiya", "Baxçeya Kurdistan"]),
 
   (id:"c1_008", ku:"Derd û êş", tr:"Dert ve acı", en:"Trouble and pain",
@@ -79,11 +79,11 @@ final kC1Kelimeler = [
 
   // ── AKADEMİK VE FELSEFİ ────────────────────────────────────
 
-  (id:"c1_011", ku:"Felsefeya zimên", tr:"Dil felsefesi", en:"Philosophy of language",
-   cins:"mê", ez:"felsefeya zimên", kat:"felsefe", zor:0.60,
-   not:"\"Felsefe\" + \"zimên\". Kürt dilbilimi tartışmalarında.",
-   her:["Felsefeya zimên û nasname.", "Di felsefeya zimên de."],
-   gen:["Felsefeya zimên", "Felsefeya me"]),
+  (id:"c1_011", ku:"Felsefeya zimanî", tr:"Dil felsefesi", en:"Philosophy of language",
+   cins:"mê", ez:"felsefeya zimanî", kat:"felsefe", zor:0.60,
+   not:"\"Felsefe\" + \"zimanî\". Kürt dilbilimi tartışmalarında.",
+   her:["Felsefeya zimanî û nasname.", "Di felsefeya zimanî de."],
+   gen:["Felsefeya zimanî", "Felsefeya me"]),
 
   (id:"c1_012", ku:"Ontolojî", tr:"Ontoloji", en:"Ontology",
    cins:"mê", ez:"ontolojiyê", kat:"felsefe", zor:0.58,
@@ -124,7 +124,7 @@ final kC1Kelimeler = [
   // ── SİYASET VE HUKUK İLERİ ────────────────────────────────
 
   (id:"c1_020", ku:"Serwerî", tr:"Egemenlik", en:"Sovereignty",
-   cins:"mê", ez:"serweryê", kat:"siyaset", zor:0.62,
+   cins:"mê", ez:"serweriyê", kat:"siyaset", zor:0.62,
    not:"Dişil — \"serwer\" (hükümdar) + \"-î\". [BH] §275.",
    her:["Serwerîya netewî.", "Di serweriyê de."],
    gen:["Serwerî û azadî", "Serwerîya me"]),

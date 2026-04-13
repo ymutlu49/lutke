@@ -80,7 +80,7 @@ class AuthService {
     } on FirebaseAuthException catch (e) {
       return AuthResult.failure(_mapFirebaseError(e.code));
     } catch (e) {
-      return AuthResult.failure('Beklenmeyen hata: $e');
+      return AuthResult.failure('Çewtîya nedîtî: $e');
     }
   }
 
@@ -127,7 +127,7 @@ class AuthService {
 
       return AuthResult.success(user);
     } catch (e) {
-      return AuthResult.failure('Anonim giriş hatası: $e');
+      return AuthResult.failure('Çewtîya têketina anonîm: $e');
     }
   }
 
@@ -235,7 +235,7 @@ class AuthService {
   Future<AuthResult> deleteAccount(String password) async {
     try {
       final user = _auth.currentUser;
-      if (user == null) return AuthResult.failure('Oturum açık değil');
+      if (user == null) return AuthResult.failure('Danişîn vekirî nîne');
 
       // Firestore verilerini sil
       await _deleteUserData(user.uid);
@@ -268,17 +268,17 @@ class AuthService {
   }
 
   String _mapFirebaseError(String code) => switch (code) {
-    'user-not-found' => 'Bu e-posta adresiyle kayıtlı kullanıcı yok.',
-    'wrong-password' => 'Şifre hatalı.',
-    'email-already-in-use' => 'Bu e-posta adresi zaten kullanımda.',
-    'weak-password' => 'Şifre en az 6 karakter olmalı.',
-    'invalid-email' => 'Geçersiz e-posta adresi.',
-    'user-disabled' => 'Bu hesap devre dışı bırakılmış.',
-    'too-many-requests' => 'Çok fazla deneme. Lütfen bekleyin.',
-    'operation-not-allowed' => 'Bu işlem izin verilmiyor.',
+    'user-not-found' => 'Bi vê e-nameyê bikarhêner tune.',
+    'wrong-password' => 'Şîfre çewt e.',
+    'email-already-in-use' => 'Ev e-name berê tê bikaranîn.',
+    'weak-password' => 'Şîfre divê herî kêm 6 tîp be.',
+    'invalid-email' => 'E-nameya nederbasdar.',
+    'user-disabled' => 'Ev hesab hatiye astengkirin.',
+    'too-many-requests' => 'Pir ceribandin. Ji kerema xwe bisekinin.',
+    'operation-not-allowed' => 'Ev kar nayê destûrkirin.',
     'requires-recent-login' =>
-      'Bu işlem için yeniden giriş yapmanız gerekiyor.',
-    _ => 'Bir hata oluştu. Lütfen tekrar deneyin.',
+      'Ji bo vê karê divê hûn ji nû ve têkevin.',
+    _ => 'Çewtî derket. Ji kerema xwe dîsa biceribînin.',
   };
 }
 

@@ -38,7 +38,7 @@ class CEFRLevelMap extends StatelessWidget {
         ),
         const SizedBox(height: 4),
         Text(
-          'Öğrenme yolu',
+          'Rêya hînbûnê',
           style: AppTypography.caption.copyWith(
             color: AppColors.textSecondary.withOpacity(0.6),
             fontSize: 11,

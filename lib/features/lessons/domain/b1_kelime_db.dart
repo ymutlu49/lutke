@@ -279,7 +279,7 @@ final kB1Kelimeler = [
    cins:"mê", ez:"piştgiriyê", kat:"siyaset", zor:0.73,
    not:"Dişil — [FB]: piştgirî n.f. \"Piştgiriya te dikim\" = seni destekliyorum",
    her:["Piştgiriya min pê re ye.", "Piştgirî lazim e."],
-   gen:["Piştgirî û arîkarî", "Piştgiriya me"]),
+   gen:["Piştgirî û alîkarî", "Piştgiriya me"]),
 
   // ════════════════════════════════════════════════════════════
   // B1 BİRİM 8 — Edebiyat ve Güzel Sanatlar
@@ -313,7 +313,7 @@ final kB1Kelimeler = [
   (id:"b1_064", ku:"Destpêk", tr:"Başlangıç", en:"Beginning",
    cins:"nêr", ez:"destpêkê", kat:"edebiyat", zor:0.74,
    not:"Eril — [FB]: destpêk n.m. \"Dest\" (el) + \"pêk\" = başlangıç. \"Destpêk\" aynı zamanda A1 düzey rozeti!",
-   her:["Destpêka jiyanê xweş e.", "Destpêkê baş kir."],
+   her:["Destpêkê jiyanê xweş e.", "Destpêkê baş kir."],
    gen:["Destpêk û dawî", "Destpêkê"]),
 
   (id:"b1_065", ku:"Dawî", tr:"Son / Bitiş", en:"End / Conclusion",
@@ -342,7 +342,7 @@ final kB1Kelimeler = [
   (id:"b1_072", ku:"Berhev kirin", tr:"Toplamak / Hasatla", en:"To harvest / gather",
    cins:"bêcins", ez:null, kat:"xweza", zor:0.70,
    not:"\"Berhev kirin\" = toplamak/hasat etmek. [FB]: berhev kirin v.",
-   her:["Payîzê em berhev kirin.", "Min kulîlk berhev kir."],
+   her:["Payîzê me berhev kir.", "Min kulîlk berhev kir."],
    gen:["Berhev kirin û çandin", "Berhev kir."]),
 
   (id:"b1_073", ku:"Demsalên çar", tr:"Dört mevsim", en:"The four seasons",
@@ -368,7 +368,7 @@ final kB1Kelimeler = [
    her:["Şer xirab e.", "Piştî şerê dirêj aştî hat."],
    gen:["Şer û aştî", "Şerê mezin"]),
 
-  (id:"b1_082", ku:"Serdema", tr:"Dönem / Devir", en:"Era / Period",
+  (id:"b1_082", ku:"Serdem", tr:"Dönem / Devir", en:"Era / Period",
    cins:"mê", ez:"serdemê", kat:"dîrok", zor:0.71,
    not:"Dişil — [FB]: serdem n.f. \"Serdema osmanî\" = Osmanlı dönemi. [AZ] tarih",
    her:["Serdema dijwar bû.", "Di vê serdemê de."],
@@ -446,8 +446,8 @@ final kB1Kelimeler = [
   (id:"b1_103", ku:"Vemirandin", tr:"Söndürmek", en:"To extinguish",
    cins:"bêcins", ez:null, kat:"leker", zor:0.70,
    not:"\"Vemirandin\" = söndürmek. [TH] §65. \"Agir vemirandin\" = ateşi söndürmek",
-   her:["Min agir veşand.", "Ew agir veşandiye."],
-   gen:["Vemirandin û vêxistin", "Agir veşand."]),
+   her:["Min agir vemirand.", "Wî agir vemirandiye."],
+   gen:["Vemirandin û vêxistin", "Agir vemirand."]),
 
   (id:"b1_104", ku:"Parastin", tr:"Korumak / Savunmak", en:"To protect / defend",
    cins:"bêcins", ez:null, kat:"leker", zor:0.71,
@@ -458,8 +458,8 @@ final kB1Kelimeler = [
   (id:"b1_105", ku:"Veguhêztin", tr:"Aktarmak / Taşımak", en:"To transmit / transfer",
    cins:"bêcins", ez:null, kat:"leker", zor:0.69,
    not:"\"Veguhêztin\" — dil ve kültürü aktarma anlamında da kullanılır. \"Zimanê xwe veguherîzin\" = dilinizi aktarın",
-   her:["Pîrê çanda kurdî veguheztiye.", "Zimanî veguherîze!"],
-   gen:["Veguhêztin û parastin", "Veguhezt."]),
+   her:["Pîrê çanda kurdî veguhêztiye.", "Zimanê xwe veguhêzîne!"],
+   gen:["Veguhêztin û parastin", "Veguhêzt."]),
 
   // ════════════════════════════════════════════════════════════
   // B1 BİRİM 13 — Bağlaçlar ve Karmaşık Yapılar
@@ -498,7 +498,7 @@ final kB1Kelimeler = [
   (id:"b1_120", ku:"Aborî", tr:"Ekonomi", en:"Economy",
    cins:"mê", ez:"aboriyê", kat:"aborî", zor:0.72,
    not:"Dişil — [FB]: aborî n.f. [AS] s.65 \"İKTİSAT = ABORİ\" ✓",
-   her:["Aboriya welêt baş nîne.", "Aborî û kar."],
+   her:["Aboriya welatê me baş nîne.", "Aborî û kar."],
    gen:["Aborî û siyaset", "Aboriya me"]),
 
   (id:"b1_121", ku:"Bazirganî", tr:"Ticaret", en:"Trade / Commerce",

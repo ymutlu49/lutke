@@ -84,12 +84,12 @@ class AuthService {
 
   String _mapAuthError(FirebaseAuthException e) {
     return switch (e.code) {
-      'weak-password' => 'Şifre çok kısa — en az 6 karakter',
-      'email-already-in-use' => 'Bu e-posta zaten kullanımda',
-      'user-not-found' => 'Hesap bulunamadı',
-      'wrong-password' => 'Şifre yanlış',
-      'invalid-email' => 'Geçersiz e-posta adresi',
-      _ => 'Bir sorun oluştu: ${e.message}',
+      'weak-password' => 'Şîfre pir kin e — herî kêm 6 tîp',
+      'email-already-in-use' => 'Ev e-name berê tê bikaranîn',
+      'user-not-found' => 'Hesab nehate dîtin',
+      'wrong-password' => 'Şîfre çewt e',
+      'invalid-email' => 'E-nameya nederbasdar',
+      _ => 'Pirsgirêk derket: ${e.message}',
     };
   }
 }

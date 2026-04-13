@@ -76,7 +76,7 @@ class _AdminPanelScreenState extends State<AdminPanelScreen>
             const Icon(Icons.admin_panel_settings, color: Colors.white, size: 22),
             const SizedBox(width: 8),
             Text(
-              'Admin Paneli',
+              'Panela Rêveberiyê',
               style: AppTypography.headingSmall.copyWith(color: Colors.white),
             ),
           ],
@@ -89,10 +89,10 @@ class _AdminPanelScreenState extends State<AdminPanelScreen>
           unselectedLabelColor: Colors.white60,
           labelStyle: AppTypography.labelSmall.copyWith(fontWeight: FontWeight.w700),
           tabs: const [
-            Tab(text: 'Kelime Listesi'),
-            Tab(text: 'İstatistikler'),
-            Tab(text: 'Veri Kontrolü'),
-            Tab(text: 'Hızlı Arama'),
+            Tab(text: 'Lîsteya Peyvan'),
+            Tab(text: 'Amar'),
+            Tab(text: 'Kontrola Daneyan'),
+            Tab(text: 'Lêgerîna Bilez'),
           ],
         ),
       ),
@@ -159,7 +159,7 @@ class _WordListTabState extends State<_WordListTab> {
             onChanged: (v) => setState(() => _filter = v.trim()),
             style: AppTypography.body,
             decoration: InputDecoration(
-              hintText: 'Kelime veya ID ara...',
+              hintText: 'Peyv an ID bigere...',
               prefixIcon: const Icon(Icons.search, size: 20),
               filled: true,
               fillColor: AppColors.surface,
@@ -181,7 +181,7 @@ class _WordListTabState extends State<_WordListTab> {
             padding: const EdgeInsets.symmetric(horizontal: AppSpacing.sm),
             children: [
               _AdminChip(
-                label: 'Hepsi (${widget.allWords.length})',
+                label: 'Hemû (${widget.allWords.length})',
                 selected: _selectedLevel == null,
                 onTap: () => setState(() => _selectedLevel = null),
               ),
@@ -200,7 +200,7 @@ class _WordListTabState extends State<_WordListTab> {
           padding: const EdgeInsets.symmetric(
               horizontal: AppSpacing.md, vertical: 6),
           child: Text(
-            '${words.length} sonuç',
+            '${words.length} encam',
             style: AppTypography.caption,
           ),
         ),
@@ -296,16 +296,16 @@ class _AdminWordTileState extends State<_AdminWordTile> {
             if (_expanded) ...[
               const SizedBox(height: 8),
               _DetailRow('EN', w.en as String),
-              _DetailRow('Kategori', w.kat as String),
+              _DetailRow('Kategorî', w.kat as String),
               _DetailRow('Ezafe', (w.ez as String?) ?? '-'),
-              _DetailRow('Zorluk', '${w.zor}'),
+              _DetailRow('Astengî', '${w.zor}'),
               if ((w.not as String?) != null && (w.not as String).isNotEmpty)
-                _DetailRow('Not', w.not as String),
+                _DetailRow('Nîşe', w.not as String),
               const SizedBox(height: 4),
               if ((w.her as List<String>).isNotEmpty)
                 _DetailRow('Heritage', (w.her as List<String>).join(' | ')),
               if ((w.gen as List<String>).isNotEmpty)
-                _DetailRow('Genel', (w.gen as List<String>).join(' | ')),
+                _DetailRow('Giştî', (w.gen as List<String>).join(' | ')),
             ],
           ],
         ),
@@ -381,7 +381,7 @@ class _StatsTab extends StatelessWidget {
         children: [
           // Toplam
           _StatCard(
-            title: 'Toplam Kelime Sayısı',
+            title: 'Hejmara Giştî ya Peyvan',
             value: '${allWords.length}',
             icon: Icons.library_books,
             color: AppColors.primary,
@@ -391,7 +391,7 @@ class _StatsTab extends StatelessWidget {
 
           // Seviye dağılımı
           Text(
-            'Seviye Dağılımı',
+            'Dabeşkirina Astan',
             style: AppTypography.headingSmall.copyWith(
               color: AppColors.textPrimary,
             ),
@@ -414,7 +414,7 @@ class _StatsTab extends StatelessWidget {
 
           // Cinsiyet dağılımı
           Text(
-            'Cinsiyet Dağılımı',
+            'Dabeşkirina Cinsan',
             style: AppTypography.headingSmall.copyWith(
               color: AppColors.textPrimary,
             ),
@@ -435,7 +435,7 @@ class _StatsTab extends StatelessWidget {
 
           // Kategori dağılımı
           Text(
-            'Kategori Dağılımı (ilk 20)',
+            'Dabeşkirina Kategoriyan (20 pêşîn)',
             style: AppTypography.headingSmall.copyWith(
               color: AppColors.textPrimary,
             ),
@@ -679,7 +679,7 @@ class _DataValidationTabState extends State<_DataValidationTab> {
     for (final dup in duplicateIds) {
       issues.add(_ValidationIssue(
         severity: _Severity.error,
-        message: 'Tekrar eden ID: $dup',
+        message: 'IDya dubare: $dup',
         wordId: dup,
       ));
     }
@@ -690,21 +690,21 @@ class _DataValidationTabState extends State<_DataValidationTab> {
       if ((w.ku as String).trim().isEmpty) {
         issues.add(_ValidationIssue(
           severity: _Severity.error,
-          message: 'Kurmancî (ku) alanı boş',
+          message: 'Qada Kurmancî (ku) vala ye',
           wordId: id,
         ));
       }
       if ((w.tr as String).trim().isEmpty) {
         issues.add(_ValidationIssue(
           severity: _Severity.warning,
-          message: 'Türkçe (tr) alanı boş',
+          message: 'Qada Tirkî (tr) vala ye',
           wordId: id,
         ));
       }
       if ((w.en as String).trim().isEmpty) {
         issues.add(_ValidationIssue(
           severity: _Severity.warning,
-          message: 'İngilizce (en) alanı boş',
+          message: 'Qada Îngilîzî (en) vala ye',
           wordId: id,
         ));
       }
@@ -712,21 +712,21 @@ class _DataValidationTabState extends State<_DataValidationTab> {
       if (!['nêr', 'mê', 'bêcins'].contains(cins)) {
         issues.add(_ValidationIssue(
           severity: _Severity.error,
-          message: 'Geçersiz cinsiyet: "$cins"',
+          message: 'Cinsê nederbasdar: "$cins"',
           wordId: id,
         ));
       }
       if ((w.her as List<String>).isEmpty) {
         issues.add(_ValidationIssue(
           severity: _Severity.info,
-          message: 'Heritage cümlesi eksik',
+          message: 'Hevoka Heritage kêm e',
           wordId: id,
         ));
       }
       if ((w.gen as List<String>).isEmpty) {
         issues.add(_ValidationIssue(
           severity: _Severity.info,
-          message: 'Genel cümle eksik',
+          message: 'Hevoka giştî kêm e',
           wordId: id,
         ));
       }
@@ -755,7 +755,7 @@ class _DataValidationTabState extends State<_DataValidationTab> {
                       child: CircularProgressIndicator(strokeWidth: 2),
                     )
                   : const Icon(Icons.verified_user, size: 20),
-              label: Text(_running ? 'Kontrol ediliyor...' : 'Veri Kontrolünü Başlat'),
+              label: Text(_running ? 'Tê kontrol kirin...' : 'Kontrola Daneyan Dest Pê Bike'),
               style: ElevatedButton.styleFrom(
                 backgroundColor: AppColors.primary,
                 foregroundColor: Colors.white,
@@ -774,19 +774,19 @@ class _DataValidationTabState extends State<_DataValidationTab> {
             child: Row(
               children: [
                 _IssueSummaryChip(
-                  'Hata',
+                  'Çewtî',
                   _issues!.where((i) => i.severity == _Severity.error).length,
                   AppColors.errorSoft,
                 ),
                 const SizedBox(width: 8),
                 _IssueSummaryChip(
-                  'Uyarı',
+                  'Hişyarî',
                   _issues!.where((i) => i.severity == _Severity.warning).length,
                   AppColors.warning,
                 ),
                 const SizedBox(width: 8),
                 _IssueSummaryChip(
-                  'Bilgi',
+                  'Agahî',
                   _issues!.where((i) => i.severity == _Severity.info).length,
                   AppColors.primary,
                 ),
@@ -804,7 +804,7 @@ class _DataValidationTabState extends State<_DataValidationTab> {
                             size: 48, color: AppColors.success),
                         const SizedBox(height: 8),
                         Text(
-                          'Veri bütünlüğü tamam!',
+                          'Yekrêziya daneyan baş e!',
                           style: AppTypography.labelLarge.copyWith(
                             color: AppColors.success,
                           ),
@@ -854,7 +854,7 @@ class _DataValidationTabState extends State<_DataValidationTab> {
           Expanded(
             child: Center(
               child: Text(
-                'Kontrol başlatmak için butona basın',
+                'Ji bo destpêkirina kontrolê bişkojkê bitikînin',
                 style: AppTypography.body.copyWith(color: AppColors.textSecondary),
               ),
             ),
@@ -963,7 +963,7 @@ class _QuickSearchTabState extends State<_QuickSearchTab> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            'Kelime ID veya ismi yazıp arayın:',
+            'IDya peyvê an navê wê binivîsin û bigerin:',
             style: AppTypography.body.copyWith(color: AppColors.textSecondary),
           ),
           const SizedBox(height: AppSpacing.sm),
@@ -975,7 +975,7 @@ class _QuickSearchTabState extends State<_QuickSearchTab> {
                   onSubmitted: (_) => _search(),
                   style: AppTypography.body,
                   decoration: InputDecoration(
-                    hintText: 'ör: Silav, a1_010, Merhaba',
+                    hintText: 'mînak: Silav, a1_010',
                     filled: true,
                     fillColor: AppColors.surface,
                     border: OutlineInputBorder(
@@ -1012,7 +1012,7 @@ class _QuickSearchTabState extends State<_QuickSearchTab> {
                   const Icon(Icons.search_off, size: 40, color: AppColors.textTertiary),
                   const SizedBox(height: 8),
                   Text(
-                    'Kelime bulunamadı',
+                    'Peyv nehate dîtin',
                     style: AppTypography.body.copyWith(color: AppColors.textSecondary),
                   ),
                 ],

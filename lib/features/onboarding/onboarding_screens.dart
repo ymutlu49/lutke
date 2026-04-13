@@ -31,7 +31,7 @@ class DialectSelectScreen extends StatelessWidget {
         children: [
           _OnboardingHeader(
             kuTitle: 'Zaravaya xwe hilbijêre',
-            trTitle: 'Lehçeni seç',
+            trTitle: 'Zaravaya xwe hilbijêre',
             icon: Icons.language_outlined,
           ),
           const SizedBox(height: AppSpacing.xl),
@@ -39,7 +39,7 @@ class DialectSelectScreen extends StatelessWidget {
           // Kurmancî seçeneği
           _DialectCard(
             name: 'Kurmancî',
-            subtitle: 'Kuzey Kürtçe — Bakurê Kurdistanê',
+            subtitle: 'Kurdiya Bakur — Bakurê Kurdistanê',
             isRecommended: true,
             onTap: () => context.push(AppRoutes.scenarioSelect),
           ),
@@ -220,7 +220,7 @@ class ScenarioSelectScreen extends StatelessWidget {
         children: [
           _OnboardingHeader(
             kuTitle: 'Rêya xwe hilbijêre',
-            trTitle: 'Yolunu seç',
+            trTitle: 'Rêya xwe hilbijêre',
             icon: Icons.fork_right_outlined,
           ),
           const SizedBox(height: AppSpacing.xl),
@@ -228,10 +228,10 @@ class ScenarioSelectScreen extends StatelessWidget {
           // Heritage yolu — İlke §7.1
           _ScenarioCard(
             kuTitle: 'Rêya Malê',
-            trTitle: 'Ev Yolu — Heritage',
+            trTitle: 'Rêya Malê — Heritage',
             description:
                 'Malbata te Kurmancî dipeyive an tu berê fêr bûyî.\n'
-                '"Büyükanneyle çay, sofrada, telefonda annem"',
+                '"Çay bi dapîrê, li ser sifrê, bi dê re li ser têlefonê"',
             icon: Icons.home_outlined,
             isPrimary: true,
             onTap: () => context.push(AppRoutes.goalSelect),
@@ -242,7 +242,7 @@ class ScenarioSelectScreen extends StatelessWidget {
           // Genel yol
           _ScenarioCard(
             kuTitle: 'Rêya Nû',
-            trTitle: 'Yeni Yol — Sıfırdan',
+            trTitle: 'Rêya Nû — Ji Destpêkê',
             description:
                 'Kurmancîyê ji destpêkê fêr dibî.\n'
                 'Alfabe → Dengên → Rojane jiyan',
@@ -405,7 +405,7 @@ class _GoalSelectScreenState extends State<GoalSelectScreen> {
                     const SizedBox(height: AppSpacing.lg),
                     _OnboardingHeader(
                       kuTitle: 'Armanca rojane',
-                      trTitle: 'Günlük hedef',
+                      trTitle: 'Armanca rojane',
                       icon: Icons.flag_outlined,
                     ),
                     const SizedBox(height: AppSpacing.xl),
@@ -488,7 +488,7 @@ class _GoalSelectScreenState extends State<GoalSelectScreen> {
                   elevation: 0,
                 ),
                 child: Text(
-                  'Dest pê bike! — Başla!',
+                  'Dest pê bike!',
                   style: AppTypography.labelLarge.copyWith(
                       color: Colors.white, fontWeight: FontWeight.w700),
                 ),
@@ -533,7 +533,7 @@ class SettingsScreen extends ConsumerWidget {
         ),
         children: [
           _SettingsSection(
-            title: 'Ziman — Dil',
+            title: 'Ziman',
             children: const [
               _SettingsTile(
                 title: 'Zimanê navnîşê',
@@ -544,32 +544,32 @@ class SettingsScreen extends ConsumerWidget {
           ),
           const SizedBox(height: AppSpacing.md),
           _SettingsSection(
-            title: 'Gihîştbarî — Erişilebilirlik',
+            title: 'Gihîştbarî',
             children: const [
               _SettingsTile(
                 title: 'Tîpên OpenDyslexic',
-                subtitle: 'Prof. Dr. Y. Mutlu araştırması',
+                subtitle: 'Lêkolîna Prof. Dr. Y. Mutlu',
                 icon: Icons.font_download_outlined,
               ),
               _SettingsTile(
                 title: 'Tîpên mezin',
-                subtitle: 'Yazı boyutunu artır',
+                subtitle: 'Mezinahiya tîpan zêde bike',
                 icon: Icons.text_increase,
               ),
               _SettingsTile(
                 title: 'Livîn kêm bike',
-                subtitle: 'Animasyonları azalt',
+                subtitle: 'Livînan kêm bike',
                 icon: Icons.animation,
               ),
             ],
           ),
           const SizedBox(height: AppSpacing.md),
           _SettingsSection(
-            title: 'Agahî — Bildirimler',
+            title: 'Agahdarî',
             children: const [
               _SettingsTile(
                 title: 'Bîranîna rojane',
-                subtitle: 'Günlük hatırlatıcı',
+                subtitle: 'Bîranîna her roj',
                 icon: Icons.notifications_outlined,
               ),
             ],
@@ -664,7 +664,7 @@ class ErrorScreen extends StatelessWidget {
                   style: AppTypography.headingSmall.copyWith(
                       color: AppColors.textPrimary)),
               const SizedBox(height: AppSpacing.sm),
-              Text('Rûpel tune ye. — Sayfa bulunamadı.',
+              Text('Rûpel nehate dîtin.',
                   style: AppTypography.bodyMedium.copyWith(
                       color: AppColors.textSecondary)),
               const SizedBox(height: AppSpacing.xl),

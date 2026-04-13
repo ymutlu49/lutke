@@ -158,7 +158,7 @@ const kCulturalItems = [
     kurmanjContent:
         'Ala Kurdistanê sê rengî ye:\n'
         'Kesk — çiya û çêra Kurdistanê,\n'
-        'Spî — aştî û paqijiyê,\n'
+        'Spî — aştî û paqijî,\n'
         'Sor — xwîna şehîdan.\n\n'
         'Di navenda alayê de Tav heye — stêrkeke zer.\n'
         'Tav jiyan û ronahiyê temsîl dike.',
@@ -307,7 +307,7 @@ const kCulturalItems = [
     kurmanjTitle: 'Nan û xwê — Ekmek ve tuz',
     turkishTitle: 'Kürt sofrasının kutsallığı',
     kurmanjContent:
-        'Li mêvanê xwe nan û xwê bide.\n'
+        'Mêvanê xwe nan û xwê bide.\n'
         'Nan û xwê girêdanê digire.\n\n'
         'Destê te xweş be!',
     turkishContent:
@@ -362,8 +362,8 @@ const kCulturalItems = [
     turkishTitle: 'Kürt Evi — Ocak ve Misafirhane',
     kurmanjContent:
         'Di mala kurdî de du cih girîng hene:\n\n'
-        'Ocax — agirê mala ye.\n'
-        'Li dora ocaxê malbat dihewîne.\n\n'
+        'Ocax — agirê malê ye.\n'
+        'Li dora ocaxê malbat dicive.\n\n'
         'Mêvanxane — ji bo mêvanan e.\n'
         'Mêvan muqedes e — "Mêvan xwedayê malê ye."',
     turkishContent:
@@ -917,8 +917,8 @@ const kCulturalItems = [
     kurmanjContent:
         'Cejn hat — malbat û heval tên ba hev.\n'
         'Zarok cil û bergên nû li xwe dikin.\n\n'
-        '"Cejnê te pîroz be!"\n'
-        '"Cejnê we jî pîroz be!"\n\n'
+        '"Cejna te pîroz be!"\n'
+        '"Cejna we jî pîroz be!"\n\n'
         'Destên mezinên malbatê tên ramuskirin.\n'
         '"Xêr û bereket bê malê te!"',
     turkishContent:
@@ -946,7 +946,7 @@ const kCulturalItems = [
     turkishTitle: 'Doktor ve Hastalık',
     kurmanjContent:
         'Di nav Kurdan de dema kes nexweş dikeve,\n'
-        'malbat û cînar tê serî lêdan.\n\n'
+        'malbat û cînar tên serdanê.\n\n'
         '"Tu çawa yî? Çi heye?"\n'
         '"Ez baştir im, spas."\n\n'
         '"Xwedê şifayê bide te!"\n'
@@ -1005,7 +1005,7 @@ const kCulturalItems = [
     turkishTitle: 'Kürt Evi ve Komşuluk',
     kurmanjContent:
         'Di nava mala kurdî de:\n'
-        'Derî her vekirî ye ji bo cîneran.\n\n'
+        'Derî her vekirî ye ji bo cîranan.\n\n'
         '"Bê, bê! Kafe vexwe, çay bixwe!"\n'
         '"Spas, spas — heta carek din."\n\n'
         'Cînar wek malbat in.\n'

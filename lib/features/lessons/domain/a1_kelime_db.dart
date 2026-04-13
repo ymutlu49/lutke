@@ -186,11 +186,11 @@ const kA1TamKelimeler = [
   (id:'a1_036', ku:'Şeş', tr:'Altı', en:'Six', cins:'bêcins', ez:null, kat:'jimar', zor:0.82,
    not:'"Şeş" — ş sesi Türkçeyle aynı',
    her:['Şeş endamê malbata me ne.', 'Şeş saet xew kir.'],
-   gen:['Şeş rojen', 'Şeş kes']),
+   gen:['Şeş roj', 'Şeş kes']),
 
   (id:'a1_037', ku:'Heft', tr:'Yedi', en:'Seven', cins:'bêcins', ez:null, kat:'jimar', zor:0.82,
    not:'"Heft" — t sonda belirgin',
-   her:['Heft rojen di hefteyê de.', 'Heft nan dixwim.'],
+   her:['Heft roj di hefteyê de ne.', 'Heft nan dixwim.'],
    gen:['Heft roj', 'Di heft saetan de']),
 
   (id:'a1_038', ku:'Heşt', tr:'Sekiz', en:'Eight', cins:'bêcins', ez:null, kat:'jimar', zor:0.81,
@@ -221,7 +221,7 @@ const kA1TamKelimeler = [
   (id:'a1_043', ku:'Çil', tr:'Kırk', en:'Forty', cins:'bêcins', ez:null, kat:'jimar', zor:0.80,
    not:'"Çil" — kısa ve net',
    her:['Çil sal in, bav!', 'Çil kilo.'],
-   gen:['Çil rojen', 'Çil sal']),
+   gen:['Çil roj', 'Çil sal']),
 
   (id:'a1_044', ku:'Pêncî', tr:'Elli', en:'Fifty', cins:'bêcins', ez:null, kat:'jimar', zor:0.79,
    not:'"Pêncî" — ê uzun, î uzun',
@@ -230,7 +230,7 @@ const kA1TamKelimeler = [
 
   (id:'a1_045', ku:'Şêst', tr:'Altmış', en:'Sixty', cins:'bêcins', ez:null, kat:'jimar', zor:0.78,
    not:'"Şêst" — ê uzun',
-   her:['Şêst sal in.', 'Şêst rojen in.'],
+   her:['Şêst sal in.', 'Şêst roj in.'],
    gen:['Şêst kilo', 'Şêst kes']),
 
   (id:'a1_046', ku:'Heftê', tr:'Yetmiş', en:'Seventy', cins:'bêcins', ez:null, kat:'jimar', zor:0.78,
@@ -291,12 +291,12 @@ const kA1TamKelimeler = [
   (id:'a1_065', ku:'Zer', tr:'Sarı', en:'Yellow', cins:'bêcins', ez:null, kat:'reng', zor:0.84,
    not:'"Zer" — kısa ve net',
    her:['Tav zer e, pîrê!', 'Pêlên zer in.'],
-   gen:['Rengê zer', 'Tavê zer e.']),
+   gen:['Rengê zer', 'Tav zer e.']),
 
   (id:'a1_066', ku:'Gewr', tr:'Gri', en:'Grey', cins:'bêcins', ez:null, kat:'reng', zor:0.80,
    not:'"Gewr" — gw birlikte — "bulut rengi"',
-   her:['Ewrên gewr in.', 'Mişkê gewr in.'],
-   gen:['Rengê gewr', 'Ezman gewr e.']),
+   her:['Ewrên gewr in.', 'Mişk gewr e.'],
+   gen:['Rengê gewr', 'Esman gewr e.']),
 
   (id:'a1_067', ku:'Qehweyî', tr:'Kahverengi', en:'Brown', cins:'bêcins', ez:null, kat:'reng', zor:0.78,
    not:'"Qehweyî" — qehwe (kahve) + -yî eki = kahve renkli',
@@ -306,7 +306,7 @@ const kA1TamKelimeler = [
   (id:'a1_068', ku:'Pembe', tr:'Pembe', en:'Pink', cins:'bêcins', ez:null, kat:'reng', zor:0.82,
    not:'"Pembe" — Farsça/Türkçe alıntı, Kurmancîde yaygın',
    her:['Kulîlkên pembe, pîrê!', 'Kincê pembe xweş e.'],
-   gen:['Rengê pembe', 'Kulîlk pembe ne.']),
+   gen:['Rengê pembe', 'Kulîlk pembe ye.']),
 
   (id:'a1_069', ku:'Mor', tr:'Mor', en:'Purple', cins:'bêcins', ez:null, kat:'reng', zor:0.82,
    not:'"Mor" — Türkçeyle aynı',
@@ -316,7 +316,7 @@ const kA1TamKelimeler = [
   (id:'a1_070', ku:'Narencî', tr:'Turuncu', en:'Orange', cins:'bêcins', ez:null, kat:'reng', zor:0.78,
    not:'"Narencî" — Farsça narenj (portakal) + -î = portakal rengi',
    her:['Nêrancên narencî in.', 'Agirê narencî ye.'],
-   gen:['Rengê narencî', 'Meyveye narencî ye.']),
+   gen:['Rengê narencî', 'Fêkî narencî ye.']),
 
   // ════════════════════════════════════════════════════════════
   // BİRİM 5 — Malbat (Aile Üyeleri)
@@ -380,7 +380,7 @@ const kA1TamKelimeler = [
 
   (id:'a1_091', ku:'Jin', tr:'Karı / Kadın', en:'Wife / Woman', cins:'mê', ez:'jina',
    kat:'malbat', zor:0.82, not:'Dişil — "jina min" = karım. "Jin" aynı zamanda "kadın" demek',
-   her:['Jina bavê min xweş dixweze.', 'Jin û mêr.'],
+   her:['Jina bavê min xweş e.', 'Jin û mêr.'],
    gen:['Jina wî', 'Jin û mêr']),
 
   (id:'a1_092', ku:'Nevî', tr:'Torun', en:'Grandchild', cins:'bêcins', ez:'neviyê/neviya',
@@ -410,7 +410,7 @@ const kA1TamKelimeler = [
 
   (id:'a1_103', ku:'Em', tr:'Biz', en:'We', cins:'bêcins', ez:null, kat:'cinavk', zor:0.86,
    not:'1.çoğul — eğik: "me"',
-   her:['Em malbata me ne.', 'Em hatim malê, pîrê!'],
+   her:['Em malbata me ne.', 'Em hatin malê, pîrê!'],
    gen:['Em xwendekar in.', 'Em li malê ne.']),
 
   (id:'a1_104', ku:'Hûn', tr:'Siz', en:'You (plural)', cins:'bêcins', ez:null, kat:'cinavk', zor:0.85,
@@ -535,7 +535,7 @@ const kA1TamKelimeler = [
 
   (id:'a1_128', ku:'Meh', tr:'Ay (zaman)', en:'Month', cins:'nêr', ez:'mehê',
    kat:'dem', zor:0.81, not:'Eril. "Heyv" = gökteki ay, "meh" = zaman olarak ay',
-   her:['Meha Adar — Newroz!', 'Meha me xweş bû.'],
+   her:['Mehê Adarê — Newroz!', 'Mehê me xweş bû.'],
    gen:['Meh û sal', 'Di mehê de']),
 
   (id:'a1_129', ku:'Sal', tr:'Yıl', en:'Year', cins:'mê', ez:'salê',
@@ -622,7 +622,7 @@ const kA1TamKelimeler = [
 
   (id:'a1_153', ku:'Qehwe', tr:'Kahve', en:'Coffee', cins:'nêr', ez:'qehwê',
    kat:'vexwarin', zor:0.84, not:'Eril — q sesi gırtlaktan!',
-   her:['Bavê min qehwe vexwe.', 'Qehweya min.'],
+   her:['Bavê min qehwe vexwe.', 'Qehweyê min.'],
    gen:['Qehwe û çay', 'Qehwê we']),
 
   (id:'a1_154', ku:'Şîr', tr:'Süt', en:'Milk', cins:'nêr', ez:'şîrê',
@@ -632,7 +632,7 @@ const kA1TamKelimeler = [
 
   (id:'a1_155', ku:'Mast', tr:'Yoğurt', en:'Yogurt', cins:'nêr', ez:'mastê',
    kat:'xwarin', zor:0.84, not:'Eril — Türkçeyle aynı kök',
-   her:['Masta dêya min xweş e!', 'Nan û mast bixwe.'],
+   her:['Mastê dêya min xweş e!', 'Nan û mast bixwe.'],
    gen:['Mast û şîr', 'Mastê me']),
 
   (id:'a1_156', ku:'Goşt', tr:'Et', en:'Meat', cins:'nêr', ez:'goştê',
@@ -647,7 +647,7 @@ const kA1TamKelimeler = [
 
   (id:'a1_158', ku:'Rûn', tr:'Yağ / Tereyağı', en:'Butter / Fat', cins:'nêr', ez:'rûnê',
    kat:'xwarin', zor:0.80, not:'Eril — û uzun. Kürt mutfağında temel malzeme',
-   her:['Rûnê bizinê li ser nanî.', 'Pîrê rûn dike.'],
+   her:['Rûnê bizinê li ser nanê.', 'Pîrê rûn dike.'],
    gen:['Rûn û mast', 'Rûnê me']),
 
   (id:'a1_159', ku:'Xwê', tr:'Tuz', en:'Salt', cins:'nêr', ez:'xwêyê',
@@ -687,12 +687,12 @@ const kA1TamKelimeler = [
 
   (id:'a1_172', ku:'Guh', tr:'Kulak', en:'Ear', cins:'nêr', ez:'guhê',
    kat:'beden', zor:0.83, not:'Eril',
-   her:['Guhên pîrê baş bihîst.', 'Guhê te êş dike?'],
+   her:['Guhên pîrê baş dibihîzin.', 'Guhê te êş dike?'],
    gen:['Guh û dev', 'Guhên min']),
 
   (id:'a1_173', ku:'Dev', tr:'Ağız', en:'Mouth', cins:'nêr', ez:'devê',
    kat:'beden', zor:0.83, not:'Eril',
-   her:['Devê te xweş axife.', 'Dev û ziman.'],
+   her:['Devê te xweş diaxive.', 'Dev û ziman.'],
    gen:['Dev û poz', 'Devê min']),
 
   (id:'a1_174', ku:'Poz', tr:'Burun', en:'Nose', cins:'nêr', ez:'pozê',
@@ -717,7 +717,7 @@ const kA1TamKelimeler = [
 
   (id:'a1_178', ku:'Dil', tr:'Kalp', en:'Heart', cins:'nêr', ez:'dilê',
    kat:'beden', zor:0.84, not:'Eril — ayrıca duygusal anlam: "kalbim"',
-   her:['Dila min ji te re tê.', 'Dilê min xweş e.'],
+   her:['Dilê min ji te re tê.', 'Dilê min xweş e.'],
    gen:['Dil û ziman', 'Dilê min']),
 
   (id:'a1_179', ku:'Ez nexweş im', tr:'Hastayım', en:"I'm sick", cins:'bêcins', ez:null,
@@ -758,7 +758,7 @@ const kA1TamKelimeler = [
   (id:'a1_192', ku:'Ode', tr:'Oda', en:'Room', cins:'mê', ez:'odê',
    kat:'mal', zor:0.83, not:'Dişil — Türkçeyle aynı',
    her:['Odeya min biçûk e.', 'Odeyên malê.'],
-   gen:['Ode û salon', 'Odeyê min']),
+   gen:['Ode û salon', 'Odeya min']),
 
   (id:'a1_193', ku:'Derî', tr:'Kapı', en:'Door', cins:'nêr', ez:'deriyê',
    kat:'mal', zor:0.82, not:'Eril',
@@ -768,7 +768,7 @@ const kA1TamKelimeler = [
   (id:'a1_194', ku:'Pace', tr:'Cam / Pencere', en:'Window', cins:'mê', ez:'pencerê',
    kat:'mal', zor:0.83, not:'Dişil — Türkçeyle aynı',
    her:['Pencereya malê kesk e.', 'Pace veke!'],
-   gen:['Pace û derî', 'Pencereyê malê']),
+   gen:['Pace û derî', 'Pencereya malê']),
 
   (id:'a1_195', ku:'Nivîn', tr:'Yatak', en:'Bed', cins:'nêr', ez:'nivînê',
    kat:'mal', zor:0.80, not:'Eril',
@@ -827,12 +827,12 @@ const kA1TamKelimeler = [
 
   (id:'a1_214', ku:'Nû', tr:'Yeni', en:'New', cins:'bêcins', ez:null,
    kat:'rengder', zor:0.84, not:'Değişmez sıfat. "Sala nû" = yeni yıl',
-   her:['Xaniyê nû ya me!', 'Sala nû pîroz be!'],
+   her:['Xaniyê nû yê me!', 'Sala nû pîroz be!'],
    gen:['Nû û kevin', 'Ev nû ye.']),
 
   (id:'a1_215', ku:'Kevin', tr:'Eski', en:'Old', cins:'bêcins', ez:null,
    kat:'rengder', zor:0.82, not:'Değişmez sıfat',
-   her:['Mala pîrê kevin e.', 'Pirtûkê kevin e.'],
+   her:['Mala pîrê kevin e.', 'Pirtûk kevin e.'],
    gen:['Kevin û nû', 'Ew kevin e.']),
 
   (id:'a1_216', ku:'Germ', tr:'Sıcak', en:'Hot / Warm', cins:'bêcins', ez:null,
@@ -1108,7 +1108,7 @@ const kA1TamKelimeler = [
    kat:'daçek', zor:0.83,
    not:'Araç/birliktelik bildirir: "bi Kurmancî" = Kurmancîyle',
    her:['Bi pîrê re diçim.', 'Bi Kurmancî axife!'],
-   gen:['Bi hev re', 'Bi arabê diçim.']),
+   gen:['Bi hev re', 'Bi erebê diçim.']),
 
   (id:'a1_273', ku:'Bo / Ji bo', tr:'İçin', en:'For', cins:'bêcins', ez:null,
    kat:'daçek', zor:0.82,
@@ -1302,7 +1302,7 @@ const kA1TamKelimeler = [
   (id:'a1_311', ku:'Daim', tr:'Her zaman / Daima', en:'Always', cins:'bêcins', ez:null,
    kat:'temel', zor:0.80,
    not:'"Daim" Farsça kökenli ama Kurmancîde yerleşmiş. "Her dem" de kullanılır',
-   her:['Ez daim hezdikim, pîrê!', 'Pîrê daim li malê ye.'],
+   her:['Ez daim ji te hez dikim, pîrê!', 'Pîrê daim li malê ye.'],
    gen:['Daim û caran', 'Ew daim tê.']),
 
   (id:'a1_312', ku:'Çiqas?', tr:'Ne kadar? / Kaç?', en:'How much? / How many?', cins:'bêcins', ez:null,
@@ -1389,7 +1389,7 @@ const kA1EkKelimeler = [
   (id:'a1_400', ku:'Dotmam', tr:'Amca kızı', en:"Father's brother's daughter", cins:'mê', ez:'dotmama',
    kat:'malbat', zor:0.78,
    not:'Dişil (mê) — Bedir Han p.277: "Dotmam, diş., amca kızı". Ferhenga Birûskî: n.f. [dot=kız + mam=amca]',
-   her:['Dotmama min baş e.', 'Dotmamê bavê min li bajêr e.'],
+   her:['Dotmama min baş e.', 'Dotmama bavê min li bajêr e.'],
    gen:['Dotmam û pismam', 'Dotmama me']),
 
   // [BH] p.277: "Pismam, er., amca oğlu (pis/pir; mam, amca)"
@@ -1447,7 +1447,7 @@ const kA1EkKelimeler = [
   (id:'a1_411', ku:'Hêk', tr:'Yumurta', en:'Egg', cins:'nêr', ez:'hêkê',
    kat:'xwarin', zor:0.82,
    not:'Eril — Ferhenga Birûskî n.m. "hêkê mirîşkê" = tavuk yumurtası. ê uzun söylenir!',
-   her:['Dêya min hêk dipije.', 'Hêkê xwarim.'],
+   her:['Dêya min hêk dipije.', 'Min hêk xwar.'],
    gen:['Hêk û penîr', 'Hêkê mirîşkê']),
 
   // [AS] s.47: "şorbe/şorba" = çorba
@@ -1456,8 +1456,8 @@ const kA1EkKelimeler = [
   (id:'a1_412', ku:'Şorbe', tr:'Çorba', en:'Soup', cins:'mê', ez:'şorbê',
    kat:'xwarin', zor:0.81,
    not:'Dişil — Farsça kökenli ama Kurmancîde yerleşmiş. Kürt mutfağında çorba (şorbe) her öğünde',
-   her:['Şorbeyê pîrê xweş e!', 'Şorbe germ bixwe.'],
-   gen:['Şorbe û nan', 'Şorbeyê me']),
+   her:['Şorbeya pîrê xweş e!', 'Şorbe germ bixwe.'],
+   gen:['Şorbe û nan', 'Şorbeya me']),
 
   // [AS] s.47: "nêranc" = portakal
   // [FB]: nêranc n.m. — eril
@@ -1804,8 +1804,8 @@ const kA1EkKelimeler = [
   (id:'a1_470', ku:'Ez difikirim', tr:'Ben düşünüyorum', en:'I think', cins:'bêcins', ez:null,
    kat:'leker', zor:0.79,
    not:'"Di-fikir-im" — fikirîn fiili. "Ez difikirim ku baş e" = iyidir diye düşünüyorum. Thackston §74',
-   her:['Ez difikirim ku pîrê tê.', 'Tu çi difikirim?'],
-   gen:['Ez difikirim.', 'Ew jî difikirim.']),
+   her:['Ez difikirim ku pîrê tê.', 'Tu çi difikirî?'],
+   gen:['Ez difikirim.', 'Ew jî difikire.']),
 
   // [TH] §74: hez kirin = sevmek
   // [FB]: hez kirin = to like/love
@@ -1813,7 +1813,7 @@ const kA1EkKelimeler = [
   (id:'a1_471', ku:'Ez hez dikim', tr:'Ben seviyorum', en:'I love / I like', cins:'bêcins', ez:null,
    kat:'leker', zor:0.82,
    not:'"Ji X hez kirin" = X-i sevmek. "Ez ji Kurmancî hez dikim!" = Kurmancîyi seviyorum! DoReCo: çok sık. Thackston §74',
-   her:['Ez ji pîrêya xwe hez dikim!', 'Dê, ez te hez dikim!'],
+   her:['Ez ji pîrêya xwe hez dikim!', 'Dê, ez ji te hez dikim!'],
    gen:['Ez ji Kurmancî hez dikim.', 'Ew ji me hez dike.']),
 
   // [TH]: zanîn = bilmek (already have dizanim)

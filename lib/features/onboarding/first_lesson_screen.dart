@@ -426,7 +426,7 @@ class _AnswerFeedbackBar extends StatelessWidget {
             onPressed: onNext,
             style: ElevatedButton.styleFrom(backgroundColor: accentColor),
             child: Text(
-              isLast ? 'Tamamlandı!' : 'Devam et →',
+              isLast ? 'Hat temamkirin!' : 'Berdewam bike →',
               style: AppTypography.labelLarge.onPrimary,
             ),
           ),
@@ -498,7 +498,7 @@ class _CompletionScreen extends StatelessWidget {
                       Gap.xs,
 
                       Text(
-                        'Çok iyi!',
+                        'Pir baş!',
                         style: AppTypography.body.muted,
                         textAlign: TextAlign.center,
                       ).animate(delay: 550.ms).fadeIn(),
@@ -522,14 +522,14 @@ class _CompletionScreen extends StatelessWidget {
                               ),
                             ),
                             Text(
-                              'doğru',
+                              'rast',
                               style: AppTypography.body.copyWith(color: AppColors.primary),
                             ),
                             Gap.sm,
                             Text(
-                              '3 Kurmancî kelime öğrendin.\n'
-                              'Bu dilin tohumları sende zaten vardı —\n'
-                              'bugün büyümeye başladı.',
+                              'Te 3 peyvên Kurmancî hîn bûn.\n'
+                              'Tovên vî zimanî berê di te de hebûn —\n'
+                              'îro dest bi mezinbûnê kirin.',
                               style: AppTypography.body,
                               textAlign: TextAlign.center,
                             ),
@@ -558,7 +558,7 @@ class _CompletionScreen extends StatelessWidget {
                   ElevatedButton(
                     onPressed: () => context.go(AppRoutes.register),
                     child: Text(
-                      'Devamı için hesap aç →',
+                      'Ji bo berdewamiyê hesab veke →',
                       style: AppTypography.labelLarge.onPrimary,
                     ),
                   ).animate(delay: 1000.ms).fadeIn(),
@@ -571,7 +571,7 @@ class _CompletionScreen extends StatelessWidget {
                       minimumSize: const Size(double.infinity, AppSpacing.touchMin),
                     ),
                     child: Text(
-                      'Şimdilik geç',
+                      'Niha derbas bibe',
                       style: AppTypography.label.muted,
                     ),
                   ).animate(delay: 1100.ms).fadeIn(),

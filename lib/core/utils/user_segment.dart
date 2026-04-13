@@ -153,12 +153,12 @@ enum UserMotivation {
 
 extension UserMotivationExt on UserMotivation {
   String get labelTr => switch (this) {
-    UserMotivation.general => 'Genel İlgi',
-    UserMotivation.heritage => 'Aile / Kültürel Bağ',
-    UserMotivation.professional => 'İş / Kariyer',
-    UserMotivation.academic => 'Akademik',
-    UserMotivation.travel => 'Gezi',
-    UserMotivation.activism => 'Kültürel Aktivizm',
+    UserMotivation.general => 'Balkişandina Giştî',
+    UserMotivation.heritage => 'Malbat / Çanda Kurdî',
+    UserMotivation.professional => 'Kar / Pîşe',
+    UserMotivation.academic => 'Akademîk',
+    UserMotivation.travel => 'Gerîn',
+    UserMotivation.activism => 'Çalakîya Çandî',
   };
 
   String get labelKu => switch (this) {

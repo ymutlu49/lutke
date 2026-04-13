@@ -85,7 +85,7 @@ class OfflineBanner extends ConsumerWidget {
               const Icon(Icons.wifi_off, size: 14, color: Colors.white),
               Gap.hXs,
               Text(
-                'Çevrimdışı — dersler çalışmaya devam ediyor',
+                'Bê girêdan — ders berdewam dikin',
                 style: AppTypography.captionStrong.copyWith(
                   color: Colors.white,
                 ),

@@ -162,7 +162,7 @@ class _FSRSRatingRow extends StatelessWidget {
             Expanded(
               child: _RatingButton(
                 kuLabel: 'Dubare',   // Tekrar
-                trLabel: 'Yeniden gör',
+                trLabel: 'Ji nû ve',
                 color: const Color(0xFFEF5350),
                 icon: Icons.refresh_rounded,
                 onTap: () {
@@ -176,7 +176,7 @@ class _FSRSRatingRow extends StatelessWidget {
             Expanded(
               child: _RatingButton(
                 kuLabel: 'Dijwar',
-                trLabel: 'Zor',
+                trLabel: 'Dijwar',
                 color: const Color(0xFFFF9800),
                 icon: Icons.sentiment_dissatisfied_outlined,
                 onTap: () {
@@ -194,7 +194,7 @@ class _FSRSRatingRow extends StatelessWidget {
             Expanded(
               child: _RatingButton(
                 kuLabel: 'Baş',
-                trLabel: 'İyi',
+                trLabel: 'Baş',
                 color: const Color(0xFF4CAF50),
                 icon: Icons.sentiment_satisfied_outlined,
                 onTap: () {
@@ -208,7 +208,7 @@ class _FSRSRatingRow extends StatelessWidget {
             Expanded(
               child: _RatingButton(
                 kuLabel: 'Hêsan',
-                trLabel: 'Kolay',
+                trLabel: 'Hêsan',
                 color: const Color(0xFF2196F3),
                 icon: Icons.sentiment_very_satisfied_outlined,
                 onTap: () {

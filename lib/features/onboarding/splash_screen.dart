@@ -115,7 +115,7 @@ class _SplashScreenState extends ConsumerState<SplashScreen> {
 
                 if (ref.watch(showTurkishProvider))
                   Text(
-                    'Hoş geldiniz — Welcome',
+                    'Bi xêr hatî — Welcome',
                     style: TextStyle(
                       fontSize: 13,
                       color: Colors.white.withOpacity(0.6),

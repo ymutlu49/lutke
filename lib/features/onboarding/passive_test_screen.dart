@@ -606,7 +606,7 @@ class _ResultScreen extends StatelessWidget {
                                       ? 'Sıfırdan başlıyoruz — en iyi yer burası. '
                                         'Adım adım, hiç acele etmeden ilerleyeceğiz.'
                                       : 'Em ji destpêkê dest pê dikin. '
-                                        'Gav bi gav, bêyî lez em ê pêş bikevin.',
+                                        'Gav bi gav, bêyî lez em dê pêş bikevin.',
                                   style: AppTypography.body,
                                   textAlign: TextAlign.center,
                                 )

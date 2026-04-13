@@ -116,9 +116,9 @@ class WeeklyRhythmCard extends StatelessWidget {
       return anchor;
     }
     final remaining = 4 - _activeDayCount;
-    if (remaining <= 0) return 'Hedef tamamlandı!';
+    if (remaining <= 0) return 'Armanc hat temamkirin!';
     final anchor = motivationAnchor != null
-        ? '$motivationAnchor için $remaining gün daha'
+        ? 'Ji bo $motivationAnchor $remaining roj din'
         : '$remaining roj din — tu dikarî!';
     return anchor;
   }
