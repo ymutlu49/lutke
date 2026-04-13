@@ -161,81 +161,99 @@ class _QuestionScreen extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final bottomPadding = MediaQuery.of(context).padding.bottom;
+
     return Scaffold(
       backgroundColor: AppColors.backgroundPrimary,
       body: SafeArea(
-        child: Padding(
-          padding: AppSpacing.pagePadding,
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: [
-              // ── İlerleme çubuğu ──────────────────────────────
-              _ProgressBar(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: [
+            // ── İlerleme çubuğu — pinned at very top ──────────
+            Padding(
+              padding: const EdgeInsets.fromLTRB(
+                AppSpacing.md, AppSpacing.md, AppSpacing.md, 0,
+              ),
+              child: _ProgressBar(
                 current: questionIndex,
                 total: totalQuestions,
               ),
+            ),
 
-              Gap.xl,
-
-              // ── Başlık ───────────────────────────────────────
-              Text(
-                'Bunu duymuş musun?',
-                style: AppTypography.headline,
-                textAlign: TextAlign.center,
-              ).animate().fadeIn(duration: 400.ms),
-
-              Gap.xs,
-
-              Text(
-                'Kulağına tanıdık geliyor mu?',
-                style: AppTypography.body.muted,
-                textAlign: TextAlign.center,
-              ).animate(delay: 150.ms).fadeIn(duration: 400.ms),
-
-              Gap.xl,
-
-              // ── Ses oynatma kartı ─────────────────────────────
-              _AudioCard(question: question)
-                  .animate(delay: 200.ms)
-                  .fadeIn(duration: 400.ms)
-                  .slideY(begin: 0.15, end: 0),
-
-              Gap.xl,
-
-              // ── Seçenekler ───────────────────────────────────
-              Text(
-                'Ne anlama geliyor?',
-                style: AppTypography.labelSmall.copyWith(
-                  color: AppColors.textSecondary,
+            // ── Scrollable content ─────────────────────────────
+            Expanded(
+              child: SingleChildScrollView(
+                padding: EdgeInsets.fromLTRB(
+                  AppSpacing.md,
+                  AppSpacing.xl,
+                  AppSpacing.md,
+                  bottomPadding > 0 ? bottomPadding : AppSpacing.xl,
                 ),
-                textAlign: TextAlign.center,
-              ).animate(delay: 350.ms).fadeIn(),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
+                  children: [
+                    // ── Başlık ───────────────────────────────────────
+                    Text(
+                      'Bunu duymuş musun?',
+                      style: AppTypography.headline,
+                      textAlign: TextAlign.center,
+                    ).animate().fadeIn(duration: 400.ms),
 
-              Gap.sm,
+                    Gap.xs,
 
-              ...question.options.asMap().entries.map((entry) {
-                final index = entry.key;
-                final option = entry.value;
-                return Padding(
-                  padding: const EdgeInsets.only(bottom: AppSpacing.sm),
-                  child: _OptionButton(
-                    text: option,
-                    onTap: () => ref.read(_testProvider.notifier).answer(index),
-                    delay: Duration(milliseconds: 400 + index * 80),
-                  ),
-                );
-              }),
+                    Text(
+                      'Kulağına tanıdık geliyor mu?',
+                      style: AppTypography.body.muted,
+                      textAlign: TextAlign.center,
+                    ).animate(delay: 150.ms).fadeIn(duration: 400.ms),
 
-              const Spacer(),
+                    Gap.xl,
 
-              // ── Alt not ──────────────────────────────────────
-              Text(
-                'Bilmiyorsan sorun değil — seç ve devam et',
-                style: AppTypography.caption,
-                textAlign: TextAlign.center,
-              ).animate(delay: 700.ms).fadeIn(),
-            ],
-          ),
+                    // ── Ses oynatma kartı ─────────────────────────────
+                    _AudioCard(question: question)
+                        .animate(delay: 200.ms)
+                        .fadeIn(duration: 400.ms)
+                        .slideY(begin: 0.15, end: 0),
+
+                    Gap.xl,
+
+                    // ── Seçenekler ───────────────────────────────────
+                    Text(
+                      'Ne anlama geliyor?',
+                      style: AppTypography.labelSmall.copyWith(
+                        color: AppColors.textSecondary,
+                      ),
+                      textAlign: TextAlign.center,
+                    ).animate(delay: 350.ms).fadeIn(),
+
+                    Gap.sm,
+
+                    ...question.options.asMap().entries.map((entry) {
+                      final index = entry.key;
+                      final option = entry.value;
+                      return Padding(
+                        padding: const EdgeInsets.only(bottom: AppSpacing.sm),
+                        child: _OptionButton(
+                          text: option,
+                          onTap: () => ref.read(_testProvider.notifier).answer(index),
+                          delay: Duration(milliseconds: 400 + index * 80),
+                        ),
+                      );
+                    }),
+
+                    Gap.lg,
+
+                    // ── Alt not ──────────────────────────────────────
+                    Text(
+                      'Bilmiyorsan sorun değil — seç ve devam et',
+                      style: AppTypography.caption,
+                      textAlign: TextAlign.center,
+                    ).animate(delay: 700.ms).fadeIn(),
+                  ],
+                ),
+              ),
+            ),
+          ],
         ),
       ),
     );
@@ -434,108 +452,129 @@ class _ResultScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final isHeritage = state.isHeritageUser;
     final correct = state.correctCount;
+    final bottomPadding = MediaQuery.of(context).padding.bottom;
 
     return Scaffold(
       backgroundColor: AppColors.backgroundPrimary,
       body: SafeArea(
-        child: Padding(
-          padding: AppSpacing.pagePadding,
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: [
-              // Sonuç ikonu
-              Container(
-                width: 80,
-                height: 80,
-                decoration: BoxDecoration(
-                  color: isHeritage
-                      ? AppColors.primarySurface
-                      : AppColors.accentSurface,
-                  shape: BoxShape.circle,
+        child: Column(
+          children: [
+            // Scrollable centered content
+            Expanded(
+              child: Center(
+                child: SingleChildScrollView(
+                  padding: EdgeInsets.fromLTRB(
+                    AppSpacing.md,
+                    AppSpacing.lg,
+                    AppSpacing.md,
+                    AppSpacing.md,
+                  ),
+                  child: Column(
+                    mainAxisSize: MainAxisSize.min,
+                    crossAxisAlignment: CrossAxisAlignment.stretch,
+                    children: [
+                      // Sonuç ikonu
+                      Container(
+                        width: 80,
+                        height: 80,
+                        decoration: BoxDecoration(
+                          color: isHeritage
+                              ? AppColors.primarySurface
+                              : AppColors.accentSurface,
+                          shape: BoxShape.circle,
+                        ),
+                        child: Icon(
+                          isHeritage ? Icons.favorite : Icons.star_outline,
+                          color: isHeritage ? AppColors.primary : AppColors.accent,
+                          size: 40,
+                        ),
+                      )
+                          .animate()
+                          .scale(
+                            begin: const Offset(0.5, 0.5),
+                            duration: 600.ms,
+                            curve: Curves.elasticOut,
+                          )
+                          .fadeIn(duration: 300.ms),
+
+                      Gap.lg,
+
+                      // Sonuç başlığı — Kurmancî önce
+                      if (isHeritage) ...[
+                        Text(
+                          'Zimanê te di dilê te de ye.',
+                          style: AppTypography.kurmanjiLarge,
+                          textAlign: TextAlign.center,
+                        )
+                            .animate(delay: 300.ms)
+                            .fadeIn(duration: 500.ms),
+
+                        Gap.xs,
+
+                        Text(
+                          'Dil senin kalbinde zaten vardı.',
+                          style: AppTypography.body.muted,
+                          textAlign: TextAlign.center,
+                        )
+                            .animate(delay: 500.ms)
+                            .fadeIn(duration: 400.ms),
+
+                        Gap.md,
+
+                        Text(
+                          '$correct / 3 soruyu doğru cevaplayarak bazı kelimeleri '
+                          'zaten duyduğunu gösterdin. '
+                          'Seni hızlı yola yönlendiriyoruz.',
+                          style: AppTypography.body,
+                          textAlign: TextAlign.center,
+                        )
+                            .animate(delay: 700.ms)
+                            .fadeIn(duration: 400.ms),
+                      ] else ...[
+                        Text(
+                          'Destpêk e!',
+                          style: AppTypography.kurmanjiLarge,
+                          textAlign: TextAlign.center,
+                        )
+                            .animate(delay: 300.ms)
+                            .fadeIn(duration: 500.ms),
+
+                        Gap.xs,
+
+                        Text(
+                          'Güzel bir başlangıç!',
+                          style: AppTypography.body.muted,
+                          textAlign: TextAlign.center,
+                        )
+                            .animate(delay: 500.ms)
+                            .fadeIn(duration: 400.ms),
+
+                        Gap.md,
+
+                        Text(
+                          'Sıfırdan başlıyoruz — en iyi yer burası. '
+                          'Adım adım, hiç acele etmeden ilerleyeceğiz.',
+                          style: AppTypography.body,
+                          textAlign: TextAlign.center,
+                        )
+                            .animate(delay: 700.ms)
+                            .fadeIn(duration: 400.ms),
+                      ],
+                    ],
+                  ),
                 ),
-                child: Icon(
-                  isHeritage ? Icons.favorite : Icons.star_outline,
-                  color: isHeritage ? AppColors.primary : AppColors.accent,
-                  size: 40,
-                ),
-              )
-                  .animate()
-                  .scale(
-                    begin: const Offset(0.5, 0.5),
-                    duration: 600.ms,
-                    curve: Curves.elasticOut,
-                  )
-                  .fadeIn(duration: 300.ms),
+              ),
+            ),
 
-              Gap.lg,
-
-              // Sonuç başlığı — Kurmancî önce
-              if (isHeritage) ...[
-                Text(
-                  'Zimanê te di dilê te de ye.',
-                  style: AppTypography.kurmanjiLarge,
-                  textAlign: TextAlign.center,
-                )
-                    .animate(delay: 300.ms)
-                    .fadeIn(duration: 500.ms),
-
-                Gap.xs,
-
-                Text(
-                  'Dil senin kalbinde zaten vardı.',
-                  style: AppTypography.body.muted,
-                  textAlign: TextAlign.center,
-                )
-                    .animate(delay: 500.ms)
-                    .fadeIn(duration: 400.ms),
-
-                Gap.md,
-
-                Text(
-                  '$correct / 3 soruyu doğru cevaplayarak bazı kelimeleri '
-                  'zaten duyduğunu gösterdin. '
-                  'Seni hızlı yola yönlendiriyoruz.',
-                  style: AppTypography.body,
-                  textAlign: TextAlign.center,
-                )
-                    .animate(delay: 700.ms)
-                    .fadeIn(duration: 400.ms),
-              ] else ...[
-                Text(
-                  'Destpêk e!',
-                  style: AppTypography.kurmanjiLarge,
-                  textAlign: TextAlign.center,
-                )
-                    .animate(delay: 300.ms)
-                    .fadeIn(duration: 500.ms),
-
-                Gap.xs,
-
-                Text(
-                  'Güzel bir başlangıç!',
-                  style: AppTypography.body.muted,
-                  textAlign: TextAlign.center,
-                )
-                    .animate(delay: 500.ms)
-                    .fadeIn(duration: 400.ms),
-
-                Gap.md,
-
-                Text(
-                  'Sıfırdan başlıyoruz — en iyi yer burası. '
-                  'Adım adım, hiç acele etmeden ilerleyeceğiz.',
-                  style: AppTypography.body,
-                  textAlign: TextAlign.center,
-                )
-                    .animate(delay: 700.ms)
-                    .fadeIn(duration: 400.ms),
-              ],
-
-              Gap.xxl,
-
-              // Devam butonu
-              ElevatedButton(
+            // Pinned bottom button
+            Padding(
+              padding: EdgeInsets.fromLTRB(
+                AppSpacing.md,
+                AppSpacing.md,
+                AppSpacing.md,
+                AppSpacing.md + (bottomPadding > 0 ? 0 : AppSpacing.md),
+              ),
+              child: ElevatedButton(
                 onPressed: () => context.go(AppRoutes.motivationAnchor),
                 child: Text(
                   isHeritage ? 'Harika, devam edelim →' : 'Başlayalım →',
@@ -545,8 +584,8 @@ class _ResultScreen extends StatelessWidget {
                   .animate(delay: 1000.ms)
                   .fadeIn(duration: 400.ms)
                   .slideY(begin: 0.2, end: 0),
-            ],
-          ),
+            ),
+          ],
         ),
       ),
     );

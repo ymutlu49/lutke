@@ -32,6 +32,7 @@ class HomeScreen extends ConsumerWidget {
 
     return Scaffold(
       backgroundColor: AppColors.backgroundPrimary,
+      bottomNavigationBar: _LutkeBottomNav(currentIndex: 0),
       body: SafeArea(
         child: CustomScrollView(
           slivers: [
@@ -40,33 +41,27 @@ class HomeScreen extends ConsumerWidget {
               floating: true,
               backgroundColor: AppColors.backgroundPrimary,
               elevation: 0,
+              toolbarHeight: 56,
               titleSpacing: AppSpacing.md,
               title: Row(
                 children: [
+                  Image.asset(
+                    'assets/images/logo_128.png',
+                    width: 36,
+                    height: 36,
+                    errorBuilder: (_, __, ___) => Icon(
+                      Icons.school_rounded,
+                      color: AppColors.primary,
+                      size: 32,
+                    ),
+                  ),
+                  const SizedBox(width: 8),
                   Text(
                     'LÛTKE',
                     style: AppTypography.headingSmall.copyWith(
                       color: AppColors.primary,
                       fontWeight: FontWeight.w800,
                       letterSpacing: 1.5,
-                    ),
-                  ),
-                  const Spacer(),
-                  // Streak göstergesi
-                  dailyStats.when(
-                    data: (stats) => _StreakBadge(days: stats.streakDays),
-                    loading: () => const SizedBox.shrink(),
-                    error: (_, __) => const SizedBox.shrink(),
-                  ),
-                  const SizedBox(width: AppSpacing.sm),
-                  // Profil ikonu
-                  GestureDetector(
-                    onTap: () => context.push(AppRoutes.profile),
-                    child: CircleAvatar(
-                      radius: 18,
-                      backgroundColor: AppColors.primary.withOpacity(0.12),
-                      child: Icon(Icons.person_outline,
-                          color: AppColors.primary, size: 20),
                     ),
                   ),
                 ],
@@ -82,6 +77,15 @@ class HomeScreen extends ConsumerWidget {
 
                   // Heritage veya Genel yola göre selamlama
                   _WelcomeSection(isHeritage: profile.isHeritage),
+
+                  const SizedBox(height: AppSpacing.sm),
+
+                  // ── Günlük özet kartı ─────────────────────────
+                  dailyStats.when(
+                    data: (stats) => _DailySummaryCard(stats: stats, level: profile.currentLevel.toUpperCase()),
+                    loading: () => _DailySummaryCard(stats: null, level: profile.currentLevel.toUpperCase()),
+                    error: (_, __) => _DailySummaryCard(stats: null, level: profile.currentLevel.toUpperCase()),
+                  ),
 
                   const SizedBox(height: AppSpacing.lg),
 
@@ -225,6 +229,104 @@ class _StreakBadge extends StatelessWidget {
             '$days roj',
             style: AppTypography.caption.copyWith(
               color: AppColors.accent,
+              fontWeight: FontWeight.w700,
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+// ════════════════════════════════════════════════════════════════
+// GÜNLÜK ÖZET KARTI — streak, XP, seviye
+// ════════════════════════════════════════════════════════════════
+
+class _DailySummaryCard extends StatelessWidget {
+  final DailyStats? stats;
+  final String level;
+  const _DailySummaryCard({this.stats, required this.level});
+
+  @override
+  Widget build(BuildContext context) {
+    final screenWidth = MediaQuery.of(context).size.width;
+    final horizontalPad = screenWidth < 360 ? 10.0 : AppSpacing.md;
+
+    return Container(
+      padding: EdgeInsets.symmetric(horizontal: horizontalPad, vertical: 10),
+      decoration: BoxDecoration(
+        color: AppColors.surface,
+        borderRadius: BorderRadius.circular(14),
+        boxShadow: [
+          BoxShadow(
+            color: Colors.black.withOpacity(0.05),
+            blurRadius: 8,
+            offset: const Offset(0, 2),
+          ),
+        ],
+      ),
+      child: IntrinsicHeight(
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          children: [
+            // Streak
+            _SummaryItem(
+              icon: Icons.local_fire_department_rounded,
+              iconColor: AppColors.accent,
+              value: stats != null ? '${stats!.streakDays} roj' : '0 roj',
+            ),
+            VerticalDivider(
+              width: 1,
+              thickness: 1,
+              color: AppColors.border,
+            ),
+            // XP
+            _SummaryItem(
+              icon: Icons.star_rounded,
+              iconColor: Colors.amber,
+              value: stats != null ? '${stats!.xpToday} XP' : '0 XP',
+            ),
+            VerticalDivider(
+              width: 1,
+              thickness: 1,
+              color: AppColors.border,
+            ),
+            // Level badge
+            _SummaryItem(
+              icon: Icons.emoji_events_rounded,
+              iconColor: AppColors.primary,
+              value: level.isNotEmpty ? level : 'A1',
+            ),
+          ],
+        ),
+      ),
+    ).animate().fadeIn(delay: 120.ms, duration: 350.ms);
+  }
+}
+
+class _SummaryItem extends StatelessWidget {
+  final IconData icon;
+  final Color iconColor;
+  final String value;
+  const _SummaryItem({
+    required this.icon,
+    required this.iconColor,
+    required this.value,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+      child: Row(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Icon(icon, size: 20, color: iconColor),
+          const SizedBox(width: 6),
+          Text(
+            value,
+            style: AppTypography.labelMedium.copyWith(
+              color: AppColors.textPrimary,
               fontWeight: FontWeight.w700,
             ),
           ),
@@ -662,16 +764,24 @@ class _LessonCard extends StatelessWidget {
       child: GestureDetector(
         onTap: isUnlocked ? onTap : null,
         child: Container(
+          constraints: const BoxConstraints(minHeight: 48),
           margin: const EdgeInsets.only(bottom: AppSpacing.sm),
           padding: const EdgeInsets.all(AppSpacing.md),
           decoration: BoxDecoration(
             color: AppColors.surface,
-            borderRadius: BorderRadius.circular(14),
+            borderRadius: BorderRadius.circular(16),
             border: Border.all(
               color: isUnlocked
                   ? AppColors.primary.withOpacity(0.15)
                   : AppColors.border,
             ),
+            boxShadow: [
+              BoxShadow(
+                color: Colors.black.withOpacity(0.04),
+                blurRadius: 6,
+                offset: const Offset(0, 2),
+              ),
+            ],
           ),
           child: Row(
             children: [
@@ -724,6 +834,125 @@ class _LessonCard extends StatelessWidget {
                     size: 14, color: AppColors.textSecondary),
             ],
           ),
+        ),
+      ),
+    );
+  }
+}
+
+// ════════════════════════════════════════════════════════════════
+// ALT NAVİGASYON ÇUBUĞU
+// 4 sekme: Fêrbûn, Dubare, Çand, Profîl
+// ════════════════════════════════════════════════════════════════
+
+class _LutkeBottomNav extends StatelessWidget {
+  final int currentIndex;
+  const _LutkeBottomNav({required this.currentIndex});
+
+  @override
+  Widget build(BuildContext context) {
+    final bottomPadding = MediaQuery.of(context).padding.bottom;
+
+    return Container(
+      decoration: BoxDecoration(
+        color: AppColors.surface,
+        boxShadow: [
+          BoxShadow(
+            color: Colors.black.withOpacity(0.06),
+            blurRadius: 12,
+            offset: const Offset(0, -2),
+          ),
+        ],
+      ),
+      child: SafeArea(
+        top: false,
+        child: Padding(
+          padding: EdgeInsets.only(
+            top: 8,
+            bottom: bottomPadding > 0 ? 0 : 8,
+          ),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            children: [
+              _NavItem(
+                icon: Icons.menu_book_rounded,
+                label: 'Fêrbûn',
+                isSelected: currentIndex == 0,
+                onTap: () {
+                  // Already on home
+                },
+              ),
+              _NavItem(
+                icon: Icons.refresh_rounded,
+                label: 'Dubare',
+                isSelected: currentIndex == 1,
+                onTap: () => context.push(
+                  AppRoutes.lesson,
+                  extra: {'mode': 'review'},
+                ),
+              ),
+              _NavItem(
+                icon: Icons.music_note_rounded,
+                label: 'Çand',
+                isSelected: currentIndex == 2,
+                onTap: () {
+                  // TODO: Navigate to culture screen when available
+                },
+              ),
+              _NavItem(
+                icon: Icons.person_rounded,
+                label: 'Profîl',
+                isSelected: currentIndex == 3,
+                onTap: () => context.push(AppRoutes.profile),
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+class _NavItem extends StatelessWidget {
+  final IconData icon;
+  final String label;
+  final bool isSelected;
+  final VoidCallback onTap;
+
+  const _NavItem({
+    required this.icon,
+    required this.label,
+    required this.isSelected,
+    required this.onTap,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return GestureDetector(
+      onTap: onTap,
+      behavior: HitTestBehavior.opaque,
+      child: SizedBox(
+        width: MediaQuery.of(context).size.width / 4,
+        height: 48,
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Icon(
+              icon,
+              size: 24,
+              color: isSelected ? AppColors.primary : AppColors.textSecondary,
+            ),
+            const SizedBox(height: 2),
+            Text(
+              label,
+              style: TextStyle(
+                fontSize: 11,
+                fontWeight: isSelected ? FontWeight.w700 : FontWeight.w500,
+                color: isSelected ? AppColors.primary : AppColors.textSecondary,
+              ),
+            ),
+          ],
         ),
       ),
     );

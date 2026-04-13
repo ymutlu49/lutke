@@ -9,7 +9,6 @@ import '../../core/constants/app_spacing.dart';
 import '../../core/router/app_router.dart';
 import '../../core/services/auth_service.dart';
 import '../lessons/data/lesson_repository.dart';
-import '../../features/lessons/data/lesson_repository.dart';
 
 // ════════════════════════════════════════════════════════════════
 // PROFİL EKRANI — LÛTKE
@@ -164,15 +163,23 @@ class _ProfileHeader extends StatelessWidget {
       ),
       child: Row(
         children: [
-          // Avatar
-          CircleAvatar(
-            radius: 32,
-            backgroundColor: AppColors.primary.withOpacity(0.15),
-            child: Text(
-              displayName.isNotEmpty ? displayName[0].toUpperCase() : 'H',
-              style: AppTypography.headingLarge.copyWith(
-                  color: AppColors.primary, fontWeight: FontWeight.w700),
+          // Avatar — Logo ile
+          Container(
+            width: 64,
+            height: 64,
+            decoration: BoxDecoration(
+              color: Colors.white,
+              shape: BoxShape.circle,
+              boxShadow: [
+                BoxShadow(
+                  color: AppColors.primary.withOpacity(0.15),
+                  blurRadius: 12,
+                  offset: const Offset(0, 4),
+                ),
+              ],
             ),
+            padding: const EdgeInsets.all(8),
+            child: Image.asset('assets/images/logo_128.png', fit: BoxFit.contain),
           ),
           const SizedBox(width: AppSpacing.md),
 

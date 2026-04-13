@@ -139,9 +139,9 @@ class _FirstLessonScreenState extends State<FirstLessonScreen> {
               ),
             ),
 
-            // ── Egzersiz İçeriği ──────────────────────────────
+            // ── Egzersiz İçeriği — scrollable ─────────────────
             Expanded(
-              child: Padding(
+              child: SingleChildScrollView(
                 padding: AppSpacing.pagePadding,
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -378,9 +378,15 @@ class _AnswerFeedbackBar extends StatelessWidget {
   Widget build(BuildContext context) {
     final bgColor = isCorrect ? AppColors.successSurface : AppColors.errorSurface;
     final accentColor = isCorrect ? AppColors.success : AppColors.errorSoft;
+    final bottomPadding = MediaQuery.of(context).padding.bottom;
 
     return Container(
-      padding: const EdgeInsets.all(AppSpacing.md),
+      padding: EdgeInsets.fromLTRB(
+        AppSpacing.md,
+        AppSpacing.md,
+        AppSpacing.md,
+        AppSpacing.md + (bottomPadding > 0 ? bottomPadding : AppSpacing.md),
+      ),
       decoration: BoxDecoration(
         color: bgColor,
         border: Border(top: BorderSide(color: accentColor, width: 2)),
@@ -438,112 +444,141 @@ class _CompletionScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final bottomPadding = MediaQuery.of(context).padding.bottom;
+
     return Scaffold(
       backgroundColor: AppColors.backgroundPrimary,
       body: SafeArea(
-        child: Padding(
-          padding: AppSpacing.pagePadding,
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: [
-              // Kutlama
-              Container(
-                width: 100,
-                height: 100,
-                decoration: const BoxDecoration(
-                  color: AppColors.primarySurface,
-                  shape: BoxShape.circle,
+        child: Column(
+          children: [
+            // Scrollable centered content
+            Expanded(
+              child: Center(
+                child: SingleChildScrollView(
+                  padding: const EdgeInsets.fromLTRB(
+                    AppSpacing.md, AppSpacing.lg, AppSpacing.md, AppSpacing.md,
+                  ),
+                  child: Column(
+                    mainAxisSize: MainAxisSize.min,
+                    crossAxisAlignment: CrossAxisAlignment.stretch,
+                    children: [
+                      // Kutlama
+                      Container(
+                        width: 100,
+                        height: 100,
+                        decoration: const BoxDecoration(
+                          color: AppColors.primarySurface,
+                          shape: BoxShape.circle,
+                        ),
+                        child: const Icon(
+                          Icons.star_rounded,
+                          color: AppColors.accent,
+                          size: 56,
+                        ),
+                      )
+                          .animate()
+                          .scale(
+                            begin: const Offset(0.3, 0.3),
+                            duration: 700.ms,
+                            curve: Curves.elasticOut,
+                          )
+                          .fadeIn(duration: 400.ms),
+
+                      Gap.lg,
+
+                      // Kurmancî tebrik
+                      Text(
+                        'Gelek baş!',
+                        style: AppTypography.kurmanjiLarge.copyWith(
+                          color: AppColors.primary,
+                        ),
+                        textAlign: TextAlign.center,
+                      ).animate(delay: 400.ms).fadeIn(),
+
+                      Gap.xs,
+
+                      Text(
+                        'Çok iyi!',
+                        style: AppTypography.body.muted,
+                        textAlign: TextAlign.center,
+                      ).animate(delay: 550.ms).fadeIn(),
+
+                      Gap.lg,
+
+                      // Sonuç
+                      Container(
+                        padding: const EdgeInsets.all(AppSpacing.md),
+                        decoration: BoxDecoration(
+                          color: AppColors.primarySurface,
+                          borderRadius: AppRadius.lg,
+                        ),
+                        child: Column(
+                          children: [
+                            Text(
+                              '$correctCount / ${_exercises.length}',
+                              style: AppTypography.display.copyWith(
+                                color: AppColors.primary,
+                                fontWeight: FontWeight.w700,
+                              ),
+                            ),
+                            Text(
+                              'doğru',
+                              style: AppTypography.body.copyWith(color: AppColors.primary),
+                            ),
+                            Gap.sm,
+                            Text(
+                              '3 Kurmancî kelime öğrendin.\n'
+                              'Bu dilin tohumları sende zaten vardı —\n'
+                              'bugün büyümeye başladı.',
+                              style: AppTypography.body,
+                              textAlign: TextAlign.center,
+                            ),
+                          ],
+                        ),
+                      ).animate(delay: 700.ms).fadeIn(),
+                    ],
+                  ),
                 ),
-                child: const Icon(
-                  Icons.star_rounded,
-                  color: AppColors.accent,
-                  size: 56,
-                ),
-              )
-                  .animate()
-                  .scale(
-                    begin: const Offset(0.3, 0.3),
-                    duration: 700.ms,
-                    curve: Curves.elasticOut,
-                  )
-                  .fadeIn(duration: 400.ms),
+              ),
+            ),
 
-              Gap.lg,
-
-              // Kurmancî tebrik
-              Text(
-                'Gelek baş!',
-                style: AppTypography.kurmanjiLarge.copyWith(
-                  color: AppColors.primary,
-                ),
-                textAlign: TextAlign.center,
-              ).animate(delay: 400.ms).fadeIn(),
-
-              Gap.xs,
-
-              Text(
-                'Çok iyi!',
-                style: AppTypography.body.muted,
-                textAlign: TextAlign.center,
-              ).animate(delay: 550.ms).fadeIn(),
-
-              Gap.lg,
-
-              // Sonuç
-              Container(
-                padding: const EdgeInsets.all(AppSpacing.md),
-                decoration: BoxDecoration(
-                  color: AppColors.primarySurface,
-                  borderRadius: AppRadius.lg,
-                ),
-                child: Column(
-                  children: [
-                    Text(
-                      '$correctCount / ${_exercises.length}',
-                      style: AppTypography.display.copyWith(
-                        color: AppColors.primary,
-                        fontWeight: FontWeight.w700,
-                      ),
+            // Pinned bottom buttons
+            Padding(
+              padding: EdgeInsets.fromLTRB(
+                AppSpacing.md,
+                AppSpacing.sm,
+                AppSpacing.md,
+                AppSpacing.sm + (bottomPadding > 0 ? 0 : AppSpacing.md),
+              ),
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                children: [
+                  // Hesap oluştur
+                  ElevatedButton(
+                    onPressed: () => context.go(AppRoutes.register),
+                    child: Text(
+                      'Devamı için hesap aç →',
+                      style: AppTypography.labelLarge.onPrimary,
                     ),
-                    Text(
-                      'doğru',
-                      style: AppTypography.body.copyWith(color: AppColors.primary),
+                  ).animate(delay: 1000.ms).fadeIn(),
+
+                  const SizedBox(height: AppSpacing.xs),
+
+                  TextButton(
+                    onPressed: () => context.go(AppRoutes.home),
+                    style: TextButton.styleFrom(
+                      minimumSize: const Size(double.infinity, AppSpacing.touchMin),
                     ),
-                    Gap.sm,
-                    Text(
-                      '3 Kurmancî kelime öğrendin.\n'
-                      'Bu dilin tohumları sende zaten vardı —\n'
-                      'bugün büyümeye başladı.',
-                      style: AppTypography.body,
-                      textAlign: TextAlign.center,
+                    child: Text(
+                      'Şimdilik geç',
+                      style: AppTypography.label.muted,
                     ),
-                  ],
-                ),
-              ).animate(delay: 700.ms).fadeIn(),
-
-              Gap.xl,
-
-              // Hesap oluştur
-              ElevatedButton(
-                onPressed: () => context.go(AppRoutes.register),
-                child: Text(
-                  'Devamı için hesap aç →',
-                  style: AppTypography.labelLarge.onPrimary,
-                ),
-              ).animate(delay: 1000.ms).fadeIn(),
-
-              Gap.sm,
-
-              TextButton(
-                onPressed: () => context.go(AppRoutes.home),
-                child: Text(
-                  'Şimdilik geç',
-                  style: AppTypography.label.muted,
-                ),
-              ).animate(delay: 1100.ms).fadeIn(),
-            ],
-          ),
+                  ).animate(delay: 1100.ms).fadeIn(),
+                ],
+              ),
+            ),
+          ],
         ),
       ),
     );

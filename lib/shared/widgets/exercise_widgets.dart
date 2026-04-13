@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 
 import '../../core/constants/app_colors.dart';
@@ -151,50 +152,72 @@ class _FSRSRatingRow extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Row(
+    // 2x2 grid on mobile for better touch targets
+    return Column(
+      mainAxisSize: MainAxisSize.min,
       children: [
-        // Again — Dubare (yeniden gör — ceza değil)
-        Expanded(
-          child: _RatingButton(
-            kuLabel: 'Dubare',   // Tekrar
-            trLabel: 'Yeniden gör',
-            color: const Color(0xFFEF5350),
-            icon: Icons.refresh_rounded,
-            onTap: () => onRating(Rating.again),
-          ),
+        Row(
+          children: [
+            // Again — Dubare (yeniden gör — ceza değil)
+            Expanded(
+              child: _RatingButton(
+                kuLabel: 'Dubare',   // Tekrar
+                trLabel: 'Yeniden gör',
+                color: const Color(0xFFEF5350),
+                icon: Icons.refresh_rounded,
+                onTap: () {
+                  HapticFeedback.mediumImpact();
+                  onRating(Rating.again);
+                },
+              ),
+            ),
+            const SizedBox(width: 8),
+            // Hard — Dijwar
+            Expanded(
+              child: _RatingButton(
+                kuLabel: 'Dijwar',
+                trLabel: 'Zor',
+                color: const Color(0xFFFF9800),
+                icon: Icons.sentiment_dissatisfied_outlined,
+                onTap: () {
+                  HapticFeedback.mediumImpact();
+                  onRating(Rating.hard);
+                },
+              ),
+            ),
+          ],
         ),
-        const SizedBox(width: 8),
-        // Hard — Dijwar
-        Expanded(
-          child: _RatingButton(
-            kuLabel: 'Dijwar',
-            trLabel: 'Zor',
-            color: const Color(0xFFFF9800),
-            icon: Icons.sentiment_dissatisfied_outlined,
-            onTap: () => onRating(Rating.hard),
-          ),
-        ),
-        const SizedBox(width: 8),
-        // Good — Baş
-        Expanded(
-          child: _RatingButton(
-            kuLabel: 'Baş',
-            trLabel: 'İyi',
-            color: const Color(0xFF4CAF50),
-            icon: Icons.sentiment_satisfied_outlined,
-            onTap: () => onRating(Rating.good),
-          ),
-        ),
-        const SizedBox(width: 8),
-        // Easy — Hêsan
-        Expanded(
-          child: _RatingButton(
-            kuLabel: 'Hêsan',
-            trLabel: 'Kolay',
-            color: const Color(0xFF2196F3),
-            icon: Icons.sentiment_very_satisfied_outlined,
-            onTap: () => onRating(Rating.easy),
-          ),
+        const SizedBox(height: 8),
+        Row(
+          children: [
+            // Good — Baş
+            Expanded(
+              child: _RatingButton(
+                kuLabel: 'Baş',
+                trLabel: 'İyi',
+                color: const Color(0xFF4CAF50),
+                icon: Icons.sentiment_satisfied_outlined,
+                onTap: () {
+                  HapticFeedback.mediumImpact();
+                  onRating(Rating.good);
+                },
+              ),
+            ),
+            const SizedBox(width: 8),
+            // Easy — Hêsan
+            Expanded(
+              child: _RatingButton(
+                kuLabel: 'Hêsan',
+                trLabel: 'Kolay',
+                color: const Color(0xFF2196F3),
+                icon: Icons.sentiment_very_satisfied_outlined,
+                onTap: () {
+                  HapticFeedback.mediumImpact();
+                  onRating(Rating.easy);
+                },
+              ),
+            ),
+          ],
         ),
       ],
     );
@@ -218,39 +241,43 @@ class _RatingButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // Min 48x48dp — İlke §8 WCAG
+    // Min 56dp height — mobile optimized, İlke §8 WCAG
     return GestureDetector(
       onTap: onTap,
       child: Container(
-        constraints: const BoxConstraints(minHeight: 64, minWidth: 48),
-        padding: const EdgeInsets.symmetric(vertical: 10),
+        constraints: const BoxConstraints(minHeight: 56, minWidth: 48),
+        padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 4),
         decoration: BoxDecoration(
           color: color.withOpacity(0.1),
-          borderRadius: BorderRadius.circular(12),
+          borderRadius: BorderRadius.circular(16),
           border: Border.all(color: color.withOpacity(0.3), width: 1.5),
         ),
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Icon(icon, color: color, size: 22),
-            const SizedBox(height: 2),
-            // Kurmancî önce — İlke §0.5
-            Text(
-              kuLabel,
-              style: TextStyle(
-                fontSize: 12,
-                fontWeight: FontWeight.w700,
-                color: color,
-              ),
-              textAlign: TextAlign.center,
-            ),
-            Text(
-              trLabel,
-              style: TextStyle(
-                fontSize: 10,
-                color: color.withOpacity(0.7),
-              ),
-              textAlign: TextAlign.center,
+            Icon(icon, color: color, size: 24),
+            const SizedBox(width: 6),
+            Column(
+              mainAxisSize: MainAxisSize.min,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                // Kurmancî önce — İlke §0.5
+                Text(
+                  kuLabel,
+                  style: TextStyle(
+                    fontSize: 14,
+                    fontWeight: FontWeight.w700,
+                    color: color,
+                  ),
+                ),
+                Text(
+                  trLabel,
+                  style: TextStyle(
+                    fontSize: 11,
+                    color: color.withOpacity(0.7),
+                  ),
+                ),
+              ],
             ),
           ],
         ),
@@ -289,12 +316,20 @@ class _MultipleChoiceExerciseState extends State<MultipleChoiceExercise> {
 
   void _select(int index) {
     if (_revealed) return;
+    HapticFeedback.lightImpact();
     setState(() {
       _selected = index;
       _revealed = true;
     });
 
     final correct = index == widget.correctIndex;
+
+    // Haptic feedback for correct/wrong
+    if (correct) {
+      HapticFeedback.mediumImpact();
+    } else {
+      HapticFeedback.heavyImpact();
+    }
 
     // 1.5 saniye bekle → FSRS derecelendirmesi
     Future.delayed(1500.ms, () {
@@ -308,8 +343,9 @@ class _MultipleChoiceExerciseState extends State<MultipleChoiceExercise> {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        // Soru
+        // Soru — büyük ve ortalanmış
         Container(
+          width: double.infinity,
           margin: const EdgeInsets.symmetric(horizontal: AppSpacing.md),
           padding: const EdgeInsets.all(AppSpacing.xl),
           decoration: BoxDecoration(
@@ -320,17 +356,21 @@ class _MultipleChoiceExerciseState extends State<MultipleChoiceExercise> {
             children: [
               Text(
                 'Wateya vê peyvê çi ye?',  // Bu kelimenin anlamı ne?
-                style: AppTypography.caption
+                style: AppTypography.bodyMedium
                     .copyWith(color: AppColors.textSecondary),
+                textAlign: TextAlign.center,
               ),
               const SizedBox(height: AppSpacing.sm),
-              Text(
-                widget.question,
-                style: AppTypography.displayMedium.copyWith(
-                  color: AppColors.textPrimary,
-                  fontWeight: FontWeight.w700,
+              FittedBox(
+                fit: BoxFit.scaleDown,
+                child: Text(
+                  widget.question,
+                  style: AppTypography.displayMedium.copyWith(
+                    color: AppColors.textPrimary,
+                    fontWeight: FontWeight.w700,
+                  ),
+                  textAlign: TextAlign.center,
                 ),
-                textAlign: TextAlign.center,
               ),
             ],
           ),
@@ -338,26 +378,24 @@ class _MultipleChoiceExerciseState extends State<MultipleChoiceExercise> {
 
         const SizedBox(height: AppSpacing.lg),
 
-        // Seçenekler — 2x2 grid
+        // Seçenekler — tek sütun, tam genişlik
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: AppSpacing.md),
-          child: GridView.count(
-            crossAxisCount: 2,
-            crossAxisSpacing: AppSpacing.sm,
-            mainAxisSpacing: AppSpacing.sm,
-            shrinkWrap: true,
-            physics: const NeverScrollableScrollPhysics(),
-            childAspectRatio: 2.4,
+          child: Column(
             children: widget.options.asMap().entries.map((entry) {
               final i = entry.key;
               final opt = entry.value;
-              return _OptionButton(
-                text: opt,
-                index: i,
-                selected: _selected,
-                correctIndex: widget.correctIndex,
-                revealed: _revealed,
-                onTap: () => _select(i),
+              return Padding(
+                padding: EdgeInsets.only(
+                    bottom: i < widget.options.length - 1 ? AppSpacing.sm : 0),
+                child: _OptionButton(
+                  text: opt,
+                  index: i,
+                  selected: _selected,
+                  correctIndex: widget.correctIndex,
+                  revealed: _revealed,
+                  onTap: () => _select(i),
+                ),
               );
             }).toList(),
           ),
@@ -407,15 +445,16 @@ class _OptionButton extends StatelessWidget {
       }
     }
 
-    return GestureDetector(
+    Widget button = GestureDetector(
       onTap: onTap,
       child: AnimatedContainer(
         duration: 250.ms,
+        constraints: const BoxConstraints(minHeight: 56),
         padding: const EdgeInsets.symmetric(
-            horizontal: AppSpacing.md, vertical: AppSpacing.sm),
+            horizontal: AppSpacing.lg, vertical: AppSpacing.md),
         decoration: BoxDecoration(
           color: bg,
-          borderRadius: BorderRadius.circular(12),
+          borderRadius: BorderRadius.circular(16),
           border: Border.all(
               color: isSelected && !revealed
                   ? AppColors.primary
@@ -426,33 +465,50 @@ class _OptionButton extends StatelessWidget {
           children: [
             if (icon != null) ...[
               Icon(icon,
-                  size: 16,
+                  size: 22,
                   color: isCorrect
                       ? const Color(0xFF4CAF50)
                       : const Color(0xFFEF5350)),
-              const SizedBox(width: 6),
+              const SizedBox(width: 10),
             ],
             Expanded(
               child: Text(
                 text,
-                style: AppTypography.bodyMedium.copyWith(
+                style: AppTypography.bodyLarge.copyWith(
                   fontWeight:
                       isSelected || (revealed && isCorrect)
                           ? FontWeight.w700
-                          : FontWeight.w400,
+                          : FontWeight.w500,
                   color: AppColors.textPrimary,
+                  fontSize: 16,
                 ),
                 overflow: TextOverflow.ellipsis,
+                maxLines: 2,
               ),
             ),
           ],
         ),
       ),
-    ).animate(target: isSelected && !revealed ? 1 : 0).scale(
-          begin: const Offset(1, 1),
-          end: const Offset(0.97, 0.97),
-          duration: 100.ms,
-        );
+    );
+
+    // Correct: green flash animation, Wrong: red shake animation
+    if (revealed && isCorrect) {
+      button = button
+          .animate()
+          .shimmer(duration: 600.ms, color: const Color(0xFF4CAF50).withOpacity(0.3));
+    } else if (revealed && isSelected && !isCorrect) {
+      button = button
+          .animate()
+          .shakeX(duration: 400.ms, hz: 4, amount: 4);
+    } else {
+      button = button.animate(target: isSelected && !revealed ? 1 : 0).scale(
+            begin: const Offset(1, 1),
+            end: const Offset(0.97, 0.97),
+            duration: 100.ms,
+          );
+    }
+
+    return button;
   }
 }
 
@@ -485,11 +541,18 @@ class _TypingExerciseState extends State<TypingExercise> {
     if (_ctrl.text.trim().isEmpty) return;
     final userInput = _ctrl.text.trim().toLowerCase();
     final expected = widget.answer.trim().toLowerCase();
+    final isCorrect = userInput == expected ||
+        _similarity(userInput, expected) > 0.85;
     setState(() {
       _checked = true;
-      _correct = userInput == expected ||
-          _similarity(userInput, expected) > 0.85;
+      _correct = isCorrect;
     });
+    // Haptic feedback
+    if (isCorrect) {
+      HapticFeedback.mediumImpact();
+    } else {
+      HapticFeedback.heavyImpact();
+    }
   }
 
   // Levenshtein benzerlik (typo toleransı)
@@ -546,16 +609,26 @@ class _TypingExerciseState extends State<TypingExercise> {
 
           const SizedBox(height: AppSpacing.lg),
 
-          // Giriş alanı
+          // Giriş alanı — büyük font, mobil optimize
           TextField(
             controller: _ctrl,
             enabled: !_checked,
             autofocus: true,
             textAlign: TextAlign.center,
-            style: AppTypography.headingSmall.copyWith(
-                color: AppColors.textPrimary),
+            style: const TextStyle(
+              fontSize: 20,
+              fontWeight: FontWeight.w600,
+              color: Colors.black87,
+            ),
             decoration: InputDecoration(
               hintText: 'Li vir binivîse...',  // Buraya yaz
+              hintStyle: TextStyle(
+                fontSize: 20,
+                color: AppColors.textSecondary.withOpacity(0.5),
+                fontWeight: FontWeight.w400,
+              ),
+              contentPadding: const EdgeInsets.symmetric(
+                  horizontal: AppSpacing.lg, vertical: AppSpacing.lg),
               filled: true,
               fillColor: _checked
                   ? (_correct
@@ -563,7 +636,7 @@ class _TypingExerciseState extends State<TypingExercise> {
                       : const Color(0xFFEF5350).withOpacity(0.08))
                   : AppColors.backgroundSecondary,
               border: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(14),
+                borderRadius: BorderRadius.circular(16),
                 borderSide: BorderSide(
                   color: _checked
                       ? (_correct
@@ -574,8 +647,12 @@ class _TypingExerciseState extends State<TypingExercise> {
                 ),
               ),
               enabledBorder: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(14),
+                borderRadius: BorderRadius.circular(16),
                 borderSide: BorderSide(color: AppColors.border),
+              ),
+              focusedBorder: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(16),
+                borderSide: BorderSide(color: AppColors.primary, width: 2),
               ),
               suffixIcon: _checked
                   ? Icon(
@@ -585,6 +662,7 @@ class _TypingExerciseState extends State<TypingExercise> {
                       color: _correct
                           ? const Color(0xFF4CAF50)
                           : const Color(0xFFEF5350),
+                      size: 28,
                     )
                   : null,
             ),
@@ -621,26 +699,30 @@ class _TypingExerciseState extends State<TypingExercise> {
 
           const Spacer(),
 
-          // Kontrol / Devam
+          // Kontrol / Devam — altta sabit
           if (!_checked)
             ElevatedButton(
               onPressed: _check,
               style: ElevatedButton.styleFrom(
                 backgroundColor: AppColors.primary,
                 foregroundColor: Colors.white,
-                minimumSize: const Size(double.infinity, 52),
+                minimumSize: const Size(double.infinity, 56),
                 shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(14)),
+                    borderRadius: BorderRadius.circular(16)),
               ),
               child: Text(
                 'Kontrol bike',  // Kontrol et
                 style: AppTypography.labelLarge.copyWith(
-                    color: Colors.white, fontWeight: FontWeight.w700),
+                    color: Colors.white,
+                    fontWeight: FontWeight.w700,
+                    fontSize: 16),
               ),
             )
           else
             // FSRS derecelendirme — kullanıcı kendi değerlendiriyor
             _FSRSRatingRow(onRating: widget.onRating),
+
+          const SizedBox(height: AppSpacing.md),
         ],
       ),
     );
@@ -684,6 +766,7 @@ class _SentenceOrderExerciseState extends State<SentenceOrderExercise> {
 
   void _placeWord(String word, int fromIndex) {
     if (_checked) return;
+    HapticFeedback.selectionClick();
     final emptySlot = _placed.indexWhere((e) => e == null);
     if (emptySlot == -1) return;
     setState(() {
@@ -694,6 +777,7 @@ class _SentenceOrderExerciseState extends State<SentenceOrderExercise> {
 
   void _removeWord(int slotIndex) {
     if (_checked) return;
+    HapticFeedback.selectionClick();
     final word = _placed[slotIndex];
     if (word == null) return;
     final emptyRemaining = _remaining.indexWhere((e) => e == null);
@@ -710,74 +794,115 @@ class _SentenceOrderExerciseState extends State<SentenceOrderExercise> {
   void _check() {
     final placed = _placed.where((w) => w != null).toList();
     if (placed.length < widget.correctOrder.length) return;
+    final isCorrect = placed.join(' ') == widget.correctOrder.join(' ');
     setState(() {
       _checked = true;
-      _correct = placed.join(' ') == widget.correctOrder.join(' ');
+      _correct = isCorrect;
     });
+    if (isCorrect) {
+      HapticFeedback.mediumImpact();
+    } else {
+      HapticFeedback.heavyImpact();
+    }
   }
 
   @override
   Widget build(BuildContext context) {
+    // Sentence answer area with correct/wrong animation
+    Widget answerArea = Container(
+      constraints: const BoxConstraints(minHeight: 60),
+      padding: const EdgeInsets.symmetric(
+          horizontal: AppSpacing.md, vertical: AppSpacing.sm),
+      decoration: BoxDecoration(
+        color: _checked
+            ? (_correct
+                ? const Color(0xFF4CAF50).withOpacity(0.08)
+                : const Color(0xFFEF5350).withOpacity(0.08))
+            : AppColors.backgroundSecondary,
+        borderRadius: BorderRadius.circular(16),
+        border: Border.all(
+            color: _checked
+                ? (_correct
+                    ? const Color(0xFF4CAF50)
+                    : const Color(0xFFEF5350))
+                : AppColors.border,
+            width: _checked ? 2 : 1),
+      ),
+      child: Wrap(
+        spacing: 8,
+        runSpacing: 8,
+        children: _placed.asMap().entries.map((entry) {
+          final i = entry.key;
+          final word = entry.value;
+          return word == null
+              ? Container(
+                  width: 48,
+                  height: 44,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(10),
+                    border: Border.all(
+                        color: AppColors.border.withOpacity(0.5),
+                        style: BorderStyle.solid),
+                  ),
+                )
+              : GestureDetector(
+                  onTap: () => _removeWord(i),
+                  child: Container(
+                    constraints: const BoxConstraints(minHeight: 44),
+                    padding: const EdgeInsets.symmetric(
+                        horizontal: 14, vertical: 10),
+                    decoration: BoxDecoration(
+                      color: AppColors.primary.withOpacity(0.12),
+                      borderRadius: BorderRadius.circular(12),
+                    ),
+                    child: Text(
+                      word,
+                      style: AppTypography.bodyMedium.copyWith(
+                        color: AppColors.primary,
+                        fontWeight: FontWeight.w600,
+                        fontSize: 15,
+                      ),
+                    ),
+                  ),
+                );
+        }).toList(),
+      ),
+    );
+
+    // Animate correct/wrong
+    if (_checked && _correct) {
+      answerArea = answerArea
+          .animate()
+          .shimmer(duration: 600.ms, color: const Color(0xFF4CAF50).withOpacity(0.3));
+    } else if (_checked && !_correct) {
+      answerArea = answerArea
+          .animate()
+          .shakeX(duration: 400.ms, hz: 4, amount: 4);
+    }
+
     return Padding(
       padding: const EdgeInsets.all(AppSpacing.md),
       child: Column(
         children: [
           Text(
             'Hevoka rast çêke',  // Doğru cümleyi oluştur
-            style: AppTypography.bodyMedium
-                .copyWith(color: AppColors.textSecondary),
+            style: AppTypography.bodyLarge.copyWith(
+              color: AppColors.textSecondary,
+              fontWeight: FontWeight.w500,
+            ),
+            textAlign: TextAlign.center,
           ),
           const SizedBox(height: AppSpacing.lg),
 
           // Yerleştirilen kelimeler
-          Container(
-            constraints: const BoxConstraints(minHeight: 52),
-            padding: const EdgeInsets.symmetric(
-                horizontal: AppSpacing.md, vertical: AppSpacing.sm),
-            decoration: BoxDecoration(
-              color: _checked
-                  ? (_correct
-                      ? const Color(0xFF4CAF50).withOpacity(0.08)
-                      : const Color(0xFFEF5350).withOpacity(0.08))
-                  : AppColors.backgroundSecondary,
-              borderRadius: BorderRadius.circular(14),
-              border: Border.all(
-                  color: _checked
-                      ? (_correct
-                          ? const Color(0xFF4CAF50)
-                          : const Color(0xFFEF5350))
-                      : AppColors.border),
-            ),
-            child: Wrap(
-              spacing: 6,
-              runSpacing: 6,
-              children: _placed.asMap().entries.map((entry) {
-                final i = entry.key;
-                final word = entry.value;
-                return word == null
-                    ? const SizedBox(width: 40, height: 32)
-                    : GestureDetector(
-                        onTap: () => _removeWord(i),
-                        child: Chip(
-                          label: Text(word),
-                          backgroundColor: AppColors.primary.withOpacity(0.12),
-                          labelStyle: AppTypography.bodySmall.copyWith(
-                              color: AppColors.primary,
-                              fontWeight: FontWeight.w600),
-                          deleteIcon: const Icon(Icons.close, size: 14),
-                          onDeleted: _checked ? null : () => _removeWord(i),
-                        ),
-                      );
-              }).toList(),
-            ),
-          ),
+          answerArea,
 
-          const SizedBox(height: AppSpacing.lg),
+          const SizedBox(height: AppSpacing.xl),
 
-          // Kalan kelimeler
+          // Kalan kelimeler — büyük dokunma hedefleri (min 44dp)
           Wrap(
-            spacing: 8,
-            runSpacing: 8,
+            spacing: 10,
+            runSpacing: 10,
             children: _remaining.asMap().entries.map((entry) {
               final i = entry.key;
               final word = entry.value;
@@ -785,12 +910,30 @@ class _SentenceOrderExerciseState extends State<SentenceOrderExercise> {
                   ? const SizedBox.shrink()
                   : GestureDetector(
                       onTap: () => _placeWord(word, i),
-                      child: Chip(
-                        label: Text(word),
-                        backgroundColor: AppColors.surface,
-                        labelStyle: AppTypography.bodySmall
-                            .copyWith(color: AppColors.textPrimary),
-                        side: BorderSide(color: AppColors.border),
+                      child: Container(
+                        constraints: const BoxConstraints(minHeight: 44),
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: 16, vertical: 10),
+                        decoration: BoxDecoration(
+                          color: AppColors.surface,
+                          borderRadius: BorderRadius.circular(12),
+                          border: Border.all(color: AppColors.border),
+                          boxShadow: [
+                            BoxShadow(
+                              color: Colors.black.withOpacity(0.04),
+                              blurRadius: 4,
+                              offset: const Offset(0, 2),
+                            ),
+                          ],
+                        ),
+                        child: Text(
+                          word,
+                          style: AppTypography.bodyMedium.copyWith(
+                            color: AppColors.textPrimary,
+                            fontWeight: FontWeight.w500,
+                            fontSize: 15,
+                          ),
+                        ),
                       ),
                     );
             }).toList(),
@@ -805,18 +948,22 @@ class _SentenceOrderExerciseState extends State<SentenceOrderExercise> {
               style: ElevatedButton.styleFrom(
                 backgroundColor: AppColors.primary,
                 foregroundColor: Colors.white,
-                minimumSize: const Size(double.infinity, 52),
+                minimumSize: const Size(double.infinity, 56),
                 shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(14)),
+                    borderRadius: BorderRadius.circular(16)),
               ),
               child: Text(
                 'Kontrol bike',
-                style: AppTypography.labelLarge
-                    .copyWith(color: Colors.white, fontWeight: FontWeight.w700),
+                style: AppTypography.labelLarge.copyWith(
+                    color: Colors.white,
+                    fontWeight: FontWeight.w700,
+                    fontSize: 16),
               ),
             )
           else
             _FSRSRatingRow(onRating: widget.onRating),
+
+          const SizedBox(height: AppSpacing.md),
         ],
       ),
     );

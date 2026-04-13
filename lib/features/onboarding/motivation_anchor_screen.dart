@@ -75,111 +75,139 @@ class _MotivationAnchorScreenState
 
   @override
   Widget build(BuildContext context) {
+    final bottomPadding = MediaQuery.of(context).padding.bottom;
+
     return Scaffold(
       backgroundColor: AppColors.backgroundPrimary,
+      resizeToAvoidBottomInset: true,
       body: SafeArea(
         child: GestureDetector(
           onTap: () => FocusScope.of(context).unfocus(),
-          child: SingleChildScrollView(
-            padding: AppSpacing.pagePadding,
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.stretch,
-              children: [
-                Gap.lg,
-
-                // ── Başlık ──────────────────────────────────────
-                Text(
-                  'Ji bo kê hîn dibî?',
-                  style: AppTypography.kurmanjiLarge.copyWith(
-                    color: AppColors.primary,
+          child: Column(
+            children: [
+              // Scrollable content — handles keyboard scroll
+              Expanded(
+                child: SingleChildScrollView(
+                  keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
+                  padding: const EdgeInsets.fromLTRB(
+                    AppSpacing.md, AppSpacing.lg, AppSpacing.md, AppSpacing.md,
                   ),
-                  textAlign: TextAlign.center,
-                ).animate().fadeIn(duration: 500.ms),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.stretch,
+                    children: [
+                      Gap.lg,
 
-                Gap.xs,
+                      // ── Başlık ──────────────────────────────────────
+                      Text(
+                        'Ji bo kê hîn dibî?',
+                        style: AppTypography.kurmanjiLarge.copyWith(
+                          color: AppColors.primary,
+                        ),
+                        textAlign: TextAlign.center,
+                      ).animate().fadeIn(duration: 500.ms),
 
-                Text(
-                  'Kimin için öğreniyorsun?',
-                  style: AppTypography.body.muted,
-                  textAlign: TextAlign.center,
-                ).animate(delay: 200.ms).fadeIn(duration: 400.ms),
+                      Gap.xs,
 
-                Gap.xl,
+                      Text(
+                        'Kimin için öğreniyorsun?',
+                        style: AppTypography.body.muted,
+                        textAlign: TextAlign.center,
+                      ).animate(delay: 200.ms).fadeIn(duration: 400.ms),
 
-                // ── Açıklama ────────────────────────────────────
-                Text(
-                  'Kürtçe öğrenince ilk aklına gelen kişinin adını yaz. '
-                  'Büyükannen, annen, deden, kardeşin — kim olursa.',
-                  style: AppTypography.body,
-                  textAlign: TextAlign.center,
-                ).animate(delay: 350.ms).fadeIn(duration: 400.ms),
+                      Gap.xl,
 
-                Gap.lg,
+                      // ── Açıklama ────────────────────────────────────
+                      Text(
+                        'Kürtçe öğrenince ilk aklına gelen kişinin adını yaz. '
+                        'Büyükannen, annen, deden, kardeşin — kim olursa.',
+                        style: AppTypography.body,
+                        textAlign: TextAlign.center,
+                      ).animate(delay: 350.ms).fadeIn(duration: 400.ms),
 
-                // ── İsim girişi ─────────────────────────────────
-                _NameInput(
-                  controller: _controller,
-                  focusNode: _focusNode,
-                ).animate(delay: 500.ms).fadeIn(duration: 400.ms),
+                      Gap.lg,
 
-                Gap.md,
+                      // ── İsim girişi ─────────────────────────────────
+                      _NameInput(
+                        controller: _controller,
+                        focusNode: _focusNode,
+                      ).animate(delay: 500.ms).fadeIn(duration: 400.ms),
 
-                // ── Hızlı seçenekler ─────────────────────────────
-                Wrap(
-                  spacing: AppSpacing.sm,
-                  runSpacing: AppSpacing.sm,
-                  alignment: WrapAlignment.center,
-                  children: _suggestions.map((s) {
-                    return _SuggestionChip(
-                      label: s,
-                      onTap: () {
-                        _controller.text = s;
-                        _controller.selection = TextSelection.fromPosition(
-                          TextPosition(offset: s.length),
-                        );
-                      },
-                    );
-                  }).toList(),
-                ).animate(delay: 650.ms).fadeIn(duration: 400.ms),
+                      Gap.md,
 
-                Gap.xxl,
+                      // ── Hızlı seçenekler — Wrap for small screens ───
+                      Wrap(
+                        spacing: AppSpacing.sm,
+                        runSpacing: AppSpacing.sm,
+                        alignment: WrapAlignment.center,
+                        children: _suggestions.map((s) {
+                          return _SuggestionChip(
+                            label: s,
+                            onTap: () {
+                              _controller.text = s;
+                              _controller.selection = TextSelection.fromPosition(
+                                TextPosition(offset: s.length),
+                              );
+                            },
+                          );
+                        }).toList(),
+                      ).animate(delay: 650.ms).fadeIn(duration: 400.ms),
 
-                // ── Önizleme ─────────────────────────────────────
-                if (_hasText) ...[
-                  _PreviewCard(name: _controller.text.trim())
-                      .animate()
-                      .fadeIn(duration: 400.ms)
-                      .slideY(begin: 0.1, end: 0),
-                  Gap.lg,
-                ],
+                      Gap.xl,
 
-                // ── Devam butonu ─────────────────────────────────
-                AnimatedOpacity(
-                  opacity: _hasText ? 1.0 : 0.5,
-                  duration: const Duration(milliseconds: 200),
-                  child: ElevatedButton(
-                    onPressed: _hasText ? _continue : null,
-                    child: Text(
-                      'Devam et →',
-                      style: AppTypography.labelLarge.onPrimary,
-                    ),
+                      // ── Önizleme ─────────────────────────────────────
+                      if (_hasText) ...[
+                        _PreviewCard(name: _controller.text.trim())
+                            .animate()
+                            .fadeIn(duration: 400.ms)
+                            .slideY(begin: 0.1, end: 0),
+                      ],
+                    ],
                   ),
-                ).animate(delay: 700.ms).fadeIn(duration: 400.ms),
+                ),
+              ),
 
-                Gap.md,
+              // ── Pinned bottom buttons ──────────────────────────
+              Padding(
+                padding: EdgeInsets.fromLTRB(
+                  AppSpacing.md,
+                  AppSpacing.sm,
+                  AppSpacing.md,
+                  AppSpacing.sm + (bottomPadding > 0 ? 0 : AppSpacing.md),
+                ),
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
+                  children: [
+                    AnimatedOpacity(
+                      opacity: _hasText ? 1.0 : 0.5,
+                      duration: const Duration(milliseconds: 200),
+                      child: ElevatedButton(
+                        onPressed: _hasText ? _continue : null,
+                        child: Text(
+                          'Devam et →',
+                          style: AppTypography.labelLarge.onPrimary,
+                        ),
+                      ),
+                    ).animate(delay: 700.ms).fadeIn(duration: 400.ms),
 
-                // ── Atla ────────────────────────────────────────
-                TextButton(
-                  onPressed: _skip,
-                  child: Text(
-                    'Şimdi değil, atla',
-                    style: AppTypography.label.copyWith(
-                      color: AppColors.textTertiary,
-                    ),
-                  ),
-                ).animate(delay: 800.ms).fadeIn(duration: 400.ms),
-              ],
-            ),
+                    const SizedBox(height: AppSpacing.xs),
+
+                    TextButton(
+                      onPressed: _skip,
+                      style: TextButton.styleFrom(
+                        minimumSize: const Size(double.infinity, AppSpacing.touchMin),
+                      ),
+                      child: Text(
+                        'Şimdi değil, atla',
+                        style: AppTypography.label.copyWith(
+                          color: AppColors.textTertiary,
+                        ),
+                      ),
+                    ).animate(delay: 800.ms).fadeIn(duration: 400.ms),
+                  ],
+                ),
+              ),
+            ],
           ),
         ),
       ),
@@ -236,25 +264,31 @@ class _SuggestionChip extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: onTap,
-      child: Container(
-        padding: const EdgeInsets.symmetric(
-          horizontal: AppSpacing.md,
-          vertical: AppSpacing.xs,
-        ),
-        decoration: BoxDecoration(
-          color: AppColors.backgroundSecondary,
-          borderRadius: AppRadius.full,
-          border: Border.all(
-            color: AppColors.borderLight,
-            width: AppSpacing.borderThin,
+    return Material(
+      color: Colors.transparent,
+      child: InkWell(
+        onTap: onTap,
+        borderRadius: AppRadius.full,
+        child: Container(
+          constraints: const BoxConstraints(minHeight: AppSpacing.touchMin),
+          padding: const EdgeInsets.symmetric(
+            horizontal: AppSpacing.md,
+            vertical: AppSpacing.sm,
           ),
-        ),
-        child: Text(
-          label,
-          style: AppTypography.label.copyWith(
-            color: AppColors.textSecondary,
+          decoration: BoxDecoration(
+            color: AppColors.backgroundSecondary,
+            borderRadius: AppRadius.full,
+            border: Border.all(
+              color: AppColors.borderLight,
+              width: AppSpacing.borderThin,
+            ),
+          ),
+          alignment: Alignment.center,
+          child: Text(
+            label,
+            style: AppTypography.label.copyWith(
+              color: AppColors.textSecondary,
+            ),
           ),
         ),
       ),

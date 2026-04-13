@@ -129,6 +129,7 @@ class _DialectCard extends StatelessWidget {
     return GestureDetector(
       onTap: onTap,
       child: Container(
+        constraints: const BoxConstraints(minHeight: AppSpacing.touchLarge),
         padding: const EdgeInsets.all(AppSpacing.lg),
         decoration: BoxDecoration(
           color: AppColors.surface,
@@ -277,6 +278,7 @@ class _ScenarioCard extends StatelessWidget {
     return GestureDetector(
       onTap: onTap,
       child: Container(
+        constraints: const BoxConstraints(minHeight: AppSpacing.touchLarge),
         padding: const EdgeInsets.all(AppSpacing.lg),
         decoration: BoxDecoration(
           color: isPrimary
@@ -349,91 +351,151 @@ class _GoalSelectScreenState extends State<GoalSelectScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return _OnboardingBase(
-      step: 3,
-      totalSteps: 4,
-      child: Column(
-        children: [
-          _OnboardingHeader(
-            kuTitle: 'Armanca rojane',
-            trTitle: 'Günlük hedef',
-            icon: Icons.flag_outlined,
-          ),
-          const SizedBox(height: AppSpacing.xl),
+    final statusBarHeight = MediaQuery.of(context).padding.top;
+    final bottomPadding = MediaQuery.of(context).padding.bottom;
 
-          ..._goals.map((g) {
-            final (count, kuLabel, trLabel, icon) = g;
-            final isSelected = _selectedGoal == count;
-            return Padding(
-              padding: const EdgeInsets.only(bottom: AppSpacing.sm),
-              child: GestureDetector(
-                onTap: () => setState(() => _selectedGoal = count),
-                child: AnimatedContainer(
-                  duration: 200.ms,
-                  padding: const EdgeInsets.all(AppSpacing.md),
-                  decoration: BoxDecoration(
-                    color: isSelected
-                        ? AppColors.primary.withOpacity(0.08)
-                        : AppColors.surface,
-                    borderRadius: BorderRadius.circular(14),
-                    border: Border.all(
-                      color: isSelected
-                          ? AppColors.primary
-                          : AppColors.border,
-                      width: isSelected ? 2 : 1,
+    return Scaffold(
+      backgroundColor: AppColors.backgroundPrimary,
+      body: SafeArea(
+        child: Column(
+          children: [
+            // İlerleme çubuğu
+            Padding(
+              padding: EdgeInsets.fromLTRB(
+                AppSpacing.md,
+                AppSpacing.md + (statusBarHeight > 0 ? 0 : AppSpacing.sm),
+                AppSpacing.md,
+                AppSpacing.md,
+              ),
+              child: Row(
+                children: [
+                  SizedBox(
+                    width: AppSpacing.touchMin,
+                    height: AppSpacing.touchMin,
+                    child: IconButton(
+                      icon: const Icon(Icons.arrow_back_ios_new),
+                      onPressed: () => context.pop(),
                     ),
                   ),
-                  child: Row(
-                    children: [
-                      Icon(icon,
-                          color: isSelected
-                              ? AppColors.primary
-                              : AppColors.textSecondary),
-                      const SizedBox(width: AppSpacing.md),
-                      Expanded(
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            // Kurmancî önce (§0.5)
-                            Text('$count peyv — $kuLabel',
-                                style: AppTypography.labelLarge.copyWith(
-                                    color: AppColors.textPrimary,
-                                    fontWeight: FontWeight.w700)),
-                            Text(trLabel,
-                                style: AppTypography.caption.copyWith(
-                                    color: AppColors.textSecondary)),
-                          ],
-                        ),
+                  Expanded(
+                    child: ClipRRect(
+                      borderRadius: BorderRadius.circular(4),
+                      child: LinearProgressIndicator(
+                        value: 3 / 4,
+                        backgroundColor: AppColors.primary.withOpacity(0.1),
+                        valueColor: AlwaysStoppedAnimation(AppColors.primary),
+                        minHeight: 6,
                       ),
-                      if (isSelected)
-                        Icon(Icons.check_circle,
-                            color: AppColors.primary),
-                    ],
+                    ),
                   ),
+                  const SizedBox(width: 8),
+                  Text('3/4',
+                      style: AppTypography.caption.copyWith(
+                          color: AppColors.textSecondary)),
+                ],
+              ),
+            ),
+
+            // Scrollable content
+            Expanded(
+              child: SingleChildScrollView(
+                padding: const EdgeInsets.symmetric(horizontal: AppSpacing.lg),
+                child: Column(
+                  children: [
+                    const SizedBox(height: AppSpacing.lg),
+                    _OnboardingHeader(
+                      kuTitle: 'Armanca rojane',
+                      trTitle: 'Günlük hedef',
+                      icon: Icons.flag_outlined,
+                    ),
+                    const SizedBox(height: AppSpacing.xl),
+
+                    ..._goals.map((g) {
+                      final (count, kuLabel, trLabel, icon) = g;
+                      final isSelected = _selectedGoal == count;
+                      return Padding(
+                        padding: const EdgeInsets.only(bottom: AppSpacing.sm),
+                        child: GestureDetector(
+                          onTap: () => setState(() => _selectedGoal = count),
+                          child: AnimatedContainer(
+                            duration: 200.ms,
+                            constraints: const BoxConstraints(minHeight: AppSpacing.touchLarge),
+                            padding: const EdgeInsets.all(AppSpacing.md),
+                            decoration: BoxDecoration(
+                              color: isSelected
+                                  ? AppColors.primary.withOpacity(0.08)
+                                  : AppColors.surface,
+                              borderRadius: BorderRadius.circular(14),
+                              border: Border.all(
+                                color: isSelected
+                                    ? AppColors.primary
+                                    : AppColors.border,
+                                width: isSelected ? 2 : 1,
+                              ),
+                            ),
+                            child: Row(
+                              children: [
+                                Icon(icon,
+                                    color: isSelected
+                                        ? AppColors.primary
+                                        : AppColors.textSecondary),
+                                const SizedBox(width: AppSpacing.md),
+                                Expanded(
+                                  child: Column(
+                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                    children: [
+                                      // Kurmancî önce (§0.5)
+                                      Text('$count peyv — $kuLabel',
+                                          style: AppTypography.labelLarge.copyWith(
+                                              color: AppColors.textPrimary,
+                                              fontWeight: FontWeight.w700)),
+                                      Text(trLabel,
+                                          style: AppTypography.caption.copyWith(
+                                              color: AppColors.textSecondary)),
+                                    ],
+                                  ),
+                                ),
+                                if (isSelected)
+                                  Icon(Icons.check_circle,
+                                      color: AppColors.primary),
+                              ],
+                            ),
+                          ),
+                        ),
+                      );
+                    }),
+                  ],
                 ),
               ),
-            );
-          }),
-
-          const SizedBox(height: AppSpacing.xl),
-
-          ElevatedButton(
-            onPressed: () => context.push(AppRoutes.firstLesson),
-            style: ElevatedButton.styleFrom(
-              backgroundColor: AppColors.primary,
-              foregroundColor: Colors.white,
-              minimumSize: const Size(double.infinity, 54),
-              shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(14)),
-              elevation: 0,
             ),
-            child: Text(
-              'Dest pê bike! — Başla!',
-              style: AppTypography.labelLarge.copyWith(
-                  color: Colors.white, fontWeight: FontWeight.w700),
+
+            // Pinned bottom button
+            Padding(
+              padding: EdgeInsets.fromLTRB(
+                AppSpacing.lg,
+                AppSpacing.md,
+                AppSpacing.lg,
+                AppSpacing.md + (bottomPadding > 0 ? 0 : AppSpacing.md),
+              ),
+              child: ElevatedButton(
+                onPressed: () => context.push(AppRoutes.firstLesson),
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: AppColors.primary,
+                  foregroundColor: Colors.white,
+                  minimumSize: const Size(double.infinity, AppSpacing.touchPreferred),
+                  shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(14)),
+                  elevation: 0,
+                ),
+                child: Text(
+                  'Dest pê bike! — Başla!',
+                  style: AppTypography.labelLarge.copyWith(
+                      color: Colors.white, fontWeight: FontWeight.w700),
+                ),
+              ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }
@@ -463,7 +525,12 @@ class SettingsScreen extends ConsumerWidget {
         ),
       ),
       body: ListView(
-        padding: const EdgeInsets.all(AppSpacing.md),
+        padding: EdgeInsets.fromLTRB(
+          AppSpacing.md,
+          AppSpacing.md,
+          AppSpacing.md,
+          AppSpacing.md + MediaQuery.of(context).padding.bottom + AppSpacing.lg,
+        ),
         children: [
           _SettingsSection(
             title: 'Ziman — Dil',
@@ -637,20 +704,32 @@ class _OnboardingBase extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final statusBarHeight = MediaQuery.of(context).padding.top;
+    final bottomPadding = MediaQuery.of(context).padding.bottom;
+
     return Scaffold(
       backgroundColor: AppColors.backgroundPrimary,
       body: SafeArea(
         child: Column(
           children: [
-            // İlerleme çubuğu
+            // İlerleme çubuğu — status bar spacing
             Padding(
-              padding: const EdgeInsets.all(AppSpacing.md),
+              padding: EdgeInsets.fromLTRB(
+                AppSpacing.md,
+                AppSpacing.md + (statusBarHeight > 0 ? 0 : AppSpacing.sm),
+                AppSpacing.md,
+                AppSpacing.md,
+              ),
               child: Row(
                 children: [
                   if (step > 1)
-                    IconButton(
-                      icon: const Icon(Icons.arrow_back_ios_new),
-                      onPressed: () => context.pop(),
+                    SizedBox(
+                      width: AppSpacing.touchMin,
+                      height: AppSpacing.touchMin,
+                      child: IconButton(
+                        icon: const Icon(Icons.arrow_back_ios_new),
+                        onPressed: () => context.pop(),
+                      ),
                     ),
                   Expanded(
                     child: ClipRRect(
@@ -671,10 +750,15 @@ class _OnboardingBase extends StatelessWidget {
               ),
             ),
 
-            // İçerik
+            // İçerik — bottom padding for gesture navigation
             Expanded(
               child: SingleChildScrollView(
-                padding: const EdgeInsets.all(AppSpacing.lg),
+                padding: EdgeInsets.fromLTRB(
+                  AppSpacing.lg,
+                  AppSpacing.lg,
+                  AppSpacing.lg,
+                  AppSpacing.lg + (bottomPadding > 0 ? bottomPadding : AppSpacing.xl),
+                ),
                 child: child,
               ),
             ),

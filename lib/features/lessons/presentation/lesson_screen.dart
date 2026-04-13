@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
@@ -202,7 +203,7 @@ class _LessonScreenState extends ConsumerState<LessonScreen> {
                   value: _currentIndex / _cards.length,
                   backgroundColor: AppColors.primary.withOpacity(0.12),
                   valueColor: AlwaysStoppedAnimation(AppColors.primary),
-                  minHeight: 6,
+                  minHeight: 8,
                 ),
               ),
             ),
@@ -336,12 +337,16 @@ class _CardFront extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: onTap,
+      onTap: () {
+        HapticFeedback.lightImpact();
+        onTap();
+      },
       child: Column(
         children: [
           Expanded(
             child: Container(
               margin: const EdgeInsets.symmetric(horizontal: AppSpacing.md),
+              padding: const EdgeInsets.symmetric(horizontal: AppSpacing.lg),
               decoration: BoxDecoration(
                 color: AppColors.surface,
                 borderRadius: BorderRadius.circular(24),
@@ -356,35 +361,44 @@ class _CardFront extends StatelessWidget {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  // Kurmancî — büyük, birincil (İlke §0.5)
-                  Text(
-                    card.kurmanji,
-                    style: AppTypography.displayMedium.copyWith(
-                      color: AppColors.textPrimary,
-                      fontWeight: FontWeight.w700,
+                  // Kurmancî — büyük, birincil, responsive (İlke §0.5)
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: AppSpacing.md),
+                    child: FittedBox(
+                      fit: BoxFit.scaleDown,
+                      child: Text(
+                        card.kurmanji,
+                        style: AppTypography.displayMedium.copyWith(
+                          color: AppColors.textPrimary,
+                          fontWeight: FontWeight.w700,
+                        ),
+                        textAlign: TextAlign.center,
+                      ),
                     ),
-                    textAlign: TextAlign.center,
                   ).animate().fadeIn().scale(begin: const Offset(0.95, 0.95)),
 
-                  const SizedBox(height: AppSpacing.lg),
+                  const SizedBox(height: AppSpacing.xl),
 
-                  Icon(Icons.touch_app_outlined,
-                      color: AppColors.textSecondary.withOpacity(0.4),
-                      size: 32),
+                  // İpucu — daha belirgin
+                  Icon(Icons.touch_app_rounded,
+                      color: AppColors.textSecondary.withOpacity(0.5),
+                      size: 40),
 
                   const SizedBox(height: AppSpacing.sm),
 
                   Text(
                     'Cevabı gör • Bersivê bibîne',
-                    style: AppTypography.caption
-                        .copyWith(color: AppColors.textSecondary),
+                    style: AppTypography.bodyMedium.copyWith(
+                      color: AppColors.textSecondary,
+                      fontWeight: FontWeight.w500,
+                    ),
                   ),
                 ],
               ),
             ),
           ),
 
-          const SizedBox(height: AppSpacing.lg),
+          const SizedBox(height: AppSpacing.md),
 
           // Seviye + kategori etiketi
           Row(
@@ -396,7 +410,7 @@ class _CardFront extends StatelessWidget {
             ],
           ),
 
-          const SizedBox(height: AppSpacing.lg),
+          const SizedBox(height: AppSpacing.md),
         ],
       ),
     );
@@ -468,12 +482,14 @@ class _TopBar extends StatelessWidget {
 
           const SizedBox(width: AppSpacing.sm),
 
-          // Kart sayacı
+          // Kart sayacı — belirgin
           Expanded(
             child: Text(
               '$current / $total',
-              style: AppTypography.labelMedium
-                  .copyWith(color: AppColors.textSecondary),
+              style: AppTypography.headingSmall.copyWith(
+                color: AppColors.textPrimary,
+                fontWeight: FontWeight.w700,
+              ),
               textAlign: TextAlign.center,
             ),
           ),
@@ -521,23 +537,26 @@ class _CompletionView extends StatelessWidget {
         child: Padding(
           padding: const EdgeInsets.all(AppSpacing.xl),
           child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              // Kutlama ikonu
-              Container(
-                width: 100,
-                height: 100,
-                decoration: BoxDecoration(
-                  color: AppColors.primary.withOpacity(0.12),
-                  shape: BoxShape.circle,
-                ),
-                child: Icon(Icons.star_rounded,
-                    size: 56, color: AppColors.primary),
-              ).animate().scale(
-                    begin: const Offset(0, 0),
-                    curve: Curves.elasticOut,
-                    duration: 600.ms,
+              const Spacer(flex: 2),
+
+              // Kutlama ikonu — ortalanmış
+              Center(
+                child: Container(
+                  width: 120,
+                  height: 120,
+                  decoration: BoxDecoration(
+                    color: AppColors.primary.withOpacity(0.12),
+                    shape: BoxShape.circle,
                   ),
+                  child: Icon(Icons.star_rounded,
+                      size: 64, color: AppColors.primary),
+                ).animate().scale(
+                      begin: const Offset(0, 0),
+                      curve: Curves.elasticOut,
+                      duration: 600.ms,
+                    ),
+              ),
 
               const SizedBox(height: AppSpacing.xl),
 
@@ -548,6 +567,7 @@ class _CompletionView extends StatelessWidget {
                   color: AppColors.textPrimary,
                   fontWeight: FontWeight.w700,
                 ),
+                textAlign: TextAlign.center,
               ).animate().fadeIn(delay: 200.ms),
 
               const SizedBox(height: AppSpacing.sm),
@@ -561,45 +581,62 @@ class _CompletionView extends StatelessWidget {
 
               const SizedBox(height: AppSpacing.xl),
 
-              // İstatistikler
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
-                children: [
-                  _CompletionStat(
-                    label: 'Kart',
-                    value: '$totalSeen',
-                    icon: Icons.layers_outlined,
-                  ),
-                  _CompletionStat(
-                    label: 'Rast',
-                    value: '$accuracy%',
-                    icon: Icons.check_circle_outline,
-                  ),
-                  _CompletionStat(
-                    label: 'XP',
-                    value: '+${correctCount * 10}',
-                    icon: Icons.star_border,
-                  ),
-                ],
+              // İstatistikler — responsive
+              LayoutBuilder(
+                builder: (context, constraints) {
+                  final statWidth = (constraints.maxWidth - AppSpacing.md * 2) / 3;
+                  return Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+                    children: [
+                      SizedBox(
+                        width: statWidth,
+                        child: _CompletionStat(
+                          label: 'Kart',
+                          value: '$totalSeen',
+                          icon: Icons.layers_outlined,
+                        ),
+                      ),
+                      SizedBox(
+                        width: statWidth,
+                        child: _CompletionStat(
+                          label: 'Rast',
+                          value: '$accuracy%',
+                          icon: Icons.check_circle_outline,
+                        ),
+                      ),
+                      SizedBox(
+                        width: statWidth,
+                        child: _CompletionStat(
+                          label: 'XP',
+                          value: '+${correctCount * 10}',
+                          icon: Icons.star_border,
+                        ),
+                      ),
+                    ],
+                  );
+                },
               ).animate().fadeIn(delay: 400.ms),
 
-              const SizedBox(height: AppSpacing.xl),
+              const Spacer(flex: 3),
 
-              // Geri dön butonu
-              ElevatedButton(
-                onPressed: onClose,
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: AppColors.primary,
-                  foregroundColor: Colors.white,
-                  minimumSize: const Size(double.infinity, 54),
-                  shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(16)),
-                  elevation: 0,
-                ),
-                child: Text(
-                  'Vegere serê',  // Ana sayfaya dön
-                  style: AppTypography.labelLarge.copyWith(
-                      color: Colors.white, fontWeight: FontWeight.w700),
+              // Geri dön butonu — tam genişlik, altta
+              SizedBox(
+                width: double.infinity,
+                child: ElevatedButton(
+                  onPressed: onClose,
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: AppColors.primary,
+                    foregroundColor: Colors.white,
+                    minimumSize: const Size(double.infinity, 56),
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(16)),
+                    elevation: 0,
+                  ),
+                  child: Text(
+                    'Vegere serê',  // Ana sayfaya dön
+                    style: AppTypography.labelLarge.copyWith(
+                        color: Colors.white, fontWeight: FontWeight.w700),
+                  ),
                 ),
               ).animate().fadeIn(delay: 500.ms).slideY(begin: 0.2),
             ],

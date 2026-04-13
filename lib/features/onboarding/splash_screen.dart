@@ -53,108 +53,125 @@ class _SplashScreenState extends ConsumerState<SplashScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final screenWidth = MediaQuery.of(context).size.width;
+    final logoSize = (screenWidth * 0.30).clamp(80.0, 160.0);
+
     return Scaffold(
-      backgroundColor: AppColors.primary,
-      body: SafeArea(
-        child: Center(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-
-              // Logo — canlandırmalı giriş
-              Container(
-                width: 140,
-                height: 140,
-                decoration: BoxDecoration(
-                  color: Colors.white,
-                  shape: BoxShape.circle,
-                  boxShadow: [
-                    BoxShadow(
-                      color: Colors.black.withOpacity(0.1),
-                      blurRadius: 24,
-                      offset: const Offset(0, 8),
-                    ),
-                  ],
-                ),
-                padding: const EdgeInsets.all(16),
-                child: Image.asset(
-                  'assets/images/logo_512.png',
-                  fit: BoxFit.contain,
-                ),
-              )
-                  .animate()
-                  .scale(
-                    begin: const Offset(0, 0),
-                    curve: Curves.elasticOut,
-                    duration: 800.ms,
-                  )
-                  .then()
-                  .shimmer(duration: 1200.ms, color: Colors.white30),
-
-              const SizedBox(height: 32),
-
-              // Uygulama adı
-              Text(
-                'LÛTKE',
-                style: TextStyle(
-                  fontSize: 40,
-                  fontWeight: FontWeight.w900,
-                  color: Colors.white,
-                  letterSpacing: 6,
-                ),
-              ).animate().fadeIn(delay: 400.ms, duration: 600.ms),
-
-              const SizedBox(height: 8),
-
-              // Kurmancî alt başlık — İlke §0.5
-              Text(
-                'Zimanê Kurdî',
-                style: TextStyle(
-                  fontSize: 18,
-                  fontWeight: FontWeight.w400,
-                  color: Colors.white.withOpacity(0.85),
-                  letterSpacing: 2,
-                ),
-              ).animate().fadeIn(delay: 600.ms, duration: 600.ms),
-
-              const SizedBox(height: 80),
-
-              // Hoş geldin mesajı — Kurmancî (İlke §0.5, §2)
-              Text(
-                'Xêr hatî.',
-                style: TextStyle(
-                  fontSize: 22,
-                  fontWeight: FontWeight.w600,
-                  color: Colors.white.withOpacity(0.9),
-                  fontStyle: FontStyle.italic,
-                ),
-              )
-                  .animate()
-                  .fadeIn(delay: 1200.ms, duration: 800.ms)
-                  .slideY(begin: 0.3, curve: Curves.easeOut),
-
-              const SizedBox(height: 8),
-
-              Text(
-                'Hoş geldiniz — Welcome',
-                style: TextStyle(
-                  fontSize: 13,
-                  color: Colors.white.withOpacity(0.6),
-                ),
-              ).animate().fadeIn(delay: 1600.ms, duration: 600.ms),
-
-              const SizedBox(height: 60),
-
-              // Yükleniyor göstergesi
-              SizedBox(
-                width: 32,
-                height: 32,
-                child: CircularProgressIndicator(
-                  strokeWidth: 2.5,
-                  color: Colors.white.withOpacity(0.6),
-                ),
-              ).animate().fadeIn(delay: 2000.ms),
+      body: Container(
+        decoration: const BoxDecoration(
+          gradient: LinearGradient(
+            begin: Alignment.topCenter,
+            end: Alignment.bottomCenter,
+            colors: [
+              AppColors.primary,
+              AppColors.primaryDark,
             ],
+          ),
+        ),
+        child: SafeArea(
+          child: Center(
+            child: Column(
+              children: [
+
+                const Spacer(flex: 3),
+
+                // Logo — canlandırmalı giriş
+                Container(
+                  width: logoSize,
+                  height: logoSize,
+                  decoration: BoxDecoration(
+                    color: Colors.white,
+                    shape: BoxShape.circle,
+                    boxShadow: [
+                      BoxShadow(
+                        color: Colors.black.withOpacity(0.1),
+                        blurRadius: 24,
+                        offset: const Offset(0, 8),
+                      ),
+                    ],
+                  ),
+                  padding: EdgeInsets.all(logoSize * 0.11),
+                  child: Image.asset(
+                    'assets/images/logo_512.png',
+                    fit: BoxFit.contain,
+                  ),
+                )
+                    .animate()
+                    .scale(
+                      begin: const Offset(0, 0),
+                      curve: Curves.elasticOut,
+                      duration: 800.ms,
+                    )
+                    .then()
+                    .shimmer(duration: 1200.ms, color: Colors.white30),
+
+                const Spacer(flex: 1),
+
+                // Uygulama adı
+                Text(
+                  'LÛTKE',
+                  style: TextStyle(
+                    fontSize: 40,
+                    fontWeight: FontWeight.w900,
+                    color: Colors.white,
+                    letterSpacing: 6,
+                  ),
+                ).animate().fadeIn(delay: 400.ms, duration: 600.ms),
+
+                const SizedBox(height: 8),
+
+                // Kurmancî alt başlık — İlke §0.5
+                Text(
+                  'Zimanê Kurdî',
+                  style: TextStyle(
+                    fontSize: 18,
+                    fontWeight: FontWeight.w400,
+                    color: Colors.white.withOpacity(0.85),
+                    letterSpacing: 2,
+                  ),
+                ).animate().fadeIn(delay: 600.ms, duration: 600.ms),
+
+                const Spacer(flex: 2),
+
+                // Hoş geldin mesajı — Kurmancî (İlke §0.5, §2)
+                Text(
+                  'Xêr hatî.',
+                  style: TextStyle(
+                    fontSize: 22,
+                    fontWeight: FontWeight.w600,
+                    color: Colors.white.withOpacity(0.9),
+                    fontStyle: FontStyle.italic,
+                  ),
+                )
+                    .animate()
+                    .fadeIn(delay: 1200.ms, duration: 800.ms)
+                    .slideY(begin: 0.3, curve: Curves.easeOut),
+
+                const SizedBox(height: 8),
+
+                Text(
+                  'Hoş geldiniz — Welcome',
+                  style: TextStyle(
+                    fontSize: 13,
+                    color: Colors.white.withOpacity(0.6),
+                  ),
+                ).animate().fadeIn(delay: 1600.ms, duration: 600.ms),
+
+                const Spacer(flex: 2),
+
+                // Yükleniyor göstergesi
+                SizedBox(
+                  width: 32,
+                  height: 32,
+                  child: CircularProgressIndicator(
+                    strokeWidth: 2.5,
+                    color: Colors.white.withOpacity(0.6),
+                  ),
+                ).animate().fadeIn(delay: 2000.ms),
+
+                const SizedBox(height: 32),
+              ],
+            ),
           ),
         ),
       ),

@@ -419,22 +419,21 @@ class _Header extends StatelessWidget {
       children: [
         // Logo
         Container(
-          width: 72,
-          height: 72,
+          width: 80,
+          height: 80,
           decoration: BoxDecoration(
-            color: AppColors.primary.withOpacity(0.1),
+            color: Colors.white,
             shape: BoxShape.circle,
-          ),
-          child: Center(
-            child: Text(
-              'L',
-              style: TextStyle(
-                fontSize: 36,
-                fontWeight: FontWeight.w900,
-                color: AppColors.primary,
+            boxShadow: [
+              BoxShadow(
+                color: AppColors.primary.withOpacity(0.15),
+                blurRadius: 16,
+                offset: const Offset(0, 4),
               ),
-            ),
+            ],
           ),
+          padding: const EdgeInsets.all(12),
+          child: Image.asset('assets/images/logo_128.png', fit: BoxFit.contain),
         ).animate().scale(
               begin: const Offset(0, 0),
               curve: Curves.elasticOut,
