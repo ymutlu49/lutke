@@ -11,6 +11,7 @@ import '../../core/router/app_router.dart';
 import '../../core/services/auth_service.dart';
 import '../lessons/data/lesson_repository.dart';
 import '../gamification/gamification_widgets.dart';
+import '../../shared/widgets/leaderboard_widget.dart';
 
 // ════════════════════════════════════════════════════════════════
 // PROFİL EKRANI — LÛTKE
@@ -174,6 +175,11 @@ class ProfileScreen extends ConsumerWidget {
 
                       // ── 4. Haftalık Aktivite Grafiği ─────────
                       const _WeeklyActivityChart(),
+
+                      const SizedBox(height: AppSpacing.lg),
+
+                      // ── 4b. Mini Leaderboard (Pêşbazî) ─────
+                      const LeaderboardWidget(),
 
                       const SizedBox(height: AppSpacing.lg),
 
@@ -1267,6 +1273,17 @@ class _QuickActionsSection extends StatelessWidget {
               ),
             ),
           ],
+        ),
+        const SizedBox(height: AppSpacing.sm),
+        // ── Rêya min (İlerleme Haritası) ──────────────────
+        SizedBox(
+          width: double.infinity,
+          child: _QuickActionButton(
+            label: 'Rêya min',
+            icon: Icons.map_rounded,
+            color: const Color(0xFF2E7D32),
+            onTap: () => context.push(AppRoutes.progressMap),
+          ),
         ),
         const SizedBox(height: AppSpacing.sm),
         // Admin panel — ince ve gizli

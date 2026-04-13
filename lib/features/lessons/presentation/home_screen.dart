@@ -15,7 +15,9 @@ import '../domain/lesson_entities.dart';
 import '../domain/a1_kelime_db.dart';
 import '../../../shared/widgets/lutke_logo.dart';
 import '../../../shared/widgets/streak_widget.dart';
+import '../../../shared/widgets/daily_word_widget.dart';
 import '../../../shared/providers/language_mode_provider.dart';
+import '../../../shared/providers/review_provider.dart';
 import '../../gamification/gamification_widgets.dart';
 
 // ════════════════════════════════════════════════════════════════
@@ -73,7 +75,12 @@ class HomeScreen extends ConsumerWidget {
                   // Heritage veya Genel yola göre selamlama
                   _WelcomeSection(isHeritage: profile.isHeritage),
 
-                  const SizedBox(height: AppSpacing.sm),
+                  const SizedBox(height: AppSpacing.md),
+
+                  // ── Peyva Roje — Gunun Kelimesi ────────────────
+                  const DailyWordWidget(),
+
+                  const SizedBox(height: AppSpacing.md),
 
                   // ── Günlük özet kartı (streak, XP, seviye) ────
                   dailyStats.when(
@@ -95,63 +102,29 @@ class HomeScreen extends ConsumerWidget {
                   const SizedBox(height: AppSpacing.lg),
 
                   // ════════════════════════════════════════════════
-                  // AKTİVİTELER — Öğrenme eylemleri
+                  // AKTİVİTELER — Çalakiyên Fêrbûnê (Learning Activities)
                   // ════════════════════════════════════════════════
 
-                  // ── Dersê Bide! — Ana quiz butonu (büyük, belirgin) ──
-                  const _StartQuizButton(),
-
-                  const SizedBox(height: AppSpacing.md),
-
-                  // ── Flashcard & Tekrar — yan yana kartlar ────
-                  Row(
-                    children: [
-                      // Flashcard kartı
-                      Expanded(
-                        child: _ActivityCard(
-                          icon: Icons.style_rounded,
-                          label: 'Flashcard',
-                          subtitle: 'Swipe bike',
-                          gradientColors: [AppColors.accent, AppColors.accentWarm],
-                          onTap: () => context.push(AppRoutes.flashcard),
-                          delay: 180,
-                        ),
-                      ),
-                      const SizedBox(width: AppSpacing.sm),
-                      // Günlük tekrar kartı
-                      Expanded(
-                        child: dailyStats.when(
-                          data: (stats) => _ActivityCard(
-                            icon: Icons.replay_rounded,
-                            label: 'Dubare',
-                            subtitle: '${stats.dueCount} peld',
-                            gradientColors: [AppColors.primary, AppColors.primaryDark],
-                            onTap: () => context.push(
-                              AppRoutes.lesson,
-                              extra: {'mode': 'review', 'userId': userId},
-                            ),
-                            delay: 220,
-                          ),
-                          loading: () => _ActivityCard(
-                            icon: Icons.replay_rounded,
-                            label: 'Dubare',
-                            subtitle: '0 peld',
-                            gradientColors: [AppColors.primary, AppColors.primaryDark],
-                            onTap: null,
-                            delay: 220,
-                          ),
-                          error: (_, __) => _ActivityCard(
-                            icon: Icons.replay_rounded,
-                            label: 'Dubare',
-                            subtitle: '0 peld',
-                            gradientColors: [AppColors.primary, AppColors.primaryDark],
-                            onTap: null,
-                            delay: 220,
+                  // Section header
+                  Padding(
+                    padding: const EdgeInsets.only(bottom: AppSpacing.md),
+                    child: Row(
+                      children: [
+                        Icon(Icons.grid_view_rounded, size: 22, color: AppColors.primary),
+                        const SizedBox(width: AppSpacing.sm),
+                        Text(
+                          'Çalakiyên Fêrbûnê',
+                          style: AppTypography.headingSmall.copyWith(
+                            color: AppColors.textPrimary,
+                            fontWeight: FontWeight.w700,
                           ),
                         ),
-                      ),
-                    ],
-                  ),
+                      ],
+                    ),
+                  ).animate().fadeIn(delay: 160.ms),
+
+                  // ── 2-column Activity Grid ──────────────────
+                  _ActivityGrid(userId: userId, dailyStats: dailyStats),
 
                   const SizedBox(height: AppSpacing.sm),
 
@@ -161,10 +134,10 @@ class HomeScreen extends ConsumerWidget {
                   const SizedBox(height: AppSpacing.lg),
 
                   // ════════════════════════════════════════════════
-                  // SKILL TREE — Öğrenme yolu
+                  // SKILL TREE — Öğrenme yolu (collapsible)
                   // ════════════════════════════════════════════════
 
-                  _SkillTreePath(
+                  _CollapsibleSkillTree(
                     userId: userId,
                     currentLevel: profile.currentLevelNum,
                     ref: ref,
@@ -806,6 +779,331 @@ class _ActivityCard extends StatelessWidget {
 }
 
 // ════════════════════════════════════════════════════════════════
+// AKTİVİTE GRID — 2 sütunlu, 8 çalakiye kartı
+// Tam öğrenme aktivite ızgarası
+// ════════════════════════════════════════════════════════════════
+
+class _ActivityGrid extends ConsumerWidget {
+  final String userId;
+  final AsyncValue<DailyStats> dailyStats;
+
+  const _ActivityGrid({required this.userId, required this.dailyStats});
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    return Column(
+      children: [
+        // ── Row 1: Waneyê Bide (Quiz) + Peld (Flashcard) ──
+        Row(
+          children: [
+            Expanded(
+              child: _ActivityGridCard(
+                emoji: '\u{1F3AF}',
+                label: 'Waneyê Bide',
+                subtitle: '10 pirs',
+                gradientColors: [AppColors.primary, AppColors.primaryDark],
+                onTap: () => context.push(
+                  AppRoutes.quiz,
+                  extra: {'level': 'A1'},
+                ),
+                delay: 180,
+              ),
+            ),
+            const SizedBox(width: AppSpacing.sm),
+            Expanded(
+              child: _ActivityGridCard(
+                emoji: '\u{1F0CF}',
+                label: 'Peld',
+                subtitle: '454 peyv',
+                gradientColors: [AppColors.accent, AppColors.accentWarm],
+                onTap: () => context.push(AppRoutes.flashcard),
+                delay: 220,
+              ),
+            ),
+          ],
+        ),
+
+        const SizedBox(height: AppSpacing.sm),
+
+        // ── Row 2: Hevok Ava Bike (Sentence Builder) + Peyv Hevdû Bike (Word Match) ──
+        Row(
+          children: [
+            Expanded(
+              child: _ActivityGridCard(
+                emoji: '\u{1F9E9}',
+                label: 'Hevok Ava Bike',
+                subtitle: 'Peyvên rêz bike',
+                gradientColors: [const Color(0xFF7C4DFF), const Color(0xFF651FFF)],
+                onTap: () => context.push(AppRoutes.sentenceBuilder),
+                delay: 260,
+              ),
+            ),
+            const SizedBox(width: AppSpacing.sm),
+            Expanded(
+              child: _ActivityGridCard(
+                emoji: '\u{1F517}',
+                label: 'Peyv Hevdû Bike',
+                subtitle: 'Hevjot bike',
+                gradientColors: [const Color(0xFF2196F3), const Color(0xFF1565C0)],
+                onTap: () => context.push(AppRoutes.wordMatch),
+                delay: 300,
+              ),
+            ),
+          ],
+        ),
+
+        const SizedBox(height: AppSpacing.sm),
+
+        // ── Row 3: Çîrok (Story) + Guhdarî (Listening) ──
+        Row(
+          children: [
+            Expanded(
+              child: _ActivityGridCard(
+                emoji: '\u{1F4D6}',
+                label: 'Çîrok',
+                subtitle: 'Bixwîne û fêr bibe',
+                gradientColors: [const Color(0xFFFF8A65), const Color(0xFFE64A19)],
+                onTap: () => context.push(AppRoutes.story),
+                delay: 340,
+              ),
+            ),
+            const SizedBox(width: AppSpacing.sm),
+            Expanded(
+              child: _ActivityGridCard(
+                emoji: '\u{1F3A7}',
+                label: 'Guhdarî',
+                subtitle: 'Guh bide',
+                gradientColors: [const Color(0xFF26A69A), const Color(0xFF00796B)],
+                onTap: () => context.push(AppRoutes.listening),
+                delay: 380,
+              ),
+            ),
+          ],
+        ),
+
+        const SizedBox(height: AppSpacing.sm),
+
+        // ── Row 4: Rêziman (Grammar) + Dubare (Smart Review) ──
+        Row(
+          children: [
+            Expanded(
+              child: _ActivityGridCard(
+                emoji: '\u{1F4DD}',
+                label: 'Rêziman',
+                subtitle: 'Gramer bike',
+                gradientColors: [const Color(0xFF3F51B5), const Color(0xFF283593)],
+                onTap: () => context.push(AppRoutes.grammar),
+                delay: 420,
+              ),
+            ),
+            const SizedBox(width: AppSpacing.sm),
+            Expanded(
+              child: _ActivityGridCard(
+                emoji: '\u{1F504}',
+                label: 'Dubare',
+                subtitle: '${ref.watch(reviewDueCountProvider)} peyv',
+                gradientColors: [const Color(0xFF43A047), const Color(0xFF2E7D32)],
+                onTap: () => context.push(AppRoutes.review),
+                delay: 460,
+              ),
+            ),
+          ],
+        ),
+      ],
+    );
+  }
+}
+
+// ════════════════════════════════════════════════════════════════
+// AKTİVİTE GRID KARTI — Emoji ikonu + gradient arka plan
+// Rounded rectangle, staggered entrance animation, ripple
+// ════════════════════════════════════════════════════════════════
+
+class _ActivityGridCard extends StatelessWidget {
+  final String emoji;
+  final String label;
+  final String subtitle;
+  final List<Color> gradientColors;
+  final VoidCallback? onTap;
+  final int delay;
+
+  const _ActivityGridCard({
+    required this.emoji,
+    required this.label,
+    required this.subtitle,
+    required this.gradientColors,
+    required this.onTap,
+    this.delay = 150,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Material(
+      color: Colors.transparent,
+      child: InkWell(
+        onTap: onTap,
+        borderRadius: BorderRadius.circular(20),
+        splashColor: Colors.white.withOpacity(0.15),
+        highlightColor: Colors.white.withOpacity(0.08),
+        child: Ink(
+          decoration: BoxDecoration(
+            gradient: LinearGradient(
+              colors: gradientColors,
+              begin: Alignment.topLeft,
+              end: Alignment.bottomRight,
+            ),
+            borderRadius: BorderRadius.circular(20),
+            boxShadow: [
+              BoxShadow(
+                color: gradientColors.first.withOpacity(0.3),
+                blurRadius: 12,
+                offset: const Offset(0, 5),
+              ),
+            ],
+          ),
+          child: Padding(
+            padding: const EdgeInsets.symmetric(
+              horizontal: AppSpacing.md,
+              vertical: AppSpacing.lg,
+            ),
+            child: Column(
+              children: [
+                // Emoji icon
+                Text(
+                  emoji,
+                  style: const TextStyle(fontSize: 32),
+                ),
+                const SizedBox(height: AppSpacing.sm),
+                // Title
+                Text(
+                  label,
+                  style: AppTypography.labelLarge.copyWith(
+                    color: Colors.white,
+                    fontWeight: FontWeight.w700,
+                  ),
+                  textAlign: TextAlign.center,
+                  maxLines: 1,
+                  overflow: TextOverflow.ellipsis,
+                ),
+                const SizedBox(height: 2),
+                // Subtitle
+                Text(
+                  subtitle,
+                  style: AppTypography.caption.copyWith(
+                    color: Colors.white.withOpacity(0.8),
+                  ),
+                  textAlign: TextAlign.center,
+                  maxLines: 1,
+                  overflow: TextOverflow.ellipsis,
+                ),
+              ],
+            ),
+          ),
+        ),
+      ),
+    ).animate().fadeIn(delay: Duration(milliseconds: delay)).scale(
+          begin: const Offset(0.92, 0.92),
+          duration: 350.ms,
+          curve: Curves.easeOut,
+        );
+  }
+}
+
+// ════════════════════════════════════════════════════════════════
+// COLLAPSIBLE SKILL TREE — Açılır/kapanır öğrenme yolu
+// ════════════════════════════════════════════════════════════════
+
+class _CollapsibleSkillTree extends StatefulWidget {
+  final String userId;
+  final int currentLevel;
+  final WidgetRef ref;
+
+  const _CollapsibleSkillTree({
+    required this.userId,
+    required this.currentLevel,
+    required this.ref,
+  });
+
+  @override
+  State<_CollapsibleSkillTree> createState() => _CollapsibleSkillTreeState();
+}
+
+class _CollapsibleSkillTreeState extends State<_CollapsibleSkillTree> {
+  bool _isExpanded = false;
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: [
+        // Toggle header
+        GestureDetector(
+          onTap: () => setState(() => _isExpanded = !_isExpanded),
+          child: Container(
+            padding: const EdgeInsets.symmetric(
+              horizontal: AppSpacing.md,
+              vertical: AppSpacing.sm,
+            ),
+            decoration: BoxDecoration(
+              color: AppColors.surface,
+              borderRadius: BorderRadius.circular(14),
+              boxShadow: [
+                BoxShadow(
+                  color: Colors.black.withOpacity(0.04),
+                  blurRadius: 8,
+                  offset: const Offset(0, 2),
+                ),
+              ],
+            ),
+            child: Row(
+              children: [
+                Icon(Icons.route_rounded, size: 22, color: AppColors.primary),
+                const SizedBox(width: AppSpacing.sm),
+                Expanded(
+                  child: Text(
+                    'Rêya Fêrbûnê',
+                    style: AppTypography.headingSmall.copyWith(
+                      color: AppColors.textPrimary,
+                      fontWeight: FontWeight.w700,
+                    ),
+                  ),
+                ),
+                AnimatedRotation(
+                  turns: _isExpanded ? 0.5 : 0,
+                  duration: const Duration(milliseconds: 250),
+                  child: Icon(
+                    Icons.keyboard_arrow_down_rounded,
+                    color: AppColors.textSecondary,
+                    size: 26,
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ).animate().fadeIn(delay: 300.ms),
+
+        // Collapsible content
+        AnimatedCrossFade(
+          firstChild: const SizedBox.shrink(),
+          secondChild: Padding(
+            padding: const EdgeInsets.only(top: AppSpacing.md),
+            child: _SkillTreePath(
+              userId: widget.userId,
+              currentLevel: widget.currentLevel,
+              ref: widget.ref,
+            ),
+          ),
+          crossFadeState: _isExpanded
+              ? CrossFadeState.showSecond
+              : CrossFadeState.showFirst,
+          duration: const Duration(milliseconds: 300),
+          sizeCurve: Curves.easeInOut,
+        ),
+      ],
+    );
+  }
+}
+
+// ════════════════════════════════════════════════════════════════
 // SEVİYE İLERLEME KARTI
 // ════════════════════════════════════════════════════════════════
 
@@ -1007,21 +1305,6 @@ class _SkillTreePath extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Padding(
-          padding: const EdgeInsets.only(bottom: AppSpacing.md),
-          child: Row(
-            children: [
-              Icon(Icons.route_rounded, size: 22, color: AppColors.primary),
-              const SizedBox(width: AppSpacing.sm),
-              Text(
-                'Rêya Fêrbûnê', // Öğrenme Yolu
-                style: AppTypography.headingSmall.copyWith(
-                    color: AppColors.textPrimary, fontWeight: FontWeight.w700),
-              ),
-            ],
-          ),
-        ),
-
         // Skill tree nodeları
         ...units.asMap().entries.map((entry) {
           final i = entry.key;

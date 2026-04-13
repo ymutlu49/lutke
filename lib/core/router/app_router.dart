@@ -22,6 +22,13 @@ import '../services/auth_service.dart';
 import '../../features/cultural_content/culture_screen.dart';
 import '../../features/exercises/presentation/flashcard_screen.dart';
 import '../../features/exercises/presentation/quiz_screen.dart';
+import '../../features/exercises/presentation/sentence_builder_screen.dart';
+import '../../features/exercises/presentation/word_match_screen.dart';
+import '../../features/exercises/presentation/story_screen.dart';
+import '../../features/grammar/grammar_tips_screen.dart';
+import '../../features/exercises/presentation/smart_review_screen.dart';
+import '../../features/lessons/presentation/progress_map_screen.dart';
+import '../../features/exercises/presentation/listening_screen.dart';
 
 part 'app_router.g.dart';
 
@@ -48,8 +55,15 @@ abstract class AppRoutes {
   static const welcome          = '/welcome';
   static const admin            = '/admin';
   static const wordDetail       = '/word-detail';
-  static const flashcard        = '/home/flashcard';
-  static const quiz             = '/home/quiz';
+  static const flashcard         = '/home/flashcard';
+  static const quiz              = '/home/quiz';
+  static const sentenceBuilder   = '/home/sentence-builder';
+  static const wordMatch         = '/home/word-match';
+  static const grammar           = '/home/grammar';
+  static const story             = '/home/story';
+  static const review            = '/home/review';
+  static const progressMap       = '/progress-map';
+  static const listening         = '/home/listening';
 }
 
 // ════════════════════════════════════════════════════════════════
@@ -148,6 +162,30 @@ GoRouter appRouter(AppRouterRef ref) {
                     builder: (_, __) => const FlashcardScreen(),
                   ),
                   GoRoute(
+                    path: 'sentence-builder',
+                    builder: (_, __) => const SentenceBuilderScreen(),
+                  ),
+                  GoRoute(
+                    path: 'word-match',
+                    builder: (_, __) => const WordMatchScreen(),
+                  ),
+                  GoRoute(
+                    path: 'grammar',
+                    builder: (_, __) => const GrammarTipsScreen(),
+                  ),
+                  GoRoute(
+                    path: 'story',
+                    builder: (_, __) => const StoryScreen(),
+                  ),
+                  GoRoute(
+                    path: 'review',
+                    builder: (_, __) => const SmartReviewScreen(),
+                  ),
+                  GoRoute(
+                    path: 'listening',
+                    builder: (_, __) => const ListeningScreen(),
+                  ),
+                  GoRoute(
                     path: 'lesson',
                     builder: (_, state) {
                       final extra = state.extra as Map<String, dynamic>?;
@@ -213,6 +251,10 @@ GoRouter appRouter(AppRouterRef ref) {
             levelColor: extra['levelColor'] as Color? ?? AppColors.primary,
           );
         },
+      ),
+      GoRoute(
+        path: AppRoutes.progressMap,
+        builder: (_, __) => const ProgressMapScreen(),
       ),
     ],
 

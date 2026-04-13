@@ -9,6 +9,7 @@ import '../../../core/constants/app_colors.dart';
 import '../../../core/constants/app_spacing.dart';
 import '../../../core/constants/app_typography.dart';
 import '../../../shared/providers/language_mode_provider.dart';
+import '../../../shared/providers/review_provider.dart';
 import '../../lessons/domain/a1_kelime_db.dart';
 
 // ════════════════════════════════════════════════════════════════
@@ -204,6 +205,8 @@ class _FlashcardScreenState extends ConsumerState<FlashcardScreen>
       _knewCount++;
     } else {
       _didntKnowCount++;
+      // Smart Review: zayıf kelime olarak kaydet
+      ref.read(reviewProvider.notifier).addWeakWord(_cards[_currentIndex].id);
     }
 
     // Sonraki kart

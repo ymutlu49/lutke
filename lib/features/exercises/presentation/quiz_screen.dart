@@ -10,6 +10,7 @@ import '../../../core/constants/app_colors.dart';
 import '../../../core/constants/app_spacing.dart';
 import '../../../core/constants/app_typography.dart';
 import '../../../shared/providers/language_mode_provider.dart';
+import '../../../shared/providers/review_provider.dart';
 import '../../lessons/domain/a1_kelime_db.dart';
 import '../../lessons/domain/a2_kelime_db.dart';
 
@@ -33,11 +34,15 @@ class _QuizWord {
   final String tr;
   final String en;
   final String kat;
+  final String cins;
+  final String not_;
   final List<dynamic> her;
+  final List<dynamic> gen;
 
   const _QuizWord({
     required this.id, required this.ku, required this.tr, required this.en,
-    this.kat = '', this.her = const [],
+    this.kat = '', this.cins = '', this.not_ = '',
+    this.her = const [], this.gen = const [],
   });
 }
 
@@ -69,7 +74,11 @@ List<_QuizWord> _loadWordsForLevel(String level) {
   // Sadece anlamli kelime/soz olanları al (alfabe harfleri haric)
   return raw
       .where((r) => r.ku.length > 1 && r.tr.length > 1)
-      .map((r) => _QuizWord(id: r.id, ku: r.ku, tr: r.tr, en: r.en, kat: r.kat ?? '', her: r.her ?? []))
+      .map((r) => _QuizWord(
+        id: r.id, ku: r.ku, tr: r.tr, en: r.en,
+        kat: r.kat ?? '', cins: r.cins ?? '', not_: r.not ?? '',
+        her: r.her ?? [], gen: r.gen ?? [],
+      ))
       .toList();
 }
 
@@ -196,6 +205,9 @@ class _QuizScreenState extends ConsumerState<QuizScreen>
   String _typedAnswer = '';
   bool _sessionComplete = false;
 
+  /// Per-question results: true = correct, false = wrong.
+  final List<bool> _questionResults = [];
+
   // Animation controllers
   late AnimationController _shakeController;
   late AnimationController _correctFlashController;
@@ -259,6 +271,7 @@ class _QuizScreenState extends ConsumerState<QuizScreen>
     setState(() {
       _answered = true;
       _isCorrect = correct;
+      _questionResults.add(correct);
     });
 
     if (correct) {
@@ -270,6 +283,8 @@ class _QuizScreenState extends ConsumerState<QuizScreen>
       _hearts = (_hearts - 1).clamp(0, 3);
       _shakeController.forward(from: 0.0);
       HapticFeedback.heavyImpact();
+      // Smart Review: zayıf kelime olarak kaydet
+      ref.read(reviewProvider.notifier).addWeakWord(q.word.id);
     }
 
     // Kalp sifirsa oturum biter
@@ -1106,6 +1121,31 @@ class _QuizScreenState extends ConsumerState<QuizScreen>
               ],
             ),
 
+            // "Rave bike?" butonu — yanlis cevaplarda aciklama goster
+            if (!_isCorrect)
+              Padding(
+                padding: const EdgeInsets.only(top: AppSpacing.sm),
+                child: GestureDetector(
+                  onTap: () => _showExplanationSheet(_currentQuestion),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      const Text('\u{1F4A1}', style: TextStyle(fontSize: 16)),
+                      const SizedBox(width: 6),
+                      Text(
+                        'Rave bike?',
+                        style: AppTypography.label.copyWith(
+                          color: AppColors.errorSoft,
+                          fontWeight: FontWeight.w600,
+                          decoration: TextDecoration.underline,
+                          decorationColor: AppColors.errorSoft.withOpacity(0.5),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+
             Gap.md,
 
             // Berdewam button
@@ -1146,6 +1186,288 @@ class _QuizScreenState extends ConsumerState<QuizScreen>
     return messages[Random().nextInt(messages.length)];
   }
 
+  // ── Bersiva Min Rave Bike — Aciklama Alt Sayfasi ─────────────
+
+  void _showExplanationSheet(_QuizQuestion question) {
+    final word = question.word;
+
+    // Dogru cevabi belirle
+    final String correctAnswer;
+    if (_showTurkish) {
+      final isKuOptions = question.type == _ExerciseType.reverseTranslation;
+      correctAnswer = isKuOptions ? word.ku : '${word.ku} = ${word.tr}';
+    } else {
+      correctAnswer = word.ku;
+    }
+
+    // Cinsiyet bilgisi
+    final genderText = switch (word.cins) {
+      'nêr'    => 'Cinsiyet: nêr (eril)',
+      'mê'     => 'Cinsiyet: mê (disil)',
+      'bêcins' => 'Cinsiyet: bêcins (cinsiyetsiz)',
+      _        => '',
+    };
+
+    // Kategori emoji
+    final emoji = _emojiForKat(word.kat);
+
+    showModalBottomSheet(
+      context: context,
+      isScrollControlled: true,
+      backgroundColor: Colors.transparent,
+      builder: (ctx) => Container(
+        constraints: BoxConstraints(
+          maxHeight: MediaQuery.of(ctx).size.height * 0.7,
+        ),
+        decoration: const BoxDecoration(
+          color: AppColors.backgroundSecondary,
+          borderRadius: BorderRadius.only(
+            topLeft: Radius.circular(AppSpacing.radiusXl),
+            topRight: Radius.circular(AppSpacing.radiusXl),
+          ),
+        ),
+        child: SafeArea(
+          top: false,
+          child: SingleChildScrollView(
+            padding: const EdgeInsets.all(AppSpacing.lg),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                // Tutamac (handle)
+                Center(
+                  child: Container(
+                    width: 40,
+                    height: 4,
+                    decoration: BoxDecoration(
+                      color: AppColors.borderLight,
+                      borderRadius: BorderRadius.circular(2),
+                    ),
+                  ),
+                ),
+
+                const SizedBox(height: AppSpacing.md),
+
+                // Baslik
+                Row(
+                  children: [
+                    Container(
+                      width: 36,
+                      height: 36,
+                      decoration: const BoxDecoration(
+                        color: AppColors.primarySurface,
+                        shape: BoxShape.circle,
+                      ),
+                      child: const Center(
+                        child: Text('\u{1F4A1}', style: TextStyle(fontSize: 18)),
+                      ),
+                    ),
+                    const SizedBox(width: 12),
+                    Expanded(
+                      child: Text(
+                        'Bersiva Min Rave Bike',
+                        style: AppTypography.title.copyWith(
+                          color: AppColors.textPrimary,
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+
+                const SizedBox(height: AppSpacing.lg),
+
+                // Dogru cevap — vurgulu kutu
+                Container(
+                  width: double.infinity,
+                  padding: const EdgeInsets.all(AppSpacing.md),
+                  decoration: BoxDecoration(
+                    color: AppColors.successSurface,
+                    borderRadius: BorderRadius.circular(AppSpacing.radiusMd),
+                    border: Border.all(
+                      color: AppColors.success.withOpacity(0.3),
+                    ),
+                  ),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        'Bersiva rast:',
+                        style: AppTypography.labelSmall.copyWith(
+                          color: AppColors.success,
+                          fontWeight: FontWeight.w600,
+                        ),
+                      ),
+                      const SizedBox(height: 6),
+                      Text(
+                        correctAnswer,
+                        style: AppTypography.kurmanji.copyWith(
+                          color: AppColors.success,
+                          fontWeight: FontWeight.w600,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+
+                const SizedBox(height: AppSpacing.md),
+
+                // Kategori ve cinsiyet bilgisi
+                Wrap(
+                  spacing: 8,
+                  runSpacing: 6,
+                  children: [
+                    if (word.kat.isNotEmpty)
+                      Container(
+                        padding: const EdgeInsets.symmetric(
+                          horizontal: 10,
+                          vertical: 4,
+                        ),
+                        decoration: BoxDecoration(
+                          color: AppColors.primarySurface,
+                          borderRadius:
+                              BorderRadius.circular(AppSpacing.radiusFull),
+                        ),
+                        child: Text(
+                          '$emoji ${word.kat}',
+                          style: AppTypography.labelSmall.copyWith(
+                            color: AppColors.primary,
+                          ),
+                        ),
+                      ),
+                    if (genderText.isNotEmpty)
+                      Container(
+                        padding: const EdgeInsets.symmetric(
+                          horizontal: 10,
+                          vertical: 4,
+                        ),
+                        decoration: BoxDecoration(
+                          color: AppColors.accentSurface,
+                          borderRadius:
+                              BorderRadius.circular(AppSpacing.radiusFull),
+                        ),
+                        child: Text(
+                          genderText,
+                          style: AppTypography.labelSmall.copyWith(
+                            color: AppColors.accent,
+                          ),
+                        ),
+                      ),
+                  ],
+                ),
+
+                // Gramer aciklamasi (not alani)
+                if (word.not_.isNotEmpty) ...[
+                  const SizedBox(height: AppSpacing.md),
+                  Container(
+                    width: double.infinity,
+                    padding: const EdgeInsets.all(AppSpacing.md),
+                    decoration: BoxDecoration(
+                      color: AppColors.warningSurface,
+                      borderRadius:
+                          BorderRadius.circular(AppSpacing.radiusMd),
+                      border: Border.all(
+                        color: AppColors.warning.withOpacity(0.3),
+                      ),
+                    ),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Row(
+                          children: [
+                            Icon(Icons.school_rounded,
+                                size: 18, color: AppColors.warning),
+                            const SizedBox(width: 8),
+                            Text(
+                              'Gramer',
+                              style: AppTypography.label.copyWith(
+                                color: AppColors.warning,
+                                fontWeight: FontWeight.w600,
+                              ),
+                            ),
+                          ],
+                        ),
+                        const SizedBox(height: 8),
+                        Text(
+                          word.not_,
+                          style: AppTypography.bodyGrammar.copyWith(
+                            color: AppColors.textPrimary,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ],
+
+                // Ornek cumleler (her alani)
+                if (word.her.isNotEmpty) ...[
+                  const SizedBox(height: AppSpacing.md),
+                  Text(
+                    'Minak:',
+                    style: AppTypography.label.copyWith(
+                      color: AppColors.textSecondary,
+                      fontWeight: FontWeight.w600,
+                    ),
+                  ),
+                  const SizedBox(height: 8),
+                  ...word.her.map((sentence) => Padding(
+                    padding: const EdgeInsets.only(bottom: 6),
+                    child: Row(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          '\u{2022} ',
+                          style: AppTypography.body.copyWith(
+                            color: AppColors.primary,
+                            fontWeight: FontWeight.w700,
+                          ),
+                        ),
+                        Expanded(
+                          child: Text(
+                            sentence.toString(),
+                            style: AppTypography.body.copyWith(
+                              color: AppColors.textPrimary,
+                              fontStyle: FontStyle.italic,
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  )),
+                ],
+
+                const SizedBox(height: AppSpacing.lg),
+
+                // "Famkirim!" butonu
+                SizedBox(
+                  width: double.infinity,
+                  child: ElevatedButton(
+                    onPressed: () => Navigator.of(ctx).pop(),
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: AppColors.primary,
+                      foregroundColor: Colors.white,
+                      padding: const EdgeInsets.symmetric(vertical: 14),
+                      shape: RoundedRectangleBorder(
+                        borderRadius:
+                            BorderRadius.circular(AppSpacing.radiusMd),
+                      ),
+                      elevation: 0,
+                    ),
+                    child: Text(
+                      'Famkirim!',
+                      style: AppTypography.labelLarge.copyWith(
+                        color: Colors.white,
+                        fontWeight: FontWeight.w700,
+                      ),
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+
   // ── Exit Dialog ───────────────────────────────────────────────
 
   void _showExitDialog() {
@@ -1184,215 +1506,474 @@ class _QuizScreenState extends ConsumerState<QuizScreen>
     );
   }
 
-  // ── End Screen ────────────────────────────────────────────────
+  // ── End Screen (Enhanced — Lesson Summary) ─────────────────────
 
   Widget _buildEndScreen() {
     final showTr = ref.watch(showTurkishProvider);
-    final accuracy = _questions.isNotEmpty
-        ? (_correctCount / _questions.length * 100).round()
+    final answeredCount = _questionResults.length;
+    final accuracy = answeredCount > 0
+        ? (_correctCount / answeredCount * 100).round()
         : 0;
+    final accuracyFraction = answeredCount > 0
+        ? _correctCount / answeredCount
+        : 0.0;
 
-    final motivationalKu = _hearts > 0
-        ? (accuracy >= 80
-            ? 'Geleki bask! Tu zimane xwe bas dizani!'
-            : accuracy >= 50
-                ? 'Bask e! Her roj ferbuve!'
-                : 'Bersiv xelet in bes tu ber bi pesdahatin ve dici!')
-        : 'Xem neke! Cardin biceribine.';
-
-    final motivationalTr = _hearts > 0
-        ? (accuracy >= 80
-            ? 'Harika! Dilini cok iyi biliyorsun!'
-            : accuracy >= 50
-                ? 'Guzel! Her gun ogrenmeye devam!'
-                : 'Hatalar olsa da ilerliyorsun!')
-        : 'Xemgîn nebe! Dîsa biceribîne.';
+    // ── Motivational Kurdish messages based on score ────────────
+    final String motivationalKu;
+    final String motivationalTr;
+    if (accuracy == 100) {
+      motivationalKu = 'Piroz be! Tu pispor i!';
+      motivationalTr = 'Tebrikler! Uzmansin!';
+    } else if (accuracy >= 80) {
+      motivationalKu = 'Zede bas! Pes dikevi!';
+      motivationalTr = 'Cok iyi! Ilerliyorsun!';
+    } else if (accuracy >= 50) {
+      motivationalKu = 'Bas e! Berdewam bike!';
+      motivationalTr = 'Iyi! Devam et!';
+    } else {
+      motivationalKu = 'Xemgin nebe! Dubare biceribine!';
+      motivationalTr = 'Uzulme! Tekrar dene!';
+    }
 
     final motivationalMessage = showTr
         ? '$motivationalKu\n$motivationalTr'
         : motivationalKu;
 
+    // ── Collect word results ────────────────────────────────────
+    final wordResults = <({_QuizWord word, bool correct})>[];
+    for (int i = 0; i < answeredCount && i < _questions.length; i++) {
+      wordResults.add((word: _questions[i].word, correct: _questionResults[i]));
+    }
+    final wrongWords = wordResults.where((r) => !r.correct).toList();
+    final hasWrongWords = wrongWords.isNotEmpty;
+
+    // ── XP breakdown ───────────────────────────────────────────
+    final baseXP = _correctCount * 10;
+    final streakBonus = _correctCount > 0 ? 3 : 0;
+    final totalXP = baseXP + streakBonus;
+
     return Scaffold(
       backgroundColor: AppColors.backgroundPrimary,
       body: SafeArea(
-        child: Center(
-          child: Padding(
-            padding: AppSpacing.pagePadding,
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                // Trophy or retry icon
-                Container(
-                  width: 100,
-                  height: 100,
-                  decoration: BoxDecoration(
-                    gradient: LinearGradient(
-                      colors: _hearts > 0
-                          ? [AppColors.accent, AppColors.accentWarm]
-                          : [AppColors.errorSoft, AppColors.errorSoft.withOpacity(0.7)],
-                      begin: Alignment.topLeft,
-                      end: Alignment.bottomRight,
+        child: SingleChildScrollView(
+          padding: AppSpacing.pagePadding,
+          child: Center(
+            child: ConstrainedBox(
+              constraints: const BoxConstraints(maxWidth: 480),
+              child: Column(
+                children: [
+                  Gap.md,
+
+                  // ── 1. Accuracy Ring ─────────────────────────
+                  _AccuracyRing(
+                    accuracy: accuracyFraction,
+                    accuracyPercent: accuracy,
+                    isSuccess: _hearts > 0,
+                  ).animate()
+                      .scale(
+                        begin: const Offset(0, 0),
+                        end: const Offset(1, 1),
+                        duration: 700.ms,
+                        curve: Curves.elasticOut,
+                      )
+                      .fadeIn(),
+
+                  Gap.lg,
+
+                  // Title
+                  Text(
+                    _hearts > 0 ? 'Ders Qediya!' : 'Dil Qediya!',
+                    style: AppTypography.display
+                        .copyWith(color: AppColors.textPrimary),
+                  ).animate().fadeIn(delay: 200.ms),
+
+                  Gap.sm,
+
+                  // ── 5. Motivational Kurdish message ──────────
+                  Text(
+                    motivationalMessage,
+                    textAlign: TextAlign.center,
+                    style: AppTypography.bodyLarge
+                        .copyWith(color: AppColors.textSecondary),
+                  ).animate().fadeIn(delay: 300.ms),
+
+                  Gap.lg,
+
+                  // ── 4. XP Breakdown ──────────────────────────
+                  Container(
+                    padding: const EdgeInsets.all(AppSpacing.md),
+                    decoration: BoxDecoration(
+                      color: AppColors.surface,
+                      borderRadius:
+                          BorderRadius.circular(AppSpacing.radiusLg),
+                      boxShadow: [
+                        BoxShadow(
+                          color: Colors.black.withOpacity(0.06),
+                          blurRadius: 12,
+                          offset: const Offset(0, 4),
+                        ),
+                      ],
                     ),
-                    shape: BoxShape.circle,
-                    boxShadow: [
-                      BoxShadow(
-                        color: (_hearts > 0
-                                ? AppColors.accent
-                                : AppColors.errorSoft)
-                            .withOpacity(0.3),
-                        blurRadius: 20,
-                        offset: const Offset(0, 8),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          'XP',
+                          style: AppTypography.label.copyWith(
+                            color: AppColors.textSecondary,
+                          ),
+                        ),
+                        Gap.sm,
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          children: [
+                            _buildStatColumn(
+                              icon: Icons.check_circle_rounded,
+                              iconColor: AppColors.success,
+                              value: '+$baseXP',
+                              label: '$_correctCount rast x10',
+                            ),
+                            Container(
+                                width: 1,
+                                height: 48,
+                                color: AppColors.borderLight),
+                            _buildStatColumn(
+                              icon: Icons.local_fire_department_rounded,
+                              iconColor: AppColors.accent,
+                              value: '+$streakBonus',
+                              label: 'Streak bonus',
+                            ),
+                            Container(
+                                width: 1,
+                                height: 48,
+                                color: AppColors.borderLight),
+                            _buildStatColumn(
+                              icon: Icons.star_rounded,
+                              iconColor: AppColors.accent,
+                              value: '$totalXP',
+                              label: 'Gistayek',
+                            ),
+                          ],
+                        ),
+                      ],
+                    ),
+                  ).animate().fadeIn(delay: 400.ms).slideY(begin: 0.2),
+
+                  Gap.lg,
+
+                  // ── 2. Words Learned ─────────────────────────
+                  if (wordResults.isNotEmpty)
+                    Container(
+                      width: double.infinity,
+                      padding: const EdgeInsets.all(AppSpacing.md),
+                      decoration: BoxDecoration(
+                        color: AppColors.surface,
+                        borderRadius:
+                            BorderRadius.circular(AppSpacing.radiusLg),
+                        boxShadow: [
+                          BoxShadow(
+                            color: Colors.black.withOpacity(0.06),
+                            blurRadius: 12,
+                            offset: const Offset(0, 4),
+                          ),
+                        ],
                       ),
-                    ],
-                  ),
-                  child: Icon(
-                    _hearts > 0
-                        ? Icons.emoji_events_rounded
-                        : Icons.refresh_rounded,
-                    size: 48,
-                    color: Colors.white,
-                  ),
-                )
-                    .animate()
-                    .scale(
-                      begin: const Offset(0, 0),
-                      end: const Offset(1, 1),
-                      duration: 600.ms,
-                      curve: Curves.elasticOut,
-                    )
-                    .fadeIn(),
-
-                Gap.xl,
-
-                // Title
-                Text(
-                  _hearts > 0 ? 'Ders Qediya!' : 'Dil Qediya!',
-                  style: AppTypography.display
-                      .copyWith(color: AppColors.textPrimary),
-                ).animate().fadeIn(delay: 200.ms),
-
-                Gap.md,
-
-                // Motivational message in Kurmancî
-                Text(
-                  motivationalMessage,
-                  textAlign: TextAlign.center,
-                  style: AppTypography.bodyLarge
-                      .copyWith(color: AppColors.textSecondary),
-                ).animate().fadeIn(delay: 300.ms),
-
-                Gap.xl,
-
-                // Stats grid
-                Container(
-                  padding: const EdgeInsets.all(AppSpacing.lg),
-                  decoration: BoxDecoration(
-                    color: AppColors.surface,
-                    borderRadius:
-                        BorderRadius.circular(AppSpacing.radiusLg),
-                    boxShadow: [
-                      BoxShadow(
-                        color: Colors.black.withOpacity(0.06),
-                        blurRadius: 12,
-                        offset: const Offset(0, 4),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            'Peyveni ve dersi',
+                            style: AppTypography.label.copyWith(
+                              color: AppColors.textSecondary,
+                            ),
+                          ),
+                          Gap.sm,
+                          ...wordResults.asMap().entries.map((entry) {
+                            final idx = entry.key;
+                            final r = entry.value;
+                            return Padding(
+                              padding: const EdgeInsets.symmetric(
+                                  vertical: 3),
+                              child: Row(
+                                children: [
+                                  Icon(
+                                    r.correct
+                                        ? Icons.check_circle_rounded
+                                        : Icons.cancel_rounded,
+                                    size: 18,
+                                    color: r.correct
+                                        ? AppColors.success
+                                        : AppColors.errorSoft,
+                                  ),
+                                  const SizedBox(width: AppSpacing.sm),
+                                  Expanded(
+                                    child: Text(
+                                      r.word.ku,
+                                      style: AppTypography.kurmanjiCard
+                                          .copyWith(
+                                        color: r.correct
+                                            ? AppColors.textPrimary
+                                            : AppColors.errorSoft,
+                                      ),
+                                    ),
+                                  ),
+                                  if (showTr)
+                                    Text(
+                                      r.word.tr,
+                                      style: AppTypography.caption.copyWith(
+                                        color: AppColors.textTertiary,
+                                      ),
+                                    ),
+                                ],
+                              ),
+                            )
+                                .animate()
+                                .fadeIn(
+                                  delay: Duration(
+                                      milliseconds: 450 + idx * 60),
+                                  duration: 250.ms,
+                                )
+                                .slideX(begin: 0.05, end: 0);
+                          }),
+                        ],
                       ),
-                    ],
-                  ),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    ).animate().fadeIn(delay: 450.ms),
+
+                  // ── 3. Weak Words ────────────────────────────
+                  if (hasWrongWords) ...[
+                    Gap.lg,
+                    Container(
+                      width: double.infinity,
+                      padding: const EdgeInsets.all(AppSpacing.md),
+                      decoration: BoxDecoration(
+                        color: AppColors.errorSurface,
+                        borderRadius:
+                            BorderRadius.circular(AppSpacing.radiusLg),
+                        border: Border.all(
+                          color: AppColors.errorSoft.withOpacity(0.3),
+                        ),
+                      ),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Row(
+                            children: [
+                              const Icon(
+                                Icons.replay_circle_filled_rounded,
+                                size: 20,
+                                color: AppColors.errorSoft,
+                              ),
+                              const SizedBox(width: AppSpacing.sm),
+                              Text(
+                                'Dubare bike!',
+                                style: AppTypography.label.copyWith(
+                                  color: AppColors.errorSoft,
+                                  fontWeight: FontWeight.w700,
+                                ),
+                              ),
+                            ],
+                          ),
+                          Gap.sm,
+                          Wrap(
+                            spacing: AppSpacing.sm,
+                            runSpacing: AppSpacing.xs,
+                            children: wrongWords.map((r) {
+                              return Container(
+                                padding: const EdgeInsets.symmetric(
+                                  horizontal: AppSpacing.sm + 2,
+                                  vertical: AppSpacing.xs,
+                                ),
+                                decoration: BoxDecoration(
+                                  color: Colors.white,
+                                  borderRadius: BorderRadius.circular(
+                                      AppSpacing.radiusFull),
+                                  border: Border.all(
+                                    color:
+                                        AppColors.errorSoft.withOpacity(0.4),
+                                  ),
+                                ),
+                                child: Text(
+                                  r.word.ku,
+                                  style: AppTypography.labelSmall.copyWith(
+                                    color: AppColors.errorSoft,
+                                    fontWeight: FontWeight.w600,
+                                  ),
+                                ),
+                              );
+                            }).toList(),
+                          ),
+                        ],
+                      ),
+                    ).animate().fadeIn(delay: 550.ms).slideY(begin: 0.1),
+                  ],
+
+                  Gap.lg,
+
+                  // ── 7. "Dubare bike" — Review wrong words ────
+                  if (hasWrongWords)
+                    SizedBox(
+                      width: double.infinity,
+                      child: ElevatedButton.icon(
+                        onPressed: () {
+                          final wrongQuestions = <_QuizQuestion>[];
+                          for (int i = 0;
+                              i < answeredCount && i < _questions.length;
+                              i++) {
+                            if (!_questionResults[i]) {
+                              wrongQuestions.add(_questions[i]);
+                            }
+                          }
+                          if (wrongQuestions.isEmpty) return;
+                          setState(() {
+                            _questions = wrongQuestions;
+                            _currentIndex = 0;
+                            _hearts = 3;
+                            _xp = 0;
+                            _correctCount = 0;
+                            _answered = false;
+                            _isCorrect = false;
+                            _selectedOptionIndex = null;
+                            _typedAnswer = '';
+                            _typingController.clear();
+                            _sessionComplete = false;
+                            _questionResults.clear();
+                          });
+                        },
+                        icon: const Icon(Icons.replay_rounded, size: 20),
+                        label: Text(
+                          'Dubare bike',
+                          style: AppTypography.labelLarge
+                              .copyWith(color: Colors.white),
+                        ),
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: AppColors.errorSoft,
+                          foregroundColor: Colors.white,
+                          padding:
+                              const EdgeInsets.symmetric(vertical: 14),
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(
+                                AppSpacing.radiusMd),
+                          ),
+                          elevation: 0,
+                        ),
+                      ),
+                    ).animate().fadeIn(delay: 600.ms),
+
+                  if (hasWrongWords) Gap.md,
+
+                  // ── 8. "Waneye din" — New quiz ───────────────
+                  SizedBox(
+                    width: double.infinity,
+                    child: ElevatedButton.icon(
+                      onPressed: () {
+                        setState(() {
+                          _questions = _generateQuizSession(
+                            level: widget.level,
+                            category: widget.category,
+                            showTurkish: _showTurkish,
+                          );
+                          _currentIndex = 0;
+                          _hearts = 3;
+                          _xp = 0;
+                          _correctCount = 0;
+                          _answered = false;
+                          _isCorrect = false;
+                          _selectedOptionIndex = null;
+                          _typedAnswer = '';
+                          _typingController.clear();
+                          _sessionComplete = false;
+                          _questionResults.clear();
+                        });
+                      },
+                      icon: const Icon(
+                          Icons.arrow_forward_rounded, size: 20),
+                      label: Text(
+                        'Waneye din',
+                        style: AppTypography.labelLarge
+                            .copyWith(color: Colors.white),
+                      ),
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: AppColors.primary,
+                        foregroundColor: Colors.white,
+                        padding:
+                            const EdgeInsets.symmetric(vertical: 14),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(
+                              AppSpacing.radiusMd),
+                        ),
+                        elevation: 0,
+                      ),
+                    ),
+                  ).animate().fadeIn(delay: 650.ms),
+
+                  Gap.md,
+
+                  // ── 6. Share button + Home ───────────────────
+                  Row(
                     children: [
-                      _buildStatColumn(
-                        icon: Icons.star_rounded,
-                        iconColor: AppColors.accent,
-                        value: '$_xp',
-                        label: 'XP',
+                      Expanded(
+                        child: OutlinedButton.icon(
+                          onPressed: () {
+                            ScaffoldMessenger.of(context).showSnackBar(
+                              SnackBar(
+                                content: Text(
+                                  'Parvekirin di pesirojeyede te!',
+                                  style: AppTypography.body.copyWith(
+                                      color: Colors.white),
+                                ),
+                                backgroundColor: AppColors.primary,
+                                behavior: SnackBarBehavior.floating,
+                              ),
+                            );
+                          },
+                          icon: const Icon(Icons.share_rounded, size: 18),
+                          label: Text(
+                            'Parve bike',
+                            style: AppTypography.label
+                                .copyWith(color: AppColors.primary),
+                          ),
+                          style: OutlinedButton.styleFrom(
+                            foregroundColor: AppColors.primary,
+                            side: const BorderSide(
+                                color: AppColors.primary),
+                            padding: const EdgeInsets.symmetric(
+                                vertical: 12),
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(
+                                  AppSpacing.radiusMd),
+                            ),
+                          ),
+                        ),
                       ),
-                      Container(
-                          width: 1,
-                          height: 48,
-                          color: AppColors.borderLight),
-                      _buildStatColumn(
-                        icon: Icons.check_circle_rounded,
-                        iconColor: AppColors.success,
-                        value: '$_correctCount/${_questions.length}',
-                        label: 'Rast',
-                      ),
-                      Container(
-                          width: 1,
-                          height: 48,
-                          color: AppColors.borderLight),
-                      _buildStatColumn(
-                        icon: Icons.percent_rounded,
-                        iconColor: AppColors.primary,
-                        value: '$accuracy%',
-                        label: 'Rastbun',
+                      const SizedBox(width: AppSpacing.sm),
+                      Expanded(
+                        child: OutlinedButton.icon(
+                          onPressed: () => context.pop(),
+                          icon: const Icon(Icons.home_rounded, size: 18),
+                          label: Text(
+                            'Mala Serekin',
+                            style: AppTypography.label
+                                .copyWith(color: AppColors.primary),
+                          ),
+                          style: OutlinedButton.styleFrom(
+                            foregroundColor: AppColors.primary,
+                            side: const BorderSide(
+                                color: AppColors.primary),
+                            padding: const EdgeInsets.symmetric(
+                                vertical: 12),
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(
+                                  AppSpacing.radiusMd),
+                            ),
+                          ),
+                        ),
                       ),
                     ],
-                  ),
-                ).animate().fadeIn(delay: 400.ms).slideY(begin: 0.2),
+                  ).animate().fadeIn(delay: 700.ms),
 
-                Gap.xl,
-
-                // Action buttons
-                SizedBox(
-                  width: double.infinity,
-                  child: ElevatedButton.icon(
-                    onPressed: () {
-                      // Restart quiz
-                      setState(() {
-                        _questions =
-                            _generateQuizSession(level: widget.level, category: widget.category, showTurkish: _showTurkish);
-                        _currentIndex = 0;
-                        _hearts = 3;
-                        _xp = 0;
-                        _correctCount = 0;
-                        _answered = false;
-                        _isCorrect = false;
-                        _selectedOptionIndex = null;
-                        _typedAnswer = '';
-                        _typingController.clear();
-                        _sessionComplete = false;
-                      });
-                    },
-                    icon: const Icon(Icons.replay_rounded, size: 20),
-                    label: Text('Cardin Biceribine',
-                        style: AppTypography.labelLarge
-                            .copyWith(color: Colors.white)),
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: AppColors.primary,
-                      foregroundColor: Colors.white,
-                      padding: const EdgeInsets.symmetric(vertical: 14),
-                      shape: RoundedRectangleBorder(
-                        borderRadius:
-                            BorderRadius.circular(AppSpacing.radiusMd),
-                      ),
-                      elevation: 0,
-                    ),
-                  ),
-                ).animate().fadeIn(delay: 500.ms),
-
-                Gap.md,
-
-                SizedBox(
-                  width: double.infinity,
-                  child: OutlinedButton.icon(
-                    onPressed: () => context.pop(),
-                    icon: const Icon(Icons.home_rounded, size: 20),
-                    label: Text('Mala Serekin',
-                        style: AppTypography.labelLarge
-                            .copyWith(color: AppColors.primary)),
-                    style: OutlinedButton.styleFrom(
-                      foregroundColor: AppColors.primary,
-                      side: const BorderSide(color: AppColors.primary),
-                      padding: const EdgeInsets.symmetric(vertical: 14),
-                      shape: RoundedRectangleBorder(
-                        borderRadius:
-                            BorderRadius.circular(AppSpacing.radiusMd),
-                      ),
-                    ),
-                  ),
-                ).animate().fadeIn(delay: 550.ms),
-              ],
+                  Gap.xl,
+                ],
+              ),
             ),
           ),
         ),
@@ -1422,6 +2003,99 @@ class _QuizScreenState extends ConsumerState<QuizScreen>
               AppTypography.caption.copyWith(color: AppColors.textSecondary),
         ),
       ],
+    );
+  }
+}
+
+// ════════════════════════════════════════════════════════════════
+// ACCURACY RING — Circular progress showing accuracy %
+// ════════════════════════════════════════════════════════════════
+
+class _AccuracyRing extends StatelessWidget {
+  final double accuracy; // 0.0 - 1.0
+  final int accuracyPercent; // 0 - 100
+  final bool isSuccess;
+
+  const _AccuracyRing({
+    required this.accuracy,
+    required this.accuracyPercent,
+    required this.isSuccess,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    final ringColor = isSuccess
+        ? (accuracyPercent >= 80
+            ? AppColors.success
+            : accuracyPercent >= 50
+                ? AppColors.accent
+                : AppColors.errorSoft)
+        : AppColors.errorSoft;
+
+    return SizedBox(
+      width: 140,
+      height: 140,
+      child: Stack(
+        alignment: Alignment.center,
+        children: [
+          // Background ring
+          SizedBox(
+            width: 140,
+            height: 140,
+            child: CircularProgressIndicator(
+              value: 1.0,
+              strokeWidth: 10,
+              color: ringColor.withOpacity(0.15),
+              strokeCap: StrokeCap.round,
+            ),
+          ),
+          // Progress ring
+          SizedBox(
+            width: 140,
+            height: 140,
+            child: TweenAnimationBuilder<double>(
+              tween: Tween(begin: 0, end: accuracy),
+              duration: const Duration(milliseconds: 1200),
+              curve: Curves.easeOutCubic,
+              builder: (context, value, child) {
+                return CircularProgressIndicator(
+                  value: value,
+                  strokeWidth: 10,
+                  color: ringColor,
+                  strokeCap: StrokeCap.round,
+                );
+              },
+            ),
+          ),
+          // Center content
+          Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Icon(
+                isSuccess
+                    ? Icons.emoji_events_rounded
+                    : Icons.refresh_rounded,
+                size: 32,
+                color: ringColor,
+              ),
+              const SizedBox(height: 4),
+              Text(
+                '$accuracyPercent%',
+                style: AppTypography.streakCounter.copyWith(
+                  color: ringColor,
+                  fontSize: 28,
+                ),
+              ),
+              Text(
+                'Rastbun',
+                style: AppTypography.caption.copyWith(
+                  color: AppColors.textTertiary,
+                ),
+              ),
+            ],
+          ),
+        ],
+      ),
     );
   }
 }
