@@ -85,29 +85,30 @@ class SplashScreen extends ConsumerWidget {
                   const SizedBox(height: 18),
 
                   // ── Slogan ────────────────────────────────
-                  // Anadil = kimlik metaforu. Ehmedê Xanî'den ilham:
-                  // "Bibîne, bibêje, biparêze" = Gör, söyle, koru
+                  // "Dil vatansız kalır ama vatan dilsiz kalmaz."
+                  // Anadilin kimlik için merkezi rolünü vurgular.
                   Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 16),
+                    padding: const EdgeInsets.symmetric(horizontal: 14),
                     child: Text(
-                      '"Bibîne, bibêje, biparêze."',
+                      '"Ziman bê welat dimîne, lê welat bê ziman namîne."',
                       textAlign: TextAlign.center,
                       style: TextStyle(
-                        fontSize: 17,
+                        fontSize: 16,
                         fontStyle: FontStyle.italic,
                         fontWeight: FontWeight.w600,
                         color: Colors.white.withOpacity(0.95),
-                        height: 1.4,
+                        height: 1.45,
+                        letterSpacing: 0.2,
                       ),
                     ),
                   ).animate().fadeIn(delay: 500.ms, duration: 500.ms),
                   const SizedBox(height: 6),
                   Text(
-                    'Zimanê dayikê — kokên me, hêviya me.',
+                    'Dil vatansız kalır, ama vatan dilsiz kalmaz.',
                     textAlign: TextAlign.center,
                     style: TextStyle(
-                      fontSize: 13,
-                      color: Colors.white.withOpacity(0.65),
+                      fontSize: 12,
+                      color: Colors.white.withOpacity(0.55),
                       letterSpacing: 0.3,
                     ),
                   ).animate().fadeIn(delay: 600.ms, duration: 400.ms),
