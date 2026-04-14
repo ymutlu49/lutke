@@ -153,11 +153,11 @@ final kB2Kelimeler = [
    her:["Pirsname dagirtin.", "Pirsnameyê tijî bike."],
    gen:["Pirsname û lêkolîn", "Pirsnameya me"]),
 
-  (id:"b2_035", ku:"Raportin", tr:"Rapor etmek / Haberdar etmek", en:"To report",
+  (id:"b2_035", ku:"Ragihandin", tr:"Rapor etmek / Haberdar etmek", en:"To report / inform",
    cins:"bêcins", ez:null, kat:"medya", zor:0.65,
-   not:"\"Raportin\" fiili. [FB]: raportin v. Gazete ve resmi yazışmalarda kullanılır",
-   her:['Min bûyer ji rayedaran re raportin.', 'Raportin a rewşê wezîfeya me ye.'],
-   gen:["Ragihandin û pêşniyar", "Raportin lazim e."]),
+   not:"Standart Kurmancî: \"ragihandin\" = bildirmek, rapor etmek. Not: \"Raportin\" uydurma.",
+   her:['Min bûyer ji rayedaran re ragihand.', 'Ragihandina rewşê wezîfeya me ye.'],
+   gen:["Ragihandin û pêşniyar", "Min ragihand."]),
 
   // ════════════════════════════════════════════════════════════
   // B2 BİRİM 5 — SOYUT KAVRAMLAR (Felsefe ve Kimlik)

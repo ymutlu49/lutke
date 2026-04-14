@@ -219,9 +219,9 @@ const kA2Kelimeler = [
    gen:['Ew dê bizewice.', 'Zewac xweş be!']),
 
   (id:'a2_041', ku:'Zewac', tr:'Evlilik / Düğün', en:'Marriage / Wedding',
-   cins:'nêr', ez:'zewacê',
+   cins:'mê', ez:'zewaca',
    kat:'malbat', zor:0.80,
-   not:'Eril — [FB]: zewac n.m. [Arapça "zivâc"tan]. "Zewacê xweş be!" = düğününüz kutlu olsun',
+   not:'Dişil — [FB]: zewac n.f. "Zewaca wî xweş be!" = düğünü kutlu olsun.',
    her:['Zewacê birê min bû.', 'Zewacê we pîroz be!'],
    gen:['Zewac û malbat', 'Di zewacê de']),
 
@@ -429,11 +429,11 @@ const kA2Kelimeler = [
    her:['Sinifê me mezin e.', 'Em li sinifê ne.'],
    gen:['Sinif û korrîdor', 'Li sinifê ye.']),
 
-  (id:'a2_084', ku:'Xwandî', tr:'Okudu / Öğrendi', en:'Read / Studied (past)',
+  (id:'a2_084', ku:'Xwend', tr:'Okudu / Öğrendi', en:'Read / Studied (past)',
    cins:'bêcins', ez:null, kat:'perwerde', zor:0.80,
-   not:'Geçmiş — xwendin fiili geçişsiz değil, geçişli (ergatif!). A2\'de tanıtım. [TH] §68',
-   her:['Min ev pirtûk xwandî sala borî.', 'Birayê min zanîngeh xwandî.'],
-   gen:['Ew gelek xwandiye.', 'Min pirtûk xwand.']),
+   not:'Geçmiş kök — "xwendin" fiilinin geçmiş gövdesi. Ergatif: "Min pirtûk xwend" (ben kitap okudum).',
+   her:['Min ev pirtûk sala borî xwend.', 'Te çi xwend?'],
+   gen:['Ew gelek xwendiye.', 'Min pirtûk xwend.']),
 
   (id:'a2_085', ku:'Îmtîhan', tr:'Sınav', en:'Exam',
    cins:'nêr', ez:'îmtîhanê',
@@ -454,12 +454,12 @@ const kA2Kelimeler = [
    her:['Serêşî dêşe min îro.', 'Ez ji serêşî diêşim.'],
    gen:['Serêşî û nexweşî', 'Serêşiya min']),
 
-  (id:'a2_091', ku:'Germahî', tr:'Ateş (hastalık)', en:'Fever',
-   cins:'mê', ez:'germahiyê',
+  (id:'a2_091', ku:'Ta', tr:'Ateş (hastalık)', en:'Fever',
+   cins:'mê', ez:'taya',
    kat:'tendurist', zor:0.81,
-   not:'Dişil — [BH] s.278 bileşik: "Germahî, diş., ısı (germ + -ahî sonek)". [FB]: germahî n.f.',
-   her:['Zarokê me bi germahî nexweş ket.', 'Germahî baş nîne ji bo zaroka.'],
-   gen:['Germahî û serêşî', 'Germahiya min']),
+   not:'Dişil — tıbbi ateş/humma. \"Germahî\" = sıcaklık (fiziksel), \"ta\" = hastalık ateşi.',
+   her:['Zarokê me bi ta nexweş ket.', 'Taya wî bilind e.'],
+   gen:['Ta û serêşî', 'Taya min']),
 
   (id:'a2_092', ku:'Derman', tr:'İlaç', en:'Medicine',
    cins:'nêr', ez:'dermanê',
@@ -923,7 +923,7 @@ const kA2EkKelimeler = [
   (id:'a2_245', ku:'Li ser', tr:'Üstünde', en:'On / On top of',
    cins:'bêcins', ez:null, kat:'daçek', zor:0.81,
    not:'"Li ser" = üstünde. [TH] §40. "Pirtûk li ser mêzê ye" = kitap masanın üstünde',
-   her:['Pirtûk li ser mêzê ye.', 'Kedî li ser nivînê ye.'],
+   her:['Pirtûk li ser mêzê ye.', 'Pisîk li ser nivînê ye.'],
    gen:['Li ser mêzê', 'Li ser malê']),
 
   (id:'a2_246', ku:'Li bin', tr:'Altında', en:'Under / Below',
@@ -1038,7 +1038,7 @@ const kA2EkKelimeler = [
   (id:'a2_270', ku:'Êşîn', tr:'Ağrımak', en:'To ache / hurt',
    cins:'bêcins', ez:null, kat:'tendurist', zor:0.80,
    not:'"Êşîn" fiili — "Serê min diêşe" = başım ağrıyor. [TH] §65. "Êş" = ağrı (A1\'de var)',
-   her:['Serê min îro pir êşîn.', 'Zikê min ji xwarinê êşîn.'],
+   her:['Serê min îro pir diêşîne.', 'Êşîna dev nîşana nexweşiyê ye.'],
    gen:['Êşîn û baş bûn', 'Zikê min diêşe.']),
 
   (id:'a2_271', ku:'Zirav', tr:'İnce / Zayıf', en:'Thin / Slim',
@@ -3543,7 +3543,7 @@ const kA2EkKelimeler8 = [
   (id:'a2_1523', ku:'Desturdan', tr:'İzin vermek', en:'To permit / allow',
    cins:'bêcins', ez:null, kat:'leker', zor:0.79,
    not:'"Desturdan" — [AS] no.1027 ✓.',
-   her:['Bavê min desturdan da min.', 'Mamoste desturdan dide zarokan.'],
+   her:['Bavê min destûr da min.', 'Mamoste desturdan dide zarokan.'],
    gen:['Desturdan û red kirin', 'Destûr bide!']),
 
   (id:'a2_1524', ku:'Dehf dan', tr:'İtmek', en:'To push',
@@ -3914,8 +3914,8 @@ const kA2EkKelimeler9 = [
    gen:['Gelêrî û ragihandin', 'Çanda gelêrî']),
 
   (id:'a2_1731', ku:'Zewac', tr:'Evlilik', en:'Marriage',
-   cins:'nêr', ez:'zewacê', kat:'malbat', zor:0.81,
-   not:'Eril — [FB]: zewac n.m. "Zewaca wan hat."',
+   cins:'mê', ez:'zewaca', kat:'malbat', zor:0.81,
+   not:'Dişil — [FB]: zewac n.f. "Zewaca wan hat."',
    her:['Zewac hat.', 'Zewaca wan.'],
    gen:['Zewac û dawet', 'Zewaca me']),
 

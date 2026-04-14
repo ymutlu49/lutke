@@ -87,7 +87,7 @@ const kChildA2Kelimeler = [
    kat:'xweza', zor:0.82, not:'Doğa', emoji: '🌹',
    her:['Gul sor e.', 'Gulên xweş.'], gen:['Gul — çiçek', 'Gula sor.']),
 
-  (id:'z_a2_026', ku:'Berf', tr:'Kar', en:'Snow', cins:'nêr', ez:'berfê',
+  (id:'z_a2_026', ku:'Berf', tr:'Kar', en:'Snow', cins:'mê', ez:'berfa',
    kat:'xweza', zor:0.80, not:'Mevsim', emoji: '❄️',
    her:['Berf dibare!', 'Em bi berfê dilîzin.'], gen:['Berf — kar', 'Berf spî ye.']),
 
@@ -101,15 +101,15 @@ const kChildA2Kelimeler = [
 
   (id:'z_a2_031', ku:'Vexwarin', tr:'İçmek', en:'To drink', cins:'bêcins', ez:null,
    kat:'fiil', zor:0.75, not:'Temel fiil', emoji: '🥤',
-   her:['Vexwarin a avê her demê pêdivî ye.', 'Ez av vedixwim.'], gen:['Vexwarin — içmek', 'Ez çay vedixwim.']),
+   her:['Ez avê vedixwim.', 'Vexwarina avê baş e.'], gen:['Vexwarin — içmek', 'Ez çay vedixwim.']),
 
   (id:'z_a2_032', ku:'Lîstin', tr:'Oynamak', en:'To play', cins:'bêcins', ez:null,
    kat:'fiil', zor:0.82, not:'Çocuk fiili', emoji: '🎮',
-   her:['Lîstin ji bo zaroka pir xweş e.', 'Em dilîzin!'], gen:['Lîstin — oynamak', 'Em dilîzin.']),
+   her:['Em dilîzin li parkê.', 'Ez bi xwişka xwe re dilîzim.'], gen:['Lîstin — oynamak', 'Em dilîzin.']),
 
   (id:'z_a2_033', ku:'Xwendin', tr:'Okumak', en:'To read', cins:'bêcins', ez:null,
    kat:'fiil', zor:0.75, not:'Eğitim fiili', emoji: '📖',
-   her:['Xwendin a pirtûkan xweş e.', 'Ez dixwînim.'], gen:['Xwendin — okumak', 'Ez pirtûk dixwînim.']),
+   her:['Ez pirtûkê dixwînim.', 'Dê pirtûk dixwîne.'], gen:['Xwendin — okumak', 'Ez pirtûk dixwînim.']),
 
   (id:'z_a2_034', ku:'Nivîsandin', tr:'Yazmak', en:'To write', cins:'bêcins', ez:null,
    kat:'fiil', zor:0.72, not:'Eğitim fiili', emoji: '✍️',
@@ -117,21 +117,21 @@ const kChildA2Kelimeler = [
 
   (id:'z_a2_035', ku:'Hatin', tr:'Gelmek', en:'To come', cins:'bêcins', ez:null,
    kat:'fiil', zor:0.75, not:'Hareket fiili', emoji: '🏃',
-   her:['Hatin a bavê min kêfxweşî ye.', 'Were vir!'], gen:['Hatin — gelmek', 'Were!']),
+   her:['Bav hat malê.', 'Were vir!'], gen:['Hatin — gelmek', 'Were!']),
 
   (id:'z_a2_036', ku:'Çûn', tr:'Gitmek', en:'To go', cins:'bêcins', ez:null,
    kat:'fiil', zor:0.78, not:'Hareket fiili', emoji: '🚶',
-   her:['Çûn a dibistanê her sibe.', 'Ez diçim mektebê.'], gen:['Çûn — gitmek', 'Ez diçim.']),
+   her:['Ez diçim dibistanê.', 'Em diçin parkê.'], gen:['Çûn — gitmek', 'Ez diçim.']),
 
   // ── Hest (Duygular) ek — 6'ya tamamla ──────────────────
-  (id:'z_a2_040', ku:'Tirsnak', tr:'Korkmuş', en:'Scared', cins:'bêcins', ez:null,
-   kat:'hest', zor:0.78, not:'Duygu', emoji: '😨',
-   her:['Ez tirsnak im.', 'Zarok tirsnak e.'], gen:['Tirsnak — korkmuş', 'Tu tirsnak î?']),
+  (id:'z_a2_040', ku:'Tirsiyayî', tr:'Korkmuş', en:'Scared', cins:'bêcins', ez:null,
+   kat:'hest', zor:0.78, not:'Duygu — pasif sıfat. "Tirsnak" = korkunç (aktif).', emoji: '😨',
+   her:['Ez tirsiyayî me.', 'Zarok tirsiyayî ye.'], gen:['Tirsiyayî — korkmuş', 'Tu tirsiyayî yî?']),
 
   // ── Fiil ek — daha fazla temel fiil ─────────────────────
   (id:'z_a2_041', ku:'Kenîn', tr:'Gülmek', en:'To laugh', cins:'bêcins', ez:null,
    kat:'fiil', zor:0.80, not:'Duygu fiili', emoji: '😂',
-   her:['Em dikene!', 'Zarok dikene.'], gen:['Kenîn — gülmek', 'Em dikene.']),
+   her:['Em dikenin!', 'Zarok dikene.'], gen:['Kenîn — gülmek', 'Em dikenin.']),
 
   (id:'z_a2_042', ku:'Girîn', tr:'Ağlamak', en:'To cry', cins:'bêcins', ez:null,
    kat:'fiil', zor:0.78, not:'Duygu fiili', emoji: '😢',
@@ -139,7 +139,7 @@ const kChildA2Kelimeler = [
 
   (id:'z_a2_043', ku:'Gotin', tr:'Söylemek', en:'To say', cins:'bêcins', ez:null,
    kat:'fiil', zor:0.75, not:'Temel fiil', emoji: '💬',
-   her:['Gotin a rastiyê wezîfeya me ye.', 'Dê dibêje.'], gen:['Gotin — söylemek', 'Tu çi dibêjî?']),
+   her:['Dê dibêje çîrokekê.', 'Ez dibêjim: silav!'], gen:['Gotin — söylemek', 'Tu çi dibêjî?']),
 
   (id:'z_a2_044', ku:'Zanîn', tr:'Bilmek', en:'To know', cins:'bêcins', ez:null,
    kat:'fiil', zor:0.75, not:'Temel fiil', emoji: '🧠',
@@ -147,5 +147,5 @@ const kChildA2Kelimeler = [
 
   (id:'z_a2_045', ku:'Xwestin', tr:'İstemek', en:'To want', cins:'bêcins', ez:null,
    kat:'fiil', zor:0.75, not:'Temel fiil', emoji: '🙋',
-   her:['Xwestin a tiştê baş ne şerm e.', 'Ez dixwazim!'], gen:['Xwestin — istemek', 'Ez av dixwazim.']),
+   her:['Ez av dixwazim.', 'Dê, ez sêvekê dixwazim.'], gen:['Xwestin — istemek', 'Ez av dixwazim.']),
 ];

@@ -129,13 +129,38 @@ void main() {
         break;
       }
     }
-    // Stem çok kısa kaldıysa orijinali kullan (false match riski).
-    if (stem.length < 3) stem = kuLow;
+    // Stem çok kısa kaldıysa ku'nun ilk 3 karakterini kullan
+    // (ör. "êşîn" → "êş" → "êşî" fallback).
+    if (stem.length < 3) {
+      stem = kuLow.length >= 3 ? kuLow.substring(0, 3) : kuLow;
+    }
+
+    // İkinci turda vowel-shift toleransı için kısa önek (ilk 4 karakter):
+    // veguhêzt → veguh, xwend → xwen (prefixleri `dixwin`, `bixwin` yakalar).
+    String shortStem = stem.length >= 4 ? stem.substring(0, 4) : stem;
+    // Düzensiz fiiller için elle eşleşme sözlüğü (infinitif → olası kökler)
+    const irregularRoots = <String, List<String>>{
+      'çûn': ['diç', 'çû', 'here', 'wer'],
+      'hatin': ['hat', 'tê ', 'were', 'bê '],
+      'gotin': ['got', 'bêj', 'dibêj'],
+      'xwendin': ['xwend', 'dixwîn', 'bixwîn'],
+      'xwestin': ['xwest', 'dixwaz', 'bixwaz'],
+      'lîstin': ['lîst', 'dilîz', 'bilîz'],
+      'çûyîn': ['çû', 'diç'],
+    };
+
+    final extraRoots = irregularRoots[kuLow] ?? const <String>[];
 
     for (final raw in her) {
       final s = raw.toString().toLowerCase();
       if (s.length < 6) continue;
       if (s.contains(stem)) return true;
+      if (stem != shortStem && shortStem.length >= 3 && s.contains(shortStem)) {
+        return true;
+      }
+      for (final r in extraRoots) {
+        if (s.contains(r)) return true;
+      }
     }
     return false;
   }

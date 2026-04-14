@@ -213,7 +213,7 @@ final kB1Kelimeler = [
   (id:"b1_044", ku:"Xeyidîn", tr:"Kızmak / Öfkelenmek", en:"To be angry",
    cins:"bêcins", ez:null, kat:"his", zor:0.72,
    not:"\"Xeyidîn\" fiili — \"Ez xeyidîme\" = kızgınım. [FB]: xeyidîn v.",
-   her:['Ez ji wê meselê xeyidîn.', 'Ji bo çi tu xeyidîn?'],
+   her:['Ez ji wê meselê xeyidîm.', 'Ji bo çi tu xeyidîn?'],
    gen:["Xeyidîn û şa bûn", "Ew xeyidî."]),
 
   (id:"b1_045", ku:"Şermezar", tr:"Utanmış / Mahçup", en:"Embarrassed / Ashamed",
@@ -336,7 +336,7 @@ final kB1Kelimeler = [
   (id:"b1_071", ku:"Çandin", tr:"Ekmek / Ürün yetiştirmek", en:"To sow / cultivate",
    cins:"bêcins", ez:null, kat:"xweza", zor:0.71,
    not:"\"Çandin\" fiili — \"Cotkar genim çandiye\" = çiftçi buğday ekmiş. [TH] §65",
-   her:['Bavê min genim çandin.', 'Em kulîlkan li baxçe çandin.'],
+   her:['Bavê min genim çand.', 'Me kulîlkan li baxçe çandin.'],
    gen:["Çandin û birin", "Çand û çêkir."]),
 
   (id:"b1_072", ku:"Berhev kirin", tr:"Toplamak / Hasatla", en:"To harvest / gather",
@@ -428,37 +428,37 @@ final kB1Kelimeler = [
   (id:"b1_100", ku:"Kişandin", tr:"Çizmek / Çekmek", en:"To draw / pull",
    cins:"bêcins", ez:null, kat:"leker", zor:0.72,
    not:"\"Kişandin\" — [AS] no.1081: kişandin = sigara içmek de denir, ama asıl: çizmek/çekmek. \"Wêne kêşan\" = resim çizmek ✓. [TH] §65: kişandin = to draw/pull. \"Lêxistin\" vurmak için ayrıdır.",
-   her:['Min wêneyek kişandin.', 'Wî dest kişandin paş.'],
+   her:['Min wêneyek kişand.', 'Wî dest kişand paş.'],
    gen:["Kişandin û nivîsîn", "Min kêşand."]),
 
   (id:"b1_101", ku:"Şikandin", tr:"Kırmak", en:"To break",
    cins:"bêcins", ez:null, kat:"leker", zor:0.71,
    not:"\"Şikandin\" — geçişli, ergatif. [TH] §65: şikandin = to break. \"Min şikand\" = ben kırdım",
-   her:['Şûşê şikandin li ser maseyê.', 'Min destê xwe şikandin.'],
+   her:['Min şûşe li ser maseyê şikand.', 'Min destê xwe şikand.'],
    gen:["Şikandin û çêkirin", "Min şikand."]),
 
   (id:"b1_102", ku:"Vêxistin", tr:"Yakmak / Tutuşturmak", en:"To light / ignite",
    cins:"bêcins", ez:null, kat:"leker", zor:0.71,
    not:"\"Vêxistin\" — \"Kawa agirê azadiyê vêxist\" Newroz efsanesinden! Geçişli → ergatif",
-   her:['Min agir vêxistin.', 'Vêxistin a êgir hêz dixwaze.'],
+   her:['Min agir vêxist.', 'Vêxistina êgir hêz dixwaze.'],
    gen:["Vêxistin û vemirandin", "Agir vêxist."]),
 
   (id:"b1_103", ku:"Vemirandin", tr:"Söndürmek", en:"To extinguish",
    cins:"bêcins", ez:null, kat:"leker", zor:0.70,
    not:"\"Vemirandin\" = söndürmek. [TH] §65. \"Agir vemirandin\" = ateşi söndürmek",
-   her:['Em vemirandin agir.', 'Vemirandin a lampa pêdiviyek e.'],
+   her:['Me agir vemirand.', 'Vemirandina lampa pêdiviyek e.'],
    gen:["Vemirandin û vêxistin", "Agir vemirand."]),
 
   (id:"b1_104", ku:"Parastin", tr:"Korumak / Savunmak", en:"To protect / defend",
    cins:"bêcins", ez:null, kat:"leker", zor:0.71,
    not:"\"Parastin\" — [BH] §273: \"Parastin, savunma\" bileşiğinde geçer. [FB]: parastin v.",
-   her:['Em welatê xwe parastin.', 'Parastin ya zimanî girîng e.'],
+   her:['Me welatê xwe parast.', 'Parastina zimên girîng e.'],
    gen:["Parastin û piştgirî", "Biparêze!"]),
 
   (id:"b1_105", ku:"Veguhêztin", tr:"Aktarmak / Taşımak", en:"To transmit / transfer",
    cins:"bêcins", ez:null, kat:"leker", zor:0.69,
    not:"\"Veguhêztin\" — dil ve kültürü aktarma anlamında da kullanılır. \"Zimanê xwe veguherîzin\" = dilinizi aktarın",
-   her:['Min name veguhêztin ji bo te.', 'Veguhêztin a daneyên giran dem dixwaze.'],
+   her:['Min name ji bo te veguhest.', 'Veguhestina daneyên giran dem dixwaze.'],
    gen:["Veguhêztin û parastin", "Veguhêzt."]),
 
   // ════════════════════════════════════════════════════════════
@@ -560,25 +560,25 @@ final kB1EkKelimeler = [
   (id:"b1_200", ku:"Anîn", tr:"Getirmek", en:"To bring",
    cins:"bêcins", ez:null, kat:"leker_ergatif", zor:0.70,
    not:"\"Anîn\" geçişli → ergatif. \"Min anî\" = getirdim. [TH] §76: anîn = to bring. \"Bîne!\" = getir!",
-   her:['Min nan anîn ji sûkê.', 'Anîn a hediyê kêfxweşî ye.'],
+   her:['Min nan ji sûkê anî.', 'Anîna hediyê kêfxweşî ye.'],
    gen:["Anîn û birin", "Min anî."]),
 
   (id:"b1_201", ku:"Birin", tr:"Götürmek", en:"To take (away)",
    cins:"bêcins", ez:null, kat:"leker_ergatif", zor:0.70,
    not:"\"Birin\" geçişli → ergatif. \"Min bir\" = götürdüm. [TH] §76",
-   her:['Min pirtûk birin malê.', 'Birin a zarokan li dibistanê her sibe.'],
+   her:['Min pirtûk bir malê.', 'Birina zarokan bo dibistanê her sibe.'],
    gen:["Birin û anîn", "Min bir."]),
 
   (id:"b1_202", ku:"Nîşandan", tr:"Göstermek", en:"To show",
    cins:"bêcins", ez:null, kat:"leker_ergatif", zor:0.70,
    not:"\"Nîşandan\" geçişli → ergatif. \"Min nîşand\" = gösterdim. [FB]: nîşandan v.",
-   her:['Min rê nîşandan ji wî re.', 'Nîşandan a riya rast hêsan e.'],
+   her:['Min rê nîşanî wî da.', 'Nîşandana riya rast hêsan e.'],
    gen:["Nîşandan û fêr kirin", "Min nîşand."]),
 
   (id:"b1_203", ku:"Guhartin", tr:"Değiştirmek", en:"To change",
    cins:"bêcins", ez:null, kat:"leker_ergatif", zor:0.71,
    not:"\"Guhartin\" geçişli → ergatif. \"Min guhart\" = değiştirdim. [FB]: guhartin v.",
-   her:['Min nivê xwe guhartin.', 'Guhartin a cilan piştî karê.'],
+   her:['Min cilên xwe guhart.', 'Guhartina cilan piştî karî.'],
    gen:["Guhartin û man", "Min guhart."]),
 
   (id:"b1_204", ku:"Şaş kirin", tr:"Şaşırtmak", en:"To confuse / surprise",
@@ -675,7 +675,7 @@ final kB1EkKelimeler = [
   (id:"b1_234", ku:"Çêbûn", tr:"Olmak / Gerçekleşmek", en:"To happen / occur",
    cins:"bêcins", ez:null, kat:"leker", zor:0.73,
    not:"\"Çêbûn\" fiili — \"Bûyer çêbû\" = olay oldu. [FB]: çêbûn v. \"Çi çêbû?\" = ne oldu?",
-   her:['Tişt çêbûn bêyî hêvî.', 'Çêbûn a şênî dem dixwaze.'],
+   her:['Tişt çêbûn bêyî hêvî.', 'Çêbûna şênî dem dixwaze.'],
    gen:["Çêbûn û man", "Çi çêbû?"]),
 
   // ─────────────────────────────────────────────────────────────
@@ -703,22 +703,22 @@ final kB1EkKelimeler = [
   (id:"b1_243", ku:"Hilbijartin", tr:"Seçmek / Oy vermek", en:"To elect / choose",
    cins:"bêcins", ez:null, kat:"siyaset", zor:0.70,
    not:"\"Hilbijartin\" fiili — ergatif. \"Min hilbijart\" = seçtim. [FB]: hilbijartin v.",
-   her:['Em hilbijartin a nû dikin.', 'Hilbijartin demokrasî ye.'],
+   her:['Em hilbijartineke nû dikin.', 'Hilbijartin demokrasî ye.'],
    gen:["Hilbijartin û biryar", "Min hilbijart."]),
 
-  (id:"b1_244", ku:"Bangêzkirin", tr:"Çağırmak / Davet etmek (resmi)", en:"To summon / call",
+  (id:"b1_244", ku:"Vexwendin", tr:"Çağırmak / Davet etmek (resmi)", en:"To invite / summon",
    cins:"bêcins", ez:null, kat:"siyaset", zor:0.69,
-   not:"\"Bangêz kirin\" = resmi çağrı. [FB]: bangêz n.m.",
-   her:['Em mêvanan bangêzkirin malê.', 'Bangêzkirin a fermî bi name tê.'],
-   gen:["Bangêzkirin û vexwandin", "Bangêz kir."]),
+   not:"Resmi çağrı/davet için. \"Bang kirin\" (sesli çağrı) ile karıştırılmamalı.",
+   her:['Me mêvan vexwendin malê.', 'Vexwendina fermî bi name tê.'],
+   gen:["Vexwendin û bang", "Min ew vexwend."]),
 
   // ─────────────────────────────────────────────────────────────
   // TARİH VE KÜLTÜR — B1 derinleşme
   // ─────────────────────────────────────────────────────────────
 
   (id:"b1_250", ku:"Serhildan", tr:"Ayaklanma / İsyan", en:"Uprising / Revolt",
-   cins:"nêr", ez:"serhildanê", kat:"dîrok", zor:0.70,
-   not:"Eril — \"ser\" (baş) + \"hildan\" (kaldırmak). [FB]: serhildan n.m. Kürt tarihinde tekrarlayan kavram.",
+   cins:"mê", ez:"serhildana", kat:"dîrok", zor:0.70,
+   not:"Dişil — \"ser\" (baş) + \"hildan\" (kaldırmak). [FB]: serhildan n.f. Kürt tarihinde tekrarlayan kavram.",
    her:["Serhildana 1925.", "Serhildan û azadî."],
    gen:["Serhildan û têkoşîn", "Serhildana me"]),
 
@@ -824,11 +824,11 @@ final kB1EkKelimeler = [
    her:["Nostaljiya welêt.", "Nostaljî û bîranîn."],
    gen:["Nostaljî û koçberî", "Nostaljiya me"]),
 
-  (id:"b1_281", ku:"Xemxwarî", tr:"Keder / Üzüntü (derin)", en:"Grief / Deep sorrow",
-   cins:"mê", ez:"xemxwariyê", kat:"psikoloji", zor:0.70,
-   not:"Dişil — \"xem\" (keder) + \"xwarî\" (taşıma). Dengbêj geleneğinin temel duygusu.",
-   her:['Xemxwarî dilê min girtî.', 'Em ji xemxwariyê parastin.'],
-   gen:["Xemxwarî û şa", "Xemxwariya me"]),
+  (id:"b1_281", ku:"Xemgînî", tr:"Keder / Üzüntü (derin)", en:"Grief / Deep sorrow",
+   cins:"mê", ez:"xemgîniyê", kat:"psikoloji", zor:0.70,
+   not:"Dişil — \"xem\" (keder) + \"-gîn\" + \"-î\". Dengbêj geleneğinin temel duygusu. [FB]: xemgînî n.f.",
+   her:['Xemgînî dilê min girt.', 'Ez ji xemgîniyê parastim.'],
+   gen:["Xemgînî û şahî", "Xemgîniya me"]),
 
   (id:"b1_282", ku:"Kêfxweşî", tr:"Sevinç / Neşe", en:"Joy / Delight",
    cins:"mê", ez:"kêfxweşiyê", kat:"psikoloji", zor:0.72,
@@ -836,11 +836,11 @@ final kB1EkKelimeler = [
    her:["Kêfxweşî tê dilê min.", "Kêfxweşî û şa."],
    gen:["Kêfxweşî û xemxwarî", "Kêfxweşiya me"]),
 
-  (id:"b1_283", ku:"Serxweşî", tr:"Gurur / Baş dikligi", en:"Pride / Dignity",
-   cins:"mê", ez:"serxweşiyê", kat:"psikoloji", zor:0.70,
-   not:"Dişil — \"ser\" (baş) + \"xweş\" (güzel/iyi). \"Ez serxweş im ku kurd im!\" = Kürt olduğum için gururluyum!",
-   her:['Bi serxweşî em peyivîn.', 'Serxweşî nîşana qewîbûnê ye.'],
-   gen:["Serxweşî û serbilindî", "Serxweşiya me"]),
+  (id:"b1_283", ku:"Serfirazî", tr:"Onur / Şeref", en:"Honor / Dignity",
+   cins:"mê", ez:"serfiraziyê", kat:"psikoloji", zor:0.70,
+   not:"Dişil — \"ser\" (baş) + \"firaz\" (yüksek) + \"-î\". Not: \"Serxweşî\" sarhoşluk anlamına geldiği için kullanılmaz.",
+   her:['Bi serfirazî em peyivîn.', 'Serfirazî nîşana rûmetê ye.'],
+   gen:["Serfirazî û serbilindî", "Serfiraziya me"]),
 
   // ─────────────────────────────────────────────────────────────
   // EKONOMİ VE İŞ — B1 derinleşme
@@ -918,37 +918,37 @@ final kB1EkKelimeler3 = [
   (id:"b1_600", ku:"Pêkanîn", tr:"Gerçekleştirmek", en:"To implement",
    cins:"bêcins", ez:null, kat:"leker_ergatif", zor:0.68,
    not:"\"Pêkanîn\" geçişli → ergatif. \"Min pêkanî\" = gerçekleştirdim.",
-   her:['Em pêkanîn projeya nû.', 'Pêkanîn a hêviyê bi xebatê tê.'],
+   her:['Me projeyeke nû pêk anî.', 'Pêkanîna hêviyê bi xebatê tê.'],
    gen:["Pêkanîn û plan", "Min pêkanî."]),
 
   (id:"b1_601", ku:"Xwestin", tr:"İstemek", en:"To want",
    cins:"bêcins", ez:null, kat:"leker_ergatif", zor:0.73,
    not:"\"Xwestin\" geçişli ergatif. \"Min xwest\" = istedim. Şimdiki: \"Ez dixwazim\".",
-   her:['Min av xwestin.', 'Te ji min çi xwestin?'],
+   her:['Min av xwest.', 'Te ji min çi xwest?'],
    gen:["Xwestin û naxwestin", "Min xwest."]),
 
   (id:"b1_602", ku:"Şandin", tr:"Göndermek", en:"To send",
    cins:"bêcins", ez:null, kat:"leker_ergatif", zor:0.71,
    not:"\"Şandin\" geçişli ergatif. \"Min şand\" = gönderdim.",
-   her:['Min name şandin ji bo te.', 'Şandin a hediyê bi posta tê.'],
+   her:['Min name ji bo te şand.', 'Şandina hediyê bi postê ye.'],
    gen:["Şandin û wergirtin", "Min şand."]),
 
   (id:"b1_603", ku:"Wergirtin", tr:"Almak / Kabul etmek", en:"To receive",
    cins:"bêcins", ez:null, kat:"leker_ergatif", zor:0.71,
    not:"\"Wergirtin\" geçişli ergatif. \"Min wergirti\" = aldım.",
-   her:['Min hediyê wergirtin.', 'Wergirtin a peyaman bi posta zû tê.'],
+   her:['Min hediye wergirt.', 'Wergirtina peyaman bi postê zû ye.'],
    gen:["Wergirtin û şandin", "Min wergirti."]),
 
   (id:"b1_604", ku:"Xwendin", tr:"Okumak", en:"To read / study",
    cins:"bêcins", ez:null, kat:"leker_ergatif", zor:0.73,
    not:"\"Xwendin\" geçişli → ergatif. \"Min xwend\" = okudum.",
-   her:['Min ev pirtûk xwendin.', 'Xwendin a kurdî girîng e.'],
+   her:['Min ev pirtûk xwend.', 'Xwendina kurdî girîng e.'],
    gen:["Xwendin û nivîsîn", "Min xwend."]),
 
   (id:"b1_605", ku:"Zanîn", tr:"Bilmek", en:"To know",
    cins:"bêcins", ez:null, kat:"leker_ergatif", zor:0.74,
    not:"\"Zanîn\" geçişli → ergatif. \"Min zanî\" = bildim. Şimdiki: \"Ez dizanim\".",
-   her:['Min zanîn ku tu yê bê.', 'Zanîn a zimanê dayikê hêz e.'],
+   her:['Min zanî ku tê bê.', 'Zanîna zimanê dayikê hêz e.'],
    gen:["Zanîn û nezanîn", "Min zanî."]),
 
   // ZAMAN ZARFLARI — [TH] §85 tam
@@ -1021,8 +1021,8 @@ final kB1EkKelimeler3 = [
    gen:["Teorî û pratîk", "Teorîya me"]),
 
   (id:"b1_632", ku:"Pratîk", tr:"Pratik / Uygulama", en:"Practice / Practical",
-   cins:"bêcins", ez:null, kat:"felsefe", zor:0.70,
-   not:"[FB]: pratîk adj./n. \"Pratîkî\" = pratikte.",
+   cins:"nêr", ez:"pratîkê", kat:"felsefe", zor:0.70,
+   not:"Eril — alıntı isim. \"Pratîkî\" = pratikte.",
    her:["Pratîkî baştir e.", "Teorî û pratîk."],
    gen:["Pratîk û teorî", "Pratîkî"]),
 
@@ -1255,7 +1255,7 @@ final kB1EkKelimeler3 = [
   (id:"b1_731", ku:"Pejirandin", tr:"Onaylamak / Kabul etmek", en:"To approve / accept",
    cins:"bêcins", ez:null, kat:"leker", zor:0.70,
    not:"\"Pejirandin\" — [AS] no.1028: \"onaylamak = pejirandin\" ✓.",
-   her:['Min plana wî pejirandin.', 'Pejirandin a fikrê dem dixwaze.'],
+   her:['Min plana wî pejirand.', 'Pejirandina fikrê dem dixwaze.'],
    gen:["Pejirandin û red kirin", "Pejirande!"]),
 
   (id:"b1_732", ku:"Xeletî kirin", tr:"Hata yapmak", en:"To make a mistake",
@@ -1264,11 +1264,11 @@ final kB1EkKelimeler3 = [
    her:["Min xeletî kir.", "Xeletî neke!"],
    gen:["Xeletî û serkeftin", "Xeletî neke!"]),
 
-  (id:"b1_733", ku:"Bi hatin", tr:"Hatırlamak", en:"To remember",
+  (id:"b1_733", ku:"Bi bîr anîn", tr:"Hatırlamak", en:"To remember",
    cins:"bêcins", ez:null, kat:"leker", zor:0.71,
-   not:"\"Bi hatin\" (bi bîr hatin) — [AS] no.1008: \"hatırlamak = bi hatin, bi bîr anîn\" ✓.",
-   her:["Min bi hat.", "Tu bi tî?"],
-   gen:["Bi hatin û jibîrkirin", "Bi bîr bîne!"]),
+   not:"Bileşik fiil: \"bi bîr anîn\" (hafızaya getirmek). Yaygın kullanım: \"tê bîra min\" (hatırlıyorum).",
+   her:["Min wê rojê bi bîr anî.", "Tê bîra min."],
+   gen:["Bi bîr anîn û ji bîr kirin", "Bi bîr bîne!"]),
 
 ];
 
@@ -1287,32 +1287,32 @@ final kB1EkKelimeler2 = [
   (id:"b1_400", ku:"Avêtin", tr:"Atmak / Fırlatmak", en:"To throw",
    cins:"bêcins", ez:null, kat:"leker_ergatif", zor:0.69,
    not:"\"Avêtin\" geçişli → ergatif. \"Min avêt\" = attım. \"Agir avêtin\" = ateş açmak.",
-   her:['Min top avêtin paş.', 'Avêtin a kevirî dijwar e.'], gen:["Avêtin û girtin", "Min avêt."]),
+   her:['Min top avêt paş.', 'Avêtina kevirî dijwar e.'], gen:["Avêtin û girtin", "Min avêt."]),
 
   (id:"b1_401", ku:"Girtin", tr:"Tutmak / Almak", en:"To take / hold",
    cins:"bêcins", ez:null, kat:"leker_ergatif", zor:0.72,
    not:"\"Girtin\" geçişli → ergatif. \"Min girt\" = tuttum/aldım. [TH] §76.",
-   her:['Min destê wî girtin.', 'Girtin a tiştî xurtî dixwaze.'], gen:["Girtin û berdan", "Min girt."]),
+   her:['Min destê wî girt.', 'Girtina tiştî xurtî dixwaze.'], gen:["Girtin û berdan", "Min girt."]),
 
   (id:"b1_402", ku:"Berdan", tr:"Bırakmak / Serbest bırakmak", en:"To let go / release",
    cins:"bêcins", ez:null, kat:"leker_ergatif", zor:0.70,
    not:"\"Berdan\" geçişli → ergatif. \"Min berd\" = bıraktım. [FB]: berdan v.",
-   her:['Min destê wî berdan.', 'Berdan a bextewariyê hêsan nîne.'], gen:["Berdan û girtin", "Min berd."]),
+   her:['Min destê wî berda.', 'Berdana bextewariyê hêsan nîne.'], gen:["Berdan û girtin", "Min berd."]),
 
   (id:"b1_403", ku:"Lêxistin", tr:"Vurmak / Çalmak", en:"To hit / strike",
    cins:"bêcins", ez:null, kat:"leker_ergatif", zor:0.69,
    not:"\"Lêxistin\" geçişli → ergatif. \"Min lêxist\" = vurdum. \"Sêtar lêxistin\" = saz çalmak.",
-   her:['Min defî lêxistin.', 'Lêxistin a derî dengê wê hat.'], gen:["Lêxistin û berdan", "Min lêxist."]),
+   her:['Min def lêxist.', 'Lêxistina derî — dengê wê hat.'], gen:["Lêxistin û berdan", "Min lêxist."]),
 
   (id:"b1_404", ku:"Vexwarin", tr:"İçmek", en:"To drink",
    cins:"bêcins", ez:null, kat:"leker_ergatif", zor:0.72,
    not:"\"Vexwarin\" geçişli → ergatif. \"Min vexwar\" = içtim. A2\'de \"vedixwim\" formu var.",
-   her:['Min av vexwarin.', 'Vexwarin a çayê li sifrê xweş e.'], gen:["Vexwarin û xwarin", "Min vexwar."]),
+   her:['Min av vexwar.', 'Vexwarina çayê li sifrê xweş e.'], gen:["Vexwarin û xwarin", "Min vexwar."]),
 
   (id:"b1_405", ku:"Pêkanîn", tr:"Uygulamak / Gerçekleştirmek", en:"To implement / realize",
    cins:"bêcins", ez:null, kat:"leker_ergatif", zor:0.68,
    not:"\"Pêkanîn\" — \"Min pêkanî\" = uyguladım. [FB]: pêkanîn v.",
-   her:['Em pêkanîn karê xwe.', 'Pêkanîn a hêviyê bi xebatê.'], gen:["Pêkanîn û plan", "Min pêkanî."]),
+   her:['Me karê xwe pêk anî.', 'Pêkanîna hêviyê bi xebatê ye.'], gen:["Pêkanîn û plan", "Min pêkanî."]),
 
   // ─────────────────────────────────────────────────────────────
   // KISALT-KELİMELER: YŞT-ZAMAN SİSTEMİ TAM
@@ -1370,7 +1370,7 @@ final kB1EkKelimeler2 = [
   (id:"b1_430", ku:"Dengdan", tr:"Oy vermek / Oylamak", en:"To vote",
    cins:"bêcins", ez:null, kat:"siyaset", zor:0.71,
    not:"\"Deng dan\" = ses vermek → oy vermek. [FB]: dengdan v. \"Dengdêr\" = seçmen.",
-   her:['Em dengdan ji bo namzedê xwe.', 'Dengdan demokrasiyê hêz dike.'], gen:["Dengdan û hilbijartin", "Deng bide!"]),
+   her:['Me ji bo namzedê xwe deng da.', 'Dengdan demokrasiyê hêz dike.'], gen:["Dengdan û hilbijartin", "Deng bide!"]),
 
   (id:"b1_431", ku:"Piştgiriya siyasî", tr:"Siyasi destek", en:"Political support",
    cins:"mê", ez:"piştgiriyê", kat:"siyaset", zor:0.70,
@@ -1419,7 +1419,7 @@ final kB1EkKelimeler2 = [
   (id:"b1_444", ku:"Teşwîqkirin", tr:"Teşvik etmek / Cesaretlendirmek", en:"To encourage",
    cins:"bêcins", ez:null, kat:"his", zor:0.70,
    not:"\"Teşwîq kirin\" — [FB]: teşwîq n.m. + kirin.",
-   her:['Mamoste min teşwîqkirin.', 'Teşwîqkirin a zarokan girîng e.'], gen:["Teşwîqkirin û alîkarî", "Teşwîq bike."]),
+   her:['Mamoste ez teşwîq kirim.', 'Teşwîqkirina zarokan girîng e.'], gen:["Teşwîqkirin û alîkarî", "Teşwîq bike."]),
 
   // ─────────────────────────────────────────────────────────────
   // SOSYAL VE DİL KONULARI — B1 özgün kelime seti
@@ -1690,25 +1690,25 @@ final kB1EkKelimeler4 = [
   (id:"b1_810", ku:"Veguhêztin", tr:"Aktarmak / İletmek", en:"To convey / transmit",
    cins:"bêcins", ez:null, kat:"leker_ergatif", zor:0.68,
    not:"\"Veguhêztin\" geçişli → ergatif. \"Min veguhêzand\" = aktardım.",
-   her:['Min agahî veguhêztin.', 'Veguhêztin a daneyan dem dixwaze.'],
+   her:['Min agahî veguhest.', 'Veguhestina daneyan dem dixwaze.'],
    gen:["Veguhêztin û parastin", "Min veguhêzand."]),
 
   (id:"b1_811", ku:"Ragihandin", tr:"Haberdar etmek / Bildirmek", en:"To inform",
    cins:"bêcins", ez:null, kat:"leker_ergatif", zor:0.70,
    not:"\"Ragihandin\" geçişli → ergatif. \"Min ragihand.\"",
-   her:['Min jê re ragihandin a nûçeyê.', 'Ragihandin bi telefonê hat.'],
+   her:['Min nûçe jê re ragihand.', 'Ragihandin bi telefonê hat.'],
    gen:["Ragihandin û bihîstin", "Min ragihand."]),
 
   (id:"b1_812", ku:"Têxistin", tr:"Koymak / Sokmak", en:"To put in / insert",
    cins:"bêcins", ez:null, kat:"leker_ergatif", zor:0.68,
    not:"\"Têxistin\" geçişli → ergatif. \"Min têxist.\"",
-   her:['Min pirtûk têxistin di çentê.', 'Têxistin a peyvên nû di nava cumleyê de.'],
+   her:['Min pirtûk têxist nava çentê.', 'Têxistina peyvên nû di nava hevokê de.'],
    gen:["Têxistin û derxistin", "Min têxist."]),
 
   (id:"b1_813", ku:"Derxistin", tr:"Çıkarmak", en:"To take out / remove",
    cins:"bêcins", ez:null, kat:"leker_ergatif", zor:0.68,
    not:"\"Derxistin\" geçişli → ergatif. \"Min derxist.\"",
-   her:['Min pirtûk derxistin ji çentê.', 'Derxistin a tişta sax dijwar bû.'],
+   her:['Min pirtûk ji çentê derxist.', 'Derxistina tiştê saxî dijwar bû.'],
    gen:["Derxistin û têxistin", "Min derxist."]),
 
   // ── ZAMAN SİSTEMİ TAMAMLAMA ────────────────────────────────
@@ -2069,13 +2069,13 @@ final kB1EkKelimeler5 = [
   (id:"b1_1000", ku:"Bijartin", tr:"Seçmek", en:"To choose / select",
    cins:"bêcins", ez:null, kat:"leker_ergatif", zor:0.69,
    not:"\"Bijartin\" geçişli → ergatif. \"Min bijart\" = seçtim.",
-   her:['Em namzedê xwe bijartin.', 'Bijartin a baş hêz dixwaze.'],
+   her:['Me namzedê xwe bijart.', 'Bijartineke baş hêz dixwaze.'],
    gen:["Bijartin û red kirin", "Min bijart."]),
 
   (id:"b1_1001", ku:"Parastin", tr:"Korumak / Savunmak", en:"To protect / defend",
    cins:"bêcins", ez:null, kat:"leker_ergatif", zor:0.71,
    not:"\"Parastin\" geçişli → ergatif. \"Min parast\" = korudum.",
-   her:['Em welatê xwe parastin.', 'Parastin a zimanê dayikê wezîfeya me ye.'],
+   her:['Me welatê xwe parast.', 'Parastina zimanê dayikê wezîfeya me ye.'],
    gen:["Parastin û winda kirin", "Min parast."]),
 
   (id:"b1_1002", ku:"Qebûl kirin", tr:"Kabul etmek", en:"To accept",
@@ -2404,7 +2404,7 @@ final kB1EkKelimeler5 = [
   (id:"b1_1110", ku:"Çandin", tr:"Ekmek / Dikmek", en:"To plant / sow",
    cins:"bêcins", ez:null, kat:"cotkarî", zor:0.70,
    not:"\"Çandin\" — geçişli. \"Min çand\" = ektim.",
-   her:['Em genim çandin li zeviyê.', 'Çandin a darên fêkîyan baş e.'],
+   her:['Me genim li zeviyê çand.', 'Çandina darên fêkî baş e.'],
    gen:["Çandin û çinîn", "Min çand."]),
 
   (id:"b1_1111", ku:"Çinîn", tr:"Toplamak / Hasat etmek", en:"To harvest / pick",
@@ -2504,7 +2504,7 @@ final kB1EkKelimeler5 = [
   (id:"b1_1151", ku:"Vegerandin", tr:"Geri vermek / İade etmek", en:"To return / give back",
    cins:"bêcins", ez:null, kat:"leker_ergatif", zor:0.69,
    not:"\"Vegerandin\" — [AS] no.991 ✓. Ergatif. Ettirgen.",
-   her:['Min pere vegerandin.', 'Vegerandin a deyn pêdiviyek e.'],
+   her:['Min pere vegerand.', 'Vegerandina deyn pêdiviyek e.'],
    gen:["Vegerandin û wergirtin", "Min vegerand."]),
 
   (id:"b1_1152", ku:"Hev dîtin", tr:"Görüşmek / Buluşmak", en:"To meet (each other)",
@@ -2957,7 +2957,7 @@ final kB1EkKelimeler7 = [
   (id:"b1_fk_07", ku:"Derbaskirin", tr:"Geçirmek (zaman)", en:"To spend (time)",
    cins:"bêcins", ez:null, kat:"leker", zor:0.78,
    not:"\"Derbaskirin\" — [Fêrkera D.6] ✓. \"Betlaneya xweş derbas bike!\" = iyi tatiller!",
-   her:['Em derbaskirin a wexta xwe bi xweşikî.', 'Derbaskirin a tîpan zû ye.'],
+   her:['Me wexta xwe bi xweşî derbas kir.', 'Derbaskirina tîpan zû ye.'],
    gen:["Derbaskirin û betlane", "Derbas bike!"]),
 ];
 
@@ -3186,7 +3186,7 @@ final kB1Buyuk5 = [
   (id:"b1_sp04", ku:"Dengdan", tr:"Oy vermek", en:"To vote",
    cins:"bêcins", ez:null, kat:"siyaset", zor:0.71,
    not:"\"Deng\" (ses/oy) + \"dan\". \"Deng da\" = oy verdi.",
-   her:['Em dengdan ji bo nûnerê xwe.', 'Dengdan a giştî dimokrasiyê hêz dike.'],
+   her:['Me ji bo nûnerê xwe deng da.', 'Dengdana giştî dîmokrasiyê xurt dike.'],
    gen:["Dengdan û hilbijartin", "Deng bide!"]),
 
   (id:"b1_sp05", ku:"Hilbijartin", tr:"Seçim", en:"Election",
@@ -4792,37 +4792,37 @@ final kB1_Leker = [
   (id:"b1_lk01", ku:"Şandin", tr:"Göndermek", en:"To send",
    cins:"bêcins", ez:null, kat:"leker_ergatif", zor:0.72,
    not:"\"Şandin\" — [BH] ✓. Ergatif: \"Min şand.\" Kök: şand.",
-   her:['Min name şandin ji bo dosta xwe.', 'Şandin a peyaman bi telefonê zû ye.'],
+   her:['Min name ji bo dosta xwe şand.', 'Şandina peyaman bi telefonê zû ye.'],
    gen:["Şandin û standin", "Min şand."]),
 
   (id:"b1_lk02", ku:"Anîn", tr:"Getirmek", en:"To bring",
    cins:"bêcins", ez:null, kat:"leker_ergatif", zor:0.73,
    not:"\"Anîn\" — [BH] ✓. Ergatif: \"Min anî.\" Kök: tîne (şimdiki).",
-   her:['Min nan anîn ji sûkê.', 'Anîn a tiştan ji bajêr dem dixwaze.'],
+   her:['Min nan ji sûkê anî.', 'Anîna tiştan ji bajêr dem dixwaze.'],
    gen:["Anîn û birin", "Min anî."]),
 
   (id:"b1_lk03", ku:"Birin", tr:"Götürmek", en:"To take / carry away",
    cins:"bêcins", ez:null, kat:"leker_ergatif", zor:0.73,
    not:"\"Birin\" — [BH] ✓. Ergatif: \"Min bir.\" Kök: dibe.",
-   her:['Min zarok birin li dibistanê.', 'Birin a tiştan li dawî kar.'],
+   her:['Min zarok bir dibistanê.', 'Birina tiştan piştî karî.'],
    gen:["Birin û anîn", "Min bir."]),
 
   (id:"b1_lk04", ku:"Avêtin", tr:"Atmak", en:"To throw",
    cins:"bêcins", ez:null, kat:"leker_ergatif", zor:0.71,
    not:"\"Avêtin\" — [BH] ✓. Ergatif: \"Min avêt.\" Kök: davête.",
-   her:['Min top avêtin ji bo zarokan.', 'Avêtin a kevirî pir dijwar e.'],
+   her:['Min top avêt ji bo zarokan.', 'Avêtina kevirî pir dijwar e.'],
    gen:["Avêtin û girtin", "Min avêt."]),
 
   (id:"b1_lk05", ku:"Vexwarin", tr:"İçmek", en:"To drink",
    cins:"bêcins", ez:null, kat:"leker_ergatif", zor:0.75,
    not:"\"Vexwarin\" — [BH] ✓. Ergatif: \"Min vexwar.\" Kök: vexwe.",
-   her:['Min çay vexwarin.', 'Vexwarin a avê her demê pêdivî ye.'],
+   her:['Min çay vexwar.', 'Vexwarina avê her demê pêdivî ye.'],
    gen:["Vexwarin û xwarin", "Min vexwar."]),
 
   (id:"b1_lk06", ku:"Veguhestin", tr:"Taşımak / Aktarmak", en:"To transport / transfer",
    cins:"bêcins", ez:null, kat:"leker_ergatif", zor:0.69,
    not:"\"Veguhestin\" — \"ve\" + \"guhestin\". Ergatif: \"Min veguhest.\"",
-   her:['Min meriqan veguhestin malê.', 'Veguhestin a giran kar dixwaze.'],
+   her:['Min kel û pel veguhestin malê.', 'Veguhestina giran kar dixwaze.'],
    gen:["Veguhestin û girtin", "Min veguhest."]),
 
   (id:"b1_lk07", ku:"Pejirandin", tr:"Kabul etmek / Onaylamak", en:"To accept / approve",
@@ -4900,8 +4900,8 @@ final kB1_Leker = [
 
   (id:"b1_lk19", ku:"Şiyandîn", tr:"Göndermek / Yollamak", en:"To send off",
    cins:"bêcins", ez:null, kat:"leker_ergatif", zor:0.69,
-   not:"\"Şiyandîn\" — geçişli. \"Min şiyand.\"",
-   her:['Min mesaj şiyandîn.', 'Şiyandîn a dîjîtal zû ye.'],
+   not:"\"Şiyandîn\" — geçişli. \"Min şiyand.\" (şandin ile eşanlamlı).",
+   her:['Min mesaj şiyand.', 'Şiyandîn wateya şandinê ye.'],
    gen:["Şiyandîn û standin", "Min şiyand."]),
 
   (id:"b1_lk20", ku:"Vegerîn", tr:"Geri dönmek", en:"To return",
@@ -7109,19 +7109,19 @@ final kB1_Kar2 = [
   (id:"b1_kr06", ku:"Hilberîn", tr:"Üretmek", en:"To produce",
    cins:"bêcins", ez:null, kat:"kar", zor:0.71,
    not:"\"Hilberîn\" = üretmek. Ergatif: \"Min hilberî.\"",
-   her:['Em li kargehê hilberîn.', 'Hilberîn a textî dem dixwaze.'],
+   her:['Em li kargehê hilberînê dikin.', 'Hilberîna textî dem dixwaze.'],
    gen:["Hilberîn û firotin", "Min hilberî."]),
 
   (id:"b1_kr07", ku:"Firotin", tr:"Satmak", en:"To sell",
    cins:"bêcins", ez:null, kat:"kar", zor:0.72,
    not:"\"Firotin\" = satmak. Ergatif: \"Min firot.\"",
-   her:['Em sêv firotin li sûkê.', 'Firotin a malê profîtê tîne.'],
+   her:['Me sêv li sûkê firotin.', 'Firotina malî qezencê tîne.'],
    gen:["Firotin û kirîn", "Min firot."]),
 
   (id:"b1_kr08", ku:"Kirîn", tr:"Satın almak", en:"To buy",
    cins:"bêcins", ez:null, kat:"kar", zor:0.73,
    not:"\"Kirîn\" = satın almak. Ergatif: \"Min kirî.\"",
-   her:['Min nan kirîn li sûkê.', 'Kirîn a tiştan dirav dixwaze.'],
+   her:['Min nan li sûkê kirî.', 'Kirîna tiştan dirav dixwaze.'],
    gen:["Kirîn û firotin", "Min kirî."]),
 
   (id:"b1_kr09", ku:"Destpêkirina karsaziyê", tr:"İş kurma", en:"Starting a business",
@@ -7133,7 +7133,7 @@ final kB1_Kar2 = [
   (id:"b1_kr10", ku:"Serfkirin", tr:"Harcamak", en:"To spend",
    cins:"bêcins", ez:null, kat:"aborî", zor:0.70,
    not:"\"Serfkirin\" = harcamak. Ergatif: \"Min serf kir.\"",
-   her:['Em pereyê xwe serfkirin baş.', 'Serfkirin a hekîmane bextewariyê tîne.'],
+   her:['Me pereyê xwe baş serf kir.', 'Serfkirina aqilane bextewariyê tîne.'],
    gen:["Serfkirin û tomarkirin", "Min serf kir."]),
 
   (id:"b1_kr11", ku:"Hesabdarkirin", tr:"Muhasebe yapmak", en:"To do accounting",
@@ -7463,10 +7463,10 @@ final kB1_Genel = [
 // ── GENEL TAMAMLAMA — 100 kelime ─────────────────────────────────
 
   // Temel günlük fiiller
-  (id:"b1_gn01", ku:"Gehandîn", tr:"Ulaştırmak / Yetiştirmek", en:"To deliver / reach",
+  (id:"b1_gn01", ku:"Gihandin", tr:"Ulaştırmak / Yetiştirmek", en:"To deliver / reach",
    cins:"bêcins", ez:null, kat:"leker_ergatif", zor:0.70,
-   not:"\"Gehandîn\" — ergatif. \"Min gehand.\"",
-   her:['Min name gehandîn ji bo te.', 'Gehandîn a peyaman wezîfeya me ye.'],
+   not:"\"Gihandin\" (standart form) — ergatif. \"Min gihand.\"",
+   her:['Min name ji bo te gihand.', 'Gihandina peyaman wezîfeya me ye.'],
    gen:["Gehandîn û standin", "Min gehand."]),
 
   (id:"b1_gn02", ku:"Hildan", tr:"Kaldırmak / Almak", en:"To lift / pick up",
@@ -7478,7 +7478,7 @@ final kB1_Genel = [
   (id:"b1_gn03", ku:"Danîn", tr:"Koymak / Bırakmak", en:"To put / place",
    cins:"bêcins", ez:null, kat:"leker_ergatif", zor:0.72,
    not:"\"Danîn\" — ergatif. \"Min da.\"",
-   her:['Min pirtûk danîn ser maseyê.', 'Danîn a tişta li cihê wê.'],
+   her:['Min pirtûk danî ser maseyê.', 'Danîna tiştî li cihê wê.'],
    gen:["Danîn û hildan", "Min da."]),
 
   (id:"b1_gn04", ku:"Veşartin", tr:"Saklamak / Gizlemek", en:"To hide",
@@ -7490,13 +7490,13 @@ final kB1_Genel = [
   (id:"b1_gn05", ku:"Dîtin", tr:"Görmek / Bulmak", en:"To see / find",
    cins:"bêcins", ez:null, kat:"leker_ergatif", zor:0.74,
    not:"\"Dîtin\" — ergatif. \"Min dît.\"",
-   her:['Min hevalê xwe dîtin li bajêr.', 'Dîtin a malbatê piştî dem xweş e.'],
+   her:['Min hevalê xwe li bajêr dît.', 'Dîtina malbatê piştî demeke dirêj xweş e.'],
    gen:["Dîtin û windakirin", "Min dît."]),
 
   (id:"b1_gn06", ku:"Zanîn", tr:"Bilmek", en:"To know",
    cins:"bêcins", ez:null, kat:"leker_ergatif", zor:0.75,
    not:"\"Zanîn\" — ergatif. \"Min zanî.\" Kök: dizanim.",
-   her:['Min zanîn rêya rast.', 'Zanîn a zimanê dayikê hêz e.'],
+   her:['Min rêya rast zanî.', 'Zanîna zimanê dayikê hêz e.'],
    gen:["Zanîn û nezanîn", "Ez dizanim."]),
 
   (id:"b1_gn07", ku:"Fêr bûn", tr:"Öğrenmek", en:"To learn",
@@ -7520,7 +7520,7 @@ final kB1_Genel = [
   (id:"b1_gn10", ku:"Hiştin", tr:"Bırakmak / İzin vermek", en:"To leave / let",
    cins:"bêcins", ez:null, kat:"leker_ergatif", zor:0.71,
    not:"\"Hiştin\" — ergatif. \"Min hişt.\"",
-   her:['Min ew bi tena hiştin.', 'Hiştin a azadiyê pêdiviyek e.'],
+   her:['Min ew bi tenê hişt.', 'Hiştina azadiyê pêdiviyek e.'],
    gen:["Hiştin û girtin", "Min hişt."]),
 
   // Sosyal hayat
@@ -7609,10 +7609,10 @@ final kB1_Genel = [
    her:["Şadî heye.", "Şadîya me."],
    gen:["Şadî û xemgînî", "Şadîya me"]),
 
-  (id:"b1_gn25", ku:"Şîndirkirin", tr:"Üzmek", en:"To sadden",
+  (id:"b1_gn25", ku:"Xemgîn kirin", tr:"Üzmek", en:"To sadden",
    cins:"bêcins", ez:null, kat:"his", zor:0.68,
-   not:"\"Şîndirkirin\" = üzmek.",
-   her:['Wê ez şîndirkirin bi gotinê.', 'Şîndirkirin a zarokan ne baş e.'],
+   not:"\"Xemgîn kirin\" = üzmek (standart Kurmancî).",
+   her:['Wê ez bi gotinê xemgîn kirim.', 'Xemgînkirina zarokan ne baş e.'],
    gen:["Şîndirkirin", "Dilê min şîndirî."]),
 
   // Beden ek
@@ -8133,16 +8133,16 @@ final kB1_B1Final = [
   // Fiil kalıpları — 20
   (id:"b1_f11",ku:"Têgihiştin",tr:"Anlamak / İdrak etmek",en:"To understand",
    cins:"bêcins",ez:null,kat:"leker",zor:0.73,
-   not:"\"Têgihiştin\" — geçişsiz.",her:['Min têgihiştin a meseleyê.', 'Têgihiştin a hîsê dem dixwaze.'],gen:["Têgihiştin û zanîn","Têdigihîjim."]),
+   not:"\"Têgihiştin\" — geçişsiz.",her:['Min bi meseleyê têgihîşt.', 'Têgihîştina hîsê dem dixwaze.'],gen:["Têgihiştin û zanîn","Têdigihîjim."]),
   (id:"b1_f12",ku:"Hesibandin",tr:"Hesaplamak / Saymak",en:"To calculate / count",
    cins:"bêcins",ez:null,kat:"leker_ergatif",zor:0.71,
-   not:"\"Hesibandin\" — ergatif: \"Min hesibandiye.\".",her:['Min hesibandin a heqê.', 'Hesibandin a daxwazan dijwar e.'],gen:["Hesibandin û zanîn","Min hesibandiye."]),
+   not:"\"Hesibandin\" — ergatif: \"Min hesibandiye.\".",her:['Min heq hesiband.', 'Hesibandina daxwazan dijwar e.'],gen:["Hesibandin û zanîn","Min hesibandiye."]),
   (id:"b1_f13",ku:"Amadekirin",tr:"Hazırlamak",en:"To prepare",
    cins:"bêcins",ez:null,kat:"leker_ergatif",zor:0.73,
-   not:"\"Amadekirin\" — ergatif: \"Min amade kir.\".",her:['Min taştê amadekirin.', 'Amadekirin a dersê hewce ye.'],gen:["Amadekirin û pêşkêşkirin","Min amade kir."]),
+   not:"\"Amadekirin\" — ergatif: \"Min amade kir.\".",her:['Min taşte amade kir.', 'Amadekirina dersê hewce ye.'],gen:["Amadekirin û pêşkêşkirin","Min amade kir."]),
   (id:"b1_f14",ku:"Xweşkirin",tr:"Güzelleştirmek",en:"To beautify",
    cins:"bêcins",ez:null,kat:"leker_ergatif",zor:0.68,
-   not:"\"Xweşkirin\" — ergatif.",her:['Em mala xwe xweşkirin.', 'Xweşkirin a jiyanê wezîfeya me ye.'],gen:["Xweşkirin û paqijkirin","Min xweş kir."]),
+   not:"\"Xweşkirin\" — ergatif.",her:['Me mala xwe xweş kir.', 'Xweşkirina jiyanê wezîfeya me ye.'],gen:["Xweşkirin û paqijkirin","Min xweş kir."]),
   (id:"b1_f15",ku:"Xirabtirîn",tr:"Daha kötü olmak",en:"To worsen",
    cins:"bêcins",ez:null,kat:"leker",zor:0.68,
    not:"\"Xerab\"+\"tirîn\". Karşılaştırmalı.",her:['Hewa xirabtirîn ji duh.', 'Xirabtirîn ji vê tişt heye.'],gen:["Xirabtirîn","Xerabtir bû."]),

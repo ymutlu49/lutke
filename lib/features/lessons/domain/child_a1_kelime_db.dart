@@ -378,15 +378,15 @@ const kChildA1Kelimeler = [
    her:['Em firfirê difirandin.', 'Firfir li ezmanan e.'],
    gen:['Firfir — uçurtma', 'Firfira sor.']),
 
-  (id:'z_a1_101', ku:'Darvêş', tr:'Salıncak', en:'Swing', cins:'mê', ez:'darvêşa',
-   kat:'listik', zor:0.78, not:'Park oyunu', emoji:'🎪',
-   her:['Ez li darvêşê dilîzim.', 'Darvêş xweş e!'],
-   gen:['Darvêş — salıncak', 'Darvêşa mezin.']),
+  (id:'z_a1_101', ku:'Colan', tr:'Salıncak', en:'Swing', cins:'mê', ez:'colana',
+   kat:'listik', zor:0.78, not:'Park oyunu — salıncak', emoji:'🎪',
+   her:['Ez li colanê dilîzim.', 'Colan xweş e!'],
+   gen:['Colan — salıncak', 'Colana mezin.']),
 
-  (id:'z_a1_102', ku:'Gêlavêj', tr:'Kaydırak', en:'Slide', cins:'mê', ez:'gêlavêja',
-   kat:'listik', zor:0.78, not:'Park oyunu', emoji:'🛝',
-   her:['Em li gêlavêjê dilîzin.', 'Gêlavêj dirêj e.'],
-   gen:['Gêlavêj — kaydırak', 'Gêlavêja bilind.']),
+  (id:'z_a1_102', ku:'Xişok', tr:'Kaydırak', en:'Slide', cins:'mê', ez:'xişoka',
+   kat:'listik', zor:0.78, not:'Park oyunu — kaydırak', emoji:'🛝',
+   her:['Em li xişokê dilîzin.', 'Xişok dirêj e.'],
+   gen:['Xişok — kaydırak', 'Xişoka bilind.']),
 
   // ── Hest (Duygular A2) ek ──────────────────────────────
 ];

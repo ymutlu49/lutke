@@ -533,8 +533,8 @@ const kA1TamKelimeler = [
    her:['Di vê heftê de pîrê tê.', 'Hefta me xweş bû.'],
    gen:['Hefta û meh', 'Di heftê de']),
 
-  (id:'a1_128', ku:'Meh', tr:'Ay (zaman)', en:'Month', cins:'nêr', ez:'mehê',
-   kat:'dem', zor:0.81, not:'Eril. "Heyv" = gökteki ay, "meh" = zaman olarak ay',
+  (id:'a1_128', ku:'Meh', tr:'Ay (zaman)', en:'Month', cins:'mê', ez:'meha',
+   kat:'dem', zor:0.81, not:'Dişil — Bedir Han standardı. "Heyv" = gökteki ay, "meh" = zaman olarak ay (ör. meha Adarê).',
    her:['Mehê Adarê — Newroz!', 'Mehê me xweş bû.'],
    gen:['Meh û sal', 'Di mehê de']),
 
@@ -1193,9 +1193,9 @@ const kA1TamKelimeler = [
    her:['Baran dibare, pîrê!', 'Baranê spas im.'],
    gen:['Baran û berf', 'Baran dibare.']),
 
-  (id:'a1_289', ku:'Berf', tr:'Kar', en:'Snow', cins:'nêr', ez:'berfê',
+  (id:'a1_289', ku:'Berf', tr:'Kar', en:'Snow', cins:'mê', ez:'berfa',
    kat:'xweza', zor:0.82,
-   not:'Eril — "Berf dibare" = kar yağıyor',
+   not:'Dişil — [BH], [FB], [Chyet]. "Berf dibare" = kar yağıyor.',
    her:['Berf dibare, pîrê!', 'Berfê spî!'],
    gen:['Berf û baran', 'Berf dibare.']),
 
@@ -1381,7 +1381,7 @@ const kA1TamKelimeler = [
    her:['Dersa me dest pê kir, dê!', 'Bavê min dersan fêrî min dike.'],
    gen:['Ders hêsan e.', 'Dersa îro Kurmancî ye.']),
 
-  (id:'a1_503', ku:'Xwendekar', tr:'Öğrenci', en:'Student', cins:'nêr', ez:'xwendekarî',
+  (id:'a1_503', ku:'Xwendekar', tr:'Öğrenci', en:'Student', cins:'nêr', ez:'xwendekarê',
    kat:'perwerde', zor:0.82, not:'"Xwend" (okumak) + "-ekar" = yapan. Eril.',
    her:['Xwendekar hat, pîrê!', 'Lawê min xwendekar e.'],
    gen:['Xwendekar li polê ye.', 'Ew xwendekarek baş e.']),
@@ -1557,19 +1557,19 @@ const kA1TamKelimeler = [
 
   // ── cil (giysi) — 2 yeni ──────────────────────────────────
 
-  (id:'a1_535', ku:'Şal', tr:'Şal / Atkı', en:'Scarf', cins:'nêr', ez:'şalî',
+  (id:'a1_535', ku:'Şal', tr:'Şal / Atkı', en:'Scarf', cins:'nêr', ez:'şalê',
    kat:'cil', zor:0.80, not:'"Şal" — eril. Kürt kültüründe geleneksel giysi parçası.',
    her:['Şalê xwe li xwe bike, keça min!', 'Pîrê, şalê te xweş e.'],
    gen:['Şal germ e.', 'Ew şalê li xwe dike.']),
 
-  (id:'a1_536', ku:'Çakêt', tr:'Ceket', en:'Jacket', cins:'nêr', ez:'çakêtî',
+  (id:'a1_536', ku:'Çakêt', tr:'Ceket', en:'Jacket', cins:'nêr', ez:'çakêtê',
    kat:'cil', zor:0.80, not:'"Çakêt" — eril. Fransızca "jaquette" kökenli.',
    her:['Çakêtê xwe li xwe bike, lawê min!', 'Dê, çakêt li ku ye?'],
    gen:['Çakêt nû ye.', 'Ew çakêtê li xwe dike.']),
 
   // ── gihanî (ulaşım) — 2 yeni ──────────────────────────────
 
-  (id:'a1_537', ku:'Trên', tr:'Tren', en:'Train', cins:'nêr', ez:'trênî',
+  (id:'a1_537', ku:'Trên', tr:'Tren', en:'Train', cins:'nêr', ez:'trênê',
    kat:'gihanî', zor:0.80, not:'"Trên" — eril. Fransızca "train" kökenli.',
    her:['Em bi trênê diçin, dê!', 'Pîrê, trên hat!'],
    gen:['Trên mezin e.', 'Em bi trênê diçin.']),
@@ -1581,12 +1581,12 @@ const kA1TamKelimeler = [
 
   // ── mêwe (meyve) — 2 yeni ─────────────────────────────────
 
-  (id:'a1_539', ku:'Zeytûn', tr:'Zeytin', en:'Olive', cins:'nêr', ez:'zeytûnî',
+  (id:'a1_539', ku:'Zeytûn', tr:'Zeytin', en:'Olive', cins:'nêr', ez:'zeytûnê',
    kat:'mêwe', zor:0.80, not:'"Zeytûn" — eril. Arapça kökenli.',
    her:['Zeytûn bixwe, lawê min!', 'Pîrê, zeytûn xweş e.'],
    gen:['Zeytûn li masê ye.', 'Ez zeytûn dixwim.']),
 
-  (id:'a1_540', ku:'Qeysî', tr:'Kayısı', en:'Apricot', cins:'nêr', ez:'qeysiyî',
+  (id:'a1_540', ku:'Qeysî', tr:'Kayısı', en:'Apricot', cins:'nêr', ez:'qeysiyê',
    kat:'mêwe', zor:0.82, not:'"Qeysî" — eril. Havînê dipese.',
    her:['Dê, qeysî gihîştiye!', 'Pîrê, qeysî şîrîn e.'],
    gen:['Qeysî zer e.', 'Ez qeysiyê dixwim.']),
@@ -1605,12 +1605,12 @@ const kA1TamKelimeler = [
 
   // ── pîşe (meslek) — 2 yeni ─────────────────────────────────
 
-  (id:'a1_543', ku:'Avahîsaz', tr:'Mimar', en:'Architect', cins:'nêr', ez:'avahîsazî',
+  (id:'a1_543', ku:'Avahîsaz', tr:'Mimar', en:'Architect', cins:'nêr', ez:'avahîsazê',
    kat:'pîşe', zor:0.86, not:'"Avahî" = bina + "saz" = yapan = mimar.',
    her:['Apê min avahîsaz e, dê.', 'Pîrê, avahîsaz çi dike?'],
    gen:['Ew avahîsaz e.', 'Avahîsaz avahiyan çêdike.']),
 
-  (id:'a1_544', ku:'Şofêr', tr:'Şoför', en:'Driver', cins:'nêr', ez:'şofêrî',
+  (id:'a1_544', ku:'Şofêr', tr:'Şoför', en:'Driver', cins:'nêr', ez:'şofêrê',
    kat:'pîşe', zor:0.80, not:'"Şofêr" — eril. Fransızca "chauffeur" kökenli.',
    her:['Bavê min şofêr e, pîrê.', 'Dê, şofêr hat!'],
    gen:['Ew şofêr e.', 'Şofêr otobêsê dimeşîne.']),
@@ -1629,7 +1629,7 @@ const kA1TamKelimeler = [
 
   // ── tendurist (sağlık) — 2 yeni ────────────────────────────
 
-  (id:'a1_547', ku:'Serêş', tr:'Baş ağrısı', en:'Headache', cins:'nêr', ez:'serêşî',
+  (id:'a1_547', ku:'Serêş', tr:'Baş ağrısı', en:'Headache', cins:'nêr', ez:'serêşê',
    kat:'tendurist', zor:0.82, not:'"Ser" = baş + "êş" = ağrı = baş ağrısı.',
    her:['Serêşê min heye, dê.', 'Pîrê, serêş xweş nabe.'],
    gen:['Serêş heye.', 'Serêşê min zêde ye.']),
@@ -1641,12 +1641,12 @@ const kA1TamKelimeler = [
 
   // ── vexwarin (içecek) — 2 yeni ─────────────────────────────
 
-  (id:'a1_549', ku:'Şerbik', tr:'Meyve suyu', en:'Juice', cins:'nêr', ez:'şerbikî',
+  (id:'a1_549', ku:'Şerbik', tr:'Meyve suyu', en:'Juice', cins:'nêr', ez:'şerbikê',
    kat:'vexwarin', zor:0.80, not:'"Şerbik" — eril. "Şerbet" kökenli, meyve suyu.',
    her:['Şerbik bixwe, lawê min!', 'Dê, şerbik xweş e.'],
    gen:['Şerbik sar e.', 'Ez şerbikê dixwim.']),
 
-  (id:'a1_550', ku:'Mastaw', tr:'Ayran', en:'Buttermilk', cins:'nêr', ez:'mastawî',
+  (id:'a1_550', ku:'Mastaw', tr:'Ayran', en:'Buttermilk', cins:'nêr', ez:'mastawê',
    kat:'vexwarin', zor:0.80, not:'"Mast" = yoğurt + "aw" = su = ayran.',
    her:['Mastawê bide min, dê!', 'Pîrê, mastaw xweş e.'],
    gen:['Mastaw sar e.', 'Ez mastawê dixwim.']),
