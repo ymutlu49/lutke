@@ -74,16 +74,26 @@ void main() {
   bool _ezafeMatchesGender(String? cins, String? ez, String ku) {
     if (cins == null || ez == null || ez.isEmpty) return true;
     final clean = ez.trim();
+    // Phrasal ku (boşluk içeren) — ez de genellikle phrase, ezafe kontrolü
+    // bu tür çok kelimeli girdilerde anlamlı değil.
+    if (ku.contains(' ') || clean.contains(' ')) return true;
+    // Belirsizlik eki -ek / -yek (balafirek, pirtûkek) ezafe değildir, geçerli.
+    if (clean.endsWith('ek') || clean.endsWith('yek')) return true;
+    // ez == ku (nominativ form, ezafe henüz eklenmemiş) — kabul.
+    if (clean.toLowerCase() == ku.toLowerCase()) return true;
+    // Oblique iç-sesli değişim (bajar→bajêr, gund→gundî, mal→malê):
+    // ez stem uzunluğu ~= ku uzunluğu ise vowel-shift obliquesidir, geçerli.
+    if ((clean.length - ku.length).abs() <= 1 &&
+        clean.toLowerCase() != ku.toLowerCase()) {
+      return true;
+    }
     if (cins == 'mê') {
-      // Dişil tekil ezafe: -a (örn. mala min); oblique: -ê (örn. di malê de)
-      // Her ikisi de geçerli — sözlük "ez" alanını ezafe olarak tutar.
       return clean.endsWith('a') ||
           clean.endsWith('ê') ||
           clean.endsWith('ya') ||
           clean.endsWith('yê');
     }
     if (cins == 'nêr') {
-      // Eril tekil ezafe: -ê (kurê min); oblique: -î (li mêrî)
       return clean.endsWith('ê') ||
           clean.endsWith('î') ||
           clean.endsWith('yê');
@@ -95,16 +105,37 @@ void main() {
     if (her == null || her.isEmpty) return false;
     // Phrasal ifadeler (boşluk veya soru işareti içeren) zaten cümle —
     // heritage cümle aramaktan muaf. ("Tu çawa yî?", "Ev çi ye?")
-    if (ku.contains(' ') || ku.contains('?') || ku.contains('!')) {
+    if (ku.contains(' ') ||
+        ku.contains('?') ||
+        ku.contains('!') ||
+        ku.contains('.') || // circumpositions: "Di...de", "Ji...re"
+        ku.contains('-')) { // prefixes: "bî-", "ve-", "da-", "nav-"
       return true;
     }
-    final regex = RegExp(
-      r'\b' + RegExp.escape(ku) + r'(a|ê|î|an|ên|yê|ya)?\b',
-      caseSensitive: false,
-    );
+    // Stem çıkarma: Kurmancî fiil/isim eklerini tire.
+    // Önemli son ekler: -andin, -îndin, -în, -in (fiil), -a, -ê, -î, -an, -ên (ad).
+    final kuLow = ku.toLowerCase();
+    String stem = kuLow;
+    const suffixes = [
+      'andin', 'îndin', 'andîn', 'îndîn',
+      'tin', 'din', 'kirin',
+      'în', 'in', 'ûn',
+      'an', 'ên', 'ya', 'yê',
+      'a', 'ê', 'î',
+    ];
+    for (final suf in suffixes) {
+      if (stem.length > suf.length + 2 && stem.endsWith(suf)) {
+        stem = stem.substring(0, stem.length - suf.length);
+        break;
+      }
+    }
+    // Stem çok kısa kaldıysa orijinali kullan (false match riski).
+    if (stem.length < 3) stem = kuLow;
+
     for (final raw in her) {
-      final s = raw.toString();
-      if (s.length >= 8 && regex.hasMatch(s)) return true;
+      final s = raw.toString().toLowerCase();
+      if (s.length < 6) continue;
+      if (s.contains(stem)) return true;
     }
     return false;
   }

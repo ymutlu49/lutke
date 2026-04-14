@@ -2300,7 +2300,7 @@ final kC1_EkTamam = [
   (id:"c1_1077", ku:"pêkanîn", tr:"Başarmak / Gerçekleştirmek", en:"To achieve / To accomplish",
    cins:"mê", ez:"pêkanîn", kat:"leker", zor:0.59,
    not:"Lêkera serkeftinê.",
-   her:["Me ew pêk anî.", "Divê em vê pêk bînin."], gen:["Pêkanîn","Pêkanîna me"]),
+   her:['Em pêkanîn projeya nû.', 'Pêkanîn a hêviyê bi xebatê tê.'], gen:["Pêkanîn","Pêkanîna me"]),
 
   (id:"c1_1078", ku:"destnîşankirin", tr:"Belirlemek / Tespit etmek", en:"To identify / To determine",
    cins:"mê", ez:"destnîşankirin", kat:"leker", zor:0.60,

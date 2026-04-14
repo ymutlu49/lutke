@@ -156,7 +156,7 @@ final kB2Kelimeler = [
   (id:"b2_035", ku:"Raportin", tr:"Rapor etmek / Haberdar etmek", en:"To report",
    cins:"bêcins", ez:null, kat:"medya", zor:0.65,
    not:"\"Raportin\" fiili. [FB]: raportin v. Gazete ve resmi yazışmalarda kullanılır",
-   her:["Nûçegiran ragihand.", "Kêşe hate ragihandin."],
+   her:['Min bûyer ji rayedaran re raportin.', 'Raportin a rewşê wezîfeya me ye.'],
    gen:["Ragihandin û pêşniyar", "Raportin lazim e."]),
 
   // ════════════════════════════════════════════════════════════
@@ -719,12 +719,12 @@ final kB2EkKelimeler = [
   (id:"b2_260", ku:"Cîhanîbûn", tr:"Küreselleşme", en:"Globalization",
    cins:"mê", ez:"cîhanîbûnê", kat:"soyut", zor:0.67,
    not:"Dişil — \"cîhan\" (dünya) + \"-îbûn\" (olma süreci). Kurmancî özgün terim. \"Globalîzasyon\" da kullanılır (uluslararası). \"Cîhanîbûn û ziman\" = küreselleşme ve dil.",
-   her:["Globalîzasyon ziman dixe xeterê.", "Globalîzasyon û çand."], gen:["Globalîzasyon û nasname", "Globalîzasyona me"]),
+   her:['Cîhanîbûn aborî guhertiye.', 'Bandora cîhanîbûnê li her welatî ye.'], gen:["Globalîzasyon û nasname", "Globalîzasyona me"]),
 
   (id:"b2_261", ku:"Nûgerî", tr:"Modernizm / Yenilikçilik", en:"Modernism",
    cins:"mê", ez:"nûgeriyê", kat:"soyut", zor:0.67,
    not:"Dişil — \"nû\" (yeni) + \"-gerî\" (yönelim). Kurmancî özgün terim. \"Modernîzm\" de kullanılır. \"Nûgeriya kurdî\" = Kürt modernizmi.",
-   her:["Modernîzm û kevneşopî.", "Di modernîzmê de."], gen:["Modernîzm û çand", "Modernîzma me"]),
+   her:['Nûgerî di sedsala 20an de dest pê kir.', 'Nûgerî û kevneşopî carinan li hev dixin.'], gen:["Modernîzm û çand", "Modernîzma me"]),
 
   (id:"b2_262", ku:"Dîjîtal", tr:"Dijital", en:"Digital",
    cins:"bêcins", ez:null, kat:"teknoloji", zor:0.70,
@@ -905,7 +905,7 @@ final kB2EkKelimeler2 = [
   (id:"b2_323", ku:"Vegêrîn", tr:"Geri dönmek", en:"To return",
    cins:"bêcins", ez:null, kat:"leker", zor:0.70,
    not:"\"Vegêrîn\" — [AS] no.992: \"geri dönmek = vegerîn\" ✓.",
-   her:["Vegerîm!", "Hasan vegeriya welatê xwe."],
+   her:['Ez piştî salan vegêrîn welêt.', 'Vegêrîn a koçberan dem dixwaze.'],
    gen:["Vegêrîn û çûn", "Vegerî!"]),
 
   // ── HUKUK VE YÖNETİM TAM ──────────────────────────────────
@@ -1005,7 +1005,7 @@ final kB2EkKelimeler2 = [
   (id:"b2_361", ku:"Konferanse", tr:"Konferans", en:"Conference",
    cins:"mê", ez:"konferansê", kat:"perwerde", zor:0.69,
    not:"Dişil — uluslararası terim.",
-   her:["Di konferansê de axivî.", "Konferansa kurdî."],
+   her:['Konferanse li zanîngehê pêk hat.', 'Konferanse ya zimanê kurdî girîng bû.'],
    gen:["Konferanse û semînar", "Konferansa me"]),
 
   (id:"b2_362", ku:"Semînar", tr:"Seminer", en:"Seminar",
@@ -1024,7 +1024,7 @@ final kB2EkKelimeler2 = [
   (id:"b2_370", ku:"Vatanperwer", tr:"Vatansever", en:"Patriotic",
    cins:"bêcins", ez:"vatanperwer", kat:"kimlik", zor:0.68,
    not:"\"Welat\" Kurmancî — \"welatperwer\" daha özgün ama \"vatanperwer\" yaygın.",
-   her:["Ew welatperwer e.", "Welatperwer bin!"],
+   her:['Ew mirovekî vatanperwer e.', 'Vatanperwer bi ziman û çanda xwe girêdayî ye.'],
    gen:["Welatperwer û wefadar", "Welatperwer"]),
 
   (id:"b2_371", ku:"Welatperwer", tr:"Vatansever (özgün)", en:"Patriot",
@@ -2464,7 +2464,7 @@ final kB2_Final46 = [
   (id:"b2_lk01", ku:"Nîşandan", tr:"Göstermek", en:"To show / demonstrate",
    cins:"bêcins", ez:null, kat:"leker", zor:0.68,
    not:"\"Nîşandan\" = göstermek. Ergatif: \"Min nîşan da.\"",
-   her:["Min nîşan da.", "Ew nîşan dide."],
+   her:['Min rê nîşandan ji wî re.', 'Nîşandan a rêya rast wezîfeya mezinan e.'],
    gen:["Nîşandan û veşartin", "Min nîşan da."]),
 
   (id:"b2_lk02", ku:"Pêşkêş kirin", tr:"Sunmak", en:"To present / offer",

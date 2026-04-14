@@ -432,7 +432,7 @@ const kA2Kelimeler = [
   (id:'a2_084', ku:'Xwandî', tr:'Okudu / Öğrendi', en:'Read / Studied (past)',
    cins:'bêcins', ez:null, kat:'perwerde', zor:0.80,
    not:'Geçmiş — xwendin fiili geçişsiz değil, geçişli (ergatif!). A2\'de tanıtım. [TH] §68',
-   her:['Min ev pirtûk xwendî.', 'Te çi xwendî îsal?'],
+   her:['Min ev pirtûk xwandî sala borî.', 'Birayê min zanîngeh xwandî.'],
    gen:['Ew gelek xwandiye.', 'Min pirtûk xwand.']),
 
   (id:'a2_085', ku:'Îmtîhan', tr:'Sınav', en:'Exam',
@@ -1038,7 +1038,7 @@ const kA2EkKelimeler = [
   (id:'a2_270', ku:'Êşîn', tr:'Ağrımak', en:'To ache / hurt',
    cins:'bêcins', ez:null, kat:'tendurist', zor:0.80,
    not:'"Êşîn" fiili — "Serê min diêşe" = başım ağrıyor. [TH] §65. "Êş" = ağrı (A1\'de var)',
-   her:['Serê min êşe.', 'Lingê min êşin piştî meşê.'],
+   her:['Serê min îro pir êşîn.', 'Zikê min ji xwarinê êşîn.'],
    gen:['Êşîn û baş bûn', 'Zikê min diêşe.']),
 
   (id:'a2_271', ku:'Zirav', tr:'İnce / Zayıf', en:'Thin / Slim',
@@ -3543,7 +3543,7 @@ const kA2EkKelimeler8 = [
   (id:'a2_1523', ku:'Desturdan', tr:'İzin vermek', en:'To permit / allow',
    cins:'bêcins', ez:null, kat:'leker', zor:0.79,
    not:'"Desturdan" — [AS] no.1027 ✓.',
-   her:['Bavê min destturdan da min.', 'Destturdan a derketinê hêsan nîne.'],
+   her:['Bavê min desturdan da min.', 'Mamoste desturdan dide zarokan.'],
    gen:['Desturdan û red kirin', 'Destûr bide!']),
 
   (id:'a2_1524', ku:'Dehf dan', tr:'İtmek', en:'To push',
