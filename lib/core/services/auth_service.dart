@@ -31,6 +31,16 @@ final isLoggedInProvider = Provider<bool>((ref) {
   return ref.watch(currentUserProvider) != null;
 });
 
+/// LÛTKE sahibi — Prof. Dr. Yılmaz Mutlu.
+/// Bu mail ile giriş yapan kullanıcı admin paneline ve hata bildirim
+/// FAB'ına erişebilir.
+const kOwnerEmail = 'y.mutlu@alparslan.edu.tr';
+
+final isOwnerProvider = Provider<bool>((ref) {
+  final user = ref.watch(currentUserProvider);
+  return user?.email?.toLowerCase() == kOwnerEmail.toLowerCase();
+});
+
 final userProfileFirestoreProvider =
     FutureProvider.family<UserProfile?, String>((ref, userId) {
   return ref.watch(authServiceProvider).getUserProfile(userId);

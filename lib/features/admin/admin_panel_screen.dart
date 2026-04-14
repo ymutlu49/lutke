@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import '../../core/router/app_router.dart';
 
@@ -11,6 +13,7 @@ import '../lessons/domain/b1_kelime_db.dart';
 import '../lessons/domain/b2_kelime_db.dart';
 import '../lessons/domain/c1_kelime_db.dart';
 import '../lessons/domain/c2_kelime_db.dart';
+import 'data/admin_note_repository.dart';
 
 // ════════════════════════════════════════════════════════════════
 // ADMIN PANELİ — Veri yönetimi ve istatistikler
@@ -24,14 +27,14 @@ class _LevelInfo {
   _LevelInfo(this.name, this.words, this.color);
 }
 
-class AdminPanelScreen extends StatefulWidget {
+class AdminPanelScreen extends ConsumerStatefulWidget {
   const AdminPanelScreen({super.key});
 
   @override
-  State<AdminPanelScreen> createState() => _AdminPanelScreenState();
+  ConsumerState<AdminPanelScreen> createState() => _AdminPanelScreenState();
 }
 
-class _AdminPanelScreenState extends State<AdminPanelScreen>
+class _AdminPanelScreenState extends ConsumerState<AdminPanelScreen>
     with SingleTickerProviderStateMixin {
   late final TabController _tabController;
   late final List<_LevelInfo> _levels;
@@ -40,7 +43,8 @@ class _AdminPanelScreenState extends State<AdminPanelScreen>
   @override
   void initState() {
     super.initState();
-    _tabController = TabController(length: 4, vsync: this);
+    // 5 sekme: Notlar (yeni!) + Lîsteya Peyvan + Amar + Kontrol + Lêgerîn
+    _tabController = TabController(length: 5, vsync: this);
     _levels = [
       _LevelInfo('A1', kA1TamListe, const Color(0xFF4CAF50)),
       _LevelInfo('A2', kA2TamListe, const Color(0xFF8BC34A)),
@@ -90,6 +94,7 @@ class _AdminPanelScreenState extends State<AdminPanelScreen>
           unselectedLabelColor: Colors.white60,
           labelStyle: AppTypography.labelSmall.copyWith(fontWeight: FontWeight.w700),
           tabs: const [
+            Tab(text: 'Notlar'),
             Tab(text: 'Lîsteya Peyvan'),
             Tab(text: 'Amar'),
             Tab(text: 'Kontrola Daneyan'),
@@ -100,6 +105,7 @@ class _AdminPanelScreenState extends State<AdminPanelScreen>
       body: TabBarView(
         controller: _tabController,
         children: [
+          const _NotesTab(),
           _WordListTab(levels: _levels, allWords: _allWords),
           _StatsTab(levels: _levels, allWords: _allWords),
           _DataValidationTab(levels: _levels, allWords: _allWords),
@@ -107,6 +113,330 @@ class _AdminPanelScreenState extends State<AdminPanelScreen>
         ],
       ),
     );
+  }
+}
+
+// ════════════════════════════════════════════════════════════════
+// TAB 0 — HATA NOTLARI (Yönetici)
+// Sahibin uygulamada bulduğu hatalar/öneriler burada listelenir.
+// JSON export ile dışa aktarılır.
+// ════════════════════════════════════════════════════════════════
+
+class _NotesTab extends ConsumerWidget {
+  const _NotesTab();
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final notesAsync = ref.watch(adminNotesProvider);
+
+    return notesAsync.when(
+      loading: () => const Center(child: CircularProgressIndicator()),
+      error: (e, _) => Center(child: Text('Xeletî: $e')),
+      data: (notes) {
+        if (notes.isEmpty) {
+          return Center(
+            child: Padding(
+              padding: const EdgeInsets.all(32),
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Icon(Icons.bug_report_outlined,
+                      size: 64, color: AppColors.textTertiary),
+                  const SizedBox(height: 12),
+                  Text(
+                    'Tu not nehat tomar kirin',
+                    style: AppTypography.title.copyWith(
+                      color: AppColors.textSecondary,
+                    ),
+                  ),
+                  const SizedBox(height: 6),
+                  Text(
+                    'Uygulamada gezerken sağ alttaki 🐞 butonuyla\nbaşka ekranlardan da not düşebilirsin.',
+                    textAlign: TextAlign.center,
+                    style: AppTypography.body.copyWith(
+                      color: AppColors.textTertiary,
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          );
+        }
+
+        return Column(
+          children: [
+            // Üst aksiyon barı
+            Container(
+              padding: const EdgeInsets.symmetric(
+                  horizontal: 12, vertical: 8),
+              decoration: BoxDecoration(
+                color: AppColors.surface,
+                border: Border(
+                  bottom: BorderSide(
+                    color: AppColors.borderLight,
+                  ),
+                ),
+              ),
+              child: Row(
+                children: [
+                  Text(
+                    '${notes.length} not',
+                    style: AppTypography.label.copyWith(
+                      color: AppColors.textSecondary,
+                      fontWeight: FontWeight.w700,
+                    ),
+                  ),
+                  const Spacer(),
+                  TextButton.icon(
+                    onPressed: () => _exportJson(context, ref),
+                    icon: const Icon(Icons.copy_rounded, size: 16),
+                    label: const Text('JSON kopyala'),
+                  ),
+                  const SizedBox(width: 4),
+                  TextButton.icon(
+                    onPressed: () => _confirmClearAll(context, ref),
+                    icon: Icon(Icons.delete_sweep_rounded,
+                        size: 16, color: AppColors.errorSoft),
+                    label: Text(
+                      'Hepsini sil',
+                      style: TextStyle(color: AppColors.errorSoft),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            Expanded(
+              child: ListView.separated(
+                padding: const EdgeInsets.all(12),
+                itemCount: notes.length,
+                separatorBuilder: (_, __) => const SizedBox(height: 8),
+                itemBuilder: (_, i) => _NoteCard(note: notes[i]),
+              ),
+            ),
+          ],
+        );
+      },
+    );
+  }
+
+  Future<void> _exportJson(BuildContext context, WidgetRef ref) async {
+    final json = await ref.read(adminNoteRepositoryProvider).exportJson();
+    await Clipboard.setData(ClipboardData(text: json));
+    if (context.mounted) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: const Text('JSON panoya kopyalandı'),
+          duration: const Duration(seconds: 2),
+          backgroundColor: AppColors.success,
+        ),
+      );
+    }
+  }
+
+  Future<void> _confirmClearAll(BuildContext context, WidgetRef ref) async {
+    final ok = await showDialog<bool>(
+      context: context,
+      builder: (_) => AlertDialog(
+        title: const Text('Hepsini sil?'),
+        content: const Text('Bu işlem geri alınamaz.'),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.pop(context, false),
+            child: const Text('Vazgeç'),
+          ),
+          TextButton(
+            onPressed: () => Navigator.pop(context, true),
+            child: Text('Sil',
+                style: TextStyle(color: AppColors.errorSoft)),
+          ),
+        ],
+      ),
+    );
+    if (ok == true) {
+      await ref.read(adminNoteRepositoryProvider).clear();
+      ref.invalidate(adminNotesProvider);
+    }
+  }
+}
+
+class _NoteCard extends ConsumerWidget {
+  final AdminNote note;
+  const _NoteCard({required this.note});
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final isDone = note.status == AdminNoteStatus.fixed;
+
+    return Container(
+      padding: const EdgeInsets.all(12),
+      decoration: BoxDecoration(
+        color: AppColors.surface,
+        borderRadius: BorderRadius.circular(12),
+        border: Border.all(
+          color: isDone
+              ? AppColors.success.withOpacity(0.4)
+              : AppColors.borderLight,
+        ),
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Row(
+            children: [
+              Text(
+                '${note.category.emoji} ${note.category.labelKu}',
+                style: AppTypography.labelSmall.copyWith(
+                  color: AppColors.primary,
+                  fontWeight: FontWeight.w700,
+                ),
+              ),
+              const SizedBox(width: 8),
+              Container(
+                padding: const EdgeInsets.symmetric(
+                    horizontal: 6, vertical: 2),
+                decoration: BoxDecoration(
+                  color: switch (note.status) {
+                    AdminNoteStatus.open =>
+                      AppColors.errorSoft.withOpacity(0.15),
+                    AdminNoteStatus.fixed =>
+                      AppColors.success.withOpacity(0.15),
+                    AdminNoteStatus.ignored =>
+                      AppColors.textTertiary.withOpacity(0.15),
+                  },
+                  borderRadius: BorderRadius.circular(6),
+                ),
+                child: Text(
+                  note.status.labelKu,
+                  style: TextStyle(
+                    fontSize: 10,
+                    fontWeight: FontWeight.w700,
+                    color: switch (note.status) {
+                      AdminNoteStatus.open => AppColors.errorSoft,
+                      AdminNoteStatus.fixed => AppColors.success,
+                      AdminNoteStatus.ignored => AppColors.textTertiary,
+                    },
+                  ),
+                ),
+              ),
+              const Spacer(),
+              Text(
+                _fmtDate(note.created),
+                style: AppTypography.caption.copyWith(
+                  color: AppColors.textTertiary,
+                  fontSize: 11,
+                ),
+              ),
+            ],
+          ),
+          const SizedBox(height: 6),
+          Text(
+            note.message,
+            style: AppTypography.body.copyWith(
+              color: isDone
+                  ? AppColors.textSecondary
+                  : AppColors.textPrimary,
+              decoration:
+                  isDone ? TextDecoration.lineThrough : null,
+            ),
+          ),
+          const SizedBox(height: 6),
+          // Route + opsiyonel context
+          Container(
+            padding:
+                const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
+            decoration: BoxDecoration(
+              color: AppColors.backgroundTertiary,
+              borderRadius: BorderRadius.circular(4),
+            ),
+            child: Text(
+              note.context != null
+                  ? '${note.route}  ·  ${note.context}'
+                  : note.route,
+              style: TextStyle(
+                fontSize: 10,
+                fontFamily: 'monospace',
+                color: AppColors.textSecondary,
+              ),
+            ),
+          ),
+          const SizedBox(height: 6),
+          // Eylemler
+          Row(
+            children: [
+              if (note.status != AdminNoteStatus.fixed)
+                TextButton.icon(
+                  onPressed: () async {
+                    await ref
+                        .read(adminNoteRepositoryProvider)
+                        .update(note.copyWith(
+                            status: AdminNoteStatus.fixed));
+                    ref.invalidate(adminNotesProvider);
+                  },
+                  icon: Icon(Icons.check_rounded,
+                      size: 16, color: AppColors.success),
+                  label: Text('Çareser',
+                      style: TextStyle(color: AppColors.success)),
+                ),
+              if (note.status == AdminNoteStatus.fixed)
+                TextButton.icon(
+                  onPressed: () async {
+                    await ref
+                        .read(adminNoteRepositoryProvider)
+                        .update(note.copyWith(
+                            status: AdminNoteStatus.open));
+                    ref.invalidate(adminNotesProvider);
+                  },
+                  icon: const Icon(Icons.undo_rounded, size: 16),
+                  label: const Text('Geri al'),
+                ),
+              const Spacer(),
+              IconButton(
+                onPressed: () async {
+                  final ok = await showDialog<bool>(
+                    context: context,
+                    builder: (_) => AlertDialog(
+                      title: const Text('Notu sil?'),
+                      actions: [
+                        TextButton(
+                          onPressed: () =>
+                              Navigator.pop(context, false),
+                          child: const Text('Vazgeç'),
+                        ),
+                        TextButton(
+                          onPressed: () =>
+                              Navigator.pop(context, true),
+                          child: Text('Sil',
+                              style: TextStyle(
+                                  color: AppColors.errorSoft)),
+                        ),
+                      ],
+                    ),
+                  );
+                  if (ok == true) {
+                    await ref
+                        .read(adminNoteRepositoryProvider)
+                        .delete(note.id);
+                    ref.invalidate(adminNotesProvider);
+                  }
+                },
+                icon: Icon(Icons.delete_outline,
+                    size: 18, color: AppColors.textTertiary),
+              ),
+            ],
+          ),
+        ],
+      ),
+    );
+  }
+
+  String _fmtDate(DateTime d) {
+    final now = DateTime.now();
+    final diff = now.difference(d);
+    if (diff.inMinutes < 1) return 'şimdi';
+    if (diff.inHours < 1) return '${diff.inMinutes} dk önce';
+    if (diff.inDays < 1) return '${diff.inHours} sa önce';
+    if (diff.inDays < 7) return '${diff.inDays} gün önce';
+    return '${d.day}/${d.month}/${d.year}';
   }
 }
 

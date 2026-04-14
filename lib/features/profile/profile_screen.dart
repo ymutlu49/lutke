@@ -236,6 +236,7 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
         ];
 
       case _ProfileTab.settings:
+        final isOwner = ref.watch(isOwnerProvider);
         return [
           _SettingsSection(dailyGoal: profile.dailyGoal),
           gap,
@@ -244,6 +245,10 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
           _AccessibilityCard(),
           gap,
           const _QuickActionsSection(),
+          if (isOwner) ...[
+            gap,
+            _AdminPanelLink(),
+          ],
           gap,
           _AccountActions(
             isAnonymous: user?.isAnonymous ?? true,
@@ -252,6 +257,80 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
           ),
         ];
     }
+  }
+}
+
+/// Sahip için: Yönetici paneli kısayolu (Mîheng sekmesinde).
+class _AdminPanelLink extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Material(
+      color: Colors.transparent,
+      child: InkWell(
+        onTap: () => context.push(AppRoutes.admin),
+        borderRadius: BorderRadius.circular(16),
+        child: Container(
+          padding: const EdgeInsets.all(AppSpacing.md),
+          decoration: BoxDecoration(
+            gradient: LinearGradient(
+              colors: [
+                AppColors.primaryDark,
+                AppColors.primary.withOpacity(0.85),
+              ],
+              begin: Alignment.topLeft,
+              end: Alignment.bottomRight,
+            ),
+            borderRadius: BorderRadius.circular(16),
+          ),
+          child: Row(
+            children: [
+              Container(
+                width: 40,
+                height: 40,
+                decoration: BoxDecoration(
+                  color: Colors.white.withOpacity(0.18),
+                  borderRadius: BorderRadius.circular(12),
+                ),
+                alignment: Alignment.center,
+                child: const Icon(
+                  Icons.admin_panel_settings,
+                  color: Colors.white,
+                  size: 22,
+                ),
+              ),
+              const SizedBox(width: 12),
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      'Panela Rêveberiyê',
+                      style: AppTypography.title.copyWith(
+                        color: Colors.white,
+                        fontWeight: FontWeight.w800,
+                        fontSize: 15,
+                      ),
+                    ),
+                    Text(
+                      'Notlar, kelime kontrol, istatistik',
+                      style: AppTypography.caption.copyWith(
+                        color: Colors.white.withOpacity(0.85),
+                        fontSize: 11,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              const Icon(
+                Icons.arrow_forward_ios_rounded,
+                color: Colors.white,
+                size: 14,
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
   }
 }
 

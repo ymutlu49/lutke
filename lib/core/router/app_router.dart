@@ -20,6 +20,7 @@ import '../constants/app_colors.dart';
 import '../constants/app_typography.dart';
 import '../services/auth_service.dart';
 import '../services/sound_service.dart';
+import '../../features/admin/presentation/admin_note_fab.dart';
 import '../../features/cultural_content/culture_screen.dart';
 import '../../features/cultural_content/presentation/gotinen_pesiyan_screen.dart';
 import '../../features/exercises/presentation/flashcard_screen.dart';
@@ -505,6 +506,10 @@ class _AppShell extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: shell,
+      // Sahip için: hata bildirim FAB (diğer kullanıcılar görmez)
+      floatingActionButton: const AdminNoteFab(),
+      floatingActionButtonLocation:
+          FloatingActionButtonLocation.endFloat,
       bottomNavigationBar: _PersistentBottomNav(
         currentIndex: shell.currentIndex,
         onTap: (i) {
