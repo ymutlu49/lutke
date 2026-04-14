@@ -578,16 +578,24 @@ class _QuizScreenState extends ConsumerState<QuizScreen>
 
   // ── Kurmancî Soru Yardımcıları ─────────────────────────────────
 
-  /// Heritage cümleden kelimeyi gizle
+  /// Heritage cümleden kelimeyi gizle (word boundary ile)
   String _maskWord(String sentence, String word) {
-    // Kelimeyi ve ezafe formlarını gizle
+    if (word.length <= 2) {
+      // Tek/iki harfli kelimeler maskeleme için uygun değil
+      return '____';
+    }
     var masked = sentence;
+    // Kelimeyi ve ezafe formlarını word boundary ile gizle
     final forms = [word, '${word}ê', '${word}a', '${word}î', '${word}an'];
     for (final form in forms) {
-      masked = masked.replaceAll(form, '____');
-      masked = masked.replaceAll(form.toLowerCase(), '____');
+      // Kelime sınırı: boşluk, satır başı/sonu, noktalama ile çevrili
+      final regex = RegExp('\\b${RegExp.escape(form)}\\b', caseSensitive: false);
+      masked = masked.replaceAll(regex, '____');
     }
-    return masked;
+    // Türkçe açıklama kısımlarını temizle ("— gün demek" gibi)
+    masked = masked.replaceAll(RegExp(r'\s*—\s*[a-zA-ZçşğüöıÇŞĞÜÖI ]+\.?$'), '');
+    masked = masked.replaceAll(RegExp(r'\s*—\s*[a-zA-ZçşğüöıÇŞĞÜÖI ]+demek.*'), '');
+    return masked.trim();
   }
 
   // ── 1. Translation: Kurmancî -> Tirkî ────────────────────────
@@ -616,14 +624,20 @@ class _QuizScreenState extends ConsumerState<QuizScreen>
 
     // Tenê Kurmancî: Heritage cümle göster (kelime gizli) → doğru kelimeyi seç
     final sentences = q.word.her;
-    String hint;
+    String hint = '';
+
     if (sentences is List && sentences.isNotEmpty) {
-      hint = _maskWord(sentences[0].toString(), q.word.ku);
-      if (!hint.contains('____')) {
-        // Cümlede kelime bulunamadıysa, İngilizce tanım kullan
-        hint = q.word.en.isNotEmpty ? q.word.en : '____';
+      // Heritage cümlelerin en uzununu seç (daha iyi bağlam)
+      final candidates = (sentences as List).cast<String>()
+          .where((s) => s.length > 5)
+          .toList();
+      if (candidates.isNotEmpty) {
+        hint = _maskWord(candidates[0], q.word.ku);
       }
-    } else {
+    }
+
+    // Maskeleme başarısızsa veya hint çok kısaysa → İngilizce tanım
+    if (!hint.contains('____') || hint.length < 5) {
       hint = q.word.en.isNotEmpty ? q.word.en : '____';
     }
 
@@ -673,14 +687,19 @@ class _QuizScreenState extends ConsumerState<QuizScreen>
 
     // Tenê Kurmancî: Heritage cümle göster → doğru kelimeyi seç
     final sentences = q.word.her;
-    String hint;
+    String hint = '';
+
     if (sentences is List && sentences.isNotEmpty) {
-      hint = _maskWord(sentences[0].toString(), q.word.ku);
-      if (!hint.contains('____')) {
-        hint = '____';
+      final candidates = (sentences as List).cast<String>()
+          .where((s) => s.length > 5)
+          .toList();
+      if (candidates.isNotEmpty) {
+        hint = _maskWord(candidates[0], q.word.ku);
       }
-    } else {
-      hint = '____';
+    }
+
+    if (!hint.contains('____') || hint.length < 5) {
+      hint = q.word.en.isNotEmpty ? q.word.en : '____';
     }
 
     return Column(
@@ -957,7 +976,7 @@ class _QuizScreenState extends ConsumerState<QuizScreen>
               Expanded(
                 child: Text(
                   _isCorrect
-                      ? (_variantAccepted ? 'Nêzîk e!' : 'Aferin!')
+                      ? (_variantAccepted ? 'Nêzîk e!' : 'Pîroz be!')
                       : 'Rast bersiv:',
                   style: AppTypography.label.copyWith(
                     color: _isCorrect
@@ -1370,7 +1389,7 @@ class _QuizScreenState extends ConsumerState<QuizScreen>
 
   String _getCorrectMessage() {
     final messages = [
-      'Aferin!',
+      'Pîroz be!',
       'Pir bask!',
       'Rast e!',
       'Geleki bask!',
