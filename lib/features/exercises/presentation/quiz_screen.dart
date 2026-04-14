@@ -21,6 +21,7 @@ import '../../lessons/domain/c1_kelime_db.dart';
 import '../../lessons/domain/c2_kelime_db.dart';
 import '../../lessons/domain/child_a1_kelime_db.dart';
 import '../../lessons/domain/child_a2_kelime_db.dart';
+import '../../cultural_content/domain/dil_motivasyon_db.dart';
 import '../../../core/services/sound_service.dart';
 import '../../../shared/providers/child_mode_provider.dart';
 import '../../../shared/utils/word_emoji_map.dart';
@@ -2398,6 +2399,88 @@ class _QuizScreenState extends ConsumerState<QuizScreen>
                     style: AppTypography.bodyLarge
                         .copyWith(color: AppColors.textSecondary),
                   ).animate().fadeIn(delay: 300.ms),
+
+                  Gap.md,
+
+                  // ── 5b. Gotina Rojê — Anadil motivasyon sözü ──
+                  Builder(builder: (_) {
+                    final gotin = gotinaRastgele();
+                    return Container(
+                      width: double.infinity,
+                      padding: const EdgeInsets.all(AppSpacing.md),
+                      decoration: BoxDecoration(
+                        gradient: LinearGradient(
+                          colors: [
+                            AppColors.primary.withOpacity(0.08),
+                            AppColors.accent.withOpacity(0.05),
+                          ],
+                          begin: Alignment.topLeft,
+                          end: Alignment.bottomRight,
+                        ),
+                        borderRadius: BorderRadius.circular(16),
+                        border: Border.all(
+                          color: AppColors.primary.withOpacity(0.12),
+                        ),
+                      ),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Row(
+                            children: [
+                              Icon(
+                                Icons.format_quote_rounded,
+                                color: AppColors.primary,
+                                size: 18,
+                              ),
+                              const SizedBox(width: 6),
+                              Text(
+                                'Gotina Rojê',
+                                style: AppTypography.labelSmall.copyWith(
+                                  color: AppColors.primary,
+                                  fontWeight: FontWeight.w800,
+                                ),
+                              ),
+                            ],
+                          ),
+                          const SizedBox(height: 6),
+                          Text(
+                            gotin.ku,
+                            style: AppTypography.kurmanji.copyWith(
+                              color: AppColors.textPrimary,
+                              fontSize: 15,
+                              fontWeight: FontWeight.w600,
+                              height: 1.4,
+                            ),
+                          ),
+                          if (showTr) ...[
+                            const SizedBox(height: 4),
+                            Text(
+                              gotin.tr,
+                              style: AppTypography.body.copyWith(
+                                color: AppColors.textSecondary,
+                                fontStyle: FontStyle.italic,
+                                fontSize: 12,
+                              ),
+                            ),
+                          ],
+                          const SizedBox(height: 6),
+                          Text(
+                            '— ${gotin.source}',
+                            style: AppTypography.caption.copyWith(
+                              color: AppColors.accent,
+                              fontWeight: FontWeight.w600,
+                              fontSize: 11,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ).animate().fadeIn(delay: 500.ms).slideY(
+                          begin: 0.1,
+                          end: 0,
+                          duration: 400.ms,
+                          curve: Curves.easeOut,
+                        );
+                  }),
 
                   Gap.lg,
 

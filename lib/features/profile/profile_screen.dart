@@ -11,6 +11,7 @@ import '../../core/router/app_router.dart';
 import '../../core/services/auth_service.dart';
 import '../lessons/data/lesson_repository.dart';
 import '../gamification/gamification_widgets.dart';
+import '../cultural_content/domain/dil_motivasyon_db.dart';
 import '../../shared/widgets/leaderboard_widget.dart';
 
 // ════════════════════════════════════════════════════════════════
@@ -1726,44 +1727,140 @@ class _SettingsSectionState extends State<_SettingsSection> {
 // İlke §9b bulgu #2
 // ════════════════════════════════════════════════════════════════
 
+/// Motivasyon kartı — günün Kurmancî sözü + kullanıcının kişisel motivasyonu.
+/// Her gün farklı bir söz Kurmancî öğrenmenin önemini hatırlatır.
 class _MotivationCard extends StatelessWidget {
   final String motivation;
   const _MotivationCard({required this.motivation});
 
   @override
-  Widget build(BuildContext context) => Container(
-        padding: const EdgeInsets.all(AppSpacing.md),
-        decoration: BoxDecoration(
-          color: AppColors.surface,
-          borderRadius: BorderRadius.circular(16),
+  Widget build(BuildContext context) {
+    final gotin = gotinaRoje();
+
+    return Container(
+      decoration: BoxDecoration(
+        gradient: LinearGradient(
+          colors: [
+            AppColors.primary.withOpacity(0.06),
+            AppColors.accent.withOpacity(0.04),
+          ],
+          begin: Alignment.topLeft,
+          end: Alignment.bottomRight,
         ),
-        child: Row(
-          children: [
-            Icon(Icons.favorite_outline,
-                color: AppColors.accent, size: 24),
-            const SizedBox(width: AppSpacing.md),
-            Expanded(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    'Motivasyona te',
-                    style: AppTypography.caption
-                        .copyWith(color: AppColors.textSecondary),
+        borderRadius: BorderRadius.circular(20),
+        border: Border.all(color: AppColors.primary.withOpacity(0.10)),
+      ),
+      padding: const EdgeInsets.all(AppSpacing.lg),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          // Üst bant: "Gotina rojê" (Günün Sözü) etiketi
+          Row(
+            children: [
+              Icon(
+                Icons.format_quote_rounded,
+                color: AppColors.primary,
+                size: 22,
+              ),
+              const SizedBox(width: 8),
+              Text(
+                'Gotina Rojê',
+                style: AppTypography.labelSmall.copyWith(
+                  color: AppColors.primary,
+                  fontWeight: FontWeight.w800,
+                  letterSpacing: 0.5,
+                ),
+              ),
+            ],
+          ),
+          const SizedBox(height: AppSpacing.sm),
+
+          // Kurmancî söz (vurgulu)
+          Text(
+            gotin.ku,
+            style: AppTypography.kurmanji.copyWith(
+              color: AppColors.textPrimary,
+              fontSize: 16,
+              fontWeight: FontWeight.w600,
+              height: 1.45,
+            ),
+          ),
+          const SizedBox(height: 6),
+
+          // Türkçe çevirisi (italik, küçük)
+          Text(
+            gotin.tr,
+            style: AppTypography.body.copyWith(
+              color: AppColors.textSecondary,
+              fontStyle: FontStyle.italic,
+              fontSize: 13,
+              height: 1.4,
+            ),
+          ),
+          const SizedBox(height: 8),
+
+          // Kaynak (yazar/halk)
+          Row(
+            children: [
+              Container(
+                width: 4, height: 4,
+                decoration: BoxDecoration(
+                  color: AppColors.accent,
+                  shape: BoxShape.circle,
+                ),
+              ),
+              const SizedBox(width: 8),
+              Expanded(
+                child: Text(
+                  gotin.source,
+                  style: AppTypography.caption.copyWith(
+                    color: AppColors.accent,
+                    fontWeight: FontWeight.w600,
+                    fontSize: 11,
                   ),
-                  Text(
+                ),
+              ),
+            ],
+          ),
+
+          // Kullanıcının kayıtlı motivasyon hedefini koru — alt küçük chip
+          if (motivation.isNotEmpty) ...[
+            const SizedBox(height: AppSpacing.md),
+            Container(
+              height: 1,
+              color: AppColors.borderLight.withOpacity(0.5),
+            ),
+            const SizedBox(height: AppSpacing.sm),
+            Row(
+              children: [
+                Icon(
+                  Icons.favorite_outline,
+                  color: AppColors.accent,
+                  size: 16,
+                ),
+                const SizedBox(width: 6),
+                Text(
+                  'Hedefa te: ',
+                  style: AppTypography.caption.copyWith(
+                    color: AppColors.textSecondary,
+                  ),
+                ),
+                Expanded(
+                  child: Text(
                     motivation,
-                    style: AppTypography.labelLarge.copyWith(
+                    style: AppTypography.caption.copyWith(
                       color: AppColors.textPrimary,
                       fontWeight: FontWeight.w600,
                     ),
                   ),
-                ],
-              ),
+                ),
+              ],
             ),
           ],
-        ),
-      );
+        ],
+      ),
+    );
+  }
 }
 
 // ════════════════════════════════════════════════════════════════
