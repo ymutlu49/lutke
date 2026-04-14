@@ -20,11 +20,38 @@ import '../../shared/widgets/leaderboard_widget.dart';
 // İlke §8: WCAG 2.2 AA erişilebilirlik
 // ════════════════════════════════════════════════════════════════
 
-class ProfileScreen extends ConsumerWidget {
+// ────────────────────────────────────────────────────────────────
+// Sekme modeli — profil ekranı 4 sekmeye bölünmüştür.
+// Her sekme odaklı bir bilgi grubu taşır, böylece scroll yükü azalır.
+// ────────────────────────────────────────────────────────────────
+enum _ProfileTab {
+  progress,     // Pêşketin — istatistikler, XP, haftalık aktivite
+  achievements, // Serkeftî — rozetler, CEFR seviye ilerlemesi
+  competition,  // Pêşbazî — leaderboard
+  settings,     // Mîheng — hesap, motivasyon, erişilebilirlik, hızlı eylem
+}
+
+class ProfileScreen extends ConsumerStatefulWidget {
   const ProfileScreen({super.key});
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
+  ConsumerState<ProfileScreen> createState() => _ProfileScreenState();
+}
+
+class _ProfileScreenState extends ConsumerState<ProfileScreen> {
+  _ProfileTab _selectedTab = _ProfileTab.progress;
+
+  /// Tüm seviyelerdeki öğrenilen kelime toplamını hesapla
+  static int _sumLearnedWords(List<AsyncValue<LevelProgress>> progresses) {
+    int total = 0;
+    for (final p in progresses) {
+      p.whenData((data) => total += data.learnedCards);
+    }
+    return total;
+  }
+
+  @override
+  Widget build(BuildContext context) {
     final user = ref.watch(currentUserProvider);
     final profile = ref.watch(userProfileProvider);
     final userId = user?.uid ?? 'anonymous';
@@ -90,132 +117,51 @@ class ProfileScreen extends ConsumerWidget {
                   ],
                 ),
 
+                // ── Profil Başlığı (her zaman görünür) ──────────
                 SliverPadding(
-                  padding: const EdgeInsets.all(AppSpacing.md),
+                  padding: const EdgeInsets.fromLTRB(
+                    AppSpacing.md, AppSpacing.md,
+                    AppSpacing.md, AppSpacing.sm,
+                  ),
+                  sliver: SliverToBoxAdapter(
+                    child: _ProfileHeader(
+                      displayName: profile.displayName.isNotEmpty
+                          ? profile.displayName
+                          : user?.displayName ?? 'Heval',
+                      currentLevel: profile.currentLevel.toUpperCase(),
+                      currentLevelNum: profile.currentLevelNum,
+                      isHeritage: profile.isHeritage,
+                      totalXP: profile.totalXP,
+                      memberSince: user?.metadata.creationTime,
+                    ),
+                  ),
+                ),
+
+                // ── Sekme Şeridi ──
+                SliverPersistentHeader(
+                  pinned: true,
+                  delegate: _TabStripDelegate(
+                    selectedTab: _selectedTab,
+                    onSelect: (tab) => setState(() => _selectedTab = tab),
+                  ),
+                ),
+
+                // ── Seçili sekme içeriği ──
+                SliverPadding(
+                  padding: const EdgeInsets.fromLTRB(
+                    AppSpacing.md, AppSpacing.md,
+                    AppSpacing.md, AppSpacing.xl,
+                  ),
                   sliver: SliverList(
-                    delegate: SliverChildListDelegate([
-                      // ── 1. Profil Başlığı (Geliştirilmiş) ────
-                      _ProfileHeader(
-                        displayName: profile.displayName.isNotEmpty
-                            ? profile.displayName
-                            : user?.displayName ?? 'Heval',
-                        currentLevel: profile.currentLevel.toUpperCase(),
-                        currentLevelNum: profile.currentLevelNum,
-                        isHeritage: profile.isHeritage,
-                        totalXP: profile.totalXP,
-                        memberSince: user?.metadata.creationTime,
+                    delegate: SliverChildListDelegate(
+                      _buildTabContent(
+                        tab: _selectedTab,
+                        profile: profile,
+                        user: user,
+                        dailyStats: dailyStats,
+                        levelProgresses: levelProgresses,
                       ),
-
-                      const SizedBox(height: AppSpacing.lg),
-
-                      // ── 2. Öğrenme İstatistik Panosu ─────────
-                      if (dailyStats != null)
-                        dailyStats.when(
-                          data: (s) => _LearningStatsDashboard(
-                            totalWords: _sumLearnedWords(levelProgresses),
-                            totalWordTarget: 4178,
-                            completedLessons:
-                                profile.completedLessons.length,
-                            totalLessons: 137,
-                            streakDays: s.streakDays,
-                            bestStreak: s.streakDays, // placeholder
-                            accuracy: s.accuracy,
-                          ),
-                          loading: () =>
-                              const _LearningStatsDashboard(
-                            totalWords: 0,
-                            totalWordTarget: 4178,
-                            completedLessons: 0,
-                            totalLessons: 137,
-                            streakDays: 0,
-                            bestStreak: 0,
-                            accuracy: 0,
-                          ),
-                          error: (_, __) =>
-                              const _LearningStatsDashboard(
-                            totalWords: 0,
-                            totalWordTarget: 4178,
-                            completedLessons: 0,
-                            totalLessons: 137,
-                            streakDays: 0,
-                            bestStreak: 0,
-                            accuracy: 0,
-                          ),
-                        )
-                      else
-                        const _LearningStatsDashboard(
-                          totalWords: 0,
-                          totalWordTarget: 4178,
-                          completedLessons: 0,
-                          totalLessons: 137,
-                          streakDays: 0,
-                          bestStreak: 0,
-                          accuracy: 0,
-                        ),
-
-                      const SizedBox(height: AppSpacing.lg),
-
-                      // ── XP İlerleme Çubuğu ──────────────────
-                      const XPProgressBar(),
-
-                      const SizedBox(height: AppSpacing.lg),
-
-                      // ── Rozet Koleksiyonu ────────────────────
-                      const AchievementBadgeGrid(),
-
-                      const SizedBox(height: AppSpacing.lg),
-
-                      // ── 3. CEFR Seviye İlerlemesi ────────────
-                      _CEFRProgressSection(
-                        currentLevel: profile.currentLevelNum,
-                        progresses: levelProgresses,
-                      ),
-
-                      const SizedBox(height: AppSpacing.lg),
-
-                      // ── 4. Haftalık Aktivite Grafiği ─────────
-                      const _WeeklyActivityChart(),
-
-                      const SizedBox(height: AppSpacing.lg),
-
-                      // ── 4b. Mini Leaderboard (Pêşbazî) ─────
-                      const LeaderboardWidget(),
-
-                      const SizedBox(height: AppSpacing.lg),
-
-                      // ── 5. Hızlı Eylemler ───────────────────
-                      const _QuickActionsSection(),
-
-                      const SizedBox(height: AppSpacing.lg),
-
-                      // ── 6. Ayarlar Bölümü ───────────────────
-                      _SettingsSection(
-                        dailyGoal: profile.dailyGoal,
-                      ),
-
-                      const SizedBox(height: AppSpacing.lg),
-
-                      // ── Motivasyon Çapası ────────────────────
-                      // İlke §9b bulgu #2
-                      _MotivationCard(motivation: profile.motivation.name),
-
-                      const SizedBox(height: AppSpacing.lg),
-
-                      // ── Erişilebilirlik Ayarları ─────────────
-                      // İlke §8.2: Disleksi desteği
-                      _AccessibilityCard(),
-
-                      const SizedBox(height: AppSpacing.lg),
-
-                      // ── Hesap Eylemleri ──────────────────────
-                      _AccountActions(
-                        isAnonymous: user?.isAnonymous ?? true,
-                        ref: ref,
-                        context: context,
-                      ),
-
-                      const SizedBox(height: AppSpacing.xl),
-                    ]),
+                    ),
                   ),
                 ),
               ],
@@ -226,13 +172,198 @@ class ProfileScreen extends ConsumerWidget {
     );
   }
 
-  /// Tüm seviyelerdeki öğrenilen kelime toplamını hesapla
-  static int _sumLearnedWords(List<AsyncValue<LevelProgress>> progresses) {
-    int total = 0;
-    for (final p in progresses) {
-      p.whenData((data) => total += data.learnedCards);
+  /// Seçili sekmeye göre içerik listesi üretir.
+  List<Widget> _buildTabContent({
+    required _ProfileTab tab,
+    required dynamic profile,
+    required dynamic user,
+    required AsyncValue<dynamic>? dailyStats,
+    required List<AsyncValue<LevelProgress>> levelProgresses,
+  }) {
+    const gap = SizedBox(height: AppSpacing.lg);
+    switch (tab) {
+      case _ProfileTab.progress:
+        return [
+          // İstatistik panosu
+          if (dailyStats != null)
+            dailyStats.when(
+              data: (s) => _LearningStatsDashboard(
+                totalWords: _sumLearnedWords(levelProgresses),
+                totalWordTarget: 4178,
+                completedLessons: profile.completedLessons.length,
+                totalLessons: 137,
+                streakDays: s.streakDays,
+                bestStreak: s.streakDays,
+                accuracy: s.accuracy,
+              ),
+              loading: () => const _LearningStatsDashboard(
+                totalWords: 0, totalWordTarget: 4178,
+                completedLessons: 0, totalLessons: 137,
+                streakDays: 0, bestStreak: 0, accuracy: 0,
+              ),
+              error: (_, __) => const _LearningStatsDashboard(
+                totalWords: 0, totalWordTarget: 4178,
+                completedLessons: 0, totalLessons: 137,
+                streakDays: 0, bestStreak: 0, accuracy: 0,
+              ),
+            )
+          else
+            const _LearningStatsDashboard(
+              totalWords: 0, totalWordTarget: 4178,
+              completedLessons: 0, totalLessons: 137,
+              streakDays: 0, bestStreak: 0, accuracy: 0,
+            ),
+          gap,
+          const XPProgressBar(),
+          gap,
+          const _WeeklyActivityChart(),
+        ];
+
+      case _ProfileTab.achievements:
+        return [
+          const AchievementBadgeGrid(),
+          gap,
+          _CEFRProgressSection(
+            currentLevel: profile.currentLevelNum,
+            progresses: levelProgresses,
+          ),
+        ];
+
+      case _ProfileTab.competition:
+        return [
+          const LeaderboardWidget(),
+        ];
+
+      case _ProfileTab.settings:
+        return [
+          _SettingsSection(dailyGoal: profile.dailyGoal),
+          gap,
+          _MotivationCard(motivation: profile.motivation.name),
+          gap,
+          _AccessibilityCard(),
+          gap,
+          const _QuickActionsSection(),
+          gap,
+          _AccountActions(
+            isAnonymous: user?.isAnonymous ?? true,
+            ref: ref,
+            context: context,
+          ),
+        ];
     }
-    return total;
+  }
+}
+
+// ════════════════════════════════════════════════════════════════
+// Sekme Şeridi Delegesi — yapışkan (sticky) başlık
+// ════════════════════════════════════════════════════════════════
+
+class _TabStripDelegate extends SliverPersistentHeaderDelegate {
+  final _ProfileTab selectedTab;
+  final ValueChanged<_ProfileTab> onSelect;
+
+  _TabStripDelegate({required this.selectedTab, required this.onSelect});
+
+  static const _tabs = [
+    (_ProfileTab.progress,     'Pêşketin',   Icons.trending_up_rounded),
+    (_ProfileTab.achievements, 'Serkeftî',   Icons.emoji_events_rounded),
+    (_ProfileTab.competition,  'Pêşbazî',    Icons.groups_rounded),
+    (_ProfileTab.settings,     'Mîheng',     Icons.tune_rounded),
+  ];
+
+  @override
+  double get minExtent => 56;
+
+  @override
+  double get maxExtent => 56;
+
+  @override
+  Widget build(BuildContext context, double shrinkOffset, bool overlapsContent) {
+    return Container(
+      color: AppColors.backgroundPrimary,
+      padding: const EdgeInsets.symmetric(
+        horizontal: AppSpacing.md,
+        vertical: 8,
+      ),
+      child: Row(
+        children: [
+          for (final (tab, label, icon) in _tabs) ...[
+            Expanded(
+              child: _TabChip(
+                label: label,
+                icon: icon,
+                isActive: tab == selectedTab,
+                onTap: () => onSelect(tab),
+              ),
+            ),
+            if (tab != _tabs.last.$1) const SizedBox(width: 6),
+          ],
+        ],
+      ),
+    );
+  }
+
+  @override
+  bool shouldRebuild(_TabStripDelegate oldDelegate) =>
+      oldDelegate.selectedTab != selectedTab;
+}
+
+class _TabChip extends StatelessWidget {
+  final String label;
+  final IconData icon;
+  final bool isActive;
+  final VoidCallback onTap;
+
+  const _TabChip({
+    required this.label,
+    required this.icon,
+    required this.isActive,
+    required this.onTap,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return GestureDetector(
+      onTap: onTap,
+      behavior: HitTestBehavior.opaque,
+      child: AnimatedContainer(
+        duration: const Duration(milliseconds: 200),
+        padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 6),
+        decoration: BoxDecoration(
+          color: isActive
+              ? AppColors.primary
+              : AppColors.primarySurface.withOpacity(0.5),
+          borderRadius: BorderRadius.circular(12),
+          border: Border.all(
+            color: isActive
+                ? AppColors.primary
+                : AppColors.primary.withOpacity(0.15),
+            width: 1,
+          ),
+        ),
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Icon(
+              icon,
+              size: 18,
+              color: isActive ? Colors.white : AppColors.primary,
+            ),
+            const SizedBox(height: 2),
+            Text(
+              label,
+              style: AppTypography.caption.copyWith(
+                color: isActive ? Colors.white : AppColors.primary,
+                fontWeight: FontWeight.w700,
+                fontSize: 10,
+              ),
+              maxLines: 1,
+              overflow: TextOverflow.ellipsis,
+            ),
+          ],
+        ),
+      ),
+    );
   }
 }
 
