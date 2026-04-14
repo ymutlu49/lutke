@@ -60,7 +60,20 @@ class _QuizWord {
 }
 
 /// Egzersiz tipleri.
-enum _ExerciseType { translation, reverseTranslation, listening, typing }
+/// - translation: Kurmancî kelime → Türkçe seçenekler (4 seçenek)
+/// - reverseTranslation: Türkçe kelime → Kurmancî seçenekler
+/// - listening: Ses (Kurmancî) → Türkçe ya da Kurmancî seçenekler
+/// - typing: Yaz (klavyeden Kurmancî kelimeyi gir)
+/// - pictureToWord: Görsel (büyük emoji) → Kurmancî kelime seç
+/// - wordToPicture: Kurmancî kelime → 4 emoji seçeneği (görsel hatırlatma)
+enum _ExerciseType {
+  translation,
+  reverseTranslation,
+  listening,
+  typing,
+  pictureToWord,
+  wordToPicture,
+}
 
 /// Tek bir quiz sorusu.
 class _QuizQuestion {
@@ -154,26 +167,28 @@ List<_QuizQuestion> _generateQuizSession({
   final sessionWords = <_QuizWord>[...easy, ...mid, ...hard];
 
   // Egzersiz tipi dagitimi:
-  // Yetiskin: ~3 translation, ~3 reverse, ~2 listening, ~2 typing
-  // Cocuk: typing yasak (disleksi/motor kontrol) → yerine reverse & listening
+  // Yetiskin: ~2 translation, ~2 reverse, 2 listening, 2 typing,
+  //           1 pictureToWord, 1 wordToPicture (görsel zenginlik)
+  // Cocuk: typing yasak; görsel ağırlıklı:
+  //        ~2 picture-based, 2 translation, 1 reverse, 1 listening
   final baseTypes = isChildMode
       ? <_ExerciseType>[
-          _ExerciseType.translation,
+          _ExerciseType.pictureToWord,
+          _ExerciseType.pictureToWord,
+          _ExerciseType.wordToPicture,
           _ExerciseType.translation,
           _ExerciseType.reverseTranslation,
-          _ExerciseType.reverseTranslation,
-          _ExerciseType.listening,
           _ExerciseType.listening,
         ]
       : <_ExerciseType>[
           _ExerciseType.translation,
           _ExerciseType.translation,
-          _ExerciseType.translation,
-          _ExerciseType.reverseTranslation,
           _ExerciseType.reverseTranslation,
           _ExerciseType.reverseTranslation,
           _ExerciseType.listening,
           _ExerciseType.listening,
+          _ExerciseType.pictureToWord,
+          _ExerciseType.wordToPicture,
           _ExerciseType.typing,
           _ExerciseType.typing,
         ];
@@ -196,6 +211,15 @@ List<_QuizQuestion> _generateQuizSession({
       type = _ExerciseType.translation;
     }
 
+    // Picture-based tipler için emoji şart
+    final wordEmoji = emojiForWord(word.ku, word.kat);
+    if ((type == _ExerciseType.pictureToWord ||
+            type == _ExerciseType.wordToPicture) &&
+        wordEmoji.isEmpty) {
+      // Fallback: emoji yoksa translation'a düş
+      type = _ExerciseType.translation;
+    }
+
     List<String> options = [];
 
     if (type != _ExerciseType.typing) {
@@ -205,29 +229,77 @@ List<_QuizQuestion> _generateQuizSession({
         distractorPool = allWords.where((w) => w.id != word.id).toList();
       }
 
-      // Morfolojik benzerlik skorlaması:
-      // - aynı/yakın uzunluk tercih (±1)
-      // - Levenshtein 1-3 tercih (çok uzak ya da aynı olmayan)
-      // - skoru düşük olanları başa al; ilk 8'i al → karıştır → ilk 3'ü distractor
+      // Morfolojik benzerlik skorlaması (translation/reverse/listening için)
+      // Picture tiplerinde semantik fark daha önemli — emoji-uyumlu öncelikli
       final target = word.ku.toLowerCase();
       int score(_QuizWord w) {
         final cand = w.ku.toLowerCase();
-        if (cand == target) return 9999; // yedek güvenlik
+        if (cand == target) return 9999;
         final lenDiff = (cand.length - target.length).abs();
         final dist = _levenshteinDistance(cand, target);
-        // En iyi: aynı uzunluk + yakın ama özdeş olmayan (mesafe 1-3)
         int s = lenDiff * 3;
         if (dist >= 1 && dist <= 3) {
-          s += dist; // 1,2,3 → küçük ceza
+          s += dist;
         } else {
-          s += 6 + dist; // çok uzak → büyük ceza
+          s += 6 + dist;
         }
         return s;
       }
       distractorPool.sort((a, b) => score(a).compareTo(score(b)));
       final topCandidates = distractorPool.take(8).toList()..shuffle(rng);
 
-      if (showTurkish) {
+      if (type == _ExerciseType.pictureToWord) {
+        // Görsel (emoji) → Kurmancî kelime seç
+        // Soru yeri: word.ku (büyük emoji); seçenekler: 4 Kurmancî kelime
+        // Doğru: word.ku; distractor: 3 farklı Kurmancî kelime (aynı kategori)
+        final correctAnswer = word.ku;
+        final wrongOptions =
+            topCandidates.take(3).map((w) => w.ku).toList();
+        options = [correctAnswer, ...wrongOptions]..shuffle(rng);
+      } else if (type == _ExerciseType.wordToPicture) {
+        // Kurmancî kelime → 4 emoji seçeneği
+        // Distractor'lar emoji-uyumlu kelimelerden seçilmeli (boş emoji çıkmasın)
+        final emojiCandidates = topCandidates
+            .where((w) => emojiForWord(w.ku, w.kat).isNotEmpty)
+            .where((w) => emojiForWord(w.ku, w.kat) != wordEmoji)
+            .toList();
+        if (emojiCandidates.length < 3) {
+          // Yetersiz emoji distractor → tip değiştir
+          type = _ExerciseType.translation;
+          final isKuOptions = false;
+          final correctAnswer = isKuOptions ? word.ku : word.tr;
+          final wrongOptions = topCandidates.take(3)
+              .map((w) => isKuOptions ? w.ku : w.tr).toList();
+          options = [correctAnswer, ...wrongOptions]..shuffle(rng);
+        } else {
+          // Seçenek olarak emoji string'leri tut (option == doğru emoji ise doğru)
+          final correctAnswer = wordEmoji;
+          final wrongOptions = emojiCandidates
+              .take(3)
+              .map((w) => emojiForWord(w.ku, w.kat))
+              .toSet() // duplicate emoji'leri ele
+              .toList();
+          // Toset'ten 3'ten az çıkabilir → ek doldurma
+          while (wrongOptions.length < 3 && emojiCandidates.length > wrongOptions.length) {
+            for (final c in emojiCandidates) {
+              final e = emojiForWord(c.ku, c.kat);
+              if (!wrongOptions.contains(e) && e != correctAnswer) {
+                wrongOptions.add(e);
+              }
+              if (wrongOptions.length >= 3) break;
+            }
+            break;
+          }
+          if (wrongOptions.length < 3) {
+            type = _ExerciseType.translation;
+            final correctAnswer2 = word.tr;
+            final wrongOptions2 = topCandidates.take(3).map((w) => w.tr).toList();
+            options = [correctAnswer2, ...wrongOptions2]..shuffle(rng);
+          } else {
+            options = [correctAnswer, ...wrongOptions.take(3)]..shuffle(rng);
+          }
+        }
+      } else if (showTurkish) {
         // Türkçe mod: KU göster → TR seçenekler / TR göster → KU seçenekler
         final isKuOptions = type == _ExerciseType.reverseTranslation;
         final correctAnswer = isKuOptions ? word.ku : word.tr;
@@ -419,7 +491,13 @@ class _QuizScreenState extends ConsumerState<QuizScreen>
 
       final selected = q.options[optionIndex];
       final String correctAnswer;
-      if (_showTurkish) {
+      if (q.type == _ExerciseType.pictureToWord) {
+        // Görsel → Kurmancî kelime; doğru = word.ku
+        correctAnswer = q.word.ku;
+      } else if (q.type == _ExerciseType.wordToPicture) {
+        // Kurmancî → Emoji; doğru = kelimenin emoji'si
+        correctAnswer = emojiForWord(q.word.ku, q.word.kat);
+      } else if (_showTurkish) {
         final isKuOptions = q.type == _ExerciseType.reverseTranslation;
         correctAnswer = isKuOptions ? q.word.ku : q.word.tr;
       } else {
@@ -695,7 +773,147 @@ class _QuizScreenState extends ConsumerState<QuizScreen>
           _buildReverseTranslationQuestion(q),
         _ExerciseType.listening => _buildListeningQuestion(q),
         _ExerciseType.typing => _buildTypingQuestion(q),
+        _ExerciseType.pictureToWord => _buildPictureToWordQuestion(q),
+        _ExerciseType.wordToPicture => _buildWordToPictureQuestion(q),
       },
+    );
+  }
+
+  // ── Picture-to-Word: Görsel göster, Kurmancî kelime seç ─────
+  Widget _buildPictureToWordQuestion(_QuizQuestion q) {
+    final emoji = emojiForWord(q.word.ku, q.word.kat);
+    return Column(
+      key: ValueKey('pictureToWord_${q.word.id}'),
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        _buildInstruction(
+          _showTurkish ? 'Bu nedir?' : 'Ev çi ye?',
+          '', showTr: false),
+        Gap.lg,
+        // Büyük emoji kart — soru kelimesinin görseli
+        Center(
+          child: Container(
+            width: 160,
+            height: 160,
+            decoration: BoxDecoration(
+              gradient: LinearGradient(
+                colors: [
+                  AppColors.primarySurface,
+                  AppColors.accentSurface.withOpacity(0.4),
+                ],
+                begin: Alignment.topLeft,
+                end: Alignment.bottomRight,
+              ),
+              borderRadius: BorderRadius.circular(28),
+              boxShadow: [
+                BoxShadow(
+                  color: AppColors.primary.withOpacity(0.12),
+                  blurRadius: 16,
+                  offset: const Offset(0, 6),
+                ),
+              ],
+            ),
+            alignment: Alignment.center,
+            child: Text(
+              emoji,
+              style: const TextStyle(fontSize: 96),
+            ),
+          ).animate().fadeIn(duration: 400.ms).scale(
+                begin: const Offset(0.85, 0.85),
+                duration: 500.ms,
+                curve: Curves.easeOut,
+              ),
+        ),
+        const SizedBox(height: AppSpacing.questionToOptions),
+        // Seçenekler: Kurmancî kelimeler
+        ..._buildOptionButtons(q),
+      ],
+    );
+  }
+
+  // ── Word-to-Picture: Kurmancî göster, görsel seç ─────────────
+  Widget _buildWordToPictureQuestion(_QuizQuestion q) {
+    return Column(
+      key: ValueKey('wordToPicture_${q.word.id}'),
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        _buildInstruction(
+          _showTurkish
+              ? '"${q.word.ku}" hangi resimde?'
+              : 'Wêneya rast hilbijêre',
+          '', showTr: false),
+        Gap.lg,
+        // Soru kelimesi (büyük metin, görsel yok)
+        _buildWordCard(q.word.ku, isKurmanji: true, kat: ''),
+        const SizedBox(height: AppSpacing.questionToOptions),
+        // Seçenekler: 4 emoji kartı (2x2 grid)
+        _buildEmojiOptions(q),
+      ],
+    );
+  }
+
+  Widget _buildEmojiOptions(_QuizQuestion q) {
+    return GridView.count(
+      crossAxisCount: 2,
+      shrinkWrap: true,
+      physics: const NeverScrollableScrollPhysics(),
+      mainAxisSpacing: 12,
+      crossAxisSpacing: 12,
+      childAspectRatio: 1.05,
+      children: List.generate(q.options.length, (i) {
+        final emoji = q.options[i];
+        final isSelected = _selectedOptionIndex == i;
+        final isCorrectOption = _answered &&
+            emoji == emojiForWord(q.word.ku, q.word.kat);
+        final showAsCorrect = _answered && isCorrectOption;
+        final showAsWrong = _answered && isSelected && !isCorrectOption;
+
+        Color borderColor;
+        Color bgColor;
+        if (showAsCorrect) {
+          borderColor = AppColors.success;
+          bgColor = AppColors.successSurface;
+        } else if (showAsWrong) {
+          borderColor = AppColors.errorSoft;
+          bgColor = AppColors.errorSurface;
+        } else if (isSelected) {
+          borderColor = AppColors.primary;
+          bgColor = AppColors.primarySurface;
+        } else {
+          borderColor = AppColors.borderLight;
+          bgColor = AppColors.surface;
+        }
+
+        return GestureDetector(
+          onTap: _answered ? null : () {
+            SoundService.playTap();
+            _submitAnswer(optionIndex: i);
+          },
+          child: AnimatedContainer(
+            duration: const Duration(milliseconds: 200),
+            decoration: BoxDecoration(
+              color: bgColor,
+              borderRadius: BorderRadius.circular(20),
+              border: Border.all(color: borderColor, width: 2),
+              boxShadow: isSelected || showAsCorrect
+                  ? [
+                      BoxShadow(
+                        color: borderColor.withOpacity(0.25),
+                        blurRadius: 12,
+                        offset: const Offset(0, 4),
+                      ),
+                    ]
+                  : null,
+            ),
+            child: Center(
+              child: Text(
+                emoji,
+                style: const TextStyle(fontSize: 56),
+              ),
+            ),
+          ),
+        );
+      }),
     );
   }
 
@@ -1355,31 +1573,71 @@ class _QuizScreenState extends ConsumerState<QuizScreen>
           ),
           child: Row(
             children: [
-              // Option letter badge
-              Container(
-                width: 28,
-                height: 28,
-                decoration: BoxDecoration(
-                  color: _answered && isThisCorrect
-                      ? AppColors.success.withOpacity(0.15)
-                      : _answered && isSelected && !isThisCorrect
-                          ? AppColors.errorSoft.withOpacity(0.15)
-                          : AppColors.backgroundTertiary,
-                  shape: BoxShape.circle,
-                ),
-                child: Center(
-                  child: _answered && isThisCorrect
-                      ? Icon(Icons.check, size: 16, color: AppColors.success)
-                      : _answered && isSelected && !isThisCorrect
-                          ? Icon(Icons.close,
-                              size: 16, color: AppColors.errorSoft)
-                          : Text(
-                              String.fromCharCode(65 + i), // A, B, C, D
-                              style: AppTypography.labelSmall.copyWith(
-                                  color: AppColors.textSecondary,
-                                  fontWeight: FontWeight.w600),
-                            ),
-                ),
+              // Option badge — Kurmancî seçenekte emoji, TR seçenekte harf
+              // (emojiForWord boşsa harf fallback)
+              Builder(
+                builder: (_) {
+                  // Cevaplandı ise check/close
+                  if (_answered && isThisCorrect) {
+                    return Container(
+                      width: 28, height: 28,
+                      decoration: BoxDecoration(
+                        color: AppColors.success.withOpacity(0.15),
+                        shape: BoxShape.circle,
+                      ),
+                      child: Center(
+                        child: Icon(Icons.check, size: 16,
+                            color: AppColors.success),
+                      ),
+                    );
+                  }
+                  if (_answered && isSelected && !isThisCorrect) {
+                    return Container(
+                      width: 28, height: 28,
+                      decoration: BoxDecoration(
+                        color: AppColors.errorSoft.withOpacity(0.15),
+                        shape: BoxShape.circle,
+                      ),
+                      child: Center(
+                        child: Icon(Icons.close, size: 16,
+                            color: AppColors.errorSoft),
+                      ),
+                    );
+                  }
+                  // Emoji denemesi (option Kurmancî ise emoji bulur)
+                  final optEmoji = emojiForWord(option, '');
+                  if (optEmoji.isNotEmpty) {
+                    return Container(
+                      width: 32, height: 32,
+                      decoration: BoxDecoration(
+                        color: AppColors.primarySurface,
+                        shape: BoxShape.circle,
+                      ),
+                      child: Center(
+                        child: Text(
+                          optEmoji,
+                          style: const TextStyle(fontSize: 18),
+                        ),
+                      ),
+                    );
+                  }
+                  // Fallback: harf badge
+                  return Container(
+                    width: 28, height: 28,
+                    decoration: const BoxDecoration(
+                      color: AppColors.backgroundTertiary,
+                      shape: BoxShape.circle,
+                    ),
+                    child: Center(
+                      child: Text(
+                        String.fromCharCode(65 + i),
+                        style: AppTypography.labelSmall.copyWith(
+                            color: AppColors.textSecondary,
+                            fontWeight: FontWeight.w600),
+                      ),
+                    ),
+                  );
+                },
               ),
               Gap.hMd,
               Expanded(

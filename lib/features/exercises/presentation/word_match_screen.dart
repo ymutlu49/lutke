@@ -14,6 +14,7 @@ import '../../../shared/providers/language_mode_provider.dart';
 import '../../lessons/domain/a1_kelime_db.dart';
 import '../../lessons/domain/a2_kelime_db.dart';import '../../lessons/domain/b1_kelime_db.dart';import '../../lessons/domain/b2_kelime_db.dart';import '../../lessons/domain/c1_kelime_db.dart';import '../../lessons/domain/c2_kelime_db.dart';
 import '../../../core/services/sound_service.dart';
+import '../../../shared/utils/word_emoji_map.dart';
 
 // ════════════════════════════════════════════════════════════════
 // WORD MATCH — Peyvan Bike! (Kelime Eslestirme Oyunu)
@@ -873,6 +874,19 @@ class _MatchCard extends StatelessWidget {
         ),
         child: Row(
           children: [
+            // Kurmancî kelimede emoji (görsel ipucu) — sağ sütunda yok
+            if (isKurmanji) ...[
+              Builder(
+                builder: (_) {
+                  final emoji = emojiForWord(text, '');
+                  if (emoji.isEmpty) return const SizedBox.shrink();
+                  return Padding(
+                    padding: const EdgeInsets.only(right: 8),
+                    child: Text(emoji, style: const TextStyle(fontSize: 20)),
+                  );
+                },
+              ),
+            ],
             Expanded(
               child: Text(
                 text,
