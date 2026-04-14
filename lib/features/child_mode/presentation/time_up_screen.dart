@@ -139,7 +139,7 @@ class TimeUpScreen extends StatelessWidget {
               Text('Ebeveyn PIN\'i girin', style: ChildTypography.title),
               const SizedBox(height: 8),
               Text(
-                'Süre limitini uzatmak veya modu değiştirmek için',
+                'Ji bo dirêjkirina demê an guherandina modê',
                 style: ChildTypography.caption,
                 textAlign: TextAlign.center,
               ),
@@ -153,7 +153,7 @@ class TimeUpScreen extends StatelessWidget {
               const SizedBox(height: 16),
               TextButton(
                 onPressed: () => Navigator.of(ctx).pop(),
-                child: const Text('İptal'),
+                child: const Text('Paş de vegere'),
               ),
             ],
           ),

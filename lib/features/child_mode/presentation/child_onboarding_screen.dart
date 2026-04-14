@@ -241,7 +241,7 @@ class _PinSetupStepState extends State<_PinSetupStep> {
         const SizedBox(height: 8),
 
         Text(
-          'Çocuğunuzun ayarlarını korumak için',
+          'Ji bo parastina mîhengên zarokê te',
           style: ChildTypography.body.copyWith(
             color: ChildColors.textSecondary,
           ),
@@ -264,7 +264,7 @@ class _PinSetupStepState extends State<_PinSetupStep> {
             } else {
               setState(() {
                 _firstPin = null;
-                _error = 'PIN eşleşmedi, tekrar deneyin';
+                _error = 'PIN li hev nayê, dîsa biceribîne';
               });
             }
           },

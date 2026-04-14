@@ -122,4 +122,30 @@ const kChildA2Kelimeler = [
   (id:'z_a2_036', ku:'Çûn', tr:'Gitmek', en:'To go', cins:'bêcins', ez:null,
    kat:'fiil', zor:0.78, not:'Hareket fiili', emoji: '🚶',
    her:['Ez diçim mektebê.', 'Em diçin parkê.'], gen:['Çûn — gitmek', 'Ez diçim.']),
+
+  // ── Hest (Duygular) ek — 6'ya tamamla ──────────────────
+  (id:'z_a2_040', ku:'Tirsnak', tr:'Korkmuş', en:'Scared', cins:'bêcins', ez:null,
+   kat:'hest', zor:0.78, not:'Duygu', emoji: '😨',
+   her:['Ez tirsnak im.', 'Zarok tirsnak e.'], gen:['Tirsnak — korkmuş', 'Tu tirsnak î?']),
+
+  // ── Fiil ek — daha fazla temel fiil ─────────────────────
+  (id:'z_a2_041', ku:'Kenîn', tr:'Gülmek', en:'To laugh', cins:'bêcins', ez:null,
+   kat:'fiil', zor:0.80, not:'Duygu fiili', emoji: '😂',
+   her:['Em dikene!', 'Zarok dikene.'], gen:['Kenîn — gülmek', 'Em dikene.']),
+
+  (id:'z_a2_042', ku:'Girîn', tr:'Ağlamak', en:'To cry', cins:'bêcins', ez:null,
+   kat:'fiil', zor:0.78, not:'Duygu fiili', emoji: '😢',
+   her:['Zarok digirî.', 'Negirî!'], gen:['Girîn — ağlamak', 'Negirî, baş e.']),
+
+  (id:'z_a2_043', ku:'Gotin', tr:'Söylemek', en:'To say', cins:'bêcins', ez:null,
+   kat:'fiil', zor:0.75, not:'Temel fiil', emoji: '💬',
+   her:['Dê dibêje.', 'Bav dibêje: Were!'], gen:['Gotin — söylemek', 'Tu çi dibêjî?']),
+
+  (id:'z_a2_044', ku:'Zanîn', tr:'Bilmek', en:'To know', cins:'bêcins', ez:null,
+   kat:'fiil', zor:0.75, not:'Temel fiil', emoji: '🧠',
+   her:['Ez dizanim!', 'Tu dizanî?'], gen:['Zanîn — bilmek', 'Ez vê dizanim.']),
+
+  (id:'z_a2_045', ku:'Xwestin', tr:'İstemek', en:'To want', cins:'bêcins', ez:null,
+   kat:'fiil', zor:0.75, not:'Temel fiil', emoji: '🙋',
+   her:['Ez dixwazim!', 'Tu çi dixwazî?'], gen:['Xwestin — istemek', 'Ez av dixwazim.']),
 ];

@@ -23,7 +23,7 @@ class ParentalControlsScreen extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Ebeveyn Paneli'),
+        title: const Text('Panela dê û bav'),
         centerTitle: true,
         leading: IconButton(
           icon: const Icon(Icons.arrow_back_rounded),
@@ -37,22 +37,22 @@ class ParentalControlsScreen extends ConsumerWidget {
           children: [
             // ── Çocuk İstatistikleri ──────────────────────────
             Text(
-              'Çocuğunuzun İlerlemesi',
+              'Pêşveçûna zarokê te',
               style: ChildTypography.title,
             ),
             const SizedBox(height: 16),
 
-            _StatRow(label: 'Öğrenilen kelime', value: '24'),
-            _StatRow(label: 'Tamamlanan ders', value: '3'),
-            _StatRow(label: 'Toplam yıldız', value: '42'),
-            _StatRow(label: 'Aktif gün (bu hafta)', value: '5 / 7'),
-            _StatRow(label: 'Günlük ortalama süre', value: '12 dk'),
+            _StatRow(label: 'Peyvên fêrbûyî', value: '24'),
+            _StatRow(label: 'Waneyên temam', value: '3'),
+            _StatRow(label: 'Stêrkên tevahî', value: '42'),
+            _StatRow(label: 'Rojên çalak (vê heftê)', value: '5 / 7'),
+            _StatRow(label: 'Dema navîn a rojane', value: '12 dk'),
 
             const SizedBox(height: 32),
 
             // ── Süre Limiti ──────────────────────────────────
             Text(
-              'Günlük Süre Limiti',
+              'Sînorê dema rojane',
               style: ChildTypography.title,
             ),
             const SizedBox(height: 16),
@@ -63,7 +63,7 @@ class ParentalControlsScreen extends ConsumerWidget {
 
             // ── Mod Geçişi ───────────────────────────────────
             Text(
-              'Mod Geçişi',
+              'Guhertina modê',
               style: ChildTypography.title,
             ),
             const SizedBox(height: 16),
@@ -80,8 +80,7 @@ class ParentalControlsScreen extends ConsumerWidget {
             const SizedBox(height: 12),
 
             Text(
-              'Yetişkin moduna geçiş yapıldığında çocuk ekranlarından '
-              'çıkılır. Profil ekranından tekrar çocuk moduna dönebilirsiniz.',
+              'Dema ku modê biguherînî, tu dikarî vegere moda zarokan.',
               style: ChildTypography.caption.copyWith(fontSize: 13),
             ),
 
@@ -200,7 +199,7 @@ class _TimeLimitSelectorState extends ConsumerState<_TimeLimitSelector> {
 
         const SizedBox(height: 12),
         Text(
-          'Günlük $_selectedMinutes dakika kullanım izni',
+          '$_selectedMinutes deqîqe — sînorê dema rojane',
           style: ChildTypography.caption.copyWith(fontSize: 14),
         ),
       ],

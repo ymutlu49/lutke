@@ -300,4 +300,93 @@ const kChildA1Kelimeler = [
    emoji: '🧸',
    her:['Gogika min xweş e.', 'Xwişk bi gogikê dilîze.'],
    gen:['Gogik — bebek oyuncak', 'Gogika spî.']),
+
+  // ════════════════════════════════════════════════════════════
+  // EK KELİMELER — Kategorileri 12'ye tamamlama
+  // ════════════════════════════════════════════════════════════
+
+  // ── Silav (Selamlama) ek ─────────────────────────────────
+  (id:'z_a1_080', ku:'Çawa yî?', tr:'Nasılsın?', en:'How are you?', cins:'bêcins', ez:null,
+   kat:'selamlama', zor:0.88, not:'Hal hatır sorma', emoji:'😊',
+   her:['Silav! Çawa yî?', 'Dê, tu çawa yî?'],
+   gen:['Çawa yî? — Nasılsın?', 'Tu çawa yî, heval?']),
+
+  (id:'z_a1_081', ku:'Baş im', tr:'İyiyim', en:'I am fine', cins:'bêcins', ez:null,
+   kat:'selamlama', zor:0.88, not:'Cevap', emoji:'😄',
+   her:['Baş im, spas!', 'Ez baş im, tu çawa yî?'],
+   gen:['Baş im — İyiyim', 'Spas, ez baş im.']),
+
+  (id:'z_a1_082', ku:'Oxir be', tr:'Güle güle', en:'Goodbye', cins:'bêcins', ez:null,
+   kat:'selamlama', zor:0.85, not:'Vedalaşma', emoji:'👋',
+   her:['Oxir be, dapîrê!', 'Oxir be, heval!'],
+   gen:['Oxir be — Güle güle', 'Oxir be, sibê dibînim te.']),
+
+  (id:'z_a1_083', ku:'Rojbaş', tr:'İyi günler', en:'Good day', cins:'bêcins', ez:null,
+   kat:'selamlama', zor:0.85, not:'Gündüz selamı', emoji:'☀️',
+   her:['Rojbaş, mamoste!', 'Rojbaş, ap!'],
+   gen:['Rojbaş — İyi günler', 'Rojbaş, çawa yî?']),
+
+  (id:'z_a1_084', ku:'Şevbaş', tr:'İyi geceler', en:'Good night', cins:'bêcins', ez:null,
+   kat:'selamlama', zor:0.85, not:'Gece selamı', emoji:'🌙',
+   her:['Şevbaş, dê!', 'Şevbaş, razê!'],
+   gen:['Şevbaş — İyi geceler', 'Şevbaş, xewna xweş!']),
+
+  (id:'z_a1_085', ku:'Keremke', tr:'Buyurun/Rica ederim', en:'Please/You are welcome', cins:'bêcins', ez:null,
+   kat:'selamlama', zor:0.82, not:'Kibarlık', emoji:'🙂',
+   her:['Keremke, rûne!', 'Keremke, nan bixwe!'],
+   gen:['Keremke — Buyurun', 'Keremke, çay vexwe.']),
+
+  (id:'z_a1_086', ku:'Biborin', tr:'Özür dilerim', en:'Sorry', cins:'bêcins', ez:null,
+   kat:'selamlama', zor:0.82, not:'Özür', emoji:'😔',
+   her:['Biborin, dê!', 'Biborin, min xelet kir.'],
+   gen:['Biborin — Özür dilerim', 'Biborin, ez dereng mam.']),
+
+  // ── Dibistan (Okul) ek ──────────────────────────────────
+  (id:'z_a1_090', ku:'Ders', tr:'Ders', en:'Lesson', cins:'mê', ez:'dersa',
+   kat:'dibistan', zor:0.82, not:'Okul', emoji:'📝',
+   her:['Ders dest pê kir.', 'Dersa me xweş e.'],
+   gen:['Ders — ders', 'Dersa Kurmancî.']),
+
+  (id:'z_a1_091', ku:'Defter', tr:'Defter', en:'Notebook', cins:'mê', ez:'deftera',
+   kat:'dibistan', zor:0.80, not:'Okul malzemesi', emoji:'📓',
+   her:['Deftera min nû ye.', 'Di defterê de binivîse.'],
+   gen:['Defter — defter', 'Deftera sor.']),
+
+  (id:'z_a1_092', ku:'Xwendekar', tr:'Öğrenci', en:'Student', cins:'bêcins', ez:'xwendekarê',
+   kat:'dibistan', zor:0.78, not:'Okul', emoji:'🧑‍🎓',
+   her:['Ez xwendekar im.', 'Xwendekar li polê ne.'],
+   gen:['Xwendekar — öğrenci', 'Xwendekarên baş.']),
+
+  (id:'z_a1_093', ku:'Pol', tr:'Sınıf', en:'Classroom', cins:'mê', ez:'pola',
+   kat:'dibistan', zor:0.80, not:'Okul', emoji:'🏫',
+   her:['Pola me mezin e.', 'Em diçin polê.'],
+   gen:['Pol — sınıf', 'Pola sêyem.']),
+
+  (id:'z_a1_094', ku:'Taxtê', tr:'Tahta', en:'Blackboard', cins:'nêr', ez:'taxtê',
+   kat:'dibistan', zor:0.78, not:'Okul', emoji:'📋',
+   her:['Mamoste li taxtê dinivîse.', 'Li taxtê binêre.'],
+   gen:['Taxtê — tahta', 'Taxtê reş e.']),
+
+  (id:'z_a1_095', ku:'Nivîsandin', tr:'Yazmak', en:'To write', cins:'bêcins', ez:null,
+   kat:'dibistan', zor:0.78, not:'Okul', emoji:'✍️',
+   her:['Ez dinivîsim.', 'Bi Kurmancî binivîse.'],
+   gen:['Nivîsandin — yazmak', 'Em dinivîsin.']),
+
+  // ── Lîstik (Oyun) ek ───────────────────────────────────
+  (id:'z_a1_100', ku:'Firfir', tr:'Uçurtma', en:'Kite', cins:'mê', ez:'firfira',
+   kat:'listik', zor:0.80, not:'Açık hava oyunu', emoji:'🪁',
+   her:['Em firfirê difirandin.', 'Firfir li ezmanan e.'],
+   gen:['Firfir — uçurtma', 'Firfira sor.']),
+
+  (id:'z_a1_101', ku:'Darvêş', tr:'Salıncak', en:'Swing', cins:'mê', ez:'darvêşa',
+   kat:'listik', zor:0.78, not:'Park oyunu', emoji:'🎪',
+   her:['Ez li darvêşê dilîzim.', 'Darvêş xweş e!'],
+   gen:['Darvêş — salıncak', 'Darvêşa mezin.']),
+
+  (id:'z_a1_102', ku:'Gêlavêj', tr:'Kaydırak', en:'Slide', cins:'mê', ez:'gêlavêja',
+   kat:'listik', zor:0.78, not:'Park oyunu', emoji:'🛝',
+   her:['Em li gêlavêjê dilîzin.', 'Gêlavêj dirêj e.'],
+   gen:['Gêlavêj — kaydırak', 'Gêlavêja bilind.']),
+
+  // ── Hest (Duygular A2) ek ──────────────────────────────
 ];

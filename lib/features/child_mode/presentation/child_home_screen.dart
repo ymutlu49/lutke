@@ -144,7 +144,7 @@ class ChildHomeScreen extends ConsumerWidget {
                 itemCount: _childLessons.length,
                 itemBuilder: (context, index) {
                   final lesson = _childLessons[index];
-                  final isLocked = index > 2; // İlk 3 ders açık
+                  final isLocked = false; // Tüm dersler açık
                   final delay = (200 + index * 100).ms;
 
                   return Padding(
@@ -157,11 +157,14 @@ class ChildHomeScreen extends ConsumerWidget {
                       isLocked: isLocked,
                       onTap: isLocked
                           ? null
-                          : () => context.go(
-                              AppRoutes.childLesson,
+                          : () => context.push(
+                              AppRoutes.unitHub,
                               extra: {
-                                'lessonId': lesson.id,
-                                'mode': 'child',
+                                'category': lesson.category,
+                                'titleKu': lesson.titleKu,
+                                'titleTr': lesson.titleTr,
+                                'level': 'A1',
+                                'wordCount': 0,
                               },
                             ),
                     ),
@@ -330,6 +333,7 @@ class _ChildLessonData {
   final String emoji;
   final String titleKu;
   final String titleTr;
+  final String category;
   final int stars;
 
   const _ChildLessonData({
@@ -337,6 +341,7 @@ class _ChildLessonData {
     required this.emoji,
     required this.titleKu,
     required this.titleTr,
+    required this.category,
     this.stars = 0,
   });
 }
@@ -347,50 +352,72 @@ const _childLessons = [
     emoji: '👋',
     titleKu: 'Silav!',
     titleTr: 'Merhaba!',
-    stars: 3,
+    category: 'selamlama',
+    stars: 0,
   ),
   _ChildLessonData(
     id: 'child_a1_02',
     emoji: '👨‍👩‍👧‍👦',
     titleKu: 'Malbata min',
     titleTr: 'Ailem',
-    stars: 2,
+    category: 'malbat',
+    stars: 0,
   ),
   _ChildLessonData(
     id: 'child_a1_03',
     emoji: '🎨',
     titleKu: 'Rengên min',
     titleTr: 'Renklerim',
+    category: 'reng',
     stars: 0,
   ),
   _ChildLessonData(
     id: 'child_a1_04',
     emoji: '🐱',
-    titleKu: 'Heywanên malê',
-    titleTr: 'Evcil hayvanlar',
+    titleKu: 'Heywan',
+    titleTr: 'Hayvanlar',
+    category: 'heywan',
   ),
   _ChildLessonData(
     id: 'child_a1_05',
     emoji: '🍎',
-    titleKu: 'Em dixwin!',
-    titleTr: 'Yemek yiyoruz!',
+    titleKu: 'Xwarin',
+    titleTr: 'Yiyecekler',
+    category: 'xwarin',
   ),
   _ChildLessonData(
     id: 'child_a1_06',
     emoji: '🔢',
-    titleKu: 'Hejmartinê fêr bibe',
-    titleTr: 'Sayı öğren',
+    titleKu: 'Hejmar',
+    titleTr: 'Sayılar',
+    category: 'hejmar',
   ),
   _ChildLessonData(
     id: 'child_a1_07',
     emoji: '🏫',
-    titleKu: 'Li dibistanê',
-    titleTr: 'Okulda',
+    titleKu: 'Dibistan',
+    titleTr: 'Okul',
+    category: 'dibistan',
   ),
   _ChildLessonData(
     id: 'child_a1_08',
     emoji: '⚽',
     titleKu: 'Lîstik!',
     titleTr: 'Oyun!',
+    category: 'listik',
+  ),
+  _ChildLessonData(
+    id: 'child_a1_09',
+    emoji: '🧍',
+    titleKu: 'Laş',
+    titleTr: 'Vücut',
+    category: 'las',
+  ),
+  _ChildLessonData(
+    id: 'child_a1_10',
+    emoji: '😊',
+    titleKu: 'Hest',
+    titleTr: 'Duygular',
+    category: 'hest',
   ),
 ];
