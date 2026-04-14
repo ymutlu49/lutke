@@ -335,7 +335,7 @@ const kA1TamKelimeler = [
 
   (id:'a1_082', ku:'Bira', tr:'Erkek kardeş', en:'Brother', cins:'nêr', ez:'birê',
    kat:'malbat', zor:0.83, not:'Eril — ezafe: birê min (erkek kardeşimin)',
-   her:['Birê min mezin e.', 'Birê te çawa ye?'],
+   her:['Birayê min mezin e.', 'Bira û xwişk bi hev re dilîzin.'],
    gen:['Bira û xwişk', 'Birê wî']),
 
   (id:'a1_083', ku:'Xwişk', tr:'Kız kardeş', en:'Sister', cins:'mê', ez:'xwişka',
@@ -385,7 +385,7 @@ const kA1TamKelimeler = [
 
   (id:'a1_092', ku:'Nevî', tr:'Torun', en:'Grandchild', cins:'bêcins', ez:'neviyê/neviya',
    kat:'malbat', zor:0.78, not:'Eril/dişil her ikisi için kullanılır',
-   her:['Ez neviyê pîrêya xwe me.', 'Neviya kalê min ez im.'],
+   her:['Pîrê neviyê xwe gelek hez dike.', 'Min sê nevî hene.'],
    gen:['Neviyê wî', 'Nevî û pîrê']),
 
   // ════════════════════════════════════════════════════════════
@@ -475,7 +475,7 @@ const kA1TamKelimeler = [
 
   (id:'a1_117', ku:'Zanîngeh', tr:'Üniversite', en:'University', cins:'mê', ez:'zanîgeha',
    kat:'perwerde', zor:0.80, not:'Dişil — "zanîn" = bilmek + "-geh" = yer',
-   her:['Birê min li zanîgehê ye.', 'Zanîgeha Mêrdînê.'],
+   her:['Birayê min li zanîngehê dixwîne.', 'Zanîngeh nêzê me ye.'],
    gen:['Zanîngeh û dibistan', 'Zanîgeha me']),
 
   (id:'a1_118', ku:'Pirtûk', tr:'Kitap', en:'Book', cins:'mê', ez:'pirtûka',
@@ -677,7 +677,7 @@ const kA1TamKelimeler = [
 
   (id:'a1_170', ku:'Serî', tr:'Baş', en:'Head', cins:'nêr', ez:'serî',
    kat:'beden', zor:0.84, not:'Eril — "serê min" = başım. "Serêşî" = baş ağrısı',
-   her:['Serê min êş dike, pîrê.', 'Serê te çawa ye?'],
+   her:['Serî dêşe min îro.', 'Karîk seriyê xwe bilind kir.'],
    gen:['Serî û çav', 'Serê min']),
 
   (id:'a1_171', ku:'Çav', tr:'Göz', en:'Eye', cins:'nêr', ez:'çavê',
@@ -737,7 +737,7 @@ const kA1TamKelimeler = [
 
   (id:'a1_182', ku:'Nexweşxane', tr:'Hastane', en:'Hospital', cins:'mê', ez:'nexweşxanê',
    kat:'tendurist', zor:0.80, not:'Dişil — "nexweş" + "xane" = hasta evi',
-   her:['Em diçin nexweşxanê.', 'Bijîşk li nexweşxanê ye.'],
+   her:['Bavê min li nexweşxaneyê ye.', 'Nexweşxane li nêzê gund e.'],
    gen:['Nexweşxane û dermangeh', 'Nexweşxanê me']),
 
   // ════════════════════════════════════════════════════════════
@@ -752,7 +752,7 @@ const kA1TamKelimeler = [
 
   (id:'a1_191', ku:'Xanî', tr:'Bina / Ev', en:'Building / House', cins:'nêr', ez:'xaniyê',
    kat:'mal', zor:0.82, not:'Eril — "xanî" daha çok bina anlamında. x sesi gırtlaktan!',
-   her:['Xaniyê me nû ye.', 'Xaniyê pîrê li gundê ye.'],
+   her:['Xaniyê me mezin e.', 'Em li xaniyek nû dijîn.'],
    gen:['Xanî û mal', 'Xaniyê me']),
 
   (id:'a1_192', ku:'Ode', tr:'Oda', en:'Room', cins:'mê', ez:'odê',
@@ -777,7 +777,7 @@ const kA1TamKelimeler = [
 
   (id:'a1_196', ku:'Kursî', tr:'Sandalye / Koltuk', en:'Chair', cins:'nêr', ez:'kursiyê',
    kat:'mal', zor:0.80, not:'Eril — Farsça/Arapça kökenli',
-   her:['Kursiyê pîrê wê ye.', 'Rûne kursiyê!'],
+   her:['Li ser kursî rûnê, hevalo!', 'Kursiyek nû kirîm ji bo dersê.'],
    gen:['Kursî û mêz', 'Kursiyê me']),
 
   (id:'a1_197', ku:'Mêz', tr:'Masa', en:'Table', cins:'nêr', ez:'mêzê',
@@ -901,25 +901,25 @@ const kA1TamKelimeler = [
   (id:'a1_230', ku:'Ez … im', tr:'Ben … -im', en:'I am …', cins:'bêcins', ez:null,
    kat:'bun', zor:0.87,
    not:'"Bûn" fiili 1.tekil: im. "Ez baş im" = iyiyim. "Ez mamosta me" = öğretmenim — "me" = im (ses uyumu)',
-   her:['Ez kurd im!', 'Ez kurê pîrêya xwe me.'],
+   her:['Ez baş im, spas.', 'Ez hêvîdar im îro.'],
    gen:['Ez xwendekar im.', 'Ez Tirkiyeyî me.']),
 
   (id:'a1_231', ku:'Tu … î', tr:'Sen … -sin', en:'You are …', cins:'bêcins', ez:null,
    kat:'bun', zor:0.87,
    not:'Bûn 2.tekil: -î. "Tu baş î?" = iyisin?',
-   her:['Tu kurd î, pîrê!', 'Tu xweş î.'],
+   her:['Tu jîr î, lawê min.', 'Tu hevalê min î.'],
    gen:['Tu xwendekar î?', 'Tu kî yî?']),
 
   (id:'a1_232', ku:'Ew … e', tr:'O … -dir', en:'He/She/It is …', cins:'bêcins', ez:null,
    kat:'bun', zor:0.86,
    not:'Bûn 3.tekil: -e. Hem eril hem dişil için. "Ew baş e" = o iyidir',
-   her:['Pîrê baş e.', 'Ev nan xweş e.'],
+   her:['Ew zarokek baş e.', 'Ew mamoste ye li dibistanê.'],
    gen:['Ew mamosta ye.', 'Ev rast e.']),
 
   (id:'a1_233', ku:'Em … in', tr:'Biz … -iz', en:'We are …', cins:'bêcins', ez:null,
    kat:'bun', zor:0.85,
    not:'Bûn 1.çoğul: -in. Aynı ek 2. ve 3. çoğul için de kullanılır',
-   her:['Em kurd in!', 'Em malbateke mezin in.'],
+   her:['Em li mal in.', 'Em ji Kurdistanê ne.'],
    gen:['Em xwendekar in.', 'Em baş in.']),
 
   // ── Dixwazim / Dixwim — İsteme ve Yeme Fiilleri ──────────────
@@ -935,13 +935,13 @@ const kA1TamKelimeler = [
   (id:'a1_235', ku:'Ez dixwim', tr:'Ben yiyorum', en:'I eat', cins:'bêcins', ez:null,
    kat:'leker', zor:0.83,
    not:'"Di-xw-im" — xwarin fiili kökü: xw. "Nan dixwim" = ekmek yiyorum',
-   her:['Ez nan dixwim.', 'Pîrê, em çi dixwin?'],
+   her:['Ez sêv dixwim sibehê.', 'Niha ez şîv dixwim.'],
    gen:['Ez birinc dixwim.', 'Ew goşt dixwe.']),
 
   (id:'a1_236', ku:'Ez vedixwim', tr:'Ben içiyorum', en:'I drink', cins:'bêcins', ez:null,
    kat:'leker', zor:0.82,
    not:'"Ve-di-xw-im" — "ve" + içmek. Çay vedixwim = çay içiyorum',
-   her:['Ez çay vedixwim, pîrê.', 'Dê av vedixwe.'],
+   her:['Ez av vedixwim.', 'Sibehê ez çay vedixwim.'],
    gen:['Ez çi vedixwim?', 'Ew şîr vedixwe.']),
 
   (id:'a1_237', ku:'Ez diçim', tr:'Ben gidiyorum', en:'I go', cins:'bêcins', ez:null,
@@ -959,55 +959,55 @@ const kA1TamKelimeler = [
   (id:'a1_239', ku:'Ez dikim', tr:'Ben yapıyorum', en:'I do / make', cins:'bêcins', ez:null,
    kat:'leker', zor:0.82,
    not:'"Di-k-im" — kirin fiili. En yaygın yardımcı fiil',
-   her:['Ez çi dikim?', 'Ez xebat dikim.'],
+   her:['Ez kar dikim li mal.', 'Ez xebatê dikim her roj.'],
    gen:['Ez wane dikim.', 'Ew çi dike?']),
 
   (id:'a1_240', ku:'Ez dibêjim', tr:'Ben söylüyorum / diyorum', en:'I say', cins:'bêcins', ez:null,
    kat:'leker', zor:0.81,
    not:'"Di-bêj-im" — gotin fiili (söylemek)',
-   her:['Ez çi dibêjim?', 'Pîrê çi dibêje?'],
+   her:['Ez ji dêya xwe re dibêjim spas.', 'Tim ez rast dibêjim.'],
    gen:['Ez dibêjim erê.', 'Ew çi dibêje?']),
 
   (id:'a1_241', ku:'Ez dizanim', tr:'Ben biliyorum', en:'I know', cins:'bêcins', ez:null,
    kat:'leker', zor:0.82,
    not:'"Di-zan-im" — zanîn fiili. "Nizanim" = bilmiyorum (ne + dizanim)',
-   her:['Ez Kurmancî dizanim!', 'Ez nizanim, pîrê.'],
+   her:['Ez Kurmancî dizanim.', 'Ez wê meselê dizanim.'],
    gen:['Ez dizanim.', 'Ew dizane.']),
 
   (id:'a1_242', ku:'Ez dibînim', tr:'Ben görüyorum', en:'I see', cins:'bêcins', ez:null,
    kat:'leker', zor:0.81,
    not:'"Di-bîn-im" — dîtin fiili. î uzun',
-   her:['Ez pîrê dibînim!', 'Tu çi dibînî?'],
+   her:['Ez te dibînim.', 'Ez çiyayên Kurdistanê dibînim.'],
    gen:['Ez çiya dibînim.', 'Ew çi dibîne?']),
 
   (id:'a1_243', ku:'Ez dibihîzim', tr:'Ben duyuyorum / işitiyorum', en:'I hear', cins:'bêcins', ez:null,
    kat:'leker', zor:0.79,
    not:'"Di-bihîz-im" — bihîstin fiili. Telaffuz dikkat: bihîz',
-   her:['Ez dengê pîrê dibihîzim.', 'Tu dibihîzî?'],
+   her:['Ez dengê te dibihîzim.', 'Ez stranek kurdî dibihîzim.'],
    gen:['Ez muzîk dibihîzim.', 'Ew çi dibihîze?']),
 
   (id:'a1_244', ku:'Ez rûdim', tr:'Ben oturuyorum', en:'I sit', cins:'bêcins', ez:null,
    kat:'leker', zor:0.80,
    not:'"Rûniştîn" fiili — "rûn" = oturmak kökü',
-   her:['Ez li cem pîrê rûdim.', 'Rûne, heval!'],
+   her:['Ez li ser kursî rûdim.', 'Niha ez li mal rûdim.'],
    gen:['Ez li kursiyê rûdim.', 'Ew li wir rûniştiye.']),
 
   (id:'a1_245', ku:'Ez radim', tr:'Ben kalkıyorum / uyanıyorum', en:'I get up', cins:'bêcins', ez:null,
    kat:'leker', zor:0.79,
    not:'"Rabûn" fiili — "ra" ön eki + "bûn"',
-   her:['Ez sibê zû radim.', 'Pîrê zû radibe.'],
+   her:['Sibehê zû ez radim.', 'Ez ji nivînê radim her sibe.'],
    gen:['Ez saet heftê radim.', 'Ew dereng radibe.']),
 
   (id:'a1_246', ku:'Ez dixwînim', tr:'Ben okuyorum', en:'I read / study', cins:'bêcins', ez:null,
    kat:'leker', zor:0.81,
    not:'"Di-xwîn-im" — xwendin fiili. x gırtlaktan!',
-   her:['Ez pirtûka Kurmancî dixwînim.', 'Xwişka min li dibistanê dixwîne.'],
+   her:['Ez pirtûkek kurdî dixwînim.', 'Ez li dibistanê dixwînim.'],
    gen:['Ez gelek dixwînim.', 'Ew li zanîgehê dixwîne.']),
 
   (id:'a1_247', ku:'Ez dinivîsim', tr:'Ben yazıyorum', en:'I write', cins:'bêcins', ez:null,
    kat:'leker', zor:0.79,
    not:'"Di-nivîs-im" — nivîsîn fiili',
-   her:['Ez bi Kurmancî dinivîsim!', 'Mamosta dinivîse.'],
+   her:['Ez nameyek bo dêya xwe dinivîsim.', 'Ez bi Kurmancî dinivîsim.'],
    gen:['Ez dersa xwe dinivîsim.', 'Ew kaxez dinivîse.']),
 
   // ════════════════════════════════════════════════════════════
@@ -1113,7 +1113,7 @@ const kA1TamKelimeler = [
   (id:'a1_273', ku:'Bo / Ji bo', tr:'İçin', en:'For', cins:'bêcins', ez:null,
    kat:'daçek', zor:0.82,
    not:'"Bo" ve "ji bo" aynı anlam — ikisi de "için". "Ji bo te" = senin için',
-   her:['Ji bo pîrê me.', 'Ez ji bo te dixwînim!'],
+   her:['Ev pirtûk ji bo te ye.', 'Ji bo zarokê min hatî kirîn.'],
    gen:['Ji bo çi?', 'Ji bo me']),
 
   (id:'a1_274', ku:'Û', tr:'Ve', en:'And', cins:'bêcins', ez:null,
@@ -1142,7 +1142,7 @@ const kA1TamKelimeler = [
   (id:'a1_280', ku:'Çiya', tr:'Dağ', en:'Mountain', cins:'nêr', ez:'çiyayê',
    kat:'xweza', zor:0.84,
    not:'Eril — Kürdistan\'ın simgesi. "Çiyayên Kurdistanê" = Kürdistan dağları',
-   her:['Kalê min ji çiyê tê.', 'Çiyayên me kesk in.'],
+   her:['Çiyayê me bilind e.', 'Em diçin çiyayan havînê.'],
    gen:['Çiya û çem', 'Çiyayê bilind']),
 
   (id:'a1_281', ku:'Çem', tr:'Nehir / Irmak', en:'River', cins:'nêr', ez:'çemê',
@@ -1160,7 +1160,7 @@ const kA1TamKelimeler = [
   (id:'a1_283', ku:'Avê Çem', tr:'Nehir suyu', en:'Water', cins:'mê', ez:'avê',
    kat:'xweza', zor:0.86,
    not:'Dişil — hem içme suyu hem nehir/su anlamı. "Avê min bide" = su ver bana',
-   her:['Avê sar vexwe, pîrê.', 'Çemê avê.'],
+   her:['Avê çem zelal e û dibikele.', 'Em ji avê çem av tînin.'],
    gen:['Av û agir', 'Avê xweş']),
 
   (id:'a1_284', ku:'Dar', tr:'Ağaç', en:'Tree', cins:'mê', ez:'darê',
@@ -1308,7 +1308,7 @@ const kA1TamKelimeler = [
   (id:'a1_312', ku:'Çiqas?', tr:'Ne kadar? / Kaç?', en:'How much? / How many?', cins:'bêcins', ez:null,
    kat:'temel', zor:0.81,
    not:'"Çiqas" = ne kadar. "Ev bi çiqas e?" = Bu ne kadar?',
-   her:['Ev bi çiqas e, pîrê?', 'Çiqas nan dixwî?'],
+   her:['Ev mal çiqas e?', 'Tu çiqas mezin î niha?'],
    gen:['Ev bi çiqas e?', 'Çiqas dem man?']),
 
   (id:'a1_313', ku:'Çend sal?', tr:'Kaç yaşında?', en:'How old?', cins:'bêcins', ez:null,
@@ -2132,7 +2132,7 @@ const kA1EkKelimeler = [
   (id:'a1_471', ku:'Ez hez dikim', tr:'Ben seviyorum', en:'I love / I like', cins:'bêcins', ez:null,
    kat:'leker', zor:0.82,
    not:'"Ji X hez kirin" = X-i sevmek. "Ez ji Kurmancî hez dikim!" = Kurmancîyi seviyorum! DoReCo: çok sık. Thackston §74',
-   her:['Ez ji pîrêya xwe hez dikim!', 'Dê, ez ji te hez dikim!'],
+   her:['Ez ji te hez dikim.', 'Ez ji Kurmancî gelek hez dikim.'],
    gen:['Ez ji Kurmancî hez dikim.', 'Ew ji me hez dike.']),
 
   // [TH]: zanîn = bilmek (already have dizanim)
@@ -2148,7 +2148,7 @@ const kA1EkKelimeler = [
   (id:'a1_473', ku:'Ez xwedî … im', tr:'Ben … sahibiyim / var', en:'I have / I own', cins:'bêcins', ez:null,
    kat:'leker', zor:0.80,
    not:'"Xwedî" = sahip. "Ez xwedî malekê me" = bir evim var. Ferhenga Birûskî: xwedî n.m./adj. [Farsça kökenli]',
-   her:['Ez xwedî malbateke baş im.', 'Pîrê, tu xwedî çi yî?'],
+   her:['Ez xwedî sê pirtûk im.', 'Ez xwedî birayek im.'],
    gen:['Ez xwedî … me.', 'Ew xwedî erebe ye.']),
 
   // ─────────────────────────────────────────────────────────────
@@ -2261,7 +2261,7 @@ const kA1EkKelimeler = [
   (id:'a1_745', ku:'Kanî', tr:'Pınar / Su kaynağı', en:'Spring / Fountain', cins:'mê', ez:'kaniyê',
    kat:'xweza', zor:0.80,
    not:'Dişil — Ferhenga Birûskî: kanî n.f. Bedir Han bileşik kelime bölümünde "ava kaniya meje" = çeşme suyu. Kürt köylerinde kanî kutsaldır',
-   her:['Ava kaniyê sar e.', 'Kaniya gundê me.'],
+   her:['Kaniya gund zelal e.', 'Em ji kaniyê av tînin.'],
    gen:['Kanî û çem', 'Kaniya me']),
 
   // [FB]: Zevî = tarla — eril
@@ -2269,7 +2269,7 @@ const kA1EkKelimeler = [
   (id:'a1_746', ku:'Zevî', tr:'Tarla', en:'Field', cins:'nêr', ez:'zeviyê',
    kat:'xweza', zor:0.79,
    not:'Eril — Ferhenga Birûskî: zevî n.m. "Cotkarê min li zeviyê ye" = çiftçim tarlada',
-   her:['Kalê min li zeviyê ye.', 'Zeviyên me mezin in.'],
+   her:['Bavê min li zeviyê dixebite.', 'Zeviya me mezin e.'],
    gen:['Zevî û baxçe', 'Zeviyê me']),
 
 ];
@@ -2512,7 +2512,7 @@ const kA1EkKelimeler2 = [
   (id:'a1_556', ku:'Kê?', tr:'Kim? (eğik)', en:'Who? (oblique)',
    cins:'bêcins', ez:null, kat:'pirs', zor:0.81,
    not:'"Kê?" eğik soru zamiri — [TH] §25. "Kî?" = nominatif. "Ji kê?" = kimden?',
-   her:['Ji kê hat?', 'Kê kirî?'],
+   her:['Kê got te van peyvan?', 'Tu li kê dipirsî?'],
    gen:['Kê û kî', 'Ji kê?']),
 
   // ── HAYVAN EK ─────────────────────────────────────────────
@@ -2618,13 +2618,13 @@ const kA1EkKelimeler2 = [
   (id:'a1_590', ku:'Vexwarin', tr:'İçmek', en:'To drink',
    cins:'bêcins', ez:null, kat:'leker', zor:0.85,
    not:'"Vexwarin" — [AS] no.1016: "içmek = vexwarin" ✓. "Ez vexwim" = içeyim.',
-   her:['Ez çay vexwim.', 'Tu çi vedixwî?'],
+   her:['Vexwarina çayê li sifrê xweş e.', 'Vexwarina avê pir baş e ji bo tendurûstiyê.'],
    gen:['Vexwarin û xwarin', 'Bide vexwin']),
 
   (id:'a1_591', ku:'Kirîn', tr:'Satın almak', en:'To buy',
    cins:'bêcins', ez:null, kat:'leker', zor:0.83,
    not:'"Kirîn" — [AS] no.1074: "satın almak = kirîn" ✓. Ergatif: "Min kir."',
-   her:['Min nan kir.', 'Tu çi kirî?'],
+   her:['Ez ji bo nan kirîn diçim sûkê.', 'Kirîna pirtûkek dirav dixwaze.'],
    gen:['Kirîn û firotin', 'Min kir.']),
 
   (id:'a1_592', ku:'Firotin', tr:'Satmak', en:'To sell',
@@ -2636,43 +2636,43 @@ const kA1EkKelimeler2 = [
   (id:'a1_593', ku:'Gerîn', tr:'Gezmek / Dolaşmak', en:'To walk around / wander',
    cins:'bêcins', ez:null, kat:'leker', zor:0.81,
    not:'"Gerîn" — [AS] no.994: "gezinmek = gerîn" ✓. "Ez digerim" = geziyorum.',
-   her:['Ez li bajêr digerim.', 'Em digerîn.'],
+   her:['Gerîn li bajêr xweş e.', 'Em ji gerînê hez dikin havînê.'],
    gen:['Gerîn û sekinîn', 'Digerim.']),
 
   (id:'a1_594', ku:'Sekinîn', tr:'Durmak', en:'To stop / stand',
    cins:'bêcins', ez:null, kat:'leker', zor:0.82,
    not:'"Sekinîn" — [AS] no.971: "sekinîn" ✓. "Bisekine!" = dur!',
-   her:['Bisekine!', 'Em li vir disekinîn.'],
+   her:['Em sekinîn li ber deriyê.', 'Sekinîn ne hêsan e gava westiyayî.'],
    gen:['Sekinîn û gerîn', 'Bisekine!']),
 
   (id:'a1_595', ku:'Rûniştin', tr:'Oturmak', en:'To sit',
    cins:'bêcins', ez:null, kat:'leker', zor:0.84,
    not:'"Rûniştin" — [AS] no.1057: "oturmak = rûniştin" ✓.',
-   her:['Rûnişt.', 'Li vir rûne!'],
+   her:['Em rûniştin li ser kursî.', 'Rûniştin li ser kursî rehet e.'],
    gen:['Rûniştin û rabûn', 'Rûne!']),
 
   (id:'a1_596', ku:'Axaftin', tr:'Konuşmak', en:'To speak',
    cins:'bêcins', ez:null, kat:'leker', zor:0.84,
    not:'"Axaftin" — [AS] no.1045: "konuşmak = axaftin, peyivîn" ✓.',
-   her:['Ez bi Kurmancî diaxivim.', 'Bi me re biaxive!'],
+   her:['Axaftin bi Kurmancî pir xweş e.', 'Em ji axaftinê bi hev re hez dikin.'],
    gen:['Axaftin û guhdarî', 'Biaxive!']),
 
   (id:'a1_597', ku:'Bihîstin', tr:'Duymak / İşitmek', en:'To hear',
    cins:'bêcins', ez:null, kat:'leker', zor:0.83,
    not:'"Bihîstin" — [AS] no.1024: "duymak = bihîstin" ✓. Ergatif: "Min bîst."',
-   her:['Min bîst.', 'Tu dibihîzî?'],
+   her:['Bihîstina dengê te baş e.', 'Bihîstin û têgihîştin du tişt in.'],
    gen:['Bihîstin û dîtin', 'Min bîst.']),
 
   (id:'a1_598', ku:'Zanîn', tr:'Bilmek', en:'To know',
    cins:'bêcins', ez:null, kat:'leker', zor:0.85,
    not:'"Zanîn" — ergatif. "Ez dizanim" = biliyorum. "Min zanî." Kök: zan.',
-   her:['Ez dizanim.', 'Min zanî ku hat.'],
+   her:['Zanîn hêz e.', 'Zanîna zimanê dayikê girîng e.'],
    gen:['Zanîn û nezanîn', 'Dizanim.']),
 
   (id:'a1_599', ku:'Bawer kirin', tr:'İnanmak', en:'To believe',
    cins:'bêcins', ez:null, kat:'leker', zor:0.81,
    not:'"Bawer kirin" — [AS] no.1019: "inanmak = bawer kirin" ✓.',
-   her:['Ez bawer dikim.', 'Min bawer kir.'],
+   her:['Ez bawer dikim ku tê.', 'Bawer kirin hêsan e, lê dijwar tê kirin.'],
    gen:['Bawer kirin û şik', 'Bawer dikim.']),
 
   // ── SIFAT EK — [BH] §57-60 ────────────────────────────────
@@ -3266,19 +3266,19 @@ const kA1EkKelimeler4 = [
   (id:'a1_ek448', ku:'Tunebûn', tr:'Yokluk / Olmama', en:'Non-existence',
    cins:'bêcins', ez:null, kat:'bun', zor:0.70,
    not:'"Tune" = yok + "bûn" = olma. "Tunebûn" = yokluk. "Tune ye" = yok.',
-   her:['Av tune ye, pîrê.', 'Nan tune ye.'],
+   her:['Tunebûna avê di gund de derd e.', 'Tunebûna te zor e.'],
    gen:['Tunebûn û hebûn', 'Tune ye.']),
 
   (id:'a1_ek449', ku:'Man', tr:'Kalmak', en:'To stay / To remain',
    cins:'bêcins', ez:null, kat:'bun', zor:0.72,
    not:'"Man" = kalmak. "Ez mam" = kaldım. "Bimîne" = kal.',
-   her:['Ez li malê mam.', 'Bimîne, pîrê!'],
+   her:['Em li malê man heya êvarê.', 'Pîrê li nezdîkê me man.'],
    gen:['Man û çûn', 'Ez dimînim.']),
 
   (id:'a1_ek450', ku:'Çêbûn', tr:'Oluşmak / Doğmak', en:'To be born / To come into being',
    cins:'bêcins', ez:null, kat:'bun', zor:0.68,
    not:'"Çê" + "bûn" = oluşmak, doğmak. "Ew çêbû" = o doğdu.',
-   her:['Zarok çêbû!', 'Ev çêbû.'],
+   her:['Çêbûna zarokê me kêfxweşî mezin e.', 'Em ji çêbûna gund şa ne.'],
    gen:['Çêbûn û jiyan', 'Ew çêbû.']),
 
   (id:'a1_ek451', ku:'Jiyan', tr:'Yaşam / Hayat', en:'Life',

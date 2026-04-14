@@ -93,6 +93,11 @@ void main() {
 
   bool _heritageContainsWord(List<dynamic>? her, String ku) {
     if (her == null || her.isEmpty) return false;
+    // Phrasal ifadeler (boşluk veya soru işareti içeren) zaten cümle —
+    // heritage cümle aramaktan muaf. ("Tu çawa yî?", "Ev çi ye?")
+    if (ku.contains(' ') || ku.contains('?') || ku.contains('!')) {
+      return true;
+    }
     final regex = RegExp(
       r'\b' + RegExp.escape(ku) + r'(a|ê|î|an|ên|yê|ya)?\b',
       caseSensitive: false,
