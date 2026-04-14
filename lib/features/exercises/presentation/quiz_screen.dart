@@ -83,9 +83,9 @@ List<_QuizWord> _loadWordsForLevel(String level) {
     _ => kA1TamListe,
   };
 
-  // Tüm kelimeleri al (alfabe harfleri dahil — açıklamaları quiz'de kullanılır)
+  // Tek harflik kelimeleri (alfabe) hariç tut — quiz için uygun değil
   return raw
-      .where((r) => r.ku.isNotEmpty && r.tr.isNotEmpty)
+      .where((r) => r.ku.isNotEmpty && r.tr.isNotEmpty && r.ku.length > 1)
       .map((r) => _QuizWord(
         id: r.id, ku: r.ku, tr: r.tr, en: r.en,
         kat: r.kat ?? '', cins: r.cins ?? '', not_: r.not ?? '',

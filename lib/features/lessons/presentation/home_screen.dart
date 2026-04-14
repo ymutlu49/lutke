@@ -1221,9 +1221,11 @@ List<_SkillTreeUnit> _buildSkillUnits(String level) {
   }
 
   // Pedagojik sıra — basit/somut → karmaşık/soyut
+  // NOT: 'alfabe' çıkarıldı — tek harflik girişler quiz/flashcard için uygun değil.
+  // Alfabe sadece Rêziman (gramer) sekmesinde yer alır.
   const _pedagogicOrder = [
-    // A1 temel
-    'alfabe', 'selamlama', 'silav', 'cinavk', 'hejmar', 'jimar',
+    // A1 temel — Silav ilk durak
+    'selamlama', 'silav', 'cinavk', 'hejmar', 'jimar',
     'malbat', 'bun', 'reng', 'dem', 'roj', 'demsal', 'werzî',
     'mal', 'xwarin', 'vexwarin', 'mêwe', 'beden', 'cil',
     'pîşe', 'ajal', 'xweza', 'cih', 'gihanî', 'rêwîtî',
@@ -1258,8 +1260,10 @@ List<_SkillTreeUnit> _buildSkillUnits(String level) {
   }
 
   // Sırada olmayan ama yeterli kelimesi olan kategorileri sona ekle
+  // 'alfabe' hariç — tek harflik girişler etkinlikler için uygun değil
   for (final entry in catCounts.entries) {
     final kat = entry.key;
+    if (kat == 'alfabe') continue;
     final count = entry.value;
     if (count < 4) continue;
     if (_pedagogicOrder.contains(kat)) continue; // Zaten eklendi
