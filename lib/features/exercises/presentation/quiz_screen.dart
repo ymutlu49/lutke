@@ -129,28 +129,40 @@ List<_QuizQuestion> _generateQuizSession({
   // Ensure types list matches effectiveCount
   final types = List.generate(effectiveCount, (i) => baseTypes[i % baseTypes.length]);
 
+  // Aynı kategoriden distractor'lar oluştur (semantik tutarlılık)
+  final sameCatWords = category != null
+      ? allWords.where((w) => w.kat == category).toList()
+      : allWords;
+
   final questions = <_QuizQuestion>[];
   for (int i = 0; i < effectiveCount; i++) {
     final word = sessionWords[i];
-    final type = types[i];
+    var type = types[i];
+
+    // Alfabe kategorisinde typing anlamsız — translation'a çevir
+    if (word.ku.length <= 2 && type == _ExerciseType.typing) {
+      type = _ExerciseType.translation;
+    }
+
     List<String> options = [];
 
     if (type != _ExerciseType.typing) {
-      // 4 secenek olustur: 1 dogru + 3 yanlis
+      // Önce aynı kategoriden distractor dene, yetersizse tüm havuzdan al
+      var distractorPool = sameCatWords.where((w) => w.id != word.id).toList();
+      if (distractorPool.length < 3) {
+        distractorPool = allWords.where((w) => w.id != word.id).toList();
+      }
+      distractorPool.shuffle(rng);
+
       if (showTurkish) {
-        // KU/TR modu: Kurmancî kelime → Türkçe seçenekler
         final isKuOptions = type == _ExerciseType.reverseTranslation;
         final correctAnswer = isKuOptions ? word.ku : word.tr;
-        final distractors = allWords.where((w) => w.id != word.id).toList()..shuffle(rng);
-        final wrongOptions = distractors.take(3).map((w) => isKuOptions ? w.ku : w.tr).toList();
+        final wrongOptions = distractorPool.take(3)
+            .map((w) => isKuOptions ? w.ku : w.tr).toList();
         options = [correctAnswer, ...wrongOptions]..shuffle(rng);
       } else {
-        // Tenê Kurmancî: Tüm seçenekler Kurmancî
-        // Translation: Kurmancî cümle/tanım → Kurmancî kelime seçenekleri
-        // Reverse: Kurmancî kelime → Kurmancî tanım/kategori seçenekleri
         final correctAnswer = word.ku;
-        final distractors = allWords.where((w) => w.id != word.id).toList()..shuffle(rng);
-        final wrongOptions = distractors.take(3).map((w) => w.ku).toList();
+        final wrongOptions = distractorPool.take(3).map((w) => w.ku).toList();
         options = [correctAnswer, ...wrongOptions]..shuffle(rng);
       }
     }
@@ -573,14 +585,21 @@ class _QuizScreenState extends ConsumerState<QuizScreen>
   // ── 1. Translation: Kurmancî -> Tirkî ────────────────────────
 
   Widget _buildTranslationQuestion(_QuizQuestion q) {
+    // Alfabe kategorisi — harf + ses açıklaması göster
+    final isAlphabet = q.word.ku.length <= 2;
+
     if (_showTurkish) {
       return Column(
         key: ValueKey('translation_${q.word.id}'),
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          _buildInstruction('Ev peyv bi Tirkî çi ye?', '', showTr: false),
+          _buildInstruction(
+            isAlphabet ? 'Ev tîp çi ye?' : 'Ev peyv bi Tirkî çi ye?',
+            '', showTr: false),
           Gap.lg,
-          _buildWordCard(q.word.ku, isKurmanji: true, kat: q.word.kat),
+          isAlphabet
+              ? _buildLetterCard(q.word.ku)
+              : _buildWordCard(q.word.ku, isKurmanji: true, kat: q.word.kat),
           const SizedBox(height: AppSpacing.questionToOptions),
           ..._buildOptionButtons(q),
         ],
@@ -592,7 +611,9 @@ class _QuizScreenState extends ConsumerState<QuizScreen>
       key: ValueKey('translation_${q.word.id}'),
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        _buildInstruction('Ev peyv çi ye?', '', showTr: false),
+        _buildInstruction(
+          isAlphabet ? 'Ev tîp çi ye?' : 'Ev peyv çi ye?',
+          '', showTr: false),
         Gap.lg,
         _buildWordCard(q.word.ku, isKurmanji: true, kat: q.word.kat),
         const SizedBox(height: AppSpacing.questionToOptions),
@@ -1015,6 +1036,43 @@ class _QuizScreenState extends ConsumerState<QuizScreen>
           begin: const Offset(0.95, 0.95),
           duration: 300.ms,
           curve: Curves.easeOut,
+        );
+  }
+
+  /// Alfabe harfi kartı — büyük harf gösterimi
+  Widget _buildLetterCard(String letter) {
+    return Center(
+      child: Container(
+        width: 120,
+        height: 120,
+        decoration: BoxDecoration(
+          color: AppColors.primarySurface,
+          borderRadius: BorderRadius.circular(24),
+          border: Border.all(color: AppColors.primary.withOpacity(0.3), width: 2),
+          boxShadow: [
+            BoxShadow(
+              color: AppColors.primary.withOpacity(0.1),
+              blurRadius: 16,
+              offset: const Offset(0, 6),
+            ),
+          ],
+        ),
+        child: Center(
+          child: Text(
+            letter.toUpperCase(),
+            style: TextStyle(
+              fontSize: 56,
+              fontWeight: FontWeight.w800,
+              color: AppColors.primary,
+              fontFamily: 'NotoSans',
+            ),
+          ),
+        ),
+      ),
+    ).animate().fadeIn(duration: 300.ms).scale(
+          begin: const Offset(0.8, 0.8),
+          duration: 400.ms,
+          curve: Curves.elasticOut,
         );
   }
 
