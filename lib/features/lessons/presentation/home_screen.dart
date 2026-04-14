@@ -1106,6 +1106,46 @@ List<dynamic> _getWordsForLevel(String level) => switch (level) {
   _ => kA1TamListe,
 };
 
+/// Kategori renkleri — her durak kendine özel canlı renk.
+Color _colorForCategory(String kat) => switch (kat) {
+  'selamlama' || 'silav' => const Color(0xFF1A7B6B), // teal
+  'cinavk' || 'navdêr' => const Color(0xFF7B1FA2), // mor
+  'hejmar' || 'jimar' => const Color(0xFF2196F3), // mavi
+  'malbat' => const Color(0xFFE91E63), // pembe
+  'bun' => const Color(0xFFD4783A), // turuncu
+  'reng' => const Color(0xFFFF5722), // koyu turuncu
+  'dem' || 'roj' || 'demsal' || 'werzî' => const Color(0xFFFF8F00), // amber
+  'mal' || 'cih' || 'bajêr' => const Color(0xFF00BCD4), // cyan
+  'xwarin' || 'vexwarin' || 'mêwe' => const Color(0xFF2D9E4F), // yeşil
+  'beden' || 'tendurist' => const Color(0xFF009688), // teal koyu
+  'cil' => const Color(0xFF9C27B0), // mor
+  'pîşe' || 'kar' => const Color(0xFF3F51B5), // indigo
+  'ajal' => const Color(0xFFD4783A), // turuncu
+  'xweza' || 'ekoloji' => const Color(0xFF4CAF50), // yeşil
+  'gihanî' || 'rêwîtî' => const Color(0xFF0277BD), // koyu mavi
+  'his' || 'peyvben' || 'psikoloji' => const Color(0xFFFF8FAB), // pembe
+  'pirs' => const Color(0xFF607D8B), // gri-mavi
+  'leker' || 'leker_ergatif' || 'ergatif' => const Color(0xFF795548), // kahve
+  'rengder' || 'soyut' => const Color(0xFF673AB7), // koyu mor
+  'daçek' || 'rêziman' => const Color(0xFF455A64), // koyu gri
+  'çand' || 'edebiyat' || 'huner' => const Color(0xFFE91E63), // pembe
+  'dua' => const Color(0xFF8BC34A), // açık yeşil
+  'temel' || 'jiyan' => const Color(0xFF1A7B6B), // teal
+  'civakî' || 'kimlik' => const Color(0xFF5C6BC0), // indigo açık
+  'siyaset' || 'zagon' => const Color(0xFF37474F), // koyu
+  'aborî' || 'bazirganî' || 'cotkarî' => const Color(0xFF00695C), // teal koyu
+  'teknoloji' || 'zanist' => const Color(0xFF0288D1), // mavi
+  'medya' => const Color(0xFFE64A19), // koyu turuncu
+  'felsefe' => const Color(0xFF6A1B9A), // mor
+  'dîrok' => const Color(0xFF5D4037), // kahve koyu
+  'akademik' => const Color(0xFF1565C0), // koyu mavi
+  'deyim' => const Color(0xFFC62828), // kırmızı
+  'welat' => const Color(0xFF2E7D32), // koyu yeşil
+  'hewa' => const Color(0xFF0097A7), // cyan koyu
+  'neyekî' => const Color(0xFF616161), // gri
+  _ => const Color(0xFF1A7B6B), // varsayılan teal
+};
+
 /// Kategori ikonları — tüm seviyeler için ortak.
 IconData _iconForCategory(String kat) => switch (kat) {
   'alfabe' => Icons.text_fields_rounded,
@@ -1393,29 +1433,30 @@ class _SkillTreeNode extends StatelessWidget {
 
     // Node boyutlari — larger for mountain-path feel
     final nodeSize = isCurrent ? 88.0 : 74.0;
+    final catColor = _colorForCategory(unit.katKey);
 
-    // Renkler — logo palette'e uygun, canlı
+    // Renkler — her durak kendi kategori rengiyle
     final nodeColor = isCompleted
-        ? AppColors.success
+        ? catColor
         : isCurrent
-            ? AppColors.primary
+            ? catColor
             : isLocked
                 ? AppColors.backgroundTertiary
-                : AppColors.primarySurface;
+                : catColor.withOpacity(0.12);
 
     final borderColor = isCompleted
-        ? AppColors.success
+        ? catColor
         : isCurrent
             ? AppColors.accent
             : isLocked
                 ? AppColors.border
-                : AppColors.primary.withOpacity(0.3);
+                : catColor.withOpacity(0.4);
 
     final iconColor = isCompleted || isCurrent
         ? Colors.white
         : isLocked
             ? AppColors.textTertiary
-            : AppColors.primary;
+            : catColor;
 
     final textColor = isLocked
         ? AppColors.textTertiary
@@ -1499,30 +1540,41 @@ class _SkillTreeNode extends StatelessWidget {
 
   Widget _buildNodeCircle(
       double size, Color color, Color border, Color iconColor) {
+    final catColor = _colorForCategory(unit.katKey);
     final circle = Container(
       width: size,
       height: size,
       decoration: BoxDecoration(
         shape: BoxShape.circle,
-        color: color,
+        gradient: (isCompleted || isCurrent)
+            ? LinearGradient(
+                begin: Alignment.topLeft,
+                end: Alignment.bottomRight,
+                colors: [
+                  catColor,
+                  Color.lerp(catColor, Colors.black, 0.2)!,
+                ],
+              )
+            : null,
+        color: (isCompleted || isCurrent) ? null : color,
         border: Border.all(color: border, width: isCurrent ? 3.5 : 2.5),
         boxShadow: [
           if (isCurrent)
             BoxShadow(
-              color: AppColors.primary.withOpacity(0.35),
-              blurRadius: 18,
-              spreadRadius: 2,
+              color: catColor.withOpacity(0.45),
+              blurRadius: 20,
+              spreadRadius: 3,
             ),
           if (isCompleted)
             BoxShadow(
-              color: AppColors.success.withOpacity(0.25),
-              blurRadius: 10,
+              color: catColor.withOpacity(0.3),
+              blurRadius: 12,
               spreadRadius: 1,
             ),
-          if (!isLocked)
+          if (!isLocked && !isCompleted && !isCurrent)
             BoxShadow(
-              color: Colors.black.withOpacity(0.08),
-              blurRadius: 6,
+              color: catColor.withOpacity(0.15),
+              blurRadius: 8,
               offset: const Offset(0, 3),
             ),
         ],
@@ -1612,14 +1664,6 @@ class _PathPainter extends CustomPainter {
 
   @override
   void paint(Canvas canvas, Size size) {
-    final paint = Paint()
-      ..color = isCompleted
-          ? AppColors.primary.withOpacity(0.6)
-          : AppColors.primary.withOpacity(0.12)
-      ..strokeWidth = isCompleted ? 3.5 : 2.5
-      ..style = PaintingStyle.stroke
-      ..strokeCap = StrokeCap.round;
-
     // Dashed line icin path
     final startX = size.width * fromX;
     final endX = size.width * toX;
@@ -1627,11 +1671,9 @@ class _PathPainter extends CustomPainter {
     final path = Path();
     path.moveTo(startX, 0);
 
-    // Eger ayni x hizasindalarsa duz cizgi, degilse egri
     if ((startX - endX).abs() < 10) {
       path.lineTo(endX, size.height);
     } else {
-      // Cubic bezier ile kivrilan yol
       path.cubicTo(
         startX, size.height * 0.4,
         endX, size.height * 0.6,
@@ -1639,10 +1681,26 @@ class _PathPainter extends CustomPainter {
       );
     }
 
-    // Dotted pattern
+    // Gölge çizgi (altta)
+    final shadowPaint = Paint()
+      ..color = (isCompleted ? const Color(0xFF1A7B6B) : Colors.black).withOpacity(0.08)
+      ..strokeWidth = isCompleted ? 5.0 : 3.5
+      ..style = PaintingStyle.stroke
+      ..strokeCap = StrokeCap.round;
+    canvas.drawPath(path, shadowPaint);
+
+    // Ana çizgi — dashed pattern
+    final paint = Paint()
+      ..color = isCompleted
+          ? const Color(0xFF1A7B6B).withOpacity(0.7) // teal canlı
+          : const Color(0xFF1A7B6B).withOpacity(0.18)
+      ..strokeWidth = isCompleted ? 3.5 : 2.5
+      ..style = PaintingStyle.stroke
+      ..strokeCap = StrokeCap.round;
+
     final dashPath = Path();
-    const dashLen = 6.0;
-    const gapLen = 4.0;
+    const dashLen = 8.0;
+    const gapLen = 5.0;
     final metrics = path.computeMetrics();
     for (final metric in metrics) {
       var distance = 0.0;

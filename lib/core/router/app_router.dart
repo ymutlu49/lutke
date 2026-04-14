@@ -593,8 +593,19 @@ class _Tab extends StatelessWidget {
     required this.onTap,
   });
 
+  // Her sekme kendi rengiyle — logo palette
+  Color get _tabColor => switch (label) {
+    'Fêrbûn' => const Color(0xFF1A7B6B), // teal primary
+    'Peyv' => const Color(0xFF0277BD), // mavi
+    'Rêziman' => const Color(0xFF7B1FA2), // mor
+    'Çand' => const Color(0xFFD4783A), // turuncu accent
+    'Profîl' => const Color(0xFF455A64), // koyu gri-mavi
+    _ => AppColors.primary,
+  };
+
   @override
   Widget build(BuildContext context) {
+    final color = isActive ? _tabColor : Colors.grey.shade500;
     return Expanded(
       child: GestureDetector(
         onTap: onTap,
@@ -604,18 +615,24 @@ class _Tab extends StatelessWidget {
           children: [
             AnimatedContainer(
               duration: const Duration(milliseconds: 200),
-              width: 48,
-              height: 28,
+              width: 52,
+              height: 30,
               decoration: BoxDecoration(
-                color: isActive
-                    ? AppColors.primary.withOpacity(0.12)
-                    : Colors.transparent,
-                borderRadius: BorderRadius.circular(14),
+                gradient: isActive
+                    ? LinearGradient(
+                        colors: [
+                          _tabColor.withOpacity(0.18),
+                          _tabColor.withOpacity(0.06),
+                        ],
+                      )
+                    : null,
+                color: isActive ? null : Colors.transparent,
+                borderRadius: BorderRadius.circular(15),
               ),
               child: Icon(
                 icon,
                 size: 22,
-                color: isActive ? AppColors.primary : Colors.grey.shade500,
+                color: color,
               ),
             ),
             const SizedBox(height: 2),
@@ -624,7 +641,7 @@ class _Tab extends StatelessWidget {
               style: TextStyle(
                 fontSize: 11,
                 fontWeight: isActive ? FontWeight.w700 : FontWeight.w500,
-                color: isActive ? AppColors.primary : Colors.grey.shade500,
+                color: color,
               ),
             ),
           ],
