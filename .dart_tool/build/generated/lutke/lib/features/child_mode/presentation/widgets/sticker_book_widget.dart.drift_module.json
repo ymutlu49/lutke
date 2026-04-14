@@ -1,9 +1,0 @@
-{
-  "elements": {},
-  "imports": [
-    "package:flutter/material.dart",
-    "package:flutter_animate/flutter_animate.dart",
-    "package:lutke/core/constants/child_theme.dart",
-    "package:lutke/features/child_mode/domain/child_gamification.dart"
-  ]
-}

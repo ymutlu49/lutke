@@ -1,7 +1,0 @@
-{
-  "elements": {},
-  "imports": [
-    "package:flutter/foundation.dart",
-    "package:lutke/core/services/js_eval_stub.dart"
-  ]
-}

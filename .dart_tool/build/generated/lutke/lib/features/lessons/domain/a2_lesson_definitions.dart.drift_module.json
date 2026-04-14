@@ -1,7 +1,0 @@
-{
-  "elements": {},
-  "imports": [
-    "package:lutke/features/lessons/domain/lesson_entities.dart",
-    "package:lutke/features/lessons/domain/a2_kelime_db.dart"
-  ]
-}

@@ -1,8 +1,0 @@
-{
-  "elements": {},
-  "imports": [
-    "package:flutter/foundation.dart",
-    "package:dio/dio.dart",
-    "package:flutter_riverpod/flutter_riverpod.dart"
-  ]
-}

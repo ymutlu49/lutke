@@ -1,9 +1,0 @@
-{
-  "elements": {},
-  "imports": [
-    "package:flutter_local_notifications/flutter_local_notifications.dart",
-    "package:shared_preferences/shared_preferences.dart",
-    "package:timezone/timezone.dart",
-    "package:timezone/data/latest.dart"
-  ]
-}

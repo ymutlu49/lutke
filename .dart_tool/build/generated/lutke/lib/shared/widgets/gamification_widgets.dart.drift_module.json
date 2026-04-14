@@ -1,7 +1,0 @@
-{
-  "elements": {},
-  "imports": [
-    "package:lutke/features/gamification/gamification_widgets.dart",
-    "package:lutke/features/gamification/gamification_provider.dart"
-  ]
-}
