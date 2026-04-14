@@ -102,16 +102,6 @@ class SplashScreen extends ConsumerWidget {
                       ),
                     ),
                   ).animate().fadeIn(delay: 500.ms, duration: 500.ms),
-                  const SizedBox(height: 6),
-                  Text(
-                    'Dil vatansız kalır, ama vatan dilsiz kalmaz.',
-                    textAlign: TextAlign.center,
-                    style: TextStyle(
-                      fontSize: 12,
-                      color: Colors.white.withOpacity(0.55),
-                      letterSpacing: 0.3,
-                    ),
-                  ).animate().fadeIn(delay: 600.ms, duration: 400.ms),
 
                   const Spacer(flex: 1),
 
@@ -123,45 +113,37 @@ class SplashScreen extends ConsumerWidget {
 
                   const Spacer(flex: 1),
 
-                  // ── Têketin / Tomarkirin — Tek belirgin CTA ──
-                  SizedBox(
-                    width: double.infinity,
-                    height: 56,
-                    child: ElevatedButton.icon(
-                      onPressed: () => context.go(AppRoutes.register),
-                      icon: const Icon(Icons.login_rounded, size: 22),
-                      label: const Text(
-                        'Têketin / Tomarkirin',
-                        style: TextStyle(
-                          fontSize: 16,
-                          fontWeight: FontWeight.w700,
-                          letterSpacing: 0.3,
+                  // ── Têketin / Tomarkirin — Sade, daha küçük CTA ──
+                  // (max genişlik sınırlı, daha kompakt)
+                  Center(
+                    child: ConstrainedBox(
+                      constraints: const BoxConstraints(maxWidth: 240),
+                      child: SizedBox(
+                        width: double.infinity,
+                        height: 46,
+                        child: ElevatedButton.icon(
+                          onPressed: () => context.go(AppRoutes.register),
+                          icon: const Icon(Icons.login_rounded, size: 18),
+                          label: const Text(
+                            'Têketin / Tomarkirin',
+                            style: TextStyle(
+                              fontSize: 14,
+                              fontWeight: FontWeight.w700,
+                              letterSpacing: 0.3,
+                            ),
+                          ),
+                          style: ElevatedButton.styleFrom(
+                            backgroundColor: Colors.white,
+                            foregroundColor: AppColors.primary,
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(14),
+                            ),
+                            elevation: 0,
+                          ),
                         ),
-                      ),
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor: Colors.white,
-                        foregroundColor: AppColors.primary,
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(18),
-                        ),
-                        elevation: 0,
                       ),
                     ),
                   ).animate().fadeIn(delay: 1000.ms).slideY(begin: 0.2),
-
-                  const SizedBox(height: 10),
-
-                  // Mîsafir — ince, opsiyonel link (kayıt olmadan dene)
-                  TextButton(
-                    onPressed: () => context.go(AppRoutes.modeSelect),
-                    style: TextButton.styleFrom(
-                      foregroundColor: Colors.white.withOpacity(0.6),
-                    ),
-                    child: const Text(
-                      'Wek mîsafir biceribîne',
-                      style: TextStyle(fontSize: 12),
-                    ),
-                  ).animate().fadeIn(delay: 1200.ms),
 
                   const Spacer(flex: 1),
 
