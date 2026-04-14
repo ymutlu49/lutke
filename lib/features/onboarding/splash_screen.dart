@@ -171,58 +171,63 @@ class SplashScreen extends ConsumerWidget {
 class _LearningPathPreview extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Container(
-      padding: const EdgeInsets.all(20),
-      decoration: BoxDecoration(
-        color: Colors.white.withOpacity(0.08),
-        borderRadius: BorderRadius.circular(24),
-        border: Border.all(color: Colors.white.withOpacity(0.1)),
-      ),
-      child: Column(
-        children: [
-          // Başlık
-          Row(
+    return Center(
+      child: ConstrainedBox(
+        constraints: const BoxConstraints(maxWidth: 320),
+        child: Container(
+          padding: const EdgeInsets.symmetric(
+              horizontal: 16, vertical: 14),
+          decoration: BoxDecoration(
+            color: Colors.white.withOpacity(0.06),
+            borderRadius: BorderRadius.circular(18),
+            border: Border.all(color: Colors.white.withOpacity(0.08)),
+          ),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
             children: [
-              Image.asset('assets/images/mascot_64.png',
-                width: 28, height: 28, filterQuality: FilterQuality.medium),
-              const SizedBox(width: 8),
-              Text('Rêya Fêrbûnê',
-                style: TextStyle(fontSize: 15, fontWeight: FontWeight.w700,
-                  color: Colors.white)),
+              // Başlık
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Image.asset(
+                    'assets/images/mascot_64.png',
+                    width: 22,
+                    height: 22,
+                    filterQuality: FilterQuality.medium,
+                  ),
+                  const SizedBox(width: 6),
+                  Text(
+                    'Rêya Fêrbûnê',
+                    style: TextStyle(
+                      fontSize: 13,
+                      fontWeight: FontWeight.w700,
+                      color: Colors.white.withOpacity(0.92),
+                    ),
+                  ),
+                ],
+              ),
+
+              const SizedBox(height: 12),
+
+              // Seviye yolu — 6 CEFR seviyesi (kompakt)
+              Row(
+                children: [
+                  _LevelDot(label: 'A1', isActive: true, color: const Color(0xFF4CAF50)),
+                  _PathLine(),
+                  _LevelDot(label: 'A2', color: const Color(0xFF8BC34A)),
+                  _PathLine(),
+                  _LevelDot(label: 'B1', color: const Color(0xFFFF9800)),
+                  _PathLine(),
+                  _LevelDot(label: 'B2', color: const Color(0xFFFF5722)),
+                  _PathLine(),
+                  _LevelDot(label: 'C1', color: const Color(0xFF9C27B0)),
+                  _PathLine(),
+                  _LevelDot(label: 'C2', color: const Color(0xFF673AB7)),
+                ],
+              ),
             ],
           ),
-
-          const SizedBox(height: 16),
-
-          // Seviye yolu — 6 CEFR seviyesi
-          Row(
-            children: [
-              _LevelDot(label: 'A1', isActive: true, color: const Color(0xFF4CAF50)),
-              _PathLine(),
-              _LevelDot(label: 'A2', color: const Color(0xFF8BC34A)),
-              _PathLine(),
-              _LevelDot(label: 'B1', color: const Color(0xFFFF9800)),
-              _PathLine(),
-              _LevelDot(label: 'B2', color: const Color(0xFFFF5722)),
-              _PathLine(),
-              _LevelDot(label: 'C1', color: const Color(0xFF9C27B0)),
-              _PathLine(),
-              _LevelDot(label: 'C2', color: const Color(0xFF673AB7)),
-            ],
-          ),
-
-          const SizedBox(height: 16),
-
-          // İstatistikler
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
-            children: [
-              _StatChip(value: '3,900+', label: 'peyv'),
-              _StatChip(value: '8', label: 'çalakî'),
-              _StatChip(value: '6', label: 'ast'),
-            ],
-          ),
-        ],
+        ),
       ),
     );
   }
@@ -238,29 +243,30 @@ class _LevelDot extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Column(
+      mainAxisSize: MainAxisSize.min,
       children: [
         Container(
-          width: isActive ? 32 : 26,
-          height: isActive ? 32 : 26,
+          width: isActive ? 26 : 20,
+          height: isActive ? 26 : 20,
           decoration: BoxDecoration(
-            color: isActive ? color : color.withOpacity(0.3),
+            color: isActive ? color : color.withOpacity(0.35),
             shape: BoxShape.circle,
             border: isActive
-                ? Border.all(color: Colors.white, width: 2)
+                ? Border.all(color: Colors.white, width: 1.5)
                 : null,
           ),
           child: Center(
             child: isActive
-                ? const Icon(Icons.flag_rounded, size: 14, color: Colors.white)
+                ? const Icon(Icons.flag_rounded, size: 11, color: Colors.white)
                 : null,
           ),
         ),
-        const SizedBox(height: 4),
+        const SizedBox(height: 3),
         Text(label,
           style: TextStyle(
-            fontSize: 10,
+            fontSize: 9,
             fontWeight: isActive ? FontWeight.w700 : FontWeight.w500,
-            color: isActive ? Colors.white : Colors.white.withOpacity(0.5),
+            color: isActive ? Colors.white : Colors.white.withOpacity(0.55),
           ),
         ),
       ],
@@ -273,35 +279,14 @@ class _PathLine extends StatelessWidget {
   Widget build(BuildContext context) {
     return Expanded(
       child: Container(
-        height: 2,
-        margin: const EdgeInsets.only(bottom: 16),
+        height: 1.5,
+        margin: const EdgeInsets.only(bottom: 12),
         decoration: BoxDecoration(
           gradient: LinearGradient(
             colors: [Colors.white.withOpacity(0.3), Colors.white.withOpacity(0.1)],
           ),
         ),
       ),
-    );
-  }
-}
-
-class _StatChip extends StatelessWidget {
-  final String value;
-  final String label;
-
-  const _StatChip({required this.value, required this.label});
-
-  @override
-  Widget build(BuildContext context) {
-    return Column(
-      children: [
-        Text(value,
-          style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w800,
-            color: Colors.white)),
-        Text(label,
-          style: TextStyle(fontSize: 11,
-            color: Colors.white.withOpacity(0.6))),
-      ],
     );
   }
 }
