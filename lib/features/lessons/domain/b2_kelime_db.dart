@@ -2710,5 +2710,507 @@ final kB2_Tamam = [
 ];
 final kB2Temam2 = [...kB2_Tamam];
 
+// ── B2 Ek Tamamlama — kategorileri 12'ye tamamlama ──
+final kB2_EkTamam = [
+  // ── kar (11 ek kelime — iş/çalışma) ──
+  (id:"b2_600", ku:"pîşe", tr:"Meslek", en:"Profession",
+   cins:"mê", ez:"pîşe", kat:"kar", zor:0.58,
+   not:"Pîşe û kar.",
+   her:["Pîşeya te çi ye?", "Pîşeya min mamostetî ye."], gen:["Pîşe","Pîşeya me"]),
+
+  (id:"b2_601", ku:"hevkar", tr:"İş arkadaşı / Ortak", en:"Colleague / Partner",
+   cins:"nêr", ez:"hevkar", kat:"kar", zor:0.58,
+   not:"Hevkarê kar.",
+   her:["Hevkarê min baş e.", "Bi hevkarên xwe re dixebitin."], gen:["Hevkar","Hevkarê me"]),
+
+  (id:"b2_602", ku:"mûçe", tr:"Maaş", en:"Salary",
+   cins:"mê", ez:"mûçe", kat:"kar", zor:0.60,
+   not:"Dahatê mehane.",
+   her:["Mûçeya min hat.", "Mûçeya wî baş e."], gen:["Mûçe","Mûçeya me"]),
+
+  (id:"b2_603", ku:"karker", tr:"İşçi", en:"Worker",
+   cins:"nêr", ez:"karker", kat:"kar", zor:0.57,
+   not:"Karkerê pîşesaziyê.",
+   her:["Karker dixebitin.", "Mafê karkeren heye."], gen:["Karker","Karkerên me"]),
+
+  (id:"b2_604", ku:"rêvebir", tr:"Yönetici", en:"Manager",
+   cins:"nêr", ez:"rêvebir", kat:"kar", zor:0.62,
+   not:"Rêvebirê şirketê.",
+   her:["Rêvebir biryar da.", "Rêvebirê me baş e."], gen:["Rêvebir","Rêvebirê me"]),
+
+  (id:"b2_605", ku:"wezîfe", tr:"Görev", en:"Duty / Task",
+   cins:"mê", ez:"wezîfe", kat:"kar", zor:0.59,
+   not:"Peywira karê.",
+   her:["Wezîfeya min ev e.", "Wezîfeyên xwe temam bike."], gen:["Wezîfe","Wezîfeya me"]),
+
+  (id:"b2_606", ku:"pêşkêşkirin", tr:"Sunum yapmak", en:"To present / Presentation",
+   cins:"mê", ez:"pêşkêşkirin", kat:"kar", zor:0.64,
+   not:"Pêşkêşkirina projeyê.",
+   her:["Pêşkêşkirina me amade ye.", "Wê pêşkêşkirin kir."], gen:["Pêşkêşkirin","Pêşkêşkirina me"]),
+
+  (id:"b2_607", ku:"hevpeyvîn", tr:"Mülakat", en:"Interview",
+   cins:"mê", ez:"hevpeyvîn", kat:"kar", zor:0.63,
+   not:"Hevpeyvîna kar.",
+   her:["Hevpeyvîna min heye.", "Di hevpeyvînê de serkeftî bû."], gen:["Hevpeyvîn","Hevpeyvîna me"]),
+
+  (id:"b2_608", ku:"berhemdar", tr:"Verimli", en:"Productive",
+   cins:"bêcins", ez:null, kat:"kar", zor:0.61,
+   not:"Rengdêrê karê.",
+   her:["Roja me berhemdar bû.", "Divê em berhemdar bin."], gen:["Berhemdar","Berhemdarî"]),
+
+  (id:"b2_609", ku:"destpêkirin", tr:"Başlatmak", en:"To start / To initiate",
+   cins:"mê", ez:"destpêkirin", kat:"kar", zor:0.60,
+   not:"Destpêkirina projeyê.",
+   her:["Me proje destpê kir.", "Destpêkirina karê me."], gen:["Destpêkirin","Destpêkirina me"]),
+
+  (id:"b2_610", ku:"îstîfa", tr:"İstifa", en:"Resignation",
+   cins:"mê", ez:"îstîfa", kat:"kar", zor:0.63,
+   not:"Devhiştina karê.",
+   her:["Wî îstîfa kir.", "Îstîfaya wî ya fermî."], gen:["Îstîfa","Îstîfaya me"]),
+
+  // ── erdnîgarî (8 ek kelime) ──
+  (id:"b2_611", ku:"perav", tr:"Kıyı", en:"Coast / Shore",
+   cins:"nêr", ez:"perav", kat:"erdnîgarî", zor:0.58,
+   not:"Peravê deryayê.",
+   her:["Peravê deryayê xweş e.", "Li peravê deryayê."], gen:["Perav","Peravê me"]),
+
+  (id:"b2_612", ku:"gelî", tr:"Vadi", en:"Valley",
+   cins:"mê", ez:"gelî", kat:"erdnîgarî", zor:0.57,
+   not:"Gelîya Kurdistanê.",
+   her:["Gelîyên Kurdistanê bedew in.", "Di gelîyê de gund hene."], gen:["Gelî","Gelîya me"]),
+
+  (id:"b2_613", ku:"deşt", tr:"Ova", en:"Plain",
+   cins:"nêr", ez:"deşt", kat:"erdnîgarî", zor:0.57,
+   not:"Deşta mezin.",
+   her:["Deştên berfire hene.", "Li deştê çandinî tê kirin."], gen:["Deşt","Deştê me"]),
+
+  (id:"b2_614", ku:"çiya", tr:"Dağ", en:"Mountain",
+   cins:"nêr", ez:"çiya", kat:"erdnîgarî", zor:0.56,
+   not:"Çiyayên Kurdistanê.",
+   her:["Çiyayên Kurdistanê bilind in.", "Li ser çiyê."], gen:["Çiya","Çiyayê me"]),
+
+  (id:"b2_615", ku:"gol", tr:"Göl", en:"Lake",
+   cins:"nêr", ez:"gol", kat:"erdnîgarî", zor:0.56,
+   not:"Golê mezin.",
+   her:["Gola Wanê mezin e.", "Li ber golê."], gen:["Gol","Golê me"]),
+
+  (id:"b2_616", ku:"çem", tr:"Nehir", en:"River",
+   cins:"nêr", ez:"çem", kat:"erdnîgarî", zor:0.56,
+   not:"Çemê mezin.",
+   her:["Çemê Dîcleyê dirêj e.", "Li ber çemê."], gen:["Çem","Çemê me"]),
+
+  (id:"b2_617", ku:"girav", tr:"Ada", en:"Island",
+   cins:"nêr", ez:"girav", kat:"erdnîgarî", zor:0.59,
+   not:"Giravê deryayê.",
+   her:["Li giravê jiyan xweş e.", "Giravek li deryayê."], gen:["Girav","Giravê me"]),
+
+  (id:"b2_618", ku:"sînor", tr:"Sınır", en:"Border",
+   cins:"nêr", ez:"sînor", kat:"erdnîgarî", zor:0.60,
+   not:"Sînorê welatan.",
+   her:["Sînorên welatan hene.", "Li sînor rawestiyan."], gen:["Sînor","Sînorê me"]),
+
+  // ── ergatîf_b2 (8 ek kelime) ──
+  (id:"b2_619", ku:"min ew anîbû", tr:"Ben onu getirmiştim", en:"I had brought it",
+   cins:"bêcins", ez:null, kat:"ergatîf_b2", zor:0.65,
+   not:"Ergatîf + dema borî ya dûr.",
+   her:["Min ew anîbû.", "Min pirtûk anîbû."], gen:["Min ew anîbû","Min anîbû"]),
+
+  (id:"b2_620", ku:"wan ew kirîbû", tr:"Onlar onu yapmıştı", en:"They had done it",
+   cins:"bêcins", ez:null, kat:"ergatîf_b2", zor:0.66,
+   not:"Ergatîf pirjimar + dema borî ya dûr.",
+   her:["Wan ew kirîbû.", "Wan karê xwe kirîbû."], gen:["Wan ew kirîbû","Wan kirîbû"]),
+
+  (id:"b2_621", ku:"te çi got?", tr:"Sen ne dedin?", en:"What did you say?",
+   cins:"bêcins", ez:null, kat:"ergatîf_b2", zor:0.62,
+   not:"Ergatîf pirsyar.",
+   her:["Te çi got?", "Te ji wî re çi got?"], gen:["Te çi got","Te got"]),
+
+  (id:"b2_622", ku:"me ew xwend", tr:"Biz onu okuduk", en:"We read it",
+   cins:"bêcins", ez:null, kat:"ergatîf_b2", zor:0.63,
+   not:"Ergatîf pirjimar.",
+   her:["Me ew xwend.", "Me pirtûk xwend."], gen:["Me ew xwend","Me xwend"]),
+
+  (id:"b2_623", ku:"wî lê xist", tr:"O ona vurdu (eril)", en:"He hit him/her",
+   cins:"bêcins", ez:null, kat:"ergatîf_b2", zor:0.65,
+   not:"Ergatîf + lêker bileşik.",
+   her:["Wî lê xist.", "Wî topê lê xist."], gen:["Wî lê xist","Lê xistin"]),
+
+  (id:"b2_624", ku:"wê ew firotibû", tr:"O onu satmıştı (dişil)", en:"She had sold it",
+   cins:"bêcins", ez:null, kat:"ergatîf_b2", zor:0.67,
+   not:"Ergatîf mê + dema borî ya dûr.",
+   her:["Wê ew firotibû.", "Wê mala xwe firotibû."], gen:["Wê ew firotibû","Wê firotibû"]),
+
+  (id:"b2_625", ku:"min bihîstibû", tr:"Ben duymuştum", en:"I had heard",
+   cins:"bêcins", ez:null, kat:"ergatîf_b2", zor:0.66,
+   not:"Ergatîf + dema borî ya dûr.",
+   her:["Min ew bihîstibû.", "Min ev nûçe bihîstibû."], gen:["Min bihîstibû","Me bihîstibû"]),
+
+  (id:"b2_626", ku:"wan nivîsand", tr:"Onlar yazdı", en:"They wrote",
+   cins:"bêcins", ez:null, kat:"ergatîf_b2", zor:0.64,
+   not:"Ergatîf pirjimar.",
+   her:["Wan nameyek nivîsand.", "Wan ew nivîsand."], gen:["Wan nivîsand","Me nivîsand"]),
+
+  // ── mastar (8 ek kelime) ──
+  (id:"b2_627", ku:"xwendin", tr:"Okumak", en:"To read / Reading",
+   cins:"mê", ez:"xwendin", kat:"mastar", zor:0.57,
+   not:"Navdêra lêkerî / mastar.",
+   her:["Xwendin girîng e.", "Xwendina pirtûkan."], gen:["Xwendin","Xwendina me"]),
+
+  (id:"b2_628", ku:"nivîsandin", tr:"Yazmak", en:"To write / Writing",
+   cins:"mê", ez:"nivîsandin", kat:"mastar", zor:0.58,
+   not:"Navdêra lêkerî / mastar.",
+   her:["Nivîsandin huner e.", "Nivîsandina wê baş e."], gen:["Nivîsandin","Nivîsandina me"]),
+
+  (id:"b2_629", ku:"hînbûn", tr:"Öğrenmek", en:"To learn / Learning",
+   cins:"mê", ez:"hînbûn", kat:"mastar", zor:0.58,
+   not:"Navdêra lêkerî / mastar.",
+   her:["Hînbûn pêvajo ye.", "Hînbûna zimanî."], gen:["Hînbûn","Hînbûna me"]),
+
+  (id:"b2_630", ku:"fêrkirin", tr:"Öğretmek", en:"To teach / Teaching",
+   cins:"mê", ez:"fêrkirin", kat:"mastar", zor:0.59,
+   not:"Navdêra lêkerî / mastar.",
+   her:["Fêrkirin peywir e.", "Fêrkirina kurdî."], gen:["Fêrkirin","Fêrkirina me"]),
+
+  (id:"b2_631", ku:"lêkolîn", tr:"Araştırmak", en:"To research / Research",
+   cins:"mê", ez:"lêkolîn", kat:"mastar", zor:0.61,
+   not:"Navdêra lêkerî / mastar.",
+   her:["Lêkolîn girîng e.", "Lêkolîna zanistî."], gen:["Lêkolîn","Lêkolîna me"]),
+
+  (id:"b2_632", ku:"bîranîn", tr:"Hatırlamak", en:"To remember / Remembering",
+   cins:"mê", ez:"bîranîn", kat:"mastar", zor:0.60,
+   not:"Navdêra lêkerî / mastar.",
+   her:["Bîranîn zehmet e.", "Bîranîna wan rojan."], gen:["Bîranîn","Bîranîna me"]),
+
+  (id:"b2_633", ku:"vegotin", tr:"Anlatmak", en:"To narrate / To express",
+   cins:"mê", ez:"vegotin", kat:"mastar", zor:0.60,
+   not:"Navdêra lêkerî / mastar.",
+   her:["Vegotina çîrokê.", "Vegotina wê balkêş bû."], gen:["Vegotin","Vegotina me"]),
+
+  (id:"b2_634", ku:"danasîn", tr:"Tanıtmak / Tanımlama", en:"To introduce / Definition",
+   cins:"mê", ez:"danasîn", kat:"mastar", zor:0.61,
+   not:"Navdêra lêkerî / mastar.",
+   her:["Danasîna projeyê.", "Danasîna xwe bike."], gen:["Danasîn","Danasîna me"]),
+
+  // ── rengdêr (8 ek kelime) ──
+  (id:"b2_635", ku:"berçav", tr:"Göze çarpan / Belirgin", en:"Prominent / Noticeable",
+   cins:"bêcins", ez:null, kat:"rengdêr", zor:0.60,
+   not:"Rengdêrê pêşketî.",
+   her:["Ev pêşkeftin berçav e.", "Guherîna berçav."], gen:["Berçav","Berçavtir"]),
+
+  (id:"b2_636", ku:"dijwar", tr:"Zor / Güç", en:"Difficult / Hard",
+   cins:"bêcins", ez:null, kat:"rengdêr", zor:0.58,
+   not:"Rengdêrê pêşketî.",
+   her:["Ev pirsgirêk dijwar e.", "Rewşa dijwar."], gen:["Dijwar","Dijwartir"]),
+
+  (id:"b2_637", ku:"hovane", tr:"Vahşice", en:"Savage / Brutal",
+   cins:"bêcins", ez:null, kat:"rengdêr", zor:0.62,
+   not:"Rengdêrê pêşketî.",
+   her:["Êrîşa hovane bû.", "Bi awayekî hovane."], gen:["Hovane","Hovanetir"]),
+
+  (id:"b2_638", ku:"berbiçav", tr:"Dikkat çekici", en:"Remarkable",
+   cins:"bêcins", ez:null, kat:"rengdêr", zor:0.61,
+   not:"Rengdêrê pêşketî.",
+   her:["Serkeftina berbiçav.", "Ev encam berbiçav e."], gen:["Berbiçav","Berbiçavtir"]),
+
+  (id:"b2_639", ku:"bêwate", tr:"Anlamsız", en:"Meaningless",
+   cins:"bêcins", ez:null, kat:"rengdêr", zor:0.59,
+   not:"\"Bê\"+\"wate\".",
+   her:["Ev gotin bêwate ye.", "Xebata bêwate."], gen:["Bêwate","Bêwatetir"]),
+
+  (id:"b2_640", ku:"hêja", tr:"Değerli", en:"Worthy / Valuable",
+   cins:"bêcins", ez:null, kat:"rengdêr", zor:0.58,
+   not:"Rengdêrê pêşketî.",
+   her:["Ev mirov hêja ye.", "Xebata hêja."], gen:["Hêja","Hêjatir"]),
+
+  (id:"b2_641", ku:"berfireh", tr:"Geniş / Kapsamlı", en:"Extensive / Broad",
+   cins:"bêcins", ez:null, kat:"rengdêr", zor:0.62,
+   not:"Rengdêrê pêşketî.",
+   her:["Lêkolîna berfireh.", "Ev warê berfireh e."], gen:["Berfireh","Berfiretir"]),
+
+  (id:"b2_642", ku:"nepenî", tr:"Gizli", en:"Secret / Hidden",
+   cins:"bêcins", ez:null, kat:"rengdêr", zor:0.61,
+   not:"Rengdêrê pêşketî.",
+   her:["Agahîya nepenî.", "Ev nepenî bû."], gen:["Nepenî","Nepenîtir"]),
+
+  // ── pîşe (7 ek kelime) ──
+  (id:"b2_643", ku:"avahîsaz", tr:"Mimar", en:"Architect",
+   cins:"nêr", ez:"avahîsaz", kat:"pîşe", zor:0.62,
+   not:"Pîşeya avahîsaziyê.",
+   her:["Avahîsaz plan çêkir.", "Avahîsazê navdar."], gen:["Avahîsaz","Avahîsazê me"]),
+
+  (id:"b2_644", ku:"parêzer", tr:"Avukat", en:"Lawyer",
+   cins:"nêr", ez:"parêzer", kat:"pîşe", zor:0.60,
+   not:"Pîşeya hiqûqê.",
+   her:["Parêzer dozê vekir.", "Parêzerê me baş e."], gen:["Parêzer","Parêzerê me"]),
+
+  (id:"b2_645", ku:"endezyar", tr:"Mühendis", en:"Engineer",
+   cins:"nêr", ez:"endezyar", kat:"pîşe", zor:0.61,
+   not:"Pîşeya endezyariyê.",
+   her:["Endezyar projeya xwe temam kir.", "Endezyarê baş."], gen:["Endezyar","Endezyarê me"]),
+
+  (id:"b2_646", ku:"bijîjk", tr:"Doktor", en:"Doctor",
+   cins:"nêr", ez:"bijîjk", kat:"pîşe", zor:0.58,
+   not:"Pîşeya bijîjkiyê.",
+   her:["Bijîjk nexweş derman kir.", "Bijîjkê me baş e."], gen:["Bijîjk","Bijîjkê me"]),
+
+  (id:"b2_647", ku:"rojnamevan", tr:"Gazeteci", en:"Journalist",
+   cins:"nêr", ez:"rojnamevan", kat:"pîşe", zor:0.61,
+   not:"Pîşeya medyayê.",
+   her:["Rojnamevan nûçe nivîsand.", "Rojnamevanê kurd."], gen:["Rojnamevan","Rojnamevanê me"]),
+
+  (id:"b2_648", ku:"cotkar", tr:"Çiftçi", en:"Farmer",
+   cins:"nêr", ez:"cotkar", kat:"pîşe", zor:0.57,
+   not:"Pîşeya çandiniyê.",
+   her:["Cotkar zevî çand.", "Cotkarê gundê me."], gen:["Cotkar","Cotkarê me"]),
+
+  (id:"b2_649", ku:"werzişvan", tr:"Sporcu", en:"Athlete",
+   cins:"nêr", ez:"werzişvan", kat:"pîşe", zor:0.60,
+   not:"Pîşeya werzişê.",
+   her:["Werzişvan serkeftî bû.", "Werzişvanê kurd."], gen:["Werzişvan","Werzişvanê me"]),
+
+  // ── teknolojî (7 ek kelime) ──
+  (id:"b2_650", ku:"database", tr:"Veritabanı", en:"Database",
+   cins:"mê", ez:"database", kat:"teknolojî", zor:0.63,
+   not:"Têgeha teknolojiyê.",
+   her:["Databasa me mezin e.", "Di databaseyê de."], gen:["Database","Databasa me"]),
+
+  (id:"b2_651", ku:"algorîtma", tr:"Algoritma", en:"Algorithm",
+   cins:"mê", ez:"algorîtma", kat:"teknolojî", zor:0.65,
+   not:"Têgeha bername û zanistê.",
+   her:["Algorîtma kar dike.", "Algorîtmaya nû."], gen:["Algorîtma","Algorîtmaya me"]),
+
+  (id:"b2_652", ku:"çavkanî", tr:"Kaynak", en:"Source / Resource",
+   cins:"mê", ez:"çavkanî", kat:"teknolojî", zor:0.59,
+   not:"Çavkanîya agahdariyê.",
+   her:["Çavkanîyên vekirî hene.", "Di çavkanîya vê agahîyê de."], gen:["Çavkanî","Çavkanîya me"]),
+
+  (id:"b2_653", ku:"pergal", tr:"Sistem", en:"System",
+   cins:"nêr", ez:"pergal", kat:"teknolojî", zor:0.60,
+   not:"Pergala teknolojîk.",
+   her:["Pergala me baş dixebite.", "Di vê pergalê de."], gen:["Pergal","Pergala me"]),
+
+  (id:"b2_654", ku:"torgilok", tr:"Ağ / İnternet", en:"Network / Internet",
+   cins:"nêr", ez:"torgilok", kat:"teknolojî", zor:0.62,
+   not:"Torgiloka dîjîtal.",
+   her:["Torgilok qut bû.", "Torgiloka me hêdî ye."], gen:["Torgilok","Torgiloka me"]),
+
+  (id:"b2_655", ku:"sepan", tr:"Uygulama", en:"Application / App",
+   cins:"mê", ez:"sepan", kat:"teknolojî", zor:0.60,
+   not:"Sepana mobîl.",
+   her:["Sepaneke nû hat.", "Sepana me baş e."], gen:["Sepan","Sepana me"]),
+
+  (id:"b2_656", ku:"ewlehî", tr:"Güvenlik", en:"Security",
+   cins:"mê", ez:"ewlehî", kat:"teknolojî", zor:0.62,
+   not:"Ewlehîya dîjîtal.",
+   her:["Ewlehîya daneyê girîng e.", "Di ewlehîyê de."], gen:["Ewlehî","Ewlehîya me"]),
+
+  // ── civaknas (6 ek kelime) ──
+  (id:"b2_657", ku:"çîn", tr:"Sınıf (toplumsal)", en:"Class (social)",
+   cins:"nêr", ez:"çîn", kat:"civaknas", zor:0.60,
+   not:"Çîna civakî.",
+   her:["Çînên civakî hene.", "Di navbera çînan de."], gen:["Çîn","Çînê me"]),
+
+  (id:"b2_658", ku:"netewe", tr:"Ulus", en:"Nation",
+   cins:"mê", ez:"netewe", kat:"civaknas", zor:0.59,
+   not:"Neteweyê.",
+   her:["Neteweya kurd.", "Di neteweya me de."], gen:["Netewe","Neteweya me"]),
+
+  (id:"b2_659", ku:"koç", tr:"Göç", en:"Migration",
+   cins:"nêr", ez:"koç", kat:"civaknas", zor:0.58,
+   not:"Koçberî û civak.",
+   her:["Koçên mezin çê bûn.", "Di koçê de zehmetî hene."], gen:["Koç","Koça me"]),
+
+  (id:"b2_660", ku:"hevsengî", tr:"Denge", en:"Balance / Equilibrium",
+   cins:"mê", ez:"hevsengî", kat:"civaknas", zor:0.62,
+   not:"Hevsengîya civakî.",
+   her:["Hevsengîya civakî girîng e.", "Di hevsengîyê de."], gen:["Hevsengî","Hevsengîya me"]),
+
+  (id:"b2_661", ku:"berjewendî", tr:"Çıkar", en:"Interest / Benefit",
+   cins:"mê", ez:"berjewendî", kat:"civaknas", zor:0.61,
+   not:"Berjewendîya civakî.",
+   her:["Berjewendîya giştî.", "Di berjewendîya gel de."], gen:["Berjewendî","Berjewendîya me"]),
+
+  (id:"b2_662", ku:"ragihandin", tr:"İletişim", en:"Communication",
+   cins:"mê", ez:"ragihandin", kat:"civaknas", zor:0.60,
+   not:"Ragihandina civakî.",
+   her:["Ragihandin girîng e.", "Di ragihandinê de pirsgirêk hene."], gen:["Ragihandin","Ragihandina me"]),
+
+  // ── dem (6 ek kelime — tense forms) ──
+  (id:"b2_663", ku:"dema borî ya sade", tr:"Geçmiş zaman (basit)", en:"Simple past tense",
+   cins:"mê", ez:"dema borî ya sade", kat:"dem", zor:0.62,
+   not:"Rêzimana deman.",
+   her:["Dema borî ya sade.", "Di dema borî ya sade de."], gen:["Dema borî ya sade","Dem"]),
+
+  (id:"b2_664", ku:"dema borî ya dûr", tr:"Uzak geçmiş zaman", en:"Past perfect tense",
+   cins:"mê", ez:"dema borî ya dûr", kat:"dem", zor:0.64,
+   not:"Rêzimana deman.",
+   her:["Dema borî ya dûr.", "Di dema borî ya dûr de."], gen:["Dema borî ya dûr","Dem"]),
+
+  (id:"b2_665", ku:"dema bê", tr:"Gelecek zaman", en:"Future tense",
+   cins:"mê", ez:"dema bê", kat:"dem", zor:0.61,
+   not:"Rêzimana deman.",
+   her:["Dema bê.", "Di dema bê de ez ê bêm."], gen:["Dema bê","Dem"]),
+
+  (id:"b2_666", ku:"ez ê bêm", tr:"Ben geleceğim", en:"I will come",
+   cins:"bêcins", ez:null, kat:"dem", zor:0.62,
+   not:"Dema bê — \"ê\" nîşane.",
+   her:["Ez ê bêm.", "Ez ê sibê bêm."], gen:["Ez ê bêm","Em ê bên"]),
+
+  (id:"b2_667", ku:"ew ê biçe", tr:"O gidecek", en:"He/she will go",
+   cins:"bêcins", ez:null, kat:"dem", zor:0.63,
+   not:"Dema bê — sêyemîn kes.",
+   her:["Ew ê biçe.", "Ew ê sibê biçe."], gen:["Ew ê biçe","Em ê biçin"]),
+
+  (id:"b2_668", ku:"em ê bixwînin", tr:"Biz okuyacağız", en:"We will read",
+   cins:"bêcins", ez:null, kat:"dem", zor:0.63,
+   not:"Dema bê — pirjimar.",
+   her:["Em ê bixwînin.", "Em ê vê pirtûkê bixwînin."], gen:["Em ê bixwînin","Hûn ê bixwînin"]),
+
+  // ── pasîf (6 ek kelime) ──
+  (id:"b2_669", ku:"tê kirin", tr:"Yapılır", en:"Is done / Is made",
+   cins:"bêcins", ez:null, kat:"pasîf", zor:0.62,
+   not:"Awayê pasîf — \"tê\" + kirin.",
+   her:["Ev kar tê kirin.", "Ev tişt tê kirin."], gen:["Tê kirin","Tê çêkirin"]),
+
+  (id:"b2_670", ku:"tê gotin", tr:"Denir / Söylenir", en:"Is said",
+   cins:"bêcins", ez:null, kat:"pasîf", zor:0.61,
+   not:"Awayê pasîf — \"tê\" + gotin.",
+   her:["Tê gotin ku...", "Li vir tê gotin."], gen:["Tê gotin","Tê zanîn"]),
+
+  (id:"b2_671", ku:"tê xwendin", tr:"Okunur", en:"Is read",
+   cins:"bêcins", ez:null, kat:"pasîf", zor:0.62,
+   not:"Awayê pasîf — \"tê\" + xwendin.",
+   her:["Ev pirtûk gelek tê xwendin.", "Tê xwendin ku..."], gen:["Tê xwendin","Tê nivîsandin"]),
+
+  (id:"b2_672", ku:"hat kirin", tr:"Yapıldı", en:"Was done",
+   cins:"bêcins", ez:null, kat:"pasîf", zor:0.63,
+   not:"Awayê pasîf dema borî.",
+   her:["Ev kar hat kirin.", "Ev hat kirin."], gen:["Hat kirin","Hat gotin"]),
+
+  (id:"b2_673", ku:"hat dîtin", tr:"Görüldü / Bulundu", en:"Was seen / Was found",
+   cins:"bêcins", ez:null, kat:"pasîf", zor:0.64,
+   not:"Awayê pasîf dema borî.",
+   her:["Ev hat dîtin.", "Ew hat dîtin."], gen:["Hat dîtin","Hat zanîn"]),
+
+  (id:"b2_674", ku:"tê zanîn", tr:"Biliniyor / Bilinir", en:"Is known",
+   cins:"bêcins", ez:null, kat:"pasîf", zor:0.62,
+   not:"Awayê pasîf — \"tê\" + zanîn.",
+   her:["Tê zanîn ku ew baş e.", "Ev tişt tê zanîn."], gen:["Tê zanîn","Tê gotin"]),
+
+  // ── pêşgotin (6 ek kelime — önek) ──
+  (id:"b2_675", ku:"bê-", tr:"...-sız / ...-siz (önek)", en:"Without- / -less (prefix)",
+   cins:"bêcins", ez:null, kat:"pêşgotin", zor:0.58,
+   not:"Pêşgotina neyînî.",
+   her:["Bêkar, bêmaf, bêwate.", "Ev gotin bêwate ye."], gen:["Bê-","Bêkar"]),
+
+  (id:"b2_676", ku:"hev-", tr:"Birlikte / Karşılıklı (önek)", en:"Together- / Mutual- (prefix)",
+   cins:"bêcins", ez:null, kat:"pêşgotin", zor:0.59,
+   not:"Pêşgotina hevkariyê.",
+   her:["Hevkar, heval, hevpeyvîn.", "Hevkarî girîng e."], gen:["Hev-","Hevkar"]),
+
+  (id:"b2_677", ku:"ve-", tr:"Tekrar / Geri (önek)", en:"Re- / Back (prefix)",
+   cins:"bêcins", ez:null, kat:"pêşgotin", zor:0.60,
+   not:"Pêşgotina vegerandinê.",
+   her:["Vegerîn, vegotin, vekirin.", "Vegere malê."], gen:["Ve-","Vegerîn"]),
+
+  (id:"b2_678", ku:"da-", tr:"Aşağı / İnme (önek)", en:"Down- / De- (prefix)",
+   cins:"bêcins", ez:null, kat:"pêşgotin", zor:0.60,
+   not:"Pêşgotina daketinê.",
+   her:["Daketin, dagirtin, daxwaz.", "Ew dakete jêr."], gen:["Da-","Daketin"]),
+
+  (id:"b2_679", ku:"der-", tr:"Dışarı / Çıkma (önek)", en:"Out- / Ex- (prefix)",
+   cins:"bêcins", ez:null, kat:"pêşgotin", zor:0.61,
+   not:"Pêşgotina derketinê.",
+   her:["Derkirin, derketin, derxistin.", "Ew derket derve."], gen:["Der-","Derketin"]),
+
+  (id:"b2_680", ku:"nav-", tr:"İç / Ara (önek)", en:"Inter- / In- (prefix)",
+   cins:"bêcins", ez:null, kat:"pêşgotin", zor:0.60,
+   not:"Pêşgotina navberiyê.",
+   her:["Navnetewî, navçe, navend.", "Di navbera wan de."], gen:["Nav-","Navnetewî"]),
+
+  // ── şart (6 ek kelime — koşul) ──
+  (id:"b2_681", ku:"eger", tr:"Eğer", en:"If",
+   cins:"bêcins", ez:null, kat:"şart", zor:0.58,
+   not:"Pêveka şertê.",
+   her:["Eger tu bêyî, ez ê kêfxweş bim.", "Eger baran bibe."], gen:["Eger","Heke"]),
+
+  (id:"b2_682", ku:"heke", tr:"Eğer / Şayet", en:"If / In case",
+   cins:"bêcins", ez:null, kat:"şart", zor:0.59,
+   not:"Pêveka şertê — hevwateya \"eger\".",
+   her:["Heke tu bixwazî.", "Heke bibe."], gen:["Heke","Eger"]),
+
+  (id:"b2_683", ku:"eger ... bûya", tr:"Eğer ... olsaydı", en:"If ... had been",
+   cins:"bêcins", ez:null, kat:"şart", zor:0.65,
+   not:"Şerta nehezkirî — dema borî.",
+   her:["Eger ew hatibûya, em ê kêfxweş bûya.", "Eger min zanibûya."], gen:["Eger ... bûya","Heke ... bûya"]),
+
+  (id:"b2_684", ku:"eger ... bibe", tr:"Eğer ... olursa", en:"If ... happens",
+   cins:"bêcins", ez:null, kat:"şart", zor:0.62,
+   not:"Şerta gengaz.",
+   her:["Eger baran bibe, em namînin.", "Eger ew bê."], gen:["Eger ... bibe","Heke ... bibe"]),
+
+  (id:"b2_685", ku:"eger ne wisa bûya", tr:"Eğer öyle olmasaydı", en:"If it had not been so",
+   cins:"bêcins", ez:null, kat:"şart", zor:0.67,
+   not:"Şerta neyînî ya borî.",
+   her:["Eger ne wisa bûya, em ê neçûya.", "Eger ne wisa bûya..."], gen:["Eger ne wisa bûya","Heke ne wisa bûya"]),
+
+  (id:"b2_686", ku:"eger ... bike", tr:"Eğer ... yaparsa", en:"If ... does",
+   cins:"bêcins", ez:null, kat:"şart", zor:0.63,
+   not:"Şerta gengaz — subjunctîf.",
+   her:["Eger tu bike, ez ê bibînim.", "Eger ew vê bike."], gen:["Eger ... bike","Heke ... bike"]),
+
+  // ── bileşik_leker (5 ek kelime) ──
+  (id:"b2_687", ku:"pê re çûn", tr:"Birlikte gitmek", en:"To go together",
+   cins:"bêcins", ez:null, kat:"bileşik_leker", zor:0.60,
+   not:"Lêkera bileşik: \"pê\" + \"re\" + \"çûn\".",
+   her:["Em pê re çûn.", "Ew bi me re çû."], gen:["Pê re çûn","Bi hev re çûn"]),
+
+  (id:"b2_688", ku:"dest pê kirin", tr:"Başlamak", en:"To begin / To start",
+   cins:"bêcins", ez:null, kat:"bileşik_leker", zor:0.59,
+   not:"Lêkera bileşik: \"dest\" + \"pê\" + \"kirin\".",
+   her:["Me dest pê kir.", "Ders dest pê dike."], gen:["Dest pê kirin","Destpêkirin"]),
+
+  (id:"b2_689", ku:"ser lê dan", tr:"Başvurmak / Üzerine eğilmek", en:"To apply / To look into",
+   cins:"bêcins", ez:null, kat:"bileşik_leker", zor:0.63,
+   not:"Lêkera bileşik.",
+   her:["Wî serî lê da.", "Em ê serî lê bidin."], gen:["Ser lê dan","Serî lê dan"]),
+
+  (id:"b2_690", ku:"ber xwe dan", tr:"Kendini vermek / Yönelmek", en:"To devote oneself",
+   cins:"bêcins", ez:null, kat:"bileşik_leker", zor:0.64,
+   not:"Lêkera bileşik.",
+   her:["Wê ber xwe da xwendinê.", "Ber xwe bidin karê xwe."], gen:["Ber xwe dan","Ber xwe da"]),
+
+  (id:"b2_691", ku:"bîr kirin", tr:"Hatırlamak / Anmak", en:"To remember / To recall",
+   cins:"bêcins", ez:null, kat:"bileşik_leker", zor:0.61,
+   not:"Lêkera bileşik: \"bîr\" + \"kirin\".",
+   her:["Min ew bîr kir.", "Bîr bike!"], gen:["Bîr kirin","Bîr kir"]),
+
+  // ── huner (5 ek kelime) ──
+  (id:"b2_692", ku:"peyker", tr:"Heykel", en:"Sculpture",
+   cins:"nêr", ez:"peyker", kat:"huner", zor:0.60,
+   not:"Hunerê peykersaziyê.",
+   her:["Peyker li meydanê ye.", "Peykera bedew."], gen:["Peyker","Peykera me"]),
+
+  (id:"b2_693", ku:"sînema", tr:"Sinema", en:"Cinema",
+   cins:"mê", ez:"sînema", kat:"huner", zor:0.57,
+   not:"Hunerê sînemayê.",
+   her:["Em çûn sînemayê.", "Sînemaya kurdî pêşket."], gen:["Sînema","Sînemaya me"]),
+
+  (id:"b2_694", ku:"şano", tr:"Tiyatro", en:"Theater",
+   cins:"nêr", ez:"şano", kat:"huner", zor:0.59,
+   not:"Hunerê şanoyê.",
+   her:["Şanoya kurdî bedew bû.", "Li şanoyê lîstin."], gen:["Şano","Şanoya me"]),
+
+  (id:"b2_695", ku:"wênesazî", tr:"Resim sanatı", en:"Painting (art)",
+   cins:"mê", ez:"wênesazî", kat:"huner", zor:0.62,
+   not:"Hunerê wênesaziyê.",
+   her:["Wênesazî hunereke kevin e.", "Di wênesaziyê de."], gen:["Wênesazî","Wênesazîya me"]),
+
+  (id:"b2_696", ku:"mûzîk", tr:"Müzik", en:"Music",
+   cins:"mê", ez:"mûzîk", kat:"huner", zor:0.56,
+   not:"Hunerê dengê.",
+   her:["Mûzîka kurdî xweş e.", "Mûzîkê guhdarî bike."], gen:["Mûzîk","Mûzîka me"]),
+];
+
 // TÜM kelimeler — vocabulary_browse_screen tarafından kullanılır
-final kB2All = [...kB2Kelimeler, ...kB2EkKelimeler, ...kB2EkKelimeler2, ...kB2EkKelimeler3, ...kB2EkKelimeler4, ...kB2FerkeraEk, ...kB2Buyuk, ...kB2_Akademik, ...kB2_Hukuk, ...kB2_Kultur2, ...kB2_Son2, ...kB2_Final, ...kB2_Kapanis, ...kB2_Son90, ...kB2_Final46, ...kB2_Son18, ...kB2_Tamam];
+final kB2All = [...kB2Kelimeler, ...kB2EkKelimeler, ...kB2EkKelimeler2, ...kB2EkKelimeler3, ...kB2EkKelimeler4, ...kB2FerkeraEk, ...kB2Buyuk, ...kB2_Akademik, ...kB2_Hukuk, ...kB2_Kultur2, ...kB2_Son2, ...kB2_Final, ...kB2_Kapanis, ...kB2_Son90, ...kB2_Final46, ...kB2_Son18, ...kB2_Tamam, ...kB2_EkTamam];

@@ -1245,7 +1245,7 @@ List<_SkillTreeUnit> _buildSkillUnits(String level) {
   // Önce pedagojik sıradaki kategorileri ekle
   for (final kat in _pedagogicOrder) {
     final count = catCounts[kat];
-    if (count == null || count < 6) continue;
+    if (count == null || count < 4) continue;
     units.add(_SkillTreeUnit(
       id: '${level.toLowerCase()}_unit_$kat',
       katKey: kat,
@@ -1261,7 +1261,7 @@ List<_SkillTreeUnit> _buildSkillUnits(String level) {
   for (final entry in catCounts.entries) {
     final kat = entry.key;
     final count = entry.value;
-    if (count < 6) continue;
+    if (count < 4) continue;
     if (_pedagogicOrder.contains(kat)) continue; // Zaten eklendi
     units.add(_SkillTreeUnit(
       id: '${level.toLowerCase()}_unit_$kat',

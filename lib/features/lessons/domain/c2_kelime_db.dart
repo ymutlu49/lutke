@@ -1285,5 +1285,34 @@ final kC2_Son9 = [
 
 final kC2Temam = [...kC2_Son9];
 
+// ── C2 Ek Tamamlama — kategorileri 12'ye tamamlama ──
+final kC2_EkTamam = [
+  // ── psikolojî (5 ek kelime) ──
+  (id:"c2_400", ku:"xwenasîn", tr:"Öz farkındalık / Kendini tanıma", en:"Self-awareness",
+   cins:"mê", ez:"xwenasîn", kat:"psikolojî", zor:0.44,
+   not:"Têgeha psîkolojîk — xwe-nas-în.",
+   her:["Xwenasîn gavê yekem e.", "Di xwenasînê de pêşketin."], gen:["Xwenasîn","Xwenasîna me"]),
+
+  (id:"c2_401", ku:"bihîstwerî", tr:"Empatik dinleme / İşitkenlik", en:"Active listening / Receptivity",
+   cins:"mê", ez:"bihîstwerî", kat:"psikolojî", zor:0.45,
+   not:"Têgeha psîkolojîk — guhdarîkirina kûr.",
+   her:["Bihîstwerî jêhatîbûnek e.", "Di bihîstwerîyê de."], gen:["Bihîstwerî","Bihîstwerîya me"]),
+
+  (id:"c2_402", ku:"hişmendî", tr:"Bilinçlilik / Farkındalık", en:"Mindfulness / Awareness",
+   cins:"mê", ez:"hişmendî", kat:"psikolojî", zor:0.44,
+   not:"Têgeha psîkolojîk — hişyarî û baldarî.",
+   her:["Hişmendî pratîkek e.", "Di hişmendîyê de hêz heye."], gen:["Hişmendî","Hişmendîya me"]),
+
+  (id:"c2_403", ku:"xweragirtin", tr:"Öz denetim / Kendini tutma", en:"Self-control / Self-regulation",
+   cins:"mê", ez:"xweragirtin", kat:"psikolojî", zor:0.45,
+   not:"Têgeha psîkolojîk — kontrola hestî.",
+   her:["Xweragirtin hêz e.", "Di xweragirtinê de serkeftî bû."], gen:["Xweragirtin","Xweragirtina me"]),
+
+  (id:"c2_404", ku:"derûnnasî", tr:"Psikoloji", en:"Psychology",
+   cins:"mê", ez:"derûnnasî", kat:"psikolojî", zor:0.43,
+   not:"Zanista derûnî.",
+   her:["Derûnnasî zanisteke girîng e.", "Di derûnnasîyê de lêkolîn."], gen:["Derûnnasî","Derûnnasîya me"]),
+];
+
 // TÜM kelimeler — vocabulary_browse_screen tarafından kullanılır
-final kC2All = [...kC2Kelimeler, ...kC2_Genisleme, ...kC2_Buyuk, ...kC2_Buyuk2, ...kC2_Buyuk_ext, ...kC2_Tamamlama, ...kC2_Son109, ...kC2_Son80, ...kC2_Bitis, ...kC2_Tamam35, ...kC2_Son9];
+final kC2All = [...kC2Kelimeler, ...kC2_Genisleme, ...kC2_Buyuk, ...kC2_Buyuk2, ...kC2_Buyuk_ext, ...kC2_Tamamlama, ...kC2_Son109, ...kC2_Son80, ...kC2_Bitis, ...kC2_Tamam35, ...kC2_Son9, ...kC2_EkTamam];

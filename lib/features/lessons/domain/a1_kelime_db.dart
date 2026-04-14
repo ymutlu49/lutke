@@ -1359,6 +1359,325 @@ const kA1TamKelimeler = [
    her:['Spas dikim ji pîrê re!', 'Gelek spas dikim.'],
    gen:['Spas dikim ji te re.', 'Ew spas dike.']),
 
+  // ════════════════════════════════════════════════════════════
+  // EK GİRİŞLER — Kategorileri 12 minimuma tamamlama
+  // a1_500 – a1_560
+  // ════════════════════════════════════════════════════════════
+
+  // ── perwerde (eğitim) — 6 yeni ──────────────────────────────
+
+  (id:'a1_500', ku:'Qelem', tr:'Kalem', en:'Pen', cins:'mê', ez:'qelemê',
+   kat:'perwerde', zor:0.80, not:'"Qelem" — dişil. Arapça kökenli, Kurmancîde yaygın.',
+   her:['Qelema te li ku ye, keça min?', 'Dê, qelemek bide min.'],
+   gen:['Qelem li ser masê ye.', 'Ez bi qelemê dinivîsim.']),
+
+  (id:'a1_501', ku:'Defter', tr:'Defter', en:'Notebook', cins:'mê', ez:'defterê',
+   kat:'perwerde', zor:0.78, not:'"Defter" — dişil. Her du zimanan de heman form.',
+   her:['Deftera xwe bîne, lawê min!', 'Pîrê, ez defterê dinivîsim.'],
+   gen:['Defter li çentê ye.', 'Ez defterê vedikîm.']),
+
+  (id:'a1_502', ku:'Ders', tr:'Ders', en:'Lesson', cins:'mê', ez:'dersê',
+   kat:'perwerde', zor:0.80, not:'"Ders" — dişil. "Dersa me" = dersimiz.',
+   her:['Dersa me dest pê kir, dê!', 'Bavê min dersan fêrî min dike.'],
+   gen:['Ders hêsan e.', 'Dersa îro Kurmancî ye.']),
+
+  (id:'a1_503', ku:'Xwendekar', tr:'Öğrenci', en:'Student', cins:'nêr', ez:'xwendekarî',
+   kat:'perwerde', zor:0.82, not:'"Xwend" (okumak) + "-ekar" = yapan. Eril.',
+   her:['Xwendekar hat, pîrê!', 'Lawê min xwendekar e.'],
+   gen:['Xwendekar li polê ye.', 'Ew xwendekarek baş e.']),
+
+  (id:'a1_504', ku:'Zanîngeh', tr:'Üniversite', en:'University', cins:'mê', ez:'zanîngehê',
+   kat:'perwerde', zor:0.85, not:'"Zanîn" (bilmek) + "-geh" (yer) = bilgi yeri.',
+   her:['Xwişka min li zanîngehê dixwîne.', 'Dê, ez ê herim zanîngehê.'],
+   gen:['Zanîngeh mezin e.', 'Ew li zanîngehê ye.']),
+
+  (id:'a1_505', ku:'Lêkolîn', tr:'Araştırma', en:'Research', cins:'mê', ez:'lêkolînê',
+   kat:'perwerde', zor:0.86, not:'"Lê" + "kolîn" = incelemek, araştırmak.',
+   her:['Bavê min lêkolîn dike, dê.', 'Pîrê, lêkolîn çi ye?'],
+   gen:['Lêkolîn girîng e.', 'Ew lêkolînê dike.']),
+
+  // ── dua (dua / iyi dilekler) — 5 yeni ──────────────────────
+
+  (id:'a1_506', ku:'Xwedê ji te razî be', tr:'Allah senden razı olsun', en:'May God be pleased with you', cins:'bêcins', ez:null,
+   kat:'dua', zor:0.84, not:'Yaygın şükran duası. "Razî" = razı, memnun.',
+   her:['Xwedê ji te razî be, pîrê!', 'Dê dibêje: Xwedê ji te razî be.'],
+   gen:['Xwedê ji te razî be, heval.', 'Spas, Xwedê ji te razî be.']),
+
+  (id:'a1_507', ku:'Bimîne sax', tr:'Sağ ol / Sağlıcakla', en:'Stay well', cins:'bêcins', ez:null,
+   kat:'dua', zor:0.80, not:'"Bimîne" = kal + "sax" = sağlıklı. Vedalaşma duası.',
+   her:['Bimîne sax, dapîrê!', 'Bavê min dibêje: Bimîne sax.'],
+   gen:['Bimîne sax, heval!', 'Bimîne sax û xweş.']),
+
+  (id:'a1_508', ku:'Riya te vekirî be', tr:'Yolun açık olsun', en:'May your path be open', cins:'bêcins', ez:null,
+   kat:'dua', zor:0.82, not:'"Rê" = yol, "vekirî" = açık. Yolculuk duası.',
+   her:['Riya te vekirî be, lawê min!', 'Pîrê dibêje: Riya te vekirî be.'],
+   gen:['Riya te vekirî be!', 'Bi xêr herî, riya te vekirî be.']),
+
+  (id:'a1_509', ku:'Hêviya te çêbe', tr:'Umudin gerçekleşsin', en:'May your hope come true', cins:'bêcins', ez:null,
+   kat:'dua', zor:0.84, not:'"Hêvî" = umut, "çêbûn" = olmak/gerçekleşmek.',
+   her:['Hêviya te çêbe, keça min!', 'Dê dibêje: Hêviya te çêbe.'],
+   gen:['Hêviya te çêbe, heval.', 'Hêviya me hemûyan çêbe.']),
+
+  (id:'a1_510', ku:'Serketî bî', tr:'Başarılı ol', en:'Be successful', cins:'bêcins', ez:null,
+   kat:'dua', zor:0.82, not:'"Serketin" = başarmak. "Serketî" = başarılı.',
+   her:['Serketî bî, lawê min!', 'Pîrê dibêje: Serketî bî.'],
+   gen:['Serketî bî li azmûnê!', 'Hêvîdarim serketî bî.']),
+
+  // ── çand (kültür) — 5 yeni ─────────────────────────────────
+
+  (id:'a1_511', ku:'Strandin', tr:'Şarkı söyleme', en:'Singing', cins:'mê', ez:'strandinê',
+   kat:'çand', zor:0.80, not:'"Stran" = şarkı, "strandin" = söylemek fiili.',
+   her:['Pîrê strandinê hez dike.', 'Dê, em strandinê bikin!'],
+   gen:['Strandin xweş e.', 'Ew strandinê dike.']),
+
+  (id:'a1_512', ku:'Destan', tr:'Destan', en:'Epic', cins:'nêr', ez:'destanê',
+   kat:'çand', zor:0.84, not:'"Destan" — eril. Destanên Kurdî navdar in.',
+   her:['Pîrê destanê ji me re dibêje.', 'Bavê min destanan hez dike.'],
+   gen:['Destan kevn e.', 'Destanên Kurdî xweş in.']),
+
+  (id:'a1_513', ku:'Kilam', tr:'Türkü / Şarkı', en:'Song', cins:'mê', ez:'kilamê',
+   kat:'çand', zor:0.80, not:'"Kilam" — dişil. "Stran" ile eş anlamlı.',
+   her:['Dê kilamek ji me re dibêje.', 'Pîrê, kilama te xweş e!'],
+   gen:['Kilam xweş e.', 'Ez kilamê guhdarî dikim.']),
+
+  (id:'a1_514', ku:'Dawet', tr:'Düğün', en:'Wedding', cins:'mê', ez:'dawetê',
+   kat:'çand', zor:0.82, not:'"Dawet" — dişil. Kürt düğün geleneği çok zengindir.',
+   her:['Dê, em ê herin dawetê!', 'Daweta xaltê xweş bû, pîrê.'],
+   gen:['Dawet şeva îşev e.', 'Em diçin dawetê.']),
+
+  (id:'a1_515', ku:'Şahî', tr:'Kutlama / Şenlik', en:'Celebration', cins:'mê', ez:'şahiyê',
+   kat:'çand', zor:0.82, not:'"Şahî" — dişil. "Şa" = mutlu + "-î" ek.',
+   her:['Pîrê, şahî li malê ye!', 'Em şahiyê dikin, dê!'],
+   gen:['Şahî xweş e.', 'Şahiya Newrozê mezin e.']),
+
+  // ── alfabe — 4 yeni ────────────────────────────────────────
+
+  (id:'a1_516', ku:'ç', tr:'ç (çe sesi)', en:'ç (ch)', cins:'bêcins', ez:null,
+   kat:'alfabe', zor:0.80, not:'Türkçe ç gibi — "çav" (göz), "çiya" (dağ)',
+   her:['Pîrê, "ç" dengê çi ye?', '"Çav" — dengê ç tê de ye.'],
+   gen:['ç — Kurmancî dengek e.', 'Mînak: çav, çiya, çêl, çarşem']),
+
+  (id:'a1_517', ku:'ş', tr:'ş (şe sesi)', en:'ş (sh)', cins:'bêcins', ez:null,
+   kat:'alfabe', zor:0.80, not:'Türkçe ş gibi — "şev" (gece), "şîr" (süt)',
+   her:['Bira, "ş" bêje!', '"Şev" — dengê ş tê de ye.'],
+   gen:['ş — Kurmancî dengek e.', 'Mînak: şev, şîr, şêr, şemî']),
+
+  (id:'a1_518', ku:'h', tr:'h (he sesi)', en:'h', cins:'bêcins', ez:null,
+   kat:'alfabe', zor:0.78, not:'Türkçe h gibi — "heval" (arkadaş), "hesp" (at)',
+   her:['Dê, "h" dengê çi ye?', '"Heval" — dengê h tê de ye.'],
+   gen:['h — Kurmancî dengek e.', 'Mînak: heval, hesp, hêvî, hewş']),
+
+  (id:'a1_519', ku:'j', tr:'j (je sesi)', en:'j (zh)', cins:'bêcins', ez:null,
+   kat:'alfabe', zor:0.80, not:'Fransızca j gibi — "jin" (kadın), "jiyan" (hayat). Türkçe j\'den farklı',
+   her:['Pîrê, "j" bêje!', '"Jin" — dengê j tê de ye.'],
+   gen:['j — Kurmancî dengek e.', 'Mînak: jin, jiyan, jêr, jimare']),
+
+  // ── bun (olmak) — 4 yeni ───────────────────────────────────
+
+  (id:'a1_520', ku:'Ez hatime', tr:'Ben geldim', en:'I have come', cins:'bêcins', ez:null,
+   kat:'bun', zor:0.84, not:'"Hatin" fiilinin birinci tekil geçmiş zaman formu.',
+   her:['Ez hatime, dê!', 'Pîrê, ez hatime malê.'],
+   gen:['Ez hatime dibistanê.', 'Ez hatime vir.']),
+
+  (id:'a1_521', ku:'Tu çûyî', tr:'Sen gittin', en:'You went', cins:'bêcins', ez:null,
+   kat:'bun', zor:0.84, not:'"Çûn" fiilinin ikinci tekil geçmiş zaman formu.',
+   her:['Tu çûyî bazarê, bira?', 'Dê, tu çûyî ku?'],
+   gen:['Tu çûyî malê.', 'Tu çûyî dibistanê.']),
+
+  (id:'a1_522', ku:'Ew heye', tr:'O var', en:'He/She exists', cins:'bêcins', ez:null,
+   kat:'bun', zor:0.82, not:'"Hebûn" = var olmak. "Heye" = var.',
+   her:['Ew heye, pîrê, xem nexwe.', 'Bavê min heye, dê.'],
+   gen:['Ew heye li malê.', 'Av heye.']),
+
+  (id:'a1_523', ku:'Em hatin', tr:'Biz geldik', en:'We came', cins:'bêcins', ez:null,
+   kat:'bun', zor:0.84, not:'"Hatin" fiilinin birinci çoğul geçmiş zaman formu.',
+   her:['Em hatin, dapîrê!', 'Dê, em hatin malê.'],
+   gen:['Em hatin dibistanê.', 'Em hatin vir.']),
+
+  // ── demsal (mevsim) — 4 yeni ───────────────────────────────
+
+  (id:'a1_524', ku:'Germahî', tr:'Sıcaklık', en:'Heat', cins:'mê', ez:'germahiyê',
+   kat:'demsal', zor:0.82, not:'"Germ" = sıcak + "-ahî" = durum eki.',
+   her:['Germahî zêde ye, dê!', 'Pîrê, germahî heye.'],
+   gen:['Germahî li derve ye.', 'Germahî zêde ye.']),
+
+  (id:'a1_525', ku:'Sar', tr:'Soğuk', en:'Cold', cins:'bêcins', ez:null,
+   kat:'demsal', zor:0.78, not:'"Sar" = soğuk. Hem sıfat hem isim olarak kullanılır.',
+   her:['Sar e, dê, cilên germ bide min.', 'Pîrê, li derve sar e.'],
+   gen:['Îro sar e.', 'Zivistan sar e.']),
+
+  (id:'a1_526', ku:'Baranbar', tr:'Yağmurlu', en:'Rainy', cins:'bêcins', ez:null,
+   kat:'demsal', zor:0.84, not:'"Baran" = yağmur + "bar" = yağan.',
+   her:['Roja îro baranbar e, dê.', 'Pîrê, li derve baranbar e.'],
+   gen:['Îro baranbar e.', 'Payîz baranbar e.']),
+
+  (id:'a1_527', ku:'Tav', tr:'Güneş ışığı', en:'Sunshine', cins:'mê', ez:'tavê',
+   kat:'demsal', zor:0.80, not:'"Tav" = güneş ışığı. "Roj" günü, "tav" ışığı.',
+   her:['Tav derket, dê!', 'Pîrê, tav xweş e.'],
+   gen:['Tav li derve ye.', 'Tav germ e.']),
+
+  // ── peyvben (bağlaç) — 4 yeni ──────────────────────────────
+
+  (id:'a1_528', ku:'Lêbelê', tr:'Ancak / Ama', en:'However', cins:'bêcins', ez:null,
+   kat:'peyvben', zor:0.84, not:'"Lêbelê" = ancak, ama. Resmi bağlaç.',
+   her:['Ez dixwazim, lêbelê nikarim, dê.', 'Pîrê, lêbelê ew ne li vir e.'],
+   gen:['Lêbelê ew nehat.', 'Ez dizanim, lêbelê ew zehmet e.']),
+
+  (id:'a1_529', ku:'Ji ber vê', tr:'Bu nedenle', en:'Therefore', cins:'bêcins', ez:null,
+   kat:'peyvben', zor:0.86, not:'"Ji ber" = -den dolayı + "vê" = bu. Neden bildiren bağlaç.',
+   her:['Ji ber vê ez neçûm, dê.', 'Pîrê, ji ber vê em li malê ne.'],
+   gen:['Ji ber vê ez li malê mam.', 'Ji ber vê ew nehat.']),
+
+  (id:'a1_530', ku:'Wekî din', tr:'Yoksa / Aksi takdirde', en:'Otherwise', cins:'bêcins', ez:null,
+   kat:'peyvben', zor:0.86, not:'"Wekî" = gibi + "din" = başka = başka türlü.',
+   her:['Bixwîne, wekî din tu ê neserkevî, lawê min.', 'Dê, wekî din em ê dereng bimînin.'],
+   gen:['Bixwîne, wekî din tu nizanî.', 'Bimeşe, wekî din tu ê dereng bî.']),
+
+  (id:'a1_531', ku:'Her wiha', tr:'Ayrıca / Bunun yanı sıra', en:'Also', cins:'bêcins', ez:null,
+   kat:'peyvben', zor:0.82, not:'"Her" = her + "wiha" = böyle = ayrıca.',
+   her:['Her wiha pîrê jî hat, dê.', 'Bavê min her wiha dixebite.'],
+   gen:['Her wiha ew jî hat.', 'Her wiha ez dizanim.']),
+
+  // ── cinavk (zamir) — 3 yeni ────────────────────────────────
+
+  (id:'a1_532', ku:'Xwe', tr:'Kendi / Kendisi', en:'Self', cins:'bêcins', ez:null,
+   kat:'cinavk', zor:0.84, not:'"Xwe" = dönüşlü zamir. "Ez xwe dibînim" = kendimi görüyorum.',
+   her:['Xwe bişo, lawê min!', 'Dê, ez xwe di neynikê de dibînim.'],
+   gen:['Ew xwe dibîne.', 'Ez xwe nas dikim.']),
+
+  (id:'a1_533', ku:'Yekî', tr:'Biri / Birisi', en:'Someone', cins:'bêcins', ez:null,
+   kat:'cinavk', zor:0.82, not:'"Yek" = bir + "-î" = belirsizlik. Belirsiz zamir.',
+   her:['Yekî li derve ye, dê!', 'Pîrê, yekî li derî ye.'],
+   gen:['Yekî hat.', 'Yekî ji min re got.']),
+
+  (id:'a1_534', ku:'Tiştek', tr:'Bir şey', en:'Something', cins:'bêcins', ez:null,
+   kat:'cinavk', zor:0.82, not:'"Tiştê" = şey + "-ek" = belirsiz. Belirsiz zamir.',
+   her:['Tiştek heye, dê?', 'Pîrê, tiştek bêje!'],
+   gen:['Tiştek li wir e.', 'Ez tiştek dizanim.']),
+
+  // ── cil (giysi) — 2 yeni ──────────────────────────────────
+
+  (id:'a1_535', ku:'Şal', tr:'Şal / Atkı', en:'Scarf', cins:'nêr', ez:'şalî',
+   kat:'cil', zor:0.80, not:'"Şal" — eril. Kürt kültüründe geleneksel giysi parçası.',
+   her:['Şalê xwe li xwe bike, keça min!', 'Pîrê, şalê te xweş e.'],
+   gen:['Şal germ e.', 'Ew şalê li xwe dike.']),
+
+  (id:'a1_536', ku:'Çakêt', tr:'Ceket', en:'Jacket', cins:'nêr', ez:'çakêtî',
+   kat:'cil', zor:0.80, not:'"Çakêt" — eril. Fransızca "jaquette" kökenli.',
+   her:['Çakêtê xwe li xwe bike, lawê min!', 'Dê, çakêt li ku ye?'],
+   gen:['Çakêt nû ye.', 'Ew çakêtê li xwe dike.']),
+
+  // ── gihanî (ulaşım) — 2 yeni ──────────────────────────────
+
+  (id:'a1_537', ku:'Trên', tr:'Tren', en:'Train', cins:'nêr', ez:'trênî',
+   kat:'gihanî', zor:0.80, not:'"Trên" — eril. Fransızca "train" kökenli.',
+   her:['Em bi trênê diçin, dê!', 'Pîrê, trên hat!'],
+   gen:['Trên mezin e.', 'Em bi trênê diçin.']),
+
+  (id:'a1_538', ku:'Keştî', tr:'Gemi', en:'Ship', cins:'mê', ez:'keştiyê',
+   kat:'gihanî', zor:0.82, not:'"Keştî" — dişil. Farsça kökenli.',
+   her:['Dê, ez keştiyê dibînim!', 'Pîrê, keştî li avê ye.'],
+   gen:['Keştî mezin e.', 'Keştî li deryayê ye.']),
+
+  // ── mêwe (meyve) — 2 yeni ─────────────────────────────────
+
+  (id:'a1_539', ku:'Zeytûn', tr:'Zeytin', en:'Olive', cins:'nêr', ez:'zeytûnî',
+   kat:'mêwe', zor:0.80, not:'"Zeytûn" — eril. Arapça kökenli.',
+   her:['Zeytûn bixwe, lawê min!', 'Pîrê, zeytûn xweş e.'],
+   gen:['Zeytûn li masê ye.', 'Ez zeytûn dixwim.']),
+
+  (id:'a1_540', ku:'Qeysî', tr:'Kayısı', en:'Apricot', cins:'nêr', ez:'qeysiyî',
+   kat:'mêwe', zor:0.82, not:'"Qeysî" — eril. Havînê dipese.',
+   her:['Dê, qeysî gihîştiye!', 'Pîrê, qeysî şîrîn e.'],
+   gen:['Qeysî zer e.', 'Ez qeysiyê dixwim.']),
+
+  // ── pirs (soru) — 2 yeni ──────────────────────────────────
+
+  (id:'a1_541', ku:'Kengê?', tr:'Ne zaman?', en:'When?', cins:'bêcins', ez:null,
+   kat:'pirs', zor:0.82, not:'"Kengê" = ne zaman. Zaman soran soru kelimesi.',
+   her:['Kengê em ê herin, dê?', 'Pîrê, kengê tu hatî?'],
+   gen:['Kengê tu tê?', 'Kengê ders dest pê dike?']),
+
+  (id:'a1_542', ku:'Çawa?', tr:'Nasıl?', en:'How?', cins:'bêcins', ez:null,
+   kat:'pirs', zor:0.80, not:'"Çawa" = nasıl. Durum/hal soran soru kelimesi.',
+   her:['Çawa yî, pîrê?', 'Dê, çawa bû?'],
+   gen:['Çawa yî?', 'Çawa diçe?']),
+
+  // ── pîşe (meslek) — 2 yeni ─────────────────────────────────
+
+  (id:'a1_543', ku:'Avahîsaz', tr:'Mimar', en:'Architect', cins:'nêr', ez:'avahîsazî',
+   kat:'pîşe', zor:0.86, not:'"Avahî" = bina + "saz" = yapan = mimar.',
+   her:['Apê min avahîsaz e, dê.', 'Pîrê, avahîsaz çi dike?'],
+   gen:['Ew avahîsaz e.', 'Avahîsaz avahiyan çêdike.']),
+
+  (id:'a1_544', ku:'Şofêr', tr:'Şoför', en:'Driver', cins:'nêr', ez:'şofêrî',
+   kat:'pîşe', zor:0.80, not:'"Şofêr" — eril. Fransızca "chauffeur" kökenli.',
+   her:['Bavê min şofêr e, pîrê.', 'Dê, şofêr hat!'],
+   gen:['Ew şofêr e.', 'Şofêr otobêsê dimeşîne.']),
+
+  // ── silav (selamlama) — 2 yeni ─────────────────────────────
+
+  (id:'a1_545', ku:'Çawa yî?', tr:'Nasılsın?', en:'How are you?', cins:'bêcins', ez:null,
+   kat:'silav', zor:0.80, not:'"Çawa" = nasıl + "yî" = -sın. En yaygın hal hatır sorma.',
+   her:['Çawa yî, pîrê?', 'Dê, çawa yî îro?'],
+   gen:['Çawa yî, heval?', 'Tu çawa yî?']),
+
+  (id:'a1_546', ku:'Baş im', tr:'İyiyim', en:'I am fine', cins:'bêcins', ez:null,
+   kat:'silav', zor:0.78, not:'"Baş" = iyi + "im" = -ım. "Çawa yî?" sorusuna cevap.',
+   her:['Baş im, pîrê, spas!', 'Dê, ez baş im.'],
+   gen:['Baş im, spas.', 'Ez baş im, tu çawa yî?']),
+
+  // ── tendurist (sağlık) — 2 yeni ────────────────────────────
+
+  (id:'a1_547', ku:'Serêş', tr:'Baş ağrısı', en:'Headache', cins:'nêr', ez:'serêşî',
+   kat:'tendurist', zor:0.82, not:'"Ser" = baş + "êş" = ağrı = baş ağrısı.',
+   her:['Serêşê min heye, dê.', 'Pîrê, serêş xweş nabe.'],
+   gen:['Serêş heye.', 'Serêşê min zêde ye.']),
+
+  (id:'a1_548', ku:'Ta', tr:'Ateş / Humma', en:'Fever', cins:'mê', ez:'tayê',
+   kat:'tendurist', zor:0.84, not:'"Ta" = ateş (vücut ısısı). "Tav" = güneş ışığı — karıştırma!',
+   her:['Ta min heye, dê.', 'Pîrê, zarok ta ye.'],
+   gen:['Ta heye.', 'Ew bi ta ye.']),
+
+  // ── vexwarin (içecek) — 2 yeni ─────────────────────────────
+
+  (id:'a1_549', ku:'Şerbik', tr:'Meyve suyu', en:'Juice', cins:'nêr', ez:'şerbikî',
+   kat:'vexwarin', zor:0.80, not:'"Şerbik" — eril. "Şerbet" kökenli, meyve suyu.',
+   her:['Şerbik bixwe, lawê min!', 'Dê, şerbik xweş e.'],
+   gen:['Şerbik sar e.', 'Ez şerbikê dixwim.']),
+
+  (id:'a1_550', ku:'Mastaw', tr:'Ayran', en:'Buttermilk', cins:'nêr', ez:'mastawî',
+   kat:'vexwarin', zor:0.80, not:'"Mast" = yoğurt + "aw" = su = ayran.',
+   her:['Mastawê bide min, dê!', 'Pîrê, mastaw xweş e.'],
+   gen:['Mastaw sar e.', 'Ez mastawê dixwim.']),
+
+  // ── roj (gün / zaman) — 5 yeni ─────────────────────────────
+
+  (id:'a1_551', ku:'Sibeh', tr:'Sabah', en:'Morning', cins:'mê', ez:'sibehê',
+   kat:'roj', zor:0.80, not:'"Sibeh" = sabah. "Sibê" = yarın. Dikkat: iki anlam!',
+   her:['Roja baş, dê! Sibeh xweş e.', 'Pîrê, sibeh zû ye.'],
+   gen:['Sibeh e.', 'Sibeh xweş e.']),
+
+  (id:'a1_552', ku:'Nîvro', tr:'Öğle', en:'Noon', cins:'mê', ez:'nîvroyê',
+   kat:'roj', zor:0.80, not:'"Nîv" = yarı + "ro(j)" = gün = günün ortası.',
+   her:['Nîvro ye, xwarinê amade bike, dê.', 'Pîrê, nîvro bû.'],
+   gen:['Nîvro ye.', 'Di nîvroyê de ez dixwim.']),
+
+  (id:'a1_553', ku:'Êvar', tr:'Akşam', en:'Evening', cins:'nêr', ez:'êvarî',
+   kat:'roj', zor:0.80, not:'"Êvar" = akşam. "Êvarê" = akşamleyin.',
+   her:['Êvar baş, pîrê!', 'Dê, êvar hat.'],
+   gen:['Êvar e.', 'Êvar xweş e.']),
+
+  (id:'a1_554', ku:'Şev', tr:'Gece', en:'Night', cins:'mê', ez:'şevê',
+   kat:'roj', zor:0.78, not:'"Şev" = gece. "Şev baş" = iyi geceler.',
+   her:['Şev baş, dê!', 'Pîrê, şev hat.'],
+   gen:['Şev e.', 'Şev baş!']),
+
+  (id:'a1_555', ku:'Nîvê şevê', tr:'Gece yarısı', en:'Midnight', cins:'mê', ez:null,
+   kat:'roj', zor:0.84, not:'"Nîv" = yarı + "şev" = gece = gece yarısı.',
+   her:['Nîvê şevê ye, razê, lawê min!', 'Dê, nîvê şevê bû.'],
+   gen:['Nîvê şevê ye.', 'Di nîvê şevê de hemû radizan.']),
+
 ];
 
 // ════════════════════════════════════════════════════════════════

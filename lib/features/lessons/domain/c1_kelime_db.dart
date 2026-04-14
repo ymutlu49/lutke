@@ -2257,5 +2257,62 @@ final kC1_Tamam9 = [
 ];
 final kC1Nihayi5 = [...kC1_Tamam9];
 
+// ── C1 Ek Tamamlama — kategorileri 12'ye tamamlama ──
+final kC1_EkTamam = [
+  // ── nirx (4 ek kelime — değer/etik) ──
+  (id:"c1_600", ku:"wekhevî", tr:"Eşitlik", en:"Equality",
+   cins:"mê", ez:"wekhevî", kat:"nirx", zor:0.58,
+   not:"Nirxa bingehîn a civakî.",
+   her:["Wekhevî mafekî bingehîn e.", "Di wekhevîyê de."], gen:["Wekhevî","Wekhevîya me"]),
+
+  (id:"c1_601", ku:"dadperwerî", tr:"Adalet severlik", en:"Justice-loving / Fairness",
+   cins:"mê", ez:"dadperwerî", kat:"nirx", zor:0.59,
+   not:"Nirxa exlaqî.",
+   her:["Dadperwerî girîng e.", "Di dadperwerîyê de."], gen:["Dadperwerî","Dadperwerîya me"]),
+
+  (id:"c1_602", ku:"dilsozî", tr:"Sadakat / Bağlılık", en:"Loyalty / Faithfulness",
+   cins:"mê", ez:"dilsozî", kat:"nirx", zor:0.60,
+   not:"Nirxa pêwendîyan.",
+   her:["Dilsozî nirxekî bilind e.", "Di dilsozîyê de."], gen:["Dilsozî","Dilsozîya me"]),
+
+  (id:"c1_603", ku:"berpirsiyarî", tr:"Sorumluluk", en:"Responsibility",
+   cins:"mê", ez:"berpirsiyarî", kat:"nirx", zor:0.59,
+   not:"Nirxa civakî.",
+   her:["Berpirsiyarî peywir e.", "Di berpirsiyarîyê de."], gen:["Berpirsiyarî","Berpirsiyarîya me"]),
+
+  // ── pîşe (3 ek kelime) ──
+  (id:"c1_604", ku:"dîplomat", tr:"Diplomat", en:"Diplomat",
+   cins:"nêr", ez:"dîplomat", kat:"pîşe", zor:0.58,
+   not:"Pîşeya dîplomasiyê.",
+   her:["Dîplomat danûstandin kir.", "Dîplomatê kurd."], gen:["Dîplomat","Dîplomatê me"]),
+
+  (id:"c1_605", ku:"zanistvan", tr:"Bilim insanı", en:"Scientist",
+   cins:"nêr", ez:"zanistvan", kat:"pîşe", zor:0.59,
+   not:"Pîşeya zanistê.",
+   her:["Zanistvan lêkolîn kir.", "Zanistvanê navdar."], gen:["Zanistvan","Zanistvanê me"]),
+
+  (id:"c1_606", ku:"fîlozof", tr:"Filozof", en:"Philosopher",
+   cins:"nêr", ez:"fîlozof", kat:"pîşe", zor:0.60,
+   not:"Pîşeya felsefeyê.",
+   her:["Fîlozof pirsan dipirse.", "Fîlozofê kurd."], gen:["Fîlozof","Fîlozofê me"]),
+
+  // ── leker (2 ek kelime) ──
+  (id:"c1_607", ku:"pêkanîn", tr:"Başarmak / Gerçekleştirmek", en:"To achieve / To accomplish",
+   cins:"mê", ez:"pêkanîn", kat:"leker", zor:0.59,
+   not:"Lêkera serkeftinê.",
+   her:["Me ew pêk anî.", "Divê em vê pêk bînin."], gen:["Pêkanîn","Pêkanîna me"]),
+
+  (id:"c1_608", ku:"destnîşankirin", tr:"Belirlemek / Tespit etmek", en:"To identify / To determine",
+   cins:"mê", ez:"destnîşankirin", kat:"leker", zor:0.60,
+   not:"Lêkera akademîk.",
+   her:["Me pirsgirêk destnîşan kir.", "Destnîşankirina armancê."], gen:["Destnîşankirin","Destnîşankirina me"]),
+
+  // ── ekolojî (1 ek kelime) ──
+  (id:"c1_609", ku:"berjewendîya jîngeh", tr:"Çevre çıkarı", en:"Environmental interest",
+   cins:"mê", ez:"berjewendîya jîngeh", kat:"ekolojî", zor:0.59,
+   not:"Berjewendîya jîngeh û civakê.",
+   her:["Berjewendîya jîngeh girîng e.", "Di berjewendîya jîngeh de."], gen:["Berjewendîya jîngeh","Berjewendîya me"]),
+];
+
 // TÜM kelimeler — vocabulary_browse_screen tarafından kullanılır
-final kC1All = [...kC1Kelimeler, ...kC1_Genisleme, ...kC1_Buyuk, ...kC1_Buyuk2, ...kC1_Buyuk3, ...kC1_Buyuk_ext, ...kC1_Tamamlama, ...kC1_168, ...kC1_Son117, ...kC1_KalanGrup, ...kC1_Son49, ...kC1_Bitis, ...kC1_Tamam9];
+final kC1All = [...kC1Kelimeler, ...kC1_Genisleme, ...kC1_Buyuk, ...kC1_Buyuk2, ...kC1_Buyuk3, ...kC1_Buyuk_ext, ...kC1_Tamamlama, ...kC1_168, ...kC1_Son117, ...kC1_KalanGrup, ...kC1_Son49, ...kC1_Bitis, ...kC1_Tamam9, ...kC1_EkTamam];
