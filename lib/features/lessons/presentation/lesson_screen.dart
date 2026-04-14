@@ -78,7 +78,7 @@ class _LessonScreenState extends ConsumerState<LessonScreen> {
   Future<void> _loadCards() async {
     try {
       // Statik listeden yükle — DB bağlantısı gerekmez
-      final allWords = kA1TamKelimeler
+      final allWords = kA1TamListe
           .where((w) => w.kat != 'alfabe') // Alfabe kartlarını atla
           .toList();
       final rng = Random();

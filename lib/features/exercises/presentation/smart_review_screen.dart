@@ -12,6 +12,10 @@ import '../../../shared/providers/language_mode_provider.dart';
 import '../../../shared/providers/review_provider.dart';
 import '../../lessons/domain/a1_kelime_db.dart';
 import '../../lessons/domain/a2_kelime_db.dart';
+import '../../lessons/domain/b1_kelime_db.dart';
+import '../../lessons/domain/b2_kelime_db.dart';
+import '../../lessons/domain/c1_kelime_db.dart';
+import '../../lessons/domain/c2_kelime_db.dart';
 
 // ════════════════════════════════════════════════════════════════
 // SMART REVIEW (DUBARE) EKRANI
@@ -102,8 +106,12 @@ class _SmartReviewScreenState extends ConsumerState<SmartReviewScreen>
 
     // Kelime DB'lerinden verileri bul
     final allDbWords = [
-      ...kA1TamKelimeler,
-      ...kA2Kelimeler,
+      ...kA1TamListe,
+      ...kA2TamListe,
+      ...kB1All,
+      ...kB2All,
+      ...kC1All,
+      ...kC2All,
     ];
 
     final cards = <_ReviewCardData>[];

@@ -988,11 +988,11 @@ class _ResultStatRow extends StatelessWidget {
 }
 
 List<dynamic> _wmWordsForLevel(String level) => switch (level.toUpperCase()) {
-  'A1' => kA1TamKelimeler.toList(),
-  'A2' => kA2Kelimeler.toList(),
-  'B1' => kB1Kelimeler.toList(),
-  'B2' => kB2Kelimeler.toList(),
-  'C1' => kC1Kelimeler.toList(),
-  'C2' => kC2Kelimeler.toList(),
-  _ => kA1TamKelimeler.toList(),
+  'A1' => kA1TamListe.toList(),
+  'A2' => kA2TamListe.toList(),
+  'B1' => kB1All.toList(),
+  'B2' => kB2All.toList(),
+  'C1' => kC1All.toList(),
+  'C2' => kC2All.toList(),
+  _ => kA1TamListe.toList(),
 };

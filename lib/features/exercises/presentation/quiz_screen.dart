@@ -74,13 +74,13 @@ class _QuizQuestion {
 
 List<_QuizWord> _loadWordsForLevel(String level) {
   final raw = switch (level.toUpperCase()) {
-    'A1' => kA1TamKelimeler,
-    'A2' => kA2Kelimeler,
-    'B1' => kB1Kelimeler,
-    'B2' => kB2Kelimeler,
-    'C1' => kC1Kelimeler,
-    'C2' => kC2Kelimeler,
-    _ => kA1TamKelimeler,
+    'A1' => kA1TamListe,
+    'A2' => kA2TamListe,
+    'B1' => kB1All,
+    'B2' => kB2All,
+    'C1' => kC1All,
+    'C2' => kC2All,
+    _ => kA1TamListe,
   };
 
   // Tüm kelimeleri al (alfabe harfleri dahil — açıklamaları quiz'de kullanılır)

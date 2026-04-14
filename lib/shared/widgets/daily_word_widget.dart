@@ -56,7 +56,7 @@ String _emojiForKat(String kat) => switch (kat) {
   List<dynamic> gen,
 }) _getDailyWord() {
   // Anlamli kelimeleri filtrele (alfabe harfleri haric)
-  final words = kA1TamKelimeler
+  final words = kA1TamListe
       .where((r) => (r.ku as String).length > 1 && (r.tr as String).length > 1)
       .toList();
 
