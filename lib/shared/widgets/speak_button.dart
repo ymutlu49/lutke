@@ -43,36 +43,66 @@ class _SpeakButtonState extends ConsumerState<SpeakButton> {
   bool _loading = false;
   bool _playing = false;
   bool _failed = false;
+  bool _showColdHint = false; // Cold start uzun sürerse gösterilir
 
   Future<void> _speak() async {
     if (_loading || _playing) return;
 
-    setState(() { _loading = true; _failed = false; });
+    setState(() { _loading = true; _failed = false; _showColdHint = false; });
+
+    final tts = ref.read(ttsServiceProvider);
+    final isCold = tts.isColdStart;
+
+    // 5 saniye sonra hâlâ yükleniyorsa "ilk seferde uyandırılıyor" ipucu
+    if (isCold) {
+      Future<void>.delayed(const Duration(seconds: 5), () {
+        if (mounted && _loading) {
+          setState(() => _showColdHint = true);
+        }
+      });
+    }
 
     try {
-      final tts = ref.read(ttsServiceProvider);
+      // Cold start için 90sn, normal için 30sn timeout
+      final timeout = isCold
+          ? const Duration(seconds: 90)
+          : const Duration(seconds: 30);
       final audioUrl = await tts.synthesize(widget.text)
-          .timeout(const Duration(seconds: 20), onTimeout: () => null);
+          .timeout(timeout, onTimeout: () => null);
+
+      if (!mounted) return;
 
       if (!mounted) return;
 
       if (audioUrl != null) {
-        setState(() { _loading = false; _playing = true; });
+        setState(() {
+          _loading = false;
+          _playing = true;
+          _showColdHint = false;
+        });
         SoundService.playClick();
         _playWebAudio(audioUrl);
       } else {
         // Ses üretilemedi — kullanıcıya görsel bilgi
-        setState(() { _loading = false; _failed = true; });
-        // 3 saniye sonra failed durumunu temizle
-        Future.delayed(const Duration(seconds: 3), () {
+        setState(() {
+          _loading = false;
+          _failed = true;
+          _showColdHint = false;
+        });
+        // 4 saniye sonra failed durumunu temizle
+        Future<void>.delayed(const Duration(seconds: 4), () {
           if (mounted) setState(() => _failed = false);
         });
         return;
       }
     } catch (_) {
       if (mounted) {
-        setState(() { _loading = false; _failed = true; });
-        Future.delayed(const Duration(seconds: 3), () {
+        setState(() {
+          _loading = false;
+          _failed = true;
+          _showColdHint = false;
+        });
+        Future<void>.delayed(const Duration(seconds: 4), () {
           if (mounted) setState(() => _failed = false);
         });
         return;
@@ -174,7 +204,7 @@ class _SpeakButtonState extends ConsumerState<SpeakButton> {
           );
     }
 
-    if (!widget.showLabel) return button;
+    if (!widget.showLabel && !_showColdHint) return button;
 
     return Column(
       mainAxisSize: MainAxisSize.min,
@@ -182,12 +212,18 @@ class _SpeakButtonState extends ConsumerState<SpeakButton> {
         button,
         const SizedBox(height: 4),
         Text(
-          _failed ? 'Deng tune' : 'Guhdarî bike',
+          _failed
+              ? 'Deng tune'
+              : _showColdHint
+                  ? 'Amade dibe…'    // "Hazırlanıyor..." (cold start)
+                  : 'Guhdarî bike',
           style: TextStyle(
             fontSize: 10,
             color: _failed
                 ? AppColors.errorSoft.withOpacity(0.7)
-                : color.withOpacity(0.7),
+                : _showColdHint
+                    ? color.withOpacity(0.85)
+                    : color.withOpacity(0.7),
             fontWeight: FontWeight.w500,
           ),
         ),

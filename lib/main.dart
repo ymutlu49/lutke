@@ -9,6 +9,7 @@ import 'package:easy_localization/easy_localization.dart';
 import 'core/constants/app_theme.dart';
 import 'core/constants/child_theme.dart';
 import 'core/router/app_router.dart';
+import 'core/services/tts_service.dart';
 import 'shared/providers/child_mode_provider.dart';
 
 void main() async {
@@ -64,11 +65,27 @@ void main() async {
   );
 }
 
-class LutkeApp extends ConsumerWidget {
+class LutkeApp extends ConsumerStatefulWidget {
   const LutkeApp({super.key});
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
+  ConsumerState<LutkeApp> createState() => _LutkeAppState();
+}
+
+class _LutkeAppState extends ConsumerState<LutkeApp> {
+  @override
+  void initState() {
+    super.initState();
+    // TTS warm-up: HF Space uykudan uyandır (arka planda, beklemiyor).
+    // Kullanıcı ilk seslendirme butonuna bastığında cold start gecikmesini
+    // azaltır. Başarısız olursa sessiz geçer.
+    Future<void>.microtask(() {
+      ref.read(ttsServiceProvider).warmUp();
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) {
     final router = ref.watch(appRouterProvider);
     final isChild = ref.watch(isChildModeProvider);
 
