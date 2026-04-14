@@ -374,7 +374,7 @@ class _GoalSelectScreenState extends State<GoalSelectScreen> {
                     height: AppSpacing.touchMin,
                     child: IconButton(
                       icon: const Icon(Icons.arrow_back_ios_new),
-                      onPressed: () => context.pop(),
+                      onPressed: () { if (context.canPop()) context.pop(); else context.go(AppRoutes.splash); },
                     ),
                   ),
                   Expanded(
@@ -521,7 +521,7 @@ class SettingsScreen extends ConsumerWidget {
         ),
         leading: IconButton(
           icon: const Icon(Icons.arrow_back_ios_new),
-          onPressed: () => context.pop(),
+          onPressed: () { if (context.canPop()) context.pop(); else context.go(AppRoutes.splash); },
         ),
       ),
       body: ListView(
@@ -728,7 +728,7 @@ class _OnboardingBase extends StatelessWidget {
                       height: AppSpacing.touchMin,
                       child: IconButton(
                         icon: const Icon(Icons.arrow_back_ios_new),
-                        onPressed: () => context.pop(),
+                        onPressed: () { if (context.canPop()) context.pop(); else context.go(AppRoutes.splash); },
                       ),
                     ),
                   Expanded(

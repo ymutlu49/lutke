@@ -806,7 +806,7 @@ class _LevelUpContentState extends State<_LevelUpContent>
                           Gap.xs,
 
                           Text(
-                            'Tebrikler!',
+                            'Pîroz be!',
                             style: AppTypography.caption.muted,
                           )
                               .animate(delay: 600.ms)

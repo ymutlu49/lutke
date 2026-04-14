@@ -197,7 +197,7 @@ class ChildProfileScreen extends ConsumerWidget {
                 onComplete: (pin) {
                   // TODO: PIN doğrulama
                   Navigator.of(ctx).pop();
-                  context.go(AppRoutes.childParentalControls);
+                  if (context.canPop()) context.pop(); context.go(AppRoutes.childParentalControls);
                 },
               ),
               const SizedBox(height: 16),

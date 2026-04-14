@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import '../../core/router/app_router.dart';
 
 import '../../core/constants/app_colors.dart';
 import '../../core/constants/app_typography.dart';
@@ -69,7 +70,7 @@ class _AdminPanelScreenState extends State<AdminPanelScreen>
         elevation: 0,
         leading: IconButton(
           icon: const Icon(Icons.arrow_back, color: Colors.white),
-          onPressed: () => context.pop(),
+          onPressed: () { if (context.canPop()) context.pop(); else context.go(AppRoutes.home); },
         ),
         title: Row(
           children: [

@@ -60,10 +60,10 @@ class LessonCompletionOverlay extends StatelessWidget {
               // Türkçe — küçük, ikincil
               Text(
                 session.accuracy >= 0.9
-                    ? 'Harika!'
+                    ? 'Gelek baş!'
                     : session.accuracy >= 0.7
-                        ? 'İyi gidiyorsun!'
-                        : 'Devam et!',
+                        ? 'Tu baş diçî!'
+                        : 'Berdewam bike!',
                 style: AppTypography.bodySmall.copyWith(
                   color: AppColors.textSecondary,
                 ),
