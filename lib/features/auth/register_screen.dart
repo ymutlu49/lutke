@@ -8,7 +8,7 @@ import '../../core/constants/app_typography.dart';
 import '../../core/constants/app_spacing.dart';
 import '../../core/router/app_router.dart';
 import '../../core/services/auth_service.dart';
-import '../../core/utils/user_segment.dart';
+import '../../core/services/local_auth_service.dart';
 import '../../shared/widgets/lutke_logo.dart';
 
 // ════════════════════════════════════════════════════════════════
@@ -53,73 +53,78 @@ class _RegisterScreenState extends ConsumerState<RegisterScreen> {
     super.dispose();
   }
 
-  // ── KAYIT ──────────────────────────────────────────────────
+  // ── KAYIT (Yerel Auth — Firebase olmadan) ───────────────────
+  // Firebase yapılandırılana kadar SharedPreferences'a yazar.
+  // Sahip credential'ları (y.mutlu@alparslan.edu.tr + ysfrns49) ile
+  // giriş yapan kullanıcı admin özelliklerini açar.
 
   Future<void> _register() async {
     if (!_formKey.currentState!.validate()) return;
     setState(() { _loading = true; _errorMsg = null; });
 
-    final result = await ref.read(authServiceProvider).registerWithEmail(
-      email: _emailCtrl.text.trim(),
-      password: _passCtrl.text,
-      displayName: _nameCtrl.text.trim(),
-      initialProfile: const UserProfile(
-        userId: '',
-        currentLevel: 'a1',
-        targetLevel: 'b1',
-        isHeritage: false,
-        dailyGoal: 20,
-      ),
-    );
+    try {
+      final localAuth = ref.read(localAuthServiceProvider);
+      await localAuth.register(
+        email: _emailCtrl.text.trim(),
+        password: _passCtrl.text,
+        displayName: _nameCtrl.text.trim(),
+      );
+      // Owner state'i yenile
+      await refreshLocalOwnerState(ref);
+      // Provider'ı invalidate et — UI yenilensin
+      ref.invalidate(localCurrentUserProvider);
 
-    if (!mounted) return;
-    setState(() => _loading = false);
-
-    if (result.isSuccess) {
+      if (!mounted) return;
+      setState(() => _loading = false);
       context.go(AppRoutes.home);
-    } else {
-      setState(() => _errorMsg = result.error);
+    } catch (e) {
+      if (!mounted) return;
+      setState(() {
+        _loading = false;
+        _errorMsg = 'Kayıt başarısız: $e';
+      });
     }
   }
 
-  // ── GİRİŞ ──────────────────────────────────────────────────
+  // ── GİRİŞ (Yerel Auth) ──────────────────────────────────────
 
   Future<void> _login() async {
     if (!_formKey.currentState!.validate()) return;
     setState(() { _loading = true; _errorMsg = null; });
 
-    final result = await ref.read(authServiceProvider).signInWithEmail(
-      email: _emailCtrl.text.trim(),
-      password: _passCtrl.text,
-    );
+    try {
+      final localAuth = ref.read(localAuthServiceProvider);
+      final user = await localAuth.login(
+        email: _emailCtrl.text.trim(),
+        password: _passCtrl.text,
+      );
 
-    if (!mounted) return;
-    setState(() => _loading = false);
+      if (!mounted) return;
 
-    if (result.isSuccess) {
-      context.go(AppRoutes.home);
-    } else {
-      setState(() => _errorMsg = result.error);
+      if (user != null) {
+        await refreshLocalOwnerState(ref);
+        ref.invalidate(localCurrentUserProvider);
+        setState(() => _loading = false);
+        context.go(AppRoutes.home);
+      } else {
+        setState(() {
+          _loading = false;
+          _errorMsg = 'E-posta veya şifre hatalı. '
+              'Henüz hesap oluşturmadıysan "Tomar bibe"ye geç.';
+        });
+      }
+    } catch (e) {
+      if (!mounted) return;
+      setState(() {
+        _loading = false;
+        _errorMsg = 'Giriş başarısız: $e';
+      });
     }
   }
 
-  // ── ANONİM GİRİŞ ──────────────────────────────────────────
-  // İlke §2: Bariyer koyma — misafir olarak başlat
-
-  Future<void> _loginAnonymously() async {
-    setState(() { _loading = true; _errorMsg = null; });
-
-    final result = await ref.read(authServiceProvider).signInAnonymously();
-
-    if (!mounted) return;
-    setState(() => _loading = false);
-
-    if (result.isSuccess) {
-      context.go(AppRoutes.passiveTest); // Onboarding'e yönlendir
-    } else {
-      setState(() => _errorMsg = result.error);
-    }
-  }
+  // NOT (Nisan 2026): Anonim/misafir giriş kaldırıldı.
+  // Firebase yapılandırması tamamlanmadığı için anonim giriş hata
+  // veriyordu. Şimdi sadece email + şifre kayıt/giriş açık.
 
   @override
   Widget build(BuildContext context) {
@@ -280,37 +285,6 @@ class _RegisterScreenState extends ConsumerState<RegisterScreen> {
                         : 'Hesabê te heye? Têkeve →',
                     style: AppTypography.bodySmall
                         .copyWith(color: AppColors.textSecondary),
-                  ),
-                ),
-
-                const Padding(
-                  padding: EdgeInsets.symmetric(vertical: AppSpacing.md),
-                  child: Row(
-                    children: [
-                      Expanded(child: Divider()),
-                      Padding(
-                        padding: EdgeInsets.symmetric(horizontal: 12),
-                        child: Text('an jî'),
-                      ),
-                      Expanded(child: Divider()),
-                    ],
-                  ),
-                ),
-
-                // Misafir girişi — bariyer yok (İlke §2, §9)
-                OutlinedButton.icon(
-                  onPressed: _loading ? null : _loginAnonymously,
-                  icon: const Icon(Icons.person_outline),
-                  label: Text(
-                    'Bê hesab dewam bike',
-                    style: AppTypography.labelMedium
-                        .copyWith(color: AppColors.textPrimary),
-                  ),
-                  style: OutlinedButton.styleFrom(
-                    minimumSize: const Size(double.infinity, 52),
-                    side: BorderSide(color: AppColors.border),
-                    shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(14)),
                   ),
                 ),
 

@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:convert';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -36,10 +37,41 @@ final isLoggedInProvider = Provider<bool>((ref) {
 /// FAB'ına erişebilir.
 const kOwnerEmail = 'y.mutlu@alparslan.edu.tr';
 
+/// Sahip kontrolü — Firebase + yerel auth bileşik kontrolü.
+/// Firebase yapılandırıldıysa user.email; aksi halde yerel auth'tan.
 final isOwnerProvider = Provider<bool>((ref) {
-  final user = ref.watch(currentUserProvider);
-  return user?.email?.toLowerCase() == kOwnerEmail.toLowerCase();
+  // Firebase yolu (Firebase aktif ise)
+  final firebaseUser = ref.watch(currentUserProvider);
+  if (firebaseUser?.email?.toLowerCase() == kOwnerEmail.toLowerCase()) {
+    return true;
+  }
+  // Yerel auth yolu (Firebase yokken)
+  final localOwner = ref.watch(_localOwnerCheckProvider);
+  return localOwner;
 });
+
+/// Yerel auth'tan owner durumunu okur — local_auth_service.dart'a delege.
+/// Bu helper provider, auth_service.dart ↔ local_auth_service.dart döngüsel
+/// import'unu önler (string-tabanlı SharedPreferences okuma).
+final _localOwnerCheckProvider = StateProvider<bool>((_) => false);
+
+/// Yerel auth durumunu ref provider'a yansıtır (login/register sonrası çağrılır).
+/// `ref` parametresi `WidgetRef` veya `Ref` olabilir — sadece `read` kullanılır.
+Future<void> refreshLocalOwnerState(dynamic ref) async {
+  try {
+    final prefs = await SharedPreferences.getInstance();
+    final raw = prefs.getString('lutke_local_user_v1');
+    if (raw == null) {
+      ref.read(_localOwnerCheckProvider.notifier).state = false;
+      return;
+    }
+    final json = jsonDecode(raw) as Map<String, dynamic>;
+    final isOwner = json['isOwner'] as bool? ?? false;
+    ref.read(_localOwnerCheckProvider.notifier).state = isOwner;
+  } catch (_) {
+    ref.read(_localOwnerCheckProvider.notifier).state = false;
+  }
+}
 
 final userProfileFirestoreProvider =
     FutureProvider.family<UserProfile?, String>((ref, userId) {
