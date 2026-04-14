@@ -2239,7 +2239,7 @@ const kA1EkKelimeler = [
 
   // [BH]: Erd = toprak/yer — eril
   // [FB]: erd n.m.
-  (id:'a1_500', ku:'Erd', tr:'Toprak / Yer', en:'Earth / Ground', cins:'nêr', ez:'erdê',
+  (id:'a1_743', ku:'Erd', tr:'Toprak / Yer', en:'Earth / Ground', cins:'nêr', ez:'erdê',
    kat:'xweza', zor:0.82,
    not:'Eril — Ferhenga Birûskî: erd n.m. "Erdê Kurdistanê" = Kürdistan toprağı. Heritage kullanıcı için duygusal kelime',
    her:['Erdê Kurdistanê bereketdar e.', 'Erd û çiya.'],
@@ -2248,7 +2248,7 @@ const kA1EkKelimeler = [
   // [BH]: Esman = gökyüzü — eril
   // [FB]: esman n.m. [Farsça "âsmân"dan]
   // [TH]: esman = sky
-  (id:'a1_501', ku:'Esman', tr:'Gökyüzü', en:'Sky', cins:'nêr', ez:'esmanê',
+  (id:'a1_744', ku:'Esman', tr:'Gökyüzü', en:'Sky', cins:'nêr', ez:'esmanê',
    kat:'xweza', zor:0.82,
    not:'Eril — Ferhenga Birûskî: esman n.m. "Esman şîn e" = gökyüzü mavi. Thackston §: esman',
    her:['Esman şîn e, hewa baş e!', 'Stêrkên esmanê.'],
@@ -2258,7 +2258,7 @@ const kA1EkKelimeler = [
   // [FB]: Bayînek/Çiyayek — mountain pass
   // Simpler: "Kanî" = pınar/kaynak — sık geçen
   // [FB]: kanî n.f. — spring, fountain
-  (id:'a1_502', ku:'Kanî', tr:'Pınar / Su kaynağı', en:'Spring / Fountain', cins:'mê', ez:'kaniyê',
+  (id:'a1_745', ku:'Kanî', tr:'Pınar / Su kaynağı', en:'Spring / Fountain', cins:'mê', ez:'kaniyê',
    kat:'xweza', zor:0.80,
    not:'Dişil — Ferhenga Birûskî: kanî n.f. Bedir Han bileşik kelime bölümünde "ava kaniya meje" = çeşme suyu. Kürt köylerinde kanî kutsaldır',
    her:['Ava kaniyê sar e.', 'Kaniya gundê me.'],
@@ -2266,7 +2266,7 @@ const kA1EkKelimeler = [
 
   // [FB]: Zevî = tarla — eril
   // [AS]: "tarla" kelimesi
-  (id:'a1_503', ku:'Zevî', tr:'Tarla', en:'Field', cins:'nêr', ez:'zeviyê',
+  (id:'a1_746', ku:'Zevî', tr:'Tarla', en:'Field', cins:'nêr', ez:'zeviyê',
    kat:'xweza', zor:0.79,
    not:'Eril — Ferhenga Birûskî: zevî n.m. "Cotkarê min li zeviyê ye" = çiftçim tarlada',
    her:['Kalê min li zeviyê ye.', 'Zeviyên me mezin in.'],
@@ -2318,192 +2318,192 @@ const kA1EkKelimeler = [
 const kA1EkKelimeler2 = [
 
   // ── GİYECEK — [AS] s.54 CİLÛBERG ─────────────────────────
-  (id:'a1_500', ku:'Kiras', tr:'Gömlek / Elbise', en:'Shirt / Dress',
+  (id:'a1_747', ku:'Kiras', tr:'Gömlek / Elbise', en:'Shirt / Dress',
    cins:'mê', ez:'kirasê', kat:'cil', zor:0.83,
    not:'Dişil — [AS]: "gömlek/elbise = kiras" ✓. [FB]: kiras n.f.',
    her:['Kiras li xwe kir.', 'Kirasê spî xweş e.'],
    gen:['Kiras û pantol', 'Kirasê min']),
 
-  (id:'a1_501', ku:'Pantol', tr:'Pantolon', en:'Trousers',
+  (id:'a1_748', ku:'Pantol', tr:'Pantolon', en:'Trousers',
    cins:'nêr', ez:'pantolê', kat:'cil', zor:0.83,
    not:'Eril — [AS]: "pantolon = pantol" ✓. [FB]: pantol n.m.',
    her:['Pantol li xwe kir.', 'Pantolê reş.'],
    gen:['Pantol û kiras', 'Pantolê min']),
 
-  (id:'a1_502', ku:'Pêlav', tr:'Ayakkabı', en:'Shoe',
+  (id:'a1_749', ku:'Pêlav', tr:'Ayakkabı', en:'Shoe',
    cins:'nêr', ez:'pêlavê', kat:'cil', zor:0.83,
    not:'Eril — [AS]: "ayakkabı = pêlav" ✓. [FB]: pêlav n.m.',
    her:['Pêlav li xwe kir.', 'Pêlavên nû.'],
    gen:['Pêlav û gore', 'Pêlavên min']),
 
-  (id:'a1_503', ku:'Gore', tr:'Çorap', en:'Sock',
+  (id:'a1_750', ku:'Gore', tr:'Çorap', en:'Sock',
    cins:'nêr', ez:'gorê', kat:'cil', zor:0.81,
    not:'Eril — [AS]: "çorap = gore" ✓. [FB]: gore n.m.',
    her:['Gore li xwe kir.', 'Goreyên germ.'],
    gen:['Gore û pêlav', 'Goreyên min']),
 
-  (id:'a1_504', ku:'Kirasê jorîn', tr:'Üst elbise / Ceket', en:'Jacket / Coat',
+  (id:'a1_751', ku:'Kirasê jorîn', tr:'Üst elbise / Ceket', en:'Jacket / Coat',
    cins:'nêr', ez:'kirasê jorîn', kat:'cil', zor:0.79,
    not:'Eril — "kiras" + "jorîn" (üst). "Ceket" de kullanılır.',
    her:['Kirasê jorîn li xwe bike!', 'Sar e, kiras bixe.'],
    gen:['Kirasê jorîn û kiras', 'Kirasê jorîn']),
 
-  (id:'a1_505', ku:'Cilên xwe guhartin', tr:'Giyinmek / Kıyafet değiştirmek', en:'To change clothes',
+  (id:'a1_752', ku:'Cilên xwe guhartin', tr:'Giyinmek / Kıyafet değiştirmek', en:'To change clothes',
    cins:'bêcins', ez:null, kat:'leker', zor:0.79,
    not:'"Cil guhartin" = kıyafet değiştirmek. "Li xwe kirin" = giymek.',
    her:['Cilên xwe biguhere!', 'Kiras li xwe bike.'],
    gen:['Cil guhartin', 'Li xwe bike!']),
 
   // ── OKUL — [AS] s.36 PERWERDEHİ ──────────────────────────
-  (id:'a1_510', ku:'Pirtûkxane', tr:'Kütüphane', en:'Library',
+  (id:'a1_753', ku:'Pirtûkxane', tr:'Kütüphane', en:'Library',
    cins:'mê', ez:'pirtûkxanê', kat:'cih', zor:0.81,
    not:'Dişil — "pirtûk" + "xane". [BH] §274: -xane eki.',
    her:['Ez diçim pirtûkxanê.', 'Pirtûkxane li kû ye?'],
    gen:['Pirtûkxane û sinif', 'Pirtûkxana me']),
 
-  (id:'a1_511', ku:'Sinif', tr:'Sınıf', en:'Classroom',
+  (id:'a1_754', ku:'Sinif', tr:'Sınıf', en:'Classroom',
    cins:'nêr', ez:'sinifê', kat:'cih', zor:0.83,
    not:'Eril — [AS]: "sınıf = sinif" ✓. [Fêrkera D.2]: "pol" da kullanılır — "pol" daha öz Kurmancî.',
    her:['Em di sinifê de ne.', 'Sinif mezin e.'],
    gen:['Sinif û pirtûkxane', 'Sinifê me']),
 
-  (id:'a1_512', ku:'Texte', tr:'Tahta / Yazı tahtası', en:'Blackboard',
+  (id:'a1_755', ku:'Texte', tr:'Tahta / Yazı tahtası', en:'Blackboard',
    cins:'mê', ez:'tabelayê', kat:'mal', zor:0.79,
    not:'Dişil — [Fêrkera D.2]: "Texteyê polê spî ye" ✓. "Texte" standart form. "Tabela" da kullanılır.',
    her:['Mamosta li texteyê dinivîse.', 'Texteyê spî ye.'],
    gen:['Texte û mase', 'Texteyê me']),
 
-  (id:'a1_513', ku:'Pênûs', tr:'Kalem / Yazı kalemi', en:'Pen / Pencil',
+  (id:'a1_756', ku:'Pênûs', tr:'Kalem / Yazı kalemi', en:'Pen / Pencil',
    cins:'mê', ez:'pênûsê', kat:'mal', zor:0.83,
    not:'Dişil — [AS] no.164: "dolma kalem = pênûsa hibrî", no.172: "kurşun kalem = pênûsa zirîçî" ✓. Kök: "pênûs". Ayrıca "pênûsk" bölgesel varyant. "Qelem" Arapça kökenli — "pênûs" tercih edilir.',
    her:['Pênûsa min kû ye?', 'Pênûs bide min.'],
    gen:['Pênûs û pirtûk', 'Pênûsa min']),
 
-  (id:'a1_514', ku:'Kaxez', tr:'Kağıt', en:'Paper',
+  (id:'a1_757', ku:'Kaxez', tr:'Kağıt', en:'Paper',
    cins:'nêr', ez:'kaxezê', kat:'mal', zor:0.82,
    not:'Eril — [AS]: "kağıt = kaxez" ✓. [FB]: kaxez n.m.',
    her:['Kaxez bide min.', 'Kaxezê spî.'],
    gen:['Kaxez û qelem', 'Kaxezê min']),
 
-  (id:'a1_515', ku:'Çante', tr:'Çanta', en:'Bag',
+  (id:'a1_758', ku:'Çante', tr:'Çanta', en:'Bag',
    cins:'mê', ez:'çantê', kat:'mal', zor:0.83,
    not:'Dişil — [AS]: "çanta = çante" ✓. [FB]: çante n.f.',
    her:['Çanta min giran e.', 'Çante li ku ye?'],
    gen:['Çante û pirtûk', 'Çanta min']),
 
   // ── GÜN VE ZAMAN EK ───────────────────────────────────────
-  (id:'a1_520', ku:'Sibê', tr:'Yarın', en:'Tomorrow',
+  (id:'a1_759', ku:'Sibê', tr:'Yarın', en:'Tomorrow',
    cins:'bêcins', ez:null, kat:'dem', zor:0.84,
    not:'[AS]: "yarın = sibê" ✓. "Sibê tê" = yarın geliyor.',
    her:['Sibê tê.', 'Sibê em diçin.'],
    gen:['Sibê û duh', 'Sibê xweş be!']),
 
-  (id:'a1_521', ku:'Duh', tr:'Dün', en:'Yesterday',
+  (id:'a1_760', ku:'Duh', tr:'Dün', en:'Yesterday',
    cins:'bêcins', ez:null, kat:'dem', zor:0.84,
    not:'[AS]: "dün = duh" ✓.',
    her:['Duh baş bû.', 'Duh nehatim.'],
    gen:['Duh û sibê', 'Duh çêbû.']),
 
-  (id:'a1_522', ku:'Êvar', tr:'Akşam', en:'Evening',
+  (id:'a1_761', ku:'Êvar', tr:'Akşam', en:'Evening',
    cins:'nêr', ez:'êvarê', kat:'dem', zor:0.84,
    not:'Eril — [AS]: "akşam = êvar" ✓.',
    her:['Êvar hat.', 'Êvarê tê?'],
    gen:['Êvar û sibê', 'Êvara baş!']),
 
-  (id:'a1_523', ku:'Sibe', tr:'Sabah', en:'Morning',
+  (id:'a1_762', ku:'Sibe', tr:'Sabah', en:'Morning',
    cins:'nêr', ez:'sibeyê', kat:'dem', zor:0.84,
    not:'Eril — [AS]: "sabah = beyanî, sibe" ✓.',
    her:['Sibe zû rabûm.', 'Sibeyê xweş e.'],
    gen:['Sibe û êvar', 'Sibeyê baş!']),
 
-  (id:'a1_524', ku:'Nîv saet', tr:'Yarım saat', en:'Half hour',
+  (id:'a1_763', ku:'Nîv saet', tr:'Yarım saat', en:'Half hour',
    cins:'bêcins', ez:null, kat:'dem', zor:0.80,
    not:'"Nîv" (yarım) + "saet". "Piştî nîv saetê" = yarım saatten sonra.',
    her:['Nîv saet man.', 'Piştî nîv saetê tê.'],
    gen:['Nîv saet û saetek', 'Nîv saet']),
 
-  (id:'a1_525', ku:'Çend?', tr:'Kaç? / Ne kadar?', en:'How many? / How much?',
+  (id:'a1_764', ku:'Çend?', tr:'Kaç? / Ne kadar?', en:'How many? / How much?',
    cins:'bêcins', ez:null, kat:'pirs', zor:0.85,
    not:'"Çend?" = kaç/ne kadar. [TH] §: interrogatives. "Seet çend e?" = saat kaç?',
    her:['Çend lîre ye?', 'Çend sal e?'],
    gen:['Çend û çawa', 'Çend e?']),
 
   // ── RENKLER EK ────────────────────────────────────────────
-  (id:'a1_530', ku:'Kesk', tr:'Yeşil', en:'Green',
+  (id:'a1_765', ku:'Kesk', tr:'Yeşil', en:'Green',
    cins:'bêcins', ez:null, kat:'reng', zor:0.84,
    not:'Değişmez sıfat — [BH] p.277: "kesk = yeşil" ✓. "Kesk û spî û sor = Kürt bayrağı renkleri".',
    her:['Çiya kesk e.', 'Rengê kesk xweş e.'],
    gen:['Kesk û zer', 'Ev kesk e.']),
 
-  (id:'a1_531', ku:'Mor', tr:'Mor', en:'Purple',
+  (id:'a1_766', ku:'Mor', tr:'Mor', en:'Purple',
    cins:'bêcins', ez:null, kat:'reng', zor:0.80,
    not:'Değişmez sıfat — [Fêrkera D.10]: "binevşî" leylak/mor. "Mor" da kullanılır. "Binevşî" daha özgün.',
    her:['Gul mor e.', 'Rengê mor.'],
    gen:['Mor û pembe', 'Ev mor e.']),
 
-  (id:'a1_532', ku:'Zer', tr:'Sarı', en:'Yellow',
+  (id:'a1_767', ku:'Zer', tr:'Sarı', en:'Yellow',
    cins:'bêcins', ez:null, kat:'reng', zor:0.83,
    not:'Değişmez sıfat — [BH]: zer adj. "Stêrka zer" = sarı yıldız.',
    her:['Roj zer e.', 'Çilek zer e.'],
    gen:['Zer û kesk', 'Ev zer e.']),
 
   // ── SAYILAR EK — büyük sayılar ────────────────────────────
-  (id:'a1_540', ku:'Sed', tr:'Yüz (100)', en:'One hundred',
+  (id:'a1_768', ku:'Sed', tr:'Yüz (100)', en:'One hundred',
    cins:'bêcins', ez:null, kat:'jimar', zor:0.83,
    not:'"Sed" = 100. [AS]: "100 = sed" ✓.',
    her:['Sed lîre.', 'Sed kîlo.'],
    gen:['Sed û hezar', 'Sed kilo']),
 
-  (id:'a1_541', ku:'Hezar', tr:'Bin (1000)', en:'One thousand',
+  (id:'a1_769', ku:'Hezar', tr:'Bin (1000)', en:'One thousand',
    cins:'bêcins', ez:null, kat:'jimar', zor:0.82,
    not:'"Hezar" = 1000. [AS]: "1.000 = hezar" ✓.',
    her:['Hezar lîre.', 'Hezar û sed.'],
    gen:['Hezar û sed', 'Hezar kilo']),
 
-  (id:'a1_542', ku:'Yekem', tr:'Birinci', en:'First',
+  (id:'a1_770', ku:'Yekem', tr:'Birinci', en:'First',
    cins:'bêcins', ez:null, kat:'jimar', zor:0.82,
    not:'"Yek" + "-em". [AS]: "birinci = yekemin" ✓. Kısa form "yekem".',
    her:['Yekem hat.', 'Roja yekem.'],
    gen:['Yekem û duyem', 'Roja yekem']),
 
-  (id:'a1_543', ku:'Duyem', tr:'İkinci', en:'Second',
+  (id:'a1_771', ku:'Duyem', tr:'İkinci', en:'Second',
    cins:'bêcins', ez:null, kat:'jimar', zor:0.81,
    not:'"Du" + "-yem". [AS]: "ikinci = duyemîn" ✓. Kısa form "duyem".',
    her:['Duyem hat.', 'Kilasa duyem.'],
    gen:['Duyem û sêyem', 'Kilasa duyem']),
 
   // ── SORULAR VE İFADELER ───────────────────────────────────
-  (id:'a1_550', ku:'Ji kerema xwe', tr:'Lütfen', en:'Please',
+  (id:'a1_772', ku:'Ji kerema xwe', tr:'Lütfen', en:'Please',
    cins:'bêcins', ez:null, kat:'silav', zor:0.85,
    not:'"Ji kerema xwe" — [AS]: "lütfen = ji kerema xwe" ✓. Lit. "senin kereminden".',
    her:['Ji kerema xwe, bide min.', 'Ji kerema xwe were.'],
    gen:['Ji kerema xwe!', 'Kerem bike']),
 
-  (id:'a1_551', ku:'Biborin', tr:'Afedersiniz / Pardon', en:'Excuse me / Sorry',
+  (id:'a1_773', ku:'Biborin', tr:'Afedersiniz / Pardon', en:'Excuse me / Sorry',
    cins:'bêcins', ez:null, kat:'silav', zor:0.84,
    not:'"Biborin" — [AS]: "afedersiniz = biborin" ✓. Resmi. "Lêborîn" de denir.',
    her:['Biborin, rê nîşan bide!', 'Biborin, ez nehatim.'],
    gen:['Biborin û spas', 'Biborin!']),
 
-  (id:'a1_552', ku:'Gelo', tr:'Acaba', en:'I wonder / Is it?',
+  (id:'a1_774', ku:'Gelo', tr:'Acaba', en:'I wonder / Is it?',
    cins:'bêcins', ez:null, kat:'pirs', zor:0.82,
    not:'"Gelo" — [AS]: "acaba = gelo" ✓. Soru partiküli. "Gelo tu hatî?" = Geldin mi acaba?',
    her:['Gelo tu hatî?', 'Gelo baş e?'],
    gen:['Gelo û ma', 'Gelo?']),
 
-  (id:'a1_553', ku:'Çawa?', tr:'Nasıl?', en:'How?',
+  (id:'a1_775', ku:'Çawa?', tr:'Nasıl?', en:'How?',
    cins:'bêcins', ez:null, kat:'pirs', zor:0.85,
    not:'"Çawa?" — [AS]: "nasıl = çawa" ✓. "Tu çawa yî?" = Nasılsın?',
    her:['Tu çawa yî?', 'Çawa dikî vê?'],
    gen:['Çawa û çima', 'Çawa yî?']),
 
-  (id:'a1_554', ku:'Çima?', tr:'Neden? / Niye?', en:'Why?',
+  (id:'a1_776', ku:'Çima?', tr:'Neden? / Niye?', en:'Why?',
    cins:'bêcins', ez:null, kat:'pirs', zor:0.84,
    not:'"Çima?" — [AS]: "neden = çima" ✓.',
    her:['Çima nehatî?', 'Çima baş e?'],
    gen:['Çima û çawa', 'Çima?']),
 
-  (id:'a1_555', ku:'Kengî?', tr:'Ne zaman?', en:'When?',
+  (id:'a1_777', ku:'Kengî?', tr:'Ne zaman?', en:'When?',
    cins:'bêcins', ez:null, kat:'pirs', zor:0.84,
    not:'"Kengî?" — [AS]: "ne zaman = kengî" ✓.',
    her:['Kengî tê?', 'Kengî xwarin?'],
