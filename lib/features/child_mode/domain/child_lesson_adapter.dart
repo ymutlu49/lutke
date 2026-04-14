@@ -12,12 +12,16 @@ import '../../lessons/domain/entities/lesson.dart';
 
 abstract class ChildLessonAdapter {
   /// Çocuklar için uygun egzersiz tipleri.
+  /// - PictureMatch: görsel eşleştirme — disleksi dostu, 7-10 yaş için ideal
+  /// - MemoryMatch: klasik hafıza oyunu — yazı yükü yok, dikkat+bellek
   static const _allowedTypes = {
     ExerciseType.listenAndSelect,
     ExerciseType.multipleChoice,
     ExerciseType.sentenceOrder,
     ExerciseType.fillInBlank,
     ExerciseType.culturalContent,
+    ExerciseType.pictureMatch,
+    ExerciseType.memoryMatch,
   };
 
   /// Bir dersi çocuk moduna adapte eder.

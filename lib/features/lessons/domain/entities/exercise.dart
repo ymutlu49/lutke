@@ -60,6 +60,11 @@ enum ExerciseType {
     labelKu: 'Wêne û peyv',
     labelTr: 'Resim ve kelime eşleştir',
     heritagePriority: 2,
+  ),
+  memoryMatch(
+    labelKu: 'Lîstika Bîranînê',
+    labelTr: 'Hafıza oyunu',
+    heritagePriority: 2,
   );
 
   final String labelKu;
@@ -409,6 +414,30 @@ class PictureMatchExercise extends Exercise {
     if (userAnswer is Map<String, String>) {
       return pairs.every((p) => userAnswer[p.emoji] == p.word);
     }
+    return false;
+  }
+}
+
+/// Lîstika Bîranînê — Hafıza (Memory) Oyunu.
+///
+/// 4-6 emoji-kelime çifti; her biri 2 kart olarak grid'e yerleştirilir
+/// (toplam 8-12 kart). Kullanıcı 2 kart açar, eşleşiyorsa kalır, yoksa
+/// tekrar kapanır. Yazı/telaffuz yükü yok → disleksi ve 7-10 yaş için
+/// ideal. Dikkat, hafıza ve görsel-sözlü ilişkilendirme çalıştırır.
+class MemoryMatchExercise extends Exercise {
+  final List<PictureWordPair> pairs;
+
+  const MemoryMatchExercise({
+    required super.id,
+    required this.pairs,
+    super.xpReward = 15,
+    super.cardId,
+  }) : super(type: ExerciseType.memoryMatch);
+
+  @override
+  bool checkAnswer(dynamic userAnswer) {
+    // userAnswer: bool (tüm çiftler bulundu mu)
+    if (userAnswer is bool) return userAnswer;
     return false;
   }
 }

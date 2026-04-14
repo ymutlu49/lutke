@@ -19,7 +19,10 @@ import '../../lessons/domain/b1_kelime_db.dart';
 import '../../lessons/domain/b2_kelime_db.dart';
 import '../../lessons/domain/c1_kelime_db.dart';
 import '../../lessons/domain/c2_kelime_db.dart';
+import '../../lessons/domain/child_a1_kelime_db.dart';
+import '../../lessons/domain/child_a2_kelime_db.dart';
 import '../../../core/services/sound_service.dart';
+import '../../../shared/providers/child_mode_provider.dart';
 import '../../../shared/utils/word_emoji_map.dart';
 
 // ════════════════════════════════════════════════════════════════
@@ -74,7 +77,25 @@ class _QuizQuestion {
 
 // ── Kelime Havuzu Yardimcilari ──────────────────────────────────
 
-List<_QuizWord> _loadWordsForLevel(String level) {
+List<_QuizWord> _loadWordsForLevel(String level, {bool isChildMode = false}) {
+  // Çocuk modu: yalnızca çocuk için seçilmiş A1+A2 havuzu kullanılır.
+  // Bu distractor seçiminde B1+ gibi yaş-uygunsuz kelimelerin çıkmasını
+  // engeller (çocuk_a1_kelime_db: 61 madde, çocuk_a2_kelime_db: 31 madde).
+  if (isChildMode) {
+    final raw = level.toUpperCase() == 'A2'
+        ? [...kChildA1Kelimeler, ...kChildA2Kelimeler]
+        : kChildA1Kelimeler;
+    return raw
+        .where((r) => r.ku.isNotEmpty && r.tr.isNotEmpty && r.ku.length > 1)
+        .map((r) => _QuizWord(
+              id: r.id, ku: r.ku, tr: r.tr, en: r.en,
+              kat: r.kat ?? '', cins: r.cins ?? '', not_: r.not ?? '',
+              zor: (r.zor is num) ? (r.zor as num).toDouble() : 0.75,
+              her: r.her ?? [], gen: r.gen ?? [],
+            ))
+        .toList();
+  }
+
   final raw = switch (level.toUpperCase()) {
     'A1' => kA1TamListe,
     'A2' => kA2TamListe,
@@ -102,8 +123,11 @@ List<_QuizQuestion> _generateQuizSession({
   String? category,
   int questionCount = 10,
   bool showTurkish = true,
+  bool isChildMode = false,
 }) {
-  final allWords = _loadWordsForLevel(level);
+  final allWords = _loadWordsForLevel(level, isChildMode: isChildMode);
+  // Çocuk modunda soru sayısını 10 → 6 indir (dikkat süresi kısa)
+  if (isChildMode) questionCount = 6;
   // Filter by category if provided, but keep allWords for distractors
   var poolWords = category != null
       ? allWords.where((w) => w.kat == category).toList()
@@ -129,19 +153,31 @@ List<_QuizQuestion> _generateQuizSession({
   final hard = rawPick.skip(2 * third).toList()..shuffle(rng);
   final sessionWords = <_QuizWord>[...easy, ...mid, ...hard];
 
-  // Egzersiz tipi dagitimi: ~3 translation, ~3 reverse, ~2 listening, ~2 typing
-  final baseTypes = <_ExerciseType>[
-    _ExerciseType.translation,
-    _ExerciseType.translation,
-    _ExerciseType.translation,
-    _ExerciseType.reverseTranslation,
-    _ExerciseType.reverseTranslation,
-    _ExerciseType.reverseTranslation,
-    _ExerciseType.listening,
-    _ExerciseType.listening,
-    _ExerciseType.typing,
-    _ExerciseType.typing,
-  ]..shuffle(rng);
+  // Egzersiz tipi dagitimi:
+  // Yetiskin: ~3 translation, ~3 reverse, ~2 listening, ~2 typing
+  // Cocuk: typing yasak (disleksi/motor kontrol) → yerine reverse & listening
+  final baseTypes = isChildMode
+      ? <_ExerciseType>[
+          _ExerciseType.translation,
+          _ExerciseType.translation,
+          _ExerciseType.reverseTranslation,
+          _ExerciseType.reverseTranslation,
+          _ExerciseType.listening,
+          _ExerciseType.listening,
+        ]
+      : <_ExerciseType>[
+          _ExerciseType.translation,
+          _ExerciseType.translation,
+          _ExerciseType.translation,
+          _ExerciseType.reverseTranslation,
+          _ExerciseType.reverseTranslation,
+          _ExerciseType.reverseTranslation,
+          _ExerciseType.listening,
+          _ExerciseType.listening,
+          _ExerciseType.typing,
+          _ExerciseType.typing,
+        ];
+  baseTypes.shuffle(rng);
   // Ensure types list matches effectiveCount
   final types = List.generate(effectiveCount, (i) => baseTypes[i % baseTypes.length]);
 
@@ -305,7 +341,13 @@ class _QuizScreenState extends ConsumerState<QuizScreen>
   void initState() {
     super.initState();
     _showTurkish = ref.read(showTurkishProvider);
-    _questions = _generateQuizSession(level: widget.level, category: widget.category, showTurkish: _showTurkish);
+    final isChild = ref.read(isChildModeProvider);
+    _questions = _generateQuizSession(
+      level: widget.level,
+      category: widget.category,
+      showTurkish: _showTurkish,
+      isChildMode: isChild,
+    );
 
     _shakeController = AnimationController(
       vsync: this,
@@ -400,7 +442,12 @@ class _QuizScreenState extends ConsumerState<QuizScreen>
       HapticFeedback.lightImpact();
       SoundService.playCorrect();
     } else {
-      _hearts = (_hearts - 1).clamp(0, 3);
+      // Çocuk modunda kalp düşmez — hata stresini azaltır (disleksi dostu).
+      // Yine de zayıf kelime olarak kaydedilir, sonraki turda daha sık gelir.
+      final isChildMode = ref.read(isChildModeProvider);
+      if (!isChildMode) {
+        _hearts = (_hearts - 1).clamp(0, 3);
+      }
       _shakeController.forward(from: 0.0);
       HapticFeedback.heavyImpact();
       SoundService.playWrong();
@@ -1486,7 +1533,10 @@ class _QuizScreenState extends ConsumerState<QuizScreen>
       // DB'de bu etiketi ara — Türkçe modda TR seçenekler görünür,
       // Kurmancî modda KU seçenekler görünür.
       try {
-        final all = _loadWordsForLevel(widget.level);
+        final all = _loadWordsForLevel(
+          widget.level,
+          isChildMode: ref.read(isChildModeProvider),
+        );
         final isKuLookup = !_showTurkish ||
             question.type == _ExerciseType.reverseTranslation;
         _QuizWord? match;
@@ -2235,6 +2285,7 @@ class _QuizScreenState extends ConsumerState<QuizScreen>
                             level: widget.level,
                             category: widget.category,
                             showTurkish: _showTurkish,
+                            isChildMode: ref.read(isChildModeProvider),
                           );
                           _currentIndex = 0;
                           _hearts = 3;

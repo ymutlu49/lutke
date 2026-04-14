@@ -201,6 +201,18 @@ class ChildUnitHubScreen extends StatelessWidget {
                         ),
                       ],
                     ),
+                    const SizedBox(height: 16),
+                    // ── Çîrok (Hikaye) — 3. sıra, tek geniş kart ──
+                    _ChildActivityCard(
+                      emoji: '📖',
+                      titleKu: 'Çîrok',
+                      color: const Color(0xFFFF7043),
+                      onTap: () => context.push(
+                        '/home/story',
+                        extra: {'level': level, 'category': category},
+                      ),
+                    ).animate().fadeIn(delay: 500.ms)
+                        .scale(begin: const Offset(0.9, 0.9), duration: 300.ms),
 
                     const SizedBox(height: 28),
 

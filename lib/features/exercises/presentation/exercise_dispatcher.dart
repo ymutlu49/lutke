@@ -9,6 +9,7 @@ import 'widgets/fill_in_blank_widget.dart';
 import 'widgets/minimal_pair_widget.dart';
 import 'widgets/speaking_practice_widget.dart';
 import '../../child_mode/presentation/widgets/picture_match_widget.dart';
+import '../../child_mode/presentation/widgets/memory_match_widget.dart';
 
 // ════════════════════════════════════════════════════════════════
 // EGZERSİZ DİSPATCHER — Strategy Pattern
@@ -89,6 +90,11 @@ class ExerciseDispatcher extends StatelessWidget {
       ),
 
       PictureMatchExercise ex => PictureMatchWidget(
+        exercise: ex,
+        onRating: onRating,
+      ),
+
+      MemoryMatchExercise ex => MemoryMatchWidget(
         exercise: ex,
         onRating: onRating,
       ),

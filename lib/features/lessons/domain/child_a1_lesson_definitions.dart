@@ -40,6 +40,16 @@ const _kChildLessons = <Lesson>[
         options: ['Hayır', 'Evet', 'Merhaba', 'Teşekkür'],
         correctIndex: 1,
       ),
+      // Hafıza oyunu — selamlaşma kelimelerini ilişkilendir
+      MemoryMatchExercise(
+        id: 'ch_ex_005',
+        pairs: [
+          PictureWordPair(emoji: '👋', word: 'Silav', translation: 'Merhaba'),
+          PictureWordPair(emoji: '🙏', word: 'Spas',  translation: 'Teşekkür'),
+          PictureWordPair(emoji: '✅', word: 'Erê',   translation: 'Evet'),
+          PictureWordPair(emoji: '❌', word: 'Na',    translation: 'Hayır'),
+        ],
+      ),
       CulturalContentExercise(
         id: 'ch_ex_004',
         contentKu: 'Silav keça xweşbextiyê ye.',
@@ -107,17 +117,21 @@ const _kChildLessons = <Lesson>[
     estimatedMinutes: 5,
     targetCardIds: ['z_a1_020', 'z_a1_021', 'z_a1_022', 'z_a1_023', 'z_a1_024', 'z_a1_025'],
     exercises: [
+      // Görsel eşleştirme — renkler için ideal başlangıç
+      PictureMatchExercise(
+        id: 'ch_ex_019',
+        pairs: [
+          PictureWordPair(emoji: '🔴', word: 'Sor',  translation: 'Kırmızı'),
+          PictureWordPair(emoji: '🟢', word: 'Kesk', translation: 'Yeşil'),
+          PictureWordPair(emoji: '🟡', word: 'Zer',  translation: 'Sarı'),
+          PictureWordPair(emoji: '🔵', word: 'Şîn',  translation: 'Mavi'),
+        ],
+      ),
       MultipleChoiceExercise(
         id: 'ch_ex_020',
         prompt: '🔴 Bu renk Kurmancî\'de ne?',
         options: ['Kesk', 'Sor', 'Zer', 'Şîn'],
         correctIndex: 1,
-      ),
-      MultipleChoiceExercise(
-        id: 'ch_ex_021',
-        prompt: '🟢 Bu renk Kurmancî\'de ne?',
-        options: ['Sor', 'Spî', 'Kesk', 'Reş'],
-        correctIndex: 2,
       ),
       FillInBlankExercise(
         id: 'ch_ex_022',
@@ -154,17 +168,21 @@ const _kChildLessons = <Lesson>[
     estimatedMinutes: 6,
     targetCardIds: ['z_a1_030', 'z_a1_031', 'z_a1_032', 'z_a1_033', 'z_a1_034'],
     exercises: [
+      // Görsel eşleştirme — hayvanlar çocuklar için en güçlü modalite
+      PictureMatchExercise(
+        id: 'ch_ex_029',
+        pairs: [
+          PictureWordPair(emoji: '🐱', word: 'Pisîk',  translation: 'Kedi'),
+          PictureWordPair(emoji: '🐕', word: 'Seg',    translation: 'Köpek'),
+          PictureWordPair(emoji: '🐐', word: 'Karîk',  translation: 'Oğlak'),
+          PictureWordPair(emoji: '🐦', word: 'Çûk',    translation: 'Kuş'),
+        ],
+      ),
       MultipleChoiceExercise(
         id: 'ch_ex_030',
         prompt: '🐱 Bu hayvan Kurmancî\'de ne?',
         options: ['Seg', 'Pisîk', 'Çûk', 'Karîk'],
         correctIndex: 1,
-      ),
-      MultipleChoiceExercise(
-        id: 'ch_ex_031',
-        prompt: '🐕 Bu hayvan Kurmancî\'de ne?',
-        options: ['Pisîk', 'Masî', 'Seg', 'Mirîşk'],
-        correctIndex: 2,
       ),
       FillInBlankExercise(
         id: 'ch_ex_032',
