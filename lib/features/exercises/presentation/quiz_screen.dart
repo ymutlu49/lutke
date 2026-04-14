@@ -1422,9 +1422,9 @@ class _QuizScreenState extends ConsumerState<QuizScreen>
 
     // Cinsiyet bilgisi
     final genderText = switch (word.cins) {
-      'nêr'    => 'Cinsiyet: nêr (eril)',
-      'mê'     => 'Cinsiyet: mê (disil)',
-      'bêcins' => 'Cinsiyet: bêcins (cinsiyetsiz)',
+      'nêr'    => _showTurkish ? 'Cinsiyet: nêr (eril)' : 'Zayend: nêr',
+      'mê'     => _showTurkish ? 'Cinsiyet: mê (dişil)' : 'Zayend: mê',
+      'bêcins' => _showTurkish ? 'Cinsiyet: bêcins (cinsiyetsiz)' : 'Zayend: bêcins',
       _        => '',
     };
 
@@ -1577,7 +1577,7 @@ class _QuizScreenState extends ConsumerState<QuizScreen>
                 ),
 
                 // Gramer aciklamasi (not alani)
-                if (word.not_.isNotEmpty) ...[
+                if (_showTurkish && word.not_.isNotEmpty) ...[
                   const SizedBox(height: AppSpacing.md),
                   Container(
                     width: double.infinity,
@@ -1599,7 +1599,7 @@ class _QuizScreenState extends ConsumerState<QuizScreen>
                                 size: 18, color: AppColors.warning),
                             const SizedBox(width: 8),
                             Text(
-                              'Gramer',
+                              _showTurkish ? 'Gramer' : 'Rêziman',
                               style: AppTypography.label.copyWith(
                                 color: AppColors.warning,
                                 fontWeight: FontWeight.w600,
@@ -1883,7 +1883,7 @@ class _QuizScreenState extends ConsumerState<QuizScreen>
                               icon: Icons.local_fire_department_rounded,
                               iconColor: AppColors.accent,
                               value: '+$streakBonus',
-                              label: 'Streak bonus',
+                              label: _showTurkish ? 'Streak bonus' : 'Bonusa berdewamiyê',
                             ),
                             Container(
                                 width: 1,
