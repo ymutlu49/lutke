@@ -636,9 +636,14 @@ class _QuizScreenState extends ConsumerState<QuizScreen>
       }
     }
 
-    // Maskeleme başarısızsa veya hint çok kısaysa → İngilizce tanım
+    // Maskeleme başarısızsa → ikinci heritage cümleyi dene, yoksa boşluk
     if (!hint.contains('____') || hint.length < 5) {
-      hint = q.word.en.isNotEmpty ? q.word.en : '____';
+      if (sentences is List && (sentences as List).length > 1) {
+        hint = _maskWord((sentences as List)[1].toString(), q.word.ku);
+      }
+      if (!hint.contains('____') || hint.length < 5) {
+        hint = '____';
+      }
     }
 
     return Column(
@@ -699,7 +704,12 @@ class _QuizScreenState extends ConsumerState<QuizScreen>
     }
 
     if (!hint.contains('____') || hint.length < 5) {
-      hint = q.word.en.isNotEmpty ? q.word.en : '____';
+      if (sentences is List && (sentences as List).length > 1) {
+        hint = _maskWord((sentences as List)[1].toString(), q.word.ku);
+      }
+      if (!hint.contains('____') || hint.length < 5) {
+        hint = '____';
+      }
     }
 
     return Column(
@@ -838,10 +848,8 @@ class _QuizScreenState extends ConsumerState<QuizScreen>
               children: [
                 SpeakButton(text: q.word.ku, size: 64),
                 Gap.sm,
-                if (q.word.en.isNotEmpty)
-                  Text(q.word.en,
-                    style: AppTypography.body.copyWith(
-                      color: AppColors.textTertiary, fontStyle: FontStyle.italic)),
+                Text('Guhdarî bike û binivîse',
+                  style: AppTypography.caption),
               ],
             ),
           ),
