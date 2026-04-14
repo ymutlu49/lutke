@@ -75,6 +75,11 @@ const List<DilGotin> kDilMotivasyonGotin = [
     tr: 'İnsan anadiliyle düşünür — bu gerçektir.',
     source: 'Yaşar Kemal',
   ),
+  (
+    ku: 'Di însan de sikkeya qederê, ziman e.',
+    tr: 'İnsanda kaderin mührü, dildir.',
+    source: 'Bediüzzaman Said-i Kurdî',
+  ),
 
   // ── Halk söylemi / atasözleri ──
   (
