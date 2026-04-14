@@ -6,6 +6,7 @@ import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import '../../../core/router/app_router.dart';
+import '../../../shared/widgets/speak_button.dart';
 
 import '../../../core/constants/app_colors.dart';
 import '../../../core/constants/app_spacing.dart';
@@ -156,12 +157,18 @@ List<_QuizQuestion> _generateQuizSession({
       distractorPool.shuffle(rng);
 
       if (showTurkish) {
+        // Türkçe mod: KU göster → TR seçenekler / TR göster → KU seçenekler
         final isKuOptions = type == _ExerciseType.reverseTranslation;
         final correctAnswer = isKuOptions ? word.ku : word.tr;
         final wrongOptions = distractorPool.take(3)
             .map((w) => isKuOptions ? w.ku : w.tr).toList();
         options = [correctAnswer, ...wrongOptions]..shuffle(rng);
       } else {
+        // Kürtçe-only mod: Anlam/bağlam göster → KU kelimeyi sor
+        // Translation: Açıklama/tanım → Kürtçe kelime seç
+        // Reverse: Heritage cümle (boşluklu) → Kürtçe kelime seç
+        // Listening: Ses çal → Kürtçe kelime seç
+        // Hepsinde doğru cevap = word.ku, seçenekler = diğer KU kelimeler
         final correctAnswer = word.ku;
         final wrongOptions = distractorPool.take(3).map((w) => w.ku).toList();
         options = [correctAnswer, ...wrongOptions]..shuffle(rng);
@@ -607,16 +614,40 @@ class _QuizScreenState extends ConsumerState<QuizScreen>
       );
     }
 
-    // Tenê Kurmancî: Kelimeyi göster → doğru anlamını seç
+    // Tenê Kurmancî: Heritage cümle göster (kelime gizli) → doğru kelimeyi seç
+    final sentences = q.word.her;
+    String hint;
+    if (sentences is List && sentences.isNotEmpty) {
+      hint = _maskWord(sentences[0].toString(), q.word.ku);
+      if (!hint.contains('____')) {
+        // Cümlede kelime bulunamadıysa, İngilizce tanım kullan
+        hint = q.word.en.isNotEmpty ? q.word.en : '____';
+      }
+    } else {
+      hint = q.word.en.isNotEmpty ? q.word.en : '____';
+    }
+
     return Column(
       key: ValueKey('translation_${q.word.id}'),
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        _buildInstruction(
-          isAlphabet ? 'Ev tîp çi ye?' : 'Ev peyv çi ye?',
-          '', showTr: false),
+        _buildInstruction('Kîjan peyv cihê vala dagire?', '', showTr: false),
         Gap.lg,
-        _buildWordCard(q.word.ku, isKurmanji: true, kat: q.word.kat),
+        Center(
+          child: Container(
+            margin: const EdgeInsets.symmetric(horizontal: 16),
+            padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 16),
+            decoration: BoxDecoration(
+              color: AppColors.primarySurface,
+              borderRadius: BorderRadius.circular(20),
+              border: Border.all(color: AppColors.primary.withOpacity(0.15)),
+            ),
+            child: Text(hint,
+              style: AppTypography.kurmanji.copyWith(
+                color: AppColors.textPrimary, fontSize: 18, height: 1.5),
+              textAlign: TextAlign.center),
+          ),
+        ),
         const SizedBox(height: AppSpacing.questionToOptions),
         ..._buildOptionButtons(q),
       ],
@@ -729,22 +760,30 @@ class _QuizScreenState extends ConsumerState<QuizScreen>
 
               Gap.md,
 
-              // Kurmancî metin (ses placeholder olarak gosterilir)
-              Container(
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-                decoration: BoxDecoration(
-                  color: AppColors.primarySurface,
-                  borderRadius: BorderRadius.circular(12),
-                  border:
-                      Border.all(color: AppColors.primary.withOpacity(0.2)),
-                ),
-                child: Text(
-                  q.word.ku,
-                  style: AppTypography.kurmanji
-                      .copyWith(color: AppColors.primary),
-                ),
-              ),
+              // Türkçe modda kelime gösterilir, Kürtçe modda gizlenir
+              if (_showTurkish)
+                Container(
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+                  decoration: BoxDecoration(
+                    color: AppColors.primarySurface,
+                    borderRadius: BorderRadius.circular(12),
+                    border:
+                        Border.all(color: AppColors.primary.withOpacity(0.2)),
+                  ),
+                  child: Text(
+                    q.word.ku,
+                    style: AppTypography.kurmanji
+                        .copyWith(color: AppColors.primary),
+                  ),
+                )
+              else
+                Text('Guhdarî bike û peyva rast hilbijêre',
+                  style: AppTypography.caption),
+
+              // TTS speak butonu
+              Gap.sm,
+              SpeakButton(text: q.word.ku, size: 40),
             ],
           ),
         ),
@@ -764,15 +803,29 @@ class _QuizScreenState extends ConsumerState<QuizScreen>
       key: ValueKey('typing_${q.word.id}'),
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        _buildInstruction('Vê peyvê binivîse', '', showTr: false),
+        _buildInstruction(
+          _showTurkish ? 'Vê peyvê bi Kurmancî binivîse' : 'Peyvê ku dibihîzî binivîse',
+          '', showTr: false),
 
         Gap.lg,
 
-        // Soru gösterimi — her iki modda da kelime kartı göster
-        _buildWordCard(
-          _showTurkish ? q.word.tr : q.word.ku,
-          isKurmanji: !_showTurkish,
-        ),
+        // Türkçe mod: Türkçe kelime göster → Kürtçe yaz
+        // Kürtçe mod: Ses dinlet → Kürtçe yaz (kelime gösterilmez)
+        if (_showTurkish)
+          _buildWordCard(q.word.tr, isKurmanji: false)
+        else
+          Center(
+            child: Column(
+              children: [
+                SpeakButton(text: q.word.ku, size: 64),
+                Gap.sm,
+                if (q.word.en.isNotEmpty)
+                  Text(q.word.en,
+                    style: AppTypography.body.copyWith(
+                      color: AppColors.textTertiary, fontStyle: FontStyle.italic)),
+              ],
+            ),
+          ),
 
         const SizedBox(height: AppSpacing.questionToOptions),
 
