@@ -201,6 +201,21 @@ List<_QuizQuestion> _generateQuizSession({
       ? allWords.where((w) => w.kat == category).toList()
       : allWords;
 
+  // Heritage cümlenin kelimeyi gerçekten içerip içermediğini ve yeterince
+  // uzun olup olmadığını kontrol et. Cloze (boşluk doldur) için şart.
+  bool hasUsableHeritage(_QuizWord w) {
+    if (w.her.isEmpty) return false;
+    final wordRe = RegExp(
+      r'\b' + RegExp.escape(w.ku) + r'(a|ê|î|an|ên|yê|ya)?\b',
+      caseSensitive: false,
+    );
+    for (final raw in w.her) {
+      final s = raw.toString();
+      if (s.length >= 10 && wordRe.hasMatch(s)) return true;
+    }
+    return false;
+  }
+
   final questions = <_QuizQuestion>[];
   for (int i = 0; i < effectiveCount; i++) {
     final word = sessionWords[i];
@@ -216,9 +231,23 @@ List<_QuizQuestion> _generateQuizSession({
     if ((type == _ExerciseType.pictureToWord ||
             type == _ExerciseType.wordToPicture) &&
         wordEmoji.isEmpty) {
-      // Fallback: emoji yoksa translation'a düş
       type = _ExerciseType.translation;
     }
+
+    // Kurmancî-only modda translation = cloze test. Heritage cümle
+    // yoksa veya zayıfsa SAÇMA SORU üretir ("____" gösterir). Bu
+    // durumda picture-tipine geç (emoji varsa) veya reverse'e zorla
+    // showTurkish=true (Türkçe ipucu).
+    if (!showTurkish && type == _ExerciseType.translation &&
+        !hasUsableHeritage(word)) {
+      if (wordEmoji.isNotEmpty) {
+        type = _ExerciseType.pictureToWord;
+      } else {
+        // Reverse + Türkçe zorla (showTurkish guard içinde TR gösterimi)
+        type = _ExerciseType.reverseTranslation;
+      }
+    }
+    // (Listening heritage gerektirmez — ses+kelime tabanlı)
 
     List<String> options = [];
 
@@ -229,15 +258,22 @@ List<_QuizQuestion> _generateQuizSession({
         distractorPool = allWords.where((w) => w.id != word.id).toList();
       }
 
-      // Morfolojik benzerlik skorlaması (translation/reverse/listening için)
-      // Picture tiplerinde semantik fark daha önemli — emoji-uyumlu öncelikli
+      // Morfolojik + uzunluk-sınıfı benzerlik skorlaması:
+      // - aynı kelime sayısı (tek kelime ↔ tek kelime, fraz ↔ fraz)
+      //   farklı sınıf BÜYÜK ceza (cloze'da fraz seçenek anlamsız olur)
+      // - aynı/yakın karakter uzunluğu (±2)
+      // - Levenshtein 1-3 tercih (yakın ama özdeş olmayan)
       final target = word.ku.toLowerCase();
+      final targetWords = target.split(RegExp(r'\s+')).length;
       int score(_QuizWord w) {
         final cand = w.ku.toLowerCase();
         if (cand == target) return 9999;
+        final candWords = cand.split(RegExp(r'\s+')).length;
+        final wordCountDiff = (candWords - targetWords).abs();
         final lenDiff = (cand.length - target.length).abs();
         final dist = _levenshteinDistance(cand, target);
-        int s = lenDiff * 3;
+        int s = wordCountDiff * 30; // sınıf farkı = büyük ceza
+        s += lenDiff * 2;
         if (dist >= 1 && dist <= 3) {
           s += dist;
         } else {
@@ -968,23 +1004,52 @@ class _QuizScreenState extends ConsumerState<QuizScreen>
     String hint = '';
 
     if (sentences is List && sentences.isNotEmpty) {
-      // Heritage cümlelerin en uzununu seç (daha iyi bağlam)
+      // Kelimeyi gerçekten içeren ve yeterince uzun cümleleri seç
+      final wordRe = RegExp(
+        r'\b' + RegExp.escape(q.word.ku) + r'(a|ê|î|an|ên|yê|ya)?\b',
+        caseSensitive: false,
+      );
       final candidates = (sentences as List).cast<String>()
-          .where((s) => s.length > 5)
+          .where((s) => s.length >= 10 && wordRe.hasMatch(s))
           .toList();
       if (candidates.isNotEmpty) {
         hint = _maskWord(candidates[0], q.word.ku);
       }
     }
 
-    // Maskeleme başarısızsa → ikinci heritage cümleyi dene, yoksa boşluk
-    if (!hint.contains('____') || hint.length < 5) {
-      if (sentences is List && (sentences as List).length > 1) {
-        hint = _maskWord((sentences as List)[1].toString(), q.word.ku);
-      }
-      if (!hint.contains('____') || hint.length < 5) {
-        hint = '____';
-      }
+    // Hâlâ kullanışlı bir cümle yoksa: kelimenin emoji'sini büyük göster
+    // (picture-to-word benzeri görünüm) — boş "____" göstermekten iyi.
+    if (!hint.contains('____') || hint.length < 8) {
+      final emoji = emojiForWord(q.word.ku, q.word.kat);
+      return Column(
+        key: ValueKey('translation_emoji_${q.word.id}'),
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          _buildInstruction('Ev çi ye?', '', showTr: false),
+          Gap.lg,
+          Center(
+            child: Container(
+              width: 140,
+              height: 140,
+              decoration: BoxDecoration(
+                gradient: LinearGradient(
+                  colors: [
+                    AppColors.primarySurface,
+                    AppColors.accentSurface.withOpacity(0.4),
+                  ],
+                  begin: Alignment.topLeft,
+                  end: Alignment.bottomRight,
+                ),
+                borderRadius: BorderRadius.circular(24),
+              ),
+              alignment: Alignment.center,
+              child: Text(emoji, style: const TextStyle(fontSize: 80)),
+            ),
+          ),
+          const SizedBox(height: AppSpacing.questionToOptions),
+          ..._buildOptionButtons(q),
+        ],
+      );
     }
 
     return Column(
@@ -1036,21 +1101,50 @@ class _QuizScreenState extends ConsumerState<QuizScreen>
     String hint = '';
 
     if (sentences is List && sentences.isNotEmpty) {
+      final wordRe = RegExp(
+        r'\b' + RegExp.escape(q.word.ku) + r'(a|ê|î|an|ên|yê|ya)?\b',
+        caseSensitive: false,
+      );
       final candidates = (sentences as List).cast<String>()
-          .where((s) => s.length > 5)
+          .where((s) => s.length >= 10 && wordRe.hasMatch(s))
           .toList();
       if (candidates.isNotEmpty) {
         hint = _maskWord(candidates[0], q.word.ku);
       }
     }
 
-    if (!hint.contains('____') || hint.length < 5) {
-      if (sentences is List && (sentences as List).length > 1) {
-        hint = _maskWord((sentences as List)[1].toString(), q.word.ku);
-      }
-      if (!hint.contains('____') || hint.length < 5) {
-        hint = '____';
-      }
+    // Heritage zayıfsa picture moduna düş — boş "____" gösterme
+    if (!hint.contains('____') || hint.length < 8) {
+      final emoji = emojiForWord(q.word.ku, q.word.kat);
+      return Column(
+        key: ValueKey('reverse_emoji_${q.word.id}'),
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          _buildInstruction('Ev çi ye?', '', showTr: false),
+          Gap.lg,
+          Center(
+            child: Container(
+              width: 140,
+              height: 140,
+              decoration: BoxDecoration(
+                gradient: LinearGradient(
+                  colors: [
+                    AppColors.primarySurface,
+                    AppColors.accentSurface.withOpacity(0.4),
+                  ],
+                  begin: Alignment.topLeft,
+                  end: Alignment.bottomRight,
+                ),
+                borderRadius: BorderRadius.circular(24),
+              ),
+              alignment: Alignment.center,
+              child: Text(emoji, style: const TextStyle(fontSize: 80)),
+            ),
+          ),
+          const SizedBox(height: AppSpacing.questionToOptions),
+          ..._buildOptionButtons(q),
+        ],
+      );
     }
 
     return Column(
