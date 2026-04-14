@@ -1,0 +1,103 @@
+{
+  "app": {
+    "name": "LÛTKE",
+    "tagline": "Zimanê Kurdî",
+    "description": "Kurmancî Öğren"
+  },
+  "nav": {
+    "home": "Ana Sayfa",
+    "lessons": "Dersler",
+    "practice": "Pratik",
+    "profile": "Profil",
+    "search": "Ara"
+  },
+  "onboarding": {
+    "welcome": "LÛTKE'ye Hoş Geldiniz",
+    "subtitle": "Kurmancî öğrenmeye başlayalım",
+    "heritage_title": "Miras Konuşmacı mısınız?",
+    "heritage_desc": "Ailenizde Kurmancî konuşuluyorsa veya çocukken öğrendiyseniz",
+    "level_select": "Seviyenizi Seçin",
+    "daily_goal": "Günlük Hedefiniz",
+    "goal_10": "10 kelime",
+    "goal_20": "20 kelime",
+    "goal_30": "30 kelime",
+    "start": "Başla!",
+    "skip": "Atla"
+  },
+  "home": {
+    "daily_goal": "Günlük Hedef",
+    "streak": "Gün Serisi",
+    "due_cards": "Tekrar Edilecek",
+    "continue": "Devam Et",
+    "new_lesson": "Yeni Ders",
+    "review": "Tekrar"
+  },
+  "lesson": {
+    "correct": "Doğru!",
+    "incorrect": "Yanlış",
+    "again": "Tekrar",
+    "hard": "Zor",
+    "good": "İyi",
+    "easy": "Kolay",
+    "show_answer": "Cevabı Göster",
+    "complete": "Ders Tamamlandı!",
+    "xp_earned": "+{xp} XP kazandınız"
+  },
+  "levels": {
+    "a1": "Başlangıç (A1)",
+    "a2": "Temel (A2)",
+    "b1": "Orta-Alt (B1)",
+    "b2": "Orta-Üst (B2)",
+    "c1": "İleri (C1)",
+    "c2": "Uzman (C2)"
+  },
+  "profile": {
+    "title": "Profilim",
+    "stats": "İstatistikler",
+    "settings": "Ayarlar",
+    "logout": "Çıkış Yap",
+    "total_words": "Toplam Kelime",
+    "accuracy": "Doğruluk",
+    "streak_days": "Gün Serisi"
+  },
+  "auth": {
+    "login": "Giriş Yap",
+    "register": "Kayıt Ol",
+    "email": "E-posta",
+    "password": "Şifre",
+    "name": "Ad Soyad",
+    "forgot_password": "Şifremi Unuttum",
+    "anonymous": "Misafir Olarak Devam Et",
+    "already_member": "Zaten üye misiniz?",
+    "not_member": "Üye değil misiniz?"
+  },
+  "errors": {
+    "no_internet": "İnternet bağlantısı yok",
+    "general": "Bir hata oluştu",
+    "retry": "Tekrar Dene"
+  },
+  "child": {
+    "welcome": "Hoş geldin!",
+    "play": "Oyna",
+    "my_words": "Kelimelerim",
+    "profile": "Ben",
+    "star": "Yıldız",
+    "stars": "Yıldız",
+    "great_job": "Harika!",
+    "good_job": "İyi!",
+    "try_again": "Tekrar dene!",
+    "parent_settings": "Ebeveyn Ayarları",
+    "enter_pin": "PIN girin",
+    "mascot_name": "Karok",
+    "mascot_greeting": "Karok seninle",
+    "how_old": "Kaç yaşındasın?",
+    "lets_learn": "Birlikte Kürtçe öğrenelim!",
+    "ready": "Karok hazır!",
+    "start": "Başla!",
+    "weekly": "Haftam",
+    "words_learned": "Öğrenilen kelime",
+    "lessons_done": "Tamamlanan ders",
+    "my_lessons": "Derslerim",
+    "locked": "Henüz açılmadı"
+  }
+}

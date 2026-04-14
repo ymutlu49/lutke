@@ -1,0 +1,11 @@
+{
+  "elements": {},
+  "imports": [
+    "package:flutter/material.dart",
+    "package:flutter_animate/flutter_animate.dart",
+    "package:go_router/go_router.dart",
+    "package:lutke/core/constants/child_theme.dart",
+    "package:lutke/core/router/app_router.dart",
+    "package:lutke/features/child_mode/presentation/widgets/star_display_widget.dart"
+  ]
+}

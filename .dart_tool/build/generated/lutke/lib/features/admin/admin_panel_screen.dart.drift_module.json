@@ -1,0 +1,16 @@
+{
+  "elements": {},
+  "imports": [
+    "package:flutter/material.dart",
+    "package:go_router/go_router.dart",
+    "package:lutke/core/constants/app_colors.dart",
+    "package:lutke/core/constants/app_typography.dart",
+    "package:lutke/core/constants/app_spacing.dart",
+    "package:lutke/features/lessons/domain/a1_kelime_db.dart",
+    "package:lutke/features/lessons/domain/a2_kelime_db.dart",
+    "package:lutke/features/lessons/domain/b1_kelime_db.dart",
+    "package:lutke/features/lessons/domain/b2_kelime_db.dart",
+    "package:lutke/features/lessons/domain/c1_kelime_db.dart",
+    "package:lutke/features/lessons/domain/c2_kelime_db.dart"
+  ]
+}

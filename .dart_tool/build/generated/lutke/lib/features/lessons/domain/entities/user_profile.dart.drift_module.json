@@ -1,0 +1,6 @@
+{
+  "elements": {},
+  "imports": [
+    "package:lutke/features/lessons/domain/entities/vocabulary_card.dart"
+  ]
+}

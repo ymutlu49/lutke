@@ -1,0 +1,103 @@
+{
+  "app": {
+    "name": "LÛTKE",
+    "tagline": "Zimanê Kurdî",
+    "description": "Kurmancî Fêr Bibe"
+  },
+  "nav": {
+    "home": "Malpera Sereke",
+    "lessons": "Waneyên",
+    "practice": "Pratîk",
+    "profile": "Profîl",
+    "search": "Lêgerîn"
+  },
+  "onboarding": {
+    "welcome": "Bi xêr hatî LÛTKE'yê",
+    "subtitle": "Em dest bi fêrbûna Kurmancî bikin",
+    "heritage_title": "Tu axêverê mîrasê yî?",
+    "heritage_desc": "Ger di malbata te de bi Kurmancî tê axaftin",
+    "level_select": "Asta xwe hilbijêre",
+    "daily_goal": "Armanca rojane",
+    "goal_10": "10 peyv",
+    "goal_20": "20 peyv",
+    "goal_30": "30 peyv",
+    "start": "Dest pê bike!",
+    "skip": "Derbas bike"
+  },
+  "home": {
+    "daily_goal": "Armanca Rojane",
+    "streak": "Roja Berdewamî",
+    "due_cards": "Divê Bê Gotar",
+    "continue": "Berdewam bike",
+    "new_lesson": "Waneya Nû",
+    "review": "Dubarekirin"
+  },
+  "lesson": {
+    "correct": "Rast!",
+    "incorrect": "Çewt",
+    "again": "Carek din",
+    "hard": "Dijwar",
+    "good": "Baş",
+    "easy": "Hêsan",
+    "show_answer": "Bersivê nîşan bide",
+    "complete": "Wane temam bû!",
+    "xp_earned": "+{xp} XP bidest xist"
+  },
+  "levels": {
+    "a1": "Destpêkê (A1)",
+    "a2": "Bingehîn (A2)",
+    "b1": "Navîn-jêr (B1)",
+    "b2": "Navîn-jor (B2)",
+    "c1": "Pêşketî (C1)",
+    "c2": "Pispor (C2)"
+  },
+  "profile": {
+    "title": "Profîla min",
+    "stats": "Amarên",
+    "settings": "Mîhengên",
+    "logout": "Derkeve",
+    "total_words": "Peyvên Tevahî",
+    "accuracy": "Rêjeya Rast",
+    "streak_days": "Roja Berdewamî"
+  },
+  "auth": {
+    "login": "Têkeve",
+    "register": "Tomar bibe",
+    "email": "E-name",
+    "password": "Şîfre",
+    "name": "Nav û Paşnav",
+    "forgot_password": "Şîfreya xwe ji bîr kir",
+    "anonymous": "Wek Mêvan dewam bike",
+    "already_member": "Berê tomar bûyî?",
+    "not_member": "Ne endamî?"
+  },
+  "errors": {
+    "no_internet": "Pêwendiya Internetê tune",
+    "general": "Xeletiyek çêbû",
+    "retry": "Dîsa biceribîne"
+  },
+  "child": {
+    "welcome": "Bi xêr hatî!",
+    "play": "Lîstik",
+    "my_words": "Peyvên min",
+    "profile": "Ez",
+    "star": "Stêrk",
+    "stars": "Stêrk",
+    "great_job": "Aferin!",
+    "good_job": "Baş e!",
+    "try_again": "Dîsa biceribîne!",
+    "parent_settings": "Mîhengên dê û bav",
+    "enter_pin": "PIN binivîse",
+    "mascot_name": "Karok",
+    "mascot_greeting": "Karok bi te re ye",
+    "how_old": "Tu çend salî yî?",
+    "lets_learn": "Em bi hev re Kurmancî fêr bibin!",
+    "ready": "Karok amade ye!",
+    "start": "Dest pê bike!",
+    "weekly": "Hefteya min",
+    "words_learned": "Peyvên fêrbûyî",
+    "lessons_done": "Waneyên temam",
+    "my_lessons": "Waneyên min",
+    "locked": "Hêj vekirî nîne"
+  }
+}

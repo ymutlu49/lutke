@@ -1,0 +1,11 @@
+{
+  "elements": {},
+  "imports": [
+    "package:connectivity_plus/connectivity_plus.dart",
+    "package:flutter/material.dart",
+    "package:flutter_riverpod/flutter_riverpod.dart",
+    "package:lutke/core/constants/app_colors.dart",
+    "package:lutke/core/constants/app_typography.dart",
+    "package:lutke/core/constants/app_spacing.dart"
+  ]
+}

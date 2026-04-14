@@ -1,0 +1,6 @@
+{
+  "elements": {},
+  "imports": [
+    "package:lutke/core/utils/fsrs_algorithm.dart"
+  ]
+}

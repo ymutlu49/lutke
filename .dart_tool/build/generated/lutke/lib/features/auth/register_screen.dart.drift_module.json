@@ -1,0 +1,16 @@
+{
+  "elements": {},
+  "imports": [
+    "package:flutter/material.dart",
+    "package:flutter_animate/flutter_animate.dart",
+    "package:flutter_riverpod/flutter_riverpod.dart",
+    "package:go_router/go_router.dart",
+    "package:lutke/core/constants/app_colors.dart",
+    "package:lutke/core/constants/app_typography.dart",
+    "package:lutke/core/constants/app_spacing.dart",
+    "package:lutke/core/router/app_router.dart",
+    "package:lutke/core/services/auth_service.dart",
+    "package:lutke/core/utils/user_segment.dart",
+    "package:lutke/shared/widgets/lutke_logo.dart"
+  ]
+}

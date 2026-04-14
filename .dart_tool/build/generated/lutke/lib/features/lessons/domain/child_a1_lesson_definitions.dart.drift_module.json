@@ -1,0 +1,8 @@
+{
+  "elements": {},
+  "imports": [
+    "package:lutke/features/lessons/domain/entities/exercise.dart",
+    "package:lutke/features/lessons/domain/entities/lesson.dart",
+    "package:lutke/features/lessons/domain/entities/vocabulary_card.dart"
+  ]
+}

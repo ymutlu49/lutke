@@ -1,0 +1,11 @@
+{
+  "elements": {},
+  "imports": [
+    "package:flutter/material.dart",
+    "package:flutter_riverpod/flutter_riverpod.dart",
+    "package:go_router/go_router.dart",
+    "package:lutke/core/constants/child_theme.dart",
+    "package:lutke/core/router/app_router.dart",
+    "package:lutke/shared/providers/child_mode_provider.dart"
+  ]
+}
