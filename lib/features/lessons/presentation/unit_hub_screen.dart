@@ -6,8 +6,8 @@ import 'package:go_router/go_router.dart';
 import '../../../core/constants/app_colors.dart';
 import '../../../core/constants/app_typography.dart';
 import '../../../core/constants/app_spacing.dart';
-import '../../../core/router/app_router.dart';
 import '../../../shared/providers/language_mode_provider.dart';
+import '../../../shared/providers/progression_provider.dart';
 import '../domain/a1_kelime_db.dart';
 import '../domain/a2_kelime_db.dart';
 import '../domain/b1_kelime_db.dart';
@@ -18,14 +18,76 @@ import '../domain/c2_kelime_db.dart';
 // ════════════════════════════════════════════════════════════════
 // BİRİM HUB EKRANI — Durak tıklandığında açılır
 //
-// Kategorinin tüm kelimelerini gösterir + farklı etkinlik
-// türlerine erişim sağlar:
-//   - Quiz (çoktan seçmeli)
-//   - Flashcard (kelime kartları)
-//   - Dinleme (ses + seçim)
-//   - Cümle kurma (sıralama)
-//   - Kelime eşleştirme
+// Etkinlikler kolaydan zora sıralı:
+//   1. Peld (Flashcard) — Tanıma
+//   2. Ceribandin (Quiz) — Anlama testi
+//   3. Guhdarêkirin (Dinleme) — Duyma + seçme
+//   4. Lîhevhatên (Eşleştirme) — Anlam ilişkileri
+//   5. Hevokê çêke (Cümle Kur) — Sözdizimi
+//   6. Hevpeyvîn (Diyalog) — Üretim
+//   7. Bilêvkirin (Telaffuz) — Sesli üretim
+//
+// Her etkinlik bir basamak — tamamlanmadan sonraki açılmaz.
 // ════════════════════════════════════════════════════════════════
+
+/// Etkinlik tanımları — kolaydan zora sıralı.
+class _ActivityDef {
+  final int index;
+  final String emoji;
+  final String titleKu;
+  final String descKu;
+  final String descTr;
+  final Color color;
+  final String route;
+
+  const _ActivityDef({
+    required this.index,
+    required this.emoji,
+    required this.titleKu,
+    required this.descKu,
+    required this.descTr,
+    required this.color,
+    required this.route,
+  });
+}
+
+const _activities = [
+  _ActivityDef(
+    index: 1, emoji: '🃏', titleKu: 'Peld', route: '/activity/flashcard',
+    descKu: 'Bi peldan fêr bibe', descTr: 'Kartlarla öğren',
+    color: Color(0xFFD4783A),
+  ),
+  _ActivityDef(
+    index: 2, emoji: '📝', titleKu: 'Ceribandin', route: '/activity/quiz',
+    descKu: 'Zanîna xwe biceribîne', descTr: 'Bilgini test et',
+    color: Color(0xFF1A7B6B),
+  ),
+  _ActivityDef(
+    index: 3, emoji: '🔊', titleKu: 'Guhdarêkirin', route: '/activity/listening',
+    descKu: 'Guh bide û hilbijêre', descTr: 'Dinle ve seç',
+    color: Color(0xFF2196F3),
+  ),
+  _ActivityDef(
+    index: 4, emoji: '🔗', titleKu: 'Lîhevhatên', route: '/activity/word-match',
+    descKu: 'Peyv û wateyan li hev bîne', descTr: 'Kelime eşleştir',
+    color: Color(0xFFFF5722),
+  ),
+  _ActivityDef(
+    index: 5, emoji: '🧩', titleKu: 'Hevokê çêke', route: '/activity/sentence-builder',
+    descKu: 'Peyvan bi rêz bike', descTr: 'Cümle kur',
+    color: Color(0xFF9C27B0),
+  ),
+  _ActivityDef(
+    index: 6, emoji: '💬', titleKu: 'Hevpeyvîn', route: '/activity/dialogue',
+    descKu: 'Diyalog û axaftin', descTr: 'Sohbet ve konuşma',
+    color: Color(0xFF00BCD4),
+  ),
+  _ActivityDef(
+    index: 7, emoji: '🎤', titleKu: 'Bilêvkirin', route: '/activity/pronunciation',
+    descKu: 'Telaffuz û dubarekirin', descTr: 'Telaffuz pratiği',
+    color: Color(0xFFE91E63),
+  ),
+];
 
 class UnitHubScreen extends ConsumerWidget {
   final String category;
@@ -48,9 +110,10 @@ class UnitHubScreen extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final showTr = ref.watch(showTurkishProvider);
-
-    // Kategorideki kelimeleri yükle
+    final completed = ref.watch(progressionProvider);
+    final progression = ref.read(progressionProvider.notifier);
     final words = _loadCategoryWords(category, level);
+    final completedCount = progression.completedCountForStop(level, category);
 
     return Scaffold(
       backgroundColor: AppColors.backgroundPrimary,
@@ -66,27 +129,30 @@ class UnitHubScreen extends ConsumerWidget {
                   GestureDetector(
                     onTap: () => context.pop(),
                     child: Container(
-                      width: 40,
-                      height: 40,
+                      width: 40, height: 40,
                       decoration: BoxDecoration(
                         color: AppColors.surface,
                         shape: BoxShape.circle,
-                        boxShadow: [
-                          BoxShadow(
-                            color: Colors.black.withOpacity(0.06),
-                            blurRadius: 4,
-                          ),
-                        ],
+                        boxShadow: [BoxShadow(color: Colors.black.withOpacity(0.06), blurRadius: 4)],
                       ),
-                      child: const Icon(Icons.arrow_back_rounded,
-                          size: 20, color: AppColors.textSecondary),
+                      child: const Icon(Icons.arrow_back_rounded, size: 20, color: AppColors.textSecondary),
                     ),
                   ),
                   const Spacer(),
-                  Text(
-                    '${words.length} peyv',
-                    style: AppTypography.label
-                        .copyWith(color: AppColors.textSecondary),
+                  // İlerleme göstergesi
+                  Container(
+                    padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+                    decoration: BoxDecoration(
+                      color: AppColors.primary.withOpacity(0.1),
+                      borderRadius: BorderRadius.circular(20),
+                    ),
+                    child: Text(
+                      '$completedCount / $kActivityCount temam',
+                      style: AppTypography.label.copyWith(
+                        color: AppColors.primary,
+                        fontWeight: FontWeight.w700,
+                      ),
+                    ),
                   ),
                 ],
               ),
@@ -98,8 +164,7 @@ class UnitHubScreen extends ConsumerWidget {
               child: Column(
                 children: [
                   Container(
-                    width: 72,
-                    height: 72,
+                    width: 72, height: 72,
                     decoration: BoxDecoration(
                       gradient: LinearGradient(
                         begin: Alignment.topLeft,
@@ -110,161 +175,78 @@ class UnitHubScreen extends ConsumerWidget {
                         ],
                       ),
                       shape: BoxShape.circle,
-                      border: Border.all(
-                          color: AppColors.primary.withOpacity(0.25), width: 2),
-                      boxShadow: [
-                        BoxShadow(
-                          color: AppColors.primary.withOpacity(0.12),
-                          blurRadius: 12,
-                          spreadRadius: 1,
-                        ),
-                      ],
+                      border: Border.all(color: AppColors.primary.withOpacity(0.25), width: 2),
                     ),
                     child: Icon(icon, size: 36, color: AppColors.primary),
                   ),
                   const SizedBox(height: 12),
-                  Text(
-                    titleKu,
-                    style: AppTypography.headline
-                        .copyWith(color: AppColors.primary),
-                  ),
+                  Text(titleKu, style: AppTypography.headline.copyWith(color: AppColors.primary)),
                   if (showTr && titleTr.isNotEmpty) ...[
                     const SizedBox(height: 4),
-                    Text(titleTr,
-                        style: AppTypography.translation),
+                    Text(titleTr, style: AppTypography.translation),
                   ],
+                  const SizedBox(height: 8),
+                  // İlerleme çubuğu
+                  ClipRRect(
+                    borderRadius: BorderRadius.circular(6),
+                    child: LinearProgressIndicator(
+                      value: completedCount / kActivityCount,
+                      backgroundColor: AppColors.primary.withOpacity(0.1),
+                      valueColor: const AlwaysStoppedAnimation(AppColors.primary),
+                      minHeight: 6,
+                    ),
+                  ),
+                  const SizedBox(height: 4),
+                  Text(
+                    '${words.length} peyv',
+                    style: AppTypography.caption,
+                  ),
                 ],
               ),
             ).animate().fadeIn(duration: 300.ms),
 
-            const SizedBox(height: 24),
+            const SizedBox(height: 16),
 
-            // ── Etkinlik Kartları ─────────────────────────
+            // ── Etkinlik Basamakları ─────────────────────
             Expanded(
-              child: SingleChildScrollView(
+              child: ListView.separated(
                 padding: const EdgeInsets.symmetric(horizontal: 20),
-                child: Column(
-                  children: [
-                    _ActivityCard(
-                      emoji: '📝',
-                      titleKu: 'Ceribandin',
-                      descKu: 'Zanîna xwe biceribîne',
-                      descTr: 'Bilgini test et',
-                      showTr: showTr,
-                      color: AppColors.primary,
-                      onTap: () => context.push(
-                        '/activity/quiz',
-                        extra: {'level': level, 'category': category},
-                      ),
-                    ).animate().fadeIn(delay: 100.ms).slideY(begin: 0.05),
+                itemCount: _activities.length,
+                separatorBuilder: (_, __) => const SizedBox(height: 12),
+                itemBuilder: (context, i) {
+                  final act = _activities[i];
+                  final lessonId = ProgressionNotifier.makeLessonId(level, category, act.index);
+                  final isCompleted = completed.contains(lessonId);
+                  final isUnlocked = progression.isActivityUnlocked(level, category, act.index);
+                  final isActive = isUnlocked && !isCompleted;
+                  final delay = (100 + i * 80).ms;
 
-                    const SizedBox(height: 14),
-
-                    _ActivityCard(
-                      emoji: '🃏',
-                      titleKu: 'Peld',
-                      descKu: 'Bi peldan fêr bibe',
-                      descTr: 'Kartlarla \u00f6\u011fren',
-                      showTr: showTr,
-                      color: AppColors.accent,
-                      onTap: () => context.push('/activity/flashcard', extra: {'category': category, 'level': level}),
-                    ).animate().fadeIn(delay: 200.ms).slideY(begin: 0.05),
-
-                    const SizedBox(height: 14),
-
-                    _ActivityCard(
-                      emoji: '🔊',
-                      titleKu: 'Guhdar\u00eekirin',
-                      descKu: 'Guh bide \u00fb hilbij\u00eare',
-                      descTr: 'Dinle ve se\u00e7',
-                      showTr: showTr,
-                      color: const Color(0xFF2196F3),
-                      onTap: () => context.push('/activity/listening', extra: {'category': category, 'level': level}),
-                    ).animate().fadeIn(delay: 300.ms).slideY(begin: 0.05),
-
-                    const SizedBox(height: 14),
-
-                    _ActivityCard(
-                      emoji: '🧩',
-                      titleKu: 'Hevok\u00ea \u00e7\u00eake',
-                      descKu: 'Peyvan bi r\u00eaz bike',
-                      descTr: 'C\u00fcmle kur',
-                      showTr: showTr,
-                      color: const Color(0xFF9C27B0),
-                      onTap: () => context.push('/activity/sentence-builder', extra: {'category': category, 'level': level}),
-                    ).animate().fadeIn(delay: 400.ms).slideY(begin: 0.05),
-
-                    const SizedBox(height: 14),
-
-                    _ActivityCard(
-                      emoji: '🔗',
-                      titleKu: 'L\u00eehevhat\u00een',
-                      descKu: 'Peyv \u00fb wateyan li hev b\u00eene',
-                      descTr: 'Kelime e\u015fle\u015ftir',
-                      showTr: showTr,
-                      color: const Color(0xFFFF5722),
-                      onTap: () => context.push('/activity/word-match', extra: {'category': category, 'level': level}),
-                    ).animate().fadeIn(delay: 500.ms).slideY(begin: 0.05),
-
-                    const SizedBox(height: 14),
-
-                    _ActivityCard(
-                      emoji: '💬',
-                      titleKu: 'Hevpeyvîn',
-                      descKu: 'Diyalog û axaftin',
-                      descTr: 'Sohbet ve konuşma',
-                      showTr: showTr,
-                      color: const Color(0xFF00BCD4),
-                      onTap: () => context.push('/activity/dialogue', extra: {'category': category, 'level': level}),
-                    ).animate().fadeIn(delay: 600.ms).slideY(begin: 0.05),
-
-                    const SizedBox(height: 14),
-
-                    _ActivityCard(
-                      emoji: '🎤',
-                      titleKu: 'Bilêvkirin',
-                      descKu: 'Telaffuz û dubarekirin',
-                      descTr: 'Telaffuz pratiği',
-                      showTr: showTr,
-                      color: const Color(0xFFE91E63),
-                      onTap: () => context.push('/activity/pronunciation', extra: {'category': category, 'level': level}),
-                    ).animate().fadeIn(delay: 700.ms).slideY(begin: 0.05),
-
-                    const SizedBox(height: 24),
-
-                    // ── Kelime Önizleme ──────────────────────
-                    if (words.isNotEmpty) ...[
-                      Row(
-                        children: [
-                          Text(
-                            'Peyvên vê beşê',
-                            style: AppTypography.label.copyWith(
-                                color: AppColors.textSecondary),
-                          ),
-                          const Spacer(),
-                          Text(
-                            '${words.length} peyv',
-                            style: AppTypography.caption,
-                          ),
-                        ],
-                      ),
-                      const SizedBox(height: 12),
-                      ...words.take(8).map((w) => _WordPreviewRow(
-                            ku: w.ku,
-                            tr: showTr ? w.tr : null,
-                          )),
-                      if (words.length > 8) ...[
-                        const SizedBox(height: 8),
-                        Text(
-                          '+${words.length - 8} peyvên din...',
-                          style: AppTypography.caption,
-                        ),
-                      ],
-                    ],
-
-                    const SizedBox(height: 32),
-                  ],
-                ),
+                  return _ActivityStepCard(
+                    activity: act,
+                    stepNumber: act.index,
+                    isCompleted: isCompleted,
+                    isLocked: !isUnlocked,
+                    isActive: isActive,
+                    showTr: showTr,
+                    onTap: isUnlocked
+                        ? () async {
+                            await context.push(
+                              act.route,
+                              extra: {
+                                'level': level,
+                                'category': category,
+                                'lessonId': lessonId,
+                              },
+                            );
+                            // Etkinlikten döndüğünde tamamlanmış say
+                            if (context.mounted) {
+                              ref.read(progressionProvider.notifier)
+                                  .markComplete(lessonId);
+                            }
+                          }
+                        : null,
+                  ).animate().fadeIn(delay: delay).slideX(begin: 0.03);
+                },
               ),
             ),
           ],
@@ -296,147 +278,181 @@ class _SimpleWord {
   const _SimpleWord(this.ku, this.tr);
 }
 
-// ── Etkinlik Kartı ──────────────────────────────────────────
+// ── Etkinlik Basamak Kartı ─────────────────────────────────
 
-class _ActivityCard extends StatelessWidget {
-  final String emoji;
-  final String titleKu;
-  final String descKu;
-  final String descTr;
+class _ActivityStepCard extends StatelessWidget {
+  final _ActivityDef activity;
+  final int stepNumber;
+  final bool isCompleted;
+  final bool isLocked;
+  final bool isActive;
   final bool showTr;
-  final Color color;
-  final VoidCallback onTap;
+  final VoidCallback? onTap;
 
-  const _ActivityCard({
-    required this.emoji,
-    required this.titleKu,
-    required this.descKu,
-    required this.descTr,
+  const _ActivityStepCard({
+    required this.activity,
+    required this.stepNumber,
+    required this.isCompleted,
+    required this.isLocked,
+    required this.isActive,
     required this.showTr,
-    required this.color,
-    required this.onTap,
+    this.onTap,
   });
 
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
+    final color = isLocked ? Colors.grey.shade400 : activity.color;
+
+    Widget card = GestureDetector(
       onTap: onTap,
       child: Container(
-        padding: const EdgeInsets.all(18),
+        padding: const EdgeInsets.all(16),
         decoration: BoxDecoration(
-          gradient: LinearGradient(
-            begin: Alignment.centerLeft,
-            end: Alignment.centerRight,
-            colors: [
-              AppColors.backgroundSecondary,
-              color.withOpacity(0.06),
-            ],
-          ),
+          gradient: isLocked
+              ? null
+              : LinearGradient(
+                  begin: Alignment.centerLeft,
+                  end: Alignment.centerRight,
+                  colors: [
+                    isCompleted
+                        ? AppColors.success.withOpacity(0.08)
+                        : color.withOpacity(0.1),
+                    isCompleted
+                        ? AppColors.success.withOpacity(0.02)
+                        : color.withOpacity(0.03),
+                  ],
+                ),
+          color: isLocked ? Colors.grey.shade50 : null,
           borderRadius: BorderRadius.circular(16),
-          border: Border.all(color: color.withOpacity(0.2)),
-          boxShadow: [
-            BoxShadow(
-              color: color.withOpacity(0.10),
-              blurRadius: 14,
-              offset: const Offset(0, 4),
-            ),
-          ],
+          border: Border.all(
+            color: isCompleted
+                ? AppColors.success.withOpacity(0.3)
+                : isLocked
+                    ? Colors.grey.shade200
+                    : color.withOpacity(0.25),
+            width: isActive ? 2 : 1.5,
+          ),
+          boxShadow: isLocked
+              ? null
+              : [
+                  BoxShadow(
+                    color: (isCompleted ? AppColors.success : color)
+                        .withOpacity(0.12),
+                    blurRadius: 12,
+                    offset: const Offset(0, 4),
+                  ),
+                ],
         ),
         child: Row(
           children: [
+            // Adım numarası / durum
             Container(
-              width: 52,
-              height: 52,
+              width: 40, height: 40,
               decoration: BoxDecoration(
-                gradient: LinearGradient(
-                  begin: Alignment.topLeft,
-                  end: Alignment.bottomRight,
-                  colors: [
-                    color.withOpacity(0.15),
-                    color.withOpacity(0.05),
-                  ],
-                ),
-                borderRadius: BorderRadius.circular(14),
-                border: Border.all(color: color.withOpacity(0.12)),
+                shape: BoxShape.circle,
+                color: isCompleted
+                    ? AppColors.success
+                    : isLocked
+                        ? Colors.grey.shade200
+                        : color.withOpacity(0.15),
+                border: isActive
+                    ? Border.all(color: color, width: 2)
+                    : null,
               ),
               child: Center(
-                child: Text(emoji, style: const TextStyle(fontSize: 26)),
+                child: isCompleted
+                    ? const Icon(Icons.check_rounded, color: Colors.white, size: 20)
+                    : isLocked
+                        ? Icon(Icons.lock_rounded, color: Colors.grey.shade400, size: 18)
+                        : Text(
+                            '$stepNumber',
+                            style: AppTypography.labelLarge.copyWith(
+                              color: color,
+                              fontWeight: FontWeight.w800,
+                            ),
+                          ),
               ),
             ),
-            const SizedBox(width: 16),
+            const SizedBox(width: 14),
+
+            // Emoji
+            Container(
+              width: 44, height: 44,
+              decoration: BoxDecoration(
+                color: isLocked
+                    ? Colors.grey.shade100
+                    : color.withOpacity(0.08),
+                borderRadius: BorderRadius.circular(12),
+              ),
+              child: Center(
+                child: Text(
+                  activity.emoji,
+                  style: TextStyle(
+                    fontSize: 24,
+                    color: isLocked ? Colors.grey : null,
+                  ),
+                ),
+              ),
+            ),
+            const SizedBox(width: 14),
+
+            // Başlık + açıklama
             Expanded(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    titleKu,
+                    activity.titleKu,
                     style: AppTypography.title.copyWith(
-                      color: color,
-                      fontSize: 17,
+                      color: isLocked ? Colors.grey.shade400 : color,
+                      fontSize: 16,
                       fontWeight: FontWeight.w700,
                     ),
                   ),
                   const SizedBox(height: 2),
                   Text(
-                    showTr ? descTr : descKu,
-                    style: AppTypography.caption.copyWith(fontSize: 13),
+                    showTr ? activity.descTr : activity.descKu,
+                    style: AppTypography.caption.copyWith(
+                      fontSize: 12,
+                      color: isLocked ? Colors.grey.shade400 : null,
+                    ),
                   ),
                 ],
               ),
             ),
-            Container(
-              width: 28,
-              height: 28,
-              decoration: BoxDecoration(
-                color: color.withOpacity(0.1),
-                shape: BoxShape.circle,
-              ),
-              child: Icon(Icons.arrow_forward_ios_rounded,
-                  size: 13, color: color.withOpacity(0.6)),
-            ),
+
+            // Sağ ikon
+            if (isCompleted)
+              Icon(Icons.check_circle_rounded,
+                  color: AppColors.success, size: 22)
+            else if (isActive)
+              Container(
+                width: 28, height: 28,
+                decoration: BoxDecoration(
+                  color: color.withOpacity(0.1),
+                  shape: BoxShape.circle,
+                ),
+                child: Icon(Icons.play_arrow_rounded, size: 16, color: color),
+              )
+            else
+              Icon(Icons.lock_outline_rounded,
+                  size: 18, color: Colors.grey.shade400),
           ],
         ),
       ),
     );
-  }
-}
 
-// ── Kelime Önizleme Satırı ──────────────────────────────────
+    // Aktif basamak: hafif pulse
+    if (isActive) {
+      card = card
+          .animate(onPlay: (c) => c.repeat(reverse: true))
+          .scale(
+            begin: const Offset(1.0, 1.0),
+            end: const Offset(1.01, 1.01),
+            duration: 1500.ms,
+          );
+    }
 
-class _WordPreviewRow extends StatelessWidget {
-  final String ku;
-  final String? tr;
-
-  const _WordPreviewRow({required this.ku, this.tr});
-
-  @override
-  Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 5),
-      child: Row(
-        children: [
-          Container(
-            width: 6,
-            height: 6,
-            decoration: BoxDecoration(
-              color: AppColors.primary.withOpacity(0.4),
-              shape: BoxShape.circle,
-            ),
-          ),
-          const SizedBox(width: 12),
-          Text(
-            ku,
-            style: AppTypography.kurmanjiCard.copyWith(fontSize: 16),
-          ),
-          if (tr != null) ...[
-            const SizedBox(width: 8),
-            Text(
-              '— $tr',
-              style: AppTypography.translation.copyWith(fontSize: 13),
-            ),
-          ],
-        ],
-      ),
-    );
+    return card;
   }
 }

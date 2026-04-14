@@ -22,6 +22,7 @@ import '../../../shared/widgets/streak_widget.dart';
 // daily_word_widget import removed — widget no longer on home screen
 import '../../../shared/providers/language_mode_provider.dart';
 import '../../../shared/providers/review_provider.dart';
+import '../../../shared/providers/progression_provider.dart';
 import '../../gamification/gamification_widgets.dart';
 
 // ════════════════════════════════════════════════════════════════
@@ -1345,9 +1346,20 @@ class _SkillTreePath extends StatelessWidget {
       _ => 'A1',
     };
     final units = _buildSkillUnits(levelKey);
-    const completedCount = 0;
-    const currentIndex = 0;
-    final unlockedCount = units.length;
+    final progression = ref.read(progressionProvider.notifier);
+    // ignore: unused_local_variable
+    final _ = ref.watch(progressionProvider); // rebuild on changes
+
+    // Tamamlanan durak sayısını hesapla
+    int completedCount = 0;
+    for (final u in units) {
+      if (progression.isStopComplete(levelKey, u.katKey)) {
+        completedCount++;
+      } else {
+        break; // Sıralı — ilk eksik durağa kadar say
+      }
+    }
+    final currentIndex = completedCount.clamp(0, units.length - 1);
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -1359,7 +1371,7 @@ class _SkillTreePath extends StatelessWidget {
 
           final isCompleted = i < completedCount;
           final isCurrent = i == currentIndex;
-          final isUnlocked = i < unlockedCount; // İlk 3 node açık
+          final isUnlocked = i <= completedCount; // tamamlanan + 1 açık
           final isLocked = !isCompleted && !isCurrent && !isUnlocked;
 
           return _SkillTreeNode(
