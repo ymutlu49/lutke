@@ -5,6 +5,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
+import '../../../core/router/app_router.dart';
 
 import '../../../core/constants/app_colors.dart';
 import '../../../core/constants/app_spacing.dart';
@@ -381,7 +382,7 @@ class _QuizScreenState extends ConsumerState<QuizScreen>
           elevation: 0,
           leading: IconButton(
             icon: const Icon(Icons.close, color: AppColors.textPrimary),
-            onPressed: () => context.pop(),
+            onPressed: () => _safePop(),
           ),
         ),
         body: Center(
@@ -1611,6 +1612,14 @@ class _QuizScreenState extends ConsumerState<QuizScreen>
 
   // ── Exit Dialog ───────────────────────────────────────────────
 
+  void _safePop() {
+    if (context.canPop()) {
+      context.pop();
+    } else {
+      context.go(AppRoutes.home);
+    }
+  }
+
   void _showExitDialog() {
     showDialog(
       context: context,
@@ -1636,7 +1645,7 @@ class _QuizScreenState extends ConsumerState<QuizScreen>
           TextButton(
             onPressed: () {
               Navigator.of(ctx).pop();
-              context.pop();
+              _safePop();
             },
             child: Text('Derkeve',
                 style: AppTypography.label
@@ -2101,7 +2110,7 @@ class _QuizScreenState extends ConsumerState<QuizScreen>
                       const SizedBox(width: AppSpacing.sm),
                       Expanded(
                         child: OutlinedButton.icon(
-                          onPressed: () => context.pop(),
+                          onPressed: () => _safePop(),
                           icon: const Icon(Icons.home_rounded, size: 18),
                           label: Text(
                             'Mala Serekin',

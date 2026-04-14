@@ -4,6 +4,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
+import '../../../core/router/app_router.dart';
 
 import '../../../core/constants/app_colors.dart';
 import '../../../core/constants/app_spacing.dart';
@@ -540,7 +541,7 @@ class _SentenceBuilderScreenState extends ConsumerState<SentenceBuilderScreen>
           TextButton(
             onPressed: () {
               Navigator.pop(ctx);
-              context.pop();
+              if (context.canPop()) context.pop(); else context.go(AppRoutes.home);
             },
             child: Text(
               'Derkeve',
@@ -673,7 +674,7 @@ class _SentenceBuilderScreenState extends ConsumerState<SentenceBuilderScreen>
                   SizedBox(
                     width: double.infinity,
                     child: ElevatedButton(
-                      onPressed: () => context.pop(),
+                      onPressed: () { if (context.canPop()) context.pop(); else context.go(AppRoutes.home); },
                       style: ElevatedButton.styleFrom(
                         backgroundColor: AppColors.primary,
                         foregroundColor: Colors.white,

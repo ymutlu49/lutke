@@ -3,6 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
+import '../../../core/router/app_router.dart';
 
 import '../../../core/constants/app_colors.dart';
 import '../../../core/constants/app_spacing.dart';
@@ -204,7 +205,7 @@ class _SmartReviewScreenState extends ConsumerState<SmartReviewScreen>
         elevation: 0,
         leading: IconButton(
           icon: const Icon(Icons.close_rounded, color: AppColors.textPrimary),
-          onPressed: () => context.pop(),
+          onPressed: () { if (context.canPop()) context.pop(); else context.go(AppRoutes.home); },
         ),
         title: Text(
           'Dubare',
@@ -618,7 +619,7 @@ class _SmartReviewScreenState extends ConsumerState<SmartReviewScreen>
             ),
             const SizedBox(height: AppSpacing.xl),
             OutlinedButton.icon(
-              onPressed: () => context.pop(),
+              onPressed: () { if (context.canPop()) context.pop(); else context.go(AppRoutes.home); },
               icon: const Icon(Icons.arrow_back_rounded),
               label: const Text('Vegere'),
               style: OutlinedButton.styleFrom(
@@ -805,7 +806,7 @@ class _SmartReviewScreenState extends ConsumerState<SmartReviewScreen>
             children: [
               Expanded(
                 child: OutlinedButton.icon(
-                  onPressed: () => context.pop(),
+                  onPressed: () { if (context.canPop()) context.pop(); else context.go(AppRoutes.home); },
                   icon: const Icon(Icons.home_rounded),
                   label: const Text('Mal'),
                   style: OutlinedButton.styleFrom(

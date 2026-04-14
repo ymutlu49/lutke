@@ -212,10 +212,6 @@ GoRouter appRouter(AppRouterRef ref) {
                     },
                   ),
                   GoRoute(
-                    path: 'grammar',
-                    builder: (_, __) => const GrammarTipsScreen(),
-                  ),
-                  GoRoute(
                     path: 'story',
                     builder: (_, __) => const StoryScreen(),
                   ),

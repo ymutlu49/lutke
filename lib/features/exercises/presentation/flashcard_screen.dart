@@ -4,6 +4,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
+import '../../../core/router/app_router.dart';
 
 import '../../../core/constants/app_colors.dart';
 import '../../../core/constants/app_spacing.dart';
@@ -69,6 +70,9 @@ class _FlashcardScreenState extends ConsumerState<FlashcardScreen>
   static const int _sessionCardCount = 20;
 
   @override
+  void _safePop() {
+    if (context.canPop()) { context.pop(); } else { context.go(AppRoutes.home); }
+  }
   void initState() {
     super.initState();
 
@@ -1120,7 +1124,7 @@ class _FlashcardScreenState extends ConsumerState<FlashcardScreen>
           SizedBox(
             width: double.infinity,
             child: TextButton(
-              onPressed: () => context.pop(),
+              onPressed: () => _safePop(),
               child: Text(
                 'Vegerê malê',
                 style: AppTypography.label.copyWith(

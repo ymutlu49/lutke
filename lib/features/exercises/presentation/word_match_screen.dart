@@ -5,6 +5,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
+import '../../../core/router/app_router.dart';
 
 import '../../../core/constants/app_colors.dart';
 import '../../../core/constants/app_spacing.dart';
@@ -613,7 +614,7 @@ class _WordMatchScreenState extends ConsumerState<WordMatchScreen>
           TextButton(
             onPressed: () {
               Navigator.pop(context);
-              context.pop();
+              if (context.canPop()) context.pop(); else context.go(AppRoutes.home);
             },
             child: Text(
               'Erê, derkeve',
@@ -757,7 +758,7 @@ class _WordMatchScreenState extends ConsumerState<WordMatchScreen>
                   // Bitti — ana sayfa
                   Expanded(
                     child: ElevatedButton.icon(
-                      onPressed: () => context.pop(),
+                      onPressed: () { if (context.canPop()) context.pop(); else context.go(AppRoutes.home); },
                       icon: const Icon(Icons.check_rounded),
                       label: const Text('Temam'),
                       style: ElevatedButton.styleFrom(

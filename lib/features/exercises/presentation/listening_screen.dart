@@ -7,6 +7,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
+import '../../../core/router/app_router.dart';
 
 import '../../../core/constants/app_colors.dart';
 import '../../../core/constants/app_spacing.dart';
@@ -516,7 +517,7 @@ class _ListeningScreenState extends ConsumerState<ListeningScreen>
                 children: [
                   // Close button
                   GestureDetector(
-                    onTap: () => context.pop(),
+                    onTap: () { if (context.canPop()) context.pop(); else context.go(AppRoutes.home); },
                     child: const Icon(
                       Icons.close,
                       color: AppColors.textSecondary,
