@@ -619,6 +619,13 @@ class _QuizScreenState extends ConsumerState<QuizScreen>
 
   Widget _buildProgressBar() {
     final progress = (_currentIndex + 1) / _questions.length;
+    // Mevcut sorunun kategorisi — görsel ipucu için emoji + isim
+    final currentKat = _currentIndex < _questions.length
+        ? _questions[_currentIndex].word.kat
+        : '';
+    final katEmoji = currentKat.isNotEmpty
+        ? emojiForWord('', currentKat)  // kelime boş → kategori fallback
+        : '';
 
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: AppSpacing.md),
@@ -632,6 +639,20 @@ class _QuizScreenState extends ConsumerState<QuizScreen>
                 style: AppTypography.caption
                     .copyWith(color: AppColors.textSecondary),
               ),
+              // Kategori chip — kullanıcıya görsel ipucu
+              if (katEmoji.isNotEmpty)
+                Container(
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 8, vertical: 2),
+                  decoration: BoxDecoration(
+                    color: AppColors.primarySurface,
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                  child: Text(
+                    katEmoji,
+                    style: const TextStyle(fontSize: 14),
+                  ),
+                ),
               Text(
                 '${(progress * 100).round()}%',
                 style: AppTypography.caption
@@ -1200,10 +1221,25 @@ class _QuizScreenState extends ConsumerState<QuizScreen>
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
+            // Emoji — büyük, dolgulu daire içinde (görsel öne çıkarma)
             if (wordEmoji.isNotEmpty)
-              Padding(
-                padding: const EdgeInsets.only(bottom: 8),
-                child: Text(wordEmoji, style: const TextStyle(fontSize: 32)),
+              Container(
+                width: 80,
+                height: 80,
+                margin: const EdgeInsets.only(bottom: 12),
+                decoration: BoxDecoration(
+                  color: AppColors.primarySurface,
+                  shape: BoxShape.circle,
+                  border: Border.all(
+                    color: AppColors.primary.withOpacity(0.15),
+                    width: 1.5,
+                  ),
+                ),
+                alignment: Alignment.center,
+                child: Text(
+                  wordEmoji,
+                  style: const TextStyle(fontSize: 44),
+                ),
               ),
             Text(
               word,

@@ -71,7 +71,96 @@ const kWordEmojis = <String, String>{
   'Sib\u00EA': '\u{1F305}', '\u00CAvar': '\u{1F306}', '\u015Eev': '\u{1F319}', 'N\u00EEvro': '\u{2600}\u{FE0F}',
 
   // Kultur
-  'Newroz': '\u{1F525}', 'Govend': '\u{1F483}', 'Stran': '\u{1F3B5}', 'Dengb\u00EAj': '\u{1F3A4}',
+  'Newroz': '🔥', 'Govend': '💃', 'Stran': '🎵', 'Dengbêj': '🎤',
+
+  // ── A1+A2 yetişkin DB'sinden yaygın ek kelimeler ──
+  // Selamlama / sosyal
+  'Spas': '🙏', 'Erê': '✅', 'Na': '❌', 'Bibore': '😔', 'Roj baş': '☀️',
+  'Êvar baş': '🌆', 'Şev baş': '🌙', 'Şeva te xweş be': '🌙',
+  'Bi xêr hatî': '🤗', 'Xatir': '👋', 'Xatirê te': '👋', 'Tu çawa yî': '🤔',
+
+  // Aile (ek)
+  'Hevjîn': '💑', 'Lawik': '👦',
+  'Birê': '👦', 'Xwişka': '👧', 'Mam': '👨', 'Xal': '👨', 'Met': '👩',
+  'Xaltî': '👩', 'Apê': '👨',
+
+  // Vücut (ek)
+  'Pê': '🦶', 'Devê': '👄', 'Çavê': '👁️', 'Stû': '🧣', 'Pişt': '🧍',
+
+  // Yiyecek/içecek (ek)
+  'Penîr': '🧀', 'Kerî': '🧈', 'Tirş': '🍋',
+  'Şêv': '🍽️', 'Taştê': '🍳',
+  'Çayê': '🍵', 'Şîrîn': '🍬',
+
+  // Doğa / mevsim (ek)
+  'Bihar': '🌸', 'Havîn': '☀️', 'Payîz': '🍂', 'Zivistan': '❄️',
+  'Hewa': '🌤️', 'Avhewa': '🌦️',
+  'Cemed': '🧊', 'Mij': '🌫️', 'Bahoz': '⛈️',
+
+  // Hayvanlar (ek)
+  'Karîk': '🐐', 'Beraz': '🐗', 'Kew': '🦃', 'Quling': '🦢', 'Mêş': '🐝',
+  'Pirpirok': '🦋', 'Mîst': '🐭',
+
+  // Ev / mobilya (ek)
+  'Pencere': '🪟', 'Bûka': '🛏️', 'Cilşo': '🧺', 'Hemam': '🛁', 'Tewlîd': '🪑',
+  'Berfirehe': '🛋️', 'Pirtûkxane': '📚', 'Saet': '🕐', 'Lampe': '💡',
+
+  // Okul / eğitim
+  'Dibistan': '🏫', 'Defter': '📓', 'Pênûs': '✏️',
+  'Pirtûk': '📖', 'Xwendekar': '🎓', 'Tahta': '📋',
+  'Ders': '📝', 'Pirs': '❓', 'Bersiv': '💡',
+
+  // İş / meslek (ek)
+  'Kar': '💼', 'Bizînes': '💼', 'Bijîjk': '👨‍⚕️', 'Hemşîre': '👩‍⚕️',
+  'Polîs': '👮', 'Mihendis': '👨‍💻', 'Kesek': '🧑',
+
+  // Şehir / yer
+  'Bajar': '🏙️', 'Gund': '🏘️', 'Kuçe': '🛣️', 'Hespxan': '🏚️', 'Xanî': '🏠',
+  'Park': '🌳', 'Baxçe': '🌷', 'Kanî': '⛲', 'Çem': '🏞️',
+  'Gol': '🏞️', 'Behr': '🌊', 'Çiyê': '⛰️',
+
+  // Ulaşım (ek)
+  'Wesayit': '🚗', 'Texsî': '🚕', 'Motorsîklet': '🏍️', 'Pawer': '🚉',
+  'Rê': '🛣️', 'Sefer': '🧳',
+
+  // Teknoloji
+  'Telefon': '📱', 'Komputer': '💻', 'Înternet': '🌐', 'Email': '📧',
+  'Mesaj': '💬', 'Wêne': '🖼️', 'Vîdyo': '🎥', 'Muzîk': '🎶',
+
+  // Sağlık (ek)
+  'Tendurist': '💪', 'Nexweş': '🤒', 'Derman': '💊', 'Nexweşxane': '🏥',
+  'Nexweşî': '🤧', 'Tab': '🌡️', 'Birîn': '🩹',
+
+  // Duygu / his
+  'Kêfxweş': '😊', 'Xemgîn': '😢', 'Hêrs': '😡', 'Tirs': '😨',
+  'Kenê': '😄', 'Hez': '❤️', 'Evîn': '💕', 'Hêvî': '🌟',
+
+  // Genel sıfat (rengder)
+  'Mezin': '🐘', 'Biçûk': '🐭', 'Dirêj': '📏', 'Kurt': '📐', 'Bilind': '⬆️',
+  'Nizm': '⬇️', 'Germ': '🔥', 'Sar': '❄️', 'Nû': '✨', 'Kevn': '📜',
+  'Xweş': '😊', 'Xirab': '👎', 'Baş': '👍', 'Pîs': '🤢', 'Paqij': '✨',
+  'Çê': '👍', 'Tal': '🌶️',
+
+  // Eylem (leker) — yaygın fiiller
+  'Çûn': '🚶', 'Hatin': '🏃', 'Razan': '😴',
+  'Rabûn': '🌅', 'Xwendin': '📖', 'Nivîsîn': '✍️', 'Lîstîn': '🎮',
+  'Stiran': '🎤', 'Reqisîn': '💃', 'Bazdan': '🏃', 'Bûn': '✨',
+  'Dîtîn': '👀', 'Bihîstîn': '👂', 'Bêjin': '💬', 'Kirîn': '🛒',
+  'Firotin': '💰', 'Şuştîn': '🧼', 'Çêkirin': '🔨', 'Xebitîn': '💼',
+
+  // Zaman (ek)
+  'Hefte': '📅', 'Meh': '📆', 'Sal': '🗓️', 'Demek': '⏳',
+  'Niha': '⏰', 'Berê': '⏪', 'Piştre': '⏩', 'Îro': '📅', 'Sibê (gelecek)': '⏭️',
+  'Duh': '⏮️',
+
+  // Renk (ek)
+  'Gewr': '⚪', 'Qehweyî': '🟤', 'Narencî': '🟠',
+
+  // Sayılar (ek)
+  'Sifir': '0️⃣', 'Bîst': '2️⃣0️⃣', 'Sed': '💯', 'Hezar': '🔢',
+
+  // Giyim (ek)
+  'Berg': '🧥', 'Çakêt': '🧥', 'Şewqe': '🎩', 'Pêlav': '👟', 'Çant': '👜',
 };
 
 /// Kelime icin emoji dondur (once kelime bazli, sonra kategori bazli)
@@ -86,15 +175,78 @@ String emojiForWord(String ku, String kat) {
   return _categoryEmoji(kat);
 }
 
+/// Kategori-bazlı emoji fallback — kelime-spesifik eşleşme yoksa
+/// kategoriden bir emoji döner. 49+ DB kategorisinin tümü kapsanmış.
 String _categoryEmoji(String kat) => switch (kat) {
-  'silav' || 'selamlama' => '\u{1F44B}',
-  'malbat'               => '\u{1F468}\u{200D}\u{1F469}\u{200D}\u{1F467}\u{200D}\u{1F466}',
-  'xwarin'               => '\u{1F37D}\u{FE0F}',
-  'vexwarin'             => '\u{1F964}',
-  'ajal'                 => '\u{1F43E}',
-  'reng'                 => '\u{1F3A8}',
-  'mal'                  => '\u{1F3E0}',
-  'beden'                => '\u{1FAC1}',
-  'cil'                  => '\u{1F455}',
-  _                      => '',
+  // Yüksek frekanslı kategoriler
+  'silav' || 'selamlama'              => '\u{1F44B}',                 // 👋
+  'malbat'                            => '\u{1F46A}',                 // 👪
+  'xwarin'                            => '\u{1F37D}\u{FE0F}',         // 🍽️
+  'vexwarin'                          => '\u{1F964}',                 // 🥤
+  'ajal' || 'heywan'                  => '\u{1F43E}',                 // 🐾
+  'reng'                              => '\u{1F3A8}',                 // 🎨
+  'mal'                               => '\u{1F3E0}',                 // 🏠
+  'beden' || 'las'                    => '\u{1FAC1}',                 // 🫁
+  'cil'                               => '\u{1F455}',                 // 👕
+  // Zaman / dem
+  'dem'                               => '\u{23F0}',                  // ⏰
+  'roj'                               => '\u{1F4C5}',                 // 📅
+  'demsal' || 'werzî'                 => '\u{1F33B}',                 // 🌻
+  'hewa'                              => '\u{1F324}\u{FE0F}',         // 🌤️
+  // Sayılar / matematik
+  'jimar' || 'hejmar'                 => '\u{1F522}',                 // 🔢
+  // Doğa / yer
+  'xweza'                             => '\u{1F33F}',                 // 🌿
+  'cih' || 'bajêr'                    => '\u{1F4CD}',                 // 📍
+  'welat'                             => '\u{1F30D}',                 // 🌍
+  'ekoloji'                           => '\u{267B}\u{FE0F}',          // ♻️
+  // Eylem / fiil
+  'leker' || 'leker_ergatif' || 'ergatif' || 'ergatif_b2' => '\u{1F3AC}', // 🎬
+  'bun'                               => '\u{1F4AB}',                 // 💫
+  // Sıfat / zarf
+  'rengder'                           => '\u{1F308}',                 // 🌈
+  'soyut'                             => '\u{1F4AD}',                 // 💭
+  // Fonksiyonel sözcükler
+  'temel' || 'peyvben'                => '\u{1F4AC}',                 // 💬
+  'daçek'                             => '\u{1F517}',                 // 🔗
+  'cinavk'                            => '\u{1F464}',                 // 👤
+  'pirs'                              => '\u{2753}',                  // ❓
+  'neyekî'                            => '\u{26D4}',                  // ⛔
+  'navdêr'                            => '\u{1F516}',                 // 🔖
+  'rêziman'                           => '\u{1F4D0}',                 // 📐
+  'alfabe'                            => '\u{1F524}',                 // 🔤
+  // Eğitim / iş / pîşe
+  'perwerde'                          => '\u{1F4DA}',                 // 📚
+  'pîşe' || 'kar'                     => '\u{1F4BC}',                 // 💼
+  'akademik'                          => '\u{1F393}',                 // 🎓
+  'ziman'                             => '\u{1F5E3}\u{FE0F}',         // 🗣️
+  'edebiyat'                          => '\u{1F4D6}',                 // 📖
+  'huner'                             => '\u{1F3A8}',                 // 🎨
+  // Sosyal / kültür / yaşam
+  'civakî' || 'kimlik'                => '\u{1F465}',                 // 👥
+  'jiyan'                             => '\u{1F31F}',                 // 🌟
+  'çand'                              => '\u{1F3AD}',                 // 🎭
+  'his' || 'psikoloji'                => '\u{2764}\u{FE0F}',          // ❤️
+  'dua'                               => '\u{1F932}',                 // 🤲
+  'siyaset'                           => '\u{1F3DB}\u{FE0F}',         // 🏛️
+  'zagon'                             => '\u{2696}\u{FE0F}',          // ⚖️
+  // Sağlık
+  'tendurist'                         => '\u{1FA7A}',                 // 🩺
+  // Yiyecek alt-kategorileri
+  'mêwe'                              => '\u{1F34E}',                 // 🍎
+  // Ulaşım / seyahat
+  'gihanî' || 'rêwîtî'                => '\u{1F697}',                 // 🚗
+  // Teknoloji / medya
+  'teknoloji'                         => '\u{1F4BB}',                 // 💻
+  'medya'                             => '\u{1F4FA}',                 // 📺
+  'zanist'                            => '\u{1F52C}',                 // 🔬
+  // Ticaret
+  'aborî' || 'bazirganî' || 'cotkarî' => '\u{1F6D2}',                 // 🛒
+  // Felsefe / din
+  'felsefe'                           => '\u{1F914}',                 // 🤔
+  'dîrok'                             => '\u{1F4DC}',                 // 📜
+  // Halk edebiyatı
+  'deyim'                             => '\u{1F4AC}',                 // 💬
+  // Fallback — kelime kategorisi yok ise nötr
+  _                                   => '\u{1F4D6}',                 // 📖 (varsayılan: kitap)
 };
