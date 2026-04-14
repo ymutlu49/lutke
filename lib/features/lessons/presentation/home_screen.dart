@@ -1097,13 +1097,13 @@ class _SkillTreeUnit {
 
 /// Seviyeye göre kelime DB'sini döndürür.
 List<dynamic> _getWordsForLevel(String level) => switch (level) {
-  'A1' => kA1TamKelimeler,
-  'A2' => kA2Kelimeler,
-  'B1' => kB1Kelimeler,
-  'B2' => kB2Kelimeler,
-  'C1' => kC1Kelimeler,
-  'C2' => kC2Kelimeler,
-  _ => kA1TamKelimeler,
+  'A1' => kA1TamListe,
+  'A2' => kA2TamListe,
+  'B1' => kB1All,
+  'B2' => kB2All,
+  'C1' => kC1All,
+  'C2' => kC2All,
+  _ => kA1TamListe,
 };
 
 /// Kategori ikonları — tüm seviyeler için ortak.
@@ -1390,22 +1390,28 @@ class _SkillTreeNode extends StatelessWidget {
     // Node boyutlari — larger for mountain-path feel
     final nodeSize = isCurrent ? 88.0 : 74.0;
 
-    // Renkler
+    // Renkler — logo palette'e uygun, canlı
     final nodeColor = isCompleted
         ? AppColors.success
         : isCurrent
             ? AppColors.primary
-            : AppColors.backgroundTertiary;
+            : isLocked
+                ? AppColors.backgroundTertiary
+                : AppColors.primarySurface;
 
     final borderColor = isCompleted
         ? AppColors.success
         : isCurrent
-            ? AppColors.primaryDark
-            : AppColors.border;
+            ? AppColors.accent
+            : isLocked
+                ? AppColors.border
+                : AppColors.primary.withOpacity(0.3);
 
     final iconColor = isCompleted || isCurrent
         ? Colors.white
-        : AppColors.textTertiary;
+        : isLocked
+            ? AppColors.textTertiary
+            : AppColors.primary;
 
     final textColor = isLocked
         ? AppColors.textTertiary
@@ -1604,9 +1610,9 @@ class _PathPainter extends CustomPainter {
   void paint(Canvas canvas, Size size) {
     final paint = Paint()
       ..color = isCompleted
-          ? AppColors.primary.withOpacity(0.5)
-          : AppColors.border
-      ..strokeWidth = 3.0
+          ? AppColors.primary.withOpacity(0.6)
+          : AppColors.primary.withOpacity(0.12)
+      ..strokeWidth = isCompleted ? 3.5 : 2.5
       ..style = PaintingStyle.stroke
       ..strokeCap = StrokeCap.round;
 

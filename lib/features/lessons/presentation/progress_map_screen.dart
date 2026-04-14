@@ -96,12 +96,12 @@ class _MountainBackground extends StatelessWidget {
           begin: Alignment.bottomCenter,
           end: Alignment.topCenter,
           colors: [
-            Color(0xFF4CAF50), // Yeşil çayır (A1)
-            Color(0xFF388E3C), // Koyu yeşil orman (A2)
-            Color(0xFF6D8B74), // Kayalık yeşil-gri (B1)
-            Color(0xFF90A4AE), // Bulutlar üstü (B2)
-            Color(0xFFCFD8DC), // Kar sınırı (C1)
-            Color(0xFF1A2A4A), // Koyu zirve (C2)
+            Color(0xFF43A047), // Canlı yeşil çayır (A1)
+            Color(0xFF2DA892), // Teal orman (A2) — logo primary light
+            Color(0xFF1A7B6B), // Koyu teal (B1) — logo primary
+            Color(0xFF0277BD), // Canlı mavi (B2)
+            Color(0xFF7B1FA2), // Mor zirve (C1)
+            Color(0xFF1A2A4A), // Koyu lacivert (C2)
           ],
           stops: [0.0, 0.18, 0.38, 0.58, 0.78, 1.0],
         ),
@@ -157,7 +157,7 @@ class _TopBar extends StatelessWidget {
               // Yıldız ikonu — toplam kelime
               _StatChip(
                 icon: Icons.auto_stories_rounded,
-                value: '$totalLearned / 3900',
+                value: '$totalLearned / 4178',
                 label: 'peyv',
               ),
             ],
@@ -279,18 +279,18 @@ class _LevelMeta {
 }
 
 const _levels = [
-  _LevelMeta(number: 1, label: 'A1', labelKu: 'Destpêk', wordCount: 400,
-      color: Color(0xFF4CAF50), biome: 'Deşt'),
+  _LevelMeta(number: 1, label: 'A1', labelKu: 'Destpêk', wordCount: 510,
+      color: Color(0xFF43A047), biome: 'Deşt'),
   _LevelMeta(number: 2, label: 'A2', labelKu: 'Bingehîn', wordCount: 700,
-      color: Color(0xFF66BB6A), biome: 'Daristan'),
-  _LevelMeta(number: 3, label: 'B1', labelKu: 'Navîn', wordCount: 1500,
-      color: Color(0xFF8D6E63), biome: 'Zinaran'),
-  _LevelMeta(number: 4, label: 'B2', labelKu: 'Navîn-Bilind', wordCount: 500,
-      color: Color(0xFF78909C), biome: 'Ewr'),
-  _LevelMeta(number: 5, label: 'C1', labelKu: 'Pêşketî', wordCount: 500,
-      color: Color(0xFFB0BEC5), biome: 'Berf'),
-  _LevelMeta(number: 6, label: 'C2', labelKu: 'Jêhatî', wordCount: 300,
-      color: Color(0xFFFFD54F), biome: 'Lûtke'),
+      color: Color(0xFF2DA892), biome: 'Daristan'),
+  _LevelMeta(number: 3, label: 'B1', labelKu: 'Navîn', wordCount: 1555,
+      color: Color(0xFF1A7B6B), biome: 'Zinaran'),
+  _LevelMeta(number: 4, label: 'B2', labelKu: 'Navîn-Bilind', wordCount: 598,
+      color: Color(0xFF0277BD), biome: 'Ewr'),
+  _LevelMeta(number: 5, label: 'C1', labelKu: 'Pêşketî', wordCount: 510,
+      color: Color(0xFF7B1FA2), biome: 'Berf'),
+  _LevelMeta(number: 6, label: 'C2', labelKu: 'Jêhatî', wordCount: 305,
+      color: Color(0xFFD4783A), biome: 'Lûtke'),
 ];
 
 class _MountainPathView extends StatelessWidget {
@@ -430,6 +430,15 @@ class _MountainPathPainter extends CustomPainter {
 
   _MountainPathPainter({required this.currentLevel});
 
+  // Segment renkleri — logo palette'e uygun
+  static const _segmentColors = [
+    Color(0xFF43A047), // A1→A2: Yeşil
+    Color(0xFF2DA892), // A2→B1: Teal
+    Color(0xFF1A7B6B), // B1→B2: Koyu teal
+    Color(0xFF0277BD), // B2→C1: Mavi
+    Color(0xFF7B1FA2), // C1→C2: Mor
+  ];
+
   @override
   void paint(Canvas canvas, Size size) {
     final totalHeight = size.height;
@@ -437,29 +446,15 @@ class _MountainPathPainter extends CustomPainter {
 
     // ── Yol gölgesi ──────────────────────────────────────────
     final shadowPaint = Paint()
-      ..color = Colors.black.withOpacity(0.15)
-      ..strokeWidth = 14
+      ..color = Colors.black.withOpacity(0.2)
+      ..strokeWidth = 16
       ..strokeCap = StrokeCap.round
       ..style = PaintingStyle.stroke;
 
     // ── Aktif olmayan yol ────────────────────────────────────
     final inactivePaint = Paint()
-      ..color = Colors.white.withOpacity(0.2)
+      ..color = Colors.white.withOpacity(0.15)
       ..strokeWidth = 8
-      ..strokeCap = StrokeCap.round
-      ..style = PaintingStyle.stroke;
-
-    // ── Aktif yol ────────────────────────────────────────────
-    final activePaint = Paint()
-      ..color = Colors.white.withOpacity(0.9)
-      ..strokeWidth = 8
-      ..strokeCap = StrokeCap.round
-      ..style = PaintingStyle.stroke;
-
-    // ── Noktalı aktif yol ────────────────────────────────────
-    final dashPaint = Paint()
-      ..color = AppColors.accentWarm
-      ..strokeWidth = 4
       ..strokeCap = StrokeCap.round
       ..style = PaintingStyle.stroke;
 
@@ -486,13 +481,34 @@ class _MountainPathPainter extends CustomPainter {
       // Gölge
       canvas.drawPath(path, shadowPaint);
 
-      // Yolu seviyeye göre renklendir
       final isActive = i < currentLevel;
-      canvas.drawPath(path, isActive ? activePaint : inactivePaint);
 
-      // Aktif yolda turuncu noktalı çizgi
       if (isActive) {
+        // Aktif yol — segment renginde parlak çizgi
+        final segColor = _segmentColors[i.clamp(0, _segmentColors.length - 1)];
+        final activePaint = Paint()
+          ..color = Colors.white.withOpacity(0.9)
+          ..strokeWidth = 10
+          ..strokeCap = StrokeCap.round
+          ..style = PaintingStyle.stroke;
+        canvas.drawPath(path, activePaint);
+
+        // Renkli dashed overlay
+        final dashPaint = Paint()
+          ..color = segColor
+          ..strokeWidth = 5
+          ..strokeCap = StrokeCap.round
+          ..style = PaintingStyle.stroke;
         _drawDashedPath(canvas, path, dashPaint);
+      } else {
+        // İnaktif yol — soluk beyaz noktalı
+        canvas.drawPath(path, inactivePaint);
+        final inactiveDash = Paint()
+          ..color = Colors.white.withOpacity(0.08)
+          ..strokeWidth = 3
+          ..strokeCap = StrokeCap.round
+          ..style = PaintingStyle.stroke;
+        _drawDashedPath(canvas, path, inactiveDash);
       }
     }
   }
@@ -565,27 +581,42 @@ class _LevelNode extends StatelessWidget {
                       trackColor: Colors.white.withOpacity(0.15),
                     ),
                   ),
-                  // İç daire
+                  // İç daire — gradient ile daha canlı
                   Container(
                     width: 60,
                     height: 60,
                     decoration: BoxDecoration(
                       shape: BoxShape.circle,
-                      color: isActive
-                          ? meta.color.withOpacity(0.9)
-                          : Colors.black.withOpacity(0.3),
+                      gradient: isActive
+                          ? LinearGradient(
+                              begin: Alignment.topLeft,
+                              end: Alignment.bottomRight,
+                              colors: [
+                                meta.color,
+                                Color.lerp(meta.color, Colors.black, 0.25)!,
+                              ],
+                            )
+                          : null,
+                      color: isActive ? null : Colors.black.withOpacity(0.3),
                       border: isCurrent
                           ? Border.all(color: AppColors.accentWarm, width: 3)
-                          : null,
-                      boxShadow: isCurrent
-                          ? [
-                              BoxShadow(
-                                color: AppColors.accentWarm.withOpacity(0.4),
-                                blurRadius: 12,
-                                spreadRadius: 2,
-                              ),
-                            ]
-                          : null,
+                          : isActive
+                              ? Border.all(color: Colors.white.withOpacity(0.3), width: 2)
+                              : null,
+                      boxShadow: [
+                        if (isCurrent)
+                          BoxShadow(
+                            color: AppColors.accentWarm.withOpacity(0.5),
+                            blurRadius: 16,
+                            spreadRadius: 3,
+                          ),
+                        if (isActive && !isCurrent)
+                          BoxShadow(
+                            color: meta.color.withOpacity(0.4),
+                            blurRadius: 10,
+                            spreadRadius: 1,
+                          ),
+                      ],
                     ),
                     alignment: Alignment.center,
                     child: isLocked

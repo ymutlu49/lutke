@@ -113,7 +113,7 @@ class ProfileScreen extends ConsumerWidget {
                         dailyStats.when(
                           data: (s) => _LearningStatsDashboard(
                             totalWords: _sumLearnedWords(levelProgresses),
-                            totalWordTarget: 3900,
+                            totalWordTarget: 4178,
                             completedLessons:
                                 profile.completedLessons.length,
                             totalLessons: 137,
@@ -124,7 +124,7 @@ class ProfileScreen extends ConsumerWidget {
                           loading: () =>
                               const _LearningStatsDashboard(
                             totalWords: 0,
-                            totalWordTarget: 3900,
+                            totalWordTarget: 4178,
                             completedLessons: 0,
                             totalLessons: 137,
                             streakDays: 0,
@@ -134,7 +134,7 @@ class ProfileScreen extends ConsumerWidget {
                           error: (_, __) =>
                               const _LearningStatsDashboard(
                             totalWords: 0,
-                            totalWordTarget: 3900,
+                            totalWordTarget: 4178,
                             completedLessons: 0,
                             totalLessons: 137,
                             streakDays: 0,
@@ -145,7 +145,7 @@ class ProfileScreen extends ConsumerWidget {
                       else
                         const _LearningStatsDashboard(
                           totalWords: 0,
-                          totalWordTarget: 3900,
+                          totalWordTarget: 4178,
                           completedLessons: 0,
                           totalLessons: 137,
                           streakDays: 0,

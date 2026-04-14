@@ -101,10 +101,24 @@ class UnitHubScreen extends ConsumerWidget {
                     width: 72,
                     height: 72,
                     decoration: BoxDecoration(
-                      color: AppColors.primarySurface,
+                      gradient: LinearGradient(
+                        begin: Alignment.topLeft,
+                        end: Alignment.bottomRight,
+                        colors: [
+                          AppColors.primary.withOpacity(0.15),
+                          AppColors.accent.withOpacity(0.08),
+                        ],
+                      ),
                       shape: BoxShape.circle,
                       border: Border.all(
-                          color: AppColors.primary.withOpacity(0.2)),
+                          color: AppColors.primary.withOpacity(0.25), width: 2),
+                      boxShadow: [
+                        BoxShadow(
+                          color: AppColors.primary.withOpacity(0.12),
+                          blurRadius: 12,
+                          spreadRadius: 1,
+                        ),
+                      ],
                     ),
                     child: Icon(icon, size: 36, color: AppColors.primary),
                   ),
@@ -261,13 +275,13 @@ class UnitHubScreen extends ConsumerWidget {
 
   List<_SimpleWord> _loadCategoryWords(String category, String level) {
     final all = switch (level.toUpperCase()) {
-      'A1' => kA1TamKelimeler,
-      'A2' => kA2Kelimeler,
-      'B1' => kB1Kelimeler,
-      'B2' => kB2Kelimeler,
-      'C1' => kC1Kelimeler,
-      'C2' => kC2Kelimeler,
-      _ => kA1TamKelimeler,
+      'A1' => kA1TamListe,
+      'A2' => kA2TamListe,
+      'B1' => kB1All,
+      'B2' => kB2All,
+      'C1' => kC1All,
+      'C2' => kC2All,
+      _ => kA1TamListe,
     };
     return (all as List)
         .where((w) => w.kat == category)
@@ -310,13 +324,20 @@ class _ActivityCard extends StatelessWidget {
       child: Container(
         padding: const EdgeInsets.all(18),
         decoration: BoxDecoration(
-          color: AppColors.backgroundSecondary,
+          gradient: LinearGradient(
+            begin: Alignment.centerLeft,
+            end: Alignment.centerRight,
+            colors: [
+              AppColors.backgroundSecondary,
+              color.withOpacity(0.06),
+            ],
+          ),
           borderRadius: BorderRadius.circular(16),
-          border: Border.all(color: color.withOpacity(0.15)),
+          border: Border.all(color: color.withOpacity(0.2)),
           boxShadow: [
             BoxShadow(
-              color: color.withOpacity(0.06),
-              blurRadius: 12,
+              color: color.withOpacity(0.10),
+              blurRadius: 14,
               offset: const Offset(0, 4),
             ),
           ],
@@ -327,8 +348,16 @@ class _ActivityCard extends StatelessWidget {
               width: 52,
               height: 52,
               decoration: BoxDecoration(
-                color: color.withOpacity(0.08),
+                gradient: LinearGradient(
+                  begin: Alignment.topLeft,
+                  end: Alignment.bottomRight,
+                  colors: [
+                    color.withOpacity(0.15),
+                    color.withOpacity(0.05),
+                  ],
+                ),
                 borderRadius: BorderRadius.circular(14),
+                border: Border.all(color: color.withOpacity(0.12)),
               ),
               child: Center(
                 child: Text(emoji, style: const TextStyle(fontSize: 26)),
@@ -344,6 +373,7 @@ class _ActivityCard extends StatelessWidget {
                     style: AppTypography.title.copyWith(
                       color: color,
                       fontSize: 17,
+                      fontWeight: FontWeight.w700,
                     ),
                   ),
                   const SizedBox(height: 2),
@@ -354,8 +384,16 @@ class _ActivityCard extends StatelessWidget {
                 ],
               ),
             ),
-            Icon(Icons.arrow_forward_ios_rounded,
-                size: 16, color: color.withOpacity(0.4)),
+            Container(
+              width: 28,
+              height: 28,
+              decoration: BoxDecoration(
+                color: color.withOpacity(0.1),
+                shape: BoxShape.circle,
+              ),
+              child: Icon(Icons.arrow_forward_ios_rounded,
+                  size: 13, color: color.withOpacity(0.6)),
+            ),
           ],
         ),
       ),
