@@ -82,47 +82,85 @@ class SplashScreen extends ConsumerWidget {
                     ),
                   ).animate().fadeIn(delay: 400.ms, duration: 400.ms),
 
+                  const SizedBox(height: 18),
+
+                  // ── Slogan ────────────────────────────────
+                  // Anadil = kimlik metaforu. Ehmedê Xanî'den ilham:
+                  // "Bibîne, bibêje, biparêze" = Gör, söyle, koru
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 16),
+                    child: Text(
+                      '"Bibîne, bibêje, biparêze."',
+                      textAlign: TextAlign.center,
+                      style: TextStyle(
+                        fontSize: 17,
+                        fontStyle: FontStyle.italic,
+                        fontWeight: FontWeight.w600,
+                        color: Colors.white.withOpacity(0.95),
+                        height: 1.4,
+                      ),
+                    ),
+                  ).animate().fadeIn(delay: 500.ms, duration: 500.ms),
+                  const SizedBox(height: 6),
+                  Text(
+                    'Zimanê dayikê — kokên me, hêviya me.',
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                      fontSize: 13,
+                      color: Colors.white.withOpacity(0.65),
+                      letterSpacing: 0.3,
+                    ),
+                  ).animate().fadeIn(delay: 600.ms, duration: 400.ms),
+
                   const Spacer(flex: 1),
 
                   // ── Öğrenme Yolu Görseli ──────────────────
                   _LearningPathPreview()
                       .animate()
-                      .fadeIn(delay: 600.ms, duration: 600.ms)
+                      .fadeIn(delay: 700.ms, duration: 600.ms)
                       .slideY(begin: 0.15, curve: Curves.easeOut),
 
                   const Spacer(flex: 1),
 
-                  // ── CTA Butonu ────────────────────────────
+                  // ── Têketin / Tomarkirin — Tek belirgin CTA ──
                   SizedBox(
                     width: double.infinity,
                     height: 56,
                     child: ElevatedButton.icon(
-                      onPressed: () => context.go(AppRoutes.modeSelect),
-                      icon: const Icon(Icons.play_arrow_rounded, size: 24),
-                      label: Text('Fêrbûnê dest pê bike',
-                        style: TextStyle(fontSize: 17, fontWeight: FontWeight.w700)),
+                      onPressed: () => context.go(AppRoutes.register),
+                      icon: const Icon(Icons.login_rounded, size: 22),
+                      label: const Text(
+                        'Têketin / Tomarkirin',
+                        style: TextStyle(
+                          fontSize: 16,
+                          fontWeight: FontWeight.w700,
+                          letterSpacing: 0.3,
+                        ),
+                      ),
                       style: ElevatedButton.styleFrom(
                         backgroundColor: Colors.white,
                         foregroundColor: AppColors.primary,
                         shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(18)),
+                          borderRadius: BorderRadius.circular(18),
+                        ),
                         elevation: 0,
                       ),
                     ),
                   ).animate().fadeIn(delay: 1000.ms).slideY(begin: 0.2),
 
-                  const SizedBox(height: 12),
+                  const SizedBox(height: 10),
 
-                  // Hesap giriş (ince)
+                  // Mîsafir — ince, opsiyonel link (kayıt olmadan dene)
                   TextButton(
-                    onPressed: () => context.go(AppRoutes.register),
+                    onPressed: () => context.go(AppRoutes.modeSelect),
                     style: TextButton.styleFrom(
-                      foregroundColor: Colors.white.withOpacity(0.7),
+                      foregroundColor: Colors.white.withOpacity(0.6),
                     ),
-                    child: const Text('Têketin / Tomarkirin',
-                      style: TextStyle(fontSize: 13)),
+                    child: const Text(
+                      'Wek mîsafir biceribîne',
+                      style: TextStyle(fontSize: 12),
+                    ),
                   ).animate().fadeIn(delay: 1200.ms),
-
 
                   const Spacer(flex: 1),
 
