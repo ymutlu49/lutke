@@ -1148,7 +1148,69 @@ IconData _iconForCategory(String kat) => switch (kat) {
   _ => Icons.circle_rounded,
 };
 
+/// Kategori anahtarından doğru Kurmancî adını döndürür.
+String _kuNameForCategory(String kat) => switch (kat) {
+  'alfabe' => 'Alfabê',
+  'selamlama' || 'silav' => 'Silav',
+  'jimar' || 'hejmar' => 'Hejmar',
+  'reng' => 'Reng',
+  'malbat' => 'Malbat',
+  'cinavk' => 'Cînav',
+  'pîşe' => 'Pîşe',
+  'perwerde' => 'Perwerde',
+  'dem' => 'Dem',
+  'roj' => 'Rojên hefteyê',
+  'demsal' || 'werzî' => 'Demsalên salê',
+  'xwarin' => 'Xwarin',
+  'vexwarin' => 'Vexwarin',
+  'mêwe' => 'Fêkî û mêwe',
+  'beden' => 'Laş',
+  'tendurist' => 'Tenduristî',
+  'mal' => 'Mal û xanî',
+  'cih' || 'bajêr' => 'Cih û der',
+  'rengder' || 'soyut' => 'Rengdêr',
+  'temel' => 'Peyvên bingehîn',
+  'leker' => 'Lêker',
+  'leker_ergatif' || 'ergatif' || 'ergatif_b2' => 'Lêkerên ergatîf',
+  'xweza' => 'Xweza',
+  'ajal' => 'Heywan',
+  'cil' => 'Cil û berg',
+  'daçek' => 'Daçek',
+  'rêziman' => 'Rêziman',
+  'pirs' => 'Pirsyar',
+  'gihanî' || 'rêwîtî' => 'Veguhestin',
+  'peyvben' => 'Peyvên girêdayî',
+  'his' || 'psikoloji' => 'Hest',
+  'bun' => 'Bûn',
+  'çand' => 'Çand',
+  'edebiyat' => 'Wêje',
+  'huner' => 'Huner',
+  'dua' => 'Dua û hêvî',
+  'civakî' || 'kimlik' => 'Civak',
+  'siyaset' => 'Siyaset',
+  'zagon' => 'Zagonî',
+  'aborî' || 'bazirganî' || 'cotkarî' => 'Aborî',
+  'teknoloji' => 'Teknolojî',
+  'zanist' => 'Zanist',
+  'ziman' => 'Ziman',
+  'medya' => 'Medya',
+  'felsefe' => 'Felsefe',
+  'dîrok' => 'Dîrok',
+  'akademik' => 'Akademîk',
+  'deyim' => 'Gotinên pêşiyan',
+  'welat' => 'Welat',
+  'jiyan' => 'Jiyan',
+  'kar' => 'Kar û pîşe',
+  'hewa' => 'Hewa',
+  'ekoloji' => 'Ekolojî',
+  'neyekî' => 'Neyînî',
+  'navdêr' => 'Navdêr',
+  _ => kat[0].toUpperCase() + kat.substring(1),
+};
+
 /// Belirli seviye için durak listesi oluşturur.
+/// Minimum 12 kelime olan kategoriler gösterilir.
+/// Pedagojik sıralamaya göre sıralanır.
 List<_SkillTreeUnit> _buildSkillUnits(String level) {
   final words = _getWordsForLevel(level);
   final catCounts = <String, int>{};
@@ -1158,29 +1220,60 @@ List<_SkillTreeUnit> _buildSkillUnits(String level) {
     catCounts[kat] = (catCounts[kat] ?? 0) + 1;
   }
 
-  // Kategorileri kelime sayısına göre sırala (çoktan aza)
-  final sortedCats = catCounts.entries.toList()
-    ..sort((a, b) => b.value.compareTo(a.value));
+  // Pedagojik sıra — basit/somut → karmaşık/soyut
+  const _pedagogicOrder = [
+    // A1 temel
+    'alfabe', 'selamlama', 'silav', 'cinavk', 'hejmar', 'jimar',
+    'malbat', 'bun', 'reng', 'dem', 'roj', 'demsal', 'werzî',
+    'mal', 'xwarin', 'vexwarin', 'mêwe', 'beden', 'cil',
+    'pîşe', 'ajal', 'xweza', 'cih', 'gihanî', 'rêwîtî',
+    'tendurist', 'his', 'peyvben', 'pirs', 'temel',
+    'leker', 'rengder', 'daçek', 'dua', 'çand',
+    // A2-B1 genişleme
+    'jiyan', 'civakî', 'perwerde', 'kar', 'teknoloji',
+    'hewa', 'bazirganî', 'welat', 'navdêr', 'neyekî',
+    'ergatif', 'leker_ergatif', 'deyim', 'rêziman',
+    // B2-C2 ileri
+    'edebiyat', 'huner', 'siyaset', 'zagon', 'aborî',
+    'medya', 'zanist', 'felsefe', 'dîrok', 'akademik',
+    'kimlik', 'ekoloji', 'ziman', 'soyut', 'psikoloji',
+    'ergatif_b2', 'cotkarî', 'bajêr',
+  ];
 
   final units = <_SkillTreeUnit>[];
-  for (final entry in sortedCats) {
-    final kat = entry.key;
-    final count = entry.value;
-    if (count < 2) continue; // Çok az kelime olan kategorileri atla
 
-    // Kategori adını büyük harfle başlat
-    final kuTitle = kat[0].toUpperCase() + kat.substring(1);
-
+  // Önce pedagojik sıradaki kategorileri ekle
+  for (final kat in _pedagogicOrder) {
+    final count = catCounts[kat];
+    if (count == null || count < 6) continue;
     units.add(_SkillTreeUnit(
       id: '${level.toLowerCase()}_unit_$kat',
       katKey: kat,
-      kuTitle: kuTitle,
+      kuTitle: _kuNameForCategory(kat),
       trTitle: '',
       icon: _iconForCategory(kat),
       wordCount: count,
       unitIndex: units.length,
     ));
   }
+
+  // Sırada olmayan ama yeterli kelimesi olan kategorileri sona ekle
+  for (final entry in catCounts.entries) {
+    final kat = entry.key;
+    final count = entry.value;
+    if (count < 6) continue;
+    if (_pedagogicOrder.contains(kat)) continue; // Zaten eklendi
+    units.add(_SkillTreeUnit(
+      id: '${level.toLowerCase()}_unit_$kat',
+      katKey: kat,
+      kuTitle: _kuNameForCategory(kat),
+      trTitle: '',
+      icon: _iconForCategory(kat),
+      wordCount: count,
+      unitIndex: units.length,
+    ));
+  }
+
   return units;
 }
 
