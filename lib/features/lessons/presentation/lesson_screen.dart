@@ -9,6 +9,7 @@ import 'package:go_router/go_router.dart';
 import '../../../core/constants/app_colors.dart';
 import '../../../core/constants/app_typography.dart';
 import '../../../core/constants/app_spacing.dart';
+import '../../../core/constants/child_theme.dart';
 import '../../../core/utils/fsrs_algorithm.dart';
 import '../../../core/services/analytics_service.dart';
 import '../../../shared/providers/language_mode_provider.dart';
@@ -189,9 +190,12 @@ class _LessonScreenState extends ConsumerState<LessonScreen> {
     }
 
     final card = _cards[_currentIndex];
+    final isChild = widget.mode == 'child';
 
     return Scaffold(
-      backgroundColor: AppColors.backgroundPrimary,
+      backgroundColor: isChild
+          ? ChildColors.backgroundPrimary
+          : AppColors.backgroundPrimary,
       body: SafeArea(
         child: Column(
           children: [
@@ -246,6 +250,7 @@ class _LessonScreenState extends ConsumerState<LessonScreen> {
           showAnswer: _showAnswer,
           onShowAnswer: () => setState(() => _showAnswer = true),
           onRating: _onRating,
+          isChild: widget.mode == 'child',
         );
 
       case ExerciseType.multipleChoice:
@@ -323,6 +328,7 @@ class _FlashcardExercise extends StatelessWidget {
   final bool showAnswer;
   final VoidCallback onShowAnswer;
   final OnRating onRating;
+  final bool isChild;
 
   const _FlashcardExercise({
     required this.card,
@@ -330,6 +336,7 @@ class _FlashcardExercise extends StatelessWidget {
     required this.showAnswer,
     required this.onShowAnswer,
     required this.onRating,
+    this.isChild = false,
   });
 
   @override
@@ -345,6 +352,7 @@ class _FlashcardExercise extends StatelessWidget {
         : _CardFront(
             card: card,
             onTap: onShowAnswer,
+            isChild: isChild,
           );
   }
 }
@@ -352,8 +360,9 @@ class _FlashcardExercise extends StatelessWidget {
 class _CardFront extends StatelessWidget {
   final VocabularyCardModel card;
   final VoidCallback onTap;
+  final bool isChild;
 
-  const _CardFront({required this.card, required this.onTap});
+  const _CardFront({required this.card, required this.onTap, this.isChild = false});
 
   @override
   Widget build(BuildContext context) {
@@ -369,30 +378,52 @@ class _CardFront extends StatelessWidget {
               margin: const EdgeInsets.symmetric(horizontal: AppSpacing.md),
               padding: const EdgeInsets.symmetric(horizontal: AppSpacing.lg),
               decoration: BoxDecoration(
-                color: AppColors.surface,
-                borderRadius: BorderRadius.circular(24),
+                gradient: isChild
+                    ? LinearGradient(
+                        begin: Alignment.topCenter,
+                        end: Alignment.bottomCenter,
+                        colors: [
+                          ChildColors.primarySurface,
+                          ChildColors.accentSurface.withOpacity(0.4),
+                        ],
+                      )
+                    : null,
+                color: isChild ? null : AppColors.surface,
+                borderRadius: BorderRadius.circular(isChild ? 28 : 24),
+                border: isChild
+                    ? Border.all(color: ChildColors.primary.withOpacity(0.2), width: 2)
+                    : null,
                 boxShadow: [
                   BoxShadow(
-                    color: Colors.black.withOpacity(0.06),
-                    blurRadius: 20,
+                    color: isChild
+                        ? ChildColors.primary.withOpacity(0.12)
+                        : Colors.black.withOpacity(0.06),
+                    blurRadius: isChild ? 24 : 20,
                     offset: const Offset(0, 4),
+                    spreadRadius: isChild ? 2 : 0,
                   ),
                 ],
               ),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  // Kurmancî — büyük, birincil, responsive (İlke §0.5)
+                  // Kurmancî — büyük, birincil, responsive
                   Padding(
                     padding: const EdgeInsets.symmetric(horizontal: AppSpacing.md),
                     child: FittedBox(
                       fit: BoxFit.scaleDown,
                       child: Text(
                         card.kurmanji,
-                        style: AppTypography.displayMedium.copyWith(
-                          color: AppColors.textPrimary,
-                          fontWeight: FontWeight.w700,
-                        ),
+                        style: isChild
+                            ? ChildTypography.display.copyWith(
+                                color: ChildColors.primary,
+                                fontWeight: FontWeight.w800,
+                                fontSize: 40,
+                              )
+                            : AppTypography.displayMedium.copyWith(
+                                color: AppColors.textPrimary,
+                                fontWeight: FontWeight.w700,
+                              ),
                         textAlign: TextAlign.center,
                       ),
                     ),
@@ -400,22 +431,28 @@ class _CardFront extends StatelessWidget {
 
                   const SizedBox(height: AppSpacing.xl),
 
-                  // İpucu — daha belirgin
+                  // İpucu
                   Icon(Icons.touch_app_rounded,
-                      color: AppColors.textSecondary.withOpacity(0.5),
-                      size: 40),
+                      color: isChild
+                          ? ChildColors.primary.withOpacity(0.4)
+                          : AppColors.textSecondary.withOpacity(0.5),
+                      size: isChild ? 48 : 40),
 
                   const SizedBox(height: AppSpacing.sm),
 
                   Consumer(
                     builder: (context, ref, _) {
-                      final showTr = ref.watch(showTurkishProvider);
                       return Text(
                         'Bersivê bibîne',
-                        style: AppTypography.bodyMedium.copyWith(
-                          color: AppColors.textSecondary,
-                          fontWeight: FontWeight.w500,
-                        ),
+                        style: isChild
+                            ? ChildTypography.body.copyWith(
+                                color: ChildColors.primary,
+                                fontWeight: FontWeight.w600,
+                              )
+                            : AppTypography.bodyMedium.copyWith(
+                                color: AppColors.textSecondary,
+                                fontWeight: FontWeight.w500,
+                              ),
                       );
                     },
                   ),
