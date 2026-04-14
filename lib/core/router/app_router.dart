@@ -307,6 +307,7 @@ GoRouter appRouter(AppRouterRef ref) {
           final extra = state.extra as Map<String, dynamic>?;
           return FlashcardScreen(
             category: extra?['category'] as String?,
+            level: extra?['level'] as String? ?? 'A1',
           );
         },
       ),
@@ -316,6 +317,7 @@ GoRouter appRouter(AppRouterRef ref) {
           final extra = state.extra as Map<String, dynamic>?;
           return ListeningScreen(
             category: extra?['category'] as String?,
+            level: extra?['level'] as String? ?? 'A1',
           );
         },
       ),
@@ -325,6 +327,7 @@ GoRouter appRouter(AppRouterRef ref) {
           final extra = state.extra as Map<String, dynamic>?;
           return SentenceBuilderScreen(
             category: extra?['category'] as String?,
+            level: extra?['level'] as String? ?? 'A1',
           );
         },
       ),
@@ -334,6 +337,7 @@ GoRouter appRouter(AppRouterRef ref) {
           final extra = state.extra as Map<String, dynamic>?;
           return WordMatchScreen(
             category: extra?['category'] as String?,
+            level: extra?['level'] as String? ?? 'A1',
           );
         },
       ),

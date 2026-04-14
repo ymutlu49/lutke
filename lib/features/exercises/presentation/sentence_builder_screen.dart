@@ -9,6 +9,7 @@ import '../../../core/constants/app_colors.dart';
 import '../../../core/constants/app_spacing.dart';
 import '../../../core/constants/app_typography.dart';
 import '../../lessons/domain/a1_kelime_db.dart';
+import '../../lessons/domain/a2_kelime_db.dart';import '../../lessons/domain/b1_kelime_db.dart';import '../../lessons/domain/b2_kelime_db.dart';import '../../lessons/domain/c1_kelime_db.dart';import '../../lessons/domain/c2_kelime_db.dart';
 
 // ════════════════════════════════════════════════════════════════
 // SENTENCE BUILDER — Duolingo-Style Cümle Oluşturma
@@ -31,7 +32,8 @@ class _SentenceQuestion {
 
 class SentenceBuilderScreen extends ConsumerStatefulWidget {
   final String? category;
-  const SentenceBuilderScreen({super.key, this.category});
+  final String level;
+  const SentenceBuilderScreen({super.key, this.category, this.level = 'A1'});
 
   @override
   ConsumerState<SentenceBuilderScreen> createState() =>
@@ -93,7 +95,7 @@ class _SentenceBuilderScreenState extends ConsumerState<SentenceBuilderScreen>
     final rng = Random();
     final pool = <_SentenceQuestion>[];
 
-    var source = kA1TamKelimeler.toList();
+    var source = _sbWordsForLevel(widget.level);
     if (widget.category != null && widget.category!.isNotEmpty) {
       final filtered = source.where((w) => w.kat == widget.category).toList();
       if (filtered.length >= 3) source = filtered;
@@ -864,3 +866,13 @@ class _GhostChip extends StatelessWidget {
     );
   }
 }
+
+List<dynamic> _sbWordsForLevel(String level) => switch (level.toUpperCase()) {
+  'A1' => kA1TamKelimeler.toList(),
+  'A2' => kA2Kelimeler.toList(),
+  'B1' => kB1Kelimeler.toList(),
+  'B2' => kB2Kelimeler.toList(),
+  'C1' => kC1Kelimeler.toList(),
+  'C2' => kC2Kelimeler.toList(),
+  _ => kA1TamKelimeler.toList(),
+};

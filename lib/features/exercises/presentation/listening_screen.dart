@@ -14,6 +14,7 @@ import '../../../core/constants/app_typography.dart';
 import '../../../shared/widgets/speak_button.dart';
 import '../../lessons/domain/a1_kelime_db.dart';
 import '../../../core/services/sound_service.dart';
+import '../../lessons/domain/a2_kelime_db.dart';import '../../lessons/domain/b1_kelime_db.dart';import '../../lessons/domain/b2_kelime_db.dart';import '../../lessons/domain/c1_kelime_db.dart';import '../../lessons/domain/c2_kelime_db.dart';
 
 // Conditional import for direct TTS calls
 import '../../../core/services/js_eval_stub.dart'
@@ -77,8 +78,8 @@ class _ListeningQuestion {
 
 // ── Kelime Havuzu ──────────────────────────────────────────────
 
-List<_ListeningWord> _loadListeningWords({String? category}) {
-  var source = kA1TamKelimeler.toList();
+List<_ListeningWord> _loadListeningWords({String? category, String? level}) {
+  var source = _lsWordsForLevel(level ?? 'A1');
   if (category != null && category.isNotEmpty) {
     final filtered = source.where((r) => r.kat == category).toList();
     if (filtered.length >= 4) source = filtered;
@@ -97,8 +98,8 @@ List<_ListeningWord> _loadListeningWords({String? category}) {
 
 // ── Soru Üretici ───────────────────────────────────────────────
 
-List<_ListeningQuestion> _generateListeningSession({int questionCount = 8, String? category}) {
-  final allWords = _loadListeningWords(category: category);
+List<_ListeningQuestion> _generateListeningSession({int questionCount = 8, String? category, String? level}) {
+  final allWords = _loadListeningWords(category: category, level: level);
   if (allWords.length < 6) return [];
 
   final rng = Random();
@@ -268,7 +269,8 @@ List<_ListeningQuestion> _generateListeningSession({int questionCount = 8, Strin
 
 class ListeningScreen extends ConsumerStatefulWidget {
   final String? category;
-  const ListeningScreen({super.key, this.category});
+  final String level;
+  const ListeningScreen({super.key, this.category, this.level = 'A1'});
 
   @override
   ConsumerState<ListeningScreen> createState() => _ListeningScreenState();
@@ -293,7 +295,7 @@ class _ListeningScreenState extends ConsumerState<ListeningScreen>
   @override
   void initState() {
     super.initState();
-    _questions = _generateListeningSession(questionCount: 8, category: widget.category);
+    _questions = _generateListeningSession(questionCount: 8, category: widget.category, level: widget.level);
     if (_questions.isNotEmpty) {
       _startTypewriter();
     }
@@ -452,7 +454,7 @@ class _ListeningScreenState extends ConsumerState<ListeningScreen>
         onRetry: () {
           Navigator.of(context).pop();
           setState(() {
-            _questions = _generateListeningSession(questionCount: 8, category: widget.category);
+            _questions = _generateListeningSession(questionCount: 8, category: widget.category, level: widget.level);
             _currentIndex = 0;
             _correctCount = 0;
             _hearts = 3;
@@ -1186,3 +1188,13 @@ class _ResultsSheet extends StatelessWidget {
     );
   }
 }
+
+List<dynamic> _lsWordsForLevel(String? level) => switch ((level ?? 'A1').toUpperCase()) {
+  'A1' => kA1TamKelimeler.toList(),
+  'A2' => kA2Kelimeler.toList(),
+  'B1' => kB1Kelimeler.toList(),
+  'B2' => kB2Kelimeler.toList(),
+  'C1' => kC1Kelimeler.toList(),
+  'C2' => kC2Kelimeler.toList(),
+  _ => kA1TamKelimeler.toList(),
+};

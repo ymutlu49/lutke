@@ -12,6 +12,11 @@ import '../../../shared/providers/language_mode_provider.dart';
 import '../../../shared/providers/review_provider.dart';
 import '../../../shared/widgets/speak_button.dart';
 import '../../lessons/domain/a1_kelime_db.dart';
+import '../../lessons/domain/a2_kelime_db.dart';
+import '../../lessons/domain/b1_kelime_db.dart';
+import '../../lessons/domain/b2_kelime_db.dart';
+import '../../lessons/domain/c1_kelime_db.dart';
+import '../../lessons/domain/c2_kelime_db.dart';
 import '../../../core/services/sound_service.dart';
 import '../../../shared/utils/word_emoji_map.dart';
 
@@ -23,7 +28,8 @@ import '../../../shared/utils/word_emoji_map.dart';
 
 class FlashcardScreen extends ConsumerStatefulWidget {
   final String? category;
-  const FlashcardScreen({super.key, this.category});
+  final String level;
+  const FlashcardScreen({super.key, this.category, this.level = 'A1'});
 
   @override
   ConsumerState<FlashcardScreen> createState() => _FlashcardScreenState();
@@ -66,8 +72,8 @@ class _FlashcardScreenState extends ConsumerState<FlashcardScreen>
   void initState() {
     super.initState();
 
-    // Kelime listesinden rastgele seç (kategori filtresi varsa uygula)
-    var allWords = kA1TamKelimeler.toList();
+    // Seviyeye göre kelime yükle
+    var allWords = _wordsForLevel(widget.level);
     if (widget.category != null && widget.category!.isNotEmpty) {
       final filtered = allWords.where((w) => w.kat == widget.category).toList();
       if (filtered.length >= 4) allWords = filtered;
@@ -1084,8 +1090,7 @@ class _FlashcardScreenState extends ConsumerState<FlashcardScreen>
                   _flipController.value = 0;
 
                   // Yeni rastgele seçim
-                  final allWords = kA1TamKelimeler
-                      .where((w) => w.kat != 'alfabe')
+                  final allWords = _wordsForLevel(widget.level)
                       .toList();
                   allWords.shuffle(Random());
                   _cards = allWords
@@ -1499,3 +1504,14 @@ class _FlashcardItem {
     );
   }
 }
+
+/// Seviyeye göre kelime listesi döndürür.
+List<dynamic> _wordsForLevel(String level) => switch (level.toUpperCase()) {
+  'A1' => kA1TamKelimeler.toList(),
+  'A2' => kA2Kelimeler.toList(),
+  'B1' => kB1Kelimeler.toList(),
+  'B2' => kB2Kelimeler.toList(),
+  'C1' => kC1Kelimeler.toList(),
+  'C2' => kC2Kelimeler.toList(),
+  _ => kA1TamKelimeler.toList(),
+};
