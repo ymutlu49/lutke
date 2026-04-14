@@ -84,7 +84,7 @@ class _FillInBlankWidgetState extends ConsumerState<FillInBlankWidget> {
           ),
           const SizedBox(height: 4),
           Text(
-            showTurkish ? 'Boşluğu doldur' : 'Fill in the blank',
+            showTurkish ? 'Boşluğu doldur' : 'Cihê vala dagire',
             style: AppTypography.caption.copyWith(
               color: AppColors.textSecondary.withOpacity(0.6),
               fontSize: 11,
@@ -463,16 +463,16 @@ class _CompactRatingRow extends StatelessWidget {
   Widget build(BuildContext context) {
     return Row(
       children: [
-        _ratingBtn('Dubare', showTurkish ? 'Tekrar' : 'Again', const Color(0xFFEF5350),
+        _ratingBtn('Dubare', showTurkish ? 'Tekrar' : '', const Color(0xFFEF5350),
             Icons.refresh_rounded, () => onRating(Rating.again)),
         const SizedBox(width: 8),
-        _ratingBtn('Dijwar', showTurkish ? 'Zor' : 'Hard', const Color(0xFFFF9800),
+        _ratingBtn('Dijwar', showTurkish ? 'Zor' : '', const Color(0xFFFF9800),
             Icons.sentiment_dissatisfied_outlined, () => onRating(Rating.hard)),
         const SizedBox(width: 8),
-        _ratingBtn('Baş', showTurkish ? 'İyi' : 'Good', const Color(0xFF4CAF50),
+        _ratingBtn('Baş', showTurkish ? 'İyi' : '', const Color(0xFF4CAF50),
             Icons.sentiment_satisfied_outlined, () => onRating(Rating.good)),
         const SizedBox(width: 8),
-        _ratingBtn('Hêsan', showTurkish ? 'Kolay' : 'Easy', const Color(0xFF2196F3),
+        _ratingBtn('Hêsan', showTurkish ? 'Kolay' : '', const Color(0xFF2196F3),
             Icons.sentiment_very_satisfied_outlined, () => onRating(Rating.easy)),
       ],
     );
@@ -498,8 +498,9 @@ class _CompactRatingRow extends StatelessWidget {
               const SizedBox(height: 2),
               Text(ku, style: TextStyle(
                   fontSize: 11, fontWeight: FontWeight.w700, color: color)),
-              Text(tr, style: TextStyle(
-                  fontSize: 9, color: color.withOpacity(0.7))),
+              if (tr.isNotEmpty)
+                Text(tr, style: TextStyle(
+                    fontSize: 9, color: color.withOpacity(0.7))),
             ],
           ),
         ),

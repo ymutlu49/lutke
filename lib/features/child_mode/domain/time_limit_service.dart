@@ -160,6 +160,29 @@ class TimeLimitNotifier extends StateNotifier<TimeLimitState> {
     );
   }
 
+  /// Mola onaylandı — çocuk uygulamayı kullanmaya devam edebilir.
+  /// 30 dakikalık sayacı sıfırlar (yeni oturum başlar), warning/expired
+  /// bayraklarını kapatır. Engelleyici değil; sağlıklı alışkanlık önerisi.
+  Future<void> acknowledgeBreak() async {
+    _ticker?.cancel();
+    _ticker = null;
+
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.setInt(_todayKey(), 0);
+
+    state = state.copyWith(
+      usedMinutes: 0,
+      isWarning: false,
+      isExpired: false,
+      sessionStart: DateTime.now(),
+    );
+
+    // Yeni oturum için sayacı baştan başlat
+    _ticker = Timer.periodic(const Duration(minutes: 1), (_) {
+      _tick();
+    });
+  }
+
   Future<void> _persistUsage(int minutes) async {
     final prefs = await SharedPreferences.getInstance();
     await prefs.setInt(_todayKey(), minutes);

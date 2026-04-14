@@ -148,14 +148,16 @@ List<_ListeningQuestion> _generateListeningSession({int questionCount = 8, Strin
         break;
 
       case _ListeningQuestionType.wordFind:
-        // Cumlede gecen bir kelimeyi bul
-        final sentenceWords = sentence
-            .replaceAll(RegExp(r'[.,!?;:""—–]'), '')
-            .split(' ')
-            .where((w) => w.length > 1)
-            .toList();
-        if (sentenceWords.isEmpty) {
-          // Fallback to meaning type
+        // Hedef kelime cümlede geçiyor mu? (word boundary ile)
+        // Geçiyorsa onu doğru cevap yap; yoksa meaning tipine düş.
+        final targetRe = RegExp(
+          r'\b' + RegExp.escape(word.ku) + r'\b',
+          caseSensitive: false,
+        );
+        final targetInSentence = targetRe.hasMatch(sentence);
+
+        if (!targetInSentence) {
+          // Hedef kelime cümlede yok → meaning sorusuna düş
           final correct = word.tr;
           final distractors = (List<_ListeningWord>.from(allWords)
                 ..remove(word)
@@ -174,29 +176,56 @@ List<_ListeningQuestion> _generateListeningSession({int questionCount = 8, Strin
           break;
         }
 
-        final correctWord = sentenceWords[rng.nextInt(sentenceWords.length)];
-        // 3 yanlis kelime — baska cumlelerden
-        final otherWords = <String>[];
-        for (final w in allWords) {
-          if (w.id == word.id) continue;
-          for (final h in w.her) {
-            final ws = h
-                .replaceAll(RegExp(r'[.,!?;:""—–]'), '')
-                .split(' ')
-                .where((s) => s.length > 1 && s != correctWord)
-                .toList();
-            if (ws.isNotEmpty) {
-              otherWords.add(ws[rng.nextInt(ws.length)]);
-            }
-            if (otherWords.length >= 8) break;
-          }
-          if (otherWords.length >= 8) break;
+        final correctWord = word.ku;
+        // Distractor: aynı kategoriden + uzunluk-benzer, içerik kelimeleri
+        // Function words listesi (bu kelimeler doğru cevap OLMAZ)
+        const functionWords = <String>{
+          // Edatlar / bağlaçlar
+          'ji','bi','li','de','da','ra','re','ve','û','an','na','ne','ma',
+          'ber','bo','bê','bes','her','hin',
+          // Zamirler
+          'min','te','wî','wê','em','hûn','ew','ez','tu',
+          // Ezafe parçaları / soru kelimeleri
+          'a','ê','î','ên','ya','yê','yên','ko','ku','çi','kî','kê',
+        };
+
+        final sameCat = allWords
+            .where((w) => w.id != word.id && w.ku != correctWord)
+            .toList();
+        // Aynı uzunluk ±2 tercih
+        sameCat.sort((a, b) {
+          final da = (a.ku.length - correctWord.length).abs();
+          final db = (b.ku.length - correctWord.length).abs();
+          return da.compareTo(db);
+        });
+        final distractorWords = <String>[];
+        for (final w in sameCat) {
+          final candidate = w.ku;
+          if (candidate.length <= 1) continue;
+          if (functionWords.contains(candidate.toLowerCase())) continue;
+          if (distractorWords.contains(candidate)) continue;
+          if (candidate == correctWord) continue;
+          distractorWords.add(candidate);
+          if (distractorWords.length >= 3) break;
         }
-        otherWords.shuffle(rng);
-        final distractorWords = otherWords.take(3).toList();
-        // Ensure we have enough distractors
-        while (distractorWords.length < 3) {
-          distractorWords.add('peyv${distractorWords.length}');
+        // Hala 3 yoksa fallback ama placeholder değil — meaning'e düş
+        if (distractorWords.length < 3) {
+          final correct = word.tr;
+          final distractors = (List<_ListeningWord>.from(allWords)
+                ..remove(word)
+                ..shuffle(rng))
+              .take(3)
+              .map((w) => w.tr)
+              .toList();
+          final opts = [correct, ...distractors]..shuffle(rng);
+          questions.add(_ListeningQuestion(
+            type: _ListeningQuestionType.meaning,
+            sentence: sentence,
+            correctAnswer: correct,
+            options: opts,
+            sourceWord: word,
+          ));
+          break;
         }
         final options = [correctWord, ...distractorWords]..shuffle(rng);
         questions.add(_ListeningQuestion(
@@ -244,8 +273,24 @@ List<_ListeningQuestion> _generateListeningSession({int questionCount = 8, Strin
           }
           if (fillDistractors.length >= 3) break;
         }
-        while (fillDistractors.length < 3) {
-          fillDistractors.add('kelîme${fillDistractors.length}');
+        if (fillDistractors.length < 3) {
+          // Yetersiz distractor → bu soru için meaning tipine düş
+          final correct = word.tr;
+          final distractors = (List<_ListeningWord>.from(allWords)
+                ..remove(word)
+                ..shuffle(rng))
+              .take(3)
+              .map((w) => w.tr)
+              .toList();
+          final opts = [correct, ...distractors]..shuffle(rng);
+          questions.add(_ListeningQuestion(
+            type: _ListeningQuestionType.meaning,
+            sentence: sentence,
+            correctAnswer: correct,
+            options: opts,
+            sourceWord: word,
+          ));
+          break;
         }
         final fillOptions = [missing, ...fillDistractors.take(3)]..shuffle(rng);
         questions.add(_ListeningQuestion(

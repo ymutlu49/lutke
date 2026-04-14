@@ -104,9 +104,9 @@ const kDialoguePiree = HeritageDialogue(
     DialogueLine(
       speaker: 'Dapîr',
       speakerRole: 'Dapîr',
-      kurmanci: 'Ez baş im, spas. Tu çawa yî, kuro?',
-      turkish: 'İyiyim, teşekkürler. Sen nasılsın, yavrum?',
-      grammarNote: '"Kuro" — sevgi hitabı, cinsiyetten bağımsız kullanılır.',
+      kurmanci: 'Ez baş im, spas. Tu çawa yî, keçê?',
+      turkish: 'İyiyim, teşekkürler. Sen nasılsın, kızım?',
+      grammarNote: '"Keçê" — kız çocuğuna sevgi hitabı (vokatif). Erkek için "kuro" kullanılır.',
       audioAsset: 'assets/audio/heritage/dlg1_04.mp3',
     ),
     DialogueLine(
@@ -201,9 +201,9 @@ const kDialogueSifre = HeritageDialogue(
     DialogueLine(
       speaker: 'Dê',
       speakerRole: 'Dê',
-      kurmanci: 'Ser çavim, kurê min! Rûne, rûne.',
+      kurmanci: 'Ser çavan, kurê min! Rûne, rûne.',
       turkish: 'Baş üstüne, oğlum! Otur, otur.',
-      grammarNote: '"Ser çavim" = baş üstüne — teşekküre kibar yanıt.',
+      grammarNote: '"Ser çavan" = baş/gözler üstüne — teşekküre kibar yanıt (standart Kurmancî).',
       audioAsset: 'assets/audio/heritage/dlg2_03.mp3',
     ),
     DialogueLine(
@@ -267,7 +267,7 @@ const kDialogueSifre = HeritageDialogue(
     DialogueLine(
       speaker: 'Dê',
       speakerRole: 'Dê',
-      kurmanci: 'Ser çavim! Nûş be!',
+      kurmanci: 'Ser çavan! Nûş be!',
       turkish: 'Baş üstüne! Afiyet olsun!',
       grammarNote: '"Nûş be" = afiyet olsun (yemek sonrası).',
       culturalNote: '"Nûş be" Farsça kökenli — Kurmancîde çok yaygın.',

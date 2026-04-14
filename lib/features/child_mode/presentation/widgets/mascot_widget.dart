@@ -4,7 +4,7 @@ import 'package:flutter_animate/flutter_animate.dart';
 import '../../../../core/constants/child_theme.dart';
 
 // ════════════════════════════════════════════════════════════════
-// LÛTKE ZAROK — Maskot Widget (Karok 🐐)
+// LÛTKE ZAROK — Maskot Widget (Karik 🐐)
 //
 // Animasyonlu maskot durumları:
 //   - idle: Nazik zıplama

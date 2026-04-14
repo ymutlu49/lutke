@@ -1,5 +1,3 @@
-import 'dart:convert';
-
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -8,6 +6,9 @@ import 'package:shared_preferences/shared_preferences.dart';
 //
 // Uygulama genelinde çocuk modunun aktif olup olmadığını yönetir.
 // SharedPreferences ile önbellek, UserProfile ile senkron.
+//
+// NOT (Nisan 2026): Ebeveyn PIN sistemi kaldırıldı. LÛTKE bir dil
+// öğrenme uygulaması; kısıtlama aracı değil.
 // ════════════════════════════════════════════════════════════════
 
 /// Çocuk modunun aktif olup olmadığını döndürür.
@@ -34,26 +35,5 @@ class ChildModeNotifier extends StateNotifier<bool> {
   Future<void> toggle() async => setChildMode(!state);
 }
 
-/// PIN doğrulama yardımcıları.
-///
-/// Basit hash — çocuğun kazara erişimini önleme amaçlı,
-/// kriptografik güvenlik gerekmiyor.
-abstract class PinHelper {
-  /// 4 haneli PIN'i basit hash ile hashler.
-  static String hashPin(String pin) {
-    final bytes = utf8.encode('lutke_zarok_$pin');
-    // Basit hash: base64 encode (güvenlik amacı yok, sadece gizleme)
-    return base64Encode(bytes);
-  }
-
-  /// Girilen PIN'i hash ile karşılaştırır.
-  static bool verifyPin(String input, String storedHash) {
-    return hashPin(input) == storedHash;
-  }
-}
-
 /// Çocuk yaş grubu — 7-10 yaş.
 final childAgeProvider = StateProvider<int?>((ref) => null);
-
-/// Ebeveyn PIN hash'i.
-final parentPinHashProvider = StateProvider<String?>((ref) => null);

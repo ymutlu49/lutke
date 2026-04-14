@@ -70,82 +70,82 @@ const kA1TamKelimeler = [
   // ════════════════════════════════════════════════════════════
 
   (id:'a1_010', ku:'Silav', tr:'Merhaba', en:'Hello', cins:'bêcins', ez:null,
-   kat:'selamlama', zor:0.88, not:'Her durumda kullanılır — sabah/akşam/gündüz fark etmez',
+   kat:'silav', zor:0.88, not:'Her durumda kullanılır — sabah/akşam/gündüz fark etmez',
    her:['Silav, pîrê!', 'Silav, dê û bav!'],
    gen:['Silav, heval!', 'Silav, baş î?']),
 
   (id:'a1_011', ku:'Merheba', tr:'Merhaba (resmi)', en:'Greetings', cins:'bêcins', ez:null,
-   kat:'selamlama', zor:0.85, not:'"Silav" daha samimi, "Merheba" biraz daha resmi — ikisi de doğru',
+   kat:'silav', zor:0.85, not:'"Silav" daha samimi, "Merheba" biraz daha resmi — ikisi de doğru',
    her:['Merheba, ap!', 'Merheba, malbato!'],
    gen:['Merheba û spas', 'Merheba, nasî?']),
 
   (id:'a1_012', ku:'Spas', tr:'Teşekkür ederim', en:'Thank you', cins:'bêcins', ez:null,
-   kat:'selamlama', zor:0.88, not:'"Sipas" da denir — ikisi de doğru',
+   kat:'silav', zor:0.88, not:'"Sipas" da denir — ikisi de doğru',
    her:['Spas, dayê!', 'Gelek spas, pîrê!'],
    gen:['Spas ji te re.', 'Spas û sipas.']),
 
   (id:'a1_013', ku:'Gelek spas', tr:'Çok teşekkür ederim', en:'Thank you very much', cins:'bêcins', ez:null,
-   kat:'selamlama', zor:0.86, not:'"Gelek" = çok. "Gelek spas" = çok teşekkürler',
+   kat:'silav', zor:0.86, not:'"Gelek" = çok. "Gelek spas" = çok teşekkürler',
    her:['Gelek spas, kal!', 'Gelek spas, dayê!'],
    gen:['Gelek spas ji alîkariya te re.', 'Gelek spas û sipas.']),
 
   (id:'a1_014', ku:'Erê', tr:'Evet', en:'Yes', cins:'bêcins', ez:null,
-   kat:'selamlama', zor:0.90, not:'Çok kolay — kalıpsal, her zaman "erê"',
+   kat:'silav', zor:0.90, not:'Çok kolay — kalıpsal, her zaman "erê"',
    her:['Erê, dayê, ez hatim!', 'Erê, baş im.'],
    gen:['Erê, dizanim.', 'Erê, rast e.']),
 
   (id:'a1_015', ku:'Na', tr:'Hayır', en:'No', cins:'bêcins', ez:null,
-   kat:'selamlama', zor:0.90, not:'Türkçe "na" demeyin — Kurmancîde bu olumsuzluk',
+   kat:'silav', zor:0.90, not:'Türkçe "na" demeyin — Kurmancîde bu olumsuzluk',
    her:['Na, pîrê, ne germ e.', 'Na, dê, ez nehatim.'],
    gen:['Na, spas.', 'Na, ne rast e.']),
 
   (id:'a1_016', ku:'Baş e', tr:'İyi / Tamam', en:'Good / OK', cins:'bêcins', ez:null,
-   kat:'selamlama', zor:0.88, not:'"Baş" = iyi, "e" = olmak fiili 3.tekil. "Baş e" = iyidir',
+   kat:'silav', zor:0.88, not:'"Baş" = iyi, "e" = olmak fiili 3.tekil. "Baş e" = iyidir',
    her:['Baş e, dayê, ez hatim.', 'Baş e, pîrê!'],
    gen:['Baş e, spas.', 'Ev baş e.']),
 
   (id:'a1_017', ku:'Tu çawa yî?', tr:'Nasılsın?', en:'How are you?', cins:'bêcins', ez:null,
-   kat:'selamlama', zor:0.85, not:'"Çawa" = nasıl, "yî" = sen-sin (bûn fiili)',
+   kat:'silav', zor:0.85, not:'"Çawa" = nasıl, "yî" = sen-sin (bûn fiili)',
    her:['Pîrê, tu çawa yî?', 'Dê, tu çawa yî?'],
    gen:['Heval, tu çawa yî?', 'Tu çawa yî, baş î?']),
 
   (id:'a1_018', ku:'Ez baş im', tr:'İyiyim', en:"I'm fine", cins:'bêcins', ez:null,
-   kat:'selamlama', zor:0.86, not:'"Ez" = ben, "baş" = iyi, "im" = -im (bûn fiili 1.tekil)',
+   kat:'silav', zor:0.86, not:'"Ez" = ben, "baş" = iyi, "im" = -im (bûn fiili 1.tekil)',
    her:['Ez baş im, spas, pîrê!', 'Ez baş im, dê.'],
    gen:['Ez baş im, tu?', 'Ez baş im, gelek spas.']),
 
   (id:'a1_019', ku:'Navê min … e', tr:'Adım … dır', en:'My name is …', cins:'bêcins', ez:null,
-   kat:'selamlama', zor:0.83, not:'"Nav" = isim/ad (eril), "navê min" = benim adım (ezafe -ê)',
+   kat:'silav', zor:0.83, not:'"Nav" = isim/ad (eril), "navê min" = benim adım (ezafe -ê)',
    her:['Navê min Fatma ye, pîrê!', 'Navê min Mehmet e.'],
    gen:['Navê min … e, tu kî yî?', 'Navê min Narin e.']),
 
   (id:'a1_020', ku:'Tu kî yî?', tr:'Sen kimsin?', en:'Who are you?', cins:'bêcins', ez:null,
-   kat:'selamlama', zor:0.84, not:'"Kî" = kim. Soru cümlesi — cümle sonuna ? yeter',
+   kat:'silav', zor:0.84, not:'"Kî" = kim. Soru cümlesi — cümle sonuna ? yeter',
    her:['Tu kî yî, kurê min?', 'Pîrê, tu kî yî?'],
    gen:['Tu kî yî? Navê te çi ye?', 'Tu kî yî, heval?']),
 
   (id:'a1_021', ku:'Bi xêr hatî', tr:'Hoş geldiniz', en:'Welcome', cins:'bêcins', ez:null,
-   kat:'selamlama', zor:0.82, not:'"Bi xêr" = iyilikle, "hatî" = geldin. Misafiri karşılarken söylenir',
+   kat:'silav', zor:0.82, not:'"Bi xêr" = iyilikle, "hatî" = geldin. Misafiri karşılarken söylenir',
    her:['Bi xêr hatî, malbato!', 'Bi xêr hatî malê me!'],
    gen:['Bi xêr hatî Kurdistanê!', 'Bi xêr hatî, heval!']),
 
   (id:'a1_022', ku:'Xatirê te', tr:'Hoşça kal / Güle güle', en:'Goodbye', cins:'bêcins', ez:null,
-   kat:'selamlama', zor:0.82, not:'"Xatir" = hatır, "xatirê te" = senin hatırın için — ayrılırken söylenir',
+   kat:'silav', zor:0.82, not:'"Xatir" = hatır, "xatirê te" = senin hatırın için — ayrılırken söylenir',
    her:['Xatirê te, pîrê!', 'Xatirê te, dê û bav!'],
    gen:['Xatirê te, heval!', 'Bi xêr bimîne, xatirê te!']),
 
   (id:'a1_023', ku:'Bibore', tr:'Özür dilerim / Pardon', en:'Excuse me / Sorry', cins:'bêcins', ez:null,
-   kat:'selamlama', zor:0.84, not:'Hafif özür için "Bibore", derin pişmanlık için "Li min bibore"',
+   kat:'silav', zor:0.84, not:'Hafif özür için "Bibore", derin pişmanlık için "Li min bibore"',
    her:['Bibore, pîrê!', 'Bibore, dê, dereng hatim.'],
    gen:['Bibore, ez dereng im.', 'Bibore, tu dizanî?']),
 
   (id:'a1_024', ku:'Destê te xweş be', tr:'Elinize sağlık', en:'Well done (for cooking)', cins:'bêcins', ez:null,
-   kat:'selamlama', zor:0.78, not:'"Dest" = el, "xweş" = güzel. Yemekten sonra söylenen geleneksel ifade',
+   kat:'silav', zor:0.78, not:'"Dest" = el, "xweş" = güzel. Yemekten sonra söylenen geleneksel ifade',
    her:['Destê te xweş be, dêyê!', 'Destê te xweş be, pîrê — nan xweş bû!'],
    gen:['Destê te xweş be!', 'Xwarin xweş bû, destê te xweş be.']),
 
   (id:'a1_025', ku:'Bextewar', tr:'Mutlu / Bahtiyar', en:'Happy', cins:'bêcins', ez:null,
-   kat:'selamlama', zor:0.80, not:'"Bextewar" = bahtiyar — Farsça kökenli ama Kurmancîde yerleşmiş',
+   kat:'silav', zor:0.80, not:'"Bextewar" = bahtiyar — Farsça kökenli ama Kurmancîde yerleşmiş',
    her:['Ez bextewar im, pîrê!', 'Tu bextewar î?'],
    gen:['Em bextewar in.', 'Bextewar bî!']),
 
@@ -513,10 +513,10 @@ const kA1TamKelimeler = [
    her:['Nîvro hatim malê, dêyê.', 'Di nîvroyê de xwarim.'],
    gen:['Nîvro û êvarê', 'Di nîvroyê de']),
 
-  (id:'a1_124', ku:'Êvare', tr:'Akşam', en:'Evening', cins:'mê', ez:'êvarê',
-   kat:'dem', zor:0.82, not:'Dişil — akşam vakti',
-   her:['Êvare hatim, pîrê!', 'Şeva we xweş be, êvarê!'],
-   gen:['Êvare û şev', 'Di êvarê de']),
+  (id:'a1_124', ku:'Êvar', tr:'Akşam', en:'Evening', cins:'mê', ez:'êvarê',
+   kat:'dem', zor:0.82, not:'Dişil — "êvar" = akşam; "êvarê" = akşamleyin (oblique)',
+   her:['Êvarê hatim, pîrê!', 'Şeva we xweş be!'],
+   gen:['Êvar û şev', 'Di êvarê de']),
 
   (id:'a1_125', ku:'Îro', tr:'Bugün', en:'Today', cins:'bêcins', ez:null,
    kat:'dem', zor:0.85, not:'"Î-ro" — "bu gün" anlamında, ayrı söylenir',
@@ -580,24 +580,24 @@ const kA1TamKelimeler = [
    gen:['Yekşem û Duşem', 'Di Yekşemê de']),
 
   // Mevsimler
-  (id:'a1_140', ku:'Bihar', tr:'İlkbahar', en:'Spring', cins:'nêr', ez:'biharê',
-   kat:'demsal', zor:0.83, not:'Eril — Newroz biharê tê! (Newroz ilkbaharda gelir)',
-   her:['Biharê Newroz tê, pîrê!', 'Bihar xweş e.'],
+  (id:'a1_140', ku:'Bihar', tr:'İlkbahar', en:'Spring', cins:'mê', ez:'biharê',
+   kat:'demsal', zor:0.83, not:'Dişil — "biharê" (ilkbaharda). Newroz biharê tê!',
+   her:['Biharê Newroz tê, pîrê!', 'Bihara vê salê xweş e.'],
    gen:['Bihar û havîn', 'Di biharê de']),
 
-  (id:'a1_141', ku:'Havîn', tr:'Yaz', en:'Summer', cins:'nêr', ez:'havînê',
-   kat:'demsal', zor:0.82, not:'Eril',
-   her:['Havînê em diçin gundê.', 'Havîn germ e.'],
+  (id:'a1_141', ku:'Havîn', tr:'Yaz', en:'Summer', cins:'mê', ez:'havînê',
+   kat:'demsal', zor:0.82, not:'Dişil — "havînê" (yazın)',
+   her:['Havînê em diçin gund.', 'Havîna îsal germ e.'],
    gen:['Havîn û payîz', 'Di havînê de']),
 
-  (id:'a1_142', ku:'Payîz', tr:'Sonbahar', en:'Autumn', cins:'nêr', ez:'payîzê',
-   kat:'demsal', zor:0.82, not:'Eril',
-   her:['Payîzê ew tê malê.', 'Payîz sar e.'],
+  (id:'a1_142', ku:'Payîz', tr:'Sonbahar', en:'Autumn', cins:'mê', ez:'payîzê',
+   kat:'demsal', zor:0.82, not:'Dişil — "payîzê" (sonbaharda)',
+   her:['Payîzê ew tê malê.', 'Payîza îsal sar e.'],
    gen:['Payîz û zivistan', 'Di payîzê de']),
 
-  (id:'a1_143', ku:'Zivistan', tr:'Kış', en:'Winter', cins:'nêr', ez:'zivistanê',
-   kat:'demsal', zor:0.82, not:'Eril — "zivistan" = kış. Berf (kar) zivistanê dibare',
-   her:['Zivistanê berf dibare, pîrê!', 'Zivistan sar e.'],
+  (id:'a1_143', ku:'Zivistan', tr:'Kış', en:'Winter', cins:'mê', ez:'zivistanê',
+   kat:'demsal', zor:0.82, not:'Dişil — "zivistan" = kış. Berf zivistanê dibare',
+   her:['Zivistanê berf dibare, pîrê!', 'Zivistana sar derbas bû.'],
    gen:['Zivistan û bihar', 'Di zivistanê de']),
 
   // ════════════════════════════════════════════════════════════
@@ -620,10 +620,10 @@ const kA1TamKelimeler = [
    her:['Pîrêya min çay dide min.', 'Çayê xweş vexwe!'],
    gen:['Çay û qehwe', 'Çayê me']),
 
-  (id:'a1_153', ku:'Qehwe', tr:'Kahve', en:'Coffee', cins:'nêr', ez:'qehwê',
-   kat:'vexwarin', zor:0.84, not:'Eril — q sesi gırtlaktan!',
-   her:['Bavê min qehwe vexwe.', 'Qehweyê min.'],
-   gen:['Qehwe û çay', 'Qehwê we']),
+  (id:'a1_153', ku:'Qehwe', tr:'Kahve', en:'Coffee', cins:'mê', ez:'qehwê',
+   kat:'vexwarin', zor:0.84, not:'Dişil — q sesi gırtlaktan!',
+   her:['Bavê min qehwe vedixwe.', 'Qehweya min.'],
+   gen:['Qehwe û çay', 'Qehweya we']),
 
   (id:'a1_154', ku:'Şîr', tr:'Süt', en:'Milk', cins:'nêr', ez:'şîrê',
    kat:'vexwarin', zor:0.83, not:'Eril — î uzun söylenir',
@@ -1663,15 +1663,15 @@ const kA1TamKelimeler = [
    her:['Nîvro ye, xwarinê amade bike, dê.', 'Pîrê, nîvro bû.'],
    gen:['Nîvro ye.', 'Di nîvroyê de ez dixwim.']),
 
-  (id:'a1_553', ku:'Êvar', tr:'Akşam', en:'Evening', cins:'nêr', ez:'êvarî',
-   kat:'roj', zor:0.80, not:'"Êvar" = akşam. "Êvarê" = akşamleyin.',
-   her:['Êvar baş, pîrê!', 'Dê, êvar hat.'],
-   gen:['Êvar e.', 'Êvar xweş e.']),
+  (id:'a1_553', ku:'Êvar baş', tr:'İyi akşamlar', en:'Good evening', cins:'bêcins', ez:null,
+   kat:'silav', zor:0.80, not:'Akşam selamlaması — "êvar baş!" (Thackston)',
+   her:['Êvar baş, pîrê!', 'Êvar baş, malbato!'],
+   gen:['Êvar baş!', 'Êvar baş, mamosta!']),
 
-  (id:'a1_554', ku:'Şev', tr:'Gece', en:'Night', cins:'mê', ez:'şevê',
-   kat:'roj', zor:0.78, not:'"Şev" = gece. "Şev baş" = iyi geceler.',
-   her:['Şev baş, dê!', 'Pîrê, şev hat.'],
-   gen:['Şev e.', 'Şev baş!']),
+  (id:'a1_554', ku:'Şev baş', tr:'İyi geceler', en:'Good night', cins:'bêcins', ez:null,
+   kat:'silav', zor:0.78, not:'Gece selamlaması — "şev baş!"',
+   her:['Şev baş, dê!', 'Şev baş, pîrê!'],
+   gen:['Şev baş!', 'Şev baş, heval!']),
 
   (id:'a1_555', ku:'Nîvê şevê', tr:'Gece yarısı', en:'Midnight', cins:'mê', ez:null,
    kat:'roj', zor:0.84, not:'"Nîv" = yarı + "şev" = gece = gece yarısı.',
@@ -2053,13 +2053,13 @@ const kA1EkKelimeler = [
    gen:['Çengal û kêr', 'Çengalê me']),
 
   // [AS]: "kêr" = bıçak
-  // [BH]: kêr eril — ve minimal çifte dikkat: "ker" (eşek) vs "kêr" (bıçak)
-  // [FB]: kêr n.m.
-  (id:'a1_453', ku:'Kêr', tr:'Bıçak', en:'Knife', cins:'nêr', ez:'kêrê',
+  // [BH]: kêr dişil — ve minimal çifte dikkat: "ker" (eşek, nêr) vs "kêr" (bıçak, mê)
+  // [FB]: kêr n.f.
+  (id:'a1_453', ku:'Kêr', tr:'Bıçak', en:'Knife', cins:'mê', ez:'kêra',
    kat:'mal', zor:0.78,
-   not:'Eril — Ferhenga Birûskî: kêr n.m. ÖNEMLİ: "ker" (kısa e) = eşek, "kêr" (uzun ê) = bıçak! Minimal çift — anlam tamamen farklı',
-   her:['Kêr bide min, pîrê.', 'Kêr û çengal.'],
-   gen:['Kêr û çengal', 'Kêrê me']),
+   not:'Dişil — Chyet/Bedirxan: kêr n.f. ÖNEMLİ: "ker" (kısa e, eril) = eşek, "kêr" (uzun ê, dişil) = bıçak! Minimal çift — anlam tamamen farklı',
+   her:['Kêra tûj bide min, pîrê.', 'Kêr û çengal.'],
+   gen:['Kêr û çengal', 'Kêra me']),
 
   // ─────────────────────────────────────────────────────────────
   // SIFAT EKSİKLERİ
@@ -2189,7 +2189,7 @@ const kA1EkKelimeler = [
   // [TH]: "Roja te baş be" = iyi günler
   // [FB]: "roj baş" = good day — yaygın selamlama
   (id:'a1_490', ku:'Roja te baş be', tr:'İyi günler', en:'Good day', cins:'bêcins', ez:null,
-   kat:'selamlama', zor:0.83,
+   kat:'silav', zor:0.83,
    not:'"Roja te baş be" = günün iyi olsun. "Roja we baş be" = çoğul form. Thackston selamlama bölümünde geçer',
    her:['Roja te baş be, pîrê!', 'Roja we baş be, malbato!'],
    gen:['Roja te baş be!', 'Roja we baş be!']),
@@ -2197,7 +2197,7 @@ const kA1EkKelimeler = [
   // [TH]: "Şeva te xweş be" = iyi geceler
   // [FB]: standard gece selamı
   (id:'a1_491', ku:'Şeva te xweş be', tr:'İyi geceler', en:'Good night', cins:'bêcins', ez:null,
-   kat:'selamlama', zor:0.82,
+   kat:'silav', zor:0.82,
    not:'"Şeva te xweş be" = gecen güzel olsun. "Şeva we xweş be" = çoğul. Thackston selamlama listesinde',
    her:['Şeva te xweş be, pîrê!', 'Şeva we xweş be, malbato!'],
    gen:['Şeva te xweş be.', 'Şeva xweş!']),
@@ -2205,7 +2205,7 @@ const kA1EkKelimeler = [
   // [TH]: "Sibê baş!" = günaydın (short form)
   // [FB]: standard sabah selamı
   (id:'a1_492', ku:'Sibê baş!', tr:'Günaydın!', en:'Good morning!', cins:'bêcins', ez:null,
-   kat:'selamlama', zor:0.83,
+   kat:'silav', zor:0.83,
    not:'"Sibê baş!" = günaydın (kısa). Uzun form: "Sibê te xweş be!" Thackston sabah selamı listesinde',
    her:['Sibê baş, pîrê!', 'Sibê baş, dê û bav!'],
    gen:['Sibê baş!', 'Sibê baş, heval!']),
@@ -2213,14 +2213,14 @@ const kA1EkKelimeler = [
   // [TH]: "Çawa ye?" informal
   // [FB]: yaygın selamlama
   (id:'a1_493', ku:'Çawa ye?', tr:'Nasıl? (kısa)', en:"How's it going?", cins:'bêcins', ez:null,
-   kat:'selamlama', zor:0.84,
+   kat:'silav', zor:0.84,
    not:'"Çawa ye?" = Nasıl/nasılsın (kısa). "Tu çawa yî?" = Nasılsın? (uzun). "Çawa ye?" = "how is it?"',
    her:['Çawa ye, pîrê?', 'Çawa ye, heval?'],
    gen:['Çawa ye?', 'Xweş e, spas!']),
 
   // [TH] + [FB]: "Bi xatirê we" = güle güle (çoğul)
   (id:'a1_494', ku:'Bi xatirê we', tr:'Güle güle (çoğul)', en:'Goodbye (to a group)', cins:'bêcins', ez:null,
-   kat:'selamlama', zor:0.81,
+   kat:'silav', zor:0.81,
    not:'"Bi xatirê we" = (siz) güle gidin. "Bi xatirê te" = (sen) güle git. Thackston veda selamları',
    her:['Bi xatirê we, malbato!', 'Bi xatirê we, pîrê û kal!'],
    gen:['Bi xatirê we!', 'Bi xatirê te, heval!']),
@@ -2228,7 +2228,7 @@ const kA1EkKelimeler = [
   // [TH]: "Ser çavim" = baş üstüne / Rica ederim
   // [FB]: ser çavim — polite response to thanks
   (id:'a1_495', ku:'Ser çavim', tr:'Baş üstüne / Rica ederim', en:'You are welcome / At your service', cins:'bêcins', ez:null,
-   kat:'selamlama', zor:0.79,
+   kat:'silav', zor:0.79,
    not:'"Ser çavim" = gözüm üstüne (kelimesi kelimesine). Rica etme/baş üstüne anlamında. Thackston kibar ifadeler bölümü',
    her:['Spas, pîrê! — Ser çavim!', 'Gelek spas! — Ser çavim, kuro!'],
    gen:['Spas! — Ser çavim.', 'Ser çavim, heval!']),

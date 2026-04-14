@@ -85,13 +85,19 @@ class _DialogueScreenState extends ConsumerState<DialogueScreen> {
       final tr = w.tr as String;
 
       // Cümleden kelimeyi maskeleyerek boşluk oluştur
-      final masked = sentence.replaceAll(ku, '____');
+      // Word boundary ile maskeleme — substring match değil.
+      // Kurmancî ezafe ekleri (-a, -ê, -î, -an, -ên) için opsiyonel eşleşme.
+      final maskRe = RegExp(
+        r'\b' + RegExp.escape(ku) + r'(a|ê|î|an|ên|yê|ya|yên)?\b',
+        caseSensitive: false,
+      );
+      final masked = sentence.replaceAllMapped(maskRe, (_) => '____');
       final hasMask = masked != sentence;
 
-      // Distractor seçenekler (aynı kategoriden)
+      // Distractor seçenekler (aynı kategoriden) — CEFR/MCQ için 3 distractor
       final distractors = withSentences
           .where((d) => d.ku != ku)
-          .take(2)
+          .take(3)
           .map((d) => d.ku as String)
           .toList();
 

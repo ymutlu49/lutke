@@ -7,15 +7,16 @@ import 'package:shared_preferences/shared_preferences.dart';
 import '../../../core/constants/child_theme.dart';
 import '../../../core/router/app_router.dart';
 import '../../../shared/providers/child_mode_provider.dart';
-import 'widgets/pin_entry_widget.dart';
 
 // ════════════════════════════════════════════════════════════════
 // LÛTKE ZAROK — Çocuk Onboarding
 //
-// 3 adımlı basit akış:
+// 2 adımlı basit akış:
 //   1. Yaş seçimi (7, 8, 9, 10)
-//   2. Ebeveyn PIN kurulumu
-//   3. Maskot karşılama ("Karok")
+//   2. Maskot karşılama ("Karik")
+//
+// NOT (Nisan 2026): Ebeveyn PIN adımı kaldırıldı — LÛTKE bir dil
+// öğrenme uygulaması; kısıtlama aracı değil.
 // ════════════════════════════════════════════════════════════════
 
 class ChildOnboardingScreen extends ConsumerStatefulWidget {
@@ -30,7 +31,6 @@ class _ChildOnboardingScreenState
     extends ConsumerState<ChildOnboardingScreen> {
   int _step = 0;
   int? _selectedAge;
-  String? _pin;
 
   @override
   Widget build(BuildContext context) {
@@ -52,17 +52,8 @@ class _ChildOnboardingScreenState
                     });
                   },
                 ),
-              1 => _PinSetupStep(
-                  key: const ValueKey(1),
-                  onComplete: (pin) {
-                    setState(() {
-                      _pin = pin;
-                      _step = 2;
-                    });
-                  },
-                ),
               _ => _MascotWelcome(
-                  key: const ValueKey(2),
+                  key: const ValueKey(1),
                   onStart: () => _completeOnboarding(),
                 ),
             },
@@ -79,9 +70,6 @@ class _ChildOnboardingScreenState
     // SharedPreferences'a kaydet
     final prefs = await SharedPreferences.getInstance();
     await prefs.setInt('child_age', _selectedAge ?? 8);
-    if (_pin != null) {
-      await prefs.setString('parent_pin_hash', PinHelper.hashPin(_pin!));
-    }
     await prefs.setBool('child_onboarding_complete', true);
 
     if (mounted) {
@@ -113,7 +101,7 @@ class _AgeStep extends StatelessWidget {
         const SizedBox(height: 24),
 
         Text(
-          'Silav! Ez Karok im!',
+          'Silav! Ez Karik im!',
           style: ChildTypography.display.copyWith(color: ChildColors.primary),
         ).animate().fadeIn(delay: 300.ms),
 
@@ -205,78 +193,7 @@ class _AgeButton extends StatelessWidget {
   }
 }
 
-// ── Adım 2: PIN Kurulumu ────────────────────────────────────
-
-class _PinSetupStep extends StatefulWidget {
-  final ValueChanged<String> onComplete;
-
-  const _PinSetupStep({super.key, required this.onComplete});
-
-  @override
-  State<_PinSetupStep> createState() => _PinSetupStepState();
-}
-
-class _PinSetupStepState extends State<_PinSetupStep> {
-  String? _firstPin;
-  String? _error;
-
-  @override
-  Widget build(BuildContext context) {
-    return Column(
-      children: [
-        const Spacer(flex: 2),
-
-        const Icon(Icons.lock_rounded, size: 64, color: ChildColors.primary)
-            .animate().fadeIn(),
-
-        const SizedBox(height: 24),
-
-        Text(
-          _firstPin == null
-              ? 'Ebeveyn PIN\'i oluşturun'
-              : 'PIN\'i tekrar girin',
-          style: ChildTypography.title,
-        ).animate().fadeIn(delay: 200.ms),
-
-        const SizedBox(height: 8),
-
-        Text(
-          'Ji bo parastina mîhengên zarokê te',
-          style: ChildTypography.body.copyWith(
-            color: ChildColors.textSecondary,
-          ),
-          textAlign: TextAlign.center,
-        ).animate().fadeIn(delay: 300.ms),
-
-        const Spacer(),
-
-        PinEntryWidget(
-          key: ValueKey(_firstPin),
-          errorMessage: _error,
-          onComplete: (pin) {
-            if (_firstPin == null) {
-              setState(() {
-                _firstPin = pin;
-                _error = null;
-              });
-            } else if (_firstPin == pin) {
-              widget.onComplete(pin);
-            } else {
-              setState(() {
-                _firstPin = null;
-                _error = 'PIN li hev nayê, dîsa biceribîne';
-              });
-            }
-          },
-        ),
-
-        const Spacer(flex: 2),
-      ],
-    );
-  }
-}
-
-// ── Adım 3: Maskot Karşılama ────────────────────────────────
+// ── Adım 2: Maskot Karşılama ────────────────────────────────
 
 class _MascotWelcome extends StatelessWidget {
   final VoidCallback onStart;
@@ -300,7 +217,7 @@ class _MascotWelcome extends StatelessWidget {
         const SizedBox(height: 24),
 
         Text(
-          'Karok amade ye!',
+          'Karik amade ye!',
           style: ChildTypography.display.copyWith(color: ChildColors.primary),
         ).animate().fadeIn(delay: 400.ms),
 

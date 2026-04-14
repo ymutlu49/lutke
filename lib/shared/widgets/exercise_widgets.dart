@@ -556,8 +556,16 @@ class _TypingExerciseState extends State<TypingExercise> {
     if (_ctrl.text.trim().isEmpty) return;
     final userInput = _ctrl.text.trim().toLowerCase();
     final expected = widget.answer.trim().toLowerCase();
-    final isCorrect = userInput == expected ||
-        _similarity(userInput, expected) > 0.85;
+    // Uzunluk-bazlı adaptif Levenshtein toleransı + simetrik diakritik.
+    final maxDist = _lenTolerance(expected.length);
+    bool isCorrect = userInput == expected ||
+        _distance(userInput, expected) <= maxDist;
+    if (!isCorrect) {
+      final inputNorm = _stripDiacritics(userInput);
+      final expectedNorm = _stripDiacritics(expected);
+      final normMax = maxDist > 0 ? maxDist - 1 : 0;
+      isCorrect = _distance(inputNorm, expectedNorm) <= normMax;
+    }
     setState(() {
       _checked = true;
       _correct = isCorrect;
@@ -570,11 +578,26 @@ class _TypingExerciseState extends State<TypingExercise> {
     }
   }
 
-  // Levenshtein benzerlik (typo toleransı)
-  double _similarity(String a, String b) {
-    if (a == b) return 1.0;
+  /// Uzunluk-bazlı kabul eşiği: len<4→0, 4-6→1, ≥7→2
+  int _lenTolerance(int len) {
+    if (len < 4) return 0;
+    if (len <= 6) return 1;
+    return 2;
+  }
+
+  String _stripDiacritics(String s) => s
+      .replaceAll('ê', 'e')
+      .replaceAll('î', 'i')
+      .replaceAll('û', 'u')
+      .replaceAll('ç', 'c')
+      .replaceAll('ş', 's');
+
+  // Levenshtein mesafesi (typo toleransı)
+  int _distance(String a, String b) {
+    if (a == b) return 0;
     final la = a.length, lb = b.length;
-    if (la == 0 || lb == 0) return 0.0;
+    if (la == 0) return lb;
+    if (lb == 0) return la;
     final d = List.generate(la + 1, (_) => List.filled(lb + 1, 0));
     for (var i = 0; i <= la; i++) d[i][0] = i;
     for (var j = 0; j <= lb; j++) d[0][j] = j;
@@ -586,7 +609,7 @@ class _TypingExerciseState extends State<TypingExercise> {
                   .reduce((a, b) => a < b ? a : b);
       }
     }
-    return 1 - d[la][lb] / (la > lb ? la : lb);
+    return d[la][lb];
   }
 
   @override

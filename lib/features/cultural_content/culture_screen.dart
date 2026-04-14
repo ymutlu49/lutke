@@ -9,11 +9,14 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:go_router/go_router.dart';
 
 import '../../core/constants/app_colors.dart';
 import '../../core/constants/app_typography.dart';
+import '../../core/router/app_router.dart';
 import '../../shared/providers/language_mode_provider.dart';
 import 'cultural_entities.dart';
+import 'domain/gotinen_pesiyan_db.dart';
 
 // ────────────────────────────────────────────────────────────────
 // TAB MODELI
@@ -223,6 +226,17 @@ class _CultureScreenState extends State<CultureScreen> {
           ),
 
           const SliverToBoxAdapter(child: SizedBox(height: 16)),
+
+          // ── GOTINÊN PÊŞÎYAN — Büyük atasözü koleksiyonu CTA ──
+          // (sadece "Hemû" ve "Gotinên Pêşiyan" sekmelerinde görünür)
+          if ((_selectedTab == 0 || _selectedTab == 1) &&
+              _searchQuery.isEmpty)
+            SliverToBoxAdapter(
+              child: Padding(
+                padding: const EdgeInsets.fromLTRB(16, 0, 16, 12),
+                child: _GotinenPesiyanBanner(),
+              ),
+            ),
 
           // ── FEATURED CARD (only on "All" tab with no search) ──
           if (_selectedTab == 0 && _searchQuery.isEmpty)
@@ -949,6 +963,93 @@ class _KeywordTag extends StatelessWidget {
         style: AppTypography.caption.copyWith(
           fontSize: 11,
           color: AppColors.textSecondary,
+        ),
+      ),
+    );
+  }
+}
+
+// ════════════════════════════════════════════════════════════════
+// GOTINÊN PÊŞÎYAN BANNER — Büyük atasözü koleksiyonuna bağlantı
+// ════════════════════════════════════════════════════════════════
+
+class _GotinenPesiyanBanner extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    final count = kGotinenPesiyan.length;
+
+    return Material(
+      color: Colors.transparent,
+      child: InkWell(
+        borderRadius: BorderRadius.circular(16),
+        onTap: () => context.push(AppRoutes.gotinenPesiyan),
+        child: Container(
+          padding: const EdgeInsets.all(16),
+          decoration: BoxDecoration(
+            gradient: LinearGradient(
+              begin: Alignment.topLeft,
+              end: Alignment.bottomRight,
+              colors: [
+                AppColors.primary,
+                AppColors.primary.withOpacity(0.8),
+              ],
+            ),
+            borderRadius: BorderRadius.circular(16),
+            boxShadow: [
+              BoxShadow(
+                color: AppColors.primary.withOpacity(0.25),
+                blurRadius: 12,
+                offset: const Offset(0, 4),
+              ),
+            ],
+          ),
+          child: Row(
+            children: [
+              Container(
+                width: 52,
+                height: 52,
+                decoration: BoxDecoration(
+                  color: Colors.white.withOpacity(0.18),
+                  borderRadius: BorderRadius.circular(14),
+                ),
+                alignment: Alignment.center,
+                child: const Icon(
+                  Icons.menu_book_rounded,
+                  color: Colors.white,
+                  size: 28,
+                ),
+              ),
+              const SizedBox(width: 14),
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      'Gotinên Pêşîyan',
+                      style: AppTypography.title.copyWith(
+                        color: Colors.white,
+                        fontWeight: FontWeight.w800,
+                        fontSize: 17,
+                      ),
+                    ),
+                    const SizedBox(height: 2),
+                    Text(
+                      '$count gotinên kal û pîran — alfabeyî',
+                      style: AppTypography.caption.copyWith(
+                        color: Colors.white.withOpacity(0.92),
+                        fontSize: 12,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              const Icon(
+                Icons.arrow_forward_ios_rounded,
+                color: Colors.white,
+                size: 16,
+              ),
+            ],
+          ),
         ),
       ),
     );

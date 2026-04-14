@@ -21,6 +21,7 @@ import '../constants/app_typography.dart';
 import '../services/auth_service.dart';
 import '../services/sound_service.dart';
 import '../../features/cultural_content/culture_screen.dart';
+import '../../features/cultural_content/presentation/gotinen_pesiyan_screen.dart';
 import '../../features/exercises/presentation/flashcard_screen.dart';
 import '../../features/exercises/presentation/quiz_screen.dart';
 import '../../features/exercises/presentation/sentence_builder_screen.dart';
@@ -40,7 +41,6 @@ import '../../features/child_mode/presentation/child_profile_screen.dart';
 import '../../features/child_mode/presentation/child_onboarding_screen.dart';
 import '../../features/child_mode/presentation/child_unit_hub_screen.dart';
 import '../../features/child_mode/presentation/child_progress_map_screen.dart';
-import '../../features/child_mode/presentation/parental_controls_screen.dart';
 import '../../features/child_mode/presentation/widgets/child_mode_wrapper.dart';
 import '../../shared/providers/child_mode_provider.dart';
 
@@ -64,6 +64,7 @@ abstract class AppRoutes {
   static const home             = '/home';
   static const vocabulary       = '/vocabulary';
   static const culture          = '/culture';
+  static const gotinenPesiyan   = '/culture/gotinen-pesiyan';
   static const profile          = '/profile';
   static const lesson           = '/home/lesson';
   static const settings         = '/settings';
@@ -88,7 +89,6 @@ abstract class AppRoutes {
   static const childWords            = '/child/words';
   static const childProfile          = '/child/profile';
   static const childLesson           = '/child/home/lesson';
-  static const childParentalControls = '/child/parental-controls';
   static const childProgressMap      = '/child/progress-map';
   static const childUnitHub          = '/child/unit-hub';
 }
@@ -452,11 +452,9 @@ GoRouter appRouter(AppRouterRef ref) {
         ],
       ),
 
-      // ── Çocuk — Ebeveyn Kontrol Paneli ────────────────────
-      GoRoute(
-        path: AppRoutes.childParentalControls,
-        builder: (_, __) => const ParentalControlsScreen(),
-      ),
+      // NOT (Nisan 2026): Ebeveyn kontrol paneli kaldırıldı.
+      // LÛTKE bir dil öğrenme uygulamasıdır; çocuk modunda kısıtlama
+      // yerine sağlıklı alışkanlık önerisi sunulur (bkz. TimeUpScreen).
       GoRoute(
         path: AppRoutes.childProgressMap,
         builder: (_, __) => const ChildProgressMapScreen(),
@@ -484,6 +482,10 @@ GoRouter appRouter(AppRouterRef ref) {
       GoRoute(
         path: AppRoutes.progressMap,
         builder: (_, __) => const ProgressMapScreen(),
+      ),
+      GoRoute(
+        path: AppRoutes.gotinenPesiyan,
+        builder: (_, __) => const GotinenPesiyanScreen(),
       ),
     ],
 

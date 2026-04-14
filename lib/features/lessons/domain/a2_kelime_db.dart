@@ -3605,7 +3605,7 @@ const kA2EkKelimeler8 = [
   (id:'a2_1542', ku:'Qehwe', tr:'Kahve', en:'Coffee',
    cins:'mê', ez:'qehwê', kat:'xwarin', zor:0.84,
    not:'Dişil — [AS]: "kahve = qehwe" ✓.',
-   her:['Qehwe dixwim.', 'Qehweya kurdî.'],
+   her:['Qehwe vedixwim.', 'Qehweya kurdî.'],
    gen:['Qehwe û çay', 'Qehweya min']),
 
   (id:'a2_1543', ku:'Av', tr:'Su', en:'Water',

@@ -124,7 +124,7 @@ class HomeScreen extends ConsumerWidget {
                         Icon(Icons.route_rounded, size: 22, color: AppColors.primary),
                         const SizedBox(width: AppSpacing.sm),
                         Text(
-                          'Rêya Fêrbûnê',
+                          'Rêya Fêrbûnê 🐐',
                           style: AppTypography.headingSmall.copyWith(
                             color: AppColors.textPrimary,
                             fontWeight: FontWeight.w700,
@@ -1192,7 +1192,7 @@ IconData _iconForCategory(String kat) => switch (kat) {
 /// Kategori anahtarından doğru Kurmancî adını döndürür.
 String _kuNameForCategory(String kat) => switch (kat) {
   'alfabe' => 'Alfabê',
-  'selamlama' || 'silav' => 'Silav',
+  'silav' => 'Silav',
   'jimar' || 'hejmar' => 'Hejmar',
   'reng' => 'Reng',
   'malbat' => 'Malbat',
@@ -1266,7 +1266,7 @@ List<_SkillTreeUnit> _buildSkillUnits(String level) {
   // Alfabe sadece Rêziman (gramer) sekmesinde yer alır.
   const _pedagogicOrder = [
     // A1 temel — Silav ilk durak
-    'selamlama', 'silav', 'cinavk', 'hejmar', 'jimar',
+    'silav', 'cinavk', 'hejmar', 'jimar',
     'malbat', 'bun', 'reng', 'dem', 'roj', 'demsal', 'werzî',
     'mal', 'xwarin', 'vexwarin', 'mêwe', 'beden', 'cil',
     'pîşe', 'ajal', 'xweza', 'cih', 'gihanî', 'rêwîtî',
@@ -1361,43 +1361,474 @@ class _SkillTreePath extends StatelessWidget {
     }
     final currentIndex = completedCount.clamp(0, units.length - 1);
 
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
+    // ── Dağ keçisi teması — biome dekorasyonları ───────────────
+    // Her seviye farklı bir ekosistemi temsil eder.
+    // Karik'un tırmanış yolculuğunda: çayır → orman → kayalık →
+    // bulutlar → kar → zirve.
+    final biome = _TrailBiome.forLevel(levelKey);
+
+    // Skill tree — arka planda dekoratif öğeler, önde duraklar.
+    return Stack(
       children: [
-        // Skill tree nodeları
-        ...units.asMap().entries.map((entry) {
-          final i = entry.key;
-          final unit = entry.value;
-
-          final isCompleted = i < completedCount;
-          final isCurrent = i == currentIndex;
-          final isUnlocked = i <= completedCount; // tamamlanan + 1 açık
-          final isLocked = !isCompleted && !isCurrent && !isUnlocked;
-
-          return _SkillTreeNode(
-            unit: unit,
-            index: i,
-            totalCount: units.length,
-            isCompleted: isCompleted,
-            isCurrent: isCurrent,
-            isLocked: isLocked,
-            showTurkish: ref.watch(showTurkishProvider),
-            onTap: () => context.push(
-              AppRoutes.unitHub,
-              extra: {
-                'category': unit.katKey,
-                'titleKu': unit.kuTitle,
-                'titleTr': unit.trTitle,
-                'icon': unit.icon,
-                'wordCount': unit.wordCount,
-                'level': levelKey,
-              },
+        // Dekoratif biome arka planı (duraklar kadar uzun)
+        Positioned.fill(
+          child: IgnorePointer(
+            child: _TrailBackdrop(
+              biome: biome,
+              stopCount: units.length,
             ),
-          );
-        }),
+          ),
+        ),
+
+        // Skill tree nodeları
+        Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            ...units.asMap().entries.map((entry) {
+              final i = entry.key;
+              final unit = entry.value;
+
+              final isCompleted = i < completedCount;
+              final isCurrent = i == currentIndex;
+              final isUnlocked = i <= completedCount; // tamamlanan + 1 açık
+              final isLocked = !isCompleted && !isCurrent && !isUnlocked;
+
+              return _SkillTreeNode(
+                unit: unit,
+                index: i,
+                totalCount: units.length,
+                isCompleted: isCompleted,
+                isCurrent: isCurrent,
+                isLocked: isLocked,
+                showTurkish: ref.watch(showTurkishProvider),
+                onTap: () => context.push(
+                  AppRoutes.unitHub,
+                  extra: {
+                    'category': unit.katKey,
+                    'titleKu': unit.kuTitle,
+                    'titleTr': unit.trTitle,
+                    'icon': unit.icon,
+                    'wordCount': unit.wordCount,
+                    'level': levelKey,
+                  },
+                ),
+              );
+            }),
+          ],
+        ),
       ],
     );
   }
+}
+
+// ════════════════════════════════════════════════════════════════
+// TRAIL BIOME — Seviyeye göre dağ keçisi yolunun ekosistemi
+// Karik'un tırmanış metaforu: A1 çayır → C2 zirve.
+// ════════════════════════════════════════════════════════════════
+
+class _TrailBiome {
+  /// Ön plan dekor öğeleri (büyük, canlı) — patikanın yakın sahnesi
+  final List<String> foregroundEmojis;
+  /// Orta plan dekor öğeleri (orta boy) — scene kıymetli detayları
+  final List<String> midgroundEmojis;
+  /// Uzak plan (küçük/soluk) — parallax uzaklık hissi
+  final List<String> backgroundEmojis;
+  /// Gökyüzü/üst gradient rengi (açık, doygun)
+  final Color skyColor;
+  /// Zemin gradient rengi (canlı, seviyeye özgü)
+  final Color groundColor;
+  /// Path çizgisi rengi
+  final Color pathColor;
+  /// Milestone emojisi (her 4 durakta bir büyük manzara)
+  final String milestoneEmoji;
+
+  const _TrailBiome({
+    required this.foregroundEmojis,
+    required this.midgroundEmojis,
+    required this.backgroundEmojis,
+    required this.skyColor,
+    required this.groundColor,
+    required this.pathColor,
+    required this.milestoneEmoji,
+  });
+
+  static _TrailBiome forLevel(String level) => switch (level) {
+        'A1' => const _TrailBiome(
+            // Çayır — dağ keçileri otlakta
+            // Dağ keçisi (🐐) baskın olacak şekilde ağırlıklandırılmış.
+            foregroundEmojis: ['🌾', '🌼', '🌿', '🌻'],
+            midgroundEmojis: ['🐐', '🐐', '🦋', '🌳'],
+            backgroundEmojis: ['🐐', '⛰️', '🏔️'],
+            skyColor: Color(0xFFE8F5E9),
+            groundColor: Color(0xFFC8E6C9),
+            pathColor: Color(0xFFD4A437),
+            milestoneEmoji: '🐐',
+          ),
+        'A2' => const _TrailBiome(
+            // Orman eteği — dağ keçileri ağaçların arasında
+            foregroundEmojis: ['🌲', '🌳', '🌿', '🍄'],
+            midgroundEmojis: ['🐐', '🐐', '🌾', '🌸'],
+            backgroundEmojis: ['🐐', '⛰️', '🏔️'],
+            skyColor: Color(0xFFE0F2F1),
+            groundColor: Color(0xFFB2DFDB),
+            pathColor: Color(0xFFD4A437),
+            milestoneEmoji: '🐐',
+          ),
+        'B1' => const _TrailBiome(
+            // Kayalık — dağ keçileri zinarlarda atlıyor
+            foregroundEmojis: ['🪨', '🌿', '🌾', '🪨'],
+            midgroundEmojis: ['🐐', '🐐', '🌲', '💧'],
+            backgroundEmojis: ['🐐', '⛰️', '🏔️'],
+            skyColor: Color(0xFFE0F7FA),
+            groundColor: Color(0xFFB2EBF2),
+            pathColor: Color(0xFFD4A437),
+            milestoneEmoji: '🐐',
+          ),
+        'B2' => const _TrailBiome(
+            // Bulutlar — dağ keçileri yüksek zirvelerde
+            foregroundEmojis: ['☁️', '🌤️', '🪨', '🌿'],
+            midgroundEmojis: ['🐐', '🐐', '🦅', '🌈'],
+            backgroundEmojis: ['🐐', '🏔️', '⛰️'],
+            skyColor: Color(0xFFE3F2FD),
+            groundColor: Color(0xFFBBDEFB),
+            pathColor: Color(0xFFD4A437),
+            milestoneEmoji: '🐐',
+          ),
+        'C1' => const _TrailBiome(
+            // Kar — dağ keçileri buzlu kayalarda
+            foregroundEmojis: ['❄️', '🌨️', '🪨', '🧊'],
+            midgroundEmojis: ['🐐', '🐐', '🦅', '✨'],
+            backgroundEmojis: ['🐐', '🏔️', '⛰️'],
+            skyColor: Color(0xFFF3E5F5),
+            groundColor: Color(0xFFE1BEE7),
+            pathColor: Color(0xFFD4A437),
+            milestoneEmoji: '🐐',
+          ),
+        'C2' => const _TrailBiome(
+            // Zirve — dağ keçileri lûtkede
+            foregroundEmojis: ['⭐', '✨', '🪨', '🌟'],
+            midgroundEmojis: ['🐐', '🐐', '👑', '🏆'],
+            backgroundEmojis: ['🐐', '🏔️', '🌄'],
+            skyColor: Color(0xFFFFF3E0),
+            groundColor: Color(0xFFFFE0B2),
+            pathColor: Color(0xFFD4A437),
+            milestoneEmoji: '🐐',
+          ),
+        _ => const _TrailBiome(
+            foregroundEmojis: ['🌿', '🪨'],
+            midgroundEmojis: ['🐐', '🌾'],
+            backgroundEmojis: ['⛰️', '🐐'],
+            skyColor: Color(0xFFE8F5E9),
+            groundColor: Color(0xFFC8E6C9),
+            pathColor: Color(0xFFD4A437),
+            milestoneEmoji: '🐐',
+          ),
+      };
+}
+
+/// Zengin patika arka planı — çok katmanlı sahne:
+/// 1) Gradient gökyüzü → zemin (gök mavisi-yeşil-toprak)
+/// 2) Uzak plan: soluk dağ silueti + bulutlar (parallax uzaklık)
+/// 3) Orta plan: ağaçlar, hayvanlar, çalılar (scene grupları)
+/// 4) Ön plan: çiçekler, otlar, taşlar (duraklara yakın)
+/// 5) Landmark: her ~4 durakta bir büyük emoji (milestone)
+///
+/// Deterministik yerleştirme (hash tabanlı): her build aynı görünüm.
+class _TrailBackdrop extends StatelessWidget {
+  final _TrailBiome biome;
+  final int stopCount;
+
+  const _TrailBackdrop({
+    required this.biome,
+    required this.stopCount,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return LayoutBuilder(
+      builder: (context, constraints) {
+        final height = constraints.maxHeight.isFinite
+            ? constraints.maxHeight
+            : (stopCount * 135.0) + 120;
+        final width = constraints.maxWidth.isFinite
+            ? constraints.maxWidth
+            : MediaQuery.of(context).size.width;
+
+        return SizedBox.expand(
+          child: DecoratedBox(
+            decoration: BoxDecoration(
+              gradient: LinearGradient(
+                begin: Alignment.topCenter,
+                end: Alignment.bottomCenter,
+                colors: [
+                  biome.skyColor,
+                  biome.groundColor,
+                ],
+              ),
+            ),
+          ),
+        );
+      },
+    );
+  }
+
+  /// Doğal sahne yerleşimi — her durak aralığında tutarlı bir "sahne":
+  /// sol-ön (büyük), sağ-orta (orta boy), sağ-arka (küçük soluk), vb.
+  /// Deterministik ama patern hissettirmeyecek şekilde varyans.
+  List<Widget> _buildNaturalScenes({
+    required double width,
+    required double height,
+    required _TrailBiome biome,
+    required int stopCount,
+  }) {
+    final widgets = <Widget>[];
+    // Her durak başına bir sahne bandı
+    final bands = stopCount + 1;
+    final bandHeight = height / bands;
+
+    for (var i = 0; i < bands; i++) {
+      final bandTop = i * bandHeight;
+      // Bu bandın hash'i — varyans için
+      final h = ((i + 1) * 2654435761) & 0x7FFFFFFF;
+      final variant = h % 4; // 0,1,2,3 — yerleşim türü
+
+      // Her band'de 3-5 öğe: sol, sağ, (orta-sol, orta-sağ opsiyonel)
+      // Bantlar arası değişken → yerleşim doğal görünsün.
+
+      switch (variant) {
+        case 0:
+          // Sol kenarda büyük ön-plan, sağ-üstte arka plan
+          widgets.add(_scenery(
+            emoji: biome.foregroundEmojis[h % biome.foregroundEmojis.length],
+            left: width * 0.04,
+            top: bandTop + bandHeight * 0.35,
+            size: 40,
+            opacity: 0.75,
+            rotation: -0.05,
+          ));
+          widgets.add(_scenery(
+            emoji: biome.backgroundEmojis[
+                (h ~/ 10) % biome.backgroundEmojis.length],
+            left: width * 0.88,
+            top: bandTop + bandHeight * 0.15,
+            size: 22,
+            opacity: 0.40,
+          ));
+          widgets.add(_scenery(
+            emoji: biome.foregroundEmojis[
+                (h ~/ 100) % biome.foregroundEmojis.length],
+            left: width * 0.12,
+            top: bandTop + bandHeight * 0.75,
+            size: 28,
+            opacity: 0.60,
+            rotation: 0.08,
+          ));
+          break;
+        case 1:
+          // Sağ kenarda büyük ön-plan, sol-orta midground
+          widgets.add(_scenery(
+            emoji: biome.foregroundEmojis[h % biome.foregroundEmojis.length],
+            left: width * 0.84,
+            top: bandTop + bandHeight * 0.4,
+            size: 42,
+            opacity: 0.75,
+            rotation: 0.05,
+          ));
+          widgets.add(_scenery(
+            emoji: biome.midgroundEmojis[
+                (h ~/ 10) % biome.midgroundEmojis.length],
+            left: width * 0.06,
+            top: bandTop + bandHeight * 0.55,
+            size: 32,
+            opacity: 0.65,
+          ));
+          widgets.add(_scenery(
+            emoji: biome.backgroundEmojis[
+                (h ~/ 100) % biome.backgroundEmojis.length],
+            left: width * 0.12,
+            top: bandTop + bandHeight * 0.18,
+            size: 20,
+            opacity: 0.35,
+          ));
+          break;
+        case 2:
+          // İki kenarda da orta boy — simetrik, doğal
+          widgets.add(_scenery(
+            emoji: biome.midgroundEmojis[h % biome.midgroundEmojis.length],
+            left: width * 0.05,
+            top: bandTop + bandHeight * 0.5,
+            size: 34,
+            opacity: 0.70,
+            rotation: -0.03,
+          ));
+          widgets.add(_scenery(
+            emoji: biome.foregroundEmojis[
+                (h ~/ 10) % biome.foregroundEmojis.length],
+            left: width * 0.86,
+            top: bandTop + bandHeight * 0.6,
+            size: 34,
+            opacity: 0.65,
+            rotation: 0.04,
+          ));
+          widgets.add(_scenery(
+            emoji: biome.foregroundEmojis[
+                (h ~/ 100) % biome.foregroundEmojis.length],
+            left: width * 0.15,
+            top: bandTop + bandHeight * 0.8,
+            size: 26,
+            opacity: 0.55,
+          ));
+          break;
+        default:
+          // Sol-üst küçük küme (3 öğe cluster), sağda büyük tek
+          widgets.add(_scenery(
+            emoji: biome.foregroundEmojis[h % biome.foregroundEmojis.length],
+            left: width * 0.06,
+            top: bandTop + bandHeight * 0.25,
+            size: 28,
+            opacity: 0.65,
+            rotation: -0.06,
+          ));
+          widgets.add(_scenery(
+            emoji: biome.midgroundEmojis[
+                (h ~/ 10) % biome.midgroundEmojis.length],
+            left: width * 0.14,
+            top: bandTop + bandHeight * 0.45,
+            size: 24,
+            opacity: 0.55,
+          ));
+          widgets.add(_scenery(
+            emoji: biome.foregroundEmojis[
+                (h ~/ 100) % biome.foregroundEmojis.length],
+            left: width * 0.85,
+            top: bandTop + bandHeight * 0.55,
+            size: 38,
+            opacity: 0.70,
+            rotation: 0.02,
+          ));
+          break;
+      }
+    }
+    return widgets;
+  }
+
+  Widget _scenery({
+    required String emoji,
+    required double left,
+    required double top,
+    required double size,
+    required double opacity,
+    double rotation = 0.0,
+  }) {
+    return Positioned(
+      left: left,
+      top: top,
+      child: Transform.rotate(
+        angle: rotation,
+        child: Opacity(
+          opacity: opacity,
+          child: Text(
+            emoji,
+            style: TextStyle(fontSize: size),
+          ),
+        ),
+      ),
+    );
+  }
+
+  /// Milestone emojileri — patika boyunca düzenli aralıklarla büyük dağ keçileri.
+  List<Widget> _buildMilestones({
+    required double width,
+    required double height,
+    required String emoji,
+    required int stopCount,
+  }) {
+    if (stopCount < 3) return [];
+    final widgets = <Widget>[];
+    // Her 5 durakta bir milestone
+    final count = (stopCount / 5).clamp(1, 4).round();
+    for (var i = 0; i < count; i++) {
+      final isLeft = i.isEven;
+      final yRatio = (i + 1) / (count + 1);
+      widgets.add(
+        Positioned(
+          left: isLeft ? 12 : null,
+          right: isLeft ? null : 12,
+          top: (yRatio * height - 40).clamp(0.0, height - 80),
+          child: Opacity(
+            opacity: 0.18,
+            child: Text(
+              emoji,
+              style: const TextStyle(fontSize: 80),
+            ),
+          ),
+        ),
+      );
+    }
+    return widgets;
+  }
+}
+
+/// Uzak dağ silueti — CustomPaint ile yumuşak zikzak path.
+/// Parallax arka plan hissi.
+class _DistantMountainsPainter extends CustomPainter {
+  final Color color;
+  _DistantMountainsPainter({required this.color});
+
+  @override
+  void paint(Canvas canvas, Size size) {
+    final paint = Paint()
+      ..color = color
+      ..style = PaintingStyle.fill;
+
+    // İlk dağ sırası (daha soluk, uzak)
+    final far = Path();
+    final baseY1 = size.height * 0.18;
+    far.moveTo(0, baseY1);
+    final peaks = (size.width / 90).round().clamp(4, 12);
+    for (var i = 0; i <= peaks; i++) {
+      final x = size.width * i / peaks;
+      final peakHeight = 30.0 + ((i * 17) % 25);
+      final y = baseY1 - peakHeight;
+      if (i.isEven) {
+        far.lineTo(x, y);
+      } else {
+        final midX = x - (size.width / peaks / 2);
+        final midY = baseY1 - peakHeight * 0.6;
+        far.quadraticBezierTo(midX, midY, x, y);
+      }
+    }
+    far.lineTo(size.width, baseY1);
+    far.lineTo(size.width, 0);
+    far.lineTo(0, 0);
+    far.close();
+    canvas.drawPath(far, paint);
+
+    // İkinci dağ sırası — daha yakın, daha koyu
+    final near = Path();
+    final baseY2 = size.height * 0.32;
+    final nearPaint = Paint()
+      ..color = color.withOpacity(color.opacity * 1.4).withOpacity(
+          (color.opacity * 1.4).clamp(0.0, 1.0))
+      ..style = PaintingStyle.fill;
+    near.moveTo(0, baseY2);
+    final peaks2 = (size.width / 120).round().clamp(3, 8);
+    for (var i = 0; i <= peaks2; i++) {
+      final x = size.width * i / peaks2;
+      final peakHeight = 45.0 + ((i * 23) % 35);
+      final y = baseY2 - peakHeight;
+      near.lineTo(x, y);
+    }
+    near.lineTo(size.width, baseY2);
+    near.lineTo(size.width, 0);
+    near.lineTo(0, 0);
+    near.close();
+    canvas.drawPath(near, nearPaint);
+  }
+
+  @override
+  bool shouldRepaint(covariant _DistantMountainsPainter oldDelegate) =>
+      oldDelegate.color != color;
 }
 
 // ════════════════════════════════════════════════════════════════

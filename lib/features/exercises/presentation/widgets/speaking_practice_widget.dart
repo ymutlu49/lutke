@@ -56,13 +56,13 @@ class _SpeakingPracticeWidgetState
   String? _encouragementMessage; // Kurmanci encouragement after attempt
   int _attemptCount = 0; // Track attempts for encouragement variety
 
-  // Kurmanci encouragement messages
+  // Kurmancî encouragement messages (Kurmancî-only, no Turkish)
   static const _encouragements = [
-    'Pir bas!',         // Very good!
-    'Berdewam bike!',   // Keep going!
-    'Denge te xwes e!', // Your voice is nice!
-    'Aferin!',          // Well done!
-    'Bes baş e!',       // Good enough!
+    'Pir baş!',          // Very good!
+    'Berdewam bike!',    // Keep going!
+    'Dengê te xweş e!',  // Your voice is nice!
+    'Pîroz be!',         // Well done!
+    'Bes baş e!',        // Good enough!
   ];
 
   SpeakingPracticeExercise get _ex => widget.exercise;
@@ -473,10 +473,10 @@ class _RecordPhase extends StatelessWidget {
         children: [
           Text(
             isRecording
-                ? (showTurkish ? 'Dinliyorum...' : 'Listening...')
+                ? (showTurkish ? 'Dinliyorum...' : 'Guhdarî dikim...')
                 : isShadowReading
-                    ? (showTurkish ? 'Birlikte tekrarla!' : 'Repeat together!')
-                    : (showTurkish ? 'Simdi sen soyle:' : 'Now you speak:'),
+                    ? (showTurkish ? 'Birlikte tekrarla!' : 'Bi hev re dubare bike!')
+                    : (showTurkish ? 'Şimdi sen söyle:' : 'Niha tu bêje:'),
             style: AppTypography.bodyMedium.copyWith(
               color: isRecording
                   ? AppColors.accent
@@ -521,7 +521,7 @@ class _RecordPhase extends StatelessWidget {
                 onPressed: onPlayReference,
                 icon: Icon(Icons.replay, size: 16, color: AppColors.primary),
                 label: Text(
-                  'Disa guhdari bike',
+                  'Dîsa guhdarî bike',
                   style: AppTypography.caption.copyWith(color: AppColors.primary),
                 ),
               ),
@@ -537,7 +537,7 @@ class _RecordPhase extends StatelessWidget {
                       : AppColors.accent,
                 ),
                 label: Text(
-                  isShadowReading ? 'Bi hev re...' : 'Bi hev re bixwine',
+                  isShadowReading ? 'Bi hev re...' : 'Bi hev re bixwîne',
                   style: AppTypography.caption.copyWith(
                     color: isShadowReading
                         ? AppColors.accent.withOpacity(0.4)
@@ -640,7 +640,7 @@ class _ComparePhase extends StatelessWidget {
           ),
 
           Text(
-            showTurkish ? 'Ikisini karsilastir:' : 'Compare the two:',
+            showTurkish ? 'İkisini karşılaştır:' : 'Herduyan bide ber hev:',
             style: AppTypography.bodyMedium.copyWith(
               color: AppColors.textSecondary,
             ),
@@ -652,13 +652,13 @@ class _ComparePhase extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
               _compareBtn(
-                showTurkish ? 'Anadil' : 'Native',
+                showTurkish ? 'Anadil' : 'Zimanê zikmakî',
                 Icons.record_voice_over_outlined,
                 AppColors.primary,
                 onPlayReference,
               ),
               _compareBtn(
-                showTurkish ? 'Senin sesin' : 'Your voice',
+                showTurkish ? 'Senin sesin' : 'Dengê te',
                 Icons.mic_outlined,
                 AppColors.accent,
                 onPlayRecording,
@@ -670,7 +670,7 @@ class _ComparePhase extends StatelessWidget {
 
           // Oz degerlendirme
           Text(
-            showTurkish ? 'Nasil hissettirdi?' : 'How did it feel?',
+            showTurkish ? 'Nasıl hissettirdi?' : 'Çawa hîs kir?',
             style: AppTypography.bodySmall.copyWith(
               color: AppColors.textSecondary,
             ),
@@ -679,16 +679,16 @@ class _ComparePhase extends StatelessWidget {
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              _assessBtn(0, 'Disa bicerib',
-                  showTurkish ? 'Tekrar dene' : 'Try again',
+              _assessBtn(0, 'Dîsa biceribîne',
+                  showTurkish ? 'Tekrar dene' : 'Dîsa biceribîne',
                   const Color(0xFFFF9800), Icons.replay_rounded),
               const SizedBox(width: 12),
-              _assessBtn(1, 'Nezik bu',
-                  showTurkish ? 'Yakindi' : 'Close',
+              _assessBtn(1, 'Nêzîk bû',
+                  showTurkish ? 'Yakındı' : 'Nêzîk bû',
                   AppColors.primary, Icons.thumb_up_outlined),
               const SizedBox(width: 12),
-              _assessBtn(2, 'Gelek bas!',
-                  showTurkish ? 'Cok iyi!' : 'Very good!',
+              _assessBtn(2, 'Gelek baş!',
+                  showTurkish ? 'Çok iyi!' : 'Gelek baş!',
                   const Color(0xFF4CAF50), Icons.stars_rounded),
             ],
           ),

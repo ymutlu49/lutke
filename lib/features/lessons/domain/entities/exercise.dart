@@ -182,14 +182,37 @@ class TypingExercise extends Exercise {
     final input = userAnswer.trim().toLowerCase();
     final expected = correctKurmanji.trim().toLowerCase();
     if (input == expected) return true;
-    return _similarity(input, expected) > 0.85;
+    // Uzunluk-bazlı adaptif tolerans (kısa kelimede sıkı):
+    //  len<4 → 0 hata, len 4-6 → 1 hata, len>=7 → 2 hata
+    final maxDist = _lenTolerance(expected.length);
+    if (_distance(input, expected) <= maxDist) return true;
+    // Simetrik diakritik normalizasyonu (ê↔e, î↔i, û↔u, ç↔c, ş↔s)
+    final inputNorm = _stripDiacritics(input);
+    final expectedNorm = _stripDiacritics(expected);
+    final normMax = maxDist > 0 ? maxDist - 1 : 0;
+    return _distance(inputNorm, expectedNorm) <= normMax;
   }
 
-  /// Levenshtein benzerlik oranı (typo toleransı).
-  static double _similarity(String a, String b) {
-    if (a == b) return 1.0;
+  /// Uzunluk-bazlı Levenshtein eşiği.
+  static int _lenTolerance(int len) {
+    if (len < 4) return 0;
+    if (len <= 6) return 1;
+    return 2;
+  }
+
+  static String _stripDiacritics(String s) => s
+      .replaceAll('ê', 'e')
+      .replaceAll('î', 'i')
+      .replaceAll('û', 'u')
+      .replaceAll('ç', 'c')
+      .replaceAll('ş', 's');
+
+  /// Levenshtein mesafesi (typo toleransı için).
+  static int _distance(String a, String b) {
+    if (a == b) return 0;
     final la = a.length, lb = b.length;
-    if (la == 0 || lb == 0) return 0.0;
+    if (la == 0) return lb;
+    if (lb == 0) return la;
     final d = List.generate(la + 1, (_) => List.filled(lb + 1, 0));
     for (var i = 0; i <= la; i++) d[i][0] = i;
     for (var j = 0; j <= lb; j++) d[0][j] = j;
@@ -201,7 +224,7 @@ class TypingExercise extends Exercise {
                   .reduce((x, y) => x < y ? x : y);
       }
     }
-    return 1 - d[la][lb] / (la > lb ? la : lb);
+    return d[la][lb];
   }
 }
 

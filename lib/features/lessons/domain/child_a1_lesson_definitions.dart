@@ -180,8 +180,8 @@ const _kChildLessons = <Lesson>[
       ),
       CulturalContentExercise(
         id: 'ch_ex_034',
-        contentKu: 'Karîk li çiyayên Kurdistanê dijîn. Karok jî karîkek e!',
-        contentTr: 'Oğlaklar Kürdistan dağlarında yaşar. Karok da bir oğlaktır!',
+        contentKu: 'Karîk li çiyayên Kurdistanê dijîn. Karik jî karîkek e!',
+        contentTr: 'Oğlaklar Kürdistan dağlarında yaşar. Karik da bir oğlaktır!',
         contentType: CulturalType.story,
       ),
     ],

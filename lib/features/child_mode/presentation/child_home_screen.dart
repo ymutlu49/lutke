@@ -61,7 +61,7 @@ class ChildHomeScreen extends ConsumerWidget {
                             ),
                           ),
                           Text(
-                            'Karok bi te re ye',
+                            'Karik bi te re ye',
                             style: ChildTypography.body.copyWith(
                               color: ChildColors.textSecondary,
                             ),

@@ -101,7 +101,7 @@ class ModeSelectionScreen extends ConsumerWidget {
                     emoji: '🐐',
                     titleKu: 'Ji bo zarokan',
                     titleTr: 'Çocuklar için (7-10 yaş)',
-                    description: 'Karok bi te re ye!',
+                    description: 'Karik bi te re ye!',
                     color: ChildColors.accent,
                     onTap: () async {
                       final prefs = await SharedPreferences.getInstance();

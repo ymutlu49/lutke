@@ -1,19 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:go_router/go_router.dart';
 
 import '../../../core/constants/child_theme.dart';
-import '../../../core/router/app_router.dart';
-import '../../../shared/providers/child_mode_provider.dart';
-import 'widgets/pin_entry_widget.dart';
 import 'widgets/star_display_widget.dart';
 
 // ════════════════════════════════════════════════════════════════
 // LÛTKE ZAROK — Profil Ekranı
 //
-// Çocuğun yıldız sayısı, çıkartma koleksiyonu, haftalık
-// emoji takvimi ve ebeveyn ayarlarına erişim (PIN korumalı).
+// Çocuğun yıldız sayısı, çıkartma koleksiyonu ve haftalık
+// emoji takvimi.
+//
+// NOT (Nisan 2026): Ebeveyn kontrol sistemi kaldırıldı — LÛTKE
+// bir dil öğrenme uygulamasıdır, kısıtlama aracı değil.
 // ════════════════════════════════════════════════════════════════
 
 class ChildProfileScreen extends ConsumerWidget {
@@ -48,7 +47,7 @@ class ChildProfileScreen extends ConsumerWidget {
 
               const SizedBox(height: 12),
               Text(
-                'Karok',
+                'Karik',
                 style: ChildTypography.headline.copyWith(
                   color: ChildColors.primary,
                 ),
@@ -156,55 +155,6 @@ class ChildProfileScreen extends ConsumerWidget {
                 ],
               ).animate().fadeIn(delay: 600.ms),
 
-              const SizedBox(height: 32),
-
-              // ── Ebeveyn Ayarları (PIN korumalı) ───────────
-              SizedBox(
-                width: double.infinity,
-                child: OutlinedButton.icon(
-                  onPressed: () => _showParentPinDialog(context, ref),
-                  icon: const Icon(Icons.settings_rounded),
-                  label: const Text('Mîhengên dê û bav'),
-                ),
-              ).animate().fadeIn(delay: 800.ms),
-            ],
-          ),
-        ),
-      ),
-    );
-  }
-
-  void _showParentPinDialog(BuildContext context, WidgetRef ref) {
-    showDialog(
-      context: context,
-      barrierDismissible: false,
-      builder: (ctx) => Dialog(
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(ChildSpacing.radiusLg),
-        ),
-        child: Padding(
-          padding: const EdgeInsets.all(24),
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              const Icon(Icons.lock_rounded,
-                  size: 48, color: ChildColors.primary),
-              const SizedBox(height: 16),
-              Text('PIN binivîse',
-                  style: ChildTypography.title),
-              const SizedBox(height: 24),
-              PinEntryWidget(
-                onComplete: (pin) {
-                  // TODO: PIN doğrulama
-                  Navigator.of(ctx).pop();
-                  if (context.canPop()) context.pop(); context.go(AppRoutes.childParentalControls);
-                },
-              ),
-              const SizedBox(height: 16),
-              TextButton(
-                onPressed: () => Navigator.of(ctx).pop(),
-                child: const Text('Paş de vegere'),
-              ),
             ],
           ),
         ),

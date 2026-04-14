@@ -261,7 +261,17 @@ class _PronunciationScreenState extends ConsumerState<PronunciationScreen> {
                           children: [
                             Text('Bilêvkirina te çawa bû?',
                                 style: AppTypography.title),
-                            const SizedBox(height: 24),
+                            const SizedBox(height: 8),
+                            // Pedagojik not: öz-değerlendirme ölçme değil,
+                            // alıştırma amaçlıdır. Kullanıcıyı bilgilendir.
+                            Text(
+                              'Ev ceribandinek e — dengê xwe bi modelê re bide ber hev.',
+                              style: AppTypography.caption.copyWith(
+                                color: AppColors.textSecondary,
+                              ),
+                              textAlign: TextAlign.center,
+                            ),
+                            const SizedBox(height: 16),
                             _AssessmentButton(
                               emoji: '😊',
                               label: 'Baş bû',

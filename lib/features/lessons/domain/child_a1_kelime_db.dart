@@ -156,10 +156,10 @@ const kChildA1Kelimeler = [
    gen:['Mirîşk — tavuk', 'Mirîşk hêk dide.']),
 
   (id:'z_a1_033', ku:'Karîk', tr:'Oğlak', en:'Kid (baby goat)', cins:'nêr', ez:'karîkê',
-   kat:'heywan', zor:0.80, not:'Karok — maskotê me!',
+   kat:'heywan', zor:0.80, not:'Karik — maskotê me!',
    emoji: '🐐',
    her:['Karîk li çiyê ye.', 'Karîk dilîze.'],
-   gen:['Karîk — oğlak', 'Karok karîkek e!']),
+   gen:['Karîk — oğlak', 'Karik karîkek e!']),
 
   (id:'z_a1_034', ku:'Çûk', tr:'Kuş', en:'Bird', cins:'mê', ez:'çûka',
    kat:'heywan', zor:0.82, not:'Genel kuş',
