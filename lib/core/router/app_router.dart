@@ -31,6 +31,8 @@ import '../../features/exercises/presentation/smart_review_screen.dart';
 import '../../features/lessons/presentation/progress_map_screen.dart';
 import '../../features/exercises/presentation/listening_screen.dart';
 import '../../features/lessons/presentation/unit_hub_screen.dart';
+import '../../features/exercises/presentation/dialogue_screen.dart';
+import '../../features/exercises/presentation/pronunciation_screen.dart';
 import '../../features/child_mode/presentation/mode_selection_screen.dart';
 import '../../features/child_mode/presentation/child_home_screen.dart';
 import '../../features/child_mode/presentation/child_vocabulary_screen.dart';
@@ -332,6 +334,27 @@ GoRouter appRouter(AppRouterRef ref) {
         builder: (_, state) {
           final extra = state.extra as Map<String, dynamic>?;
           return WordMatchScreen(
+            category: extra?['category'] as String?,
+            level: extra?['level'] as String? ?? 'A1',
+          );
+        },
+      ),
+
+      GoRoute(
+        path: '/activity/dialogue',
+        builder: (_, state) {
+          final extra = state.extra as Map<String, dynamic>?;
+          return DialogueScreen(
+            category: extra?['category'] as String?,
+            level: extra?['level'] as String? ?? 'A1',
+          );
+        },
+      ),
+      GoRoute(
+        path: '/activity/pronunciation',
+        builder: (_, state) {
+          final extra = state.extra as Map<String, dynamic>?;
+          return PronunciationScreen(
             category: extra?['category'] as String?,
             level: extra?['level'] as String? ?? 'A1',
           );

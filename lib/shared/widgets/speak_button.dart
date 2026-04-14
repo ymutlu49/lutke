@@ -28,6 +28,7 @@ class SpeakButton extends ConsumerStatefulWidget {
   final double size;
   final Color? color;
   final bool showLabel;
+  final bool slow;
 
   const SpeakButton({
     super.key,
@@ -35,6 +36,7 @@ class SpeakButton extends ConsumerStatefulWidget {
     this.size = 44,
     this.color,
     this.showLabel = false,
+    this.slow = false,
   });
 
   @override

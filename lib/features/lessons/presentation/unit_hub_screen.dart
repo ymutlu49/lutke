@@ -192,6 +192,30 @@ class UnitHubScreen extends ConsumerWidget {
                       onTap: () => context.push('/activity/word-match', extra: {'category': category, 'level': level}),
                     ).animate().fadeIn(delay: 500.ms).slideY(begin: 0.05),
 
+                    const SizedBox(height: 14),
+
+                    _ActivityCard(
+                      emoji: '💬',
+                      titleKu: 'Hevpeyvîn',
+                      descKu: 'Diyalog û axaftin',
+                      descTr: 'Sohbet ve konuşma',
+                      showTr: showTr,
+                      color: const Color(0xFF00BCD4),
+                      onTap: () => context.push('/activity/dialogue', extra: {'category': category, 'level': level}),
+                    ).animate().fadeIn(delay: 600.ms).slideY(begin: 0.05),
+
+                    const SizedBox(height: 14),
+
+                    _ActivityCard(
+                      emoji: '🎤',
+                      titleKu: 'Bilêvkirin',
+                      descKu: 'Telaffuz û dubarekirin',
+                      descTr: 'Telaffuz pratiği',
+                      showTr: showTr,
+                      color: const Color(0xFFE91E63),
+                      onTap: () => context.push('/activity/pronunciation', extra: {'category': category, 'level': level}),
+                    ).animate().fadeIn(delay: 700.ms).slideY(begin: 0.05),
+
                     const SizedBox(height: 24),
 
                     // ── Kelime Önizleme ──────────────────────
