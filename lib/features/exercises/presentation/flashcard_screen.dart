@@ -18,6 +18,8 @@ import '../../lessons/domain/b1_kelime_db.dart';
 import '../../lessons/domain/b2_kelime_db.dart';
 import '../../lessons/domain/c1_kelime_db.dart';
 import '../../lessons/domain/c2_kelime_db.dart';
+import '../../lessons/domain/child_a1_kelime_db.dart';
+import '../../../core/constants/child_theme.dart';
 import '../../../core/services/sound_service.dart';
 import '../../../shared/utils/word_emoji_map.dart';
 
@@ -30,7 +32,8 @@ import '../../../shared/utils/word_emoji_map.dart';
 class FlashcardScreen extends ConsumerStatefulWidget {
   final String? category;
   final String level;
-  const FlashcardScreen({super.key, this.category, this.level = 'A1'});
+  final bool isChildMode;
+  const FlashcardScreen({super.key, this.category, this.level = 'A1', this.isChildMode = false});
 
   @override
   ConsumerState<FlashcardScreen> createState() => _FlashcardScreenState();
@@ -77,14 +80,17 @@ class _FlashcardScreenState extends ConsumerState<FlashcardScreen>
     super.initState();
 
     // Seviyeye göre kelime yükle
-    var allWords = _wordsForLevel(widget.level);
+    final cardCount = widget.isChildMode ? 10 : _sessionCardCount;
+    var allWords = widget.isChildMode
+        ? (kChildA1Kelimeler as List).toList()
+        : _wordsForLevel(widget.level);
     if (widget.category != null && widget.category!.isNotEmpty) {
       final filtered = allWords.where((w) => w.kat == widget.category).toList();
       if (filtered.length >= 4) allWords = filtered;
     }
     allWords.shuffle(Random());
     _cards = allWords
-        .take(_sessionCardCount)
+        .take(cardCount)
         .map((w) => _FlashcardItem.fromRecord(w))
         .toList();
 
@@ -288,7 +294,9 @@ class _FlashcardScreenState extends ConsumerState<FlashcardScreen>
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppColors.backgroundPrimary,
+      backgroundColor: widget.isChildMode
+          ? ChildColors.backgroundPrimary
+          : AppColors.backgroundPrimary,
       body: SafeArea(
         child: _sessionComplete
             ? _buildSessionSummary()
@@ -568,25 +576,30 @@ class _FlashcardScreenState extends ConsumerState<FlashcardScreen>
             width: constraints.maxWidth,
             height: constraints.maxHeight * 0.85,
             decoration: BoxDecoration(
-              color: AppColors.surface,
-              borderRadius: BorderRadius.circular(AppSpacing.radiusXl),
+              color: widget.isChildMode
+                  ? ChildColors.backgroundSecondary
+                  : AppColors.surface,
+              borderRadius: BorderRadius.circular(
+                  widget.isChildMode ? ChildSpacing.radiusLg : AppSpacing.radiusXl),
               boxShadow: [
                 BoxShadow(
-                  color: Colors.black.withOpacity(0.1),
-                  blurRadius: 20,
+                  color: widget.isChildMode
+                      ? ChildColors.primary.withOpacity(0.12)
+                      : Colors.black.withOpacity(0.1),
+                  blurRadius: widget.isChildMode ? 24 : 20,
                   offset: const Offset(0, 8),
-                  spreadRadius: 2,
+                  spreadRadius: widget.isChildMode ? 4 : 2,
                 ),
               ],
               border: Border.all(
                 color: _isDragging
                     ? (_dragOffset.dx > 30
-                        ? AppColors.success.withOpacity(0.4)
+                        ? (widget.isChildMode ? ChildColors.success : AppColors.success).withOpacity(0.4)
                         : _dragOffset.dx < -30
-                            ? AppColors.errorSoft.withOpacity(0.4)
-                            : AppColors.borderLight)
-                    : AppColors.borderLight,
-                width: 1.5,
+                            ? (widget.isChildMode ? ChildColors.encourage : AppColors.errorSoft).withOpacity(0.4)
+                            : (widget.isChildMode ? ChildColors.primary.withOpacity(0.2) : AppColors.borderLight))
+                    : (widget.isChildMode ? ChildColors.primary.withOpacity(0.2) : AppColors.borderLight),
+                width: widget.isChildMode ? 2.5 : 1.5,
               ),
             ),
             child: ClipRRect(
@@ -608,18 +621,34 @@ class _FlashcardScreenState extends ConsumerState<FlashcardScreen>
   // ── Kart ön yüz ───────────────────────────────────────────
 
   Widget _buildCardFront(_FlashcardItem card) {
+    final isChild = widget.isChildMode;
+    final emojiStr = emojiForWord(card.kurmanji, card.kategori);
+
     return Container(
-      padding: const EdgeInsets.all(AppSpacing.lg),
+      padding: EdgeInsets.all(isChild ? 24 : AppSpacing.lg),
+      decoration: isChild
+          ? BoxDecoration(
+              gradient: LinearGradient(
+                begin: Alignment.topCenter,
+                end: Alignment.bottomCenter,
+                colors: [
+                  ChildColors.primarySurface,
+                  ChildColors.accentSurface.withOpacity(0.3),
+                ],
+              ),
+            )
+          : null,
       child: Column(
         children: [
-          // Kategori ve zorluk badgeleri
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              _CategoryBadge(category: card.kategori),
-              _LevelBadge(difficulty: card.zorluk),
-            ],
-          ),
+          // Kategori ve zorluk badgeleri — çocuk modunda gizle
+          if (!isChild)
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                _CategoryBadge(category: card.kategori),
+                _LevelBadge(difficulty: card.zorluk),
+              ],
+            ),
 
           // Kurmancî kelime — ortada, büyük
           Expanded(
@@ -627,8 +656,8 @@ class _FlashcardScreenState extends ConsumerState<FlashcardScreen>
               child: Column(
                 mainAxisSize: MainAxisSize.min,
                 children: [
-                  // Cinsiyet etiketi
-                  if (card.cinsiyet != 'bêcins')
+                  // Cinsiyet etiketi — çocuk modunda gizle
+                  if (!isChild && card.cinsiyet != 'bêcins')
                     Container(
                       padding: const EdgeInsets.symmetric(
                         horizontal: 12,
@@ -659,13 +688,13 @@ class _FlashcardScreenState extends ConsumerState<FlashcardScreen>
                       ),
                     ),
 
-                  // Kelime emojisi (gorsel ipucu)
-                  if (emojiForWord(card.kurmanji, card.kategori).isNotEmpty)
+                  // Kelime emojisi — çocukta daha büyük
+                  if (emojiStr.isNotEmpty)
                     Padding(
                       padding: const EdgeInsets.only(bottom: 8),
                       child: Text(
-                        emojiForWord(card.kurmanji, card.kategori),
-                        style: const TextStyle(fontSize: 40),
+                        emojiStr,
+                        style: TextStyle(fontSize: isChild ? 64 : 40),
                       ),
                     ),
 
@@ -677,28 +706,33 @@ class _FlashcardScreenState extends ConsumerState<FlashcardScreen>
                       Flexible(
                         child: Text(
                           card.kurmanji,
-                          style: AppTypography.displayKurmanji.copyWith(
-                            fontSize: card.kurmanji.length > 12 ? 28 : 36,
-                            color: AppColors.primary,
-                            fontWeight: FontWeight.w700,
-                          ),
+                          style: isChild
+                              ? ChildTypography.display.copyWith(
+                                  fontSize: card.kurmanji.length > 8 ? 32 : 40,
+                                  color: ChildColors.primary,
+                                  fontWeight: FontWeight.w800,
+                                )
+                              : AppTypography.displayKurmanji.copyWith(
+                                  fontSize: card.kurmanji.length > 12 ? 28 : 36,
+                                  color: AppColors.primary,
+                                  fontWeight: FontWeight.w700,
+                                ),
                           textAlign: TextAlign.center,
                         ),
                       ),
                       const SizedBox(width: 8),
-                      // TTS speak button — tap to hear pronunciation
                       SpeakButton(
                         text: card.kurmanji,
-                        size: 36,
-                        color: AppColors.primary,
+                        size: isChild ? 44 : 36,
+                        color: isChild ? ChildColors.primary : AppColors.primary,
                       ),
                     ],
                   ),
 
                   const SizedBox(height: AppSpacing.md),
 
-                  // Ezafe formu
-                  if (card.ezafe != null)
+                  // Ezafe — çocuk modunda gizle
+                  if (!isChild && card.ezafe != null)
                     Text(
                       'Ezafe: ${card.ezafe}',
                       style: AppTypography.caption.copyWith(
@@ -713,28 +747,37 @@ class _FlashcardScreenState extends ConsumerState<FlashcardScreen>
 
           // Alt ipucu
           Container(
-            padding: const EdgeInsets.symmetric(
-              horizontal: AppSpacing.md,
-              vertical: AppSpacing.sm,
+            padding: EdgeInsets.symmetric(
+              horizontal: isChild ? 16 : AppSpacing.md,
+              vertical: isChild ? 10 : AppSpacing.sm,
             ),
             decoration: BoxDecoration(
-              color: AppColors.backgroundTertiary.withOpacity(0.5),
-              borderRadius: BorderRadius.circular(AppSpacing.radiusMd),
+              color: isChild
+                  ? ChildColors.primary.withOpacity(0.08)
+                  : AppColors.backgroundTertiary.withOpacity(0.5),
+              borderRadius: BorderRadius.circular(isChild ? 16 : AppSpacing.radiusMd),
             ),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Icon(
                   Icons.touch_app_rounded,
-                  size: 16,
-                  color: AppColors.textTertiary,
+                  size: isChild ? 22 : 16,
+                  color: isChild ? ChildColors.primary : AppColors.textTertiary,
                 ),
                 const SizedBox(width: 6),
                 Text(
-                  'Peldê bide ser ku wateya wê bibîne',
-                  style: AppTypography.caption.copyWith(
-                    color: AppColors.textTertiary,
-                  ),
+                  isChild
+                      ? 'Bersivê bibîne'
+                      : 'Peldê bide ser ku wateya wê bibîne',
+                  style: isChild
+                      ? ChildTypography.caption.copyWith(
+                          color: ChildColors.primary,
+                          fontWeight: FontWeight.w600,
+                        )
+                      : AppTypography.caption.copyWith(
+                          color: AppColors.textTertiary,
+                        ),
                 ),
               ],
             ),
@@ -747,16 +790,22 @@ class _FlashcardScreenState extends ConsumerState<FlashcardScreen>
   // ── Kart arka yüz ─────────────────────────────────────────
 
   Widget _buildCardBack(_FlashcardItem card) {
+    final isChild = widget.isChildMode;
     return Container(
-      padding: const EdgeInsets.all(AppSpacing.lg),
+      padding: EdgeInsets.all(isChild ? 24 : AppSpacing.lg),
       decoration: BoxDecoration(
         gradient: LinearGradient(
           begin: Alignment.topLeft,
           end: Alignment.bottomRight,
-          colors: [
-            AppColors.surface,
-            AppColors.primarySurface.withOpacity(0.3),
-          ],
+          colors: isChild
+              ? [
+                  ChildColors.accentSurface,
+                  ChildColors.primarySurface,
+                ]
+              : [
+                  AppColors.surface,
+                  AppColors.primarySurface.withOpacity(0.3),
+                ],
         ),
       ),
       child: SingleChildScrollView(

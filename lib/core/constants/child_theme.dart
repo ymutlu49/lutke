@@ -48,6 +48,33 @@ abstract class ChildColors {
   static const textPrimary = Color(0xFF1A2A4A);
   static const textSecondary = Color(0xFF4A5A6A);
   static const textOnPrimary = Color(0xFFFFFFFF);
+
+  // ── Kategori Renkleri (çocuk ders kartları) ───────────────
+  static const categorySelamlama = Color(0xFF1A7B6B); // teal
+  static const categoryMalbat    = Color(0xFF7B1FA2); // mor
+  static const categoryReng      = Color(0xFFE91E63); // pembe
+  static const categoryHeywan    = Color(0xFFD4783A); // turuncu
+  static const categoryXwarin    = Color(0xFF2D9E4F); // yeşil
+  static const categoryHejmar    = Color(0xFF2196F3); // mavi
+  static const categoryDibistan  = Color(0xFFFF8F00); // amber
+  static const categoryListik    = Color(0xFFFF5722); // koyu turuncu
+  static const categoryLas       = Color(0xFF00BCD4); // cyan
+  static const categoryHest      = Color(0xFFFF8FAB); // pembe
+
+  /// Kategori anahtarından renk döndürür.
+  static Color categoryColor(String category) => switch (category) {
+    'selamlama' || 'silav' => categorySelamlama,
+    'malbat' => categoryMalbat,
+    'reng' => categoryReng,
+    'heywan' => categoryHeywan,
+    'xwarin' || 'vexwarin' => categoryXwarin,
+    'hejmar' || 'jimar' => categoryHejmar,
+    'dibistan' || 'perwerde' => categoryDibistan,
+    'listik' => categoryListik,
+    'las' || 'beden' => categoryLas,
+    'hest' || 'his' => categoryHest,
+    _ => primary,
+  };
 }
 
 /// Çocuk modu tipografi — tüm boyutlar +4sp.

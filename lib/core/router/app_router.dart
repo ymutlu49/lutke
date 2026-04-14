@@ -38,6 +38,7 @@ import '../../features/child_mode/presentation/child_home_screen.dart';
 import '../../features/child_mode/presentation/child_vocabulary_screen.dart';
 import '../../features/child_mode/presentation/child_profile_screen.dart';
 import '../../features/child_mode/presentation/child_onboarding_screen.dart';
+import '../../features/child_mode/presentation/child_unit_hub_screen.dart';
 import '../../features/child_mode/presentation/child_progress_map_screen.dart';
 import '../../features/child_mode/presentation/parental_controls_screen.dart';
 import '../../features/child_mode/presentation/widgets/child_mode_wrapper.dart';
@@ -89,6 +90,7 @@ abstract class AppRoutes {
   static const childLesson           = '/child/home/lesson';
   static const childParentalControls = '/child/parental-controls';
   static const childProgressMap      = '/child/progress-map';
+  static const childUnitHub          = '/child/unit-hub';
 }
 
 // ════════════════════════════════════════════════════════════════
@@ -306,6 +308,7 @@ GoRouter appRouter(AppRouterRef ref) {
           return FlashcardScreen(
             category: extra?['category'] as String?,
             level: extra?['level'] as String? ?? 'A1',
+            isChildMode: extra?['isChildMode'] as bool? ?? false,
           );
         },
       ),
@@ -372,6 +375,21 @@ GoRouter appRouter(AppRouterRef ref) {
             titleTr: extra['titleTr'] as String? ?? '',
             icon: extra['icon'] as IconData? ?? Icons.menu_book_rounded,
             wordCount: extra['wordCount'] as int? ?? 0,
+            level: extra['level'] as String? ?? 'A1',
+          );
+        },
+      ),
+
+      // ── Lûtke Zarok — Çocuk Unit Hub ─────────────────────
+      GoRoute(
+        path: AppRoutes.childUnitHub,
+        builder: (_, state) {
+          final extra = state.extra as Map<String, dynamic>? ?? {};
+          return ChildUnitHubScreen(
+            category: extra['category'] as String? ?? '',
+            titleKu: extra['titleKu'] as String? ?? '',
+            titleTr: extra['titleTr'] as String? ?? '',
+            emoji: extra['emoji'] as String? ?? '📚',
             level: extra['level'] as String? ?? 'A1',
           );
         },

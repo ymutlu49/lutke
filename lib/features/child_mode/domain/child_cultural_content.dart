@@ -80,10 +80,10 @@ const kChildCulturalItems = [
   ChildCulturalItem(
     id: 'child_c_011',
     type: ChildCulturalType.cirok,
-    titleKu: 'Bizina Biçûk',
-    titleTr: 'Küçük Keçi',
-    contentKu: 'Bizina biçûk li çiyê ye.\nEw dixwaze stêrkan bibîne.\nŞev tê, stêr derdikevin.\nBizin kêfxweş e!',
-    contentTr: 'Küçük keçi dağda.\nYıldızları görmek istiyor.\nGece oluyor, yıldızlar çıkıyor.\nKeçi mutlu!',
+    titleKu: 'Karîkê Biçûk',
+    titleTr: 'Küçük Oğlak',
+    contentKu: 'Karîkê biçûk li çiyê ye.\nEw dixwaze stêrkan bibîne.\nŞev tê, stêr derdikevin.\nKarîk kêfxweş e!',
+    contentTr: 'Küçük oğlak dağda.\nYıldızları görmek istiyor.\nGece oluyor, yıldızlar çıkıyor.\nOğlak mutlu!',
     emoji: '🐐',
   ),
 

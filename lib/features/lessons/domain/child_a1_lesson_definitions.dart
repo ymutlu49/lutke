@@ -157,7 +157,7 @@ const _kChildLessons = <Lesson>[
       MultipleChoiceExercise(
         id: 'ch_ex_030',
         prompt: '🐱 Bu hayvan Kurmancî\'de ne?',
-        options: ['Seg', 'Pisîk', 'Çûk', 'Bizin'],
+        options: ['Seg', 'Pisîk', 'Çûk', 'Karîk'],
         correctIndex: 1,
       ),
       MultipleChoiceExercise(
@@ -169,8 +169,8 @@ const _kChildLessons = <Lesson>[
       FillInBlankExercise(
         id: 'ch_ex_032',
         sentenceWithBlank: '___ li çiyê ye.',
-        correctWord: 'Bizin',
-        options: ['Masî', 'Bizin', 'Pisîk'],
+        correctWord: 'Karîk',
+        options: ['Masî', 'Karîk', 'Pisîk'],
       ),
       MultipleChoiceExercise(
         id: 'ch_ex_033',
@@ -180,8 +180,8 @@ const _kChildLessons = <Lesson>[
       ),
       CulturalContentExercise(
         id: 'ch_ex_034',
-        contentKu: 'Bizin li çiyayên Kurdistanê dijîn. Karok jî bizinek e!',
-        contentTr: 'Keçiler Kürdistan dağlarında yaşar. Karok de bir keçidir!',
+        contentKu: 'Karîk li çiyayên Kurdistanê dijîn. Karok jî karîkek e!',
+        contentTr: 'Oğlaklar Kürdistan dağlarında yaşar. Karok da bir oğlaktır!',
         contentType: CulturalType.story,
       ),
     ],

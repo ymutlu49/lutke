@@ -155,16 +155,17 @@ class ChildHomeScreen extends ConsumerWidget {
                       titleTr: lesson.titleTr,
                       stars: lesson.stars,
                       isLocked: isLocked,
+                      cardColor: ChildColors.categoryColor(lesson.category),
                       onTap: isLocked
                           ? null
                           : () => context.push(
-                              AppRoutes.unitHub,
+                              AppRoutes.childUnitHub,
                               extra: {
                                 'category': lesson.category,
                                 'titleKu': lesson.titleKu,
                                 'titleTr': lesson.titleTr,
+                                'emoji': lesson.emoji,
                                 'level': 'A1',
-                                'wordCount': 0,
                               },
                             ),
                     ),
@@ -223,6 +224,7 @@ class _ChildLessonCard extends StatelessWidget {
   final String titleTr;
   final int stars;
   final bool isLocked;
+  final Color cardColor;
   final VoidCallback? onTap;
 
   const _ChildLessonCard({
@@ -231,6 +233,7 @@ class _ChildLessonCard extends StatelessWidget {
     required this.titleTr,
     required this.stars,
     required this.isLocked,
+    required this.cardColor,
     this.onTap,
   });
 
@@ -241,43 +244,62 @@ class _ChildLessonCard extends StatelessWidget {
       child: Container(
         padding: const EdgeInsets.all(20),
         decoration: BoxDecoration(
-          color: isLocked
-              ? Colors.grey.shade100
-              : ChildColors.backgroundSecondary,
+          gradient: isLocked
+              ? null
+              : LinearGradient(
+                  begin: Alignment.centerLeft,
+                  end: Alignment.centerRight,
+                  colors: [
+                    cardColor.withOpacity(0.14),
+                    cardColor.withOpacity(0.04),
+                  ],
+                ),
+          color: isLocked ? Colors.grey.shade100 : null,
           borderRadius: BorderRadius.circular(ChildSpacing.radiusLg),
           border: Border.all(
             color: isLocked
                 ? Colors.grey.shade300
-                : ChildColors.primary.withOpacity(0.2),
-            width: 1.5,
+                : cardColor.withOpacity(0.3),
+            width: 2,
           ),
           boxShadow: isLocked
               ? null
               : [
                   BoxShadow(
-                    color: ChildColors.primary.withOpacity(0.06),
-                    blurRadius: 12,
-                    offset: const Offset(0, 4),
+                    color: cardColor.withOpacity(0.15),
+                    blurRadius: 16,
+                    offset: const Offset(0, 6),
                   ),
                 ],
         ),
         child: Row(
           children: [
-            // Emoji büyük
+            // Emoji — gradient container ile canlı
             Container(
-              width: 64,
-              height: 64,
+              width: 72,
+              height: 72,
               decoration: BoxDecoration(
-                color: isLocked
-                    ? Colors.grey.shade200
-                    : ChildColors.primarySurface,
-                borderRadius: BorderRadius.circular(16),
+                gradient: isLocked
+                    ? null
+                    : LinearGradient(
+                        begin: Alignment.topLeft,
+                        end: Alignment.bottomRight,
+                        colors: [
+                          cardColor.withOpacity(0.2),
+                          cardColor.withOpacity(0.06),
+                        ],
+                      ),
+                color: isLocked ? Colors.grey.shade200 : null,
+                borderRadius: BorderRadius.circular(20),
+                border: isLocked
+                    ? null
+                    : Border.all(color: cardColor.withOpacity(0.15)),
               ),
               child: Center(
                 child: isLocked
                     ? Icon(Icons.lock_rounded,
                         size: 28, color: Colors.grey.shade400)
-                    : Text(emoji, style: const TextStyle(fontSize: 32)),
+                    : Text(emoji, style: const TextStyle(fontSize: 42)),
               ),
             ),
             const SizedBox(width: 16),
@@ -290,34 +312,45 @@ class _ChildLessonCard extends StatelessWidget {
                   Text(
                     titleKu,
                     style: ChildTypography.kurmanjiCard.copyWith(
-                      color: isLocked ? Colors.grey : null,
+                      color: isLocked ? Colors.grey : cardColor,
+                      fontWeight: FontWeight.w700,
                     ),
                   ),
-                  const SizedBox(height: 2),
+                  const SizedBox(height: 3),
                   Text(
                     titleTr,
                     style: ChildTypography.caption.copyWith(
                       color: isLocked
                           ? Colors.grey.shade400
                           : ChildColors.textSecondary,
-                      fontSize: 14,
+                      fontSize: 15,
                     ),
                   ),
                   if (!isLocked && stars > 0) ...[
                     const SizedBox(height: 6),
-                    StarDisplay(count: stars, size: 20),
+                    StarDisplay(count: stars, size: 22),
                   ],
                 ],
               ),
             ),
 
-            // Ok veya kilit
-            Icon(
-              isLocked
-                  ? Icons.lock_outline_rounded
-                  : Icons.arrow_forward_ios_rounded,
-              size: 20,
-              color: isLocked ? Colors.grey.shade400 : ChildColors.primary,
+            // Ok — renkli daire içinde
+            Container(
+              width: 36,
+              height: 36,
+              decoration: BoxDecoration(
+                color: isLocked
+                    ? Colors.grey.shade200
+                    : cardColor.withOpacity(0.12),
+                shape: BoxShape.circle,
+              ),
+              child: Icon(
+                isLocked
+                    ? Icons.lock_outline_rounded
+                    : Icons.arrow_forward_ios_rounded,
+                size: 16,
+                color: isLocked ? Colors.grey.shade400 : cardColor,
+              ),
             ),
           ],
         ),
