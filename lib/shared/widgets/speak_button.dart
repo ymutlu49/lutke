@@ -16,13 +16,9 @@ import '../../core/services/js_eval_stub.dart'
 
 /// Kurmancî kelime seslendirme butonu.
 ///
-/// Tıklanınca:
-/// 1. HuggingFace Kurmancî TTS dener (gerçek Kurmancî model)
-/// 2. Başarısız olursa Web SpeechSynthesis (Türkçe fonetik) kullanır
-///
-/// [text] — Seslendirilecek Kurmancî metin
-/// [size] — Buton boyutu (default: 44)
-/// [color] — İkon rengi (default: primary)
+/// HuggingFace Kurmancî TTS modelini kullanır.
+/// Türkçe fallback YOKTUR — yanlış telaffuz olmasın diye.
+/// Başarısız olursa kullanıcıya bilgi verir.
 class SpeakButton extends ConsumerStatefulWidget {
   final String text;
   final double size;
@@ -46,43 +42,44 @@ class SpeakButton extends ConsumerStatefulWidget {
 class _SpeakButtonState extends ConsumerState<SpeakButton> {
   bool _loading = false;
   bool _playing = false;
+  bool _failed = false;
 
   Future<void> _speak() async {
     if (_loading || _playing) return;
 
-    setState(() { _loading = true; });
+    setState(() { _loading = true; _failed = false; });
 
     try {
-      if (kIsWeb) {
-        // PRIMARY: Web SpeechSynthesis (instant, offline, Kurdish-first voice)
-        if (!mounted) return;
-        setState(() { _loading = false; _playing = true; });
-        SoundService.playClick(); // Subtle click feedback when TTS starts
-        _speakWithWebSpeech(widget.text);
+      final tts = ref.read(ttsServiceProvider);
+      final audioUrl = await tts.synthesize(widget.text)
+          .timeout(const Duration(seconds: 20), onTimeout: () => null);
 
-        // Also try HuggingFace in background for higher quality (optional)
-        _tryHuggingFaceInBackground(widget.text);
+      if (!mounted) return;
+
+      if (audioUrl != null) {
+        setState(() { _loading = false; _playing = true; });
+        SoundService.playClick();
+        _playWebAudio(audioUrl);
       } else {
-        // Non-web: try HuggingFace only
-        final tts = ref.read(ttsServiceProvider);
-        final audioUrl = await tts.synthesize(widget.text)
-            .timeout(const Duration(seconds: 8), onTimeout: () => null);
-
-        if (!mounted) return;
-        setState(() { _loading = false; _playing = true; });
-        if (audioUrl != null) {
-          _playWebAudio(audioUrl);
-        }
+        // Ses üretilemedi — kullanıcıya görsel bilgi
+        setState(() { _loading = false; _failed = true; });
+        // 3 saniye sonra failed durumunu temizle
+        Future.delayed(const Duration(seconds: 3), () {
+          if (mounted) setState(() => _failed = false);
+        });
+        return;
       }
     } catch (_) {
-      // Fallback: Web SpeechSynthesis
       if (mounted) {
-        setState(() { _loading = false; _playing = true; });
-        _speakWithWebSpeech(widget.text);
+        setState(() { _loading = false; _failed = true; });
+        Future.delayed(const Duration(seconds: 3), () {
+          if (mounted) setState(() => _failed = false);
+        });
+        return;
       }
     }
 
-    // Reset playing state after estimated speech duration
+    // Tahmini ses süresi sonrası playing durumunu kapat
     final estimatedDuration = (widget.text.split(' ').length * 0.5 + 1.5)
         .clamp(2.0, 8.0)
         .toInt();
@@ -91,18 +88,7 @@ class _SpeakButtonState extends ConsumerState<SpeakButton> {
     });
   }
 
-  /// Try HuggingFace TTS in background — does not block the UI.
-  /// If it returns audio, it will be available for future plays.
-  void _tryHuggingFaceInBackground(String text) {
-    final tts = ref.read(ttsServiceProvider);
-    tts.synthesize(text)
-        .timeout(const Duration(seconds: 10), onTimeout: () => null)
-        .then((_) {}) // Result cached for future use
-        .catchError((_) {}); // Ignore errors silently
-  }
-
   void _playWebAudio(String url) {
-    // Web'de JavaScript ile audio oynat
     if (kIsWeb) {
       _evalJs('''
         (function() {
@@ -110,12 +96,6 @@ class _SpeakButtonState extends ConsumerState<SpeakButton> {
           a.play().catch(function(e) { console.log('Audio play error:', e); });
         })();
       ''');
-    }
-  }
-
-  void _speakWithWebSpeech(String text) {
-    if (kIsWeb) {
-      _evalJs(getWebTtsScript(text));
     }
   }
 
@@ -140,14 +120,18 @@ class _SpeakButtonState extends ConsumerState<SpeakButton> {
         width: widget.size,
         height: widget.size,
         decoration: BoxDecoration(
-          color: _playing
-              ? color.withOpacity(0.15)
-              : _loading
-                  ? color.withOpacity(0.08)
-                  : color.withOpacity(0.1),
+          color: _failed
+              ? AppColors.errorSoft.withOpacity(0.12)
+              : _playing
+                  ? color.withOpacity(0.15)
+                  : _loading
+                      ? color.withOpacity(0.08)
+                      : color.withOpacity(0.1),
           shape: BoxShape.circle,
           border: Border.all(
-            color: _playing ? color : color.withOpacity(0.2),
+            color: _failed
+                ? AppColors.errorSoft
+                : _playing ? color : color.withOpacity(0.2),
             width: _playing ? 2 : 1,
           ),
         ),
@@ -162,11 +146,13 @@ class _SpeakButtonState extends ConsumerState<SpeakButton> {
                   ),
                 )
               : Icon(
-                  _playing
-                      ? Icons.volume_up_rounded
-                      : Icons.volume_up_outlined,
+                  _failed
+                      ? Icons.volume_off_rounded
+                      : _playing
+                          ? Icons.volume_up_rounded
+                          : Icons.volume_up_outlined,
                   size: iconSize,
-                  color: color,
+                  color: _failed ? AppColors.errorSoft : color,
                 ),
         ),
       ),
@@ -196,10 +182,12 @@ class _SpeakButtonState extends ConsumerState<SpeakButton> {
         button,
         const SizedBox(height: 4),
         Text(
-          'Guhdarî bike',
+          _failed ? 'Deng tune' : 'Guhdarî bike',
           style: TextStyle(
             fontSize: 10,
-            color: color.withOpacity(0.7),
+            color: _failed
+                ? AppColors.errorSoft.withOpacity(0.7)
+                : color.withOpacity(0.7),
             fontWeight: FontWeight.w500,
           ),
         ),
