@@ -13,6 +13,10 @@ import '../../../shared/providers/language_mode_provider.dart';
 import '../../../shared/providers/review_provider.dart';
 import '../../lessons/domain/a1_kelime_db.dart';
 import '../../lessons/domain/a2_kelime_db.dart';
+import '../../lessons/domain/b1_kelime_db.dart';
+import '../../lessons/domain/b2_kelime_db.dart';
+import '../../lessons/domain/c1_kelime_db.dart';
+import '../../lessons/domain/c2_kelime_db.dart';
 import '../../../core/services/sound_service.dart';
 import '../../../shared/utils/word_emoji_map.dart';
 
@@ -70,6 +74,10 @@ List<_QuizWord> _loadWordsForLevel(String level) {
   final raw = switch (level.toUpperCase()) {
     'A1' => kA1TamKelimeler,
     'A2' => kA2Kelimeler,
+    'B1' => kB1Kelimeler,
+    'B2' => kB2Kelimeler,
+    'C1' => kC1Kelimeler,
+    'C2' => kC2Kelimeler,
     _ => kA1TamKelimeler,
   };
 

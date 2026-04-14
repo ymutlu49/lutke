@@ -10,6 +10,10 @@ import '../../../core/router/app_router.dart';
 import '../../../shared/providers/language_mode_provider.dart';
 import '../domain/a1_kelime_db.dart';
 import '../domain/a2_kelime_db.dart';
+import '../domain/b1_kelime_db.dart';
+import '../domain/b2_kelime_db.dart';
+import '../domain/c1_kelime_db.dart';
+import '../domain/c2_kelime_db.dart';
 
 // ════════════════════════════════════════════════════════════════
 // BİRİM HUB EKRANI — Durak tıklandığında açılır
@@ -29,6 +33,7 @@ class UnitHubScreen extends ConsumerWidget {
   final String titleTr;
   final IconData icon;
   final int wordCount;
+  final String level;
 
   const UnitHubScreen({
     super.key,
@@ -37,6 +42,7 @@ class UnitHubScreen extends ConsumerWidget {
     this.titleTr = '',
     this.icon = Icons.menu_book_rounded,
     this.wordCount = 0,
+    this.level = 'A1',
   });
 
   @override
@@ -44,7 +50,7 @@ class UnitHubScreen extends ConsumerWidget {
     final showTr = ref.watch(showTurkishProvider);
 
     // Kategorideki kelimeleri yükle
-    final words = _loadCategoryWords(category);
+    final words = _loadCategoryWords(category, level);
 
     return Scaffold(
       backgroundColor: AppColors.backgroundPrimary,
@@ -134,7 +140,7 @@ class UnitHubScreen extends ConsumerWidget {
                       color: AppColors.primary,
                       onTap: () => context.push(
                         '/activity/quiz',
-                        extra: {'level': 'A1', 'category': category},
+                        extra: {'level': level, 'category': category},
                       ),
                     ).animate().fadeIn(delay: 100.ms).slideY(begin: 0.05),
 
@@ -229,11 +235,19 @@ class UnitHubScreen extends ConsumerWidget {
     );
   }
 
-  List<_SimpleWord> _loadCategoryWords(String category) {
-    final all = [...kA1TamKelimeler, ...kA2Kelimeler];
-    return all
+  List<_SimpleWord> _loadCategoryWords(String category, String level) {
+    final all = switch (level.toUpperCase()) {
+      'A1' => kA1TamKelimeler,
+      'A2' => kA2Kelimeler,
+      'B1' => kB1Kelimeler,
+      'B2' => kB2Kelimeler,
+      'C1' => kC1Kelimeler,
+      'C2' => kC2Kelimeler,
+      _ => kA1TamKelimeler,
+    };
+    return (all as List)
         .where((w) => w.kat == category)
-        .map((w) => _SimpleWord(w.ku, w.tr))
+        .map((w) => _SimpleWord(w.ku as String, w.tr as String))
         .toList();
   }
 }

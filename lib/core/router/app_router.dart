@@ -349,6 +349,7 @@ GoRouter appRouter(AppRouterRef ref) {
             titleTr: extra['titleTr'] as String? ?? '',
             icon: extra['icon'] as IconData? ?? Icons.menu_book_rounded,
             wordCount: extra['wordCount'] as int? ?? 0,
+            level: extra['level'] as String? ?? 'A1',
           );
         },
       ),

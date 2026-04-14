@@ -13,6 +13,11 @@ import '../../../core/services/auth_service.dart';
 import '../data/lesson_repository.dart';
 import '../domain/lesson_entities.dart';
 import '../domain/a1_kelime_db.dart';
+import '../domain/a2_kelime_db.dart';
+import '../domain/b1_kelime_db.dart';
+import '../domain/b2_kelime_db.dart';
+import '../domain/c1_kelime_db.dart';
+import '../domain/c2_kelime_db.dart';
 import '../../../shared/widgets/streak_widget.dart';
 // daily_word_widget import removed — widget no longer on home screen
 import '../../../shared/providers/language_mode_provider.dart';
@@ -1090,62 +1095,88 @@ class _SkillTreeUnit {
   });
 }
 
-/// A1 kelime DB'sindeki kategorilerden birim listesi oluşturur.
-/// Sıralama müfredata uygun.
-List<_SkillTreeUnit> _buildA1SkillUnits() {
-  // Kategori -> kelime sayısı haritası
+/// Seviyeye göre kelime DB'sini döndürür.
+List<dynamic> _getWordsForLevel(String level) => switch (level) {
+  'A1' => kA1TamKelimeler,
+  'A2' => kA2Kelimeler,
+  'B1' => kB1Kelimeler,
+  'B2' => kB2Kelimeler,
+  'C1' => kC1Kelimeler,
+  'C2' => kC2Kelimeler,
+  _ => kA1TamKelimeler,
+};
+
+/// Kategori ikonları — tüm seviyeler için ortak.
+IconData _iconForCategory(String kat) => switch (kat) {
+  'alfabe' => Icons.text_fields_rounded,
+  'selamlama' || 'silav' => Icons.waving_hand_rounded,
+  'jimar' || 'hejmar' => Icons.tag_rounded,
+  'reng' => Icons.palette_rounded,
+  'malbat' => Icons.family_restroom_rounded,
+  'cinavk' || 'navdêr' => Icons.person_rounded,
+  'pîşe' || 'kar' => Icons.work_rounded,
+  'perwerde' => Icons.school_rounded,
+  'dem' => Icons.access_time_rounded,
+  'roj' || 'demsal' || 'werzî' || 'hewa' => Icons.wb_sunny_rounded,
+  'xwarin' || 'vexwarin' || 'mêwe' => Icons.restaurant_rounded,
+  'beden' || 'tendurist' => Icons.accessibility_new_rounded,
+  'mal' || 'cih' || 'bajêr' => Icons.home_rounded,
+  'rengder' || 'soyut' => Icons.format_color_text_rounded,
+  'temel' || 'jiyan' => Icons.auto_stories_rounded,
+  'leker' || 'leker_ergatif' || 'ergatif' || 'neyekî' => Icons.directions_run_rounded,
+  'xweza' || 'ekoloji' => Icons.park_rounded,
+  'ajal' => Icons.pets_rounded,
+  'cil' => Icons.dry_cleaning_rounded,
+  'daçek' || 'rêziman' => Icons.compare_arrows_rounded,
+  'pirs' => Icons.help_outline_rounded,
+  'gihanî' || 'rêwîtî' => Icons.directions_bus_rounded,
+  'peyvben' || 'his' || 'psikoloji' => Icons.sentiment_satisfied_rounded,
+  'bun' => Icons.lightbulb_rounded,
+  'çand' || 'edebiyat' || 'huner' => Icons.museum_rounded,
+  'dua' => Icons.volunteer_activism_rounded,
+  'civakî' || 'kimlik' => Icons.groups_rounded,
+  'siyaset' || 'zagon' => Icons.gavel_rounded,
+  'aborî' || 'bazirganî' || 'cotkarî' => Icons.account_balance_rounded,
+  'teknoloji' || 'zanist' => Icons.science_rounded,
+  'ziman' => Icons.translate_rounded,
+  'medya' => Icons.newspaper_rounded,
+  'felsefe' => Icons.psychology_rounded,
+  'dîrok' => Icons.history_edu_rounded,
+  'akademik' => Icons.school_rounded,
+  'deyim' => Icons.format_quote_rounded,
+  'welat' => Icons.flag_rounded,
+  _ => Icons.circle_rounded,
+};
+
+/// Belirli seviye için durak listesi oluşturur.
+List<_SkillTreeUnit> _buildSkillUnits(String level) {
+  final words = _getWordsForLevel(level);
   final catCounts = <String, int>{};
-  for (final k in kA1TamKelimeler) {
-    catCounts[k.kat] = (catCounts[k.kat] ?? 0) + 1;
+  for (final k in words) {
+    final kat = k.kat as String? ?? '';
+    if (kat.isEmpty) continue;
+    catCounts[kat] = (catCounts[kat] ?? 0) + 1;
   }
 
-  // Müfredat sırasına göre birimler
-  const unitDefs = <(String kat, String ku, String tr, IconData icon)>[
-    ('alfabe',    'Alfabe',            'Alfabe ve Sesler',       Icons.text_fields_rounded),
-    ('selamlama', 'Silav',             'Selamlama',              Icons.waving_hand_rounded),
-    ('jimar',     'Jimar',             'Sayilar',                Icons.tag_rounded),
-    ('reng',      'Reng',              'Renkler',                Icons.palette_rounded),
-    ('malbat',    'Malbat',            'Aile',                   Icons.family_restroom_rounded),
-    ('cinavk',    'Cinavk',            'Zamirler',               Icons.person_rounded),
-    ('pîşe',      'Pîşe',              'Meslekler',              Icons.work_rounded),
-    ('perwerde',  'Perwerde',          'Egitim',                 Icons.school_rounded),
-    ('dem',       'Dem',               'Zaman',                  Icons.access_time_rounded),
-    ('roj',       'Roj',               'Gunler',                 Icons.calendar_today_rounded),
-    ('demsal',    'Demsal',            'Mevsimler',              Icons.wb_sunny_rounded),
-    ('xwarin',    'Xwarin',            'Yemek',                  Icons.restaurant_rounded),
-    ('vexwarin',  'Vexwarin',          'Icecek',                 Icons.local_cafe_rounded),
-    ('mêwe',      'Mêwe',              'Meyve',                  Icons.eco_rounded),
-    ('beden',     'Beden',             'Beden',                  Icons.accessibility_new_rounded),
-    ('tendurist', 'Tendurist',         'Saglik',                 Icons.health_and_safety_rounded),
-    ('mal',       'Mal',               'Ev ve Mekan',            Icons.home_rounded),
-    ('cih',       'Cih',               'Yer ve Mekan',           Icons.location_on_rounded),
-    ('rengder',   'Rengder',           'Sifatlar',               Icons.format_color_text_rounded),
-    ('temel',     'Peyvên Bingehîn',  'Temel Kelimeler',        Icons.auto_stories_rounded),
-    ('leker',     'Leker',             'Fiiller',                Icons.directions_run_rounded),
-    ('xweza',     'Xweza',             'Doga',                   Icons.park_rounded),
-    ('ajal',      'Ajal',              'Hayvanlar',              Icons.pets_rounded),
-    ('cil',       'Cil',               'Giysiler',               Icons.dry_cleaning_rounded),
-    ('daçek',     'Daçek',             'Edatlar',                Icons.compare_arrows_rounded),
-    ('pirs',      'Pirs',              'Sorular',                Icons.help_outline_rounded),
-    ('silav',     'Axaftin',           'Gunluk Konusmalar',      Icons.chat_rounded),
-    ('gihanî',    'Gihanî',            'Ulasim',                 Icons.directions_bus_rounded),
-    ('peyvben',   'Peyvên Bêhnvedanê', 'Duygular',              Icons.sentiment_satisfied_rounded),
-    ('bun',       'Bûn',               'Olmak Fiili',            Icons.lightbulb_rounded),
-    ('çand',      'Çand',              'Kultur',                 Icons.museum_rounded),
-    ('dua',       'Dua',               'Dua ve Dilekler',        Icons.volunteer_activism_rounded),
-  ];
+  // Kategorileri kelime sayısına göre sırala (çoktan aza)
+  final sortedCats = catCounts.entries.toList()
+    ..sort((a, b) => b.value.compareTo(a.value));
 
   final units = <_SkillTreeUnit>[];
-  for (var i = 0; i < unitDefs.length; i++) {
-    final (kat, ku, tr, icon) = unitDefs[i];
-    final count = catCounts[kat];
-    if (count == null || count == 0) continue;
+  for (final entry in sortedCats) {
+    final kat = entry.key;
+    final count = entry.value;
+    if (count < 2) continue; // Çok az kelime olan kategorileri atla
+
+    // Kategori adını büyük harfle başlat
+    final kuTitle = kat[0].toUpperCase() + kat.substring(1);
+
     units.add(_SkillTreeUnit(
-      id: 'unit_$kat',
+      id: '${level.toLowerCase()}_unit_$kat',
       katKey: kat,
-      kuTitle: ku,
-      trTitle: tr,
-      icon: icon,
+      kuTitle: kuTitle,
+      trTitle: '',
+      icon: _iconForCategory(kat),
       wordCount: count,
       unitIndex: units.length,
     ));
@@ -1171,12 +1202,15 @@ class _SkillTreePath extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final units = _buildA1SkillUnits();
-    // Tüm birimler erişilebilir — MVP'de kilit yok
-    // İlerleme takibi sonra SharedPreferences/DB'den gelecek
+    // Seviyeye göre durakları oluştur
+    final levelKey = switch (currentLevel) {
+      1 => 'A1', 2 => 'A2', 3 => 'B1', 4 => 'B2', 5 => 'C1', 6 => 'C2',
+      _ => 'A1',
+    };
+    final units = _buildSkillUnits(levelKey);
     const completedCount = 0;
     const currentIndex = 0;
-    final unlockedCount = units.length; // Tüm duraklar açık
+    final unlockedCount = units.length;
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -1207,6 +1241,7 @@ class _SkillTreePath extends StatelessWidget {
                 'titleTr': unit.trTitle,
                 'icon': unit.icon,
                 'wordCount': unit.wordCount,
+                'level': levelKey,
               },
             ),
           );
