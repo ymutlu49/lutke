@@ -44,6 +44,9 @@ ID_KU_PAT = re.compile(
     r"\(\s*id\s*:\s*['\"]([^'\"]+)['\"][^)]*?ku\s*:\s*['\"]([^'\"]+)['\"]",
     re.DOTALL,
 )
+# her:[ '...', '...' ]  veya her:[ "...", "..." ] — string list yakalama
+HER_LIST_PAT = re.compile(r"her\s*:\s*\[([^\[\]]*)\]", re.DOTALL)
+HER_STR_PAT = re.compile(r"['\"]([^'\"]+)['\"]")
 
 
 def extract_words(level: str):
@@ -62,6 +65,45 @@ def extract_words(level: str):
         if len(ku) < 3:
             continue
         items.append((wid, ku))
+    return items
+
+
+def extract_heritage(level: str):
+    """Verilen seviyeden tüm heritage cümlelerini (id, sentence) çıkar.
+    Her kelimenin her cümlesi için: id = '{wid}_h{n}' (n=1,2,...).
+    """
+    db = DB_DIR / f'{level}_kelime_db.dart'
+    if not db.exists():
+        return []
+    text = db.read_text(encoding='utf-8')
+    items = []
+    # Tüm kayıtları gez
+    for m in ID_KU_PAT.finditer(text):
+        wid = m.group(1)
+        # Bu kaydın açılış parantezinden kapanışına kadar al
+        depth, i = 0, m.start()
+        while i < len(text):
+            if text[i] == '(':
+                depth += 1
+            elif text[i] == ')':
+                depth -= 1
+                if depth == 0:
+                    end = i + 1
+                    break
+            i += 1
+        else:
+            continue
+        record = text[m.start():end]
+        her_m = HER_LIST_PAT.search(record)
+        if not her_m:
+            continue
+        sentences = HER_STR_PAT.findall(her_m.group(1))
+        for idx, sent in enumerate(sentences, 1):
+            sent = sent.strip()
+            # Çok kısa (3 karakter) atla; çok uzun (200+) HF için riskli
+            if len(sent) < 5 or len(sent) > 200:
+                continue
+            items.append((f'{wid}_h{idx}', sent))
     return items
 
 
@@ -197,6 +239,8 @@ def main():
                         help='Sadece verilen Kurmancî kelimeler (virgülle ayrılmış).')
     parser.add_argument('--force', action='store_true',
                         help='Mevcut MP3\'ün üzerine yaz (yeniden üret).')
+    parser.add_argument('--heritage', action='store_true',
+                        help='Kelimeler yerine heritage cümlelerini render et.')
     args = parser.parse_args()
 
     ASSETS_DIR.mkdir(parents=True, exist_ok=True)
@@ -213,8 +257,16 @@ def main():
             targets.append((wid, ku))
     else:
         levels = ['a1', 'a2', 'b1', 'b2', 'c1', 'c2'] if args.level == 'all' else [args.level]
+        extractor = extract_heritage if args.heritage else extract_words
+        seen_keys = set()
         for lvl in levels:
-            targets.extend(extract_words(lvl))
+            for wid, txt in extractor(lvl):
+                # Aynı cümle farklı kelimelerde geçebilir — dedupe
+                k = txt.strip().lower()
+                if k in seen_keys:
+                    continue
+                seen_keys.add(k)
+                targets.append((wid, txt))
 
     if args.limit > 0:
         targets = targets[: args.limit]
