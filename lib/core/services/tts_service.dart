@@ -5,6 +5,8 @@ import 'package:dio/dio.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+import 'tts_asset_manifest.dart';
+
 /// LÛTKE — Kurmancî TTS Servisi
 ///
 /// Tek kaynak: HuggingFace Gradio API (amedcj/kmr_tts)
@@ -30,7 +32,7 @@ class TtsService {
 
   // HuggingFace Gradio endpoint — Kurmancî TTS
   static const _hfSpaceUrl = 'https://amedcj-kmr-tts.hf.space';
-  static const _gradioApi = '/gradio_api/call/predict';
+  static const _gradioApi = '/gradio_api/call/text_to_speech';
   static const _cacheKeyPrefix = 'tts_cache_';
   static const _maxCacheSize = 500; // Max 500 kelime persist edilsin
 
@@ -118,14 +120,29 @@ class TtsService {
 
   /// Kurmancî metni seslendir.
   /// Başarılı: audio URL döner. Başarısız: null döner.
+  ///
+  /// Öncelik sırası:
+  ///   1. Asset manifest (ön-üretilmiş MP3) → 0ms, çevrimdışı
+  ///   2. SharedPreferences cache (HF URL) → anında
+  ///   3. HuggingFace API → 2-90s (cold start'a göre)
   Future<String?> synthesize(String text) async {
-    await _loadCache();
-
     final processed = _preprocessText(text);
     final key = processed.toLowerCase();
     if (key.isEmpty) return null;
 
-    // Önbellekte varsa hemen döndür
+    // 1) Asset manifest (en hızlı — ön üretilmiş ses)
+    // Nokta'sız halde ve tam halde iki aramayı da dene
+    final stripped = key.replaceAll(RegExp(r'[.,!?]+$'), '').trim();
+    final assetPath = TtsAssetManifest.lookup(stripped) ??
+        TtsAssetManifest.lookup(key);
+    if (assetPath != null) {
+      _state = TtsState.playing;
+      return 'asset:$assetPath';
+    }
+
+    await _loadCache();
+
+    // 2) SharedPreferences cache
     if (_cache.containsKey(key)) {
       _state = TtsState.playing;
       return _cache[key];
@@ -185,7 +202,7 @@ class TtsService {
     // Adım 2: Sonucu bekle (polling)
     // İlk istek: 60 saniye (120 × 500ms), sonraki: 30 saniye (60 × 500ms)
     final maxPolls = _isFirstRequest ? 120 : 60;
-    final resultUrl = '$_hfSpaceUrl/gradio_api/call/predict/$eventId';
+    final resultUrl = '$_hfSpaceUrl/gradio_api/call/text_to_speech/$eventId';
 
     for (int i = 0; i < maxPolls; i++) {
       await Future<void>.delayed(const Duration(milliseconds: 500));

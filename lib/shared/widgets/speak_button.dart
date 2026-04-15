@@ -119,14 +119,22 @@ class _SpeakButtonState extends ConsumerState<SpeakButton> {
   }
 
   void _playWebAudio(String url) {
-    if (kIsWeb) {
-      _evalJs('''
-        (function() {
-          var a = new Audio('$url');
-          a.play().catch(function(e) { console.log('Audio play error:', e); });
-        })();
-      ''');
+    if (!kIsWeb) return;
+    // "asset:assets/..." → tarayıcıda statik dosya olarak çözülür.
+    // Flutter web --base-href ile deploy edildiğinde path /lutke/assets/... olur;
+    // JS tarafında göreli yol kullanmak (./assets/...) doğru çözülür.
+    var playUrl = url;
+    if (url.startsWith('asset:')) {
+      final assetPath = url.substring('asset:'.length);
+      // Göreli path — tarayıcı mevcut base URL ile birleştirir (/lutke/ dahil).
+      playUrl = assetPath;
     }
+    _evalJs('''
+      (function() {
+        var a = new Audio('$playUrl');
+        a.play().catch(function(e) { console.log('Audio play error:', e); });
+      })();
+    ''');
   }
 
   void _evalJs(String script) {
