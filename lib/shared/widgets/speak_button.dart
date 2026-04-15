@@ -44,10 +44,12 @@ class _SpeakButtonState extends ConsumerState<SpeakButton> {
   bool _playing = false;
   bool _failed = false;
   bool _showColdHint = false; // Cold start uzun sürerse gösterilir
+  bool _slowMode = false; // Uzun basınca aktif olur — 0.75x hız
 
-  Future<void> _speak() async {
+  Future<void> _speak({bool slow = false}) async {
     if (_loading || _playing) return;
 
+    _slowMode = slow || widget.slow;
     setState(() { _loading = true; _failed = false; _showColdHint = false; });
 
     final tts = ref.read(ttsServiceProvider);
@@ -126,12 +128,18 @@ class _SpeakButtonState extends ConsumerState<SpeakButton> {
     var playUrl = url;
     if (url.startsWith('asset:')) {
       final assetPath = url.substring('asset:'.length);
-      // Göreli path — tarayıcı mevcut base URL ile birleştirir (/lutke/ dahil).
       playUrl = assetPath;
     }
+    // Yavaş mod: 0.75x — öğrenenler için (telaffuzu ayrıştırmak daha kolay).
+    final rate = _slowMode ? 0.75 : 1.0;
+    // preservesPitch=true → perde (tiz/pes) korunur, sadece hız değişir.
     _evalJs('''
       (function() {
         var a = new Audio('$playUrl');
+        a.playbackRate = $rate;
+        a.preservesPitch = true;
+        a.mozPreservesPitch = true;
+        a.webkitPreservesPitch = true;
         a.play().catch(function(e) { console.log('Audio play error:', e); });
       })();
     ''');
@@ -152,8 +160,12 @@ class _SpeakButtonState extends ConsumerState<SpeakButton> {
     final iconSize = widget.size * 0.5;
 
     Widget button = GestureDetector(
-      onTap: _speak,
-      child: AnimatedContainer(
+      onTap: () => _speak(slow: false),
+      onLongPress: () => _speak(slow: true),
+      child: Tooltip(
+        message: 'Dokun: normal hız\nUzun bas: yavaş (0.75x)',
+        waitDuration: const Duration(milliseconds: 800),
+        child: AnimatedContainer(
         duration: const Duration(milliseconds: 200),
         width: widget.size,
         height: widget.size,
@@ -193,6 +205,7 @@ class _SpeakButtonState extends ConsumerState<SpeakButton> {
                   color: _failed ? AppColors.errorSoft : color,
                 ),
         ),
+      ),
       ),
     );
 
