@@ -236,11 +236,26 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
         ];
 
       case _ProfileTab.settings:
-        final isOwner = ref.watch(isOwnerProvider);
+        bool isOwner = false;
+        try {
+          isOwner = ref.watch(isOwnerProvider);
+        } catch (_) {}
+        int dailyGoal = 20;
+        try {
+          dailyGoal = (profile.dailyGoal as int?) ?? 20;
+        } catch (_) {}
+        String motivationName = 'general';
+        try {
+          motivationName = profile.motivation.name as String;
+        } catch (_) {}
+        bool isAnonymous = true;
+        try {
+          isAnonymous = (user?.isAnonymous as bool?) ?? true;
+        } catch (_) {}
         return [
-          _SettingsSection(dailyGoal: profile.dailyGoal),
+          _SettingsSection(dailyGoal: dailyGoal),
           gap,
-          _MotivationCard(motivation: profile.motivation.name),
+          _MotivationCard(motivation: motivationName),
           gap,
           _AccessibilityCard(),
           gap,
@@ -251,7 +266,7 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
           ],
           gap,
           _AccountActions(
-            isAnonymous: user?.isAnonymous ?? true,
+            isAnonymous: isAnonymous,
             ref: ref,
             context: context,
           ),
@@ -352,33 +367,37 @@ class _TabStripDelegate extends SliverPersistentHeaderDelegate {
   ];
 
   @override
-  double get minExtent => 56;
+  double get minExtent => 64;
 
   @override
-  double get maxExtent => 56;
+  double get maxExtent => 64;
 
   @override
   Widget build(BuildContext context, double shrinkOffset, bool overlapsContent) {
     return Container(
       color: AppColors.backgroundPrimary,
-      padding: const EdgeInsets.symmetric(
-        horizontal: AppSpacing.md,
-        vertical: 8,
-      ),
-      child: Row(
-        children: [
-          for (final (tab, label, icon) in _tabs) ...[
-            Expanded(
-              child: _TabChip(
-                label: label,
-                icon: icon,
-                isActive: tab == selectedTab,
-                onTap: () => onSelect(tab),
-              ),
-            ),
-            if (tab != _tabs.last.$1) const SizedBox(width: 6),
-          ],
-        ],
+      padding: const EdgeInsets.fromLTRB(AppSpacing.md, 6, AppSpacing.md, 10),
+      child: DecoratedBox(
+        decoration: BoxDecoration(
+          color: AppColors.primary.withOpacity(0.06),
+          borderRadius: BorderRadius.circular(14),
+        ),
+        child: Padding(
+          padding: const EdgeInsets.all(4),
+          child: Row(
+            children: [
+              for (final (tab, label, icon) in _tabs)
+                Expanded(
+                  child: _TabChip(
+                    label: label,
+                    icon: icon,
+                    isActive: tab == selectedTab,
+                    onTap: () => onSelect(tab),
+                  ),
+                ),
+            ],
+          ),
+        ),
       ),
     );
   }
@@ -407,38 +426,47 @@ class _TabChip extends StatelessWidget {
       onTap: onTap,
       behavior: HitTestBehavior.opaque,
       child: AnimatedContainer(
-        duration: const Duration(milliseconds: 200),
-        padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 6),
+        duration: const Duration(milliseconds: 220),
+        curve: Curves.easeOutCubic,
+        margin: const EdgeInsets.symmetric(horizontal: 2),
+        padding: const EdgeInsets.symmetric(vertical: 6, horizontal: 4),
         decoration: BoxDecoration(
-          color: isActive
-              ? AppColors.primary
-              : AppColors.primarySurface.withOpacity(0.5),
-          borderRadius: BorderRadius.circular(12),
-          border: Border.all(
-            color: isActive
-                ? AppColors.primary
-                : AppColors.primary.withOpacity(0.15),
-            width: 1,
-          ),
+          color: isActive ? AppColors.primary : Colors.transparent,
+          borderRadius: BorderRadius.circular(10),
+          boxShadow: isActive
+              ? [
+                  BoxShadow(
+                    color: AppColors.primary.withOpacity(0.25),
+                    blurRadius: 8,
+                    offset: const Offset(0, 2),
+                  ),
+                ]
+              : null,
         ),
         child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
           mainAxisSize: MainAxisSize.min,
           children: [
             Icon(
               icon,
-              size: 18,
-              color: isActive ? Colors.white : AppColors.primary,
+              size: 20,
+              color: isActive ? Colors.white : AppColors.primary.withOpacity(0.85),
             ),
-            const SizedBox(height: 2),
-            Text(
-              label,
-              style: AppTypography.caption.copyWith(
-                color: isActive ? Colors.white : AppColors.primary,
-                fontWeight: FontWeight.w700,
-                fontSize: 10,
+            const SizedBox(height: 3),
+            FittedBox(
+              fit: BoxFit.scaleDown,
+              child: Text(
+                label,
+                style: TextStyle(
+                  color: isActive
+                      ? Colors.white
+                      : AppColors.primary.withOpacity(0.85),
+                  fontWeight: FontWeight.w700,
+                  fontSize: 11,
+                  letterSpacing: 0.1,
+                ),
+                maxLines: 1,
               ),
-              maxLines: 1,
-              overflow: TextOverflow.ellipsis,
             ),
           ],
         ),
