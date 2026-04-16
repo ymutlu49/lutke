@@ -122,27 +122,71 @@ class _WordMatchScreenState extends ConsumerState<WordMatchScreen>
   // ── Tur baslat ───────────────────────────────────────────────
   void _startRound() {
     final rng = Random();
-    final shuffled = List.of(_allWords)..shuffle(rng);
-    final selected = shuffled.take(_pairsPerRound).toList();
-
     final isKuOnly = ref.read(languageModeProvider) == LanguageMode.kuOnly;
+
+    // Matching için UYGUN kelimeleri filtrele:
+    // - Phrasal (boşluklu) ifadeler matching'e uygun değil — cümlede kendisi geçer
+    // - Kurmancî-only modda: anlamlı (kelimeyi içeren, yeterince uzun) heritage gerek
+    bool isGoodMatchCandidate(dynamic w) {
+      final ku = (w.ku as String).trim();
+      // Phrasal (birden çok kelimeden oluşan) başlıkları ele — matching için uygunsuz
+      if (ku.contains(' ') || ku.contains('?') || ku.contains('!')) return false;
+      if (ku.length < 3) return false;
+      if (!isKuOnly) return true;
+      // KU-only modda heritage cümlesi kontrolü
+      final her = (w.her as List<dynamic>? ?? []);
+      if (her.isEmpty) return false;
+      // En az bir heritage kelimeyi içermeli ve kelimeyi maskelediğinde
+      // bağlam yeterince uzun kalmalı (≥12 karakter)
+      for (final raw in her) {
+        final s = raw.toString();
+        if (s.length < 15) continue;
+        // Kelime oranı: maske sonrası kalan / toplam
+        final kuLen = ku.length;
+        if (kuLen >= s.length * 0.5) continue; // Kelime cümlenin yarısından fazla → anlamsız
+        final pattern = RegExp(
+          r'\b' + RegExp.escape(ku) + r'(a|ê|î|an|ên|yê|ya|i|ê)?\b',
+          caseSensitive: false,
+        );
+        if (pattern.hasMatch(s)) return true;
+      }
+      return false;
+    }
+
+    final filtered = _allWords.where(isGoodMatchCandidate).toList();
+    final pool = filtered.length >= _pairsPerRound ? filtered : _allWords;
+    final shuffled = List.of(pool)..shuffle(rng);
+    final selected = shuffled.take(_pairsPerRound).toList();
 
     _currentPairs = selected.asMap().entries.map((e) {
       final w = e.value;
       final String rightText;
       if (isKuOnly) {
-        // Heritage cumlesi snippet veya kategori + emoji
+        // Heritage cumlesi — kelimeyi ____ ile maskele (eşleştirme trivia değil, anlam)
         final heritageSentences = w.her as List<dynamic>;
-        if (heritageSentences.isNotEmpty) {
-          String sentence = heritageSentences.first.toString();
-          // Kisalt: maks 30 karakter
-          if (sentence.length > 30) {
-            sentence = '${sentence.substring(0, 27)}...';
+        String sentence = '';
+        final ku = (w.ku as String).trim();
+        final pattern = RegExp(
+          r'\b' + RegExp.escape(ku) + r'(a|ê|î|an|ên|yê|ya|i|ê)?\b',
+          caseSensitive: false,
+        );
+        for (final raw in heritageSentences) {
+          final s = raw.toString();
+          if (s.length >= 15 && pattern.hasMatch(s)) {
+            sentence = s.replaceAllMapped(pattern, (_) => '____');
+            break;
           }
-          rightText = sentence;
-        } else {
-          rightText = '${_categoryEmoji(w.kat)} ${w.kat}';
         }
+        if (sentence.isEmpty && heritageSentences.isNotEmpty) {
+          sentence = heritageSentences.first.toString();
+        }
+        if (sentence.isEmpty) {
+          sentence = '${_categoryEmoji(w.kat)} ${w.kat}';
+        }
+        if (sentence.length > 35) {
+          sentence = '${sentence.substring(0, 32)}...';
+        }
+        rightText = sentence;
       } else {
         rightText = w.tr as String;
       }
