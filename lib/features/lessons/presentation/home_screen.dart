@@ -18,6 +18,8 @@ import '../domain/b1_kelime_db.dart';
 import '../domain/b2_kelime_db.dart';
 import '../domain/c1_kelime_db.dart';
 import '../domain/c2_kelime_db.dart';
+import '../../en_learning/domain/en_to_quiz_adapter.dart';
+import '../../../shared/providers/learning_module_provider.dart';
 import '../../../shared/widgets/streak_widget.dart';
 // daily_word_widget import removed — widget no longer on home screen
 import '../../../shared/providers/language_mode_provider.dart';
@@ -1100,15 +1102,19 @@ class _SkillTreeUnit {
 }
 
 /// Seviyeye göre kelime DB'sini döndürür.
-List<dynamic> _getWordsForLevel(String level) => switch (level) {
-  'A1' => kA1TamListe,
-  'A2' => kA2TamListe,
-  'B1' => kB1All,
-  'B2' => kB2All,
-  'C1' => kC1All,
-  'C2' => kC2All,
-  _ => kA1TamListe,
-};
+/// İngilizce modülünde EnWord adapte edilmiş veri döner.
+List<dynamic> _getWordsForLevel(String level, {bool isEnglishModule = false}) {
+  if (isEnglishModule) return getEnWordsForLevel(level);
+  return switch (level) {
+    'A1' => kA1TamListe,
+    'A2' => kA2TamListe,
+    'B1' => kB1All,
+    'B2' => kB2All,
+    'C1' => kC1All,
+    'C2' => kC2All,
+    _ => kA1TamListe,
+  };
+}
 
 /// Kategori renkleri — her durak kendine özel canlı renk.
 Color _colorForCategory(String kat) => switch (kat) {
@@ -1255,8 +1261,8 @@ String _kuNameForCategory(String kat) => switch (kat) {
 /// Belirli seviye için durak listesi oluşturur.
 /// Minimum 12 kelime olan kategoriler gösterilir.
 /// Pedagojik sıralamaya göre sıralanır.
-List<_SkillTreeUnit> _buildSkillUnits(String level) {
-  final words = _getWordsForLevel(level);
+List<_SkillTreeUnit> _buildSkillUnits(String level, {bool isEnglishModule = false}) {
+  final words = _getWordsForLevel(level, isEnglishModule: isEnglishModule);
   final catCounts = <String, int>{};
   for (final k in words) {
     final kat = k.kat as String? ?? '';
@@ -1348,7 +1354,8 @@ class _SkillTreePath extends StatelessWidget {
       1 => 'A1', 2 => 'A2', 3 => 'B1', 4 => 'B2', 5 => 'C1', 6 => 'C2',
       _ => 'A1',
     };
-    final units = _buildSkillUnits(levelKey);
+    final units = _buildSkillUnits(levelKey,
+        isEnglishModule: ref.watch(isEnglishModuleProvider));
     final progression = ref.read(progressionProvider.notifier);
     // ignore: unused_local_variable
     final _ = ref.watch(progressionProvider); // rebuild on changes

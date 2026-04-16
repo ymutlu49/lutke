@@ -21,6 +21,8 @@ import '../../lessons/domain/c1_kelime_db.dart';
 import '../../lessons/domain/c2_kelime_db.dart';
 import '../../lessons/domain/child_a1_kelime_db.dart';
 import '../../lessons/domain/child_a2_kelime_db.dart';
+import '../../en_learning/domain/en_to_quiz_adapter.dart';
+import '../../../shared/providers/learning_module_provider.dart';
 import '../../cultural_content/domain/dil_motivasyon_db.dart';
 import '../../../core/services/sound_service.dart';
 import '../../../shared/providers/child_mode_provider.dart';
@@ -91,7 +93,21 @@ class _QuizQuestion {
 
 // ── Kelime Havuzu Yardimcilari ──────────────────────────────────
 
-List<_QuizWord> _loadWordsForLevel(String level, {bool isChildMode = false}) {
+List<_QuizWord> _loadWordsForLevel(String level, {bool isChildMode = false, bool isEnglishModule = false}) {
+  // İngilizce modülü: EnWord verisini Kurmancî record şekline adapte eder.
+  if (isEnglishModule) {
+    final raw = getEnWordsForLevel(level);
+    return raw
+        .where((r) => r.ku.isNotEmpty && r.tr.isNotEmpty && r.ku.length > 1)
+        .map((r) => _QuizWord(
+              id: r.id, ku: r.ku, tr: r.tr, en: r.en,
+              kat: r.kat ?? '', cins: r.cins ?? '', not_: r.not ?? '',
+              zor: (r.zor is num) ? (r.zor as num).toDouble() : 0.75,
+              her: r.her ?? [], gen: r.gen ?? [],
+            ))
+        .cast<_QuizWord>()
+        .toList();
+  }
   // Çocuk modu: yalnızca çocuk için seçilmiş A1+A2 havuzu kullanılır.
   // Bu distractor seçiminde B1+ gibi yaş-uygunsuz kelimelerin çıkmasını
   // engeller (çocuk_a1_kelime_db: 61 madde, çocuk_a2_kelime_db: 31 madde).
@@ -138,8 +154,9 @@ List<_QuizQuestion> _generateQuizSession({
   int questionCount = 10,
   bool showTurkish = true,
   bool isChildMode = false,
+  bool isEnglishModule = false,
 }) {
-  final allWords = _loadWordsForLevel(level, isChildMode: isChildMode);
+  final allWords = _loadWordsForLevel(level, isChildMode: isChildMode, isEnglishModule: isEnglishModule);
   // Çocuk modunda soru sayısını 10 → 6 indir (dikkat süresi kısa)
   if (isChildMode) questionCount = 6;
   // Filter by category if provided, but keep allWords for distractors
@@ -455,11 +472,13 @@ class _QuizScreenState extends ConsumerState<QuizScreen>
     super.initState();
     _showTurkish = ref.read(showTurkishProvider);
     final isChild = ref.read(isChildModeProvider);
+    final isEn = ref.read(isEnglishModuleProvider);
     _questions = _generateQuizSession(
       level: widget.level,
       category: widget.category,
       showTurkish: _showTurkish,
       isChildMode: isChild,
+      isEnglishModule: isEn,
     );
 
     _shakeController = AnimationController(
@@ -2041,6 +2060,7 @@ class _QuizScreenState extends ConsumerState<QuizScreen>
         final all = _loadWordsForLevel(
           widget.level,
           isChildMode: ref.read(isChildModeProvider),
+          isEnglishModule: ref.read(isEnglishModuleProvider),
         );
         final isKuLookup = !_showTurkish ||
             question.type == _ExerciseType.reverseTranslation;
@@ -2873,6 +2893,7 @@ class _QuizScreenState extends ConsumerState<QuizScreen>
                             category: widget.category,
                             showTurkish: _showTurkish,
                             isChildMode: ref.read(isChildModeProvider),
+                            isEnglishModule: ref.read(isEnglishModuleProvider),
                           );
                           _currentIndex = 0;
                           _hearts = 3;
