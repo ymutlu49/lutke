@@ -91,13 +91,23 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
                   automaticallyImplyLeading: false,
                   title: Row(
                     children: [
-                      ClipOval(
-                        child: Image.asset(
-                          'assets/images/logo_128.png',
-                          width: 44,
-                          height: 44,
-                          fit: BoxFit.cover,
-                          filterQuality: FilterQuality.medium,
+                      MouseRegion(
+                        cursor: SystemMouseCursors.click,
+                        child: GestureDetector(
+                          onTap: () => context.go(AppRoutes.home),
+                          child: Tooltip(
+                            message: 'Serrûpel',
+                            waitDuration: const Duration(milliseconds: 800),
+                            child: ClipOval(
+                              child: Image.asset(
+                                'assets/images/logo_128.png',
+                                width: 44,
+                                height: 44,
+                                fit: BoxFit.cover,
+                                filterQuality: FilterQuality.medium,
+                              ),
+                            ),
+                          ),
                         ),
                       ),
                       const SizedBox(width: 10),

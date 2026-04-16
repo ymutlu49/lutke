@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
+import 'package:go_router/go_router.dart';
 
 import '../../core/constants/app_colors.dart';
 import '../../core/constants/app_typography.dart';
 import '../../core/constants/app_spacing.dart';
+import '../../core/router/app_router.dart';
 
 /// LÛTKE markasının tek gerçek kaynağı.
 /// Tüm ekranlarda tutarlı logo gösterimi sağlar.
@@ -17,39 +19,81 @@ class LutkeLogo extends StatelessWidget {
   final double size;
   final _LogoVariant _variant;
   final bool animated;
+  /// Logoya dokunulduğunda çağrılacak callback.
+  /// `null` → tıklanamaz (splash/welcome gibi akış içi ekranlar).
+  /// Varsayılan (factory'lerden gelir) → ana sayfaya yönlendirir.
+  final VoidCallback? onTap;
 
   const LutkeLogo._({
     required this.size,
     required _LogoVariant variant,
     this.animated = false,
+    this.onTap,
   }) : _variant = variant;
 
-  /// Sadece ikon — navigation bar, küçük alanlar.
-  factory LutkeLogo.icon({double size = 40}) =>
-      LutkeLogo._(size: size, variant: _LogoVariant.icon);
+  /// Sadece ikon — navigation bar, küçük alanlar. Tıklanabilir (ana sayfaya gider).
+  factory LutkeLogo.icon({double size = 40, VoidCallback? onTap}) =>
+      LutkeLogo._(size: size, variant: _LogoVariant.icon, onTap: onTap ?? _goHome);
 
-  /// Dikey marka — ikon üstte, yazı altta. Auth, onboarding.
-  factory LutkeLogo.brand({double iconSize = 72, bool animated = false}) =>
-      LutkeLogo._(size: iconSize, variant: _LogoVariant.brand, animated: animated);
+  /// Dikey marka — ikon üstte, yazı altta. Auth, onboarding. Splash/welcome için onTap: null.
+  factory LutkeLogo.brand({
+    double iconSize = 72,
+    bool animated = false,
+    VoidCallback? onTap,
+  }) => LutkeLogo._(
+        size: iconSize,
+        variant: _LogoVariant.brand,
+        animated: animated,
+        onTap: onTap,
+      );
 
-  /// Yatay marka — ikon solda, yazı sağda. App bar.
-  factory LutkeLogo.brandHorizontal({double iconSize = 32}) =>
-      LutkeLogo._(size: iconSize, variant: _LogoVariant.horizontal);
+  /// Yatay marka — ikon solda, yazı sağda. App bar. Tıklanabilir.
+  factory LutkeLogo.brandHorizontal({double iconSize = 32, VoidCallback? onTap}) =>
+      LutkeLogo._(
+        size: iconSize,
+        variant: _LogoVariant.horizontal,
+        onTap: onTap ?? _goHome,
+      );
 
-  /// Splash ekranı — büyük, animasyonlu.
+  /// Splash ekranı — büyük, animasyonlu. Tıklanamaz (akış içi).
   factory LutkeLogo.splash({required double screenWidth}) {
     final s = (screenWidth * 0.28).clamp(72.0, 140.0);
     return LutkeLogo._(size: s, variant: _LogoVariant.splash, animated: true);
   }
 
+  /// Dahili sentinel — onTap geç argümanı olmayan çağrılarda runtime'da
+  /// context'e ihtiyaç olduğundan, _navigate() helper'ı kullanılır.
+  static void _goHome() {} // yerleşik sentinel — build içinde ele alınır
+
   @override
   Widget build(BuildContext context) {
-    return switch (_variant) {
+    final raw = switch (_variant) {
       _LogoVariant.icon => _buildIcon(),
       _LogoVariant.brand => _buildBrand(),
       _LogoVariant.horizontal => _buildHorizontal(),
       _LogoVariant.splash => _buildSplash(),
     };
+    if (onTap == null) return raw;
+    return MouseRegion(
+      cursor: SystemMouseCursors.click,
+      child: GestureDetector(
+        behavior: HitTestBehavior.opaque,
+        onTap: () {
+          if (onTap == _goHome) {
+            // Ana sayfaya git — mevcut rota zaten home ise no-op
+            final loc = GoRouterState.of(context).matchedLocation;
+            if (loc != AppRoutes.home) context.go(AppRoutes.home);
+          } else {
+            onTap!.call();
+          }
+        },
+        child: Tooltip(
+          message: 'Serrûpel',
+          waitDuration: const Duration(milliseconds: 800),
+          child: raw,
+        ),
+      ),
+    );
   }
 
   Widget _buildIcon() {

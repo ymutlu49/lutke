@@ -437,6 +437,10 @@ class _QuizScreenState extends ConsumerState<QuizScreen>
   bool _sessionComplete = false;
   bool _variantAccepted = false; // True when e->ê etc. variant was accepted
   String _variantNote = ''; // Note about which variant was accepted
+  // Dictation "yakın cevap" — Levenshtein benzerliği 75-95% arasında ise
+  // cevap kabul edilir ama doğru form gösterilir (öğrenmeyi destekler).
+  bool _nearMiss = false;
+  String _expectedForm = ''; // Kullanıcıya gösterilecek doğru form
 
   /// Per-question results: true = correct, false = wrong.
   final List<bool> _questionResults = [];
@@ -521,6 +525,25 @@ class _QuizScreenState extends ConsumerState<QuizScreen>
               : '';
         }
       }
+
+      // NEAR-MISS: Yakın cevap kabulü — %75-95 benzerlik aralığı.
+      // Öğrenenleri cesaretlendirir, doğru formu gösterir.
+      // Sadece dictation'da etkin; kısa kelimelerde (<4 harf) uygulanmaz.
+      if (!correct && expected.length >= 4 && userInput.isNotEmpty) {
+        final userNorm = _normalizeKurmanciDiacritics(userInput);
+        final expectedNorm = _normalizeKurmanciDiacritics(expected);
+        final d = _levenshteinDistance(userNorm, expectedNorm);
+        final maxLen = userNorm.length > expectedNorm.length
+            ? userNorm.length
+            : expectedNorm.length;
+        final similarity = 1.0 - (d / maxLen);
+        // %75 eşiği: 4 harfte 1, 8 harfte 2, 16 harfte 4 hata tolere edilir.
+        if (similarity >= 0.75) {
+          correct = true;
+          _nearMiss = true;
+          _expectedForm = q.word.ku.trim();
+        }
+      }
     } else {
       // Multiple choice
       if (optionIndex == null) return;
@@ -592,6 +615,8 @@ class _QuizScreenState extends ConsumerState<QuizScreen>
       _typedAnswer = '';
       _variantAccepted = false;
       _variantNote = '';
+      _nearMiss = false;
+      _expectedForm = '';
       _typingController.clear();
     });
   }
@@ -1005,13 +1030,28 @@ class _QuizScreenState extends ConsumerState<QuizScreen>
     String hint = '';
 
     if (sentences is List && sentences.isNotEmpty) {
-      // Kelimeyi gerçekten içeren ve yeterince uzun cümleleri seç
+      // Kelimeyi gerçekten içeren ve cloze için UYGUN cümleleri seç.
+      //
+      // Cloze için elverişsiz cümleler (çok seçenekli olabilir):
+      //  - Çok kısa vocative ifadeler ("Silav, pîrê!" gibi — 4'ten az kelimelik
+      //    ünlem cümleleri birden çok selamlama/veda ile tamamlanabilir)
+      //  - Bağlam içermeyen kısa ifadeler (boşluk dahil 20 karakter altı)
+      //  - Fiil içermeyen sadece isim sıralamaları
       final wordRe = RegExp(
         r'\b' + RegExp.escape(q.word.ku) + r'(a|ê|î|an|ên|yê|ya)?\b',
         caseSensitive: false,
       );
+      bool isGoodClozeContext(String s) {
+        if (s.length < 20) return false; // Çok kısa bağlam yetersiz
+        final wordCount = s.split(RegExp(r'\s+')).length;
+        if (wordCount < 5) return false; // Çok az kelime → belirsiz
+        final trimmed = s.trim();
+        // Vocative ünlem ("X, Y!" kalıbı) — birden çok selam/veda fit olur
+        if (trimmed.endsWith('!') && wordCount <= 5) return false;
+        return true;
+      }
       final candidates = (sentences as List).cast<String>()
-          .where((s) => s.length >= 10 && wordRe.hasMatch(s))
+          .where((s) => wordRe.hasMatch(s) && isGoodClozeContext(s))
           .toList();
       if (candidates.isNotEmpty) {
         hint = _maskWord(candidates[0], q.word.ku);
@@ -1420,11 +1460,13 @@ class _QuizScreenState extends ConsumerState<QuizScreen>
               Expanded(
                 child: Text(
                   _isCorrect
-                      ? (_variantAccepted ? 'Nêzîk e!' : 'Pîroz be!')
+                      ? (_nearMiss
+                          ? _nearMissMessage()
+                          : (_variantAccepted ? 'Nêzîk e!' : 'Pîroz be!'))
                       : 'Rast bersiv:',
                   style: AppTypography.label.copyWith(
                     color: _isCorrect
-                        ? (_variantAccepted
+                        ? ((_variantAccepted || _nearMiss)
                             ? AppColors.warning
                             : AppColors.success)
                         : AppColors.errorSoft,
@@ -1434,6 +1476,56 @@ class _QuizScreenState extends ConsumerState<QuizScreen>
               ),
             ],
           ),
+
+          // Near-miss: doğru formu göster + motivasyon
+          if (_nearMiss && _expectedForm.isNotEmpty) ...[
+            const SizedBox(height: 8),
+            Container(
+              padding: const EdgeInsets.symmetric(
+                horizontal: 10,
+                vertical: 8,
+              ),
+              decoration: BoxDecoration(
+                color: AppColors.warning.withOpacity(0.08),
+                borderRadius: BorderRadius.circular(8),
+                border: Border.all(
+                  color: AppColors.warning.withOpacity(0.25),
+                  width: 1,
+                ),
+              ),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    'Forma rast:',
+                    style: AppTypography.caption.copyWith(
+                      color: AppColors.warning,
+                      fontWeight: FontWeight.w600,
+                      fontSize: 11,
+                    ),
+                  ),
+                  const SizedBox(height: 4),
+                  Text(
+                    _expectedForm,
+                    style: AppTypography.kurmanji.copyWith(
+                      color: AppColors.textPrimary,
+                      fontWeight: FontWeight.w700,
+                      fontSize: 15,
+                    ),
+                  ),
+                  const SizedBox(height: 4),
+                  Text(
+                    _nearMissEncouragement(),
+                    style: AppTypography.caption.copyWith(
+                      color: AppColors.warning.withOpacity(0.85),
+                      fontSize: 11,
+                      fontStyle: FontStyle.italic,
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ],
 
           // Variant accepted note
           if (_variantAccepted && _variantNote.isNotEmpty) ...[
@@ -1893,6 +1985,30 @@ class _QuizScreenState extends ConsumerState<QuizScreen>
       'Rast e!',
       'Geleki bask!',
       'Tu zana yi!',
+    ];
+    return messages[Random().nextInt(messages.length)];
+  }
+
+  /// Yakın-cevap başlığı — cesaretlendirici, "çok yaklaştın" tonu.
+  String _nearMissMessage() {
+    final messages = [
+      'Gelek nêzîk!',       // Çok yakın!
+      'Hema hema rast!',    // Neredeyse doğru!
+      'Baş e — berdewam!',  // İyi — devam et!
+      'Tu nêzîk î!',        // Yaklaştın!
+      'Dewamê pêvajoya xwe!', // Sürecini sürdür!
+    ];
+    return messages[Random().nextInt(messages.length)];
+  }
+
+  /// Yakın-cevap altına motivasyonel ipucu — doğru formu öğrensin.
+  String _nearMissEncouragement() {
+    final messages = [
+      'Careke din binêre — tu yê rast binivîsî!',
+      'Tîpên rast bi kar bîne, bibîne çi guherî.',
+      'Her xelet, gavek bo fêrbûnê ye.',
+      'Forma rast di bîra xwe de bihêle.',
+      'Hurgîlî û baqilî — zimanê dayikê ye.',
     ];
     return messages[Random().nextInt(messages.length)];
   }

@@ -8,6 +8,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import '../../../core/constants/app_colors.dart';
 import '../../../core/constants/app_typography.dart';
 import '../../../core/constants/app_spacing.dart';
+import '../../../core/router/app_router.dart';
 import '../../../shared/widgets/speak_button.dart';
 import '../../../shared/providers/language_mode_provider.dart';
 import '../domain/a1_kelime_db.dart';
@@ -413,12 +414,23 @@ class _VocabularyBrowseScreenState extends ConsumerState<VocabularyBrowseScreen>
         automaticallyImplyLeading: false,
         title: Row(
           children: [
-            ClipOval(
-                child: Image.asset('assets/images/logo_128.png',
-                    width: 44,
-                    height: 44,
-                    fit: BoxFit.cover,
-                    filterQuality: FilterQuality.medium)),
+            MouseRegion(
+              cursor: SystemMouseCursors.click,
+              child: GestureDetector(
+                onTap: () => context.go(AppRoutes.home),
+                child: Tooltip(
+                  message: 'Serrûpel',
+                  waitDuration: const Duration(milliseconds: 800),
+                  child: ClipOval(
+                    child: Image.asset('assets/images/logo_128.png',
+                        width: 44,
+                        height: 44,
+                        fit: BoxFit.cover,
+                        filterQuality: FilterQuality.medium),
+                  ),
+                ),
+              ),
+            ),
             const SizedBox(width: 10),
             Text('Peyvên Kurmancî',
                 style: AppTypography.headingSmall

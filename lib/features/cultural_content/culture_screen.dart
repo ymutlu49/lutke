@@ -145,12 +145,22 @@ class _CultureScreenState extends State<CultureScreen> {
             toolbarHeight: 60,
             title: Row(
               children: [
-                ClipOval(
-                  child: Image.asset(
-                    'assets/images/logo_128.png',
-                    width: 40, height: 40,
-                    fit: BoxFit.cover,
-                    filterQuality: FilterQuality.medium,
+                MouseRegion(
+                  cursor: SystemMouseCursors.click,
+                  child: GestureDetector(
+                    onTap: () => context.go(AppRoutes.home),
+                    child: Tooltip(
+                      message: 'Serrûpel',
+                      waitDuration: const Duration(milliseconds: 800),
+                      child: ClipOval(
+                        child: Image.asset(
+                          'assets/images/logo_128.png',
+                          width: 40, height: 40,
+                          fit: BoxFit.cover,
+                          filterQuality: FilterQuality.medium,
+                        ),
+                      ),
+                    ),
                   ),
                 ),
                 const SizedBox(width: 10),
