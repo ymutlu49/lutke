@@ -122,21 +122,29 @@ class _CulturalRewardCardState extends State<CulturalRewardCard> {
                   ).animate(delay: 500.ms).fadeIn();
                 }),
 
-                // Kültürel arka plan notu
-                if (widget.item.backgroundNote != null) ...[
-                  Gap.sm,
-                  _ToggleSection(
-                    label: 'Kültürel arka plan',
-                    isOpen: _showNote,
-                    onToggle: () => setState(() => _showNote = !_showNote),
-                    child: Text(
-                      widget.item.backgroundNote!,
-                      style: AppTypography.bodyGrammar.copyWith(
-                        color: AppColors.textSecondary,
-                      ),
-                    ),
-                  ).animate(delay: 600.ms).fadeIn(),
-                ],
+                // Kültürel arka plan notu — only when showTurkish
+                // (Not içeriği Türkçe olduğundan KU-only modda gizlenir)
+                if (widget.item.backgroundNote != null)
+                  Consumer(builder: (_, ref, __) {
+                    if (!ref.watch(showTurkishProvider)) {
+                      return const SizedBox.shrink();
+                    }
+                    return Padding(
+                      padding: const EdgeInsets.only(top: AppSpacing.sm),
+                      child: _ToggleSection(
+                        label: 'Kültürel arka plan',
+                        isOpen: _showNote,
+                        onToggle: () =>
+                            setState(() => _showNote = !_showNote),
+                        child: Text(
+                          widget.item.backgroundNote!,
+                          style: AppTypography.bodyGrammar.copyWith(
+                            color: AppColors.textSecondary,
+                          ),
+                        ),
+                      ).animate(delay: 600.ms).fadeIn(),
+                    );
+                  }),
 
                 Gap.lg,
 
@@ -612,7 +620,7 @@ class _NewrozBanner extends StatelessWidget {
 
 // ── Bölüm Başlığı ────────────────────────────────────────────────
 
-class _SectionHeader extends StatelessWidget {
+class _SectionHeader extends ConsumerWidget {
   final CulturalContentType type;
   const _SectionHeader({required this.type});
 
@@ -624,7 +632,7 @@ class _SectionHeader extends StatelessWidget {
   );
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     final item = CulturalItem(
       id: 'tmp',
       type: type,
@@ -635,13 +643,16 @@ class _SectionHeader extends StatelessWidget {
       level: 1,
       unitId: '',
     );
+    final showTr = ref.watch(showTurkishProvider);
 
     return Row(
       children: [
         Text(item.typeLabel,
             style: AppTypography.title.copyWith(color: AppColors.primary)),
-        Gap.hSm,
-        Text('/ ${item.typeTurkish}', style: AppTypography.caption),
+        if (showTr) ...[
+          Gap.hSm,
+          Text('/ ${item.typeTurkish}', style: AppTypography.caption),
+        ],
       ],
     );
   }

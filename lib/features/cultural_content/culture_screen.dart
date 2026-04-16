@@ -170,13 +170,20 @@ class _CultureScreenState extends State<CultureScreen> {
                     fontWeight: FontWeight.w700,
                   ),
                 ),
-                const SizedBox(width: 6),
-                Text(
-                  'Kültür',
-                  style: AppTypography.body.copyWith(
-                    color: AppColors.textSecondary,
-                  ),
-                ),
+                Consumer(builder: (_, ref, __) {
+                  if (!ref.watch(showTurkishProvider)) {
+                    return const SizedBox.shrink();
+                  }
+                  return Row(mainAxisSize: MainAxisSize.min, children: [
+                    const SizedBox(width: 6),
+                    Text(
+                      'Kültür',
+                      style: AppTypography.body.copyWith(
+                        color: AppColors.textSecondary,
+                      ),
+                    ),
+                  ]);
+                }),
               ],
             ),
             actions: [
@@ -316,14 +323,15 @@ class _CultureScreenState extends State<CultureScreen> {
 // ARAMA CUBUGU
 // ════════════════════════════════════════════════════════════════
 
-class _SearchBar extends StatelessWidget {
+class _SearchBar extends ConsumerWidget {
   final TextEditingController controller;
   final ValueChanged<String> onChanged;
 
   const _SearchBar({required this.controller, required this.onChanged});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final showTr = ref.watch(showTurkishProvider);
     return Container(
       height: 44,
       decoration: BoxDecoration(
@@ -336,7 +344,7 @@ class _SearchBar extends StatelessWidget {
         onChanged: onChanged,
         style: AppTypography.body,
         decoration: InputDecoration(
-          hintText: 'Bigere... (Ara...)',
+          hintText: showTr ? 'Bigere... (Ara...)' : 'Bigere...',
           hintStyle: AppTypography.body.copyWith(color: AppColors.textTertiary),
           prefixIcon: const Icon(Icons.search_rounded, size: 20,
             color: AppColors.textTertiary),
