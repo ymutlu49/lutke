@@ -33,6 +33,8 @@ import '../../features/exercises/presentation/smart_review_screen.dart';
 import '../../features/lessons/presentation/progress_map_screen.dart';
 import '../../features/exercises/presentation/listening_screen.dart';
 import '../../features/lessons/presentation/unit_hub_screen.dart';
+import '../../features/en_learning/presentation/module_select_screen.dart';
+import '../../features/en_learning/presentation/en_home_screen.dart';
 import '../../features/exercises/presentation/dialogue_screen.dart';
 import '../../features/exercises/presentation/pronunciation_screen.dart';
 import '../../features/child_mode/presentation/mode_selection_screen.dart';
@@ -62,6 +64,8 @@ abstract class AppRoutes {
   static const register         = '/auth/register';
   static const login            = '/auth/login';
   static const modeSelect       = '/mode-select';
+  static const moduleSelect     = '/module-select'; // Kurmancî / İngilizce
+  static const enHome           = '/en/home'; // İngilizce öğrenme ana sayfası
   static const home             = '/home';
   static const vocabulary       = '/vocabulary';
   static const culture          = '/culture';
@@ -130,6 +134,14 @@ GoRouter appRouter(AppRouterRef ref) {
       GoRoute(
         path: AppRoutes.modeSelect,
         builder: (_, __) => const ModeSelectionScreen(),
+      ),
+      GoRoute(
+        path: AppRoutes.moduleSelect,
+        builder: (_, __) => const ModuleSelectScreen(),
+      ),
+      GoRoute(
+        path: AppRoutes.enHome,
+        builder: (_, __) => const EnHomeScreen(),
       ),
       GoRoute(
         path: AppRoutes.welcome,

@@ -97,6 +97,9 @@ class HomeScreen extends ConsumerWidget {
                       ),
                       // KU/TR dil toggle
                       _LanguageModeToggle(),
+                      const SizedBox(width: 4),
+                      // İngilizce modülüne geç (kısayol)
+                      _ModuleSwitcher(),
                     ],
                   ),
 
@@ -2427,6 +2430,35 @@ class _LanguageModeToggle extends ConsumerWidget {
                 fontSize: 11, fontWeight: FontWeight.w800,
                 color: isKuTr ? const Color(0xFFFF9800) : AppColors.textSecondary.withOpacity(0.4),
                 decoration: isKuTr ? null : TextDecoration.lineThrough)),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+/// Modül kısayolu: Kurmancî → İngilizce öğrenme moduna geçiş
+class _ModuleSwitcher extends ConsumerWidget {
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    return GestureDetector(
+      onTap: () => context.push(AppRoutes.moduleSelect),
+      child: Container(
+        padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 6),
+        decoration: BoxDecoration(
+          color: AppColors.accent.withOpacity(0.10),
+          borderRadius: BorderRadius.circular(20),
+          border: Border.all(color: AppColors.accent.withOpacity(0.3)),
+        ),
+        child: const Row(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Text('🌍', style: TextStyle(fontSize: 14)),
+            SizedBox(width: 4),
+            Text('Îng',
+              style: TextStyle(
+                fontSize: 11, fontWeight: FontWeight.w800,
+                color: AppColors.accent)),
           ],
         ),
       ),
