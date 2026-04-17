@@ -809,6 +809,43 @@ class _ActivityGrid extends ConsumerWidget {
             ),
           ],
         ),
+
+        const SizedBox(height: AppSpacing.sm),
+
+        // ── Row 3: Axaftin + Guhdarîkirin (Speaking + Listening) ──
+        Row(
+          children: [
+            Expanded(
+              child: _ActivityGridCard(
+                emoji: '\u{1F5E3}\uFE0F',
+                label: 'Axaftin',
+                subtitle: 'Telafuz û axaftin',
+                gradientColors: [const Color(0xFFD81B60), const Color(0xFFAD1457)],
+                onTap: () => context.push(
+                  ref.read(isEnglishModuleProvider)
+                      ? AppRoutes.enSpeaking
+                      : AppRoutes.speaking,
+                ),
+                delay: 480,
+              ),
+            ),
+            const SizedBox(width: AppSpacing.sm),
+            Expanded(
+              child: _ActivityGridCard(
+                emoji: '\u{1F442}',
+                label: 'Guhdarîkirin',
+                subtitle: 'Guhdarî bike',
+                gradientColors: [const Color(0xFF00838F), const Color(0xFF006064)],
+                onTap: () => context.push(
+                  ref.read(isEnglishModuleProvider)
+                      ? AppRoutes.enListening
+                      : AppRoutes.listening,
+                ),
+                delay: 520,
+              ),
+            ),
+          ],
+        ),
       ],
     );
   }
