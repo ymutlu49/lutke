@@ -23,6 +23,8 @@ import 'en_b1_kelime_db.dart';
 import 'en_b2_kelime_db.dart';
 import 'en_c1_kelime_db.dart';
 import 'en_c2_kelime_db.dart';
+import 'en_child_a1_kelime_db.dart';
+import 'en_child_a2_kelime_db.dart';
 
 /// Kurmancî DB ile aynı şekildeki record (uyumlu).
 typedef LearningRecord = ({
@@ -69,6 +71,12 @@ final List<LearningRecord> kEnC1AsRecords =
     kEnC1Liste.map(_adaptEn).toList(growable: false);
 final List<LearningRecord> kEnC2AsRecords =
     kEnC2Liste.map(_adaptEn).toList(growable: false);
+
+/// Çocuk modu — İngilizce.
+final List<LearningRecord> kEnChildA1AsRecords =
+    kEnChildA1Liste.map(_adaptEn).toList(growable: false);
+final List<LearningRecord> kEnChildA2AsRecords =
+    kEnChildA2Liste.map(_adaptEn).toList(growable: false);
 
 /// Seviye string → İngilizce kayıt listesi
 List<dynamic> getEnWordsForLevel(String level) {
