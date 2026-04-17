@@ -37,6 +37,11 @@ import '../../features/en_learning/presentation/module_select_screen.dart';
 import '../../features/en_learning/presentation/en_home_screen.dart';
 import '../../features/en_learning/presentation/en_grammar_screen.dart';
 import '../../features/en_learning/presentation/en_quiz_hub_screen.dart';
+import '../../features/en_learning/presentation/en_skills_hub_screen.dart';
+import '../../features/en_learning/presentation/en_reading_screen.dart';
+import '../../features/en_learning/presentation/en_writing_screen.dart';
+import '../../features/en_learning/presentation/en_listening_screen.dart';
+import '../../features/en_learning/presentation/en_speaking_screen.dart';
 import '../../features/exercises/presentation/dialogue_screen.dart';
 import '../../features/exercises/presentation/pronunciation_screen.dart';
 import '../../features/child_mode/presentation/mode_selection_screen.dart';
@@ -70,6 +75,11 @@ abstract class AppRoutes {
   static const enHome           = '/en/home'; // İngilizce öğrenme ana sayfası
   static const enGrammar        = '/en/grammar';
   static const enQuizHub        = '/en/quiz-hub';
+  static const enSkillsHub      = '/en/skills-hub';
+  static const enReading        = '/en/reading';
+  static const enWriting        = '/en/writing';
+  static const enListening      = '/en/listening';
+  static const enSpeaking       = '/en/speaking';
   static const home             = '/home';
   static const vocabulary       = '/vocabulary';
   static const culture          = '/culture';
@@ -154,6 +164,26 @@ GoRouter appRouter(AppRouterRef ref) {
       GoRoute(
         path: AppRoutes.enQuizHub,
         builder: (_, __) => const EnQuizHubScreen(),
+      ),
+      GoRoute(
+        path: AppRoutes.enSkillsHub,
+        builder: (_, __) => const EnSkillsHubScreen(),
+      ),
+      GoRoute(
+        path: AppRoutes.enReading,
+        builder: (_, __) => const EnReadingScreen(),
+      ),
+      GoRoute(
+        path: AppRoutes.enWriting,
+        builder: (_, __) => const EnWritingScreen(),
+      ),
+      GoRoute(
+        path: AppRoutes.enListening,
+        builder: (_, __) => const EnListeningScreen(),
+      ),
+      GoRoute(
+        path: AppRoutes.enSpeaking,
+        builder: (_, __) => const EnSpeakingScreen(),
       ),
       GoRoute(
         path: AppRoutes.welcome,

@@ -781,7 +781,7 @@ class _ActivityGrid extends ConsumerWidget {
                 gradientColors: [const Color(0xFF3F51B5), const Color(0xFF283593)],
                 onTap: () => context.push(
                   ref.read(isEnglishModuleProvider)
-                      ? AppRoutes.enGrammar
+                      ? AppRoutes.enSkillsHub
                       : AppRoutes.grammar,
                 ),
                 delay: 400,
