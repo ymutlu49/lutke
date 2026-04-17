@@ -779,7 +779,11 @@ class _ActivityGrid extends ConsumerWidget {
                 label: 'Rêziman',
                 subtitle: 'Gramer bike',
                 gradientColors: [const Color(0xFF3F51B5), const Color(0xFF283593)],
-                onTap: () => context.push(AppRoutes.grammar),
+                onTap: () => context.push(
+                  ref.read(isEnglishModuleProvider)
+                      ? AppRoutes.enGrammar
+                      : AppRoutes.grammar,
+                ),
                 delay: 400,
               ),
             ),
