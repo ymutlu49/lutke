@@ -8,6 +8,7 @@ import '../../core/constants/app_colors.dart';
 import '../../core/services/sound_service.dart';
 import '../../core/services/tts_service.dart';
 import '../providers/language_mode_provider.dart';
+import '../providers/learning_module_provider.dart';
 
 // Conditional import: web uses dart:js_interop, other platforms get a no-op stub
 import '../../core/services/js_eval_stub.dart'
@@ -51,6 +52,21 @@ class _SpeakButtonState extends ConsumerState<SpeakButton> {
 
     _slowMode = slow || widget.slow;
     setState(() { _loading = true; _failed = false; _showColdHint = false; });
+
+    // İngilizce modülünde browser speechSynthesis kullan (hızlı, ücretsiz, native)
+    final isEnglish = ref.read(isEnglishModuleProvider);
+    if (isEnglish && kIsWeb) {
+      _speakEnglishBrowser(widget.text);
+      setState(() { _loading = false; _playing = true; });
+      SoundService.playClick();
+      // Tahmini süre sonra playing'i kapat
+      final estimated = (widget.text.split(' ').length * 0.4 + 1.0)
+          .clamp(1.5, 6.0).toInt();
+      Future.delayed(Duration(seconds: estimated), () {
+        if (mounted) setState(() => _playing = false);
+      });
+      return;
+    }
 
     final tts = ref.read(ttsServiceProvider);
     final isCold = tts.isColdStart;
@@ -118,6 +134,36 @@ class _SpeakButtonState extends ConsumerState<SpeakButton> {
     Future.delayed(Duration(seconds: estimatedDuration), () {
       if (mounted) setState(() => _playing = false);
     });
+  }
+
+  /// İngilizce için: browser'ın yerleşik speechSynthesis API'sini kullan.
+  /// Hızlı, ücretsiz, çevrimdışı çalışır. Cold start yok.
+  void _speakEnglishBrowser(String text) {
+    if (!kIsWeb) return;
+    final rate = _slowMode ? 0.7 : 1.0;
+    final escaped = text
+        .replaceAll('\\', '\\\\')
+        .replaceAll("'", "\\'")
+        .replaceAll('\n', ' ');
+    _evalJs('''
+      (function() {
+        try {
+          if (!window.speechSynthesis) { console.log('No speechSynthesis'); return; }
+          window.speechSynthesis.cancel();
+          var u = new SpeechSynthesisUtterance('$escaped');
+          u.lang = 'en-US';
+          u.rate = $rate;
+          u.pitch = 1.0;
+          // Mümkünse İngilizce sesini seç (Chrome/Edge varsayılanı)
+          var voices = window.speechSynthesis.getVoices();
+          var enVoice = voices.find(function(v) {
+            return v.lang.startsWith('en-US') || v.lang.startsWith('en-GB');
+          });
+          if (enVoice) u.voice = enVoice;
+          window.speechSynthesis.speak(u);
+        } catch (e) { console.log('TTS error:', e); }
+      })();
+    ''');
   }
 
   void _playWebAudio(String url) {
