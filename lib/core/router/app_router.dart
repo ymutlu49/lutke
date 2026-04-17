@@ -36,6 +36,7 @@ import '../../features/lessons/presentation/unit_hub_screen.dart';
 import '../../features/en_learning/presentation/module_select_screen.dart';
 import '../../features/en_learning/presentation/en_home_screen.dart';
 import '../../features/en_learning/presentation/en_grammar_screen.dart';
+import '../../features/en_learning/presentation/en_quiz_hub_screen.dart';
 import '../../features/exercises/presentation/dialogue_screen.dart';
 import '../../features/exercises/presentation/pronunciation_screen.dart';
 import '../../features/child_mode/presentation/mode_selection_screen.dart';
@@ -68,6 +69,7 @@ abstract class AppRoutes {
   static const moduleSelect     = '/module-select'; // Kurmancî / İngilizce
   static const enHome           = '/en/home'; // İngilizce öğrenme ana sayfası
   static const enGrammar        = '/en/grammar';
+  static const enQuizHub        = '/en/quiz-hub';
   static const home             = '/home';
   static const vocabulary       = '/vocabulary';
   static const culture          = '/culture';
@@ -148,6 +150,10 @@ GoRouter appRouter(AppRouterRef ref) {
       GoRoute(
         path: AppRoutes.enGrammar,
         builder: (_, __) => const EnGrammarScreen(),
+      ),
+      GoRoute(
+        path: AppRoutes.enQuizHub,
+        builder: (_, __) => const EnQuizHubScreen(),
       ),
       GoRoute(
         path: AppRoutes.welcome,

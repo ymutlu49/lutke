@@ -789,7 +789,16 @@ class _ActivityGrid extends ConsumerWidget {
             ),
             const SizedBox(width: AppSpacing.sm),
             Expanded(
-              child: _ActivityGridCard(
+              child: ref.watch(isEnglishModuleProvider)
+                  ? _ActivityGridCard(
+                      emoji: '\u{1F3AF}',
+                      label: 'Testên taybet',
+                      subtitle: 'Article, Past, Phrasal',
+                      gradientColors: [const Color(0xFF43A047), const Color(0xFF2E7D32)],
+                      onTap: () => context.push(AppRoutes.enQuizHub),
+                      delay: 440,
+                    )
+                  : _ActivityGridCard(
                 emoji: '\u{1F504}',
                 label: 'Dubare',
                 subtitle: '${ref.watch(reviewDueCountProvider)} peyv',
