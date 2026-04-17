@@ -43,6 +43,7 @@ import '../../features/en_learning/presentation/en_writing_screen.dart';
 import '../../features/en_learning/presentation/en_listening_screen.dart';
 import '../../features/en_learning/presentation/en_speaking_screen.dart';
 import '../../features/exercises/presentation/ku_speaking_screen.dart';
+import '../../features/exercises/presentation/ku_writing_screen.dart';
 import '../../features/exercises/presentation/dialogue_screen.dart';
 import '../../features/exercises/presentation/pronunciation_screen.dart';
 import '../../features/child_mode/presentation/mode_selection_screen.dart';
@@ -82,6 +83,7 @@ abstract class AppRoutes {
   static const enListening      = '/en/listening';
   static const enSpeaking       = '/en/speaking';
   static const speaking         = '/home/speaking'; // Kurmancî konuşma
+  static const writing          = '/home/writing';  // Kurmancî yazma dedicated
   static const home             = '/home';
   static const vocabulary       = '/vocabulary';
   static const culture          = '/culture';
@@ -190,6 +192,10 @@ GoRouter appRouter(AppRouterRef ref) {
       GoRoute(
         path: AppRoutes.speaking,
         builder: (_, __) => const KuSpeakingScreen(),
+      ),
+      GoRoute(
+        path: AppRoutes.writing,
+        builder: (_, __) => const KuWritingScreen(),
       ),
       GoRoute(
         path: AppRoutes.welcome,

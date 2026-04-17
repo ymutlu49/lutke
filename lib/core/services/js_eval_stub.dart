@@ -3,3 +3,7 @@
 void evalJs(String script) {
   // No-op on non-web platforms
 }
+
+dynamic evalJsSync(String script) {
+  return null;
+}

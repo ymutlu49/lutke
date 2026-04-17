@@ -8,6 +8,8 @@ import '../../../core/constants/app_spacing.dart';
 import '../../../core/constants/app_typography.dart';
 import '../../../shared/providers/language_mode_provider.dart';
 import '../../../shared/widgets/speak_button.dart';
+import '../../../shared/services/speech_recognition_service.dart';
+import '../../../shared/services/skill_progress_service.dart';
 import '../domain/ku_speaking_db.dart';
 
 /// Kurmancî konuşma/telaffuz ekranı.
@@ -31,7 +33,41 @@ class _KuSpeakingScreenState extends ConsumerState<KuSpeakingScreen> {
     _items = _items.take(10).toList();
   }
 
-  void _iDid() => setState(() { _done = true; _score += 10; });
+  bool _listening = false;
+  String? _transcript;
+  double? _similarity;
+
+  void _startRecording() {
+    if (_listening) return;
+    setState(() { _listening = true; _transcript = null; _similarity = null; });
+    // Kurmancî için direkt dil desteği yok, en yakın fallback 'tr-TR' (Türkçe)
+    // Bu yüzden sonuç yaklaşık — kullanıcıya bildir
+    SpeechRecognitionService.start(
+      language: 'tr-TR', // yakın fallback
+      onResult: (t) {
+        if (!mounted) return;
+        final sim = SpeechRecognitionService.similarity(t, _items[_idx].textKu);
+        setState(() {
+          _listening = false;
+          _transcript = t;
+          _similarity = sim;
+          if (sim >= 0.5) { // Kurmancî için daha düşük eşik
+            _done = true;
+            _score += (sim * 15).round();
+          }
+        });
+      },
+      onError: (err) {
+        if (!mounted) return;
+        setState(() { _listening = false; _transcript = 'Xelet: $err'; });
+      },
+    );
+  }
+
+  void _iDid() {
+    setState(() { _done = true; _score += 10; });
+    SkillProgressService.markCompleted(module: 'ku', skill: 'speaking');
+  }
 
   void _next() {
     if (_idx + 1 >= _items.length) {
@@ -147,21 +183,46 @@ class _KuSpeakingScreenState extends ConsumerState<KuSpeakingScreen> {
                   ]),
                 ),
                 const SizedBox(height: 16),
-                Container(
-                  padding: const EdgeInsets.all(10),
-                  decoration: BoxDecoration(
-                    color: AppColors.backgroundSecondary,
-                    borderRadius: BorderRadius.circular(10),
+                // Speech recognition button
+                Center(
+                  child: ElevatedButton.icon(
+                    onPressed: _listening ? null : _startRecording,
+                    icon: Icon(_listening ? Icons.mic : Icons.mic_none),
+                    label: Text(_listening ? 'Guhdarî dike...' : 'Tu bibêje'),
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: _listening ? Colors.red : AppColors.primary,
+                      foregroundColor: Colors.white,
+                      minimumSize: const Size(200, 48),
+                    ),
                   ),
-                  child: Row(children: [
-                    const Icon(Icons.mic, size: 20, color: AppColors.textSecondary),
-                    const SizedBox(width: 8),
-                    Expanded(child: Text(
-                      'Niha tu bibêje. Bi modelê re bide ber hev.',
-                      style: AppTypography.caption.copyWith(
-                        color: AppColors.textSecondary, height: 1.4))),
-                  ]),
                 ),
+                if (_transcript != null) ...[
+                  const SizedBox(height: 10),
+                  Container(
+                    padding: const EdgeInsets.all(12),
+                    decoration: BoxDecoration(
+                      color: _similarity != null && _similarity! >= 0.5
+                        ? Colors.green.withValues(alpha: 0.1)
+                        : Colors.orange.withValues(alpha: 0.1),
+                      borderRadius: BorderRadius.circular(10),
+                    ),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text('Te got: "$_transcript"',
+                          style: AppTypography.bodySmall.copyWith(
+                            fontWeight: FontWeight.w700)),
+                        if (_similarity != null) ...[
+                          const SizedBox(height: 4),
+                          Text('Hevşibî: %${(_similarity! * 100).toStringAsFixed(0)} (ji bo Kurmancî yaklaşık)',
+                            style: TextStyle(
+                              color: _similarity! >= 0.5 ? Colors.green : Colors.orange,
+                              fontWeight: FontWeight.w800, fontSize: 12)),
+                        ],
+                      ],
+                    ),
+                  ),
+                ],
                 const Spacer(),
                 Row(children: [
                   Expanded(child: OutlinedButton(

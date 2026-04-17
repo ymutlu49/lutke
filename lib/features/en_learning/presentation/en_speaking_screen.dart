@@ -7,6 +7,8 @@ import '../../../core/constants/app_colors.dart';
 import '../../../core/constants/app_spacing.dart';
 import '../../../core/constants/app_typography.dart';
 import '../domain/en_speaking_db.dart';
+import '../../../shared/services/speech_recognition_service.dart';
+import '../../../shared/services/skill_progress_service.dart';
 
 import '../../../core/services/js_eval_stub.dart'
     if (dart.library.html) '../../../core/services/js_eval_web.dart'
@@ -59,8 +61,41 @@ class _EnSpeakingScreenState extends State<EnSpeakingScreen> {
     ''');
   }
 
+  bool _listening = false;
+  String? _transcript;
+  double? _similarity;
+
+  void _startRecording() {
+    if (_listening) return;
+    setState(() { _listening = true; _transcript = null; _similarity = null; });
+    SpeechRecognitionService.start(
+      language: 'en-US',
+      onResult: (t) {
+        if (!mounted) return;
+        final sim = SpeechRecognitionService.similarity(t, _items[_idx].textEn);
+        setState(() {
+          _listening = false;
+          _transcript = t;
+          _similarity = sim;
+          if (sim >= 0.7) {
+            _done = true;
+            _score += (sim * 15).round();
+          }
+        });
+      },
+      onError: (err) {
+        if (!mounted) return;
+        setState(() {
+          _listening = false;
+          _transcript = 'Xelet: $err';
+        });
+      },
+    );
+  }
+
   void _iDid() {
     setState(() { _done = true; _score += 10; });
+    SkillProgressService.markCompleted(module: 'en', skill: 'speaking');
   }
 
   void _next() {
@@ -184,21 +219,46 @@ class _EnSpeakingScreenState extends State<EnSpeakingScreen> {
                   ]),
                 ),
                 const SizedBox(height: 16),
-                Container(
-                  padding: const EdgeInsets.all(10),
-                  decoration: BoxDecoration(
-                    color: AppColors.backgroundSecondary,
-                    borderRadius: BorderRadius.circular(10),
+                // Recording button (speech recognition)
+                Center(
+                  child: ElevatedButton.icon(
+                    onPressed: _listening ? null : _startRecording,
+                    icon: Icon(_listening ? Icons.mic : Icons.mic_none),
+                    label: Text(_listening ? 'Guhdarî dike...' : 'Tu bibêje'),
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: _listening ? Colors.red : const Color(0xFFD81B60),
+                      foregroundColor: Colors.white,
+                      minimumSize: const Size(200, 48),
+                    ),
                   ),
-                  child: Row(children: [
-                    const Icon(Icons.mic, size: 20, color: AppColors.textSecondary),
-                    const SizedBox(width: 8),
-                    Expanded(child: Text(
-                      'Niha tu bibêje. Guhê xwe bide û bi xwe re bide ber hev.',
-                      style: AppTypography.caption.copyWith(
-                        color: AppColors.textSecondary, height: 1.4))),
-                  ]),
                 ),
+                if (_transcript != null) ...[
+                  const SizedBox(height: 10),
+                  Container(
+                    padding: const EdgeInsets.all(12),
+                    decoration: BoxDecoration(
+                      color: _similarity != null && _similarity! >= 0.7
+                        ? Colors.green.withValues(alpha: 0.1)
+                        : Colors.orange.withValues(alpha: 0.1),
+                      borderRadius: BorderRadius.circular(10),
+                    ),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text('Te got: "$_transcript"',
+                          style: AppTypography.bodySmall.copyWith(
+                            fontWeight: FontWeight.w700)),
+                        if (_similarity != null) ...[
+                          const SizedBox(height: 4),
+                          Text('Hevşibî: %${(_similarity! * 100).toStringAsFixed(0)}',
+                            style: TextStyle(
+                              color: _similarity! >= 0.7 ? Colors.green : Colors.orange,
+                              fontWeight: FontWeight.w800)),
+                        ],
+                      ],
+                    ),
+                  ),
+                ],
                 const Spacer(),
                 Row(children: [
                   Expanded(child: OutlinedButton(
