@@ -18,6 +18,11 @@
 
 import 'en_word.dart';
 import 'en_a1_kelime_db.dart';
+import 'en_a2_kelime_db.dart';
+import 'en_b1_kelime_db.dart';
+import 'en_b2_kelime_db.dart';
+import 'en_c1_kelime_db.dart';
+import 'en_c2_kelime_db.dart';
 
 /// Kurmancî DB ile aynı şekildeki record (uyumlu).
 typedef LearningRecord = ({
@@ -54,12 +59,16 @@ LearningRecord _adaptEn(EnWord w) {
 final List<LearningRecord> kEnA1AsRecords =
     kEnA1Liste.map(_adaptEn).toList(growable: false);
 
-/// Diğer seviyeler — sonraki fazlarda doldurulacak.
-final List<LearningRecord> kEnA2AsRecords = const <LearningRecord>[];
-final List<LearningRecord> kEnB1AsRecords = const <LearningRecord>[];
-final List<LearningRecord> kEnB2AsRecords = const <LearningRecord>[];
-final List<LearningRecord> kEnC1AsRecords = const <LearningRecord>[];
-final List<LearningRecord> kEnC2AsRecords = const <LearningRecord>[];
+final List<LearningRecord> kEnA2AsRecords =
+    kEnA2Liste.map(_adaptEn).toList(growable: false);
+final List<LearningRecord> kEnB1AsRecords =
+    kEnB1Liste.map(_adaptEn).toList(growable: false);
+final List<LearningRecord> kEnB2AsRecords =
+    kEnB2Liste.map(_adaptEn).toList(growable: false);
+final List<LearningRecord> kEnC1AsRecords =
+    kEnC1Liste.map(_adaptEn).toList(growable: false);
+final List<LearningRecord> kEnC2AsRecords =
+    kEnC2Liste.map(_adaptEn).toList(growable: false);
 
 /// Seviye string → İngilizce kayıt listesi
 List<dynamic> getEnWordsForLevel(String level) {
