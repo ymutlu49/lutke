@@ -18,9 +18,19 @@
   <link rel="manifest" href="manifest.json">
   <!-- WEB-COMPAT: google_fonts paketi runtime'da fonts.gstatic.com'dan Lexend /
        AtkinsonHyperlegible çeker (disleksi erişilebilirlik modu). Preconnect
-       ile ilk font indirme gecikmesini ~100-200ms kısaltır. -->
+       ile ilk font indirme gecikmesini ~100-200ms kısaltır.
+       PERF 2026-04: preconnect ek olarak fonts.googleapis.com için de eklendi
+       (CSS manifest'i oradan iniyor). dns-prefetch fallback as-is. -->
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
   <link rel="dns-prefetch" href="https://fonts.gstatic.com">
+  <link rel="dns-prefetch" href="https://fonts.googleapis.com">
+  <!-- PERF 2026-04: canvaskit.js/wasm bulunduğu aynı origin'de, modern
+       tarayıcıda http/2 pipeline yeterli. canvaskit'i preload etmek ilk
+       paint'i öne çeker ama 9.7MB main.dart.js zaten daha büyük —
+       canvaskit preload'ı kullanıcı paketiyle (tarayıcı auto) yarıştırmak
+       isteniyorsa ekleyebilirsin. Şimdilik kapalı. -->
+  <!-- <link rel="preload" href="canvaskit/canvaskit.wasm" as="fetch" crossorigin> -->
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
     body {
