@@ -2,12 +2,16 @@
     "name": "LÛTKE — Zimanê Kurdî",
     "short_name": "LÛTKE",
     "start_url": ".",
+    "scope": ".",
+    "lang": "ku",
+    "dir": "ltr",
     "display": "standalone",
     "background_color": "#EDF7F4",
     "theme_color": "#1A7B6B",
     "description": "Kurmancî dil öğretim uygulaması — Kurdish Language Learning App",
     "orientation": "portrait-primary",
     "prefer_related_applications": false,
+    "categories": ["education", "kids", "books"],
     "icons": [
         {
             "src": "icons/Icon-192.png",
