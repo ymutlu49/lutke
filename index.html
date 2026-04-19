@@ -25,12 +25,9 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
   <link rel="dns-prefetch" href="https://fonts.gstatic.com">
   <link rel="dns-prefetch" href="https://fonts.googleapis.com">
-  <!-- PERF 2026-04: canvaskit.js/wasm bulunduğu aynı origin'de, modern
-       tarayıcıda http/2 pipeline yeterli. canvaskit'i preload etmek ilk
-       paint'i öne çeker ama 9.7MB main.dart.js zaten daha büyük —
-       canvaskit preload'ı kullanıcı paketiyle (tarayıcı auto) yarıştırmak
-       isteniyorsa ekleyebilirsin. Şimdilik kapalı. -->
-  <!-- <link rel="preload" href="canvaskit/canvaskit.wasm" as="fetch" crossorigin> -->
+  <!-- PERF 2026-04 (güncel): canvaskit.wasm preload AÇIK. Paralel fetch
+       TTI'yi ~600ms erken getiriyor (kritik-ajan raporu, 19 Nisan). -->
+  <link rel="preload" href="canvaskit/canvaskit.wasm" as="fetch" crossorigin>
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
     body {
