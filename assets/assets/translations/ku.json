@@ -6,18 +6,18 @@
   },
   "nav": {
     "home": "Malpera Sereke",
-    "lessons": "Waneyên",
+    "lessons": "Wane",
     "practice": "Pratîk",
     "profile": "Profîl",
     "search": "Lêgerîn"
   },
   "onboarding": {
-    "welcome": "Bi xêr hatî LÛTKE'yê",
-    "subtitle": "Em dest bi fêrbûna Kurmancî bikin",
-    "heritage_title": "Tu axêverê mîrasê yî?",
+    "welcome": "Bi xêr hatî LÛTKEyê",
+    "subtitle": "Werin em dest bi fêrbûna Kurmancî bikin",
+    "heritage_title": "Tu axêverê mîratî yî?",
     "heritage_desc": "Ger di malbata te de bi Kurmancî tê axaftin",
     "level_select": "Asta xwe hilbijêre",
-    "daily_goal": "Armanca rojane",
+    "daily_goal": "Armanca Rojane",
     "goal_10": "10 peyv",
     "goal_20": "20 peyv",
     "goal_30": "30 peyv",
@@ -26,8 +26,8 @@
   },
   "home": {
     "daily_goal": "Armanca Rojane",
-    "streak": "Roja Berdewamî",
-    "due_cards": "Divê Bê Gotar",
+    "streak": "Rêza Berdewamiyê",
+    "due_cards": "Kartên Dubarekirinê",
     "continue": "Berdewam bike",
     "new_lesson": "Waneya Nû",
     "review": "Dubarekirin"
@@ -44,35 +44,35 @@
     "xp_earned": "+{xp} XP bidest xist"
   },
   "levels": {
-    "a1": "Destpêkê (A1)",
+    "a1": "Destpêk (A1)",
     "a2": "Bingehîn (A2)",
-    "b1": "Navîn-jêr (B1)",
-    "b2": "Navîn-jor (B2)",
+    "b1": "Navîna Jêrîn (B1)",
+    "b2": "Navîna Jorîn (B2)",
     "c1": "Pêşketî (C1)",
     "c2": "Pispor (C2)"
   },
   "profile": {
     "title": "Profîla min",
-    "stats": "Amarên",
-    "settings": "Mîhengên",
+    "stats": "Amar",
+    "settings": "Mîheng",
     "logout": "Derkeve",
-    "total_words": "Peyvên Tevahî",
-    "accuracy": "Rêjeya Rast",
-    "streak_days": "Roja Berdewamî"
+    "total_words": "Hemû Peyv",
+    "accuracy": "Rêjeya Rastiyê",
+    "streak_days": "Rojên Berdewamiyê"
   },
   "auth": {
     "login": "Têkeve",
     "register": "Tomar bibe",
-    "email": "E-name",
+    "email": "E-peyam",
     "password": "Şîfre",
     "name": "Nav û Paşnav",
-    "forgot_password": "Şîfreya xwe ji bîr kir",
-    "anonymous": "Wek Mêvan dewam bike",
+    "forgot_password": "Te şîfreya xwe ji bîr kir?",
+    "anonymous": "Wek Mêvan berdewam bike",
     "already_member": "Berê tomar bûyî?",
     "not_member": "Ne endamî?"
   },
   "errors": {
-    "no_internet": "Pêwendiya Internetê tune",
+    "no_internet": "Pêwendiya Înternetê tune",
     "general": "Xeletiyek çêbû",
     "retry": "Dîsa biceribîne"
   },
@@ -96,8 +96,8 @@
     "start": "Dest pê bike!",
     "weekly": "Hefteya min",
     "words_learned": "Peyvên fêrbûyî",
-    "lessons_done": "Waneyên temam",
+    "lessons_done": "Waneyên qediyayî",
     "my_lessons": "Waneyên min",
-    "locked": "Hêj vekirî nîne"
+    "locked": "Hêj nehatiye vekirin"
   }
 }
