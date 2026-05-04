@@ -1655,7 +1655,7 @@ const kA1TamKelimeler = [
 
   (id:'a1_551', ku:'Sibeh', tr:'Sabah', en:'Morning', cins:'mê', ez:'sibehê',
    kat:'roj', zor:0.80, not:'"Sibeh" = sabah. "Sibê" = yarın. Dikkat: iki anlam!',
-   her:['Roja baş, dê! Sibeh xweş e.', 'Pîrê, sibeh zû ye.'],
+   her:['Roj baş, dê! Sibeh xweş e.', 'Pîrê, sibeh zû ye.'],
    gen:['Sibeh e.', 'Sibeh xweş e.']),
 
   (id:'a1_552', ku:'Piştî nîvro', tr:'Öğleden sonra', en:'Afternoon', cins:'bêcins', ez:null,
@@ -1663,10 +1663,10 @@ const kA1TamKelimeler = [
    her:['Piştî nîvro pîrê tê.', 'Piştî nîvro em diçin.'],
    gen:['Piştî nîvro û berî nîvro', 'Piştî nîvro tê.']),
 
-  (id:'a1_553', ku:'Êvara baş', tr:'İyi akşamlar', en:'Good evening', cins:'bêcins', ez:null,
-   kat:'silav', zor:0.80, not:'Akşam selamlaması — "Êvara baş!" (ezafe -a, dişil): "Êvar" mê + iyi dilek. Vokatif "Êvar baş" (ezafesiz) bazı diyalektlerde duyulur ama standart Bedirxan-Lescot ezafe ister.',
-   her:['Êvara baş, pîrê!', 'Êvara baş, malbato!'],
-   gen:['Êvara baş!', 'Êvara baş, mamosta!']),
+  (id:'a1_553', ku:'Êvar baş!', tr:'İyi akşamlar!', en:'Good evening!', cins:'bêcins', ez:null,
+   kat:'silav', zor:0.80, not:'Akşam selamlaması — sabit selamlama kalıbı, EZAFE ALMAZ: "Roj baş!", "Şev baş!", "Sibe baş!", "Êvar baş!". Bunlar set-phrase\'lerdir. Dilek formülleri (örn. "Êvara te baş be!" / "Roja te baş be!") farklı yapı; orada ezafe gerekir çünkü cümle özne-yüklem yapısındadır.',
+   her:['Êvar baş, pîrê!', 'Êvar baş, malbato!'],
+   gen:['Êvar baş!', 'Êvar baş, mamosta!']),
 
   (id:'a1_554', ku:'Şev baş', tr:'İyi geceler', en:'Good night', cins:'bêcins', ez:null,
    kat:'silav', zor:0.78, not:'Gece selamlaması — "şev baş!"',

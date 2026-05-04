@@ -35,17 +35,17 @@ const kA2Kelimeler = [
    her:['Sibê baş, dayê!', 'Sibê baş, pîrê — tu çawa yî?'],
    gen:['Sibê baş, mamosta!', 'Sibê baş, heval!']),
 
-  (id:'a2_002', ku:'Êvara baş!', tr:'İyi akşamlar!', en:'Good evening!',
+  (id:'a2_002', ku:'Êvar baş!', tr:'İyi akşamlar!', en:'Good evening!',
    cins:'bêcins', ez:null, kat:'silav', zor:0.83,
-   not:'"Êvare" = akşam (dişil). "Êvara baş!" = iyi akşamlar. [AS] selamlama bölümü',
-   her:['Êvara baş, kal!', 'Êvara baş, malbato!'],
-   gen:['Êvara baş, heval!', 'Êvara we baş be!']),
+   not:'"Êvare" = akşam (dişil). "Êvar baş!" = iyi akşamlar. [AS] selamlama bölümü',
+   her:['Êvar baş, kal!', 'Êvar baş, malbato!'],
+   gen:['Êvar baş, heval!', 'Êvara we baş be!']),
 
-  (id:'a2_003', ku:'Şeva baş!', tr:'İyi geceler!', en:'Good night!',
+  (id:'a2_003', ku:'Şev baş!', tr:'İyi geceler!', en:'Good night!',
    cins:'bêcins', ez:null, kat:'silav', zor:0.83,
-   not:'"Şeva baş!" = iyi geceler. "Şeva te xweş be" = gecen güzel olsun [TH]',
-   her:['Şeva baş, keça min!', 'Şeva baş, pîrê!'],
-   gen:['Şeva baş, heval!', 'Şeva we baş be!']),
+   not:'"Şev baş!" = iyi geceler. "Şeva te xweş be" = gecen güzel olsun [TH]',
+   her:['Şev baş, keça min!', 'Şev baş, pîrê!'],
+   gen:['Şev baş, heval!', 'Şeva we baş be!']),
 
   // Hal hatır sorma — derinleşmiş
   (id:'a2_004', ku:'Çi nûçe?', tr:'Ne haber?', en:"What\'s new?",
@@ -490,8 +490,8 @@ const kA2Kelimeler = [
    cins:'mê', ez:'dema xewê',
    kat:'jiyan', zor:0.80,
    not:'"Dema xewê" = uyuma zamanı. [AS]: "ketin xewê" = uykuya girmek ✓. "Dem" (zaman) + "xewê" (uykunun). Özgün Kurmancî ifade.',
-   her:['Dema xewê ye, kuro!', 'Şeva baş be!'],
-   gen:['Dema xewê', 'Şeva baş be!']),
+   her:['Dema xewê ye, kuro!', 'Şev baş be!'],
+   gen:['Dema xewê', 'Şev baş be!']),
 
   (id:'a2_101', ku:'Şûştin', tr:'Yıkamak', en:'To wash',
    cins:'bêcins', ez:null, kat:'jiyan', zor:0.79,

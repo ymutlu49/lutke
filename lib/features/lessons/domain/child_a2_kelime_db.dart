@@ -17,7 +17,7 @@ const kChildA2Kelimeler = [
 
   (id:'z_a2_002', ku:'Çav', tr:'Göz', en:'Eye', cins:'nêr', ez:'çavê',
    kat:'las', zor:0.82, not:'Çift organ', emoji: '👁️',
-   her:['Çavên min reş in.', 'Çavên dapîrê şîn in.'], gen:['Çav — göz', 'Du çav.']),
+   her:['Çavên min reş in.', 'Çavên dapîrê şîn in.'], gen:['Du çav.']),
 
   (id:'z_a2_003', ku:'Guh', tr:'Kulak', en:'Ear', cins:'nêr', ez:'guhê',
    kat:'las', zor:0.80, not:'Çift organ', emoji: '👂',
@@ -25,7 +25,7 @@ const kChildA2Kelimeler = [
 
   (id:'z_a2_004', ku:'Dev', tr:'Ağız', en:'Mouth', cins:'nêr', ez:'devê',
    kat:'las', zor:0.80, not:'Vücut', emoji: '👄',
-   her:['Devê xwe veke!', 'Dev — xwarin tê de ye.'], gen:['Dev — ağız', 'Dev mezin e.']),
+   her:['Devê xwe veke!', 'Dev — xwarin tê de ye.'], gen:['Dev mezin e.']),
 
   (id:'z_a2_005', ku:'Dest', tr:'El', en:'Hand', cins:'nêr', ez:'destê',
    kat:'las', zor:0.85, not:'Çift organ', emoji: '✋',
@@ -40,12 +40,12 @@ const kChildA2Kelimeler = [
   // ════════════════════════════════════════════════════════════
 
   (id:'z_a2_010', ku:'Kêfxweş', tr:'Mutlu', en:'Happy', cins:'bêcins', ez:null,
-   kat:'hest', zor:0.78, not:'Duygu', emoji: '😊',
+   kat:'hest', zor:0.78, not:'Hest', emoji: '😊',
    her:['Ez kêfxweş im!', 'Dê kêfxweş e.'], gen:['Kêfxweş — mutlu', 'Ez kêfxweş im.']),
 
   (id:'z_a2_011', ku:'Xemgîn', tr:'Üzgün', en:'Sad', cins:'bêcins', ez:null,
-   kat:'hest', zor:0.75, not:'Duygu', emoji: '😢',
-   her:['Ez xemgîn im.', 'Xwişk xemgîn e.'], gen:['Xemgîn — üzgün', 'Tu xemgîn î?']),
+   kat:'hest', zor:0.75, not:'Hest', emoji: '😢',
+   her:['Ez xemgîn im.', 'Xwişk xemgîn e.'], gen:['Tu xemgîn î?']),
 
   (id:'z_a2_012', ku:'Birçî', tr:'Aç', en:'Hungry', cins:'bêcins', ez:null,
    kat:'hest', zor:0.82, not:'Temel ihtiyaç', emoji: '😋',
@@ -65,7 +65,7 @@ const kChildA2Kelimeler = [
 
   (id:'z_a2_020', ku:'Roj', tr:'Güneş/Gün', en:'Sun/Day', cins:'mê', ez:'roja',
    kat:'xweza', zor:0.85, not:'Doğa', emoji: '☀️',
-   her:['Roj li ezmanan e.', 'Roja baş!'], gen:['Roj — güneş', 'Roj zer e.']),
+   her:['Roj li ezmanan e.', 'Roj baş!'], gen:['Roj zer e.']),
 
   (id:'z_a2_021', ku:'Heyv', tr:'Ay', en:'Moon', cins:'mê', ez:'heyva',
    kat:'xweza', zor:0.80, not:'Gece gökyüzü', emoji: '🌙',
@@ -73,7 +73,7 @@ const kChildA2Kelimeler = [
 
   (id:'z_a2_022', ku:'Stêr', tr:'Yıldız', en:'Star', cins:'mê', ez:'stêra',
    kat:'xweza', zor:0.82, not:'Gece gökyüzü', emoji: '⭐',
-   her:['Stêr li ezmanan in.', 'Stêrên gelek xweş in.'], gen:['Stêr — yıldız', 'Stêr dibiriqin.']),
+   her:['Stêr li ezmanan in.', 'Stêrên gelek xweş in.'], gen:['Stêr dibiriqin.']),
 
   (id:'z_a2_023', ku:'Av', tr:'Su', en:'Water', cins:'mê', ez:'ava',
    kat:'xweza', zor:0.88, not:'Doğa elementi', emoji: '🌊',
@@ -81,7 +81,7 @@ const kChildA2Kelimeler = [
 
   (id:'z_a2_024', ku:'Dar', tr:'Ağaç', en:'Tree', cins:'mê', ez:'dara',
    kat:'xweza', zor:0.82, not:'Doğa', emoji: '🌳',
-   her:['Dar mezin e.', 'Çûk li darê ye.'], gen:['Dar — ağaç', 'Dara kesk.']),
+   her:['Dar mezin e.', 'Çûk li darê ye.'], gen:['Dara kesk.']),
 
   (id:'z_a2_025', ku:'Gul', tr:'Çiçek/Gül', en:'Flower/Rose', cins:'mê', ez:'gula',
    kat:'xweza', zor:0.82, not:'Doğa', emoji: '🌹',
@@ -104,7 +104,7 @@ const kChildA2Kelimeler = [
    her:['Ez avê vedixwim.', 'Vexwarina avê baş e.'], gen:['Vexwarin — içmek', 'Ez çay vedixwim.']),
 
   (id:'z_a2_032', ku:'Lîstin', tr:'Oynamak', en:'To play', cins:'bêcins', ez:null,
-   kat:'fiil', zor:0.82, not:'Çocuk fiili', emoji: '🎮',
+   kat:'fiil', zor:0.82, not:'Lêkera zarokan', emoji: '🎮',
    her:['Em dilîzin li parkê.', 'Ez bi xwişka xwe re dilîzim.'], gen:['Lîstin — oynamak', 'Em dilîzin.']),
 
   (id:'z_a2_033', ku:'Xwendin', tr:'Okumak', en:'To read', cins:'bêcins', ez:null,
@@ -125,21 +125,21 @@ const kChildA2Kelimeler = [
 
   // ── Hest (Duygular) ek — 6'ya tamamla ──────────────────
   (id:'z_a2_040', ku:'Tirsiyayî', tr:'Korkmuş', en:'Scared', cins:'bêcins', ez:null,
-   kat:'hest', zor:0.78, not:'Duygu — pasif sıfat. "Tirsnak" = korkunç (aktif).', emoji: '😨',
+   kat:'hest', zor:0.78, not:'Hest — rengdêra pasîv. "Tirsnak" = bi tirs (aktîv).', emoji: '😨',
    her:['Ez tirsiyayî me.', 'Zarok tirsiyayî ye.'], gen:['Tirsiyayî — korkmuş', 'Tu tirsiyayî yî?']),
 
   // ── Fiil ek — daha fazla temel fiil ─────────────────────
   (id:'z_a2_041', ku:'Kenîn', tr:'Gülmek', en:'To laugh', cins:'bêcins', ez:null,
-   kat:'fiil', zor:0.80, not:'Duygu fiili', emoji: '😂',
-   her:['Em dikenin!', 'Zarok dikene.'], gen:['Kenîn — gülmek', 'Em dikenin.']),
+   kat:'fiil', zor:0.80, not:'Lêkera hestî', emoji: '😂',
+   her:['Em dikenin!', 'Zarok dikene.'], gen:['Em dikenin.']),
 
   (id:'z_a2_042', ku:'Girîn', tr:'Ağlamak', en:'To cry', cins:'bêcins', ez:null,
-   kat:'fiil', zor:0.78, not:'Duygu fiili', emoji: '😢',
-   her:['Zarok digirî.', 'Negirî!'], gen:['Girîn — ağlamak', 'Negirî, baş e.']),
+   kat:'fiil', zor:0.78, not:'Lêkera hestî', emoji: '😢',
+   her:['Zarok digirî.', 'Negirî!'], gen:['Negirî, baş e.']),
 
   (id:'z_a2_043', ku:'Gotin', tr:'Söylemek', en:'To say', cins:'bêcins', ez:null,
    kat:'fiil', zor:0.75, not:'Temel fiil', emoji: '💬',
-   her:['Dê dibêje çîrokekê.', 'Ez dibêjim: silav!'], gen:['Gotin — söylemek', 'Tu çi dibêjî?']),
+   her:['Dê dibêje çîrokekê.', 'Ez dibêjim: silav!'], gen:['Tu çi dibêjî?']),
 
   (id:'z_a2_044', ku:'Zanîn', tr:'Bilmek', en:'To know', cins:'bêcins', ez:null,
    kat:'fiil', zor:0.75, not:'Temel fiil', emoji: '🧠',
