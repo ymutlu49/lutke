@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
@@ -76,12 +77,16 @@ class _RegisterScreenState extends ConsumerState<RegisterScreen> {
 
       if (!mounted) return;
       setState(() => _loading = false);
-      context.go(AppRoutes.home);
+      // Tarayıcının şifre yöneticisine kaydet prompt'u gönder.
+      TextInput.finishAutofillContext(shouldSave: true);
+      // Yeni akış (Nisan 2026): register → intro → placement → track-select.
+      context.go(AppRoutes.introFlow);
     } catch (e) {
       if (!mounted) return;
       setState(() {
         _loading = false;
-        _errorMsg = 'Kayıt başarısız: $e';
+        // Raw exception gizli — Kurmancî nazik mesaj.
+        _errorMsg = _humanizeAuthError(e, isLogin: false);
       });
     }
   }
@@ -105,21 +110,45 @@ class _RegisterScreenState extends ConsumerState<RegisterScreen> {
         await refreshLocalOwnerState(ref);
         ref.invalidate(localCurrentUserProvider);
         setState(() => _loading = false);
-        context.go(AppRoutes.home);
+        // Tarayıcının şifre yöneticisine kaydet prompt'u gönder.
+        TextInput.finishAutofillContext(shouldSave: true);
+        // Yeni akış (Nisan 2026): login → intro → placement → track-select.
+        context.go(AppRoutes.introFlow);
       } else {
         setState(() {
           _loading = false;
-          _errorMsg = 'E-posta veya şifre hatalı. '
-              'Henüz hesap oluşturmadıysan "Tomar bibe"ye geç.';
+          // Pure Kurmancî — destekleyici ton, ne yapması gerektiği açık.
+          _errorMsg = 'E-nav an şîfre ne rast e. '
+              'Eger hesabê te tune be, "Tomar bibe" bitikîne.';
         });
       }
     } catch (e) {
       if (!mounted) return;
       setState(() {
         _loading = false;
-        _errorMsg = 'Giriş başarısız: $e';
+        _errorMsg = _humanizeAuthError(e, isLogin: true);
       });
     }
+  }
+
+  /// Auth hatalarını kullanıcı diline çevir — raw `$e` asla gösterilmez.
+  /// Pure Kurmancî, action hint dahil.
+  String _humanizeAuthError(Object e, {required bool isLogin}) {
+    final msg = e.toString().toLowerCase();
+    if (msg.contains('network') || msg.contains('socket') ||
+        msg.contains('timeout') || msg.contains('connection')) {
+      return 'Girêdana înternetê tune. Ji kerema xwe girêdanê kontrol bike.';
+    }
+    if (msg.contains('exist') || msg.contains('already') ||
+        msg.contains('duplicate')) {
+      return 'Ev e-nav berê hatiye tomarkirin. Ji kerema xwe "Têkeve" bitikîne.';
+    }
+    if (msg.contains('weak') || msg.contains('password')) {
+      return 'Şîfre qels e — herî kêm 6 tîp pêwîst in.';
+    }
+    return isLogin
+        ? 'Têketin bi ser neket. Ji kerema xwe dîsa biceribîne.'
+        : 'Tomarkirin bi ser neket. Ji kerema xwe dîsa biceribîne.';
   }
 
   // NOT (Nisan 2026): Anonim/misafir giriş kaldırıldı.
@@ -135,7 +164,8 @@ class _RegisterScreenState extends ConsumerState<RegisterScreen> {
           padding: const EdgeInsets.all(AppSpacing.xl),
           child: Form(
             key: _formKey,
-            child: Column(
+            child: AutofillGroup(
+              child: Column(
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
                 const SizedBox(height: AppSpacing.xl),
@@ -152,24 +182,38 @@ class _RegisterScreenState extends ConsumerState<RegisterScreen> {
                     label: 'Nav',
                     hint: 'Navê xwe binivîse',
                     icon: Icons.person_outline,
+                    autofillHints: const [AutofillHints.name],
+                    textInputAction: TextInputAction.next,
                     validator: (v) {
-                      if (v == null || v.trim().isEmpty) return 'Nav lazim e';
+                      if (v == null || v.trim().isEmpty) return 'Navê xwe binivîse';
                       return null;
                     },
                   ),
                   const SizedBox(height: AppSpacing.md),
                 ],
 
-                // E-posta
+                // E-nav
                 _buildField(
                   ctrl: _emailCtrl,
-                  label: 'E-name',
-                  hint: 'e-name@mînak.com',
+                  label: 'E-nav',
+                  hint: 'e-nav@mînak.com',
                   icon: Icons.email_outlined,
                   keyboardType: TextInputType.emailAddress,
+                  autofillHints: const [
+                    AutofillHints.username,
+                    AutofillHints.email,
+                  ],
+                  textInputAction: TextInputAction.next,
                   validator: (v) {
-                    if (v == null || !v.contains('@')) {
-                      return 'E-nameya derbasdar binivîse';
+                    // RegExp ji bo domain + TLD pejirandinê — toleranslı.
+                    final val = v?.trim() ?? '';
+                    if (val.isEmpty) {
+                      return 'E-nava xwe binivîse';
+                    }
+                    final ok = RegExp(r'^[^@\s]+@[^@\s]+\.[^@\s]+$')
+                        .hasMatch(val);
+                    if (!ok) {
+                      return 'E-naveke rast binivîse (mînak: navê@mînak.com)';
                     }
                     return null;
                   },
@@ -184,6 +228,19 @@ class _RegisterScreenState extends ConsumerState<RegisterScreen> {
                   hint: '••••••••',
                   icon: Icons.lock_outline,
                   obscure: !_passVisible,
+                  autofillHints: _isLogin
+                      ? const [AutofillHints.password]
+                      : const [AutofillHints.newPassword],
+                  textInputAction: TextInputAction.done,
+                  onFieldSubmitted: (_) {
+                    // Submit sırasında tarayıcının şifre kaydet prompt'unu tetikle.
+                    TextInput.finishAutofillContext(shouldSave: true);
+                    if (_isLogin) {
+                      _login();
+                    } else {
+                      _register();
+                    }
+                  },
                   suffix: IconButton(
                     icon: Icon(
                       _passVisible ? Icons.visibility_off : Icons.visibility,
@@ -193,7 +250,7 @@ class _RegisterScreenState extends ConsumerState<RegisterScreen> {
                   ),
                   validator: (v) {
                     if (v == null || v.length < 6) {
-                      return 'Şîfre divê 6 tîpan mezintir be';
+                      return 'Şîfre divê herî kêm 6 tîp be';
                     }
                     return null;
                   },
@@ -215,29 +272,35 @@ class _RegisterScreenState extends ConsumerState<RegisterScreen> {
                 ],
 
                 // Hata mesajı — nazik ton (İlke §1.1)
+                // A11Y (19 Nisan): Semantics liveRegion → ekran okuyucu
+                // otomatik okur, user odaklanmak zorunda kalmaz.
                 if (_errorMsg != null) ...[
                   const SizedBox(height: AppSpacing.sm),
-                  Container(
-                    padding: const EdgeInsets.all(AppSpacing.md),
-                    decoration: BoxDecoration(
-                      color: const Color(0xFFEF5350).withOpacity(0.08),
-                      borderRadius: BorderRadius.circular(12),
-                      border: Border.all(
-                          color: const Color(0xFFEF5350).withOpacity(0.3)),
-                    ),
-                    child: Row(
-                      children: [
-                        const Icon(Icons.info_outline,
-                            color: Color(0xFFEF5350), size: 18),
-                        const SizedBox(width: 8),
-                        Expanded(
-                          child: Text(
-                            _errorMsg!,
-                            style: AppTypography.caption.copyWith(
-                                color: const Color(0xFFEF5350)),
+                  Semantics(
+                    liveRegion: true,
+                    label: 'Xeletî: ${_errorMsg!}',
+                    child: Container(
+                      padding: const EdgeInsets.all(AppSpacing.md),
+                      decoration: BoxDecoration(
+                        color: const Color(0xFFEF5350).withOpacity(0.08),
+                        borderRadius: BorderRadius.circular(12),
+                        border: Border.all(
+                            color: const Color(0xFFEF5350).withOpacity(0.3)),
+                      ),
+                      child: Row(
+                        children: [
+                          const Icon(Icons.info_outline,
+                              color: Color(0xFFEF5350), size: 18),
+                          const SizedBox(width: 8),
+                          Expanded(
+                            child: Text(
+                              _errorMsg!,
+                              style: AppTypography.caption.copyWith(
+                                  color: const Color(0xFFEF5350)),
+                            ),
                           ),
-                        ),
-                      ],
+                        ],
+                      ),
                     ),
                   ),
                 ],
@@ -265,7 +328,7 @@ class _RegisterScreenState extends ConsumerState<RegisterScreen> {
                               strokeWidth: 2, color: Colors.white),
                         )
                       : Text(
-                          _isLogin ? 'Têkeve' : 'Destpê bike',
+                          _isLogin ? 'Têkeve' : 'Tomar bibe',
                           style: AppTypography.labelLarge.copyWith(
                               color: Colors.white, fontWeight: FontWeight.w700),
                         ),
@@ -292,7 +355,7 @@ class _RegisterScreenState extends ConsumerState<RegisterScreen> {
 
                 // Gizlilik notu
                 Text(
-                  'Agahiyên te bi ewlehî tên paristin.',
+                  'Agahiyên te bi ewlehî tên parastin.',
                   style: AppTypography.caption
                       .copyWith(color: AppColors.textSecondary),
                   textAlign: TextAlign.center,
@@ -300,6 +363,7 @@ class _RegisterScreenState extends ConsumerState<RegisterScreen> {
 
                 const SizedBox(height: AppSpacing.xl),
               ],
+            ),
             ),
           ),
         ),
@@ -316,6 +380,9 @@ class _RegisterScreenState extends ConsumerState<RegisterScreen> {
     TextInputType? keyboardType,
     Widget? suffix,
     String? Function(String?)? validator,
+    Iterable<String>? autofillHints,
+    TextInputAction? textInputAction,
+    void Function(String)? onFieldSubmitted,
   }) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -329,6 +396,9 @@ class _RegisterScreenState extends ConsumerState<RegisterScreen> {
           obscureText: obscure,
           keyboardType: keyboardType,
           validator: validator,
+          autofillHints: autofillHints,
+          textInputAction: textInputAction,
+          onFieldSubmitted: onFieldSubmitted,
           style: AppTypography.bodyMedium
               .copyWith(color: AppColors.textPrimary),
           decoration: InputDecoration(
@@ -366,14 +436,14 @@ class _RegisterScreenState extends ConsumerState<RegisterScreen> {
   Future<void> _forgotPassword() async {
     final email = _emailCtrl.text.trim();
     if (email.isEmpty || !email.contains('@')) {
-      setState(() => _errorMsg = 'E-nameya xwe binivîse û dîsa biceribîne');
+      setState(() => _errorMsg = 'Pêşî e-nava xwe binivîse, paşê dîsa biceribîne.');
       return;
     }
     await ref.read(authServiceProvider).sendPasswordReset(email);
     if (!mounted) return;
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
-        content: Text('Şîfreya sifirkirinê hate şandin: $email'),
+        content: Text('Lînka guhertina şîfreyê hate şandin bo: $email'),
         backgroundColor: AppColors.primary,
       ),
     );
@@ -398,8 +468,8 @@ class _Header extends StatelessWidget {
 
         Text(
           isLogin
-              ? 'Bi xêr hatî dîsa' // Yeniden hoş geldin
-              : 'Zimanê xwe vegerîne', // Dilini geri al
+              ? 'Bi xêr hatî dîsa'
+              : 'Ji peyvekê heya welatekî',
           style: AppTypography.bodyMedium
               .copyWith(color: AppColors.textSecondary),
         ).animate().fadeIn(delay: 400.ms, duration: 400.ms),

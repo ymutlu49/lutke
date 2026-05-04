@@ -1,0 +1,30 @@
+name: Quiz QA
+
+on:
+  pull_request:
+    paths:
+      - 'lib/features/lessons/domain/**'
+      - 'lib/features/exercises/domain/**'
+      - 'lib/features/cultural_content/domain/**'
+      - 'lib/features/en_learning/domain/**'
+      - 'lib/features/onboarding/placement_test_screen.dart'
+      - 'tools/qa/**'
+  push:
+    branches: [main]
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Run quiz validator (schema + position/length bias)
+        run: python tools/qa/quiz_qa_validator.py
+      - name: Run Kurmancî content scanner (Turkish leakage)
+        run: python tools/qa/kurmanci_scanner.py
+      - name: Run Kurmancî linguistic linter (spelling/diacritics)
+        run: python tools/qa/kurmanci_lint.py
+      - name: Run assessment-validity scanner (weak distractors)
+        run: python tools/qa/assessment_quality.py
