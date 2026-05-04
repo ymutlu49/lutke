@@ -215,10 +215,9 @@ class _WelcomePage extends StatelessWidget {
 
           const SizedBox(height: 24),
 
-          // Ana mesaj — Kurmancî
-          // Slogan: pedagojik (peyv → welat) + heritage rezonansı
+          // Ana mesaj — Kurmancî hero (Cegerxwîn ekosu, problem/why)
           Text(
-            'Ji peyvekê heya welatekî',
+            'Bê ziman, mirov bê kok e!',
             textAlign: TextAlign.center,
             style: AppTypography.displayKurmanji.copyWith(
               color: AppColors.textPrimary,
@@ -228,18 +227,33 @@ class _WelcomePage extends StatelessWidget {
               .fadeIn(delay: 500.ms, duration: 600.ms)
               .slideY(begin: 0.2, curve: Curves.easeOut),
 
-          const SizedBox(height: 12),
+          const SizedBox(height: 8),
 
-          // Alt açıklama — Kurmancî (her dem xuya dibe)
+          // Tagline — pedagojik yolculuk (peyv → welat)
           Text(
-            'Rêya herî bibandor a hînbûna Kurmancî',
+            'Ji peyvekê heya welatekî',
             textAlign: TextAlign.center,
             style: AppTypography.bodyLarge.copyWith(
-              color: AppColors.textSecondary,
+              color: AppColors.primary,
+              fontWeight: FontWeight.w600,
+              fontStyle: FontStyle.italic,
             ),
           )
               .animate()
               .fadeIn(delay: 700.ms, duration: 500.ms),
+
+          const SizedBox(height: 12),
+
+          // Pragmatik vaad
+          Text(
+            'Rêya herî bibandor a hînbûna Kurmancî',
+            textAlign: TextAlign.center,
+            style: AppTypography.bodyMedium.copyWith(
+              color: AppColors.textSecondary,
+            ),
+          )
+              .animate()
+              .fadeIn(delay: 900.ms, duration: 500.ms),
 
           const Spacer(flex: 2),
 

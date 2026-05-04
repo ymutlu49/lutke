@@ -127,7 +127,7 @@ Geri bildiriminizi bekliyoruz: info@lutke.app
 
 ## Recommended Screenshot Sequence
 
-1. **Welcome/Landing** — "Ji peyvekê heya welatekî" (Bir kelimeden bir vatana)
+1. **Welcome/Landing** — "Bê ziman, mirov bê kok e!" (Dilsiz insan köksüzdür) + "Ji peyvekê heya welatekî"
 2. **Onboarding** — "Tu axêverê mîratî yî?"
 3. **Home with skill tree** — Visual learning path
 4. **Lesson exercise** — Multiple choice with audio

@@ -469,7 +469,7 @@ class _Header extends StatelessWidget {
         Text(
           isLogin
               ? 'Bi xêr hatî dîsa'
-              : 'Ji peyvekê heya welatekî',
+              : 'Bê ziman, mirov bê kok e!',
           style: AppTypography.bodyMedium
               .copyWith(color: AppColors.textSecondary),
         ).animate().fadeIn(delay: 400.ms, duration: 400.ms),
