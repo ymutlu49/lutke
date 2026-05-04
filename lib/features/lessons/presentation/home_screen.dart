@@ -11,21 +11,28 @@ import '../../../core/constants/app_spacing.dart';
 import '../../../core/router/app_router.dart';
 import '../../../core/services/auth_service.dart';
 import '../data/lesson_repository.dart';
-import '../domain/lesson_entities.dart';
 import '../domain/a1_kelime_db.dart';
 import '../domain/a2_kelime_db.dart';
 import '../domain/b1_kelime_db.dart';
 import '../domain/b2_kelime_db.dart';
 import '../domain/c1_kelime_db.dart';
 import '../domain/c2_kelime_db.dart';
-import '../../en_learning/domain/en_to_quiz_adapter.dart';
+// PERF: getEnWordsForLevel transitively re-exported via learning_module_provider.
+// en_to_quiz_adapter.dart dropped — EN words only surface at flashcard/quiz where
+// that file is already imported. Saves ~1 deferred-candidate adapter in main bundle.
+import '../../en_learning/domain/en_to_quiz_adapter.dart' show getEnWordsForLevel;
 import '../../../shared/providers/learning_module_provider.dart';
-import '../../../shared/widgets/streak_widget.dart';
 // daily_word_widget import removed — widget no longer on home screen
 import '../../../shared/providers/language_mode_provider.dart';
 import '../../../shared/providers/review_provider.dart';
 import '../../../shared/providers/progression_provider.dart';
+import '../../gamification/gamification_provider.dart';
 import '../../gamification/gamification_widgets.dart';
+import '../../cultural_content/widgets/daily_proverb_card.dart';
+import '../../../core/services/user_mode_preferences.dart';
+import '../../../shared/widgets/level_picker_sheet.dart';
+import '../../subscription/data/subscription_service.dart';
+import '../../subscription/domain/subscription_status.dart';
 
 // ════════════════════════════════════════════════════════════════
 // ANA SAYFA — İLERLEME HARİTASI
@@ -43,8 +50,12 @@ class HomeScreen extends ConsumerWidget {
     final userId = user?.uid ?? 'anonymous';
 
     final dailyStats = ref.watch(dailyStatsProvider(userId));
-    final currentLevelProgress =
-        ref.watch(levelProgressProvider((userId: userId, level: profile.currentLevelNum)));
+    // PERF 2026-04: eskiden build() içinde 6 ayrı `ref.watch(isEnglishModuleProvider)`
+    // çağrısı vardı — her biri ayrı bir subscribe path yaratıyor (Riverpod aynı
+    // provider'ı dedupe etse de her çağrı watchlist'e ayrı entry, her rebuild'de
+    // identityHashCode karşılaştırması). Tek cache → 5 ek hash lookup / frame.
+    final isEn = ref.watch(isEnglishModuleProvider);
+    final userMode = ref.watch(userModeProvider);
 
     return Scaffold(
       backgroundColor: AppColors.backgroundPrimary,
@@ -62,7 +73,9 @@ class HomeScreen extends ConsumerWidget {
                   const SizedBox(height: AppSpacing.md),
 
                   // ════════════════════════════════════════════════
-                  // 1) COMPACT HEADER: mascot + Xêr hatî + KU/TR
+                  // 1) COMPACT HEADER: mascot + selamlama
+                  // Dil toggle (KU/TR) ve track değişimi yalnız Profile
+                  // üzerinden yapılır (Mîheng > Rêya biguherîne / Dil modu).
                   // ════════════════════════════════════════════════
                   Row(
                     crossAxisAlignment: CrossAxisAlignment.center,
@@ -84,37 +97,53 @@ class HomeScreen extends ConsumerWidget {
                           mainAxisSize: MainAxisSize.min,
                           children: [
                             Text(
-                              profile.isHeritage ? 'Xêr hatî, heval!' : 'Xêr hatî!',
+                              isEn
+                                  ? (profile.isHeritage ? 'Welcome, friend!' : 'Welcome!')
+                                  : (profile.isHeritage ? 'Xêr hatî, heval!' : 'Xêr hatî!'),
                               style: AppTypography.headingSmall.copyWith(
                                 color: AppColors.textPrimary, fontWeight: FontWeight.w700),
                             ),
                             const SizedBox(height: 2),
                             Text(
-                              'Îro çi fêr dibî?',
+                              isEn
+                                  ? 'What will you learn today?'
+                                  : 'Îro çi fêr dibî?',
                               style: AppTypography.caption.copyWith(
                                 color: AppColors.textSecondary),
                             ),
                           ],
                         ),
                       ),
-                      // KU/TR dil toggle
-                      _LanguageModeToggle(),
-                      const SizedBox(width: 4),
-                      // İngilizce modülüne geç (kısayol)
-                      _ModuleSwitcher(),
                     ],
                   ),
 
                   const SizedBox(height: AppSpacing.md),
 
                   // ════════════════════════════════════════════════
-                  // 2) COMPACT STREAK BAR: streak, XP, level
+                  // 2) COMPACT STREAK BAR — Academic modda gizli
                   // ════════════════════════════════════════════════
-                  dailyStats.when(
-                    data: (stats) => _DailySummaryCard(stats: stats, level: profile.currentLevel.toUpperCase()),
-                    loading: () => _DailySummaryCard(stats: null, level: profile.currentLevel.toUpperCase()),
-                    error: (_, __) => _DailySummaryCard(stats: null, level: profile.currentLevel.toUpperCase()),
-                  ),
+                  if (!hideGamificationFor(userMode))
+                    dailyStats.when(
+                      data: (stats) => _DailySummaryCard(stats: stats, level: profile.currentLevel.toUpperCase()),
+                      loading: () => _DailySummaryCard(stats: null, level: profile.currentLevel.toUpperCase()),
+                      error: (_, __) => _DailySummaryCard(stats: null, level: profile.currentLevel.toUpperCase()),
+                    ),
+
+                  // ════════════════════════════════════════════════
+                  // 2.1) ABONELİK BANNER — yeni kullanıcı için 7 günlük
+                  // demo daveti, deneme/premium aktifken durum bildirimi.
+                  // Premium aktifse tamamen gizlenir (ek gürültü olmaz).
+                  // ════════════════════════════════════════════════
+                  const _SubscriptionBanner(),
+
+                  // ════════════════════════════════════════════════
+                  // 2.5) GOTINA ÎRO — Sadece Kurmancî track'ta
+                  // Kurmancî atasözü İngilizce öğrenene yabancı gelir
+                  // ════════════════════════════════════════════════
+                  if (!isEn) ...[
+                    const SizedBox(height: AppSpacing.md),
+                    const DailyProverbCard(),
+                  ],
 
                   const SizedBox(height: AppSpacing.lg),
 
@@ -128,13 +157,21 @@ class HomeScreen extends ConsumerWidget {
                       children: [
                         Icon(Icons.route_rounded, size: 22, color: AppColors.primary),
                         const SizedBox(width: AppSpacing.sm),
-                        Text(
-                          'Rêya Fêrbûnê 🐐',
-                          style: AppTypography.headingSmall.copyWith(
-                            color: AppColors.textPrimary,
-                            fontWeight: FontWeight.w700,
+                        Expanded(
+                          child: Text(
+                            isEn
+                                ? 'Learning Path 📖'
+                                : 'Rêya Fêrbûnê 🐐',
+                            style: AppTypography.headingSmall.copyWith(
+                              color: AppColors.textPrimary,
+                              fontWeight: FontWeight.w700,
+                            ),
                           ),
                         ),
+                        // Seviye chip'i — kullanıcı her zaman seviyeyi
+                        // değiştirebilsin. Bu, yerleştirme testini "tek
+                        // doğru yol" değil bir "öneri" olarak konumlar.
+                        _LevelChip(level: profile.currentLevel),
                       ],
                     ),
                   ).animate().fadeIn(delay: 160.ms),
@@ -164,9 +201,295 @@ class HomeScreen extends ConsumerWidget {
 
           // Rozet kazanımı
           const BadgeEarnedOverlay(),
+
+          // CEFR seviye geçişi → sertifika toast'u (görünmez listener).
+          const _CefrCertificateCtaListener(),
         ],
       ),
     );
+  }
+}
+
+// ════════════════════════════════════════════════════════════════
+// SUBSCRIPTION BANNER — kullanıcı dostu, ısrarcı değil.
+// Yeni kullanıcı (none): "7 gün ücretsiz dene" daveti
+// Deneme aktif: kalan gün sayısı + premium'a yükselt CTA
+// Deneme/premium bitti: yenile CTA
+// Premium aktif: gizli (ek banner gerekmez)
+// ════════════════════════════════════════════════════════════════
+
+class _SubscriptionBanner extends ConsumerWidget {
+  const _SubscriptionBanner();
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final sub = ref.watch(subscriptionProvider);
+    final isPromoActive = SubscriptionConstants.isPromoPeriodActive;
+
+    // Premium aktif → banner göstermeye gerek yok.
+    // Promo aktifken aşağıdaki ayrı banner gösterilir, premium dahi olsa kullanıcı
+    // "tanıtım dönemi" mesajından haberdar olmalı.
+    if (!isPromoActive && sub.tier == SubscriptionTier.premium) {
+      return const SizedBox.shrink();
+    }
+
+    // Banner içeriği duruma göre.
+    final (gradient, icon, title, subtitle, ctaLabel) = isPromoActive
+        ? (
+            // Promo banner — sıcak gold/amber tonları, festival hissi.
+            [const Color(0xFFFFA726), const Color(0xFFFB8C00)],
+            Icons.celebration_outlined,
+            'Demê pêşkêşiyê — bedelî!',
+            'Heya ${SubscriptionConstants.promoEndsLabelKu} '
+                'her tişt vekirî · '
+                '${SubscriptionConstants.promoDaysRemaining} roj mayî',
+            'Bibîne',
+          )
+        : switch (sub.tier) {
+            SubscriptionTier.trial => (
+              [AppColors.primary, AppColors.primary.withOpacity(0.7)],
+              Icons.timer_outlined,
+              'Ceribandina te aktîv e',
+              sub.trialDaysRemaining != null
+                  ? '${sub.trialDaysRemaining} roj mayî — paşê ${SubscriptionConstants.annualPriceTry} ₺/sal'
+                  : 'Bê sînor 7 roj.',
+              'Aboneya salane',
+            ),
+            SubscriptionTier.trialExpired => (
+              [Colors.orange, Colors.orange.shade700],
+              Icons.lock_outline_rounded,
+              'Ceribandina 7 rojan qediya',
+              'Berdewamiya tev: ${SubscriptionConstants.annualPriceTry} ₺/sal',
+              'Abone bibe',
+            ),
+            SubscriptionTier.premiumExpired => (
+              [Colors.orange, Colors.orange.shade700],
+              Icons.refresh_rounded,
+              'Aboneya te qediya',
+              'Bi ${SubscriptionConstants.annualPriceTry} ₺/sal nûjen bike',
+              'Nûjen bike',
+            ),
+            _ => (
+              [AppColors.primary, AppColors.primary.withOpacity(0.7)],
+              Icons.workspace_premium_rounded,
+              'LÛTKE Premium\'ê biceribîne',
+              '7 roj bê pere — kart pêwîst nine',
+              'Bê pere dest pê bike',
+            ),
+          };
+
+    return Padding(
+      padding: const EdgeInsets.only(top: AppSpacing.sm),
+      child: Material(
+        color: Colors.transparent,
+        child: InkWell(
+          borderRadius: BorderRadius.circular(AppSpacing.radiusLg),
+          onTap: () => context.push(AppRoutes.paywall),
+          child: Container(
+            padding: const EdgeInsets.all(AppSpacing.md),
+            decoration: BoxDecoration(
+              gradient: LinearGradient(
+                colors: gradient,
+                begin: Alignment.topLeft,
+                end: Alignment.bottomRight,
+              ),
+              borderRadius: BorderRadius.circular(AppSpacing.radiusLg),
+            ),
+            child: Row(
+              children: [
+                Container(
+                  width: 44,
+                  height: 44,
+                  decoration: BoxDecoration(
+                    color: Colors.white.withOpacity(0.2),
+                    borderRadius: BorderRadius.circular(AppSpacing.radiusMd),
+                  ),
+                  child: Icon(icon, color: Colors.white, size: 24),
+                ),
+                const SizedBox(width: AppSpacing.sm),
+                Expanded(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        title,
+                        style: AppTypography.labelLarge.copyWith(
+                          color: Colors.white,
+                          fontWeight: FontWeight.w800,
+                        ),
+                      ),
+                      const SizedBox(height: 2),
+                      Text(
+                        subtitle,
+                        style: AppTypography.caption.copyWith(
+                          color: Colors.white.withOpacity(0.9),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+                const SizedBox(width: AppSpacing.sm),
+                Container(
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: AppSpacing.sm,
+                    vertical: 6,
+                  ),
+                  decoration: BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.circular(AppSpacing.radiusFull),
+                  ),
+                  child: Text(
+                    ctaLabel,
+                    style: AppTypography.label.copyWith(
+                      color: AppColors.primary,
+                      fontWeight: FontWeight.w800,
+                      fontSize: 12,
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+// ════════════════════════════════════════════════════════════════
+// LEVEL CHIP — Path başlığında, tıklayınca level picker sheet'i açar.
+// Yerleştirme testi sonucu zorlamaz; kullanıcı her zaman dilediği seviyeyi
+// gezebilir.
+// ════════════════════════════════════════════════════════════════
+
+class _LevelChip extends StatelessWidget {
+  final String level; // a1..c2
+  const _LevelChip({required this.level});
+
+  @override
+  Widget build(BuildContext context) {
+    final label = level.toUpperCase();
+    return Material(
+      color: Colors.transparent,
+      child: InkWell(
+        borderRadius: BorderRadius.circular(AppSpacing.radiusFull),
+        onTap: () => LevelPickerSheet.show(context),
+        child: Tooltip(
+          message: 'Asta xwe biguherîne',
+          child: Container(
+            padding: const EdgeInsets.symmetric(
+              horizontal: AppSpacing.sm,
+              vertical: 6,
+            ),
+            decoration: BoxDecoration(
+              color: AppColors.primary.withOpacity(0.10),
+              borderRadius: BorderRadius.circular(AppSpacing.radiusFull),
+              border: Border.all(
+                color: AppColors.primary.withOpacity(0.25),
+              ),
+            ),
+            child: Row(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Text(
+                  'Ast: $label',
+                  style: AppTypography.label.copyWith(
+                    color: AppColors.primary,
+                    fontWeight: FontWeight.w800,
+                  ),
+                ),
+                const SizedBox(width: 4),
+                Icon(
+                  Icons.keyboard_arrow_down_rounded,
+                  size: 18,
+                  color: AppColors.primary,
+                ),
+              ],
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+// ════════════════════════════════════════════════════════════════
+// CEFR LEVEL TRANSITION LISTENER
+//
+// Kullanıcı XP ile CEFR seviyesinden bir üst CEFR'e atladığında
+// (ör. A1 → A2) altta SnackBar ile tebrik + "Belgeyê bibîne" aksiyonu.
+//
+// Not: `gamificationProvider.state.level` yalnızca A1/A2/B1/B2 taşıyor,
+// B2 üstü placement testinde set ediliyor. Bu toast, gamification kaynaklı
+// her A→B geçişinde tek seferlik tetiklenir. Spam önlemek için
+// SharedPreferences'e "son gösterilen seviye" kaydedilir.
+// ════════════════════════════════════════════════════════════════
+
+class _CefrCertificateCtaListener extends ConsumerStatefulWidget {
+  const _CefrCertificateCtaListener();
+
+  @override
+  ConsumerState<_CefrCertificateCtaListener> createState() =>
+      _CefrCertificateCtaListenerState();
+}
+
+class _CefrCertificateCtaListenerState
+    extends ConsumerState<_CefrCertificateCtaListener> {
+  String? _lastSeenLevel;
+
+  @override
+  Widget build(BuildContext context) {
+    ref.listen(gamificationProvider, (prev, next) {
+      final previousLevel =
+          _lastSeenLevel ?? prev?.level ?? next.level;
+      if (previousLevel != next.level && previousLevel.isNotEmpty) {
+        _lastSeenLevel = next.level;
+        _showCertCtaSnack(context, next.level);
+      } else {
+        _lastSeenLevel = next.level;
+      }
+    });
+    return const SizedBox.shrink();
+  }
+
+  void _showCertCtaSnack(BuildContext context, String newCefrLevel) {
+    // Build esnasında SnackBar açmaz — microtask'a ertele.
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      if (!mounted) return;
+      final messenger = ScaffoldMessenger.of(context);
+      messenger.hideCurrentSnackBar();
+      messenger.showSnackBar(
+        SnackBar(
+          behavior: SnackBarBehavior.floating,
+          backgroundColor: AppColors.primaryDark,
+          duration: const Duration(seconds: 8),
+          content: Row(
+            children: [
+              const Icon(
+                Icons.workspace_premium_rounded,
+                color: Colors.white,
+              ),
+              const SizedBox(width: 10),
+              Expanded(
+                child: Text(
+                  'Pîroz be! Asta $newCefrLevel temam bû.',
+                  style: const TextStyle(
+                    color: Colors.white,
+                    fontWeight: FontWeight.w600,
+                  ),
+                ),
+              ),
+            ],
+          ),
+          action: SnackBarAction(
+            textColor: AppColors.accent,
+            label: 'Belgeyê bibîne →',
+            onPressed: () =>
+                context.push('${AppRoutes.certificate}/$newCefrLevel'),
+          ),
+        ),
+      );
+    });
   }
 }
 
@@ -177,51 +500,25 @@ class HomeScreen extends ConsumerWidget {
 // İlke §9b bulgu #3: Ceza değil, ritim kutlanır
 // ════════════════════════════════════════════════════════════════
 
-class _StreakBadge extends StatelessWidget {
-  final int days;
-  const _StreakBadge({required this.days});
-
-  @override
-  Widget build(BuildContext context) {
-    if (days == 0) return const SizedBox.shrink();
-    return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
-      decoration: BoxDecoration(
-        color: AppColors.accent.withOpacity(0.15),
-        borderRadius: BorderRadius.circular(20),
-        border: Border.all(color: AppColors.accent.withOpacity(0.3)),
-      ),
-      child: Row(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          const Text('🔥', style: TextStyle(fontSize: 14)),
-          const SizedBox(width: 4),
-          Text(
-            '$days roj',
-            style: AppTypography.caption.copyWith(
-              color: AppColors.accent,
-              fontWeight: FontWeight.w700,
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-}
+// NOT: `_StreakBadge` kaldırıldı — hiçbir yerde referans yoktu (analyzer:
+// unused_element). Streak görünümü artık _DailySummaryCard içinde.
 
 // ════════════════════════════════════════════════════════════════
 // GÜNLÜK ÖZET KARTI — streak, XP, seviye
 // ════════════════════════════════════════════════════════════════
 
-class _DailySummaryCard extends StatelessWidget {
+class _DailySummaryCard extends ConsumerWidget {
   final DailyStats? stats;
   final String level;
   const _DailySummaryCard({this.stats, required this.level});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     final screenWidth = MediaQuery.of(context).size.width;
     final horizontalPad = screenWidth < 360 ? 10.0 : AppSpacing.md;
+    // TRACK-AWARE FIX: "roj" (Kurmancî: gün) EN track'te "days" olmalı.
+    final isEn = ref.watch(isEnglishModuleProvider);
+    final dayLabel = isEn ? 'days' : 'roj';
 
     return Container(
       padding: EdgeInsets.symmetric(horizontal: horizontalPad, vertical: 10),
@@ -244,7 +541,7 @@ class _DailySummaryCard extends StatelessWidget {
             _SummaryItem(
               icon: Icons.local_fire_department_rounded,
               iconColor: AppColors.accent,
-              value: stats != null ? '${stats!.streakDays} roj' : '0 roj',
+              value: stats != null ? '${stats!.streakDays} $dayLabel' : '0 $dayLabel',
             ),
             VerticalDivider(
               width: 1,
@@ -275,7 +572,9 @@ class _DailySummaryCard extends StatelessWidget {
   }
 }
 
-class _SummaryItem extends StatelessWidget {
+/// Değer değiştiğinde kısa scale-pulse ile canlı görünen özet öğesi.
+/// MediaQuery.disableAnimations aktifse pulse atlanır.
+class _SummaryItem extends StatefulWidget {
   final IconData icon;
   final Color iconColor;
   final String value;
@@ -286,845 +585,107 @@ class _SummaryItem extends StatelessWidget {
   });
 
   @override
+  State<_SummaryItem> createState() => _SummaryItemState();
+}
+
+class _SummaryItemState extends State<_SummaryItem>
+    with SingleTickerProviderStateMixin {
+  late final AnimationController _ctrl;
+  late final Animation<double> _scale;
+  String? _lastValue;
+
+  @override
+  void initState() {
+    super.initState();
+    _ctrl = AnimationController(
+      vsync: this,
+      duration: const Duration(milliseconds: 360),
+    );
+    _scale = TweenSequence<double>([
+      TweenSequenceItem(tween: Tween(begin: 1.0, end: 1.22), weight: 45),
+      TweenSequenceItem(tween: Tween(begin: 1.22, end: 1.0), weight: 55),
+    ]).animate(CurvedAnimation(parent: _ctrl, curve: Curves.easeOut));
+    _lastValue = widget.value;
+  }
+
+  @override
+  void didUpdateWidget(covariant _SummaryItem old) {
+    super.didUpdateWidget(old);
+    if (widget.value != _lastValue) {
+      _lastValue = widget.value;
+      final reduce = MediaQuery.of(context).disableAnimations;
+      if (!reduce) _ctrl.forward(from: 0.0);
+    }
+  }
+
+  @override
+  void dispose() {
+    _ctrl.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
-      child: Row(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          Icon(icon, size: 20, color: iconColor),
-          const SizedBox(width: 6),
-          Text(
-            value,
-            style: AppTypography.labelMedium.copyWith(
-              color: AppColors.textPrimary,
-              fontWeight: FontWeight.w700,
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-}
-
-// ════════════════════════════════════════════════════════════════
-// HAFTALIK RİTİM KARTI
-// İlke §9b bulgu #3: Streak değil, haftalık ritim
-// ════════════════════════════════════════════════════════════════
-
-class _WeeklyRhythmCard extends StatelessWidget {
-  final DailyStats? stats;
-  const _WeeklyRhythmCard({this.stats});
-
-  @override
-  Widget build(BuildContext context) {
-    final days = ['D', 'S', 'Ç', 'P', 'C', 'Ct', 'P'];
-    final today = DateTime.now().weekday - 1; // 0=Pazartesi
-
-    return Container(
-      padding: const EdgeInsets.all(AppSpacing.md),
-      decoration: BoxDecoration(
-        color: AppColors.surface,
-        borderRadius: BorderRadius.circular(16),
-        boxShadow: [
-          BoxShadow(
-            color: Colors.black.withOpacity(0.04),
-            blurRadius: 8,
-            offset: const Offset(0, 2),
-          ),
-        ],
-      ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Text(
-            'Roja te ya vê hefteyê',  // Bu haftaki günün
-            style: AppTypography.labelMedium.copyWith(
-                color: AppColors.textSecondary),
-          ),
-          const SizedBox(height: AppSpacing.sm),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
-            children: List.generate(7, (i) {
-              final isToday = i == today;
-              final isDone = i < today;
-              return _DayDot(
-                label: days[i],
-                isToday: isToday,
-                isDone: isDone,
-              );
-            }),
-          ),
-          if (stats != null) ...[
-            const SizedBox(height: AppSpacing.sm),
-            const Divider(height: 1),
-            const SizedBox(height: AppSpacing.sm),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
-              children: [
-                _StatChip(
-                    label: 'Îro',
-                    value: '${stats!.totalReviewed}',
-                    icon: Icons.check_circle_outline),
-                _StatChip(
-                    label: 'Rast',
-                    value: '${(stats!.accuracy * 100).round()}%',
-                    icon: Icons.trending_up),
-                _StatChip(
-                    label: 'XP',
-                    value: '+${stats!.xpToday}',
-                    icon: Icons.star_border),
-              ],
-            ),
-          ],
-        ],
-      ),
-    ).animate().fadeIn(delay: 150.ms);
-  }
-}
-
-class _DayDot extends StatelessWidget {
-  final String label;
-  final bool isToday;
-  final bool isDone;
-  const _DayDot({required this.label, required this.isToday, required this.isDone});
-
-  @override
-  Widget build(BuildContext context) {
-    return Column(
-      children: [
-        Container(
-          width: 32,
-          height: 32,
-          decoration: BoxDecoration(
-            shape: BoxShape.circle,
-            color: isToday
-                ? AppColors.primary
-                : isDone
-                    ? AppColors.primary.withOpacity(0.15)
-                    : AppColors.backgroundSecondary,
-            border: isToday
-                ? null
-                : Border.all(
-                    color: isDone
-                        ? AppColors.primary.withOpacity(0.4)
-                        : AppColors.border,
-                    width: 1.5,
-                  ),
-          ),
-          child: Center(
-            child: isDone
-                ? Icon(Icons.check,
-                    size: 16,
-                    color: isToday ? Colors.white : AppColors.primary)
-                : Text(
-                    label,
-                    style: TextStyle(
-                      fontSize: 11,
-                      fontWeight:
-                          isToday ? FontWeight.w700 : FontWeight.w500,
-                      color: isToday ? Colors.white : AppColors.textSecondary,
-                    ),
-                  ),
-          ),
-        ),
-        const SizedBox(height: 4),
-        if (!isDone)
-          Text(
-            label,
-            style: TextStyle(
-              fontSize: 10,
-              color: isToday ? AppColors.primary : AppColors.textSecondary,
-              fontWeight: isToday ? FontWeight.w700 : FontWeight.w400,
-            ),
-          ),
-      ],
-    );
-  }
-}
-
-class _StatChip extends StatelessWidget {
-  final String label;
-  final String value;
-  final IconData icon;
-  const _StatChip({required this.label, required this.value, required this.icon});
-
-  @override
-  Widget build(BuildContext context) {
-    return Column(
-      children: [
-        Icon(icon, size: 18, color: AppColors.primary),
-        const SizedBox(height: 2),
-        Text(value,
-            style: AppTypography.labelLarge.copyWith(
-                color: AppColors.textPrimary, fontWeight: FontWeight.w700)),
-        Text(label,
-            style: AppTypography.caption.copyWith(
-                color: AppColors.textSecondary)),
-      ],
-    );
-  }
-}
-
-// ════════════════════════════════════════════════════════════════
-// GÜNLÜK TEKRAR BUTONU — Birincil aksiyon
-// İlke §3: FSRS-5 kuyruğu; §4: Gamification destekleyici
-// ════════════════════════════════════════════════════════════════
-
-class _DailyReviewButton extends StatelessWidget {
-  final int dueCount;
-  final String userId;
-  const _DailyReviewButton({required this.dueCount, required this.userId});
-
-  @override
-  Widget build(BuildContext context) {
-    final hasCards = dueCount > 0;
-
-    return GestureDetector(
-      onTap: hasCards
-          ? () => context.push(
-                AppRoutes.lesson,
-                extra: {'mode': 'review', 'userId': userId},
-              )
-          : null,
-      child: AnimatedContainer(
-        duration: 300.ms,
-        padding: const EdgeInsets.all(AppSpacing.md),
-        decoration: BoxDecoration(
-          gradient: hasCards
-              ? LinearGradient(
-                  colors: [AppColors.primary, AppColors.primaryDark],
-                  begin: Alignment.topLeft,
-                  end: Alignment.bottomRight,
-                )
-              : null,
-          color: hasCards ? null : AppColors.backgroundSecondary,
-          borderRadius: BorderRadius.circular(20),
-          boxShadow: hasCards
-              ? [
-                  BoxShadow(
-                    color: AppColors.primary.withOpacity(0.35),
-                    blurRadius: 16,
-                    offset: const Offset(0, 6),
-                  )
-                ]
-              : null,
-        ),
+      child: ScaleTransition(
+        scale: _scale,
         child: Row(
+          mainAxisSize: MainAxisSize.min,
           children: [
-            Container(
-              width: 52,
-              height: 52,
-              decoration: BoxDecoration(
-                color: Colors.white.withOpacity(hasCards ? 0.2 : 0.6),
-                shape: BoxShape.circle,
+            Icon(widget.icon, size: 20, color: widget.iconColor),
+            const SizedBox(width: 6),
+            AnimatedSwitcher(
+              duration: const Duration(milliseconds: 220),
+              transitionBuilder: (child, anim) => FadeTransition(
+                opacity: anim,
+                child: child,
               ),
-              child: Icon(
-                hasCards ? Icons.play_arrow_rounded : Icons.check_circle_outline,
-                color: hasCards ? Colors.white : AppColors.textSecondary,
-                size: 28,
-              ),
-            ),
-            const SizedBox(width: AppSpacing.md),
-            Expanded(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    hasCards ? 'Tekrar bike — $dueCount peld' : 'Îro temam e! ✓',
-                    style: AppTypography.labelLarge.copyWith(
-                      color: hasCards ? Colors.white : AppColors.textSecondary,
-                      fontWeight: FontWeight.w700,
-                    ),
-                  ),
-                  Text(
-                    hasCards
-                        ? 'FSRS-5 — pir bibîre, zûtir pêş bikeve'
-                        : 'Hemû peld hatine xwendin',
-                    style: AppTypography.caption.copyWith(
-                      color: hasCards
-                          ? Colors.white.withOpacity(0.85)
-                          : AppColors.textSecondary,
-                    ),
-                  ),
-                ],
-              ),
-            ),
-            if (hasCards)
-              Icon(Icons.arrow_forward_ios,
-                  color: Colors.white.withOpacity(0.8), size: 16),
-          ],
-        ),
-      ),
-    ).animate().fadeIn(delay: 200.ms).scale(
-          begin: const Offset(0.97, 0.97),
-          duration: 300.ms,
-          curve: Curves.easeOut,
-        );
-  }
-}
-
-// ════════════════════════════════════════════════════════════════
-// FLASHCARD HIZLI ERİŞİM BUTONU
-// ════════════════════════════════════════════════════════════════
-
-class _FlashcardQuickAction extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: () => context.push(AppRoutes.flashcard),
-      child: Container(
-        padding: const EdgeInsets.all(AppSpacing.md),
-        decoration: BoxDecoration(
-          color: AppColors.surface,
-          borderRadius: BorderRadius.circular(20),
-          border: Border.all(
-            color: AppColors.accent.withOpacity(0.2),
-          ),
-          boxShadow: [
-            BoxShadow(
-              color: AppColors.accent.withOpacity(0.08),
-              blurRadius: 12,
-              offset: const Offset(0, 4),
-            ),
-          ],
-        ),
-        child: Row(
-          children: [
-            Container(
-              width: 48,
-              height: 48,
-              decoration: BoxDecoration(
-                gradient: LinearGradient(
-                  colors: [AppColors.accent, AppColors.accentWarm],
-                  begin: Alignment.topLeft,
-                  end: Alignment.bottomRight,
+              child: Text(
+                widget.value,
+                key: ValueKey(widget.value),
+                style: AppTypography.labelMedium.copyWith(
+                  color: AppColors.textPrimary,
+                  fontWeight: FontWeight.w700,
                 ),
-                borderRadius: BorderRadius.circular(14),
-              ),
-              child: const Icon(
-                Icons.style_rounded,
-                color: Colors.white,
-                size: 24,
-              ),
-            ),
-            const SizedBox(width: AppSpacing.md),
-            Expanded(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    'Peld',
-                    style: AppTypography.labelLarge.copyWith(
-                      color: AppColors.textPrimary,
-                      fontWeight: FontWeight.w700,
-                    ),
-                  ),
-                  Text(
-                    'Peyvan bi swipe fêr bibe',
-                    style: AppTypography.caption.copyWith(
-                      color: AppColors.textSecondary,
-                    ),
-                  ),
-                ],
-              ),
-            ),
-            Icon(
-              Icons.arrow_forward_ios,
-              size: 14,
-              color: AppColors.accent.withOpacity(0.6),
-            ),
-          ],
-        ),
-      ),
-    ).animate().fadeIn(delay: 220.ms).slideX(begin: 0.05);
-  }
-}
-
-// ════════════════════════════════════════════════════════════════
-// AKTİVİTE KARTI — Fêrbûn sekmesi için büyük, renkli kart
-// ════════════════════════════════════════════════════════════════
-
-class _ActivityCard extends StatelessWidget {
-  final IconData icon;
-  final String label;
-  final String subtitle;
-  final List<Color> gradientColors;
-  final VoidCallback? onTap;
-  final int delay;
-
-  const _ActivityCard({
-    required this.icon,
-    required this.label,
-    required this.subtitle,
-    required this.gradientColors,
-    required this.onTap,
-    this.delay = 150,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: onTap,
-      child: Container(
-        padding: const EdgeInsets.symmetric(
-          horizontal: AppSpacing.md,
-          vertical: AppSpacing.lg,
-        ),
-        decoration: BoxDecoration(
-          gradient: LinearGradient(
-            colors: gradientColors,
-            begin: Alignment.topLeft,
-            end: Alignment.bottomRight,
-          ),
-          borderRadius: BorderRadius.circular(20),
-          boxShadow: [
-            BoxShadow(
-              color: gradientColors.first.withOpacity(0.35),
-              blurRadius: 14,
-              offset: const Offset(0, 6),
-            ),
-          ],
-        ),
-        child: Column(
-          children: [
-            Container(
-              width: 52,
-              height: 52,
-              decoration: BoxDecoration(
-                color: Colors.white.withOpacity(0.2),
-                shape: BoxShape.circle,
-              ),
-              child: Icon(icon, color: Colors.white, size: 28),
-            ),
-            const SizedBox(height: AppSpacing.sm),
-            Text(
-              label,
-              style: AppTypography.labelLarge.copyWith(
-                color: Colors.white,
-                fontWeight: FontWeight.w700,
-              ),
-            ),
-            const SizedBox(height: 2),
-            Text(
-              subtitle,
-              style: AppTypography.caption.copyWith(
-                color: Colors.white.withOpacity(0.8),
               ),
             ),
           ],
         ),
       ),
-    ).animate().fadeIn(delay: Duration(milliseconds: delay)).scale(
-          begin: const Offset(0.95, 0.95),
-          duration: 300.ms,
-          curve: Curves.easeOut,
-        );
-  }
-}
-
-// ════════════════════════════════════════════════════════════════
-// AKTİVİTE GRID — 2 sütunlu, 8 çalakiye kartı
-// Tam öğrenme aktivite ızgarası
-// ════════════════════════════════════════════════════════════════
-
-class _ActivityGrid extends ConsumerWidget {
-  final String userId;
-  final AsyncValue<DailyStats> dailyStats;
-
-  const _ActivityGrid({required this.userId, required this.dailyStats});
-
-  @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    return Column(
-      children: [
-        // ── Row 1: Waneyê Bide (Quiz) + Peld (Flashcard) ──
-        Row(
-          children: [
-            Expanded(
-              child: _ActivityGridCard(
-                emoji: '\u{1F3AF}',
-                label: 'Waneyê Bide',
-                subtitle: '10 pirs',
-                gradientColors: [AppColors.primary, AppColors.primaryDark],
-                onTap: () => context.push(
-                  AppRoutes.quiz,
-                  extra: {'level': 'A1'},
-                ),
-                delay: 320,
-              ),
-            ),
-            const SizedBox(width: AppSpacing.sm),
-            Expanded(
-              child: _ActivityGridCard(
-                emoji: '\u{1F0CF}',
-                label: 'Peld',
-                subtitle: '454 peyv',
-                gradientColors: [AppColors.accent, AppColors.accentWarm],
-                onTap: () => context.push(AppRoutes.flashcard),
-                delay: 360,
-              ),
-            ),
-          ],
-        ),
-
-        const SizedBox(height: AppSpacing.sm),
-
-        // ── Row 2: Rêziman (Grammar) + Dubare (Smart Review) ──
-        Row(
-          children: [
-            Expanded(
-              child: _ActivityGridCard(
-                emoji: '\u{1F4DD}',
-                label: 'Rêziman',
-                subtitle: 'Gramer bike',
-                gradientColors: [const Color(0xFF3F51B5), const Color(0xFF283593)],
-                onTap: () => context.push(
-                  ref.read(isEnglishModuleProvider)
-                      ? AppRoutes.enSkillsHub
-                      : AppRoutes.grammar,
-                ),
-                delay: 400,
-              ),
-            ),
-            const SizedBox(width: AppSpacing.sm),
-            Expanded(
-              child: ref.watch(isEnglishModuleProvider)
-                  ? _ActivityGridCard(
-                      emoji: '\u{1F3AF}',
-                      label: 'Testên taybet',
-                      subtitle: 'Article, Past, Phrasal',
-                      gradientColors: [const Color(0xFF43A047), const Color(0xFF2E7D32)],
-                      onTap: () => context.push(AppRoutes.enQuizHub),
-                      delay: 440,
-                    )
-                  : _ActivityGridCard(
-                emoji: '\u{1F504}',
-                label: 'Dubare',
-                subtitle: '${ref.watch(reviewDueCountProvider)} peyv',
-                gradientColors: [const Color(0xFF43A047), const Color(0xFF2E7D32)],
-                onTap: () => context.push(AppRoutes.review),
-                delay: 440,
-              ),
-            ),
-          ],
-        ),
-
-        const SizedBox(height: AppSpacing.sm),
-
-        // ── Row 3: Axaftin + Guhdarîkirin (Speaking + Listening) ──
-        Row(
-          children: [
-            Expanded(
-              child: _ActivityGridCard(
-                emoji: '\u{1F5E3}\uFE0F',
-                label: 'Axaftin',
-                subtitle: 'Telafuz û axaftin',
-                gradientColors: [const Color(0xFFD81B60), const Color(0xFFAD1457)],
-                onTap: () => context.push(
-                  ref.read(isEnglishModuleProvider)
-                      ? AppRoutes.enSpeaking
-                      : AppRoutes.speaking,
-                ),
-                delay: 480,
-              ),
-            ),
-            const SizedBox(width: AppSpacing.sm),
-            Expanded(
-              child: _ActivityGridCard(
-                emoji: '\u{1F442}',
-                label: 'Guhdarîkirin',
-                subtitle: 'Guhdarî bike',
-                gradientColors: [const Color(0xFF00838F), const Color(0xFF006064)],
-                onTap: () => context.push(
-                  ref.read(isEnglishModuleProvider)
-                      ? AppRoutes.enListening
-                      : AppRoutes.listening,
-                ),
-                delay: 520,
-              ),
-            ),
-          ],
-        ),
-      ],
     );
   }
 }
 
 // ════════════════════════════════════════════════════════════════
-// AKTİVİTE GRID KARTI — Emoji ikonu + gradient arka plan
-// Rounded rectangle, staggered entrance animation, ripple
+// PERF 2026-04: Dead-code purge — ~970 satır aşağıda kaldırıldı.
+// Aşağıdaki widget'lar hiçbir yerde instantiate edilmiyordu (build()
+// grafiği tarama sonucu sıfır referans):
+//
+//   _WeeklyRhythmCard + _DayDot + _StatChip        — compact bar ile değişti
+//   _DailyReviewButton                             — SkillTreePath ile değişti
+//   _FlashcardQuickAction                          — grid card ile değişti
+//   _ActivityCard                                  — tasarım revize edildi
+//   _ActivityGrid + _ActivityGridCard              — skill tree öne çıktı
+//   _CollapsibleSkillTree + state                  — açılır/kapanır kaldırıldı
+//   _LevelProgressCard                             — daily_summary ile değişti
+//   _LutkeBottomNav + _NavItem                     — shell'deki nav kullanılıyor
+//   _StartQuizButton                               — grid içinde inline
+//
+// Bundle etkisi: dart2js hâlâ ağaç budayıp atacaktı ama:
+//   (a) tree-shake analizi hızlanır (daha az node),
+//   (b) const literal'lar (Icons, TextStyle) ve closure literallar
+//       kalıcı-referans-olmayan-ama-hâlâ-derlenen kod oldukları için
+//       ara adımda serbest-bırakılmadan tutuluyordu,
+//   (c) analyzer "unused_element" warn gürültüsü gidiyor.
 // ════════════════════════════════════════════════════════════════
 
-class _ActivityGridCard extends StatelessWidget {
-  final String emoji;
-  final String label;
-  final String subtitle;
-  final List<Color> gradientColors;
-  final VoidCallback? onTap;
-  final int delay;
+// (kaldırıldı: _WeeklyRhythmCard + _DayDot + _StatChip + _DailyReviewButton)
 
-  const _ActivityGridCard({
-    required this.emoji,
-    required this.label,
-    required this.subtitle,
-    required this.gradientColors,
-    required this.onTap,
-    this.delay = 150,
-  });
+// (kaldırıldı: _FlashcardQuickAction, _ActivityCard)
 
-  @override
-  Widget build(BuildContext context) {
-    return Material(
-      color: Colors.transparent,
-      child: InkWell(
-        onTap: onTap,
-        borderRadius: BorderRadius.circular(20),
-        splashColor: Colors.white.withOpacity(0.15),
-        highlightColor: Colors.white.withOpacity(0.08),
-        child: Ink(
-          decoration: BoxDecoration(
-            gradient: LinearGradient(
-              colors: gradientColors,
-              begin: Alignment.topLeft,
-              end: Alignment.bottomRight,
-            ),
-            borderRadius: BorderRadius.circular(20),
-            boxShadow: [
-              BoxShadow(
-                color: gradientColors.first.withOpacity(0.3),
-                blurRadius: 12,
-                offset: const Offset(0, 5),
-              ),
-            ],
-          ),
-          child: Padding(
-            padding: const EdgeInsets.symmetric(
-              horizontal: AppSpacing.md,
-              vertical: AppSpacing.lg,
-            ),
-            child: Column(
-              children: [
-                // Emoji icon
-                Text(
-                  emoji,
-                  style: const TextStyle(fontSize: 32),
-                ),
-                const SizedBox(height: AppSpacing.sm),
-                // Title
-                Text(
-                  label,
-                  style: AppTypography.labelLarge.copyWith(
-                    color: Colors.white,
-                    fontWeight: FontWeight.w700,
-                  ),
-                  textAlign: TextAlign.center,
-                  maxLines: 1,
-                  overflow: TextOverflow.ellipsis,
-                ),
-                const SizedBox(height: 2),
-                // Subtitle
-                Text(
-                  subtitle,
-                  style: AppTypography.caption.copyWith(
-                    color: Colors.white.withOpacity(0.8),
-                  ),
-                  textAlign: TextAlign.center,
-                  maxLines: 1,
-                  overflow: TextOverflow.ellipsis,
-                ),
-              ],
-            ),
-          ),
-        ),
-      ),
-    ).animate().fadeIn(delay: Duration(milliseconds: delay)).scale(
-          begin: const Offset(0.92, 0.92),
-          duration: 350.ms,
-          curve: Curves.easeOut,
-        );
-  }
-}
-
-// ════════════════════════════════════════════════════════════════
-// COLLAPSIBLE SKILL TREE — Açılır/kapanır öğrenme yolu
-// ════════════════════════════════════════════════════════════════
-
-class _CollapsibleSkillTree extends StatefulWidget {
-  final String userId;
-  final int currentLevel;
-  final WidgetRef ref;
-
-  const _CollapsibleSkillTree({
-    required this.userId,
-    required this.currentLevel,
-    required this.ref,
-  });
-
-  @override
-  State<_CollapsibleSkillTree> createState() => _CollapsibleSkillTreeState();
-}
-
-class _CollapsibleSkillTreeState extends State<_CollapsibleSkillTree> {
-  bool _isExpanded = true;
-
-  @override
-  Widget build(BuildContext context) {
-    return Column(
-      children: [
-        // Toggle header
-        GestureDetector(
-          onTap: () => setState(() => _isExpanded = !_isExpanded),
-          child: Container(
-            padding: const EdgeInsets.symmetric(
-              horizontal: AppSpacing.md,
-              vertical: AppSpacing.sm,
-            ),
-            decoration: BoxDecoration(
-              color: AppColors.surface,
-              borderRadius: BorderRadius.circular(14),
-              boxShadow: [
-                BoxShadow(
-                  color: Colors.black.withOpacity(0.04),
-                  blurRadius: 8,
-                  offset: const Offset(0, 2),
-                ),
-              ],
-            ),
-            child: Row(
-              children: [
-                Icon(Icons.route_rounded, size: 22, color: AppColors.primary),
-                const SizedBox(width: AppSpacing.sm),
-                Expanded(
-                  child: Text(
-                    'Rêya Fêrbûnê',
-                    style: AppTypography.headingSmall.copyWith(
-                      color: AppColors.textPrimary,
-                      fontWeight: FontWeight.w700,
-                    ),
-                  ),
-                ),
-                AnimatedRotation(
-                  turns: _isExpanded ? 0.5 : 0,
-                  duration: const Duration(milliseconds: 250),
-                  child: Icon(
-                    Icons.keyboard_arrow_down_rounded,
-                    color: AppColors.textSecondary,
-                    size: 26,
-                  ),
-                ),
-              ],
-            ),
-          ),
-        ).animate().fadeIn(delay: 300.ms),
-
-        // Collapsible content
-        AnimatedCrossFade(
-          firstChild: const SizedBox.shrink(),
-          secondChild: Padding(
-            padding: const EdgeInsets.only(top: AppSpacing.md),
-            child: _SkillTreePath(
-              userId: widget.userId,
-              currentLevel: widget.currentLevel,
-              ref: widget.ref,
-            ),
-          ),
-          crossFadeState: _isExpanded
-              ? CrossFadeState.showSecond
-              : CrossFadeState.showFirst,
-          duration: const Duration(milliseconds: 300),
-          sizeCurve: Curves.easeInOut,
-        ),
-      ],
-    );
-  }
-}
-
-// ════════════════════════════════════════════════════════════════
-// SEVİYE İLERLEME KARTI
-// ════════════════════════════════════════════════════════════════
-
-class _LevelProgressCard extends StatelessWidget {
-  final LevelProgress? progress;
-  const _LevelProgressCard({this.progress});
-
-  @override
-  Widget build(BuildContext context) {
-    if (progress == null) {
-      return Container(
-        height: 80,
-        decoration: BoxDecoration(
-          color: AppColors.surface,
-          borderRadius: BorderRadius.circular(16),
-        ),
-      );
-    }
-
-    final pct = progress!.completionPercent;
-
-    return Container(
-      padding: const EdgeInsets.all(AppSpacing.md),
-      decoration: BoxDecoration(
-        color: AppColors.surface,
-        borderRadius: BorderRadius.circular(16),
-        boxShadow: [
-          BoxShadow(
-              color: Colors.black.withOpacity(0.04),
-              blurRadius: 8,
-              offset: const Offset(0, 2)),
-        ],
-      ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Text(
-                'Asta ${progress!.levelName}',
-                style: AppTypography.labelLarge.copyWith(
-                    color: AppColors.textPrimary,
-                    fontWeight: FontWeight.w700),
-              ),
-              Text(
-                '${progress!.learnedCards}/${progress!.totalCards} peyv',
-                style: AppTypography.caption.copyWith(
-                    color: AppColors.textSecondary),
-              ),
-            ],
-          ),
-          const SizedBox(height: AppSpacing.sm),
-          ClipRRect(
-            borderRadius: BorderRadius.circular(6),
-            child: LinearProgressIndicator(
-              value: pct,
-              backgroundColor: AppColors.primary.withOpacity(0.12),
-              valueColor: AlwaysStoppedAnimation(AppColors.primary),
-              minHeight: 8,
-            ),
-          ),
-          const SizedBox(height: AppSpacing.xs),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Text(
-                '${(pct * 100).round()}% temam',
-                style: AppTypography.caption.copyWith(
-                    color: AppColors.primary, fontWeight: FontWeight.w600),
-              ),
-              if (progress!.masteredCards > 0)
-                Text(
-                  '${progress!.masteredCards} dît ✓',
-                  style: AppTypography.caption.copyWith(
-                      color: AppColors.textSecondary),
-                ),
-            ],
-          ),
-        ],
-      ),
-    ).animate().fadeIn(delay: 250.ms);
-  }
-}
+// (kaldırıldı: _ActivityGrid, _ActivityGridCard, _CollapsibleSkillTree,
+//              _CollapsibleSkillTreeState, _LevelProgressCard)
 
 // ════════════════════════════════════════════════════════════════
 // SKILL TREE UNIT MODELİ
@@ -1248,6 +809,70 @@ IconData _iconForCategory(String kat) => switch (kat) {
   _ => Icons.circle_rounded,
 };
 
+/// Kategori anahtarından İngilizce adını döndürür (İngilizce modü için).
+String _enNameForCategory(String kat) => switch (kat) {
+  'alfabe' => 'Alphabet',
+  'silav' => 'Greetings',
+  'jimar' || 'hejmar' => 'Numbers',
+  'reng' => 'Colors',
+  'malbat' => 'Family',
+  'cinavk' => 'Pronouns',
+  'pîşe' => 'Jobs',
+  'perwerde' => 'Education',
+  'dem' => 'Time',
+  'roj' => 'Days of Week',
+  'demsal' || 'werzî' => 'Seasons',
+  'xwarin' => 'Food',
+  'vexwarin' => 'Drinks',
+  'mêwe' => 'Fruits',
+  'beden' => 'Body',
+  'tendurist' => 'Health',
+  'mal' => 'Home',
+  'cih' || 'bajêr' => 'Places',
+  'rengder' || 'soyut' => 'Adjectives',
+  'temel' => 'Basic Words',
+  'leker' => 'Verbs',
+  'leker_ergatif' || 'ergatif' || 'ergatif_b2' => 'Past Verbs',
+  'xweza' => 'Nature',
+  'ajal' => 'Animals',
+  'cil' => 'Clothes',
+  'daçek' => 'Prepositions',
+  'rêziman' => 'Grammar',
+  'pirs' => 'Questions',
+  'gihanî' || 'rêwîtî' => 'Transport',
+  'peyvben' => 'Connectors',
+  'his' || 'psikoloji' => 'Feelings',
+  'bun' => 'To Be',
+  'dua' => 'Greetings & Blessings',
+  'çand' => 'Culture',
+  'jiyan' => 'Life',
+  'civakî' => 'Social',
+  'kar' => 'Work',
+  'teknoloji' => 'Technology',
+  'hewa' => 'Weather',
+  'bazirganî' => 'Commerce',
+  'welat' => 'Country',
+  'navdêr' => 'Nouns',
+  'neyekî' => 'Negation',
+  'deyim' => 'Idioms',
+  'edebiyat' => 'Literature',
+  'huner' => 'Arts',
+  'siyaset' => 'Politics',
+  'zagon' => 'Law',
+  'aborî' => 'Economy',
+  'medya' => 'Media',
+  'zanist' => 'Science',
+  'felsefe' => 'Philosophy',
+  'dîrok' => 'History',
+  'akademik' => 'Academic',
+  'kimlik' => 'Identity',
+  'ekoloji' => 'Ecology',
+  'ziman' => 'Language',
+  'ergatif_b2' => 'Ergative',
+  'cotkarî' => 'Farming',
+  _ => kat,
+};
+
 /// Kategori anahtarından doğru Kurmancî adını döndürür.
 String _kuNameForCategory(String kat) => switch (kat) {
   'alfabe' => 'Alfabê',
@@ -1305,13 +930,48 @@ String _kuNameForCategory(String kat) => switch (kat) {
   'ekoloji' => 'Ekolojî',
   'neyekî' => 'Neyînî',
   'navdêr' => 'Navdêr',
-  _ => kat[0].toUpperCase() + kat.substring(1),
+  _ => kat.isEmpty ? '' : kat[0].toUpperCase() + kat.substring(1),
 };
+
+// PERF 2026-04: Pedagogic order — top-level const (eskiden her build()'de
+// yeni list literal allocate ediliyordu, üstelik `contains` O(n) lookup +
+// _pedagogicOrder.length=~60. Şimdi const => 1 kez alloc, lookup için ek
+// olarak Set versiyonu O(1) bakış.
+const List<String> _kPedagogicOrder = [
+  // A1 temel — Silav ilk durak
+  'silav', 'cinavk', 'hejmar', 'jimar',
+  'malbat', 'bun', 'reng', 'dem', 'roj', 'demsal', 'werzî',
+  'mal', 'xwarin', 'vexwarin', 'mêwe', 'beden', 'cil',
+  'pîşe', 'ajal', 'xweza', 'cih', 'gihanî', 'rêwîtî',
+  'tendurist', 'his', 'peyvben', 'pirs', 'temel',
+  'leker', 'rengder', 'daçek', 'dua', 'çand',
+  // A2-B1 genişleme
+  'jiyan', 'civakî', 'perwerde', 'kar', 'teknoloji',
+  'hewa', 'bazirganî', 'welat', 'navdêr', 'neyekî',
+  'ergatif', 'leker_ergatif', 'deyim', 'rêziman',
+  // B2-C2 ileri
+  'edebiyat', 'huner', 'siyaset', 'zagon', 'aborî',
+  'medya', 'zanist', 'felsefe', 'dîrok', 'akademik',
+  'kimlik', 'ekoloji', 'ziman', 'soyut', 'psikoloji',
+  'ergatif_b2', 'cotkarî', 'bajêr',
+];
+final Set<String> _kPedagogicOrderSet = _kPedagogicOrder.toSet();
+
+/// PERF 2026-04: Memoization cache — `_buildSkillUnits` fonksiyonu
+/// home_screen her rebuild'de (ör. progressionProvider değişiminde) tüm
+/// A1/A2/…/C2 kelime listesini dönüp kategori sayımı yapıyordu. Input
+/// (level, isEnglishModule) ikisi değişmeden sonuç değişmez — cache ile
+/// O(n) → O(1). Web'de drag/scroll sırasında ~3-5ms/frame kazanç.
+final Map<String, List<_SkillTreeUnit>> _skillUnitsCache = {};
 
 /// Belirli seviye için durak listesi oluşturur.
 /// Minimum 12 kelime olan kategoriler gösterilir.
 /// Pedagojik sıralamaya göre sıralanır.
 List<_SkillTreeUnit> _buildSkillUnits(String level, {bool isEnglishModule = false}) {
+  final cacheKey = '$level|${isEnglishModule ? 'en' : 'ku'}';
+  final cached = _skillUnitsCache[cacheKey];
+  if (cached != null) return cached;
+
   final words = _getWordsForLevel(level, isEnglishModule: isEnglishModule);
   final catCounts = <String, int>{};
   for (final k in words) {
@@ -1320,38 +980,18 @@ List<_SkillTreeUnit> _buildSkillUnits(String level, {bool isEnglishModule = fals
     catCounts[kat] = (catCounts[kat] ?? 0) + 1;
   }
 
-  // Pedagojik sıra — basit/somut → karmaşık/soyut
-  // NOT: 'alfabe' çıkarıldı — tek harflik girişler quiz/flashcard için uygun değil.
-  // Alfabe sadece Rêziman (gramer) sekmesinde yer alır.
-  const _pedagogicOrder = [
-    // A1 temel — Silav ilk durak
-    'silav', 'cinavk', 'hejmar', 'jimar',
-    'malbat', 'bun', 'reng', 'dem', 'roj', 'demsal', 'werzî',
-    'mal', 'xwarin', 'vexwarin', 'mêwe', 'beden', 'cil',
-    'pîşe', 'ajal', 'xweza', 'cih', 'gihanî', 'rêwîtî',
-    'tendurist', 'his', 'peyvben', 'pirs', 'temel',
-    'leker', 'rengder', 'daçek', 'dua', 'çand',
-    // A2-B1 genişleme
-    'jiyan', 'civakî', 'perwerde', 'kar', 'teknoloji',
-    'hewa', 'bazirganî', 'welat', 'navdêr', 'neyekî',
-    'ergatif', 'leker_ergatif', 'deyim', 'rêziman',
-    // B2-C2 ileri
-    'edebiyat', 'huner', 'siyaset', 'zagon', 'aborî',
-    'medya', 'zanist', 'felsefe', 'dîrok', 'akademik',
-    'kimlik', 'ekoloji', 'ziman', 'soyut', 'psikoloji',
-    'ergatif_b2', 'cotkarî', 'bajêr',
-  ];
-
   final units = <_SkillTreeUnit>[];
 
   // Önce pedagojik sıradaki kategorileri ekle
-  for (final kat in _pedagogicOrder) {
+  for (final kat in _kPedagogicOrder) {
     final count = catCounts[kat];
     if (count == null || count < 4) continue;
     units.add(_SkillTreeUnit(
       id: '${level.toLowerCase()}_unit_$kat',
       katKey: kat,
-      kuTitle: _kuNameForCategory(kat),
+      kuTitle: isEnglishModule
+          ? _enNameForCategory(kat)
+          : _kuNameForCategory(kat),
       trTitle: '',
       icon: _iconForCategory(kat),
       wordCount: count,
@@ -1366,11 +1006,13 @@ List<_SkillTreeUnit> _buildSkillUnits(String level, {bool isEnglishModule = fals
     if (kat == 'alfabe') continue;
     final count = entry.value;
     if (count < 4) continue;
-    if (_pedagogicOrder.contains(kat)) continue; // Zaten eklendi
+    if (_kPedagogicOrderSet.contains(kat)) continue; // Zaten eklendi (O(1))
     units.add(_SkillTreeUnit(
       id: '${level.toLowerCase()}_unit_$kat',
       katKey: kat,
-      kuTitle: _kuNameForCategory(kat),
+      kuTitle: isEnglishModule
+          ? _enNameForCategory(kat)
+          : _kuNameForCategory(kat),
       trTitle: '',
       icon: _iconForCategory(kat),
       wordCount: count,
@@ -1378,6 +1020,7 @@ List<_SkillTreeUnit> _buildSkillUnits(String level, {bool isEnglishModule = fals
     ));
   }
 
+  _skillUnitsCache[cacheKey] = units;
   return units;
 }
 
@@ -1404,8 +1047,11 @@ class _SkillTreePath extends StatelessWidget {
       1 => 'A1', 2 => 'A2', 3 => 'B1', 4 => 'B2', 5 => 'C1', 6 => 'C2',
       _ => 'A1',
     };
+    // PERF: isEnglishModule parent'ta zaten watch ediliyor — değişince parent
+    // rebuild olur; burada `read` yeterli. Böylece aynı frame içinde iki ayrı
+    // subscribe entry oluşmaz.
     final units = _buildSkillUnits(levelKey,
-        isEnglishModule: ref.watch(isEnglishModuleProvider));
+        isEnglishModule: ref.read(isEnglishModuleProvider));
     final progression = ref.read(progressionProvider.notifier);
     // ignore: unused_local_variable
     final _ = ref.watch(progressionProvider); // rebuild on changes
@@ -1426,6 +1072,11 @@ class _SkillTreePath extends StatelessWidget {
     // Karik'un tırmanış yolculuğunda: çayır → orman → kayalık →
     // bulutlar → kar → zirve.
     final biome = _TrailBiome.forLevel(levelKey);
+
+    // PERF 2026-04: `ref.watch(showTurkishProvider)` eskiden .map() içinde
+    // her entry için çağrılıyordu (10+ item × per rebuild). Hoist edildi →
+    // tek subscribe, N item'da O(1) bakış.
+    final showTurkish = ref.watch(showTurkishProvider);
 
     // Skill tree — arka planda dekoratif öğeler, önde duraklar.
     return Stack(
@@ -1460,7 +1111,7 @@ class _SkillTreePath extends StatelessWidget {
                 isCompleted: isCompleted,
                 isCurrent: isCurrent,
                 isLocked: isLocked,
-                showTurkish: ref.watch(showTurkishProvider),
+                showTurkish: showTurkish,
                 onTap: () => context.push(
                   AppRoutes.unitHub,
                   extra: {
@@ -1998,17 +1649,24 @@ class _SkillTreeNode extends StatelessWidget {
                   textAlign: TextAlign.center,
                 ),
 
-                // Alt baslik + kelime sayisi
-                Text(
-                  showTurkish
-                      ? '${unit.trTitle} · ${unit.wordCount} peyv'
-                      : '${unit.wordCount} peyv',
-                  style: AppTypography.caption.copyWith(
-                    color: AppColors.textTertiary,
-                    fontSize: 10,
-                  ),
-                  textAlign: TextAlign.center,
-                ),
+                // Alt baslik + kelime sayisi — track-aware label.
+                // FIX (Apr 2026): Eski davranış `'${unit.trTitle} · ${unit.wordCount} peyv'`
+                // showTurkish=true'da leading " · X peyv" üretirdi (unit.trTitle daima boş).
+                // EN TRACK FIX: "peyv" (Kurmancî: kelime) EN modunda "words" olmalı.
+                Consumer(builder: (_, ref, __) {
+                  final enMode = ref.watch(isEnglishModuleProvider);
+                  final wordLabel = enMode ? 'words' : 'peyv';
+                  return Text(
+                    (showTurkish && unit.trTitle.isNotEmpty)
+                        ? '${unit.trTitle} · ${unit.wordCount} $wordLabel'
+                        : '${unit.wordCount} $wordLabel',
+                    style: AppTypography.caption.copyWith(
+                      color: AppColors.textTertiary,
+                      fontSize: 10,
+                    ),
+                    textAlign: TextAlign.center,
+                  );
+                }),
 
                 // Aktif node: "Dest pê bike!" etiketi
                 if (isCurrent) ...[
@@ -2019,14 +1677,17 @@ class _SkillTreeNode extends StatelessWidget {
                       color: AppColors.primary,
                       borderRadius: BorderRadius.circular(12),
                     ),
-                    child: Text(
-                      'Dest pê bike!',
-                      style: AppTypography.caption.copyWith(
-                        color: Colors.white,
-                        fontWeight: FontWeight.w700,
-                        fontSize: 11,
-                      ),
-                    ),
+                    child: Consumer(builder: (_, ref, __) {
+                      final enMode = ref.watch(isEnglishModuleProvider);
+                      return Text(
+                        enMode ? 'Start!' : 'Dest pê bike!',
+                        style: AppTypography.caption.copyWith(
+                          color: Colors.white,
+                          fontWeight: FontWeight.w700,
+                          fontSize: 11,
+                        ),
+                      );
+                    }),
                   ),
                 ],
               ],
@@ -2223,302 +1884,7 @@ class _PathPainter extends CustomPainter {
       old.fromX != fromX || old.toX != toX || old.isCompleted != isCompleted;
 }
 
-// ════════════════════════════════════════════════════════════════
-// ALT NAVİGASYON ÇUBUĞU
-// 4 sekme: Fêrbûn, Dubare, Çand, Profîl
-// ════════════════════════════════════════════════════════════════
-
-class _LutkeBottomNav extends StatelessWidget {
-  final int currentIndex;
-  const _LutkeBottomNav({required this.currentIndex});
-
-  @override
-  Widget build(BuildContext context) {
-    final bottomPadding = MediaQuery.of(context).padding.bottom;
-
-    return Container(
-      decoration: BoxDecoration(
-        color: AppColors.surface,
-        boxShadow: [
-          BoxShadow(
-            color: Colors.black.withOpacity(0.06),
-            blurRadius: 12,
-            offset: const Offset(0, -2),
-          ),
-        ],
-      ),
-      child: SafeArea(
-        top: false,
-        child: Padding(
-          padding: EdgeInsets.only(
-            top: 8,
-            bottom: bottomPadding > 0 ? 0 : 8,
-          ),
-          child: Row(
-            children: [
-              Expanded(
-                child: _NavItem(
-                  icon: Icons.menu_book_rounded,
-                  label: 'Fêrbûn',
-                  isSelected: currentIndex == 0,
-                  onTap: () {
-                    // Already on home
-                  },
-                ),
-              ),
-              Expanded(
-                child: _NavItem(
-                  icon: Icons.translate_rounded,
-                  label: 'Peyv',
-                  isSelected: currentIndex == 1,
-                  onTap: () => context.push(AppRoutes.vocabulary),
-                ),
-              ),
-              Expanded(
-                child: _NavItem(
-                  icon: Icons.music_note_rounded,
-                  label: 'Çand',
-                  isSelected: currentIndex == 2,
-                  onTap: () {
-                    ScaffoldMessenger.of(context).showSnackBar(
-                      SnackBar(
-                        content: const Text(
-                          'Beşa Çandê zû tê',
-                          style: TextStyle(fontSize: 13),
-                        ),
-                        behavior: SnackBarBehavior.floating,
-                        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
-                        duration: const Duration(seconds: 2),
-                      ),
-                    );
-                  },
-                ),
-              ),
-              Expanded(
-                child: _NavItem(
-                  icon: Icons.person_rounded,
-                  label: 'Profîl',
-                  isSelected: currentIndex == 3,
-                  onTap: () => context.push(AppRoutes.profile),
-                ),
-              ),
-            ],
-          ),
-        ),
-      ),
-    );
-  }
-}
-
-class _NavItem extends StatelessWidget {
-  final IconData icon;
-  final String label;
-  final bool isSelected;
-  final VoidCallback onTap;
-
-  const _NavItem({
-    required this.icon,
-    required this.label,
-    required this.isSelected,
-    required this.onTap,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: onTap,
-      behavior: HitTestBehavior.opaque,
-      child: SizedBox(
-        height: 48,
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Icon(
-              icon,
-              size: 24,
-              color: isSelected ? AppColors.primary : AppColors.textSecondary,
-            ),
-            const SizedBox(height: 2),
-            Text(
-              label,
-              style: TextStyle(
-                fontSize: 11,
-                fontWeight: isSelected ? FontWeight.w700 : FontWeight.w500,
-                color: isSelected ? AppColors.primary : AppColors.textSecondary,
-              ),
-            ),
-          ],
-        ),
-      ),
-    );
-  }
-}
-
-// ════════════════════════════════════════════════════════════════
-// QUIZ BUTONU — "Ders Bide!" (Start Lesson)
-// Ana sayfada belirgin, Duolingo tarzı quiz oturumu başlatıcı
-// ════════════════════════════════════════════════════════════════
-
-class _StartQuizButton extends StatelessWidget {
-  const _StartQuizButton();
-
-  @override
-  Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: () => context.push(AppRoutes.quiz, extra: {'level': 'A1'}),
-      child: Container(
-        padding: const EdgeInsets.all(AppSpacing.md),
-        decoration: BoxDecoration(
-          gradient: const LinearGradient(
-            colors: [AppColors.accent, AppColors.accentWarm],
-            begin: Alignment.topLeft,
-            end: Alignment.bottomRight,
-          ),
-          borderRadius: BorderRadius.circular(20),
-          boxShadow: [
-            BoxShadow(
-              color: AppColors.accent.withOpacity(0.35),
-              blurRadius: 16,
-              offset: const Offset(0, 6),
-            ),
-          ],
-        ),
-        child: Row(
-          children: [
-            Container(
-              width: 52,
-              height: 52,
-              decoration: BoxDecoration(
-                color: Colors.white.withOpacity(0.2),
-                shape: BoxShape.circle,
-              ),
-              child: const Icon(
-                Icons.quiz_rounded,
-                color: Colors.white,
-                size: 28,
-              ),
-            ),
-            const SizedBox(width: AppSpacing.md),
-            Expanded(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    'Waneyê Bide!',
-                    style: AppTypography.labelLarge.copyWith(
-                      color: Colors.white,
-                      fontWeight: FontWeight.w700,
-                    ),
-                  ),
-                  Text(
-                    '10 pirs — werger, guhdarikirin, nivisan',
-                    style: AppTypography.caption.copyWith(
-                      color: Colors.white.withOpacity(0.85),
-                    ),
-                  ),
-                ],
-              ),
-            ),
-            Icon(Icons.arrow_forward_ios,
-                color: Colors.white.withOpacity(0.8), size: 16),
-          ],
-        ),
-      ),
-    ).animate().fadeIn(delay: 180.ms).scale(
-          begin: const Offset(0.97, 0.97),
-          duration: 300.ms,
-          curve: Curves.easeOut,
-        );
-  }
-}
-
-// ════════════════════════════════════════════════════════════════
-// DİL MODU TOGGLE — KU/TR veya KU only
-// ════════════════════════════════════════════════════════════════
-
-class _LanguageModeToggle extends ConsumerWidget {
-  @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    final mode = ref.watch(languageModeProvider);
-    final isKuTr = mode == LanguageMode.kuTr;
-
-    return GestureDetector(
-      onTap: () {
-        ref.read(languageModeProvider.notifier).toggle();
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(
-            content: Text(
-              isKuTr ? 'Tenê Kurmancî' : 'Kurmancî + Tirkî',
-              style: const TextStyle(fontSize: 13),
-            ),
-            behavior: SnackBarBehavior.floating,
-            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
-            duration: const Duration(seconds: 2),
-          ),
-        );
-      },
-      child: Container(
-        padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
-        decoration: BoxDecoration(
-          color: isKuTr
-              ? AppColors.primary.withOpacity(0.1)
-              : const Color(0xFFFFF3E0),
-          borderRadius: BorderRadius.circular(20),
-          border: Border.all(
-            color: isKuTr
-                ? AppColors.primary.withOpacity(0.3)
-                : const Color(0xFFFF9800).withOpacity(0.3),
-          ),
-        ),
-        child: Row(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            Text('KU',
-              style: TextStyle(
-                fontSize: 11, fontWeight: FontWeight.w800,
-                color: AppColors.primary)),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 3),
-              child: Text('/', style: TextStyle(fontSize: 10, color: AppColors.textSecondary)),
-            ),
-            Text(isKuTr ? 'TR' : '—',
-              style: TextStyle(
-                fontSize: 11, fontWeight: FontWeight.w800,
-                color: isKuTr ? const Color(0xFFFF9800) : AppColors.textSecondary.withOpacity(0.4),
-                decoration: isKuTr ? null : TextDecoration.lineThrough)),
-          ],
-        ),
-      ),
-    );
-  }
-}
-
-/// Modül kısayolu: Kurmancî → İngilizce öğrenme moduna geçiş
-class _ModuleSwitcher extends ConsumerWidget {
-  @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    return GestureDetector(
-      onTap: () => context.push(AppRoutes.moduleSelect),
-      child: Container(
-        padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 6),
-        decoration: BoxDecoration(
-          color: AppColors.accent.withOpacity(0.10),
-          borderRadius: BorderRadius.circular(20),
-          border: Border.all(color: AppColors.accent.withOpacity(0.3)),
-        ),
-        child: const Row(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            Text('🌍', style: TextStyle(fontSize: 14)),
-            SizedBox(width: 4),
-            Text('Îng',
-              style: TextStyle(
-                fontSize: 11, fontWeight: FontWeight.w800,
-                color: AppColors.accent)),
-          ],
-        ),
-      ),
-    );
-  }
-}
+// (kaldırıldı: _LutkeBottomNav, _NavItem, _StartQuizButton)
+// Eski _LanguageModeToggle ve _ModuleSwitcher kaldırıldı.
+// Dil modu (KU/TR vs kuOnly) artık yalnızca Profile > _LanguageModeCard'ta.
+// Track değişimi de Profile > _ActiveTrackCard üzerinden track-select'e gider.

@@ -8,11 +8,31 @@ import '../../core/constants/app_colors.dart';
 import '../../core/constants/app_typography.dart';
 import '../../core/constants/app_spacing.dart';
 import '../../core/router/app_router.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import '../../core/services/auth_service.dart';
+import '../../core/services/local_auth_service.dart';
 import '../lessons/data/lesson_repository.dart';
 import '../gamification/gamification_widgets.dart';
+import '../certificate/certificate_screen.dart';
 import '../cultural_content/domain/dil_motivasyon_db.dart';
 import '../../shared/widgets/leaderboard_widget.dart';
+import '../../shared/widgets/level_picker_sheet.dart';
+import '../subscription/data/subscription_service.dart';
+import '../subscription/domain/subscription_status.dart';
+import 'widgets/accessibility_settings_card.dart';
+import 'widgets/skill_progress_dashboard.dart';
+import 'widgets/tts_source_card.dart';
+import 'widgets/weekly_ai_advisor_card.dart';
+import '../../core/services/sound_service.dart';
+import '../../core/services/user_mode_preferences.dart';
+import '../../shared/providers/language_mode_provider.dart';
+import '../../shared/providers/learning_module_provider.dart';
+import '../../shared/providers/learning_track_provider.dart';
+import '../../shared/providers/streak_provider.dart';
+import '../../shared/providers/progression_provider.dart';
+import '../../shared/providers/review_provider.dart';
+import '../gamification/gamification_provider.dart';
+import '../child_mode/domain/bizer_evolution.dart';
 
 // ════════════════════════════════════════════════════════════════
 // PROFİL EKRANI — LÛTKE
@@ -49,6 +69,18 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
       p.whenData((data) => total += data.learnedCards);
     }
     return total;
+  }
+
+  /// dailyStatsProvider'dan streak'i güvenli biçimde çıkar.
+  static int _extractStreak(AsyncValue<dynamic>? dailyStats) {
+    if (dailyStats == null) return 0;
+    int result = 0;
+    dailyStats.whenData((s) {
+      try {
+        result = (s.streakDays as int?) ?? 0;
+      } catch (_) {}
+    });
+    return result;
   }
 
   @override
@@ -227,12 +259,23 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
           gap,
           const XPProgressBar(),
           gap,
+          const SkillProgressDashboard(),
+          gap,
+          WeeklyAiAdvisorCard(
+            streakDays: _extractStreak(dailyStats),
+            currentLevelNum: profile.currentLevelNum,
+          ),
+          gap,
           const _WeeklyActivityChart(),
         ];
 
       case _ProfileTab.achievements:
         return [
           const AchievementBadgeGrid(),
+          gap,
+          _CertificateTile(
+            unlockedUpTo: profile.currentLevelNum,
+          ),
           gap,
           _CEFRProgressSection(
             currentLevel: profile.currentLevelNum,
@@ -250,6 +293,10 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
         try {
           isOwner = ref.watch(isOwnerProvider);
         } catch (_) {}
+        bool isReviewer = false;
+        try {
+          isReviewer = ref.watch(isReviewerProvider);
+        } catch (_) {}
         int dailyGoal = 20;
         try {
           dailyGoal = (profile.dailyGoal as int?) ?? 20;
@@ -263,13 +310,32 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
           isAnonymous = (user?.isAnonymous as bool?) ?? true;
         } catch (_) {}
         return [
+          const _ActiveTrackCard(),
+          gap,
           _SettingsSection(dailyGoal: dailyGoal),
+          gap,
+          const _LanguageModeCard(),
+          gap,
+          const _SoundToggleCard(),
           gap,
           _MotivationCard(motivation: motivationName),
           gap,
           _AccessibilityCard(),
           gap,
+          const AccessibilitySettingsCard(),
+          gap,
+          const TtsSourceCard(),
+          gap,
+          const _UserModeCard(),
+          gap,
           const _QuickActionsSection(),
+          // Owner aynı zamanda reviewer — bu yüzden iki link birden
+          // gösterilmesin. Sadece "Panela Rêveberiyê" yeterli (içinden
+          // hem editör yönetimi hem review fonksiyonlarına ulaşılır).
+          if (isReviewer && !isOwner) ...[
+            gap,
+            _ReviewHubLink(isOwner: false),
+          ],
           if (isOwner) ...[
             gap,
             _AdminPanelLink(),
@@ -282,6 +348,206 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
           ),
         ];
     }
+  }
+}
+
+/// Aktif öğrenme yolu kartı — 4 yoldan hangisi çalışıyor?
+/// Karışmaya karşı en iyi görsel işaret.
+class _ActiveTrackCard extends ConsumerWidget {
+  const _ActiveTrackCard();
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final track = ref.watch(currentTrackProvider);
+
+    // Track'e göre gradient — track select ekranındakiyle aynı
+    final (gradientStart, gradientEnd) = switch (track) {
+      LearningTrack.kurdishAdult => (
+        AppColors.primary,
+        AppColors.primary.withOpacity(0.7),
+      ),
+      LearningTrack.kurdishChild => (
+        const Color(0xFFF5A623),
+        const Color(0xFFE89200),
+      ),
+      LearningTrack.englishAdult => (
+        const Color(0xFF1E88E5),
+        const Color(0xFF1565C0),
+      ),
+      LearningTrack.englishChild => (
+        const Color(0xFFAB47BC),
+        const Color(0xFF6A1B9A),
+      ),
+    };
+
+    return Material(
+      color: Colors.transparent,
+      child: InkWell(
+        onTap: () => context.go(AppRoutes.trackSelect),
+        borderRadius: BorderRadius.circular(16),
+        child: Container(
+          padding: const EdgeInsets.all(AppSpacing.md),
+          decoration: BoxDecoration(
+            gradient: LinearGradient(
+              colors: [gradientStart, gradientEnd],
+              begin: Alignment.topLeft,
+              end: Alignment.bottomRight,
+            ),
+            borderRadius: BorderRadius.circular(16),
+          ),
+          child: Row(
+            children: [
+              Container(
+                width: 48,
+                height: 48,
+                decoration: BoxDecoration(
+                  color: Colors.white.withOpacity(0.22),
+                  borderRadius: BorderRadius.circular(14),
+                ),
+                alignment: Alignment.center,
+                child: Text(
+                  track.emoji,
+                  style: const TextStyle(fontSize: 26),
+                ),
+              ),
+              const SizedBox(width: 12),
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Row(
+                      children: [
+                        Container(
+                          padding: const EdgeInsets.symmetric(
+                              horizontal: 6, vertical: 2),
+                          decoration: BoxDecoration(
+                            color: Colors.white,
+                            borderRadius: BorderRadius.circular(8),
+                          ),
+                          child: Text(
+                            '✓ Çalak e',
+                            style: TextStyle(
+                              fontSize: 9,
+                              fontWeight: FontWeight.w800,
+                              color: gradientStart,
+                            ),
+                          ),
+                        ),
+                        const SizedBox(width: 6),
+                        Text(
+                          track.isChild ? '👶 Zarok' : '👤 Mezin',
+                          style: const TextStyle(
+                            fontSize: 10,
+                            color: Colors.white,
+                            fontWeight: FontWeight.w700,
+                          ),
+                        ),
+                      ],
+                    ),
+                    const SizedBox(height: 4),
+                    Text(
+                      track.labelKu,
+                      style: const TextStyle(
+                        fontSize: 15,
+                        fontWeight: FontWeight.w800,
+                        color: Colors.white,
+                      ),
+                    ),
+                    Text(
+                      track.labelTr,
+                      style: TextStyle(
+                        fontSize: 11,
+                        color: Colors.white.withOpacity(0.85),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              const Icon(
+                Icons.alt_route_rounded,
+                color: Colors.white,
+                size: 20,
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+/// Dil uzmanı için: Review Hub kısayolu.
+class _ReviewHubLink extends StatelessWidget {
+  final bool isOwner;
+  const _ReviewHubLink({required this.isOwner});
+
+  @override
+  Widget build(BuildContext context) {
+    return Material(
+      color: Colors.transparent,
+      child: InkWell(
+        onTap: () => context.push(AppRoutes.reviewHub),
+        borderRadius: BorderRadius.circular(16),
+        child: Container(
+          padding: const EdgeInsets.all(AppSpacing.md),
+          decoration: BoxDecoration(
+            gradient: LinearGradient(
+              colors: [
+                AppColors.accent,
+                AppColors.accent.withOpacity(0.75),
+              ],
+              begin: Alignment.topLeft,
+              end: Alignment.bottomRight,
+            ),
+            borderRadius: BorderRadius.circular(16),
+          ),
+          child: Row(
+            children: [
+              Container(
+                width: 40,
+                height: 40,
+                decoration: BoxDecoration(
+                  color: Colors.white.withOpacity(0.18),
+                  borderRadius: BorderRadius.circular(12),
+                ),
+                alignment: Alignment.center,
+                child: const Text('🔍', style: TextStyle(fontSize: 20)),
+              ),
+              const SizedBox(width: 12),
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      'Review Hub — Pispor',
+                      style: AppTypography.title.copyWith(
+                        color: Colors.white,
+                        fontWeight: FontWeight.w800,
+                        fontSize: 15,
+                      ),
+                    ),
+                    Text(
+                      isOwner
+                          ? 'Admin + Pispor: naverok binirxîne'
+                          : 'Naverokên Kurmancî binirxîne',
+                      style: AppTypography.caption.copyWith(
+                        color: Colors.white.withOpacity(0.9),
+                        fontSize: 11,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              const Icon(
+                Icons.arrow_forward_ios_rounded,
+                color: Colors.white,
+                size: 14,
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
   }
 }
 
@@ -337,7 +603,7 @@ class _AdminPanelLink extends StatelessWidget {
                       ),
                     ),
                     Text(
-                      'Notlar, kelime kontrol, istatistik',
+                      'Nîşe, kontrola peyvan, îstatîstîk',
                       style: AppTypography.caption.copyWith(
                         color: Colors.white.withOpacity(0.85),
                         fontSize: 11,
@@ -373,14 +639,14 @@ class _TabStripDelegate extends SliverPersistentHeaderDelegate {
     (_ProfileTab.progress,     'Pêşketin',   Icons.trending_up_rounded),
     (_ProfileTab.achievements, 'Serkeftî',   Icons.emoji_events_rounded),
     (_ProfileTab.competition,  'Pêşbazî',    Icons.groups_rounded),
-    (_ProfileTab.settings,     'Mîheng',     Icons.tune_rounded),
+    (_ProfileTab.settings,     'Sazkirin',   Icons.tune_rounded),
   ];
 
   @override
-  double get minExtent => 64;
+  double get minExtent => 76;
 
   @override
-  double get maxExtent => 64;
+  double get maxExtent => 76;
 
   @override
   Widget build(BuildContext context, double shrinkOffset, bool overlapsContent) {
@@ -389,8 +655,12 @@ class _TabStripDelegate extends SliverPersistentHeaderDelegate {
       padding: const EdgeInsets.fromLTRB(AppSpacing.md, 6, AppSpacing.md, 10),
       child: DecoratedBox(
         decoration: BoxDecoration(
-          color: AppColors.primary.withOpacity(0.06),
+          color: AppColors.primary.withOpacity(0.08),
           borderRadius: BorderRadius.circular(14),
+          border: Border.all(
+            color: AppColors.primary.withOpacity(0.12),
+            width: 1,
+          ),
         ),
         child: Padding(
           padding: const EdgeInsets.all(4),
@@ -432,53 +702,67 @@ class _TabChip extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: onTap,
-      behavior: HitTestBehavior.opaque,
-      child: AnimatedContainer(
-        duration: const Duration(milliseconds: 220),
-        curve: Curves.easeOutCubic,
-        margin: const EdgeInsets.symmetric(horizontal: 2),
-        padding: const EdgeInsets.symmetric(vertical: 6, horizontal: 4),
-        decoration: BoxDecoration(
-          color: isActive ? AppColors.primary : Colors.transparent,
-          borderRadius: BorderRadius.circular(10),
-          boxShadow: isActive
-              ? [
-                  BoxShadow(
-                    color: AppColors.primary.withOpacity(0.25),
-                    blurRadius: 8,
-                    offset: const Offset(0, 2),
-                  ),
-                ]
-              : null,
-        ),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            Icon(
-              icon,
-              size: 20,
-              color: isActive ? Colors.white : AppColors.primary.withOpacity(0.85),
+    // SEMANTICS: Ekran okuyucu kullanıcıları için tab olarak duyur.
+    // selected: durumu NVDA/TalkBack'e "seçili/seçili değil" anlamında gelir.
+    return Semantics(
+      button: true,
+      selected: isActive,
+      label: label,
+      child: ExcludeSemantics(
+        child: GestureDetector(
+          onTap: onTap,
+          behavior: HitTestBehavior.opaque,
+          child: AnimatedContainer(
+            duration: const Duration(milliseconds: 220),
+            curve: Curves.easeOutCubic,
+            margin: const EdgeInsets.symmetric(horizontal: 2),
+            padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 4),
+            // MIN TOUCH TARGET — WCAG 2.5.5 / 2.2 AA önerilen 44x44.
+            // Artırılan içerik: icon 22, label 13 (önceki 20+11 okunmuyordu).
+            constraints: const BoxConstraints(minHeight: 56),
+            decoration: BoxDecoration(
+              color: isActive ? AppColors.primary : Colors.transparent,
+              borderRadius: BorderRadius.circular(10),
+              boxShadow: isActive
+                  ? [
+                      BoxShadow(
+                        color: AppColors.primary.withOpacity(0.25),
+                        blurRadius: 8,
+                        offset: const Offset(0, 2),
+                      ),
+                    ]
+                  : null,
             ),
-            const SizedBox(height: 3),
-            FittedBox(
-              fit: BoxFit.scaleDown,
-              child: Text(
-                label,
-                style: TextStyle(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Icon(
+                  icon,
+                  size: 22,
                   color: isActive
                       ? Colors.white
-                      : AppColors.primary.withOpacity(0.85),
-                  fontWeight: FontWeight.w700,
-                  fontSize: 11,
-                  letterSpacing: 0.1,
+                      : AppColors.primary,
                 ),
-                maxLines: 1,
-              ),
+                const SizedBox(height: 4),
+                FittedBox(
+                  fit: BoxFit.scaleDown,
+                  child: Text(
+                    label,
+                    style: TextStyle(
+                      color: isActive
+                          ? Colors.white
+                          : AppColors.primary,
+                      fontWeight: FontWeight.w700,
+                      fontSize: 13,
+                      letterSpacing: 0.2,
+                    ),
+                    maxLines: 1,
+                  ),
+                ),
+              ],
             ),
-          ],
+          ),
         ),
       ),
     );
@@ -721,7 +1005,7 @@ class _GeneralBadge extends StatelessWidget {
                 size: 12, color: AppColors.primary),
             const SizedBox(width: 4),
             Text(
-              'Genel',
+              'Giştî',
               style: AppTypography.caption.copyWith(
                 color: AppColors.primary,
                 fontWeight: FontWeight.w600,
@@ -1227,6 +1511,28 @@ class _CEFRProgressSection extends StatelessWidget {
             ),
           ),
           const SizedBox(height: AppSpacing.md),
+          // Bilgi balonu — kullanıcı her astı tıklayıp gezebilir.
+          Padding(
+            padding: const EdgeInsets.only(bottom: AppSpacing.sm),
+            child: Row(
+              children: [
+                Icon(
+                  Icons.touch_app_outlined,
+                  size: 14,
+                  color: AppColors.textTertiary,
+                ),
+                const SizedBox(width: 4),
+                Expanded(
+                  child: Text(
+                    'Tikan li astekê bide ku biguherînî.',
+                    style: AppTypography.caption.copyWith(
+                      color: AppColors.textTertiary,
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ),
           ...levels.asMap().entries.map((entry) {
             final i = entry.key;
             final level = entry.value;
@@ -1235,12 +1541,16 @@ class _CEFRProgressSection extends StatelessWidget {
 
             return Padding(
               padding: const EdgeInsets.only(bottom: AppSpacing.sm),
-              child: _CEFRLevelBar(
-                level: level,
-                isActive: isActive,
-                color: color,
-                progressAsync:
-                    i < progresses.length ? progresses[i] : null,
+              child: InkWell(
+                borderRadius: BorderRadius.circular(8),
+                onTap: () => LevelPickerSheet.show(context),
+                child: _CEFRLevelBar(
+                  level: level,
+                  isActive: isActive,
+                  color: color,
+                  progressAsync:
+                      i < progresses.length ? progresses[i] : null,
+                ),
               ),
             );
           }),
@@ -1480,19 +1790,128 @@ class _WeeklyActivityChart extends StatelessWidget {
 }
 
 // ════════════════════════════════════════════════════════════════
+// 4.5. KULLANICI MODU — Gamified / Akademik (Sade)
+// ════════════════════════════════════════════════════════════════
+
+class _UserModeCard extends ConsumerWidget {
+  const _UserModeCard();
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final mode = ref.watch(userModeProvider);
+    final notifier = ref.read(userModeProvider.notifier);
+
+    return Container(
+      padding: const EdgeInsets.all(AppSpacing.md),
+      decoration: BoxDecoration(
+        color: AppColors.surface,
+        borderRadius: BorderRadius.circular(16),
+        border: Border.all(
+          color: AppColors.primary.withValues(alpha: 0.12),
+        ),
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Row(
+            children: [
+              const Text('🎛️', style: TextStyle(fontSize: 20)),
+              const SizedBox(width: 8),
+              Text('Modê Dîtinê',
+                  style: AppTypography.labelLarge.copyWith(
+                    fontWeight: FontWeight.w800,
+                    color: AppColors.textPrimary,
+                  )),
+            ],
+          ),
+          const SizedBox(height: 4),
+          Text(
+            'Gamification ya akademîk? Sêwirana te li vir e.',
+            style: AppTypography.caption
+                .copyWith(color: AppColors.textSecondary),
+          ),
+          const SizedBox(height: AppSpacing.md),
+          ...UserMode.values.where((m) => m != UserMode.child).map((m) {
+            final selected = mode == m;
+            return Padding(
+              padding: const EdgeInsets.only(bottom: 8),
+              child: GestureDetector(
+                onTap: () => notifier.setMode(m),
+                child: Container(
+                  padding: const EdgeInsets.all(12),
+                  decoration: BoxDecoration(
+                    color: selected
+                        ? AppColors.primary.withValues(alpha: 0.08)
+                        : AppColors.surface,
+                    border: Border.all(
+                      color: selected
+                          ? AppColors.primary
+                          : AppColors.textSecondary
+                              .withValues(alpha: 0.15),
+                      width: selected ? 2 : 1,
+                    ),
+                    borderRadius: BorderRadius.circular(12),
+                  ),
+                  child: Row(
+                    children: [
+                      Icon(
+                        selected
+                            ? Icons.radio_button_checked
+                            : Icons.radio_button_off,
+                        color: selected
+                            ? AppColors.primary
+                            : AppColors.textSecondary,
+                        size: 22,
+                      ),
+                      const SizedBox(width: 10),
+                      Expanded(
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(m.labelKu,
+                                style:
+                                    AppTypography.bodyMedium.copyWith(
+                                  fontWeight: selected
+                                      ? FontWeight.w800
+                                      : FontWeight.w600,
+                                  color: AppColors.textPrimary,
+                                )),
+                            Text(m.descriptionKu,
+                                style: AppTypography.caption.copyWith(
+                                  color: AppColors.textSecondary,
+                                )),
+                          ],
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+            );
+          }),
+        ],
+      ),
+    );
+  }
+}
+
+// ════════════════════════════════════════════════════════════════
 // 5. HIZLI EYLEMLER
 // ════════════════════════════════════════════════════════════════
 
-class _QuickActionsSection extends StatelessWidget {
+class _QuickActionsSection extends ConsumerWidget {
   const _QuickActionsSection();
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    // TRACK-AWARE FIX: EN track'te "Dersê Bide / Peyvên Kurmancî" yerine
+    // "Start Lesson / English Words" gösterilir.
+    final isEn = ref.watch(isEnglishModuleProvider);
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
-          'Zû bike',
+          isEn ? 'Quick actions' : 'Zû bike',
           style: AppTypography.labelLarge.copyWith(
             color: AppColors.textPrimary,
             fontWeight: FontWeight.w700,
@@ -1503,7 +1922,7 @@ class _QuickActionsSection extends StatelessWidget {
           children: [
             Expanded(
               child: _QuickActionButton(
-                label: 'Dersê Bide',
+                label: isEn ? 'Start Lesson' : 'Dersê Bide',
                 icon: Icons.play_arrow_rounded,
                 color: AppColors.primary,
                 onTap: () => context.push(AppRoutes.lesson, extra: {
@@ -1515,7 +1934,7 @@ class _QuickActionsSection extends StatelessWidget {
             const SizedBox(width: AppSpacing.sm),
             Expanded(
               child: _QuickActionButton(
-                label: 'Peyvên Kurmancî',
+                label: isEn ? 'English Words' : 'Peyvên Kurmancî',
                 icon: Icons.list_alt_rounded,
                 color: const Color(0xFF5C6BC0),
                 onTap: () => context.go(AppRoutes.vocabulary),
@@ -1524,11 +1943,11 @@ class _QuickActionsSection extends StatelessWidget {
           ],
         ),
         const SizedBox(height: AppSpacing.sm),
-        // ── Rêya min (İlerleme Haritası) ──────────────────
+        // ── Rêya min / My progress ─────────────────────────
         SizedBox(
           width: double.infinity,
           child: _QuickActionButton(
-            label: 'Rêya min',
+            label: isEn ? 'My progress' : 'Rêya min',
             icon: Icons.map_rounded,
             color: const Color(0xFF2E7D32),
             onTap: () => context.push(AppRoutes.progressMap),
@@ -1618,7 +2037,6 @@ class _SettingsSection extends StatefulWidget {
 class _SettingsSectionState extends State<_SettingsSection> {
   late double _goalSlider;
   bool _notificationsEnabled = true;
-  String _language = 'Kurmancî';
   bool _darkMode = false;
 
   @override
@@ -1645,7 +2063,7 @@ class _SettingsSectionState extends State<_SettingsSection> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            'Mîheng',
+            'Sazkirin',
             style: AppTypography.labelLarge.copyWith(
               color: AppColors.textPrimary,
               fontWeight: FontWeight.w700,
@@ -1713,33 +2131,12 @@ class _SettingsSectionState extends State<_SettingsSection> {
                 setState(() => _notificationsEnabled = v),
           ),
 
-          const Divider(height: AppSpacing.sm),
-
-          // Dil tercihi
-          ListTile(
-            dense: true,
-            contentPadding: EdgeInsets.zero,
-            title: Text(
-              'Ziman',
-              style: AppTypography.bodySmall
-                  .copyWith(color: AppColors.textPrimary),
-            ),
-            trailing: DropdownButton<String>(
-              value: _language,
-              underline: const SizedBox.shrink(),
-              style: AppTypography.caption.copyWith(
-                color: AppColors.textPrimary,
-                fontWeight: FontWeight.w500,
-              ),
-              items: ['Kurmancî', 'Tirkî', 'English']
-                  .map((l) =>
-                      DropdownMenuItem(value: l, child: Text(l)))
-                  .toList(),
-              onChanged: (v) {
-                if (v != null) setState(() => _language = v);
-              },
-            ),
-          ),
+          // Dil tercihi kaldırıldı (Apr 2026):
+          // Önceden kullanıcının seçtiği değer hiçbir şey değiştirmiyordu
+          // ve gerçek dil modu anahtarı (_LanguageModeCard — Kurmancî/Tirkî
+          // ↔ Kurmancî/Îngîlîzî) bu liste ile çelişiyordu. Bu yanıltıcıydı
+          // ve destek kaydı olmayan "English" seçeneği KU track'te
+          // bulunmamalıydı.
 
           const Divider(height: AppSpacing.sm),
 
@@ -1760,6 +2157,37 @@ class _SettingsSectionState extends State<_SettingsSection> {
             value: _darkMode,
             activeColor: AppColors.primary,
             onChanged: (v) => setState(() => _darkMode = v),
+          ),
+
+          const Divider(height: AppSpacing.sm),
+
+          // Yalnız yönetici için — Bug FAB toggle + alt-editor yönetimi
+          const _OwnerSettingsSection(),
+
+          // Aboneya Premium — durum + paywall'a yönlendirme
+          const _SubscriptionTile(),
+
+          const Divider(height: AppSpacing.sm),
+
+          // Testa asta xwe dîsa bike
+          ListTile(
+            dense: true,
+            contentPadding: EdgeInsets.zero,
+            leading: Icon(Icons.assessment_outlined,
+                size: 20, color: AppColors.primary),
+            title: Text(
+              'Testa asta xwe dîsa bike',
+              style: AppTypography.bodySmall
+                  .copyWith(color: AppColors.textPrimary),
+            ),
+            subtitle: Text(
+              'Asta xwe ji nû ve bipîve — CEFR A1\u2013C1',
+              style: AppTypography.caption
+                  .copyWith(color: AppColors.textSecondary),
+            ),
+            trailing: Icon(Icons.chevron_right,
+                size: 20, color: AppColors.textSecondary),
+            onTap: () => context.push(AppRoutes.placementTest),
           ),
 
           const Divider(height: AppSpacing.sm),
@@ -2080,7 +2508,69 @@ class _AccountActions extends StatelessWidget {
   });
 
   Future<void> _signOut() async {
+    // NAV FIX: Logout bir yıkıcı eylem — onaysız ise yanlışlıkla
+    // tıklayan kullanıcı streak/XP/ilerlemeyi kaybettiğini ancak
+    // sonradan fark eder. Basit onay dialog'u ekleyerek kazayı önlüyoruz.
+    final confirmed = await showDialog<bool>(
+      context: context,
+      builder: (ctx) => AlertDialog(
+        shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(AppSpacing.radiusLg)),
+        title: Text('Derkeve?',
+            style: AppTypography.headingSmall.copyWith(
+                color: AppColors.textPrimary, fontWeight: FontWeight.w700)),
+        content: Text(
+          'Piştî derketinê ji bo dîsa dest pê bike têkeve.',
+          style: AppTypography.bodyMedium
+              .copyWith(color: AppColors.textSecondary),
+        ),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.of(ctx).pop(false),
+            child: Text('Betal',
+                style: AppTypography.labelLarge
+                    .copyWith(color: AppColors.primary)),
+          ),
+          TextButton(
+            onPressed: () => Navigator.of(ctx).pop(true),
+            child: Text('Derkeve',
+                style: AppTypography.labelLarge
+                    .copyWith(color: AppColors.errorSoft)),
+          ),
+        ],
+      ),
+    );
+    if (confirmed != true) return;
+
+    // Firebase signOut + yerel auth logout birlikte — hangisi kullanımdaysa
+    // temizlenmeli. Aksi halde splash "hâlâ logged in" sanar.
     await ref.read(authServiceProvider).signOut();
+    try {
+      await ref.read(localAuthServiceProvider).logout();
+    } catch (_) {}
+    // Local owner + login holder flag'lerini sıfırla.
+    await refreshLocalOwnerState(ref);
+    // BUG FIX: signOut SharedPreferences'i temizler ama StateNotifier'ların
+    // in-memory state'i kalırdı — yeni kullanıcı eski XP/streak/track/rozet'i
+    // görürdü. Invalidate ile user-scoped notifier'ları zorla baştan init ettir.
+    ref.invalidate(activeTrackProvider);
+    ref.invalidate(userModeProvider);
+    ref.invalidate(streakProvider);
+    ref.invalidate(gamificationProvider);
+    ref.invalidate(progressionProvider);
+    ref.invalidate(reviewProvider);
+    ref.invalidate(karikEvolutionProvider);
+    // userProfileProvider in-memory state'i invalidate et — aksi halde yeni
+    // hesap eski placement level'ını görür.
+    ref.invalidate(userProfileProvider);
+    ref.invalidate(localCurrentUserProvider);
+    // Placement level'ı track-scoped clear et — çoklu hesap aynı cihazda
+    // kullanılırsa öncekinin B2'si yeni hesaba sızmasın.
+    try {
+      final prefs = await SharedPreferences.getInstance();
+      await prefs.remove('placement_level_ku');
+      await prefs.remove('placement_level_en');
+    } catch (_) {}
     if (context.mounted) context.go(AppRoutes.splash);
   }
 
@@ -2106,11 +2596,11 @@ class _AccountActions extends StatelessWidget {
 
         if (isAnonymous) const SizedBox(height: AppSpacing.sm),
 
-        // Mod Değiştir (Yetişkin ↔ Çocuk)
+        // Rêya biguherîne — 4 yol (KU/EN × Mezinan/Zarokan)
         OutlinedButton.icon(
-          onPressed: () => context.go(AppRoutes.modeSelect),
-          icon: const Icon(Icons.swap_horiz_rounded, size: 20),
-          label: const Text('Modê biguherîne'),
+          onPressed: () => context.go(AppRoutes.trackSelect),
+          icon: const Icon(Icons.alt_route_rounded, size: 20),
+          label: const Text('Rêya biguherîne'),
           style: OutlinedButton.styleFrom(
             minimumSize: const Size(double.infinity, 52),
             side: const BorderSide(color: AppColors.primary),
@@ -2138,6 +2628,490 @@ class _AccountActions extends StatelessWidget {
           ),
         ),
       ],
+    );
+  }
+}
+
+/// Kurmancî track için gösterim dili toggle kartı.
+/// Kurmancî + Tirkî (varsayılan) veya Tenê Kurmancî (ileri) arası geçiş.
+/// İngilizce track'te anlamsız — gizlenir.
+// ════════════════════════════════════════════════════════════════
+// SES AÇ/KAPA KARTI — "🔊 Deng" / "🔊 Sound"
+// SoundService mute durumu burada switch ile değiştirilir.
+// SharedPreferences key: `sound_muted` (SoundService içinde persist).
+// ════════════════════════════════════════════════════════════════
+
+class _SoundToggleCard extends ConsumerStatefulWidget {
+  const _SoundToggleCard();
+
+  @override
+  ConsumerState<_SoundToggleCard> createState() => _SoundToggleCardState();
+}
+
+class _SoundToggleCardState extends ConsumerState<_SoundToggleCard> {
+  late bool _muted;
+
+  @override
+  void initState() {
+    super.initState();
+    _muted = SoundService.isMuted;
+  }
+
+  Future<void> _onChanged(bool newValue) async {
+    // Switch.value = "ses açık mı?" — muted == !value
+    final newMuted = !newValue;
+    await SoundService.setMuted(newMuted);
+    if (!mounted) return;
+    setState(() => _muted = newMuted);
+    // Küçük onay sesi (mute kapatıldığında çalar).
+    if (!newMuted) SoundService.playTap();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final isEn = ref.watch(isEnglishModuleProvider);
+    final soundOn = !_muted;
+    final title = isEn ? 'Sound' : 'Deng';
+    final description = isEn
+        ? 'Play sound effects for taps, correct answers, and celebrations.'
+        : 'Lê tikandin, bersîva rast û pîrozbahî ji bo dengan lê bide.';
+
+    return Container(
+      padding: const EdgeInsets.all(AppSpacing.md),
+      decoration: BoxDecoration(
+        color: AppColors.surface,
+        borderRadius: BorderRadius.circular(16),
+        border: Border.all(
+          color: AppColors.primary.withValues(alpha: 0.12),
+        ),
+      ),
+      child: Row(
+        children: [
+          Text(
+            soundOn ? '\u{1F50A}' : '\u{1F507}',
+            style: const TextStyle(fontSize: 24),
+          ),
+          const SizedBox(width: 12),
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  title,
+                  style: AppTypography.labelLarge.copyWith(
+                    color: AppColors.textPrimary,
+                    fontWeight: FontWeight.w800,
+                  ),
+                ),
+                const SizedBox(height: 2),
+                Text(
+                  description,
+                  style: AppTypography.caption
+                      .copyWith(color: AppColors.textSecondary),
+                ),
+              ],
+            ),
+          ),
+          Switch.adaptive(
+            value: soundOn,
+            onChanged: _onChanged,
+            activeColor: AppColors.primary,
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class _LanguageModeCard extends ConsumerWidget {
+  const _LanguageModeCard();
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final isEn = ref.watch(isEnglishModuleProvider);
+    if (isEn) return const SizedBox.shrink();
+
+    final mode = ref.watch(languageModeProvider);
+    final notifier = ref.read(languageModeProvider.notifier);
+    final isKuTr = mode == LanguageMode.kuTr;
+
+    return Container(
+      padding: const EdgeInsets.all(AppSpacing.md),
+      decoration: BoxDecoration(
+        color: AppColors.surface,
+        borderRadius: BorderRadius.circular(16),
+        border: Border.all(
+          color: AppColors.primary.withValues(alpha: 0.12),
+        ),
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Row(
+            children: [
+              const Text('🗣️', style: TextStyle(fontSize: 22)),
+              const SizedBox(width: 8),
+              Expanded(
+                child: Text(
+                  'Moda Zimanê Nîşandanê',
+                  style: AppTypography.labelLarge.copyWith(
+                    color: AppColors.textPrimary,
+                    fontWeight: FontWeight.w800,
+                  ),
+                ),
+              ),
+            ],
+          ),
+          const SizedBox(height: 4),
+          Text(
+            'Tirkî wek wergerê nîşan bide, an jî tenê Kurmancî bimîne.',
+            style: AppTypography.caption
+                .copyWith(color: AppColors.textSecondary),
+          ),
+          const SizedBox(height: AppSpacing.md),
+          _LangModeOption(
+            label: 'Kurmancî / Tirkî  ·  KU/TR',
+            description: 'Di wergeran de Tirkî tê nîşandan (pêşgirtî).',
+            selected: isKuTr,
+            onTap: () => notifier.setMode(LanguageMode.kuTr),
+          ),
+          const SizedBox(height: 8),
+          _LangModeOption(
+            label: 'Kurmancî / Îngîlîzî  ·  KU/EN',
+            description: 'Di wergeran de Îngîlîzî tê nîşandan (heritage / EN).',
+            selected: !isKuTr,
+            onTap: () => notifier.setMode(LanguageMode.kuEn),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class _LangModeOption extends StatelessWidget {
+  final String label;
+  final String description;
+  final bool selected;
+  final VoidCallback onTap;
+
+  const _LangModeOption({
+    required this.label,
+    required this.description,
+    required this.selected,
+    required this.onTap,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Material(
+      color: Colors.transparent,
+      child: InkWell(
+        onTap: onTap,
+        borderRadius: BorderRadius.circular(12),
+        child: Container(
+          padding: const EdgeInsets.all(AppSpacing.sm),
+          decoration: BoxDecoration(
+            color: selected
+                ? AppColors.primary.withValues(alpha: 0.08)
+                : Colors.transparent,
+            borderRadius: BorderRadius.circular(12),
+            border: Border.all(
+              color: selected
+                  ? AppColors.primary
+                  : AppColors.border,
+              width: selected ? 1.5 : 1,
+            ),
+          ),
+          child: Row(
+            children: [
+              Icon(
+                selected
+                    ? Icons.radio_button_checked
+                    : Icons.radio_button_unchecked,
+                color: selected
+                    ? AppColors.primary
+                    : AppColors.textTertiary,
+                size: 20,
+              ),
+              const SizedBox(width: 10),
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      label,
+                      style: AppTypography.bodySmall.copyWith(
+                        color: AppColors.textPrimary,
+                        fontWeight: FontWeight.w700,
+                      ),
+                    ),
+                    const SizedBox(height: 2),
+                    Text(
+                      description,
+                      style: AppTypography.caption.copyWith(
+                        color: AppColors.textSecondary,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+// ════════════════════════════════════════════════════════════════
+// SERTİFİKA LISTILE — Belgeya serkeftinê
+// Kullanıcı tamamladığı CEFR seviyesinin belgesini indirir.
+// ════════════════════════════════════════════════════════════════
+
+class _CertificateTile extends StatelessWidget {
+  /// Kullanıcının açtığı en yüksek seviye (inclusive).
+  /// A1 açıksa = 1; A1 tamamlanıp A2'ye geçtiyse = 2 (hem A1 hem A2 belgesi).
+  final int unlockedUpTo;
+
+  const _CertificateTile({required this.unlockedUpTo});
+
+  @override
+  Widget build(BuildContext context) {
+    return Semantics(
+      button: true,
+      label: 'Belgeya serkeftinê daxîne',
+      child: Material(
+        color: Colors.transparent,
+        child: InkWell(
+          borderRadius: BorderRadius.circular(16),
+          onTap: () {
+            showModalBottomSheet(
+              context: context,
+              backgroundColor: AppColors.backgroundSecondary,
+              shape: const RoundedRectangleBorder(
+                borderRadius: BorderRadius.vertical(
+                  top: Radius.circular(24),
+                ),
+              ),
+              builder: (_) => CertificateLevelPicker(
+                unlockedUpTo: unlockedUpTo,
+              ),
+            );
+          },
+          child: Container(
+            padding: const EdgeInsets.all(AppSpacing.md),
+            decoration: BoxDecoration(
+              gradient: const LinearGradient(
+                colors: [
+                  Color(0xFF0C5247),
+                  Color(0xFF1A7B6B),
+                ],
+                begin: Alignment.topLeft,
+                end: Alignment.bottomRight,
+              ),
+              borderRadius: BorderRadius.circular(16),
+              boxShadow: [
+                BoxShadow(
+                  color: AppColors.primary.withOpacity(0.25),
+                  blurRadius: 12,
+                  offset: const Offset(0, 4),
+                ),
+              ],
+            ),
+            child: Row(
+              children: [
+                Container(
+                  width: 48,
+                  height: 48,
+                  decoration: BoxDecoration(
+                    color: Colors.white.withOpacity(0.2),
+                    borderRadius: BorderRadius.circular(14),
+                  ),
+                  child: const Icon(
+                    Icons.workspace_premium_rounded,
+                    color: Colors.white,
+                    size: 28,
+                  ),
+                ),
+                const SizedBox(width: 14),
+                Expanded(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        'Belgeya serkeftinê',
+                        style: AppTypography.title.copyWith(
+                          color: Colors.white,
+                          fontWeight: FontWeight.w800,
+                          fontSize: 16,
+                        ),
+                      ),
+                      const SizedBox(height: 2),
+                      Text(
+                        'PNG daxîne — bi tora civakî parve bike',
+                        style: AppTypography.caption.copyWith(
+                          color: Colors.white.withOpacity(0.9),
+                          fontSize: 11,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+                const Icon(
+                  Icons.download_rounded,
+                  color: Colors.white,
+                  size: 20,
+                ),
+              ],
+            ),
+          ),
+        ),
+      ),
+    )
+        .animate()
+        .fadeIn(delay: 200.ms, duration: 400.ms)
+        .slideY(begin: 0.05, end: 0);
+  }
+}
+
+// ════════════════════════════════════════════════════════════════
+// SUBSCRIPTION TILE — abonelik durumu + paywall'a yönlendirme
+// ════════════════════════════════════════════════════════════════
+
+// ════════════════════════════════════════════════════════════════
+// OWNER SETTINGS — Yalnız yönetici için
+// • Bug raporlama butonunu (uğur böceği) gizle/göster toggle
+// • Alt-editör (reviewer) yönetim alanına git
+// ════════════════════════════════════════════════════════════════
+
+class _OwnerSettingsSection extends ConsumerWidget {
+  const _OwnerSettingsSection();
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final isOwner = ref.watch(isOwnerProvider);
+    if (!isOwner) return const SizedBox.shrink();
+
+    return Column(
+      children: [
+        Padding(
+          padding: const EdgeInsets.only(top: 8, bottom: 4),
+          child: Row(
+            children: [
+              Icon(Icons.shield_outlined,
+                  size: 16, color: AppColors.primary),
+              const SizedBox(width: 6),
+              Text(
+                'Tenê ji bo Rêveberê',
+                style: AppTypography.label.copyWith(
+                  color: AppColors.primary,
+                  fontWeight: FontWeight.w800,
+                  fontSize: 11,
+                ),
+              ),
+            ],
+          ),
+        ),
+
+        // Alt-editör yönetimi
+        ListTile(
+          dense: true,
+          contentPadding: EdgeInsets.zero,
+          leading: Icon(Icons.group_add_outlined,
+              size: 20, color: AppColors.primary),
+          title: Text(
+            'Edîtorên min',
+            style: AppTypography.bodySmall
+                .copyWith(color: AppColors.textPrimary),
+          ),
+          subtitle: Text(
+            'Edîtorên alîkar lê zêde bike an birî bide',
+            style: AppTypography.caption
+                .copyWith(color: AppColors.textSecondary),
+          ),
+          trailing: Icon(Icons.chevron_right,
+              size: 20, color: AppColors.textSecondary),
+          onTap: () => context.push(AppRoutes.editorManagement),
+        ),
+
+        const Divider(height: AppSpacing.sm),
+      ],
+    );
+  }
+}
+
+class _SubscriptionTile extends ConsumerWidget {
+  const _SubscriptionTile();
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final sub = ref.watch(subscriptionProvider);
+    final tier = sub.tier;
+    final isPromoActive = SubscriptionConstants.isPromoPeriodActive;
+
+    final (icon, title, subtitle, color) = isPromoActive
+        ? (
+            Icons.celebration_outlined,
+            'Demê pêşkêşiyê — bedelî',
+            'Heya ${SubscriptionConstants.promoEndsLabelKu} '
+                '· ${SubscriptionConstants.promoDaysRemaining} roj mayî',
+            const Color(0xFFFFA726),
+          )
+        : switch (tier) {
+            SubscriptionTier.premium => (
+              Icons.workspace_premium_rounded,
+              'Premium aktîf',
+              sub.premiumDaysRemaining != null
+                  ? '${sub.premiumDaysRemaining} roj mayî · ${SubscriptionConstants.annualPriceTry} ₺/sal'
+                  : 'Bê sînor',
+              const Color(0xFF4CAF50),
+            ),
+            SubscriptionTier.trial => (
+              Icons.timer_outlined,
+              'Ceribandina te aktîv e',
+              sub.trialDaysRemaining != null
+                  ? '${sub.trialDaysRemaining} roj mayî · paşê ${SubscriptionConstants.annualPriceTry} ₺/sal'
+                  : '7 roj mayî',
+              AppColors.primary,
+            ),
+            SubscriptionTier.trialExpired => (
+              Icons.lock_outline_rounded,
+              'Ceribandin qediya',
+              'Aboneya salane: ${SubscriptionConstants.annualPriceTry} ₺/sal',
+              Colors.orange,
+            ),
+            SubscriptionTier.premiumExpired => (
+              Icons.refresh_rounded,
+              'Aboneya te qediya',
+              'Nûjenkirin: ${SubscriptionConstants.annualPriceTry} ₺/sal',
+              Colors.orange,
+            ),
+            SubscriptionTier.none => (
+              Icons.workspace_premium_outlined,
+              'Premium\'ê biceribîne',
+              '7 roj bê pere · paşê ${SubscriptionConstants.annualPriceTry} ₺/sal',
+              AppColors.primary,
+            ),
+          };
+
+    return ListTile(
+      dense: true,
+      contentPadding: EdgeInsets.zero,
+      leading: Icon(icon, size: 20, color: color),
+      title: Text(
+        title,
+        style: AppTypography.bodySmall.copyWith(
+          color: AppColors.textPrimary,
+          fontWeight: FontWeight.w700,
+        ),
+      ),
+      subtitle: Text(
+        subtitle,
+        style: AppTypography.caption.copyWith(color: AppColors.textSecondary),
+      ),
+      trailing: Icon(Icons.chevron_right,
+          size: 20, color: AppColors.textSecondary),
+      onTap: () => context.push(AppRoutes.paywall),
     );
   }
 }
