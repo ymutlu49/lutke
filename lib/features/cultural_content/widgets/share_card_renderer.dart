@@ -279,14 +279,18 @@ class _ProverbLayout extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // Font ladder — en uzun durum gözetilerek seçildi.
-    // İçerik alanı 940 px wide × ~570 px tall. Kapasite tahmini:
-    //   ≤30 char  → 92pt (1 satır, hero etki)
-    //   ≤60 char  → 76pt (1-2 satır)
-    //   ≤100 char → 60pt (2-3 satır)
-    //   ≤160 char → 50pt (3-4 satır)
-    //   ≤220 char → 42pt (4-5 satır)
-    //   >220      → 36pt (5-7 satır)
+    // Pure proverb: pull-quote (full text, hero font).
+    // Long-form (event/food/celebration/architecture/story/folkDance):
+    //   title-prominent + first-paragraph snippet (~200 char teaser).
+    final isPureProverb = item.type == CulturalContentType.proverb;
+    if (isPureProverb) {
+      return _buildPullQuoteVariant();
+    }
+    return _buildArticleVariant();
+  }
+
+  // ── Pure proverb pull-quote ──────────────────────────────────
+  Widget _buildPullQuoteVariant() {
     final length = item.kurmanjContent.length;
     final heroSize = length <= 30
         ? 92.0
@@ -310,7 +314,6 @@ class _ProverbLayout extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.center,
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
-        // Dekoratif tırnak — küçültüldü, az dikey alan harcar.
         Text(
           '“',
           style: TextStyle(
@@ -322,8 +325,6 @@ class _ProverbLayout extends StatelessWidget {
           ),
         ),
         const SizedBox(height: 14),
-
-        // Kurmancî metin — hero
         Text(
           item.kurmanjContent,
           textAlign: TextAlign.center,
@@ -343,9 +344,6 @@ class _ProverbLayout extends StatelessWidget {
             ],
           ),
         ),
-
-        // Atalama — yalnız başlık atasözünden gerçekten farklıysa.
-        // Robust dedup: trailing punctuation + whitespace + casefold.
         if (hasDistinctTitle) ...[
           const SizedBox(height: 28),
           Text(
@@ -361,9 +359,6 @@ class _ProverbLayout extends StatelessWidget {
             ),
           ),
         ],
-
-        // TR çeviri — kutu yerine ince ayraç + italik satır.
-        // Daha az dikey alan harcar, görsel hiyerarşi netleşir.
         if (hasTr) ...[
           const SizedBox(height: 32),
           Container(
@@ -389,7 +384,110 @@ class _ProverbLayout extends StatelessWidget {
       ],
     );
   }
+
+  // ── Article (long-form) — title-prominent + snippet teaser ───
+  Widget _buildArticleVariant() {
+    final firstPara = _firstParagraph(item.kurmanjContent);
+    final snippet = _truncateAtSentence(firstPara, 220);
+    final wasTruncated = snippet.length < firstPara.length ||
+        firstPara.length < item.kurmanjContent.trim().length;
+
+    final titleSize = item.kurmanjTitle.length <= 24
+        ? 60.0
+        : item.kurmanjTitle.length <= 36
+            ? 50.0
+            : 42.0;
+
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+      crossAxisAlignment: CrossAxisAlignment.center,
+      children: [
+        Text(
+          item.kurmanjTitle,
+          textAlign: TextAlign.center,
+          style: TextStyle(
+            fontFamily: 'Georgia',
+            fontSize: titleSize,
+            fontWeight: FontWeight.w800,
+            color: Colors.white,
+            height: 1.18,
+            letterSpacing: 0.6,
+            shadows: [
+              Shadow(
+                color: Colors.black.withOpacity(0.28),
+                blurRadius: 10,
+                offset: const Offset(0, 3),
+              ),
+            ],
+          ),
+        ),
+        const SizedBox(height: 18),
+        Container(
+          width: 80,
+          height: 1.6,
+          color: const Color(0xFFE8B923).withOpacity(0.65),
+        ),
+        const SizedBox(height: 22),
+        Text(
+          wasTruncated ? '$snippet…' : snippet,
+          textAlign: TextAlign.center,
+          style: TextStyle(
+            fontFamily: 'NotoSans',
+            fontSize: 28,
+            fontWeight: FontWeight.w500,
+            color: Colors.white.withOpacity(0.94),
+            height: 1.5,
+            letterSpacing: 0.2,
+          ),
+        ),
+        if (wasTruncated) ...[
+          const SizedBox(height: 24),
+          Text(
+            'Berdewama li lutke.app',
+            textAlign: TextAlign.center,
+            style: TextStyle(
+              fontFamily: 'NotoSans',
+              fontSize: 22,
+              fontWeight: FontWeight.w500,
+              fontStyle: FontStyle.italic,
+              color: const Color(0xFFE8B923).withOpacity(0.85),
+              letterSpacing: 0.4,
+            ),
+          ),
+        ],
+      ],
+    );
+  }
 }
+
+/// İlk anlamlı paragrafı döndürür (boş satır ile ayrılmış).
+String _firstParagraph(String text) {
+  final t = text.trim();
+  final dbl = t.split(RegExp(r'\n\s*\n'));
+  if (dbl.length > 1 && dbl[0].trim().isNotEmpty) {
+    return dbl[0].trim();
+  }
+  final lines =
+      t.split('\n').map((l) => l.trim()).where((l) => l.isNotEmpty).toList();
+  return lines.isEmpty ? t : lines.first;
+}
+
+/// Cümle sınırında veya kelime sınırında keser.
+String _truncateAtSentence(String text, int maxLen) {
+  if (text.length <= maxLen) return text;
+  final cutoff = text.substring(0, maxLen);
+  final m = RegExp(r'^.*[.!?]').firstMatch(cutoff);
+  if (m != null) {
+    final s = m.group(0)!;
+    if (s.length >= maxLen ~/ 2) return s.trim();
+  }
+  final lastSpace = cutoff.lastIndexOf(' ');
+  if (lastSpace > maxLen ~/ 2) {
+    return cutoff.substring(0, lastSpace).trim();
+  }
+  return cutoff.trim();
+}
+
 
 /// Robust normalized comparison — strips trailing/leading punctuation +
 /// whitespace and casefolds. Atasözlerinde kurmanjTitle == kurmanjContent
