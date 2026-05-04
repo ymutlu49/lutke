@@ -7,8 +7,10 @@ import 'package:share_plus/share_plus.dart';
 import '../../../core/constants/app_colors.dart';
 import '../../../core/constants/app_typography.dart';
 import '../../../core/constants/app_spacing.dart';
+import '../../../shared/widgets/lutke_goat_icon.dart';
 import '../../../shared/widgets/speak_button.dart';
 import '../../../shared/providers/language_mode_provider.dart';
+import '../../admin/data/content_override_service.dart';
 
 // ════════════════════════════════════════════════════════════════
 // KELİME DETAY EKRANI — Tam ekran kelime görünümü
@@ -77,17 +79,22 @@ class WordDetailScreen extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final showTurkish = ref.watch(showTurkishProvider);
-    final ku = word.ku as String;
-    final tr = word.tr as String;
-    final en = word.en as String;
-    final cins = word.cins as String;
-    final ez = word.ez as String?;
-    final kat = word.kat as String;
-    final zor = word.zor as double;
-    final not_ = word.not as String?;
-    final her = word.her as List<String>;
-    final gen = word.gen as List<String>;
-    final id = word.id as String;
+    // Owner runtime override (yalnızca Kurmancî DB için)
+    final overrides = ref.watch(contentOverridesProvider);
+    final rawId = word.id as String;
+    final displayWord = applyOverride(word, overrides[rawId]);
+    final ku = displayWord.ku as String;
+    final tr = displayWord.tr as String;
+    final en = displayWord.en as String;
+    final cins = displayWord.cins as String;
+    final ez = displayWord.ez as String?;
+    final kat = displayWord.kat as String;
+    // Override `zor` double-num uyumunu garantile (raw num? dönebilir).
+    final zor = ((displayWord.zor as num?) ?? 0.75).toDouble();
+    final not_ = displayWord.not as String?;
+    final her = displayWord.her as List<String>;
+    final gen = displayWord.gen as List<String>;
+    final id = rawId;
 
     final genderClr = _genderColor(cins);
 
@@ -110,7 +117,7 @@ class WordDetailScreen extends ConsumerWidget {
                 ),
                 child: const Icon(Icons.arrow_back_rounded, size: 20),
               ),
-              onPressed: () => context.pop(),
+              onPressed: () => context.canPop() ? context.pop() : context.go('/vocabulary'),
             ),
             flexibleSpace: FlexibleSpaceBar(
               background: _HeroSection(
@@ -136,6 +143,7 @@ class WordDetailScreen extends ConsumerWidget {
                 // 0) Seslendirme Butonu
                 LargeSpeakButton(
                   text: ku,
+                  // Altyazı dil moduna göre: kuTr → tr, kuEn → en.
                   subtitle: showTurkish ? tr : en,
                 ).animate().fadeIn(duration: 400.ms).slideY(begin: 0.1, end: 0),
 
@@ -175,14 +183,16 @@ class WordDetailScreen extends ConsumerWidget {
                 if (her.isNotEmpty || gen.isNotEmpty)
                   const SizedBox(height: AppSpacing.md),
 
-                // 4) Gramer Notu
-                if (not_ != null && not_!.isNotEmpty)
+                // 4) Gramer Notu — yalnızca Türkçe mod açıkken gösterilir,
+                //    çünkü not: alanı Türkçe açıklama içerir. Kurmancî modda
+                //    Türkçe metin sızıntısı olmaması için gizlenir.
+                if (showTurkish && not_ != null && not_!.isNotEmpty)
                   _GrammarNoteCard(note: not_!)
                       .animate()
                       .fadeIn(duration: 400.ms, delay: 400.ms)
                       .slideY(begin: 0.1, end: 0),
 
-                if (not_ != null && not_!.isNotEmpty)
+                if (showTurkish && not_ != null && not_!.isNotEmpty)
                   const SizedBox(height: AppSpacing.md),
 
                 // 5) Ilgili Kelimeler (placeholder — same kat)
@@ -264,7 +274,25 @@ class _HeroSection extends StatelessWidget {
                 ),
                 const SizedBox(height: AppSpacing.sm),
 
-                // Kurmanci kelime — Hero animasyonu
+                // Kurmancî dil rozeti — Karîk (logo) + "Kurmancî" etiketi.
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    const LutkeGoatIcon(size: 18),
+                    const SizedBox(width: 8),
+                    Text(
+                      'Kurmancî',
+                      style: AppTypography.labelSmall.copyWith(
+                        color: AppColors.textTertiary,
+                        fontWeight: FontWeight.w700,
+                        letterSpacing: 0.3,
+                      ),
+                    ),
+                  ],
+                ),
+                const SizedBox(height: 6),
+
+                // Kurmancî kelime — Hero animasyonu.
                 Hero(
                   tag: 'word_$wordId',
                   child: Material(
@@ -272,7 +300,6 @@ class _HeroSection extends StatelessWidget {
                     child: Text(
                       ku,
                       style: const TextStyle(
-                        fontFamily: 'NotoSans',
                         fontSize: 32,
                         fontWeight: FontWeight.w700,
                         height: 1.2,
@@ -284,24 +311,31 @@ class _HeroSection extends StatelessWidget {
                 ),
                 const SizedBox(height: AppSpacing.sm),
 
-                // Turkce ceviri
-                if (showTurkish)
-                  Text(
-                    tr,
-                    style: AppTypography.bodyLarge.copyWith(
-                      color: AppColors.textPrimary,
-                      fontWeight: FontWeight.w500,
+                // Çeviri satırı — dil moduna göre Tirkî veya Îngîlîzî.
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text(
+                      showTurkish ? '🇹🇷' : '🇬🇧',
+                      style: const TextStyle(fontSize: 14),
                     ),
-                    textAlign: TextAlign.center,
-                  ),
-                if (showTurkish) const SizedBox(height: 4),
-
-                // Ingilizce ceviri
+                    const SizedBox(width: 8),
+                    Text(
+                      showTurkish ? 'Tirkî' : 'Îngîlîzî',
+                      style: AppTypography.labelSmall.copyWith(
+                        color: AppColors.textTertiary,
+                        fontWeight: FontWeight.w700,
+                        letterSpacing: 0.3,
+                      ),
+                    ),
+                  ],
+                ),
+                const SizedBox(height: 4),
                 Text(
-                  en,
-                  style: AppTypography.body.copyWith(
-                    color: showTurkish ? AppColors.textSecondary : AppColors.textPrimary,
-                    fontWeight: showTurkish ? FontWeight.w400 : FontWeight.w500,
+                  showTurkish ? tr : en,
+                  style: AppTypography.bodyLarge.copyWith(
+                    color: AppColors.textPrimary,
+                    fontWeight: FontWeight.w500,
                   ),
                   textAlign: TextAlign.center,
                 ),

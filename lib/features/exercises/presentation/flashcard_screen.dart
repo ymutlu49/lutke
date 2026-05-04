@@ -10,7 +10,9 @@ import '../../../core/constants/app_colors.dart';
 import '../../../core/constants/app_spacing.dart';
 import '../../../core/constants/app_typography.dart';
 import '../../../shared/providers/language_mode_provider.dart';
+import '../../../shared/providers/learning_module_provider.dart';
 import '../../../shared/providers/review_provider.dart';
+import '../../../shared/widgets/lutke_goat_icon.dart';
 import '../../../shared/widgets/speak_button.dart';
 import '../../lessons/domain/a1_kelime_db.dart';
 import '../../lessons/domain/a2_kelime_db.dart';
@@ -19,9 +21,17 @@ import '../../lessons/domain/b2_kelime_db.dart';
 import '../../lessons/domain/c1_kelime_db.dart';
 import '../../lessons/domain/c2_kelime_db.dart';
 import '../../lessons/domain/child_a1_kelime_db.dart';
+import '../../en_learning/domain/en_to_quiz_adapter.dart';
 import '../../../core/constants/child_theme.dart';
 import '../../../core/services/sound_service.dart';
 import '../../../shared/utils/word_emoji_map.dart';
+import '../../gamification/gamification_provider.dart';
+import '../../../shared/widgets/persistent_xp_badge.dart';
+import '../../../shared/widgets/xp_float_animation.dart';
+import '../../../shared/widgets/streak_milestone_toast.dart';
+import '../../child_mode/domain/child_daily_challenge.dart';
+import '../../child_mode/domain/bizer_evolution.dart';
+import '../../admin/data/content_override_service.dart';
 
 // ════════════════════════════════════════════════════════════════
 // FLASHCARD EKRANI — Tinder-Style Swipeable Kartlar
@@ -72,18 +82,48 @@ class _FlashcardScreenState extends ConsumerState<FlashcardScreen>
   // ── Kart sayısı (oturum başına) ────────────────────────────
   static const int _sessionCardCount = 20;
 
-  @override
   void _safePop() {
     if (context.canPop()) { context.pop(); } else { context.go(AppRoutes.home); }
   }
+
+  @override
   void initState() {
     super.initState();
 
-    // Seviyeye göre kelime yükle
+    // Seviyeye göre kelime yükle — modül-aware.
+    // İngilizce modda EN DB + adapter (target=EN, mother=KU).
+    // BUG FIX (Nisan 2026): Önceden child mode her zaman Kurmancî
+    // child A1 yüklüyordu — EN child kullanıcısı İngilizce dersine
+    // girdiğinde Kurmancî kart görüyordu. Şimdi child + EN → EN child DB.
     final cardCount = widget.isChildMode ? 10 : _sessionCardCount;
-    var allWords = widget.isChildMode
-        ? (kChildA1Kelimeler as List).toList()
-        : _wordsForLevel(widget.level);
+    final isEn = ref.read(learningModuleProvider) == LearningModule.english;
+    // Owner runtime overrides/CRUD — yalnızca Kurmancî DB için (EN kapsam dışı).
+    final overrides = ref.read(contentOverridesProvider);
+    final deletedIds = ref.read(deletedWordIdsProvider);
+    final customWords = ref.read(customWordsProvider);
+
+    List<dynamic> allWords;
+    if (isEn) {
+      allWords = widget.isChildMode
+          ? getEnWordsForLevel(widget.level, childOnly: true)
+          : getEnWordsForLevel(widget.level);
+    } else if (widget.isChildMode) {
+      allWords = applyVocabulary(
+        List<dynamic>.from(kChildA1Kelimeler),
+        level: 'CHILD_A1',
+        overrides: overrides,
+        deletedIds: deletedIds,
+        customWords: customWords,
+      );
+    } else {
+      allWords = applyVocabulary(
+        List<dynamic>.from(_wordsForLevel(widget.level)),
+        level: widget.level.toUpperCase(),
+        overrides: overrides,
+        deletedIds: deletedIds,
+        customWords: customWords,
+      );
+    }
     if (widget.category != null && widget.category!.isNotEmpty) {
       final filtered = allWords.where((w) => w.kat == widget.category).toList();
       if (filtered.length >= 4) allWords = filtered;
@@ -226,9 +266,21 @@ class _FlashcardScreenState extends ConsumerState<FlashcardScreen>
     if (_swipeResult == _SwipeDirection.right) {
       _knewCount++;
       SoundService.playCorrect();
+      SoundService.playXpGain();
+      showXpFloat(context, 5);
+      // Combo milestone
+      final milestone = ref
+          .read(gamificationProvider.notifier)
+          .registerCorrectForCombo();
+      if (milestone > 0) {
+        final isEn = ref.read(isEnglishModuleProvider);
+        final newCombo = ref.read(gamificationProvider).comboCount;
+        showStreakMilestone(context, newCombo, isEnglish: isEn);
+      }
     } else {
       _didntKnowCount++;
       SoundService.playWrong();
+      ref.read(gamificationProvider.notifier).resetCombo();
       // Smart Review: zayıf kelime olarak kaydet
       ref.read(reviewProvider.notifier).addWeakWord(_cards[_currentIndex].id);
     }
@@ -245,14 +297,41 @@ class _FlashcardScreenState extends ConsumerState<FlashcardScreen>
       if (_currentIndex >= _cards.length) {
         _sessionComplete = true;
         HapticFeedback.heavyImpact();
+        _awardGamificationOnce();
       }
     });
+  }
+
+  bool _gamificationReported = false;
+
+  void _awardGamificationOnce() {
+    if (_gamificationReported) return;
+    _gamificationReported = true;
+    SoundService.playSessionComplete();
+    final gami = ref.read(gamificationProvider.notifier);
+    gami.resetCombo();
+    // Flashcard XP: her bilinen kart için XP
+    gami.addXP(_knewCount * 8);
+    gami.updateWordsLearned(_knewCount);
+    // Daily challenge: learnWords (yeni kelime öğrenme)
+    // BUG FIX: Wrapper ile invalidate — kart stale kalmasin.
+    if (_knewCount > 0) {
+      recordChallengeProgressAndNotify(
+          ref, ChallengeKind.learnWords, amount: _knewCount);
+      // Karîk evolution — çocuk modunda bilinen her kart 1 yıldız
+      if (widget.isChildMode) {
+        ref.read(karikEvolutionProvider.notifier).addStars(_knewCount);
+      }
+    }
+    recordChallengeProgressAndNotify(ref, ChallengeKind.playGames);
   }
 
   // ── Buton ile swipe ────────────────────────────────────────
 
   void _swipeViaButton(_SwipeDirection direction) {
     if (_sessionComplete || _currentIndex >= _cards.length) return;
+    // Animasyon sürerken ikinci tıklamaları yok say — double-tap sayaç bozulmasını önler.
+    if (_swipeController.isAnimating || _swipeResult != null) return;
 
     _swipeResult = direction;
     final screenWidth = MediaQuery.of(context).size.width;
@@ -281,6 +360,7 @@ class _FlashcardScreenState extends ConsumerState<FlashcardScreen>
   void _flipCard() {
     HapticFeedback.lightImpact();
     SoundService.playFlip();
+    SoundService.playReveal();
     if (_showFront) {
       _flipController.forward();
     } else {
@@ -388,7 +468,7 @@ class _FlashcardScreenState extends ConsumerState<FlashcardScreen>
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  'Peld',
+                  ref.watch(isEnglishModuleProvider) ? 'Flashcards' : 'Peld',
                   style: AppTypography.title.copyWith(
                     color: AppColors.textPrimary,
                   ),
@@ -417,6 +497,8 @@ class _FlashcardScreenState extends ConsumerState<FlashcardScreen>
                 count: _didntKnowCount,
                 color: AppColors.errorSoft,
               ),
+              const SizedBox(width: 6),
+              const PersistentXpBadge(),
             ],
           ),
         ],
@@ -622,7 +704,11 @@ class _FlashcardScreenState extends ConsumerState<FlashcardScreen>
 
   Widget _buildCardFront(_FlashcardItem card) {
     final isChild = widget.isChildMode;
-    final emojiStr = emojiForWord(card.kurmanji, card.kategori);
+    // Yalnız kelime-spesifik emoji göster — kategori fallback kapalı.
+    // Aksi takdirde "Çante" (çanta) için "mal" kategorisinden 🏠 gibi
+    // yanıltıcı emoji çıkar.
+    final emojiStr = emojiForWord(card.kurmanji, card.kategori,
+        useCategoryFallback: false);
 
     return Container(
       padding: EdgeInsets.all(isChild ? 24 : AppSpacing.lg),
@@ -725,6 +811,7 @@ class _FlashcardScreenState extends ConsumerState<FlashcardScreen>
                         text: card.kurmanji,
                         size: isChild ? 44 : 36,
                         color: isChild ? ChildColors.primary : AppColors.primary,
+                        lang: ref.watch(learningModuleProvider) == LearningModule.english ? 'en' : 'ku',
                       ),
                     ],
                   ),
@@ -769,7 +856,9 @@ class _FlashcardScreenState extends ConsumerState<FlashcardScreen>
                 Text(
                   isChild
                       ? 'Bersivê bibîne'
-                      : 'Peldê bide ser ku wateya wê bibîne',
+                      : (ref.watch(learningModuleProvider) == LearningModule.english
+                          ? 'Tap the card to see the meaning'
+                          : 'Peldê bide ser ku wateya wê bibîne'),
                   style: isChild
                       ? ChildTypography.caption.copyWith(
                           color: ChildColors.primary,
@@ -812,7 +901,26 @@ class _FlashcardScreenState extends ConsumerState<FlashcardScreen>
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            // Kurmancî kelime (küçük)
+            // Dil göstergesi — track-aware (Kurmancî / English).
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                ref.watch(isEnglishModuleProvider)
+                    ? const Text('🇬🇧', style: TextStyle(fontSize: 14))
+                    : const LutkeGoatIcon(size: 18),
+                const SizedBox(width: 8),
+                Text(
+                  ref.watch(isEnglishModuleProvider) ? 'English' : 'Kurmancî',
+                  style: AppTypography.labelSmall.copyWith(
+                    color: AppColors.textTertiary,
+                    fontWeight: FontWeight.w700,
+                    letterSpacing: 0.3,
+                  ),
+                ),
+              ],
+            ),
+            const SizedBox(height: 6),
+            // Kurmancî kelime (büyük odak)
             Center(
               child: Text(
                 card.kurmanji,
@@ -826,13 +934,36 @@ class _FlashcardScreenState extends ConsumerState<FlashcardScreen>
             const Divider(height: 1),
             const SizedBox(height: AppSpacing.md),
 
-            // Çeviri — Tirkî an Inglîzî li gor moda zimanê
-            _TranslationRow(
-              flag: ref.watch(showTurkishProvider) ? '🇹🇷' : '🇬🇧',
-              label: ref.watch(showTurkishProvider) ? 'Tirkî' : 'English',
-              text: ref.watch(showTurkishProvider) ? card.turkce : card.ingilizce,
-            ),
-            const SizedBox(height: AppSpacing.md),
+            // Çeviri — track-aware:
+            //   • Kurmancî track: Türkçe (🇹🇷 Tirkî) ↔ İngilizce (🇬🇧 Îngîlîzî)
+            //     toggle (showTurkishProvider).
+            //   • English track: SADECE Kurmancî açıklama gösterilir
+            //     (Kürdistan bayrağı). Türkçe TUTULMAZ — kullanıcı Kurmancî
+            //     anadilinden İngilizce öğreniyor; Türkçe köprü gerekmez.
+            //     Adapter (en_to_quiz_adapter.dart) Kurmancî açıklamayı
+            //     `card.turkce` alanına haritalar (legacy isim).
+            if (ref.watch(isEnglishModuleProvider)) ...[
+              _TranslationRow(
+                flagWidget: const LutkeGoatIcon(size: 16),
+                label: 'Kurmancî',
+                text: card.turkce, // adapter: ku açıklama
+              ),
+              const SizedBox(height: AppSpacing.md),
+            ] else if (ref.watch(showTurkishProvider)) ...[
+              _TranslationRow(
+                flag: '🇹🇷',
+                label: 'Tirkî',
+                text: card.turkce,
+              ),
+              const SizedBox(height: AppSpacing.md),
+            ] else ...[
+              _TranslationRow(
+                flag: '🇬🇧',
+                label: 'Îngîlîzî',
+                text: card.ingilizce,
+              ),
+              const SizedBox(height: AppSpacing.md),
+            ],
 
             // Cinsiyet notu
             if (card.cinsiyetNotu != null) ...[
@@ -1009,7 +1140,7 @@ class _FlashcardScreenState extends ConsumerState<FlashcardScreen>
           const SizedBox(height: AppSpacing.lg),
 
           Text(
-            'Derse temam!',
+            ref.watch(isEnglishModuleProvider) ? 'Session complete!' : 'Derse temam!',
             style: AppTypography.displayKurmanji.copyWith(
               color: AppColors.primary,
             ),
@@ -1018,9 +1149,11 @@ class _FlashcardScreenState extends ConsumerState<FlashcardScreen>
           const SizedBox(height: AppSpacing.xs),
 
           Text(
-            ref.watch(showTurkishProvider)
-                ? 'Peld danişîna temam bû'
-                : 'Danişîna peldan temam bû',
+            ref.watch(isEnglishModuleProvider)
+                ? 'Flashcard session finished'
+                : (ref.watch(showTurkishProvider)
+                    ? 'Peld danişîna temam bû'
+                    : 'Danişîna peldan temam bû'),
             style: AppTypography.body.copyWith(
               color: AppColors.textSecondary,
             ),
@@ -1074,7 +1207,7 @@ class _FlashcardScreenState extends ConsumerState<FlashcardScreen>
                             ),
                           ),
                           Text(
-                            'Rast',
+                            ref.watch(isEnglishModuleProvider) ? 'Correct' : 'Rast',
                             style: AppTypography.caption,
                           ),
                         ],
@@ -1095,7 +1228,7 @@ class _FlashcardScreenState extends ConsumerState<FlashcardScreen>
                       icon: Icons.check_circle_rounded,
                       color: AppColors.success,
                       value: '$_knewCount',
-                      label: 'Dizanim',
+                      label: ref.watch(isEnglishModuleProvider) ? 'Knew' : 'Dizanim',
                     ),
                     Container(
                       width: 1,
@@ -1106,7 +1239,7 @@ class _FlashcardScreenState extends ConsumerState<FlashcardScreen>
                       icon: Icons.cancel_rounded,
                       color: AppColors.errorSoft,
                       value: '$_didntKnowCount',
-                      label: 'Nizanim',
+                      label: ref.watch(isEnglishModuleProvider) ? "Didn't" : 'Nizanim',
                     ),
                     Container(
                       width: 1,
@@ -1142,9 +1275,17 @@ class _FlashcardScreenState extends ConsumerState<FlashcardScreen>
                   _showFront = true;
                   _flipController.value = 0;
 
-                  // Yeni rastgele seçim
-                  final allWords = _wordsForLevel(widget.level)
-                      .toList();
+                  // Yeni rastgele seçim — applyVocabulary CRUD-aware
+                  final overrides = ref.read(contentOverridesProvider);
+                  final deletedIds = ref.read(deletedWordIdsProvider);
+                  final customWords = ref.read(customWordsProvider);
+                  final allWords = applyVocabulary(
+                    List<dynamic>.from(_wordsForLevel(widget.level)),
+                    level: widget.level.toUpperCase(),
+                    overrides: overrides,
+                    deletedIds: deletedIds,
+                    customWords: customWords,
+                  );
                   allWords.shuffle(Random());
                   _cards = allWords
                       .take(_sessionCardCount)
@@ -1153,7 +1294,7 @@ class _FlashcardScreenState extends ConsumerState<FlashcardScreen>
                 });
               },
               icon: const Icon(Icons.replay_rounded),
-              label: const Text('Dîsa bilîze'),
+              label: Text(ref.watch(isEnglishModuleProvider) ? 'Play again' : 'Dîsa bilîze'),
               style: ElevatedButton.styleFrom(
                 backgroundColor: AppColors.primary,
                 foregroundColor: Colors.white,
@@ -1175,7 +1316,7 @@ class _FlashcardScreenState extends ConsumerState<FlashcardScreen>
             child: TextButton(
               onPressed: () => _safePop(),
               child: Text(
-                'Vegerê malê',
+                'Vegere malê',
                 style: AppTypography.label.copyWith(
                   color: AppColors.textSecondary,
                 ),
@@ -1234,33 +1375,9 @@ class _ScorePill extends StatelessWidget {
   }
 }
 
-/// Kategori -> emoji eslesmesi (flashcard icin, fallback olarak kullanilir)
-/// Kelime bazli emoji icin emojiForWord() kullanilir (word_emoji_map.dart)
-String _emojiForCategory(String kat) => switch (kat) {
-  'silav' || 'selamlama' => '\u{1F44B}',
-  'malbat'               => '\u{1F468}\u{200D}\u{1F469}\u{200D}\u{1F467}\u{200D}\u{1F466}',
-  'xwarin'               => '\u{1F37D}\u{FE0F}',
-  'vexwarin'             => '\u{1F964}',
-  'mêwe' || 'mewe'       => '\u{1F34E}',
-  'ajal'                 => '\u{1F43E}',
-  'reng'                 => '\u{1F3A8}',
-  'jimar'                => '\u{1F522}',
-  'mal'                  => '\u{1F3E0}',
-  'cil'                  => '\u{1F455}',
-  'beden'                => '\u{1FAC1}',
-  'tendurist'            => '\u{1F48A}',
-  'pîşe' || 'pise'       => '\u{1F477}',
-  'dem'                  => '\u{23F0}',
-  'roj'                  => '\u{1F4C5}',
-  'demsal'               => '\u{1F326}\u{FE0F}',
-  'cih'                  => '\u{1F4CD}',
-  'gihanî'               => '\u{1F697}',
-  'leker'                => '\u{1F3C3}',
-  'xweza'                => '\u{1F33F}',
-  'perwerde'             => '\u{1F4DA}',
-  'alfabe'               => '\u{1F524}',
-  _                      => '',
-};
+// Kategori → emoji haritası artık shared/utils/word_emoji_map.dart'ta tek
+// canonical kopya olarak `categoryEmoji()` olarak export ediliyor. Eski üç
+// yerdeki kopya (flashcard, vocabulary_browse, word_match) birleştirildi.
 
 class _CategoryBadge extends StatelessWidget {
   final String category;
@@ -1285,7 +1402,7 @@ class _CategoryBadge extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final emoji = _emojiForCategory(category);
+    final emoji = categoryEmoji(category);
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
       decoration: BoxDecoration(
@@ -1304,14 +1421,14 @@ class _CategoryBadge extends StatelessWidget {
   }
 }
 
-class _LevelBadge extends StatelessWidget {
+class _LevelBadge extends ConsumerWidget {
   final double difficulty;
   const _LevelBadge({required this.difficulty});
 
-  String get _levelText {
-    if (difficulty >= 0.85) return 'Hêsan'; // Kolay
-    if (difficulty >= 0.70) return 'Navîn'; // Orta
-    return 'Dijwar'; // Zor
+  String _levelText(bool isEn) {
+    if (difficulty >= 0.85) return isEn ? 'Easy' : 'Hêsan';
+    if (difficulty >= 0.70) return isEn ? 'Medium' : 'Navîn';
+    return isEn ? 'Hard' : 'Dijwar';
   }
 
   Color get _levelColor {
@@ -1321,7 +1438,8 @@ class _LevelBadge extends StatelessWidget {
   }
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final isEn = ref.watch(learningModuleProvider) == LearningModule.english;
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
       decoration: BoxDecoration(
@@ -1330,7 +1448,7 @@ class _LevelBadge extends StatelessWidget {
         border: Border.all(color: _levelColor.withOpacity(0.2)),
       ),
       child: Text(
-        _levelText,
+        _levelText(isEn),
         style: AppTypography.labelSmall.copyWith(
           color: _levelColor,
           fontWeight: FontWeight.w600,
@@ -1395,59 +1513,76 @@ class _ActionButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: onTap,
-      child: Column(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          Container(
-            width: size,
-            height: size,
-            decoration: BoxDecoration(
-              color: color.withOpacity(0.1),
-              shape: BoxShape.circle,
-              border: Border.all(color: color.withOpacity(0.3), width: 2),
-              boxShadow: [
-                BoxShadow(
+    // SEMANTICS: Ekran okuyucu için tek semantik node (button+label).
+    // COLOR-BLIND: icon zaten var (check/close/flip) — renk tek başına
+    // ayırıcı değil.
+    return Semantics(
+      button: true,
+      label: label,
+      child: ExcludeSemantics(
+        child: GestureDetector(
+          onTap: onTap,
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Container(
+                width: size,
+                height: size,
+                decoration: BoxDecoration(
                   color: color.withOpacity(0.1),
-                  blurRadius: 12,
-                  offset: const Offset(0, 4),
+                  shape: BoxShape.circle,
+                  border: Border.all(color: color, width: 2),
+                  boxShadow: [
+                    BoxShadow(
+                      color: color.withOpacity(0.1),
+                      blurRadius: 12,
+                      offset: const Offset(0, 4),
+                    ),
+                  ],
                 ),
-              ],
-            ),
-            child: Icon(icon, color: color, size: size * 0.45),
+                child: Icon(icon, color: color, size: size * 0.45),
+              ),
+              const SizedBox(height: 6),
+              Text(
+                label,
+                style: AppTypography.caption.copyWith(
+                  color: color,
+                  fontWeight: FontWeight.w600,
+                ),
+              ),
+            ],
           ),
-          const SizedBox(height: 6),
-          Text(
-            label,
-            style: AppTypography.caption.copyWith(
-              color: color,
-              fontWeight: FontWeight.w600,
-            ),
-          ),
-        ],
+        ),
       ),
     );
   }
 }
 
 class _TranslationRow extends StatelessWidget {
-  final String flag;
+  final String? flag;
+  final Widget? flagWidget;
   final String label;
   final String text;
 
   const _TranslationRow({
-    required this.flag,
+    this.flag,
+    this.flagWidget,
     required this.label,
     required this.text,
-  });
+  }) : assert(flag != null || flagWidget != null,
+            'flag veya flagWidget zorunlu');
 
   @override
   Widget build(BuildContext context) {
+    final leading = flagWidget ??
+        Text(flag!, style: const TextStyle(fontSize: 18));
     return Row(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(flag, style: const TextStyle(fontSize: 18)),
+        SizedBox(
+          width: 26,
+          child: Center(child: leading),
+        ),
         const SizedBox(width: 10),
         Expanded(
           child: Column(
