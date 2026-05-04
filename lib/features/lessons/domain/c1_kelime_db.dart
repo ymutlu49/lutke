@@ -7,8 +7,6 @@
 // Kaynak: BH §, TH §, FB, Xanî, Cegerxwîn, Dengbêj metinleri
 // ════════════════════════════════════════════════════════════════
 
-import '../domain/lesson_entities.dart';
-
 // ────────────────────────────────────────────────────────────────
 // C1 ANA KELİMELER — 200 kelime
 // ────────────────────────────────────────────────────────────────
@@ -24,8 +22,8 @@ final kC1Kelimeler = [
    gen:["Evîn û azadî", "Evîna me"]),
 
   (id:"c1_002", ku:"Dîl", tr:"Tutsak / Esir", en:"Captive",
-   cins:"bêcins", ez:"dîlê", kat:"edebiyat", zor:0.63,
-   not:"\"Dîl\" — [BH]: dîl n. Klasik edebiyatta sıkça. \"Dîlê evînê\" = aşkın esiri.",
+   cins:"nêr", ez:"dîlê", kat:"edebiyat", zor:0.63,
+   not:"Eril — [BH]: dîl n.m. Klasik edebiyatta sık. \"Dîlê evînê\" = aşkın esiri (Mem û Zîn, Xanî).",
    her:["Dîlê evînê bûm.", "Dîl azadiyê dixwaze."],
    gen:["Dîl û azadî", "Dîlê evînê"]),
 
@@ -147,9 +145,9 @@ final kC1Kelimeler = [
    her:["Nêzîkatiya mafdar divê.", "Di nêzîkatiya mafdar de."],
    gen:["Nêzîkatiya mafdar", "Nêzîkatîya me"]),
 
-  (id:"c1_024", ku:"Rûxandina", tr:"Çöküş / Yıkılış", en:"Collapse / Demolition",
+  (id:"c1_024", ku:"Rûxandin", tr:"Çöküş / Yıkılış", en:"Collapse / Demolition",
    cins:"mê", ez:"rûxandinê", kat:"dîrok", zor:0.62,
-   not:"Dişil — \"rûxandin\" fiilinden isim.",
+   not:"Dişil — \"rûxandin\" lêkerê mezdarek e (masdar). [BH] n.f.",
    her:["Rûxandina dewletê.", "Piştî rûxandinê."],
    gen:["Rûxandin û avakirin", "Rûxandina dîrokî"]),
 
@@ -257,23 +255,23 @@ final kC1Kelimeler = [
 
   // ── SOSYAL BİLİMLER ─────────────────────────────────────────
 
-  (id:"c1_060", ku:"Civaknameyî", tr:"Sosyoloji", en:"Sociology",
-   cins:"mê", ez:"civaknameyiyê", kat:"zanist", zor:0.61,
-   not:"Dişil — \"civak\" + \"nameyî\". [BH] §273: -nameyî eki.",
-   her:["Civaknameyîya kurdî.", "Di civaknameyiyê de."],
-   gen:["Civaknameyî û mêjûnasî", "Civaknameyîya me"]),
+  (id:"c1_060", ku:"Civaknasî", tr:"Sosyoloji", en:"Sociology",
+   cins:"mê", ez:"civaknasiyê", kat:"zanist", zor:0.61,
+   not:"Dişil — \"civak\" (toplum) + \"-nasî\" (bilim). Standart Kurmancî kalıbı (krş. mêjûnasî, jînbûnasî).",
+   her:["Civaknasîya kurdî.", "Di civaknasiyê de."],
+   gen:["Civaknasî û mêjûnasî", "Civaknasîya me"]),
 
   (id:"c1_061", ku:"Mêjûnasî", tr:"Tarih bilimi", en:"Historiography",
-   cins:"mê", ez:"mêjûnasiyê", kat:"zanist", zor:0.61,
+   cins:"mê", ez:"mêjûnasîyê", kat:"zanist", zor:0.61,
    not:"Dişil — \"mêjû\" + \"-nasî\".",
-   her:["Mêjûnasîya kurdî.", "Di mêjûnasiyê de."],
-   gen:["Mêjûnasî û civaknameyî", "Mêjûnasîya me"]),
+   her:["Mêjûnasîya kurdî.", "Di mêjûnasîyê de."],
+   gen:["Mêjûnasî û civaknasî", "Mêjûnasîya me"]),
 
-  (id:"c1_062", ku:"Xweşbnasî", tr:"Estetik (Güzel sanatlar felsefesi)", en:"Aesthetics",
-   cins:"mê", ez:"xweşbnasiyê", kat:"felsefe", zor:0.60,
-   not:"Dişil — \"xweş\" (güzel) + \"b\" + \"-nasî\".",
-   her:["Xweşbnasîya hunerê.", "Di xweşbnasiyê de."],
-   gen:["Xweşbnasî û etîk", "Xweşbnasîya kurdî"]),
+  (id:"c1_062", ku:"Estetîk", tr:"Estetik (Güzel sanatlar felsefesi)", en:"Aesthetics",
+   cins:"mê", ez:"estetîkê", kat:"felsefe", zor:0.60,
+   not:"Dişil — Uluslararası terim. \"Xweşikbûnasî\" alternatifi tartışmalı; \"estetîk\" modern Kurmancî'de yaygın.",
+   her:["Estetîka hunerê.", "Di estetîkê de."],
+   gen:["Estetîk û etîk", "Estetîka kurdî"]),
 
   (id:"c1_063", ku:"Etîk", tr:"Etik", en:"Ethics",
    cins:"mê", ez:"etîkê", kat:"felsefe", zor:0.62,
@@ -308,9 +306,9 @@ final kC1Kelimeler = [
    gen:["Bişaftin û parastin", "Li hemberî bişaftinê"]),
 
   (id:"c1_074", ku:"Neteweperwerî", tr:"Milliyetçilik", en:"Nationalism",
-   cins:"mê", ez:"neteweperweriyê", kat:"siyaset", zor:0.62,
+   cins:"mê", ez:"neteweperwerîyê", kat:"siyaset", zor:0.62,
    not:"Dişil — \"netewe\" + \"-perwerî\".",
-   her:["Neteweperwerîya kurd.", "Di neteweperweriyê de."],
+   her:["Neteweperwerîya kurd.", "Di neteweperwerîyê de."],
    gen:["Neteweperwerî û fedralîzm", "Neteweperwerîya me"]),
 
   (id:"c1_075", ku:"Federalîzm", tr:"Federalizm", en:"Federalism",
@@ -394,11 +392,11 @@ final kC1Kelimeler = [
    her:["Bêhnvedana rêzimanî.", "Di bêhnvedanê de."],
    gen:["Bêhnvedana rêzimanî", "Bêhnvedana me"]),
 
-  (id:"c1_111", ku:"Rêzoka tevlîhev", tr:"Karmaşık cümle", en:"Complex sentence",
-   cins:"mê", ez:"rêzoka tevlîhev", kat:"rêziman", zor:0.60,
-   not:"\"Rêzok\" (cümle) + \"tevlîhev\" (karmaşık).",
-   her:["Rêzoka tevlîhev.", "Di rêzoka tevlîhev de."],
-   gen:["Rêzoka tevlîhev û sade", "Rêzokên kurdî"]),
+  (id:"c1_111", ku:"Hevoka hevedudanî", tr:"Karmaşık/Birleşik cümle", en:"Complex sentence",
+   cins:"mê", ez:"hevoka hevedudanî", kat:"rêziman", zor:0.60,
+   not:"\"Hevok\" (cümle, standart Kurmancî; \"rêzok\" rastnayê) + \"hevedudanî\" (birleşik/karmaşık).",
+   her:["Hevoka hevedudanî.", "Di hevoka hevedudanî de."],
+   gen:["Hevoka hevedudanî û sade", "Hevokên kurdî"]),
 
   (id:"c1_112", ku:"Vegotina neyekrêz", tr:"Dolaylı anlatım", en:"Indirect speech",
    cins:"mê", ez:"vegotina neyekrêz", kat:"rêziman", zor:0.59,
@@ -406,11 +404,11 @@ final kC1Kelimeler = [
    her:["Vegotina neyekrêz.", "Di vegotina neyekrêz de."],
    gen:["Vegotina neyekrêz û rasterast", "Vegotina kurdî"]),
 
-  (id:"c1_113", ku:"Şertê ramantî", tr:"Mantıksal koşul", en:"Logical condition",
-   cins:"nêr", ez:"şertê ramantî", kat:"rêziman", zor:0.59,
-   not:"\"Şert\" + \"ramantî\" (mantıksal).",
-   her:["Şertê ramantî di rêzimanê de.", "Bi şertê ramantî."],
-   gen:["Şertê ramantî", "Şertên rêzimanî"]),
+  (id:"c1_113", ku:"Şertê mantiqî", tr:"Mantıksal koşul", en:"Logical condition",
+   cins:"nêr", ez:"şertê mantiqî", kat:"rêziman", zor:0.59,
+   not:"\"Şert\" + \"mantiqî\" (mantıksal). \"Ramantî\" uydurma form; \"mantiq\" Arapça alıntı olarak yerleşik, \"ramanî\" felsefe terimi ama rêzimanda \"mantiqî\" kullanılır.",
+   her:["Şertê mantiqî di rêzimanê de.", "Bi şertê mantiqî."],
+   gen:["Şertê mantiqî", "Şertên rêzimanî"]),
 
   // ── TOPLUMSAL HAFIZA VE TRAVMA ────────────────────────────────
 
@@ -480,11 +478,11 @@ final kC1Kelimeler = [
    her:["Hevoka bingehîn çi ye?", "Hevoka bingehîn nivisand."],
    gen:["Hevoka bingehîn", "Hevoka me"]),
 
-  (id:"c1_151", ku:"Argumana xurt", tr:"Güçlü argüman", en:"Strong argument",
-   cins:"mê", ez:"argumana xurt", kat:"ziman", zor:0.61,
-   not:"\"Arguman\" + \"xurt\".",
-   her:["Argumana xurt anî.", "Argumana te xurt e."],
-   gen:["Argumana xurt û lawaz", "Argumana me"]),
+  (id:"c1_151", ku:"Argumenta xurt", tr:"Güçlü argüman", en:"Strong argument",
+   cins:"mê", ez:"argumenta xurt", kat:"ziman", zor:0.61,
+   not:"\"Argument\" (uluslararası; \"arguman\" yanlış yazım) + \"xurt\". Nêolojîzm: \"delîla xurt\" alternatîfa xwemalî.",
+   her:["Argumenta xurt anî.", "Argumenta te xurt e."],
+   gen:["Argumenta xurt û lawaz", "Argumenta me"]),
 
   (id:"c1_152", ku:"Encamgirtin", tr:"Sonuç çıkarma", en:"Drawing conclusions",
    cins:"mê", ez:"encamgirtinê", kat:"ziman", zor:0.60,
@@ -500,11 +498,11 @@ final kC1Kelimeler = [
    her:["Têgehê bingehîn çi ye?", "Têgehên bingehîn ên zimannasiyê."],
    gen:["Têgehê bingehîn", "Têgehên me"]),
 
-  (id:"c1_161", ku:"Têgehe", tr:"Kavram", en:"Concept",
+  (id:"c1_161", ku:"Têgeh", tr:"Kavram", en:"Concept",
    cins:"mê", ez:"têgehê", kat:"zanist", zor:0.63,
-   not:"Dişil — \"têgeh\" n.f. Kurmancî özgün terim.",
-   her:["Têgehe nû hat pêşniyar kirin.", "Têgeha me ya bingehîn."],
-   gen:["Têgehe û pênase", "Têgehên kurdî"]),
+   not:"Dişil — \"têgeh\" n.f. Kurmancî özgün terim (nêolojîzma standart). [BH] §273.",
+   her:["Têgeheke nû hat pêşniyar kirin.", "Têgeha me ya bingehîn."],
+   gen:["Têgeh û pênase", "Têgehên kurdî"]),
 
   (id:"c1_162", ku:"Nêzîk bûn", tr:"Yaklaşmak / Ele almak", en:"To approach / deal with",
    cins:"bêcins", ez:null, kat:"leker", zor:0.63,
@@ -941,9 +939,9 @@ final kC1_Buyuk3 = [
   (id:"c1_514", ku:"Zagonên zimanî", tr:"Dil yasaları", en:"Language laws",
    cins:"bêcins", ez:"zagonên zimanî", kat:"zagon", zor:0.6, not:"\"Zagonên zimanî\".",
    her:["Zagonên zimanî.","Di zagonên zimanî de."], gen:["Zagonên zimanî","zagonên zimanî ya me"]),
-  (id:"c1_515", ku:"Mafê zimanê di dadgehê de", tr:"Mahkemede dil hakkı", en:"Language right in court",
-   cins:"nêr", ez:"mafê zimanê di dadgehê de", kat:"zagon", zor:0.59, not:"\"Mafê zimanê di dadgehê de\".",
-   her:["Mafê zimanê di dadgehê de.","Di mafê zimanê di dadgehê de de."], gen:["Mafê zimanê di dadgehê de","mafê zimanê di dadgehê de ya me"]),
+  (id:"c1_515", ku:"Mafê ziman li dadgehê", tr:"Mahkemede dil hakkı", en:"Language right in court",
+   cins:"nêr", ez:"mafê ziman li dadgehê", kat:"zagon", zor:0.59, not:"\"Mafê ziman li dadgehê\" — temel adlî hak. \"Mafê parastina bi zimanê dayikê.\"",
+   her:["Mafê ziman li dadgehê pîroz e.","Mafê ziman li dadgehê parastî ye."], gen:["Mafê ziman li dadgehê","Mafê parastinê yê me"]),
   (id:"c1_516", ku:"Nûçeyên analîtîk", tr:"Analitik haberler", en:"Analytical news",
    cins:"bêcins", ez:"nûçeyên analîtîk", kat:"medya", zor:0.61, not:"\"Nûçeyên analîtîk\".",
    her:["Nûçeyên analîtîk.","Di nûçeyên analîtîk de."], gen:["Nûçeyên analîtîk","nûçeyên analîtîk ya me"]),
@@ -1028,9 +1026,9 @@ final kC1_Buyuk3 = [
   (id:"c1_543", ku:"Gelê bi bîranîn", tr:"Hafızalı halk", en:"People with memory",
    cins:"nêr", ez:"gelê bi bîranîn", kat:"kimlik", zor:0.62, not:"\"Gelê bi bîranîn\".",
    her:["Gelê bi bîranîn.","Di gelê bi bîranîn de."], gen:["Gelê bi bîranîn","gelê bi bîranîn ya me"]),
-  (id:"c1_544", ku:"Zimanê jîyandî", tr:"Yaşayan dil", en:"Living language",
-   cins:"nêr", ez:"zimanê jîyandî", kat:"ziman", zor:0.63, not:"\"Zimanê jîyandî\".",
-   her:["Zimanê jîyandî.","Di zimanê jîyandî de."], gen:["Zimanê jîyandî","zimanê jîyandî ya me"]),
+  (id:"c1_544", ku:"Zimanê zindî", tr:"Yaşayan dil", en:"Living language",
+   cins:"nêr", ez:"zimanê zindî", kat:"ziman", zor:0.63, not:"\"Ziman\"+\"zindî\" (=canlı, standart Kurmancî; \"jîyandî\" uydurma participle). Canlı dil — yaşayan ve kullanılan dil.",
+   her:["Zimanê kurdî zimanê zindî ye.","Di zimanê zindî de guherîn heye."], gen:["Zimanê zindî","Zimanê zindî yê me"]),
   (id:"c1_545", ku:"Zimanê ku tê xebatkirin", tr:"Çalışılan dil", en:"Language being worked on",
    cins:"nêr", ez:"zimanê ku tê xebatkirin", kat:"ziman", zor:0.6, not:"\"Zimanê ku tê xebatkirin\".",
    her:["Zimanê ku tê xebatkirin.","Di zimanê ku tê xebatkirin de."], gen:["Zimanê ku tê xebatkirin","zimanê ku tê xebatkirin ya me"]),
@@ -1043,9 +1041,9 @@ final kC1_Buyuk3 = [
   (id:"c1_548", ku:"Perwerdeya zimanî", tr:"Dil eğitimi", en:"Language education",
    cins:"mê", ez:"perwerdeya zimanî", kat:"perwerde", zor:0.62, not:"\"Perwerdeya zimanî\".",
    her:["Perwerdeya zimanî.","Di perwerdeya zimanî de."], gen:["Perwerdeya zimanî","perwerdeya zimanî ya me"]),
-  (id:"c1_549", ku:"Dersên zimanî yên bilind", tr:"Yüksek düzey dil dersleri", en:"Advanced language lessons",
-   cins:"bêcins", ez:"dersên zimanî yên bilind", kat:"perwerde", zor:0.61, not:"\"Dersên zimanî yên bilind\".",
-   her:["Dersên zimanî yên bilind.","Di dersên zimanî yên bilind de."], gen:["Dersên zimanî yên bilind","dersên zimanî yên bilind ya me"]),
+  (id:"c1_549", ku:"Waneyên zimanî yên bilind", tr:"Yüksek düzey dil dersleri", en:"Advanced language lessons",
+   cins:"bêcins", ez:"waneyên zimanî yên bilind", kat:"perwerde", zor:0.61, not:"\"Waneyên zimanî yên bilind\".",
+   her:["Waneyên zimanî yên bilind.","Di waneyên zimanî yên bilind de."], gen:["Waneyên zimanî yên bilind","waneyên zimanî yên bilind ya me"]),
   (id:"c1_550", ku:"Pêşkeftina zimanê kurdî", tr:"Kürtçenin ilerlemesi", en:"Progress of Kurdish language",
    cins:"mê", ez:"pêşkeftina zimanê kurdî", kat:"ziman", zor:0.63, not:"\"Pêşkeftina zimanê kurdî\".",
    her:["Pêşkeftina zimanê kurdî.","Di pêşkeftina zimanê kurdî de."], gen:["Pêşkeftina zimanê kurdî","pêşkeftina zimanê kurdî ya me"]),
@@ -1062,14 +1060,14 @@ final kC1_Buyuk_ext = [
   // ── KLASİK EDEBİYAT DERİN (40) ───────────────────────────────
 
   (id:"c1_300", ku:"Helbesta klasîk", tr:"Klasik şiir", en:"Classical poetry", cins:"mê", ez:"helbesta klasîk", kat:"edebiyat", zor:0.59, not:"\"Helbest\"+\"klasîk\".", her:["Helbesta klasîk a kurdî.", "Di helbesta klasîk de."], gen:["Helbesta klasîk","Helbestên me"]),
-  (id:"c1_959", ku:"Dîwana Xanî", tr:"Xani'nin Divanı", en:"Khani's Divan", cins:"mê", ez:"Dîwana Xanî", kat:"edebiyat", zor:0.61, not:"\"Dîwan\" = klasik Doğu şiir divanı. Ehmedê Xanî (1650-1707).", her:["Dîwana Xanî xweş e.", "Di Dîwana Xanî de."], gen:["Dîwana Xanî","Dîwanên klasîk"]),
+  (id:"c1_959", ku:"Dîwana Xanî", tr:"Xanî'nin Divanı", en:"Khani's Divan", cins:"mê", ez:"Dîwana Xanî", kat:"edebiyat", zor:0.61, not:"\"Dîwan\" = klasik Doğu şiir divanı. Ehmedê Xanî (1651–1707) — başyapıtı Mem û Zîn (1695); ayrıca Nûbahara Biçûkan (1683).", her:["Dîwana Xanî xweş e.", "Di Dîwana Xanî de."], gen:["Dîwana Xanî","Dîwanên klasîk"]),
   (id:"c1_960", ku:"Melayê Cizîrî", tr:"Melayê Ciziri", en:"Mele of Cizre", cins:"nêr", ez:"Melayê Cizîrî", kat:"edebiyat", zor:0.61, not:"Klasik Kürt şairi (1570-1640). \"Dîwana Cizîrî\".", her:["Melayê Cizîrî şaîrê mezin e.", "Di helbestên Cizîrî de."], gen:["Melayê Cizîrî","Helbestvanên klasîk"]),
   (id:"c1_961", ku:"Helbestên xemgîn", tr:"Hüzünlü şiirler", en:"Sorrowful poems", cins:"bêcins", ez:"helbestên xemgîn", kat:"edebiyat", zor:0.60, not:"\"Helbest\"+\"xemgîn\". Kürt lirik geleneği.", her:["Helbestên xemgîn hene.", "Di helbestên xemgîn de."], gen:["Helbestên xemgîn","Helbestên me"]),
   (id:"c1_962", ku:"Vegotina qehremanî", tr:"Kahramanlık anlatısı", en:"Heroic narrative", cins:"mê", ez:"vegotina qehremanî", kat:"edebiyat", zor:0.59, not:"\"Vegotin\"+\"qehremanî\".", her:["Vegotina qehremanî.", "Di vegotina qehremanî de."], gen:["Vegotina qehremanî","Vegotina me"]),
   (id:"c1_963", ku:"Mijara evîn û azadiyê", tr:"Aşk ve özgürlük teması", en:"Theme of love and freedom", cins:"mê", ez:"mijara evîn û azadiyê", kat:"edebiyat", zor:0.60, not:"\"Mijar\"+\"evîn û azadî\". Mem û Zîn teması.", her:["Mijara evîn û azadiyê.", "Di mijara evîn û azadiyê de."], gen:["Mijara evîn û azadiyê","Mijarên me"]),
   (id:"c1_964", ku:"Sembola azadiyê di wêjeyê", tr:"Edebiyatta özgürlük sembolü", en:"Freedom symbol in literature", cins:"mê", ez:"sembola azadiyê di wêjeyê", kat:"edebiyat", zor:0.59, not:"\"Sembol\"+\"azadî\"+\"wêje\".", her:["Sembola azadiyê di wêjeyê.", "Di sembola azadiyê de."], gen:["Sembola azadiyê di wêjeyê","Sembolên me"]),
   (id:"c1_965", ku:"Şoreşgeriya edebî", tr:"Edebi devrimcilik", en:"Literary revolutionism", cins:"mê", ez:"şoreşgeriya edebî", kat:"edebiyat", zor:0.59, not:"\"Şoreşgerî\"+\"edebî\".", her:["Şoreşgeriya edebî ya Cegerxwîn.", "Di şoreşgeriya edebî de."], gen:["Şoreşgeriya edebî","Şoreşgeriya me"]),
-  (id:"c1_966", ku:"Cegerxwîn", tr:"Cegerxwîn (şair)", en:"Cegerxwîn (poet)", cins:"nêr", ez:"Cegerxwîn", kat:"edebiyat", zor:0.63, not:"Cegerxwîn (1903-1984) = Şükrü Hasan Kurdî. Sosyalist Kürt şairi.", her:["Cegerxwîn helbestvanê mezin e.", "Di helbestên Cegerxwîn de."], gen:["Cegerxwîn","Helbestvanên me"]),
+  (id:"c1_966", ku:"Cegerxwîn", tr:"Cegerxwîn (şair)", en:"Cegerxwîn (poet)", cins:"nêr", ez:"Cegerxwîn", kat:"edebiyat", zor:0.63, not:"Cegerxwîn (1903–1984) — navê wî yê rastîn Şêxmûs Hesen e. Helbestvanê neteweyî yê modern; Hesar (Gercüş, Mêrdîn) li Stockholmê wefat kir.", her:["Cegerxwîn helbestvanê mezin e.", "Di helbestên Cegerxwîn de."], gen:["Cegerxwîn","Helbestvanên me"]),
   (id:"c1_967", ku:"Analîza vegotinê", tr:"Anlatı analizi", en:"Narrative analysis", cins:"mê", ez:"analîza vegotinê", kat:"edebiyat", zor:0.59, not:"\"Analîz\"+\"vegotin\".", her:["Analîza vegotinê kirin.", "Di analîza vegotinê de."], gen:["Analîza vegotinê","Analîza me"]),
 
   // ── AKADEMİK YAZIM DERİN (40) ────────────────────────────────
@@ -1091,7 +1089,7 @@ final kC1_Buyuk_ext = [
   (id:"c1_979", ku:"Pêvajoya hînbûna duyem", tr:"İkinci dil öğrenim süreci", en:"Second language acquisition", cins:"mê", ez:"pêvajoya hînbûna duyem", kat:"ziman", zor:0.58, not:"\"Pêvajo\"+\"hînbûn\"+\"duyem\".", her:["Pêvajoya hînbûna duyem.", "Di pêvajoya hînbûna duyem de."], gen:["Pêvajoya hînbûna duyem","Pêvajoya me"]),
   (id:"c1_980", ku:"Zimannasîya civakî", tr:"Toplumsal dilbilim", en:"Sociolinguistics", cins:"mê", ez:"zimannasîya civakî", kat:"ziman", zor:0.59, not:"\"Zimannasî\"+\"civakî\". Sosyolengüistik.", her:["Zimannasîya civakî dixwînim.", "Di zimannasîya civakî de."], gen:["Zimannasîya civakî","Zimannasîya me"]),
   (id:"c1_981", ku:"Tevlêbûna zimên", tr:"Dil teması/karışımı", en:"Language contact", cins:"mê", ez:"tevlêbûna zimên", kat:"ziman", zor:0.59, not:"\"Tevlêbûn\"+\"zimên\". Dil temas teorisi.", her:["Tevlêbûna zimên.", "Di tevlêbûna zimên de."], gen:["Tevlêbûna zimên","Tevlêbûna me"]),
-  (id:"c1_982", ku:"Kodbivartina zimên", tr:"Kod geçişi", en:"Code switching", cins:"mê", ez:"kodbivartina zimên", kat:"ziman", zor:0.58, not:"\"Kodbivartîn\"+\"zimên\". Code-switching.", her:["Kodbivartina zimên dibe.", "Di kodbivartina zimên de."], gen:["Kodbivartina zimên","Kodbivartina me"]),
+  (id:"c1_982", ku:"Guhartina kodê", tr:"Kod geçişi", en:"Code switching", cins:"mê", ez:"guhartina kodê", kat:"ziman", zor:0.58, not:"\"Guhartin\" (değişim) + \"kod\". \"Kodbivartîn\" uydurma (bivartin lêkereke nestandart). Sosyodilbilim terimi.", her:["Guhartina kodê dibe.", "Di guhartina kodê de."], gen:["Guhartina kodê","Guhartina me"]),
   (id:"c1_983", ku:"Zimanê zikmakî û yên din", tr:"Ana dil ve diğerleri", en:"Mother tongue and others", cins:"bêcins", ez:null, kat:"ziman", zor:0.59, not:"\"Zimanê zikmakî\"+\"yên din\".", her:["Zimanê zikmakî û yên din.", "Di navbera zimanan de."], gen:["Zimanê zikmakî û yên din","Zimanên me"]),
   (id:"c1_984", ku:"Vejandin û vejîna zimanî", tr:"Dil canlandırma", en:"Language revitalization", cins:"mê", ez:"vejandin û vejîna zimanî", kat:"ziman", zor:0.59, not:"\"Vejandin\"+\"vejîn\"+\"zimanî\".", her:["Vejandin û vejîna zimanî.", "Di vejandin û vejîna zimanî de."], gen:["Vejandin û vejîna zimanî","Vejîna zimanî ya me"]),
   (id:"c1_985", ku:"Zimanê medyayê", tr:"Medya dili", en:"Media language", cins:"nêr", ez:"zimanê medyayê", kat:"medya", zor:0.60, not:"\"Ziman\"+\"medyayê\". Medya dilbilimi.", her:["Zimanê medyayê.", "Di zimanê medyayê de."], gen:["Zimanê medyayê","Zimanê me"]),
@@ -1105,7 +1103,7 @@ final kC1_Buyuk_ext = [
   (id:"c1_332", ku:"Girêdana dîrokî", tr:"Tarihi bağ", en:"Historical link", cins:"mê", ez:"girêdana dîrokî", kat:"dîrok", zor:0.59, not:"\"Girêdan\"+\"dîrokî\".", her:["Girêdana dîrokî heye.", "Di girêdana dîrokî de."], gen:["Girêdana dîrokî","Girêdana me"]),
   (id:"c1_333", ku:"Çavkaniya dîrokî", tr:"Tarihi kaynak", en:"Historical source", cins:"mê", ez:"çavkaniya dîrokî", kat:"dîrok", zor:0.60, not:"\"Çavkanî\"+\"dîrokî\".", her:["Çavkaniya dîrokî baş e.", "Di çavkaniya dîrokî de."], gen:["Çavkaniya dîrokî","Çavkaniyên me"]),
   (id:"c1_334", ku:"Dîroka şoreşê", tr:"Devrim tarihi", en:"History of revolution", cins:"mê", ez:"dîroka şoreşê", kat:"dîrok", zor:0.60, not:"\"Dîrok\"+\"şoreşê\".", her:["Dîroka şoreşê.", "Di dîroka şoreşê de."], gen:["Dîroka şoreşê","Dîroka me"]),
-  (id:"c1_335", ku:"Peymana Lausannê", tr:"Lozan Antlaşması", en:"Treaty of Lausanne", cins:"mê", ez:"Peymana Lausannê", kat:"dîrok", zor:0.62, not:"\"Peymanam\"+\"Lausannê\". 1923 — Kürdistan'ın bölünmesi.", her:["Peymana Lausannê di 1923an de hat.", "Di Peymana Lausannê de."], gen:["Peymana Lausannê","Peymanen dîrokî"]),
+  (id:"c1_335", ku:"Peymana Lozanê", tr:"Lozan Antlaşması", en:"Treaty of Lausanne", cins:"mê", ez:"Peymana Lozanê", kat:"dîrok", zor:0.62, not:"\"Peyman\"+\"Lozan\" (forma Kurmancî; \"Lausanne\" Frensî). 1923 — parçekirina Kurdistanê.", her:["Peymana Lozanê di 1923an de hat.", "Di Peymana Lozanê de."], gen:["Peymana Lozanê","Peymanên dîrokî"]),
   (id:"c1_336", ku:"Dewleta Mahabad", tr:"Mahabad Cumhuriyeti", en:"Republic of Mahabad", cins:"mê", ez:"Dewleta Mahabad", kat:"dîrok", zor:0.62, not:"\"Dewleta Mahabad\" (1946) = Kürt devleti deneyi.", her:["Dewleta Mahabad.", "Di Dewleta Mahabad de."], gen:["Dewleta Mahabad","Dewletên me"]),
   (id:"c1_337", ku:"Serhildana Şêx Ubeydullahî", tr:"Şeyh Ubeydullah isyanı", en:"Sheikh Ubeydullah uprising", cins:"mê", ez:"Serhildana Şêx Ubeydullahî", kat:"dîrok", zor:0.60, not:"\"Serhildan\" 1880 — erken Kürt milliyetçiliği.", her:["Serhildana Şêx Ubeydullahî.", "Di serhildana Şêx Ubeydullahî de."], gen:["Serhildana Şêx Ubeydullahî","Serhildanên kurdî"]),
   (id:"c1_338", ku:"Piraniya Kurdî", tr:"Kürt çoğunluğu", en:"Kurdish majority", cins:"mê", ez:"piraniya Kurdî", kat:"civakî", zor:0.60, not:"\"Piranî\"+\"Kurdî\". Demografik kavram.", her:["Piraniya Kurdî.", "Di piraniya Kurdî de."], gen:["Piraniya Kurdî","Piraniya me"]),
@@ -1126,13 +1124,13 @@ final kC1_Buyuk_ext = [
 
   // ── GAZETE DİLİ VE MEDYA (30) ─────────────────────────────────
 
-  (id:"c1_350", ku:"Haber analîzê", tr:"Haber analizi", en:"News analysis", cins:"nêr", ez:"haberê analîzê", kat:"medya", zor:0.60, not:"\"Haber\"+\"analîz\". Gazetecilik terimi.", her:["Haber analîzê hat kirin.", "Di haber analîzê de."], gen:["Haber analîzê","Haberên me"]),
+  (id:"c1_350", ku:"Analîza nûçeyê", tr:"Haber analizi", en:"News analysis", cins:"mê", ez:"analîza nûçeyê", kat:"medya", zor:0.60, not:"\"Analîz\"+\"nûçe\" (xwemalî; \"haber\" tr-alıntı, Kurmancî'de \"nûçe\" standart). Gazetecilik terimi.", her:["Analîza nûçeyê hat kirin.", "Di analîza nûçeyê de."], gen:["Analîza nûçeyê","Nûçeyên me"]),
   (id:"c1_351", ku:"Ragihandina zindî", tr:"Canlı yayın", en:"Live broadcast", cins:"mê", ez:"ragihandina zindî", kat:"medya", zor:0.61, not:"\"Ragihandin\"+\"zindî\".", her:["Ragihandina zindî hat.", "Di ragihandina zindî de."], gen:["Ragihandina zindî","Ragihandina me"]),
   (id:"c1_352", ku:"Çavkanîya pêbawerî", tr:"Güvenilir kaynak", en:"Credible source", cins:"mê", ez:"çavkanîya pêbawerî", kat:"medya", zor:0.60, not:"\"Çavkanî\"+\"pêbawerî\".", her:["Çavkanîya pêbawerî.", "Di çavkanîya pêbawerî de."], gen:["Çavkanîya pêbawerî","Çavkaniyên me"]),
   (id:"c1_353", ku:"Nûçeyên derew", tr:"Yalan haberler", en:"Fake news", cins:"bêcins", ez:"nûçeyên derew", kat:"medya", zor:0.61, not:"\"Nûçe\"+\"derew\". Dezinformasyon.", her:["Nûçeyên derew hene.", "Di nûçeyên derew de."], gen:["Nûçeyên derew","Nûçeyên me"]),
   (id:"c1_354", ku:"Azadîya çapemeniyê", tr:"Basın özgürlüğü", en:"Press freedom", cins:"mê", ez:"azadîya çapemeniyê", kat:"medya", zor:0.61, not:"\"Azadî\"+\"çapemeniyê\".", her:["Azadîya çapemeniyê lazim e.", "Ji bo azadîya çapemeniyê."], gen:["Azadîya çapemeniyê","Azadîya me"]),
   (id:"c1_355", ku:"Kovara zanistî ya kurdî", tr:"Kürtçe bilimsel dergi", en:"Kurdish scientific journal", cins:"mê", ez:"kovara zanistî ya kurdî", kat:"medya", zor:0.60, not:"\"Kovar\"+\"zanistî\"+\"kurdî\".", her:["Kovara zanistî ya kurdî.", "Di kovara zanistî ya kurdî de."], gen:["Kovara zanistî ya kurdî","Kovarên me"]),
-  (id:"c1_356", ku:"Wergerkirina haberê", tr:"Haberin çevirisi", en:"News translation", cins:"mê", ez:"wergerkirina haberê", kat:"medya", zor:0.59, not:"\"Wergerkirin\"+\"haber\".", her:["Wergerkirina haberê.", "Di wergerkirina haberê de."], gen:["Wergerkirina haberê","Wergerkirina me"]),
+  (id:"c1_356", ku:"Wergerkirina nûçeyê", tr:"Haberin çevirisi", en:"News translation", cins:"mê", ez:"wergerkirina nûçeyê", kat:"medya", zor:0.59, not:"\"Wergerkirin\"+\"nûçe\" (xwemalî; \"haber\" tr-alıntı, standart Kurmancî \"nûçe\").", her:["Wergerkirina nûçeyê.", "Di wergerkirina nûçeyê de."], gen:["Wergerkirina nûçeyê","Wergerkirina me"]),
   (id:"c1_357", ku:"Perspektîva medyayê", tr:"Medya perspektifi", en:"Media perspective", cins:"mê", ez:"perspektîva medyayê", kat:"medya", zor:0.59, not:"\"Perspektîv\"+\"medyayê\".", her:["Perspektîva medyayê.", "Di perspektîva medyayê de."], gen:["Perspektîva medyayê","Perspektîva me"]),
 
   // ── DIASPORA VE KİMLİK (30) ───────────────────────────────────
@@ -1147,7 +1145,7 @@ final kC1_Buyuk_ext = [
 
   // ── ÊZÎDÎTÎ VE DİNİ KÜLTÜR (20) ──────────────────────────────
 
-  (id:"c1_365", ku:"Êzîdîtî", tr:"Êzidilik", en:"Yazidism", cins:"mê", ez:"Êzîdîtiyê", kat:"çand", zor:0.62, not:"\"Êzîdîtî\" = Êzidi inanç sistemi. Kürdistanın özgün dini.", her:["Êzîdîtî baweriyeke kûvî ye.", "Di Êzîdîtiyê de."], gen:["Êzîdîtî","Baweriyên me"]),
+  (id:"c1_365", ku:"Êzîdîtî", tr:"Êzidilik", en:"Yazidism", cins:"mê", ez:"Êzîdîtiyê", kat:"çand", zor:0.62, not:"\"Êzîdîtî\" = Êzidi inanç sistemi. Kürdistan\\'ın özgün dinlerinden biri (kevn).", her:["Êzîdîtî baweriyeke kevnar e.", "Di Êzîdîtiyê de cejnên kevn hene."], gen:["Êzîdîtî","Baweriya kevnar"]),
   (id:"c1_366", ku:"Şingalê Êzîdîyan", tr:"Êzidilerin Şengali", en:"Yazidis' Sinjar", cins:"nêr", ez:"Şingalê Êzîdîyan", kat:"dîrok", zor:0.62, not:"\"Şingal\" (Sinjar) = Êzidi yurdu. 2014 soykırımı.", her:["Şingalê Êzîdîyan.", "Di Şingalê Êzîdîyan de."], gen:["Şingalê Êzîdîyan","Şingal"]),
   (id:"c1_367", ku:"Cenabê Tawûsî Melek", tr:"Tavus Meleği", en:"Melek Taus / Peacock Angel", cins:"nêr", ez:"Cenabê Tawûsî Melek", kat:"çand", zor:0.61, not:"\"Tawûsî Melek\" = Êzidi inanç merkezi. Kutsal figür.", her:["Tawûsî Melek.", "Di baweriya Tawûsî Melek de."], gen:["Tawûsî Melek","Baweriya me"]),
   (id:"c1_368", ku:"Elewîtî û Kurdanê", tr:"Alevilik ve Kürtler", en:"Alevism and Kurds", cins:"bêcins", ez:null, kat:"çand", zor:0.61, not:"\"Elewîtî\"+\"Kurd\". Kürtlerde Alevilik.", her:["Elewîtî û Kurdanê.", "Di navbera Elewîtî û Kurdanê de."], gen:["Elewîtî û Kurdanê","Elewîtiya me"]),
@@ -1211,7 +1209,7 @@ final kC1_Tamamlama = [
 
   (id:"c1_996", ku:"Peymana navdewletî ya mafan", tr:"Uluslararası haklar sözleşmesi", en:"International rights treaty",
    cins:"mê", ez:"peymana navdewletî ya mafan", kat:"zagon", zor:0.59,
-   not:"\"Peymanam\"+\"navdewletî\"+\"maf\". ICCPR vb.",
+   not:"\"Peyman\"+\"navdewletî\"+\"maf\". ICCPR vb.",
    her:["Peymana navdewletî ya mafan.", "Di peymana navdewletî ya mafan de."],
    gen:["Peymana navdewletî ya mafan", "Peymanên me"]),
 
@@ -1293,11 +1291,11 @@ final kC1_Tamamlama = [
    her:["Têkilîya aborî û siyasî.", "Di têkilîya aborî û siyasî de."],
    gen:["Têkilîya aborî û siyasî", "Têkilîya me"]),
 
-  (id:"c1_1009", ku:"Bêhevperî û newekhevî", tr:"Eşitsizlik ve adaletsizlik", en:"Inequality and injustice",
+  (id:"c1_1009", ku:"Bêdadî û newekhevî", tr:"Adaletsizlik ve eşitsizlik", en:"Injustice and inequality",
    cins:"bêcins", ez:null, kat:"civakî", zor:0.59,
-   not:"\"Bêhevperî\"+\"newekhevî\". Toplumsal adalet.",
-   her:["Bêhevperî û newekhevî hene.", "Di bêhevperî û newekhevî de."],
-   gen:["Bêhevperî û newekhevî", "Bêhevperîya me"]),
+   not:"\"Bêdadî\" (=adaletsizlik; ji \"dad\" = adalet, standart) + \"newekhevî\" (=eşitsizlik). \"Bêhevperî\" uydurma; \"bêdadî\" xwemalî. Adalet-i içtimai.",
+   her:["Bêdadî û newekhevî hene.", "Li dijî bêdadî û newekheviyê."],
+   gen:["Bêdadî û newekhevî", "Bêdadîya civakî"]),
 
   (id:"c1_1010", ku:"Alîgirîya civakî", tr:"Sosyal dayanışma", en:"Social solidarity",
    cins:"mê", ez:"alîgirîya civakî", kat:"civakî", zor:0.60,
@@ -1353,17 +1351,17 @@ final kC1_Tamamlama = [
 
   // ── DİLBİLGİSİ C1 (15) ───────────────────────────────────────
 
-  (id:"c1_1018", ku:"Ergatîvîteya C1", tr:"C1 ergatiflik", en:"C1 ergativity",
-   cins:"mê", ez:"ergatîvîteya C1", kat:"rêziman", zor:0.59,
-   not:"Kurmancî ergatif sistem — C1 derinlemesi. \"Min got\" vs \"Ez çûm\".",
-   her:["Ergatîvîteya C1 kûr e.", "Di ergatîvîteya C1 de."],
-   gen:["Ergatîvîteya C1", "Ergatîvîteya kurdî"]),
+  (id:"c1_1018", ku:"Ergatîvîteya Kurmancî", tr:"Kurmancî ergatiflik", en:"Kurmanji ergativity",
+   cins:"mê", ez:"ergatîvîteya Kurmancî", kat:"rêziman", zor:0.59,
+   not:"Termên navnetewî (Latin alıntı); Kurmancîya xwemalî: \"pergala erkerî\". C1 deriniliği: \"Min got\" (ergatif, geçişli geçmiş) vs \"Ez çûm\" (nominatif).",
+   her:["Ergatîvîteya Kurmancî taybet e.", "Di ergatîvîteya Kurmancî de kêşan tê guhertin."],
+   gen:["Ergatîvîte û pergala erkerî", "Ergatîvîteya kurdî"]),
 
-  (id:"c1_430", ku:"Subjunctîva C1", tr:"C1 dilek kipi", en:"C1 subjunctive",
-   cins:"mê", ez:"subjunctîva C1", kat:"rêziman", zor:0.59,
-   not:"\"Subjunctîv\" = dilek kipi. C1 modal fiiller: \"divê were\", \"dibe ku bê\".",
-   her:["Subjunctîva C1.", "Di subjunctîva C1 de."],
-   gen:["Subjunctîva C1", "Subjunctîva kurdî"]),
+  (id:"c1_430", ku:"Raweya bilanî", tr:"Dilek kipi (subjunctive)", en:"Subjunctive mood",
+   cins:"mê", ez:"raweya bilanî", kat:"rêziman", zor:0.59,
+   not:"\"Rawe\" (kip) + \"bilanî\" (dilek; < bila). Standart Kurmancî rêzimana: \"divê were\", \"bila bê\", \"dibe ku bê\". \"Subjunctîv\" Latin alıntı; \"raweya bilanî\" xwemalî (BH §318).",
+   her:["Di raweya bilanî de lêker diguhere.", "Bila ev pirtûk were xwendin — raweya bilanî."],
+   gen:["Raweya bilanî", "Raweyên kurdî"]),
 
   (id:"c1_431", ku:"Dema referansê di vegotinê", tr:"Anlatıda referans zamanı", en:"Reference time in narration",
    cins:"mê", ez:"dema referansê di vegotinê", kat:"rêziman", zor:0.58,
@@ -1724,11 +1722,11 @@ final kC1_168 = [
    her:["Têkilîya azadî û berpirsiyariyê.", "Di têkilîya azadî û berpirsiyariyê de."],
    gen:["Têkilîya azadî û berpirsiyariyê", "Têkilîya me"]),
 
-  (id:"c1_1064", ku:"Endezyarîya sosyal", tr:"Sosyal mühendislik", en:"Social engineering",
-   cins:"mê", ez:"endezyarîya sosyal", kat:"civakî", zor:0.59,
-   not:"\"Endezyarî\"+\"sosyal\". Sosyal dönüşüm tasarımı.",
-   her:["Endezyarîya sosyal.", "Di endezyarîya sosyal de."],
-   gen:["Endezyarîya sosyal", "Endezyarîya me"]),
+  (id:"c1_1064", ku:"Endezyariya civakî", tr:"Sosyal mühendislik", en:"Social engineering",
+   cins:"mê", ez:"endezyariya civakî", kat:"civakî", zor:0.59,
+   not:"\"Endezyarî\"+\"civakî\" (xwemalî; \"sosyal\" tr-alıntı, \"civakî\" standart Kurmancî). Sosyal dönüşüm tasarımı.",
+   her:["Endezyariya civakî.", "Di endezyariya civakî de."],
+   gen:["Endezyariya civakî", "Endezyariya me"]),
 
   (id:"c1_1065", ku:"Helwest û nirx", tr:"Tutum ve değerler", en:"Attitude and values",
    cins:"bêcins", ez:null, kat:"nirx", zor:0.60,
@@ -1827,11 +1825,11 @@ final kC1_Son117 = [
    gen:["Dem û cihê vegotinê", "Dem û cihê me"]),
 
   // ── CIVAKÎ (toplum) — 12 ──────────────────────────────────────
-  (id:"c1_610", ku:"Têkoşîna sinifî", tr:"Sınıf mücadelesi", en:"Class struggle",
-   cins:"mê", ez:"têkoşîna sinifî", kat:"civakî", zor:0.59,
-   not:"\"Têkoşîn\"+\"sinifî\". Marksist kavram, Kürt bağlamına uyarlanmış.",
-   her:["Têkoşîna sinifî û neteweyî.", "Di têkoşîna sinifî de."],
-   gen:["Têkoşîna sinifî", "Têkoşîna me"]),
+  (id:"c1_610", ku:"Têkoşîna çînî", tr:"Sınıf mücadelesi", en:"Class struggle",
+   cins:"mê", ez:"têkoşîna çînî", kat:"civakî", zor:0.59,
+   not:"\"Têkoşîn\"+\"çînî\" (ji \"çîn\" = sınıf, standart Kurmancî; \"sinifî\" tr-alıntı). Marksîst têgeh, pergala Kurdî.",
+   her:["Têkoşîna çînî û neteweyî.", "Di têkoşîna çînî de."],
+   gen:["Têkoşîna çînî", "Têkoşîna me"]),
 
   (id:"c1_611", ku:"Komên civakî yên qeyran", tr:"Kriz toplumsal grupları", en:"Social crisis groups",
    cins:"bêcins", ez:"komên civakî yên qeyran", kat:"civakî", zor:0.58,
@@ -1852,11 +1850,11 @@ final kC1_Son117 = [
    gen:["Girêdana civakî", "Girêdana me"]),
 
   // ── ZANIST (bilim) — 10 ───────────────────────────────────────
-  (id:"c1_614", ku:"Metodên nitelî û nicelikî", tr:"Nitel ve nicel yöntemler", en:"Qualitative and quantitative methods",
-   cins:"bêcins", ez:"metodên nitelî û nicelikî", kat:"zanist", zor:0.59,
-   not:"\"Metodên nitelî\" = nitel, \"nicelikî\" = nicel. Araştırma metodolojisi.",
-   her:["Metodên nitelî û nicelikî.", "Di metodên nitelî û nicelikî de."],
-   gen:["Metodên nitelî û nicelikî", "Metodên me"]),
+  (id:"c1_614", ku:"Rêbazên çawaniyî û hejmarî", tr:"Nitel ve nicel yöntemler", en:"Qualitative and quantitative methods",
+   cins:"bêcins", ez:"rêbazên çawaniyî û hejmarî", kat:"zanist", zor:0.59,
+   not:"\"Çawaniyî\" (kalitatif, ji \"çawanî\" = nitelik) + \"hejmarî\" (kantitatif, ji \"hejmar\" = sayı). \"Nitelî/nicelikî\" tr-alıntı, Kurmancî'de xwemalî form tercih dibe.",
+   her:["Rêbazên çawaniyî û hejmarî.", "Di rêbazên çawaniyî û hejmarî de."],
+   gen:["Rêbazên çawaniyî û hejmarî", "Rêbazên me"]),
 
   (id:"c1_615", ku:"Danasîna teorîk", tr:"Teorik çerçeve", en:"Theoretical framework",
    cins:"mê", ez:"danasîna teorîk", kat:"zanist", zor:0.59,
@@ -1890,11 +1888,11 @@ final kC1_Son117 = [
    gen:["Rêza encamgirtinê", "Rêza me"]),
 
   // ── KIMLIK — 10 ───────────────────────────────────────────────
-  (id:"c1_620", ku:"Xwebarkirina nasnameya xwe", tr:"Kimliğini kabul ettirme", en:"Asserting one's identity",
-   cins:"mê", ez:"xwebarkirina nasnameya xwe", kat:"kimlik", zor:0.59,
-   not:"\"Xwebarkirin\"+\"nasname\". Kimlik görünürlüğü.",
-   her:["Xwebarkirina nasnameya xwe.", "Di xwebarkirina nasnameya xwe de."],
-   gen:["Xwebarkirina nasnameya xwe", "Nasnamaya me"]),
+  (id:"c1_620", ku:"Ragihandina nasnameya xwe", tr:"Kimliğini ifade etme/sahiplenme", en:"Asserting one's identity",
+   cins:"mê", ez:"ragihandina nasnameya xwe", kat:"kimlik", zor:0.59,
+   not:"\"Ragihandin\" (=ifade etmek, ilan etmek, standart Kurmancî) + \"nasname\". \"Xwebarkirin\" uydurma; \"ragihandin\" yerleşik. Kimlik görünürlüğü.",
+   her:["Ragihandina nasnameya xwe mafekî bingehîn e.", "Di ragihandina nasnameya xwe de."],
+   gen:["Ragihandina nasnameya xwe", "Nasnameya me"]),
 
   (id:"c1_621", ku:"Wekhevîya nasnameyan", tr:"Kimliklerin eşitliği", en:"Equality of identities",
    cins:"mê", ez:"wekhevîya nasnameyan", kat:"kimlik", zor:0.59,
@@ -2149,7 +2147,7 @@ final kC1_KalanGrup = [
 
   (id:"c1_718", ku:"Peymana aştiyê", tr:"Barış anlaşması", en:"Peace agreement",
    cins:"mê", ez:"peymana aştiyê", kat:"siyaset", zor:0.62,
-   not:"\"Peymanam\"+\"aştî\". Kürt barış süreci bağlamı.",
+   not:"\"Peyman\"+\"aştî\". Kürt barış süreci bağlamı.",
    her:["Peymana aştiyê hat.", "Di peymana aştiyê de."],
    gen:["Peymana aştiyê", "Peymana me"]),
 
@@ -2238,7 +2236,7 @@ final kC1_Bitis = [
   (id:"c1_913", ku:"Vejîna ferhengê", tr:"Kültürün canlanması", en:"Cultural revival", cins:"mê", ez:"vejîna ferhengê", kat:"çand", zor:0.60, not:"\"Vejîn\"+\"ferheng\". Kültürel yeniden doğuş.", her:["Vejîna ferhengê.","Di vejîna ferhengê de."], gen:["Vejîna ferhengê","Vejîna me"]),
   (id:"c1_914", ku:"Nifşa pêşerojê", tr:"Gelecek nesil", en:"Future generation", cins:"mê", ez:"nifşa pêşerojê", kat:"jiyan", zor:0.61, not:"\"Nifş\"+\"pêşeroj\". Dil mirasının aktarımı.", her:["Nifşa pêşerojê.","Di nifşa pêşerojê de."], gen:["Nifşa pêşerojê","Nifşa me"]),
   (id:"c1_915", ku:"Têkilîya berî û piştî şerî", tr:"Savaş öncesi ve sonrası ilişkisi", en:"Pre and post-war relation", cins:"mê", ez:"têkilîya berî û piştî şerî", kat:"dîrok", zor:0.59, not:"\"Têkilî\"+\"berî û piştî şerî\".", her:["Têkilîya berî û piştî şerî.","Di têkilîya berî û piştî şerî de."], gen:["Têkilîya berî û piştî şerî","Têkilîya me"]),
-  (id:"c1_916", ku:"Înkâra çandî ya dewletê", tr:"Devletin kültürel inkârı", en:"State's cultural denial", cins:"mê", ez:"înkâra çandî ya dewletê", kat:"siyaset", zor:0.60, not:"\"Înkâr\"+\"çandî\"+\"dewlet\". Kürt meselesinin özü.", her:["Înkâra çandî ya dewletê.","Di înkâra çandî ya dewletê de."], gen:["Înkâra çandî ya dewletê","Înkâra me"]),
+  (id:"c1_916", ku:"Înkara çandî ya dewletê", tr:"Devletin kültürel inkârı", en:"State's cultural denial", cins:"mê", ez:"înkara çandî ya dewletê", kat:"siyaset", zor:0.60, not:"\"Înkar\" (Erebî alıntı; Kurmancî alfabesinde â yok, î kullanılır) + \"çandî\" + \"dewlet\". Pirsgirêka kurdî ya bingehîn.", her:["Înkara çandî ya dewletê.","Di înkara çandî ya dewletê de."], gen:["Înkara çandî ya dewletê","Înkara me"]),
   (id:"c1_917", ku:"Berxwedana kultural", tr:"Kültürel direniş", en:"Cultural resistance", cins:"mê", ez:"berxwedana kultural", kat:"çand", zor:0.61, not:"\"Berxwedan\"+\"kultural\". Sanat ve edebiyat yoluyla direniş.", her:["Berxwedana kultural.","Di berxwedana kultural de."], gen:["Berxwedana kultural","Berxwedana me"]),
   (id:"c1_918", ku:"Têbigihîştina zimanî", tr:"Dil farkındalığı", en:"Language awareness", cins:"mê", ez:"têbigihîştina zimanî", kat:"ziman", zor:0.59, not:"\"Têbigihîştin\"+\"zimanî\". Metalinguistik farkındalık.", her:["Têbigihîştina zimanî lazim e.","Di têbigihîştina zimanî de."], gen:["Têbigihîştina zimanî","Têbigihîştina me"]),
   (id:"c1_919", ku:"Rêbaza rexneyî", tr:"Eleştirel yöntem", en:"Critical method", cins:"mê", ez:"rêbaza rexneyî", kat:"akademik", zor:0.58, not:"\"Rêbaz\"+\"rexneyî\". Eleştirel düşünme metodolojisi.", her:["Rêbaza rexneyî.","Di rêbaza rexneyî de."], gen:["Rêbaza rexneyî","Rêbaza me"]),
@@ -2260,56 +2258,56 @@ final kC1Nihayi5 = [...kC1_Tamam9];
 // ── C1 Ek Tamamlama — kategorileri 12'ye tamamlama ──
 final kC1_EkTamam = [
   // ── nirx (4 ek kelime — değer/etik) ──
-  (id:"c1_1070", ku:"wekhevî", tr:"Eşitlik", en:"Equality",
-   cins:"mê", ez:"wekhevî", kat:"nirx", zor:0.58,
-   not:"Nirxa bingehîn a civakî.",
-   her:["Wekhevî mafekî bingehîn e.", "Di wekhevîyê de."], gen:["Wekhevî","Wekhevîya me"]),
+  (id:"c1_1070", ku:"Wekhevî", tr:"Eşitlik", en:"Equality",
+   cins:"mê", ez:"wekheviyê", kat:"nirx", zor:0.58,
+   not:"Dişil — \"wek\"+\"hev\"+\"-î\". Nirxa bingehîn a civakî. [BH] n.f.",
+   her:["Wekhevî mafekî bingehîn e.", "Di wekheviyê de."], gen:["Wekhevî","Wekheviya me"]),
 
-  (id:"c1_1071", ku:"dadperwerî", tr:"Adalet severlik", en:"Justice-loving / Fairness",
-   cins:"mê", ez:"dadperwerî", kat:"nirx", zor:0.59,
-   not:"Nirxa exlaqî.",
-   her:["Dadperwerî girîng e.", "Di dadperwerîyê de."], gen:["Dadperwerî","Dadperwerîya me"]),
+  (id:"c1_1071", ku:"Dadperwerî", tr:"Adalet / Adil olma", en:"Justice / Fairness",
+   cins:"mê", ez:"dadperweriyê", kat:"nirx", zor:0.59,
+   not:"Dişil — \"dad\"+\"perwerî\". Nirxa exlaqî/felsefî.",
+   her:["Dadperwerî girîng e.", "Di dadperweriyê de."], gen:["Dadperwerî","Dadperweriya me"]),
 
-  (id:"c1_1072", ku:"dilsozî", tr:"Sadakat / Bağlılık", en:"Loyalty / Faithfulness",
-   cins:"mê", ez:"dilsozî", kat:"nirx", zor:0.60,
-   not:"Nirxa pêwendîyan.",
-   her:["Dilsozî nirxekî bilind e.", "Di dilsozîyê de."], gen:["Dilsozî","Dilsozîya me"]),
+  (id:"c1_1072", ku:"Dilsozî", tr:"Sadakat / Bağlılık", en:"Loyalty / Faithfulness",
+   cins:"mê", ez:"dilsoziyê", kat:"nirx", zor:0.60,
+   not:"Dişil — \"dil\"+\"soz\"+\"-î\". Nirxa pêwendîyan.",
+   her:["Dilsozî nirxekî bilind e.", "Di dilsoziyê de."], gen:["Dilsozî","Dilsoziya me"]),
 
-  (id:"c1_1073", ku:"berpirsiyarî", tr:"Sorumluluk", en:"Responsibility",
-   cins:"mê", ez:"berpirsiyarî", kat:"nirx", zor:0.59,
-   not:"Nirxa civakî.",
-   her:["Berpirsiyarî peywir e.", "Di berpirsiyarîyê de."], gen:["Berpirsiyarî","Berpirsiyarîya me"]),
+  (id:"c1_1073", ku:"Berpirsiyarî", tr:"Sorumluluk", en:"Responsibility",
+   cins:"mê", ez:"berpirsiyariyê", kat:"nirx", zor:0.59,
+   not:"Dişil — \"ber\"+\"pirs\"+\"-yarî\". Nirxa civakî û exlaqî.",
+   her:["Berpirsiyarî peywira her kesî ye.", "Di berpirsiyariyê de."], gen:["Berpirsiyarî","Berpirsiyariya me"]),
 
   // ── pîşe (3 ek kelime) ──
-  (id:"c1_1074", ku:"dîplomat", tr:"Diplomat", en:"Diplomat",
-   cins:"nêr", ez:"dîplomat", kat:"pîşe", zor:0.58,
-   not:"Pîşeya dîplomasiyê.",
-   her:["Dîplomat danûstandin kir.", "Dîplomatê kurd."], gen:["Dîplomat","Dîplomatê me"]),
+  (id:"c1_1074", ku:"Dîplomat", tr:"Diplomat", en:"Diplomat",
+   cins:"bêcins", ez:"dîplomatê", kat:"pîşe", zor:0.58,
+   not:"Uluslararası terim. Cins: bêcins (hem nêr hem mê; \"dîplomatê/a kurd\"). Pîşeya dîplomasiyê.",
+   her:["Dîplomat danûstandin kir.", "Dîplomatê/a kurd."], gen:["Dîplomat","Dîplomatê me"]),
 
-  (id:"c1_1075", ku:"zanistvan", tr:"Bilim insanı", en:"Scientist",
-   cins:"nêr", ez:"zanistvan", kat:"pîşe", zor:0.59,
-   not:"Pîşeya zanistê.",
-   her:["Zanistvan lêkolîn kir.", "Zanistvanê navdar."], gen:["Zanistvan","Zanistvanê me"]),
+  (id:"c1_1075", ku:"Zanistvan", tr:"Bilim insanı", en:"Scientist",
+   cins:"bêcins", ez:"zanistvanê", kat:"pîşe", zor:0.59,
+   not:"\"Zanist\"+\"-van\" (standart Kurmancî nêolojîzmek; krş. \"lêkolînvan\"). Cins: bêcins.",
+   her:["Zanistvan lêkolîn kir.", "Zanistvanê/a navdar."], gen:["Zanistvan","Zanistvanê me"]),
 
-  (id:"c1_1076", ku:"fîlozof", tr:"Filozof", en:"Philosopher",
-   cins:"nêr", ez:"fîlozof", kat:"pîşe", zor:0.60,
-   not:"Pîşeya felsefeyê.",
-   her:["Fîlozof pirsan dipirse.", "Fîlozofê kurd."], gen:["Fîlozof","Fîlozofê me"]),
+  (id:"c1_1076", ku:"Fîlozof", tr:"Filozof", en:"Philosopher",
+   cins:"bêcins", ez:"fîlozofê", kat:"pîşe", zor:0.60,
+   not:"Uluslararası terim. Cins: bêcins. Pîşeya felsefeyê.",
+   her:["Fîlozof pirsan dipirse.", "Fîlozofê/a kurd."], gen:["Fîlozof","Fîlozofê me"]),
 
   // ── leker (2 ek kelime) ──
-  (id:"c1_1077", ku:"pêkanîn", tr:"Başarmak / Gerçekleştirmek", en:"To achieve / To accomplish",
-   cins:"mê", ez:"pêkanîn", kat:"leker", zor:0.59,
-   not:"Lêkera serkeftinê.",
-   her:['Em pêkanîn projeya nû.', 'Pêkanîn a hêviyê bi xebatê tê.'], gen:["Pêkanîn","Pêkanîna me"]),
+  (id:"c1_1077", ku:"Pêkanîn", tr:"Başarmak / Gerçekleştirmek", en:"To achieve / accomplish",
+   cins:"bêcins", ez:null, kat:"leker", zor:0.59,
+   not:"\"Pêk\"+\"anîn\" (=vücuda getirmek). Ergatîf: \"Me projeya nû pêk anî.\"",
+   her:["Me projeya nû pêk anî.", "Pêkanîna hêviyê bi xebatê tê."], gen:["Pêk anîn û pêşxistin","Pêkanîna me"]),
 
-  (id:"c1_1078", ku:"destnîşankirin", tr:"Belirlemek / Tespit etmek", en:"To identify / To determine",
-   cins:"mê", ez:"destnîşankirin", kat:"leker", zor:0.60,
-   not:"Lêkera akademîk.",
-   her:["Me pirsgirêk destnîşan kir.", "Destnîşankirina armancê."], gen:["Destnîşankirin","Destnîşankirina me"]),
+  (id:"c1_1078", ku:"Destnîşan kirin", tr:"Belirlemek / Tespit etmek", en:"To identify / determine",
+   cins:"bêcins", ez:null, kat:"leker", zor:0.60,
+   not:"\"Destnîşan\"+\"kirin\" (=el ile işaret; akademik dilde \"tespit etmek\"). Ergatîf: \"Me destnîşan kir.\"",
+   her:["Me pirsgirêk destnîşan kir.", "Gotar destnîşan dike ku..."], gen:["Destnîşan kirin","Destnîşankirina armancê"]),
 
   // ── ekolojî (1 ek kelime) ──
-  (id:"c1_1079", ku:"berjewendîya jîngeh", tr:"Çevre çıkarı", en:"Environmental interest",
-   cins:"mê", ez:"berjewendîya jîngeh", kat:"ekolojî", zor:0.59,
+  (id:"c1_1079", ku:"Berjewendîya jîngehê", tr:"Çevre çıkarı", en:"Environmental interest",
+   cins:"mê", ez:"berjewendîya jîngehê", kat:"ekoloji", zor:0.59,
    not:"Berjewendîya jîngeh û civakê.",
    her:["Berjewendîya jîngeh girîng e.", "Di berjewendîya jîngeh de."], gen:["Berjewendîya jîngeh","Berjewendîya me"]),
 ];

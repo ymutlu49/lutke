@@ -22,6 +22,8 @@ import '../../../core/constants/app_colors.dart';
 import '../../../core/constants/app_typography.dart';
 import '../../../core/constants/app_spacing.dart';
 import '../../../shared/providers/language_mode_provider.dart';
+import '../../../shared/providers/learning_module_provider.dart';
+import '../../en_learning/presentation/en_coming_soon_screen.dart';
 import '../../lessons/domain/heritage_dialogues.dart';
 
 // ════════════════════════════════════════════════════════════════
@@ -60,7 +62,7 @@ final List<StoryData> kStoryList = [
     dialogue: kDialoguePiree,
     questions: [
       const ComprehensionQuestion(
-        question: 'Kî got "Rûne, rûne! Ezê çay bikim"?',
+        question: 'Kî got "Rûne, rûne! Ez ê çayekê ji bo te çêkim"?',
         options: ['Elif', 'Dapîr', 'Dê'],
         correctIndex: 1,
       ),
@@ -100,7 +102,7 @@ final List<StoryData> kStoryList = [
       ),
       const ComprehensionQuestion(
         question: 'Zeynep sibê çi dike?',
-        options: ['Dibistanê diçe', 'Tê malê', 'Dersê dixwîne'],
+        options: ['Dibistanê diçe', 'Tê malê', 'Wanê dixwîne'],
         correctIndex: 1,
       ),
     ],
@@ -318,6 +320,18 @@ class _StoryScreenState extends ConsumerState<StoryScreen> {
 
   @override
   Widget build(BuildContext context) {
+    // ── TRACK-AWARE GUARD ──────────────────────────────────
+    // Kurmancî heritage diyalogları yalnızca KU track için.
+    // EN track → "Coming soon" + EN Reading önerisi.
+    final isEn = ref.watch(isEnglishModuleProvider);
+    if (isEn) {
+      return const EnComingSoonScreen(
+        activityKu: 'Çîrok',
+        suggestedRoute: '/en/reading',
+        suggestedLabel: 'EN Reading',
+      );
+    }
+
     final showTurkish = ref.watch(showTurkishProvider);
 
     return Scaffold(
@@ -330,7 +344,7 @@ class _StoryScreenState extends ConsumerState<StoryScreen> {
           onPressed: () => context.pop(),
         ),
         title: Text(
-          'Cirok',
+          'Çîrok',
           style: AppTypography.headline.copyWith(
             color: AppColors.textPrimary,
           ),

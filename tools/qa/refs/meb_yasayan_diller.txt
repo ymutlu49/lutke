@@ -1,0 +1,2663 @@
+                                      T.C.
+                       MLLÎ ETM BAKANLII
+                Talim ve Terbiye Kurulu Bakanlii
+
+ORTAOKUL VE MAM HATP ORTAOKULU YAAYAN DLLER
+                   VE LEHÇELER DERS (KÜRTÇE)
+                          ÖRETM PROGRAMI
+
+                               ANKARA 2012
+
+                                                            1
+                                                        ÇNDEKLER
+
+ÇNDEKLER ..................................................................................................................................................................2
+
+1. GR.............................................................................................................................................................................. 3
+
+   1.1. DLLER ÇN AVRUPA ORTAK BAVURU METN'NN ESAS ALINMASI ............................................................... 5
+
+2. PROGRAMIN VZYONU ............................................................................................................................................ 9
+
+3. PROGRAMIN YAPISI ................................................................................................................................................. 9
+
+   3.1. GENEL AMAÇLAR ..................................................................................................................................................... 9
+   3.2 PROGRAMIN KAPSAMI ............................................................................................................................................. 10
+   3.3 ÖRENME ALANLARI............................................................................................................................................... 10
+
+       3.3.1 Dinleme ........................................................................................................................................................... 11
+       3.3.2 Konuma (Karilikli Konuma ve Sözlü Anlatim) ........................................................................................... 13
+       3.3.3 Okuma ............................................................................................................................................................. 14
+       3.3.4 Yazma .............................................................................................................................................................. 17
+   3.4 KAZANIMLAR........................................................................................................................................................... 19
+   3.5 AÇIKLAMALAR......................................................................................................................................................... 20
+   3.6 ETKNLKLER ........................................................................................................................................................... 20
+   3.7 DL YAPILARI........................................................................................................................................................... 21
+   3.8 TEMALAR VE ÇERK ÖNERLER .............................................................................................................................. 21
+   3.9 TEMALAR VE ÇERK ÖNERLERNE LKN AÇIKLAMALAR .................................................................................... 22
+
+4. ÖRENME-ÖRETME SÜREC ............................................................................................................................ 24
+
+   4.1 DL ÖRETM LKELER............................................................................................................................................ 26
+   4.2 KÜRTÇE (KURMANCCA VE ZAZACA) DL ÖRETMNDE ÖRENME ORTAMININ DÜZENLENMES ....................... 27
+   4.3 ÖRETMENN ROLÜ ............................................................................................................................................. 27
+   4.4 ÖRENCNN ROLÜ .................................................................................................................................................. 28
+
+5. KÜRTÇE ÖRETMNDE YARARLANABLECEK GENEL ÖRETM YÖNTEM VE TEKNKLER.... 28
+
+       5.1 Öretim Yöntemleri ............................................................................................................................................ 29
+       5.2 Öretim Teknikleri ............................................................................................................................................. 35
+
+6. YANLI DÜZELTME STRATEJLER .................................................................................................................. 40
+
+7. ÖLÇME VE DEERLENDRME............................................................................................................................. 41
+
+   7.1 TAMAMLAYICI ÖLÇME VE DEERLENDRME TEKNKLER ....................................................................................... 41
+       7.1.1 Performans Görevi .......................................................................................................................................... 42
+       7.1.2 Proje................................................................................................................................................................ 44
+       7.1.3 Sözlü Sunumlar................................................................................................................................................ 45
+       7.1.4 Ürün Dosyasi (Portfolyo), Kavrama ............................................................................................................... 46
+       7.1.5 Gözlem............................................................................................................................................................. 47
+       7.1.6 Görüme .......................................................................................................................................................... 48
+
+   7.2 ÖRENCLERN DEERLENDRME SÜRECNE KATILIMI............................................................................................ 49
+       7.2.1 Öz (kendini) Deerlendirme ............................................................................................................................ 50
+       7.2.2 Akran Deerlendirmesi ................................................................................................................................... 51
+
+8. KÜRTÇE (KURMANCCA VE ZAZACA) DERS ÖRETM PROGRAMI KAZANIMLARI........................ 52
+
+9. ETKNLK ÖRNEKLER.......................................................................................................................................... 57
+
+   ETKNLK 1 .................................................................................................................................................................... 57
+   ETKNLK 2 .................................................................................................................................................................... 58
+   ETKNLK 3 .................................................................................................................................................................... 60
+   ETKNLK 5 .................................................................................................................................................................... 63
+
+       Etkinlik 7 ................................................................................................................................................................. 65
+       Etkinlik 8 .................................................................................................................................................................. 66
+       Etkinlik 9 .................................................................................................................................................................. 67
+       Etkinlik 10 ................................................................................................................................................................ 68
+
+11. YARARLANILAN KAYNAKLAR.......................................................................................................................... 71
+
+                                                            2
+1. GR
+
+         Bu program ortaokul 5, 6, 7, ve 8. siniflar seçmeli Kürtçe dersinin ve Kürtçe'nin iki lehçesi
+Kurmancca ve Zazaca için müterek olarak hazirlanmitir. Program metninde geçen "Kürtçe"
+kelimesi Kurmancca ve Zazaca lehçelerine birlikte iaret etmektedir. Ders örencilerin Kurmancca
+ve Zazaca'da temel iletiim becerilerini gelitirmeyi hedeflemektedir. Bu dersi alan örencilerin
+Kürtçe'de temel iletiim becerilerine ek olarak bu dildeki yeterliklerini daha üst düzeye eritirmek
+için gereken temeli de oluturmalari amaçlanmitir. Hedef gruptaki örencilerin ya, ilgi ve
+ihtiyaçlari dikkate alinarak, bilisel, duyusal ve psikomotor alanlarla ilgili becerileri ve kültürler
+arasi iletiim becerilerini gelitirmeye odaklanilmitir.
+
+         Programin hazirlanmasinda "yapilandirmaci" dil öretimi yaklaimi benimsenmi ve
+özellikle yapilandirmaci örenmede Piaget, Vygotsky ve Bruner'in çalimalarina dayali bir yaklaim
+esas alinmitir. Bu yaklaim örenmede bireyin zihinsel süreçleri ile ilgilenir. Aktif düünen, bilgiyi
+edinen ve edindii bilgiyi geçmi deneyimleri ve örenmeleriyle ilikilendiren, aratiran,
+sorgulayan, bilgiye erierek bilgiyi etkin kullanan ve yeni bilgiler elde ederek örenme sürecinde
+aktif rol oynayan bireylerin yetitirilmesi amaçlanir (Güne, 2011). Buna göre birey, çevresi ile
+iletiim ve sosyal etkileim süreçlerinde aktif ekilde yer alarak daha anlamli ve kalici örenir.
+Yapilandirmaci yaklaimin esas alindii programda örencilerin çok boyutlu ve örenme sürecinde
+aktif kilinmasini salamak amaciyla programin oluturulmasinda dört temel dil becerisi (dinleme,
+okuma, konuma ve yazma) esas alinmitir. Özellikle gramer temelli ve tek yönlü bir yaklaimdan
+kaçinilmi ve dilin çok yönlü kullanimina ilikin tüm hususlar göz önünde bulundurulmutur. Hedef
+gruptaki örencilerin ilgi, ihtiyaç ve beklentilerini karilayacak, yakindan uzaa, basitten zora ve
+gündelik hayata dair temalar ve bu temalara ilikin güncel içerik önerileri hazirlanmitir. Buna
+ilaveten örencilerin zihinsel, duyusal ve bedensel geliimleri de göz önünde bulundurularak ayni
+zamanda hedef gruba yönelik bilgi, beceri ve tutum gelitirmeye yönelik kazanimlar gelitirilmitir.
+Kazanimlarin gelitirilmesinde örencilerin bireysel geliim, ilgi ve ihtiyaçlari ile birlikte dinleme,
+okuma, konuma ve yazmaya yönelik dil becerileri arasinda tutarlilik ve ilikisellik unsurlari göz
+önünde bulundurulmutur. Kazanimlara ilaveten öretmenlere yönelik olarak yazilan ve her bir
+kazanimin örencilere kazandirilmasinda dikkat edilecek çerçeve ve sinirlari belirlemeye yönelik
+açiklamalar yer almaktadir. Ayrica, programda özellikle dil öretiminde dikkat edilecek hususlar ve
+etkili öretimde kullanilabilecek yöntem ve tekniklerle örnek etkinliklere yer verilmitir. Bununla
+balantili olarak programda belirlenen kazanimlarin örenciler tarafindan ne düzeyde kazanildii ve
+örenme eksikliklerini belirlemeye yönelik öretmenlerin ve örencilerin kullanabilecekleri ölçme
+
+                                                            3
+ve deerlendirme yöntemleri ve materyallerine yer verilmitir. Programin, bu bölümlerin ilikisel ve
+bütünleyici bir ekilde sunulduu ve temelde etkili, anlamli ve kalici bir örenme salayacak
+nitelie sahip olmasina özen gösterilmitir.
+
+         Öretim programi eitimcilere yönelik olarak, örenmeyi kilavuzlamada yol gösterici bir
+çerçeve ve harita sunmakla birlikte ders kitabi, örenci çalima kitabi ve öretmen kilavuz kitabi
+yazacak olanlara yönelik de bir rehber niteliindedir. Özellikle dersin temel bavuru kaynai olan
+ders kitabi ve dier materyallerin hazirlanmasinda mevcut program titizlikle incelenmelidir.
+Programda belirlenen her bir kazanim ve ilgili açiklamalar göz önünde bulundurularak örenci
+merkezli, etkinlik temelli, bireysel ve grup çalimasina uygun ve görsel unsurlari zenginletirilmi
+ders kitaplari programi bütünleyici ve amaca ulamada destekleyici bir ilev görecektir.
+
+         Kürtçe ders programinin hazirlanmasinda "Diller çin Avrupa Ortak Bavuru Metni"nde
+belirlenen düzeyler esas alinmitir. Söz konusu metinde belirlenen düzeyler çerçevesinde hazirlanan
+program ayni zamanda modüler bir nitelik de taimaktadir. Her bir düzeyde öretim ilkeleri dikkate
+alinarak kolaydan zora, basitten karmaia, yakindan uzaa, somuttan soyuta, bilinenden
+bilinmeyene doru bir geliim göstermektedir. Bu bakimdan programda belirlenen düzeyler farkli
+siniflardaki örencilerin ayni düzeyi bir arada örenmelerine uygun bir yapida hazirlanmitir.
+Örnein, Kurmancca veya Zazaca'yi ilk defa seçecek bir ortaokul 5. ve 8. sinif örencisi ayni grupta
+ilk düzeyi alabileceklerdir. Dolayisiyla örenci, beinci siniftan itibaren Kurmancca veya Zazacayi
+seçerek her yil alabilecei gibi ilk kez dördüncü sinifta da alabilecektir. Bu bakimdan program sinif
+düzeylerinden ziyade hedef gruptaki örencilerin geliim özellikleri ve dil düzeyleri esas alinarak
+ele alinmalidir.
+
+        Öretmenler, özellikle programin hedef grubundaki ortaokul örencilerinin ya araliini
+dikkate alarak etkinlikleri gelitirmeli ve düzeye uygun materyallerle öretim sürecine rehberlik
+etmelidirler. 10-14 ya araliindaki örenciler olay ve olgular hakkinda ilikisel düünmeye balar
+ve daha çok grup çalimasini tercih ederler. Ayrica, özellikle bu ya aralii somut düünme
+biçiminden soyut düünceye geçi dönemidir. Sosyalleme ve akran ilikilerinin daha fazla önem
+taidii bu dönemde öretmenler öretim sürecini planlamada örencilerin iletiim ve sosyal
+etkileime dayali eilimini göz ardi etmemelidir. Bu bakimdan, öretmenler, dil öretiminde
+örencinin aktif kilinacai, etkinlik temelli, bireysel ve etkileimsel yöntemleri kullanmalidir.
+Özellikle hedef gruptaki örencilerin ya ve geliim özellikleri örenme ortam ve süreçlerini aktif,
+etkinlik temelli ve kendilerinin katilacai ekilde yapilandirmayi zorunlu kilmaktadir.
+
+                                                            4
+         Özellikle dil öretiminde öretmen, öretimini gerçekletirecei dilde konuarak dersi
+ilemelidir. Bu dile yabanci olan örenciler için bir süre zorlayici olabilir. Ayrica, öretmende de bir
+yilginlik sonucu anladiklari dil ile öretimi gerçekletirmeye yönelme gibi bir eilim olabilmektedir.
+Ancak, düzeye uygun cümle yapilari ve açiklamalarla öretimi yapilacak dilde örencilerle iletiim
+kurmak bir süre sonra örencilerin temel düzeyde dinleme becerileri kazanmalarini da salami
+olacaktir. Bu nedenle öretmen Kurmancca ve Zazaca dersini ilerken dili sabir ve israrla konuarak
+örencilerin konuma ve dinleme becerilerini desteklemelidir.
+
+         Dil örenmede bir dier önemli husus "örencinin motivasyonu" sorunudur. Örencinin
+haftada iki saatlik bir derste ileri düzeyde bir dil kullanicisi durumuna gelmesini beklemek oldukça
+yüksek bir beklentidir. Buna karin örencinin ders süresince etkinlik temelli, grup ve bireysel
+çalima becerileri edinmesi, dil örenme yöntemleri ve kiisel örenme stilinin tespiti yoluyla sinif
+diinda da örenmeye yönlendirilmelidir. Örencilere yönelik ders dii çalima aktivitelerini ve
+örenme yöntemlerini belirlemek ayrica, programin ön gördüü sürece dayali deerlendirme yöntem
+ve materyallerini kullanarak örenme düzeyini izlemek örenmede sinif dii motivasyon düzeyini de
+artiracaktir. Sonuç olarak öretmen sinif içi öretim sürecine ilaveten sinif dii örenme yöntem ve
+süreçlerini de planlamalidir.
+
+         Dil öretiminde önem taiyan bir dier husus gramer temelli bir öretimden ziyade dört
+temel dil becerisine (dinleme, okuma, konuma ve yazma) odaklanan bireysel, grup etkinlikleri ve
+aktif öretim, yöntem ve tekniklerine dayali olarak öretim sürecini planlamaktir. Programda da
+dorudan gramer öretimine yönelik kazanimlardan kaçinilmitir. Düzeye uygun gramer
+kurallarinin örenciler tarafindan örenilmesi elbette salanacaktir. Ancak bu çaba dorudan
+gramere yönelik bir öretim sürecinden ziyade dört temel dil becerileri üzerinden ele alinacak
+metinler, dinleme etkinlikleri, yazma ve konuma etkinlikleri içerisinde yeri geldii zaman
+örencilere sezdirilerek örenme salanacaktir.
+
+1.1. Diller çin Avrupa Ortak Bavuru Metni'nin Esas Alinmasi
+        Programin hazirlanmasinda Avrupa Konseyi tarafindan dil örenme ve öretimine ilikin
+
+uygulanmalara dair karilatirilabilir standartlar getiren "Diller çin Avrupa Ortak Bavuru Metni"
+çerçevesinde belirlenen düzeyler esas alinmi ve söz konusu metnin yaklaimlarindan
+yararlanilmitir. Metnin temel amaci Avrupa ülkelerinde dil öretim programlarini, program
+yönergelerini, sinav ve ders kitaplari vb. konulardaki çalimalari yönlendirmek için ortak bir çerçeve
+sunmaktir. Ayrica, bavuru metni yabanci dil örenenlerin, bu dili iletiim kurmada kullanabilmek
+için neleri bilmeleri ve bu dilde yeterlik sahibi olabilmeleri için hangi alanlarda ne düzeyde geliim
+
+                                                            5
+göstermeleri gerektiini kapsamli bir ekilde açiklamaktadir. Bu açiklamalar ayni zamanda dillerin
+kurulmu olduu kültür balamini da kapsamaktadir. Bu bakimdan bütün dillerin öretimi ve
+örenme sürecinin deerlendirilmesinde rehber ilevi görmektedir. Bavuru metni ayni zamanda
+yabanci dil örenenlerin gerçekletirecei ilerlemenin, örenmenin her aamasinda ve yaam boyu
+örenme temeliyle ölçülebilmesini salayan dil yeterlilik düzeylerini de tanimlamaktadir.
+
+         1991 yilinda konseye üye ülkelerin katildii bir sempozyumla sviçre'de temelleri atilan
+Diller çin Avrupa Ortak Bavuru Metni 1993-1996 yillari arasinda uluslararasi bir çalima grubu
+tarafindan hazirlanmi ve 1997 yilinda Konseye üye ülkeler tarafindan onaylanarak yürürlüe
+girmitir. Çok dilliliin ve çok kültürlülüün önemini ve bu öneme istinaden dillerin korunmasi ve
+gelitirilmesine vurgu yapan metin birçok dile çevrilmi ve Avrupa diinda da birçok ülkede kabul
+görmütür. 2009 yilinda Milli Eitim Bakanlii Talim ve Terbiye Kurulu Bakanlii'nca oluturulan
+bir komisyon tarafindan Türkçeye de çevrilmitir.
+
+         Diller çin Avrupa Ortak Bavuru Metni, dil örenenlere ve öretenlere yönelik örenme,
+öretme ve deerlendirme alanlarina ilikin bir bavuru rehberi niteliindedir. Rehberde bireysel
+örenme, örenen özerklii, yaam boyu örenme, dil ve kültürler arasi etkileimin önemi üzerinde
+durulmaktadir. Ayrica dil öretiminde örenen merkezli ve öz deerlendirme temelli bir yaklaim
+esas alinarak, örenenin ulamasi beklenen hedef, bilgi ve beceri düzeylerini esas alan bir yeterlik
+siniflandirmasi yapilmaktadir. Metinde belirlenen dile ilikin yeterlik düzeyleri temel (A1-A2),
+baimsiz (B1-B2) ve ileri düzey (C1-C2) kullanici olarak ifade edilmitir.
+
+                                   Tablo 1. OBM Ortak Bavuru Düzeyleri
+
+        A                  B              C
+
+    Temel Düzey        Ara Düzey      leri Düzey
+
+     Kullanici         Kullanici      Kullanici
+
+A1  A2                 B1         B2  C1                    C2
+                                                          Ustalik
+Giri/ Keif Ara/ Temel  Eik        leri/ Baimsiz Özerklik
+
+         Diller çin Avrupa Ortak Bavuru Metni de dikkate alinarak hazirlanan Kürtçe Dersi
+Öretim Programi'nda ortaokul 5. siniftan 8. sinifin sonuna kadar ulailmasi hedeflenen yeterlik
+
+                            6
+düzeyi B1 olarak belirlenmitir. Ancak ilk aamasi tamamlanan A1 düzeyi ilk kez bu dersi seçecek
+örenciler için bir öretim yilini kapsayacak ekilde yapilandirilmitir. Kürtçe Dersi Öretim
+Programi, haftada iki saatlik bir süre esas alinarak A1 düzeyi için hazirlanmitir. A1 düzeyinin
+yabanci bir dil öretimi için younlatirilmi ve air bir düzeye tekabül ettii düünülebilir. Ancak
+bu dersi dili Kürtçe olmayan bir örencinin seçebilmesinin yaninda, mevcut durum ve realite
+içerisinde dili Kürtçe olanlarin da seçmesi beklenmektedir. Program da bunu göz önüne alarak
+hazirlanmitir. Bu durum göz önünde bulundurularak program, bir yil için tasarlanan "balangiç,
+keif" (A1) düzeyinde daha youn bir içerii kapsayacak ekilde hazirlanmitir.
+
+         Bu kapsamda hazirlanan Kürtçe (Kurmancca ve Zazaca) Öretim Programinin, ders kitabi ve
+yardimci ders materyallerini hazirlayacak olanlara, öretmenlere ve bu dili örenecek olanlara
+yönelik örenci merkezli, etkinlik temelli bir kilavuz olarak i görecei düünülmektedir.
+
+         Ortaokul Kürtçe Dersi Öretim Programi, temel düzey ve ara düzeyin ilk aamasi (B1) için
+tasarlanan aaidaki kazanimlari içermektedir (OBM, 2009).
+
+ARA DÜZEY       Tablo 2. Ortak Yetenek Düzeyleri ­ Bütüncül Basamak
+KULLANICI
+                  Açik ve standart bir dil kullanildiinda ve i, okul, elence, gibi aina olduu ana
+TEMEL             konulari anlayabilir. Dilin konuulduu bir bölgeye yapilan yolculuk sirasinda
+DÜZEY      B1 karilailan durumlarin çounda sorunlarin altindan kalkabilir. Bildik ve ilgi alanina
+KULLANICI         giren konular üzerine yalin ve tutarli bir söylem üretebilir. Bir olayi, bir deneyimi ya
+                  da bir düü anlatabilir, bir beklentiyi betimleyebilir ve bir projeye veya bir düünceye
+                  ilikin gerekçeler ya da açiklamalari kisaca dile getirebilir.
+                  Tek cümleleri ve dorudan öncelik alanlariyla (söz gelimi yalin ve kiisel bilgiler ve
+                  aile bilgileri, aliveriler, yakin çevre, i) ilikili olarak siklikla kullanilan deyimleri
+           A2 anlayabilir. Bildik ve aliilagelen konular üzerinde yalnizca yalin ve dolaysiz bilgi
+                  aliveriini gerektiren basit ve bildik etkinlikler çerçevesinde iletiim kurabilir.
+                  Eitimini, çevresini yalin yollardan betimleyebilir ve dolaysiz gereksinimlerine denk
+                  düen konulari anlatabilir.
+                  Siradan ve gündelik deyilerle somut gereksinimleri karilamayi hedefleyen son
+                  derece yalin ifadeleri anlayabilir ve kullanabilir. Kendini veya bir bakasini tanitabilir
+           A1 ve bir kiiye, kendisiyle ilgili sorular sorar (Örnein oturduu yer, ilikileri, sahip
+                  olduu eyler, vb. üzerine) ve ayni türden sorulara yanit verebilir. Eer kendisiyle
+                  konuan kii yava yava ve tane tane kendisine yardimci olacak biçimde
+                  konuuyorsa, basit bir biçimde iletiim kurabilir.
+
+         Ortak bavuru metninde yeterlik düzeyleri örencinin öz deerlendirmesi esas alinarak
+tablolatirilmitir. Buna göre dersi A1, A2 ve B1 düzeyinde tasarlanan Kürtçe dersinin öz
+deerlendirme çizelgesi aaida gösterilmitir (OBM, 2009: 23, 24).
+
+           7
+                 Tablo 3. Ortak Yetenek Düzeyleri ­ Öz Deerlendirme Çizelgesi
+
+                                A1                           A2                                B1
+
+                     Eer karimdaki kii            Beni yakindan ilgilendiren   Açik ve uygun bir dil
+                     yava ve anlailir ekilde                                   kullanildiinda ve i, okul,
+                     konuuyorsa, kendimle,        Konulara ilikin (ailem,      Elence, vb. gibi bildik konular
+                     ailemle ve yakin çevrem                                   söz konusuysa, temel öeleri
+                     konusunda konuulan           aliveri, yakin çevre, i ve   anlayabilirim. Göreceli olarak
+                     basit sözcükleri ve                                       yava ve tane tane konuulmasi
+                     bilinen deyileri             okul gibi) anlatimlari ve    durumunda güncel olaylar, kiisel
+                     anlayabilirim.                                            veya mesleki olarak ilgimi çeken
+        Dinleme                                   sik kullanilan söz           birçok radyo ve televizyon
+                                                                               yayininin özünü anlayabilirim.
+                                                  daarciini anlayabilirim.
+
+                                                  Gazete ilanlarinin yalin ve
+
+ANLAMA                                            basit iletilerine ilikin
+
+                                                  temel              anlami
+
+                                                  kavrayabilirim.
+
+                     Bildik          isimleri,    Kisa ve çok yalin metinleri  Temelde gündelik ya da
+                                                                               mesleime ilikin bir dilde kaleme
+                     sözcükleri ve çok basit,     okuyabilirim. Reklam,        alinmi metinleri anlayabilirim.
+                                                                               Olaylara ilikin betimlemeleri,
+                     sözgelimi       ilanlarda,   prospektüs, menü ve tarife   duygularin betimini ve kiisel
+                                                                               mektuplarda yer alan dilekleri
+          Okuma      afilerde ya da               gibi gündelik belgelerde     anlayabilirim.
+
+             Bir     kataloglarda yer alan        öngörülen özel bir bilgiyi
+        Konumaya
+                     cümleleri anlayabilirim.     bulabilir, kisa ve yalin
+          Katilma
+                                                  kiisel           mektuplari
+            Sözlü
+           Olarak                                 anlayabilirim.
+         Kesintisiz
+        Konumak      Karimdaki                    Bildik     konu    ve        Konutuum dilin kullanildii
+
+           Yazma     konumacinin                  etkinliklerde yalin ve       bölgeye yaptiim bir yolculuk
+
+                     cümlelerini daha yavaça      dolaysiz           bilgi     sirasinda       karilailabilecek
+
+                     yinelemeyi veya yeniden      aliveriinden baka bir        durumlarin birçouyla baa
+
+                     oluturmayi      ve           ey gerektirmeyen basit ve    çikabilirim.    Bir  hazirlik
+
+                     söylemeye çalitiim           aliilagelen, etkinlikler     yapmaksizin, bildik ya da kiisel
+
+                     eyi düzeltmeyi kabul         sirasinda          iletiim   ilgi alanima giren veya gündelik
+
+                     etmesi kouluyla basit bir    kurabilirim. Genel olarak    yaama ilikin (örnein aile, bo
+
+                     iletiim kurabilirim. Basit   bir konumayi yeterince       zaman etkinlikleri, i, seyahat ve
+
+KONUMA               sorular, bildik konular ya   anlamasam da çok kisa        güncel olaylar) bir konumaya
+
+                     da dolaysiz bir              iletiim         aliveriinde  katilabilirim.
+
+                     gereksinim duyduum           bulunabilirim.
+
+                     eyler üzerine sorular
+
+                     sorabilir ve bu türden
+
+                     sorulari yanitlayabilirim.
+
+                     Oturduum yeri ve             Ailemi ve öteki kiileri,     Deneyimleri ve olaylari, dülerimi,
+                                                                               beklentilerimi ya da amaçlarimi
+                     tanidiim        kiileri      yaam            koullarimi,  anlatmak üzere kendimi basitçe
+                                                                               ifade edebilirim. Görülerime veya
+                     betimlemek için basit        eitimimi ve güncel ya da     projelerime kisa gerekçeler ve
+                                                                               açiklamalar getirebilirim. Bir
+                     deyimler ve tümceler         yakin mesleki etkinliimi     öyküyü ya da bir kitabin veya bir
+                                                                               filmi ana hatlar ile anlatabilirim ve
+                     kullanabilirim               yalin öelerle betimlemek     tepkilerimi dile getirebilirim.
+
+                                                  için bir dizi cümleden ya    Bildik ya da beni kiisel olarak
+                                                                               ilgilendiren konularda yalin ve
+                                                  da               anlatimdan  tutarli bir metin yazabilirim.
+                                                                               Deneyimleri ve izlenimleri
+                                                  yararlanabilirim.            betimlemek için kiisel mektuplar
+                                                                               yazabilirim.
+                     Basit, kisa, örnein bir      Basit ve kisa not ve
+                                                  mesajlar yazabilirim. Çok
+YAZMA                tatil           kartpostali  basit kiisel bir mektup
+                                                  (örnein bir teekkür
+                     yazabilirim.    Bir          mektubu) yazabilirim.
+
+                     soruturmaya ilikin
+
+                     kiisel          ayrintilari
+
+                     verebilirim.
+
+                                                         8
+2. PROGRAMIN VZYONU
+
+         Ortaokul Kürtçe Dersi Öretim Programi, Kurmancca veya Zazaca'yi bir iletiim araci
+olarak kullanabilen, dil örenmekten zevk alan, kültürel deerlerin farkinda olan ve farkli dil ve
+kültürlere zenginlik olarak bakabilen bireylerin yetimelerini hedeflemektedir.
+
+3. PROGRAMIN YAPISI
+
+         Kürtçe Dersi Öretim Programi aaidaki bölümlerden olumaktadir:
+3.1. Genel Amaçlar
+
+         Kürtçe Dersi Öretim Programi'nin amaci, Türk Millî Eitiminin Genel Amaçlari ve Temel
+lkelerine uygun olarak örencilerin;
+
+  Kürtçe örenmeye kari ilgisini artirmak,
+  Kürtçenin yaadii kültürü tanimalarini salamak,
+  Kürtçe (Kurmancca ve Zazaca) konuulan yörelerin kültürel deerlerini ayirt etmelerine olanak
+
+     tanimak,
+  Kendi kültürel deerlerini fark ederek farkli olana hogörü ve saygi göstermelerini salamak,
+  Kendini ifade etme, iletiim kurma, i birlii yapma, eletirel düünme ve problem çözme
+
+     becerilerini gelitirmek,
+  Seviyelerine uygun görsel, iitsel ve yazili kaynaklari takip etmelerini salamak,
+  Kiisel, sosyal, kültürel bakimdan gelimelerini salamak,
+  Kürtçede dinleme, konuma, okuma ve yazma dil becerilerini gelitirmek,
+  Diller çin Avrupa Ortak Bavuru Metni'nde belirlenen ölçütlere göre kendilerini
+
+     deerlendirmelerini salamak,
+  Kürtçede kelime hazinesini zenginletirmek,
+  Bilgi teknolojilerinden yararlanarak örenme becerilerini gelitirmektir.
+
+                                                            9
+3.2 Programin Kapsami
+
+         Kürtçe Dersi Öretim Programi örencilerin;
+
+     letiim becerilerine,
+     Zihinsel geliim düzeylerine,
+     Bilisel alanlara (okuduunu anlama, yorumlama, karilatirma vb.),
+     Duyusal alanlara (kültürler arasi hogörü, dil örenmeye kari ilgi duyma vb.),
+     Psikomotor becerilere (sesli okuma, yazma, arki söyleme, konuma gibi zihin ve kas
+
+        koordinasyonu ile ilgili beceriler vb.),
+     Dinleme, okuma, yazma ve konuma becerilerini uyumlu ekilde gelitirmeye,
+     Kendi kültürel deerlerini bakalarina aktarma, Kürtçe konuulan yörelerin kültürel
+
+        deerlerini ve farkli lehçelerini ayirt etmelerine uygun,
+     Kendi yeteneklerini kefetmelerine, güçlü ve zayif yönlerini tanimalarina ve kendi
+
+        kendilerini deerlendirmelerine,
+     Konuma ve yazma becerisini gelitirerek Kürtçeyi doru ve akici kullanmalarini salamaya,
+     Dört dil becerisini gelitirirken özellikle üretime dayali beceriler araciliiyla kendilerini ifade
+
+        etme becerilerini gelitirmeye,
+     Not alma, önemli hususlari belirleme, dikkatini sunulan bilgiye younlatirma, kendi
+
+        kendine örenme için materyal oluturma ve kullanma yetenei gibi çalima becerilerini
+        gelitirmeye yönelik kazanimlarla düzenlenmitir.
+
+3.3 Örenme Alanlari
+
+         Dili öretme ve örenme, çok boyutlu ve bu boyutlarin karilikli etkileimine dayali bir
+süreçtir. Örenme alanlari, anlama (dinleme, okuma) ve anlatmayi (konuma, yazma) temel alan
+dört beceriden olumaktadir. Kürtçe Dersi Öretim Programi hazirlanirken bu dil becerileri temel
+alinmitir. Programda dört dil becerisinin hiçbirine öncelik sirasi verilmemi olup bütün dil
+becerilerinin doal iletiim ortamlarinda olduu gibi birbiriyle etkileim içerisinde ele alinmasi
+hedeflenmitir. Bu etkileimin örencinin dili örenme, etkili kullanma ve bilgileri yapilandirma
+sürecini kolaylatirmasi beklenmektedir. Örnein, örenciler okuma öncesinde baliktan,
+
+                                                           10
+görsellerden, anahtar kelimelerden vb.den yararlanarak ön bilgileri dorultusunda konuya ilikin
+düüncelerini ifade edebilir, ilenen konu çerçevesinde bildiklerini ve örendiklerini paylaabilirler.
+Okuma sonrasinda konuya ilikin deerlendirmelerin yer aldii kisa sözlü ve yazili metinler
+oluturabilirler. Etkili dil öretiminde öretmenlerin her bir kazanima dayali etkinliklerde, dört
+temel örenme alanina odakli çalimalar planlamasi ve gerekli materyalleri salamasi önem
+taimaktadir.
+
+         Dört dil becerisinin birlikte ve etkileim içerisinde kullanilmasiyla örencilerin anlama ve
+anlatma becerilerinin gelitirilmesi salanacaktir. Programin örenme alanlarini oluturan beceriler
+aaida özetlenmitir.
+
+3.3.1 Dinleme
+
+         Dinleme, günlük yaamda iletiimin gerçekleebilmesi, ayni zamanda eitim ortaminda
+örenmenin salanabilmesi için gereksinim duyulan dil becerisidir. Dinleme, edilgen bir ilem
+olarak deil tam tersine bireyin etkin katilimi ile gerçekleir. Dinleme ayni zamanda konuma
+esnasinda aktarilan duygu ve düünceleri anlamak, balam içerisinde deerlendirmek, düzenlemek,
+aralarindaki ilikiyi saptamak, yorumlamak ve belleinde saklamaya deer bulduklarini seçip
+ayirmak gibi farkli zihinsel süreçleri gerektirmektedir.
+
+         Dinleme tek tarafli gerçekleen bir beceri olarak ele alinmamalidir. Dier bir deyile dili
+kullanabilmek için önce dinleyerek anlamak gerekmektedir. Dil örenme sürecinde örencinin hedef
+dili duymasini salamak dinleme becerisinin gelimesi için tek baina yeterli deildir. Bu dorultuda
+dil siniflarinda dinleme becerisinin gelitirilmesi için farkli amaçlara yönelik olarak farkli
+dinlemelere yer verilmesi önem taimaktadir. Farkli amaçlar dorultusunda farkli olarak
+gerçekletirilen dinleme türlerinden bazilari aaida siralanmitir:
+
+         Youn dinleme: Konuma dilinde yer alan belirli dil yapilarini ve vurgulari saptamak
+amaciyla yapilan dinleme.
+
+         Seçici dinleme: Belirli bir bilgiyi edinmek amaciyla tüm duyulani anlamlandirmaya
+çalimaksizin yapilan dinleme. Örnein, uçu anonslarinda doru kapi numarasini bulabilmek veya
+seyahat edilecek ülkedeki hava durumunu örenmek amaciyla yapilan dinleme.
+
+         Yaygin dinleme: Ders sunumu, karilikli konuma gibi daha uzun süreli metinleri
+dinleyerek söylenenlerden genel bir anlam çikarmak için yapilan dinleme.
+
+                                                           11
+         Etkileimli dinleme: kili ve grup çalimalarinda, rol çalimalarinda, tartima ortamlarinda
+konuma ile bütünleerek gerçekleen dinleme.
+
+         Örenme-öretme sürecinde, öretmen sinifin ilgi ve ihtiyaçlari dorultusunda yukarida
+belirtilen farkli dinleme türleri ile dinleme etkinlikleri düzenlerken ses kayitlarinin, videokasetlerin,
+uzman kiilerce hazirlanmi sözcük ve tümce vurgusu içeren kasetlerin, CD'lerin kullanimina
+koullar olanak tanidii ölçüde özen göstermelidir.
+
+         Dinleme becerisi içsel bir süreç olduundan dinleme etkinliklerinin sonucunda anlamanin
+gerçekleip gerçeklemediini çözümleyebilmek için dinleme sonrasi konuma, yazma gibi
+becerilerin kullanimina da ders ortaminda yer verilmelidir. Dinleme etkinliklerinde dinleme öncesi,
+dinleme sirasi ve dinleme sonrasi aamalari gerçekletirmek, örenciyi dinleme stratejilerini
+kullanmaya özendirmek, etkileimsel örenmeye olanak tanimak ve anlamli örenmeyi desteklemek
+için önemlidir. Aaida farkli amaçlar dorultusunda farkli dinlemelerle gerçekletirilecek bazi
+dinleme etkinlikleri öneri eklinde verilmitir. Bu etkinlikler dinleme etkinliklerinin farkli
+aamalarinda kullanilabilir:
+
+     Kayitli bir metnin veya öretmenin dinlenmesiyle metinde yer alan yönergelerin
+        uygulanmasi,
+
+     Kayitli bir metinde yer alan betimlemelerin dinlenmesiyle uygun resmin, grafiin, tablonun
+        seçilmesi,
+
+     Dinlenilen metinle ilgili sorularin cevaplanmasi,
+     Dinlenilen bir öykünün sonunun yazilmasi,
+     Dinlenilen bir öyküde yer alan olaylarin kronolojik siralama ile emalatirilmasi,
+     Karilikli konumanin (öretmen ve veli arasindaki telefon görümesi gibi) dinlenerek
+
+        seçilen yer, zaman, kii, durum gibi bilgilerin randevu defteri, haftalik plan, form gibi farkli
+        bir metne ilenmesi,
+     Dinleme sonrasinda doru-yanli etkinliklerinin yapilmasi,
+     Karilikli bir konumanin dinlenerek konumanin kimler arasinda ve nerede gerçekletiine
+        ilikin tahminde bulunulmasi,
+
+                                                           12
+     Karilikli konumayi dinlemeden önce resimlere bakarak tahminde bulunulmasi, dinleme
+        sonrasinda tahminler ile metinde yer alan olaylarin karilatirilmasi, benzer bir karilikli
+        konumanin sinif ortaminda canlandirilmasi,
+
+     Küçük bir sunuda yer alan ana düüncelerin not edilmesi,
+
+     Metinde açik bir ekilde ifade edilmeyen duygu, düünce ve anlamlarin çikarim yoluyla
+        bulunmasi. Örnein, karilikli konumanin dinlenmesi sonucunda iletiimde bulunanlarin ne
+        tür bir duygu (kizgin, mutlu, tedirgin vb.) içerisinde olduunun saptanmasi,
+
+         Örencilerin dinleme becerilerini gelitirebilmeleri için yukarida belirtilen sinif içi
+çalimalarin yani sira sinif dii ortamlarda da dinlemenin sürdürülebilmesi amaciyla örencilerin
+internet, MP3 çalar, CD, DVD, ve Kurmancca ve Zazaca yayin yapan kanallari dinleme ve
+izlemeleri dorultusunda yönlendirilmeleri de gerekmektedir. Bu durum örencileri gerçek iletiim
+ortamlarina hazirlamada yarar salayacaktir. Öretmen, örencilerin dinleme becerilerinin
+gelimesinde en temel kaynaktir. Bu nedenle öretmen sinif içinde olabildiince Kürtçe konuarak
+model olmali ve örencilerini Kürtçeyi kullanmaya özendirmelidir.
+
+3.3.2 Konuma (Karilikli Konuma ve Sözlü Anlatim)
+
+         Dil öretimindeki önemli amaçlardan biri örencinin hedef dilde kendisini sözlü olarak ifade
+edebilmesidir. Bir dili bilip bilmediimiz çou zaman o dili ne ölçüde konuabildiimize balidir.
+Konuma bilisel becerilerin yani sira psikomotor becerilere de paralel olarak gerçekleir. Ayni
+zamanda örencinin kendine güvenerek konumasi gibi duyusal beceriler de konumayi
+etkilemektedir. Bunun yani sira seslendirme kurallarini doru uygulamak, mimik, jest gibi sözel
+olmayan iletiimi etkili olarak kullanmak da konumayi destekleyen önemli öelerdendir.
+
+         Konuma sirasinda konumanin akiciliini salama, anlailmayan noktalari tekrarlama, ayni
+ifadeyi baka kelimeler ve yapilar kullanarak ifade etme gibi farkli amaçlara yönelik konuma
+stratejilerinden yararlanilabilecei gibi özür dileme, ricada bulunma, bilgi aktarma, reddetme gibi
+farkli dil ilevleri de kullanilabilir.
+
+         Kürtçe Dersi Öretim Programi'nda konuma örenme alani, sözlü anlatim ve karilikli
+konuma bölümlerinden olumaktadir. Sözlü anlatim; sunum, görü bildirme gibi karidaki kiiden
+cevap beklentisi olmaksizin kesintisiz gerçekletirilebilir. Sözlü anlatim yoluyla gerçekletirilen
+konuma planli (bir konuda sunum yapmak gibi) veya plansiz (okunan veya dinlenen bir metindeki
+konulara ilikin sorulara kisa cevaplar vermek vb.) olabilir. Karilikli konuma ise daha çok yüz
+
+                                                           13
+yüze gerçekleir. Örencilerin sözlü anlatim ve karilikli konuma becerilerini kazanabilmesi için
+etkinliklerin farkli konuma türlerini gözeterek hazirlanmasi gerekmektedir. Sinif ortaminda yer alan
+konuma türlerinden bazilari u ekilde siralanabilir:
+
+  Modelleme konuma: Anlamdan daha çok belirli bir sesletimi gerçekletirmek amaciyla
+     yapilan tekrarlar.
+
+  Youn konuma: Dilsel bir yapinin doru olarak kullanimi için bireysel veya ikili çalima ile
+     gerçekletirilen sinirli konumalar.
+
+  Aktarimsal konuma: Belirli bir bilginin paylaimi için gerçekletirilen, soru-cevap
+     düzeneinde ilerleyen konumalar.
+
+  Yaygin konuma: Sözel raporlarin, kisa sunumlarin, özetlerin daha resmî bir dil tercihi ile
+     sunulmasi.
+         Yukarida açiklanan konuma türlerine göre sinif içi ortamlarda gerçekletirilebilecek bazi
+
+konuma etkinlikleri olarak diyaloglar, tartimalar, münazaralar, doaçlama, röportajlar, kitap
+tanitimlari, sunumlar, rol yapma, okuma tiyatrosu, öykü anlatimi ve iletiim oyunlari sayilabilir.
+Konuma becerisini gelitirmeye yönelik olan bu etkinliklerden örencilerin düzeylerine uygun
+olanlar seçilmeli ve bunlar sinif içinde kullanilmalidir. Ayrica ikili çalimalar ve grup çalimalari,
+projeler gibi etkinlikler de konuma firsatlari oluturmak için sinif içi çalimalarda tercih
+edilmelidir.
+
+3.3.3 Okuma
+
+         Okuma, metinde yer alan kelime, söz öbei, cümle vb.nin anlamini çözmenin çok daha
+ötesinde örencinin metnin amacini tanimlayabildii, çikarim ve yorumlarda bulunduu bir süreç
+olarak görülmelidir. Örencinin kendini ifade edebilmesi, deerlendirmelerde bulunmasi ve öne
+sürülen düüncelere katilip katilmadiini belirtebilmesi için okuduunu anlamasi ve dier dil
+becerileri ile bütünletirerek anlatmasi gerekmektedir. Okumanin, kelime hazinesini gelitirmek,
+kelimelerin balam içerisinde kazandii anlamlari ayirt edebilmek, örenilen dilsel yapilarin özgün
+metinlerde kullanimini görebilmek ve dilsel üretim için doal bir balam oluturmak gibi önemli
+ilevleri de bulunmaktadir. Okuma öretiminin amaçlari aaidaki gibi siralanabilir:
+
+    Doru, sürekli ve anlayarak okuma becerisi kazanmak,
+
+                                                           14
+    Okuma amacini (bilgi edinmek, elenmek gibi) belirleyerek uygun okuma yöntem ve
+      stratejilerini kullanmak,
+
+    Kelime hazinesini gelitirmek,
+    Okumanin, bilgi kazanmanin yollarindan biri olduunu kavramak,
+    Metinde yer alan kültürel öelere ilikin farkindalii gelitirmek,
+    Dilin doru ve etkili kullanildii metinleri okuyarak anlatim gücünü gelitirmek,
+    Okunan metinle ilgili eletirel düünceleri ortaya koymak,
+    Okumayi zevkli bir alikanlik hâline getirmek,
+
+         Okuma becerisinin gelitirilmesi, örencilerin farkli kültürleri taniyabilmeleri, iletiim
+teknolojilerini etkin olarak kullanarak dünyadaki gelimeleri yakindan takip edebilmeleri,
+aratirmalari sonucunda elde ettikleri bilgileri yaamlari boyunca etkin olarak kullanabilmelerine
+olanak tanir.
+
+         Okuma öretiminin amaçlari dorultusunda okuma becerisinin gelitirilmesinde aaida
+listelenen okuma öretimi stratejilerinden yararlanilabilir:
+
+      Okunan metin hakkinda genel bir bilgi sahibi olunmasi,
+      Okunan metnin türünün ve iletiim amacinin belirlenmesi,
+      Metinde yer alan ana ve yardimci fikirlerin bulunmasi,
+      Seçici bilgiye ulamak amaciyla okuma yapilmasi,
+      Metinde yer alan konu ve olaylarin birbiriyle ilikilendirilmesi,
+      Okunan metnin özetlenmesi,
+      Metinde yer alan bilgilerin aktarilmasi,
+      Okuma metinlerinde bilinmeyen sözcük ve yapilarin anlaminin balamsal veriler ve
+
+      ipuçlarinin yardimi ile bulunmasi,
+         Dil öretiminde, okuma becerisini gelitirebilmek için çeitli stratejiler mevcuttur. Bunlar;
+
+göz atarak okuma, özetleyerek okuma, not alarak okuma, iaretleyerek okuma, tahmin ederek
+okuma, soru sorarak okuma, canlandirarak okuma, tartiarak okuma ve eletirel okumadir.
+
+                                                           15
+         Belirtilen okuma amaçlari ve stratejileri dorultusunda okuma becerisinin gelitirilmesinde
+örencilerin düzeylerine uygun, ilgi ve ihtiyaçlarina yönelik etkin katilimlarini salayacak
+etkinlikler düzenlenmelidir. Örencilerin metinde tamamlanmadan birakilmi kisimlari tahminde
+bulunarak gelitirmesi, konulara ilikin deerlendirmelerde bulunmasi, metni neden beendiini
+veya beenmediini gerekçeleri ile açiklamasi, kendisinin benzer durumlarda neler yapabileceini
+tartimasi gibi etkinlikler örenme deneyiminin kiiselletirilmesi, eletirel düünme becerisinin
+gelitirilmesi ve örenen odakli bir eitim ortaminin oluturulmasi açisindan önem taimaktadir.
+
+         Okuma becerisine yönelik olarak uygulanabilecek bazi etkinlikler aaida verilmitir:
+
+      Örencinin okuduu metindeki en önemli cümleyi belirlemesi, daha sonra ikili çalima yoluyla
+      seçtii cümleyi arkadaiyla paylaarak bu cümleyi neden önemli bulduunu açiklamasi
+      istenebilir.
+
+      Metin üzerinde ayrintili bir ekilde çaliilmadan önce, örenciden metnin baliina,
+      görsellerine, anahtar kelimelerine vb. bakarak metin ile ilgili metni tanima ve tahmin etme
+      çalimalari yapmasi ve bu kapsamda soru hazirlayarak sinifla paylamasi, bu sorularin metin
+      inceleme çalimalari sonrasinda doru cevaplanip cevaplanmadiini deerlendirmesi
+      istenebilir.
+
+      Örencilerden metnin bütününü göz önünde bulundurarak metinde eksik birakilan tamamlama
+      cümlesini belirleyip doru yere yerletirmeleri istenebilir.
+
+      Örencilerden metinden çikarilmi olan bir cümlenin veya paragrafin, metnin içerii ve
+      badaikliinin gözetilmesi ile doru yere yerletirmeleri talep edilebilir.
+
+      Okuma metnindeki konu, herkesin bilgi sahibi olabilecei kiiler, olaylar ve durumlar ile ilgili
+      ise okuma öncesinde örencilerin konuya ilikin bilgilerini paylamasi ve bilmek istediklerini
+      saptamasi yoluyla ilgi uyandirmak ve beklentileri artirmak amaciyla kavrama etkinlikleri
+      yaptirilabilir.
+
+         Etkinliklerin seçimi ve uygulanmasinda okuma öncesi, okuma sirasi ve okuma sonrasinda
+farkli tür etkinliklere yer verilmesi ve her üç aamada da etkinliklerin dengeli bir dailiminin
+yapilmasi gerekmektedir.
+
+         Okuma öncesinde: Etkinlikler ile konuya hazirlanan ön bilgilerini harekete geçiren örenci,
+okuma süresince gerçekletirdii etkinlikler ile konuya ayrintili olarak bakabilecek, kavrama,
+karilatirma, yorumlama, sentez ve deerlendirme yoluyla bilginin üreticisi konumuna geçecektir.
+
+                                                           16
+Düünce ÜretimiOkuma sirasinda: Etkinlikler ile dikkatin metnin belirli noktalarina yönlendirilmesi
+salanmalidir.
+
+         Okuma sonrasinda: Etkinlikler ile örenciye, kazanimlari dier örenme alanlarinda ve
+metinle ilikili farkli konular çerçevesinde uygulayabilecei bir açilim salanmalidir.
+
+3.3.4 Yazma
+         Dil öretiminde, yazma becerisi farkli amaçlarla kullanilabilecek etkili bir araçtir. Bu beceri
+
+gündelik hayatta; resmî veya özel mektuplar, kartlar, e-posta, faks veya mesaj yazma, özgeçmi
+yazma, form doldurma, ödev yapma, alitirma yapma, not alma vb. etkinliklerle gelitirilmektedir.
+
+         Süreç odakli yazma, dier dil becerilerinin gelimesine önemli katki saladii gibi kiinin
+duygu, düünce ve bilgisini düzenleyip ifade etmesine araci olmaktadir. Yazma mekanik bir süreç
+olarak deil anlama, düünme, gelitirme ve üretme becerilerini kapsayan bir beceri olarak
+algilanmali ve deerlendirilmelidir. Bu anlamda yazma becerisinin kazandirilmasinda süreç odakli
+bir yaklaim benimsenmelidir. Örencilerden yazma sürecinde plan yapma, fikirlerini aamali
+olarak gelitirme, düüncelerini destekleme, yazdiklarini deerlendirme gibi farkli kazanimlari
+gelitirmeleri beklenmelidir. Süreç odakli yazmada izlenebilecek yol aaidaki tabloda
+özetlenmitir:
+
+                               Tablo 4. Süreç Odakli Yazmada zlenebilecek Yol
+
+          Yazilan konuya ilikin bir metin okuma,
+          Aratirma yapma,
+          Beyin firtinasi (bir konuya ilikin akla gelen ilk düüncelerin not hâlinde, deerlendirme
+
+           yapilmaksizin yazilmasi daha sonra dier grup üyelerinin yazdiklari ile karilatirilmasi, ayni
+           düüncelerin altinin çizilmesi, yenilerinin listeye eklenmesi, uygun görülmeyenlerin çikarilmasi,
+           sinirlandirma amaciyla konuya göre en önemli ilk üç düüncenin belirlenmesi),
+          Düünce listesi oluturma (bireysel),
+          Tartima,
+          Öretmenin yönlendirici sorularini cevaplama,
+          Serbest çariim (anahtar kelime belirleyerek bu kelimenin çaritirdii alt kavramlari açma ve
+           kavram haritasi oluturma),
+          Serbest yazma (belirli bir sürede yapi ve kelimelerin doruluu üzerinde konuyla ilgili akla gelen
+           ilk düünceleri yazma),
+
+                                                           17
+lk Taslak lk aamada öne çikan düünceleri bir paragraf içerisinde sirasiyla yazma, yazilan düünceleri
+           destekleyecek örnekler ve alt temalar bulma (bireysel),
+kinci Taslak
+       Taslak Ayni konuda yazan bir örenci ile metinleri deierek, yazinin yeterince açik olup olmadiina,
+           ana düüncesine, iletilmek istenen düüncenin etkili ve ikna edici biçimde gelitirilip
+Deerlendirmegelitirilmediine ilikin deerlendirmelerde bulunma, öneriler gelitirme (kili çalima: kili
+           çalimanin uygun olmayacai öretim ortamlarinda bu süreç öretmenle de sürdürülebilir),
+
+          Öneriler ve paylaimlar dorultusunda yazilan paragrafi tekrar gözden geçirme ve gerekli
+           deiiklikleri yapma,
+
+          Düzeltilmi taslai dil yapilarinin doru kullanilip kullanilmadiini, aktarilmak istenilen
+           düüncenin anlailir ve tutarli görülüp görülmediini deerlendirme, bu yönde gereken
+           düzeltmeleri yaparak öretmene teslim etme,
+
+          Öretmenden gelen dönütler ile arkadatan alinan dönütleri kiyaslama, bunlari sinif ortaminda
+           paylama,
+
+          Öretmenin açikladii deerlendirme ölçütleri çerçevesinde yazilan metni gözden geçirme, son
+           düzeltmeleri yapma ve teslim etme,
+
+          çerik (ana fikir cümlesi, düüncelerin desteklenerek ve örneklendirilerek gelitirilmesi, sebep-
+           sonuç, benzerlik-farklilik, betimlemelerin sunumu),
+
+          Düzen (etkili bir giri ve sonucun bulunmasi, düüncelerin mantiksal dizini, metnin yeterli
+           uzunlua sahip olmasi),
+
+          Söylem (paragraf bütünlüü, balaçlarin etkin kullanimi, göndermelerin uygunluu,
+           yinelemelerden kaçinmak amaciyla farkli dil yapilarinin kullanimi, akicilik, metin türüne
+           uygunluu),
+
+          Dil kullanimi (dil bilgisi yapilarinin doru kullanimi, kelimelerin doru yazimi, düzene ilikin
+           genel görünüm),
+
+          Yaraticilik (konunun uygun olmasi kouluyla yaratici düüncelere, özgün örneklere ne ölçüde yer
+           verildii),
+
+         Yukarida açiklanan aamalara göre örnein ikinci taslai gelitirmekte olan bir örenci,
+
+öretmenin geri bildirimlerini dikkate alarak yazma süreci öncesine dönebilir, metnin akiina
+
+bütünlük getirecek yeni bir düünceyi yazisina ekleyebilir. Belirtilen aamalarin izlenmesi
+
+durumunda öretmenler, örencilere her aamada yardim etmeli, yol gösterici olmali ve onlara
+
+yönlendirmeler yaparak hatalarini kendilerinin düzeltmeleri için firsat tanimalidir.
+
+         Yazma öretimi sirasinda süreç odakli yaklaim dorultusunda öretmen, örencilerin
+
+mektup, e-posta, kart, özgeçmi yazma gibi etkinlikleri gerçekletirmelerine firsat tanimalidir.
+
+Örenciler bu etkinlikleri gerçekletirirken metin türlerinin özelliklerini, öne çikan yapisal
+
+farkliliklarini gözetmelidir. Bu nedenle yazma becerisine yönelik bu uygulamalardan önce
+
+örencilere uygun örnekler verilmeli, okuma ve inceleme etkinlikleri tür özelliklerine, kullanilan
+
+aliilagelmi yapilara dikkati çekecek yönde gelitirilmelidir. Ayni ekilde metinde akii salayan ve
+
+bütünlük getiren balaçlari örencilerin metinlerde kullanmalari istenmeden önce, kariik düzende
+
+                                                           18
+verilmi bir metni badaiklik ve balaiklik ilkelerini gözeterek doru bir düzene getirmeleri, ön
+etkinlik olarak verilebilir. Ayrica öretmenler örencilerde yazma alikanliini gelitirmek, onlari
+yazmaya motive etmek ve yazmaya kari olumlu tutum edinmelerini salamak amaciyla aaidaki
+etkinlik örneklerinden de yararlanabilirler:
+
+      Eksik bir cümle verip bu cümleyi tamamlamalari istenebilir.
+
+      Bir müzik dinletisi sonunda o müziin çaritirdii kelimeleri ve sahneleri kisaca
+      betimlemeleri istenebilir.
+
+      Örencilere birtakim veriler sunularak (sorular, betimleyici sözceler vb.) çerçevesi çizilmi bir
+      konuda yazi üretmeleri istenebilir.
+
+      Öyküleme aracilii ile i birliine dayali örenme desteklenebilir. Örenciler daitilan
+      resimleri düzenleyerek bir öykü oluturabilirler.
+
+      Kiisel mektup yazarken mektubun hayali alicisini göz önünde bulundurarak örencilerden
+      duygu ve düüncelerini deiik ekillerde ifade etmeleri istenebilir.
+
+      Örenciden performans ödevi olarak günlük tutmasi istenebilir ve bu günlük, yilsonunda
+      deerlendirilmeye tabi tutulabilir.
+         Yaratici yazma ve günlük tutma gibi dier yazma etkinlikleri yazmanin zevkli bir ura
+
+hâline gelmesi, örenenlerin kendilerini kefetmesi, duygu, düünce ve yaadiklari karisinda
+verdikleri tepkileri düzenli olarak paylaabilmeleri açisindan önem taimaktadir.
+
+3.4 Kazanimlar
+
+         Kazanim, örenen için eitim yoluyla planlanarak örenme-öretme süreci sonunda
+ulailmasi beklenen bilgi, beceri, tutum ve deerler bütünüdür. Bu nedenle örencilerin örenme
+alanlarindaki geliimleri, kazanimlarin edinilmesine balidir. Eitimin amaçlarina ulamasi,
+kazanimlar çerçevesinde öngörülen örenmenin belirlenen düzeyde gerçeklemesine balidir.
+Öretmen, öretim sürecini planlarken kazanimlarda yer alan bilgi, beceri veya tutumu
+kazandirmaya yönelik bir ön hazirlik yapmali ve öretim sürecini en etkili ekilde planlamalidir.
+
+         Kazanimlarin bir kez ele alinma zorunluluu yoktur. Programda yer alan kazanimlar farkli
+temalarda birkaç kez ele alinabilir. Örnein, bir sinifta ele alinan bir kazanim ayni sinifin farkli bir
+temasinda veya baka bir sinifta etkinliin düzeyi deitirilerek yeniden ele alinabilir.
+
+                                                           19
+        Program, Kürtçenin (Kurmancca ve Zazaca) öretimine yönelik olarak hazirlanmi ortak bir
+içerie sahiptir. Programin teorik boyutunda ifade edilen açiklamalar, öretim yöntem ve teknikleri,
+ölçme ve deerlendirme materyalleri, örnek etkinlikler ve kazanimlar ile açiklamalar her iki
+lehçenin özellikleri dikkate alinarak hazirlanmitir. Öretmen, kazanimlari ve her kazanima ilikin
+ifade edilen düzeyi, açiklamalarda belirlenen sinirlar çerçevesinde dikkate almali ve öretim
+sürecini buna göre planlamalidir.
+
+     Öretmen, Kurmancca veya Zazaca'yi tercih eden gruplara ayri ayri ders verebilecei gibi,
+yaygin olmasa da her iki lehçeden birini örenme talebinde bulunan örencilerden oluan karma
+gruplara da ders vermek durumunda kalabilir. Özellikle her iki lehçede ayri ayri ders almak isteyen
+örenci sayisinin az olduu okullarda bu durumla karilamak mümkündür. Karilailabilecek söz
+konusu istisnai durumlarda, gruplar birletirilerek her iki lehçenin öretimi ayni sinif ortaminda
+gerçekletirilebilir. Program bu durumlar göz önüne alinarak hazirlanmitir. Öretim sürecinde bir
+gruba yönelik ödevlendirme yapilirken dier gruba yönelik aktif öretim sürdürülmelidir.
+
+3.5 Açiklamalar
+
+         Kürtçe Dersi Öretim Programi'nda kazanimlarla birlikte verilen açiklamalar; kazanimlarin
+hangi kapsamda, ne kadar verilecei ve nasil uygulanabilecei ile ilgili bilgilerden olumaktadir.
+Açiklamalar, kazanimi uygulamada öretmene yol gösterici bir ilev görmektedir. Ayni kazanima
+farkli temalarda ve düzeylerde farkli açiklamalar yapilmi ve kazanima ilikin öretimin ne ekilde
+yapilacaina ve düzeyine ilikin çerçeve çizilmitir. Açiklamalarda belirtilen örnekler Kurmancca ve
+Zazaca olarak belirtilmitir. Öretmen, öretim sürecini planlamada öretimini gerçekletirecei
+lehçedeki örnekleri esas alarak, bunlari gelitirebilir.
+
+3.6 Etkinlikler
+
+         Etkinlikler kazanimlarin hayata geçmesini salayacak sinif içi ve okul dii uygulamalardan
+ibarettir. A1 düzeyine göre dil becerileri esas alinarak yapilandirilmi etkinlik örnekleri programin
+hedef kitlesine kilavuzluk etmesi amaciyla verilmitir. Bu amaçla öretmenlere yönelik Kurmancca
+ve Zazaca olarak beer etkinlik örnei hazirlanmitir. Öretmen bu örneklerden de istifade ederek
+her kazanimin öretimine yönelik farkli etkinlik türlerini hazirlayabilir.
+
+                                                           20
+3.7 Dil Yapilari
+
+     Dil bilgisi bir dilin yapisi, kurallari ve ileyii ile ilgilidir. Bu sebeple dilden ve dil
+becerilerinden ayri olarak algilanmamalidir. Dil öretiminde örencilere dile ilikin kurallari
+aktarmak yerine; onlarin dinleme, konuma, okuma ve yazma becerilerini gelitirmelerine firsat
+verilmelidir. Bu amaçla hazirlanmi olan Kürtçe Dersi Öretim Programi'nda, dil bilgisi, dil
+becerilerinin (dinleme, konuma, okuma ve yazma) içerisinde bu becerilerin bir parçasi olarak yer
+almitir. Bu dorultuda yapilacak olan uygulamalarda dil bilgisi kural ve ilkelerinin örtük bir
+biçimde sezdirilmesi yolu benimsenmitir.
+
+3.8 Temalar ve çerik Önerileri
+
+TEMALAR                         ÇERK ÖNERLER
+
+DLMZ TANIYALIM Kürtçede kullanilan farkli harf ve karakterler. Kürtçenin lehçeleri ve deyi
+                                  farkliliklari.
+
+BEN VE ALEM       Ad-soyad, tanima, ya, cinsiyet, doum yeri ve tarihi, fiziksel görünüm
+                  (boy, kilo, saç ve göz rengi, uzunluk, kisalik vb) memleket, arkadalarim,
+                  ilgiler, anne-baba, aile bireyleri, akrabalar, aile hayati, meslekler vb.
+
+OKULUM VE         Okulun adi, adresi, okul çevresi, okul eyalari, okul kurallari ve etkinlikleri,
+YAADIIM ÇEVRE     okuldaki kii ve mekânlar, dersler, sinavlar, okul kulüpleri ve sosyal
+                  faaliyetler, yaadiim yer, yaadiim ev, evin bölümleri, mahallem
+                  (köyüm, sokaim, ev adresim) ve arkadalarim, evdeki eyalar vb.
+
+BEDEN VE SALIK    Vücudumun organlari, günlük bakim ve beden temizlii (di firçalama, el,
+                  tirnak ve saç vb.), salik, hastalik, salik birimleri (aile salik merkezi,
+                  hastane, 112 acil vb.) ve çalianlari, salikli yaam, bedensel ihtiyaçlar,
+                  kaza ve tedavi, ilkyardim vb.
+
+YYECEK VE         Yiyecek ve içecekler (sebze, meyve, yemekler vb.), özellikleri, tatlari,
+ÇECEKLERMZ        öünler, yeme ve içme tercihleri, mekânlari ve çalianlari, yemek tarifleri
+                  ve sunumu vb.
+
+TAKVMLER VE       Saatler, günler, günün bölümleri, hafta, aylar, mevsimler, mevsimlerin
+MEVSMLER          özellikleri, hava durumu, mevsimlere göre giyim ve yaam vb.
+
+                                21
+SEYAHAT VE     Seyahat araçlari (bireysel ve toplu taima araçlari) yer yön bilgisi, yol
+ULAIM          durumu, trafik kurallari, tatil ve tatil tercihleri, hazirliklari, tarihi ve turistik
+               mekânlar (tarihi eserler, turistik yerler ve doal güzellikler) vb.
+OYUNLAR VE
+MASALLAR       Tekerlemeler, çocuk oyunlari (evde ve okulda oynanan oyunlar) oyun
+               kurallari, arkilar, masallar, hikayeler (hikaye ve masal kahramanlari,
+SERBEST ZAMAN  mekanlari ve olaylari), aile büyüklerinden ani ve hatiralar vb.
+ETKNLKLER
+               lgiler, hobiler, kültür ve sanat etkinlikleri (tiyatro, sinema, konser, sergi,
+               müze vb.), ziyaretler (arkada, akraba ve komu vb.), spor faaliyetleri,
+               izledii programlar ve oynadii oyunlar, okuduu kitaplar vb.
+
+3.9 Temalar ve çerik Önerilerine likin Açiklamalar
+
+     1. Kürtçe Dersi Öretim Programi çerçevesinde bir öretim yilinda ele alinacak tema sayisi alti
+olarak belirlenmitir. Tabloda dokuz tema verilmitir. Bu temalarin alti tanesi seçilerek bir öretim
+yilinda ilenmelidir.
+
+     2. Temalarin tamaminda "içerik önerileri" balii altinda verilen konular zorunlu deildir. Ayni
+tema kapsaminda yukaridaki tabloda verilen içerik önerilerinden seçilebilecei gibi temaya ve
+düzeye uygun farkli içerikler de seçilebilir.
+
+     3. Seçilecek içerik (konular), 1739 sayili Millî Eitim Temel Kanununda yer alan millî eitimin
+genel amaçlari ve temel ilkelerine uygun olmalidir.
+
+     4. Temalarin her biri A1 seviyesinde 12 ders saati (6 hafta), süre ile ilenecek ekilde
+düzenlenmelidir. Yazilacak olan ders kitaplari A1 (Balangiç Düzeyi) 7-9 forma araliinda
+hazirlanmalidir. Örenci çalima kitaplari ise en az ilgili ders kitabi forma sayisi araliinda
+düzenlenmelidir. Dinleme etkinlikleri için kilavuz kitapla beraber öretmenlerin sinif içi
+çalimalarinda kullanmalari amaciyla CD/DVD verilmelidir. Hazirlanacak olan CD/DVD'ler doru
+ve akici bir üslup ile anlailir ( telaffuz, vurgu ve tonlama ) ve mümkünse ana dili Kürtçe olan kiiler
+tarafindan hazirlanmalidir. Seslendirmeyi CD/DVD'in akii içinde farkli kiiler yapmali,
+kullanilacak içerik olabildiince Kurmancca ve Zazacaya özgü metinlerden seçilmelidir.
+
+               22
+     5. Her temada A1 seviyesi için temaya uygun üç içerik ve her içeriin ilenmesi için 4 ders saati
+ayrilmalidir. Temalarda dinleme, konuma, okuma ve yazma becerilerine dengeli ekilde yer
+verilmelidir.
+
+     6. Programa uygun olarak hazirlanacak ders kitaplarinda dil bilgisi konulari, temayi ve içerii
+destekleyecek ekilde dil bilgisi tablosundan seçilmeli ve dil bilgisi konusu ile ilgili açiklamada
+verilen sinirlilik içerisinde ilenmelidir.
+
+     7. Okuma metinleri örencinin ya ve geliim düzeyine uygun olarak gerçek hayattan (gazete,
+dergi vb.) alinan metinler, haberler, röportajlar ile diyaloglar, hikâyeler, ansiklopedik bilgiler,
+arkilar, iirler vb.nden oluturulabilir. Bu metinler ders kitabinda ve örenci çalima kitabinda
+çeitli etkinliklerle desteklenmelidir.
+
+     8. Dinleme metinleri öretmen kilavuzunda, dinleme metni ile ilikili etkinlikler ise ders kitabi
+ve örenci çalima kitabinda yer almalidir. Öretmen, dinleme çalimalari sirasinda CD/DVD
+kullanabilecei gibi kilavuz kitapta yer alan dinleme metnini okuyarak da çalimayi
+gerçekletirebilir.
+
+     9. Ders kitabinda içerii destekleyen sözlü ve yazili anlatim etkinliklerine de yer verilmelidir.
+Bu etkinlikler temaya bali olarak seçilerek içerii metni destekleyecek ekilde düzenlenebilir.
+
+     10. Kitap düzenlenirken programda örenme alanlari balii altinda dinleme, konuma, okuma
+ve yazma dil becerilerine ait bilgilerden mutlaka yararlanilmali, düzenlenecek etkinliklerin anlamli,
+iletiim temelli ve eylem odakli yaklaima uygun olmasi salanmalidir
+
+     11. Ders kitabinin giri bölümünde içerik tablosu verilmelidir.
+     12. Ortaokul 5. Sinif Kürtçe Dersi için hazirlanacak ders kitabi, örenci çalima kitabi ve
+öretmen kilavuz kitabi için öngörülen forma sayilari Tablo 5'te verilmitir (Ortaokul 6, 7 ve 8.
+Siniflarin Kürtçe Dersi Öretim Programi hazirlandiinda bu siniflar için hazirlanacak ders kitabi,
+örenci çalima kitabi ve öretmen kilavuz kitaplari için ön görülen forma sayilari tespit
+edilecektir).
+
+                                                           23
+                           Tablo 5. Forma Sayilari
+
+       Kitabi Ders Kitabi  Örenci Çalima            Öretmen Kilavuz
+                                                           Kitabi
+
+Düzey   Kitap    Forma      Kitap  Forma             Kitap     Forma
+       Boyutu    Sayisi    Boyutu  Sayisi           Boyutu     Sayisi
+
+Balangiç 19.5 x  Serbest   19.5 x  Ders             21 x 29,7  Serbest
+                           27,5    kitabinin
+A1     27,5                        forma
+                                   sayisindan
+                                   az olmamali
+
+4. ÖRENME-ÖRETME SÜREC
+
+      nsanin doal geliiminin bir parçasi olan örenme, örencinin etkin olduu bir süreçtir. Bu
+süreçte öretmen, örencilerin derse aktif olarak katilmalarini desteklemeli ve örenme olgusunun
+sonuçlarindan kendilerinin de sorumlu olduklarinin bilincine varmalari salanmalidir. Bu amaçla
+öretmen, derste örencilerin bireysel olarak ve grup içinde örenmelerini salayacak çalimalar
+düzenlemelidir.
+
+      Örenme-öretme süreci, öretimin planlanmasi, eitim ortaminin düzenlenmesi, öretim
+yöntem ve tekniklerinin belirlenmesi ve uygulanmasi, gerekli materyal seçimi ve kullanimi,
+örencilerin geliimini izleme ve deerlendirme gibi faaliyetleri ifade etmektedir. Örenme-öretme
+süreci, "nasil öretelim?" sorusuna cevap arar. Bu süreç, örencilerin hedeflere ulaabilmeleri için
+geçirmeleri gereken örenme yaantilarini salayacak uyaricilarin düzenlenmesi ve uygulanmasidir.
+Örenme-öretme sürecini düzenlemede, dersin özelliine ve amacina uygun strateji, yöntem-
+teknik, araç-gereç ile örenme ortaminin fiziki düzenlenmesini dikkate almak gerekir. Bu süreçte
+örencinin derse aktif katilimini salamak ve etkili yaantilar geçirmek için iki noktaya dikkat
+etmek gerekir.
+
+      1. Örenciyi tanima, örencinin konu/ders hakkindaki hazir bulunuluk düzeyi, ilgi, ihtiyaç ve
+yeteneklerini dikkate alarak etkinlikler oluturmaktir. Öretmenin, örencileri tanimalari için
+örenme psikolojisi ve örenme kuramlarindan yararlanmalari gerekmektedir.
+
+      2. Örenciyi eitim ortaminda etkileyebilecek deikenlerin bilinmesi gerekir. Örenme-
+öretme sürecinde ipucu, pekitireç, dönüt, düzeltme ve örenci katilimi gibi deikenlerin dikkate
+
+                                                           24
+alinmasi gerekmektedir. Örencilerin ilgi, ihtiyaç ve bireysel farkliliklarinin dikkate alinmasi ve bu
+dorultuda etkinliklerin belirlenmesi, örenme-öretme sürecinin temel önceliklerinden biridir.
+
+        Örenme-öretme süreci, öretimden ziyade örenmeyi ön plana almalidir.
+
+        Örencilerin baimsiz düünmesi ve giriimcilii desteklenmelidir.
+
+        Örenciyi istekli kilacak ve merak duygusunu tahrik edecek çalimalar yapilmalidir.
+
+        Örencilerin önceki tecrübelerinden yola çikilarak örenme ortami ve etkinlikler
+          düzenlenmelidir.
+
+        Kürtçe dersi yaraticilii, esneklii, açiklii, sorun çözme ve eletiri becerisini gelitirmeyi ve
+          iletiime dayali örenmeyi dikkate alinarak ilenmelidir.
+
+        Dil bilgisi kurallarinin okuma, dinleme, yazma, karilikli konuma ve sözlü anlatim
+          alanlarinda bata sezdirme yoluyla sonraki aamalarda da etkinliklerle ayrintili bir ekilde
+          öretilmesi benimsenmelidir.
+
+        Örencilerin bireysel farkliliklari ve örenme stilleri (görsel, iitsel, kinestetik) dikkate
+          alinmalidir.
+
+        Öretimde aktif yöntem ve teknikler kullanilmalidir.
+
+      Örenme-öretme sürecinde dikkate alinmasi geren önemli bir nokta da örencilerin sahip
+olduklari örenme stilleridir. Örencilerin örenme stillerine göre hazirlanmi örenme-öretme
+sürecinin, geleneksel etkinliklere göre hazirlanmi örenme-öretme sürecine göre daha etkili
+olduu söylenebilir. Bu amaçla, örencilerin bireysel farkliliklarini dikkate almak ve derse etkin
+katilmalarini salayacak ekilde etkinliklerin düzenlenmesi gerekmektedir. Örenme-öretme
+süreci, örencilerin dil becerilerini gelitirmek ve gelitirilen bu becerilerini gerek günlük hayatta
+gerekse akademik hayatta kullanmak bakimindan önemlidir. Kürtçe dersi için, örenme ortaminin
+amacina uygun düzenlenmesi, örencilerin özelliklerine uygun öretim yöntem ve tekniklerin
+seçilmesi önem taimaktadir. Bu amaçla öretmenin, örenme-öretme sürecinde dikkat etmesi
+gereken özellikler öyle siralanabilir:
+
+        Öretimin etkili ve uygulanabilir ekilde planlanmasina özen gösterme,
+
+        Örencilerin, örenme ihtiyaçlarini karilayacak etkinlikler düzenleme,
+
+        Örencilerin kendilerini gerçekletirmelerine imkân salayacak uygun etkinlikler
+          düzenleme,
+                                                           25
+        Örenme-öretme sürecinin düzenlenmesi ile ilgili alternatif yaklaimlar ortaya koyma,
+        Öretim etkinliklerinin düzenlenmesi için uygun materyal ve kaynak seçme,
+        Kürtçe dersi için alternatif ders materyallerini kullanma,
+        Alternatif öretim yöntem ve tekniklerini uygulama,
+        Örenme ve öretme sürecinde örencilerin bireysel fakliliklarini dikkate alma,
+        Derste zamani etkili ve verimli kullanma,
+        Örencilerin derse etkin bir ekilde katilmasini salama,
+        Örencileri örenmeye tevik etme,
+        Örencilerle etkili iletiim kurma,
+        Derste örenciler için anlamli etkinlikler ve özgün içerikler seçme,
+
+4.1 Dil Öretim lkeleri
+         Dil öretiminde temel becerilerin (dinleme, konuma, okuma ve yazma) birlikte öretimi
+
+esastir. Dilin tam olarak örenilebilmesi için öretmenin etkinlikleri önceden planlamasi,
+konunun/dersin öretimini basitten zora, somuttan soyuta doru planlamali, konunun özelliine göre
+görsel ve iitsel araçlari kullanmali, bilgilerin günlük yaama aktarilmasini salamali, örencilerin
+derse aktif katilimlarini tevik etmeli, bireysel farkliliklari dikkate almali, örencileri güdülemeli ve
+cesaretlendirmelidir. Bu amaçla öretmen;
+
+        Örencilerin sürece aktif katilarak bilginin yapilandirilmasini gerçekletirecek etkinlikler
+          yapmalidir.
+
+        Kürtçenin etkili bir ekilde örenilmesi için örencilerin eski bilgileri ile yeni bilgileri
+          arasinda ba kurmalarina yardimci olmalidir.
+
+        Günlük yaamdan yola çikilarak örencilerin iletiim ve etkileim içinde olmalari
+          salanmalidir.
+
+        Örenciler örenme sürecinde aktif olmalidir. Öretmen süreçte örencilere rehberlik
+          yapmalidir.
+
+                                                           26
+4.2 Kürtçe (Kurmancca ve Zazaca) Dil Öretiminde Örenme Ortaminin Düzenlenmesi
+
+        Örencinin dil öretiminde baarili olmasi örenme ortaminin, örenci özelliklerinin ve
+öretmenin öretme yaklaimi ile kullandii yöntem ve tekniklerin önemi büyüktür. Bu amaçla
+örencilerin güdülenmesine yardimci olacak, örenme yeterliklerine ve bireysel özelliklerine uygun,
+kendilerini rahat ifade edebilecekleri bir ortam hazirlamak gerekir. Örenme ortami, okuma,
+dinleme, yazma, karilikli konuma ve sözlü anlatim çalimalarinin gerçeklemesine imkân verecek
+ekilde düzenlenmelidir.
+
+4.3 Öretmenin Rolü
+
+       Bilginin sürekli deitii günümüzde, öretmenin rolü farklilamitir. Öretmen, dorudan
+bilgi aktarmak yerine bilgiye ulama, bilgiyi kullanma ve bilgiden yeni bilgiler üretme mantii
+çerçevesinde örenme-öretme sürecini ele almalidir. Mevcut bilgiden yararlanma süresinin
+kisaldii günümüzde dorudan bilgi aktarmak yerine, örencilere bilgiye ulama yollarini göstermek
+öretmenin temel görevlerinden biridir.
+
+         Örenme-öretme sürecinde öretmenin rolü, örencilere rehberlik etmek, önerilerde
+bulunmak, gerekli durumlarda açiklamalarda bulunmak, fikir vermek ve onlarinin geliimlerini
+gözlemektir. Öretmen, örenme ve öretme sürecini, siniftaki ders araç gerecini, yöntem teknikleri
+ve örenme ortamini örencilerin derse aktif katilimlarini salayacak ekilde düzenlemelidir. Kürtçe
+Dersi Öretim Programi'nin uygulanmasinda öretmen kritik bir role sahiptir. Öretmenin temel
+görevi, örencilerin bireysel özelliklerini ve çevresel koullarini dikkate alarak programin
+uygulanmasini salamaktir. Dil örenimi için örencilerin kendilerini rahat ifade edebilecekleri bir
+ortam hazirlamak, dil becerilerini gelitirme sürecinde örencilere destek olmak gerekir. Buna ek
+olarak öretmen Kürtçeyi doru, etkili ve güzel kullanarak örencilere örnek olmalidir. Öretmen,
+örenme ortamini;
+
+        Örencileri aktif kilacak etkinlikler düzenlemeli,
+
+        Açik uçlu sorularla örencilerin sürece aktif katilmalarini salamali,
+
+        Örencilerin merak duygularini diri tutacak strateji, yöntem, teknik ve etkinlikler
+          düzenlemeli,
+
+        Örencilere, düüncelerini gelitirebilmeleri için firsat vermeli,
+
+        Örencilere anlamlandirma sürecinde rehberlik yapmali,
+
+                                                           27
+        Bireysel ve ibirliine dayali çalimalar yapacak ekilde düzenlemedir.
+
+4.4 Örencinin Rolü
+        Kürtçe Dersi Öretim Programinda, örencilerin Kürtçe dersinde kendilerini yazili ve sözlü
+
+olarak ifade edebilmeleri, öretme örenme sürecinde etkin olarak kendi örenmelerinden sorumlu
+olmalari, kiilerle iletiim ve etkileimde bulunabilmeleri, sosyal yaamda temel ihtiyaçlarini
+karilamalari, dile ait kültürü tanimalari hedeflenmektedir.
+Bu amaçla Kürtçe dersinde örencilerin;
+
+        Örenme-öretme sürecine aktif olarak katilan,
+        Örenmelerine ilikin süreçte sorumluluk sahibi olabilen,
+        Yaam boyu örenme için örenmeyi örenen,
+        Örendiklerini gerçek yaam ile ilikilendiren ve gerçek yaamda uygulayabilen,
+        Kürtçe konuan, okuyan, yazan, dinleyen,
+        Düünebilen, tartiabilen, sorumluluk sahibi,
+        Yazili ve sözlü anlatim ile dier alanlarda üst düzey becerilerini kullanabilen,
+        Güçlü ve zayif yönlerinin farkina varabilen,
+        Karar verme becerisine sahip olabilen,
+        Sebep sonuç ilikisi kurabilen bireyler olarak yetitirilmeleri beklenmektedir.
+
+5. KÜRTÇE ÖRETMNDE YARARLANABLECEK GENEL ÖRETM
+YÖNTEM VE TEKNKLER
+
+       Kürtçe Dersi Öretim Programi'nin amaçlarini gerçekletirmek için çeitli öretim, yöntem ve
+tekniklerinden yararlanilmaktadir. Örencilerin dil ve zihinsel becerilerini gelitirmede önemli olan
+bazi öretim yöntem ve teknikleri aaida verilmektedir. Bunlar yapilandirmaci yaklaimla ele
+alinmakta ve aktif öretim yöntemlerine göre açiklanmaktadir. Öretmenlerin uygulamada bunlarin
+yaninda dier yöntem ve tekniklerden de yararlanmalari beklenmektedir.
+
+                                                           28
+5.1 Öretim Yöntemleri
+
+       Kürtçe Dersi Öretim Programi'nin öretiminde kullanilabilecek bazi yöntemlerin
+açiklamalari verilmektedir.
+
+5.1.1 Sesli ve Sesiz Okuma
+
+       Sesli okuma, yazilari görme, kelime ve cümleleri tanima, seslendirme, anlama ve zihinde
+yapilandirma ilemlerinden oluan karmaik bir süreçtir. Sesli okuma örencilerin dil ve zihinsel
+becerilerini gelitirir. Ayrica dikkat gelitirme, okumaya younlama, dinleme, anlama gibi
+becerileri gelitirmeye katki salar. Sesli okumayla örenci okuma sürecini izler, kontrol altina alir
+ve yönlendirir. Sesli okuma öretmene, örencilerin okuma becerilerinin geliimi hakkinda fikir
+verir. Öretmen örnek okumalar yapmali ve örencileri sesli okumaya cesaretlendirmelidir.
+Aratirmalar, ilköretim düzeyinde sesli okuma becerilerini gelitirmeden sessiz okumaya geçmenin
+örencinin konuma becerilerinin geliimin olumsuz yönde etkilediini göstermektedir. Çünkü
+sessiz okumada örenciler vurgu, tonlama ve telaffuza dikkat etmeden okumakta ve bu becerilerini
+yeterince gelitirememektedir. Bu durum konumaya yansimakta ve örenci vurgu, tonlama ve
+telaffuza dikkat etmeden konumaktadir. Bu nedenle sesli okuma çalimalarina öretim süresi
+boyunca airlik verilmelidir.
+
+       Kelime ve cümleleri seslendirmeden yapilan okumaya sessiz okuma denilmektedir. Sessiz
+okuma göz ve zihin araciliiyla yapilmakta ses telleri, dil ve kulak okuma sürecinden
+çikarilmaktadir. Sessiz okuma, anlama ve zihinsel becerileri gelitirme daha kolay olmaktadir.
+Sessiz okuma örencinin kendi kendine okuyup örenmesine, baimsiz çalimasina, zamanini ve
+gücünü daha iyi kullanmasina katki salamaktadir. Örenci sessiz okumayla daha hizli okumakta,
+örenmesi gerekenlere kisa sürede ulamakta, aktif olarak örenmekte ve kendini sürekli
+gelitirmektedir. Bu nedenle örenciler sessiz okumaya özendirilmelidir. Sessiz okuma sonrasi
+okunanlarin anlailma durumu kontrol edilmelidir. Sessiz okuma uygulamalarinda öretmen tahmin
+etme, eletirme, açiklama ve özetleme tekniklerinden yararlanmalidir. Sessiz okumaya dil
+öretiminin balangiç düzeyinde balanmalidir. Örencilerin sessiz okuma daha sonraki düzeylerde
+aamali olarak gelitirilmelidir. Sessiz okumaya dördüncü ve beinci kademede sesli okuma kadar
+yer verilmelidir. Dil öretiminde sesli ve sessiz okuma uygulamalari birlikte yürütülmelidir.
+
+                                                           29
+5.1.2 Eletirel Okuma ve Dinleme
+
+       Okuma sirasinda, okuyucunun metinde ilenen düüncelerdeki tutarlilik ya da tutarsizliklari,
+çelikileri, verilen örneklerin uygunluu ya da yeterlii hakkinda kendine sorular sorarak
+okumasidir. Eletirel okuma, bir dizi soruyla olgularin neden-sonuç ilikilerini aratirma, analiz
+etme, düünce üretme, düünceleri düzenleme, görüleri karilatirma, çikarimlarda bulunma,
+tartimalari deerlendirme ve problem çözme gibi ilemleri gerektirmektedir. Eletirel okuma; ayni
+zamanda bilgiyi edinme, açiklama ve kavramlar arasindaki ilikileri yapilandirma biçimidir.
+
+       Eletirel dinleme ise, bir konumada aktarilan duygu, düünce ve bilgilerin doruluu,
+nedenleri, tutarlilii gibi yönlerini sorgulayarak dinlemedir. Eletirel dinlemede örenci
+konumacinin görüünü paylamasa da olaylara tarafsiz bakabilmelidir. Eletirel dinleme örencinin
+zihinsel becerileri yaninda dier becerilerini de etkilemekte ve gelitirmektedir. Bu dinlemeyle
+örenci, örendii bilgi ve becerileri günlük yaamina aktarmakta ve uygulamaktadir. Bu durum
+örenme alikanliklarinin kazanildii ve kalici hâle geldii ilköretim yillarinin iyi
+deerlendirilmesini gerektirmektedir. Örencilerin ilköretim yillarinda eletirel dinleme
+becerilerini gelitirmesi, örenme-öretme sürecinde aktif olmasi ve örenmekten zevk almasi için
+gerekli koullar salanmalidir.
+
+5.1.3 kna Edici Konuma
+
+       Bir konuma türü olan ikna edici konuma be adimda gerçekletirilmektedir. Bunlar; dikkat
+çekme, anlamayi salama, inandirma, tekrarlama ve istenileni açiklama aamalaridir. kna edilecek
+konuda deiik görü ve bilgilerle karidakinin dikkatini çekme, canli bir dille ve somut örneklerle
+konuyu anlamasini salama, soru ve kukularini giderecek kanitlar sunma, ana fikri araliklarla tekrar
+ederek hatirlatma ve son olarak da yapilmak isteneni açiklamadir. kna eden kii, karisindakini
+kirmamaya dikkat etmelidir. kna edici konumanin yapildii süreçte karidaki kiinin kendi
+düünce süreçlerinin bilincine varmasi ve bakalarinin farkli düünce süreçlerini de göz önünde
+bulundurmasi salanir.
+
+5.1.4 Eletirel Konuma
+
+       Örencinin bir fikre katilip katilmadiini, nedenleri ile anlatmasi ve öne sürülen gerekçeleri
+sorgulayarak konumasidir. Eletirel konumada zihindeki duygu, düünce ve bilgiler dikkatle
+seçilerek çeitli zihinsel ilemlerden geçirilmektedir. Bunlar siralama, siniflama, iliki kurma,
+eletirme, özetleme, analiz-sentez yapma, deerlendirme gibi ilemlerdir. Eletirel konuma türü
+
+                                                           30
+örencilerin i birlii yapma, tartima, ortak karar verme ve sorun çözme gibi becerilerini de
+gelitirmektedir.
+
+5.1.5 Betimleyici Yazma
+
+       Bir nesnenin (oyuncak, araba, atlikarinca vb.), bir yerin (piknik alani, otobüs durai vb.) ya da
+bir kiinin (bir bebek, arkada, gelin vb.) di görünüü açiklayarak yazmadir. Betimleme ayni
+zamanda "iç görünü" dediimiz, bireyin davranilari ve duygulari ile ilgili olan kiilik özelliklerini
+de kapsar. Betimlenecek nesne, yer, ya da kii dikkatle gözlemlenmelidir. Nesne betimlenirken
+rengi, boyutlari ve ekli hakkinda bilgi verilir. Bunun için, örencinin tanidii basit bir nesne
+seçilmelidir. Betimlenen nesne, daha önce onu hiç görmemi okuyucunun betimlemeyi okuduktan
+sonra, onu gözünde canlandirmasini salayacak ölçüde açik ve belirgin ifadeler içermelidir.
+
+       Yer betimlemesi söz konusu olduunda ise, betimlenen yer ile ilgili görüntünün iç mekânda
+mi yoksa di mekânda mi olduu önemlidir. Bir oda betimlenecekse sadece odanin içi betimlenmeli,
+betimlenecek yer diaridaysa pencereden bakinca neler görüldüü eklinde sinirlandirilmalidir.
+Betimleme ayni zamanda arka planda görülenleri de (dalar, duvarlar, gökyüzü vb.) içerir. Ancak,
+yer betimlemelerinde, betimlenen yerdeki nesnelere tek tek odaklanip onlarin ayrintili betimlemeleri
+yapilmaz, betimlenen yer genel hatlari ile anlatilir.
+
+       Bir kiinin betimlenmesi ise, bir nesnenin ya da yerin betimlenmesinden daha karmaik ve
+etkileyicidir. Çünkü; bir insanin neye benzediini deil, onun nasil biri olduunu da anlatmaniz
+gerekir. Bir kiinin tam bir betimlenmesi onun nasil düündüü, davrandii neler hissettii, onu hiç
+tanimayan bir kiinin onunla karilamadan onu tanimasi anlamina gelir. Söz konusu betimleme bir
+kiinin duygularindan söz etmek olduunda onun betimlenmesi sürecinde betimlenecek duygu sanki
+bir filmin bir sahnesinin durdurulmasi gibidir. Örenci, o sahneye ilikin neler hissettiini
+kaydetmelidir. Betimlenen kiinin duygularini (mutluluk, korku, güven, kiskançlik, utanma, nefret,
+coku, kizginlik, üzüntü, hayret, sevgi, hayal kiriklii, heyecan, tereddüt) anlatirken duyguyu yüzde
+ve bedendeki yansimalari ile vermeye çalimak, duygunun adini bulmayi okuyucuya birakmak
+önemlidir. Bazen bir durum için farkli kiilerin, farkli duygular hissetmesi mümkündür.
+
+5.1.6 Karilatirmali Yazma
+
+       ki ya da daha fazla nesne, kii veya yerin benzer ve farkli yönlerini ele alarak yazmadir.
+Karilatirma yazilarinda nesne, kii ya da yerin benzer özellikleri bir paragrafta, farkli özellikleri de
+
+                                                           31
+ayri bir paragrafta verilebilir.
+       Örnek konular:
+
+     Ailenizin imdiye kadar oturduu evleri birbiriyle karilatiriniz.
+     Tatilinizi geçirdiiniz yerleri karilatiriniz.
+     Beendiiniz iki televizyon programini birbiriyle karilatiriniz.
+     Sevdiiniz iki yemei birbiri ile karilatiriniz.
+     Bildiiniz iki oyunu birbiri ile karilatiriniz.
+     Tarihi iki olayi birbirleriyle karilatiriniz.
+
+5.1.7  Birlii Yaparak (Paylaarak) Yazma
+
+       Örencilerin bir konu hakkinda küçük gruplar hâlinde birlikte çaliarak bir metin
+oluturmasidir. Metni yazarken i bölümü yapilir. Gruptaki her bir örenci metnin bir bölümünü
+yazabilecei gibi, metnin tümünü de birlikte yazabilirler. Paylaarak yazma örencilerin grup
+hâlinde bir ürün ortaya koymasini salar ve sosyal ilikileri gelitirir.
+
+5.1.8 Anlatma Yöntemi
+
+       Öretmen merkezlidir. Öretimde sözlü anlatima önem verildii için anlatmayi gerektiren
+derslerde "yorumlayici", "açiklayici" ve "belirtici" özellikleriyle olumlu olarak kullanilir. Küçük
+grup çalimalarinda anlatilanlara ilikin tartima yaptirilabilir.
+
+5.1.9 Tartima
+
+       Tartima, bir grup örencinin belli bir konunun kavranmasi amaciyla karilikli görüler,
+fikirler, eletiriler üreterek o konuyu kapsamli ve detayli olarak irdelemesi eklinde tanimlanabilir.
+Örencileri belli bir konu üzerinde düünmeye yöneltmek, konu ile ilgili anlailmayan noktalari
+aydinlia kavuturmak ve konuya ilikin bilgileri pekitirmek, örencinin konu hakkindaki ön
+bilgilerini örenmek gibi amaçlarla tartima yapilabilir. Bu yöntemi uygularken özellikle tartima
+konusu önceden belirlenmeli, tartimanin amaci, süresi, hangi tür tartima tekniinin kullanilacai,
+yönetecek bir lider belirlenmelidir. Örenci, tartimayi sürdürmesini örendikçe ve tecrübe
+kazandikça tartimanin deeri artacaktir. Tartima sürecinde aaidaki önemli kurallara dikkat
+edilmelidir:
+
+     Öretmen ve örencilerin tartimaya önceden hazirlikli olmalari gerekir.
+     Tartimanin amaci, süresi ve tartimada neler yapilacai net olarak belirlenmelidir.
+
+                                                           32
+     Örencilerin kendilerini rahat hissedebilecei bir ortam oluturulmalidir.
+     Sorular örencileri düünmeye sevk eden türde, açik uçlu olmalidir.
+     Örencilerin ilgisini çeken, güncel konular seçilmelidir.
+     Tartima sirasinda örencilere kendisini ifade edebilecei kadar süre verilmelidir.
+     Her örencinin tartimaya katilmasi salanmalidir.
+
+5.1.10 Problem Çözme
+
+       Problem çözme, örencilerin hayat boyu kullanabilecekleri karar verme ve çözüm üretme
+yeteneklerini gelitirmek için kullanilan bir yöntemdir. Bu yöntemde önce örencilerle birlikte
+problem belirlenir. Problem, örencilerin kendi yaantilariyla ilgili ve güncel olmalidir. Problem,
+kolay anlailabilmesi için tanimlanir ve sinirlandirilir. Buradan hareketle problemle ilgili veriler
+toplanir, amaca uygun olanlar seçilir ve seçilenler problemin çözümüne yönelik olarak
+deerlendirilir. Örencilere verilere nasil ulaabilecekleri, çeitli bilgi kaynaklarindan (internet,
+kütüphane, kitle iletiim araçlari vb.) nasil yararlanabilecekleri ve topladiklari verileri nasil
+düzenleyebilecekleri konusunda rehberlik edilir. Elde edilen veriler amaca, kiilere veya süreye
+uygunluk açisindan deerlendirilir. Uygun çözüm önerileri seçilir. Seçilen öneriler denenir. Son
+olarak problem çözme sürecinin bütün aamalari örencilerle birlikte deerlendirilir.
+
+5.1.11 Rol Oynama
+
+       Rol oynama, örencilerin, bakalarinin kimliine bürünerek onlarin nasil düündüklerini, neler
+hissettiklerini ve nasil davrandiklarini anlamasina firsat verir. Rol oynarken aaida verilen bazi
+kurallara dikkat edilmelidir:
+
+     Canlandirilacak durum ya da olay örencilerle birlikte seçilmelidir.
+     Uygulamadan önce yapilacak etkinliklerin ayrintilari iyi belirlenmelidir.
+     Ortam (sinif, salon vb.) oynanacak rollere uygun olarak düzenlenmelidir.
+     Rol daitiminda örenciler, seçilirken oynanacak rollerin genel özellikleri hakkinda da
+
+      bilgilendirilmelidir.
+     Örenciler rol daitiminda görev almalari için cesaretlendirilmeli, ilk uygulamalarda gönüllü
+
+      ve rolünü iyi canlandirabilecek olanlarin rol almasi salanmalidir.
+     Rolleri prova etmeleri için yeterli zaman verilmelidir.
+     Rol yapmanin sonunda, sinifta oyuna ve oyunun amacina ilikin tartima ortami oluturulmali,
+
+      deerlendirme yapilmalidir.
+
+                                                           33
+5.1.12 Gösteri
+
+       Bu yöntem, bir eyin nasil yapilacainin açiklanmasi ve uygulamali olarak gösterilmesidir.
+Hem görerek hem de iiterek örenme imkâni salar. Bu yöntem, bir konuya ilikin bilgiler
+açiklanmasi ve bu bilgilerin beceriye dönütürülmesi için gerekli uygulamalarin yapilmasi
+aamasinda ve daha çok uygulama düzeyindeki davranilarin kazandirilmasinda kullanilir. Bu
+yöntemin kullanilmasinda unlara dikkat edilmelidir:
+
+     Gösterinin amaci örencilere açiklanmalidir.
+     Bütün sinifin izleyebilecei ve anlayabilecei ekilde yapilmalidir.
+     Öretmen önceden hazirlik yapmalidir.
+     Gösteride yapilacaklar basitten karmaia doru siralanmalidir.
+
+       Kürtçe derslerinde bu yöntem, örnein; bir iirin nasil okunabileceini, harflerin nasil
+yazilacaini, verilen bilgilerin bir grafie nasil dönütürülebileceini gösterirken kullanilabilir.
+5.1.13 Eitsel Oyunlar
+
+       Oyunlar, örenilen konuyu ilgi çekici hâle getirmek, örencileri etkin kilmak, rahat bir
+ortamda, zevk alarak örenmelerini salamak amaciyla kullanilan bir yöntemdir. Oyun çocuun
+hayal dünyasi ile gerçek dünya arasinda bir köprü görevi görmektedir. Çocuklar oyun içinde
+deneyimler kazanmakta ve model alarak örendii eyleri oyun içinde deneme firsati bulmaktadir.
+Oyunun bu özelliinden yararlanarak dersler ve konular daha ilgi çekici hale getirilebilir. Bu ekilde
+örenmelerin etkililii salandii gibi örenilenlerin kalicilik düzeyi de artirilabilir. Bu yöntem
+uygulanirken unlara dikkat edilmelidir:
+
+     Oyunun bir amaci olmali ve oyunun sonunda amaca ulailip ulailmadii deerlendirilmelidir.
+
+     Öretmen oyunu sürekli kontrol etmelidir.
+
+     Oyunlar basit ve örencilerin ilgisini çekecek özellikte olmalidir.
+
+     Örencilerin düzey ve yeteneklerine uygun olmalidir.
+
+     Oyun, siniftaki tüm örencilerin katilmasina olanak vermelidir.
+
+     Her oyuna bir ders saatinin 5-10 dakikasi ayrilmalidir.
+
+     Oyunlara dersin ortasinda ya da sonunda yer verilmelidir.
+
+                                                           34
+5.1.14 Programli Öretim
+       Programli öretim Skinner'in pekitirme kurami temel alinarak gelitirilen bir öretim
+
+modelidir. Bu model öretimin bireyselletirilmesi ve tam örenme ilkeleri temel alinarak
+hazirlanmitir. Bu yöntem geleneksel sinif ortaminda yürütülen, örencilerin bireysel hizlarini ve
+yetenek farkliliklarini dikkate almayan toplu öretime alternatif olarak ortaya atilmitir. Bu yöntem
+sayesinde örenci seviyesine ve yeteneine göre kendi hizinda ilerleyebilme olanaina
+kavumaktadir. Programli öretimin dier kitap ve materyallerden önemli bir farki da örencinin
+yalnizca materyali okuma ile kalmayip metni anlamaya çaliarak sorulara yanit vermesi ve bu
+yanitlara ilikin hazirlanan araçlara "programli öretim makineleri" denmesine karin bu programlar
+basili kitap eklinde de kullanilabilmektedir.
+
+5.1.16 Grupla Çalima
+
+       Grupla çalima yöntemi de örencilerin sinif içinde belirli gruplara ayrilarak bir konu üzerinde
+ibirliine dayali olarak çalimasina dayalidir. Bu yöntemin uygulanmasi, örencilerin sorumluluk
+duygusunu gelitirdii gibi siniftaki iletiim düzeyini de önemli ölçüde artirmaktadir. Bu yöntem
+sayesinde örenciler birlikte çalima alikanlii kazanarak toplum içinde de olumlu ilikiler
+kurmanin temelini atmi olacaklardir. Ayrica örenciler bu yöntem aracilii ile arkadalari ile
+birlikte aratirma-inceleme yapma ve bunlari sinifta sunarak aktif bir ekilde örenme sürecine
+katilma ve kendilerini ifade etme olanai bulacaklardir.
+
+       Bu yöntemin uygulanmasinda örenciler aktif olmasina karin öretmene de büyük görevler
+dümektedir. Öretmenlerin her eyden önce gruplari olutururken farkli seviyedeki örencilerin bir
+araya gelmesine özen göstermesi gerekmektedir. Konular daitilirken örencilerin seviyelerine göre
+eit bir ekilde paylailmasina dikkat edilmelidir. Öretmene düen dier bir görev de, örenme
+çevresini konu ve amaca uygun olarak örencilerle birlikte düzenlemek, örencilerin ulamakta
+güçlük çektikleri gerekli araç ve gereçleri salamaktir.
+
+5.2 Öretim Teknikleri
+       Kürtçe Dersi Öretim Programi'nin öretiminde kullanilabilecek bazi tekniklerin açiklamalari
+
+verilmektedir.
+
+                                                           35
+5.2.1 Beyin Firtinasi Teknii:
+       Beyin firtinasi, örencilerin bir konu, olay ya da sorun hakkinda düünmeleri, çok sayida fikir
+
+üretmeleri ve mantikli olup olmadii endiesine kapilmadan kendilerini ifade etmeleri anlayiina
+dayalidir. Temel amaç, örencilerin yaratici düünme becerilerini gelitirmektir. Bir dier amaç da
+örencilerin bir ii (örnein, bir hikâyeye balik bulmak) baarmak için, olabildiince çeitli
+seçenekleri göz önünde bulundurmalarini salamaktir. Beyin firtinasi yöntemi, küçük veya büyük
+gruplarda kullanilabilir. Bu yöntemin baarili olabilmesi, sunulan bütün fikirlerin kaydedilmesine
+balidir. Beyin firtinasinin uygulanmasinda dikkat edilmesi gereken önemli kurallar unlardir:
+
+     Örencilerin fikirlerini çekinmeden söyleyebilecei, rahat bir sinif ortami oluturulmalidir.
+     Etkinlii yönlendirecek ve verimlilii artiracak nitelikte bir bakan gereklidir.
+     Örenciler sinirsiz düünmeye özendirilmelidir.
+     Tek konuya odaklanilmalidir.
+     En fazla 15 dakika süre ayrilmalidir.
+     leri sürülen fikirler herkes tarafindan duyulmalidir.
+     Örencilerin ileri sürdükleri fikirler asla eletirilmemelidir.
+     leri sürülen her fikir kaydedilmelidir.
+     Kaydedilen fikirler beyin firtinasinin amacina göre deerlendirilerek siralanmali veya
+
+      gruplandirilmalidir.
+5.2.2 Soru-Cevap Teknii:
+
+       Kürtçe öretiminde soru cevap örencilerin düünme, dinleme ve konuma alikanliklari
+kazanmalarinda, iletiim becerilerini gelitirmelerinde ayni zamanda anlamayi kontrol etmede
+bavurulabilecek önemli bir tekniktir. Bu teknik uygulanirken unlara dikkat edilmelidir:
+
+     Örencilerin tümünün cevabi düünmelerini salamak için soru tüm sinifa yöneltilmelidir.
+     Sorunun cevabini düünmeleri için örencilere yeterli zaman verilmelidir.
+     Öncelikle gönüllü örencilere cevaplama firsati verilmeli; sorularin yöneltilmesinde adaletli
+
+      olunmalidir.
+     Doru cevap aninda pekitirilmelidir. Yanli cevap veren örenciler kesinlikle küçük
+
+                                                           36
+      düürülmemeli, doru cevabi bulmalari için yönlendirilmelidir.
+
+     Soruya cevap verecek örenci, sinifta oturduklari siraya veya liste sirasina göre deil, rasgele
+      seçilmelidir.
+
+     Örencinin konu hakkindaki bilgisini örenmeye yönelik sorular yerine açik uçlu, örencileri
+      düünmeye yönlendirebilecek sorular tercih edilmelidir.
+
+5.2.3 Drama Teknii:
+
+       Drama teknii, Kürtçe Dersi Öretim Programi'nda daha çok "yaratici drama" anlaminda ele
+alinmitir. Buna göre drama; doaçlama, canlandirma vb. tiyatro ya da drama tekniklerinden
+yararlanilarak bir grup çalimasi içinde, örencilerin bir yaantiyi, bir olayi, bir fikri, bir kavrami ya
+da bir beceriyi, ön bilgilerini kullanarak yapilandirmasi, anlamlandirmasi ve canlandirmasidir.
+Drama süreci üç aamali olarak planlanmitir:
+
+       a. Isinma ve rahatlama çalimalari: Müzik ya da ritim eliinde yürüme, koma, ziplama,
+gösterilen harekete uygun ritim tutma gibi çalimalar yaptirilabilir. Burada amaç, örencilerin
+fiziksel, zihinsel ve ruhsal olarak iletiime, kendilerini ifade etmeye hazir hâle gelmeleri,
+birbirleriyle kaynamalari ve rollerine dikkatlerini younlatirmalarini salamaktir.
+
+       b. Oynama (Esas çalima): Bu aamada liderin (genellikle öretmen) dikkat etmesi gereken
+nokta oyunlarda airilia kaçmamak ve katilimcilari gereinden fazla yormamaktir. Çalima
+grubunun özelliklerine uygun oyunlar seçilmeli ve oynanmalidir.
+
+       c. Rahatlama ve deerlendirme çalimalari: Eklem yerlerinin rahat hareket ettirilmesi,
+kaslarin yumuatilmasi ve örencilerin sakinletirilmesi amaciyla etkinliklerin sonunda kullanilir.
+Rahatlamada hem fiziksel hem de zihinsel rahatlama söz konusudur. Rahatlamayi kolaylatirmak
+için ortamda sakin bir müzik ve sözel yönergeler kullanilir. Bu aamanin amaci; örencileri
+rahatlatmak ve olayin tamamlandiini hissettirmektir. Deerlendirmede ise oynama sürecinde neler
+hissettikleri sorularak örencilerin kendi davranilari hakkinda bilinçlenmeleri ve dierlerinin
+davranilari üzerinde düünerek empati gelitirmeleri salanir.
+Drama çalimalarinda dikkat edilmesi gereken bazi kurallar öyle siralanabilir:
+
+     Drama etkinliklerini uygulamak için önce uygun bir ortam oluturulmalidir.
+     Özellikle rahatlama ve dikkat salama çalimalari sirasinda örencilerin birbirlerine
+
+      dokunmayacaklari bir alanin seçilmesi gerekir. Seçilen yer, koullari uygun, rahat bir ortam
+      olmalidir.
+
+                                                           37
+     Örencilerin geliim düzeyleri dikkate alinmadir.
+     Örencilerin gerek oyuncu, gerekse izleyici konumundayken, konuyla ilgili ön bilgilerini
+
+      hatirlayabilecekleri ve yansitabilecekleri bir ortam içerisinde olmalari gerekir. Bu ortamda
+      eletiri yapabilmeleri; sosyal, duygusal ve bilisel yönden bireysel farkliliklarinin farkina
+      varabilmeleri salanir.
+     Herhangi bir etkinlie dikkatini younlatirmasi, ilgi göstermesi ve gerekli hareketleri
+      yapabilmesi için istekli ve gönüllü olmalari önemlidir.
+      birlii ve gerekli ortami salamak için acele edilmemeli, drama için yeterli süre ayrilmalidir.
+     lk kez drama yapilan grupta, çalimalara basitten balanmali, daha sonra karmaik çalimalara
+      doru gidilmelidir.
+     Grubun sayisi önceden belirlenmelidir. Ya ve geliim düzeyiyle birlikte grubun özellikleri
+      dikkate alinarak gruptaki örenci sayisina karar verilmelidir. Sayi bu niteliklere göre
+      deimekle birlikte 10-12 kiilik gruplarin ideal olduu unutulmamalidir.
+     Etkinlik seçiminde örencilerin görüleri dikkate alinmalidir. Örenciler kendi seçtikleri
+      etkinliklere daha iyi younlair ve bunlardan zevk alirlar.
+     Rol alan örenciye baarisiz olma kaygisi yaatmamak için gerekli önlemler alinmalidir.
+     Her drama etkinliinden sonra etkinlik hakkinda deerlendirmeler yapilmalidir.
+
+5.2.4 Kavram Haritasi Teknii:
+
+       Kavram haritasi, bir kavrami, onu oluturan parçalari ve bunlarin birbirleriyle balantilarini
+gösteren bir görselletirme tekniidir. Bilginin zihinde somut ve görsel olarak düzenlenmesini
+salar. Kavram haritalari, kavramin onu oluturan parçalarla birlikte bir bütün olarak görülmesini,
+kavram hakkinda bilginin uzun süre akilda kalmasini, kolaylikla anlailmasini, kavramla ilgili yeni
+bilgilerin toplanmasini ve onlarin kavramla olan ilikilerinin görülmesini salar. Ayrica,
+örencilerin kavramla ilgili ön bilgilerini örenmeye ve yazili bir metni daha anlailir hâle
+getirmeye yardimci olur.
+
+5.2.5 Balik Kilçii Teknii:
+
+       Balik kilçii teknii, bir problemin nedenlerinin saptanmasina yardimci olur. Örencilerle
+birlikte yapildiindan, çalimadaki herkesin nedenler hakkinda daha çok bilgi sahibi olmasini salar.
+Balik kilçii tekniinde izlenecek aamalar öyle siralanir:
+
+                                                           38
+     Aratirilacak sorun, yani belirlenen problem, balik kilçiinin ba tarafina yerletirilir.
+     Problemin olumasina yol açan sebepler ya da etkenler önem sirasina göre, teker teker balik
+
+      kilçiinin yan kilçiklarina yazilir.
+     Yazilan yan etkenlerin her birinin altina olasi alt etmenler siralanir. Alt etmenler tek tek
+
+      incelenerek probleme katkilari belirlenmeye çaliilir.
+     Balik kilçii teknii, örencilere karmaik sorunlari analiz etmede yardimci olur. Toplanan
+
+      veriler sadece problemlerin ne olduunu gösterir, tehis koyar.
+     Problemin nedeni belirlendikten sonra çözüm aamasina geçilir.
+
+5.2.6 Benzetim Teknii:
+
+       Benzetim teknii, özde, bilinenden yola çikarak bilinmeyene anlam yüklemektir. Bir kaynak
+(bilinen) bir de hedef (bilinmeyen) vardir. Benzetim bu ikisini birletiren bir köprü görevi görür.
+
+       Bu teknikte bilgi, örenci tarafindan onu zihinsel bir karmaaya sokmadan kazanilmaktadir.
+Benzetim teknii, karmaik ya da soyut fikirlerin en önemli temel özelliklerini öne çikararak
+örenciye hazir olarak sunmaktadir. Bu teknikle soyut fikirler somut olarak verilerek örencinin
+zihninde anlam kazandirilmaya çaliilmaktadir.
+
+5.2.7 Gözlem ve nceleme:
+
+       Gözlem, bir olayi, bir nesneyi ya da bir gerçei anlamak için olay, nesne ya da gerçein çeitli
+belirti ve koullarini izleme ve inceleme iidir. nceleme ise ele alinan bir konu ya da olayin
+özelliklerini ve ayrintilarini tam olarak anlamaya çalimak için yapilan yöntemli çalimalardir.
+Gözlem ve inceleme, birbirini tamamlayan iki ura gibidir. Örencilerin, gözlem çalimalari ve
+inceleme gezileri sirasinda gördüklerini ve iittiklerini not etmeleri, belge toplayip bunlar üzerinde
+inceleme yapmalari, bazi durumlarda gördüklerini yazili olarak anlatmalari, tartimalari ve
+deerlendirmeleri Kürtçeyi kullanma becerisini gelitirir. Gözlem sürecinde aaidaki hususlara
+dikkat edilmelidir:
+
+     Gözlenecek varlik veya olay kendi doal artlarinda olmalidir.
+     Gözlemin amaç veya amaçlari olmalidir.
+     Gözlem planli yapilmalidir.
+     Gözlem planinin örencilerle ve hatta velilerle yapilmasi, plana örencinin ve velisinin
+
+      katkisinin salanmasi önemlidir.
+     Gözlemin bir gezi ile birlikte olmasinin gerektii durumlarda, disiplin problemleri olmamasi
+
+      için organizasyonun çok iyi yapilmasi gereklidir.
+
+                                                           39
+     Örenciler, gittikleri yerlerde neye dikkat edeceklerini, neyi gözleyeceklerini bilmelidirler.
+     Gözlem sirasinda örencilere not tutma alikanlii kazandirilmalidir.
+     Gözlem sonunda gözlem sonuçlarini görmeye yönelik bir deerlendirmenin yapilmasi esastir.
+
+      Bu süreçte gözlem sirasinda tutulan notlar, toplanan materyaller, alinan fotoraf veya filmler,
+      ses kayitlari vb. ayrintili olarak deerlendirilmelidir.
+
+6. YANLI DÜZELTME STRATEJLER
+
+       Dili örenirken veya kullanirken hatalar yapilabilir. Bunu göz önünde bulundurmak dil
+kullaniminda ve öretiminde daha gerçekçi kararlar almaya yardimci olabilir. "Hata olmadan
+gelime olamaz" gerçeinden hareketle bilinçli bir tutumla örencilerin hata yaparak dili
+örenmeleri ve kendilerini gelitirmeleri salanmalidir. Dil öretimi sirasinda örencilerin
+yapabilecei yanlilarin düzeltilmesinde aaidaki stratejiler dikkate alinmalidir:
+
+     Örencilerin hatalarini düzeltebilmeleri için sistemli bir geri bildirim yaklaimi
+      benimsenmelidir.
+
+     Dil sürçmeleri eklinde olan yanlilar göz ardi edilse de sistematik hatalar kesinlikle
+      düzeltilmelidir.
+
+     Hatalar özellikle iletiimi kesintiye urattiinda düzeltilmelidir.
+     Etkinliin amacina göre uygun hata düzeltme yöntemi kullanilmalidir. Örnein, iki-üç
+
+      dakikalik kesintisiz bir konumada örencinin konumasini keserek hatayi düzeltmek yerine
+      konuma bitiminde hata ile ilgili geri bildirim verilebilir.
+     Örencilerin kendi dil kullanimlarini bilinçli bir ekilde izlemesi, yazili ve sözlü
+      anlatimlarinda kari tarafa vermek istedikleri mesajin istedikleri gibi ulaip ulamadiini
+      kontrol etmeleri ve hatalarinin farkina varabilmeleri için kullanilabilecek stratejiler
+      gösterilmeli ve gerekli yönlendirmeler yapilmalidir.
+     Akran geri bildirimi tevik edilmelidir
+      Örenci hatalarinin gözlenmesi ve incelenmesinin yararlari aaida özetlenmitir:
+     Birey ya da grup olarak gelecee yönelik dil öretimini planlama,
+     Ders plani ve malzeme gelitirme,
+     Örenme-öretme sürecini deerlendirme,
+     Örencilerin kendi örenme süreçlerinin bilincine varmasi ve kendilerini dil örenme
+      süreçlerinden sorumlu hissetmeleri.
+
+                                                           40
+7. ÖLÇME VE DEERLENDRME
+
+         Ölçme ve deerlendirme, örenme ve öretme sürecinin ayrilmaz ve önemli bir parçasidir.
+Ölçme, niteliklerin sayi ya da sembollerle ifade edilmesidir. Deerlendirme ise ölçmeyi de
+kapsamina alan daha geni bir kavramdir. Deerlendirmede, ölçme sonuçlari da dikkate alinarak bir
+yargiya varilmasi söz konusudur. Bir baka ifadeyle deerlendirme, ölçme sonuçlarini bir ölçüt ya
+da ölçütlerle karilatirarak yargiya ulama sürecidir. Ölçme ve deerlendirmenin amaci,
+örencilerin baarilarina ve örenme-öretme sürecine yönelik dönüt almaktir. Bu dönütler
+dorultusunda düzeltme ve gelitirme etkinlikleri gerçekletirilir.
+
+         Yapilandirmaci örenme yaklaimiyla birlikte örenme ve öretme sürecine ilikin bir
+paradigma deiimi gerçeklemi, bu durum ölçme ve deerlendirme sürecini de etkilemitir. Yeni
+deerlendirme yaklaimlarinda, sonuç yerine daha çok örenme sürecine odaklanilmaktadir.
+Örencilerin dil becerilerinin geliimine yönelik deerlendirmede de örenme sürecinin merkeze
+alinmasi oldukça önemlidir. Dil becerilerinin sadece sonuç odakli bir anlayila deerlendirilmesi
+doru bir yaklaim deildir. Çünkü dil becerileri, anlama ve anlatma becerileri üzerine kuruludur.
+Dilin etkili kullanimi, anlama becerilerini oluturan dinleme ve okuma becerileri ile anlatma
+becerilerini oluturan konuma ve yazma becerilerinin kazandirilmasina bali görülmektedir. Bu
+becerilere ilikin etkili bir deerlendirmenin yapilabilmesi için geleneksel ölçme tekniklerine yer
+vermekle birlikte, daha çok örenme sürecinin dikkate alindii tamamlayici ölçme ve deerlendirme
+teknikleri temel alinmalidir. Bu tekniklerin yani sira örencilerin deerlendirme sürecine katilimlari
+da öz deerlendirme ve akran deerlendirme gibi tekniklerle salanabilir. Geleneksel ölçme
+teknikleri unlardir: Yazili yoklamalar, kisa cevapli sorular, doru-yanli sorulari, eletirme
+sorulari, çoktan seçmeli test. Bu bölümde geleneksel ölçme tekniklerine ilikin açiklamalara yer
+verilmemitir. Çünkü bu teknikler bugüne kadar yaygin ekilde kullanilagelen yöntemler
+olduundan, genel olarak bilinen ölçme teknikleridir. Tamamlayici ölçme ve deerlendirme
+teknikleri, aaida açiklanmitir.
+
+7.1 Tamamlayici Ölçme ve Deerlendirme Teknikleri
+
+         Tamamlayici ölçme ve deerlendirme teknikleri, daha çok süreç odakli olup ya hep ya da hiç
+ölçütü yerine baari ve baarisizliin arasinda örencinin çalimalarinda kismi performansini da
+deerlendirmeye alir. Alternatif deerlendirme, otantik deerlendirme gibi sözcüklerle de
+adlandirilan tamamlayici deerlendirmede, sonuç kadar sürecin deerlendirilmesi temel alinmakta,
+örencilerin düünceleri ve yaraticiliklari ön plana çikarilmakta, bireysel farkliliklari göz önünde
+
+                                                           41
+bulundurulmaktadir. Kürtçe Öretim Programi'nda da örencilerin örenme sürecindeki
+geliimlerinin izlenmesi ve performansa dayali bir deerlendirmenin yapilmasi önemli
+görülmektedir. Bununla birlikte geleneksel ölçme tekniklerine yer verilmesi de beklenmektedir.
+Kürtçe Öretim Programi'nda öngörülen tamamlayici ölçme ve deerlendirme tekniklerinden
+bazilari aaida özetlenmitir.
+
+7.1.1 Performans Görevi
+
+         Performans görevi; eletirel düünme, problem çözme, okuduunu anlama, yaraticiliini
+kullanma, aratirma yapma gibi örencinin bilisel, duyusal, psikomotor, alandaki becerilerini
+kullanmasini, gelitirmesini ve bir ürün ortaya koymasina yönelik öretmen rehberliinde yapilan
+çalimalardan oluur. Performans görevlerinin amaci, örencilerin üst düzey zihinsel becerilerinin
+gelitirilmesi ve ölçülmesidir. Performans görevinin bölümleri unlardir:
+Tanimlama bölümü, performans görevinin özü niteliindedir. Bu aamada ölçülmesi hedeflenen
+kazanim ya da kazanimlar belirtilir.
+Görev bölümünde örenciye yapmasi gereken görevler sunulur.
+Yönerge bölümünde örencinin görevini yerine getirirken dikkat etmesi gereken hususlar belirtilir.
+Performans görevinin tam olarak tamamlandiina ilikin göstergeler ve bu görevin çiktilari
+tanimlanir.
+Süre bölümünde görevin tamamlanma süresi belirtilir.
+Puanlama yöntemi bölümünde ise yapilan çalimanin deerlendirilmesinin nasil yapilacai
+belirtilir. Bu bölümde deerlendirmede kullanilacak dereceli puanlama anahtari, formlar gibi
+araçlara yer verilir.
+
+         Kürtçe dersinde kullanilabilecek bir performans görevi örnei Tablo 5'te ve buna ilikin
+dereceli puanlama anahtari ise Tablo 6'da verilmitir.
+
+Ders                 Tablo 5. Performans Görevi Örnei
+Sinif
+Konu        Kürtçe (Kurmancca/Zazaca)
+Kazanimlar
+            Ortaokul 1
+
+            Yaanilan çevre ile ilgili basit bir hikâye yazma
+
+                 Yakin çevresindeki kiileri ve nesneleri betimler.
+                 Yaadii yeri ve çevresini basit ifadelerle yazili olarak tasvir eder.
+                 Düzeye uygun bir paragrafi dikte yoluyla yazar.
+                 Duygu ve düüncelerini ifade edecek düzeye uygun bir paragraf
+                 yazar.
+
+                                          42
+Puanlama Yöntemi  Dereceli puanlama anahtari
+Süre              10 gün
+Yönerge            Yaadiiniz çevrenin özelliklerini düünülecek ve aile bireylerine
+
+                     sorunuz.
+                   Yaadiiniz çevrenin özelliklerini tasvir edecek bir hikayeyi zihninizde
+
+                     oluturun.
+                   Oluturduunuz hikâyeyi aile bireyleriyle paylainiz.
+                   Hikâye sinif ortaminda yazilacak.
+                   Hikâyeye uygun bir balik yazilacak.
+                   Hikâye bir paragraf ya da kisa iki paragraftan oluacak.
+                   Yaadiiniz çevreyi tasvir edecek bir resim çiziniz.
+                   Hikâyenin deerlendirilmesi dereceli puanlama anahtari ile yapilacaktir.
+
+                  43
+         Tablo 6. Dereceli Puanlama Anahtari (Rubric) Örnei
+
+Örencinin Adi Soyadi:                                 Sinifi:
+Numarasi:                                              Tarih:
+
+                                              Dereceler
+
+                    Ölçütler           1   2  3                4                    5
+                                                                                  (Çok
+Anlamli cümleler yazma.                (Zayif) (Geçer) (Orta) (yi)                iyi)
+Çevresini tasvir etme.
+Hikayenin baliini yazma.                   X                                       X
+Hikayenin konusuna uygun resim çizme.                   X
+Yazim kurallarina uyma.                                                            60
+                                                                               X
+Toplam Puani                           X
+
+                                                         Yüzlük Sisteme
+                                       15
+
+                                                     Dönütürülmü Puani
+
+         Not: (1) Dereceli puanlama anahtarinin bir örnei örencilere verilecektir. Öretmen
+
+dereceli puanlama anahtarini kendi oluturabilecei gibi örencilerle birlikte de oluturabilir.(2)
+
+Tablodaki puanlamalar dereceli puanlama anahtarinda alinan puanlarin yüzlük puan sistemine
+
+dönütürülmesi için verilmitir. (3) Bir siniftaki tüm örenciler bir listede yer alacak ekilde bir
+
+form da kullanilabilir.
+
+         Dereceli puanlama anahtarinda alinan puanlarin yüzlük puan sistemine dönütürülmesi u
+
+ekildedir: Tablo 2'de örnek bir puanlama gösterilmitir. Buna göre bir örencinin aldii toplam
+
+puan 15'tir. Örencinin alabilecei en yüksek puan ise 25'tir. Yüzlük sisteme dönütürmek için 15
+
+puanin 25 puana orani bulunur (15/25= 0.60). Dolayisiyla örencinin yüzdelik sisteme göre puani
+
+60'tir.
+
+7.1.2 Proje
+
+         Proje, örencilerin grup halinde ya da bireysel olarak istedikleri bir konuda inceleme,
+aratirma ve yorum yapma, görü gelitirme, yeni bilgilere ulama, özgün düünce üretme ve
+çikarimlarda bulunmalari amaciyla ders öretmeni rehberliinde yapacaklari çalimalardir. Projeler,
+performans görevlerinin geniletilmi ekilleridir. Proje çalimalarinda problem tanimlanir,
+seçenekler üzerinde düünülür, çözümler planlanir ve kiisel çözümler belirtilir. Projelerin
+belirlenmesinde ve seçiminde, örencilerin ilgi ve ihtiyaçlari, seviyesi ile maliyet ve proje süresi
+gibi hususlar dikkate alinmalidir. Projeler, bir ya da iki dönemi kapsayacak ekilde verilebilir.
+Projelerin hazirlanmasinda da performans görevindeki bölümler temel alinir. Kürtçe dersinde
+kullanilabilecek bir proje örnei Tablo 7'de verilmitir.
+
+                                       44
+                              Tablo 7. Proje Örnei
+
+Ders              Kürtçe (Kurmancca/Zazaca)
+
+Sinif             Ortaokul 1
+
+Konu              Duvar takvimi hazirlama ve tanitma.
+
+Kazanimlar             Hava durumu ve mevsimler hakkinda bilgi verir.
+Puanlama               Duygu ve düüncelerini basit cümlelerle ifade eder.
+                       Düzeye uygun kelime ve cümleleri dikte yoluyla yazar.
+                       Kullandii düzeye uygun sözcükleri birbirine balamak için temel balaçlari
+                       kullanir.
+                  Dereceli puanlama anahtari
+
+Yöntemi
+
+Süre              3 ay
+
+Yönerge            Evdeki, okuldaki duvar takvimlerini inceleyiniz.
+
+                   Duvar takvimlerinin hazirlaniinda nelere dikkate edildiini aratiriniz.
+
+                   Duvar takviminde 12 aya ve haftanin yedi gününe yer verilecektir.
+
+                   Duvar takvimi, 50 takvim yapraindan oluacaktir.
+
+                   Duvar takviminde, mevsimlerin özellikleriyle ilgili açiklamalara yer verilecektir.
+
+                   Duvar takviminde önemli olaylarin gerçekletii tarihlerin bulunduu sayfalara bir
+
+                  ya da iki cümlelik açiklama eklenecek.
+
+                   En az 12 önemli olay yazilacaktir.
+
+                   Her örenci hazirladii takvim ile ilgili 5 dakikalik bir sunum yapacaktir.
+
+                   Proje çalimaniz dereceli puanlama anahtari ile deerlendirilecektir.
+
+         Not: Öretmen tarafindan ya da örencilerle birlikte hazirlanan dereceli puanlama anahtari
+
+kullanilacaktir.
+
+7.1.3 Sözlü Sunumlar
+
+         Sözlü sunumlar, dil öretiminde konuma becerisinin gelitirilmesinde ve ayni zamanda
+örencinin konuma becerisine ilikin deerlendirme yapilmasinda kullanilmaktadir. Sunular,
+örencilerin eletirel düünme becerileri, hatirlama ve hitap düzeylerine ilikin bilgi veren uygun
+araçlardir. Sözlü sunumlarin deerlendirilmesinde dereceli puanlama anahtari, kontrol listeleri gibi
+ölçme araçlari kullanilabilir. Bu araçlarin yani sira, öz deerlendirme ve akran deerlendirme
+formlarindan da yararlanilabilir.
+
+                                             45
+7.1.4 Ürün Dosyasi (Portfolyo), Kavrama
+         Literatürde ürün dosyasi kavrami, geliim dosyasi, seçki dosyasi, ürün seçki dosyasi,
+
+portföy, portfolyo gibi çeitli sözcüklerle adlandirilmaktadir. Ürün dosyasinin eitim kurumlarinda
+durum belirleme ve deerlendirme araci olarak kullanilmasi, ilköretim dil siniflarinda balamitir.
+Ürün dosyasi, örencilerin belli bir alandaki çalimalarini, harcadii çabayi, çalimanin aamalarini
+gösteren, örencilerin çalimalarini sistematik olarak bir araya getirilmesi ile oluturulan dosyadir.
+Ürün dosyasi hem öretmen hem de örenci için bir deerlendirme aracidir. Bu dosya, sinif içi
+etkinlikler kapsaminda yapilan çalimalar, performans görevleri, projelerden örencinin beendii
+ya da performansini yansittiina inandii çalimalari seçmesiyle oluur.
+
+         Ürün dosyasi deerlendirmeleri, örencinin kendi dosyasi hakkinda sorumluluk
+hissetmesine, eletirel düünmeye ve öz deerlendirmeye olanak salamaktadir. Böylece örenci
+karar sürecine katilmakta ve daha iyi örenmektedir. Ürün dosyalarinin türlerine ilikin olarak ideal
+ürün dosyasi, sergileme, derleme, deerlendirme gibi birçok siniflama yapilmitir. Ürün
+dosyalarinin oluturulmasinda tainabilirlik hususu ve ekonomiklik ilkesi göz önünde
+bulundurulmalidir. Örencilerin ilgi ve ihtiyaçlari, bireysel farkliliklari dikkate alinmalidir.
+Öretmenler ürün dosyalarina ilikin biçim ve içerik açisindan bilgiler vermelidir. Ürün dosyalarinin
+genel olarak üç ana bölümden olumasi gerekir.
+
+         Öz geçmi. Örencinin yaptii çalimalarin hangi aamalardan geçtiini yansitir. Ürünler.
+Örencinin dosyasinda yer alan tüm çalimalari kapsar. çindekiler bölümü olarak nitelendirilebilir.
+
+         Yansitma. Örencinin çalimalarina ilikin deerlendirmesini yansitir. Çalimanin amaci,
+seçilme nedeni, çalimanin olumlu yönleri, çalimadaki eksiklikler gibi konularda örencinin öz
+deerlendirme ve öz eletiri yapmalarini kapsayan bir bölümdür.
+
+         Örenci ürün dosyalarinin deerlendirilmesinde ideal ya da en iyi yol diye
+nitelendirilebilecek bir yöntem yoktur. Ürün dosyalari, belirtilen çalimalarin dosyada yer almasi,
+tertip ve düzen, yansitma ölçütleri dikkate alinarak deerlendirilebilir. Deerlendirme için dereceli
+puanlama anahtari ya da kontrol listesi kullanilabilir. Ürün dosyasi deerlendirme formu örnei
+Tablo 8'de gösterilmitir.
+
+                                                           46
+              Tablo 8. Ürün Dosyasi Deerlendirme Formu Örnei
+
+Örencinin Adi Soyadi:                            Sinifi:
+
+Numarasi:                                        Tarih:
+
+                                              Dereceler
+
+              Ölçütler                 1   2  3               4         5
+                                                                    (Çok iyi)
+                                       (Zayif) (Geçer) (Orta) (yi)
+
+Örenci tanitim sayfasinin tam olmasi.
+
+çindekiler sayfasinin tam olmasi.
+
+Çeitli çalimalarin olmasi.
+
+Çalimalarin amaca uygun olmasi.
+
+Dosyanin düzenli olmasi.
+
+Toplam Puani                                  Yüzlük Sisteme
+                                           Dönütürülmü Puani
+
+7.1.5 Gözlem
+
+         Gözlem, örencinin örenmeye yönelik geliimini izlemek ve deerlendirmek amaciyla
+kullanilan, örenci hakkinda doru ve çabuk bilgi salayan tekniklerden biridir. Gözlem, ayni
+zamanda dier teknikleri tamamlayici bir özellie de sahiptir. Öretmen, örencinin ders içi
+performansini gözlemleyebilir.
+
+         Gözlem tekniinin kullanilmasi için öncellikle öretmenin gözlemek istedii özellii
+tanimlamasi ve ölçütleri belirlemesi gerekir. Öretmen, gözlem için hazir formlari ya da kendi
+oluturduu ölçütlerin yer aldii formlari kullanabilir. Öretmen, belirlenen ölçütlerin
+kaydedilmesinde hangi ölçme aracindan yararlanilacaini belirlenmelidir. Gözlem sonuçlarinin
+kaydedilmesinde kontrol listeleri kullanilabilir. Örencilerin deiik durumlarda, farkli zamanlarda
+ve birkaç defa gözlemlenmeleri daha uygundur. Örenci gözlem formu örnei Tablo 9'da
+sunulmutur.
+
+                                       47
+                       Tablo 9. Örenci Gözlem Formu Örnei
+
+Örencinin Adi Soyadi:                                              Sinifi:
+
+Numarasi:                                                          Tarih:
+
+Örenme Alani                     Kazanimlar                                 Dereceler
+                                                                   Evet Kismen Hayir
+
+              Dinlediklerini bakalariyla paylair.
+
+Dinleme            Görsellere ve balia bakarak dinleyecei
+                   metnin konusunu tahmin eder.
+                   Dinledii basit ve anlailir yönergeleri
+                   uygular.
+              Görsel destekli basit bilgilerin yer aldii tablo ve
+
+Okuma         çizelgeleri okur.
+
+              Okuduu kisa ve basit yönergeleri uygular.
+
+              Okuduu bir metnin içeriiyle ilgili
+
+              karilatirmalar yapar.
+
+              Duygu ve düüncelerini basit cümlelerle ifade
+
+Konuma        eder.
+
+              Bir günlük yaantisini basit cümlelerle anlatir.
+
+              Yakin çevresindeki kiileri ve nesneleri betimler.
+
+Yazma              Kiisel bilgilerini içeren düzeye uygun bir
+                   bilgi formu hazirlar ve doldurur.
+                   Düzeye uygun bir paragrafi dikte yoluyla
+                   yazar.
+              Duygu ve düüncelerini ifade edecek düzeye
+
+              uygun bir paragraf yazar.
+
+Not: Gözlem formu, bir siniftaki tüm örencilerin yer aldii bir form eklinde de
+
+hazirlanabilir. Örnek form olduu için her örenme alanindan sadece üçer kazanim alinmitir.
+
+7.1.6 Görüme
+
+         Öretmenin örenciye örenme alani ya da baka bir konu ile ilgili bazi sorular sormasi ve
+genellikle sözlü olarak cevaplar almasindan oluan bir iletiim sürecidir. Görüme, özellikle dil
+öretiminde bavurulmasi gereken önemli tekniklerden biridir. Görüme, örencilere dinlediini
+anlama, dili doru bir ekilde kullanma ve konuma becerisini gelitirme firsati salar. Bununla
+birlikte örencinin ne düzeyde örendii ve konuma becerisi konusunda detayli bilgi verir.
+
+                                         48
+Görüme teknii kullanilirken, görümenin hangi zamanlarda ve nasil yapilacai, nasil
+kaydedilecei ve görüme süresi önceden planlanmalidir. Örencilere sorulan sorularin kazanimlarla
+tutarli olmasi gerekir. Görümeler, yapilandirilmi, yari yapilandirilmi ve yapilandirilmami
+görümeler eklinde yapilabilir. Görümelerde, görüme formu kullanilabilir. Örenci görüme
+formu örnei Tablo 10'da gösterilmitir.
+
+                                 Tablo 10. Örenci Görüme Formu Örnei
+Görüme tarihi
+Görüme yeri
+Örencinin adi
+soyadi
+Sinifi ve numarasi
+Ben ve ailem temasinda neler örendin?
+
+Kendini tanitir misin? (Ya, doum yeri vb. açilardan)
+
+Ailenizde kimler yaiyor?
+
+Ailenizde çalian kimse var midir? Varsa çalianlarin meslekleri nelerdir?
+
+Bu temada en iyi örendiin konu ya da konular nelerdir?
+
+Bu temada yeterince örenemediin konu ya da konular var midir?
+
+7.2 Örencilerin Deerlendirme Sürecine Katilimi
+         Deerlendirme çalimalari genellikle öretmenler tarafindan yapilmaktadir. Fakat yenilenen
+
+öretim programlari ve yapilandirmaci örenme yaklaimiyla birlikte örenci ve velilerin de
+deerlendirme sürecine katilimlari gündeme gelmitir. Örenciler örenme ortaminda ve örenme
+ortami diinda doal olarak birbirlerinden çok ey örenmektedirler. Böylece birbirleri hakkinda
+fikir sahibi olmaktadirlar ve birbirlerini deerlendirme giriiminde bulunmaktadirlar. Örencilerin
+deerlendirme sürecine katilimi, daha derinlemesine deerlendirmenin yapilmasina ve örencinin
+
+                                                           49
+eletirel düünme becerilerinin gelimesine katki salamaktadir. Örencinin deerlendirme sürecine
+katilim ekillerinden bazilari unlardir:
+
+7.2.1 Öz (kendini) Deerlendirme
+
+         Öz deerlendirme, örencinin kendi çalimasini öretmen ya da örenciler tarafindan
+belirlenmi ölçütlere göre deerlendirmesidir. Öz deerlendirme, örencinin yeteneklerini
+kefetmesine, güçlü ve zayif yönlerinin farkina varmasina, kendi örenmeleri ve ilerlemesini
+deerlendirmesine olanak salar. Öz deerlendirmenin önemi konusunda örencilerin yeterince bilgi
+sahibi olmasi önemlidir. Balangiçta öz deerlendirme, örencilerin deneyimsizlii nedeniyle
+yanilgilara neden olabilir. Fakat örenciler deneyim kazandikça aldiklari kararlar daha doru
+olacaktir. Öz deerlendirmede, formlar ya da kontrol listeleri kullanilabilir. Örenci öz
+deerlendirme formu örnei Tablo 11'de gösterilmitir.
+
+                    Tablo 11. Örenci Öz Deerlendirme Formu Örnei
+
+Örencinin Adi Soyadi:                                                  Sinifi:
+
+Numarasi:                                                              Tarih:
+
+Yönerge: Bu form kendinizi deerlendirmeniz amaciyla hazirlanmitir.
+
+Etkinlik adi
+
+Tarih
+
+Örencinin adi soyadi
+
+Sinifi ve numarasi
+
+Bu etkinlikte neler yaptim?
+
+Bu etkinlikte neyi ya da neleri iyi yaptim?
+
+Bu etkinlii yaparken en çok zorlandiim bölümler hangileridir?
+
+Bu etkinlikte neler örendim?
+
+Bu etkinlie benzer yeni etkinlikler yaparken dikkat edeceim noktalar:
+
+                                             50
+7.2.2 Akran Deerlendirmesi
+         Örencilerin, birbirlerinin çalimalarini belirlenmi ölçütlere göre deerlendirmeleridir.
+
+Akran deerlendirme, örencilerin eletirel düünme becerilerinin gelimesine ve örenme
+süreçlerine önemli katkida bulunur. Akran deerlendirmenin yapilabilmesi için öretmen tarafindan
+ya da örencilerle birlikte deerlendirme ölçütlerinin önceden belirlenmi olmasi gerekmektedir.
+Akran deerlendirmede formlar ya da kontrol listeleri kullanilabilir.
+
+                                                           51
+       8. KÜRTÇE (KURMANCCA VE ZAZACA) DERS ÖRETM PROGRAMI KAZANIMLARI
+
+                                         Balangiç Düzeyi (A1) Kazanimlari (Ortaokul 1. Sinif)
+
+                                                               DNLEME
+
+                   KAZANIMLAR                                  AÇIKLAMALAR
+
+1. Dinledii sözcük ve ifadelerde, Kürtçeye özgü sesleri ayirt 1. Alitirmalar yoluyla Kürtçede farkli seslere karilik gelen harflerin (Ê ê, Î î, Û û,
+
+eder.                                                          Q q, W w, X x,) ayirt edilmesi salanmalidir.
+
+2. Dinledii metinlerde geçen temel zaman ifadelerini ayirt     2. Dinlenilen metinde geçen temel zaman ifadelerine ilikin örneklerin verilmesi
+
+eder.                                                          istenmelidir.
+
+3. Dinledii metinlerde geçen sayilari ayirt eder.              3. Örencilerin sayilari ayirt etmesi salanmalidir.
+
+4. Dinledii somut ve anlailir ifadelerle ilgili görselleri bulur. 4. Duyulan sözcük ya da ifadelere ilikin görsellerin ayirt edilmesine yönelik
+
+5. Dinledii basit ve anlailir yönergeleri anlar.               etkinlikler yapilmalidir.
+
+6. Dinledii sözcükleri birbirine balayan balaçlari ayirt eder. 5. Sinif ve okul içi kurallar ile ilgili yönergeler belirlenmelidir.
+
+7. Dinledii metinlerde geçen soru ifadelerini dier ifadelerden 6. Ve/veya (û/ an) (û/ yan) gibi basit balaçlar üzerinde durulmalidir.
+
+ayirt eder.                                                    7. Dinlenilen metinlere ilikin basit düzeyde ne, nerede, ne zaman, nasil, niçin ve
+
+8. Sözcük ya da ifadelerin vurgu ve tonlamasindan iletiimsel   kim (çi, li ku, kengî, çawa, çima û kî) (çi, kotî, key, senîn, qey û kam)
+
+anlamlar çikarir.                                              sorularinin soru edati olduunu ayirt etmesi salanmalidir.
+
+9. Dinledii düzeye uygun metinleri takip eder.                 8. Vurgu ve tonlamanin anlam üzerindeki etkisine dikkat çekilerek, örencilerin bu
+
+10. Duyduu basit sözcük ve ifadeleri, vurgu ve tonlamalara     baki açisiyla dinleme yapmalari salanmalidir.
+
+uygun olarak seslendirir.                                      9. Örencilerin dinledii yazili bir metni takip etmesi salanmalidir.
+
+11. Görsellere ve balia bakarak dinleyecei metnin konusunu 10. Basit sözcük ve ifadelerin vurgu ve tonlamayla seslendirilmesine yönelik
+
+tahmin eder.                                                   etkinliklere yer verilmelidir.
+
+12. Dinleme esnasinda ne, nerede, ne zaman, nasil, niçin ve kim 11. Görsellerin ve baliin önemine dikkat çekilmeli ve bunlardan yola çikilarak
+
+sorularina cevap arar (5N 1K).                                 metnin konusunun tahmin edilebilecei vurgulanmalidir.
+
+13. Dinlediklerini bakalariyla paylair.                        12. Basit, kisa ve anlailir hikayeler dinletilerek ne, nerede, ne zaman nasil, niçin ve
+
+14. Dinledii ifadelerde geçen miktar sözcüklerini ayirt eder.  kim sorularina (5N 1K) cevap vermeleri salanmalidir.
+
+15. Dinledii cümle ve metinlerde yer alan temel zaman          13. Dinledikleri kisa ve basit metinleri anlatmalari salanmalidir.
+
+dilimlerine ilikin görselleri bulur.                           14. Az, çok, kilogram, (hindik, pir, kîlo) (enik, pirr, kîlo) gibi ifadeler üzerinde
+
+16. Dinledii basit ve anlailir yönergeleri uygular.            durulmalidir.
+
+17. Temel düzeydeki günlük konumalari takip eder.              15. Cümle ya da ifadelerdeki temel zaman ifadelerine ilikin görsellerin
+
+18. Dinledii sözcükleri birbirine balayan balaçlari tanir.     bulunmasina yönelik etkinliklere yer verilmelidir.
+
+                                                               16. Yönergelerin anlailmasi ve uygulanmasi salanmalidir.
+
+                                                               17. Aile, okul, arkada gibi ortamlarda yapilan konumalari anlamalarina yönelik
+
+                                                               etkinlikler yapilmalidir.
+
+                                                               18. Temel düzey balaçlar üzerinde durulmalidir (lê belê, û, digel, jî,û wekî vana).
+
+                                                               (labelê, û, reyde, zî,û sey nînan)
+
+                                                               52
+Balangiç Düzeyi (A1) Kazanimlari (Ortaokul 1. Sinif)
+
+                                                                     Okuma
+
+Kazanimlar                                              Açiklamalar
+
+1. Kürtçe alfabedeki tüm sesleri okur.                  1. Kürtçe alfabedeki tüm sesler okutulur. Kürtçe alfabede olup Türkçe alfabede olmayan (X
+
+2. Görsellerle desteklenmi, kisa, basit yönergeleri     x, W w, Q q, Ê ê, Û, û, Î, î ) seslerin içinde bulunduu kelimeler okunmali, okunurken bu
+
+anlar.                                                  harflerin seslendirilmesine vurgu yapilmalidir. Türkçe alfabede yer alan i ve i harflerinin
+
+3. Günlük hayatta siklikla kullanilan basit sözcükleri  Kürtçe alfabede i ve î olarak yazildii ve okunduu örnek kelimelerle öretilmelidir.
+
+ve söz öbeklerini anlayarak okur.                       2. Sinif içinde kullanilan "oku, yaz, kalk, otur" gibi yönergeler kullanilmalidir.
+
+4. Görsellerle desteklendiinde yazili materyalde        3. Günlük hayatta siklikla kullanilan "selamlama, vedalama, hâl hatir sorma, kendini
+
+geçen temel yer ve zaman bilgilerini okur ve            tanitma" gibi ifadeler kullanilmalidir.
+
+belirler.                                               4. Kartvizit, tanitim katalogu, konser ve gösteri afileri, e-posta, gazete ve dergilerden
+
+5. Kisa, basit yol tariflerini okur.                    basitletirilmi ilan vb. metinler ile çaliilmali; yer ve isimlerin eletirilmesi
+
+6. Okudu metinde anlamini bildii kelime ve kisa         salanmalidir.
+
+sözcük gruplarini fark eder.                            5. Açik ve kapali alanlardaki yönlendirici tabelalar, trafik levhalari vb. örneklerden
+
+7. Kelimeler ve sözcük gruplari ile ilgili resimleri    yararlanilmalidir.
+
+eletirir.                                               6. çinde bilinen kelimelerin de bulunduu kisa metinler okutularak anlamini bildii
+
+8. Günlük hayatla ilgili okuduu basit cümleleri anlar.  kelimeleri bulmalari istenmelidir.
+
+9. Basit metinlerin içeriklerini baliklardan tahmin     7. Günlük hayatla ilgili kelime ve sözcük gruplari ve bunlarla ilgili resimler verilerek
+
+eder.                                                   eletirmeleri istenmelidir.
+
+10. Hava durumu ve mevsimler hakkindaki bir okuma 8. Temaya uygun günlük hayatta kullanilan basit cümleler okutularak anlatmalari
+
+parçasinda verilen bilgileri mevsimlerle eletirir.      salanmalidir.
+
+11. Güncel konularla ilgili metinleri okur, içeriini    9. Baliklari içerii yansitan kisa metinler verilerek metni okumadan önce, baliindan yola
+
+anlar.                                                  çikarak içeriini tahmin etmeleri salanmalidir.
+
+12. Görsel destekli basit bilgilerin yer aldii tablo ve 10. Mevsimlerdeki hava durumlariyla ilgili resimlerle desteklenmi basit metinler okutulur,
+
+çizelgeleri okur.                                       verilen bilgileri mevsimlerle eletirmeleri istenir.
+
+13. Okuduu kisa ve basit yönergeleri uygular.           11. Günlük konularla ilgili basit metinler okutulmali, metnin içeriiyle ilgili sorular sorularak
+
+14. Yazili kaynaklarda aradii bilgiyi bulur.            cevaplar vermesi salanmalidir.
+
+15. Okuduu basit ve kisa metinlerde bilmedii            12. Toplu taima araçlarinin gidi- geli zamanlarini, mesai saatlerini, fiyatlarini gösteren
+
+sözcüklerin anlamlarini tahmin eder.                    çizelgeler vb. kullanilabilir.
+
+16. Okuduu bir metnin içeriiyle ilgili karilatirmalar 13. Sinif etkinlik yönergeleri vb. üzerinde durulmalidir.
+
+yapar.                                                  14. Dergi, katalog, dizin, broür vb. kaynaklarin içerdii metinler ile çaliilmalidir.
+
+17. Okuduu metinlerde Kürtçeye dier dillerden           15. Örencilerin bilmedii kelimeleri nerede bulmasi gerektii üzerinde durulmali, varsa ders
+
+geçen sözcükleri okur ve anlar.                         kitabinin sözlüünden veya dier Kürtçe sözlüklerden kelime bulma alitirmalari
+
+18. Okuduu kisa ve basit diyalog ve metinlerde geçen    yaptirilmalidir.
+
+yönerge, teklif, ret, kabul, özür vb. iletiim           16. Ülkeler ve insanlar arasindaki aliverii konu edinen basit bir metin okutulup karilatirma
+
+ifadelerini tespit eder.                                yapmalari salanmalidir.
+
+                                                        17. "Spor, Film, Computer" gibi sözcükler kullanilmalidir.
+
+                                                        18. çinde iletiim ifadelerinin bulunduu metinler okutularak bunlari söylemesi istenmelidir.
+
+                                                        53
+KAZANIMLAR  Balangiç Düzeyi (A1) Kazanimlari (Ortaokul 1. Sinif)
+                             (Konuma) Karilikli Konuma
+                                                                            AÇIKLAMALAR
+
+1. Günlük ilikilerin gerektirdii basit konuma kaliplarini      1. Selamlama, vedalama, teekkür etme, rica etme, hal hatir sormanin gerektirdii
+    kullanir.
+                                                               durumlara uygun konumalari istenmelidir.
+2. Kendisiyle ilgili sorulan basit sorulara cevap verir.
+3. Bakalari hakkinda bilgi edinmek için sorular sorar.         2. Adi, kaç yainda olduu, nereli olduu, nerede oturduuna ilikin sorulari
+4. Sözcükleri basit balaçlarla birbirine balar.
+5. Günlük hayatta holanip holanmadii aktiviteler               cevaplamalari beklenmelidir.
+
+    hakkinda konuur.                                           3. Bakasina adi, kaç yainda olduu nereli olduu nerede oturduu, hobi ve
+6. htiyaç duyduu konular hakkinda vurgu ve tonlama
+                                                               ilgilerine ilikin sorular sormalari beklenmelidir.
+    kullanarak sorular sorar.
+7. Konumalarinda beden dilini kullanir.                        4. Konuurken `ve, ile, fakat' (û, lê) (û, la) gibi balaçlarin kullanilmasi
+8. Görgü kurallarina ve deerlere uygun konuur.
+9. Konumalarinda zaman dilimlerini kullanir.                   salanmalidir.
+10. Çeitli konular hakkinda sorular sorar ve sorulan sorulara
+uygun cevaplar verir.                                          5. Futbol, yüzme, oyuncaklarla oynama, çizgi film izleme, kitap okuma gibi
+11. Duygu ve düüncelerini basit cümlelerle ifade eder.
+                                                               yapilabilecek günlük aktivitelerden holanip holanmadii hakkinda konumalari
+12. Okuduklarini, izlediklerini basit cümlelerle ifade eder.
+                                                               beklenmelidir.
+13. Basit, düzeyde cümleler kullanarak diyalog çalimasini
+                                                               6. Sorduu sorularda vurgu ve tonlamayi doru ekilde kullanmalari salanmalidir.
+yapar.
+                                                               7. Sözsüz iletiimi kullanarak (uygun yüz ifadeleriyle) olumlu ve olumsuz
+14. Karilikli konumada anlamadiklari ile ilgili açiklama
+                                                               duygularini gösterir.
+isteinde bulunur.
+                                                               8. Konumacinin sözünü bitirmesini bekleyerek, söz alarak, incitmeden, büyüklerine,
+15. lgi duyduu konular hakkinda konuur.
+                                                               deerlerine saygi göstererek konumalari istenmelidir.
+
+                                                               9. "Sabah/ölen/öleden sonra/ikindi/akam/yatsi/gece" vb. (sibe, nîvro, pitî
+
+                                                               nivroyê, berêvar, êvar, ea, ev) (odir, peroj, peyperojî, verean, and, ewe)
+
+                                                               sözcükleri kullanmalari salanmalidir.
+
+                                                               10. Saat sorma, fiyat, miktar, fiyat, yer-yön bilgisi, ilgiler vb. konularda sorulan
+                                                               sorular ile ilgili verilen cevaplar üzerinde durulmalidir.
+                                                               11. Sevinç, mutluluk, üzüntü, korku (kêfxweî, bextewarî, xem, tirs) (keyfweîye,
+                                                               bextewerî, xem, ters) gibi kelimelerin geçtii cümlelerin kullanilmasi salanmalidir.
+                                                               12. Okuduklari metinleri, izledikleri film, tiyatro, oyun vb. etkinlikleri basit
+                                                               cümlelerle karilikli anlatmalari salanmalidir.
+                                                               13. Diyaloglarda kendisi, ailesi ve arkadalariyla ilgili çalimalar yapilmalidir.
+                                                               14. "Bu nasildir?", "Bunu anlamadim" "Bir daha anlatabilir misin?" "Ev çawa ye?,
+                                                               "Min ev fehm nekir?, "Tu dikarî careke din vebêjî? "O senîn o?, "Mi o fehm kerd?,
+                                                               "Ti êne reyna vaje vb. ifadelerin kullanilmasi salanmalidir.
+                                                               15. Ailesinde kaç kiinin olduu, ailesinin geçimini nasil saladii, arkadalarinin
+
+                                                                   isimleri, arkadalariyla hangi oyunlari oynadiklari, nasil zaman geçirdikleri vb.
+                                                                   konularda soru sormasi ve sorulan sorulara cevap vermesi salanmalidir.
+
+                                                               54
+KAZANIMLAR  Balangiç Düzeyi (A1) Kazanimlari (Ortaokul 1. Sinif)
+                               Konuma (Sözlü Anlatim)
+                                                                         AÇIKLAMALAR
+
+1. Basit cümlelerle kendisini ve ailesini tanitir.          1. Adinin ne olduu, kaç yainda olduu, ailesinin nereli olduu, nerede oturduuna ilikin
+2. Aile bireylerini fiziksel özellikleriyle tarif eder.
+3. Basit cümlelerle evini ve odasini betimler.                 bilgi vermeleri salanmalidir.
+4. Ailesi diindaki dier yakin çevresini tanitir.
+5. Günlük yaamiyla ilgili açiklamalar yapar.                2. "Annem kisa boylu/babam uzun boylu/ablamin saçlari uzun/kardeim benden kisa" (Diya
+6.Günlük yaaminda holanip holanmadiklari hakkinda              min bejnkin e/bavê min bejndirêj e/Porê eta min dirêj e/Birayê min ji min kintir e (Maya
+
+   konuur.                                                     mi kilmek a/Piyê mi derg o/Porê ema mi derg o/Birayê mi mi ra kilmêr o gibi aile
+7.Günlük yaaminda yapabildikleri ve yapamadiklari
+                                                               bireylerini tarif etmeleri salanmalidir.
+   hakkinda konuur.                                         3.Betimlemelerde`geni/küçük/büyük/rahat/aydinlik/karanlik' gibi sifatlari kullanmalari
+8. Konuma esnasinda balaçlari kullanir.
+9.Bir görselin temel niteliklerini tek sözcüklü ifadelerle     salanmalidir.
+
+   tarif eder.                                              4. `Bu benim arkadaim/bu komumdur/sinif arkadaim/oyun arkadaim' gibi yakin çevresini
+10. 0­100 arasi sayilari sayar.
+11.Yakin çevresindeki kiileri ve nesneleri basit               tanitmalari salanmalidir.
+                                                            5. `Hava nasildir?/bugün çok sicaktir/yamur yaiyor/hava bugün souktur' gibi hava
+   cümlelerle anlatir.
+12. Yakin çevresindeki nesneleri betimler.                     durumunu bildiren ifadelerle çaliilmalidir.
+13. Hava durumu ve mevsimler hakkinda bilgi verir.
+14. Nesneleri renkleriyle betimler.                         6. `Ben balik yemeyi çok severim/parkta oynamayi da severim/ama yüzmeyi sevmiyorum'
+15.Sözlü anlatim sirasinda basit isim tamlamalarini            gibi günlük alikanliklar hakkinda bilgi vermesi salanmalidir.
+
+   kullanir.                                                7. `Sabah artik kendim kalkabiliyorum/arki söyleyebilirim/ama kahvaltimi kendim
+
+                                                               hazirlayamiyorum/yüzemiyorum' gibi günlük yaamda yapabildikleri ve yapamadiklari
+
+                                                               hakkinda bilgi verirler.
+                                                            8. Konuurken "û", "lê", "lê bêlê" "û", "la", "labêlê" gibi balaçlarin kullanilmasi
+
+                                                               salanmalidir.
+
+                                                            9. Yüz, kulak, burun, ayak, masa, sandalye, tahta vb. gibi isimler ile, yeil, kirmizi, mavi,
+                                                               beyaz gibi sifatlarin kullanilmasi beklenir.
+
+                                                            10. 1,2,3.......100'e kadar sayilari ardiik ve ayri ayri kullanabilmesi salanmalidir.
+                                                            11. Sinifini, okulunu, arkadalarini basit cümlelerle anlatmasi salanmalidir.
+                                                            12. Nesnelerin ekillerini ifade eden çalimalar yapilmalidir." "Top yuvarlaktir." vb. ifadeler
+
+                                                               kullanilmalidir.
+                                                            13. "bi tav", "bi baran", "bi mij", "bi berf" "tîjin", "ilîyin", "mijin", "vewrin" vb.
+
+                                                               kelimeler üzerinde durulmalidir. Mevsimlerin temel özellikleri hakkinda bilgi vermeleri
+                                                               salanmalidir.
+                                                            14. Ana ve ara renkler kullanilmalidir.
+                                                            15. "Kapinin kolu", "öretmen masasi" "Çembilê derî" "Maseya mamoste" vb. "Qulpê
+                                                               Keybî" "Maseya mamostî" tamlamalar kullanilmalidir.
+
+                                                            55
+            Balangiç Düzeyi (A1) Kazanimlari (Ortaokul 1. Sinif)
+
+                                                      YAZMA
+
+KAZANIMLAR                                                   AÇIKLAMALAR
+
+1. Kürtçede kullanilan sesleri yazililari ile tanir.  1. Kürtçede farkli seslere karilik gelen harfleri (X x, W w, Q q, Ê ê, Û, û ) öncelikle
+2. Kürtçede, kullanilan harflerin geçtii örnek            tanimasi, yazmasi ve kelime örnekleriyle fark etmesi üzerinde durulmalidir. Ayni
+                                                          seslerin örenci düzeyine uygun ekilde bildii basit sözcükler ve cümlelerde
+   kelimeler yazar.                                       kullanarak fark etmesi salanmalidir.
+3. 0-20 arasi sayilarin okunularini yazar.
+4. Kendisi ve bakalariyla ilgili basit düzeyde        2. Kürtçede geçen farkli sesler üzerinde durularak örnekler verilir. Örencilerin de
+                                                          örnekler vermeleri istenir. Örnek kelime ve cümleler yazilir. Örencilere örnek
+   kiisel bilgileri yazar.                                kelimeler dikte yoluyla yazdirilir.
+5. Verilen Kürtçe bir paragrafa bakarak doru
+                                                      3. Sayilarin yazilii üzerinde durulur. Doum tarihi, posta kodu, kapi numarasi vb.
+   yazar.                                                 cümlelerde sayilari kullanmasi salanmalidir.
+6. Kiisel bilgilerini içeren düzeye uygun bir bilgi
+                                                      4. Kendisi, arkadalari veya yakinlariyla ilgili kiisel bilgileri (doum tarihi, adresi ve
+   formu hazirlar ve doldurur.                            kiisel özellikleri) içeren kisa bir paragraf oluturarak, mektup zarfi, kartvizit
+7. Basit bir bulmacayi tamamlar.                          hazirlama gibi çalimalar yapmasi salanmalidir.
+8. Düzeye uygun kelime ve cümleleri dikte yoluyla
+                                                      5. Verilen bir Kürtçe paragrafa bakarak doru yazmasi salanmalidir.
+   yazar.                                             6. Kiisel bilgilerini yazacai basit bir form hazirlamasi ve doldurmasi salanmalidir.
+9. Holandiklari ve holanmadiklari durumlara dair      7. Verilen düzeye uygun bir bulmacayi tamamlamasi salanmalidir.
+                                                      8. Düzeye uygun kelimeler ve kisa cümleler içeren bir paragrafi dikte yoluyla
+   kisa cümleler yazar.
+10. Yaadii yeri ve çevresini basit ifadelerle             yazmasi salanmalidir.
+                                                      9. Holandii ve holanmadii durumlara ilikin kisa bir paragraf yazmasi
+   yazili olarak tasvir eder.
+11. Kullandii düzeye uygun sözcükleri birbirine           salanmalidir.
+                                                      10. Yakin çevresine ilikin betimleyici bir paragraf yazmasi salanmalidir. Yazdii
+   balamak için temel balaçlari kullanir.
+12. Düzeyine uygun sözcükler ile aile bireylerini         betimleyici paragrafta nesne ve durumlara ilikin renk, nitelik ve örendii sayilari
+                                                          (zer, sor, hêîn, pêr, hêndik, hênekî di jî, sê, pênc, diwazdeh, vb.) (zerd, sûr, kewe,
+   tanitan bir paragraf yazar.                            perê, enik, tayê bîn zî, hîre, panc, duyes vb.) kullanmasi beklenmektedir.
+13. Duygu ve düüncelerini ifade edecek düzeye         11. Örendii balaçlari (û, lê, lê bêlê) (û, la, labêlê) cümle içerisinde kullanmasi
+                                                          beklenmektedir. Bu amaçla düzeye uygun balaçlari içeren cümleler yazmasi
+   uygun bir paragraf yazar.                              salanmalidir.
+14. Verilen kelime köklerinden ekler yoluyla yeni     12. Ailesi hakkinda tanitici bir paragraf yazmasi salanmalidir. Okutulacak paragrafta
+                                                          varsa yanlilar ve eksikler üzerinde durulur. Aile soy aaci oluturmalari
+   sözcükler türeterek bu kelimelerin geçtii              salanmalidir.
+   cümleler oluturur.                                 13. Duygu ve düüncelerini ifade edecek bir paragraf yazmalari istenir. Yazacai
+15. 0-20 arasi sayilari cümle içerisinde yazili           paragrafta duygu ve düünceye ilikin kavramlar kullanmasi beklenmektedir.
+   olarak kullanir.                                       Örnein, "mutluluk, sevinç, üzüntü" vb.
+                                                      14. Örendii kelime köklerinden ekler yoluyla türettii sözcüklerden cümleler ve bu
+                                                          cümlelerden anlamli bir paragraf oluturmasi beklenmektedir.
+                                                      15. Örendii sayilarin okunuunu kullanacai bir paragraf oluturmasi salanmalidir.
+                                                          Paragrafta örenci no, tarih, saat, sokak ve ev numaralarini kullanmasi önerilebilir.
+
+                                                      56
+9. ETKNLK ÖRNEKLER
+
+Aaida programin hayata geçirilmesi aamasinda Kürtçe Dersi Öretim Programi kullanicisina fikir
+verecek bazi etkinlik örnekleri verilmitir. Bu etkinlikler dinleme, okuma, karilikli konuma, sözlü
+anlatim ve yazma becerilerine göre verilmitir. Ancak programin öngördüü etkinlikler sadece bunlar
+ile sinirli deildir. Programin kullanicisi bu etkinlikleri yol gösterici örnekler olarak görmelidir.
+
+                                                        Etkinlik 1
+                                                      (Kurmancca)
+     Düzey ve Beceri: Balangiç Düzeyi (A1) Yazma
+     Kazanimlar: Dinleme esnasinda ne, nerede, ne zaman, nasil, niçin ve kim sorularina cevap
+     arar (5N 1K).
+Süre: 40 dakika
+Araç- Gereç: Çalima kâitlari
+Süreç:
+     Aaidaki metni örencilerinize iki defa okuyunuz.
+     5N 1K formu hazirlayarak örencilere daitiniz ve bu sorulari cevaplamalarini isteyiniz.
+     Öretmen örencilere ikier kii eklinde elemelerini ister.
+
+                                                             eva Dirêj
+         Navê min Elî ye, ez li Mêrdînê dijîm. Rojeke gelek germ a Tîrmeha du hezar û diwazdehan bû.
+         Ji ber ku hewa gelek germ bû pitî nîvroyê ez du seetan li ber klîmayê rawestiyam. Ez êvarê jî di
+         jûra ku klîma tê de bû razam. Ez nîvê evê hiyar bûm. Di serê min de êeke dijwar hebû. Ji ber
+         ku wesayîta me nebû, wê evê em neçûn nexwexaneyê. Saet derbas nedibûn. Ez heta sibehê
+         perpitîm. Serê sibehê bavê min ez birim ber bijîk. Bijîk demildest serûm bi milê min ve girê
+         da. Pitî ku serûm qediya min hest pê kir ku êa serê min hinek sivik bûye. Min bi bavê xwe re
+         dermanên ku bijîk nivîsîbûn kirîn...
+
+Deerlendirme: Örencilerin dinleme durumlarini kontrol ediniz. Örencilerin 5N 1K sorularina
+verdikleri cevaplari tartiarak kontrol ediniz.
+
+                                                             57
+                                                        Etkinlik 2
+                                                      (Kurmancca)
+     Düzey ve Beceri: Balangiç Düzeyi (A1) Yazma
+     Kazanimlar: Görsellere ve balia bakarak dinleyecei metnin konusunu tahmin eder.
+Süre: 40 dakika
+Araç- Gereç: Çalima kaidi (Metin baliinin ve görsellin yer aldii kait).
+Süreç:
+     Her örenciye bir çalima kaidi verilecek.
+     Aaidaki metnin baliini ve görseli örencilere gösteriniz.
+     Örencilere metinde nelerin anlatildiini sorunuz.
+     Daha sonra metni okuyunuz.
+     Örencilere metni dinlemeden önceki tahminleri ile metin okunduktan sonra örendikleri
+         arasinda fark olup olmadiini sorunuz.
+
+                                                              Cotkarî
+Berê kesên ku cotyarî dikirin, ji bo karên mîna cotkirin û veguhestina kayê ji gayan sûd werdigirtin.
+Niha jî di ûna gayan de traktor tên bikaranîn. Îro li Tirkiyeyê beeke gelek biçûk ji cotkaran ji gayan
+sûd werdigirin. Bikaranîna traktoran di cotyariyê de karê cotkaran zêde hêsan kir. Karên ku bi traktoran
+tên kirin bileztir tên kirin û zûtir diqedin.
+
+    Deerlendirme: Eskiden tarlalar nasil sürülürdü? Siz çiftçilik yapsaniz, traktörden mi yoksa
+    öküzlerden mi yararlanmak istersiniz? Neden?
+
+                                                             58
+Çalima Kaidi
+
+              COTKARÎ
+
+Metnin konusunu bir ya da iki cümle ile yaziniz.
+
+                                                  59
+                                                        Etkinlik 3
+                                                       (Kurmancca)
+
+     Düzey ve Beceri: Balangiç Düzeyi (A1) - Okuma
+     Kazanimlar: Mevsimler hakkindaki okuma parçasinda verilen bilgileri mevsimlerle eletirir.
+Süre: 40 dakika
+Araç- Gereç: Mevsimlerle ilgili resimler ve metinler,çalima kâitlari
+Süreç:
+   Öretmen mevsimlerle ilgili kelime, metin ve resimlerin yer aldii önceden hazirlanmi çalima
+      kaitlarini örencilere daitir.
+   Örencilere be dakika süre verilerek önce kendi balarina okumalari istenir.
+   stekli olan üç örenciye sesli okutulur.
+   Öretmen kelime ve cümleleri yüksek sesle örnek bir ekilde okur. Telaffuzunda örencilerin
+      zorlanabilecei kelimeleri daha çok tekrar eder.
+   Örencilerden okunanlari kendisinden sonra tekrar etmelerini ister.
+   Örencilere bireysel olarak sesli okuma yaptirir. Okuma yanlilarini aninda düzeltir.
+   Örencilerin genelinin yanli okuduu kelimelerin telaffuzu üzerinde ayrica durur.
+   Örencilerden mevsimlerle ilgili okuduklarinin Türkçe kariliklarini tahmin etmelerini ister.
+   Öretmen okunanlarin Türkçe kariliklarini söyler.
+   Örencilerden mevsimlerle ilgili kelime ve cümleleri anlamlarina uygun resimlerle
+      eletirmelerini ister.
+
+Metin ve Görsel Örnei:
+
+                                                Demsal
+
+Bihar Bihar demsaleke xwe e. Hewa germ
+dibe û baran dibare. Zarok, di kolanan de bûka
+baranê digerînin. Di biharê de gul û giya în
+dibin. Dar kulîlk vedikin.
+
+                                                60
+                        Havîn
+Havîn demsaleke germ e. Di havînê de berên
+zeviyan çê dibin. Mêwe digihîjin, sebze zêde
+dibin.
+
+                         Payîz
+Payîz demsaleke hênik e. Di payîzê de pelên
+daran zer dibin û diwein. Germ kêm dibe,
+serma zêde dibe û ilî dest pê dike.
+
+                       Zivistan
+Zivistan demsaleke sar e. Roj kin dibin, ev jî
+dirêj dibin. Berf û baran dibare.
+Zarok kalê berfê çê dikin
+
+ Deerlendirme: Sesli okuma sirasindaki hatalarin düzeltilmesinde hata düzeltme stratejilerine dikkat
+ edilmelidir. Sözcük ve metinlerin resimlerle yapilan eletirmeleri kontrol edilerek yanlilar
+ düzeltilmelidir.
+
+                                                              61
+                                                        Etkinlik 4
+                                                         (Zazaca)
+
+     Düzey ve Beceri: Balangiç Düzeyi (A1) - Okuma
+     Kazanimlar: Kelimeler ve sözcük gruplari ile ilgili resimleri eletirir.
+Süre: 40 dakika
+
+Araç- Gereç: Öretilecek kelimelerle ilgili resimler, çalima kâitlari
+
+Süreç:
+
+     Öretmen öretilecek kelimeler ve bunlara ait resimlerin yer aldii kaitlarini örencilere daitir.
+     Örencilere be dakika süre verilerek önce kendi balarina okumalari istenir.
+     stekli olan üç örenciye sesli okutulur.
+     Öretmen kelimeleri yüksek sesle örnek bir ekilde okur. Telaffuzunda örencilerin
+
+      zorlanabilecei kelimeleri daha çok tekrar eder.
+     Örencilerden okunanlari kendisinden sonra tekrar etmelerini ister.
+     Örencilere bireysel olarak sesli okuma yaptirir. Okuma yanlilarini aninda düzeltir.
+     Örencilerin genelinin yanli okuduklari kelimelerin okunuu üzerinde ayrica durur.
+     Örencilerden okuduklari kelimelerin Türkçe kariliklarini tahmin etmelerini ister.
+     Öretmen okunanlarin kelimelerin Türkçe kariliklarini söyler. Türkçe kariliklarini çalima
+
+      kaidina yazmamalari konusunda uyarir.
+     Örencilerden örenilen kelimeleri doru resimlerin altina yazmalarini ister.
+
+Metin ve Görsel Örnei:
+
+        Nameyanê resimanê cêrênan vajîn û binusîn Mase, kemere, dare, bajar, saye, hak, çim, nan
+
+.................   ....................  .............       ...................
+
+..................  ...............       ..................  ...............
+
+Deerlendirme: Sesli okuma sirasindaki hatalarin düzeltilmesinde hata düzeltme stratejilerine dikkat
+edilmelidir. Sözcük ve metinlerin resimlerle yapilan eletirmeleri kontrol edilerek yanlilar
+düzeltilmelidir.
+
+                                                             62
+                                                        Etkinlik 5
+                                                         (Zazaca)
+
+     Düzey ve Beceri: Balangiç Düzeyi (A1) Sözlü Anlatim
+     Kazanim: Yakin çevresindeki kiileri ve nesneleri betimler.
+Süre: 40 dakika
+Araç- Gereç: Farkli özelliklerdeki kii ve nesnelere ait görseller
+Süreç:
+   Öretmen, fiziksel özellikler bakimindan sinifta birbirine benzeyen kiilerin olup olmadiini
+      sorar.
+   Örencilerden cevap vermelerini ister.
+   Sinifa getirdii görselleri (büyük-küçük, uzun-kisa, yuvarlak-düz...) örencilere gösterir.
+   Örencilerin bu görsel ve nesnelere ait özellikleri söylemeleri istenir.
+   Siniftaki dier araç gereçleri betimleri istenir.
+   Örencilerden siniftaki arkadalarini ve aile bireylerini fiziksel özellikleri bakimindan
+      betimlemeleri istenir.
+
+derg,  kilm,  gilover,  pan
+
+Deerlendirme: Verilen görsel ve belirtilen fiziksel özelliklerle ilgili örencilerin konumalari
+salanmalidir.
+
+              63
+                                                        Etkinlik 6
+                                                         (Zazaca)
+     Düzey ve Beceri: Balangiç Düzeyi (A1) Sözlü Anlatim
+     Kazanim: Hava durumu ve mevsimler hakkinda bilgi verir.
+Süre: 40 dakika
+Araç- Gereç: Hava durumu ile ilgili semboller
+Süreç:
+   Örencilere, havanin diarida nasil olduu sorulur.
+   Hava durumu ile ilgili görseller sunulur, görsellerin isimlerini söylemeleri istenir.
+   Örencilerin yakin zamanda seyrettii hava durumu programlariyla ilgili olarak hava durumu
+      hakkinda konumalari istenir.
+   Etkinliin ikinci aamasinda örencilerin sembollerden birini seçerek o sembolün ne ifade ettiini
+      paylamalari istenir.
+
+Deerlendirme: "Hewa sayî yo", "Hewa ilîyin o", "mijin", "Hewa hewrin o" Varan vareno" "vb.
+kelimeler üzerinde durulmalidir.
+
+                                                             64
+                                                        Etkinlik 7
+                                                         (Zazaca)
+
+     Düzey ve Beceri: Balangiç Düzeyi (A1) Yazma
+     Kazanimlar: Kürtçede kullanilan sesleri yazililari ile tanir.
+     Kürtçede, kullanilan harflerin geçtii örnek kelimeler yazar.
+     Yaadii yeri ve çevresini basit ifadelerle yazili olarak tasvir eder.
+Süre: 40 dakika
+
+Araç- Gereç: Çalima Kâitlari
+
+Süreç:
+
+     Öretmen örencilerden ikier kii olarak elemelerini ister.
+
+     birlii ile yaadiklari yer ve çevreye ilikin sik kullanilan nesne ve durumlara ilikin isimleri
+
+         yazmalarini ister.
+
+     Daha sonra çalima kâitlarini duvara asarak yazdiklari nesne isimlerini okumalari ve bu
+
+         nesnelere dair konumalari salanir.
+
+Kitab  baxçe
+
+Deerlendirme: Çalima kâitlarinda Türkçede kullanilmayip Zazaca da kullanilan harflerin (X x, W
+w, Q q, Ê ê, Û, û ) geçtii kelimeleri doru yazip yazmadiklari üzerinde durulmalidir.
+
+                                                             65
+                                                        Etkinlik 8
+                                                         (Zazaca)
+Düzey ve Beceri: Balangiç Düzeyi (A1) Yazma
+Kazanimlar: Kiisel bilgilerini içeren düzeye uygun bir bilgi formu hazirlar ve doldurur.
+     Holandiklari ve holanmadiklari durumlara dair kisa cümleler yazar.
+     Kendisi ve bakalariyla ilgili basit düzeyde kiisel bilgileri yazar.
+Süre: 40 dakika
+Araç- Gereç: Çalima Kâitlari
+Süreç: Öretmen örencilerden aaida verilen baliklarda bir bilgi formu hazirlamalarini ve kiisel
+bilgileri dorultusunda doldurmalarini ister.
+Name
+Peyname
+Wendegeh
+Bajaro ke tede ronîeno. Nameyê taxêDersa ke ci ra hes keno.
+Deerlendirme: Yukarida, kiisel bilgilere ilikin yazilan baliklara yenileri ilave edilebilir.
+Hazirladiklari bilgi formunda kullanilan harf, kelime ve cümle hatalari üzerinde durulur. Eksik
+bilgilerin tamamlanmasi salanir. Eletikleri arkadalariyla karilikli olarak birbirlerinin hazirladiklari
+bilgi formlarini kontrol ederek hatalarin bulunmasi salanir.
+
+                                                             66
+             Etkinlik 9
+
+(Kurmancca)
+
+Axavtina Pêberîhev
+
+     Ast û Bikêrî: Asta Destpêkê (A1) Axavtina Pêberîhev
+     Destketî
+10.Dikare awayên axavtinên sivik bi kar bîne ku ew jî ji pêdiviyên têkiliyên rojane ne.
+
+Mawe: 40 deqîqe
+
+Amûr - Navgîn: Wêneyên ku hevnasîna bi kesên cihê cihê re û danûstandinê sembolîze dikin.
+
+Pêvajo: Mamoste, dîtbariyên awayên axavtin û danûstandina rewên cihê cihê ku di nav têkiliyên
+rojane de tên bikaranîn, nîanî xwendevanan dide. Ji xwendevanan tê xwestin ku taybetiyên wan
+dîtbariyan bibêjin. Ji xwendevanan tê xwestin ku axavtinên pêberîhev ên mîna: "merheba, selamun
+eleykum, ez Baran, navê te çi ye, beyanî ba, spas dikim, ez kêfxwe bûm, ez di pola yekem a dibistana
+navîn de me, li taxa Erekê rûdinêm, bi hêviya ku em careke din hev bibînin, êvar ba, ez te pîroz dikim"
+û hwd. bi kar bînin. Dîsa ji xendevanan tê xwestin ku di navbera hevalên xwe yên polê de jî heman
+çalakiyan bikin.
+Nirxandin:
+1. Heke di têkiliyên rojane de ev vegotin neyên bikaranîn, dê çi kêe derkevin holê û li ser vê yekê ji
+xwendevanan bixwazin ku mînak ji wan pirsgirêkan bidin.
+2. Bala xwe bidin ser xwendevanan ku di axavtinên pêberîhev de bi awayekî serbest hestên xwe bînin
+ziman û di axavtinên xwe de zimanê laî bi kar bînin.
+
+                                                             67
+                 Etkinlik 10
+
+(Kurmancca)
+
+   Ast û Bikêrî: Asta Destpêkê (A1) Axavtina Pêberîhev
+   Destketî
+1. Dikare hest û ramanên xwe bi hevokên sivik bîne ziman.
+
+Mawe: 40 deqîqe
+
+Amûr - Navgîn: Dîmenek ku zarokên hemtemen an jî nêztemenê hev di tê de lîstika xaran dilîzin.
+
+Pêvajo: Mamoste, wêneyê ku zarok tê de bi xaran dilîzin, li dîwar dadileqîne. Ji polê dixwaze ku çar
+xwendevan derkevin ber texte. Peyre xaran dide wan çar xwendevanan û ji wan dixwaze ku bi xaran
+bilîzin. Pitî ku lîstik bi dawî dibe, mamoste derbareyê lîstikê de ji xwendevanan pirsan dipirse û bi vê
+yekê dixwaze ku zarok hestên xwe bînin ziman. Bi vê rêbazê, xwendevan hem li ser xwe, hevalên xwe,
+ciyên lîstikê û hem jî li ser lîstika xaran hest û ramanên xwe bi hevokên sivik tînin ziman. Peyre ev
+fersend ji bo xwendevanên din yên polê jî tê dayîn û ji wan tê xwestin ku hest û ramanên xwe yên
+derbareyê lîstika xaran de bînin ziman.
+
+Nirxandin: Divê li ser van komebêjeyan bê sekinandin: "koma lîstikê", "xwea min çû", "min bi dest
+xist", "bi ser ketim", "min winda kir", "lîstika bi hev re xwe e", "min dek û dolab nekirin", "dema ku
+çav bi xaran dikevim hevalên min tên bîra min".
+
+                                                             68
+10. TERMLER SÖZLÜÜ
+
+Avrupa dil geliim dosyasi: Bir örencinin yabanci dil örenme sürecindeki baari ve kazanimlarini
+içeren belge, dil pasaportu, dil örenim geçmii (biyografisi), dil dosyasindan olumaktadir. Bilisel
+alan Düünceye dayali eitsel hedeflerin siniflanmasi yöntemidir. Bloom'un siniflandirma yöntemi
+olarak da bilinir. Bloom bilisel alani en düük düünce seviyesinden en yüksee doru bilgi, uygulama,
+analiz, sentez ve deerlendirme olmak üzere alti düzey hâlinde tasarlamitir. Bireyselletirilmi öretim
+Her örencinin kendi yetenek düzeyine uygun bir biçimde yönlendirilmesini, kendi düzeylerine uygun
+örenme tekniklerinin uygulanmasini ve sonuçta her bireyin kendine özgü düzeylerde davranmasini ön
+gören bir öretim sistemidir. Literatürde Keller Plani olarak da geçmektedir.
+Dil becerileri: Dili kullanma becerileridir (dinleme, konuma, okuma, yazma gibi).
+Diller çin Avrupa Ortak Bavuru Metni (AOB): Avrupa ülkelerinde dil öretim programlarini,
+program yönergelerini, sinav ve ders kitaplari vb. konulardaki çalimalari yönlendirmek için ortak bir
+çerçeve sunmak amaciyla Avrupa Konseyi tarafindan hazirlanan metindir. Bu metinde yabanci dil
+örenenlerin, bu dili iletiim kurmada kullanabilmek için neleri bilmeleri ve bu dilde etkinlik kazanmak
+için hangi bilgi ve yetilerini gelitirmeleri gerektii kapsamli bir ekilde açiklanmitir. Bavuru metni
+ayni zamanda, yabanci dil örenenlerin gerçekletirecei ilerlemenin örenmenin her aamasinda ve
+yaam boyu örenme temeliyle ölçülebilmesini salayan dil yeterlilik düzeylerini de tanimlamaktadir.
+Dil yeterlilik seviyeleri: Diller çin Avrupa Ortak Bavuru Metni'nde yer alan ve baari düzeyini
+belirleyen A1-C2 düzeylerini kapsar.
+Duyusal alan: nsana kazandirilmak istenen duygular, tercihler, deerler, ahlaki kurallar, istek ve
+arzular, güdüler ve yönelimlerden oluan sistemdir.
+Eylem odakli yaklaim: Dilin kullanimi diindaki becerilerin de ilave edildii, dil örenenin sosyal bir
+aktör olarak farkli koul ve balamda, tamamlanmasi beklenen görevleri ve ileri yerine getirme
+fikridir.
+letiimci/iletiimsel yaklaim: Örenci için anlamli olan sözlü ve yazili iletiim etkinliklerine airlik
+verilen örenci merkezli öretim yaklaimidir.
+letiim becerisi: Örencinin olasi konuma durumlarinda belirli yapilari kullanarak duruma uygun
+tepki vermesidir. Yabanci dil öretim yöntemlerinden iletiimci yaklaimda hedeflenen ve bir dili
+iletiim ihtiyacini karilamaya yönelik bir ortamda ve uygun bir biçimde kullanarak karilikli anlamayi
+salayan beceridir.
+Kültürler arasi empati gelitirme becerisi: Örencinin kendi kültürünün yani sira örendii yabanci
+dilin kültürüne kari hogörülü davranma becerisidir.
+
+                                                             69
+Örenme stratejileri: Örenen kiinin örenme sirasinda gerçekletirebilecei ve onun kodlama
+sürecini etkilemesi umulan davranilar ve düüncelerdir.
+Sarmal programlama yaklaimi: Daha önce örenilmi olan konularin gerektikçe tekrarlanip
+geniletildii yaklaima göre hazirlanmi programdir.
+Süreç odakli yazma: Örencinin yazma etkinlii öncesinde yaziyi planlama, yazma sürecini hayata
+geçirme, yaziyi gözden geçirme, son okuma ve deerlendirme gibi aamalardan geçirilerek bir yazma
+görevini tamamlamasini öngören yaklaimdir. Bu yaklaima göre yazma etkinlii üründen çok süreç
+araciliiyla tasarlanir.
+
+                                                             70
+
