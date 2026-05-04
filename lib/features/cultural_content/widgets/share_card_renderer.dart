@@ -416,8 +416,7 @@ class _PoemLayout extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final allLines = item.kurmanjContent.split('
-')
+    final allLines = item.kurmanjContent.split('\n')
         .where((l) => l.trim().isNotEmpty)
         .toList();
     final preview = allLines.take(6).toList();
@@ -496,9 +495,7 @@ class _PoemLayout extends StatelessWidget {
         if (hasTr) ...[
           const SizedBox(height: 22),
           Text(
-            item.turkishContent.split('
-').take(2).join('
-'),
+            item.turkishContent.split('\n').take(2).join('\n'),
             textAlign: TextAlign.center,
             style: TextStyle(
               fontFamily: 'NotoSans',
@@ -531,8 +528,7 @@ class _ArtistLayout extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     // Biyografi/eser satırları — boş olmayanlar, max 4 (alan kısıtı).
-    final lines = item.kurmanjContent.split('
-');
+    final lines = item.kurmanjContent.split('\n');
     final highlights =
         lines.where((l) => l.trim().isNotEmpty).take(4).toList();
 

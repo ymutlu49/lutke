@@ -13,6 +13,21 @@
 
 $ErrorActionPreference = "Stop"
 
+# ─── API Token ──────────────────────────────────────────────────
+# Token User-scope env var olarak saklanir. Eger bu PS oturumunda
+# yoksa, registry'den oku ve trim et (kullanici paste ederken
+# bashlangic/bitis bosluklari olabilir).
+if (-not $env:CLOUDFLARE_API_TOKEN) {
+    $userToken = [Environment]::GetEnvironmentVariable('CLOUDFLARE_API_TOKEN', 'User')
+    if ($userToken) {
+        $env:CLOUDFLARE_API_TOKEN = $userToken.Trim()
+    }
+}
+if (-not $env:CLOUDFLARE_API_TOKEN) {
+    throw "CLOUDFLARE_API_TOKEN bulunamadi. Once token'i set et: [Environment]::SetEnvironmentVariable('CLOUDFLARE_API_TOKEN', 'TOKEN', 'User')"
+}
+Write-Host "API Token: $($env:CLOUDFLARE_API_TOKEN.Length) chars OK" -ForegroundColor DarkGray
+
 $flutterBin = "C:\Users\yilma\development\flutter\bin"
 if (-not ($env:Path -like "*$flutterBin*")) {
     $env:Path = "$flutterBin;$env:Path"
@@ -23,6 +38,11 @@ Set-Location $projectRoot
 
 # Cloudflare Pages projesi adi. Ilk deploy'da otomatik olusturulur (subdomain: <name>.pages.dev).
 $projectName = "lutke"
+
+# Cloudflare account ID — dashboard URL'inden alinmis.
+# Token'da "User Details Read" izni yoksa /memberships endpoint'i basarisiz olur;
+# direkt account ID gecmek bu sorgudan kacinir.
+$env:CLOUDFLARE_ACCOUNT_ID = "0eec8b88e11ef882d9269249ad00e331"
 
 Write-Host "== 1/4 Flutter clean ==" -ForegroundColor Cyan
 flutter clean
@@ -39,8 +59,23 @@ if ($LASTEXITCODE -ne 0) { throw "flutter build failed" }
 Write-Host "== 4/4 Cloudflare Pages deploy ==" -ForegroundColor Cyan
 Write-Host "Proje adi: $projectName" -ForegroundColor Yellow
 
+# Proje var mi kontrol et — yoksa olustur
+Write-Host "Proje varlik kontrolu..." -ForegroundColor DarkGray
+$projectListOutput = wrangler pages project list 2>&1 | Out-String
+if ($projectListOutput -notmatch [regex]::Escape($projectName)) {
+    Write-Host "Proje bulunamadi, olusturuluyor..." -ForegroundColor Yellow
+    wrangler pages project create $projectName --production-branch=main 2>&1 | Out-Host
+    if ($LASTEXITCODE -ne 0) {
+        Write-Host "Proje olusturulamadi." -ForegroundColor Red
+        throw "wrangler pages project create failed"
+    }
+    Write-Host "Proje olusturuldu: $projectName" -ForegroundColor Green
+} else {
+    Write-Host "Proje zaten mevcut: $projectName" -ForegroundColor DarkGray
+}
+
 # wrangler pages deploy
-# --project-name : Cloudflare Pages projesi (yok ise olusturur)
+# --project-name : Cloudflare Pages projesi
 # --branch       : production branch (main = production deploy, diger = preview)
 # --commit-dirty : yerel commit'lenmemis degisikliklere izin ver
 wrangler pages deploy build/web `
@@ -66,20 +101,39 @@ Write-Host ""
 # Iki domain baglanir: apex (lutke.app) + www (www.lutke.app)
 $customDomains = @("lutke.app", "www.lutke.app")
 $customDomain = $customDomains[0]  # gosterim icin
-Write-Host "== Custom domain baglanti kontrolu ==" -ForegroundColor Cyan
+Write-Host "== Custom domain baglanti kontrolu (API) ==" -ForegroundColor Cyan
+# wrangler 4.x'de `pages domain` komutu kaldirildi.
+# Direkt Cloudflare API kullanilir.
+$apiBase = "https://api.cloudflare.com/client/v4/accounts/$($env:CLOUDFLARE_ACCOUNT_ID)/pages/projects/$projectName/domains"
+$headers = @{
+    'Authorization' = "Bearer $($env:CLOUDFLARE_API_TOKEN)"
+    'Content-Type'  = 'application/json'
+}
 
-$existingDomains = wrangler pages domain list --project-name=$projectName 2>&1
+# Mevcut bagli domainleri cek
+try {
+    $existing = Invoke-RestMethod -Uri $apiBase -Headers $headers -Method Get
+    $existingNames = $existing.result | ForEach-Object { $_.name }
+} catch {
+    $existingNames = @()
+}
+
 foreach ($domain in $customDomains) {
-    if ($existingDomains -match [regex]::Escape($domain)) {
+    if ($existingNames -contains $domain) {
         Write-Host "  [OK] Bagli: $domain" -ForegroundColor Green
     } else {
         Write-Host "  Baglaniyor: $domain ..." -ForegroundColor Yellow
-        wrangler pages domain add $domain --project-name=$projectName
-        if ($LASTEXITCODE -eq 0) {
-            Write-Host "  [OK] Bagi tamam: $domain" -ForegroundColor Green
-        } else {
-            Write-Host "  [WARN] $domain baglanamadi. Manuel ekle:" -ForegroundColor Yellow
-            Write-Host "    Dashboard > Pages > $projectName > Custom domains > Add" -ForegroundColor Yellow
+        try {
+            $body = @{ name = $domain } | ConvertTo-Json -Compress
+            $resp = Invoke-RestMethod -Uri $apiBase -Headers $headers -Method Post -Body $body
+            if ($resp.success) {
+                Write-Host "  [OK] $domain eklendi (status: $($resp.result.status))" -ForegroundColor Green
+            } else {
+                Write-Host "  [WARN] $domain eklenirken hata: $($resp.errors | ConvertTo-Json -Compress)" -ForegroundColor Yellow
+            }
+        } catch {
+            Write-Host "  [WARN] $domain API hatasi: $($_.Exception.Message)" -ForegroundColor Yellow
+            Write-Host "    Manuel ekle: Dashboard > Pages > $projectName > Custom domains > Add" -ForegroundColor Yellow
         }
     }
 }
