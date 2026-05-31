@@ -157,4 +157,29 @@
       if (pempty) pempty.classList.toggle('hide', shown !== 0);
     });
   }
+
+  // --- nasil-denir hub: kelime arama ---
+  var ndtable = document.getElementById('ndtable');
+  var ndsearch = document.getElementById('ndsearch');
+  if (ndtable && ndsearch) {
+    var ndrows = Array.prototype.slice.call(ndtable.querySelectorAll('tbody tr'));
+    var ndcount = document.getElementById('ndcount');
+    var ndempty = document.getElementById('ndempty');
+    function ndnorm(s) {
+      return (s || '').toLowerCase()
+        .replace(/ê/g, 'e').replace(/î/g, 'i').replace(/û/g, 'u')
+        .replace(/ç/g, 'c').replace(/ş/g, 's').replace(/ı/g, 'i').replace(/ğ/g, 'g').replace(/ö/g, 'o').replace(/ü/g, 'u');
+    }
+    ndsearch.addEventListener('input', function () {
+      var q = ndnorm(ndsearch.value.trim());
+      var shown = 0;
+      for (var i = 0; i < ndrows.length; i++) {
+        var vis = !q || ndnorm(ndrows[i].getAttribute('data-hay')).indexOf(q) !== -1;
+        ndrows[i].classList.toggle('hide', !vis);
+        if (vis) shown++;
+      }
+      if (ndcount) ndcount.textContent = shown.toLocaleString('tr-TR') + ' ifade';
+      if (ndempty) ndempty.classList.toggle('hide', shown !== 0);
+    });
+  }
 })();

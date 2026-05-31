@@ -140,6 +140,7 @@ function redirectPageHtml(to) {
 const NAVEROK_SUB = [
   { href: '/naverok', label: 'Hemû Naverok' },
   { href: '/peyv/a1', label: 'Peyv (Ferheng)' },
+  { href: '/nasil-denir', label: 'Kürtçe nasıl denir?' },
   { href: '/wane/a1', label: 'Wane û Çalakî' },
   { href: '/reziman', label: 'Rêziman' },
   { href: '/cand', label: 'Çand' },

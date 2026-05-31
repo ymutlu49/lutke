@@ -520,6 +520,12 @@ blockquote {
 .pv-ku { font-weight: 600; color: var(--text); font-size: 1.04rem; }
 .pv-tr { color: var(--text-2); font-size: .95rem; }
 
+/* "nasıl denir" cevap kutusu (answer-first — AEO) */
+.answer-box { background: linear-gradient(135deg, var(--primary-surface), var(--accent-surface)); border: 1px solid var(--border-strong); border-radius: var(--radius); padding: 22px 26px; margin: 6px 0 8px; }
+.answer-lead { font-size: 1.3rem; color: var(--text); margin: 0; }
+.answer-ku { color: var(--primary-dark); }
+.kw-row a.kw:hover { background: var(--primary); color: #fff; }
+
 /* atasözü harf-sayfası kartları */
 .pv-list { display: grid; gap: 12px; }
 .pv-card {

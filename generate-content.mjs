@@ -77,8 +77,11 @@ const DOT = '<svg class="mk" viewBox="0 0 24 24" fill="none" stroke="#CFE0DA" st
 const SEARCH_ICO = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg>';
 
 function slugify(s) {
-  return String(s).toLowerCase()
+  return String(s)
+    .replace(/İ/g, 'i').replace(/I/g, 'i') // Türkçe büyük I/İ → i (toLowerCase'den önce)
+    .toLowerCase()
     .replace(/ê/g, 'e').replace(/î/g, 'i').replace(/û/g, 'u').replace(/ç/g, 'c').replace(/ş/g, 's')
+    .replace(/ı/g, 'i').replace(/ğ/g, 'g').replace(/ö/g, 'o').replace(/ü/g, 'u') // Türkçe
     .replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '').slice(0, 60);
 }
 
@@ -629,6 +632,117 @@ export async function generateContentPages(ctx) {
     }
   }
 
-  ctx.log(`content: ${pageCount} sayfa (naverok + peyv + wane + diyalog + reziman + cand)`);
+  // ════════════════════════════════════════════════════════
+  // 8) "Kürtçe X nasıl denir" — programatik (sözlükten, somut kategoriler)
+  //    /nasil-denir          hub (kategori + arama)
+  //    /nasil-denir/<slug>   tek ifade: cevap-önce + telaffuz + örnek + schema
+  //    AEO: "Kürtçe X nasıl denir" / "how to say X in Kurdish" aramaları + AI alıntı.
+  // ════════════════════════════════════════════════════════
+  {
+    // Sadece SOMUT, günlük "nasıl denir" aramasına uygun kategoriler (thin-content
+    // ve anlamsız soyut terimlerden kaçınmak için akademik/soyut kategoriler hariç).
+    const CONCRETE_KATS = new Set([
+      'silav', 'his', 'malbat', 'xwarin', 'vexwarin', 'mewe', 'jimar', 'reng', 'rengder', 'rengdêr',
+      'beden', 'ajal', 'mal', 'cih', 'dem', 'demsal', 'roj', 'hewa', 'cil', 'pîşe', 'kar',
+      'temel', 'pirs', 'dua', 'rêwîtî', 'tendurist', 'gihanî', 'spor', 'werzî', 'huner', 'deyim',
+    ]);
+    const KAT_TR = {
+      silav: 'Selamlaşma', his: 'Duygular', malbat: 'Aile', xwarin: 'Yiyecek', vexwarin: 'İçecek',
+      mewe: 'Meyve', jimar: 'Sayılar', reng: 'Renkler', rengder: 'Sıfatlar', 'rengdêr': 'Sıfatlar',
+      beden: 'Vücut', ajal: 'Hayvanlar', mal: 'Ev', cih: 'Yer', dem: 'Zaman', demsal: 'Mevsimler',
+      roj: 'Günler', hewa: 'Hava', cil: 'Giyim', 'pîşe': 'Meslekler', kar: 'İş',
+      temel: 'Temel kelimeler', pirs: 'Soru kelimeleri', dua: 'Dilek & dua', 'rêwîtî': 'Seyahat',
+      tendurist: 'Sağlık', gihanî: 'Ulaşım', spor: 'Spor', 'werzî': 'Spor', huner: 'Sanat', deyim: 'Deyimler',
+    };
+    // tüm kelimeler, somut kategori + makul uzunlukta TR karşılık (tek kavram)
+    const allWords = [];
+    for (const lvl of LEVELS) for (const w of (data.words[lvl] || [])) allWords.push(w);
+    const seenSlug = new Map(); // slug → ilk kelime (çakışma engelle)
+    const phrases = [];
+    for (const w of allWords) {
+      if (!CONCRETE_KATS.has(w.kat)) continue;
+      // TR karşılığı: parantez/açıklama at, ilk varyantı al ("a / b" → "a")
+      const trClean = (w.tr || '').replace(/\(.*?\)/g, '').split(/[\/;,]/)[0].trim();
+      if (!trClean || trClean.length < 2 || trClean.length > 28) continue;
+      if (/[0-9]/.test(trClean) && w.kat !== 'jimar') continue;
+      const slug = slugify(trClean);
+      if (!slug || slug.length < 2) continue;
+      if (seenSlug.has(slug)) continue; // ilk geleni tut
+      seenSlug.set(slug, w);
+      phrases.push({ ...w, trClean, slug });
+    }
+    phrases.sort((a, b) => a.trClean.localeCompare(b.trClean, 'tr'));
+
+    if (phrases.length) {
+      // Hub
+      let rows = '';
+      for (const p of phrases) {
+        const hay = `${p.trClean} ${p.ku}`.toLowerCase();
+        rows += `<tr data-hay="${escHtml(hay)}"><td><a href="/nasil-denir/${p.slug}">${escHtml(p.trClean)}</a></td><td class="w-ku">${escHtml(p.ku)}</td></tr>`;
+      }
+      const hubBody = `${crumb([{ label: 'Naverok', href: '/naverok' }, { label: 'Kürtçe nasıl denir?' }])}
+        <span class="eyebrow">Ferheng · Kürtçe nasıl denir?</span>
+        <h1>Kürtçe nasıl denir?</h1>
+        <p class="lead">${phrases.length} kelime ve ifadenin Kürtçesi (Kurmancî) — doğru yazım, telaffuz ve örnek cümlelerle. Prof. Dr. Yılmaz Mutlu derlemesi.</p>
+        <div class="toolbar">
+          <label class="search-box">${SEARCH_ICO}<input type="search" id="ndsearch" placeholder="Kelime ara… (örn. günaydın)" aria-label="Kelime ara"></label>
+          <span class="count-pill" id="ndcount">${phrases.length} ifade</span>
+        </div>
+        <table class="word-table" id="ndtable"><thead><tr><th>Türkçe</th><th>Kürtçe (Kurmancî)</th></tr></thead><tbody>${rows}</tbody></table>
+        <p class="w-empty hide" id="ndempty">Sonuç bulunamadı.</p>
+        ${appCta('Tüm kelimeleri sesli ve pratikle öğren.', '/app/vocabulary', 'Sepanê veke')}`;
+      await emit('nasil-denir', hubBody, {
+        title: `Kürtçe nasıl denir? | ${phrases.length} kelimenin Kürtçesi — LÛTKE`,
+        desc: `Kürtçe (Kurmancî) kelime ve ifadeler: günaydın, teşekkür ederim, seni seviyorum ve ${phrases.length}+ kelimenin doğru Kürtçesi, telaffuz ve örneklerle.`,
+        og: 'og-default.png', _nav: 'naverok', lang: 'tr',
+        jsonld: { '@type': 'CollectionPage', name: 'Kürtçe nasıl denir?', inLanguage: 'tr', about: 'Kurmancî (Northern Kurdish) vocabulary' },
+      }, '0.7');
+
+      // Tek ifade sayfaları
+      for (const p of phrases) {
+        const trCap = p.trClean.charAt(0).toUpperCase() + p.trClean.slice(1);
+        const q = `Kürtçe "${p.trClean}" nasıl denir?`;
+        const answer = `Kürtçe (Kurmancî) "${p.trClean}" = "${p.ku}".`;
+        const examples = [...(p.her || []), ...(p.gen || [])].filter(Boolean).slice(0, 4);
+        const exHtml = examples.length
+          ? `<h2 class="unit-head">Örnek cümleler</h2><div class="ex-list">${examples.map(e => `<div class="gex"><div class="gex-ku">${escHtml(e)}</div></div>`).join('')}</div>` : '';
+        const note = p.not ? `<div class="tip-box"><span class="tip-ico" aria-hidden="true">💡</span><div>${escHtml(p.not)}</div></div>` : '';
+        const katLbl = KAT_TR[p.kat] || katLabel(p.kat);
+        // ilgili: aynı kategoriden 6 kelime
+        const related = phrases.filter(x => x.kat === p.kat && x.slug !== p.slug).slice(0, 6);
+        const relHtml = related.length
+          ? `<h2 class="unit-head">İlgili kelimeler</h2><div class="kw-row">${related.map(r => `<a class="kw" href="/nasil-denir/${r.slug}">${escHtml(r.trClean)} · ${escHtml(r.ku)}</a>`).join('')}</div>` : '';
+        const body = `${crumb([{ label: 'Naverok', href: '/naverok' }, { label: 'Kürtçe nasıl denir?', href: '/nasil-denir' }, { label: trCap }])}
+          <span class="eyebrow">Ferheng · ${escHtml(katLbl)}</span>
+          <h1>${escHtml(q)}</h1>
+          <div class="answer-box">
+            <p class="answer-lead">Kürtçe <strong>${escHtml(p.trClean)}</strong> = <strong class="answer-ku">${escHtml(p.ku)}</strong>${p.cins && p.cins !== 'bêcins' ? ` <span class="muted">(${escHtml(p.cins)})</span>` : ''}</p>
+          </div>
+          ${exHtml}${note}${relHtml}
+          ${appCta(`"${p.ku}" kelimesini sesli dinle ve pratik yap.`, '/app/vocabulary', 'Sepanê veke')}`;
+        await emit(`nasil-denir/${p.slug}`, body, {
+          title: `Kürtçe "${p.trClean}" nasıl denir? — "${p.ku}" | LÛTKE`,
+          desc: `Kürtçe (Kurmancî) "${p.trClean}" = "${p.ku}". Doğru yazım, telaffuz ve örnek cümlelerle. ${katLbl} — LÛTKE Kürtçe sözlük.`,
+          og: 'og-default.png', ogType: 'article', _nav: 'naverok', lang: 'tr',
+          jsonld: [
+            {
+              '@type': 'QAPage', inLanguage: 'tr',
+              mainEntity: {
+                '@type': 'Question', name: q,
+                acceptedAnswer: { '@type': 'Answer', text: `${answer}${examples.length ? ' Örnek: ' + examples[0] : ''}` },
+              },
+            },
+            {
+              '@type': 'DefinedTerm', name: p.ku, inLanguage: 'ku', description: p.tr,
+              inDefinedTermSet: { '@id': 'https://lutke.app/peyv/a1#set' },
+            },
+          ],
+        }, '0.6');
+      }
+      ctx.log(`nasil-denir: ${phrases.length + 1} sayfa (hub + ifadeler)`);
+    }
+  }
+
+  ctx.log(`content: ${pageCount} sayfa (naverok + peyv + wane + diyalog + reziman + cand + nasil-denir)`);
   return { pages: pageCount, urls };
 }
