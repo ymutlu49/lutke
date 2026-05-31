@@ -140,7 +140,8 @@ function redirectPageHtml(to) {
 const NAVEROK_SUB = [
   { href: '/naverok', label: 'Hemû Naverok' },
   { href: '/peyv/a1', label: 'Peyv (Ferheng)' },
-  { href: '/nasil-denir', label: 'Kürtçe nasıl denir?' },
+  // NOT: /nasil-denir bilinçli olarak nav'da GÖSTERİLMEZ — sadece arama/AI için
+  // (sitemap'te var, sayfalar üretilir, kullanıcı menüsünde görünmez). 2026-05-31.
   { href: '/wane/a1', label: 'Wane û Çalakî' },
   { href: '/reziman', label: 'Rêziman' },
   { href: '/cand', label: 'Çand' },
