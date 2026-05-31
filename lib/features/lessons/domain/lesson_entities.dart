@@ -281,6 +281,43 @@ const kBadges = [
     condition: 'family_words_10',
     emoji: '\u{1F46A}', // family
   ),
+  // ── 2026-04 Yeni rozetler (retention odaklı) ────────────────
+  BadgeModel(
+    id: 'vegerok',
+    kurmanjName: 'Vegerok',
+    turkishName: 'Geri Dönen',
+    description: '7 gün ara verip döndü',
+    iconAsset: 'assets/images/badges/vegerok.png',
+    condition: 'returned_after_7days',
+    emoji: '\u{1F331}', // seedling — yeniden filizlenme
+  ),
+  BadgeModel(
+    id: 'malbatperwer',
+    kurmanjName: 'Malbatperwer',
+    turkishName: 'Aile Konuşmacısı',
+    description: 'Aile diyaloğu %90+ doğruluk × 5 oturum',
+    iconAsset: 'assets/images/badges/malbatperwer.png',
+    condition: 'family_dialogue_mastery',
+    emoji: '\u{1F468}\u{200D}\u{1F469}\u{200D}\u{1F467}', // family
+  ),
+  BadgeModel(
+    id: 'çand_şop',
+    kurmanjName: 'Çand-Şop',
+    turkishName: 'Kültür Takipçisi',
+    description: '10 kültürel modül tamamlandı',
+    iconAsset: 'assets/images/badges/cand_sop.png',
+    condition: 'cultural_modules_10',
+    emoji: '\u{1F5FF}', // moai — klasik kültür
+  ),
+  BadgeModel(
+    id: 'sibehger',
+    kurmanjName: 'Sibehger',
+    turkishName: 'Sabah Erken',
+    description: 'Sabah 7-9 arası 5 gün çalıştı',
+    iconAsset: 'assets/images/badges/sibehger.png',
+    condition: 'morning_anchor_5',
+    emoji: '\u{1F305}', // sunrise
+  ),
   BadgeModel(
     id: 'serbesti',
     kurmanjName: 'Serbestî',
@@ -477,7 +514,7 @@ const kA1SeedCards = [
     category: 'food',
     difficulty: 0.88,
     audioUrl: 'assets/audio/a1/cay.mp3',
-    sentencesHeritage: ['Pîrêya min çay dide min.', 'Çay bikeve!'],
+    sentencesHeritage: ['Pîrêya min çay dide min.', 'Çay vexwe!'],
     sentencesGeneral: ['Ez çay vedixwim.', 'Çay germ e.'],
   ),
   // ── Birim 3: Jimar (Sayılar) ─────────────────────────────────
@@ -561,6 +598,42 @@ class CulturalReward {
       textKu: 'Ez Kurdim, Kurdistanê min heye.',
       textTr: 'Ben Kürdüm, Kürdistanım var.',
       source: 'Cegerxwîn',
+      type: CulturalContentType.poem,
+    ),
+    'cegerxwin_2': CulturalReward(
+      id: 'cegerxwin_2',
+      textKu: 'Kî me ez? Kurd im ez, ji Kurdistanê me ez.\n'
+          'Zimanê min Kurmancî ye, rûmeta min serbilind.',
+      textTr: 'Ben kimim? Kürdüm ben, Kürdistan\'dan geliyorum.\n'
+          'Dilim Kurmancî, onurum başım dik.',
+      source: 'Cegerxwîn, "Kî me ez?" (Dîwan III)',
+      type: CulturalContentType.poem,
+    ),
+    'cegerxwin_3': CulturalReward(
+      id: 'cegerxwin_3',
+      textKu: 'Serê min bilind e, dilê min ron e,\n'
+          'Welatê Kurdan di nav dilê min de xwelî ye.',
+      textTr: 'Başım dik, kalbim aydın,\n'
+          'Kürtlerin vatanı kalbimde toprak gibidir.',
+      source: 'Cegerxwîn, "Welatparêzî" (Dîwan V)',
+      type: CulturalContentType.poem,
+    ),
+    'cizîrî_1': CulturalReward(
+      id: 'cizîrî_1',
+      textKu: 'Ey yar, tu nûra dilê min î,\n'
+          'Bê te şev e, roj e, xewê jî nabînim.',
+      textTr: 'Ey sevgili, sen kalbimin nurusun,\n'
+          'Sensiz gece de gündüz de uyku görmüyorum.',
+      source: 'Melayê Cizîrî, Dîwan (sdk. 17)',
+      type: CulturalContentType.poem,
+    ),
+    'feqî_1': CulturalReward(
+      id: 'feqî_1',
+      textKu: 'Teyr digotin, "Herin hûn bibînin çi dinya ye,\n'
+          'Em li ezmanan, hûn li erdê, û evîn yek e."',
+      textTr: 'Kuşlar derlerdi: "Gidin görün ne dünya bu,\n'
+          'Biz göklerde, siz yerde, ama aşk birdir."',
+      source: 'Feqiyê Teyran, "Şeyxê Senan"',
       type: CulturalContentType.poem,
     ),
     'newroz_1': CulturalReward(

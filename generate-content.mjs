@@ -134,13 +134,13 @@ export async function generateContentPages(ctx) {
     let h = `<section class="page-hero"><div class="wrap">
       <span class="eyebrow">Naverok</span>
       <h1>Hemû naveroka LÛTKE</h1>
-      <p class="lead">Tevahiya naveroka sepanê — niha li ser gerokê jî. Peyv, ders, diyalog, rêziman û çand; bê daxistin, bê têketin.</p>
+      <p class="lead">Tevahiya naveroka sepanê — niha li ser gerokê jî. Peyv, wane, diyalog, rêziman û çand; bê daxistin, bê têketin.</p>
     </div></section>
 
     <section class="section-tight"><div class="wrap">
       <div class="stats">
         ${stat(nf(m.wordTotal), 'Peyv')}
-        ${stat(m.lessonTotal, 'Ders')}
+        ${stat(m.lessonTotal, 'Wane')}
         ${stat(m.exerciseTotal, 'Egzersîz')}
         ${stat(nf(candCount), 'Naveroka çandî')}
       </div>
@@ -150,7 +150,7 @@ export async function generateContentPages(ctx) {
     const sections = [
       { href: '/peyv/a1', emoji: '📖', t: 'Peyv', d: `${nf(m.wordTotal)} peyv, A1–C2 — bi mînak û cins.`,
         sub: LEVELS.filter(l => (data.words[l] || []).length).map(l => `<a href="/peyv/${l}">${l.toUpperCase()}</a>`).join('') },
-      { href: '/wane/a1', emoji: '🎓', t: 'Ders û Çalakî', d: `${m.lessonTotal} ders, ${m.exerciseTotal} egzersîz.`,
+      { href: '/wane/a1', emoji: '🎓', t: 'Wane û Çalakî', d: `${m.lessonTotal} wane, ${m.exerciseTotal} egzersîz.`,
         sub: LEVELS.filter(l => (data.lessons[l] || []).length).map(l => `<a href="/wane/${l}">${l.toUpperCase()}</a>`).join('') },
       { href: '/reziman', emoji: '📐', t: 'Rêziman', d: `${m.grammarTotal} mijarên gramerê — bi qaîde û mînak.`, sub: '' },
       { href: '/cand', emoji: '🪕', t: 'Çand', d: `Atasozî, helbest, stran, destan û kesayet — ${nf(candCount)}+ tişt.`, sub: '' },
@@ -183,8 +183,8 @@ export async function generateContentPages(ctx) {
     h += `<section class="section"><div class="wrap">${appCta('Bi tevahî, bi deng û bi pratîkê fêr bibe.', '/app/', 'Sepanê veke')}</div></section>`;
 
     await emit('naverok', h, {
-      title: 'Naverok | Hemû peyv, ders, rêziman û çand — LÛTKE',
-      desc: `LÛTKE naveroka tam: ${nf(m.wordTotal)} peyv (A1–C2), ${m.lessonTotal} ders, ${m.grammarTotal} mijarên rêzimanê û naveroka çandî (atasozî, helbest, stran). Di moda gerokê de bigere.`,
+      title: 'Naverok | Hemû peyv, wane, rêziman û çand — LÛTKE',
+      desc: `LÛTKE naveroka tam: ${nf(m.wordTotal)} peyv (A1–C2), ${m.lessonTotal} wane, ${m.grammarTotal} mijarên rêzimanê û naveroka çandî (atasozî, helbest, stran). Di moda gerokê de bigere.`,
       og: 'og-default.png', _raw: true,
     }, '0.9');
   }
@@ -266,17 +266,17 @@ export async function generateContentPages(ctx) {
     const levelNav = LEVELS.filter(l => (data.lessons[l] || []).length).map(l =>
       `<a class="seg${l === lvl ? ' active' : ''}" href="/wane/${l}">${l.toUpperCase()}</a>`).join('');
 
-    const body = `${crumb([{ label: 'Naverok', href: '/naverok' }, { label: 'Ders', href: '/wane/a1' }, { label: lvl.toUpperCase() }])}
-      <span class="eyebrow">Ders · ${lvl.toUpperCase()} ${LEVEL_NAME[lvl]}</span>
-      <h1>Dersên ${lvl.toUpperCase()}</h1>
-      <p class="lead">${lessons.length} ders — her yek bi egzersîz û çalakiyên xwe.</p>
+    const body = `${crumb([{ label: 'Naverok', href: '/naverok' }, { label: 'Wane', href: '/wane/a1' }, { label: lvl.toUpperCase() }])}
+      <span class="eyebrow">Wane · ${lvl.toUpperCase()} ${LEVEL_NAME[lvl]}</span>
+      <h1>Waneyên ${lvl.toUpperCase()}</h1>
+      <p class="lead">${lessons.length} wane — her yek bi egzersîz û çalakiyên xwe.</p>
       <div class="segbar" role="tablist" aria-label="Ast">${levelNav}</div>
       ${listHtml}
-      ${appCta('Van dersan bi tevahî û interaktîf di sepanê de bike.', '/app/', 'Sepanê veke')}`;
+      ${appCta('Van waneyan bi tevahî û interaktîf di sepanê de bike.', '/app/', 'Sepanê veke')}`;
 
     await emit(`wane/${lvl}`, body, {
-      title: `Dersên ${lvl.toUpperCase()} (${LEVEL_NAME[lvl]}) | Mufredata Kurmancî — LÛTKE`,
-      desc: `${lessons.length} dersên Kurmancî yên asta ${lvl.toUpperCase()} — bi egzersîz, gramer û naveroka çandî. Mufredata LÛTKE.`,
+      title: `Waneyên ${lvl.toUpperCase()} (${LEVEL_NAME[lvl]}) | Mufredata Kurmancî — LÛTKE`,
+      desc: `${lessons.length} waneyên Kurmancî yên asta ${lvl.toUpperCase()} — bi egzersîz, gramer û naveroka çandî. Mufredata LÛTKE.`,
       og: 'og-default.png',
     }, '0.7');
   }
@@ -304,26 +304,26 @@ export async function generateContentPages(ctx) {
       let wordsHtml = '';
       const tw = (l.targetCardIds || []).map(id => wordById.get(id)).filter(Boolean);
       if (tw.length) {
-        wordsHtml = `<h2 class="unit-head">Peyvên vê dersê (${tw.length})</h2><table class="word-table"><thead><tr><th>Kurmancî</th><th>Tirkî</th></tr></thead><tbody>`;
+        wordsHtml = `<h2 class="unit-head">Peyvên vê waneyê (${tw.length})</h2><table class="word-table"><thead><tr><th>Kurmancî</th><th>Tirkî</th></tr></thead><tbody>`;
         for (const w of tw.slice(0, 80)) wordsHtml += `<tr><td class="w-ku">${escHtml(w.ku)}</td><td class="w-tr">${escHtml(w.tr)}</td></tr>`;
         wordsHtml += `</tbody></table>`;
       }
       const cul = (data.cultural || []).find(c => c.id === l.culturalRewardId);
       const culHtml = cul ? `<blockquote>${escHtml(cul.textKu)}<br><span style="font-weight:400;font-size:.92rem;color:var(--text-3)">${escHtml(cul.textTr)}${cul.source ? ' — ' + escHtml(cul.source) : ''}</span></blockquote>` : '';
 
-      const body = `${crumb([{ label: 'Naverok', href: '/naverok' }, { label: `Ders ${lvl.toUpperCase()}`, href: `/wane/${lvl}` }, { label: l.kurmanjTitle }])}
+      const body = `${crumb([{ label: 'Naverok', href: '/naverok' }, { label: `Wane ${lvl.toUpperCase()}`, href: `/wane/${lvl}` }, { label: l.kurmanjTitle }])}
         <span class="eyebrow">${lvl.toUpperCase()} · Birim ${l.unitNumber} · ${PATH_LABEL[l.path] || ''}</span>
         <h1>${escHtml(l.kurmanjTitle)}</h1>
         <p class="lead">${escHtml(l.turkishTitle)} · ${l.exercises.length} egzersîz · ${l.estimatedMinutes} xulek · ${l.totalXP} XP</p>
         ${culHtml}
         <h2 class="unit-head">Egzersîz û Çalakî</h2>
-        ${ex || '<p class="muted">Egzersîzên vê dersê di sepanê de têne hilberandin.</p>'}
+        ${ex || '<p class="muted">Egzersîzên vê waneyê di sepanê de têne hilberandin.</p>'}
         ${wordsHtml}
-        ${appCta('Vê dersê bi deng, pratîk û paşvexdistinê di sepanê de bike.', '/app/', 'Dersê di sepanê de bike')}`;
+        ${appCta('Vê waneyê bi deng, pratîk û paşvexdistinê di sepanê de bike.', '/app/', 'Waneyê di sepanê de bike')}`;
 
       await emit(`wane/${l.id}`, body, {
-        title: `${l.kurmanjTitle} (${lvl.toUpperCase()}) | Dersa Kurmancî — LÛTKE`,
-        desc: `${l.turkishTitle} — dersa Kurmancî ya asta ${lvl.toUpperCase()}: ${l.exercises.length} egzersîz, gramer û naverok. LÛTKE.`,
+        title: `${l.kurmanjTitle} (${lvl.toUpperCase()}) | Waneya Kurmancî — LÛTKE`,
+        desc: `${l.turkishTitle} — waneya Kurmancî ya asta ${lvl.toUpperCase()}: ${l.exercises.length} egzersîz, gramer û naverok. LÛTKE.`,
         og: 'og-default.png', ogType: 'article',
         jsonld: { '@context': 'https://schema.org', '@type': 'LearningResource', name: l.kurmanjTitle, inLanguage: 'ku', educationalLevel: lvl.toUpperCase(), learningResourceType: 'lesson', isPartOf: { '@type': 'Course', name: `Kurmancî ${lvl.toUpperCase()}` } },
       }, '0.6');

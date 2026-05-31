@@ -9,7 +9,7 @@
 // ✓ A1 kelime havuzundan (kA1TamListe + kA1EkKelimeler)
 // ✓ SOV cümle düzeni — Bedir Han & Lescot §295–299
 // ✓ Bûn fiili doğru çekimi — Thackston §62
-// ✓ Ezafe formları dilbilgisel açıdan doğru
+// ✓ Veqetandek formları dilbilgisel açıdan doğru
 // ✓ Keyf xweş im (kullanıcı tercihi, iki kelime)
 // ════════════════════════════════════════════════════════════════
 
@@ -71,7 +71,7 @@ const kDialoguePiree = HeritageDialogue(
       'Elif büyükannesini ziyaret etti, Kurmancî denemek istiyor.',
   culturalContext:
       'Kürt kültüründe misafir gelince çay zorunlu ikramdır. '
-      '"Çay bikeve!" — ilk söylenen sözlerden biridir. '
+      '"Çay vexwe!" — ilk söylenen sözlerden biridir. '
       'Büyükanneler ile diyalog, asimile nesil için '
       'en değerli pratik ortamdır.',
   keyWords: ['silav', 'pîrê', 'çay', 'spas', 'baş', 'germ', 'xweş', 'hîn bûn'],
@@ -89,7 +89,7 @@ const kDialoguePiree = HeritageDialogue(
       speakerRole: 'Dapîr',
       kurmanci: 'Silav, keça min! Bi xêr hatî!',
       turkish: 'Merhaba, kızım! Hoş geldin!',
-      grammarNote: '"Keça min" = kızım (dişil ezafe: keç + -a + min).',
+      grammarNote: '"Keça min" = kızım (dişil veqetandek: keç + -a + min).',
       culturalNote: '"Keça min" sözü derin sevgi ifadesidir — "kızım" dışında anlam taşır.',
       audioAsset: 'assets/audio/heritage/dlg1_02.mp3',
     ),
@@ -131,7 +131,7 @@ const kDialoguePiree = HeritageDialogue(
       speakerRole: 'Nevî',
       kurmanci: 'Spas, pîrê. Çayê te gelek xweş e!',
       turkish: 'Teşekkürler büyükanne. Senin çayın çok güzel!',
-      grammarNote: '"Çayê te" = senin çayın (ezafe: çay + -ê + te). "Gelek xweş" = çok güzel.',
+      grammarNote: '"Çayê te" = senin çayın (veqetandek: çay + -ê + te). "Gelek xweş" = çok güzel.',
       audioAsset: 'assets/audio/heritage/dlg1_07.mp3',
     ),
     DialogueLine(
@@ -536,7 +536,7 @@ const kDialogueDersa = HeritageDialogue(
       speakerRole: 'Nevî',
       kurmanci: 'Pîrê, tu mamostayê min î!',
       turkish: 'Büyükanne, sen benim öğretmeninim!',
-      grammarNote: '"Mamostayê min î" = benim öğretmeninim (ezafe + bûn 2.tekil).',
+      grammarNote: '"Mamostayê min î" = benim öğretmeninim (veqetandek + bûn 2.tekil).',
       audioAsset: 'assets/audio/heritage/dlg5_07.mp3',
     ),
     DialogueLine(
