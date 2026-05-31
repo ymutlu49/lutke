@@ -83,7 +83,7 @@ function slugify(s) {
 }
 
 export async function generateContentPages(ctx) {
-  const { ROOT, DIST, renderPage, SITE_URL, escHtml } = ctx;
+  const { ROOT, DIST, renderPage, SITE_URL, escHtml, BUILD_DATE = '2026-05-31' } = ctx;
   const candidates = [
     path.join(ROOT, 'website', 'data', 'content.json'),
     path.join(process.cwd(), 'website', 'data', 'content.json'),
@@ -180,12 +180,33 @@ export async function generateContentPages(ctx) {
       h += `</div></div></section>`;
     }
 
+    // Görünür FAQ (AEO: AI motorları bunu doğrudan alıntılar — şema sadece görünür Q&A'yı işaretler)
+    const faqs = [
+      { q: 'LÛTKE çi ye?', a: `LÛTKE platformeke belaş e ji bo fêrbûna zimanê Kurmancî (Kurdiya Bakur). Tê de ferhengek bi ${nf(m.wordTotal)} peyvan (A1–C2), ${m.lessonTotal} ders, rêbera rêzimanê û naveroka çandî (gotinên pêşiyan, helbest, stran) hene. Pêşxistî: Prof. Dr. Yılmaz Mutlu.` },
+      { q: 'LÛTKE belaş e?', a: 'Erê, hemû naveroka LÛTKE bi temamî belaş e — bê reklam, bê şopandin.' },
+      { q: 'Kurmancî çi ye?', a: 'Kurmancî (Kurdiya Bakur) zaravayê herî belav ê zimanê Kurdî ye. Bi alfabeya Latînî (alfabeya Hawar a Bedirxan, 31 tîp) tê nivîsîn û ji aliyê ~15 mîlyon kesan ve tê axaftin.' },
+      { q: 'Ez çawa dest bi fêrbûna Kurmancî bikim?', a: 'Di LÛTKE de testek bilez asta te (A1–C2) dibîne; paşê her roj çend deqîqe bi kartên peyvan, quiz, guhdarî û axaftinê fêr dibî. Dest pê bike li lutke.app/app.' },
+      { q: 'LÛTKE kîjan astan vedigire?', a: 'Hemû şeş astên CEFR: A1 (Destpêk), A2 (Bingehîn), B1–B2 (Navîn), C1 (Pêşketî) û C2 (Pispor).' },
+    ];
+    h += `<section class="section section-alt"><div class="wrap" style="max-width:760px">
+      <div class="center" style="margin-bottom:30px"><span class="eyebrow">Pirsên Gelemperî</span><h2>Pirs û Bersiv</h2></div>
+      ${faqs.map(f => `<div class="ex-card"><div class="ex-q">${escHtml(f.q)}</div><p style="margin:8px 0 0">${escHtml(f.a)}</p></div>`).join('')}
+    </div></section>`;
+
     h += `<section class="section"><div class="wrap">${appCta('Bi tevahî, bi deng û bi pratîkê fêr bibe.', '/app/', 'Sepanê veke')}</div></section>`;
 
     await emit('naverok', h, {
       title: 'Naverok | Hemû peyv, wane, rêziman û çand — LÛTKE',
       desc: `LÛTKE naveroka tam: ${nf(m.wordTotal)} peyv (A1–C2), ${m.lessonTotal} wane, ${m.grammarTotal} mijarên rêzimanê û naveroka çandî (atasozî, helbest, stran). Di moda gerokê de bigere.`,
       og: 'og-default.png', _raw: true,
+      jsonld: {
+        '@type': 'FAQPage',
+        '@id': `${SITE_URL}/naverok#faq`,
+        mainEntity: faqs.map(f => ({
+          '@type': 'Question', name: f.q,
+          acceptedAnswer: { '@type': 'Answer', text: f.a },
+        })),
+      },
     }, '0.9');
   }
 
@@ -231,11 +252,29 @@ export async function generateContentPages(ctx) {
       <p class="w-empty hide" id="wempty">Tu peyv nehat dîtin.</p>
       ${appCta('Van peyvan bi kartên jîr (FSRS) û deng fêr bibe.', '/app/vocabulary', 'Di sepanê de')}`;
 
+    // DefinedTermSet — sözlük için en güçlü AEO schema'sı: her madde makine-okur
+    // (peyv, wate) çifti. AI cevap motorları bunu doğrudan alıntılar.
+    const terms = words.map(w => ({
+      '@type': 'DefinedTerm',
+      name: w.ku,
+      inLanguage: 'ku',
+      description: w.tr,
+      termCode: lvl.toUpperCase(),
+    }));
     await emit(`peyv/${lvl}`, body, {
       title: `Peyvên ${lvl.toUpperCase()} (${LEVEL_NAME[lvl]}) | Ferhenga Kurmancî — LÛTKE`,
       desc: `${words.length} peyvên Kurmancî yên asta ${lvl.toUpperCase()} — bi wateya tirkî, cins û mînakên hevokan. Ferhenga LÛTKE.`,
       og: 'og-default.png',
-      jsonld: { '@context': 'https://schema.org', '@type': 'CollectionPage', name: `Peyvên ${lvl.toUpperCase()}`, inLanguage: 'ku', isPartOf: { '@type': 'WebSite', name: 'LÛTKE', url: SITE_URL + '/' } },
+      jsonld: {
+        '@type': 'DefinedTermSet',
+        '@id': `${SITE_URL}/peyv/${lvl}#set`,
+        name: `Ferhenga Kurmancî — ${lvl.toUpperCase()} (${LEVEL_NAME[lvl]})`,
+        description: `${words.length} peyvên Kurmancî yên asta ${lvl.toUpperCase()}, bi wateya tirkî.`,
+        inLanguage: 'ku',
+        url: `${SITE_URL}/peyv/${lvl}`,
+        publisher: { '@id': 'https://lutke.app/#org' },
+        hasDefinedTerm: terms,
+      },
     }, '0.7');
   }
 
@@ -325,7 +364,7 @@ export async function generateContentPages(ctx) {
         title: `${l.kurmanjTitle} (${lvl.toUpperCase()}) | Waneya Kurmancî — LÛTKE`,
         desc: `${l.turkishTitle} — waneya Kurmancî ya asta ${lvl.toUpperCase()}: ${l.exercises.length} egzersîz, gramer û naverok. LÛTKE.`,
         og: 'og-default.png', ogType: 'article',
-        jsonld: { '@context': 'https://schema.org', '@type': 'LearningResource', name: l.kurmanjTitle, inLanguage: 'ku', educationalLevel: lvl.toUpperCase(), learningResourceType: 'lesson', isPartOf: { '@type': 'Course', name: `Kurmancî ${lvl.toUpperCase()}` } },
+        jsonld: { '@type': 'LearningResource', name: l.kurmanjTitle, inLanguage: 'ku', educationalLevel: lvl.toUpperCase(), learningResourceType: 'lesson', isAccessibleForFree: true, author: { '@id': 'https://lutke.app/#yilmaz-mutlu' }, publisher: { '@id': 'https://lutke.app/#org' }, dateModified: BUILD_DATE, isPartOf: { '@type': 'Course', name: `Kurmancî ${lvl.toUpperCase()}` } },
       }, '0.6');
     }
   }
@@ -402,7 +441,7 @@ export async function generateContentPages(ctx) {
         title: `${g.titleKu} | Rêzimana Kurmancî (${g.level}) — LÛTKE`,
         desc: `${g.titleTr || g.titleKu} — mijara rêzimana Kurmancî: ${g.rules.length} qaîde, ${g.examples.length} mînak. Asta ${g.level}. LÛTKE.`,
         og: 'og-default.png', ogType: 'article', _nav: 'naverok',
-        jsonld: { '@context': 'https://schema.org', '@type': 'LearningResource', name: g.titleKu, inLanguage: 'ku', educationalLevel: g.level, learningResourceType: 'grammar guide' },
+        jsonld: { '@type': 'LearningResource', name: g.titleKu, inLanguage: 'ku', educationalLevel: g.level, learningResourceType: 'grammar guide', isAccessibleForFree: true, author: { '@id': 'https://lutke.app/#yilmaz-mutlu' }, publisher: { '@id': 'https://lutke.app/#org' }, dateModified: BUILD_DATE },
       }, '0.6');
     }
   }
@@ -539,7 +578,7 @@ export async function generateContentPages(ctx) {
           title: `${it.kurmanjTitle} | ${g.ku} — LÛTKE`,
           desc: `${it.turkishTitle} — ${it.typeTurkish || 'naveroka çandî'} bi Kurmancî û tirkî. Çanda Kurdî li LÛTKE.`,
           og: 'og-default.png', ogType: 'article', _nav: 'naverok',
-          jsonld: { '@context': 'https://schema.org', '@type': 'Article', headline: it.kurmanjTitle, inLanguage: 'ku' },
+          jsonld: { '@type': 'Article', headline: it.kurmanjTitle, inLanguage: 'ku', author: { '@id': 'https://lutke.app/#yilmaz-mutlu' }, publisher: { '@id': 'https://lutke.app/#org' }, dateModified: BUILD_DATE },
         }, '0.5');
       }
     }

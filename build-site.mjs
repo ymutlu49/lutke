@@ -30,6 +30,46 @@ const SITE_URL = 'https://lutke.app';
 const WITH_APP = process.argv.includes('--with-app');
 
 const log = (...a) => console.log('[build-site]', ...a);
+const BUILD_DATE = process.env.BUILD_DATE || '2026-05-31';
+
+// ── Site-geneli varlık (entity) düğümleri — AEO/GEO için ──
+// Her sayfanın JSON-LD @graph'ine eklenir. Sabit @id'ler ile AI motorları
+// LÛTKE'yi ve yazarı (Prof. Dr. Yılmaz Mutlu) tutarlı bir varlık olarak tanır.
+// sameAs: gerçek profiller eklendikçe genişletilmeli (Wikidata/ORCID/sosyal).
+const ENTITY_NODES = [
+  {
+    '@type': ['Organization', 'EducationalOrganization'],
+    '@id': 'https://lutke.app/#org',
+    name: 'LÛTKE',
+    alternateName: 'LÛTKE — Zimanê Kurdî',
+    url: 'https://lutke.app/',
+    logo: 'https://lutke.app/assets/site/logo-512.png',
+    description: 'Platformeke belaş a fêrbûna zimanê Kurmancî (Kurdiya Bakur): ferheng (3.900+ peyv, A1–C2), ders, rêziman û çanda Kurdî (gotinên pêşiyan, helbest, stran).',
+    inLanguage: 'ku',
+    slogan: 'Ji peyvekê heya welatekî.',
+    founder: { '@id': 'https://lutke.app/#yilmaz-mutlu' },
+    sameAs: [],
+  },
+  {
+    '@type': 'Person',
+    '@id': 'https://lutke.app/#yilmaz-mutlu',
+    name: 'Yılmaz Mutlu',
+    honorificPrefix: 'Prof. Dr.',
+    jobTitle: 'Professor',
+    description: 'Akademîsyen û pêşxistinerê platforma LÛTKE; xebatkarê li ser zimanê Kurmancî.',
+    knowsAbout: ['Kurmancî', 'Zimanê Kurdî', 'Kurdish linguistics', 'Language education', 'CEFR'],
+    worksFor: { '@id': 'https://lutke.app/#org' },
+    sameAs: [],
+  },
+  {
+    '@type': 'WebSite',
+    '@id': 'https://lutke.app/#website',
+    url: 'https://lutke.app/',
+    name: 'LÛTKE',
+    inLanguage: 'ku',
+    publisher: { '@id': 'https://lutke.app/#org' },
+  },
+];
 
 // ---------- helpers ----------
 async function rmrf(p) { await fs.rm(p, { recursive: true, force: true }); }
@@ -163,18 +203,28 @@ async function main() {
   function renderPage({ slug, body, meta = {}, activeNav = null }) {
     const canonical = slug === '' ? `${SITE_URL}/` : `${SITE_URL}/${slug}`;
     const ogImage = `${SITE_URL}/assets/site/${meta.og || 'og-default.png'}`;
+    const lang = meta.lang || 'ku';
+    // JSON-LD: site-geneli varlık @graph'i (Organization + Person + WebSite) HER
+    // sayfada referanslanabilir @id'lerle + sayfaya özel node'lar. AEO/GEO: AI
+    // motorları varlık reconciliation yapar; sabit @id'ler güveni artırır.
+    const graph = [...ENTITY_NODES];
+    if (meta.jsonld) {
+      const extra = Array.isArray(meta.jsonld) ? meta.jsonld : [meta.jsonld];
+      graph.push(...extra);
+    }
+    const jsonld = `<script type="application/ld+json">${JSON.stringify({ '@context': 'https://schema.org', '@graph': graph })}</script>`;
     const headFilled = head
       .replaceAll('{{TITLE}}', meta.title || 'LÛTKE — Zimanê Kurdî')
       .replaceAll('{{DESC}}', (meta.desc || '').replace(/"/g, '&quot;'))
       .replaceAll('{{CANONICAL}}', canonical)
       .replaceAll('{{OG_IMAGE}}', ogImage)
       .replaceAll('{{OG_TYPE}}', meta.ogType || 'website')
+      .replaceAll('{{OG_LOCALE}}', lang === 'tr' ? 'tr_TR' : (lang === 'en' ? 'en' : 'ku'))
       .replaceAll('{{CSS}}', `/assets/site/${cssName}`)
       .replaceAll('{{JS}}', `/assets/site/${jsName}`)
-      .replaceAll('{{JSONLD}}', meta.jsonld
-        ? `<script type="application/ld+json">${JSON.stringify(meta.jsonld)}</script>`
-        : '');
+      .replaceAll('{{JSONLD}}', jsonld);
     return layout
+      .replace('<html lang="ku" dir="ltr">', `<html lang="${lang}" dir="ltr">`)
       .replace('<!--#head-->', headFilled)
       .replace('<!--#header-->', header.replaceAll('{{NAV}}', navHtml(activeNav ?? slug)))
       .replace('<!--#content-->', body)
@@ -203,7 +253,7 @@ async function main() {
   let contentUrls = [];
   {
     const { generateContentPages } = await import('./generate-content.mjs');
-    const res = await generateContentPages({ ROOT, DIST, SITE_URL, renderPage, escHtml, log });
+    const res = await generateContentPages({ ROOT, DIST, SITE_URL, renderPage, escHtml, log, BUILD_DATE });
     contentUrls = res.urls;
   }
 
@@ -237,9 +287,9 @@ ${[...staticUrls, ...contentSiteUrls].join('\n')}
 </urlset>
 `;
   await write(path.join(DIST, 'sitemap.xml'), sitemap);
-  await write(path.join(DIST, 'robots.txt'),
-    `User-agent: *\nAllow: /\nDisallow: /app/\nSitemap: ${SITE_URL}/sitemap.xml\n`);
-  log(`sitemap (${staticUrls.length + contentSiteUrls.length} url) + robots`);
+  await write(path.join(DIST, 'robots.txt'), buildRobots());
+  await write(path.join(DIST, 'llms.txt'), buildLlmsTxt());
+  log(`sitemap (${staticUrls.length + contentSiteUrls.length} url) + robots + llms.txt`);
 
   // 7) _redirects + 8) _headers
   await write(path.join(DIST, '_redirects'), buildRedirects());
@@ -303,6 +353,50 @@ function buildRedirects() {
   r += `/app  /app/  301\n`;
   r += `/app/*  /app/index.html  200\n`;
   return r;
+}
+
+function buildRobots() {
+  // AEO/GEO: AI arama/cevap botlarına AÇIKÇA izin ver (alıntılanmak için şart).
+  // Eğitim (training) botlarına da izin: düşük-kaynaklı bir dilin gelecek
+  // modellere girmesi LÛTKE için avantaj. /app/ (Flutter SPA) crawl dışı.
+  const searchBots = ['OAI-SearchBot', 'ChatGPT-User', 'Claude-SearchBot', 'Claude-User',
+    'PerplexityBot', 'Perplexity-User', 'Bingbot', 'Applebot', 'Googlebot'];
+  const trainBots = ['GPTBot', 'ClaudeBot', 'Google-Extended', 'Amazonbot', 'Applebot-Extended', 'CCBot'];
+  let r = `# robots.txt — lutke.app · Em dixwazin werin crawl kirin û jêgirtin (AEO/GEO)\n\n`;
+  r += `User-agent: *\nAllow: /\nDisallow: /app/\n\n`;
+  r += `# AI lêgerîn/bersiv-botên (jêgirtin/citation çêdikin)\n`;
+  for (const b of searchBots) r += `User-agent: ${b}\nAllow: /\nDisallow: /app/\n`;
+  r += `\n# AI training botên (ziman têkeve modelên paşerojê)\n`;
+  for (const b of trainBots) r += `User-agent: ${b}\nAllow: /\nDisallow: /app/\n`;
+  r += `\nSitemap: ${SITE_URL}/sitemap.xml\n`;
+  return r;
+}
+
+function buildLlmsTxt() {
+  // /llms.txt — AI ajanları/araçları için küratörlü özet (forward-looking).
+  return `# LÛTKE — Platforma fêrbûna Kurmancî
+
+> LÛTKE platformeke belaş a fêrbûna zimanê Kurmancî (Kurdiya Bakur) ye, ji aliyê
+> Prof. Dr. Yılmaz Mutlu ve. Tê de ferhengek bi 3.900+ peyvên A1–C2, ders û
+> egzersîz, rêbera rêzimanê û naveroka çandî ya Kurdî (gotinên pêşiyan, helbest,
+> stran, kesayetên dîrokî) heye. Armanc: bibe çavkaniya vekirî ya bingehîn a Kurmancî.
+
+## Naverok (Content)
+- [Naverok — hemû](${SITE_URL}/naverok): peyv, wane, rêziman û çand.
+- [Ferheng (Peyv)](${SITE_URL}/peyv/a1): 3.900+ peyvên Kurmancî bi wate û mînakan, A1–C2.
+- [Wane û Çalakî](${SITE_URL}/wane/a1): dersên Kurmancî bi egzersîzan.
+- [Rêziman](${SITE_URL}/reziman): rêbera rêzimana Kurmancî (alfabe, veqetandek, ergatîf, lêker).
+- [Çand](${SITE_URL}/cand): atasozî, helbest, stran û kesayetên dîrokî.
+- [Gotinên Pêşiyan](${SITE_URL}/cand/gotinen-pesiyan): 3.361 atasozîyên Kurmancî bi wergera tirkî.
+
+## Derbarê (About)
+- [LÛTKE Çi ye?](${SITE_URL}/lutke-ci-ye): naskirina platformê.
+- [Rêbaz](${SITE_URL}/rebaz): rêbaza zanistî (FSRS, CEFR, standardê Bedirxan-Hawar).
+- [Derbarê](${SITE_URL}/derbare): platform û nivîskar Prof. Dr. Yılmaz Mutlu.
+
+## Sepan (App)
+- [Sepana LÛTKE](${SITE_URL}/app/): sepana interaktîf (Flutter web).
+`;
 }
 
 function buildHeaders() {
