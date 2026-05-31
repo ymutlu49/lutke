@@ -1,0 +1,34 @@
+# LÛTKE — Cloudflare Pages Functions configuration
+#
+# This file binds D1 database + environment for Pages Functions.
+# Secrets (JWT_SECRET, RESEND_API_KEY) are NOT here — set via:
+#   wrangler pages secret put JWT_SECRET --project-name lutke
+#   wrangler pages secret put RESEND_API_KEY --project-name lutke
+#
+# D1 database is created once with:
+#   wrangler d1 create lutke_users
+# Then `database_id` below is updated.
+
+name = "lutke"
+compatibility_date = "2025-01-01"
+pages_build_output_dir = "build/web"
+
+[[d1_databases]]
+binding = "DB"
+database_name = "lutke_users"
+database_id = "e28b9e26-478c-44e5-bea7-b4b1ce326d53"
+
+# Public env vars (visible in Functions runtime).
+# Real secrets must be set via `wrangler pages secret put`.
+[vars]
+EMAIL_FROM = "no-reply@lutke.app"
+EMAIL_FROM_NAME = "LÛTKE"
+PUBLIC_BASE_URL = "https://lutke.app"
+OWNER_EMAILS = "y.mutlu@alparslan.edu.tr,aslanogluosman@gmail.com"
+# Google Sign-In: client_id public bilgi olduğu için burada saklanır.
+# Boş bırakılırsa Google butonu UI'da görünmez (graceful fallback).
+# Setup: Google Cloud Console → APIs & Services → Credentials →
+#   Create OAuth client ID → Web application →
+#   Authorized JavaScript origins: https://lutke.app
+# Yapılandırdıktan sonra aşağıya yapıştır + redeploy.
+GOOGLE_CLIENT_ID = "358492425924-o2fv407ke7bkbtsj7agbb7441ttspdfu.apps.googleusercontent.com"

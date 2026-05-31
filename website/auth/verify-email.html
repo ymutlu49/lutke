@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="ku" dir="ltr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Piştrastkirina e-nameyê — LÛTKE</title>
+  <meta name="robots" content="noindex">
+  <meta name="theme-color" content="#1A7B6B">
+  <link rel="icon" href="/assets/site/favicon.png" type="image/png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Lexend:wght@400;500;600;700;800&display=swap">
+  <link rel="stylesheet" href="{{CSS}}">
+</head>
+<body>
+  <div class="auth-wrap">
+    <div class="auth-card">
+      <a class="brand" href="/" aria-label="LÛTKE"><img class="brand-mark" src="/assets/site/logo-128.png" alt="" width="44" height="44"><span class="brand-word">LÛTKE</span></a>
+
+      <div id="loading">
+        <div class="spinner" role="status" aria-label="Tê barkirin"></div>
+        <h1>E-nameya te tê piştrastkirin…</h1>
+        <p>Ji kerema xwe kêliyekê bisekine.</p>
+      </div>
+
+      <div id="result" class="hide">
+        <h1 id="r-title"></h1>
+        <div id="r-msg" class="msg"></div>
+        <div id="r-actions"></div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    (function () {
+      'use strict';
+      var qs = new URLSearchParams(location.search);
+      var token = qs.get('token');
+      var loading = document.getElementById('loading');
+      var result = document.getElementById('result');
+      var rTitle = document.getElementById('r-title');
+      var rMsg = document.getElementById('r-msg');
+      var rActions = document.getElementById('r-actions');
+
+      function show(title, msg, cls, actionsHtml) {
+        loading.classList.add('hide');
+        result.classList.remove('hide');
+        rTitle.textContent = title;
+        rMsg.textContent = msg;
+        rMsg.className = 'msg show ' + cls;
+        rActions.innerHTML = actionsHtml || '';
+      }
+
+      var loginBtn = '<a class="btn btn-primary btn-block" href="/app/auth/login">Têkeve</a>';
+      var openBtn = '<a class="btn btn-ghost btn-block" style="margin-top:10px" href="/app/">Sepanê veke</a>';
+
+      if (!token) {
+        show('Lînk ne temam e', 'Ev lînk ne rast e an ne temam e. Ji kerema xwe lînkê di e-nameyê de ji nû ve veke.', 'err', openBtn);
+        return;
+      }
+
+      fetch('/api/auth/verify-email', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ token: token })
+      }).then(function (r) {
+        return r.json().then(function (data) { return { ok: r.ok, data: data }; });
+      }).then(function (res) {
+        if (res.ok && res.data && res.data.ok) {
+          show('E-name hat piştrastkirin! ✓',
+            'Hesabê te çalak bû. Niha tu dikarî têkevî LÛTKE.',
+            'ok', loginBtn);
+        } else {
+          var code = res.data && res.data.code;
+          var m = 'Lînk nederbasdar e an dema wê qediyaye. Ji kerema xwe lînkek nû bixwaze.';
+          if (code === 'token_missing') m = 'Token winda ye. Lînkê ji nû ve veke.';
+          show('Piştrastkirin neçû serî', m, 'err',
+            openBtn.replace('btn-ghost', 'btn-primary').replace(' style="margin-top:10px"', ''));
+        }
+      }).catch(function () {
+        show('Çewtiya girêdanê', 'Em nikarîn bigihîjin pêşkêşkerê. Girêdana înternetê kontrol bike û dîsa biceribîne.', 'err', openBtn);
+      });
+    })();
+  </script>
+</body>
+</html>

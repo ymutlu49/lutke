@@ -59,6 +59,16 @@ if ($LASTEXITCODE -ne 0) { throw "flutter build failed" }
 Write-Host "== 4/4 Cloudflare Pages deploy ==" -ForegroundColor Cyan
 Write-Host "Proje adi: $projectName" -ForegroundColor Yellow
 
+# Backend kurulum durum kontrolu
+$tomlContent = Get-Content (Join-Path $projectRoot "wrangler.toml") -Raw
+if ($tomlContent -match "PLACEHOLDER_REPLACE_AFTER_CREATE") {
+    Write-Host "" -ForegroundColor Yellow
+    Write-Host "[UYARI] wrangler.toml'da database_id yer tutucu. " -ForegroundColor Yellow
+    Write-Host "Once `"setup_cloudflare_backend.ps1`" calistirip D1 yarat ve secret'lari ayarla." -ForegroundColor Yellow
+    Write-Host "Bu uyariya ragmen devam ediliyor (frontend test deploy)..." -ForegroundColor Yellow
+    Write-Host "" -ForegroundColor Yellow
+}
+
 # Proje var mi kontrol et — yoksa olustur
 Write-Host "Proje varlik kontrolu..." -ForegroundColor DarkGray
 $projectListOutput = wrangler pages project list 2>&1 | Out-String
@@ -75,9 +85,13 @@ if ($projectListOutput -notmatch [regex]::Escape($projectName)) {
 }
 
 # wrangler pages deploy
-# --project-name : Cloudflare Pages projesi
-# --branch       : production branch (main = production deploy, diger = preview)
-# --commit-dirty : yerel commit'lenmemis degisikliklere izin ver
+# --project-name      : Cloudflare Pages projesi
+# --branch            : production branch (main = production deploy, diger = preview)
+# --commit-dirty      : yerel commit'lenmemis degisikliklere izin ver
+#
+# NOT: functions/ klasoru proje koku altinda olunca wrangler otomatik
+# bundle eder (Pages Functions). wrangler.toml'daki D1 binding'i de
+# functions runtime'a baglanir.
 wrangler pages deploy build/web `
     --project-name=$projectName `
     --branch=main `

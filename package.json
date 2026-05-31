@@ -1,0 +1,15 @@
+{
+  "name": "lutke-website",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "LÛTKE — Malpera fermî ya kurumsal/tanıtım (Kurmancî) + Flutter app + Cloudflare Pages",
+  "scripts": {
+    "build": "node build-site.mjs",
+    "build:withapp": "node build-site.mjs --with-app",
+    "og": "node tools/site/gen-og.mjs",
+    "preview": "npx serve dist -l 4321",
+    "deploy": "node build-site.mjs --with-app && npx wrangler pages deploy dist --project-name=lutke --branch=main --commit-dirty=true"
+  },
+  "devDependencies": {}
+}

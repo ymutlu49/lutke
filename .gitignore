@@ -18,15 +18,12 @@ build/
 *.ipr
 *.iws
 .atom/
-
 # macOS
 .DS_Store
 *.dmg
-
 # Windows
 Thumbs.db
 desktop.ini
-
 # Log / Temp
 *.log
 *.pyc
@@ -34,30 +31,38 @@ desktop.ini
 *.swo
 *~
 .buildlog/
-
 # Firebase (hassas bilgi — her geliştirici kendi yapılandırır)
 # firebase_options.dart — Template olarak commit edilecek, gerçek anahtarlar değil
 google-services.json
 GoogleService-Info.plist
-
 # Environment
 .env
 .env.*
-
 # Android signing (hassas — her geliştirici kendisi oluşturur)
 android/key.properties
 *.jks
 *.keystore
-
 # Android local
 android/local.properties
-
 # Coverage
 coverage/
 *.lcov
-
 # Generated files (build_runner tarafından üretilir — gerekirse yeniden üretilir)
 # *.g.dart → commit ediyoruz çünkü CI'da build_runner çalışmayabilir
-
 # Pubspec lock (Flutter projelerinde commit edilir — tutarlı bağımlılıklar)
 # pubspec.lock → commit ediyoruz
+dist/
+.ogtmp/
+.preview_check.txt
+.api_check.txt
+.me.txt
+.redir.txt
+.og.log
+.b.log
+.deploy.log
+.prod.txt
+.prod2.txt
+.qa.txt
+.stg.txt
+.commit.log
+.head.txt
