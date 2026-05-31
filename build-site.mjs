@@ -3,16 +3,15 @@
 // website/  →  dist/   (marketing site at root) + dist/app/ (Flutter app, base-href /app/)
 //
 // Usage:
-//   node build-site.mjs            # build marketing site only (fast)
+//   node build-site.mjs            # build marketing + content pages (fast; keeps dist/app)
 //   node build-site.mjs --with-app # also copy Flutter build/web -> dist/app (heavy)
 //
 // Design:
 //   - Common parts injected from website/layout.html (<!--#head/header/footer/content-->)
 //   - Per-page <!--META {json}--> drives <title>/description/canonical/OG
 //   - Content-hashed css/js (immutable cache safe)
-//   - Clean URLs (foo.html served at /foo by Cloudflare Pages)
-//   - Dynamic sitemap.xml + robots.txt
-//   - _headers (+immutable for hashed assets, no CSP for Flutter) + _redirects
+//   - Data-driven content pages from website/data/content.json (generate-content.mjs)
+//   - Clean URLs, dynamic sitemap.xml, robots.txt, _headers, _redirects
 //   - functions/ stays at project root; `wrangler pages deploy dist` bundles it from CWD
 //
 import { promises as fs } from 'node:fs';
@@ -39,6 +38,9 @@ async function read(p) { return fs.readFile(p, 'utf8'); }
 async function write(p, c) { await mkdirp(path.dirname(p)); await fs.writeFile(p, c); }
 function hash8(buf) { return createHash('sha256').update(buf).digest('hex').slice(0, 8); }
 async function copyDir(from, to) { await fs.cp(from, to, { recursive: true }); }
+function escHtml(s) {
+  return String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+}
 async function listFiles(dir) {
   const out = [];
   async function walk(d) {
@@ -54,17 +56,17 @@ async function listFiles(dir) {
 }
 
 // ---------- pages registry (drives nav + sitemap) ----------
-// slug '' => /  (index)
 const PAGES = [
-  { src: 'index.html',          slug: '',               nav: null,                 prio: '1.0' },
-  { src: 'lutke-ci-ye.html',    slug: 'lutke-ci-ye',    nav: 'LÛTKE Çi ye?',       prio: '0.9' },
-  { src: 'rebaz.html',          slug: 'rebaz',          nav: 'Rêbaz',              prio: '0.8' },
-  { src: 'asten-ferbune.html',  slug: 'asten-ferbune',  nav: 'Astên Fêrbûnê',      prio: '0.8' },
-  { src: 'taybetmendi.html',    slug: 'taybetmendi',    nav: 'Taybetmendî',        prio: '0.8' },
-  { src: 'naverok.html',        slug: 'naverok',        nav: 'Naverok',            prio: '0.7' },
-  { src: 'derbare.html',        slug: 'derbare',        nav: 'Derbarê',            prio: '0.6' },
-  { src: 'tekili.html',         slug: 'tekili',         nav: 'Têkilî',             prio: '0.5' },
-  { src: 'daxistin.html',       slug: 'daxistin',       nav: null,                 prio: '0.9' },
+  { src: 'index.html',          slug: '',               nav: null,            prio: '1.0' },
+  { src: 'lutke-ci-ye.html',    slug: 'lutke-ci-ye',    nav: 'LÛTKE Çi ye?',  prio: '0.9' },
+  { src: 'rebaz.html',          slug: 'rebaz',          nav: 'Rêbaz',         prio: '0.8' },
+  { src: 'asten-ferbune.html',  slug: 'asten-ferbune',  nav: 'Astên Fêrbûnê', prio: '0.8' },
+  { src: 'taybetmendi.html',    slug: 'taybetmendi',    nav: 'Taybetmendî',   prio: '0.8' },
+  // naverok = içerik hub'ı; HTML'ini generate-content.mjs üretir. Burada sadece nav linki.
+  { slug: 'naverok',            nav: 'Naverok',         navOnly: true },
+  { src: 'derbare.html',        slug: 'derbare',        nav: 'Derbarê',       prio: '0.6' },
+  { src: 'tekili.html',         slug: 'tekili',         nav: 'Têkilî',        prio: '0.5' },
+  { src: 'daxistin.html',       slug: 'daxistin',       nav: null,            prio: '0.9' },
 ];
 
 // auth utility pages (functional, not in nav/sitemap)
@@ -74,9 +76,8 @@ const AUTH_PAGES = [
 ];
 
 // Physical redirect pages -> /app/...  (static-first safe; _redirects is SKIPPED for
-// paths under a folder that holds a static file, e.g. /auth/* — there Pages serves
-// assets before consulting _redirects, which would otherwise mis-route /auth/login).
-// Also fixes /vocabulary which Pages 308s to a trailing slash before _redirects runs.
+// paths under a folder that holds a static file, e.g. /auth/*; and /vocabulary gets a
+// 308-to-trailing-slash before _redirects runs).
 const REDIRECT_PAGES = [
   { out: 'auth/login.html',    to: '/app/auth/login' },
   { out: 'auth/register.html', to: '/app/auth/register' },
@@ -95,59 +96,21 @@ function redirectPageHtml(to) {
 </head><body>Tê beralîkirin… <a href="${to}">LÛTKE</a></body></html>`;
 }
 
-function escHtml(s) {
-  return s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
-}
-
-// Extract REAL sample words from the Dart content DBs (no invented content).
-async function buildWordSamples() {
-  const domain = path.join(ROOT, 'lib', 'features', 'lessons', 'domain');
-  const levels = [
-    { lvl: 'a1', file: 'a1_kelime_db.dart', from: 16, take: 9 },
-    { lvl: 'a2', file: 'a2_kelime_db.dart', from: 6, take: 9 },
-    { lvl: 'b1', file: 'b1_kelime_db.dart', from: 6, take: 6 },
-    { lvl: 'c1', file: 'c1_kelime_db.dart', from: 6, take: 6 },
-  ];
-  // matches: id:'x', ku:'...', tr:'...'  (single or double quotes, no escapes/nested quotes)
-  const re = /id:\s*['"][a-z0-9_]+['"]\s*,\s*ku:\s*['"]([^'"\\]{2,42})['"]\s*,\s*tr:\s*['"]([^'"\\]{1,52})['"]/g;
-  let html = '';
-  for (const L of levels) {
-    let txt = '';
-    try { txt = await read(path.join(domain, L.file)); } catch { continue; }
-    const all = [];
-    let m;
-    re.lastIndex = 0;
-    while ((m = re.exec(txt))) {
-      const tr = m[2];
-      // skip alphabet/phonetic helper rows for a nicer showcase
-      if (/ünlü|sesi|harf/i.test(tr)) continue;
-      all.push({ ku: m[1], tr });
-    }
-    const slice = all.slice(L.from, L.from + L.take);
-    for (const w of slice) {
-      html += `<div class="word" data-level="${L.lvl}"><span class="lvl">${L.lvl.toUpperCase()}</span><div class="ku">${escHtml(w.ku)}</div><div class="tr">${escHtml(w.tr)}</div></div>\n        `;
-    }
-  }
-  return html.trim() || '<p class="muted">Naverok di sepanê de ye.</p>';
-}
-
 function navHtml(activeSlug) {
-  const items = PAGES.filter(p => p.nav).map(p => {
+  return PAGES.filter(p => p.nav).map(p => {
     const href = p.slug === '' ? '/' : `/${p.slug}`;
     const active = p.slug === activeSlug ? ' aria-current="page"' : '';
     return `<li><a href="${href}"${active}>${p.nav}</a></li>`;
   }).join('\n        ');
-  return items;
 }
 
 // ---------- main ----------
 async function main() {
   log('clean dist');
-  // keep dist/app if it exists and we're NOT rebuilding it (fast iteration)
   if (WITH_APP) {
     await rmrf(DIST);
   } else {
-    // remove everything except dist/app
+    // remove everything except dist/app (fast iteration on the marketing/content site)
     if (existsSync(DIST)) {
       for (const e of await fs.readdir(DIST)) {
         if (e !== 'app') await rmrf(path.join(DIST, e));
@@ -165,7 +128,7 @@ async function main() {
   await write(path.join(DIST, 'assets', 'site', jsName), jsRaw);
   log('assets', cssName, jsName);
 
-  // 2) copy static site assets (images, og, etc.)
+  // 2) copy static site assets (images, og, favicon, etc.)
   const siteAssets = path.join(SRC, 'assets');
   if (existsSync(siteAssets)) {
     await copyDir(siteAssets, path.join(DIST, 'assets', 'site'));
@@ -178,14 +141,9 @@ async function main() {
   const footer = await read(path.join(SRC, 'partials', 'footer.html'));
   const head = await read(path.join(SRC, 'partials', 'head.html'));
 
-  // 4) build content pages
-  const wordsHtml = await buildWordSamples();
-  for (const page of PAGES) {
-    const raw = await read(path.join(SRC, 'pages', page.src));
-    const m = raw.match(/^<!--META([\s\S]*?)-->/);
-    const meta = m ? JSON.parse(m[1]) : {};
-    const body = raw.replace(/^<!--META[\s\S]*?-->\s*/, '');
-    const canonical = page.slug === '' ? `${SITE_URL}/` : `${SITE_URL}/${page.slug}`;
+  // Shared page renderer — used by static PAGES and by generate-content.mjs.
+  function renderPage({ slug, body, meta = {}, activeNav = null }) {
+    const canonical = slug === '' ? `${SITE_URL}/` : `${SITE_URL}/${slug}`;
     const ogImage = `${SITE_URL}/assets/site/${meta.og || 'og-default.png'}`;
     const headFilled = head
       .replaceAll('{{TITLE}}', meta.title || 'LÛTKE — Zimanê Kurdî')
@@ -198,19 +156,40 @@ async function main() {
       .replaceAll('{{JSONLD}}', meta.jsonld
         ? `<script type="application/ld+json">${JSON.stringify(meta.jsonld)}</script>`
         : '');
-    const html = layout
+    return layout
       .replace('<!--#head-->', headFilled)
-      .replace('<!--#header-->', header.replaceAll('{{NAV}}', navHtml(page.slug)))
-      .replace('<!--#content-->', body.replaceAll('{{WORDS}}', wordsHtml))
+      .replace('<!--#header-->', header.replaceAll('{{NAV}}', navHtml(activeNav ?? slug)))
+      .replace('<!--#content-->', body)
       .replace('<!--#footer-->', footer);
+  }
+
+  // 4) static content pages
+  const wordsHtml = await buildWordSamples();
+  let staticCount = 0;
+  for (const page of PAGES) {
+    if (page.navOnly) continue;
+    const raw = await read(path.join(SRC, 'pages', page.src));
+    const m = raw.match(/^<!--META([\s\S]*?)-->/);
+    const meta = m ? JSON.parse(m[1]) : {};
+    const body = raw.replace(/^<!--META[\s\S]*?-->\s*/, '').replaceAll('{{WORDS}}', wordsHtml);
+    const html = renderPage({ slug: page.slug, body, meta });
     const outPath = page.slug === ''
       ? path.join(DIST, 'index.html')
       : path.join(DIST, `${page.slug}.html`);
     await write(outPath, html);
+    staticCount++;
   }
-  log(`built ${PAGES.length} pages`);
+  log(`built ${staticCount} static pages`);
 
-  // 5) auth utility pages (standalone, self-contained — copied verbatim)
+  // 4b) data-driven content pages (peyv / wane / diyalog / naverok hub)
+  let contentUrls = [];
+  {
+    const { generateContentPages } = await import('./generate-content.mjs');
+    const res = await generateContentPages({ ROOT, DIST, SITE_URL, renderPage, escHtml, log });
+    contentUrls = res.urls;
+  }
+
+  // 5) auth utility pages (standalone, self-contained)
   for (const ap of AUTH_PAGES) {
     const raw = await read(path.join(SRC, ap.src));
     const filled = raw
@@ -228,28 +207,26 @@ async function main() {
 
   // 6) sitemap + robots
   const today = process.env.BUILD_DATE || '2026-05-31';
-  const urls = PAGES.filter(p => p.src !== 'daxistin.html' || true).map(p => {
+  const staticUrls = PAGES.filter(p => !p.navOnly).map(p => {
     const loc = p.slug === '' ? `${SITE_URL}/` : `${SITE_URL}/${p.slug}`;
     return `  <url><loc>${loc}</loc><lastmod>${today}</lastmod><priority>${p.prio}</priority></url>`;
-  }).join('\n');
+  });
+  const contentSiteUrls = contentUrls.map(u =>
+    `  <url><loc>${u.loc}</loc><lastmod>${today}</lastmod><priority>${u.prio}</priority></url>`);
   const sitemap = `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-${urls}
+${[...staticUrls, ...contentSiteUrls].join('\n')}
 </urlset>
 `;
   await write(path.join(DIST, 'sitemap.xml'), sitemap);
   await write(path.join(DIST, 'robots.txt'),
     `User-agent: *\nAllow: /\nDisallow: /app/\nSitemap: ${SITE_URL}/sitemap.xml\n`);
-  log('sitemap + robots');
+  log(`sitemap (${staticUrls.length + contentSiteUrls.length} url) + robots`);
 
-  // 7) _redirects (old app entry points -> /app/, SPA fallback)
+  // 7) _redirects + 8) _headers
   await write(path.join(DIST, '_redirects'), buildRedirects());
-  // 8) _headers
   await write(path.join(DIST, '_headers'), buildHeaders());
   log('_redirects + _headers');
-
-  // 9) favicon at root (from site assets if present)
-  // (handled by site assets copy)
 
   // 10) Flutter app -> dist/app
   if (WITH_APP) {
@@ -260,24 +237,42 @@ ${urls}
     log('reusing existing dist/app');
   }
 
-  // 11) report
   const files = await listFiles(DIST);
   log(`DONE. dist has ${files.length} files.`);
 }
 
+// Extract REAL sample words from the Dart content DBs for the marketing index page.
+async function buildWordSamples() {
+  const domain = path.join(ROOT, 'lib', 'features', 'lessons', 'domain');
+  const levels = [
+    { lvl: 'a1', file: 'a1_kelime_db.dart', from: 16, take: 9 },
+    { lvl: 'a2', file: 'a2_kelime_db.dart', from: 6, take: 9 },
+    { lvl: 'b1', file: 'b1_kelime_db.dart', from: 6, take: 6 },
+    { lvl: 'c1', file: 'c1_kelime_db.dart', from: 6, take: 6 },
+  ];
+  const re = /id:\s*['"][a-z0-9_]+['"]\s*,\s*ku:\s*['"]([^'"\\]{2,42})['"]\s*,\s*tr:\s*['"]([^'"\\]{1,52})['"]/g;
+  let html = '';
+  for (const L of levels) {
+    let txt = '';
+    try { txt = await read(path.join(domain, L.file)); } catch { continue; }
+    const all = [];
+    let m; re.lastIndex = 0;
+    while ((m = re.exec(txt))) {
+      const tr = m[2];
+      if (/ünlü|sesi|harf/i.test(tr)) continue;
+      all.push({ ku: m[1], tr });
+    }
+    for (const w of all.slice(L.from, L.from + L.take)) {
+      html += `<div class="word" data-level="${L.lvl}"><span class="lvl">${L.lvl.toUpperCase()}</span><div class="ku">${escHtml(w.ku)}</div><div class="tr">${escHtml(w.tr)}</div></div>\n        `;
+    }
+  }
+  return html.trim() || '<p class="muted">Naverok di sepanê de ye.</p>';
+}
+
 function buildRedirects() {
-  // NOTE: static files (auth/verify-email.html, reset-password.html, oauth-callback.html)
-  // are served BEFORE these rules by Cloudflare Pages, so no redirect needed for them.
-  // NOTE: 'vocabulary' is handled by a PHYSICAL redirect page (dist/vocabulary.html)
-  // because Pages 308s it to a trailing slash before _redirects runs.
-  // 'auth/login' + 'auth/register' are PHYSICAL pages too (the /auth/ folder holds a
-  // static file, so Pages serves assets there before consulting _redirects).
-  const appRoutes = [
-    'home', 'word-detail', 'progress-map', 'unit-hub', 'grammar', 'profile',
-  ];
-  const splatRoutes = [
-    'home', 'culture', 'onboarding', 'certificate', 'en', 'child', 'admin', 'review', 'legal',
-  ];
+  // vocabulary + auth/login + auth/register = physical redirect pages (static-first safe).
+  const appRoutes = ['home', 'word-detail', 'progress-map', 'unit-hub', 'grammar', 'profile'];
+  const splatRoutes = ['home', 'culture', 'onboarding', 'certificate', 'en', 'child', 'admin', 'review', 'legal'];
   const exactExtra = ['welcome', 'track-select', 'placement-test', 'listening-pilot', 'culture', 'legal', 'admin', 'review'];
   let r = `# LÛTKE — redirects
 # Eski uygulama giriş noktaları -> /app/ (yer imleri / PWA / eski e-posta linkleri korunur)
@@ -286,7 +281,6 @@ function buildRedirects() {
   for (const x of appRoutes) r += `/${x}  /app/${x}  301\n`;
   for (const x of exactExtra) r += `/${x}  /app/${x}  301\n`;
   for (const x of splatRoutes) r += `/${x}/*  /app/${x}/:splat  301\n`;
-  // app entry + SPA fallback
   r += `\n# Flutter app entry + SPA deep-link fallback\n`;
   r += `/app  /app/  301\n`;
   r += `/app/*  /app/index.html  200\n`;
@@ -299,7 +293,7 @@ function buildHeaders() {
 /assets/site/*
   Cache-Control: public, max-age=31536000, immutable
 
-# Marketing pages: revalidate
+# Marketing pages: revalidate + security headers
 /*
   X-Content-Type-Options: nosniff
   Referrer-Policy: strict-origin-when-cross-origin
@@ -316,7 +310,6 @@ function buildHeaders() {
   Cache-Control: no-cache
 /app/flutter.js
   Cache-Control: no-cache
-# Versioned engine + immutable-ish assets
 /app/canvaskit/*
   Cache-Control: public, max-age=2592000
 `;
@@ -326,24 +319,20 @@ async function copyAppBuild() {
   if (!existsSync(path.join(BUILD_WEB, 'index.html'))) {
     throw new Error('build/web/index.html not found — cannot copy Flutter app');
   }
-  log('copying Flutter build/web -> dist/app (this is large, ~1.3GB) ...');
+  log('copying Flutter build/web -> dist/app (large, ~1.3GB) ...');
   await rmrf(path.join(DIST, 'app'));
-  // robocopy is much faster than fs.cp for ~10k files on Windows
   try {
     execFileSync('robocopy', [BUILD_WEB, path.join(DIST, 'app'), '/E', '/NFL', '/NDL', '/NJH', '/NJS', '/NC', '/NS', '/MT:16'],
       { stdio: 'inherit' });
   } catch (e) {
-    // robocopy exit codes 0-7 are success; >=8 is error
-    if (e.status !== undefined && e.status >= 8) throw e;
+    if (e.status !== undefined && e.status >= 8) throw e; // robocopy 0-7 = success
   }
-  // base-href swap: / -> /app/  (runtime DOM value; no recompile needed)
   const idxPath = path.join(DIST, 'app', 'index.html');
   let idx = await read(idxPath);
   idx = idx.replace(/<base href="\/">/, '<base href="/app/">');
   await fs.writeFile(idxPath, idx);
   log('  base-href set to /app/');
 
-  // oauth-callback at ROOT too (redirect_uri = <origin>/oauth-callback is root-absolute)
   const oauthSrc = path.join(BUILD_WEB, 'oauth-callback.html');
   if (existsSync(oauthSrc)) {
     await fs.copyFile(oauthSrc, path.join(DIST, 'oauth-callback.html'));
