@@ -96,4 +96,44 @@
       });
     });
   }
+
+  // --- cand/gotinen-pesiyan: atasözü arama + harf filtresi ---
+  var ptable = document.getElementById('ptable');
+  if (ptable) {
+    var prows = Array.prototype.slice.call(ptable.querySelectorAll('tbody tr'));
+    var psearch = document.getElementById('psearch');
+    var pcount = document.getElementById('pcount');
+    var pempty = document.getElementById('pempty');
+    var pchips = document.querySelectorAll('[data-pfilter]');
+    var pActiveLetter = 'all';
+    var pQuery = '';
+
+    function pnorm(s) {
+      return (s || '').toLowerCase()
+        .replace(/ê/g, 'e').replace(/î/g, 'i').replace(/û/g, 'u')
+        .replace(/ç/g, 'c').replace(/ş/g, 's');
+    }
+    function papply() {
+      var q = pnorm(pQuery.trim());
+      var shown = 0;
+      for (var i = 0; i < prows.length; i++) {
+        var r = prows[i];
+        var lOk = pActiveLetter === 'all' || r.getAttribute('data-pletter') === pActiveLetter;
+        var qOk = !q || pnorm(r.getAttribute('data-hay')).indexOf(q) !== -1;
+        var vis = lOk && qOk;
+        r.classList.toggle('hide', !vis);
+        if (vis) shown++;
+      }
+      if (pcount) pcount.textContent = shown.toLocaleString('tr-TR') + ' gotin';
+      if (pempty) pempty.classList.toggle('hide', shown !== 0);
+    }
+    if (psearch) psearch.addEventListener('input', function () { pQuery = psearch.value; papply(); });
+    pchips.forEach(function (chip) {
+      chip.addEventListener('click', function () {
+        pActiveLetter = chip.getAttribute('data-pfilter');
+        pchips.forEach(function (c) { c.classList.toggle('active', c === chip); });
+        papply();
+      });
+    });
+  }
 })();
