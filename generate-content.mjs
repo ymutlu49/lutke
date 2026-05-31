@@ -150,7 +150,7 @@ export async function generateContentPages(ctx) {
     const sections = [
       { href: '/peyv/a1', emoji: '📖', t: 'Peyv', d: `${nf(m.wordTotal)} peyv, A1–C2 — bi mînak û cins.`,
         sub: LEVELS.filter(l => (data.words[l] || []).length).map(l => `<a href="/peyv/${l}">${l.toUpperCase()}</a>`).join('') },
-      { href: '/wane/a1', emoji: '🎓', t: 'Ders û etkinlik', d: `${m.lessonTotal} ders, ${m.exerciseTotal} egzersîz.`,
+      { href: '/wane/a1', emoji: '🎓', t: 'Ders û Çalakî', d: `${m.lessonTotal} ders, ${m.exerciseTotal} egzersîz.`,
         sub: LEVELS.filter(l => (data.lessons[l] || []).length).map(l => `<a href="/wane/${l}">${l.toUpperCase()}</a>`).join('') },
       { href: '/reziman', emoji: '📐', t: 'Rêziman', d: `${m.grammarTotal} mijarên gramerê — bi qaîde û mînak.`, sub: '' },
       { href: '/cand', emoji: '🪕', t: 'Çand', d: `Atasozî, helbest, stran, destan û kesayet — ${nf(candCount)}+ tişt.`, sub: '' },
@@ -269,7 +269,7 @@ export async function generateContentPages(ctx) {
     const body = `${crumb([{ label: 'Naverok', href: '/naverok' }, { label: 'Ders', href: '/wane/a1' }, { label: lvl.toUpperCase() }])}
       <span class="eyebrow">Ders · ${lvl.toUpperCase()} ${LEVEL_NAME[lvl]}</span>
       <h1>Dersên ${lvl.toUpperCase()}</h1>
-      <p class="lead">${lessons.length} ders — her yek bi egzersîz û etkinlikên xwe.</p>
+      <p class="lead">${lessons.length} ders — her yek bi egzersîz û çalakiyên xwe.</p>
       <div class="segbar" role="tablist" aria-label="Ast">${levelNav}</div>
       ${listHtml}
       ${appCta('Van dersan bi tevahî û interaktîf di sepanê de bike.', '/app/', 'Sepanê veke')}`;
@@ -316,7 +316,7 @@ export async function generateContentPages(ctx) {
         <h1>${escHtml(l.kurmanjTitle)}</h1>
         <p class="lead">${escHtml(l.turkishTitle)} · ${l.exercises.length} egzersîz · ${l.estimatedMinutes} xulek · ${l.totalXP} XP</p>
         ${culHtml}
-        <h2 class="unit-head">Egzersîz û etkinlik</h2>
+        <h2 class="unit-head">Egzersîz û Çalakî</h2>
         ${ex || '<p class="muted">Egzersîzên vê dersê di sepanê de têne hilberandin.</p>'}
         ${wordsHtml}
         ${appCta('Vê dersê bi deng, pratîk û paşvexdistinê di sepanê de bike.', '/app/', 'Dersê di sepanê de bike')}`;
