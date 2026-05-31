@@ -479,37 +479,82 @@ export async function generateContentPages(ctx) {
       og: 'og-default.png', _nav: 'naverok',
     }, '0.8');
 
-    // ── Atasözleri (arama + harf filtre) ──
+    // ── Atasözleri: hub (harf kartları + arama) + harf başına sayfa ──
+    // Her harf sayfası o harfin TÜM atasözlerini görünür kart + per-atasözü
+    // CreativeWork JSON-LD (#anchor) ile sunar → her atasözü AI'ca tek tek
+    // alıntılanabilir, ama sayfa dolu olduğu için thin-content yok.
     if (proverbs.length) {
       const letters = [...new Set(proverbs.map(p => p.letter))];
-      const chips = ['<button class="chip active" data-pfilter="all">Hemû</button>']
-        .concat(letters.map(L => `<button class="chip" data-pfilter="${escHtml(L)}">${escHtml(L)}</button>`)).join(' ');
+      const byLetter = new Map();
+      for (const p of proverbs) {
+        if (!byLetter.has(p.letter)) byLetter.set(p.letter, []);
+        byLetter.get(p.letter).push(p);
+      }
+      const letterSlug = L => slugify(L) || L.toLowerCase().charCodeAt(0).toString(36);
+
+      // Hub: harf kartları + (client-side) arama tüm atasözlerinde
       let rows = '';
       for (const p of proverbs) {
         const hay = `${p.ku} ${p.tr || ''}`.toLowerCase();
-        rows += `<tr data-pletter="${escHtml(p.letter)}" data-hay="${escHtml(hay)}">
+        rows += `<tr data-pletter="${escHtml(p.letter)}" data-hay="${escHtml(hay)}" class="hide">
           <td class="pv-ku">${escHtml(p.ku)}</td>
           <td class="pv-tr">${p.tr ? escHtml(p.tr) : '<span class="muted">—</span>'}</td>
         </tr>`;
       }
-      const body = `${crumb([{ label: 'Naverok', href: '/naverok' }, { label: 'Çand', href: '/cand' }, { label: 'Gotinên Pêşiyan' }])}
+      const letterCards = letters.map(L =>
+        `<a class="hub-card" href="/cand/gotinen-pesiyan/${letterSlug(L)}"><span class="lv">${escHtml(L)}</span><div class="ct">${byLetter.get(L).length} gotin</div></a>`).join('');
+      const hubBody = `${crumb([{ label: 'Naverok', href: '/naverok' }, { label: 'Çand', href: '/cand' }, { label: 'Gotinên Pêşiyan' }])}
         <span class="eyebrow">Çand · Gotinên Pêşiyan</span>
         <h1>Gotinên Pêşiyan</h1>
-        <p class="lead">${nf(proverbs.length)} atasozîyên Kurmancî — berhevoka Prof. Dr. Yılmaz Mutlu. Bigere an li gor tîpê parzûn bike.</p>
+        <p class="lead">${nf(proverbs.length)} atasozîyên Kurmancî — berhevoka Prof. Dr. Yılmaz Mutlu. Li gor tîpê hilbijêre an li jêr bigere.</p>
         <div class="toolbar">
           <label class="search-box">${SEARCH_ICO}<input type="search" id="psearch" placeholder="Li gotinê bigere…" aria-label="Li gotinê bigere"></label>
           <span class="count-pill" id="pcount">${nf(proverbs.length)} gotin</span>
         </div>
-        <div class="chips" role="group" aria-label="Tîp">${chips}</div>
-        <table class="word-table" id="ptable"><thead><tr><th>Kurmancî</th><th>Tirkî</th></tr></thead><tbody>${rows}</tbody></table>
+        <div class="hub-grid" id="pletters">${letterCards}</div>
+        <table class="word-table hide" id="ptable"><thead><tr><th>Kurmancî</th><th>Tirkî</th></tr></thead><tbody>${rows}</tbody></table>
         <p class="w-empty hide" id="pempty">Tu gotin nehat dîtin.</p>
         ${appCta('Gotinên pêşiyan bi deng û çîrokan di sepanê de.', '/app/culture', 'Di sepanê de')}`;
-      await emit('cand/gotinen-pesiyan', body, {
+      await emit('cand/gotinen-pesiyan', hubBody, {
         title: `Gotinên Pêşiyan | ${nf(proverbs.length)} atasozîyên Kurmancî — LÛTKE`,
-        desc: `${nf(proverbs.length)} atasozîyên (gotinên pêşiyan) Kurmancî bi wergera tirkî. Berhevoka Prof. Dr. Yılmaz Mutlu.`,
+        desc: `${nf(proverbs.length)} atasozîyên (gotinên pêşiyan) Kurmancî bi wergera tirkî, li gor tîpan. Berhevoka Prof. Dr. Yılmaz Mutlu.`,
         og: 'og-default.png', _nav: 'naverok',
-        jsonld: { '@context': 'https://schema.org', '@type': 'CollectionPage', name: 'Gotinên Pêşiyan', inLanguage: 'ku' },
+        jsonld: { '@type': 'CollectionPage', name: 'Gotinên Pêşiyan', inLanguage: 'ku', isPartOf: { '@id': 'https://lutke.app/#website' } },
       }, '0.7');
+
+      // Harf sayfaları
+      for (const L of letters) {
+        const list = byLetter.get(L);
+        let cards = '', items = [];
+        list.forEach((p, i) => {
+          const aid = `g-${letterSlug(L)}-${p.num}`;
+          cards += `<div class="pv-card" id="${aid}">
+            <div class="pv-ku">${escHtml(p.ku)}</div>
+            ${p.tr ? `<div class="pv-tr">${escHtml(p.tr)}</div>` : ''}
+          </div>`;
+          items.push({
+            '@type': 'CreativeWork',
+            '@id': `${SITE_URL}/cand/gotinen-pesiyan/${letterSlug(L)}#${aid}`,
+            additionalType: 'https://schema.org/Quotation',
+            text: p.ku, inLanguage: 'ku',
+            ...(p.tr ? { abstract: p.tr } : {}),
+            genre: 'gotina pêşiyan',
+            isPartOf: { '@id': 'https://lutke.app/#org' },
+          });
+        });
+        const body = `${crumb([{ label: 'Naverok', href: '/naverok' }, { label: 'Çand', href: '/cand' }, { label: 'Gotinên Pêşiyan', href: '/cand/gotinen-pesiyan' }, { label: `Tîpa ${L}` }])}
+          <span class="eyebrow">Gotinên Pêşiyan · Tîpa ${escHtml(L)}</span>
+          <h1>Gotinên Pêşiyan bi tîpa “${escHtml(L)}”</h1>
+          <p class="lead">${list.length} atasozîyên Kurmancî yên ku bi tîpa ${escHtml(L)} dest pê dikin, bi wergera tirkî.</p>
+          <div class="pv-list">${cards}</div>
+          ${appCta('Hemû gotinên pêşiyan û bêtir naverok di sepanê de.', '/app/culture', 'Di sepanê de')}`;
+        await emit(`cand/gotinen-pesiyan/${letterSlug(L)}`, body, {
+          title: `Gotinên Pêşiyan — Tîpa ${L} (${list.length}) | Atasozîyên Kurmancî — LÛTKE`,
+          desc: `${list.length} atasozîyên (gotinên pêşiyan) Kurmancî yên bi tîpa ${L}, bi wergera tirkî. Berhevoka Prof. Dr. Yılmaz Mutlu.`,
+          og: 'og-default.png', _nav: 'naverok',
+          jsonld: { '@type': 'CollectionPage', name: `Gotinên Pêşiyan — Tîpa ${L}`, inLanguage: 'ku', hasPart: items },
+        }, '0.6');
+      }
     }
 
     // ── Gotinên Mezinan (motivasyon) ──

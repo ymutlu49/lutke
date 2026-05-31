@@ -120,43 +120,41 @@
     });
   }
 
-  // --- cand/gotinen-pesiyan: atasözü arama + harf filtresi ---
+  // --- cand/gotinen-pesiyan hub: arama yazınca harf-kartları gizlenir,
+  //     tüm atasözleri tablosu görünür ve filtrelenir; boşken kartlara döner ---
   var ptable = document.getElementById('ptable');
-  if (ptable) {
+  var psearch = document.getElementById('psearch');
+  if (ptable && psearch) {
     var prows = Array.prototype.slice.call(ptable.querySelectorAll('tbody tr'));
-    var psearch = document.getElementById('psearch');
     var pcount = document.getElementById('pcount');
     var pempty = document.getElementById('pempty');
-    var pchips = document.querySelectorAll('[data-pfilter]');
-    var pActiveLetter = 'all';
-    var pQuery = '';
+    var pletters = document.getElementById('pletters');
+    var ptotalTxt = pcount ? pcount.textContent : '';
 
     function pnorm(s) {
       return (s || '').toLowerCase()
         .replace(/ê/g, 'e').replace(/î/g, 'i').replace(/û/g, 'u')
         .replace(/ç/g, 'c').replace(/ş/g, 's');
     }
-    function papply() {
-      var q = pnorm(pQuery.trim());
+    psearch.addEventListener('input', function () {
+      var q = pnorm(psearch.value.trim());
+      if (!q) { // boş arama → harf kartlarına dön
+        if (pletters) pletters.classList.remove('hide');
+        ptable.classList.add('hide');
+        if (pempty) pempty.classList.add('hide');
+        if (pcount) pcount.textContent = ptotalTxt;
+        return;
+      }
+      if (pletters) pletters.classList.add('hide');
+      ptable.classList.remove('hide');
       var shown = 0;
       for (var i = 0; i < prows.length; i++) {
-        var r = prows[i];
-        var lOk = pActiveLetter === 'all' || r.getAttribute('data-pletter') === pActiveLetter;
-        var qOk = !q || pnorm(r.getAttribute('data-hay')).indexOf(q) !== -1;
-        var vis = lOk && qOk;
-        r.classList.toggle('hide', !vis);
+        var vis = pnorm(prows[i].getAttribute('data-hay')).indexOf(q) !== -1;
+        prows[i].classList.toggle('hide', !vis);
         if (vis) shown++;
       }
       if (pcount) pcount.textContent = shown.toLocaleString('tr-TR') + ' gotin';
       if (pempty) pempty.classList.toggle('hide', shown !== 0);
-    }
-    if (psearch) psearch.addEventListener('input', function () { pQuery = psearch.value; papply(); });
-    pchips.forEach(function (chip) {
-      chip.addEventListener('click', function () {
-        pActiveLetter = chip.getAttribute('data-pfilter');
-        pchips.forEach(function (c) { c.classList.toggle('active', c === chip); });
-        papply();
-      });
     });
   }
 })();
