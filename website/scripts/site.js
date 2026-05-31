@@ -27,6 +27,29 @@
     });
   }
 
+  // --- Naverok açılır menü (mobil: tıkla-aç; masaüstü: CSS hover) ---
+  var drops = document.querySelectorAll('.has-dropdown');
+  drops.forEach(function (dd) {
+    var btn = dd.querySelector('.nav-drop-toggle');
+    if (!btn) return;
+    btn.addEventListener('click', function (e) {
+      // masaüstünde de tıklamayla aç/kapat çalışsın (klavye/dokunmatik dostu)
+      e.stopPropagation();
+      var isOpen = dd.classList.toggle('open');
+      btn.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+      // diğer açık dropdown'ları kapat
+      drops.forEach(function (o) {
+        if (o !== dd) { o.classList.remove('open'); var b = o.querySelector('.nav-drop-toggle'); if (b) b.setAttribute('aria-expanded', 'false'); }
+      });
+    });
+  });
+  // dışarı tıkla → kapat
+  document.addEventListener('click', function (e) {
+    if (!e.target.closest('.has-dropdown')) {
+      drops.forEach(function (o) { o.classList.remove('open'); var b = o.querySelector('.nav-drop-toggle'); if (b) b.setAttribute('aria-expanded', 'false'); });
+    }
+  });
+
   // --- header subtle shadow on scroll ---
   var header = document.getElementById('site-header');
   if (header) {

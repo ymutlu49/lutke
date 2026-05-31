@@ -104,7 +104,10 @@ export async function generateContentPages(ctx) {
 
   async function writeFile(p, c) { await fs.mkdir(path.dirname(p), { recursive: true }); await fs.writeFile(p, c); }
   async function emit(slugPath, html, meta, prio) {
-    const full = renderPage({ slug: slugPath, body: html, meta, activeNav: meta._nav || 'naverok' });
+    // İçerik detay sayfaları kendi section'larını içermez → .wrap konteyneriyle sar
+    // (kenar boşluğu). Tam section yapısı olan sayfalar (naverok hub) _raw:true geçer.
+    const body = meta._raw ? html : `<section class="content-page"><div class="wrap">${html}</div></section>`;
+    const full = renderPage({ slug: slugPath, body, meta, activeNav: meta._nav || 'naverok' });
     await writeFile(path.join(DIST, slugPath + '.html'), full);
     if (meta._noindex !== true) urls.push({ loc: `${SITE_URL}/${slugPath}`, prio: prio || '0.5' });
     pageCount++;
@@ -182,7 +185,7 @@ export async function generateContentPages(ctx) {
     await emit('naverok', h, {
       title: 'Naverok | Hemû peyv, ders, rêziman û çand — LÛTKE',
       desc: `LÛTKE naveroka tam: ${nf(m.wordTotal)} peyv (A1–C2), ${m.lessonTotal} ders, ${m.grammarTotal} mijarên rêzimanê û naveroka çandî (atasozî, helbest, stran). Di moda gerokê de bigere.`,
-      og: 'og-default.png',
+      og: 'og-default.png', _raw: true,
     }, '0.9');
   }
 

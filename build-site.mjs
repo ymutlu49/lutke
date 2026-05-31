@@ -96,8 +96,26 @@ function redirectPageHtml(to) {
 </head><body>Tê beralîkirin… <a href="${to}">LÛTKE</a></body></html>`;
 }
 
+// Naverok açılır menüsü — içerik bölümleri alt başlık olarak
+const NAVEROK_SUB = [
+  { href: '/naverok', label: 'Hemû Naverok' },
+  { href: '/peyv/a1', label: 'Peyv (Ferheng)' },
+  { href: '/wane/a1', label: 'Ders û Etkinlik' },
+  { href: '/reziman', label: 'Rêziman' },
+  { href: '/cand', label: 'Çand' },
+];
+const CHEV = '<svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>';
+
 function navHtml(activeSlug) {
   return PAGES.filter(p => p.nav).map(p => {
+    if (p.slug === 'naverok') {
+      const active = activeSlug === 'naverok' ? ' active' : '';
+      const items = NAVEROK_SUB.map(s => `<li><a href="${s.href}">${s.label}</a></li>`).join('');
+      return `<li class="has-dropdown${active}">
+          <button type="button" class="nav-drop-toggle" aria-expanded="false" aria-haspopup="true">${p.nav}${CHEV}</button>
+          <ul class="dropdown">${items}</ul>
+        </li>`;
+    }
     const href = p.slug === '' ? '/' : `/${p.slug}`;
     const active = p.slug === activeSlug ? ' aria-current="page"' : '';
     return `<li><a href="${href}"${active}>${p.nav}</a></li>`;
