@@ -20,12 +20,26 @@ lutke.app/oauth-callback   → build/web'den kopyalandı (redirect_uri = origin 
 - **Dart değişikliği YOK**: `_resolveInitialLocation()` ham `Uri.base.path` kullandığından app `/app/`'e taşınınca token deep-link'leri router-rebuild'de kırılırdı. Çözüm: token akışları (verify-email/reset-password) **uygulamadan ayrılıp kökte statik sayfalara** taşındı; bunlar mevcut `/api/*`'ı çağırır.
 - **functions/ DEĞİŞMEDİ**: e-posta linkleri zaten `${PUBLIC_BASE_URL}/auth/verify-email` ve `/reset-password`'a gidiyor → kökteki statik sayfalar bunları karşılar.
 
+## İçerik gezgini (veri-güdümlü — tüm peyv/ders/diyalog web'de)
+
+Uygulamanın TÜM içeriği SEO-dostu statik sayfalar olarak da yayında:
+- `/naverok` — içerik hub'ı (seviye kartları)
+- `/peyv/<lvl>` — kelime listesi (client-side arama + kategori filtre); a1..c2
+- `/wane/<lvl>` — ders listesi (birime gruplu)
+- `/wane/<lessonId>` — ders detayı + egzersizler/etkinlikler (105 ders)
+- `/diyalog/<id>` — heritage diyalog sahneleri (8 diyalog)
+
+**Akış:** `tool/export_content.dart` (`dart run`) Dart içeriğini `website/data/content.json`'a aktarır (3604 peyv, 105 ders, 590 egzersiz, 8 diyalog — app'in `kA1TamListe/kA2TamListe/kB1All/kB2All/kC1All/kC2All` aggregator'larıyla aynı kaynak, ID dedup). `generate-content.mjs` bundan 126 sayfa üretir. `content.json` git'te **tracked** (Dart yoksa bile build çalışır).
+
+İçerik DB'leri (`lib/.../\*_kelime_db.dart`, `\*_lesson_definitions.dart`) değişince: `dart run tool/export_content.dart` → `node build-site.mjs` → deploy. `deploy_site.ps1` export'u otomatik yapar.
+
 ## Build
 
 ```
-node build-site.mjs            # sadece tanıtım sitesi (hızlı; mevcut dist/app korunur)
-node build-site.mjs --with-app # build/web → dist/app kopyası dahil (ağır, ~1.3GB local; upload dedup'lı)
-node tools/site/gen-og.mjs     # OG görselleri (headless Chrome, 1200×630, izole --user-data-dir)
+dart run tool/export_content.dart  # Dart içerik -> website/data/content.json (DB değişince)
+node build-site.mjs                # tanıtım + içerik sayfaları (hızlı; dist/app korunur)
+node build-site.mjs --with-app     # + build/web → dist/app (ağır, ~1.3GB local; upload dedup'lı)
+node tools/site/gen-og.mjs         # OG görselleri (headless Chrome, 1200×630, izole --user-data-dir)
 ```
 
 ## Deploy

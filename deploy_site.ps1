@@ -48,6 +48,14 @@ if ($RebuildApp) {
   if ($LASTEXITCODE -ne 0) { throw "flutter build failed" }
 }
 
+# ─── İçerik JSON'unu Dart'tan dışa aktar (peyv/ders/diyalog) ─────
+# website/data/content.json git'te tracked; içerik DB'leri değiştiyse tazele.
+$flutterBin2 = "C:\Users\yilma\development\flutter\bin"
+if (-not ($env:Path -like "*$flutterBin2*")) { $env:Path = "$flutterBin2;$env:Path" }
+Write-Host "== export_content.dart (content.json tazeleniyor) ==" -ForegroundColor Cyan
+dart run tool/export_content.dart
+if ($LASTEXITCODE -ne 0) { Write-Host "[UYARI] export_content basarisiz — mevcut content.json kullanilacak" -ForegroundColor Yellow }
+
 # ─── Site + app derle (dist) ─────────────────────────────────────
 Write-Host "== build-site.mjs --with-app (dist olusturuluyor) ==" -ForegroundColor Cyan
 node build-site.mjs --with-app
