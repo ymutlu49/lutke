@@ -396,6 +396,10 @@ function buildLlmsTxt() {
 
 ## Sepan (App)
 - [Sepana LÛTKE](${SITE_URL}/app/): sepana interaktîf (Flutter web).
+
+## Projeyên xwişk (Related projects — same creator, Prof. Dr. Yılmaz Mutlu)
+- [Gav bi Gav](https://gavbigav.com/): platforma fêrbûna xwendin û nivîsandina Kurdî.
+- [Jimaro](https://jimaro.app/): proje ya perwerdehiyê.
 `;
 }
 
