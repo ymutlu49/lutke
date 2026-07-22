@@ -167,7 +167,10 @@ class TtsService {
           TtsAssetManifest.lookup(key);
       if (assetPath != null) {
         _state = TtsState.playing;
-        return 'asset:$assetPath';
+        if (kIsWeb) return 'asset:$assetPath';
+        // Mobil paket boyutu: assets/audio/words APK/AAB'ye GÖMÜLMEZ
+        // (1.3GB). Aynı dosyalar canlıdan çalınır (dist/app kopyası).
+        return 'https://lutke.app/app/assets/$assetPath';
       }
     }
 

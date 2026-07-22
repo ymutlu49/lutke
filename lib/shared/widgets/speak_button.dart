@@ -5,6 +5,7 @@ import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../core/constants/app_colors.dart';
+import '../../core/services/audio_service.dart';
 import '../../core/services/connectivity_service.dart';
 import '../../core/services/en_tts_helper.dart';
 import '../../core/services/sound_service.dart';
@@ -309,7 +310,19 @@ class _SpeakButtonState extends ConsumerState<SpeakButton> {
           _showColdHint = false;
         });
         SoundService.playClick();
-        _playWebAudio(audioUrl);
+        if (kIsWeb) {
+          _playWebAudio(audioUrl);
+        } else {
+          // Mobil: just_audio üzerinden çal (asset: öneki mobilde gelmez —
+          // tts_service manifest hit'lerini uzak URL'ye çevirir).
+          final audio = ref.read(audioServiceProvider.notifier);
+          final rate = _slowMode ? 0.75 : 1.0;
+          if (audioUrl.startsWith('asset:')) {
+            audio.playAsset(audioUrl.substring('asset:'.length), speed: rate);
+          } else {
+            audio.playUrl(audioUrl, speed: rate);
+          }
+        }
       } else {
         // Ses üretilemedi — kullanıcıya görsel + metin bilgi
         setState(() {

@@ -107,6 +107,9 @@ const PAGES = [
   { src: 'derbare.html',        slug: 'derbare',        nav: 'Derbarê',       prio: '0.6' },
   { src: 'tekili.html',         slug: 'tekili',         nav: 'Têkilî',        prio: '0.5' },
   { src: 'daxistin.html',       slug: 'daxistin',       nav: null,            prio: '0.9' },
+  // Yasal sayfalar (Play Store zorunlulukları): nav'da yok, sitemap'te düşük öncelik.
+  { src: 'gizlilik.html',       slug: 'gizlilik',       nav: null,            prio: '0.3' },
+  { src: 'hesap-silme.html',    slug: 'hesap-silme',    nav: null,            prio: '0.3' },
 ];
 
 // auth utility pages (functional, not in nav/sitemap)

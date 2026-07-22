@@ -10,15 +10,14 @@
          tekrar açılır + Data Safety formuna eklenir. -->
     <!-- <uses-permission android:name="android.permission.RECORD_AUDIO"/> -->
 
-    <!-- Bildirimler — Haftalık ritim hatırlatıcısı (İlke §4.2) -->
-    <uses-permission android:name="android.permission.POST_NOTIFICATIONS"/>
-    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED"/>
-    <uses-permission android:name="android.permission.VIBRATE"/>
-    <uses-permission android:name="android.permission.SCHEDULE_EXACT_ALARM"/>
+    <!-- Bildirim/alarm izinleri kaldırıldı (Temmuz 2026): flutter_local_notifications
+         pubspec'ten çıkarılmıştı, hiçbir bildirim servisi çalışmıyor. SCHEDULE_EXACT_ALARM
+         Play politikasında yalnızca alarm/takvim uygulamalarına tanınıyor — gereksiz ret riski.
+         Ön plan hizmeti (FGS) izinleri de kaldırıldı: uygulama arka planda medya çalmıyor,
+         hiçbir <service> tanımı yok; FOREGROUND_SERVICE_MEDIA_PLAYBACK beyanı Play Console'da
+         video kanıtı istiyordu. Bildirim özelliği eklenirse izinler + Console beyanlarıyla
+         birlikte geri gelmeli. -->
 
-    <!-- Foreground service — ses oynatma -->
-    <uses-permission android:name="android.permission.FOREGROUND_SERVICE"/>
-    <uses-permission android:name="android.permission.FOREGROUND_SERVICE_MEDIA_PLAYBACK"/>
 
     <application
         android:label="LÛTKE"
