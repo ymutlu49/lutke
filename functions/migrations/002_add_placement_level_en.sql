@@ -1,0 +1,17 @@
+-- 002 — placement_level_en kolonu (İngilizce track için ayrı test-once sinyali)
+--
+-- Seviye testi TRACK-bazlı bir kez gösterilir: Kurmancî (placement_level)
+-- ve İngilizce (placement_level_en) ayrı sinyallerdir. Tek kolonlu eski
+-- modelde KU testi yapan kullanıcı EN tarafında da "yerleşmiş" sayılıyordu
+-- (veya tersi) — bu kolon o karışıklığı bitirir.
+--
+-- NULL  = kullanıcı İngilizce düzey testini henüz yapmadı (test gösterilir)
+-- 'a1'..'c2' = test yapıldı/atlandı (her girişte tekrar gösterilmez)
+--
+-- Mevcut (production) DB'ye uygulamak için TEK SEFER:
+--   wrangler d1 execute lutke_users --file=functions/migrations/002_add_placement_level_en.sql --remote
+--
+-- NOT: D1, ADD COLUMN'da IF NOT EXISTS desteklemez (2026). İkinci kez
+-- çalıştırılırsa "duplicate column" hatası verir — bu zararsızdır, kolon zaten vardır.
+-- ADDITIVE migration: mevcut satırlar NULL alır; placement_level'a dokunulmaz.
+ALTER TABLE users ADD COLUMN placement_level_en TEXT;

@@ -24,7 +24,7 @@ database_id = "e28b9e26-478c-44e5-bea7-b4b1ce326d53"
 EMAIL_FROM = "no-reply@lutke.app"
 EMAIL_FROM_NAME = "LÛTKE"
 PUBLIC_BASE_URL = "https://lutke.app"
-OWNER_EMAILS = "y.mutlu@alparslan.edu.tr,aslanogluosman@gmail.com"
+OWNER_EMAILS = "y.mutlu@alparslan.edu.tr"
 # Google Sign-In: client_id public bilgi olduğu için burada saklanır.
 # Boş bırakılırsa Google butonu UI'da görünmez (graceful fallback).
 # Setup: Google Cloud Console → APIs & Services → Credentials →

@@ -1,0 +1,11 @@
+-- 001 — placement_level kolonu (hesap-bazlı düzey-testi-once)
+--
+-- NULL  = kullanıcı düzey belirleme testini henüz yapmadı (test gösterilir)
+-- 'a1'..'c2' = test yapıldı/atlandı (her girişte tekrar gösterilmez)
+--
+-- Mevcut (production) DB'ye uygulamak için TEK SEFER:
+--   wrangler d1 execute lutke_users --file=functions/migrations/001_add_placement_level.sql --remote
+--
+-- NOT: D1, ADD COLUMN'da IF NOT EXISTS desteklemez (2026). İkinci kez
+-- çalıştırılırsa "duplicate column" hatası verir — bu zararsızdır, kolon zaten vardır.
+ALTER TABLE users ADD COLUMN placement_level TEXT;
