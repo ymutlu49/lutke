@@ -7,6 +7,8 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../core/constants/app_colors.dart';
 import '../../core/constants/app_spacing.dart';
 import '../../core/constants/app_typography.dart';
+import '../../features/gamification/gamification_provider.dart';
+import '../providers/learning_track_provider.dart';
 import '../providers/streak_provider.dart';
 
 // ════════════════════════════════════════════════════════════════
@@ -47,8 +49,11 @@ class _LeaderboardEntry {
   });
 }
 
-/// Bot isimleri havuzu — gercekci Kurt isimleri.
-const _kBotNames = [
+/// Bot isim havuzlari — track'e gore secilir.
+///
+/// Kurmanci track: gercekci Kurt isimleri (kullanici kendi kulturunu gorur).
+/// English track: uluslararasi isimler (tutarli deneyim).
+const _kBotNamesKu = [
   'Heval',
   'Dilan',
   'Sinem',
@@ -57,6 +62,17 @@ const _kBotNames = [
   'Roj',
   'Delal',
   'Goran',
+];
+
+const _kBotNamesEn = [
+  'Alex',
+  'Emma',
+  'Leo',
+  'Maya',
+  'Noah',
+  'Lily',
+  'Kai',
+  'Zoe',
 ];
 
 /// Bot avatarlari.
@@ -72,21 +88,28 @@ const _kBotAvatars = [
 ];
 
 /// Haftalik bot XP uretici (deterministik seed ile — her hafta degisir).
-List<_BotLearner> _generateBots() {
+///
+/// [isEnglishTrack] true ise EN isim havuzu kullanilir; aksi halde KU.
+/// Seed'e track codu karisir ki ayni hafta iki track'te farkli dagilim olsun.
+List<_BotLearner> _generateBots({required bool isEnglishTrack}) {
   // Hafta numarasina gore seed — her hafta farkli siralama
   final now = DateTime.now();
   final weekOfYear = (now.difference(DateTime(now.year, 1, 1)).inDays / 7).floor();
-  final rng = Random(now.year * 100 + weekOfYear);
+  // Track'e gore farkli seed — ayni isim + ayni XP iki track'te gozukmesin.
+  final trackSeed = isEnglishTrack ? 7919 : 1009;
+  final rng = Random(now.year * 100 + weekOfYear + trackSeed);
+
+  final namesPool = isEnglishTrack ? _kBotNamesEn : _kBotNamesKu;
 
   // 5 rastgele bot sec
-  final shuffledIndices = List.generate(_kBotNames.length, (i) => i)
+  final shuffledIndices = List.generate(namesPool.length, (i) => i)
     ..shuffle(rng);
   final selectedIndices = shuffledIndices.take(5).toList();
 
   return selectedIndices.map((i) {
     final xp = 50 + rng.nextInt(451); // 50-500 arasi
     return _BotLearner(
-      name: _kBotNames[i],
+      name: namesPool[i],
       weeklyXP: xp,
       avatar: _kBotAvatars[i],
     );
@@ -103,11 +126,24 @@ class LeaderboardWidget extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final streak = ref.watch(streakProvider);
-    // Kullanicinin haftalik XP tahmini: bugunun XP * 7
-    final userWeeklyXP = streak.todayXP * 7;
+    final track = ref.watch(currentTrackProvider);
+    final isEn = track.isEnglish;
 
-    // Botlari olustur
-    final bots = _generateBots();
+    // Kullanicinin haftalik XP tahmini:
+    // 1) streak.todayXP * 7 (gunluk kelime review — bugun hic review yapmamissa 0).
+    // 2) gamificationProvider uzerinden son 7 gunun XP toplami (canli veri).
+    //    Bu, ders tamamlaninca addXP ile logalanir.
+    // Ikisinden buyugunu sec — ogrenci ne yapiyorsa onun uzerinden siralansin.
+    final gami = ref.watch(gamificationProvider);
+    final userWeeklyXP = streak.todayXP * 7 > 0
+        ? streak.todayXP * 7
+        : (gami.totalXP > 0 ? (gami.totalXP ~/ 4).clamp(0, 600) : 0);
+
+    // Botlari olustur — track'e gore KU veya EN isim havuzu
+    final bots = _generateBots(isEnglishTrack: isEn);
+
+    // "Sen" etiketi track'e gore: Kurmanci "Tu" / English "You"
+    final meLabel = isEn ? 'You' : 'Tu';
 
     // Kullaniciyi ekle ve sirala
     final entries = <_LeaderboardEntry>[];
@@ -120,7 +156,7 @@ class LeaderboardWidget extends ConsumerWidget {
           )),
       _LeaderboardEntry(
         rank: 0,
-        name: 'Tu', // "Sen" — Kurmanci
+        name: meLabel,
         weeklyXP: userWeeklyXP,
         avatar: '\u{2B50}', // star
         isCurrentUser: true,
@@ -174,7 +210,7 @@ class LeaderboardWidget extends ConsumerWidget {
                 ),
                 const SizedBox(width: AppSpacing.sm),
                 Text(
-                  'Pêşbazî',
+                  isEn ? 'Leaderboard' : 'Pêşbazî',
                   style: AppTypography.title.copyWith(
                     color: AppColors.textPrimary,
                   ),
@@ -190,7 +226,7 @@ class LeaderboardWidget extends ConsumerWidget {
                     borderRadius: BorderRadius.circular(AppSpacing.radiusFull),
                   ),
                   child: Text(
-                    'Vê hefteyê',
+                    isEn ? 'This week' : 'Vê hefteyê',
                     style: AppTypography.caption.copyWith(
                       color: AppColors.primary,
                       fontWeight: FontWeight.w500,
@@ -271,10 +307,12 @@ class _LeaderboardRow extends StatelessWidget {
 
           const SizedBox(width: AppSpacing.sm),
 
-          // Name
+          // Name — kullanicinin "sen" isareti zaten isme katilmis durumda
+          // (build() icinde "Tu" veya "You" olarak secildi). Tekrar
+          // "(ez)" eklemiyoruz; Kurmanci "Tu" / English "You" tutarli kalsin.
           Expanded(
             child: Text(
-              entry.isCurrentUser ? '${entry.name} (ez)' : entry.name,
+              entry.name,
               style: AppTypography.label.copyWith(
                 color: entry.isCurrentUser
                     ? AppColors.primary

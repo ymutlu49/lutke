@@ -62,12 +62,13 @@ class WeakWordRecord {
       };
 
   factory WeakWordRecord.fromJson(Map<String, dynamic> json) => WeakWordRecord(
-        wordId: json['wordId'] as String,
+        wordId: (json['wordId'] as String?) ?? '',
         reviewCount: json['reviewCount'] as int? ?? 0,
         consecutiveCorrect: json['consecutiveCorrect'] as int? ?? 0,
-        addedAt: DateTime.parse(json['addedAt'] as String),
+        addedAt: DateTime.tryParse((json['addedAt'] as String?) ?? '') ??
+            DateTime.now(),
         lastReviewedAt: json['lastReviewedAt'] != null
-            ? DateTime.parse(json['lastReviewedAt'] as String)
+            ? DateTime.tryParse(json['lastReviewedAt'] as String)
             : null,
       );
 }

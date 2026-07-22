@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:math' as math;
 
 import 'package:flutter/material.dart';
@@ -24,15 +25,13 @@ import '../../en_learning/domain/en_to_quiz_adapter.dart' show getEnWordsForLeve
 import '../../../shared/providers/learning_module_provider.dart';
 // daily_word_widget import removed — widget no longer on home screen
 import '../../../shared/providers/language_mode_provider.dart';
-import '../../../shared/providers/review_provider.dart';
 import '../../../shared/providers/progression_provider.dart';
 import '../../gamification/gamification_provider.dart';
 import '../../gamification/gamification_widgets.dart';
 import '../../cultural_content/widgets/daily_proverb_card.dart';
 import '../../../core/services/user_mode_preferences.dart';
 import '../../../shared/widgets/level_picker_sheet.dart';
-import '../../subscription/data/subscription_service.dart';
-import '../../subscription/domain/subscription_status.dart';
+import '../../auth/email_verification_screen.dart' show EmailVerificationBanner;
 
 // ════════════════════════════════════════════════════════════════
 // ANA SAYFA — İLERLEME HARİTASI
@@ -120,6 +119,16 @@ class HomeScreen extends ConsumerWidget {
                   const SizedBox(height: AppSpacing.md),
 
                   // ════════════════════════════════════════════════
+                  // 1.5) CEJNA ZIMANÊ KURDÎ — 15ê Gulanê 2026
+                  // Geçici duyuru banner'ı:
+                  //   • Bayram kutlaması (vurgulu)
+                  //   • Beta/eksiklik notu (şeffaflık)
+                  // 60 saniye sonra otomatik kaybolur; kalıcı kayıt tutmaz.
+                  // GEÇİCİ: 16 Mayıs 2026 sonrası bu blok + widget kaldırılacak.
+                  // ════════════════════════════════════════════════
+                  const _HomeCejnaBanner(),
+
+                  // ════════════════════════════════════════════════
                   // 2) COMPACT STREAK BAR — Academic modda gizli
                   // ════════════════════════════════════════════════
                   if (!hideGamificationFor(userMode))
@@ -130,11 +139,11 @@ class HomeScreen extends ConsumerWidget {
                     ),
 
                   // ════════════════════════════════════════════════
-                  // 2.1) ABONELİK BANNER — yeni kullanıcı için 7 günlük
-                  // demo daveti, deneme/premium aktifken durum bildirimi.
-                  // Premium aktifse tamamen gizlenir (ek gürültü olmaz).
+                  // 2.05) E-NAV PIŞTRASTKIRINA BANNERÊ — Cloudflare auth.
+                  // Kullanıcı email'ini henüz doğrulamadıysa narın bir
+                  // hatırlatıcı çıkar; doğrulandıysa otomatik gizlenir.
                   // ════════════════════════════════════════════════
-                  const _SubscriptionBanner(),
+                  const EmailVerificationBanner(),
 
                   // ════════════════════════════════════════════════
                   // 2.5) GOTINA ÎRO — Sadece Kurmancî track'ta
@@ -205,152 +214,6 @@ class HomeScreen extends ConsumerWidget {
           // CEFR seviye geçişi → sertifika toast'u (görünmez listener).
           const _CefrCertificateCtaListener(),
         ],
-      ),
-    );
-  }
-}
-
-// ════════════════════════════════════════════════════════════════
-// SUBSCRIPTION BANNER — kullanıcı dostu, ısrarcı değil.
-// Yeni kullanıcı (none): "7 gün ücretsiz dene" daveti
-// Deneme aktif: kalan gün sayısı + premium'a yükselt CTA
-// Deneme/premium bitti: yenile CTA
-// Premium aktif: gizli (ek banner gerekmez)
-// ════════════════════════════════════════════════════════════════
-
-class _SubscriptionBanner extends ConsumerWidget {
-  const _SubscriptionBanner();
-
-  @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    final sub = ref.watch(subscriptionProvider);
-    final isPromoActive = SubscriptionConstants.isPromoPeriodActive;
-
-    // Premium aktif → banner göstermeye gerek yok.
-    // Promo aktifken aşağıdaki ayrı banner gösterilir, premium dahi olsa kullanıcı
-    // "tanıtım dönemi" mesajından haberdar olmalı.
-    if (!isPromoActive && sub.tier == SubscriptionTier.premium) {
-      return const SizedBox.shrink();
-    }
-
-    // Banner içeriği duruma göre.
-    final (gradient, icon, title, subtitle, ctaLabel) = isPromoActive
-        ? (
-            // Promo banner — sıcak gold/amber tonları, festival hissi.
-            [const Color(0xFFFFA726), const Color(0xFFFB8C00)],
-            Icons.celebration_outlined,
-            'Demê pêşkêşiyê — bedelî!',
-            'Heya ${SubscriptionConstants.promoEndsLabelKu} '
-                'her tişt vekirî · '
-                '${SubscriptionConstants.promoDaysRemaining} roj mayî',
-            'Bibîne',
-          )
-        : switch (sub.tier) {
-            SubscriptionTier.trial => (
-              [AppColors.primary, AppColors.primary.withOpacity(0.7)],
-              Icons.timer_outlined,
-              'Ceribandina te aktîv e',
-              sub.trialDaysRemaining != null
-                  ? '${sub.trialDaysRemaining} roj mayî — paşê ${SubscriptionConstants.annualPriceTry} ₺/sal'
-                  : 'Bê sînor 7 roj.',
-              'Aboneya salane',
-            ),
-            SubscriptionTier.trialExpired => (
-              [Colors.orange, Colors.orange.shade700],
-              Icons.lock_outline_rounded,
-              'Ceribandina 7 rojan qediya',
-              'Berdewamiya tev: ${SubscriptionConstants.annualPriceTry} ₺/sal',
-              'Abone bibe',
-            ),
-            SubscriptionTier.premiumExpired => (
-              [Colors.orange, Colors.orange.shade700],
-              Icons.refresh_rounded,
-              'Aboneya te qediya',
-              'Bi ${SubscriptionConstants.annualPriceTry} ₺/sal nûjen bike',
-              'Nûjen bike',
-            ),
-            _ => (
-              [AppColors.primary, AppColors.primary.withOpacity(0.7)],
-              Icons.workspace_premium_rounded,
-              'LÛTKE Premium\'ê biceribîne',
-              '7 roj bê pere — kart pêwîst nine',
-              'Bê pere dest pê bike',
-            ),
-          };
-
-    return Padding(
-      padding: const EdgeInsets.only(top: AppSpacing.sm),
-      child: Material(
-        color: Colors.transparent,
-        child: InkWell(
-          borderRadius: BorderRadius.circular(AppSpacing.radiusLg),
-          onTap: () => context.push(AppRoutes.paywall),
-          child: Container(
-            padding: const EdgeInsets.all(AppSpacing.md),
-            decoration: BoxDecoration(
-              gradient: LinearGradient(
-                colors: gradient,
-                begin: Alignment.topLeft,
-                end: Alignment.bottomRight,
-              ),
-              borderRadius: BorderRadius.circular(AppSpacing.radiusLg),
-            ),
-            child: Row(
-              children: [
-                Container(
-                  width: 44,
-                  height: 44,
-                  decoration: BoxDecoration(
-                    color: Colors.white.withOpacity(0.2),
-                    borderRadius: BorderRadius.circular(AppSpacing.radiusMd),
-                  ),
-                  child: Icon(icon, color: Colors.white, size: 24),
-                ),
-                const SizedBox(width: AppSpacing.sm),
-                Expanded(
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        title,
-                        style: AppTypography.labelLarge.copyWith(
-                          color: Colors.white,
-                          fontWeight: FontWeight.w800,
-                        ),
-                      ),
-                      const SizedBox(height: 2),
-                      Text(
-                        subtitle,
-                        style: AppTypography.caption.copyWith(
-                          color: Colors.white.withOpacity(0.9),
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-                const SizedBox(width: AppSpacing.sm),
-                Container(
-                  padding: const EdgeInsets.symmetric(
-                    horizontal: AppSpacing.sm,
-                    vertical: 6,
-                  ),
-                  decoration: BoxDecoration(
-                    color: Colors.white,
-                    borderRadius: BorderRadius.circular(AppSpacing.radiusFull),
-                  ),
-                  child: Text(
-                    ctaLabel,
-                    style: AppTypography.label.copyWith(
-                      color: AppColors.primary,
-                      fontWeight: FontWeight.w800,
-                      fontSize: 12,
-                    ),
-                  ),
-                ),
-              ],
-            ),
-          ),
-        ),
       ),
     );
   }
@@ -868,7 +731,6 @@ String _enNameForCategory(String kat) => switch (kat) {
   'kimlik' => 'Identity',
   'ekoloji' => 'Ecology',
   'ziman' => 'Language',
-  'ergatif_b2' => 'Ergative',
   'cotkarî' => 'Farming',
   _ => kat,
 };
@@ -1084,10 +946,7 @@ class _SkillTreePath extends StatelessWidget {
         // Dekoratif biome arka planı (duraklar kadar uzun)
         Positioned.fill(
           child: IgnorePointer(
-            child: _TrailBackdrop(
-              biome: biome,
-              stopCount: units.length,
-            ),
+            child: _TrailBackdrop(biome: biome),
           ),
         ),
 
@@ -1237,34 +1096,16 @@ class _TrailBiome {
       };
 }
 
-/// Zengin patika arka planı — çok katmanlı sahne:
-/// 1) Gradient gökyüzü → zemin (gök mavisi-yeşil-toprak)
-/// 2) Uzak plan: soluk dağ silueti + bulutlar (parallax uzaklık)
-/// 3) Orta plan: ağaçlar, hayvanlar, çalılar (scene grupları)
-/// 4) Ön plan: çiçekler, otlar, taşlar (duraklara yakın)
-/// 5) Landmark: her ~4 durakta bir büyük emoji (milestone)
-///
-/// Deterministik yerleştirme (hash tabanlı): her build aynı görünüm.
+/// Patika arka planı — gradient gökyüzü → zemin (biome renkleri).
 class _TrailBackdrop extends StatelessWidget {
   final _TrailBiome biome;
-  final int stopCount;
 
-  const _TrailBackdrop({
-    required this.biome,
-    required this.stopCount,
-  });
+  const _TrailBackdrop({required this.biome});
 
   @override
   Widget build(BuildContext context) {
     return LayoutBuilder(
       builder: (context, constraints) {
-        final height = constraints.maxHeight.isFinite
-            ? constraints.maxHeight
-            : (stopCount * 135.0) + 120;
-        final width = constraints.maxWidth.isFinite
-            ? constraints.maxWidth
-            : MediaQuery.of(context).size.width;
-
         return SizedBox.expand(
           child: DecoratedBox(
             decoration: BoxDecoration(
@@ -1282,264 +1123,6 @@ class _TrailBackdrop extends StatelessWidget {
       },
     );
   }
-
-  /// Doğal sahne yerleşimi — her durak aralığında tutarlı bir "sahne":
-  /// sol-ön (büyük), sağ-orta (orta boy), sağ-arka (küçük soluk), vb.
-  /// Deterministik ama patern hissettirmeyecek şekilde varyans.
-  List<Widget> _buildNaturalScenes({
-    required double width,
-    required double height,
-    required _TrailBiome biome,
-    required int stopCount,
-  }) {
-    final widgets = <Widget>[];
-    // Her durak başına bir sahne bandı
-    final bands = stopCount + 1;
-    final bandHeight = height / bands;
-
-    for (var i = 0; i < bands; i++) {
-      final bandTop = i * bandHeight;
-      // Bu bandın hash'i — varyans için
-      final h = ((i + 1) * 2654435761) & 0x7FFFFFFF;
-      final variant = h % 4; // 0,1,2,3 — yerleşim türü
-
-      // Her band'de 3-5 öğe: sol, sağ, (orta-sol, orta-sağ opsiyonel)
-      // Bantlar arası değişken → yerleşim doğal görünsün.
-
-      switch (variant) {
-        case 0:
-          // Sol kenarda büyük ön-plan, sağ-üstte arka plan
-          widgets.add(_scenery(
-            emoji: biome.foregroundEmojis[h % biome.foregroundEmojis.length],
-            left: width * 0.04,
-            top: bandTop + bandHeight * 0.35,
-            size: 40,
-            opacity: 0.75,
-            rotation: -0.05,
-          ));
-          widgets.add(_scenery(
-            emoji: biome.backgroundEmojis[
-                (h ~/ 10) % biome.backgroundEmojis.length],
-            left: width * 0.88,
-            top: bandTop + bandHeight * 0.15,
-            size: 22,
-            opacity: 0.40,
-          ));
-          widgets.add(_scenery(
-            emoji: biome.foregroundEmojis[
-                (h ~/ 100) % biome.foregroundEmojis.length],
-            left: width * 0.12,
-            top: bandTop + bandHeight * 0.75,
-            size: 28,
-            opacity: 0.60,
-            rotation: 0.08,
-          ));
-          break;
-        case 1:
-          // Sağ kenarda büyük ön-plan, sol-orta midground
-          widgets.add(_scenery(
-            emoji: biome.foregroundEmojis[h % biome.foregroundEmojis.length],
-            left: width * 0.84,
-            top: bandTop + bandHeight * 0.4,
-            size: 42,
-            opacity: 0.75,
-            rotation: 0.05,
-          ));
-          widgets.add(_scenery(
-            emoji: biome.midgroundEmojis[
-                (h ~/ 10) % biome.midgroundEmojis.length],
-            left: width * 0.06,
-            top: bandTop + bandHeight * 0.55,
-            size: 32,
-            opacity: 0.65,
-          ));
-          widgets.add(_scenery(
-            emoji: biome.backgroundEmojis[
-                (h ~/ 100) % biome.backgroundEmojis.length],
-            left: width * 0.12,
-            top: bandTop + bandHeight * 0.18,
-            size: 20,
-            opacity: 0.35,
-          ));
-          break;
-        case 2:
-          // İki kenarda da orta boy — simetrik, doğal
-          widgets.add(_scenery(
-            emoji: biome.midgroundEmojis[h % biome.midgroundEmojis.length],
-            left: width * 0.05,
-            top: bandTop + bandHeight * 0.5,
-            size: 34,
-            opacity: 0.70,
-            rotation: -0.03,
-          ));
-          widgets.add(_scenery(
-            emoji: biome.foregroundEmojis[
-                (h ~/ 10) % biome.foregroundEmojis.length],
-            left: width * 0.86,
-            top: bandTop + bandHeight * 0.6,
-            size: 34,
-            opacity: 0.65,
-            rotation: 0.04,
-          ));
-          widgets.add(_scenery(
-            emoji: biome.foregroundEmojis[
-                (h ~/ 100) % biome.foregroundEmojis.length],
-            left: width * 0.15,
-            top: bandTop + bandHeight * 0.8,
-            size: 26,
-            opacity: 0.55,
-          ));
-          break;
-        default:
-          // Sol-üst küçük küme (3 öğe cluster), sağda büyük tek
-          widgets.add(_scenery(
-            emoji: biome.foregroundEmojis[h % biome.foregroundEmojis.length],
-            left: width * 0.06,
-            top: bandTop + bandHeight * 0.25,
-            size: 28,
-            opacity: 0.65,
-            rotation: -0.06,
-          ));
-          widgets.add(_scenery(
-            emoji: biome.midgroundEmojis[
-                (h ~/ 10) % biome.midgroundEmojis.length],
-            left: width * 0.14,
-            top: bandTop + bandHeight * 0.45,
-            size: 24,
-            opacity: 0.55,
-          ));
-          widgets.add(_scenery(
-            emoji: biome.foregroundEmojis[
-                (h ~/ 100) % biome.foregroundEmojis.length],
-            left: width * 0.85,
-            top: bandTop + bandHeight * 0.55,
-            size: 38,
-            opacity: 0.70,
-            rotation: 0.02,
-          ));
-          break;
-      }
-    }
-    return widgets;
-  }
-
-  Widget _scenery({
-    required String emoji,
-    required double left,
-    required double top,
-    required double size,
-    required double opacity,
-    double rotation = 0.0,
-  }) {
-    return Positioned(
-      left: left,
-      top: top,
-      child: Transform.rotate(
-        angle: rotation,
-        child: Opacity(
-          opacity: opacity,
-          child: Text(
-            emoji,
-            style: TextStyle(fontSize: size),
-          ),
-        ),
-      ),
-    );
-  }
-
-  /// Milestone emojileri — patika boyunca düzenli aralıklarla büyük dağ keçileri.
-  List<Widget> _buildMilestones({
-    required double width,
-    required double height,
-    required String emoji,
-    required int stopCount,
-  }) {
-    if (stopCount < 3) return [];
-    final widgets = <Widget>[];
-    // Her 5 durakta bir milestone
-    final count = (stopCount / 5).clamp(1, 4).round();
-    for (var i = 0; i < count; i++) {
-      final isLeft = i.isEven;
-      final yRatio = (i + 1) / (count + 1);
-      widgets.add(
-        Positioned(
-          left: isLeft ? 12 : null,
-          right: isLeft ? null : 12,
-          top: (yRatio * height - 40).clamp(0.0, height - 80),
-          child: Opacity(
-            opacity: 0.18,
-            child: Text(
-              emoji,
-              style: const TextStyle(fontSize: 80),
-            ),
-          ),
-        ),
-      );
-    }
-    return widgets;
-  }
-}
-
-/// Uzak dağ silueti — CustomPaint ile yumuşak zikzak path.
-/// Parallax arka plan hissi.
-class _DistantMountainsPainter extends CustomPainter {
-  final Color color;
-  _DistantMountainsPainter({required this.color});
-
-  @override
-  void paint(Canvas canvas, Size size) {
-    final paint = Paint()
-      ..color = color
-      ..style = PaintingStyle.fill;
-
-    // İlk dağ sırası (daha soluk, uzak)
-    final far = Path();
-    final baseY1 = size.height * 0.18;
-    far.moveTo(0, baseY1);
-    final peaks = (size.width / 90).round().clamp(4, 12);
-    for (var i = 0; i <= peaks; i++) {
-      final x = size.width * i / peaks;
-      final peakHeight = 30.0 + ((i * 17) % 25);
-      final y = baseY1 - peakHeight;
-      if (i.isEven) {
-        far.lineTo(x, y);
-      } else {
-        final midX = x - (size.width / peaks / 2);
-        final midY = baseY1 - peakHeight * 0.6;
-        far.quadraticBezierTo(midX, midY, x, y);
-      }
-    }
-    far.lineTo(size.width, baseY1);
-    far.lineTo(size.width, 0);
-    far.lineTo(0, 0);
-    far.close();
-    canvas.drawPath(far, paint);
-
-    // İkinci dağ sırası — daha yakın, daha koyu
-    final near = Path();
-    final baseY2 = size.height * 0.32;
-    final nearPaint = Paint()
-      ..color = color.withOpacity(color.opacity * 1.4).withOpacity(
-          (color.opacity * 1.4).clamp(0.0, 1.0))
-      ..style = PaintingStyle.fill;
-    near.moveTo(0, baseY2);
-    final peaks2 = (size.width / 120).round().clamp(3, 8);
-    for (var i = 0; i <= peaks2; i++) {
-      final x = size.width * i / peaks2;
-      final peakHeight = 45.0 + ((i * 23) % 35);
-      final y = baseY2 - peakHeight;
-      near.lineTo(x, y);
-    }
-    near.lineTo(size.width, baseY2);
-    near.lineTo(size.width, 0);
-    near.lineTo(0, 0);
-    near.close();
-    canvas.drawPath(near, nearPaint);
-  }
-
-  @override
-  bool shouldRepaint(covariant _DistantMountainsPainter oldDelegate) =>
-      oldDelegate.color != color;
 }
 
 // ════════════════════════════════════════════════════════════════
@@ -1882,6 +1465,195 @@ class _PathPainter extends CustomPainter {
   @override
   bool shouldRepaint(covariant _PathPainter old) =>
       old.fromX != fromX || old.toX != toX || old.isCompleted != isCompleted;
+}
+
+// ════════════════════════════════════════════════════════════════
+// CEJNA ZIMANÊ KURDÎ — Home banner (15ê Gulanê 2026)
+//
+// Geçici duyuru kartı. Her home ziyaretinde 60 saniye gösterilir,
+// sonra otomatik kaybolur. Kalıcı kayıt tutulmaz. Manuel X kapatma
+// da bu session içindir.
+//
+// İçerik iki katman:
+//   1. Bayram kutlaması (altın renkli, vurgulu)
+//   2. Beta/eksiklik notu (Kurmancî + Türkçe — şeffaflık)
+//
+// GEÇİCİ: 16 Mayıs 2026 sonrası bu widget + home_screen'deki
+// çağrı (_HomeCejnaBanner()) kaldırılacak.
+// ════════════════════════════════════════════════════════════════
+
+class _HomeCejnaBanner extends ConsumerStatefulWidget {
+  const _HomeCejnaBanner();
+
+  @override
+  ConsumerState<_HomeCejnaBanner> createState() => _HomeCejnaBannerState();
+}
+
+class _HomeCejnaBannerState extends ConsumerState<_HomeCejnaBanner> {
+  static const _autoHideAfter = Duration(seconds: 60);
+  bool _hidden = false;
+  Timer? _autoHideTimer;
+
+  static const _gold = Color(0xFFFFD700);
+  static const _goldText = Color(0xFFB8860B);
+
+  @override
+  void initState() {
+    super.initState();
+    _autoHideTimer = Timer(_autoHideAfter, () {
+      if (!mounted) return;
+      setState(() => _hidden = true);
+    });
+  }
+
+  @override
+  void dispose() {
+    _autoHideTimer?.cancel();
+    super.dispose();
+  }
+
+  void _dismiss() {
+    _autoHideTimer?.cancel();
+    setState(() => _hidden = true);
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    if (_hidden) return const SizedBox.shrink();
+
+    return Padding(
+      padding: const EdgeInsets.only(bottom: AppSpacing.md),
+      child: Container(
+        padding: const EdgeInsets.fromLTRB(16, 14, 14, 14),
+        decoration: BoxDecoration(
+          gradient: LinearGradient(
+            begin: Alignment.topLeft,
+            end: Alignment.bottomRight,
+            colors: [
+              _gold.withOpacity(0.18),
+              const Color(0xFFFFA500).withOpacity(0.08),
+              AppColors.primary.withOpacity(0.04),
+            ],
+          ),
+          border: Border.all(
+            color: _gold.withOpacity(0.5),
+            width: 1.3,
+          ),
+          borderRadius: BorderRadius.circular(16),
+          boxShadow: [
+            BoxShadow(
+              color: _gold.withOpacity(0.10),
+              blurRadius: 12,
+              offset: const Offset(0, 4),
+            ),
+          ],
+        ),
+        child: Stack(
+          children: [
+            // İçerik — kapatma X'ine yer bırak
+            Padding(
+              padding: const EdgeInsets.only(right: 24),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  // ── Bayram header ─────────────────────────────
+                  Row(
+                    children: [
+                      const Text('🎉', style: TextStyle(fontSize: 18)),
+                      const SizedBox(width: 8),
+                      Text(
+                        '15Ê GULANÊ 2026',
+                        style: TextStyle(
+                          fontSize: 10.5,
+                          fontWeight: FontWeight.w800,
+                          letterSpacing: 1.8,
+                          color: _goldText,
+                        ),
+                      ),
+                    ],
+                  ),
+                  const SizedBox(height: 6),
+                  Text(
+                    'Cejna Zimanê Kurdî Pîroz Be!',
+                    style: AppTypography.headingSmall.copyWith(
+                      color: AppColors.textPrimary,
+                      fontWeight: FontWeight.w900,
+                      fontSize: 17,
+                      height: 1.2,
+                    ),
+                  ),
+                  const SizedBox(height: 4),
+                  Text(
+                    '— Bê ziman, mirov bê kok e —',
+                    style: AppTypography.caption.copyWith(
+                      color: AppColors.textSecondary,
+                      fontStyle: FontStyle.italic,
+                    ),
+                  ),
+
+                  // ── Ayırıcı ───────────────────────────────────
+                  Padding(
+                    padding: const EdgeInsets.symmetric(vertical: 10),
+                    child: Container(
+                      height: 1,
+                      color: AppColors.borderLight,
+                    ),
+                  ),
+
+                  // ── Şeffaflık notu — Kurmancî ─────────────────
+                  Text(
+                    'Sepan hîn nû ye. Em dizanin ku di hin beşan de '
+                    'kêmasiyên biçûk hene û em ê hêdî hêdî hemûyan '
+                    'sererast bikin. Spas ji bo bîhnfirehiya we!',
+                    style: AppTypography.caption.copyWith(
+                      color: AppColors.textSecondary,
+                      height: 1.55,
+                    ),
+                  ),
+                  const SizedBox(height: 6),
+                  // ── Türkçe altyazı ───────────────────────────
+                  Text(
+                    'Uygulama henüz yeni. Bazı bölümlerdeki küçük '
+                    'eksikliklerin farkındayız; zamanla tüm gerekli '
+                    'iyileştirmeleri yapacağız. Anlayışınız için teşekkürler!',
+                    style: AppTypography.caption.copyWith(
+                      color: AppColors.textTertiary,
+                      height: 1.5,
+                      fontStyle: FontStyle.italic,
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            // ── Kapatma butonu — sağ üstte ─────────────────────
+            Positioned(
+              top: -4,
+              right: -4,
+              child: Material(
+                color: Colors.transparent,
+                child: InkWell(
+                  onTap: _dismiss,
+                  borderRadius: BorderRadius.circular(20),
+                  child: Padding(
+                    padding: const EdgeInsets.all(6),
+                    child: Tooltip(
+                      message: 'Bigire',
+                      child: Icon(
+                        Icons.close_rounded,
+                        size: 18,
+                        color: AppColors.textTertiary,
+                        semanticLabel: 'Banner\'ı kapat',
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+            ),
+          ],
+        ),
+      ),
+    ).animate().fadeIn(duration: 500.ms).slideY(begin: 0.05);
+  }
 }
 
 // (kaldırıldı: _LutkeBottomNav, _NavItem, _StartQuizButton)

@@ -1,7 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../../../core/constants/child_theme.dart';
+import '../../../../core/services/audio_service.dart';
+import '../../../../core/services/tts_service.dart';
+import '../../../../core/services/tts_source_preferences.dart';
 import '../../../../core/utils/fsrs_algorithm.dart';
 import '../../../lessons/domain/entities/exercise.dart';
 import '../../../exercises/presentation/exercise_dispatcher.dart';
@@ -13,7 +17,7 @@ import '../../../exercises/presentation/exercise_dispatcher.dart';
 // Sürükle-bırak veya dokunma ile eşleştirme.
 // ════════════════════════════════════════════════════════════════
 
-class PictureMatchWidget extends StatefulWidget {
+class PictureMatchWidget extends ConsumerStatefulWidget {
   final PictureMatchExercise exercise;
   final OnRatingCallback onRating;
 
@@ -24,10 +28,31 @@ class PictureMatchWidget extends StatefulWidget {
   });
 
   @override
-  State<PictureMatchWidget> createState() => _PictureMatchWidgetState();
+  ConsumerState<PictureMatchWidget> createState() =>
+      _PictureMatchWidgetState();
 }
 
-class _PictureMatchWidgetState extends State<PictureMatchWidget> {
+class _PictureMatchWidgetState extends ConsumerState<PictureMatchWidget> {
+  /// Kurmancî TTS — HF amedcj/kmr_tts. Türkçe/İngilizce fallback YOK.
+  Future<void> _speakKurmanci(String text) async {
+    if (text.trim().isEmpty) return;
+    try {
+      final tts = ref.read(ttsServiceProvider);
+      // Kullanıcı TTS kaynak tercihini senkronize et (default assetFirst).
+      tts.source = ref.read(ttsSourceProvider);
+      final url = await tts.synthesize(text);
+      if (url == null || !mounted) return;
+      final audio = ref.read(audioServiceProvider.notifier);
+      if (url.startsWith('asset:')) {
+        await audio.playAsset(url.substring('asset:'.length));
+      } else {
+        await audio.playUrl(url);
+      }
+    } catch (_) {
+      // Sessiz geç — yanlış telaffuz yerine susmak tercih edilir
+    }
+  }
+
   // Seçilen emoji
   String? _selectedEmoji;
   // Eşleşmiş çiftler: emoji → word
@@ -45,14 +70,10 @@ class _PictureMatchWidgetState extends State<PictureMatchWidget> {
       padding: const EdgeInsets.all(20),
       child: Column(
         children: [
-          // Başlık
+          // Başlık — Kurmancî-only (alt yazı kaldırıldı: dil sızıntısı önlemi)
           Text(
             'Wêne û peyv li hev bîne!',
             style: ChildTypography.title.copyWith(color: ChildColors.primary),
-          ),
-          Text(
-            'Resim ve kelimeyi eşleştir!',
-            style: ChildTypography.caption,
           ),
           const SizedBox(height: 24),
 
@@ -164,7 +185,7 @@ class _PictureMatchWidgetState extends State<PictureMatchWidget> {
                 onPressed: () => widget.onRating(Rating.good),
                 icon: const Text('⭐', style: TextStyle(fontSize: 22)),
                 label: Text(
-                  'Aferin! Dûv re',
+                  'Pîroz be! Dûvre',
                   style: ChildTypography.labelLarge.copyWith(
                     color: ChildColors.textOnPrimary,
                   ),
@@ -184,6 +205,12 @@ class _PictureMatchWidgetState extends State<PictureMatchWidget> {
       _selectedEmoji = emoji;
       _showError = false;
     });
+    // Emojinin karşılığı olan Kurmancî kelimeyi sesli oku (çocuk öğrenir).
+    final pair = _pairs.firstWhere(
+      (p) => p.emoji == emoji,
+      orElse: () => _pairs.first,
+    );
+    _speakKurmanci(pair.word);
   }
 
   void _tryMatch(String word) {
@@ -191,12 +218,13 @@ class _PictureMatchWidgetState extends State<PictureMatchWidget> {
     final correctPair = _pairs.firstWhere((p) => p.emoji == emoji);
 
     if (correctPair.word == word) {
-      // Doğru eşleşme!
+      // Doğru eşleşme — Kurmancî kelimeyi kutlama olarak sesli söyle
       setState(() {
         _matched[emoji] = word;
         _selectedEmoji = null;
         _showError = false;
       });
+      _speakKurmanci(word);
     } else {
       // Yanlış
       setState(() {

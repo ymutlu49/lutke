@@ -177,13 +177,13 @@ class ChildLessonCompleteScreen extends StatelessWidget {
 
               const SizedBox(height: 12),
 
+              // "Waneya din" — sonraki ders seçimi için Unit Hub'a yönlendirir
+              // (otomatik sequential navigation çocuk modunda doğru değil —
+              // çocuğun kendi seçimini yapması pedagojik olarak önemli).
               TextButton(
-                onPressed: () {
-                  // TODO: Sonraki derse geç
-                  context.go(AppRoutes.childHome);
-                },
+                onPressed: () => context.go(AppRoutes.childUnitHub),
                 child: Text(
-                  'Waneya din',
+                  'Waneya din hilbijêre',
                   style: ChildTypography.label.copyWith(
                     color: ChildColors.primary,
                   ),

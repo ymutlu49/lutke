@@ -9,25 +9,41 @@ import '../../../core/router/app_router.dart';
 import '../../../core/constants/app_colors.dart';
 import '../../../core/constants/app_spacing.dart';
 import '../../../core/constants/app_typography.dart';
+import '../../../shared/providers/language_mode_provider.dart';
+import '../../../shared/providers/learning_module_provider.dart';
+import '../../../shared/services/skill_progress_service.dart';
+import '../../en_learning/presentation/en_coming_soon_screen.dart';
 import '../../lessons/domain/a1_kelime_db.dart';
 import '../../lessons/domain/a2_kelime_db.dart';import '../../lessons/domain/b1_kelime_db.dart';import '../../lessons/domain/b2_kelime_db.dart';import '../../lessons/domain/c1_kelime_db.dart';import '../../lessons/domain/c2_kelime_db.dart';
+import '../../../core/services/sound_service.dart';
+import '../../gamification/gamification_provider.dart';
+import '../../../shared/widgets/persistent_xp_badge.dart';
+import '../../../shared/widgets/xp_float_animation.dart';
+import '../../../shared/widgets/streak_milestone_toast.dart';
 
 // ════════════════════════════════════════════════════════════════
 // SENTENCE BUILDER — Duolingo-Style Cümle Oluşturma
 // Kullanıcı karışık sıradaki kelimeleri doğru sırayla dizer.
 // Heritage cümleler (her alanı) A1 kelime veritabanından çekilir.
+//
+// Akış: Cümlelerin Türkçe çevirisi veride olmadığı için hedef cümle
+// soru başında bir "çalışma kartında" gösterilir, sonra gizlenir;
+// kullanıcı cümleyi hafızasından kurar. Ekranda yalnızca kaynak
+// kelimenin TÜRKÇE anlamı ipucu olarak kalır (cevap sızıntısı yok).
 // ════════════════════════════════════════════════════════════════
 
 /// Tek bir egzersiz sorusu: orijinal cümle + karışık tokenlar
 class _SentenceQuestion {
   final String original;
   final List<String> tokens;
-  final String sourceWord; // hangi kelimeden geldi (Kurmancî)
+  final String sourceWord;   // hangi kelimeden geldi (Kurmancî)
+  final String sourceWordTr; // kaynak kelimenin Türkçe karşılığı (anlam ipucu)
 
   _SentenceQuestion({
     required this.original,
     required this.tokens,
     required this.sourceWord,
+    required this.sourceWordTr,
   });
 }
 
@@ -53,7 +69,13 @@ class _SentenceBuilderScreenState extends ConsumerState<SentenceBuilderScreen>
   int _correctCount = 0;
   int _xpEarned = 0;
   bool _sessionComplete = false;
-  bool _hintUsed = false;
+
+  // ── Yardım / deneme durumu (soru başına) ────────────────────
+  bool _studyPhase = true;      // soru başında cümle gösterilir, sonra gizlenir
+  int _hintCount = 0;           // kademeli ipucu kullanım sayısı (her biri -3 XP)
+  bool _peekUsed = false;       // gizlenen cümleye yeniden bakıldı mı (-3 XP)
+  int _wrongAttempts = 0;       // bu sorudaki yanlış deneme sayısı
+  bool _answerRevealed = false; // "Bersivê nîşan bide" kullanıldı mı
 
   // ── Mevcut soru durumu ──────────────────────────────────────
   late List<String> _wordBank;     // alt kısımdaki mevcut kelimeler
@@ -65,11 +87,6 @@ class _SentenceBuilderScreenState extends ConsumerState<SentenceBuilderScreen>
   late Animation<double> _shakeAnimation;
   bool _showCorrectFlash = false;
   bool _showWrongShake = false;
-
-  // ── Zorluk artışı ─────────────────────────────────────────
-  // İlk 4 soru: 3-4 kelimelik cümleler, sonra 5-7 kelimelik
-  int get _minTokens => _currentIndex < 4 ? 3 : 5;
-  int get _maxTokens => _currentIndex < 4 ? 4 : 7;
 
   @override
   void initState() {
@@ -116,6 +133,7 @@ class _SentenceBuilderScreenState extends ConsumerState<SentenceBuilderScreen>
           original: cleaned,
           tokens: tokens,
           sourceWord: (word.ku as String?) ?? '',
+          sourceWordTr: (word.tr as String?) ?? '',
         ));
       }
     }
@@ -146,17 +164,28 @@ class _SentenceBuilderScreenState extends ConsumerState<SentenceBuilderScreen>
       setState(() => _sessionComplete = true);
       return;
     }
-    final q = _questions[_currentIndex];
-    _wordBank = List<String>.from(q.tokens)..shuffle(Random());
-    _answerSlots = List<String?>.filled(q.tokens.length, null);
-    _nextSlotIndex = 0;
-    _hintUsed = false;
+    _resetBoard();
+    _studyPhase = true;
+    _hintCount = 0;
+    _peekUsed = false;
+    _wrongAttempts = 0;
+    _answerRevealed = false;
     _showCorrectFlash = false;
     _showWrongShake = false;
   }
 
+  /// Aynı soru için tahtayı sıfırlar (yanlış denemeden sonra tekrar).
+  /// Deneme sayacı ve ipucu/peek durumu korunur.
+  void _resetBoard() {
+    final q = _questions[_currentIndex];
+    _wordBank = List<String>.from(q.tokens)..shuffle(Random());
+    _answerSlots = List<String?>.filled(q.tokens.length, null);
+    _nextSlotIndex = 0;
+  }
+
   // ── Kelime tıklama: bankadan slota ────────────────────────
   void _onWordTap(int bankIndex) {
+    if (_answerRevealed || _showCorrectFlash || _showWrongShake) return;
     if (_nextSlotIndex >= _answerSlots.length) return;
 
     setState(() {
@@ -175,6 +204,7 @@ class _SentenceBuilderScreenState extends ConsumerState<SentenceBuilderScreen>
 
   // ── Slot tıklama: slottan bankaya geri ────────────────────
   void _onSlotTap(int slotIndex) {
+    if (_answerRevealed || _showCorrectFlash || _showWrongShake) return;
     final word = _answerSlots[slotIndex];
     if (word == null) return;
 
@@ -203,10 +233,24 @@ class _SentenceBuilderScreenState extends ConsumerState<SentenceBuilderScreen>
     final correct = userAnswer == q.original;
 
     if (correct) {
-      _xpEarned += _hintUsed ? 8 : 15;
+      // Yardım kullanımı XP'yi düşürür: her ipucu -3, cümleye tekrar bakmak -3.
+      // Taban 15, alt sınır 5.
+      final gain = max(15 - _hintCount * 3 - (_peekUsed ? 3 : 0), 5);
+      _xpEarned += gain;
       _correctCount++;
       setState(() => _showCorrectFlash = true);
       HapticFeedback.mediumImpact();
+      SoundService.playCorrect();
+      SoundService.playXpGain();
+      showXpFloat(context, gain);
+      final milestone = ref
+          .read(gamificationProvider.notifier)
+          .registerCorrectForCombo();
+      if (milestone > 0) {
+        final isEn = ref.read(isEnglishModuleProvider);
+        final newCombo = ref.read(gamificationProvider).comboCount;
+        showStreakMilestone(context, newCombo, isEnglish: isEn);
+      }
 
       Future.delayed(const Duration(milliseconds: 800), () {
         if (!mounted) return;
@@ -215,9 +259,13 @@ class _SentenceBuilderScreenState extends ConsumerState<SentenceBuilderScreen>
     } else {
       setState(() {
         _hearts--;
+        _wrongAttempts++;
         _showWrongShake = true;
       });
       HapticFeedback.heavyImpact();
+      SoundService.playWrong();
+      SoundService.playFail();
+      ref.read(gamificationProvider.notifier).resetCombo();
       _shakeController.forward(from: 0);
 
       if (_hearts <= 0) {
@@ -230,9 +278,13 @@ class _SentenceBuilderScreenState extends ConsumerState<SentenceBuilderScreen>
 
       Future.delayed(const Duration(milliseconds: 1000), () {
         if (!mounted) return;
+        // Bu arada "Bersivê nîşan bide" kullanıldıysa tahtaya dokunma.
+        if (_answerRevealed) return;
         setState(() {
           _showWrongShake = false;
-          _setupCurrentQuestion();
+          // Sadece tahta sıfırlanır; deneme sayacı ve ipucu durumu korunur
+          // ki "Bersivê nîşan bide" çıkış yolu tetiklenebilsin.
+          _resetBoard();
         });
       });
     }
@@ -249,20 +301,79 @@ class _SentenceBuilderScreenState extends ConsumerState<SentenceBuilderScreen>
     });
   }
 
-  // ── Hint: ilk kelimeyi göster ─────────────────────────────
+  // ── Kademeli ipucu ────────────────────────────────────────
+  // Her basışta, kullanıcının baştan itibaren DOĞRU yerleştirdiği
+  // kelimelerin sonrasındaki sıradaki doğru kelime yerleştirilir.
+  // Doğru önekten sonraki yanlış kelimeler bankaya geri döner —
+  // böylece kullanıcı nerede hata yaptığını da görür. Her ipucu -3 XP.
   void _useHint() {
-    if (_hintUsed) return;
+    if (_studyPhase || _answerRevealed || _showCorrectFlash || _showWrongShake) {
+      return;
+    }
     final q = _questions[_currentIndex];
-    final firstWord = q.tokens.first;
 
-    // İlk kelime bankada mı?
-    final bankIdx = _wordBank.indexOf(firstWord);
-    if (bankIdx == -1) return; // Zaten yerleştirilmiş
+    // Baştan itibaren doğru yerleştirilmiş kelime sayısı (doğru önek)
+    int prefix = 0;
+    while (prefix < q.tokens.length && _answerSlots[prefix] == q.tokens[prefix]) {
+      prefix++;
+    }
+    if (prefix >= q.tokens.length) return; // her şey zaten doğru
+
+    final nextWord = q.tokens[prefix];
 
     setState(() {
-      _hintUsed = true;
+      _hintCount++;
+
+      // Önekten sonraki (yanlış) yerleştirmeleri bankaya geri al
+      for (int i = q.tokens.length - 1; i >= prefix; i--) {
+        final w = _answerSlots[i];
+        if (w != null) {
+          final emptyIdx = _wordBank.indexOf('');
+          if (emptyIdx != -1) _wordBank[emptyIdx] = w;
+          _answerSlots[i] = null;
+        }
+      }
+
+      // Sıradaki doğru kelimeyi bankadan bulup yerine koy
+      final bankIdx = _wordBank.indexOf(nextWord);
+      if (bankIdx != -1) {
+        _answerSlots[prefix] = nextWord;
+        _wordBank[bankIdx] = '';
+      }
+
+      _nextSlotIndex = _answerSlots.indexOf(null);
+      if (_nextSlotIndex == -1) _nextSlotIndex = _answerSlots.length;
     });
-    _onWordTap(bankIdx);
+
+    HapticFeedback.lightImpact();
+
+    // İpucu son slotu da doldurduysa otomatik kontrol
+    if (_nextSlotIndex >= _answerSlots.length) {
+      _checkAnswer();
+    }
+  }
+
+  // ── Çıkış yolu: cevabı göster ─────────────────────────────
+  // Tekrarlanan yanlış denemeden sonra kullanıcıya çıkış sunulur.
+  // Not: 3 kalp sisteminde 3. yanlış oturumu bitirdiği için eşik
+  // "aynı soruda 2 yanlış" (veya son kalpte 1 yanlış) olarak kuruldu.
+  bool get _canReveal =>
+      !_answerRevealed &&
+      (_wrongAttempts >= 2 || (_wrongAttempts >= 1 && _hearts <= 1));
+
+  /// Doğru cümleyi vurgulayarak gösterir; soru yanlış sayılır
+  /// (XP verilmez, doğru sayacı artmaz) ve devam edilebilir.
+  void _revealAnswer() {
+    if (_answerRevealed || _showCorrectFlash) return;
+    final q = _questions[_currentIndex];
+    setState(() {
+      _answerRevealed = true;
+      _showWrongShake = false;
+      _answerSlots = List<String?>.from(q.tokens);
+      _wordBank = List<String>.filled(q.tokens.length, '');
+      _nextSlotIndex = _answerSlots.length;
+    });
+    HapticFeedback.selectionClick();
   }
 
   // ═══════════════════════════════════════════════════════════
@@ -271,7 +382,42 @@ class _SentenceBuilderScreenState extends ConsumerState<SentenceBuilderScreen>
 
   @override
   Widget build(BuildContext context) {
+    // ── TRACK-AWARE GUARD ──────────────────────────────────
+    // Hevokê çêke KU heritage cümleleri kullanır — EN track için uygun değil.
+    final isEn = ref.watch(isEnglishModuleProvider);
+    if (isEn) {
+      return const EnComingSoonScreen(
+        activityKu: 'Hevokê çêke',
+        suggestedRoute: '/en/writing',
+        suggestedLabel: 'EN Writing',
+      );
+    }
+
     if (_sessionComplete) return _buildResultScreen();
+
+    // Yeterli cümle bulunamadıysa (pool boş) — erken boş ekran.
+    if (_questions.isEmpty || _currentIndex >= _questions.length) {
+      return Scaffold(
+        backgroundColor: AppColors.backgroundPrimary,
+        appBar: AppBar(
+          backgroundColor: AppColors.backgroundPrimary,
+          elevation: 0,
+          leading: IconButton(
+            icon: const Icon(Icons.close_rounded),
+            onPressed: () => context.canPop()
+                ? context.pop()
+                : context.go(AppRoutes.home),
+          ),
+        ),
+        body: Center(
+          child: Text(
+            'Vê beşê de hevokên bes tune ne.',
+            style: AppTypography.body
+                .copyWith(color: AppColors.textSecondary),
+          ),
+        ),
+      );
+    }
 
     final q = _questions[_currentIndex];
     final progress = (_currentIndex + 1) / _totalQuestions;
@@ -295,7 +441,7 @@ class _SentenceBuilderScreenState extends ConsumerState<SentenceBuilderScreen>
                     horizontal: AppSpacing.md,
                   ),
                   child: Text(
-                    'Peyvên rêz bike',
+                    _studyPhase ? 'Hevokê bixwîne' : 'Peyvên rêz bike',
                     style: AppTypography.headline.copyWith(
                       color: AppColors.textPrimary,
                     ),
@@ -305,32 +451,36 @@ class _SentenceBuilderScreenState extends ConsumerState<SentenceBuilderScreen>
 
                 const SizedBox(height: 4),
 
-                // Kaynak kelime ipucu
-                Text(
-                  '( ${q.sourceWord} )',
-                  style: AppTypography.caption.copyWith(
-                    color: AppColors.textTertiary,
+                // Anlam ipucu: kaynak kelimenin TÜRKÇE karşılığı.
+                // Kurmancî kaynak kelime gösterilmez — cevabı ele veriyordu.
+                if (q.sourceWordTr.isNotEmpty)
+                  Text(
+                    '( ${q.sourceWordTr} )',
+                    style: AppTypography.caption.copyWith(
+                      color: AppColors.textTertiary,
+                    ),
                   ),
-                ),
 
                 const SizedBox(height: AppSpacing.lg),
 
-                // ── Cevap slotları ───────────────────────────
+                // ── İçerik: çalışma kartı veya cevap slotları ──
                 Expanded(
                   child: Padding(
                     padding: const EdgeInsets.symmetric(
                       horizontal: AppSpacing.md,
                     ),
-                    child: Column(
-                      children: [
-                        _buildAnswerSlots(q),
-                        const Spacer(),
-                        _buildWordBank(),
-                        const SizedBox(height: AppSpacing.md),
-                        _buildHintButton(),
-                        const SizedBox(height: AppSpacing.md),
-                      ],
-                    ),
+                    child: _studyPhase
+                        ? _buildStudyCard(q)
+                        : Column(
+                            children: [
+                              _buildAnswerSlots(q),
+                              const Spacer(),
+                              _buildWordBank(),
+                              const SizedBox(height: AppSpacing.md),
+                              _buildBottomControls(),
+                              const SizedBox(height: AppSpacing.md),
+                            ],
+                          ),
                   ),
                 ),
               ],
@@ -390,6 +540,8 @@ class _SentenceBuilderScreenState extends ConsumerState<SentenceBuilderScreen>
               );
             }),
           ),
+          const SizedBox(width: 6),
+          const PersistentXpBadge(),
         ],
       ),
     );
@@ -415,17 +567,23 @@ class _SentenceBuilderScreenState extends ConsumerState<SentenceBuilderScreen>
         decoration: BoxDecoration(
           color: _showCorrectFlash
               ? AppColors.successSurface
-              : _showWrongShake
-                  ? AppColors.errorSurface
-                  : AppColors.backgroundSecondary,
+              : _answerRevealed
+                  ? AppColors.warningSurface
+                  : _showWrongShake
+                      ? AppColors.errorSurface
+                      : AppColors.backgroundSecondary,
           borderRadius: BorderRadius.circular(AppSpacing.radiusLg),
           border: Border.all(
             color: _showCorrectFlash
                 ? AppColors.success
-                : _showWrongShake
-                    ? AppColors.errorSoft
-                    : AppColors.borderLight,
-            width: _showCorrectFlash || _showWrongShake ? 2 : 1,
+                : _answerRevealed
+                    ? AppColors.warning
+                    : _showWrongShake
+                        ? AppColors.errorSoft
+                        : AppColors.borderLight,
+            width: _showCorrectFlash || _showWrongShake || _answerRevealed
+                ? 2
+                : 1,
           ),
           boxShadow: [
             BoxShadow(
@@ -446,6 +604,7 @@ class _SentenceBuilderScreenState extends ConsumerState<SentenceBuilderScreen>
                 word: word,
                 onTap: () => _onSlotTap(i),
                 isCorrect: _showCorrectFlash,
+                isRevealed: _answerRevealed,
               );
             }
             return _EmptySlot(index: i);
@@ -474,40 +633,243 @@ class _SentenceBuilderScreenState extends ConsumerState<SentenceBuilderScreen>
     );
   }
 
-  // ── Hint butonu ───────────────────────────────────────────
-  Widget _buildHintButton() {
-    return GestureDetector(
-      onTap: _hintUsed ? null : _useHint,
-      child: Container(
-        padding: const EdgeInsets.symmetric(
-          horizontal: AppSpacing.md,
-          vertical: AppSpacing.sm,
+  // ── Çalışma kartı ─────────────────────────────────────────
+  // Hedef cümle soru başında burada gösterilir; kullanıcı
+  // "dest pê bike" deyince kart kapanır ve cümle gizlenir.
+  Widget _buildStudyCard(_SentenceQuestion q) {
+    return Column(
+      children: [
+        const Spacer(),
+        Container(
+          width: double.infinity,
+          padding: const EdgeInsets.all(AppSpacing.lg),
+          decoration: BoxDecoration(
+            color: AppColors.primarySurface,
+            borderRadius: BorderRadius.circular(AppSpacing.radiusLg),
+            border: Border.all(color: AppColors.primary.withOpacity(0.4)),
+          ),
+          child: Column(
+            children: [
+              const Icon(
+                Icons.menu_book_rounded,
+                color: AppColors.primary,
+                size: 28,
+              ),
+              const SizedBox(height: AppSpacing.sm),
+              Text(
+                q.original,
+                style: AppTypography.kurmanjiCard.copyWith(
+                  color: AppColors.textPrimary,
+                  fontWeight: FontWeight.w700,
+                ),
+                textAlign: TextAlign.center,
+              ),
+            ],
+          ),
+        ).animate().fadeIn(duration: 300.ms),
+        const SizedBox(height: AppSpacing.sm),
+        Text(
+          // TR modda yeni mekanik iki dilli anlatılır — ilk kez gören
+          // başlangıç kullanıcısı yönergeyi anlayabilsin.
+          ref.watch(showTurkishProvider)
+              ? 'Hevokê baş bixwîne — paşê ew tê veşartin.\nCümleyi dikkatle oku — sonra gizlenecek.'
+              : 'Hevokê baş bixwîne — paşê ew tê veşartin.',
+          style: AppTypography.caption.copyWith(
+            color: AppColors.textTertiary,
+          ),
+          textAlign: TextAlign.center,
         ),
-        decoration: BoxDecoration(
-          color: _hintUsed
-              ? AppColors.borderLight.withOpacity(0.5)
-              : AppColors.warningSurface,
-          borderRadius: BorderRadius.circular(AppSpacing.radiusFull),
-          border: Border.all(
-            color: _hintUsed ? AppColors.borderLight : AppColors.warning,
+        const Spacer(),
+        SizedBox(
+          width: double.infinity,
+          child: ElevatedButton(
+            onPressed: () => setState(() => _studyPhase = false),
+            style: ElevatedButton.styleFrom(
+              backgroundColor: AppColors.primary,
+              foregroundColor: Colors.white,
+              padding: const EdgeInsets.symmetric(vertical: 16),
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(AppSpacing.radiusMd),
+              ),
+              elevation: 0,
+            ),
+            child: Text(
+              ref.watch(showTurkishProvider)
+                  ? 'Min xwend — dest pê bike (Okudum, başla)'
+                  : 'Min xwend — dest pê bike',
+              style: AppTypography.labelLarge.copyWith(color: Colors.white),
+            ),
           ),
         ),
-        child: Row(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            Icon(
-              Icons.lightbulb_outline_rounded,
-              size: 18,
-              color: _hintUsed ? AppColors.textTertiary : AppColors.warning,
+        const SizedBox(height: AppSpacing.md),
+      ],
+    );
+  }
+
+  // ── Alt kontroller ────────────────────────────────────────
+  // Normal: ipucu + cümleye tekrar bak (+ gerekirse cevabı göster).
+  // Cevap gösterildiyse: sadece devam butonu.
+  Widget _buildBottomControls() {
+    if (_answerRevealed) {
+      return SizedBox(
+        width: double.infinity,
+        child: ElevatedButton(
+          onPressed: _advanceToNext,
+          style: ElevatedButton.styleFrom(
+            backgroundColor: AppColors.primary,
+            foregroundColor: Colors.white,
+            padding: const EdgeInsets.symmetric(vertical: 16),
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(AppSpacing.radiusMd),
             ),
-            const SizedBox(width: 6),
-            Text(
-              _hintUsed ? 'Alîkarî hat bikaranîn' : 'Alîkarî',
-              style: AppTypography.label.copyWith(
-                color: _hintUsed ? AppColors.textTertiary : AppColors.warning,
+            elevation: 0,
+          ),
+          child: Text(
+            'Berdewam bike',
+            style: AppTypography.labelLarge.copyWith(color: Colors.white),
+          ),
+        ),
+      );
+    }
+
+    return Wrap(
+      spacing: AppSpacing.sm,
+      runSpacing: AppSpacing.sm,
+      alignment: WrapAlignment.center,
+      crossAxisAlignment: WrapCrossAlignment.center,
+      children: [
+        _buildHintButton(),
+        _buildPeekButton(),
+        if (_canReveal) _buildRevealButton(),
+      ],
+    );
+  }
+
+  // ── Hint butonu: kademeli, çok kullanımlı ─────────────────
+  Widget _buildHintButton() {
+    final showTr = ref.watch(showTurkishProvider);
+    final base = showTr ? 'Alîkarî (ipucu)' : 'Alîkarî';
+    return Semantics(
+      button: true,
+      label: base,
+      child: GestureDetector(
+        onTap: _useHint,
+        child: Container(
+          constraints: const BoxConstraints(minHeight: 44),
+          padding: const EdgeInsets.symmetric(
+            horizontal: AppSpacing.md,
+            vertical: AppSpacing.sm,
+          ),
+          decoration: BoxDecoration(
+            color: AppColors.warningSurface,
+            borderRadius: BorderRadius.circular(AppSpacing.radiusFull),
+            border: Border.all(color: AppColors.warning),
+          ),
+          child: Row(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              const Icon(
+                Icons.lightbulb_outline_rounded,
+                size: 18,
+                color: AppColors.warning,
               ),
-            ),
-          ],
+              const SizedBox(width: 6),
+              Text(
+                _hintCount > 0 ? '$base ($_hintCount) · -3 XP' : '$base · -3 XP',
+                style: AppTypography.label.copyWith(color: AppColors.warning),
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+
+  // ── "Cümleye tekrar bak" butonu ───────────────────────────
+  // Gizlenen hedef cümleyi yeniden gösterir (çalışma kartına döner).
+  // İlk kullanımda -3 XP; aynı soruda tekrar bakmak ek ceza getirmez.
+  Widget _buildPeekButton() {
+    final showTr = ref.watch(showTurkishProvider);
+    final base = showTr ? 'Hevokê bibîne (cümleye bak)' : 'Hevokê bibîne';
+    return Semantics(
+      button: true,
+      label: base,
+      child: GestureDetector(
+        onTap: () {
+          HapticFeedback.selectionClick();
+          setState(() {
+            _peekUsed = true;
+            _studyPhase = true;
+          });
+        },
+        child: Container(
+          constraints: const BoxConstraints(minHeight: 44),
+          padding: const EdgeInsets.symmetric(
+            horizontal: AppSpacing.md,
+            vertical: AppSpacing.sm,
+          ),
+          decoration: BoxDecoration(
+            color: AppColors.primarySurface,
+            borderRadius: BorderRadius.circular(AppSpacing.radiusFull),
+            border: Border.all(color: AppColors.primary),
+          ),
+          child: Row(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              const Icon(
+                Icons.visibility_outlined,
+                size: 18,
+                color: AppColors.primary,
+              ),
+              const SizedBox(width: 6),
+              Text(
+                _peekUsed ? base : '$base · -3 XP',
+                style: AppTypography.label.copyWith(color: AppColors.primary),
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+
+  // ── "Cevabı göster" butonu ────────────────────────────────
+  Widget _buildRevealButton() {
+    final showTr = ref.watch(showTurkishProvider);
+    final label =
+        showTr ? 'Bersivê nîşan bide (cevabı göster)' : 'Bersivê nîşan bide';
+    return Semantics(
+      button: true,
+      label: label,
+      child: GestureDetector(
+        onTap: _revealAnswer,
+        child: Container(
+          constraints: const BoxConstraints(minHeight: 44),
+          padding: const EdgeInsets.symmetric(
+            horizontal: AppSpacing.md,
+            vertical: AppSpacing.sm,
+          ),
+          decoration: BoxDecoration(
+            color: AppColors.errorSurface,
+            borderRadius: BorderRadius.circular(AppSpacing.radiusFull),
+            border: Border.all(color: AppColors.errorSoft),
+          ),
+          child: Row(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              const Icon(
+                Icons.help_outline_rounded,
+                size: 18,
+                color: AppColors.errorSoft,
+              ),
+              const SizedBox(width: 6),
+              Text(
+                label,
+                style:
+                    AppTypography.label.copyWith(color: AppColors.errorSoft),
+              ),
+            ],
+          ),
         ),
       ),
     );
@@ -557,7 +919,24 @@ class _SentenceBuilderScreenState extends ConsumerState<SentenceBuilderScreen>
   // SONUÇ EKRANI
   // ═══════════════════════════════════════════════════════════
 
+  bool _sessionCompleteSoundFired = false;
+
   Widget _buildResultScreen() {
+    if (!_sessionCompleteSoundFired) {
+      _sessionCompleteSoundFired = true;
+      SoundService.playSessionComplete();
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        final gami = ref.read(gamificationProvider.notifier);
+        gami.resetCombo();
+        if (_xpEarned > 0) gami.addXP(_xpEarned);
+        // İLERLEME FIX: Beceri panosundaki 'grammar' (Gramer) sayacı hiç
+        // beslenmiyordu — cümle kurma (sözdizimi) oturumu buraya işlenir.
+        markSkillCompletedAndNotify(ref,
+            module: ref.read(isEnglishModuleProvider) ? 'en' : 'ku',
+            skill: 'grammar',
+            xp: 10);
+      });
+    }
     final accuracy = _questions.isEmpty
         ? 0
         : ((_correctCount / _totalQuestions) * 100).round();
@@ -706,6 +1085,7 @@ class _SentenceBuilderScreenState extends ConsumerState<SentenceBuilderScreen>
                         _correctCount = 0;
                         _xpEarned = 0;
                         _sessionComplete = false;
+                        _sessionCompleteSoundFired = false;
                         _buildQuestions();
                         _setupCurrentQuestion();
                       });
@@ -736,15 +1116,22 @@ class _AnswerChip extends StatelessWidget {
   final String word;
   final VoidCallback onTap;
   final bool isCorrect;
+  final bool isRevealed; // "Bersivê nîşan bide" ile gösterildi (turuncu vurgu)
 
   const _AnswerChip({
     required this.word,
     required this.onTap,
     this.isCorrect = false,
+    this.isRevealed = false,
   });
 
   @override
   Widget build(BuildContext context) {
+    final chipColor = isCorrect
+        ? AppColors.success
+        : isRevealed
+            ? AppColors.warning
+            : AppColors.primary;
     return GestureDetector(
       onTap: onTap,
       child: AnimatedContainer(
@@ -754,12 +1141,11 @@ class _AnswerChip extends StatelessWidget {
           vertical: AppSpacing.sm + 2,
         ),
         decoration: BoxDecoration(
-          color: isCorrect ? AppColors.success : AppColors.primary,
+          color: chipColor,
           borderRadius: BorderRadius.circular(AppSpacing.radiusMd),
           boxShadow: [
             BoxShadow(
-              color: (isCorrect ? AppColors.success : AppColors.primary)
-                  .withOpacity(0.3),
+              color: chipColor.withOpacity(0.3),
               blurRadius: 6,
               offset: const Offset(0, 2),
             ),

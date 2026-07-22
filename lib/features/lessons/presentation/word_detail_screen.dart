@@ -9,6 +9,7 @@ import '../../../core/constants/app_typography.dart';
 import '../../../core/constants/app_spacing.dart';
 import '../../../shared/widgets/lutke_goat_icon.dart';
 import '../../../shared/widgets/speak_button.dart';
+import '../../../shared/widgets/suggestion_sheet.dart';
 import '../../../shared/providers/language_mode_provider.dart';
 import '../../admin/data/content_override_service.dart';
 
@@ -167,6 +168,9 @@ class WordDetailScreen extends ConsumerWidget {
                   kat: kat,
                   zor: zor,
                   levelColor: levelColor,
+                  wordId: id,
+                  wordKu: ku,
+                  showTurkish: showTurkish,
                 ).animate()
                     .fadeIn(duration: 400.ms, delay: 200.ms)
                     .slideY(begin: 0.1, end: 0),
@@ -186,13 +190,13 @@ class WordDetailScreen extends ConsumerWidget {
                 // 4) Gramer Notu — yalnızca Türkçe mod açıkken gösterilir,
                 //    çünkü not: alanı Türkçe açıklama içerir. Kurmancî modda
                 //    Türkçe metin sızıntısı olmaması için gizlenir.
-                if (showTurkish && not_ != null && not_!.isNotEmpty)
-                  _GrammarNoteCard(note: not_!)
+                if (showTurkish && not_ != null && not_.isNotEmpty)
+                  _GrammarNoteCard(note: not_)
                       .animate()
                       .fadeIn(duration: 400.ms, delay: 400.ms)
                       .slideY(begin: 0.1, end: 0),
 
-                if (showTurkish && not_ != null && not_!.isNotEmpty)
+                if (showTurkish && not_ != null && not_.isNotEmpty)
                   const SizedBox(height: AppSpacing.md),
 
                 // 5) Ilgili Kelimeler (placeholder — same kat)
@@ -417,6 +421,9 @@ class _GrammarCard extends StatelessWidget {
   final String kat;
   final double zor;
   final Color levelColor;
+  final String wordId;
+  final String wordKu;
+  final bool showTurkish;
 
   const _GrammarCard({
     required this.cins,
@@ -427,6 +434,9 @@ class _GrammarCard extends StatelessWidget {
     required this.kat,
     required this.zor,
     required this.levelColor,
+    required this.wordId,
+    required this.wordKu,
+    required this.showTurkish,
   });
 
   @override
@@ -468,7 +478,7 @@ class _GrammarCard extends StatelessWidget {
           ),
           const SizedBox(height: AppSpacing.md),
 
-          // Cinsiyet badge + Ezafe + Kategori
+          // Cinsiyet badge + Veqetandek + Kategori
           Wrap(
             spacing: 8,
             runSpacing: 8,
@@ -480,11 +490,11 @@ class _GrammarCard extends StatelessWidget {
                 color: genderColor,
               ),
 
-              // Ezafe
+              // Veqetandek
               if (ez != null && ez!.isNotEmpty)
                 _GrammarBadge(
                   icon: Icons.link_rounded,
-                  label: 'Ezafe: $ez',
+                  label: 'Veqetandek: $ez',
                   color: AppColors.primary,
                 ),
 
@@ -493,6 +503,24 @@ class _GrammarCard extends StatelessWidget {
                 icon: Icons.category_rounded,
                 label: kat,
                 color: levelColor,
+              ),
+
+              // Düzeltme önerisi — kullanıcı içerik hatası bildirir
+              // (id + kelime otomatik bağlanır; POST /api/suggestions).
+              GestureDetector(
+                onTap: () => showSuggestionSheet(
+                  context,
+                  itemId: wordId,
+                  itemText: wordKu,
+                  initialType: 'peyv',
+                ),
+                child: _GrammarBadge(
+                  icon: Icons.flag_outlined,
+                  label: showTurkish
+                      ? 'Şaşiyekê ragihîne · Hata bildir'
+                      : 'Şaşiyekê ragihîne',
+                  color: AppColors.warning,
+                ),
               ),
             ],
           ),

@@ -11,10 +11,17 @@ import '../../../core/constants/app_colors.dart';
 import '../../../core/constants/app_spacing.dart';
 import '../../../core/constants/app_typography.dart';
 import '../../../shared/providers/language_mode_provider.dart';
+import '../../../shared/providers/learning_module_provider.dart';
+import '../../../shared/services/skill_progress_service.dart';
+import '../../en_learning/presentation/en_coming_soon_screen.dart';
 import '../../lessons/domain/a1_kelime_db.dart';
 import '../../lessons/domain/a2_kelime_db.dart';import '../../lessons/domain/b1_kelime_db.dart';import '../../lessons/domain/b2_kelime_db.dart';import '../../lessons/domain/c1_kelime_db.dart';import '../../lessons/domain/c2_kelime_db.dart';
 import '../../../core/services/sound_service.dart';
 import '../../../shared/utils/word_emoji_map.dart';
+import '../../gamification/gamification_provider.dart';
+import '../../../shared/widgets/persistent_xp_badge.dart';
+import '../../../shared/widgets/xp_float_animation.dart';
+import '../../../shared/widgets/streak_milestone_toast.dart';
 
 // ════════════════════════════════════════════════════════════════
 // WORD MATCH — Peyvan Bike! (Kelime Eslestirme Oyunu)
@@ -48,7 +55,6 @@ class _WordMatchScreenState extends ConsumerState<WordMatchScreen>
   // ── Oyun durumu ──────────────────────────────────────────────
   int _currentRound = 0;
   int _correctMatches = 0;
-  int _wrongAttempts = 0;
   int _totalCorrect = 0;
   int _totalWrong = 0;
   bool _sessionComplete = false;
@@ -119,21 +125,28 @@ class _WordMatchScreenState extends ConsumerState<WordMatchScreen>
     super.dispose();
   }
 
+  // ── Metin normalizasyonu — duplicate tespiti icin ────────────
+  // trim + lowercase: 'Turuncu ' ile 'turuncu' ayni sayilir.
+  static String _normText(String s) => s.trim().toLowerCase();
+
   // ── Tur baslat ───────────────────────────────────────────────
   void _startRound() {
     final rng = Random();
-    final isKuOnly = ref.read(languageModeProvider) == LanguageMode.kuOnly;
+    // kuEn modu (eski kuOnly): Türkçe çeviri gösterilmez — yerine
+    // heritage cümlesi (hedef kelime ____ ile maskelenir) kullanılır.
+    // Böylece kullanıcı kelimeyi bağlam içinde tanır, trivia-çeviri değil.
+    final isKuEn = ref.read(languageModeProvider) == LanguageMode.kuEn;
 
     // Matching için UYGUN kelimeleri filtrele:
     // - Phrasal (boşluklu) ifadeler matching'e uygun değil — cümlede kendisi geçer
-    // - Kurmancî-only modda: anlamlı (kelimeyi içeren, yeterince uzun) heritage gerek
+    // - kuEn modda: anlamlı (kelimeyi içeren, yeterince uzun) heritage gerek
     bool isGoodMatchCandidate(dynamic w) {
       final ku = (w.ku as String).trim();
       // Phrasal (birden çok kelimeden oluşan) başlıkları ele — matching için uygunsuz
       if (ku.contains(' ') || ku.contains('?') || ku.contains('!')) return false;
       if (ku.length < 3) return false;
-      if (!isKuOnly) return true;
-      // KU-only modda heritage cümlesi kontrolü
+      if (!isKuEn) return true;
+      // kuEn modda heritage cümlesi kontrolü
       final her = (w.her as List<dynamic>? ?? []);
       if (her.isEmpty) return false;
       // En az bir heritage kelimeyi içermeli ve kelimeyi maskelediğinde
@@ -156,12 +169,37 @@ class _WordMatchScreenState extends ConsumerState<WordMatchScreen>
     final filtered = _allWords.where(isGoodMatchCandidate).toList();
     final pool = filtered.length >= _pairsPerRound ? filtered : _allWords;
     final shuffled = List.of(pool)..shuffle(rng);
-    final selected = shuffled.take(_pairsPerRound).toList();
+
+    // Ayni normalize metinli (Kurmanci VEYA Turkce) iki kelime ayni turda
+    // yer almasin: ornegin iki farkli kelimenin cevirisi de 'turuncu' ise
+    // kullanici gorsel olarak ayirt edemez ve 'yanlis' karta tiklayip
+    // haksiz hata alirdi. Duplicate aday cikarsa siradaki kelimeye gecilir.
+    final selected = <dynamic>[];
+    final seenKu = <String>{};
+    final seenTr = <String>{};
+    for (final w in shuffled) {
+      final kuNorm = _normText(w.ku as String);
+      final trNorm = _normText(w.tr as String);
+      if (seenKu.contains(kuNorm) || seenTr.contains(trNorm)) continue;
+      seenKu.add(kuNorm);
+      seenTr.add(trNorm);
+      selected.add(w);
+      if (selected.length == _pairsPerRound) break;
+    }
+    // Yedek: havuz duplicate metinler yuzunden yetersiz kaldiysa
+    // kalan kelimelerden doldur (nadir durum — bos tur olmasin).
+    if (selected.length < _pairsPerRound) {
+      for (final w in shuffled) {
+        if (selected.contains(w)) continue;
+        selected.add(w);
+        if (selected.length == _pairsPerRound) break;
+      }
+    }
 
     _currentPairs = selected.asMap().entries.map((e) {
       final w = e.value;
       final String rightText;
-      if (isKuOnly) {
+      if (isKuEn) {
         // Heritage cumlesi — kelimeyi ____ ile maskele (eşleştirme trivia değil, anlam)
         final heritageSentences = w.her as List<dynamic>;
         String sentence = '';
@@ -206,7 +244,6 @@ class _WordMatchScreenState extends ConsumerState<WordMatchScreen>
     _selectedLeftIndex = null;
     _selectedRightIndex = null;
     _correctMatches = 0;
-    _wrongAttempts = 0;
 
     if (_challengeMode) {
       _timeRemaining = 60;
@@ -267,12 +304,35 @@ class _WordMatchScreenState extends ConsumerState<WordMatchScreen>
   // ── Eslestirme kontrolu ──────────────────────────────────────
   void _checkMatch() {
     final leftIdx = _selectedLeftIndex!;
-    final rightActualIdx = _shuffledRightIndices[_selectedRightIndex!];
+    final rightShuffledIdx = _selectedRightIndex!;
+    var rightActualIdx = _shuffledRightIndices[rightShuffledIdx];
+
+    // Savunma katmani: cift kimligi farkli olsa da metinler esdegerse
+    // dogru say. (Or: iki kartta da 'turuncu' yaziyorsa kullanici hangisine
+    // tiklarsa tiklasin dogrudur — gorsel olarak ayirt edilemez.)
+    // Sag sutun indeksleri takas edilir ki kalan kartlar tutarli kalsin.
+    if (leftIdx != rightActualIdx) {
+      final leftPair = _currentPairs[leftIdx];
+      final rightPair = _currentPairs[rightActualIdx];
+      final textEquivalent =
+          _normText(leftPair.matchText) == _normText(rightPair.matchText) ||
+              _normText(leftPair.kuWord) == _normText(rightPair.kuWord);
+      if (textEquivalent) {
+        final swapPos = _shuffledRightIndices.indexOf(leftIdx);
+        if (swapPos != -1) {
+          _shuffledRightIndices[rightShuffledIdx] = leftIdx;
+          _shuffledRightIndices[swapPos] = rightActualIdx;
+          rightActualIdx = leftIdx;
+        }
+      }
+    }
 
     if (leftIdx == rightActualIdx) {
       // Dogru eslestirme
       SoundService.playCorrect();
+      SoundService.playXpGain();
       HapticFeedback.mediumImpact();
+      showXpFloat(context, 5);
 
       final colorIdx = _matchedIndices.length % _matchColors.length;
       _matchColorMap[leftIdx] = _matchColors[colorIdx];
@@ -286,18 +346,30 @@ class _WordMatchScreenState extends ConsumerState<WordMatchScreen>
         _flashColor = AppColors.success;
       });
 
+      final milestone = ref
+          .read(gamificationProvider.notifier)
+          .registerCorrectForCombo();
+      if (milestone > 0) {
+        final isEn = ref.read(isEnglishModuleProvider);
+        final newCombo = ref.read(gamificationProvider).comboCount;
+        showStreakMilestone(context, newCombo, isEnglish: isEn);
+      }
+
       _flashController.forward(from: 0);
 
       // Tur tamamlandi mi?
       if (_correctMatches == _pairsPerRound) {
-        Future.delayed(const Duration(milliseconds: 600), _finishRound);
+        Future.delayed(const Duration(milliseconds: 600), () {
+          if (!mounted) return;
+          _finishRound();
+        });
       }
     } else {
       // Yanlis eslestirme
       SoundService.playWrong();
       HapticFeedback.heavyImpact();
+      ref.read(gamificationProvider.notifier).resetCombo();
       _totalWrong++;
-      _wrongAttempts++;
 
       setState(() {
         _shakingLeftIndex = leftIdx;
@@ -323,6 +395,7 @@ class _WordMatchScreenState extends ConsumerState<WordMatchScreen>
   // ── Tur bitis ────────────────────────────────────────────────
   void _finishRound() {
     _timerActive = false;
+    if (!mounted) return;
 
     if (_currentRound + 1 >= _totalRounds) {
       setState(() {
@@ -353,27 +426,25 @@ class _WordMatchScreenState extends ConsumerState<WordMatchScreen>
     return _totalCorrect / total;
   }
 
-  // ── Kategori emojisi ─────────────────────────────────────────
-  static String _categoryEmoji(String kat) {
-    switch (kat) {
-      case 'selamlama': return '👋';
-      case 'aile': return '👨‍👩‍👧';
-      case 'sayi': return '🔢';
-      case 'renk': return '🎨';
-      case 'yemek': return '🍽️';
-      case 'hayvan': return '🐾';
-      case 'beden': return '🧍';
-      case 'ev': return '🏠';
-      case 'zaman': return '⏰';
-      case 'doga': return '🌿';
-      case 'giysiler': return '👗';
-      case 'meslek': return '💼';
-      default: return '📝';
-    }
-  }
+  // Kategori → emoji haritası artık shared/utils/word_emoji_map.dart içindeki
+  // `categoryEmoji(kat)` fonksiyonundan geliyor. Eski kopya tr-kategori
+  // anahtarlarını (ör: 'aile', 'yemek') kullanıyordu — canonical harita
+  // Kurmancî anahtarlar kullanır. Mevcut kelime DB'si zaten Kurmancî.
+  static String _categoryEmoji(String kat) => categoryEmoji(kat);
 
   @override
   Widget build(BuildContext context) {
+    // ── TRACK-AWARE GUARD ──────────────────────────────────
+    // Peyvan Bike! KU kelime + çeviri eşleştirme — EN track için henüz yok.
+    final isEn = ref.watch(isEnglishModuleProvider);
+    if (isEn) {
+      return const EnComingSoonScreen(
+        activityKu: 'Peyvan Bike',
+        suggestedRoute: '/en/reading',
+        suggestedLabel: 'EN Reading',
+      );
+    }
+
     if (_sessionComplete) return _buildResultScreen();
     return _buildGameScreen();
   }
@@ -416,7 +487,11 @@ class _WordMatchScreenState extends ConsumerState<WordMatchScreen>
                 }
               });
             },
-            tooltip: 'Challenge Mode',
+            tooltip: 'Modê Meydanxwazî',
+          ),
+          const Padding(
+            padding: EdgeInsets.only(right: 8.0, top: 8.0, bottom: 8.0),
+            child: PersistentXpBadge(),
           ),
         ],
       ),
@@ -557,35 +632,39 @@ class _WordMatchScreenState extends ConsumerState<WordMatchScreen>
     );
   }
 
-  // ── Eslestirme alani — iki sutun ─────────────────────────────
+  // ── Eslestirme alani — iki sutun, satir bazli hizalama ───────
+  // Her satirda sol (Kurmanci) ve sag (ceviri) kart ESIT yukseklikte ve
+  // dikeyde ayni hizada. Kart yuksekligi kullanilabilir alandan hesaplanir;
+  // kalan dikey bosluk spaceEvenly ile dagitilir — altta olu bosluk kalmaz.
   Widget _buildMatchArea() {
-    return Row(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        // Sol sutun — Kurmanci kelimeler
-        Expanded(
-          child: ListView.separated(
-            shrinkWrap: true,
-            physics: const NeverScrollableScrollPhysics(),
-            itemCount: _pairsPerRound,
-            separatorBuilder: (_, __) => const SizedBox(height: AppSpacing.sm),
-            itemBuilder: (_, index) => _buildLeftCard(index),
-          ),
-        ),
+    return LayoutBuilder(
+      builder: (context, constraints) {
+        // Satir yuksekligi: alani 6'ya bol, arasi icin pay birak.
+        // Cok uzun ekranlarda kartlar asiri buyumesin (max 96),
+        // cok kisa ekranlarda okunabilir kalsin (min 44).
+        final rowHeight = (constraints.maxHeight / _pairsPerRound - 8)
+            .clamp(44.0, 96.0)
+            .toDouble();
 
-        const SizedBox(width: AppSpacing.sm),
-
-        // Sag sutun — Ceviri / Heritage
-        Expanded(
-          child: ListView.separated(
-            shrinkWrap: true,
-            physics: const NeverScrollableScrollPhysics(),
-            itemCount: _pairsPerRound,
-            separatorBuilder: (_, __) => const SizedBox(height: AppSpacing.sm),
-            itemBuilder: (_, index) => _buildRightCard(index),
-          ),
-        ),
-      ],
+        return Column(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          children: List.generate(_pairsPerRound, (i) {
+            return SizedBox(
+              height: rowHeight,
+              child: Row(
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                children: [
+                  // Sol — Kurmanci kelime
+                  Expanded(child: _buildLeftCard(i)),
+                  const SizedBox(width: AppSpacing.sm),
+                  // Sag — Ceviri / Heritage
+                  Expanded(child: _buildRightCard(i)),
+                ],
+              ),
+            );
+          }),
+        );
+      },
     );
   }
 
@@ -636,7 +715,7 @@ class _WordMatchScreenState extends ConsumerState<WordMatchScreen>
   void _showExitDialog() {
     showDialog(
       context: context,
-      builder: (_) => AlertDialog(
+      builder: (dialogContext) => AlertDialog(
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(AppSpacing.radiusLg),
         ),
@@ -650,7 +729,7 @@ class _WordMatchScreenState extends ConsumerState<WordMatchScreen>
         ),
         actions: [
           TextButton(
-            onPressed: () => Navigator.pop(context),
+            onPressed: () => Navigator.pop(dialogContext),
             child: Text(
               'Na, bidomîne',
               style: AppTypography.label.copyWith(color: AppColors.primary),
@@ -658,7 +737,7 @@ class _WordMatchScreenState extends ConsumerState<WordMatchScreen>
           ),
           TextButton(
             onPressed: () {
-              Navigator.pop(context);
+              Navigator.pop(dialogContext);
               if (context.canPop()) context.pop(); else context.go(AppRoutes.home);
             },
             child: Text(
@@ -675,7 +754,24 @@ class _WordMatchScreenState extends ConsumerState<WordMatchScreen>
   // SONUC EKRANI
   // ════════════════════════════════════════════════════════════════
 
+  bool _sessionCompleteSoundFired = false;
+
   Widget _buildResultScreen() {
+    if (!_sessionCompleteSoundFired) {
+      _sessionCompleteSoundFired = true;
+      SoundService.playSessionComplete();
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        final gami = ref.read(gamificationProvider.notifier);
+        gami.resetCombo();
+        if (_xpEarned > 0) gami.addXP(_xpEarned);
+        // İLERLEME FIX: Beceri panosundaki 'reading' (Xwendin) sayacı hiç
+        // beslenmiyordu — kelime eşleştirme oturumu tamamlanınca işlenir.
+        markSkillCompletedAndNotify(ref,
+            module: ref.read(isEnglishModuleProvider) ? 'en' : 'ku',
+            skill: 'reading',
+            xp: 10);
+      });
+    }
     final accuracyPercent = (_accuracy * 100).round();
     final stars = accuracyPercent >= 90 ? 3 : (accuracyPercent >= 70 ? 2 : 1);
 
@@ -782,6 +878,9 @@ class _WordMatchScreenState extends ConsumerState<WordMatchScreen>
                           _totalCorrect = 0;
                           _totalWrong = 0;
                           _sessionComplete = false;
+                          // İLERLEME FIX: bayrak sıfırlanmazsa tekrar oynanan
+                          // oturumun XP/beceri kaydı sessizce atlanır.
+                          _sessionCompleteSoundFired = false;
                         });
                         _startRound();
                       },
@@ -898,9 +997,11 @@ class _MatchCard extends StatelessWidget {
       onTap: isMatched ? null : onTap,
       child: AnimatedContainer(
         duration: const Duration(milliseconds: 200),
+        // Yukseklik artik dis katmandan (satir bazli yerlesim) geliyor;
+        // dikey padding kucuk tutulur ki metne alan kalsin.
         padding: const EdgeInsets.symmetric(
-          horizontal: AppSpacing.md,
-          vertical: AppSpacing.sm + 4,
+          horizontal: AppSpacing.sm + 4,
+          vertical: AppSpacing.xs + 2,
         ),
         decoration: BoxDecoration(
           color: bgColor,
@@ -926,29 +1027,54 @@ class _MatchCard extends StatelessWidget {
                   if (emoji.isEmpty) return const SizedBox.shrink();
                   return Padding(
                     padding: const EdgeInsets.only(right: 8),
-                    child: Text(emoji, style: const TextStyle(fontSize: 20)),
+                    child: Text(emoji, style: const TextStyle(fontSize: 22)),
                   );
                 },
               ),
             ],
             Expanded(
-              child: Text(
-                text,
-                style: isKurmanji
-                    ? AppTypography.kurmanjiCard.copyWith(
-                        color: isMatched
-                            ? (matchColor ?? AppColors.success)
-                            : AppColors.textPrimary,
-                        fontWeight: FontWeight.w600,
-                      )
-                    : AppTypography.body.copyWith(
-                        color: isMatched
-                            ? (matchColor ?? AppColors.success)
-                            : AppColors.textPrimary,
+              child: isKurmanji
+                  // Kurmancî kelime — tek satır; uzun kelime taşmasın diye
+                  // otomatik küçülür (FittedBox scaleDown)
+                  ? FittedBox(
+                      fit: BoxFit.scaleDown,
+                      alignment: Alignment.centerLeft,
+                      child: Text(
+                        text,
+                        maxLines: 1,
+                        style: AppTypography.kurmanjiCard.copyWith(
+                          fontSize: 20,
+                          height: 1.2,
+                          color: isMatched
+                              ? (matchColor ?? AppColors.success)
+                              : AppColors.textPrimary,
+                          fontWeight: FontWeight.w600,
+                        ),
                       ),
-                maxLines: 2,
-                overflow: TextOverflow.ellipsis,
-              ),
+                    )
+                  // Çeviri / heritage — en fazla 2 satır; karta sığmazsa
+                  // otomatik küçülür (FittedBox), böylece dikey taşma olmaz
+                  : LayoutBuilder(
+                      builder: (context, box) => FittedBox(
+                        fit: BoxFit.scaleDown,
+                        alignment: Alignment.centerLeft,
+                        child: ConstrainedBox(
+                          constraints: BoxConstraints(maxWidth: box.maxWidth),
+                          child: Text(
+                            text,
+                            style: AppTypography.bodyLarge.copyWith(
+                              height: 1.3,
+                              color: isMatched
+                                  ? (matchColor ?? AppColors.success)
+                                  : AppColors.textPrimary,
+                              fontWeight: FontWeight.w500,
+                            ),
+                            maxLines: 2,
+                            overflow: TextOverflow.ellipsis,
+                          ),
+                        ),
+                      ),
+                    ),
             ),
             if (isMatched)
               Padding(

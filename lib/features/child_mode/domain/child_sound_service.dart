@@ -1,3 +1,4 @@
+import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 // ════════════════════════════════════════════════════════════════
@@ -13,6 +14,11 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 //   - starEarned: Yıldız kazanma (pırıltı)
 //   - stickerEarned: Çıkartma kazanma (açma sesi)
 //   - tap: Dokunma geri bildirimi
+//
+// MVP NOTE (Nisan 2026): Ses dosyaları henüz mevcut değil.
+// Çocuk geri bildirimi olmadan kalmasın diye HAPTIC FEEDBACK
+// fallback olarak kullanılır. Ses asset'leri eklendiğinde
+// `just_audio` ile çalınacak (TODO play() metodunda).
 // ════════════════════════════════════════════════════════════════
 
 enum ChildSoundType {
@@ -39,8 +45,28 @@ class ChildSoundService {
   void setEnabled(bool value) => _enabled = value;
 
   /// Ses çal (placeholder — ses dosyaları eklendiğinde aktifleşir).
+  /// Şu anda HAPTIC FEEDBACK ile yedek geri bildirim verir.
   Future<void> play(ChildSoundType type) async {
     if (!_enabled) return;
+
+    // Haptic fallback — ses dosyaları gelene kadar dokunsal geri bildirim.
+    // Çocuk hiçbir cevap almasaydı motivasyon kaybı olurdu.
+    switch (type) {
+      case ChildSoundType.correct:
+      case ChildSoundType.lessonComplete:
+      case ChildSoundType.starEarned:
+      case ChildSoundType.stickerEarned:
+        // Pozitif olaylar — orta şiddetli haptic
+        await HapticFeedback.mediumImpact();
+        break;
+      case ChildSoundType.encourage:
+        // Yumuşak teşvik — hafif haptic
+        await HapticFeedback.lightImpact();
+        break;
+      case ChildSoundType.tap:
+        await HapticFeedback.selectionClick();
+        break;
+    }
 
     // TODO: Ses dosyaları eklendiğinde just_audio ile çalınacak
     // final player = AudioPlayer();
@@ -63,6 +89,9 @@ class ChildSoundService {
 
   /// Çıkartma kazanma sesi.
   Future<void> playStickerEarned() => play(ChildSoundType.stickerEarned);
+
+  /// Dokunma sesi (UI feedback).
+  Future<void> playTap() => play(ChildSoundType.tap);
 }
 
 /// Riverpod provider.

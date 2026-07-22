@@ -97,7 +97,9 @@ class LutkeAudioService extends StateNotifier<AudioPlayerState> {
 
   /// Asset dosyasından ses çal.
   /// Örnek: `assets/audio/a1/silav.mp3`
-  Future<void> playAsset(String assetPath) async {
+  /// [speed]: çalma hızı (1.0 = normal). Her çağrıda açıkça uygulanır —
+  /// önceki playSlow(0.7x) hızının sonraki çalmalara sızmasını önler.
+  Future<void> playAsset(String assetPath, {double speed = 1.0}) async {
     try {
       state = state.copyWith(
         state: AudioState.loading,
@@ -106,6 +108,7 @@ class LutkeAudioService extends StateNotifier<AudioPlayerState> {
       );
 
       await _player.setAsset(assetPath);
+      await _player.setSpeed(speed);
       await _player.play();
     } catch (e) {
       state = state.copyWith(
@@ -116,7 +119,7 @@ class LutkeAudioService extends StateNotifier<AudioPlayerState> {
   }
 
   /// URL'den ses çal (Firebase Storage gibi).
-  Future<void> playUrl(String url) async {
+  Future<void> playUrl(String url, {double speed = 1.0}) async {
     try {
       state = state.copyWith(
         state: AudioState.loading,
@@ -125,6 +128,7 @@ class LutkeAudioService extends StateNotifier<AudioPlayerState> {
       );
 
       await _player.setUrl(url);
+      await _player.setSpeed(speed);
       await _player.play();
     } catch (e) {
       state = state.copyWith(
@@ -187,7 +191,9 @@ class LutkeAudioService extends StateNotifier<AudioPlayerState> {
 
 final audioServiceProvider =
     StateNotifierProvider<LutkeAudioService, AudioPlayerState>((ref) {
-  final service = LutkeAudioService();
-  ref.onDispose(service.dispose);
-  return service;
+  // BUG FIX: StateNotifier.dispose() Riverpod tarafindan otomatik cagrilir.
+  // ref.onDispose(service.dispose) EXTRA bir disposal yaratiyor;
+  // _player.dispose() iki kez cagrilinca just_audio sessions/listeners
+  // uzerinde assertion firlatir. Kaldirildi.
+  return LutkeAudioService();
 });

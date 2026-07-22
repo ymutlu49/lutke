@@ -24,6 +24,7 @@ class AnalyticsService {
     required int levelNum,
     required String rating,    // 'again' | 'hard' | 'good' | 'easy'
     required int responseMs,   // milisaniye cevap süresi
+    String? track,             // 'ku_adult' | 'en_adult' | 'ku_child' | 'en_child'
   }) async {
     final uid = _uid;
     if (uid == null) return;
@@ -36,10 +37,44 @@ class AnalyticsService {
       'level': levelNum,
       'rating': rating,
       'responseMs': responseMs,
+      if (track != null) 'track': track,
       'timestamp': FieldValue.serverTimestamp(),
     });
 
     // Günlük özeti güncelle
+    await _updateDailySummary(uid, rating == 'again' ? 0 : 1);
+  }
+
+  /// EN-specific card review (writing/speaking/listening exercises).
+  /// INTEGRATION FIX (Nisan 2026 — EN audit):
+  ///   EN modülündeki exercise'lar önceden hiç analytics'e düşmüyordu.
+  ///   Dashboard ve AI recommendation service'in EN ilerlemesini görebilmesi
+  ///   için ayrı bir log noktası. `kurmanji` yerine `english` alanı +
+  ///   `track` = 'en_adult' | 'en_child' eklenir.
+  Future<void> logEnCardReview({
+    required String cardId,
+    required String english,
+    required String level,        // 'A1' | 'A2' | ... | 'C2'
+    required String rating,        // 'again' | 'hard' | 'good' | 'easy'
+    required int responseMs,
+    required bool isChild,
+  }) async {
+    final uid = _uid;
+    if (uid == null) return;
+
+    await _db.collection('analytics').add({
+      'userId': uid,
+      'event': 'card_review',
+      'cardId': cardId,
+      'english': english,
+      'levelStr': level,
+      'rating': rating,
+      'responseMs': responseMs,
+      'track': isChild ? 'en_child' : 'en_adult',
+      'module': 'en',
+      'timestamp': FieldValue.serverTimestamp(),
+    });
+
     await _updateDailySummary(uid, rating == 'again' ? 0 : 1);
   }
 
@@ -50,6 +85,7 @@ class AnalyticsService {
     required int durationSeconds,
     required int correctAnswers,
     required int totalQuestions,
+    String? track,  // 'ku_adult' | 'en_adult' | ...
   }) async {
     final uid = _uid;
     if (uid == null) return;
@@ -66,6 +102,7 @@ class AnalyticsService {
       'accuracy': totalQuestions > 0
           ? correctAnswers / totalQuestions
           : 0.0,
+      if (track != null) 'track': track,
       'timestamp': FieldValue.serverTimestamp(),
     });
   }

@@ -1,10 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../../core/constants/child_theme.dart';
-import '../../../core/router/app_router.dart';
+import '../../../shared/providers/learning_track_provider.dart';
+import '../../en_learning/domain/en_child_a1_kelime_db.dart';
+import '../../en_learning/domain/en_child_a2_kelime_db.dart';
 import '../../lessons/domain/child_a1_kelime_db.dart';
+import '../../lessons/domain/child_a2_kelime_db.dart';
 import 'widgets/mascot_widget.dart';
 
 // ════════════════════════════════════════════════════════════════
@@ -15,7 +19,7 @@ import 'widgets/mascot_widget.dart';
 // canlı renkler, maskot teşviki.
 // ════════════════════════════════════════════════════════════════
 
-class ChildUnitHubScreen extends StatelessWidget {
+class ChildUnitHubScreen extends ConsumerWidget {
   final String category;
   final String titleKu;
   final String titleTr;
@@ -32,8 +36,9 @@ class ChildUnitHubScreen extends StatelessWidget {
   });
 
   @override
-  Widget build(BuildContext context) {
-    final words = _loadCategoryWords(category);
+  Widget build(BuildContext context, WidgetRef ref) {
+    final isEn = ref.watch(currentTrackProvider).isEnglish;
+    final words = _loadCategoryWords(category, level, isEn: isEn);
     final catColor = ChildColors.categoryColor(category);
 
     return Scaffold(
@@ -47,7 +52,7 @@ class ChildUnitHubScreen extends StatelessWidget {
               child: Row(
                 children: [
                   GestureDetector(
-                    onTap: () => context.pop(),
+                    onTap: () => context.canPop() ? context.pop() : context.go('/child/home'),
                     child: Container(
                       width: 48,
                       height: 48,
@@ -61,7 +66,7 @@ class ChildUnitHubScreen extends StatelessWidget {
                   ),
                   const Spacer(),
                   Text(
-                    '${words.length} peyv',
+                    isEn ? '${words.length} words' : '${words.length} peyv',
                     style: ChildTypography.label.copyWith(
                       color: catColor,
                     ),
@@ -124,7 +129,7 @@ class ChildUnitHubScreen extends StatelessWidget {
                   MascotWidget(
                     state: MascotState.wave,
                     size: 56,
-                    message: 'Ka em fêr bibin!',
+                    message: isEn ? "Let's learn together!" : 'Ka em fêr bibin!',
                   ),
                 ],
               ),
@@ -143,7 +148,7 @@ class ChildUnitHubScreen extends StatelessWidget {
                         Expanded(
                           child: _ChildActivityCard(
                             emoji: '📝',
-                            titleKu: 'Ceribandin',
+                            titleKu: isEn ? 'Quiz' : 'Ceribandin',
                             color: ChildColors.primary,
                             onTap: () => context.push(
                               '/activity/quiz',
@@ -156,7 +161,7 @@ class ChildUnitHubScreen extends StatelessWidget {
                         Expanded(
                           child: _ChildActivityCard(
                             emoji: '🃏',
-                            titleKu: 'Peld',
+                            titleKu: isEn ? 'Flashcards' : 'Peld',
                             color: ChildColors.accent,
                             onTap: () => context.push(
                               '/activity/flashcard',
@@ -177,7 +182,7 @@ class ChildUnitHubScreen extends StatelessWidget {
                         Expanded(
                           child: _ChildActivityCard(
                             emoji: '🔊',
-                            titleKu: 'Guhdarêkirin',
+                            titleKu: isEn ? 'Listen' : 'Guhdarêkirin',
                             color: const Color(0xFF2196F3),
                             onTap: () => context.push(
                               '/activity/listening',
@@ -190,7 +195,7 @@ class ChildUnitHubScreen extends StatelessWidget {
                         Expanded(
                           child: _ChildActivityCard(
                             emoji: '🖼️',
-                            titleKu: 'Wêne',
+                            titleKu: isEn ? 'Picture match' : 'Wêne',
                             color: ChildColors.stickerPurple,
                             onTap: () => context.push(
                               '/activity/word-match',
@@ -205,7 +210,7 @@ class ChildUnitHubScreen extends StatelessWidget {
                     // ── Çîrok (Hikaye) — 3. sıra, tek geniş kart ──
                     _ChildActivityCard(
                       emoji: '📖',
-                      titleKu: 'Çîrok',
+                      titleKu: isEn ? 'Story' : 'Çîrok',
                       color: const Color(0xFFFF7043),
                       onTap: () => context.push(
                         '/home/story',
@@ -221,14 +226,16 @@ class ChildUnitHubScreen extends StatelessWidget {
                       Row(
                         children: [
                           Text(
-                            'Peyvên vê beşê',
+                            isEn ? 'Words in this unit' : 'Peyvên vê beşê',
                             style: ChildTypography.label.copyWith(
                               color: ChildColors.textSecondary,
                             ),
                           ),
                           const Spacer(),
                           Text(
-                            '${words.length} peyv',
+                            isEn
+                                ? '${words.length} words'
+                                : '${words.length} peyv',
                             style: ChildTypography.caption,
                           ),
                         ],
@@ -284,9 +291,26 @@ class ChildUnitHubScreen extends StatelessWidget {
     );
   }
 
-  List<_SimpleWord> _loadCategoryWords(String category) {
-    final all = kChildA1Kelimeler;
-    return (all as List)
+  List<_SimpleWord> _loadCategoryWords(
+    String category,
+    String level, {
+    bool isEn = false,
+  }) {
+    // Track-aware: EN child → en_child_aX_kelime_db, KU child → child_aX.
+    // Level belirtilmişse o seviyeye bak; yoksa A1+A2 birleşir.
+    if (isEn) {
+      final pool = level == 'A2'
+          ? [...kEnChildA1Liste, ...kEnChildA2Liste]
+          : kEnChildA1Liste;
+      return pool
+          .where((w) => w.kat == category)
+          .map((w) => _SimpleWord(w.en, w.ku))
+          .toList();
+    }
+    final pool = level == 'A2'
+        ? [...kChildA1Kelimeler, ...kChildA2Kelimeler]
+        : kChildA1Kelimeler as List;
+    return pool
         .where((w) => w.kat == category)
         .map((w) => _SimpleWord(w.ku as String, w.tr as String))
         .toList();

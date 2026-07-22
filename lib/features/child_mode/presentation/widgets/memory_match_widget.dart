@@ -2,8 +2,12 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_animate/flutter_animate.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../../../core/constants/child_theme.dart';
+import '../../../../core/services/audio_service.dart';
+import '../../../../core/services/tts_service.dart';
+import '../../../../core/services/tts_source_preferences.dart';
 import '../../../../core/utils/fsrs_algorithm.dart';
 import '../../../lessons/domain/entities/exercise.dart';
 import '../../../exercises/presentation/exercise_dispatcher.dart';
@@ -21,7 +25,7 @@ import '../../../exercises/presentation/exercise_dispatcher.dart';
 // Çalıştırdığı beceriler: dikkat, görsel-sözlü ilişki, çalışma belleği.
 // ════════════════════════════════════════════════════════════════
 
-class MemoryMatchWidget extends StatefulWidget {
+class MemoryMatchWidget extends ConsumerStatefulWidget {
   final MemoryMatchExercise exercise;
   final OnRatingCallback onRating;
 
@@ -32,7 +36,7 @@ class MemoryMatchWidget extends StatefulWidget {
   });
 
   @override
-  State<MemoryMatchWidget> createState() => _MemoryMatchWidgetState();
+  ConsumerState<MemoryMatchWidget> createState() => _MemoryMatchWidgetState();
 }
 
 /// Tek bir kart — emoji yüzü veya kelime yüzü
@@ -48,12 +52,30 @@ class _MemoryCard {
   });
 }
 
-class _MemoryMatchWidgetState extends State<MemoryMatchWidget> {
+class _MemoryMatchWidgetState extends ConsumerState<MemoryMatchWidget> {
   late List<_MemoryCard> _cards;
   final Set<int> _flipped = {};   // Şu an açık olan kart indeksleri
   final Set<int> _matched = {};   // Eşleşmiş kart indeksleri (kalıcı açık)
   int _attempts = 0;              // Deneme sayısı
   bool _isChecking = false;       // İki kart açık, eşleşme kontrolü var
+
+  /// Kurmancî TTS — HF amedcj/kmr_tts. Browser fallback YOK.
+  Future<void> _speakKurmanci(String text) async {
+    if (text.trim().isEmpty) return;
+    try {
+      final tts = ref.read(ttsServiceProvider);
+      // Kullanıcı TTS kaynak tercihini senkronize et (default assetFirst).
+      tts.source = ref.read(ttsSourceProvider);
+      final url = await tts.synthesize(text);
+      if (url == null || !mounted) return;
+      final audio = ref.read(audioServiceProvider.notifier);
+      if (url.startsWith('asset:')) {
+        await audio.playAsset(url.substring('asset:'.length));
+      } else {
+        await audio.playUrl(url);
+      }
+    } catch (_) {}
+  }
 
   @override
   void initState() {
@@ -93,6 +115,12 @@ class _MemoryMatchWidgetState extends State<MemoryMatchWidget> {
       _flipped.add(index);
     });
 
+    // Kelime kartı açıldıysa Kurmancî olarak seslendir (çocuk duyarak öğrenir)
+    final card = _cards[index];
+    if (!card.isEmoji) {
+      _speakKurmanci(card.content);
+    }
+
     if (_flipped.length == 2) {
       _attempts++;
       _checkMatch();
@@ -123,6 +151,12 @@ class _MemoryMatchWidgetState extends State<MemoryMatchWidget> {
       }
       _isChecking = false;
     });
+
+    // Doğru eşleşme — kelime kartının içeriğini Kurmancî olarak kutla
+    if (isMatch) {
+      final wordCard = c1.isEmoji ? c2 : c1;
+      _speakKurmanci(wordCard.content);
+    }
 
     if (_allMatched) {
       await Future<void>.delayed(const Duration(milliseconds: 400));

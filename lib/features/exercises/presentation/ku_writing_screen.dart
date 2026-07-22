@@ -7,6 +7,8 @@ import '../../../core/constants/app_colors.dart';
 import '../../../core/constants/app_spacing.dart';
 import '../../../core/constants/app_typography.dart';
 import '../../../shared/providers/language_mode_provider.dart';
+import '../../../shared/services/skill_progress_service.dart';
+import '../../gamification/gamification_provider.dart';
 import '../domain/ku_writing_db.dart';
 
 class KuWritingScreen extends ConsumerStatefulWidget {
@@ -36,11 +38,20 @@ class _KuWritingScreenState extends ConsumerState<KuWritingScreen> {
     super.dispose();
   }
 
-  String _normalize(String s) => s
-      .toLowerCase()
-      .replaceAll(RegExp(r"[.,!?']"), '')
-      .replaceAll(RegExp(r'\s+'), ' ')
-      .trim();
+  String _normalize(String s) {
+    final t = s
+        .toLowerCase()
+        .replaceAll(RegExp(r"[.,!?']"), '')
+        .replaceAll(RegExp(r'\s+'), ' ')
+        .trim();
+    // Ezafe varyantları eşdeğerdir (a/ya, ê/yê, ên/yên — KURMANCI_RULES
+    // §3.3): serbest metin cevabında ikisi de kabul edilir.
+    return ' $t '
+        .replaceAll(' ya ', ' a ')
+        .replaceAll(' yê ', ' ê ')
+        .replaceAll(' yên ', ' ên ')
+        .trim();
+  }
 
   void _check() {
     final q = _items[_idx];
@@ -53,8 +64,19 @@ class _KuWritingScreenState extends ConsumerState<KuWritingScreen> {
     });
   }
 
+  bool _progressRecorded = false;
+
   void _next() {
     if (_idx + 1 >= _items.length) {
+      // İLERLEME FIX (Temmuz 2026): Bu ekran hiçbir XP/beceri kaydı
+      // yazmıyordu — beceri panosundaki 'writing' (Nivîsîn) barı hiçbir
+      // ekrandan beslenmiyordu. Oturum başına bir kez kaydet.
+      if (!_progressRecorded) {
+        _progressRecorded = true;
+        final gami = ref.read(gamificationProvider.notifier);
+        if (_score > 0) gami.addXP(_score);
+        markSkillCompletedAndNotify(ref, module: 'ku', skill: 'writing');
+      }
       showDialog(
         context: context,
         builder: (_) => AlertDialog(

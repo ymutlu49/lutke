@@ -7,16 +7,20 @@ import 'package:shared_preferences/shared_preferences.dart';
 import '../../../core/constants/child_theme.dart';
 import '../../../core/router/app_router.dart';
 import '../../../shared/providers/child_mode_provider.dart';
+import 'parental_gate_screen.dart';
 
 // ════════════════════════════════════════════════════════════════
 // LÛTKE ZAROK — Çocuk Onboarding
 //
-// 2 adımlı basit akış:
+// 3 adımlı akış (COPPA + Play Store Designed for Families gereksinimi):
+//   0. VELİ KAPISI (math gate + consent) — yeni Nisan 2026
 //   1. Yaş seçimi (7, 8, 9, 10)
 //   2. Maskot karşılama ("Karik")
 //
-// NOT (Nisan 2026): Ebeveyn PIN adımı kaldırıldı — LÛTKE bir dil
-// öğrenme uygulaması; kısıtlama aracı değil.
+// NOT (Nisan 2026 v2): Önceki "PIN kaldırıldı" kararı geri alındı.
+// Play Store yayınlama için 13 yaş altı içerik COPPA'ya uyumlu olmalı.
+// Math gate Google'ın onayladığı yöntemdir (developer.android.com/
+// guide/topics/policies/play-families).
 // ════════════════════════════════════════════════════════════════
 
 class ChildOnboardingScreen extends ConsumerStatefulWidget {
@@ -29,11 +33,47 @@ class ChildOnboardingScreen extends ConsumerStatefulWidget {
 
 class _ChildOnboardingScreenState
     extends ConsumerState<ChildOnboardingScreen> {
-  int _step = 0;
+  int _step = -1; // -1 = parental gate; 0 = age; 1 = mascot
   int? _selectedAge;
+  bool _initChecked = false;
+
+  @override
+  void initState() {
+    super.initState();
+    _checkParentalConsent();
+  }
+
+  Future<void> _checkParentalConsent() async {
+    // Eğer veli zaten onay vermişse direkt yaş seçimine geç
+    final consented = await ParentalConsent.isGiven();
+    if (mounted) {
+      setState(() {
+        _step = consented ? 0 : -1;
+        _initChecked = true;
+      });
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
+    if (!_initChecked) {
+      return const Scaffold(
+        backgroundColor: ChildColors.backgroundPrimary,
+        body: Center(child: CircularProgressIndicator()),
+      );
+    }
+
+    // Veli kapısı (parental gate)
+    if (_step == -1) {
+      return ParentalGateScreen(
+        onConsent: () => setState(() => _step = 0),
+        onCancel: () {
+          // Vazgeçildi → track-select'e dön
+          context.go(AppRoutes.trackSelect);
+        },
+      );
+    }
+
     return Scaffold(
       backgroundColor: ChildColors.backgroundPrimary,
       body: SafeArea(

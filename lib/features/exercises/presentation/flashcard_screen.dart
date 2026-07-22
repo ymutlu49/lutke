@@ -818,10 +818,10 @@ class _FlashcardScreenState extends ConsumerState<FlashcardScreen>
 
                   const SizedBox(height: AppSpacing.md),
 
-                  // Ezafe — çocuk modunda gizle
-                  if (!isChild && card.ezafe != null)
+                  // Veqetandek — çocuk modunda gizle
+                  if (!isChild && card.veqetandek != null)
                     Text(
-                      'Ezafe: ${card.ezafe}',
+                      'Veqetandek: ${card.veqetandek}',
                       style: AppTypography.caption.copyWith(
                         color: AppColors.textTertiary,
                         fontStyle: FontStyle.italic,
@@ -1058,7 +1058,7 @@ class _FlashcardScreenState extends ConsumerState<FlashcardScreen>
                     const SizedBox(width: 8),
                     Expanded(
                       child: Text(
-                        'Cinsiyet: ${card.cinsiyet == 'nêr' ? (ref.watch(showTurkishProvider) ? 'Nêr (Eril)' : 'Nêr') : (ref.watch(showTurkishProvider) ? 'Mê (Dişil)' : 'Mê')}${card.ezafe != null ? ' — Ezafe: ${card.ezafe}' : ''}',
+                        'Cinsiyet: ${card.cinsiyet == 'nêr' ? (ref.watch(showTurkishProvider) ? 'Nêr (Eril)' : 'Nêr') : (ref.watch(showTurkishProvider) ? 'Mê (Dişil)' : 'Mê')}${card.veqetandek != null ? ' — Veqetandek: ${card.veqetandek}' : ''}',
                         style: AppTypography.caption.copyWith(
                           color: AppColors.primary,
                           fontWeight: FontWeight.w500,
@@ -1655,7 +1655,7 @@ class _FlashcardItem {
   final String turkce;
   final String ingilizce;
   final String cinsiyet;
-  final String? ezafe;
+  final String? veqetandek;
   final String kategori;
   final double zorluk;
   final String? cinsiyetNotu;
@@ -1668,7 +1668,7 @@ class _FlashcardItem {
     required this.turkce,
     required this.ingilizce,
     required this.cinsiyet,
-    this.ezafe,
+    this.veqetandek,
     required this.kategori,
     required this.zorluk,
     this.cinsiyetNotu,
@@ -1683,7 +1683,7 @@ class _FlashcardItem {
       turkce: record.tr as String,
       ingilizce: record.en as String,
       cinsiyet: record.cins as String,
-      ezafe: record.ez as String?,
+      veqetandek: record.ez as String?,
       kategori: record.kat as String,
       zorluk: (record.zor as num).toDouble(),
       cinsiyetNotu: record.not as String?,

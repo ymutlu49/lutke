@@ -8,26 +8,27 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../../../core/constants/app_colors.dart';
 import '../../../../core/constants/app_typography.dart';
 import '../../../../core/constants/app_spacing.dart';
+import '../../../../core/services/asr_service.dart';
 import '../../../../core/services/audio_service.dart';
+import '../../../../core/services/tts_service.dart';
+import '../../../../core/services/tts_source_preferences.dart';
 import '../../../../core/utils/fsrs_algorithm.dart';
 import '../../../../shared/providers/language_mode_provider.dart';
+import '../../../../shared/services/skill_progress_service.dart';
 import '../../../lessons/domain/entities/exercise.dart';
-
-// Conditional import for direct TTS calls
-import '../../../../core/services/js_eval_stub.dart'
-    if (dart.library.html) '../../../../core/services/js_eval_web.dart'
-    as js_bridge;
 
 // ════════════════════════════════════════════════════════════════
 // KONUŞMA PRATİĞİ — LÛTKE
 //
 // İlke §5.5 (MVP versiyonu):
 //   1. Anadil konuşucusu sesini dinle
-//   2. Kendi sesini kaydet
-//   3. İkisini karşılaştır
-//   4. Kullanıcı kendi değerlendirmesini yapar
+//   2. Konuş — mikrofon otomatik dinler (web SpeechRecognition)
+//   3. Otomatik skor + transkript göster (deneysel, tr-TR yakın fallback)
+//   4. Kullanıcı öz-değerlendirmeyi onaylar/değiştirir (son söz onda)
 //
-// İlke §0.4 (Katman 2): Otomatik ses analizi Faz 3+'da.
+// Otomatik değerlendirme (Temmuz 2026): AsrService ile tarayıcı
+// SpeechRecognition kullanılır. Destek/izin/ağ hatası durumunda SESSİZCE
+// eski akışa düşülür: sahte kayıt toggle + öz-değerlendirme.
 // İlke §3.1: Heritage kullanıcı "yanlış" yerine "çok yakın" tonu.
 // ════════════════════════════════════════════════════════════════
 
@@ -50,11 +51,17 @@ class _SpeakingPracticeWidgetState
     extends ConsumerState<SpeakingPracticeWidget> {
   _SpeakingPhase _phase = _SpeakingPhase.listen;
   bool _isRecording = false;
-  bool _hasRecording = false;
   int? _selfAssessment; // 0=kötü, 1=yakın, 2=iyi
   bool _isShadowReading = false; // Shadow reading mode
   String? _encouragementMessage; // Kurmanci encouragement after attempt
-  int _attemptCount = 0; // Track attempts for encouragement variety
+
+  // Otomatik telaffuz değerlendirmesi (deneysel).
+  // null = ASR yapılamadı → eski öz-değerlendirme akışı aynen çalışır.
+  PronunciationResult? _asrResult;
+
+  // Tek seferlik ilerleme kaydı — beceri panosundaki 'speaking' sayacı
+  // bu egzersiz tamamlanınca da beslensin (İLERLEME FIX).
+  bool _progressRecorded = false;
 
   // Kurmancî encouragement messages (Kurmancî-only, no Turkish)
   static const _encouragements = [
@@ -67,37 +74,28 @@ class _SpeakingPracticeWidgetState
 
   SpeakingPracticeExercise get _ex => widget.exercise;
 
-  /// Play TTS directly — Kurdish-first voice strategy
-  void _playTtsDirect(String text, {double rate = 0.82}) {
-    if (!kIsWeb) return;
-    final escaped = text
-        .replaceAll("'", "\\'")
-        .replaceAll('"', '\\"')
-        .replaceAll('\n', ' ');
-    final script = '''
-      (function() {
-        const u = new SpeechSynthesisUtterance('$escaped');
-        const voices = speechSynthesis.getVoices();
-        const kurdish = voices.find(v => v.lang.startsWith('ku'));
-        const turkish = voices.find(v => v.lang.startsWith('tr'));
-        if (kurdish) {
-          u.voice = kurdish;
-          u.lang = kurdish.lang;
-        } else if (turkish) {
-          u.voice = turkish;
-          u.lang = 'tr-TR';
-        } else {
-          u.lang = 'tr-TR';
-        }
-        u.rate = $rate;
-        u.pitch = 1.0;
-        speechSynthesis.cancel();
-        speechSynthesis.speak(u);
-      })();
-    ''';
+  /// Kurmancî TTS — yalnızca HuggingFace amedcj/kmr_tts kullanır.
+  /// Türkçe veya başka browser fallback YOKTUR (yanlış telaffuz olmasın).
+  /// HF başarısızsa sessiz geçer; UI kullanıcıyı rahatsız etmez.
+  Future<void> _playKurmanciTts(String text) async {
+    final trimmed = text.trim();
+    if (trimmed.isEmpty) return;
     try {
-      js_bridge.evalJs(script);
-    } catch (_) {}
+      final tts = ref.read(ttsServiceProvider);
+      // Kullanıcı TTS kaynak tercihini senkronize et (default assetFirst).
+      // Profîl'den assetOnly/geminiFenrir seçilmişse bu widget'in de onurlandırması için.
+      tts.source = ref.read(ttsSourceProvider);
+      final audioUrl = await tts.synthesize(trimmed);
+      if (audioUrl == null || !mounted) return;
+      final audio = ref.read(audioServiceProvider.notifier);
+      if (audioUrl.startsWith('asset:')) {
+        await audio.playAsset(audioUrl.substring('asset:'.length));
+      } else {
+        await audio.playUrl(audioUrl);
+      }
+    } catch (_) {
+      // Sessiz geç — yanlış telaffuz yerine susmak tercih edilir
+    }
   }
 
   void _playReference() {
@@ -112,37 +110,94 @@ class _SpeakingPracticeWidgetState
   }
 
   void _toggleRecording() {
+    if (_isRecording) {
+      // Elle durduruldu — aktif ASR varsa iptal, öz-değerlendirmeye düş
+      AsrService.cancel();
+      _finishRecording(null);
+      return;
+    }
     setState(() {
-      if (_isRecording) {
-        _isRecording = false;
-        _hasRecording = true;
-        _attemptCount++;
-        // Show random encouragement message
+      _isRecording = true;
+      _encouragementMessage = null;
+      _asrResult = null;
+    });
+    if (AsrService.isSupported) {
+      // Otomatik değerlendirme: mikrofonu dinle, hedefle karşılaştır.
+      // Konuşma bitince (sessizlik) tarayıcı kendiliğinden durur.
+      _runAutoAssess();
+    }
+    // Desteklenmiyorsa eski davranış: ikinci dokunuş compare'e geçirir.
+  }
+
+  /// Tarayıcı SpeechRecognition ile otomatik skor (deneysel).
+  /// Her türlü hatada sessizce skorsuz devam edilir.
+  Future<void> _runAutoAssess() async {
+    // Kurmancî için tarayıcı dili yok — tr-TR yakın fallback (yaklaşık).
+    final result = await AsrService.assess(target: _ex.targetText);
+    if (!mounted || !_isRecording) return; // iptal edildi / ekran kapandı
+    if (result == null) {
+      // Sessiz fallback: mikrofon izni/destek/ağ hatası — kayıt modunda
+      // kal, kullanıcı eski akıştaki gibi elle durdurup öz-değerlendirir.
+      return;
+    }
+    _finishRecording(result);
+  }
+
+  /// Kayıt aşamasını bitir, karşılaştırma fazına geç.
+  /// [result] null ise otomatik skor yok — eski öz-değerlendirme akışı.
+  void _finishRecording(PronunciationResult? result) {
+    setState(() {
+      _isRecording = false;
+      _asrResult = result;
+      if (result != null) {
+        // Otomatik skor → öz-değerlendirme önerisi (kullanıcı değiştirebilir)
+        _selfAssessment = switch (result.verdict) {
+          PronunciationVerdict.excellent => 2,
+          PronunciationVerdict.close => 1,
+          PronunciationVerdict.tryAgain => 0,
+        };
+        // Heritage tonu (§3.1): "yanlış" deme, cesaretlendir
+        _encouragementMessage = switch (result.verdict) {
+          PronunciationVerdict.excellent => 'Pir baş! 🎉',
+          PronunciationVerdict.close => 'Nêzîk bû — berdewam bike!',
+          PronunciationVerdict.tryAgain => 'Dîsa biceribîne — hêdî hêdî',
+        };
+      } else {
         _encouragementMessage =
             _encouragements[Random().nextInt(_encouragements.length)];
-        _phase = _SpeakingPhase.compare;
-      } else {
-        _isRecording = true;
-        _encouragementMessage = null;
       }
+      _phase = _SpeakingPhase.compare;
     });
-    // TODO: record paketi ile gerçek kayıt
+  }
+
+  /// Karşılaştırma fazından kayıt fazına geri dön (yeniden dene).
+  void _retryRecording() {
+    AsrService.cancel();
+    setState(() {
+      _phase = _SpeakingPhase.record;
+      _isRecording = false;
+      _asrResult = null;
+      _selfAssessment = null;
+      _encouragementMessage = null;
+    });
+  }
+
+  @override
+  void dispose() {
+    AsrService.cancel();
+    super.dispose();
   }
 
   /// Start shadow reading: TTS plays, user repeats simultaneously
   void _startShadowReading() {
     setState(() => _isShadowReading = true);
-    _playTtsDirect(_ex.targetText, rate: 0.75); // Slower for shadow reading
+    _playKurmanciTts(_ex.targetText);
     // Reset after estimated duration
     final words = _ex.targetText.split(' ').length;
     final durationSec = ((words * 0.6 + 2.0)).clamp(3.0, 10.0).toInt();
     Future.delayed(Duration(seconds: durationSec), () {
       if (mounted) setState(() => _isShadowReading = false);
     });
-  }
-
-  void _playRecording() {
-    // TODO: Kaydedilen sesi çal
   }
 
   void _assess(int score) {
@@ -276,7 +331,8 @@ class _SpeakingPracticeWidgetState
                 ),
               _SpeakingPhase.compare => _ComparePhase(
                   onPlayReference: _playReference,
-                  onPlayRecording: _playRecording,
+                  onRetry: _retryRecording,
+                  asrResult: _asrResult,
                   assessment: _selfAssessment,
                   onAssess: _assess,
                   showTurkish: ref.watch(showTurkishProvider),
@@ -308,7 +364,16 @@ class _SpeakingPracticeWidgetState
     return Padding(
       padding: const EdgeInsets.only(top: AppSpacing.md),
       child: ElevatedButton(
-        onPressed: () => widget.onRating(rating),
+        onPressed: () {
+          // İLERLEME FIX: Konuşma pratiği beceri panosuna hiç işlenmiyordu —
+          // değerlendirme onaylanınca 'speaking' (Axaftin) sayacına yazılır.
+          if (!_progressRecorded) {
+            _progressRecorded = true;
+            markSkillCompletedAndNotify(ref,
+                module: 'ku', skill: 'speaking', xp: 8);
+          }
+          widget.onRating(rating);
+        },
         style: ElevatedButton.styleFrom(
           backgroundColor: AppColors.primary,
           foregroundColor: Colors.white,
@@ -557,7 +622,8 @@ class _RecordPhase extends StatelessWidget {
 
 class _ComparePhase extends StatelessWidget {
   final VoidCallback onPlayReference;
-  final VoidCallback onPlayRecording;
+  final VoidCallback onRetry;
+  final PronunciationResult? asrResult;
   final int? assessment;
   final ValueChanged<int> onAssess;
   final bool showTurkish;
@@ -565,7 +631,8 @@ class _ComparePhase extends StatelessWidget {
 
   const _ComparePhase({
     required this.onPlayReference,
-    required this.onPlayRecording,
+    required this.onRetry,
+    required this.asrResult,
     required this.assessment,
     required this.onAssess,
     required this.showTurkish,
@@ -639,6 +706,12 @@ class _ComparePhase extends StatelessWidget {
             ),
           ),
 
+          // Otomatik değerlendirme sonucu (varsa)
+          if (asrResult != null) ...[
+            _AsrResultCard(result: asrResult!, showTurkish: showTurkish),
+            const SizedBox(height: AppSpacing.md),
+          ],
+
           Text(
             showTurkish ? 'İkisini karşılaştır:' : 'Herduyan bide ber hev:',
             style: AppTypography.bodyMedium.copyWith(
@@ -647,7 +720,9 @@ class _ComparePhase extends StatelessWidget {
           ),
           const SizedBox(height: AppSpacing.lg),
 
-          // Iki ses butonu
+          // Referans dinle + yeniden dene butonları
+          // (Kayıt playback'i yok — SpeechRecognition ham sesi vermez;
+          //  ölü "Dengê te" butonu yerine dürüst "yeniden dene" akışı.)
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
@@ -658,10 +733,10 @@ class _ComparePhase extends StatelessWidget {
                 onPlayReference,
               ),
               _compareBtn(
-                showTurkish ? 'Senin sesin' : 'Dengê te',
+                showTurkish ? 'Tekrar söyle' : 'Dîsa bêje',
                 Icons.mic_outlined,
                 AppColors.accent,
-                onPlayRecording,
+                onRetry,
               ),
             ],
           ),
@@ -752,5 +827,72 @@ class _ComparePhase extends StatelessWidget {
         ),
       ),
     );
+  }
+}
+
+// ── Otomatik Değerlendirme Sonuç Kartı (deneysel) ─────────────
+
+class _AsrResultCard extends StatelessWidget {
+  final PronunciationResult result;
+  final bool showTurkish;
+
+  const _AsrResultCard({required this.result, required this.showTurkish});
+
+  @override
+  Widget build(BuildContext context) {
+    // Heritage tonu (§3.1): kırmızı "yanlış" yok, cesaretlendirici renkler
+    final (color, label) = switch (result.verdict) {
+      PronunciationVerdict.excellent =>
+        (const Color(0xFF4CAF50), 'Pir baş! 🎉'),
+      PronunciationVerdict.close => (const Color(0xFFFF9800), 'Nêzîk bû!'),
+      PronunciationVerdict.tryAgain =>
+        (const Color(0xFFFF9800), 'Dîsa biceribîne'),
+    };
+    return Container(
+      width: double.infinity,
+      padding: const EdgeInsets.all(AppSpacing.md),
+      decoration: BoxDecoration(
+        color: color.withOpacity(0.08),
+        borderRadius: BorderRadius.circular(14),
+        border: Border.all(color: color.withOpacity(0.3)),
+      ),
+      child: Column(
+        children: [
+          Text(
+            '$label  %${result.percent}',
+            style: AppTypography.bodyMedium.copyWith(
+              color: color,
+              fontWeight: FontWeight.w800,
+            ),
+            textAlign: TextAlign.center,
+          ),
+          if (result.transcript.isNotEmpty) ...[
+            const SizedBox(height: 4),
+            Text(
+              showTurkish
+                  ? 'Duyduğumuz: "${result.transcript}"'
+                  : 'Me bihîst: "${result.transcript}"',
+              style: AppTypography.caption.copyWith(
+                color: AppColors.textSecondary,
+              ),
+              textAlign: TextAlign.center,
+            ),
+          ],
+          if (result.isApproximate) ...[
+            const SizedBox(height: 4),
+            Text(
+              showTurkish
+                  ? 'Otomatik değerlendirme yaklaşıktır (deneysel)'
+                  : 'Nirxandina otomatîk nêzîkî ye (ceribandin)',
+              style: AppTypography.caption.copyWith(
+                fontSize: 10,
+                color: AppColors.textSecondary.withOpacity(0.7),
+              ),
+              textAlign: TextAlign.center,
+            ),
+          ],
+        ],
+      ),
+    ).animate().fadeIn(duration: 250.ms);
   }
 }

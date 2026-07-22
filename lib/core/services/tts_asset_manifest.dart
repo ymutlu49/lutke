@@ -9461,7 +9461,46 @@ class TtsAssetManifest {
   static String? lookup(String word) {
     final key = word.trim().toLowerCase();
     if (key.isEmpty) return null;
-    final normalized = key.replaceAll(RegExp(r'[.,!?]+$'), '').trim();
-    return entries[normalized] ?? entries[key];
+
+    // 1) Direct + trailing punctuation stripped
+    final stripped = key.replaceAll(RegExp(r'[.,!?]+$'), '').trim();
+    final direct = entries[stripped] ?? entries[key];
+    if (direct != null) return direct;
+
+    // 2) Apostrof variants — typographic vs ASCII (’ → ', ‘ → ', ` → ')
+    final asciiQuote = stripped
+        .replaceAll('’', "'") // ’
+        .replaceAll('‘', "'") // ‘
+        .replaceAll('ʼ', "'") // ʼ
+        .replaceAll('`', "'") // `
+        .replaceAll('´', "'"); // ´
+    if (asciiQuote != stripped) {
+      final v = entries[asciiQuote];
+      if (v != null) return v;
+    }
+    final typoQuote = stripped.replaceAll("'", '’');
+    if (typoQuote != stripped) {
+      final v = entries[typoQuote];
+      if (v != null) return v;
+    }
+
+    // 3) Whitespace variants (multi-space, tab → single space)
+    final tightSpace = stripped.replaceAll(RegExp(r'\s+'), ' ').trim();
+    if (tightSpace != stripped) {
+      final v = entries[tightSpace];
+      if (v != null) return v;
+    }
+
+    // 4) Trailing/leading punctuation stripped + ASCII apostrof
+    final fullStrip = stripped
+        .replaceAll(RegExp(r'^[^\p{L}\p{N}]+', unicode: true), '')
+        .replaceAll(RegExp(r'[^\p{L}\p{N}]+$', unicode: true), '');
+    if (fullStrip != stripped) {
+      final v = entries[fullStrip] ??
+          entries[fullStrip.replaceAll('’', "'")];
+      if (v != null) return v;
+    }
+
+    return null;
   }
 }

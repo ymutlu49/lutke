@@ -222,8 +222,15 @@ class SyncService {
   Future<void> _queueSync(String type, Map<String, dynamic> data) async {
     final prefs = await SharedPreferences.getInstance();
     final existing = prefs.getString(_kQueueKey);
-    final queue =
-        existing != null ? (jsonDecode(existing) as List).cast<Map>() : [];
+    List<Map> queue = [];
+    if (existing != null) {
+      try {
+        final decoded = jsonDecode(existing);
+        if (decoded is List) queue = decoded.cast<Map>();
+      } catch (_) {
+        // Bozuk veri — yeni bir kuyrukla başla
+      }
+    }
     queue.add({'type': type, 'data': data, 'timestamp': DateTime.now().toIso8601String()});
     await prefs.setString(_kQueueKey, jsonEncode(queue));
   }
@@ -234,7 +241,18 @@ class SyncService {
     final existing = prefs.getString(_kQueueKey);
     if (existing == null) return;
 
-    final queue = (jsonDecode(existing) as List).cast<Map>();
+    List<Map> queue;
+    try {
+      final decoded = jsonDecode(existing);
+      if (decoded is! List) {
+        await prefs.remove(_kQueueKey);
+        return;
+      }
+      queue = decoded.cast<Map>();
+    } catch (_) {
+      await prefs.remove(_kQueueKey);
+      return;
+    }
     final remaining = <Map>[];
 
     for (final item in queue) {

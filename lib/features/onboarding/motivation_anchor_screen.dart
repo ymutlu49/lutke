@@ -40,7 +40,8 @@ class _MotivationAnchorScreenState
     'Diya min',
     'Bavê min',
     'Bapîrê min',
-    'Xwişk/Birayê min',
+    'Xwişka min',
+    'Birayê min',
   ];
 
   @override
@@ -109,7 +110,7 @@ class _MotivationAnchorScreenState
                       Gap.xs,
 
                       Text(
-                        'Tu ji bo kê hîn dibî?',
+                        'Navê kesekî ku te motîve dike binivîse.',
                         style: AppTypography.body.muted,
                         textAlign: TextAlign.center,
                       ).animate(delay: 200.ms).fadeIn(duration: 400.ms),
@@ -184,7 +185,7 @@ class _MotivationAnchorScreenState
                       child: ElevatedButton(
                         onPressed: _hasText ? _continue : null,
                         child: Text(
-                          'Devam et →',
+                          'Berdewam bike →',
                           style: AppTypography.labelLarge.onPrimary,
                         ),
                       ),
@@ -317,7 +318,7 @@ class _PreviewCard extends StatelessWidget {
       child: Column(
         children: [
           Text(
-            'Agahdarî wê wiha xuya bibin:',
+            'Peyamên te dê wiha xuya bibin:',
             style: AppTypography.captionStrong.copyWith(
               color: AppColors.textSecondary,
             ),
@@ -333,7 +334,7 @@ class _PreviewCard extends StatelessWidget {
           ),
           Gap.xs,
           Text(
-            '"Berî ku tu $name bibînî dê pir xweş be!"',
+            '"$name dê bi Kurmancîya te serbilind bibe!"',
             style: AppTypography.body.copyWith(
               color: AppColors.primaryDark,
               fontStyle: FontStyle.italic,

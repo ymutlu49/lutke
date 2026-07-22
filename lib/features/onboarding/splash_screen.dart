@@ -4,16 +4,17 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../core/constants/app_colors.dart';
-import '../../core/constants/app_spacing.dart';
 import '../../core/router/app_router.dart';
-import '../../shared/providers/language_mode_provider.dart';
+import '../../core/services/auth_service.dart';
+import '../../core/services/cloudflare_auth_service.dart';
+import '../../shared/providers/intro_seen_provider.dart';
+import '../../shared/providers/learning_track_provider.dart';
 
 class SplashScreen extends ConsumerWidget {
   const SplashScreen({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final showTr = ref.watch(showTurkishProvider);
     final sw = MediaQuery.of(context).size.width;
     final w = sw > 480 ? 480.0 : sw;
 
@@ -85,8 +86,8 @@ class SplashScreen extends ConsumerWidget {
                   const SizedBox(height: 18),
 
                   // ── Slogan ────────────────────────────────
-                  // "Dil vatansız kalır ama vatan dilsiz kalmaz."
-                  // Anadilin kimlik için merkezi rolünü vurgular.
+                  // "Ziman bê welat dimîne, lê welat bê ziman namîne."
+                  // Zimanê zikmakî di nasnameyê de rola navendî digire.
                   Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 14),
                     child: Text(
@@ -113,42 +114,18 @@ class SplashScreen extends ConsumerWidget {
 
                   const Spacer(flex: 1),
 
-                  // ── Têketin / Tomarkirin — Sade, daha küçük CTA ──
-                  // (max genişlik sınırlı, daha kompakt)
-                  Center(
-                    child: ConstrainedBox(
-                      constraints: const BoxConstraints(maxWidth: 240),
-                      child: SizedBox(
-                        width: double.infinity,
-                        height: 46,
-                        child: ElevatedButton.icon(
-                          onPressed: () => context.go(AppRoutes.register),
-                          icon: const Icon(Icons.login_rounded, size: 18),
-                          label: const Text(
-                            'Têketin / Tomarkirin',
-                            style: TextStyle(
-                              fontSize: 14,
-                              fontWeight: FontWeight.w700,
-                              letterSpacing: 0.3,
-                            ),
-                          ),
-                          style: ElevatedButton.styleFrom(
-                            backgroundColor: Colors.white,
-                            foregroundColor: AppColors.primary,
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(14),
-                            ),
-                            elevation: 0,
-                          ),
-                        ),
-                      ),
-                    ),
-                  ).animate().fadeIn(delay: 1000.ms).slideY(begin: 0.2),
+                  // ── CTA — giriş durumuna ve track seçimine göre akıllı ──
+                  // Giriş yapmış + track var → "Devam bike" (native home)
+                  // Giriş yapmış + track yok → "Rêya xwe hilbijêre" (track-select)
+                  // Giriş yapmamış → "Têketin / Tomarkirin" (register)
+                  _SmartCta(),
 
                   const Spacer(flex: 1),
 
-                  // Çêker
-                  Text('Çêker: Prof. Dr. Yılmaz Mutlu',
+                  // Pêşxistî
+                  Text(
+                    'Pêşxistî: Prof. Dr. Yılmaz Mutlu',
+                    textAlign: TextAlign.center,
                     style: TextStyle(fontSize: 11,
                       color: Colors.white.withOpacity(0.35)),
                   ).animate().fadeIn(delay: 1400.ms),
@@ -288,5 +265,114 @@ class _PathLine extends StatelessWidget {
         ),
       ),
     );
+  }
+}
+
+// ════════════════════════════════════════════════════════════════
+// SMART CTA — oturum + track + placement durumuna göre 4 farklı çıkış
+// (Cejna Zimanê Kurdî 2026 — friction azaltıldı)
+//
+// Akış matrisi:
+//   logged-out               → "Dest pê bike!" → register
+//   logged-in + intro yok    → "Dest pê bike!" → introFlow
+//   logged-in + intro + plc  → "Berdewam bike" → track.nativeHomePath (FRICTION'SIZ)
+//   logged-in + intro + ¬plc → "Rêya xwe hilbijêre" → trackSelect
+// ════════════════════════════════════════════════════════════════
+
+class _SmartCta extends ConsumerStatefulWidget {
+  const _SmartCta();
+
+  @override
+  ConsumerState<_SmartCta> createState() => _SmartCtaState();
+}
+
+class _SmartCtaState extends ConsumerState<_SmartCta> {
+  // null = henüz kontrol edilmedi (async loading); true/false = sonuç.
+  bool? _hasPlacement;
+
+  @override
+  void initState() {
+    super.initState();
+    _checkPlacement();
+  }
+
+  /// YARIŞ DÜZELTMESİ (Temmuz 2026): önceden yalnız prefs'e + build'de
+  /// .valueOrNull ile hesaba bakılıyordu — sayfa yenilenince /me henüz
+  /// dönmemişse test yeniden gösteriliyordu. Artık hesap bilgisi YÜKLENENE
+  /// kadar beklenir (5 sn timeout → prefs fallback), karar track-duyarlıdır
+  /// (KU → placementLevel, EN → placementLevelEn).
+  Future<void> _checkPlacement() async {
+    final track = ref.read(currentTrackProvider);
+    final placed = await hasPlacementForTrack(ref, track.languageCode);
+    if (!mounted) return;
+    setState(() => _hasPlacement = placed);
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final isLoggedIn = ref.watch(isAnyLoggedInProvider);
+    final introSeen = ref.watch(introSeenProvider).valueOrNull ?? false;
+    final track = ref.watch(currentTrackProvider);
+
+    final String label;
+    final String emoji;
+    final VoidCallback onTap;
+
+    if (!isLoggedIn) {
+      // UX 19 Nisan: 'Têkeve an Tomar bibe' bürokratik idi;
+      // 'Dest pê bike!' ısıtıcı + Duolingo-vari net CTA.
+      label = 'Dest pê bike!';
+      emoji = '✨';
+      onTap = () => context.go(AppRoutes.register);
+    } else if (!introSeen) {
+      label = 'Dest pê bike!';
+      emoji = '✨';
+      onTap = () => context.go(AppRoutes.introFlow);
+    } else if (_hasPlacement == true) {
+      // Placement zaten yapılmış (localStorage VEYA hesap) — kullanıcı her
+      // açılışta track-select/placement test'i tekrar görmesin. Direkt dersliğe.
+      label = 'Berdewam bike';
+      emoji = '▶️';
+      onTap = () => context.go(track.nativeHomePath);
+    } else {
+      // Placement yapılmamış (veya hâlâ kontrol ediliyor) — track seçim.
+      label = 'Rêya xwe hilbijêre';
+      emoji = '🎯';
+      onTap = () => context.go(AppRoutes.trackSelect);
+    }
+
+    return Center(
+      child: ConstrainedBox(
+        constraints: const BoxConstraints(maxWidth: 280),
+        child: SizedBox(
+          width: double.infinity,
+          height: 50,
+          child: ElevatedButton.icon(
+            onPressed: onTap,
+            icon: Text(emoji, style: const TextStyle(fontSize: 18)),
+            label: Flexible(
+              child: Text(
+                label,
+                style: const TextStyle(
+                  fontSize: 13,
+                  fontWeight: FontWeight.w800,
+                  letterSpacing: 0.2,
+                ),
+                maxLines: 1,
+                overflow: TextOverflow.ellipsis,
+              ),
+            ),
+            style: ElevatedButton.styleFrom(
+              backgroundColor: Colors.white,
+              foregroundColor: AppColors.primary,
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(14),
+              ),
+              elevation: 0,
+            ),
+          ),
+        ),
+      ),
+    ).animate().fadeIn(delay: 1000.ms).slideY(begin: 0.2);
   }
 }

@@ -296,6 +296,145 @@ class FocusRingWidget extends StatelessWidget {
   }
 }
 
+// ── Reading Ruler (Okuma Cetveli) ─────────────────────────────────
+
+/// Fareyle/dokunma ile izlenebilen yarı-saydam yatay vurgu bandı.
+///
+/// Disleksi araştırmaları (Rello & Baeza-Yates 2013, Singleton 2009):
+/// göz satır takibini kaybetmek dislektik okuyucularda yaygındır.
+/// Reading ruler aktif satırı vurgular, üst/alt satırları hafif karartır.
+///
+/// Kullanım: `MaterialApp.builder` içinde `Stack` son öğesi olarak
+/// yerleştirilir. `accessibilitySettingsProvider.readingRuler == true`
+/// olduğunda görünür. Pointer (mouse/touch) pozisyonuna bağlanır.
+class ReadingRulerOverlay extends StatefulWidget {
+  final Widget child;
+  final bool enabled;
+  final double bandHeight;
+  final Color bandColor;
+  final Color dimColor;
+
+  const ReadingRulerOverlay({
+    super.key,
+    required this.child,
+    required this.enabled,
+    this.bandHeight = 48,
+    this.bandColor = const Color(0x33FFEB3B), // hafif sarı, %20 alpha
+    this.dimColor = const Color(0x0D000000),  // çok hafif karartma
+  });
+
+  @override
+  State<ReadingRulerOverlay> createState() => _ReadingRulerOverlayState();
+}
+
+class _ReadingRulerOverlayState extends State<ReadingRulerOverlay> {
+  // PERF 2026-04: Eskiden `double? _y` state'ti ve her pointer hareketinde
+  // `setState` çağrılıyordu → tüm app subtree rebuild oluyordu (MaterialApp.
+  // builder içinde). Desktop'ta mouse hareketi = full rebuild hop = ~3-6ms/
+  // frame. ValueNotifier + ValueListenableBuilder ile sadece CustomPaint
+  // katmanı repaint olur; altta duran child hiç rebuild almaz.
+  final ValueNotifier<double?> _y = ValueNotifier<double?>(null);
+
+  @override
+  void dispose() {
+    _y.dispose();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    if (!widget.enabled) return widget.child;
+    return Stack(
+      fit: StackFit.expand,
+      children: [
+        MouseRegion(
+          onHover: (e) => _y.value = e.localPosition.dy,
+          onExit: (_) => _y.value = null,
+          child: Listener(
+            behavior: HitTestBehavior.translucent,
+            onPointerMove: (e) => _y.value = e.localPosition.dy,
+            onPointerDown: (e) => _y.value = e.localPosition.dy,
+            child: widget.child,
+          ),
+        ),
+        IgnorePointer(
+          child: ValueListenableBuilder<double?>(
+            valueListenable: _y,
+            builder: (context, y, _) {
+              if (y == null) return const SizedBox.shrink();
+              return CustomPaint(
+                painter: _ReadingRulerPainter(
+                  y: y,
+                  bandHeight: widget.bandHeight,
+                  bandColor: widget.bandColor,
+                  dimColor: widget.dimColor,
+                ),
+                size: Size.infinite,
+              );
+            },
+          ),
+        ),
+      ],
+    );
+  }
+}
+
+class _ReadingRulerPainter extends CustomPainter {
+  final double y;
+  final double bandHeight;
+  final Color bandColor;
+  final Color dimColor;
+
+  _ReadingRulerPainter({
+    required this.y,
+    required this.bandHeight,
+    required this.bandColor,
+    required this.dimColor,
+  });
+
+  @override
+  void paint(Canvas canvas, Size size) {
+    final half = bandHeight / 2;
+    final top = (y - half).clamp(0.0, size.height);
+    final bottom = (y + half).clamp(0.0, size.height);
+
+    // Üst karartma
+    if (top > 0) {
+      canvas.drawRect(
+        Rect.fromLTWH(0, 0, size.width, top),
+        Paint()..color = dimColor,
+      );
+    }
+    // Alt karartma
+    if (bottom < size.height) {
+      canvas.drawRect(
+        Rect.fromLTWH(0, bottom, size.width, size.height - bottom),
+        Paint()..color = dimColor,
+      );
+    }
+    // Vurgu bandı
+    canvas.drawRect(
+      Rect.fromLTWH(0, top, size.width, bottom - top),
+      Paint()..color = bandColor,
+    );
+    // Alt çizgi (BeeLine benzeri yönlendirici)
+    canvas.drawLine(
+      Offset(0, y + half),
+      Offset(size.width, y + half),
+      Paint()
+        ..color = bandColor.withOpacity(0.6)
+        ..strokeWidth = 1.5,
+    );
+  }
+
+  @override
+  bool shouldRepaint(covariant _ReadingRulerPainter old) =>
+      old.y != y ||
+      old.bandHeight != bandHeight ||
+      old.bandColor != bandColor ||
+      old.dimColor != dimColor;
+}
+
 // ════════════════════════════════════════════════════════════════
 // WCAG RENK KONTROL LİSTESİ (Geliştirici referansı)
 // Tüm tokenlar app_colors.dart'ta belgelenmiştir.

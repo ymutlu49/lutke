@@ -7,6 +7,7 @@ import '../../core/constants/app_colors.dart';
 import '../../core/constants/app_typography.dart';
 import '../../core/constants/app_spacing.dart';
 import '../../shared/providers/language_mode_provider.dart';
+import '../../shared/providers/learning_module_provider.dart';
 import '../lessons/domain/lesson_entities.dart';
 import 'gamification_provider.dart';
 
@@ -333,6 +334,53 @@ class AchievementBadgeGrid extends ConsumerWidget {
         ),
         Gap.md,
 
+        // Kullanici hic rozet kazanmadigindaki cesaretlendirici banner.
+        // Tum rozetler kilitli goruntuluyse "baslangic pedagojisi":
+        // cezalandirma degil, ilk kazancin ne kadar yakinda oldugunu
+        // hatirlatan bir cagri gosteriyoruz.
+        if (earned.isEmpty) ...[
+          Container(
+            width: double.infinity,
+            padding: const EdgeInsets.all(AppSpacing.md),
+            decoration: BoxDecoration(
+              color: AppColors.accent.withOpacity(0.08),
+              borderRadius: AppRadius.md,
+              border: Border.all(
+                color: AppColors.accent.withOpacity(0.2),
+              ),
+            ),
+            child: Row(
+              children: [
+                const Text('🌱', style: TextStyle(fontSize: 24)),
+                Gap.hMd,
+                Expanded(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        'Rêwîtî nû dest pê kiriye',
+                        style: AppTypography.captionStrong.copyWith(
+                          color: AppColors.accent,
+                          fontWeight: FontWeight.w800,
+                        ),
+                      ),
+                      const SizedBox(height: 2),
+                      Text(
+                        'Yek ders temam bike — yekem xelat li benda te ye!',
+                        style: AppTypography.caption.copyWith(
+                          color: AppColors.textSecondary,
+                          height: 1.4,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ],
+            ),
+          ),
+          Gap.md,
+        ],
+
         // Grid
         GridView.builder(
           shrinkWrap: true,
@@ -596,7 +644,7 @@ class _BadgeDetailSheet extends StatelessWidget {
               borderRadius: AppRadius.full,
             ),
             child: Text(
-              isEarned ? 'Hatiye bidestxistin!' : 'Hêj nehat',
+              isEarned ? 'Hatiye bidestxistin!' : 'Hîn nehatiye',
               style: AppTypography.captionStrong.copyWith(
                 color: isEarned ? AppColors.success : AppColors.textTertiary,
               ),
@@ -806,7 +854,7 @@ class _LevelUpContentState extends State<_LevelUpContent>
                           Gap.xs,
 
                           Text(
-                            'Pîroz be!',
+                            'Asta te ya nû bi xêr be!',
                             style: AppTypography.caption.muted,
                           )
                               .animate(delay: 600.ms)
@@ -1047,30 +1095,37 @@ class _DailyRewardWidgetState extends ConsumerState<DailyRewardWidget>
 
             const SizedBox(width: AppSpacing.md),
 
-            // Metin
+            // Metin — track-aware
             Expanded(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    'Xelata Rojane',
-                    style: AppTypography.kurmanjiCard.copyWith(
-                      color: isAvailable
-                          ? AppColors.accent
-                          : AppColors.textSecondary,
-                      fontWeight: FontWeight.w600,
+              child: Consumer(builder: (_, ref, __) {
+                final isEn = ref.watch(isEnglishModuleProvider);
+                final title = isEn ? 'Daily Reward' : 'Xelata Rojane';
+                final cta = isEn
+                    ? 'Complete a lesson — earn +${GamificationNotifier.dailyRewardXP} XP!'
+                    : 'Dersê bike, +${GamificationNotifier.dailyRewardXP} XP bistîne!';
+                final claimed =
+                    isEn ? 'Your daily reward is claimed' : 'Xelata te ya rojane hat';
+                return Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      title,
+                      style: AppTypography.kurmanjiCard.copyWith(
+                        color: isAvailable
+                            ? AppColors.accent
+                            : AppColors.textSecondary,
+                        fontWeight: FontWeight.w600,
+                      ),
                     ),
-                  ),
-                  Text(
-                    isAvailable
-                        ? 'Dersê bike, +${GamificationNotifier.dailyRewardXP} XP bistîne!'
-                        : 'Xelata te ya rojane hat',
-                    style: AppTypography.caption.copyWith(
-                      color: AppColors.textSecondary,
+                    Text(
+                      isAvailable ? cta : claimed,
+                      style: AppTypography.caption.copyWith(
+                        color: AppColors.textSecondary,
+                      ),
                     ),
-                  ),
-                ],
-              ),
+                  ],
+                );
+              }),
             ),
 
             // XP kazanma göstergesi
@@ -1125,9 +1180,10 @@ class _DailyRewardWidgetState extends ConsumerState<DailyRewardWidget>
 }
 
 /// Zaten alınmış günlük ödül gösterimi
-class _ClaimedDailyReward extends StatelessWidget {
+class _ClaimedDailyReward extends ConsumerWidget {
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final isEn = ref.watch(isEnglishModuleProvider);
     return Container(
       padding: const EdgeInsets.symmetric(
         horizontal: AppSpacing.md,
@@ -1150,7 +1206,7 @@ class _ClaimedDailyReward extends StatelessWidget {
           ),
           const SizedBox(width: AppSpacing.sm),
           Text(
-            'Xelata rojane hat wergirtin',
+            isEn ? 'Daily reward claimed' : 'Xelata rojane hat wergirtin',
             style: AppTypography.caption.copyWith(
               color: AppColors.success,
               fontWeight: FontWeight.w500,
@@ -1528,7 +1584,7 @@ class WeeklyRhythmWidget extends ConsumerWidget {
           // ── Başlık satırı ─────────────────────────────────────
           Row(
             children: [
-              Text('Ev hefta',
+              Text('Ev hefte',
                   style: AppTypography.kurmanjiCard
                       .copyWith(color: AppColors.primary)),
               Gap.hXs,
@@ -1652,12 +1708,12 @@ class _WeeklyMessage extends StatelessWidget {
     if (rhythm.weekGoalMet) {
       message = name != null
           ? '$name ji bo ev hefta hedef qediya!'
-          : 'Ev hefta hedef qediya!';
+          : 'Hedefa vê hefteyê temam bû!';
       color = AppColors.success;
     } else if (remaining <= 1) {
       message = name != null
           ? '$name ji bo tenê $remaining roj!'
-          : 'Hefteya hedef $remaining roj ma!';
+          : 'Heta hedefê $remaining roj maye!';
       color = AppColors.accent;
     } else {
       message = name != null
@@ -1726,7 +1782,7 @@ class WeeklySummaryCard extends ConsumerWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  'Ev hefta',
+                  'Ev hefte',
                   style: AppTypography.captionStrong,
                 ),
                 Gap.xs,
@@ -1737,7 +1793,7 @@ class WeeklySummaryCard extends ConsumerWidget {
                 Gap.xs,
                 Text(
                   rhythm.weekGoalMet
-                      ? 'Hefteya hedef qediya!'
+                      ? 'Hedefa hefteyê temam bû!'
                       : '${WeeklyRhythmState.weekGoalDays - rhythm.activeDayCount} roj zêdetir',
                   style: AppTypography.caption.copyWith(
                     color: rhythm.weekGoalMet

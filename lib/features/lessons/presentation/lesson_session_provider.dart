@@ -1,7 +1,6 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../../core/utils/fsrs_algorithm.dart';
-import '../domain/entities/exercise.dart';
 import '../domain/entities/lesson.dart';
 
 // ════════════════════════════════════════════════════════════════

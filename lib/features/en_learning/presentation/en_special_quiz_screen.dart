@@ -7,18 +7,20 @@ import '../../../core/constants/app_colors.dart';
 import '../../../core/constants/app_spacing.dart';
 import '../../../core/constants/app_typography.dart';
 import '../../../core/router/app_router.dart';
+import '../../../core/services/accessibility_settings.dart';
 import '../../../core/services/sound_service.dart';
+import '../../../shared/services/skill_progress_service.dart';
 import '../domain/en_quiz_items.dart';
 
-/// İngilizce-özgü quiz ekranı.
+/// Ekrana quiz'a taybet a Îngilîzî.
 ///
-/// Tipler: article, past, plural, prep, phrasal, collocation, compare, synonym
+/// Tîp: article, past, plural, prep, phrasal, collocation, compare, synonym
 ///
-/// Kurmancî anadilliler için: açıklamalar tamamen Kurmancî,
-/// yaygın hatalar vurgulanır.
+/// Ji bo xwecihên Kurmancî: şîrove hemû bi Kurmancî ne,
+/// xeletiyên gelemperî têne destnîşankirin.
 class EnSpecialQuizScreen extends ConsumerStatefulWidget {
-  final String? type; // null = tüm tipler
-  final String? level; // null = tüm seviyeler
+  final String? type; // null = hemû tîp
+  final String? level; // null = hemû asta
   const EnSpecialQuizScreen({super.key, this.type, this.level});
 
   @override
@@ -33,6 +35,8 @@ class _EnSpecialQuizScreenState
   String? _selectedAnswer;
   bool _answered = false;
   int _correctCount = 0;
+  int _streak = 0;
+  int _bestStreak = 0;
   int _xp = 0;
 
   @override
@@ -55,9 +59,14 @@ class _EnSpecialQuizScreenState
       _answered = true;
       if (correct) {
         _correctCount++;
-        _xp += 10;
+        _streak++;
+        if (_streak > _bestStreak) _bestStreak = _streak;
+        // Streak bonus: her 3'emîn rast XP ekstra tîne.
+        final bonus = _streak >= 3 && _streak % 3 == 0 ? 5 : 0;
+        _xp += 10 + bonus;
         SoundService.playCorrect();
       } else {
+        _streak = 0;
         SoundService.playWrong();
       }
     });
@@ -77,10 +86,13 @@ class _EnSpecialQuizScreenState
 
   void _showResult() {
     final pct = _items.isEmpty ? 0 : (_correctCount * 100 ~/ _items.length);
+    if (pct >= 70) {
+      markSkillCompletedAndNotify(ref, module: 'en', skill: 'grammar');
+    }
     showDialog(
       context: context,
       barrierDismissible: false,
-      builder: (_) => AlertDialog(
+      builder: (dialogContext) => AlertDialog(
         title: Row(
           children: [
             Text(pct >= 70 ? '🎉' : '📚',
@@ -95,6 +107,7 @@ class _EnSpecialQuizScreenState
         ),
         content: Column(
           mainAxisSize: MainAxisSize.min,
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text('Encam: $_correctCount / ${_items.length}',
                 style: AppTypography.bodyLarge.copyWith(
@@ -113,23 +126,35 @@ class _EnSpecialQuizScreenState
                   color: AppColors.primary,
                   fontWeight: FontWeight.w700,
                 )),
+            if (_bestStreak >= 3) ...[
+              const SizedBox(height: 4),
+              Text('🔥 Rêza herî baş: $_bestStreak',
+                  style: AppTypography.bodySmall.copyWith(
+                    color: Colors.orange.shade700,
+                    fontWeight: FontWeight.w700,
+                  )),
+            ],
           ],
         ),
         actions: [
           TextButton(
             onPressed: () {
-              Navigator.pop(context);
-              context.pop();
+              Navigator.pop(dialogContext);
+              context.canPop()
+                  ? context.pop()
+                  : context.go(AppRoutes.enHome);
             },
             child: Text('Derkeve',
                 style: TextStyle(color: AppColors.textSecondary)),
           ),
           ElevatedButton(
             onPressed: () {
-              Navigator.pop(context);
+              Navigator.pop(dialogContext);
               setState(() {
                 _currentIndex = 0;
                 _correctCount = 0;
+                _streak = 0;
+                _bestStreak = 0;
                 _xp = 0;
                 _selectedAnswer = null;
                 _answered = false;
@@ -149,24 +174,36 @@ class _EnSpecialQuizScreenState
 
   @override
   Widget build(BuildContext context) {
+    final a11y = ref.watch(accessibilitySettingsProvider);
     if (_items.isEmpty) {
       return Scaffold(
+        backgroundColor:
+            a11y.background.color ?? AppColors.backgroundPrimary,
         body: Center(
           child: Padding(
             padding: const EdgeInsets.all(AppSpacing.lg),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                const Text('📚', style: TextStyle(fontSize: 64)),
+                // A11Y: decorative emoji.
+                ExcludeSemantics(
+                  child: const Text('📚', style: TextStyle(fontSize: 64)),
+                ),
                 const SizedBox(height: AppSpacing.md),
-                Text('Ev tîp an asta hîna tê amade kirin',
+                Text('Ev tîp an asta hîna tê amadekirin',
                     style: AppTypography.body.copyWith(
                       color: AppColors.textSecondary,
                     ),
                     textAlign: TextAlign.center),
                 const SizedBox(height: AppSpacing.lg),
                 ElevatedButton(
-                  onPressed: () => context.pop(),
+                  onPressed: () => context.canPop()
+                      ? context.pop()
+                      : context.go(AppRoutes.enHome),
+                  // A11Y: minimum 48dp.
+                  style: ElevatedButton.styleFrom(
+                    minimumSize: const Size(120, 48),
+                  ),
                   child: const Text('Vegere'),
                 ),
               ],
@@ -180,27 +217,61 @@ class _EnSpecialQuizScreenState
     final progress = (_currentIndex + 1) / _items.length;
 
     return Scaffold(
-      backgroundColor: AppColors.backgroundPrimary,
+      backgroundColor: a11y.background.color ?? AppColors.backgroundPrimary,
       appBar: AppBar(
-        backgroundColor: AppColors.backgroundPrimary,
+        backgroundColor:
+            a11y.background.color ?? AppColors.backgroundPrimary,
         elevation: 0,
         leading: IconButton(
           icon: const Icon(Icons.close_rounded),
-          onPressed: () => context.pop(),
+          tooltip: 'Derkeve',
+          onPressed: () => context.canPop()
+              ? context.pop()
+              : context.go(AppRoutes.enHome),
         ),
         title: Row(
           children: [
-            Text(_typeIcon(q.type), style: const TextStyle(fontSize: 22)),
+            // A11Y: decorative emoji/icon glyph.
+            ExcludeSemantics(
+              child: Text(_typeIcon(q.type),
+                  style: const TextStyle(fontSize: 22)),
+            ),
             const SizedBox(width: 8),
             Expanded(
-              child: Text(
-                _typeName(q.type),
-                style: AppTypography.bodyLarge.copyWith(
-                  color: AppColors.textPrimary,
-                  fontWeight: FontWeight.w700,
+              child: Semantics(
+                header: true,
+                child: Text(
+                  _typeName(q.type),
+                  style: AppTypography.bodyLarge.copyWith(
+                    color: AppColors.textPrimary,
+                    fontWeight: FontWeight.w700,
+                  ),
+                  overflow: TextOverflow.ellipsis,
                 ),
               ),
             ),
+            if (_streak >= 2) ...[
+              Semantics(
+                // A11Y: announce streak value for screen reader users.
+                label: 'Şopa rast: $_streak',
+                child: Container(
+                  padding: const EdgeInsets.symmetric(
+                      horizontal: 8, vertical: 4),
+                  margin: const EdgeInsets.only(right: 6),
+                  decoration: BoxDecoration(
+                    color: AppColors.accent.withValues(alpha: 0.15),
+                    borderRadius: BorderRadius.circular(20),
+                  ),
+                  child: Text('🔥 $_streak',
+                      style: TextStyle(
+                        // A11Y: semantic token — survives high-contrast.
+                        color: AppColors.accent,
+                        fontWeight: FontWeight.w800,
+                        fontSize: 13,
+                      )),
+                ),
+              ),
+            ],
             Container(
               padding:
                   const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
@@ -208,12 +279,15 @@ class _EnSpecialQuizScreenState
                 color: AppColors.accent.withValues(alpha: 0.1),
                 borderRadius: BorderRadius.circular(20),
               ),
-              child: Text('⭐ $_xp XP',
-                  style: TextStyle(
-                    color: AppColors.accent,
-                    fontWeight: FontWeight.w800,
-                    fontSize: 13,
-                  )),
+              child: Semantics(
+                label: '$_xp puanê ezmûnê',
+                child: Text('⭐ $_xp XP',
+                    style: TextStyle(
+                      color: AppColors.accent,
+                      fontWeight: FontWeight.w800,
+                      fontSize: 13,
+                    )),
+              ),
             ),
           ],
         ),
@@ -230,11 +304,14 @@ class _EnSpecialQuizScreenState
                   // Progress bar
                   Row(
                     children: [
-                      Text('${_currentIndex + 1}/${_items.length}',
-                          style: AppTypography.caption.copyWith(
-                            color: AppColors.textSecondary,
-                            fontWeight: FontWeight.w700,
-                          )),
+                      Semantics(
+                        label: 'Pirsa ${_currentIndex + 1} ji ${_items.length}',
+                        child: Text('${_currentIndex + 1}/${_items.length}',
+                            style: AppTypography.caption.copyWith(
+                              color: AppColors.textSecondary,
+                              fontWeight: FontWeight.w700,
+                            )),
+                      ),
                       const SizedBox(width: 8),
                       Expanded(
                         child: ClipRRect(
@@ -244,7 +321,8 @@ class _EnSpecialQuizScreenState
                             minHeight: 6,
                             backgroundColor:
                                 AppColors.accent.withValues(alpha: 0.15),
-                            valueColor: AlwaysStoppedAnimation(AppColors.accent),
+                            valueColor: AlwaysStoppedAnimation(
+                                AppColors.accent),
                           ),
                         ),
                       ),
@@ -259,7 +337,8 @@ class _EnSpecialQuizScreenState
                         padding: const EdgeInsets.symmetric(
                             horizontal: 10, vertical: 4),
                         decoration: BoxDecoration(
-                          color: AppColors.primary.withValues(alpha: 0.1),
+                          color:
+                              AppColors.primary.withValues(alpha: 0.1),
                           borderRadius: BorderRadius.circular(8),
                         ),
                         child: Text(q.level,
@@ -274,22 +353,32 @@ class _EnSpecialQuizScreenState
                   const SizedBox(height: AppSpacing.md),
 
                   // Prompt
-                  Container(
-                    width: double.infinity,
-                    padding: const EdgeInsets.all(AppSpacing.lg),
-                    decoration: BoxDecoration(
-                      color: AppColors.surface,
-                      borderRadius: BorderRadius.circular(16),
-                      border: Border.all(color: AppColors.borderLight),
-                    ),
-                    child: Text(
-                      q.promptEn,
-                      style: AppTypography.title.copyWith(
-                        color: AppColors.textPrimary,
-                        fontWeight: FontWeight.w700,
-                        height: 1.5,
+                  Semantics(
+                    // A11Y: Prompt explicitly labelled as the question.
+                    label: 'Pirs: ${q.promptEn}',
+                    child: Container(
+                      width: double.infinity,
+                      padding: const EdgeInsets.all(AppSpacing.lg),
+                      decoration: BoxDecoration(
+                        color: AppColors.surface,
+                        borderRadius: BorderRadius.circular(16),
+                        border: Border.all(color: AppColors.borderLight),
                       ),
-                      textAlign: TextAlign.center,
+                      // A11Y dyslexia: left-aligned, ≥1.6 line-height, wider
+                      // letter-spacing via a11y.applyFont. `textAlign.center`
+                      // removed — left-align is the WCAG-preferred alignment.
+                      child: Text(
+                        q.promptEn,
+                        style: a11y.applyFont(
+                          AppTypography.title.copyWith(
+                            color: AppColors.textPrimary,
+                            fontWeight: FontWeight.w700,
+                            height: 1.6,
+                            letterSpacing: 0.3,
+                          ),
+                        ),
+                        textAlign: TextAlign.left,
+                      ),
                     ),
                   ),
                   const SizedBox(height: AppSpacing.lg),
@@ -302,71 +391,91 @@ class _EnSpecialQuizScreenState
                         final opt = q.options[i];
                         final isSelected = _selectedAnswer == opt;
                         final isCorrect = opt == q.correctAnswer;
+                        // A11Y: semantic tokens instead of raw Colors.red/green
+                        // — survive Windows high-contrast, custom themes, and
+                        // align with the soft error palette (dyslexic users
+                        // are less alarmed by orange vs. hard red).
                         Color bg = AppColors.surface;
                         Color border = AppColors.borderLight;
                         Color text = AppColors.textPrimary;
                         IconData? icon;
                         if (_answered) {
                           if (isCorrect) {
-                            bg = Colors.green.withValues(alpha: 0.15);
-                            border = Colors.green;
-                            text = Colors.green.shade900;
+                            bg = AppColors.success.withValues(alpha: 0.15);
+                            border = AppColors.success;
+                            text = AppColors.success;
                             icon = Icons.check_circle_rounded;
                           } else if (isSelected) {
-                            bg = Colors.red.withValues(alpha: 0.15);
-                            border = Colors.red;
-                            text = Colors.red.shade900;
+                            bg = AppColors.errorSoft.withValues(alpha: 0.15);
+                            border = AppColors.errorSoft;
+                            text = AppColors.errorSoft;
                             icon = Icons.cancel_rounded;
                           }
                         }
                         return Padding(
                           padding: const EdgeInsets.only(bottom: 10),
-                          child: Material(
-                            color: Colors.transparent,
-                            child: InkWell(
-                              onTap:
-                                  _answered ? null : () => _onAnswer(opt),
-                              borderRadius: BorderRadius.circular(14),
-                              child: Container(
-                                padding: const EdgeInsets.all(16),
-                                decoration: BoxDecoration(
-                                  color: bg,
-                                  borderRadius: BorderRadius.circular(14),
-                                  border: Border.all(color: border, width: 1.5),
-                                ),
-                                child: Row(
-                                  children: [
-                                    Container(
-                                      width: 28,
-                                      height: 28,
-                                      decoration: BoxDecoration(
-                                        color: border.withValues(alpha: 0.2),
-                                        shape: BoxShape.circle,
-                                      ),
-                                      alignment: Alignment.center,
-                                      child: Text(
-                                        String.fromCharCode(65 + i),
-                                        style: TextStyle(
-                                          color: text,
-                                          fontWeight: FontWeight.w800,
-                                          fontSize: 12,
+                          child: Semantics(
+                            button: true,
+                            label:
+                                'Vebijarka ${String.fromCharCode(65 + i)}: $opt',
+                            child: Material(
+                              color: Colors.transparent,
+                              child: InkWell(
+                                onTap: _answered
+                                    ? null
+                                    : () => _onAnswer(opt),
+                                borderRadius: BorderRadius.circular(14),
+                                child: Container(
+                                  constraints: const BoxConstraints(
+                                      minHeight: 52),
+                                  padding: const EdgeInsets.all(16),
+                                  decoration: BoxDecoration(
+                                    color: bg,
+                                    borderRadius:
+                                        BorderRadius.circular(14),
+                                    border: Border.all(
+                                        color: border, width: 1.5),
+                                  ),
+                                  child: Row(
+                                    children: [
+                                      Container(
+                                        width: 32,
+                                        height: 32,
+                                        decoration: BoxDecoration(
+                                          color: border.withValues(
+                                              alpha: 0.2),
+                                          shape: BoxShape.circle,
+                                        ),
+                                        alignment: Alignment.center,
+                                        child: Text(
+                                          String.fromCharCode(65 + i),
+                                          style: TextStyle(
+                                            color: text,
+                                            fontWeight:
+                                                FontWeight.w800,
+                                            fontSize: 13,
+                                          ),
                                         ),
                                       ),
-                                    ),
-                                    const SizedBox(width: 12),
-                                    Expanded(
-                                      child: Text(
-                                        opt,
-                                        style: TextStyle(
-                                          color: text,
-                                          fontWeight: FontWeight.w600,
-                                          fontSize: 16,
+                                      const SizedBox(width: 12),
+                                      Expanded(
+                                        child: Text(
+                                          opt,
+                                          style: a11y.applyFont(
+                                            TextStyle(
+                                              color: text,
+                                              fontWeight:
+                                                  FontWeight.w600,
+                                              fontSize: 16,
+                                            ),
+                                          ),
                                         ),
                                       ),
-                                    ),
-                                    if (icon != null)
-                                      Icon(icon, color: border, size: 24),
-                                  ],
+                                      if (icon != null)
+                                        Icon(icon,
+                                            color: border, size: 24),
+                                    ],
+                                  ),
                                 ),
                               ),
                             ),
@@ -378,30 +487,43 @@ class _EnSpecialQuizScreenState
 
                   // Explanation
                   if (_answered)
-                    Container(
-                      padding: const EdgeInsets.all(14),
-                      margin: const EdgeInsets.only(bottom: AppSpacing.md),
-                      decoration: BoxDecoration(
-                        color: AppColors.accent.withValues(alpha: 0.08),
-                        borderRadius: BorderRadius.circular(12),
-                        border: Border.all(
-                            color: AppColors.accent.withValues(alpha: 0.25)),
-                      ),
-                      child: Row(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          const Text('💡', style: TextStyle(fontSize: 18)),
-                          const SizedBox(width: 8),
-                          Expanded(
-                            child: Text(
-                              q.explanationKu,
-                              style: AppTypography.bodySmall.copyWith(
-                                color: AppColors.textPrimary,
-                                height: 1.5,
+                    // A11Y: liveRegion announces explanation after answering.
+                    Semantics(
+                      liveRegion: true,
+                      label:
+                          '${_selectedAnswer == q.correctAnswer ? 'Rast' : 'Çewt'}. ${q.explanationKu}',
+                      child: Container(
+                        padding: const EdgeInsets.all(14),
+                        margin: const EdgeInsets.only(bottom: AppSpacing.md),
+                        decoration: BoxDecoration(
+                          color: AppColors.accent.withValues(alpha: 0.08),
+                          borderRadius: BorderRadius.circular(12),
+                          border: Border.all(
+                              color: AppColors.accent
+                                  .withValues(alpha: 0.25)),
+                        ),
+                        child: Row(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            // A11Y: decorative emoji hidden from screen reader.
+                            ExcludeSemantics(
+                              child: const Text('💡',
+                                  style: TextStyle(fontSize: 18)),
+                            ),
+                            const SizedBox(width: 8),
+                            Expanded(
+                              child: Text(
+                                q.explanationKu,
+                                style: a11y.applyFont(
+                                  AppTypography.bodySmall.copyWith(
+                                    color: AppColors.textPrimary,
+                                    height: 1.6,
+                                  ),
+                                ),
                               ),
                             ),
-                          ),
-                        ],
+                          ],
+                        ),
                       ),
                     ),
 
@@ -441,17 +563,17 @@ class _EnSpecialQuizScreenState
 }
 
 String _typeName(String type) => switch (type) {
-      'article' => 'Belirteç (a/an/the)',
-      'past' => 'Demê borî (past)',
+      'article' => 'Bernavk (a/an/the)',
+      'past' => 'Dema borî',
       'plural' => 'Pirjimar',
       'prep' => 'Daçek (in/on/at)',
-      'phrasal' => 'Lekerên frazî',
+      'phrasal' => 'Lêkerên frazî',
       'collocation' => 'Hevderçûn',
       'compare' => 'Berawirdkirin',
-      'superlative' => 'Berawirdê herî',
+      'superlative' => 'Pileya herî bilind',
       'synonym' => 'Hevwate',
-      'antonym' => 'Dijber',
-      'as_as' => 'as ... as yapısı',
+      'antonym' => 'Dijwate',
+      'as_as' => 'Hevberawirdî (as ... as)',
       _ => 'Pirs',
     };
 

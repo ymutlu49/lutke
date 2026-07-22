@@ -6,11 +6,15 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../../core/constants/app_colors.dart';
-import '../../../core/constants/app_spacing.dart';
 import '../../../core/constants/app_typography.dart';
 import '../../../core/router/app_router.dart';
+import '../../../core/services/asr_service.dart';
 import '../../../core/services/sound_service.dart';
+import '../../../shared/providers/learning_module_provider.dart';
+import '../../../shared/services/skill_progress_service.dart';
 import '../../../shared/widgets/speak_button.dart';
+import '../../en_learning/presentation/en_coming_soon_screen.dart';
+import '../../gamification/gamification_provider.dart';
 import '../../lessons/domain/a1_kelime_db.dart';
 import '../../lessons/domain/a2_kelime_db.dart';
 import '../../lessons/domain/b1_kelime_db.dart';
@@ -25,6 +29,11 @@ import '../../lessons/domain/c2_kelime_db.dart';
 // kendini değerlendirir. TTS ile model telaffuz sağlanır.
 //
 // Akış: Dinle → Yavaş dinle → Tekrar et → Öz değerlendir
+//
+// YENİ (Temmuz 2026): Opsiyonel otomatik mikrofon kontrolü (deneysel).
+// AsrService (tarayıcı SpeechRecognition, tr-TR yakın fallback) ile
+// telaffuz otomatik skorlanır. Hata/destek yoksa SESSİZCE mevcut
+// öz-değerlendirme akışı devam eder — otomatik kontrol sadece ek katman.
 //
 // Araştırma: Babbel repetition drills + self-assessment
 // ════════════════════════════════════════════════════════════════
@@ -47,11 +56,68 @@ class _PronunciationScreenState extends ConsumerState<PronunciationScreen> {
   int _goodCount = 0;
   int _totalAttempts = 0;
 
+  // Otomatik telaffuz kontrolü (deneysel) — hata durumunda sessizce
+  // öz-değerlendirme akışına düşülür, kullanıcıya engel olmaz.
+  bool _isListening = false;
+  PronunciationResult? _asrResult;
+  int _checkSeq = 0; // Geç dönen eski ASR future'larını ayıklamak için
+  bool _progressRecorded = false; // Tek seferlik oturum sonu ilerleme kaydı
+
   @override
   void initState() {
     super.initState();
     _items = _generateItems();
   }
+
+  @override
+  void dispose() {
+    AsrService.cancel();
+    super.dispose();
+  }
+
+  /// Mikrofonla otomatik telaffuz kontrolü başlat/iptal et.
+  Future<void> _startAutoCheck(String target) async {
+    if (_isListening) {
+      AsrService.cancel();
+      setState(() => _isListening = false);
+      return;
+    }
+    final seq = ++_checkSeq;
+    setState(() {
+      _isListening = true;
+      _asrResult = null;
+    });
+    // Kurmancî için tarayıcı dili yok — tr-TR yakın fallback (yaklaşık).
+    final result = await AsrService.assess(target: target);
+    // Ekran kapandıysa veya bu arada yeni bir dinleme başladıysa dokunma
+    if (!mounted || seq != _checkSeq) return;
+    setState(() {
+      _isListening = false;
+      // null = hata/destek yok → kart gösterilmez, akış aynen devam eder
+      _asrResult = result;
+    });
+    if (result != null &&
+        result.verdict == PronunciationVerdict.excellent) {
+      SoundService.playCorrect();
+    }
+  }
+
+  /// Faz değiştir — aktif dinlemeyi iptal eder.
+  /// [keepResult]: öz-değerlendirme fazında son skoru özet olarak göster.
+  void _changePhase(int phase, {bool keepResult = false}) {
+    AsrService.cancel();
+    setState(() {
+      _phase = phase;
+      _isListening = false;
+      if (!keepResult) _asrResult = null;
+    });
+  }
+
+  String _verdictKu(PronunciationVerdict v) => switch (v) {
+        PronunciationVerdict.excellent => 'Pir baş',
+        PronunciationVerdict.close => 'Nêzîk bû',
+        PronunciationVerdict.tryAgain => 'Dîsa biceribîne',
+      };
 
   List<_PronunciationItem> _generateItems() {
     final words = _wordsForLevel(widget.level);
@@ -89,6 +155,17 @@ class _PronunciationScreenState extends ConsumerState<PronunciationScreen> {
 
   @override
   Widget build(BuildContext context) {
+    // ── TRACK-AWARE GUARD ──────────────────────────────────
+    // Bilêvkirin KU kelime + cümle havuzu — EN track için uygun değil.
+    final isEn = ref.watch(isEnglishModuleProvider);
+    if (isEn) {
+      return const EnComingSoonScreen(
+        activityKu: 'Bilêvkirin',
+        suggestedRoute: '/en/speaking',
+        suggestedLabel: 'EN Speaking',
+      );
+    }
+
     if (_items.isEmpty) {
       return Scaffold(
         backgroundColor: AppColors.backgroundPrimary,
@@ -204,9 +281,22 @@ class _PronunciationScreenState extends ConsumerState<PronunciationScreen> {
                       Text('Guhdarî bike û dubare bike',
                           style: AppTypography.caption),
 
+                      // Otomatik telaffuz kontrolü (deneysel, sadece web)
+                      if (AsrService.isSupported) ...[
+                        const SizedBox(height: 24),
+                        _MicCheckButton(
+                          isListening: _isListening,
+                          onTap: () => _startAutoCheck(item.word),
+                        ),
+                        if (_asrResult != null) ...[
+                          const SizedBox(height: 12),
+                          _AsrFeedbackCard(result: _asrResult!),
+                        ],
+                      ],
+
                       const SizedBox(height: 32),
                       _buildNextButton('Hevokê jî biceribîne', () {
-                        setState(() => _phase = 1);
+                        _changePhase(1);
                       }),
                     ],
 
@@ -242,9 +332,23 @@ class _PronunciationScreenState extends ConsumerState<PronunciationScreen> {
                       Text('Guhdarî bike û bi dengê bilind dubare bike',
                           style: AppTypography.caption),
 
+                      // Otomatik telaffuz kontrolü (deneysel, sadece web)
+                      if (AsrService.isSupported) ...[
+                        const SizedBox(height: 24),
+                        _MicCheckButton(
+                          isListening: _isListening,
+                          onTap: () => _startAutoCheck(item.sentence),
+                        ),
+                        if (_asrResult != null) ...[
+                          const SizedBox(height: 12),
+                          _AsrFeedbackCard(result: _asrResult!),
+                        ],
+                      ],
+
                       const SizedBox(height: 32),
                       _buildNextButton('Xwe binirxîne', () {
-                        setState(() => _phase = 2);
+                        // Son otomatik skor öz-değerlendirmede özet olarak kalsın
+                        _changePhase(2, keepResult: true);
                       }),
                     ],
 
@@ -271,6 +375,24 @@ class _PronunciationScreenState extends ConsumerState<PronunciationScreen> {
                               ),
                               textAlign: TextAlign.center,
                             ),
+                            // Otomatik kontrol yapıldıysa son skoru özetle
+                            if (_asrResult != null) ...[
+                              const SizedBox(height: 12),
+                              Container(
+                                padding: const EdgeInsets.symmetric(
+                                    horizontal: 12, vertical: 8),
+                                decoration: BoxDecoration(
+                                  color: AppColors.primary.withOpacity(0.06),
+                                  borderRadius: BorderRadius.circular(10),
+                                ),
+                                child: Text(
+                                  'Mîkrofon: %${_asrResult!.percent} — '
+                                  '${_verdictKu(_asrResult!.verdict)}',
+                                  style: AppTypography.caption
+                                      .copyWith(color: AppColors.primary),
+                                ),
+                              ),
+                            ],
                             const SizedBox(height: 16),
                             _AssessmentButton(
                               emoji: '😊',
@@ -306,7 +428,7 @@ class _PronunciationScreenState extends ConsumerState<PronunciationScreen> {
                                 SoundService.playTap();
                                 _totalAttempts++;
                                 // Kelimeye geri dön
-                                setState(() => _phase = 0);
+                                _changePhase(0);
                               },
                             ),
                           ],
@@ -342,13 +464,31 @@ class _PronunciationScreenState extends ConsumerState<PronunciationScreen> {
   }
 
   void _nextItem() {
+    AsrService.cancel();
     setState(() {
       _currentIndex++;
       _phase = 0;
+      _isListening = false;
+      _asrResult = null;
     });
   }
 
   Widget _buildResultScreen() {
+    // İLERLEME FIX: Bilêvkirin oturumu tamamlanınca hiçbir XP/istatistik
+    // yazılmıyordu — kullanıcı "hiç ilerleme olmuyor" görüyordu. Oturum
+    // sonunda bir kez XP + beceri panosu ('speaking' / Axaftin) kaydı yazılır.
+    if (!_progressRecorded) {
+      _progressRecorded = true;
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        if (!mounted) return;
+        // Taban 10 XP + her "Baş bû" için konuşma bonusu (XPRules.speakingPractice)
+        ref
+            .read(gamificationProvider.notifier)
+            .addXP(10 + _goodCount * XPRules.speakingPractice);
+        markSkillCompletedAndNotify(ref,
+            module: 'ku', skill: 'speaking', xp: 10);
+      });
+    }
     return Scaffold(
       backgroundColor: AppColors.backgroundPrimary,
       body: SafeArea(
@@ -506,6 +646,110 @@ class _AssessmentButton extends StatelessWidget {
         ),
       ),
     );
+  }
+}
+
+// ── Mikrofon Kontrol Butonu (otomatik değerlendirme) ────────
+
+class _MicCheckButton extends StatelessWidget {
+  final bool isListening;
+  final VoidCallback onTap;
+
+  const _MicCheckButton({required this.isListening, required this.onTap});
+
+  @override
+  Widget build(BuildContext context) {
+    final color = isListening ? const Color(0xFFEF5350) : AppColors.accent;
+    return Column(
+      children: [
+        GestureDetector(
+          onTap: onTap,
+          child: AnimatedContainer(
+            duration: const Duration(milliseconds: 200),
+            width: 64, height: 64,
+            decoration: BoxDecoration(
+              color: color.withOpacity(0.1),
+              shape: BoxShape.circle,
+              border: Border.all(
+                color: color.withOpacity(isListening ? 0.6 : 0.3),
+                width: 2,
+              ),
+            ),
+            child: Icon(
+              isListening ? Icons.graphic_eq_rounded : Icons.mic_rounded,
+              size: 30,
+              color: color,
+            ),
+          ),
+        ),
+        const SizedBox(height: 6),
+        Text(
+          isListening ? 'Guhdarî dikim...' : 'Bêje — otomatîk kontrol',
+          style: AppTypography.caption.copyWith(fontSize: 12, color: color),
+        ),
+      ],
+    );
+  }
+}
+
+// ── Otomatik Değerlendirme Geri Bildirim Kartı ──────────────
+
+class _AsrFeedbackCard extends StatelessWidget {
+  final PronunciationResult result;
+
+  const _AsrFeedbackCard({required this.result});
+
+  @override
+  Widget build(BuildContext context) {
+    final (color, emoji, label) = switch (result.verdict) {
+      PronunciationVerdict.excellent => (AppColors.success, '🎉', 'Pir baş!'),
+      PronunciationVerdict.close => (AppColors.warning, '👍', 'Nêzîk bû!'),
+      PronunciationVerdict.tryAgain =>
+        (AppColors.errorSoft, '💪', 'Dîsa biceribîne'),
+    };
+    return Container(
+      width: double.infinity,
+      padding: const EdgeInsets.all(14),
+      decoration: BoxDecoration(
+        color: color.withOpacity(0.08),
+        borderRadius: BorderRadius.circular(12),
+        border: Border.all(color: color.withOpacity(0.3)),
+      ),
+      child: Column(
+        children: [
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Text(emoji, style: const TextStyle(fontSize: 20)),
+              const SizedBox(width: 8),
+              Text(
+                '$label  %${result.percent}',
+                style: AppTypography.label
+                    .copyWith(color: color, fontWeight: FontWeight.w700),
+              ),
+            ],
+          ),
+          if (result.transcript.isNotEmpty) ...[
+            const SizedBox(height: 6),
+            Text(
+              'Me bihîst: "${result.transcript}"',
+              style: AppTypography.caption.copyWith(fontSize: 12),
+              textAlign: TextAlign.center,
+            ),
+          ],
+          if (result.isApproximate) ...[
+            const SizedBox(height: 4),
+            Text(
+              'Nirxandina otomatîk nêzîkî ye (ceribandin)',
+              style: AppTypography.caption.copyWith(
+                fontSize: 10,
+                color: AppColors.textTertiary,
+              ),
+            ),
+          ],
+        ],
+      ),
+    ).animate().fadeIn(duration: 250.ms);
   }
 }
 

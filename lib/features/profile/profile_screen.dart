@@ -1,4 +1,5 @@
 import 'dart:math';
+import 'package:flutter/foundation.dart' show kIsWeb;
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -11,18 +12,21 @@ import '../../core/router/app_router.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../../core/services/auth_service.dart';
 import '../../core/services/local_auth_service.dart';
+import '../../core/services/cloudflare_auth_service.dart';
+import '../../core/utils/web_navigator_stub.dart'
+    if (dart.library.html) '../../core/utils/web_navigator_html.dart'
+    as web_navigator;
 import '../lessons/data/lesson_repository.dart';
 import '../gamification/gamification_widgets.dart';
 import '../certificate/certificate_screen.dart';
 import '../cultural_content/domain/dil_motivasyon_db.dart';
 import '../../shared/widgets/leaderboard_widget.dart';
 import '../../shared/widgets/level_picker_sheet.dart';
-import '../subscription/data/subscription_service.dart';
-import '../subscription/domain/subscription_status.dart';
 import 'widgets/accessibility_settings_card.dart';
 import 'widgets/skill_progress_dashboard.dart';
 import 'widgets/tts_source_card.dart';
 import 'widgets/weekly_ai_advisor_card.dart';
+import '../admin/widgets/user_stats_card.dart';
 import '../../core/services/sound_service.dart';
 import '../../core/services/user_mode_preferences.dart';
 import '../../shared/providers/language_mode_provider.dart';
@@ -31,6 +35,7 @@ import '../../shared/providers/learning_track_provider.dart';
 import '../../shared/providers/streak_provider.dart';
 import '../../shared/providers/progression_provider.dart';
 import '../../shared/providers/review_provider.dart';
+import '../../shared/widgets/suggestion_sheet.dart';
 import '../gamification/gamification_provider.dart';
 import '../child_mode/domain/bizer_evolution.dart';
 
@@ -2164,9 +2169,6 @@ class _SettingsSectionState extends State<_SettingsSection> {
           // Yalnız yönetici için — Bug FAB toggle + alt-editor yönetimi
           const _OwnerSettingsSection(),
 
-          // Aboneya Premium — durum + paywall'a yönlendirme
-          const _SubscriptionTile(),
-
           const Divider(height: AppSpacing.sm),
 
           // Testa asta xwe dîsa bike
@@ -2188,6 +2190,29 @@ class _SettingsSectionState extends State<_SettingsSection> {
             trailing: Icon(Icons.chevron_right,
                 size: 20, color: AppColors.textSecondary),
             onTap: () => context.push(AppRoutes.placementTest),
+          ),
+
+          const Divider(height: AppSpacing.sm),
+
+          // Düzeltme önerisi — içerik hatası bildir / öneri gönder
+          ListTile(
+            dense: true,
+            contentPadding: EdgeInsets.zero,
+            leading: Icon(Icons.rate_review_outlined,
+                size: 20, color: AppColors.warning),
+            title: Text(
+              'Pêşniyara serrastkirinê bişîne',
+              style: AppTypography.bodySmall
+                  .copyWith(color: AppColors.textPrimary),
+            ),
+            subtitle: Text(
+              'Şaşiyekê dîtî? Ji me re binivîse — Düzeltme önerisi gönder',
+              style: AppTypography.caption
+                  .copyWith(color: AppColors.textSecondary),
+            ),
+            trailing: Icon(Icons.chevron_right,
+                size: 20, color: AppColors.textSecondary),
+            onTap: () => showSuggestionSheet(context, initialType: 'din'),
           ),
 
           const Divider(height: AppSpacing.sm),
@@ -2217,7 +2242,7 @@ class _SettingsSectionState extends State<_SettingsSection> {
   void _showAboutDialog(BuildContext context) {
     showDialog(
       context: context,
-      builder: (_) => AlertDialog(
+      builder: (dialogContext) => AlertDialog(
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(20),
         ),
@@ -2255,7 +2280,7 @@ class _SettingsSectionState extends State<_SettingsSection> {
         ),
         actions: [
           TextButton(
-            onPressed: () => Navigator.pop(context),
+            onPressed: () => Navigator.pop(dialogContext),
             child: Text(
               'Baş e',
               style: TextStyle(color: AppColors.primary),
@@ -2542,11 +2567,22 @@ class _AccountActions extends StatelessWidget {
     );
     if (confirmed != true) return;
 
-    // Firebase signOut + yerel auth logout birlikte — hangisi kullanımdaysa
-    // temizlenmeli. Aksi halde splash "hâlâ logged in" sanar.
-    await ref.read(authServiceProvider).signOut();
+    // Firebase signOut + yerel auth logout + Cloudflare auth logout birlikte —
+    // hangisi kullanımdaysa temizlenmeli. Aksi halde splash "hâlâ logged in"
+    // sanar veya cloud token kalır ve isOwnerProvider hâlâ true döner.
+    // BUG FIX (Mayıs 2026): authService.signOut try-catch dışındaydı; Firebase
+    // init edilmediği için throw ediyordu ve aşağıdaki kod (replaceLocation
+    // dahil) hiç çalışmıyordu → kullanıcı logout edemiyordu. Tüm signOut
+    // çağrıları artık try-catch'te.
+    try {
+      await ref.read(authServiceProvider).signOut();
+    } catch (_) {}
     try {
       await ref.read(localAuthServiceProvider).logout();
+    } catch (_) {}
+    try {
+      await ref.read(cloudflareAuthServiceProvider).logout();
+      ref.invalidate(cloudflareCurrentUserProvider);
     } catch (_) {}
     // Local owner + login holder flag'lerini sıfırla.
     await refreshLocalOwnerState(ref);
@@ -2571,6 +2607,18 @@ class _AccountActions extends StatelessWidget {
       await prefs.remove('placement_level_ku');
       await prefs.remove('placement_level_en');
     } catch (_) {}
+
+    // Web: hard reload yap. Bu garantili şekilde
+    //   - tarayıcı cache'ini bypass eder
+    //   - Riverpod in-memory state'i tamamen sıfırlar
+    //   - Cloudflare/local auth provider'ları yeniden hidrate olur
+    //   - service worker (varsa) yeni bundle'ı çeker
+    // ?reset=1 query parameter'ı index.html'deki cleanup snippet'i tetikler:
+    // localStorage temizler, SW unregister eder, /auth/login'e yönlendirir.
+    if (kIsWeb) {
+      web_navigator.replaceLocation('/?reset=1');
+      return;
+    }
     if (context.mounted) context.go(AppRoutes.splash);
   }
 
@@ -2975,10 +3023,6 @@ class _CertificateTile extends StatelessWidget {
 }
 
 // ════════════════════════════════════════════════════════════════
-// SUBSCRIPTION TILE — abonelik durumu + paywall'a yönlendirme
-// ════════════════════════════════════════════════════════════════
-
-// ════════════════════════════════════════════════════════════════
 // OWNER SETTINGS — Yalnız yönetici için
 // • Bug raporlama butonunu (uğur böceği) gizle/göster toggle
 // • Alt-editör (reviewer) yönetim alanına git
@@ -3013,6 +3057,9 @@ class _OwnerSettingsSection extends ConsumerWidget {
           ),
         ),
 
+        // Bikarhêner statîstîkleri (Cloudflare D1)
+        const UserStatsCard(),
+
         // Alt-editör yönetimi
         ListTile(
           dense: true,
@@ -3040,78 +3087,3 @@ class _OwnerSettingsSection extends ConsumerWidget {
   }
 }
 
-class _SubscriptionTile extends ConsumerWidget {
-  const _SubscriptionTile();
-
-  @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    final sub = ref.watch(subscriptionProvider);
-    final tier = sub.tier;
-    final isPromoActive = SubscriptionConstants.isPromoPeriodActive;
-
-    final (icon, title, subtitle, color) = isPromoActive
-        ? (
-            Icons.celebration_outlined,
-            'Demê pêşkêşiyê — bedelî',
-            'Heya ${SubscriptionConstants.promoEndsLabelKu} '
-                '· ${SubscriptionConstants.promoDaysRemaining} roj mayî',
-            const Color(0xFFFFA726),
-          )
-        : switch (tier) {
-            SubscriptionTier.premium => (
-              Icons.workspace_premium_rounded,
-              'Premium aktîf',
-              sub.premiumDaysRemaining != null
-                  ? '${sub.premiumDaysRemaining} roj mayî · ${SubscriptionConstants.annualPriceTry} ₺/sal'
-                  : 'Bê sînor',
-              const Color(0xFF4CAF50),
-            ),
-            SubscriptionTier.trial => (
-              Icons.timer_outlined,
-              'Ceribandina te aktîv e',
-              sub.trialDaysRemaining != null
-                  ? '${sub.trialDaysRemaining} roj mayî · paşê ${SubscriptionConstants.annualPriceTry} ₺/sal'
-                  : '7 roj mayî',
-              AppColors.primary,
-            ),
-            SubscriptionTier.trialExpired => (
-              Icons.lock_outline_rounded,
-              'Ceribandin qediya',
-              'Aboneya salane: ${SubscriptionConstants.annualPriceTry} ₺/sal',
-              Colors.orange,
-            ),
-            SubscriptionTier.premiumExpired => (
-              Icons.refresh_rounded,
-              'Aboneya te qediya',
-              'Nûjenkirin: ${SubscriptionConstants.annualPriceTry} ₺/sal',
-              Colors.orange,
-            ),
-            SubscriptionTier.none => (
-              Icons.workspace_premium_outlined,
-              'Premium\'ê biceribîne',
-              '7 roj bê pere · paşê ${SubscriptionConstants.annualPriceTry} ₺/sal',
-              AppColors.primary,
-            ),
-          };
-
-    return ListTile(
-      dense: true,
-      contentPadding: EdgeInsets.zero,
-      leading: Icon(icon, size: 20, color: color),
-      title: Text(
-        title,
-        style: AppTypography.bodySmall.copyWith(
-          color: AppColors.textPrimary,
-          fontWeight: FontWeight.w700,
-        ),
-      ),
-      subtitle: Text(
-        subtitle,
-        style: AppTypography.caption.copyWith(color: AppColors.textSecondary),
-      ),
-      trailing: Icon(Icons.chevron_right,
-          size: 20, color: AppColors.textSecondary),
-      onTap: () => context.push(AppRoutes.paywall),
-    );
-  }
-}

@@ -122,7 +122,7 @@ class AppDatabase extends _$AppDatabase {
   AppDatabase() : super(_openConnection());
 
   @override
-  int get schemaVersion => 4;
+  int get schemaVersion => 5;
 
   @override
   MigrationStrategy get migration => MigrationStrategy(
@@ -137,6 +137,11 @@ class AppDatabase extends _$AppDatabase {
         await m.addColumn(userProfiles, userProfiles.parentPin);
         await m.addColumn(userProfiles, userProfiles.dailyTimeLimitMinutes);
         await m.createTable(childSessionLogs);
+      }
+      if (from < 5) {
+        // UserProgress tablosu — saveLessonResult çağrısı için gerekli.
+        // Daha önce schema'da olmasına rağmen migration atlanmıştı → crash.
+        await m.createTable(userProgress);
       }
     },
   );
@@ -165,8 +170,9 @@ class AppDatabase extends _$AppDatabase {
   Future<List<VocabularyCard>> getNewCardsByLevel(
       int level, int limit) async {
     // "Yeni" = hiç review kaydı olmayan kartlar
+    // NOT: Shema varsayılanı 'new', enum.name çıktısı 'newCard' — iki değeri de kapsıyoruz.
     final reviewed = await (select(fsrsReviews)
-          ..where((t) => t.state.isNotIn(['new'])))
+          ..where((t) => t.state.isNotIn(['new', 'newCard'])))
         .map((r) => r.cardId)
         .get();
 
@@ -209,6 +215,9 @@ class AppDatabase extends _$AppDatabase {
 
   Future<void> createReview(
       String userId, String cardId, dynamic fsrsCard) async {
+    // FSRSCard has no `lastRatingWasCorrect` field; derive from state:
+    // relearning => last answer was "again" (incorrect); else treat as correct.
+    final wasCorrect = fsrsCard.state.name != 'relearning';
     await into(fsrsReviews).insert(FsrsReviewsCompanion.insert(
       userId: userId,
       cardId: cardId,
@@ -219,13 +228,14 @@ class AppDatabase extends _$AppDatabase {
       reviewCount: Value(fsrsCard.reviewCount),
       lapseCount: Value(fsrsCard.lapseCount),
       dueDate: fsrsCard.dueDate,
-      wasCorrect: Value(fsrsCard.lastRatingWasCorrect),
+      wasCorrect: Value(wasCorrect),
       lastReview: Value(DateTime.now()),
     ));
   }
 
   Future<void> updateReview(
       String userId, String cardId, dynamic fsrsCard) async {
+    final wasCorrect = fsrsCard.state.name != 'relearning';
     await (update(fsrsReviews)
           ..where((t) =>
               t.userId.equals(userId) & t.cardId.equals(cardId)))
@@ -237,7 +247,7 @@ class AppDatabase extends _$AppDatabase {
       reviewCount: Value(fsrsCard.reviewCount),
       lapseCount: Value(fsrsCard.lapseCount),
       dueDate: Value(fsrsCard.dueDate),
-      wasCorrect: Value(fsrsCard.lastRatingWasCorrect),
+      wasCorrect: Value(wasCorrect),
       lastReview: Value(DateTime.now()),
     ));
   }

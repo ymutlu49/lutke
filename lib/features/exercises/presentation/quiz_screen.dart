@@ -23,10 +23,18 @@ import '../../lessons/domain/child_a1_kelime_db.dart';
 import '../../lessons/domain/child_a2_kelime_db.dart';
 import '../../en_learning/domain/en_to_quiz_adapter.dart';
 import '../../../shared/providers/learning_module_provider.dart';
+import '../../../shared/services/skill_progress_service.dart';
 import '../../cultural_content/domain/dil_motivasyon_db.dart';
 import '../../../core/services/sound_service.dart';
 import '../../../shared/providers/child_mode_provider.dart';
 import '../../../shared/utils/word_emoji_map.dart';
+import '../../gamification/gamification_provider.dart';
+import '../../../shared/widgets/persistent_xp_badge.dart';
+import '../../../shared/widgets/xp_float_animation.dart';
+import '../../../shared/widgets/streak_milestone_toast.dart';
+import '../../child_mode/domain/child_daily_challenge.dart';
+import '../../child_mode/domain/bizer_evolution.dart';
+import '../../admin/data/content_override_service.dart';
 
 // ════════════════════════════════════════════════════════════════
 // QUIZ SESSION — 4 Egzersiz Tipi, 10 Soru, Duolingo Tarzı
@@ -93,40 +101,77 @@ class _QuizQuestion {
 
 // ── Kelime Havuzu Yardimcilari ──────────────────────────────────
 
-List<_QuizWord> _loadWordsForLevel(String level, {bool isChildMode = false, bool isEnglishModule = false}) {
+List<_QuizWord> _loadWordsForLevel(
+  String level, {
+  bool isChildMode = false,
+  bool isEnglishModule = false,
+  Map<String, WordOverride> overrides = const {},
+  Set<String> deletedIds = const {},
+  Map<String, CustomWord> customWords = const {},
+}) {
+  // Yardımcı — owner override/custom kelimeleri `_QuizWord` şekline taşır.
+  // applyVocabulary zaten edit override'ı uyguladığı için burada
+  // ikinci bir override uygulamasına gerek kalmaz.
+  _QuizWord fromRaw(dynamic r) {
+    return _QuizWord(
+      id: r.id as String,
+      ku: r.ku as String,
+      tr: r.tr as String,
+      en: (r.en ?? '') as String,
+      kat: (r.kat ?? '') as String,
+      cins: (r.cins ?? '') as String,
+      not_: (r.not ?? '') as String,
+      zor: () {
+        final v = r.zor;
+        return (v is num) ? v.toDouble() : 0.75;
+      }(),
+      her: (r.her ?? const []) as List,
+      gen: (r.gen ?? const []) as List,
+    );
+  }
+
   // İngilizce modülü: EnWord verisini Kurmancî record şekline adapte eder.
+  // BUG FIX (Nisan 2026): EN + Child kombinasyonunda EN child A1/A2 DB'sine
+  // yönlendir — Oxford 3000 (mezin EN) yerine yaş-uygun çocuk kelimeleri.
+  // EN tarafında CRUD kapsam dışı.
   if (isEnglishModule) {
-    final raw = getEnWordsForLevel(level);
+    final raw = getEnWordsForLevel(level, childOnly: isChildMode);
     return raw
         .where((r) => r.ku.isNotEmpty && r.tr.isNotEmpty && r.ku.length > 1)
-        .map((r) => _QuizWord(
-              id: r.id, ku: r.ku, tr: r.tr, en: r.en,
-              kat: r.kat ?? '', cins: r.cins ?? '', not_: r.not ?? '',
-              zor: (r.zor is num) ? (r.zor as num).toDouble() : 0.75,
-              her: r.her ?? [], gen: r.gen ?? [],
-            ))
+        .map((r) => fromRaw(r))
         .cast<_QuizWord>()
         .toList();
   }
+
   // Çocuk modu: yalnızca çocuk için seçilmiş A1+A2 havuzu kullanılır.
-  // Bu distractor seçiminde B1+ gibi yaş-uygunsuz kelimelerin çıkmasını
-  // engeller (çocuk_a1_kelime_db: 61 madde, çocuk_a2_kelime_db: 31 madde).
   if (isChildMode) {
-    final raw = level.toUpperCase() == 'A2'
-        ? [...kChildA1Kelimeler, ...kChildA2Kelimeler]
-        : kChildA1Kelimeler;
-    return raw
-        .where((r) => r.ku.isNotEmpty && r.tr.isNotEmpty && r.ku.length > 1)
-        .map((r) => _QuizWord(
-              id: r.id, ku: r.ku, tr: r.tr, en: r.en,
-              kat: r.kat ?? '', cins: r.cins ?? '', not_: r.not ?? '',
-              zor: (r.zor is num) ? (r.zor as num).toDouble() : 0.75,
-              her: r.her ?? [], gen: r.gen ?? [],
-            ))
+    final up = level.toUpperCase();
+    final merged = <dynamic>[];
+    merged.addAll(applyVocabulary(
+      List<dynamic>.from(kChildA1Kelimeler),
+      level: 'CHILD_A1',
+      overrides: overrides,
+      deletedIds: deletedIds,
+      customWords: customWords,
+    ));
+    if (up == 'A2') {
+      merged.addAll(applyVocabulary(
+        List<dynamic>.from(kChildA2Kelimeler),
+        level: 'CHILD_A2',
+        overrides: overrides,
+        deletedIds: deletedIds,
+        customWords: customWords,
+      ));
+    }
+    return merged
+        .where((r) => (r.ku as String).isNotEmpty &&
+            (r.tr as String).isNotEmpty &&
+            (r.ku as String).length > 1)
+        .map((r) => fromRaw(r))
         .toList();
   }
 
-  final raw = switch (level.toUpperCase()) {
+  final rawList = switch (level.toUpperCase()) {
     'A1' => kA1TamListe,
     'A2' => kA2TamListe,
     'B1' => kB1All,
@@ -136,15 +181,20 @@ List<_QuizWord> _loadWordsForLevel(String level, {bool isChildMode = false, bool
     _ => kA1TamListe,
   };
 
+  final merged = applyVocabulary(
+    List<dynamic>.from(rawList),
+    level: level.toUpperCase(),
+    overrides: overrides,
+    deletedIds: deletedIds,
+    customWords: customWords,
+  );
+
   // Tek harflik kelimeleri (alfabe) hariç tut — quiz için uygun değil
-  return raw
-      .where((r) => r.ku.isNotEmpty && r.tr.isNotEmpty && r.ku.length > 1)
-      .map((r) => _QuizWord(
-        id: r.id, ku: r.ku, tr: r.tr, en: r.en,
-        kat: r.kat ?? '', cins: r.cins ?? '', not_: r.not ?? '',
-        zor: (r.zor is num) ? (r.zor as num).toDouble() : 0.75,
-        her: r.her ?? [], gen: r.gen ?? [],
-      ))
+  return merged
+      .where((r) => (r.ku as String).isNotEmpty &&
+          (r.tr as String).isNotEmpty &&
+          (r.ku as String).length > 1)
+      .map((r) => fromRaw(r))
       .toList();
 }
 
@@ -155,8 +205,18 @@ List<_QuizQuestion> _generateQuizSession({
   bool showTurkish = true,
   bool isChildMode = false,
   bool isEnglishModule = false,
+  Map<String, WordOverride> overrides = const {},
+  Set<String> deletedIds = const {},
+  Map<String, CustomWord> customWords = const {},
 }) {
-  final allWords = _loadWordsForLevel(level, isChildMode: isChildMode, isEnglishModule: isEnglishModule);
+  final allWords = _loadWordsForLevel(
+    level,
+    isChildMode: isChildMode,
+    isEnglishModule: isEnglishModule,
+    overrides: overrides,
+    deletedIds: deletedIds,
+    customWords: customWords,
+  );
   // Çocuk modunda soru sayısını 10 → 6 indir (dikkat süresi kısa)
   if (isChildMode) questionCount = 6;
   // Filter by category if provided, but keep allWords for distractors
@@ -219,8 +279,15 @@ List<_QuizQuestion> _generateQuizSession({
       ? allWords.where((w) => w.kat == category).toList()
       : allWords;
 
-  // Heritage cümlenin kelimeyi gerçekten içerip içermediğini ve yeterince
-  // uzun olup olmadığını kontrol et. Cloze (boşluk doldur) için şart.
+  // Heritage cümlenin kelimeyi gerçekten içerip içermediğini ve cloze
+  // (boşluk doldur) için DENGELİ uzunlukta olup olmadığını kontrol et.
+  //
+  // PEDAGOJİK DENGE (kullanıcı geri bildirimi — Nisan 2026):
+  // Çok uzun cümle + tek kelimelik yanıt görsel/bilişsel tutarsızlık yaratır
+  // ("Metin uzun verilmiş ama yanıtı bir kelime ile verilmiş"). Cloze için
+  // hem alt hem üst sınır gerekir: yeterli bağlam ama abartısız.
+  //   • min: 10 char (bağlam yeterli olmalı)
+  //   • max: 90 char / 14 kelime (tek kelime yanıt için makul)
   bool hasUsableHeritage(_QuizWord w) {
     if (w.her.isEmpty) return false;
     final wordRe = RegExp(
@@ -229,7 +296,10 @@ List<_QuizQuestion> _generateQuizSession({
     );
     for (final raw in w.her) {
       final s = raw.toString();
-      if (s.length >= 10 && wordRe.hasMatch(s)) return true;
+      if (s.length < 10 || s.length > 90) continue;
+      final wc = s.split(RegExp(r'\s+')).length;
+      if (wc > 14) continue;
+      if (wordRe.hasMatch(s)) return true;
     }
     return false;
   }
@@ -244,8 +314,14 @@ List<_QuizQuestion> _generateQuizSession({
       type = _ExerciseType.translation;
     }
 
-    // Picture-based tipler için emoji şart
-    final wordEmoji = emojiForWord(word.ku, word.kat);
+    // Picture-based tipler için KELİMEYE ÖZEL emoji şart (Temmuz 2026 fix):
+    //   • Kategori fallback'i KULLANILMAZ — aynı kategorideki kelimeler hep
+    //     aynı jenerik emoji'yi (🏠, 📖, 🔢…) üretiyordu; farklı cevaplı
+    //     sorularda aynı görselin tekrarı kafa karıştırıyordu.
+    //   • Jenerik/soyut semboller (🔵 "mavi daire", ⭐, ❓…) dışlanır.
+    //   • Yalnızca somut kategoriler (nesne/hayvan/yiyecek…) uygundur.
+    // Uygun emoji yoksa soru çeviri tipine dönüştürülür.
+    final wordEmoji = _pictureEmojiFor(word);
     if ((type == _ExerciseType.pictureToWord ||
             type == _ExerciseType.wordToPicture) &&
         wordEmoji.isEmpty) {
@@ -270,10 +346,32 @@ List<_QuizQuestion> _generateQuizSession({
     List<String> options = [];
 
     if (type != _ExerciseType.typing) {
+      // EŞANLAMLI ÇAKIŞMASI FİLTRESİ (Temmuz 2026 — kullanıcı geri bildirimi):
+      // Doğru cevapla aynı Türkçe karşılığa (veya aynı Kurmancî yazıma) sahip
+      // kelime distractor OLAMAZ. İki seçenek de "Mutlu / Bahtiyar" okunursa
+      // kullanıcı hangisinin istendiğini bilemez ve haksız yere yanlış sayılır.
+      // "Mutlu / Bahtiyar", "Keyfim yerinde / Mutluyum" gibi '/'-varyantları
+      // parça parça karşılaştırılır — tek parçası bile çakışan kelime elenir.
+      Set<String> trVariants(String s) => s
+          .toLowerCase()
+          .split(RegExp(r'[/;,]'))
+          .map((p) => p.trim())
+          .where((p) => p.isNotEmpty)
+          .toSet();
+      final targetTrSet = trVariants(word.tr);
+      final targetKuNorm = word.ku.trim().toLowerCase();
+      bool collides(_QuizWord w) {
+        if (w.ku.trim().toLowerCase() == targetKuNorm) return true;
+        return trVariants(w.tr).intersection(targetTrSet).isNotEmpty;
+      }
+
       // Önce aynı kategoriden distractor dene, yetersizse tüm havuzdan al
-      var distractorPool = sameCatWords.where((w) => w.id != word.id).toList();
+      var distractorPool = sameCatWords
+          .where((w) => w.id != word.id && !collides(w))
+          .toList();
       if (distractorPool.length < 3) {
-        distractorPool = allWords.where((w) => w.id != word.id).toList();
+        distractorPool =
+            allWords.where((w) => w.id != word.id && !collides(w)).toList();
       }
 
       // Morfolojik + uzunluk-sınıfı benzerlik skorlaması:
@@ -303,68 +401,89 @@ List<_QuizQuestion> _generateQuizSession({
       final topCandidates = distractorPool.take(8).toList()..shuffle(rng);
 
       if (type == _ExerciseType.pictureToWord) {
-        // Görsel (emoji) → Kurmancî kelime seç
-        // Soru yeri: word.ku (büyük emoji); seçenekler: 4 Kurmancî kelime
-        // Doğru: word.ku; distractor: 3 farklı Kurmancî kelime (aynı kategori)
-        final correctAnswer = word.ku;
-        final wrongOptions =
-            topCandidates.take(3).map((w) => w.ku).toList();
-        options = [correctAnswer, ...wrongOptions]..shuffle(rng);
-      } else if (type == _ExerciseType.wordToPicture) {
-        // Kurmancî kelime → 4 emoji seçeneği
-        // Distractor'lar emoji-uyumlu kelimelerden seçilmeli (boş emoji çıkmasın)
-        final emojiCandidates = topCandidates
-            .where((w) => emojiForWord(w.ku, w.kat).isNotEmpty)
-            .where((w) => emojiForWord(w.ku, w.kat) != wordEmoji)
-            .toList();
-        if (emojiCandidates.length < 3) {
-          // Yetersiz emoji distractor → tip değiştir
+        // Görsel (emoji) → Kurmancî kelime seç.
+        // Distractor kelimenin emoji'si hedefle AYNI olmamalı — aksi halde
+        // görsele göre iki "doğru" cevap oluşur (ör. 🍑 için hem "Mişmiş"
+        // hem "Xox" doğru sayılırdı). Ayrıca selamlama/fraz distractor çıkar.
+        final targetEmojiNorm = _normalizeEmoji(wordEmoji);
+        bool sharesTargetEmoji(_QuizWord w) =>
+            _normalizeEmoji(
+                emojiForWord(w.ku, w.kat, useCategoryFallback: false)) ==
+            targetEmojiNorm;
+        final safeCandidates =
+            topCandidates.where((w) => !sharesTargetEmoji(w)).toList();
+        final pictureSuitable =
+            safeCandidates.where(_isSuitableForPictureQuiz).toList();
+        final wrongPool =
+            pictureSuitable.length >= 3 ? pictureSuitable : safeCandidates;
+        if (wrongPool.length < 3) {
+          // Yeterli güvenli distractor yok → çeviri sorusuna düş.
+          // Seçenek dili moda uyar: TR modda Türkçe, KU-only modda Kurmancî
+          // (aksi halde _buildOptionButtons doğru cevabı bulamaz).
           type = _ExerciseType.translation;
-          final isKuOptions = false;
-          final correctAnswer = isKuOptions ? word.ku : word.tr;
-          final wrongOptions = topCandidates.take(3)
-              .map((w) => isKuOptions ? w.ku : w.tr).toList();
-          options = [correctAnswer, ...wrongOptions]..shuffle(rng);
+          final correctAnswer = showTurkish ? word.tr : word.ku;
+          options = _distinctOptions(
+            correctAnswer,
+            topCandidates.map((w) => showTurkish ? w.tr : w.ku),
+            distractorPool.map((w) => showTurkish ? w.tr : w.ku),
+          )..shuffle(rng);
         } else {
-          // Seçenek olarak emoji string'leri tut (option == doğru emoji ise doğru)
-          final correctAnswer = wordEmoji;
-          final wrongOptions = emojiCandidates
-              .take(3)
-              .map((w) => emojiForWord(w.ku, w.kat))
-              .toSet() // duplicate emoji'leri ele
-              .toList();
-          // Toset'ten 3'ten az çıkabilir → ek doldurma
-          while (wrongOptions.length < 3 && emojiCandidates.length > wrongOptions.length) {
-            for (final c in emojiCandidates) {
-              final e = emojiForWord(c.ku, c.kat);
-              if (!wrongOptions.contains(e) && e != correctAnswer) {
-                wrongOptions.add(e);
-              }
-              if (wrongOptions.length >= 3) break;
-            }
-            break;
-          }
-          if (wrongOptions.length < 3) {
-            type = _ExerciseType.translation;
-            final correctAnswer2 = word.tr;
-            final wrongOptions2 = topCandidates.take(3).map((w) => w.tr).toList();
-            options = [correctAnswer2, ...wrongOptions2]..shuffle(rng);
-          } else {
-            options = [correctAnswer, ...wrongOptions.take(3)]..shuffle(rng);
-          }
+          final correctAnswer = word.ku;
+          options = _distinctOptions(
+            correctAnswer,
+            wrongPool.map((w) => w.ku),
+            distractorPool.map((w) => w.ku),
+          )..shuffle(rng);
+        }
+      } else if (type == _ExerciseType.wordToPicture) {
+        // Kurmancî kelime → 4 emoji seçeneği.
+        // Kurallar (Temmuz 2026 fix):
+        //   • Distractor emoji kelimeye-özel + somut olmalı (kategori
+        //     fallback'i aynı jenerik emoji'nin tekrarına yol açıyordu).
+        //   • 4 seçenek birbirinden FARKLI olmalı (duplicate emoji yok).
+        //   • Hedefle aynı emoji'yi paylaşan kelime distractor alınmaz.
+        // Havuz: topCandidates(8) yerine tüm distractorPool — kelime-şekli
+        // benzerliği emoji seçeneklerinde önemsiz, geniş arz gerekli.
+        final targetEmojiNorm = _normalizeEmoji(wordEmoji);
+        final emojiPool = List<_QuizWord>.from(distractorPool)..shuffle(rng);
+        final wrongEmojis = <String>[];
+        final seenEmojis = <String>{targetEmojiNorm};
+        for (final c in emojiPool) {
+          final e = _pictureEmojiFor(c);
+          if (e.isEmpty) continue;
+          if (!seenEmojis.add(_normalizeEmoji(e))) continue; // duplicate → atla
+          wrongEmojis.add(e);
+          if (wrongEmojis.length >= 3) break;
+        }
+        if (wrongEmojis.length < 3) {
+          // Yeterli FARKLI emoji distractor yok → çeviri sorusuna düş
+          type = _ExerciseType.translation;
+          final correctAnswer = showTurkish ? word.tr : word.ku;
+          options = _distinctOptions(
+            correctAnswer,
+            topCandidates.map((w) => showTurkish ? w.tr : w.ku),
+            distractorPool.map((w) => showTurkish ? w.tr : w.ku),
+          )..shuffle(rng);
+        } else {
+          options = [wordEmoji, ...wrongEmojis]..shuffle(rng);
         }
       } else if (showTurkish) {
         // Türkçe mod: KU göster → TR seçenekler / TR göster → KU seçenekler
         final isKuOptions = type == _ExerciseType.reverseTranslation;
         final correctAnswer = isKuOptions ? word.ku : word.tr;
-        final wrongOptions = topCandidates.take(3)
-            .map((w) => isKuOptions ? w.ku : w.tr).toList();
-        options = [correctAnswer, ...wrongOptions]..shuffle(rng);
+        options = _distinctOptions(
+          correctAnswer,
+          topCandidates.map((w) => isKuOptions ? w.ku : w.tr),
+          distractorPool.map((w) => isKuOptions ? w.ku : w.tr),
+        )..shuffle(rng);
       } else {
         // Kürtçe-only mod: Anlam/bağlam göster → KU kelimeyi sor
         final correctAnswer = word.ku;
-        final wrongOptions = topCandidates.take(3).map((w) => w.ku).toList();
-        options = [correctAnswer, ...wrongOptions]..shuffle(rng);
+        options = _distinctOptions(
+          correctAnswer,
+          topCandidates.map((w) => w.ku),
+          distractorPool.map((w) => w.ku),
+        )..shuffle(rng);
       }
     }
 
@@ -375,6 +494,123 @@ List<_QuizQuestion> _generateQuizSession({
 }
 
 // ── Levenshtein Distance ────────────────────────────────────────
+
+/// 4 seçeneği GÖRÜNEN METİN düzeyinde tekilleştirerek kur.
+///
+/// İki distractor'ın aynı metni göstermesi (ör. iki kez "Elma") kullanıcıyı
+/// yanıltır: görsel olarak özdeş iki karttan yalnızca biri "doğru" sayılır.
+/// Önce skorlanmış adaylardan (primary), yetmezse geniş havuzdan (fallback)
+/// normalize metni benzersiz olan 3 yanlış seçenek toplanır.
+List<String> _distinctOptions(
+  String correctAnswer,
+  Iterable<String> primary,
+  Iterable<String> fallback,
+) {
+  final seen = <String>{correctAnswer.trim().toLowerCase()};
+  final wrong = <String>[];
+  for (final cand in [...primary, ...fallback]) {
+    if (wrong.length >= 3) break;
+    if (!seen.add(cand.trim().toLowerCase())) continue;
+    wrong.add(cand);
+  }
+  return [correctAnswer, ...wrong];
+}
+
+/// Görsel soru üretimine uygun SOMUT kategoriler (beyaz liste).
+///
+/// Soyut kategoriler (his, dem, rengder, leker, daçek, silav…) görsel-kelime
+/// eşleştirmesinde yanıltıcıdır — ☀️ görünce "roj" denmeli, "Roj baş" değil;
+/// "hêvî" (umut) gibi soyut kavramların emoji'si ise yoruma açıktır.
+/// Yalnızca bu listedeki kategoriler pictureToWord/wordToPicture üretir.
+/// (Hem yetişkin hem çocuk DB'lerindeki kat değerleri kapsanmıştır.)
+const Set<String> _pictureFriendlyCats = {
+  // Yiyecek / içecek
+  'xwarin', 'vexwarin', 'mêwe',
+  // Canlı / doğa / hava / mevsim
+  'ajal', 'heywan', 'xweza', 'hewa', 'demsal', 'werzî',
+  // İnsan / beden / aile / meslek / sağlık
+  'malbat', 'beden', 'las', 'pîşe', 'tendurist',
+  // Nesne / yer / araç / giysi
+  'mal', 'cih', 'bajêr', 'cil', 'gihanî', 'rêwîtî',
+  'teknoloji', 'teknolojî', 'perwerde', 'dibistan', 'listik',
+};
+
+/// Jenerik / soyut fallback emoji'leri — görsel soru için YANILTICI.
+///
+/// Kullanıcı şikayeti (Temmuz 2026): "mavi daire ne demek?" — 🔵 gibi soyut
+/// şekiller somut bir nesneyi göstermez; görselden ne sorulduğu anlaşılmaz.
+/// Karşılaştırma `_normalizeEmoji` (FE0F varyasyon selektörü atılır)
+/// üzerinden yapılır — literal'lerdeki selektör farkları sorun olmaz.
+const Set<String> _genericQuizEmojis = {
+  // Renk daireleri / şekiller ("mavi daire" şikayetinin kaynağı)
+  '🔵', '🔴', '⚪', '⚫', '🟢', '🟡', '🟣', '🟤', '🟠', '🩷', '🩶',
+  // Yıldız / parıltı
+  '⭐', '🌟', '✨', '💫',
+  // İşaret / sembol
+  '❓', '❗', '✅', '❌', '⛔', '📌', '🔖', '🔗', '💯', '🔢', '🔤', '🔟',
+  // Soyut kavram fallback'leri
+  '📖', '💬', '💭', '👍', '👎', '📏', '📐',
+  // Yön / zaman okları
+  '⬆️', '⬇️', '⏪', '⏩', '⏮️', '⏳', '⏰',
+};
+
+/// Emoji karşılaştırma normalizasyonu: FE0F (varyasyon selektörü) atılır.
+/// Aynı sembolün "☀️" ve "☀" yazımları eşit sayılır.
+String _normalizeEmoji(String e) => e.replaceAll('\u{FE0F}', '').trim();
+
+/// Emoji jenerik/soyut bir sembol mü? (görsel soru için elenir)
+bool _isGenericQuizEmoji(String e) {
+  final norm = _normalizeEmoji(e);
+  if (norm.isEmpty) return true;
+  // Keycap rakamlar (1️⃣, 2️⃣0️⃣ vb.) — soyut sembol
+  if (norm.contains('\u{20E3}')) return true;
+  for (final g in _genericQuizEmojis) {
+    if (_normalizeEmoji(g) == norm) return true;
+  }
+  return false;
+}
+
+/// Kelimenin görsel soruda kullanılabilir emoji'sini döndürür; uygun
+/// değilse '' döner (→ görsel soru üretilmez).
+///
+/// Üç katmanlı süzgeç:
+///   1. Kelime somut-kategori + biçim kontrolünden geçmeli
+///      (`_isSuitableForPictureQuiz`).
+///   2. Emoji KELİMEYE ÖZEL olmalı — kategori fallback'i kapalı; yoksa
+///      aynı kategorideki tüm kelimeler aynı emoji'yi paylaşırdı.
+///   3. Emoji jenerik/soyut sembol olmamalı (🔵, ⭐, 📖…).
+String _pictureEmojiFor(_QuizWord w) {
+  if (!_isSuitableForPictureQuiz(w)) return '';
+  final e = emojiForWord(w.ku, w.kat, useCategoryFallback: false);
+  if (e.isEmpty || _isGenericQuizEmoji(e)) return '';
+  return e;
+}
+
+/// Kelime, görsel-bazlı (pictureToWord/wordToPicture) quiz için uygun mu?
+///
+/// Hariç tutulanlar:
+///   • Boşluk içeren ifadeler — selamlama / fraz / cümle
+///     (örn. "Roj baş", "Êvar baş", "Sibê baş", "Bi xêr hatî")
+///   • Somut olmayan kategoriler — `_pictureFriendlyCats` beyaz listesi
+///     dışındaki her şey (silav/formül, fiiller, sıfatlar, sayılar,
+///     renkler, soyut kavramlar…). Görsel-kelime eşleştirmesi yalnızca
+///     somut nesne/canlı/yer kelimelerinde pedagojik olarak anlamlı.
+///   • Çok uzun kelime (>20 char) — UI'da kesilir
+bool _isSuitableForPictureQuiz(_QuizWord w) {
+  final ku = w.ku.trim();
+  if (ku.isEmpty) return false;
+
+  // 1. Boşluk içeren — kompozit ifade
+  if (ku.contains(' ')) return false;
+
+  // 2. Yalnızca somut kategoriler (beyaz liste — eski kara liste yerine)
+  if (!_pictureFriendlyCats.contains(w.kat)) return false;
+
+  // 3. Çok uzun kelime
+  if (ku.length > 20) return false;
+
+  return true;
+}
 
 int _levenshteinDistance(String a, String b) {
   final la = a.length;
@@ -426,6 +662,76 @@ String _normalizeKurmanciDiacritics(String s) {
       .replaceAll('ş', 's');
 }
 
+/// Kabul edilen Kurmancî alternatif (eş anlam) yazımları.
+/// Yazma alıştırmalarında kullanıcı "asıl" cevabın yerine eş bir form
+/// yazsa da kabul edilir.
+///
+/// Anahtar: orijinal `word.ku` (lowercase, trim).
+/// Değer: kabul edilen alternatifler listesi (lowercase, trim).
+///
+/// Genişletme: yeni kabul edilen formları buraya ekle. Çift yönlü
+/// (her iki form da hedef olabilir) — `_acceptsAlternative` her iki
+/// yönü kontrol eder.
+const Map<String, List<String>> _kurmanciAlternatives = {
+  // Selamlama
+  'sibê baş': ['roj baş', 'rojbaş', 'roj baş!', 'sibe baş', 'sibebaş'],
+  'roj baş': ['sibê baş', 'rojbaş', 'sibebaş'],
+  'spas': ['sipas', 'spas dikim'],
+  'silav': ['silaw', 'silaman'],
+  'tu çawa yî?': ['tu çawanî?', 'çawa yî?', 'çawanî?'],
+  'ez baş im': ['baş im', 'ez baş', 'ez başim'],
+  'bi xêr hatî': ['xêr hatî', 'bi xêr hatî!'],
+  'bila xweş be': ['bi xêr', 'xweş be'],
+  // Vedalaşma
+  'bi xatirê te': ['bixatirê te', 'xatirê te', 'xatire te'],
+  'oxir be': ['oxirbe', 'rê veke'],
+  // Misafirperverlik
+  'destê te xweş be': ['dest xweş', 'destxweş', 'destê te xweş'],
+  // Sayılar (alternatif yazımlar)
+  'yek': ['1'],
+  'du': ['2', 'didu'],
+  'sê': ['3', 'se'],
+  'çar': ['4', 'car'],
+  'pênc': ['5', 'penc'],
+  'şeş': ['6', 'ses'],
+  'heft': ['7'],
+  'heşt': ['8', 'hest'],
+  'neh': ['9', 'no'],
+  'deh': ['10'],
+};
+
+/// İki yönlü kabul: hem `expected → user` hem `user → expected`.
+/// Tüm karşılaştırmalar lowercase + trim sonrası yapılır.
+bool _acceptsAlternative(String userInput, String expected) {
+  final u = userInput.trim().toLowerCase();
+  final e = expected.trim().toLowerCase();
+  if (u == e) return true;
+
+  // expected'ın alternatifleri arasında user var mı?
+  final altsForExpected = _kurmanciAlternatives[e];
+  if (altsForExpected != null && altsForExpected.contains(u)) return true;
+
+  // user'ın alternatifleri arasında expected var mı?
+  final altsForUser = _kurmanciAlternatives[u];
+  if (altsForUser != null && altsForUser.contains(e)) return true;
+
+  // Diakritik-normalize eşitlik
+  final un = _normalizeKurmanciDiacritics(u);
+  final en = _normalizeKurmanciDiacritics(e);
+  if (un == en) return true;
+
+  // Normalize edilmiş alternatif kontrolü
+  if (altsForExpected != null) {
+    for (final a in altsForExpected) {
+      if (_normalizeKurmanciDiacritics(a.trim().toLowerCase()) == un) {
+        return true;
+      }
+    }
+  }
+
+  return false;
+}
+
 // ════════════════════════════════════════════════════════════════
 // QUIZ SCREEN — Ana Ekran
 // ════════════════════════════════════════════════════════════════
@@ -452,6 +758,7 @@ class _QuizScreenState extends ConsumerState<QuizScreen>
   int? _selectedOptionIndex;
   String _typedAnswer = '';
   bool _sessionComplete = false;
+  bool _reportedToGamification = false; // Tek seferlik XP ödülü
   bool _variantAccepted = false; // True when e->ê etc. variant was accepted
   String _variantNote = ''; // Note about which variant was accepted
   // Dictation "yakın cevap" — Levenshtein benzerliği 75-95% arasında ise
@@ -473,12 +780,18 @@ class _QuizScreenState extends ConsumerState<QuizScreen>
     _showTurkish = ref.read(showTurkishProvider);
     final isChild = ref.read(isChildModeProvider);
     final isEn = ref.read(isEnglishModuleProvider);
+    final overrides = ref.read(contentOverridesProvider);
+    final deletedIds = ref.read(deletedWordIdsProvider);
+    final customWords = ref.read(customWordsProvider);
     _questions = _generateQuizSession(
       level: widget.level,
       category: widget.category,
       showTurkish: _showTurkish,
       isChildMode: isChild,
       isEnglishModule: isEn,
+      overrides: overrides,
+      deletedIds: deletedIds,
+      customWords: customWords,
     );
 
     _shakeController = AnimationController(
@@ -511,10 +824,22 @@ class _QuizScreenState extends ConsumerState<QuizScreen>
     if (q.type == _ExerciseType.typing) {
       final userInput = (typed ?? _typedAnswer).trim().toLowerCase();
       final expected = q.word.ku.trim().toLowerCase();
+      // Önce kabul edilen alternatif (eş anlam) kontrolü — örn. "Sibê baş!"
+      // için "roj baş" da kabul edilir.
+      if (_acceptsAlternative(userInput, expected)) {
+        correct = true;
+        // Alternatif kabul edildi — kullanıcıya bilgi notu göster.
+        if (userInput != expected &&
+            _normalizeKurmanciDiacritics(userInput) !=
+                _normalizeKurmanciDiacritics(expected)) {
+          _variantAccepted = true;
+          _variantNote = 'Forma cuda lê kabûl — "${q.word.ku}" jî tê bikaranîn.';
+        }
+      }
       // Uzunluk-bazlı adaptif tolerans (kısa kelimede sıkı, uzunda gevşek)
       final maxDist = _lenToleranceFor(expected.length);
       final distance = _levenshteinDistance(userInput, expected);
-      correct = distance <= maxDist;
+      if (!correct) correct = distance <= maxDist;
 
       // Accept common Kurmancî variants: iki yönlü simetrik diakritik kabul.
       // Kullanıcı "ê"→"e" ya da "e"→"ê" yazsa da — her iki tarafı normalize edip karşılaştır.
@@ -574,8 +899,11 @@ class _QuizScreenState extends ConsumerState<QuizScreen>
         // Görsel → Kurmancî kelime; doğru = word.ku
         correctAnswer = q.word.ku;
       } else if (q.type == _ExerciseType.wordToPicture) {
-        // Kurmancî → Emoji; doğru = kelimenin emoji'si
-        correctAnswer = emojiForWord(q.word.ku, q.word.kat);
+        // Kurmancî → Emoji; doğru = kelimenin KENDİ emoji'si.
+        // Kategori fallback KAPALI — soru üretimi de fallback'siz emoji
+        // garanti eder; iki taraf tutarlı kalmalı.
+        correctAnswer =
+            emojiForWord(q.word.ku, q.word.kat, useCategoryFallback: false);
       } else if (_showTurkish) {
         final isKuOptions = q.type == _ExerciseType.reverseTranslation;
         correctAnswer = isKuOptions ? q.word.ku : q.word.tr;
@@ -598,16 +926,31 @@ class _QuizScreenState extends ConsumerState<QuizScreen>
       _correctFlashController.forward(from: 0.0);
       HapticFeedback.lightImpact();
       SoundService.playCorrect();
+      SoundService.playXpGain();
+      // Floating "+10 XP" overlay — motivasyon polish.
+      showXpFloat(context, 10);
+      // Combo milestone — ardışık doğrular kutlanır.
+      final milestone = ref
+          .read(gamificationProvider.notifier)
+          .registerCorrectForCombo();
+      if (milestone > 0) {
+        final isEn = ref.read(isEnglishModuleProvider);
+        final newCombo = ref.read(gamificationProvider).comboCount;
+        showStreakMilestone(context, newCombo, isEnglish: isEn);
+      }
     } else {
       // Çocuk modunda kalp düşmez — hata stresini azaltır (disleksi dostu).
       // Yine de zayıf kelime olarak kaydedilir, sonraki turda daha sık gelir.
       final isChildMode = ref.read(isChildModeProvider);
       if (!isChildMode) {
         _hearts = (_hearts - 1).clamp(0, 3);
+        SoundService.playFail();
       }
       _shakeController.forward(from: 0.0);
       HapticFeedback.heavyImpact();
       SoundService.playWrong();
+      // Combo kırıldı
+      ref.read(gamificationProvider.notifier).resetCombo();
       // Smart Review: zayıf kelime olarak kaydet
       ref.read(reviewProvider.notifier).addWeakWord(q.word.id);
     }
@@ -621,6 +964,11 @@ class _QuizScreenState extends ConsumerState<QuizScreen>
   }
 
   void _nextQuestion() {
+    // BAYAT SES GUARD'I (Temmuz 2026 fix): önceki sorunun sesi — hâlâ
+    // çalıyorsa veya HF cold-start'ta geç geldiyse — burada kesilir;
+    // sonraki soruda eski kelimenin sesi çalmaz.
+    SpeakButton.stopAll();
+
     if (_currentIndex >= _questions.length - 1 || _hearts <= 0) {
       setState(() => _sessionComplete = true);
       return;
@@ -671,28 +1019,92 @@ class _QuizScreenState extends ConsumerState<QuizScreen>
 
     if (_sessionComplete) return _buildEndScreen();
 
-    return Scaffold(
-      backgroundColor: AppColors.backgroundPrimary,
-      body: SafeArea(
-        child: Column(
-          children: [
-            // Top bar: close + progress + hearts + XP
-            _buildTopBar(),
+    // ── Keyboard shortcuts (a11y): 1-4 seçenek, Enter onay, Esc geri
+    final question = _questions.isEmpty ? null : _questions[_currentIndex];
+    final optionCount = question?.options.length ?? 0;
+    // KLAVYE FIX: Yazma sorusunda TextField aktifken rakam/Enter kısayolları
+    // KAYDEDİLMEZ. Ancestor Shortcuts eşleşen tuşu 'handled' sayar (web'de
+    // preventDefault) ve olay TextField'a hiç ulaşmaz — "1".."10" gibi rakam
+    // cevapları yazılamaz, Enter da onSubmitted'ı tetiklemezdi. Cevap
+    // verildikten sonra TextField devre dışı kaldığından Enter yeniden
+    // "devam" kısayolu olarak çalışabilir.
+    final typingActive =
+        question?.type == _ExerciseType.typing && !_answered;
+    final shortcuts = <ShortcutActivator, Intent>{
+      if (!typingActive) ...{
+        const SingleActivator(LogicalKeyboardKey.digit1):
+            const _QuizSelectIntent(0),
+        const SingleActivator(LogicalKeyboardKey.digit2):
+            const _QuizSelectIntent(1),
+        const SingleActivator(LogicalKeyboardKey.digit3):
+            const _QuizSelectIntent(2),
+        const SingleActivator(LogicalKeyboardKey.digit4):
+            const _QuizSelectIntent(3),
+        const SingleActivator(LogicalKeyboardKey.enter):
+            const _QuizContinueIntent(),
+      },
+      const SingleActivator(LogicalKeyboardKey.escape):
+          const _QuizExitIntent(),
+    };
 
-            // Progress bar
-            _buildProgressBar(),
-
-            // Question area
-            Expanded(
-              child: SingleChildScrollView(
-                padding: AppSpacing.pagePadding,
-                child: _buildQuestionCard(),
+    return Shortcuts(
+      shortcuts: shortcuts,
+      child: Actions(
+        actions: <Type, Action<Intent>>{
+          _QuizSelectIntent: CallbackAction<_QuizSelectIntent>(
+            onInvoke: (intent) {
+              if (_answered) return null;
+              if (intent.index >= optionCount) return null;
+              _submitAnswer(optionIndex: intent.index);
+              return null;
+            },
+          ),
+          _QuizContinueIntent: CallbackAction<_QuizContinueIntent>(
+            onInvoke: (_) {
+              if (_answered) _nextQuestion();
+              return null;
+            },
+          ),
+          _QuizExitIntent: CallbackAction<_QuizExitIntent>(
+            onInvoke: (_) {
+              _showExitDialog();
+              return null;
+            },
+          ),
+        },
+        child: Focus(
+          autofocus: true,
+          // NAV FIX: Quiz ortasında tarayıcı geri / sistem geri tuşu
+          // kaza ile ilerlemeyi silmesin. PopScope onaylı çıkış.
+          child: PopScope(
+            canPop: _questionResults.isEmpty,
+            onPopInvoked: (didPop) {
+              if (didPop) return;
+              _showExitDialog();
+            },
+            child: Scaffold(
+            backgroundColor: AppColors.backgroundPrimary,
+            body: SafeArea(
+              child: Semantics(
+                container: true,
+                label: 'Pirsa Quiz',
+                child: Column(
+                  children: [
+                    _buildTopBar(),
+                    _buildProgressBar(),
+                    Expanded(
+                      child: SingleChildScrollView(
+                        padding: AppSpacing.pagePadding,
+                        child: _buildQuestionCard(),
+                      ),
+                    ),
+                    if (_answered) _buildContinueButton(),
+                  ],
+                ),
               ),
             ),
-
-            // Berdewam button
-            if (_answered) _buildContinueButton(),
-          ],
+          ),
+          ),
         ),
       ),
     );
@@ -748,7 +1160,7 @@ class _QuizScreenState extends ConsumerState<QuizScreen>
 
           Gap.hMd,
 
-          // XP
+          // XP (oturum) — +10 göstergesi
           Container(
             padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
             decoration: BoxDecoration(
@@ -769,6 +1181,11 @@ class _QuizScreenState extends ConsumerState<QuizScreen>
               ],
             ),
           ),
+
+          const SizedBox(width: 6),
+
+          // Persistent streak + XP badge (global gamification durumu)
+          const PersistentXpBadge(),
         ],
       ),
     );
@@ -862,13 +1279,16 @@ class _QuizScreenState extends ConsumerState<QuizScreen>
 
   // ── Picture-to-Word: Görsel göster, Kurmancî kelime seç ─────
   Widget _buildPictureToWordQuestion(_QuizQuestion q) {
-    final emoji = emojiForWord(q.word.ku, q.word.kat);
+    // Kategori fallback'siz — üretim aşaması kelimeye özel emoji garantiler
+    final emoji =
+        emojiForWord(q.word.ku, q.word.kat, useCategoryFallback: false);
     return Column(
       key: ValueKey('pictureToWord_${q.word.id}'),
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         _buildInstruction(
-          _showTurkish ? 'Bu nedir?' : 'Ev çi ye?',
+          // Kurmancî-first: her zaman Kurmancî, TR toggle varsa alt satır olarak aç
+          _showTurkish ? 'Ev çi ye? — Bu nedir?' : 'Ev çi ye?',
           '', showTr: false),
         Gap.lg,
         // Büyük emoji kart — soru kelimesinin görseli
@@ -945,7 +1365,9 @@ class _QuizScreenState extends ConsumerState<QuizScreen>
         final emoji = q.options[i];
         final isSelected = _selectedOptionIndex == i;
         final isCorrectOption = _answered &&
-            emoji == emojiForWord(q.word.ku, q.word.kat);
+            emoji ==
+                emojiForWord(q.word.ku, q.word.kat,
+                    useCategoryFallback: false);
         final showAsCorrect = _answered && isCorrectOption;
         final showAsWrong = _answered && isSelected && !isCorrectOption;
 
@@ -1007,7 +1429,7 @@ class _QuizScreenState extends ConsumerState<QuizScreen>
       return '____';
     }
     var masked = sentence;
-    // Kelimeyi ve ezafe formlarını word boundary ile gizle
+    // Kelimeyi ve veqetandek formlarını word boundary ile gizle
     final forms = [word, '${word}ê', '${word}a', '${word}î', '${word}an'];
     for (final form in forms) {
       // Kelime sınırı: boşluk, satır başı/sonu, noktalama ile çevrili
@@ -1048,39 +1470,59 @@ class _QuizScreenState extends ConsumerState<QuizScreen>
     final sentences = q.word.her;
     String hint = '';
 
-    if (sentences is List && sentences.isNotEmpty) {
+    if (sentences.isNotEmpty) {
       // Kelimeyi gerçekten içeren ve cloze için UYGUN cümleleri seç.
       //
-      // Cloze için elverişsiz cümleler (çok seçenekli olabilir):
-      //  - Çok kısa vocative ifadeler ("Silav, pîrê!" gibi — 4'ten az kelimelik
-      //    ünlem cümleleri birden çok selamlama/veda ile tamamlanabilir)
-      //  - Bağlam içermeyen kısa ifadeler (boşluk dahil 20 karakter altı)
-      //  - Fiil içermeyen sadece isim sıralamaları
+      // Cloze için elverişsiz cümleler:
+      //  • Çok kısa vocative ifadeler ("Silav, pîrê!" — birden çok selam fit)
+      //  • Bağlam içermeyen kısa ifadeler (20 char altı)
+      //  • ÇOK UZUN cümleler (Nisan 2026 fix): tek kelimelik yanıt için
+      //    metin/yanıt orantısı bozulur, kullanıcı bilişsel yük artar.
+      //  • Fiil içermeyen sadece isim sıralamaları
       final wordRe = RegExp(
         r'\b' + RegExp.escape(q.word.ku) + r'(a|ê|î|an|ên|yê|ya)?\b',
         caseSensitive: false,
       );
       bool isGoodClozeContext(String s) {
         if (s.length < 20) return false; // Çok kısa bağlam yetersiz
+        if (s.length > 90) return false; // Çok uzun → tek kelime yanıtla orantısız
         final wordCount = s.split(RegExp(r'\s+')).length;
         if (wordCount < 5) return false; // Çok az kelime → belirsiz
+        if (wordCount > 14) return false; // Çok kelime → orantısız uzun
         final trimmed = s.trim();
         // Vocative ünlem ("X, Y!" kalıbı) — birden çok selam/veda fit olur
         if (trimmed.endsWith('!') && wordCount <= 5) return false;
         return true;
       }
-      final candidates = (sentences as List).cast<String>()
+      final candidates = sentences.cast<String>()
           .where((s) => wordRe.hasMatch(s) && isGoodClozeContext(s))
-          .toList();
+          .toList()
+        // Kısa cümleleri tercih et (yanıtla daha dengeli görünür)
+        ..sort((a, b) => a.length.compareTo(b.length));
       if (candidates.isNotEmpty) {
-        hint = _maskWord(candidates[0], q.word.ku);
+        hint = _maskWord(candidates.first, q.word.ku);
       }
     }
 
-    // Hâlâ kullanışlı bir cümle yoksa: kelimenin emoji'sini büyük göster
-    // (picture-to-word benzeri görünüm) — boş "____" göstermekten iyi.
+    // Hâlâ kullanışlı bir cümle yoksa: kelimeye ÖZEL emoji varsa büyük
+    // göster (picture-to-word benzeri görünüm). Jenerik kategori sembolü
+    // (📖, 🔵…) YANILTICI olduğundan artık kullanılmaz — emoji yoksa
+    // Türkçe kelime ipucu olarak gösterilir (cevaplanamaz soru kalmasın).
     if (!hint.contains('____') || hint.length < 8) {
-      final emoji = emojiForWord(q.word.ku, q.word.kat);
+      final emoji = _pictureEmojiFor(q.word);
+      if (emoji.isEmpty) {
+        return Column(
+          key: ValueKey('translation_tr_${q.word.id}'),
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            _buildInstruction('Ev peyv bi Kurmancî çi ye?', '', showTr: false),
+            Gap.lg,
+            _buildWordCard(q.word.tr, isKurmanji: false),
+            const SizedBox(height: AppSpacing.questionToOptions),
+            ..._buildOptionButtons(q),
+          ],
+        );
+      }
       return Column(
         key: ValueKey('translation_emoji_${q.word.id}'),
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -1157,25 +1599,47 @@ class _QuizScreenState extends ConsumerState<QuizScreen>
     }
 
     // Tenê Kurmancî: Heritage cümle göster → doğru kelimeyi seç
+    // Cloze için min/max sınır: 10-90 char, ≤14 kelime — tek kelimelik
+    // yanıtla orantısal denge (Nisan 2026 fix).
     final sentences = q.word.her;
     String hint = '';
 
-    if (sentences is List && sentences.isNotEmpty) {
+    if (sentences.isNotEmpty) {
       final wordRe = RegExp(
         r'\b' + RegExp.escape(q.word.ku) + r'(a|ê|î|an|ên|yê|ya)?\b',
         caseSensitive: false,
       );
-      final candidates = (sentences as List).cast<String>()
-          .where((s) => s.length >= 10 && wordRe.hasMatch(s))
-          .toList();
+      final candidates = sentences.cast<String>()
+          .where((s) {
+            if (s.length < 10 || s.length > 90) return false;
+            if (s.split(RegExp(r'\s+')).length > 14) return false;
+            return wordRe.hasMatch(s);
+          })
+          .toList()
+        ..sort((a, b) => a.length.compareTo(b.length));
       if (candidates.isNotEmpty) {
-        hint = _maskWord(candidates[0], q.word.ku);
+        hint = _maskWord(candidates.first, q.word.ku);
       }
     }
 
-    // Heritage zayıfsa picture moduna düş — boş "____" gösterme
+    // Heritage zayıfsa picture moduna düş — boş "____" gösterme.
+    // Kelimeye özel emoji yoksa jenerik kategori sembolü yerine Türkçe
+    // kelime ipucu gösterilir (yanıltıcı 📖/🔵 sembolleri kaldırıldı).
     if (!hint.contains('____') || hint.length < 8) {
-      final emoji = emojiForWord(q.word.ku, q.word.kat);
+      final emoji = _pictureEmojiFor(q.word);
+      if (emoji.isEmpty) {
+        return Column(
+          key: ValueKey('reverse_tr_${q.word.id}'),
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            _buildInstruction('Ev peyv bi Kurmancî çi ye?', '', showTr: false),
+            Gap.lg,
+            _buildWordCard(q.word.tr, isKurmanji: false),
+            const SizedBox(height: AppSpacing.questionToOptions),
+            ..._buildOptionButtons(q),
+          ],
+        );
+      }
       return Column(
         key: ValueKey('reverse_emoji_${q.word.id}'),
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -1237,6 +1701,7 @@ class _QuizScreenState extends ConsumerState<QuizScreen>
   // ── 3. Listening Exercise ─────────────────────────────────────
 
   Widget _buildListeningQuestion(_QuizQuestion q) {
+    final isEn = ref.watch(isEnglishModuleProvider);
     return Column(
       key: ValueKey('listening_${q.word.id}'),
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -1246,68 +1711,44 @@ class _QuizScreenState extends ConsumerState<QuizScreen>
 
         Gap.lg,
 
-        // Audio button + word display (placeholder)
         Center(
           child: Column(
             children: [
-              GestureDetector(
-                onTap: () {
-                  HapticFeedback.mediumImpact();
-                  // Placeholder: ses dosyasi yokken sadece haptic feedback
-                },
-                child: Container(
-                  width: 80,
-                  height: 80,
-                  decoration: BoxDecoration(
-                    gradient: LinearGradient(
-                      colors: [AppColors.primary, AppColors.primaryDark],
-                      begin: Alignment.topLeft,
-                      end: Alignment.bottomRight,
-                    ),
-                    shape: BoxShape.circle,
-                    boxShadow: [
-                      BoxShadow(
-                        color: AppColors.primary.withOpacity(0.3),
-                        blurRadius: 16,
-                        offset: const Offset(0, 6),
-                      ),
-                    ],
-                  ),
-                  child: const Icon(Icons.volume_up_rounded,
-                      size: 36, color: Colors.white),
-                ).animate(onPlay: (c) => c.repeat(reverse: true)).scale(
-                      begin: const Offset(1, 1),
-                      end: const Offset(1.05, 1.05),
-                      duration: 1200.ms,
-                    ),
+              // Ana ses butonu — GERÇEK TTS (Temmuz 2026 fix).
+              // Eski 80px dekoratif daire yalnızca haptic yapan bir
+              // placeholder'dı ("ses çalmıyor" şikayetinin kaynağı);
+              // kaldırıldı, gerçek SpeakButton büyütülerek ana buton oldu.
+              // autoPlay: soru ilk göründüğünde ses BİR KEZ otomatik çalar;
+              // key soru değişince state'i tazeler (yeni kelime → yeni çalma).
+              SpeakButton(
+                key: ValueKey('listening_speak_${q.word.id}'),
+                text: q.word.ku,
+                size: 80,
+                lang: isEn ? 'en' : 'ku',
+                autoPlay: true,
               ),
 
               Gap.md,
 
-              // Türkçe modda kelime gösterilir, Kürtçe modda gizlenir
-              if (_showTurkish)
-                Container(
-                  padding:
-                      const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-                  decoration: BoxDecoration(
-                    color: AppColors.primarySurface,
-                    borderRadius: BorderRadius.circular(12),
-                    border:
-                        Border.all(color: AppColors.primary.withOpacity(0.2)),
-                  ),
-                  child: Text(
-                    q.word.ku,
-                    style: AppTypography.kurmanji
-                        .copyWith(color: AppColors.primary),
-                  ),
-                )
-              else
-                Text('Guhdarî bike û peyva rast hilbijêre',
-                  style: AppTypography.caption),
-
-              // TTS speak butonu
-              Gap.sm,
-              SpeakButton(text: q.word.ku, size: 40),
+              // GİZLİLİK (Temmuz 2026 fix): dinleme sorusunda kelime metni
+              // HİÇBİR modda gösterilmez — eskiden Türkçe modda q.word.ku
+              // ekrandaydı ve cevabı ifşa ediyordu. Nötr yönerge gösterilir.
+              Text(
+                isEn
+                    ? 'Listen and pick the right word'
+                    : 'Guhdarî bike û peyva rast hilbijêre',
+                style: AppTypography.caption,
+                textAlign: TextAlign.center,
+              ),
+              if (_showTurkish && !isEn) ...[
+                Gap.xs,
+                Text(
+                  'Dinle ve doğru kelimeyi seç',
+                  style: AppTypography.caption
+                      .copyWith(color: AppColors.textTertiary),
+                  textAlign: TextAlign.center,
+                ),
+              ],
             ],
           ),
         ),
@@ -1328,7 +1769,7 @@ class _QuizScreenState extends ConsumerState<QuizScreen>
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         _buildInstruction(
-          _showTurkish ? 'Bu kelimeyi Kurmancî yaz' : 'Peyvê ku dibihîzî binivîse',
+          _showTurkish ? 'Peyvê ku dibihîzî binivîse — Bu kelimeyi Kurmancî yaz' : 'Peyvê ku dibihîzî binivîse',
           '', showTr: false),
 
         Gap.lg,
@@ -1341,10 +1782,14 @@ class _QuizScreenState extends ConsumerState<QuizScreen>
           Center(
             child: Column(
               children: [
-                SpeakButton(text: q.word.ku, size: 64),
+                SpeakButton(text: q.word.ku, size: 64, lang: ref.watch(isEnglishModuleProvider) ? 'en' : 'ku'),
                 Gap.sm,
-                Text('Guhdarî bike û binivîse',
-                  style: AppTypography.caption),
+                Text(
+                  ref.watch(isEnglishModuleProvider)
+                      ? 'Listen and type'
+                      : 'Guhdarî bike û binivîse',
+                  style: AppTypography.caption,
+                ),
               ],
             ),
           ),
@@ -1379,7 +1824,9 @@ class _QuizScreenState extends ConsumerState<QuizScreen>
             textAlign: TextAlign.center,
             style: AppTypography.kurmanji,
             decoration: InputDecoration(
-              hintText: 'Bersiva xwe binivîse...',
+              hintText: ref.watch(isEnglishModuleProvider)
+                  ? 'Type your answer...'
+                  : 'Bersiva xwe binivîse...',
               hintStyle: AppTypography.body
                   .copyWith(color: AppColors.textTertiary),
               border: InputBorder.none,
@@ -1394,7 +1841,8 @@ class _QuizScreenState extends ConsumerState<QuizScreen>
         ),
 
         // ── Kurmancî special characters keyboard ──────────
-        if (!_answered) ...[
+        // EN track'te Kurmancî özel harfler (ê î û ç ş) gerekmez.
+        if (!_answered && !ref.watch(isEnglishModuleProvider)) ...[
           const SizedBox(height: AppSpacing.sm),
           _KurmanciKeyboard(controller: _typingController, onChanged: (v) {
             setState(() => _typedAnswer = v);
@@ -1421,7 +1869,8 @@ class _QuizScreenState extends ConsumerState<QuizScreen>
                         BorderRadius.circular(AppSpacing.radiusMd)),
                 elevation: 0,
               ),
-              child: Text('Bersivê Bide',
+              child: Text(
+                  ref.watch(isEnglishModuleProvider) ? 'Answer' : 'Bersivê Bide',
                   style: AppTypography.labelLarge
                       .copyWith(color: Colors.white)),
             ),
@@ -1608,13 +2057,40 @@ class _QuizScreenState extends ConsumerState<QuizScreen>
 
   // ── Shared Widgets ────────────────────────────────────────────
 
+  /// KU→EN prompt eşleştirmesi.
+  ///
+  /// English track kullanıcısı quiz ekranına girdiğinde KU sorularının
+  /// EN içerikle gösterilmesi için EN adapter çalışır ama UI instruction'ları
+  /// hardcoded Kurmancî'ydi. Bu map yaygın talimatları İngilizce'ye çevirir.
+  static const Map<String, String> _kuToEnPrompts = {
+    'Ev çi ye?': 'What is this?',
+    'Ev çi ye? — Bu nedir?': 'What is this?',
+    'Ev tîp çi ye?': 'What letter is this?',
+    'Ev peyv bi Tirkî çi ye?': 'What does this word mean?',
+    'Ev peyv bi Kurmancî çi ye?': 'How do you say this in English?',
+    'Kîjan peyv cihê vala dagire?': 'Which word fills the blank?',
+    'Kîjan peyv rast e?': 'Which word is correct?',
+    'Guh bide û bersivê bide': 'Listen and answer',
+    'Guhdarî bike û peyva rast hilbijêre': 'Listen and pick the right word',
+    'Guhdarî bike û binivîse': 'Listen and type',
+    'Wêneya rast hilbijêre': 'Pick the correct picture',
+    'Peyvê ku dibihîzî binivîse': 'Type the word you hear',
+    'Peyvê ku dibihîzî binivîse — Bu kelimeyi Kurmancî yaz':
+        'Type the word you hear',
+  };
+
   Widget _buildInstruction(String kuText, String trText, {required bool showTr}) {
+    // Track-aware: EN modülünde KU prompt'u İngilizce'ye çevir.
+    final isEn = ref.watch(isEnglishModuleProvider);
+    final displayText = isEn
+        ? (_kuToEnPrompts[kuText] ?? kuText)
+        : kuText;
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(kuText,
+        Text(displayText,
             style: AppTypography.title.copyWith(color: AppColors.textPrimary)),
-        if (showTr) ...[
+        if (showTr && !isEn) ...[
           const SizedBox(height: 4),
           Text(trText,
               style: AppTypography.translation
@@ -1701,13 +2177,14 @@ class _QuizScreenState extends ConsumerState<QuizScreen>
           ],
         ),
         child: Center(
+          // FONT: Hardcoded 'NotoSans' kaldırıldı; disleksi moduna
+          // uyum için tema fontu kullanılır.
           child: Text(
             letter.toUpperCase(),
             style: TextStyle(
               fontSize: 56,
               fontWeight: FontWeight.w800,
               color: AppColors.primary,
-              fontFamily: 'NotoSans',
             ),
           ),
         ),
@@ -1725,7 +2202,12 @@ class _QuizScreenState extends ConsumerState<QuizScreen>
       final option = entry.value;
 
       final String correctAnswer;
-      if (_showTurkish) {
+      if (q.type == _ExerciseType.pictureToWord) {
+        // Görsel → KU kelime: seçenekler HER modda Kurmancî'dir.
+        // (Eskiden TR modda q.word.tr ile karşılaştırılıyordu → doğru
+        // seçenek hiç yeşil yanmıyordu.)
+        correctAnswer = q.word.ku;
+      } else if (_showTurkish) {
         final isKuOption = q.type == _ExerciseType.reverseTranslation;
         correctAnswer = isKuOption ? q.word.ku : q.word.tr;
       } else {
@@ -1810,8 +2292,14 @@ class _QuizScreenState extends ConsumerState<QuizScreen>
                       ),
                     );
                   }
-                  // Emoji denemesi (option Kurmancî ise emoji bulur)
-                  final optEmoji = emojiForWord(option, '');
+                  // Emoji denemesi — yalnızca kelimeye-özel eşleşme;
+                  // kategori fallback KAPALI (eskiden her TR seçenek
+                  // jenerik 📖 badge'i alıyordu — anlamsız görsel).
+                  // pictureToWord'de emoji badge CEVABI İFŞA EDERDİ
+                  // (büyük görseldeki emoji ile aynı) → harf badge.
+                  final optEmoji = q.type == _ExerciseType.pictureToWord
+                      ? ''
+                      : emojiForWord(option, '', useCategoryFallback: false);
                   if (optEmoji.isNotEmpty) {
                     return Container(
                       width: 32, height: 32,
@@ -2000,10 +2488,10 @@ class _QuizScreenState extends ConsumerState<QuizScreen>
   String _getCorrectMessage() {
     final messages = [
       'Pîroz be!',
-      'Pir bask!',
+      'Pir baş!',
       'Rast e!',
-      'Geleki bask!',
-      'Tu zana yi!',
+      'Gelek baş!',
+      'Tu zana yî!',
     ];
     return messages[Random().nextInt(messages.length)];
   }
@@ -2061,6 +2549,9 @@ class _QuizScreenState extends ConsumerState<QuizScreen>
           widget.level,
           isChildMode: ref.read(isChildModeProvider),
           isEnglishModule: ref.read(isEnglishModuleProvider),
+          overrides: ref.read(contentOverridesProvider),
+          deletedIds: ref.read(deletedWordIdsProvider),
+          customWords: ref.read(customWordsProvider),
         );
         final isKuLookup = !_showTurkish ||
             question.type == _ExerciseType.reverseTranslation;
@@ -2082,9 +2573,9 @@ class _QuizScreenState extends ConsumerState<QuizScreen>
 
     // Cinsiyet bilgisi
     final genderText = switch (word.cins) {
-      'nêr'    => _showTurkish ? 'Cinsiyet: nêr (eril)' : 'Zayend: nêr',
-      'mê'     => _showTurkish ? 'Cinsiyet: mê (dişil)' : 'Zayend: mê',
-      'bêcins' => _showTurkish ? 'Cinsiyet: bêcins (cinsiyetsiz)' : 'Zayend: bêcins',
+      'nêr'    => _showTurkish ? 'Zayend: nêr (eril)' : 'Zayend: nêr',
+      'mê'     => _showTurkish ? 'Zayend: mê (dişil)' : 'Zayend: mê',
+      'bêcins' => _showTurkish ? 'Zayend: bêcins (cinsiyetsiz)' : 'Zayend: bêcins',
       _        => '',
     };
 
@@ -2209,7 +2700,7 @@ class _QuizScreenState extends ConsumerState<QuizScreen>
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          _showTurkish ? 'Senin seçimin:' : 'Te ev hilbijart:',
+                          _showTurkish ? 'Te ev hilbijart — Senin seçimin:' : 'Te ev hilbijart:',
                           style: AppTypography.labelSmall.copyWith(
                             color: AppColors.errorSoft,
                             fontWeight: FontWeight.w600,
@@ -2296,7 +2787,7 @@ class _QuizScreenState extends ConsumerState<QuizScreen>
                                 size: 18, color: AppColors.warning),
                             const SizedBox(width: 8),
                             Text(
-                              _showTurkish ? 'Gramer' : 'Rêziman',
+                              _showTurkish ? 'Rêziman' : 'Rêziman',
                               style: AppTypography.label.copyWith(
                                 color: AppColors.warning,
                                 fontWeight: FontWeight.w600,
@@ -2371,7 +2862,7 @@ class _QuizScreenState extends ConsumerState<QuizScreen>
                       elevation: 0,
                     ),
                     child: Text(
-                      'Famkirim!',
+                      'Min fêm kir!',
                       style: AppTypography.labelLarge.copyWith(
                         color: Colors.white,
                         fontWeight: FontWeight.w700,
@@ -2444,6 +2935,60 @@ class _QuizScreenState extends ConsumerState<QuizScreen>
     final accuracyFraction = answeredCount > 0
         ? _correctCount / answeredCount
         : 0.0;
+
+    // ── GAMIFICATION CANLI VERİ (tek seferlik) ──────────────
+    if (!_reportedToGamification && answeredCount > 0) {
+      _reportedToGamification = true;
+      // Oturum tamamlandı — şenlikli çan.
+      SoundService.playSessionComplete();
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        final gami = ref.read(gamificationProvider.notifier);
+        gami.resetCombo(); // Yeni oturum için sıfırla.
+        gami.completedLesson(
+          correctCount: _correctCount,
+          totalCount: answeredCount,
+          hasSpeaking: false,
+          hasFamilyDialogue: false,
+          wordCount: _correctCount,
+        );
+        if (accuracy == 100) gami.recordPerfectScore();
+        gami.updateWordsLearned(_correctCount);
+
+        // İLERLEME FIX: Beceri panosu (Jêhatîyên min) hiç beslenmiyordu —
+        // quiz oturumu 'quiz' sayacına, dinleme soruları da 'listening'
+        // sayacına işlenir. Aksi halde panodaki barlar hep 0 XP kalıyordu.
+        final skillModule =
+            ref.read(isEnglishModuleProvider) ? 'en' : 'ku';
+        markSkillCompletedAndNotify(ref,
+            module: skillModule, skill: 'quiz', xp: 10);
+        bool hadListening = false;
+        for (int i = 0;
+            i < answeredCount && i < _questions.length;
+            i++) {
+          if (_questions[i].type == _ExerciseType.listening) {
+            hadListening = true;
+            break;
+          }
+        }
+        if (hadListening) {
+          markSkillCompletedAndNotify(ref,
+              module: skillModule, skill: 'listening', xp: 10);
+        }
+
+        // Daily challenge: correctAnswers + completeLesson
+        // BUG FIX: Wrapper ile invalidate — daily kart stale kalmasin.
+        if (_correctCount > 0) {
+          recordChallengeProgressAndNotify(
+              ref, ChallengeKind.correctAnswers, amount: _correctCount);
+          // Karîk evolution — doğru cevap başına 1 yıldız (çocuk modunda)
+          if (ref.read(isChildModeProvider)) {
+            ref.read(karikEvolutionProvider.notifier)
+                .addStars(_correctCount);
+          }
+        }
+        recordChallengeProgressAndNotify(ref, ChallengeKind.completeLesson);
+      });
+    }
 
     // ── Motivational Kurdish messages based on score ────────────
     final String motivationalKu;
@@ -2662,7 +3207,7 @@ class _QuizScreenState extends ConsumerState<QuizScreen>
                               icon: Icons.local_fire_department_rounded,
                               iconColor: AppColors.accent,
                               value: '+$streakBonus',
-                              label: _showTurkish ? 'Streak bonus' : 'Bonusa berdewamiyê',
+                              label: _showTurkish ? 'Bonusa berdewamiyê' : 'Bonusa berdewamiyê',
                             ),
                             Container(
                                 width: 1,
@@ -2672,7 +3217,7 @@ class _QuizScreenState extends ConsumerState<QuizScreen>
                               icon: Icons.star_rounded,
                               iconColor: AppColors.accent,
                               value: '$totalXP',
-                              label: 'Gistayek',
+                              label: 'Giştî',
                             ),
                           ],
                         ),
@@ -2703,7 +3248,7 @@ class _QuizScreenState extends ConsumerState<QuizScreen>
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
-                            'Peyvên ve dersi',
+                            'Peyvên vê dersê',
                             style: AppTypography.label.copyWith(
                               color: AppColors.textSecondary,
                             ),
@@ -2858,6 +3403,9 @@ class _QuizScreenState extends ConsumerState<QuizScreen>
                             _typingController.clear();
                             _sessionComplete = false;
                             _questionResults.clear();
+                            // İLERLEME FIX: Tekrar oturumu bitince XP, beceri
+                            // panosu ve günlük görev yeniden raporlanabilsin.
+                            _reportedToGamification = false;
                           });
                         },
                         icon: const Icon(Icons.replay_rounded, size: 20),
@@ -2894,6 +3442,9 @@ class _QuizScreenState extends ConsumerState<QuizScreen>
                             showTurkish: _showTurkish,
                             isChildMode: ref.read(isChildModeProvider),
                             isEnglishModule: ref.read(isEnglishModuleProvider),
+                            overrides: ref.read(contentOverridesProvider),
+                            deletedIds: ref.read(deletedWordIdsProvider),
+                            customWords: ref.read(customWordsProvider),
                           );
                           _currentIndex = 0;
                           _hearts = 3;
@@ -2906,6 +3457,9 @@ class _QuizScreenState extends ConsumerState<QuizScreen>
                           _typingController.clear();
                           _sessionComplete = false;
                           _questionResults.clear();
+                          // İLERLEME FIX: Yeni oturum bitince XP, beceri
+                          // panosu ve günlük görev yeniden raporlanabilsin.
+                          _reportedToGamification = false;
                         });
                       },
                       icon: const Icon(
@@ -2940,7 +3494,7 @@ class _QuizScreenState extends ConsumerState<QuizScreen>
                             ScaffoldMessenger.of(context).showSnackBar(
                               SnackBar(
                                 content: Text(
-                                  'Parvekirin di pesirojeyede te!',
+                                  'Parvekirin di pêşerojê de!',
                                   style: AppTypography.body.copyWith(
                                       color: Colors.white),
                                 ),
@@ -2974,7 +3528,7 @@ class _QuizScreenState extends ConsumerState<QuizScreen>
                           onPressed: () => _safePop(),
                           icon: const Icon(Icons.home_rounded, size: 18),
                           label: Text(
-                            'Mala Serekin',
+                            'Mala Sereke',
                             style: AppTypography.label
                                 .copyWith(color: AppColors.primary),
                           ),
@@ -3259,4 +3813,21 @@ class _CharByCharComparison extends StatelessWidget {
 
     return Text.rich(TextSpan(children: spans));
   }
+}
+
+// ════════════════════════════════════════════════════════════════
+// KLAVYE KISAYOLARI — WCAG 2.1.1 Keyboard + 2.4.6 Headings
+// ════════════════════════════════════════════════════════════════
+
+class _QuizSelectIntent extends Intent {
+  final int index;
+  const _QuizSelectIntent(this.index);
+}
+
+class _QuizContinueIntent extends Intent {
+  const _QuizContinueIntent();
+}
+
+class _QuizExitIntent extends Intent {
+  const _QuizExitIntent();
 }

@@ -57,7 +57,7 @@ String _emojiForKat(String kat) => switch (kat) {
 }) _getDailyWord() {
   // Anlamli kelimeleri filtrele (alfabe harfleri haric)
   final words = kA1TamListe
-      .where((r) => (r.ku as String).length > 1 && (r.tr as String).length > 1)
+      .where((r) => r.ku.length > 1 && r.tr.length > 1)
       .toList();
 
   if (words.isEmpty) {
@@ -66,7 +66,7 @@ String _emojiForKat(String kat) => switch (kat) {
       tr: 'Merhaba',
       en: 'Hello',
       cins: 'becins',
-      kat: 'selamlama',
+      kat: 'silav',
       not_: '',
       her: <dynamic>[],
       gen: <dynamic>[],
@@ -81,14 +81,14 @@ String _emojiForKat(String kat) => switch (kat) {
   final w = words[index];
 
   return (
-    ku: w.ku as String,
-    tr: w.tr as String,
-    en: w.en as String,
-    cins: (w.cins ?? 'becins') as String,
-    kat: (w.kat ?? '') as String,
-    not_: (w.not ?? '') as String,
-    her: (w.her ?? []) as List<dynamic>,
-    gen: (w.gen ?? []) as List<dynamic>,
+    ku: w.ku,
+    tr: w.tr,
+    en: w.en,
+    cins: w.cins,
+    kat: w.kat,
+    not_: w.not,
+    her: w.her,
+    gen: w.gen,
   );
 }
 

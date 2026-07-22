@@ -1,11 +1,34 @@
 class EnWritingExercise {
   final String id;
   final String level;
-  final String type; // 'dictation', 'fill_blank', 'reorder', 'correct'
+  // Types:
+  //   'dictation'     — Kurmancî prompt → rewrite in English (controlled).
+  //   'fill_blank'    — Complete a sentence with one correct form.
+  //   'reorder'       — Put scrambled words in order.
+  //   'correct'       — Error correction.
+  //   'paragraph'     — Open productive writing (descriptive, narrative, opinion, etc.).
+  //   'email'         — Write a short email / message with register constraints.
+  //   'report'        — Structured informational writing (A2+).
+  //   'essay'         — Extended argumentative/expository writing (B2+).
+  final String type;
   final String promptKu;
+  // For controlled types (dictation/fill_blank/reorder/correct) this is the expected answer.
+  // For productive types (paragraph/email/report/essay) this is a MODEL answer to be shown
+  // as "Bersîva mînak" after the learner drafts their own response.
   final String correctAnswer;
   final List<String>? words;
   final String explanationKu;
+  // Productive-writing scaffolding (null for controlled types).
+  // Sentence starters the learner can lean on when stuck. Example: ["My favourite season is…", "I like it because…"].
+  final List<String>? sentenceStarters;
+  // Topical vocabulary bank with Kurmancî glosses. Example: ["harvest — dexl", "stall — tenûr"].
+  final List<String>? vocabularyBank;
+  // Minimum word count guidance (soft). 0 or null means no guidance.
+  final int? minWords;
+  // Short genre label shown in the UI: 'descriptive', 'narrative', 'opinion', 'email', 'instructions', 'dialogue', 'report', 'argumentative'.
+  final String? genre;
+  // Process-writing planning prompts in Kurmancî (pre-writing questions).
+  final List<String>? planningPromptsKu;
 
   const EnWritingExercise({
     required this.id,
@@ -15,6 +38,11 @@ class EnWritingExercise {
     required this.correctAnswer,
     required this.words,
     required this.explanationKu,
+    this.sentenceStarters,
+    this.vocabularyBank,
+    this.minWords,
+    this.genre,
+    this.planningPromptsKu,
   });
 }
 
@@ -61,10 +89,10 @@ const List<EnWritingExercise> kEnWritingExercises = [
     id: 'en_write_005',
     level: 'A1',
     type: 'dictation',
-    promptKu: 'Kurmancî: "Ev kitêbek e." Bi Îngilîzî binivîse:',
+    promptKu: 'Kurmancî: "Ev pirtûkek e." Bi Îngilîzî binivîse:',
     correctAnswer: 'This is a book.',
     words: null,
-    explanationKu: '"This is" = Ev... e. "A book" = kitêbek (yek).',
+    explanationKu: '"This is" = Ev... e. "A book" = pirtûkek. Artîkel "a" berî navdêra yekjimar a hejmarbar.',
   ),
   EnWritingExercise(
     id: 'en_write_006',
@@ -97,10 +125,10 @@ const List<EnWritingExercise> kEnWritingExercises = [
     id: 'en_write_009',
     level: 'A1',
     type: 'dictation',
-    promptKu: 'Kurmancî: "Kêlî çend e?" Bi Îngilîzî binivîse:',
+    promptKu: 'Kurmancî: "Seet çend e?" Bi Îngilîzî binivîse:',
     correctAnswer: 'What time is it?',
     words: null,
-    explanationKu: 'Pirsa demê: What time is it? = Kêlî çend e?',
+    explanationKu: 'Pirsa demê: What time is it? = Seet çend e? "What" + "time" + "is it" — pirs-avahî.',
   ),
   EnWritingExercise(
     id: 'en_write_010',
@@ -115,10 +143,10 @@ const List<EnWritingExercise> kEnWritingExercises = [
     id: 'en_write_011',
     level: 'A1',
     type: 'dictation',
-    promptKu: 'Kurmancî: "Ew dibistanê hez dike." Bi Îngilîzî binivîse:',
+    promptKu: 'Kurmancî: "Ew ji dibistanê hez dike." Bi Îngilîzî binivîse:',
     correctAnswer: 'He likes school.',
     words: null,
-    explanationKu: '"Like" bi "he/she/it" re dibe "likes".',
+    explanationKu: '"Like" bi "he/she/it" re dibe "likes". "Ji ... hez kirin" = "to like ...".',
   ),
   EnWritingExercise(
     id: 'en_write_012',
@@ -160,19 +188,19 @@ const List<EnWritingExercise> kEnWritingExercises = [
     id: 'en_write_016',
     level: 'A1',
     type: 'dictation',
-    promptKu: 'Kurmancî: "Diya min xweş e." Bi Îngilîzî binivîse:',
-    correctAnswer: 'My mother is nice.',
+    promptKu: 'Kurmancî: "Diya min dilovan e." Bi Îngilîzî binivîse:',
+    correctAnswer: 'My mother is kind.',
     words: null,
-    explanationKu: '"My mother" = diya min. "Nice" = xweş.',
+    explanationKu: '"My mother" = diya min. "Kind" = dilovan (ji bo mirovan ev wêneya herî rast e; "nice" bêhtir ji bo tiştan tê bikaranîn).',
   ),
   EnWritingExercise(
     id: 'en_write_017',
     level: 'A1',
     type: 'dictation',
-    promptKu: 'Kurmancî: "Ez rengê şîn hez dikim." Bi Îngilîzî binivîse:',
-    correctAnswer: 'I like the color blue.',
+    promptKu: 'Kurmancî: "Rengê min ê bijarte şîn e." Bi Îngilîzî binivîse:',
+    correctAnswer: 'My favorite color is blue.',
     words: null,
-    explanationKu: '"The color" = reng. "Blue" = şîn.',
+    explanationKu: '"My favorite color" = rengê min ê bijarte. Forma xwezayî: "My favorite ... is ...".',
   ),
   EnWritingExercise(
     id: 'en_write_018',
@@ -475,10 +503,10 @@ const List<EnWritingExercise> kEnWritingExercises = [
     id: 'en_write_050',
     level: 'A2',
     type: 'dictation',
-    promptKu: 'Kurmancî: "Wan dawî gotin." Bi Îngilîzî binivîse:',
+    promptKu: 'Kurmancî: "Wan xatir xwestin." Bi Îngilîzî binivîse:',
     correctAnswer: 'They said goodbye.',
     words: null,
-    explanationKu: 'Past: say -> said. "Goodbye" = dawî/xatir.',
+    explanationKu: 'Past: say -> said. "Goodbye" = xatir. "Said goodbye" kolokasyon e.',
   ),
   EnWritingExercise(
     id: 'en_write_051',
@@ -691,10 +719,10 @@ const List<EnWritingExercise> kEnWritingExercises = [
     id: 'en_write_073',
     level: 'B1',
     type: 'dictation',
-    promptKu: 'Kurmancî: "Heger ez dewlemend bûma, dê seyahat bikira." Bi Îngilîzî binivîse:',
+    promptKu: 'Kurmancî: "Heger ez dewlemend bûma, minê rêwîtî bikira." Bi Îngilîzî binivîse:',
     correctAnswer: 'If I were rich, I would travel.',
     words: null,
-    explanationKu: 'Second conditional: If + past, would + base. Xeyalî.',
+    explanationKu: 'Second conditional: If + past, would + base. Rewşa xeyalî/nepêkhatî ya niha.',
   ),
   EnWritingExercise(
     id: 'en_write_074',
@@ -953,5 +981,632 @@ const List<EnWritingExercise> kEnWritingExercises = [
     correctAnswer: 'If I had known, I would have come.',
     words: null,
     explanationKu: 'Third conditional: "If" bi "had + past participle" re, ne "would have".',
+  ),
+
+  // ============ C1 LEVEL (5) ============
+  EnWritingExercise(
+    id: 'en_write_101',
+    level: 'C1',
+    type: 'dictation',
+    promptKu: 'Kurmancî: "Tenê wê gavê min fam kir ka çi qewimî." Bi Îngilîzî binivîse:',
+    correctAnswer: 'Only then did I realize what had happened.',
+    words: null,
+    explanationKu: 'Inversion piştî "only then": did + S + base verb. "Realize" + past perfect.',
+  ),
+  EnWritingExercise(
+    id: 'en_write_102',
+    level: 'C1',
+    type: 'dictation',
+    promptKu: 'Kurmancî: "Min ê zanîba, min ê alîkarî bikira." (formal, bê "if") Bi Îngilîzî binivîse:',
+    correctAnswer: 'Had I known, I would have helped.',
+    words: null,
+    explanationKu: 'Conditional inversion (bê "if"): Had + S + V3, would have + V3.',
+  ),
+  EnWritingExercise(
+    id: 'en_write_103',
+    level: 'C1',
+    type: 'fill_blank',
+    promptKu: 'Cleft dagire: "It ___ John who broke the window." (past)',
+    correctAnswer: 'was',
+    words: null,
+    explanationKu: 'Cleft sentence: "It was X who..." — giranî dide John.',
+  ),
+  EnWritingExercise(
+    id: 'en_write_104',
+    level: 'C1',
+    type: 'reorder',
+    promptKu: 'Kelîmeyan bi rêz bike: (Piştî qedandina karê xwe, ew çû malê.)',
+    correctAnswer: 'Having finished his work, he went home.',
+    words: ['went', 'his', 'finished', 'Having', 'home', 'he', 'work'],
+    explanationKu: 'Participle clause: Having + V3 + obj, S + V (sereke).',
+  ),
+  EnWritingExercise(
+    id: 'en_write_105',
+    level: 'C1',
+    type: 'correct',
+    promptKu: 'Çewtiyê rast bike: "I suggest that he comes early." (subjunctive)',
+    correctAnswer: 'I suggest that he come early.',
+    words: null,
+    explanationKu: 'Subjunctive: piştî suggest/demand/insist + that + S + base verb (bê -s).',
+  ),
+
+  // ============ C2 LEVEL (3) ============
+  EnWritingExercise(
+    id: 'en_write_106',
+    level: 'C2',
+    type: 'dictation',
+    promptKu: 'Kurmancî: "Tevî hewldanên xwe yên zêde, projeya wî bi ser neket." Bi Îngilîzî binivîse:',
+    correctAnswer: 'Notwithstanding his great efforts, his project did not succeed.',
+    words: null,
+    explanationKu: 'Formal connector "notwithstanding" + navdêr — wek "despite" lê fermîtir.',
+  ),
+  EnWritingExercise(
+    id: 'en_write_107',
+    level: 'C2',
+    type: 'fill_blank',
+    promptKu: 'Subjunctive (formal): "It is essential that he ___ informed."',
+    correctAnswer: 'be',
+    words: null,
+    explanationKu: 'Piştî "It is essential/important that..." subjunctive: be (bê is/was).',
+  ),
+  EnWritingExercise(
+    id: 'en_write_108',
+    level: 'C2',
+    type: 'correct',
+    promptKu: 'Çewtiyê rast bike: "Hardly I had arrived when the phone rang."',
+    correctAnswer: 'Hardly had I arrived when the phone rang.',
+    words: null,
+    explanationKu: 'Inversion piştî "hardly": had + S + V3 + when... Devrik mecbûrî ye.',
+  ),
+
+  // ============================================================
+  // PRODUCTIVE WRITING (paragraph / email / report / essay)
+  // Scaffolded with sentence starters, vocabulary banks, models.
+  // ============================================================
+
+  // ---- A1 productive (3) ----
+  EnWritingExercise(
+    id: 'en_write_201',
+    level: 'A1',
+    type: 'paragraph',
+    genre: 'descriptive',
+    promptKu: 'Derheqê malbata xwe de 4–6 hevokan bi Îngilîzî binivîse. Kê heye? Çi dikin? Li ku dijîn? Biceribîne jêderên "sentence starter" bi kar bînî.',
+    minWords: 30,
+    planningPromptsKu: [
+      'Di malbata te de çend kes hene?',
+      'Navê yek ji wan çi ye û ew çi dike?',
+      'Tiştekî ku hûn bi hev re dikin çi ye?',
+    ],
+    sentenceStarters: [
+      'There are … people in my family.',
+      'My mother/father is …',
+      'My brother/sister likes …',
+      'We live in …',
+      'On Sundays we …',
+    ],
+    vocabularyBank: [
+      'family — malbat',
+      'together — bi hev re',
+      'kind — dilovan',
+      'live — jiyan',
+      'work — xebat',
+    ],
+    correctAnswer:
+        'There are four people in my family. My mother is a teacher and my father works in an office. My brother is eight years old and he likes football. We live in a small flat near the school. On Sundays we cook lunch together and drink tea in the garden.',
+    words: null,
+    explanationKu:
+        'Mînak: hevokên kurt, "there is/are", present simple, "and"/"but" bi kar tînin. Tîpa mezin li destpêka hevokê, xala dawîyê herdem.',
+  ),
+  EnWritingExercise(
+    id: 'en_write_202',
+    level: 'A1',
+    type: 'paragraph',
+    genre: 'descriptive',
+    promptKu: 'Rojeke xwe ya normal (ji sibehê heta êvarê) bi 5 hevokan binivîse. Dema niha (present simple) bi kar bîne.',
+    minWords: 35,
+    planningPromptsKu: [
+      'Tu seet çend şiyar dibî?',
+      'Tu taştê çi dixwî?',
+      'Tu piştî dibistanê çi dikî?',
+    ],
+    sentenceStarters: [
+      'I wake up at …',
+      'For breakfast I eat …',
+      'I go to school at …',
+      'After school I …',
+      'In the evening I …',
+    ],
+    vocabularyBank: [
+      'wake up — şiyar bûn',
+      'breakfast — taştê',
+      'homework — karên malê',
+      'dinner — şîv',
+      'sleep — raketin',
+    ],
+    correctAnswer:
+        'I wake up at seven every day. For breakfast I eat bread with cheese and drink black tea. I go to school at eight. After school I do my homework and play with my friends. In the evening I have dinner and go to bed at ten.',
+    words: null,
+    explanationKu:
+        '"Daily routine" herdem bi present simple tê nivîsandin. "Every day" / "at seven" / "in the evening" — wext-îşaret.',
+  ),
+  EnWritingExercise(
+    id: 'en_write_203',
+    level: 'A1',
+    type: 'email',
+    genre: 'email',
+    promptKu: 'Ji hevalekî/a xwe yê nû re name-mîna-peyamekî kurt binivîse. Xwe nas bike û 2 pirs bike.',
+    minWords: 30,
+    planningPromptsKu: [
+      'Tu kî yî? (nav, temen, bajar)',
+      'Tu dixwazî çi pirsan bikî?',
+    ],
+    sentenceStarters: [
+      'Hi ______,',
+      'My name is … and I am … years old.',
+      'I live in …',
+      'I like …',
+      'What about you? Do you …?',
+      'Write back soon. Bye!',
+    ],
+    vocabularyBank: [
+      'hobby — hobî',
+      'favourite — bijarte',
+      'write back — bersivê binivîse',
+    ],
+    correctAnswer:
+        'Hi Alan,\nMy name is Berfîn and I am ten years old. I live in Amed with my family. I like reading books and playing football. What about you? Do you have any brothers or sisters? What is your favourite food?\nWrite back soon.\nBye,\nBerfîn',
+    words: null,
+    explanationKu:
+        'Nameya sade: (1) silav + nav, (2) agahiyên xwe, (3) pirsên ji hevalê xwe, (4) xatir-xwestin. Rêza hevokan girîng e.',
+  ),
+
+  // ---- A2 productive (3) ----
+  EnWritingExercise(
+    id: 'en_write_204',
+    level: 'A2',
+    type: 'paragraph',
+    genre: 'narrative',
+    promptKu: 'Derheqê geshtekê (sefer, pîknîk, serdan) ku te kir binivîse. Past simple bi kar bîne. 6–8 hevok.',
+    minWords: 50,
+    planningPromptsKu: [
+      'Kengî û bi kê re?',
+      'Hûn çûn ku?',
+      'Te çi kir? Te çi dît?',
+      'Tu çawa hîs kir?',
+    ],
+    sentenceStarters: [
+      'Last summer / Last weekend …',
+      'I went to … with …',
+      'First, we …',
+      'Then, we …',
+      'In the evening, we …',
+      'I really enjoyed it because …',
+    ],
+    vocabularyBank: [
+      'beautiful — xweşik',
+      'crowded — qelebalix',
+      'quiet — bêdeng',
+      'tired — westiyayî',
+      'amazing — ecêb xweş',
+    ],
+    correctAnswer:
+        'Last summer I went to Lake Van with my family. We drove there early in the morning. First, we had a picnic under a big tree by the water. Then, we walked along the shore and took many photos. In the afternoon, I swam with my brother while my mother read a book. We came home late in the evening. I was very tired, but I really enjoyed the trip because the lake was so beautiful.',
+    words: null,
+    explanationKu:
+        'Çîroka paşerojê: hemî lêker past simple. "First, then, in the afternoon, finally" — girêdanên dema.',
+  ),
+  EnWritingExercise(
+    id: 'en_write_205',
+    level: 'A2',
+    type: 'paragraph',
+    genre: 'opinion',
+    promptKu: 'Hobiya xwe ya bijarte hilbijêre û binivîse çima jê hez dikî. 5–7 hevok.',
+    minWords: 50,
+    planningPromptsKu: [
+      'Hobiya te çi ye?',
+      'Tu kengî dest pê kir?',
+      'Çima jê hez dikî? (du sedem)',
+      'Tu carinan çi zehmetiyan dibînî?',
+    ],
+    sentenceStarters: [
+      'My favourite hobby is …',
+      'I started … when I was …',
+      'I love it because …',
+      'Another reason is that …',
+      'Sometimes it is difficult because …',
+      'Overall, I think …',
+    ],
+    vocabularyBank: [
+      'relax — vehesandin',
+      'improve — baştir kirin',
+      'creative — afirîner',
+      'challenging — dijwar',
+    ],
+    correctAnswer:
+        'My favourite hobby is painting. I started painting when I was eight years old, and now I paint almost every weekend. I love it because it helps me relax after a long school week. Another reason is that painting lets me share what I feel without words. Sometimes it is difficult because I run out of ideas, but I ask my cousin for suggestions. Overall, I think hobbies are important because they make our lives more colourful.',
+    words: null,
+    explanationKu:
+        'Paragrafa fikrê: (1) mijar, (2) sedem 1, (3) sedem 2, (4) aliyê zehmet, (5) encam. Girêdan: "because", "another reason", "overall".',
+  ),
+  EnWritingExercise(
+    id: 'en_write_206',
+    level: 'A2',
+    type: 'email',
+    genre: 'email',
+    promptKu: 'Ji mamosteyê xwe re nameyek fermî ya kurt binivîse: sibê tu nikarî werî dibistanê ji ber ku nexweş î. Daxwaza karê malê jî bike.',
+    minWords: 45,
+    planningPromptsKu: [
+      'Destpêk (rêzdar).',
+      'Sedem (çima nayê).',
+      'Daxwaz (karê malê an ders).',
+      'Dawî (spas û nav).',
+    ],
+    sentenceStarters: [
+      'Dear Mr./Ms. ______,',
+      'I am writing to let you know that …',
+      'Unfortunately, I have …',
+      'Could you please send me …?',
+      'Thank you for your understanding.',
+      'Best regards,',
+    ],
+    vocabularyBank: [
+      'unfortunately — mixabin',
+      'fever — taya germ',
+      'recover — sax bûn',
+      'assignment — erk/karê malê',
+    ],
+    correctAnswer:
+        'Dear Ms. Azad,\nI am writing to let you know that I will not be able to come to school tomorrow. Unfortunately, I have a fever and my mother wants me to stay home until I recover. Could you please send me today\'s homework by email so I do not fall behind? I will study it at home.\nThank you for your understanding.\nBest regards,\nBaran Yıldız',
+    words: null,
+    explanationKu:
+        'Nameya fermî: destpêka "Dear Mr./Ms.", pileya rêzê, "Could you please ...?" ji bo xwestinê, "Best regards" ji bo dawiyê.',
+  ),
+
+  // ---- B1 productive (4) ----
+  EnWritingExercise(
+    id: 'en_write_207',
+    level: 'B1',
+    type: 'paragraph',
+    genre: 'descriptive',
+    promptKu: 'Bajarê/gundê ku tu lê dijî bide naskirin. Paragrafeke 80–100 peyvan binivîse.',
+    minWords: 80,
+    planningPromptsKu: [
+      'Navê cih, cîh û nifûs.',
+      'Çi taybet dike? (cih, xwarin, kes)',
+      'Tiştê tu herî zêde jê hez dikî.',
+      'Tişta ku tu xemgîn dike an diguherî.',
+    ],
+    sentenceStarters: [
+      'I live in …, a … in …',
+      'It is famous for …',
+      'One thing I really love about my town is …',
+      'However, there is something I would change: …',
+      'Overall, …',
+    ],
+    vocabularyBank: [
+      'population — nifûs',
+      'historic — dîrokî',
+      'crowded — qelebalix',
+      'preserve — parastin',
+      'bustling — jîndar',
+    ],
+    correctAnswer:
+        'I live in Amed, a historic city in south-eastern Turkey with a population of about a million. Amed is famous for its ancient black basalt walls, which are among the longest in the world. One thing I really love about my city is the old bazaar near Ulu Cami, where small shops still sell handmade soap, copper trays and silk scarves. However, there is something I would change: many young people leave for bigger cities because there are not enough job opportunities. Overall, Amed is a place full of history and warmth, and I hope more young people will find reasons to stay.',
+    words: null,
+    explanationKu:
+        'Paragrafa nasînê: hevoka mijarê, hûrgiliyên piştrastker, raman/fikr. B1-ê: komhevok, "which", "because", "however".',
+  ),
+  EnWritingExercise(
+    id: 'en_write_208',
+    level: 'B1',
+    type: 'paragraph',
+    genre: 'opinion',
+    promptKu: 'Heye ku ciwan pêwîstî bi zimanên cuda hene. Li gor te, fêrbûna zimanê duyem girîng e? Çima? Paragrafeke 100 peyvan binivîse.',
+    minWords: 100,
+    planningPromptsKu: [
+      'Fikra te ya sereke (erê/na/girîng lê…).',
+      'Sedema 1 (mînakek kesane/heritage-related).',
+      'Sedema 2 (kar, seyr, çand).',
+      'Encam.',
+    ],
+    sentenceStarters: [
+      'In my opinion, …',
+      'First of all, …',
+      'Another important reason is …',
+      'For example, …',
+      'To sum up, …',
+    ],
+    vocabularyBank: [
+      'mother tongue — zimanê dayikê',
+      'heritage — mîrat',
+      'opportunity — derfet',
+      'identity — nasname',
+      'connect — girê dan',
+    ],
+    correctAnswer:
+        'In my opinion, learning a second language is very important for young people today. First of all, English opens many doors: you can read articles, watch films without subtitles, and find work with international companies. Another important reason, especially for us Kurds, is that many of our relatives live in Europe. For example, my cousins in Germany speak little Kurmancî, and English has become the bridge between our conversations. Learning a language is not only about grammar; it is also about respecting other cultures. To sum up, mastering a second language does not weaken our identity. On the contrary, it connects us to the wider world while we still carry our mother tongue with pride.',
+    words: null,
+    explanationKu:
+        'Paragrafa ramanî: fikr → 2 sedem + mînak → encam. "First of all, another reason, for example, to sum up" — girêdanên ramanî.',
+  ),
+  EnWritingExercise(
+    id: 'en_write_209',
+    level: 'B1',
+    type: 'paragraph',
+    genre: 'instructions',
+    promptKu: 'Pêkarî (recipe) an jî çawatiya (how-to) tiştekî sade binivîse — mînak: çawa çayeke baş çêbike. Bi kar anîna "imperative" (ferman) bîne bîra xwe.',
+    minWords: 80,
+    planningPromptsKu: [
+      'Amûr û pêwîst (ingredients).',
+      'Gavên bi rêz (first, then, next, finally).',
+      'Serişteya taybet.',
+    ],
+    sentenceStarters: [
+      'To make …, you will need …',
+      'First, …',
+      'Next, …',
+      'After that, …',
+      'Finally, …',
+      'A tip: …',
+    ],
+    vocabularyBank: [
+      'boil — kelandin',
+      'pour — rijandin',
+      'steep — helandin (çay)',
+      'teapot — çaydank',
+      'strong — xurt',
+    ],
+    correctAnswer:
+        'To make a proper Kurdish tea, you will need black tea leaves, a double teapot (çaydank), fresh water and sugar cubes. First, fill the lower pot with water and put it on the stove. Next, place dry tea leaves in the upper pot and let the steam warm them. After that, when the water boils, pour some over the leaves and keep the upper pot on top for ten minutes so the tea can steep. Finally, serve the tea in small glasses, half tea and half hot water. A tip: never stir the leaves with a spoon — always swirl the pot gently so the aroma stays intact.',
+    words: null,
+    explanationKu:
+        'Rêbername: lêkerê fermanî (fill, place, pour, serve). Girêdanên rêzê: "first, next, after that, finally". Hevokên kurt — zelaltir dibin.',
+  ),
+  EnWritingExercise(
+    id: 'en_write_210',
+    level: 'B1',
+    type: 'email',
+    genre: 'email',
+    promptKu: 'Tu li xaniyekî (Airbnb) rezervasyon kirî, lê pêwendiya Wi-Fi nexebitî. Ji xwedî re nameyek bêhnfireh lê xurt binivîse.',
+    minWords: 80,
+    planningPromptsKu: [
+      'Destpêk + kerem-xwesti.',
+      'Pirsgirêk (çi, kengî).',
+      'Bandor (çi encam heye).',
+      'Daxwaz (çareserî).',
+      'Dawî.',
+    ],
+    sentenceStarters: [
+      'Dear Mr./Ms. ______,',
+      'I hope this message finds you well.',
+      'I am writing to let you know that …',
+      'This is a problem because …',
+      'Could you please …?',
+      'I look forward to your reply.',
+      'Kind regards,',
+    ],
+    vocabularyBank: [
+      'connection — pêwendî',
+      'reliable — pêbawer',
+      'refund — vegerandina perê',
+      'inconvenience — nerihetî',
+      'urgent — lezgîn',
+    ],
+    correctAnswer:
+        'Dear Mr. Kaya,\nI hope this message finds you well. I am writing to let you know that the Wi-Fi connection in the flat has not worked since I arrived on Monday evening. I have restarted the router twice, but the problem continues. This is a problem because I booked this flat specifically to work remotely, and my meetings depend on a reliable connection. Could you please arrange for a technician to visit tomorrow, or advise me on the router password so I can check the settings? If the issue cannot be fixed quickly, I would kindly ask for a partial refund for the affected days.\nI look forward to your reply.\nKind regards,\nRojîn Demir',
+    words: null,
+    explanationKu:
+        'E-nameya gilîyê: rêzdar lê zelal. Pirsgirêk → bandor → daxwaz → rîca ya alternatîf. "Kind regards" ji bo bilêkî nîv-fermî baş e.',
+  ),
+
+  // ---- B2 productive (3) ----
+  EnWritingExercise(
+    id: 'en_write_211',
+    level: 'B2',
+    type: 'essay',
+    genre: 'argumentative',
+    promptKu: 'Hin kes dibêjin ku medyaya civakî bêtir zirarê li ciwanan dide. Yên din dibêjin ku derfetan vedike. Li gor te kîjan rast e? Essayeke 180–220 peyvan binivîse (destpêk, 2 paragrafên axaftinê, encam).',
+    minWords: 180,
+    planningPromptsKu: [
+      'Destpêk: paşxane + îddîaya te (thesis).',
+      'Paragraf 1: argûmana herî xurt + mînak.',
+      'Paragraf 2: berevajî an nuans + çareser.',
+      'Encam: thesis ji nû ve bi zimaneke din.',
+    ],
+    sentenceStarters: [
+      'In recent years, …',
+      'While some argue that …, others believe …',
+      'Personally, I think that …',
+      'One of the main reasons is …',
+      'On the other hand, …',
+      'A balanced approach would be to …',
+      'In conclusion, …',
+    ],
+    vocabularyBank: [
+      'addictive — kitkit',
+      'mental health — saxlemiya derûnî',
+      'algorithm — algorîtma',
+      'regulate — rêkûpêk kirin',
+      'engagement — beşdarî',
+      'exposure — rûberû-bûn',
+    ],
+    correctAnswer:
+        'In recent years, social media has become a central part of young people\'s lives, from Stockholm to Silopi. While some argue that platforms like Instagram and TikTok damage mental health by promoting unrealistic standards, others believe they open doors that previous generations could not imagine. Personally, I think both views hold some truth, but the design of the platforms matters more than the medium itself.\nOne of the main reasons for concern is the way algorithms reward outrage and comparison. Studies in Europe and North America show that heavy users report higher anxiety than peers who spend less time scrolling. Young Kurdish users, in particular, often encounter hostile political content that ordinary conversation would filter out.\nOn the other hand, the same platforms allow diaspora teenagers to stay in touch with their grandparents through short videos, practise Kurmancî with online communities, and publish creative work without needing traditional gatekeepers. A balanced approach would be to teach media literacy in schools and to regulate the most manipulative design features, rather than to ban the tools outright.\nIn conclusion, social media is neither a villain nor a saviour. It is a powerful tool whose impact depends on thoughtful use, honest design, and the critical habits we cultivate in young users.',
+    words: null,
+    explanationKu:
+        'Essay-ya argûmanî ya B2: thesis → 2 paragrafên piştevan → encam. Girêdan: "while some argue", "on the other hand", "in conclusion". Nuans (ne sade erê/na) dibe xala B2/C1.',
+  ),
+  EnWritingExercise(
+    id: 'en_write_212',
+    level: 'B2',
+    type: 'report',
+    genre: 'report',
+    promptKu: 'Tu endamê encumena xwendekaran î. Pirsgirêkekê li dibistana xwe tesbît bike û ji rêveberiyê re raporeke fermî ya 150–180 peyvan binivîse. Başlıkan bi kar bîne (Introduction, Findings, Recommendations).',
+    minWords: 150,
+    planningPromptsKu: [
+      'Gireh-pirsgirêk çi ye û çawa tê dîtin?',
+      'Kîjan daneyan piştgiriyê didin?',
+      '2–3 pêşniyar.',
+    ],
+    sentenceStarters: [
+      'The aim of this report is to …',
+      'The report is based on …',
+      'Findings',
+      'It was found that …',
+      'Furthermore, …',
+      'Recommendations',
+      'It is recommended that … should …',
+    ],
+    vocabularyBank: [
+      'survey — anket',
+      'respondents — beşdarên ankettê',
+      'facilities — avahî/îmkan',
+      'address the issue — bersivê bide pirsgirêkê',
+    ],
+    correctAnswer:
+        'Introduction\nThe aim of this report is to examine the condition of the school library and to suggest improvements. The report is based on an online survey completed by 142 students and three interviews with teachers.\n\nFindings\nIt was found that 78% of respondents use the library less than once a month. The main reasons are limited opening hours (it closes at 3 p.m.) and the outdated collection, particularly in science and Kurdish literature. Furthermore, there are no working power sockets for laptops, which discourages older students from studying there.\n\nRecommendations\nIt is recommended that the library should extend its opening hours until 6 p.m. on weekdays. In addition, a budget of 15,000 TL should be allocated annually to refresh the Kurdish and science sections. Finally, power sockets should be installed at every study desk.\n\nIf these changes are implemented, the library can become a central study space for the whole school rather than a quiet corridor few students visit.',
+    words: null,
+    explanationKu:
+        'Rapora fermî: başlik, daneya pîvarbar, forma edilgen ("it was found that"). Pêşniyar bi "should" an "it is recommended that ... should".',
+  ),
+  EnWritingExercise(
+    id: 'en_write_213',
+    level: 'B2',
+    type: 'paragraph',
+    genre: 'narrative',
+    promptKu: 'Wê kêlîka di jiyana te de ya ku tiştekî girîng li ser xwe an li ser cîhanê fêr bû binivîse. Paragrafeke 120–150 peyvan, bi dema paşerojê.',
+    minWords: 120,
+    planningPromptsKu: [
+      'Kengî, li ku, bi kê re?',
+      'Hevoka kilitî: tiştê ku qewimî.',
+      'Çi fêr bûyî?',
+    ],
+    sentenceStarters: [
+      'It happened when I was …',
+      'At that time, …',
+      'I will never forget the moment …',
+      'Looking back, …',
+      'That experience taught me that …',
+    ],
+    vocabularyBank: [
+      'realise — fam kirin',
+      'turning point — xalên veguherînê',
+      'humble — bindest, nerm',
+      'perspective — dîtinê',
+    ],
+    correctAnswer:
+        'It happened when I was sixteen, in the small hospital where my grandfather spent his last two weeks. At that time, I was preparing for university exams, and I secretly resented every evening I lost sitting by his bed. One night, he asked me to read him a short story in Kurmancî. My pronunciation stumbled, but his eyes followed every word. When I finished, he whispered that my grandmother used to read him the same story when they were young. I will never forget the moment he closed his eyes, smiling, because a language I had almost left behind suddenly became the bridge between two lifetimes. Looking back, I understand that my exams were neither unimportant nor urgent in the way I thought. That experience taught me that knowledge without love is half a life, and that the people we lose become the teachers we carry forward.',
+    words: null,
+    explanationKu:
+        'Vegotina kesane (personal narrative): serpêhatî + xala veguherînê + fikra kûr. Past simple + past perfect ("had almost left") + reflection ("looking back").',
+  ),
+
+  // ---- C1 productive (2) ----
+  EnWritingExercise(
+    id: 'en_write_214',
+    level: 'C1',
+    type: 'essay',
+    genre: 'argumentative',
+    promptKu: 'Gelek zaroken diyasporayê zimanê dayikê bi zimanê dibistanê winda dikin. Eger tu dê siyaseteke perwerdeyê pêş bixista, tu dê çi bikira? 250–300 peyv. Essay-ya akademîk.',
+    minWords: 250,
+    planningPromptsKu: [
+      'Destpêk: mijar + pirsgirêk + thesis.',
+      'Paragrafa 1: çavkaniya pirsgirêkê.',
+      'Paragrafa 2: pêşniyara te ya pratîk (bi detayan).',
+      'Paragrafa 3: berevajî ramanan bide û bersivê bike.',
+      'Encam: fikra sereke bi forma din.',
+    ],
+    sentenceStarters: [
+      'There can be little doubt that …',
+      'A closer examination reveals that …',
+      'The most effective policy would arguably be …',
+      'Critics might contend that …',
+      'Such concerns, however, can be addressed by …',
+      'In light of the above, …',
+    ],
+    vocabularyBank: [
+      'attrition — hêdî hêdî wendabûn',
+      'bilingual — duzimanî',
+      'curriculum — bernameya dersê',
+      'stakeholders — beşdar',
+      'evidence-based — li ser bingeha delîlan',
+      'implementation — bi cih anîn',
+    ],
+    correctAnswer:
+        'There can be little doubt that heritage-language attrition is among the most pressing cultural concerns facing diasporic communities today. Each year, thousands of children born into Kurmancî-speaking households gradually shift to the majority language of their country of residence, often completing the process before adolescence. The economic and social pressures driving this shift are well documented, yet the loss is rarely inevitable. What remains contested is the shape of an educational policy that could meaningfully slow it.\nA closer examination reveals that the problem is not primarily linguistic but structural. Few public schools across Europe offer formal Kurmancî instruction, and weekend community classes, while admirable, cannot match the cognitive weight of subjects taught five days a week in the dominant language. The most effective policy would arguably combine three elements: bilingual kindergarten streams in cities with sizeable Kurdish populations, elective Kurmancî literature modules in secondary schools accredited toward university entrance, and teacher-training scholarships designed to produce a sustainable pipeline of qualified educators.\nCritics might contend that such provisions are expensive and benefit a minority. Such concerns, however, can be addressed by pointing to robust evidence that bilingual children generally outperform monolingual peers in executive function, and by noting that host economies increasingly value employees fluent in regional languages. Implementation should therefore be framed not as charity but as sound human-capital policy.\nIn light of the above, the preservation of Kurmancî among diasporic youth requires neither nostalgia nor resignation. It requires the political imagination to treat heritage languages as public goods, worthy of the same serious investment that we extend, without hesitation, to literacy in the majority tongue.',
+    words: null,
+    explanationKu:
+        'Essay-ya akademîk ya C1: hedging ("arguably", "might contend", "can be"), peyvên abstract (attrition, stakeholders), komhevokên dirêj, rêbazeke pêşniyarê ya rasyonel.',
+  ),
+  EnWritingExercise(
+    id: 'en_write_215',
+    level: 'C1',
+    type: 'paragraph',
+    genre: 'descriptive',
+    promptKu: 'Pîlekî an kêlîka dawî ya sibehekê ya herêmeke taybet bi te re (dibistan, sûk, malbat, çiya) bi zimanê edebî binivîse. Bal bike ser hewas (senses: dîtin, bihîstin, bêhn, tîp). 150–180 peyv.',
+    minWords: 150,
+    planningPromptsKu: [
+      'Kîjan cih? (pirsgirêk ne bi bijartina balkêş, bi hûrgiliyan e)',
+      'Çi deng tên bihîstin?',
+      'Çi bêhn?',
+      'Çi ronahî?',
+      'Hestên te yên wê demê?',
+    ],
+    sentenceStarters: [
+      'Even before I open my eyes, …',
+      'The first sound is …',
+      'From the kitchen drifts the smell of …',
+      'By the time the call to prayer fades, …',
+    ],
+    vocabularyBank: [
+      'faint — kêm/nerm',
+      'drift — hêdî çûn/hatin',
+      'linger — berdewam mayîn',
+      'murmur — pistepist',
+      'horizon — aso',
+      'amber — rengê zêrîn',
+    ],
+    correctAnswer:
+        'Even before I open my eyes, the village announces the morning in its own quiet order. The first sound is the rooster behind the wall, hoarse and unhurried, as if reminding the sun of a promise. From the kitchen drifts the smell of tea brewing in the old double pot, and beneath it, the faint sweetness of yesterday\'s bread being warmed on the soba. By the time the call to prayer fades, the amber light has already climbed the eastern wall of my grandmother\'s courtyard, turning the dust in the air into something almost sacred. A single jeep murmurs past the lower road; the children in the neighbour\'s garden trade insults over a deflated football. Then, for perhaps half a minute, everything pauses — the kettle whistles, the cat stretches on the threshold, the mountains beyond the roofline hold their breath. That pause, more than any photograph, is what I take with me when I return to the city.',
+    words: null,
+    explanationKu:
+        'Paragrafa wêneker a C1: hewas, rîtm, hevokên dirêj û kurt li pey hev, metafor ("holds their breath"). "Show, don\'t tell" — nîşan bidin, bi rasterast nebêjin.',
+  ),
+
+  // ---- C2 productive (1) ----
+  EnWritingExercise(
+    id: 'en_write_216',
+    level: 'C2',
+    type: 'essay',
+    genre: 'argumentative',
+    promptKu: 'Mîrateya çandî di serdema dîjîtal de: parastin, tomarkirin an jî têkdar kirin? Essayeke 350+ peyvan ya akademîk binivîse. Bikar bîne: hedging, nuans, dengên dijber, referansên giştî.',
+    minWords: 350,
+    planningPromptsKu: [
+      'Thesis: ne sade, bi qonax (qualified).',
+      '2–3 xetên argûmanê bi mînakên taybet.',
+      'Dengên dijber: çawa dê ji wan re bersiv bidî?',
+      'Encam: ne tekrar, lê berfirehkirina fikrê.',
+    ],
+    sentenceStarters: [
+      'It has become something of a truism that …',
+      'Yet the assumption warrants closer scrutiny.',
+      'A more nuanced account would acknowledge …',
+      'The danger, of course, lies in …',
+      'Nevertheless, to dismiss … as … would be to overlook …',
+      'What emerges, then, is less a choice between … and … than …',
+    ],
+    vocabularyBank: [
+      'commodification — bazar-bûn, jibîrkirina cewherê hunerê',
+      'custodianship — parêzgerî',
+      'vernacular — zimanê herêmî/rojane',
+      'provenance — jêder/reh',
+      'gatekeeping — derîgirî, kontrolkirin',
+      'fungible — guhêrbar (nîqaşkirî: cudabûna wê tune ye)',
+    ],
+    correctAnswer:
+        'It has become something of a truism that digital tools have revolutionised the preservation of cultural heritage. Archives once confined to dusty shelves in provincial museums now travel the world as open-access datasets, while endangered languages accumulate hours of recorded speech that, even a generation ago, would have simply died with their last speakers. Yet the assumption that digitisation equals preservation warrants closer scrutiny, particularly in the case of traditions whose vitality was always embedded in the lived rhythms of performance and community rather than in text.\nConsider the dengbêj tradition among the Kurds. A dengbêj does not sing a song so much as inhabit a long conversation between singer, audience, and place. To record such a performance is certainly valuable; to mistake the recording for the tradition would be a category error. A more nuanced account would acknowledge that digital custodianship, at its best, creates not substitutes for living practice but scaffolding around it — reference points against which future practitioners can test their own innovations. The danger, of course, lies in the subtle way that the archive can begin to dictate authenticity, turning every deviation into a kind of failure rather than the ordinary business of a living art form.\nNevertheless, to dismiss digital preservation as commodification would be to overlook the communities for whom recordings have been, quite literally, a lifeline. Diaspora youth encountering their grandparents\' voices through an archive in Toronto are not consuming a dead artefact; they are re-entering a conversation that might otherwise have closed. The ethical burden, therefore, rests less on whether to digitise than on how — with what metadata, what provenance, what mechanisms of continuing consent from the communities concerned.\nWhat emerges, then, is less a choice between preservation and corruption than a demand for thoughtful custodianship. A healthy cultural ecology will likely require both the living dengbêj in the coffeehouse and the archive of his performances in a cloud server a thousand miles away, provided we keep clearly in view which of the two is the root and which the reflection.',
+    words: null,
+    explanationKu:
+        'C2: nuans bêyî neutral-bûn, "less X than Y" avahî, hedging sofîstîke, terîmên akademîk (custodianship, scaffolding, category error). Peyv ~400; her paragrafek xalê xwe xwedî kiriye.',
   ),
 ];

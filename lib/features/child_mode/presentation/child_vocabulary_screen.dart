@@ -3,12 +3,19 @@ import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../../core/constants/child_theme.dart';
+import '../../../shared/providers/language_mode_provider.dart';
+import '../../../shared/providers/learning_track_provider.dart';
+import '../../../shared/widgets/speak_button.dart';
+import '../../en_learning/domain/en_child_a1_kelime_db.dart';
 
 // ════════════════════════════════════════════════════════════════
 // LÛTKE ZAROK — Kelime Ekranı
 //
 // Çocuklar için basitleştirilmiş kelime tarayıcı.
 // Büyük kartlar, emoji simgeleri, kategori bazlı filtreleme.
+//
+// Track-aware (Nisan 2026): englishChild → İngilizce A1 kelimeleri,
+// kurdishChild → Kurmancî örnek kelimeleri.
 // ════════════════════════════════════════════════════════════════
 
 class ChildVocabularyScreen extends ConsumerWidget {
@@ -16,6 +23,8 @@ class ChildVocabularyScreen extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final track = ref.watch(currentTrackProvider);
+    final isEn = track.isEnglish;
     return Scaffold(
       body: SafeArea(
         child: Column(
@@ -25,7 +34,7 @@ class ChildVocabularyScreen extends ConsumerWidget {
             Padding(
               padding: const EdgeInsets.fromLTRB(24, 16, 24, 8),
               child: Text(
-                'Peyvên min',
+                isEn ? 'My Words' : 'Peyvên min',
                 style: ChildTypography.headline.copyWith(
                   color: ChildColors.primary,
                 ),
@@ -38,14 +47,25 @@ class ChildVocabularyScreen extends ConsumerWidget {
               child: ListView(
                 scrollDirection: Axis.horizontal,
                 padding: const EdgeInsets.symmetric(horizontal: 20),
-                children: const [
-                  _CategoryChip(emoji: '📚', label: 'Hemû', isSelected: true),
-                  _CategoryChip(emoji: '👨‍👩‍👧‍👦', label: 'Malbat'),
-                  _CategoryChip(emoji: '🐱', label: 'Heywan'),
-                  _CategoryChip(emoji: '🎨', label: 'Reng'),
-                  _CategoryChip(emoji: '🍎', label: 'Xwarin'),
-                  _CategoryChip(emoji: '🔢', label: 'Hejmar'),
-                ],
+                children: isEn
+                    ? const [
+                        _CategoryChip(
+                            emoji: '📚', label: 'All', isSelected: true),
+                        _CategoryChip(emoji: '👨‍👩‍👧‍👦', label: 'Family'),
+                        _CategoryChip(emoji: '🐱', label: 'Animals'),
+                        _CategoryChip(emoji: '🎨', label: 'Colors'),
+                        _CategoryChip(emoji: '🍎', label: 'Food'),
+                        _CategoryChip(emoji: '🔢', label: 'Numbers'),
+                      ]
+                    : const [
+                        _CategoryChip(
+                            emoji: '📚', label: 'Hemû', isSelected: true),
+                        _CategoryChip(emoji: '👨‍👩‍👧‍👦', label: 'Malbat'),
+                        _CategoryChip(emoji: '🐱', label: 'Heywan'),
+                        _CategoryChip(emoji: '🎨', label: 'Reng'),
+                        _CategoryChip(emoji: '🍎', label: 'Xwarin'),
+                        _CategoryChip(emoji: '🔢', label: 'Hejmar'),
+                      ],
               ),
             ),
 
@@ -53,24 +73,50 @@ class ChildVocabularyScreen extends ConsumerWidget {
 
             // ── Kelime Kartları ──────────────────────────────
             Expanded(
-              child: GridView.builder(
-                padding: const EdgeInsets.symmetric(horizontal: 24),
-                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                  crossAxisCount: 2,
-                  crossAxisSpacing: 16,
-                  mainAxisSpacing: 16,
-                  childAspectRatio: 0.85,
-                ),
-                itemCount: _sampleWords.length,
-                itemBuilder: (context, index) {
-                  final word = _sampleWords[index];
-                  return _WordCard(
-                    emoji: word.emoji,
-                    kurmanji: word.ku,
-                    turkish: word.tr,
-                  ).animate()
-                      .fadeIn(delay: (100 * index).ms)
-                      .scale(begin: const Offset(0.9, 0.9));
+              child: Builder(
+                builder: (context) {
+                  // Track-aware: EN child → İngilizce çocuk A1 DB'den
+                  // ilk 24 kelime; KU child → mevcut örnekler.
+                  final items = isEn
+                      ? kEnChildA1Liste
+                          .take(24)
+                          .map((w) => _DisplayWord(
+                                emoji: w.emoji ?? '📘',
+                                primary: w.en,
+                                secondary: w.ku,
+                                lang: 'en',
+                              ))
+                          .toList()
+                      : _sampleWords
+                          .map((w) => _DisplayWord(
+                                emoji: w.emoji,
+                                primary: w.ku,
+                                secondary: w.tr,
+                                lang: 'ku',
+                              ))
+                          .toList();
+                  return GridView.builder(
+                    padding: const EdgeInsets.symmetric(horizontal: 24),
+                    gridDelegate:
+                        const SliverGridDelegateWithFixedCrossAxisCount(
+                      crossAxisCount: 2,
+                      crossAxisSpacing: 16,
+                      mainAxisSpacing: 16,
+                      childAspectRatio: 0.85,
+                    ),
+                    itemCount: items.length,
+                    itemBuilder: (context, index) {
+                      final word = items[index];
+                      return _WordCard(
+                        emoji: word.emoji,
+                        primary: word.primary,
+                        secondary: word.secondary,
+                        lang: word.lang,
+                      ).animate()
+                          .fadeIn(delay: (100 * index).ms)
+                          .scale(begin: const Offset(0.9, 0.9));
+                    },
+                  );
                 },
               ),
             ),
@@ -121,19 +167,23 @@ class _CategoryChip extends StatelessWidget {
   }
 }
 
-class _WordCard extends StatelessWidget {
+class _WordCard extends ConsumerWidget {
   final String emoji;
-  final String kurmanji;
-  final String turkish;
+  final String primary;
+  final String secondary;
+  final String lang; // 'ku' veya 'en' — TTS için
 
   const _WordCard({
     required this.emoji,
-    required this.kurmanji,
-    required this.turkish,
+    required this.primary,
+    required this.secondary,
+    required this.lang,
   });
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    // Kurmancî modda Türkçe çeviri gizlenir — sadece emoji + Kurmancî.
+    final showTurkish = ref.watch(showTurkishProvider);
     return Container(
       decoration: BoxDecoration(
         color: ChildColors.backgroundSecondary,
@@ -153,22 +203,46 @@ class _WordCard extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Text(emoji, style: const TextStyle(fontSize: 40)),
-          const SizedBox(height: 12),
+          const SizedBox(height: 10),
           Text(
-            kurmanji,
+            primary,
             style: ChildTypography.kurmanjiCard.copyWith(
               color: ChildColors.primary,
             ),
           ),
-          const SizedBox(height: 4),
-          Text(
-            turkish,
-            style: ChildTypography.caption.copyWith(fontSize: 14),
+          if (showTurkish) ...[
+            const SizedBox(height: 4),
+            Text(
+              secondary,
+              style: ChildTypography.caption.copyWith(fontSize: 14),
+            ),
+          ],
+          const SizedBox(height: 8),
+          // TTS — EN için İngilizce TTS, KU için Kurmancî (HF).
+          SpeakButton(
+            text: primary,
+            size: 44,
+            color: ChildColors.primary,
+            lang: lang,
           ),
         ],
       ),
     );
   }
+}
+
+// İç model — track-aware liste için.
+class _DisplayWord {
+  final String emoji;
+  final String primary;
+  final String secondary;
+  final String lang;
+  const _DisplayWord({
+    required this.emoji,
+    required this.primary,
+    required this.secondary,
+    required this.lang,
+  });
 }
 
 // ── Örnek kelimeler (Phase 2'de DB'den gelecek) ──────────────

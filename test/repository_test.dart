@@ -54,8 +54,8 @@ void main() {
     });
 
     test('Kurmancî eril ezafe -ê ile biter', () {
-      // Örnek: bajar (nêr) → bajêr
-      const ezafe = 'bajêr';
+      // Örnek: bajar (nêr) + ezafe → bajarê min (benim şehrim)
+      const ezafe = 'bajarê';
       expect(ezafe.endsWith('ê'), isTrue);
     });
 

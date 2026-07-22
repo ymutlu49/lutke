@@ -10,12 +10,28 @@ import '../../../core/constants/app_colors.dart';
 import '../../../core/constants/app_typography.dart';
 import '../../../core/constants/app_spacing.dart';
 import '../../../core/constants/child_theme.dart';
+import '../../../core/router/app_router.dart';
 import '../../../core/utils/fsrs_algorithm.dart';
 import '../../../core/services/analytics_service.dart';
 import '../../../shared/providers/language_mode_provider.dart';
+import '../../../shared/providers/learning_module_provider.dart';
+import '../../../shared/providers/learning_track_provider.dart';
 import '../../../shared/widgets/exercise_widgets.dart';
+import '../../../shared/widgets/speak_button.dart';
+import '../../gamification/gamification_provider.dart';
+import '../../../core/services/sound_service.dart';
+import '../../../shared/widgets/persistent_xp_badge.dart';
+import '../../../shared/widgets/xp_float_animation.dart';
+import '../../../shared/widgets/streak_milestone_toast.dart';
+import '../../child_mode/domain/child_daily_challenge.dart';
+import '../../child_mode/domain/bizer_evolution.dart';
+import '../../en_learning/domain/en_to_quiz_adapter.dart';
+import '../../admin/data/content_override_service.dart';
+import '../../admin/data/lesson_override_service.dart';
 import '../data/lesson_repository.dart';
 import '../domain/a1_kelime_db.dart';
+import '../domain/child_a1_kelime_db.dart';
+import '../domain/child_a2_kelime_db.dart';
 
 // ════════════════════════════════════════════════════════════════
 // DERS EKRANI — LÛTKE
@@ -78,28 +94,106 @@ class _LessonScreenState extends ConsumerState<LessonScreen> {
 
   Future<void> _loadCards() async {
     try {
-      // Statik listeden yükle — DB bağlantısı gerekmez
-      final allWords = kA1TamListe
-          .where((w) => w.kat != 'alfabe') // Alfabe kartlarını atla
-          .toList();
+      // Çocuk modunda yetişkin DB'si yerine çocuk kelime DB'si yükle.
+      // Yetişkin A1'de "dewlet, hiqûq, felsefe" gibi kavramlar var — çocuğa uygun değil.
+      final isChild = widget.mode == 'child';
+      // TRACK-AWARE FIX: İngilizce track'te Kurmancî DB'si yerine EN DB'si.
+      // Adapter: _QuizWord.ku ← EnWord.en (hedef), _QuizWord.tr ← EnWord.ku (anadildeki karşılık).
+      // Önceden: tüm track'ler için kA1TamListe → EN user Kurmancî kartlar görüyordu.
+      // BUG FIX (Nisan 2026): Child + EN kombinasyonu için EN child DB.
+      final isEn = ref.read(learningModuleProvider) == LearningModule.english;
+
+      // Owner runtime overrides/CRUD — yalnızca Kurmancî DB için (EN kapsam dışı).
+      final overrides = ref.read(contentOverridesProvider);
+      final deletedIds = ref.read(deletedWordIdsProvider);
+      final customWords = ref.read(customWordsProvider);
+      final lessonOverrides = ref.read(lessonOverridesProvider);
+
+      // Kaynak listeyi hazırla; KU tarafta applyVocabulary (delete + custom +
+      // edit override) uygulanır. EN tarafta dokunulmaz.
+      List<dynamic> source;
+      if (isEn) {
+        source = isChild
+            ? <dynamic>[
+                ...getEnWordsForLevel('A1', childOnly: true),
+                ...getEnWordsForLevel('A2', childOnly: true),
+              ]
+            : getEnWordsForLevel('A1')
+                .where((w) => (w.kat as String? ?? '') != 'alfabe')
+                .toList();
+      } else if (isChild) {
+        final a1 = applyVocabulary(
+          List<dynamic>.from(kChildA1Kelimeler),
+          level: 'CHILD_A1',
+          overrides: overrides,
+          deletedIds: deletedIds,
+          customWords: customWords,
+        );
+        final a2 = applyVocabulary(
+          List<dynamic>.from(kChildA2Kelimeler),
+          level: 'CHILD_A2',
+          overrides: overrides,
+          deletedIds: deletedIds,
+          customWords: customWords,
+        );
+        source = [...a1, ...a2];
+      } else {
+        source = applyVocabulary(
+          List<dynamic>.from(kA1TamListe),
+          level: 'A1',
+          overrides: overrides,
+          deletedIds: deletedIds,
+          customWords: customWords,
+        ).where((w) => w.kat != 'alfabe').toList();
+      }
+
+      // Ders override: belirli bir lesson ise ve targetCardIds override
+      // edilmişse, kaynakları o id listesiyle sınırla (eksik id'ler
+      // uyarılarak atlanır).
+      if (!isEn && widget.lessonId != null) {
+        final lo = lessonOverrides[widget.lessonId];
+        if (lo != null && lo.targetCardIds != null) {
+          final ids = lo.targetCardIds!;
+          final byId = <String, dynamic>{};
+          for (final w in source) {
+            byId[w.id as String] = w;
+          }
+          final picked = <dynamic>[];
+          for (final id in ids) {
+            final hit = byId[id];
+            if (hit == null) {
+              warnMissingCardId(widget.lessonId!, id);
+            } else {
+              picked.add(hit);
+            }
+          }
+          if (picked.isNotEmpty) source = picked;
+        }
+      }
+
       final rng = Random();
-      final shuffled = [...allWords]..shuffle(rng);
-      final limit = widget.mode == 'review' ? 15 : (widget.lessonId != null ? 20 : 15);
+      final shuffled = [...source]..shuffle(rng);
+      final limit = widget.mode == 'review' ? 15 : (widget.lessonId != null ? (isChild ? 8 : 20) : (isChild ? 8 : 15));
       final selected = shuffled.take(limit).toList();
 
-      // VocabularyCardModel'e dönüştür
-      final cards = selected.map((w) => VocabularyCardModel(
-        id: w.id,
-        kurmanji: w.ku,
-        turkish: w.tr,
-        english: w.en,
-        category: w.kat,
-        gender: w.cins,
+      // VocabularyCardModel'e dönüştür — dynamic destructuring (child/adult shape farklı)
+      final cards = selected.map((dynamic raw) {
+        // applyVocabulary içinde edit override'ları zaten uygulandı; raw
+        // üzerinden doğrudan okuma yapıyoruz. EN tarafında override yok.
+        final w = raw;
+        return VocabularyCardModel(
+        id: w.id as String,
+        kurmanji: w.ku as String,
+        turkish: w.tr as String,
+        english: (w.en as String?) ?? '',
+        category: w.kat as String,
+        gender: (w.cins as String?) ?? 'neutral',
         level: 1,
-        fsrsCard: FSRSCard(cardId: w.id, state: CardState.newCard, dueDate: DateTime.now()),
-        sentencesHeritage: (w.her as List).cast<String>(),
-        sentencesGeneral: (w.gen as List).cast<String>(),
-      )).toList();
+        fsrsCard: FSRSCard(cardId: w.id as String, state: CardState.newCard, dueDate: DateTime.now()),
+        sentencesHeritage: (w.her as List?)?.cast<String>() ?? const [],
+        sentencesGeneral: (w.gen as List?)?.cast<String>() ?? const [],
+      );
+      }).toList();
 
       if (mounted) {
         setState(() {
@@ -142,7 +236,26 @@ class _LessonScreenState extends ConsumerState<LessonScreen> {
 
     // İstatistik güncelle
     final correct = rating == Rating.good || rating == Rating.easy;
-    if (correct) _correctCount++;
+    if (correct) {
+      _correctCount++;
+      // Good / Easy = doğru kabul → ses + XP float + combo.
+      SoundService.playCorrect();
+      SoundService.playXpGain();
+      final xp = rating == Rating.easy ? 10 : 8;
+      if (mounted) showXpFloat(context, xp);
+      final milestone = ref
+          .read(gamificationProvider.notifier)
+          .registerCorrectForCombo();
+      if (milestone > 0 && mounted) {
+        final isEn = ref.read(isEnglishModuleProvider);
+        final newCombo = ref.read(gamificationProvider).comboCount;
+        showStreakMilestone(context, newCombo, isEnglish: isEn);
+      }
+    } else {
+      // Hard / Again — combo kırılır, nazik ses.
+      SoundService.playWrong();
+      ref.read(gamificationProvider.notifier).resetCombo();
+    }
     _totalSeen++;
     _ratings.add(rating);
 
@@ -162,6 +275,8 @@ class _LessonScreenState extends ConsumerState<LessonScreen> {
   }
 
   void _onSessionComplete() {
+    SoundService.playSessionComplete();
+    ref.read(gamificationProvider.notifier).resetCombo();
     ref.read(analyticsServiceProvider).logLessonComplete(
       lessonId: widget.lessonId ?? 'review',
       lessonTitle: widget.mode == 'review' ? 'Dubare' : 'Wane',
@@ -170,10 +285,108 @@ class _LessonScreenState extends ConsumerState<LessonScreen> {
       correctAnswers: _correctCount,
       totalQuestions: _totalSeen,
     );
+
+    // ── GAMIFICATION CANLI VERİ ──────────────────────────────
+    // XP ekle + rozet kontrolü + streak güncelle + daily challenge
+    ref.read(gamificationProvider.notifier).completedLesson(
+      correctCount: _correctCount,
+      totalCount: _totalSeen,
+      hasSpeaking: false,
+      hasFamilyDialogue: false,
+      wordCount: _totalSeen,
+    );
+    if (_totalSeen > 0 && _correctCount == _totalSeen) {
+      ref.read(gamificationProvider.notifier).recordPerfectScore();
+    }
+    ref.read(gamificationProvider.notifier)
+        .updateWordsLearned(_correctCount);
+
+    // Child daily challenge güncelle (modül-agnostik)
+    // BUG FIX: recordProgress SharedPreferences yaziyordu ama todayChallengesProvider
+    // invalidate edilmiyordu — kart stale veri gosterirdi. Wrapper kullan.
+    recordChallengeProgressAndNotify(ref, ChallengeKind.completeLesson);
+    if (_correctCount > 0) {
+      recordChallengeProgressAndNotify(
+          ref, ChallengeKind.correctAnswers, amount: _correctCount);
+      recordChallengeProgressAndNotify(
+          ref, ChallengeKind.learnWords, amount: _correctCount);
+      // Karîk evolution — her doğru cevap 1 yıldız (çocuk modu için anlamlı)
+      if (widget.mode == 'child') {
+        ref.read(karikEvolutionProvider.notifier)
+            .addStars(_correctCount);
+      }
+    }
+  }
+
+  /// NAV FIX: Mid-lesson back button guard.
+  /// Önceden: browser back = ilerleme sessizce kaybolurdu.
+  /// Şimdi: tarayıcı geri / sistem geri → onay dialog'u göster.
+  Future<bool> _confirmExit() async {
+    // Kullanıcı hiç kart görmediyse veya ders zaten tamamlandıysa onaysız çık
+    if (_totalSeen == 0 || _currentIndex >= _cards.length) return true;
+    final isChild = widget.mode == 'child';
+    // TRACK-AWARE dialog strings.
+    final isEn = ref.read(learningModuleProvider) == LearningModule.english;
+    final titleStr = isEn
+        ? (isChild ? 'Leave lesson?' : 'Exit the lesson?')
+        : (isChild ? 'Dersê bihêle?' : 'Ji dersê derkeve?');
+    final bodyStr = isEn
+        ? 'If you leave now, your progress in this lesson will be lost.'
+        : 'Eger tu derkevî, pêşdaçûna te ya vê dersê winda dibe.';
+    final stayStr = isEn ? 'Stay' : 'Bimîne';
+    final leaveStr = isEn ? 'Leave' : 'Derkeve';
+    final ok = await showDialog<bool>(
+      context: context,
+      builder: (ctx) => AlertDialog(
+        shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(AppSpacing.radiusLg)),
+        backgroundColor: AppColors.surface,
+        title: Text(
+          titleStr,
+          style: AppTypography.headingSmall.copyWith(
+              color: AppColors.textPrimary, fontWeight: FontWeight.w700),
+        ),
+        content: Text(
+          bodyStr,
+          style: AppTypography.bodyMedium
+              .copyWith(color: AppColors.textSecondary),
+        ),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.of(ctx).pop(false),
+            child: Text(stayStr,
+                style: AppTypography.labelLarge
+                    .copyWith(color: AppColors.primary)),
+          ),
+          TextButton(
+            onPressed: () => Navigator.of(ctx).pop(true),
+            child: Text(leaveStr,
+                style: AppTypography.labelLarge
+                    .copyWith(color: AppColors.errorSoft)),
+          ),
+        ],
+      ),
+    );
+    return ok ?? false;
+  }
+
+  void _handleClosePressed() async {
+    final shouldExit = await _confirmExit();
+    if (shouldExit && mounted) context.pop();
   }
 
   @override
   Widget build(BuildContext context) {
+    // NAV FIX: Kullanıcı ders ortasında Profil > Rêya biguherîne ile
+    // track değiştirirse (ör. Kurmancî → İngilizce), eski track'in
+    // kartlarıyla oturum devam etmesin. Track değişince ekrandan çık.
+    ref.listen<LearningTrack>(currentTrackProvider, (prev, next) {
+      if (prev != null && prev != next && mounted && context.canPop()) {
+        // Kartlar eski track'e aitti; kullanıcı yeni track ana ekranına dönsün
+        context.pop();
+      }
+    });
+
     if (_loading) return const _LoadingView();
 
     if (_cards.isEmpty) {
@@ -185,14 +398,29 @@ class _LessonScreenState extends ConsumerState<LessonScreen> {
         totalSeen: _totalSeen,
         correctCount: _correctCount,
         ratings: _ratings,
-        onClose: () => context.pop(),
+        // Deep-link / bookmark girişinde stack boş olabilir → siyah ekran
+        // yerine home'a fallback. (Nav agent BUG-5)
+        onClose: () {
+          if (context.canPop()) {
+            context.pop();
+          } else {
+            context.go(AppRoutes.home);
+          }
+        },
       );
     }
 
     final card = _cards[_currentIndex];
     final isChild = widget.mode == 'child';
 
-    return Scaffold(
+    return PopScope(
+      canPop: false,
+      onPopInvoked: (didPop) async {
+        if (didPop) return;
+        final shouldExit = await _confirmExit();
+        if (shouldExit && mounted) context.pop();
+      },
+      child: Scaffold(
       backgroundColor: isChild
           ? ChildColors.backgroundPrimary
           : AppColors.backgroundPrimary,
@@ -203,7 +431,7 @@ class _LessonScreenState extends ConsumerState<LessonScreen> {
             _TopBar(
               current: _currentIndex + 1,
               total: _cards.length,
-              onClose: () => context.pop(),
+              onClose: _handleClosePressed,
             ),
 
             // ── İlerleme Çubuğu ──────────────────────────────
@@ -228,6 +456,7 @@ class _LessonScreenState extends ConsumerState<LessonScreen> {
             ),
           ],
         ),
+      ),
       ),
     );
   }
@@ -357,7 +586,7 @@ class _FlashcardExercise extends StatelessWidget {
   }
 }
 
-class _CardFront extends StatelessWidget {
+class _CardFront extends ConsumerWidget {
   final VocabularyCardModel card;
   final VoidCallback onTap;
   final bool isChild;
@@ -365,7 +594,11 @@ class _CardFront extends StatelessWidget {
   const _CardFront({required this.card, required this.onTap, this.isChild = false});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    // TRACK-AWARE TTS FIX: İngilizce track'te card.kurmanji aslında İngilizce
+    // kelimedir (adapter eşlemesi). SpeakButton lang='ku' olursa HF Kurmancî
+    // TTS İngilizce metni seslendirmeye çalışır → yanlış aksan.
+    final isEn = ref.watch(isEnglishModuleProvider);
     return GestureDetector(
       onTap: () {
         HapticFeedback.lightImpact();
@@ -429,7 +662,17 @@ class _CardFront extends StatelessWidget {
                     ),
                   ).animate().fadeIn().scale(begin: const Offset(0.95, 0.95)),
 
-                  const SizedBox(height: AppSpacing.xl),
+                  const SizedBox(height: AppSpacing.md),
+
+                  // Kurmancî → HF TTS, İngilizce → browser SpeechSynthesis.
+                  SpeakButton(
+                    text: card.kurmanji,
+                    size: isChild ? 64 : 52,
+                    color: isChild ? ChildColors.primary : AppColors.primary,
+                    lang: isEn ? 'en' : 'ku',
+                  ),
+
+                  const SizedBox(height: AppSpacing.lg),
 
                   // İpucu
                   Icon(Icons.touch_app_rounded,
@@ -442,8 +685,9 @@ class _CardFront extends StatelessWidget {
 
                   Consumer(
                     builder: (context, ref, _) {
+                      final isEn = ref.watch(isEnglishModuleProvider);
                       return Text(
-                        'Bersivê bibîne',
+                        isEn ? 'Tap to see answer' : 'Bersivê bibîne',
                         style: isChild
                             ? ChildTypography.body.copyWith(
                                 color: ChildColors.primary,
@@ -557,7 +801,8 @@ class _TopBar extends StatelessWidget {
             ),
           ),
 
-          const SizedBox(width: 48), // Simetri
+          // XP + streak badge — global gamification durumu
+          const PersistentXpBadge(),
         ],
       ),
     );
@@ -569,7 +814,7 @@ class _TopBar extends StatelessWidget {
 // İlke §4: Kutlama, destekleyici ton — ceza yok
 // ════════════════════════════════════════════════════════════════
 
-class _CompletionView extends StatelessWidget {
+class _CompletionView extends ConsumerWidget {
   final int totalSeen;
   final int correctCount;
   final List<Rating> ratings;
@@ -583,16 +828,23 @@ class _CompletionView extends StatelessWidget {
   });
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final isEn = ref.watch(isEnglishModuleProvider);
     final accuracy =
         totalSeen > 0 ? (correctCount / totalSeen * 100).round() : 0;
 
     // İlke §4: Destekleyici mesaj — başarı oranına göre
-    final message = accuracy >= 80
-        ? 'Zêde baş! Tu pêş dikevî.' // Çok iyi! İlerliyorsun.
-        : accuracy >= 50
-            ? 'Baş e! Her gav pêngav e.' // İyi! Her gün adım adım.
-            : 'Destpêk xweş e. Berdewam bike!'; // Başlangıç güzel. Devam et!
+    final message = isEn
+        ? (accuracy >= 80
+            ? 'Great work! You are progressing.'
+            : accuracy >= 50
+                ? 'Good job! Every step counts.'
+                : 'Nice start. Keep going!')
+        : (accuracy >= 80
+            ? 'Zêde baş! Tu pêş dikevî.'
+            : accuracy >= 50
+                ? 'Baş e! Her gav pêngav e.'
+                : 'Destpêk xweş e. Berdewam bike!');
 
     return Scaffold(
       backgroundColor: AppColors.backgroundPrimary,
@@ -623,9 +875,9 @@ class _CompletionView extends StatelessWidget {
 
               const SizedBox(height: AppSpacing.xl),
 
-              // Kurmancî kutlama (İlke §0.5)
+              // Track-aware kutlama
               Text(
-                'Temam bû!',
+                isEn ? 'Done!' : 'Temam bû!',
                 style: AppTypography.displayMedium.copyWith(
                   color: AppColors.textPrimary,
                   fontWeight: FontWeight.w700,
@@ -654,7 +906,7 @@ class _CompletionView extends StatelessWidget {
                       SizedBox(
                         width: statWidth,
                         child: _CompletionStat(
-                          label: 'Peld',
+                          label: isEn ? 'Cards' : 'Peld',
                           value: '$totalSeen',
                           icon: Icons.layers_outlined,
                         ),
@@ -662,7 +914,7 @@ class _CompletionView extends StatelessWidget {
                       SizedBox(
                         width: statWidth,
                         child: _CompletionStat(
-                          label: 'Rast',
+                          label: isEn ? 'Correct' : 'Rast',
                           value: '$accuracy%',
                           icon: Icons.check_circle_outline,
                         ),
@@ -696,7 +948,7 @@ class _CompletionView extends StatelessWidget {
                     elevation: 0,
                   ),
                   child: Text(
-                    'Vegere serê',  // Ana sayfaya dön
+                    isEn ? 'Back to home' : 'Vegere serê',
                     style: AppTypography.labelLarge.copyWith(
                         color: Colors.white, fontWeight: FontWeight.w700),
                   ),

@@ -9,7 +9,6 @@ import '../../../core/constants/app_spacing.dart';
 import '../../../core/constants/app_typography.dart';
 import '../../../core/services/auth_service.dart';
 import '../data/lesson_repository.dart';
-import '../domain/entities/vocabulary_card.dart';
 
 // ════════════════════════════════════════════════════════════════
 // RÊYA MIN — İlerleme Haritası (Progress Map)
@@ -138,7 +137,7 @@ class _TopBar extends StatelessWidget {
           Row(
             children: [
               _GlassButton(
-                onTap: () => context.pop(),
+                onTap: () => context.canPop() ? context.pop() : context.go('/home'),
                 child: const Icon(
                   Icons.arrow_back_rounded,
                   color: Colors.white,

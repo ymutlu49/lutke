@@ -37,7 +37,7 @@ class TimeUpScreen extends ConsumerWidget {
         'Li erdê rûnê, çav bigire û nêrîna xwe xweş bike.'),
     ('📚', 'Pirtûkek bixwîne!',
         'Çîrokek bibîne, xeyalê xwe xweş bike.'),
-    ('🎨', 'Resim çêke!',
+    ('🎨', 'Wêne çêke!',
         'Qelem û kaxiz bistîne — hunera te li bendê ye.'),
   ];
 
@@ -132,12 +132,27 @@ class TimeUpScreen extends ConsumerWidget {
               const Spacer(flex: 2),
 
               // "Fam kir" (Anladım) butonu — çocuk devam edebilir
+              // EXPLOIT FIX (Nisan 2026): acknowledgeBreak artık bool döndürür
+              // (günlük 2 mola hakkı var). Hak bittiğinde uyarı göster.
               SizedBox(
                 width: double.infinity,
                 child: FilledButton.icon(
-                  onPressed: () {
-                    // Süre takibini sıfırla — mola alındı, oturum yeniden başlıyor
-                    ref.read(timeLimitProvider.notifier).acknowledgeBreak();
+                  onPressed: () async {
+                    final notifier = ref.read(timeLimitProvider.notifier);
+                    final granted = await notifier.acknowledgeBreak();
+                    if (!granted && context.mounted) {
+                      // Mola hakkı bitti — pedagojik mesaj
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        const SnackBar(
+                          content: Text(
+                            'Bes mola îro xelas bûye.\n'
+                            'Demek bide xwe — sibê em digel hev in! 🌙',
+                            textAlign: TextAlign.center,
+                          ),
+                          duration: Duration(seconds: 4),
+                        ),
+                      );
+                    }
                   },
                   icon: const Icon(Icons.check_circle_outline_rounded),
                   label: const Text('Fam kir, spas!'),

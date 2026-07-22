@@ -41,6 +41,8 @@ const kWordEmojis = <String, String>{
   // Ev
   'Mal': '\u{1F3E0}', 'Der\u00EE': '\u{1F6AA}', 'Pace': '\u{1FA9F}', 'Ode': '\u{1F6CF}\u{FE0F}',
   'Mitbax': '\u{1F373}', 'Kurs\u00EE': '\u{1FA91}', 'Mase': '\u{1FA91}', 'D\u00EEwar': '\u{1F9F1}',
+  // Ev/eşya - ek (yalnız map'te olmayan yeni kelimeler)
+  'Çante': '🎒', 'Berkur': '👜',
 
   // Doga
   'Roj': '\u{2600}\u{FE0F}', 'Heyv': '\u{1F319}', 'St\u00EAr': '\u{2B50}', 'Ewr': '\u{2601}\u{FE0F}',
@@ -77,18 +79,23 @@ const kWordEmojis = <String, String>{
   // Selamlama / sosyal
   'Spas': '🙏', 'Erê': '✅', 'Na': '❌', 'Bibore': '😔', 'Roj baş': '☀️',
   'Êvar baş': '🌆', 'Şev baş': '🌙', 'Şeva te xweş be': '🌙',
-  'Bi xêr hatî': '🤗', 'Xatir': '👋', 'Xatirê te': '👋', 'Tu çawa yî': '🤔',
+  // NOT: "Bi xatirê te" formê standart ê xatirxwaziyê ye; tenê "Xatir" naşopîne.
+  'Bi xêr hatî': '🤗', 'Bi xatirê te': '👋', 'Xatirê te': '👋', 'Tu çawa yî': '🤔',
 
   // Aile (ek)
+  // NOT: Formên lemma (bêyî veqetandek): "Bira", "Xwişk", "Ap" li şûna "Birê/Xwişka/Apê".
   'Hevjîn': '💑', 'Lawik': '👦',
-  'Birê': '👦', 'Xwişka': '👧', 'Mam': '👨', 'Xal': '👨', 'Met': '👩',
-  'Xaltî': '👩', 'Apê': '👨',
+  'Birê': '👦', 'Xwişka': '👧',
+  'Mam': '👨', 'Xal': '👨', 'Met': '👩', 'Xaltî': '👩', 'Ap': '👨', 'Apê': '👨',
 
   // Vücut (ek)
-  'Pê': '🦶', 'Devê': '👄', 'Çavê': '👁️', 'Stû': '🧣', 'Pişt': '🧍',
+  // NOT: "Devê"/"Çavê" veqetandek; lemmaya standard "Dev"/"Çav".
+  'Pê': '🦶', 'Devê': '👄', 'Çavê': '👁️',
+  'Stû': '🧣', 'Pişt': '🧍',
 
   // Yiyecek/içecek (ek)
-  'Penîr': '🧀', 'Kerî': '🧈', 'Tirş': '🍋',
+  // NOT: "Kerî" = perçe (slice); tereyağı = "Nîvişk" an "Rûnê nivîşk".
+  'Penîr': '🧀', 'Nîvişk': '🧈', 'Tirş': '🍋',
   'Şêv': '🍽️', 'Taştê': '🍳',
   'Çayê': '🍵', 'Şîrîn': '🍬',
 
@@ -102,25 +109,29 @@ const kWordEmojis = <String, String>{
   'Pirpirok': '🦋', 'Mîst': '🐭',
 
   // Ev / mobilya (ek)
-  'Pencere': '🪟', 'Bûka': '🛏️', 'Cilşo': '🧺', 'Hemam': '🛁', 'Tewlîd': '🪑',
+  // NOT: "Bûka"/"Tewlîd" eşkere tune bûn → "Nivîn" (yatak) / "Kursî" li şûna wan.
+  'Pencere': '🪟', 'Nivîn': '🛏️', 'Cilşo': '🧺', 'Hemam': '🛁',
   'Berfirehe': '🛋️', 'Pirtûkxane': '📚', 'Saet': '🕐', 'Lampe': '💡',
 
   // Okul / eğitim
-  'Dibistan': '🏫', 'Defter': '📓', 'Pênûs': '✏️',
+  'Dibistan': '🏫', 'Defter': '📓', 'Pênûsk': '✏️', 'Pênûs': '✏️',
   'Pirtûk': '📖', 'Xwendekar': '🎓', 'Tahta': '📋',
   'Ders': '📝', 'Pirs': '❓', 'Bersiv': '💡',
 
   // İş / meslek (ek)
-  'Kar': '💼', 'Bizînes': '💼', 'Bijîjk': '👨‍⚕️', 'Hemşîre': '👩‍⚕️',
+  // NOT: "Bijîjk" → standard "Bijîşk" (ş); "Bizînes" = İng. ödünç, Kurmancî "Karsazî".
+  'Kar': '💼', 'Karsazî': '💼', 'Hemşîre': '👩‍⚕️',
   'Polîs': '👮', 'Mihendis': '👨‍💻', 'Kesek': '🧑',
 
   // Şehir / yer
-  'Bajar': '🏙️', 'Gund': '🏘️', 'Kuçe': '🛣️', 'Hespxan': '🏚️', 'Xanî': '🏠',
+  // NOT: "Hespxan" → "Hespxane" (ahır); "Çiyê" → "Çiya" (lemma form).
+  'Bajar': '🏙️', 'Gund': '🏘️', 'Kuçe': '🛣️', 'Hespxane': '🐎', 'Xanî': '🏠',
   'Park': '🌳', 'Baxçe': '🌷', 'Kanî': '⛲', 'Çem': '🏞️',
-  'Gol': '🏞️', 'Behr': '🌊', 'Çiyê': '⛰️',
+  'Gol': '🏞️', 'Behr': '🌊',
 
   // Ulaşım (ek)
-  'Wesayit': '🚗', 'Texsî': '🚕', 'Motorsîklet': '🏍️', 'Pawer': '🚉',
+  // NOT: "Pawer" ne Kurmancî ye → "Rawestgeh" (istasyon).
+  'Wesayit': '🚗', 'Texsî': '🚕', 'Motorsîklet': '🏍️', 'Rawestgeh': '🚉',
   'Rê': '🛣️', 'Sefer': '🧳',
 
   // Teknoloji
@@ -132,8 +143,9 @@ const kWordEmojis = <String, String>{
   'Nexweşî': '🤧', 'Tab': '🌡️', 'Birîn': '🩹',
 
   // Duygu / his
+  // NOT: "Kenê" veqetandekî bû → lemma "Ken" (gülüş).
   'Kêfxweş': '😊', 'Xemgîn': '😢', 'Hêrs': '😡', 'Tirs': '😨',
-  'Kenê': '😄', 'Hez': '❤️', 'Evîn': '💕', 'Hêvî': '🌟',
+  'Ken': '😄', 'Hez': '❤️', 'Evîn': '💕', 'Hêvî': '🌟',
 
   // Genel sıfat (rengder)
   'Mezin': '🐘', 'Biçûk': '🐭', 'Dirêj': '📏', 'Kurt': '📐', 'Bilind': '⬆️',
@@ -142,15 +154,16 @@ const kWordEmojis = <String, String>{
   'Çê': '👍', 'Tal': '🌶️',
 
   // Eylem (leker) — yaygın fiiller
+  // NOT: Formên rast ên mastar: "lîstin", "dîtin", "bihîstin", "gotin", "şûştin".
   'Çûn': '🚶', 'Hatin': '🏃', 'Razan': '😴',
-  'Rabûn': '🌅', 'Xwendin': '📖', 'Nivîsîn': '✍️', 'Lîstîn': '🎮',
-  'Stiran': '🎤', 'Reqisîn': '💃', 'Bazdan': '🏃', 'Bûn': '✨',
-  'Dîtîn': '👀', 'Bihîstîn': '👂', 'Bêjin': '💬', 'Kirîn': '🛒',
-  'Firotin': '💰', 'Şuştîn': '🧼', 'Çêkirin': '🔨', 'Xebitîn': '💼',
+  'Rabûn': '🌅', 'Xwendin': '📖', 'Nivîsîn': '✍️', 'Lîstin': '🎮',
+  'Reqisîn': '💃', 'Bazdan': '🏃', 'Bûn': '✨',
+  'Dîtin': '👀', 'Bihîstin': '👂', 'Gotin': '💬', 'Kirîn': '🛒',
+  'Firotin': '💰', 'Şûştin': '🧼', 'Çêkirin': '🔨', 'Xebitîn': '💼',
 
   // Zaman (ek)
   'Hefte': '📅', 'Meh': '📆', 'Sal': '🗓️', 'Demek': '⏳',
-  'Niha': '⏰', 'Berê': '⏪', 'Piştre': '⏩', 'Îro': '📅', 'Sibê (gelecek)': '⏭️',
+  'Niha': '⏰', 'Berê': '⏪', 'Piştre': '⏩', 'Îro': '📅',
   'Duh': '⏮️',
 
   // Renk (ek)
@@ -163,21 +176,34 @@ const kWordEmojis = <String, String>{
   'Berg': '🧥', 'Çakêt': '🧥', 'Şewqe': '🎩', 'Pêlav': '👟', 'Çant': '👜',
 };
 
-/// Kelime icin emoji dondur (once kelime bazli, sonra kategori bazli)
-String emojiForWord(String ku, String kat) {
+/// Kelime icin emoji dondur (once kelime bazli, sonra kategori bazli).
+///
+/// `useCategoryFallback` = false → kelime-spesifik eşleşme yoksa boş döner.
+/// Bu, flashcard ve detay ekranlarında "yanıltıcı kategori emoji'si"
+/// (ör. "Çante" çanta için kategori `mal` → 🏠) gösterilmesini önler.
+/// Quiz/picture-bazlı testlerde fallback kapalı kullanılmalı.
+///
+/// Default: true (geriye dönük uyumlu, vocabulary browse vb. eski davranış).
+String emojiForWord(String ku, String kat,
+    {bool useCategoryFallback = true}) {
   // Tam eslesme
   if (kWordEmojis.containsKey(ku)) return kWordEmojis[ku]!;
   // Kucuk harfle dene
   for (final entry in kWordEmojis.entries) {
     if (entry.key.toLowerCase() == ku.toLowerCase()) return entry.value;
   }
-  // Kategori bazli fallback
-  return _categoryEmoji(kat);
+  // Kategori bazli fallback (opsiyonel)
+  if (!useCategoryFallback) return '';
+  return categoryEmoji(kat);
 }
 
 /// Kategori-bazlı emoji fallback — kelime-spesifik eşleşme yoksa
 /// kategoriden bir emoji döner. 49+ DB kategorisinin tümü kapsanmış.
-String _categoryEmoji(String kat) => switch (kat) {
+///
+/// Projenin tek canonical kategori→emoji haritası. `flashcard_screen`,
+/// `vocabulary_browse_screen`, `word_match_screen` ve diğer tüm callsite'lar
+/// buradan import etmeli — eskiden dört ayrı (ve tutarsız) switch kopyası vardı.
+String categoryEmoji(String kat) => switch (kat) {
   // Yüksek frekanslı kategoriler
   'silav' || 'selamlama'              => '\u{1F44B}',                 // 👋
   'malbat'                            => '\u{1F46A}',                 // 👪

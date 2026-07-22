@@ -66,7 +66,10 @@ class _KuSpeakingScreenState extends ConsumerState<KuSpeakingScreen> {
 
   void _iDid() {
     setState(() { _done = true; _score += 10; });
-    SkillProgressService.markCompleted(module: 'ku', skill: 'speaking');
+    // BUG FIX: markCompleted yaziyordu ama skill provider'lari invalidate
+    // edilmiyordu — dashboard stale veri gosteriyordu.
+    markSkillCompletedAndNotify(ref,
+        module: 'ku', skill: 'speaking');
   }
 
   void _next() {
@@ -154,7 +157,7 @@ class _KuSpeakingScreenState extends ConsumerState<KuSpeakingScreen> {
                 // Speak buttons (HF TTS)
                 Center(child: SpeakButton(text: q.textKu, size: 72)),
                 const SizedBox(height: 8),
-                Center(child: Text('Guhdarî bike (uzun bas = yavaş)',
+                Center(child: Text('Guhdarî bike (bi dirêj lêxistin = hêdî)',
                   style: AppTypography.caption)),
                 const SizedBox(height: 12),
                 Container(
@@ -214,7 +217,7 @@ class _KuSpeakingScreenState extends ConsumerState<KuSpeakingScreen> {
                             fontWeight: FontWeight.w700)),
                         if (_similarity != null) ...[
                           const SizedBox(height: 4),
-                          Text('Hevşibî: %${(_similarity! * 100).toStringAsFixed(0)} (ji bo Kurmancî yaklaşık)',
+                          Text('Hevşibî: %${(_similarity! * 100).toStringAsFixed(0)} (ji bo Kurmancî nêzîk e)',
                             style: TextStyle(
                               color: _similarity! >= 0.5 ? Colors.green : Colors.orange,
                               fontWeight: FontWeight.w800, fontSize: 12)),

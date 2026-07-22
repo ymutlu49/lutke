@@ -199,25 +199,20 @@ class _QuestionScreen extends ConsumerWidget {
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: [
                     // ── Başlık ───────────────────────────────────────
-                    Consumer(
-                      builder: (context, ref, _) {
-                        final showTr = ref.watch(showTurkishProvider);
-                        return Column(
-                          children: [
-                            Text(
-                              showTr ? 'Bunu duymuş musun?' : 'Te ev bihîstiye?',
-                              style: AppTypography.headline,
-                              textAlign: TextAlign.center,
-                            ).animate().fadeIn(duration: 400.ms),
-                            Gap.xs,
-                            Text(
-                              showTr ? 'Kulağına tanıdık geliyor mu?' : 'Ji te re nas tê?',
-                              style: AppTypography.body.muted,
-                              textAlign: TextAlign.center,
-                            ).animate(delay: 150.ms).fadeIn(duration: 400.ms),
-                          ],
-                        );
-                      },
+                    Column(
+                      children: [
+                        Text(
+                          'Te ev bihîstiye?',
+                          style: AppTypography.headline,
+                          textAlign: TextAlign.center,
+                        ).animate().fadeIn(duration: 400.ms),
+                        Gap.xs,
+                        Text(
+                          'Ji te re nas tê?',
+                          style: AppTypography.body.muted,
+                          textAlign: TextAlign.center,
+                        ).animate(delay: 150.ms).fadeIn(duration: 400.ms),
+                      ],
                     ),
 
                     Gap.xl,
@@ -231,18 +226,13 @@ class _QuestionScreen extends ConsumerWidget {
                     Gap.xl,
 
                     // ── Seçenekler ───────────────────────────────────
-                    Consumer(
-                      builder: (context, ref, _) {
-                        final showTr = ref.watch(showTurkishProvider);
-                        return Text(
-                          showTr ? 'Ne anlama geliyor?' : 'Wateya wê çi ye?',
-                          style: AppTypography.labelSmall.copyWith(
-                            color: AppColors.textSecondary,
-                          ),
-                          textAlign: TextAlign.center,
-                        ).animate(delay: 350.ms).fadeIn();
-                      },
-                    ),
+                    Text(
+                      'Wateya wê çi ye?',
+                      style: AppTypography.labelSmall.copyWith(
+                        color: AppColors.textSecondary,
+                      ),
+                      textAlign: TextAlign.center,
+                    ).animate(delay: 350.ms).fadeIn(),
 
                     Gap.sm,
 
@@ -266,18 +256,11 @@ class _QuestionScreen extends ConsumerWidget {
                     Gap.lg,
 
                     // ── Alt not ──────────────────────────────────────
-                    Consumer(
-                      builder: (context, ref, _) {
-                        final showTr = ref.watch(showTurkishProvider);
-                        return Text(
-                          showTr
-                              ? 'Bilmiyorsan sorun değil — seç ve devam et'
-                              : 'Eger tu nizanî pirsgirêk tune — hilbijêre û berdewam bike',
-                          style: AppTypography.caption,
-                          textAlign: TextAlign.center,
-                        ).animate(delay: 700.ms).fadeIn();
-                      },
-                    ),
+                    Text(
+                      'Eger tu nizanî ne tu kêmasî ye — hilbijêre û berdewam bike.',
+                      style: AppTypography.caption,
+                      textAlign: TextAlign.center,
+                    ).animate(delay: 700.ms).fadeIn(),
                   ],
                 ),
               ),
@@ -369,18 +352,11 @@ class _AudioCardState extends State<_AudioCard> {
 
           Gap.sm,
 
-          Consumer(
-            builder: (context, ref, _) {
-              final showTr = ref.watch(showTurkishProvider);
-              return Text(
-                _hasPlayed
-                    ? (showTr ? 'Tekrar dinle' : 'Dîsa guhdarî bike')
-                    : (showTr ? 'Sesi çal' : 'Deng lê bide'),
-                style: AppTypography.caption.copyWith(
-                  color: AppColors.primary,
-                ),
-              );
-            },
+          Text(
+            _hasPlayed ? 'Dîsa guhdarî bike' : 'Deng lê bide',
+            style: AppTypography.caption.copyWith(
+              color: AppColors.primary,
+            ),
           ),
         ],
       ),
@@ -543,79 +519,36 @@ class _ResultScreen extends StatelessWidget {
                             .animate(delay: 300.ms)
                             .fadeIn(duration: 500.ms),
 
-                        Gap.xs,
+                        Gap.md,
 
-                        Consumer(
-                          builder: (context, ref, _) {
-                            final showTr = ref.watch(showTurkishProvider);
-                            return Column(
-                              children: [
-                                if (showTr)
-                                  Text(
-                                    'Dil senin kalbinde zaten vardı.',
-                                    style: AppTypography.body.muted,
-                                    textAlign: TextAlign.center,
-                                  )
-                                      .animate(delay: 500.ms)
-                                      .fadeIn(duration: 400.ms),
-                                Gap.md,
-                                Text(
-                                  showTr
-                                      ? '$correct / 3 soruyu doğru cevaplayarak bazı kelimeleri '
-                                        'zaten duyduğunu gösterdin. '
-                                        'Seni hızlı yola yönlendiriyoruz.'
-                                      : '$correct / 3 pirs rast bûn. '
-                                        'Te nîşan da ku tu hin peyvan berê bihîstiye. '
-                                        'Em te ber bi rêya bilez ve dişînin.',
-                                  style: AppTypography.body,
-                                  textAlign: TextAlign.center,
-                                )
-                                    .animate(delay: 700.ms)
-                                    .fadeIn(duration: 400.ms),
-                              ],
-                            );
-                          },
-                        ),
+                        Text(
+                          '$correct / 3 pirs rast bûn. '
+                          'Te nîşan da ku hin peyv ji berê ve li ba te ne. '
+                          'Em ê te li ser rêya bilez bimeşînin.',
+                          style: AppTypography.body,
+                          textAlign: TextAlign.center,
+                        )
+                            .animate(delay: 700.ms)
+                            .fadeIn(duration: 400.ms),
                       ] else ...[
                         Text(
-                          'Destpêk e!',
+                          'Destpêkeke xweş!',
                           style: AppTypography.kurmanjiLarge,
                           textAlign: TextAlign.center,
                         )
                             .animate(delay: 300.ms)
                             .fadeIn(duration: 500.ms),
 
-                        Gap.xs,
+                        Gap.md,
 
-                        Consumer(
-                          builder: (context, ref, _) {
-                            final showTr = ref.watch(showTurkishProvider);
-                            return Column(
-                              children: [
-                                if (showTr)
-                                  Text(
-                                    'Güzel bir başlangıç!',
-                                    style: AppTypography.body.muted,
-                                    textAlign: TextAlign.center,
-                                  )
-                                      .animate(delay: 500.ms)
-                                      .fadeIn(duration: 400.ms),
-                                Gap.md,
-                                Text(
-                                  showTr
-                                      ? 'Sıfırdan başlıyoruz — en iyi yer burası. '
-                                        'Adım adım, hiç acele etmeden ilerleyeceğiz.'
-                                      : 'Em ji destpêkê dest pê dikin. '
-                                        'Gav bi gav, bêyî lez em dê pêş bikevin.',
-                                  style: AppTypography.body,
-                                  textAlign: TextAlign.center,
-                                )
-                                    .animate(delay: 700.ms)
-                                    .fadeIn(duration: 400.ms),
-                              ],
-                            );
-                          },
-                        ),
+                        Text(
+                          'Em ji destpêkê dest pê dikin. '
+                          'Gav bi gav, bêyî lez em dê pêş bikevin.',
+                          style: AppTypography.body,
+                          textAlign: TextAlign.center,
+                        )
+                            .animate(delay: 700.ms)
+                            .fadeIn(duration: 400.ms),
                       ],
                     ],
                   ),
@@ -631,19 +564,12 @@ class _ResultScreen extends StatelessWidget {
                 AppSpacing.md,
                 AppSpacing.md + (bottomPadding > 0 ? 0 : AppSpacing.md),
               ),
-              child: Consumer(
-                builder: (context, ref, _) {
-                  final showTr = ref.watch(showTurkishProvider);
-                  return ElevatedButton(
-                    onPressed: () => context.go(AppRoutes.motivationAnchor),
-                    child: Text(
-                      isHeritage
-                          ? (showTr ? 'Harika, devam edelim →' : 'Berdewam bike →')
-                          : (showTr ? 'Başlayalım →' : 'Dest pê bike →'),
-                      style: AppTypography.labelLarge.onPrimary,
-                    ),
-                  );
-                },
+              child: ElevatedButton(
+                onPressed: () => context.go(AppRoutes.motivationAnchor),
+                child: Text(
+                  isHeritage ? 'Berdewam bike →' : 'Dest pê bike →',
+                  style: AppTypography.labelLarge.onPrimary,
+                ),
               )
                   .animate(delay: 1000.ms)
                   .fadeIn(duration: 400.ms)

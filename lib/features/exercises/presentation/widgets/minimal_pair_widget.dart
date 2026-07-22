@@ -40,7 +40,6 @@ class MinimalPairWidget extends ConsumerStatefulWidget {
 class _MinimalPairWidgetState extends ConsumerState<MinimalPairWidget> {
   int? _selected;
   bool _checked = false;
-  bool _correct = false;
   bool _audioPlayed = false;
 
   MinimalPairExercise get _ex => widget.exercise;
@@ -62,7 +61,6 @@ class _MinimalPairWidgetState extends ConsumerState<MinimalPairWidget> {
     if (_selected == null) return;
     setState(() {
       _checked = true;
-      _correct = _ex.checkAnswer(_selected);
     });
   }
 

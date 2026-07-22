@@ -7,6 +7,8 @@ import '../../core/router/app_router.dart';
 import '../../core/constants/app_colors.dart';
 import '../../core/constants/app_typography.dart';
 import '../../core/constants/app_spacing.dart';
+import '../../core/services/suggestion_service.dart';
+import '../../shared/widgets/empty_state.dart';
 import '../lessons/domain/a1_kelime_db.dart';
 import '../lessons/domain/a2_kelime_db.dart';
 import '../lessons/domain/b1_kelime_db.dart';
@@ -43,8 +45,9 @@ class _AdminPanelScreenState extends ConsumerState<AdminPanelScreen>
   @override
   void initState() {
     super.initState();
-    // 5 sekme: Notlar (yeni!) + Lîsteya Peyvan + Amar + Kontrol + Lêgerîn
-    _tabController = TabController(length: 5, vsync: this);
+    // 7 sekme: Destpêk (pano) + Pêşniyar (kullanıcı önerileri) + Nîşe +
+    // Lîsteya Peyvan + Amar + Kontrol + Lêgerîn
+    _tabController = TabController(length: 7, vsync: this);
     _levels = [
       _LevelInfo('A1', kA1TamListe, const Color(0xFF4CAF50)),
       _LevelInfo('A2', kA2TamListe, const Color(0xFF8BC34A)),
@@ -86,6 +89,13 @@ class _AdminPanelScreenState extends ConsumerState<AdminPanelScreen>
             ),
           ],
         ),
+        actions: [
+          IconButton(
+            tooltip: 'Edîtorê Naverokê · Content editor',
+            onPressed: () => context.push(AppRoutes.contentEditor),
+            icon: const Icon(Icons.edit_note_rounded, color: Colors.white),
+          ),
+        ],
         bottom: TabBar(
           controller: _tabController,
           isScrollable: true,
@@ -94,22 +104,541 @@ class _AdminPanelScreenState extends ConsumerState<AdminPanelScreen>
           unselectedLabelColor: Colors.white60,
           labelStyle: AppTypography.labelSmall.copyWith(fontWeight: FontWeight.w700),
           tabs: const [
-            Tab(text: 'Notlar'),
-            Tab(text: 'Lîsteya Peyvan'),
+            Tab(text: 'Destpêk'),
+            Tab(text: 'Pêşniyar'),
+            Tab(text: 'Nîşe'),
+            Tab(text: 'Lîsteya peyvan'),
             Tab(text: 'Amar'),
-            Tab(text: 'Kontrola Daneyan'),
-            Tab(text: 'Lêgerîna Bilez'),
+            Tab(text: 'Kontrola daneyan'),
+            Tab(text: 'Lêgerîna bilez'),
           ],
         ),
       ),
       body: TabBarView(
         controller: _tabController,
         children: [
+          _DashboardTab(
+            wordCount: _allWords.length,
+            onOpenSuggestions: () => _tabController.animateTo(1),
+          ),
+          const _SuggestionsTab(),
           const _NotesTab(),
           _WordListTab(levels: _levels, allWords: _allWords),
           _StatsTab(levels: _levels, allWords: _allWords),
           _DataValidationTab(levels: _levels, allWords: _allWords),
           _QuickSearchTab(allWords: _allWords),
+        ],
+      ),
+    );
+  }
+}
+
+// ════════════════════════════════════════════════════════════════
+// TAB 0 — DESTPÊK (Pano)
+// Dağınık admin yüzeylerine tek yerden erişim + hızlı özet.
+// ════════════════════════════════════════════════════════════════
+
+class _DashboardTab extends ConsumerWidget {
+  final int wordCount;
+  final VoidCallback onOpenSuggestions;
+
+  const _DashboardTab({
+    required this.wordCount,
+    required this.onOpenSuggestions,
+  });
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final suggestionsAsync = ref.watch(contentSuggestionsProvider);
+    final notesAsync = ref.watch(adminNotesProvider);
+    final openSuggestions = suggestionsAsync.valueOrNull
+            ?.where((s) => s.status == 'open')
+            .length ??
+        0;
+    final openNotes = notesAsync.valueOrNull
+            ?.where((n) => n.status == AdminNoteStatus.open)
+            .length ??
+        0;
+
+    return SingleChildScrollView(
+      padding: const EdgeInsets.all(AppSpacing.md),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          // Hızlı özet satırı
+          Row(
+            children: [
+              Expanded(
+                child: _DashStat(
+                  label: 'Peyv',
+                  value: '$wordCount',
+                  icon: Icons.library_books_outlined,
+                  color: AppColors.primary,
+                ),
+              ),
+              const SizedBox(width: 8),
+              Expanded(
+                child: _DashStat(
+                  label: 'Pêşniyara vekirî',
+                  value: '$openSuggestions',
+                  icon: Icons.rate_review_outlined,
+                  color: openSuggestions > 0
+                      ? AppColors.warning
+                      : AppColors.success,
+                  onTap: onOpenSuggestions,
+                ),
+              ),
+              const SizedBox(width: 8),
+              Expanded(
+                child: _DashStat(
+                  label: 'Nîşeya vekirî',
+                  value: '$openNotes',
+                  icon: Icons.bug_report_outlined,
+                  color:
+                      openNotes > 0 ? AppColors.errorSoft : AppColors.success,
+                ),
+              ),
+            ],
+          ),
+
+          const SizedBox(height: AppSpacing.lg),
+
+          Text(
+            'Amûrên rêveberiyê',
+            style: AppTypography.headingSmall
+                .copyWith(color: AppColors.textPrimary),
+          ),
+          const SizedBox(height: AppSpacing.sm),
+
+          _DashNavCard(
+            icon: Icons.edit_note_rounded,
+            color: AppColors.primary,
+            title: 'Edîtorê Naverokê',
+            subtitle: 'Peyv, ders, quiz û naveroka çandî biguherîne',
+            onTap: () => context.push(AppRoutes.contentEditor),
+          ),
+          _DashNavCard(
+            icon: Icons.fact_check_outlined,
+            color: const Color(0xFF9C27B0),
+            title: 'Panela Nirxandina Pisporan',
+            subtitle: 'Nirxandinên pisporên ziman bibîne û birêve bibe',
+            onTap: () => context.push(AppRoutes.reviewPanel),
+          ),
+          _DashNavCard(
+            icon: Icons.group_outlined,
+            color: const Color(0xFF2196F3),
+            title: 'Rêveberiya Edîtoran',
+            subtitle: 'Pisporên nirxandinê (reviewer) û mafên wan',
+            onTap: () => context.push(AppRoutes.editorManagement),
+          ),
+          _DashNavCard(
+            icon: Icons.rate_review_outlined,
+            color: AppColors.warning,
+            title: 'Pêşniyarên Bikarhêneran',
+            subtitle: 'Pêşniyarên serrastkirinê yên ji bikarhêneran',
+            onTap: onOpenSuggestions,
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class _DashStat extends StatelessWidget {
+  final String label;
+  final String value;
+  final IconData icon;
+  final Color color;
+  final VoidCallback? onTap;
+
+  const _DashStat({
+    required this.label,
+    required this.value,
+    required this.icon,
+    required this.color,
+    this.onTap,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return GestureDetector(
+      onTap: onTap,
+      child: Container(
+        padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 8),
+        decoration: BoxDecoration(
+          color: color.withOpacity(0.08),
+          borderRadius: BorderRadius.circular(12),
+          border: Border.all(color: color.withOpacity(0.25)),
+        ),
+        child: Column(
+          children: [
+            Icon(icon, size: 20, color: color),
+            const SizedBox(height: 4),
+            Text(
+              value,
+              style: AppTypography.headingSmall
+                  .copyWith(color: color, fontWeight: FontWeight.w800),
+            ),
+            Text(
+              label,
+              textAlign: TextAlign.center,
+              style: AppTypography.caption.copyWith(
+                color: AppColors.textSecondary,
+                fontSize: 10,
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+class _DashNavCard extends StatelessWidget {
+  final IconData icon;
+  final Color color;
+  final String title;
+  final String subtitle;
+  final VoidCallback onTap;
+
+  const _DashNavCard({
+    required this.icon,
+    required this.color,
+    required this.title,
+    required this.subtitle,
+    required this.onTap,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.only(bottom: 8),
+      child: Material(
+        color: AppColors.surface,
+        borderRadius: BorderRadius.circular(12),
+        child: InkWell(
+          borderRadius: BorderRadius.circular(12),
+          onTap: onTap,
+          child: Container(
+            padding: const EdgeInsets.all(12),
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(12),
+              border: Border.all(color: AppColors.borderLight),
+            ),
+            child: Row(
+              children: [
+                Container(
+                  width: 40,
+                  height: 40,
+                  decoration: BoxDecoration(
+                    color: color.withOpacity(0.12),
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                  child: Icon(icon, size: 22, color: color),
+                ),
+                const SizedBox(width: 12),
+                Expanded(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        title,
+                        style: AppTypography.labelMedium.copyWith(
+                          color: AppColors.textPrimary,
+                          fontWeight: FontWeight.w700,
+                        ),
+                      ),
+                      Text(
+                        subtitle,
+                        style: AppTypography.caption
+                            .copyWith(color: AppColors.textSecondary),
+                      ),
+                    ],
+                  ),
+                ),
+                Icon(Icons.chevron_right,
+                    size: 20, color: AppColors.textTertiary),
+              ],
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+// ════════════════════════════════════════════════════════════════
+// TAB 1 — PÊŞNIYAR (Kullanıcı düzeltme önerileri)
+// Kaynak: D1 content_suggestions (GET /api/suggestions — owner).
+// ════════════════════════════════════════════════════════════════
+
+class _SuggestionsTab extends ConsumerStatefulWidget {
+  const _SuggestionsTab();
+
+  @override
+  ConsumerState<_SuggestionsTab> createState() => _SuggestionsTabState();
+}
+
+class _SuggestionsTabState extends ConsumerState<_SuggestionsTab> {
+  String? _statusFilter; // null = hemû
+
+  @override
+  Widget build(BuildContext context) {
+    final async = ref.watch(contentSuggestionsProvider);
+
+    return async.when(
+      loading: () => const Center(child: CircularProgressIndicator()),
+      error: (e, _) => ErrorRetryView(
+        messageKu: ErrorRetryView.friendlyMessage(e),
+        onRetry: () => ref.invalidate(contentSuggestionsProvider),
+      ),
+      data: (all) {
+        final items = _statusFilter == null
+            ? all
+            : all.where((s) => s.status == _statusFilter).toList();
+
+        return Column(
+          children: [
+            // Filtre çipleri + yenile
+            Container(
+              padding:
+                  const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+              decoration: BoxDecoration(
+                color: AppColors.surface,
+                border: Border(
+                  bottom: BorderSide(color: AppColors.borderLight),
+                ),
+              ),
+              child: Row(
+                children: [
+                  _AdminChip(
+                    label: 'Hemû (${all.length})',
+                    selected: _statusFilter == null,
+                    onTap: () => setState(() => _statusFilter = null),
+                  ),
+                  _AdminChip(
+                    label:
+                        'Vekirî (${all.where((s) => s.status == 'open').length})',
+                    selected: _statusFilter == 'open',
+                    color: AppColors.warning,
+                    onTap: () => setState(() => _statusFilter = 'open'),
+                  ),
+                  _AdminChip(
+                    label: 'Pejirandî',
+                    selected: _statusFilter == 'accepted',
+                    color: AppColors.success,
+                    onTap: () => setState(() => _statusFilter = 'accepted'),
+                  ),
+                  _AdminChip(
+                    label: 'Redkirî',
+                    selected: _statusFilter == 'rejected',
+                    color: AppColors.errorSoft,
+                    onTap: () => setState(() => _statusFilter = 'rejected'),
+                  ),
+                  const Spacer(),
+                  IconButton(
+                    tooltip: 'Nû bike',
+                    onPressed: () =>
+                        ref.invalidate(contentSuggestionsProvider),
+                    icon: const Icon(Icons.refresh_rounded, size: 20),
+                  ),
+                ],
+              ),
+            ),
+            Expanded(
+              child: items.isEmpty
+                  ? Center(
+                      child: Column(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          Icon(Icons.rate_review_outlined,
+                              size: 56, color: AppColors.textTertiary),
+                          const SizedBox(height: 10),
+                          Text(
+                            'Pêşniyar tune',
+                            style: AppTypography.title
+                                .copyWith(color: AppColors.textSecondary),
+                          ),
+                        ],
+                      ),
+                    )
+                  : ListView.separated(
+                      padding: const EdgeInsets.all(12),
+                      itemCount: items.length,
+                      separatorBuilder: (_, __) =>
+                          const SizedBox(height: 8),
+                      itemBuilder: (_, i) =>
+                          _SuggestionCard(suggestion: items[i]),
+                    ),
+            ),
+          ],
+        );
+      },
+    );
+  }
+}
+
+class _SuggestionCard extends ConsumerWidget {
+  final ContentSuggestion suggestion;
+  const _SuggestionCard({required this.suggestion});
+
+  Future<void> _setStatus(
+      BuildContext context, WidgetRef ref, String status) async {
+    final ok = await ref
+        .read(suggestionServiceProvider)
+        .updateStatus(suggestion.id, status);
+    if (ok) {
+      ref.invalidate(contentSuggestionsProvider);
+    } else if (context.mounted) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text('Nûvekirin bi ser neket')),
+      );
+    }
+  }
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final s = suggestion;
+    final statusColor = switch (s.status) {
+      'accepted' => AppColors.success,
+      'rejected' => AppColors.errorSoft,
+      _ => AppColors.warning,
+    };
+    final statusLabel = switch (s.status) {
+      'accepted' => 'Pejirandî',
+      'rejected' => 'Redkirî',
+      _ => 'Vekirî',
+    };
+    final typeLabel = kSuggestionTypes
+        .firstWhere((t) => t.$1 == s.itemType,
+            orElse: () => ('din', 'Din', 'Diğer'))
+        .$2;
+
+    return Container(
+      padding: const EdgeInsets.all(12),
+      decoration: BoxDecoration(
+        color: AppColors.surface,
+        borderRadius: BorderRadius.circular(12),
+        border: Border.all(color: statusColor.withOpacity(0.35)),
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Row(
+            children: [
+              Container(
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
+                decoration: BoxDecoration(
+                  color: AppColors.primary.withOpacity(0.1),
+                  borderRadius: BorderRadius.circular(6),
+                ),
+                child: Text(
+                  typeLabel,
+                  style: AppTypography.labelSmall.copyWith(
+                    color: AppColors.primary,
+                    fontWeight: FontWeight.w700,
+                  ),
+                ),
+              ),
+              const SizedBox(width: 8),
+              Container(
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
+                decoration: BoxDecoration(
+                  color: statusColor.withOpacity(0.12),
+                  borderRadius: BorderRadius.circular(6),
+                ),
+                child: Text(
+                  statusLabel,
+                  style: TextStyle(
+                    fontSize: 10,
+                    fontWeight: FontWeight.w700,
+                    color: statusColor,
+                  ),
+                ),
+              ),
+              const Spacer(),
+              Text(
+                '${s.createdAt.day}/${s.createdAt.month}/${s.createdAt.year}',
+                style: AppTypography.caption
+                    .copyWith(color: AppColors.textTertiary, fontSize: 11),
+              ),
+            ],
+          ),
+          const SizedBox(height: 6),
+
+          // Bağlı içerik
+          if (s.itemText != null || s.itemId != null)
+            Padding(
+              padding: const EdgeInsets.only(bottom: 4),
+              child: Text(
+                [
+                  if (s.itemText != null) s.itemText,
+                  if (s.itemId != null) '(${s.itemId})',
+                ].join(' '),
+                style: AppTypography.label.copyWith(
+                  color: AppColors.primary,
+                  fontWeight: FontWeight.w700,
+                ),
+              ),
+            ),
+
+          Text(
+            s.message,
+            style: AppTypography.body.copyWith(color: AppColors.textPrimary),
+          ),
+          if (s.suggestion != null && s.suggestion!.isNotEmpty) ...[
+            const SizedBox(height: 6),
+            Container(
+              width: double.infinity,
+              padding: const EdgeInsets.all(8),
+              decoration: BoxDecoration(
+                color: AppColors.success.withOpacity(0.08),
+                borderRadius: BorderRadius.circular(8),
+              ),
+              child: Text(
+                'Pêşniyar: ${s.suggestion}',
+                style: AppTypography.bodySmall
+                    .copyWith(color: AppColors.textPrimary),
+              ),
+            ),
+          ],
+          if (s.email != null && s.email!.isNotEmpty) ...[
+            const SizedBox(height: 4),
+            Text(
+              s.email!,
+              style: AppTypography.caption
+                  .copyWith(color: AppColors.textTertiary, fontSize: 11),
+            ),
+          ],
+          const SizedBox(height: 6),
+          Row(
+            children: [
+              if (s.status != 'accepted')
+                TextButton.icon(
+                  onPressed: () => _setStatus(context, ref, 'accepted'),
+                  icon: Icon(Icons.check_rounded,
+                      size: 16, color: AppColors.success),
+                  label: Text('Bipejirîne',
+                      style: TextStyle(color: AppColors.success)),
+                ),
+              if (s.status != 'rejected')
+                TextButton.icon(
+                  onPressed: () => _setStatus(context, ref, 'rejected'),
+                  icon: Icon(Icons.close_rounded,
+                      size: 16, color: AppColors.errorSoft),
+                  label: Text('Red bike',
+                      style: TextStyle(color: AppColors.errorSoft)),
+                ),
+              if (s.status != 'open')
+                TextButton.icon(
+                  onPressed: () => _setStatus(context, ref, 'open'),
+                  icon: const Icon(Icons.undo_rounded, size: 16),
+                  label: const Text('Veke'),
+                ),
+            ],
+          ),
         ],
       ),
     );
@@ -131,7 +660,10 @@ class _NotesTab extends ConsumerWidget {
 
     return notesAsync.when(
       loading: () => const Center(child: CircularProgressIndicator()),
-      error: (e, _) => Center(child: Text('Xeletî: $e')),
+      error: (e, _) => ErrorRetryView(
+        messageKu: ErrorRetryView.friendlyMessage(e),
+        onRetry: () => ref.invalidate(adminNotesProvider),
+      ),
       data: (notes) {
         if (notes.isEmpty) {
           return Center(
@@ -144,14 +676,14 @@ class _NotesTab extends ConsumerWidget {
                       size: 64, color: AppColors.textTertiary),
                   const SizedBox(height: 12),
                   Text(
-                    'Tu not nehat tomar kirin',
+                    'Hê tu nîşe nehatiye tomarkirin',
                     style: AppTypography.title.copyWith(
                       color: AppColors.textSecondary,
                     ),
                   ),
                   const SizedBox(height: 6),
                   Text(
-                    'Uygulamada gezerken sağ alttaki 🐞 butonuyla\nbaşka ekranlardan da not düşebilirsin.',
+                    'Dema tu di sepanê de digerî, bi bişkoka 🐞 ya li quncikê jêrîn ê rastê\ntu dikarî ji ekranên din jî nîşeyan zêde bikî.',
                     textAlign: TextAlign.center,
                     style: AppTypography.body.copyWith(
                       color: AppColors.textTertiary,
@@ -180,7 +712,7 @@ class _NotesTab extends ConsumerWidget {
               child: Row(
                 children: [
                   Text(
-                    '${notes.length} not',
+                    '${notes.length} nîşe',
                     style: AppTypography.label.copyWith(
                       color: AppColors.textSecondary,
                       fontWeight: FontWeight.w700,
@@ -190,7 +722,7 @@ class _NotesTab extends ConsumerWidget {
                   TextButton.icon(
                     onPressed: () => _exportJson(context, ref),
                     icon: const Icon(Icons.copy_rounded, size: 16),
-                    label: const Text('JSON kopyala'),
+                    label: const Text('JSON ji ber bigire'),
                   ),
                   const SizedBox(width: 4),
                   TextButton.icon(
@@ -198,7 +730,7 @@ class _NotesTab extends ConsumerWidget {
                     icon: Icon(Icons.delete_sweep_rounded,
                         size: 16, color: AppColors.errorSoft),
                     label: Text(
-                      'Hepsini sil',
+                      'Hemû jê bibe',
                       style: TextStyle(color: AppColors.errorSoft),
                     ),
                   ),
@@ -225,7 +757,7 @@ class _NotesTab extends ConsumerWidget {
     if (context.mounted) {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
-          content: const Text('JSON panoya kopyalandı'),
+          content: const Text('JSON ji ber hat girtin'),
           duration: const Duration(seconds: 2),
           backgroundColor: AppColors.success,
         ),
@@ -237,16 +769,16 @@ class _NotesTab extends ConsumerWidget {
     final ok = await showDialog<bool>(
       context: context,
       builder: (_) => AlertDialog(
-        title: const Text('Hepsini sil?'),
-        content: const Text('Bu işlem geri alınamaz.'),
+        title: const Text('Hemû jê bibin?'),
+        content: const Text('Ev kar venagere.'),
         actions: [
           TextButton(
             onPressed: () => Navigator.pop(context, false),
-            child: const Text('Vazgeç'),
+            child: const Text('Betal'),
           ),
           TextButton(
             onPressed: () => Navigator.pop(context, true),
-            child: Text('Sil',
+            child: Text('Jê bibe',
                 style: TextStyle(color: AppColors.errorSoft)),
           ),
         ],
@@ -374,7 +906,7 @@ class _NoteCard extends ConsumerWidget {
                   },
                   icon: Icon(Icons.check_rounded,
                       size: 16, color: AppColors.success),
-                  label: Text('Çareser',
+                  label: Text('Çareserkirî',
                       style: TextStyle(color: AppColors.success)),
                 ),
               if (note.status == AdminNoteStatus.fixed)
@@ -387,7 +919,7 @@ class _NoteCard extends ConsumerWidget {
                     ref.invalidate(adminNotesProvider);
                   },
                   icon: const Icon(Icons.undo_rounded, size: 16),
-                  label: const Text('Geri al'),
+                  label: const Text('Vegerîne'),
                 ),
               const Spacer(),
               IconButton(
@@ -395,17 +927,17 @@ class _NoteCard extends ConsumerWidget {
                   final ok = await showDialog<bool>(
                     context: context,
                     builder: (_) => AlertDialog(
-                      title: const Text('Notu sil?'),
+                      title: const Text('Nîşe were jêbirin?'),
                       actions: [
                         TextButton(
                           onPressed: () =>
                               Navigator.pop(context, false),
-                          child: const Text('Vazgeç'),
+                          child: const Text('Betal'),
                         ),
                         TextButton(
                           onPressed: () =>
                               Navigator.pop(context, true),
-                          child: Text('Sil',
+                          child: Text('Jê bibe',
                               style: TextStyle(
                                   color: AppColors.errorSoft)),
                         ),
@@ -432,10 +964,10 @@ class _NoteCard extends ConsumerWidget {
   String _fmtDate(DateTime d) {
     final now = DateTime.now();
     final diff = now.difference(d);
-    if (diff.inMinutes < 1) return 'şimdi';
-    if (diff.inHours < 1) return '${diff.inMinutes} dk önce';
-    if (diff.inDays < 1) return '${diff.inHours} sa önce';
-    if (diff.inDays < 7) return '${diff.inDays} gün önce';
+    if (diff.inMinutes < 1) return 'niha';
+    if (diff.inHours < 1) return 'berî ${diff.inMinutes} deq';
+    if (diff.inDays < 1) return 'berî ${diff.inHours} st';
+    if (diff.inDays < 7) return 'berî ${diff.inDays} rojan';
     return '${d.day}/${d.month}/${d.year}';
   }
 }
@@ -490,7 +1022,7 @@ class _WordListTabState extends State<_WordListTab> {
             onChanged: (v) => setState(() => _filter = v.trim()),
             style: AppTypography.body,
             decoration: InputDecoration(
-              hintText: 'Peyv an ID bigere...',
+              hintText: 'Li peyvekê an ID-yekê bigere...',
               prefixIcon: const Icon(Icons.search, size: 20),
               filled: true,
               fillColor: AppColors.surface,
@@ -626,15 +1158,15 @@ class _AdminWordTileState extends State<_AdminWordTile> {
             ),
             if (_expanded) ...[
               const SizedBox(height: 8),
-              _DetailRow('EN', w.en as String),
+              _DetailRow('Îngilîzî', w.en as String),
               _DetailRow('Kategorî', w.kat as String),
-              _DetailRow('Ezafe', (w.ez as String?) ?? '-'),
-              _DetailRow('Astengî', '${w.zor}'),
+              _DetailRow('Veqetandek', (w.ez as String?) ?? '-'),
+              _DetailRow('Zehmetî', '${w.zor}'),
               if ((w.not as String?) != null && (w.not as String).isNotEmpty)
                 _DetailRow('Nîşe', w.not as String),
               const SizedBox(height: 4),
               if ((w.her as List<String>).isNotEmpty)
-                _DetailRow('Heritage', (w.her as List<String>).join(' | ')),
+                _DetailRow('Mîrate', (w.her as List<String>).join(' | ')),
               if ((w.gen as List<String>).isNotEmpty)
                 _DetailRow('Giştî', (w.gen as List<String>).join(' | ')),
             ],
@@ -712,7 +1244,7 @@ class _StatsTab extends StatelessWidget {
         children: [
           // Toplam
           _StatCard(
-            title: 'Hejmara Giştî ya Peyvan',
+            title: 'Hejmara giştî ya peyvan',
             value: '${allWords.length}',
             icon: Icons.library_books,
             color: AppColors.primary,
@@ -722,7 +1254,7 @@ class _StatsTab extends StatelessWidget {
 
           // Seviye dağılımı
           Text(
-            'Dabeşkirina Astan',
+            'Dabeşkirina astan',
             style: AppTypography.headingSmall.copyWith(
               color: AppColors.textPrimary,
             ),
@@ -745,7 +1277,7 @@ class _StatsTab extends StatelessWidget {
 
           // Cinsiyet dağılımı
           Text(
-            'Dabeşkirina Cinsan',
+            'Dabeşkirina cinsan',
             style: AppTypography.headingSmall.copyWith(
               color: AppColors.textPrimary,
             ),
@@ -766,7 +1298,7 @@ class _StatsTab extends StatelessWidget {
 
           // Kategori dağılımı
           Text(
-            'Dabeşkirina Kategoriyan (20 pêşîn)',
+            'Dabeşkirina kategoriyan (20 yên pêşîn)',
             style: AppTypography.headingSmall.copyWith(
               color: AppColors.textPrimary,
             ),
@@ -791,7 +1323,9 @@ class _StatsTab extends StatelessWidget {
                       child: ClipRRect(
                         borderRadius: BorderRadius.circular(4),
                         child: LinearProgressIndicator(
-                          value: entry.value / (sortedCats.first.value),
+                          value: sortedCats.first.value > 0
+                              ? entry.value / sortedCats.first.value
+                              : 0.0,
                           backgroundColor: AppColors.border,
                           valueColor:
                               AlwaysStoppedAnimation(AppColors.primary.withOpacity(0.6)),
@@ -1010,7 +1544,7 @@ class _DataValidationTabState extends State<_DataValidationTab> {
     for (final dup in duplicateIds) {
       issues.add(_ValidationIssue(
         severity: _Severity.error,
-        message: 'IDya dubare: $dup',
+        message: 'ID-ya dubare: $dup',
         wordId: dup,
       ));
     }
@@ -1043,14 +1577,14 @@ class _DataValidationTabState extends State<_DataValidationTab> {
       if (!['nêr', 'mê', 'bêcins'].contains(cins)) {
         issues.add(_ValidationIssue(
           severity: _Severity.error,
-          message: 'Cinsê nederbasdar: "$cins"',
+          message: 'Cinsekî nederbasdar: "$cins"',
           wordId: id,
         ));
       }
       if ((w.her as List<String>).isEmpty) {
         issues.add(_ValidationIssue(
           severity: _Severity.info,
-          message: 'Hevoka Heritage kêm e',
+          message: 'Hevoka mîrateyî kêm e',
           wordId: id,
         ));
       }
@@ -1086,7 +1620,7 @@ class _DataValidationTabState extends State<_DataValidationTab> {
                       child: CircularProgressIndicator(strokeWidth: 2),
                     )
                   : const Icon(Icons.verified_user, size: 20),
-              label: Text(_running ? 'Tê kontrol kirin...' : 'Kontrola Daneyan Dest Pê Bike'),
+              label: Text(_running ? 'Tê kontrolkirin...' : 'Kontrola daneyan dest pê bike'),
               style: ElevatedButton.styleFrom(
                 backgroundColor: AppColors.primary,
                 foregroundColor: Colors.white,
@@ -1135,7 +1669,7 @@ class _DataValidationTabState extends State<_DataValidationTab> {
                             size: 48, color: AppColors.success),
                         const SizedBox(height: 8),
                         Text(
-                          'Yekrêziya daneyan baş e!',
+                          'Saxlemiya daneyan baş e!',
                           style: AppTypography.labelLarge.copyWith(
                             color: AppColors.success,
                           ),
@@ -1185,7 +1719,7 @@ class _DataValidationTabState extends State<_DataValidationTab> {
           Expanded(
             child: Center(
               child: Text(
-                'Ji bo destpêkirina kontrolê bişkojkê bitikînin',
+                'Ji bo destpêkirina kontrolê bişkokê bitikîne',
                 style: AppTypography.body.copyWith(color: AppColors.textSecondary),
               ),
             ),
@@ -1294,7 +1828,7 @@ class _QuickSearchTabState extends State<_QuickSearchTab> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            'IDya peyvê an navê wê binivîsin û bigerin:',
+            'ID-ya peyvê an navê wê binivîse û bigere:',
             style: AppTypography.body.copyWith(color: AppColors.textSecondary),
           ),
           const SizedBox(height: AppSpacing.sm),
@@ -1343,7 +1877,7 @@ class _QuickSearchTabState extends State<_QuickSearchTab> {
                   const Icon(Icons.search_off, size: 40, color: AppColors.textTertiary),
                   const SizedBox(height: 8),
                   Text(
-                    'Peyv nehate dîtin',
+                    'Peyv nehat dîtin',
                     style: AppTypography.body.copyWith(color: AppColors.textSecondary),
                   ),
                 ],
@@ -1399,15 +1933,15 @@ class _FullWordDetail extends StatelessWidget {
               const SizedBox(height: AppSpacing.sm),
 
               _FieldRow('ID', word.id as String),
-              _FieldRow('Cinsiyet', word.cins as String),
-              _FieldRow('Ezafe', (word.ez as String?) ?? '-'),
-              _FieldRow('Kategori', word.kat as String),
-              _FieldRow('Zorluk', '${word.zor}'),
+              _FieldRow('Cins', word.cins as String),
+              _FieldRow('Veqetandek', (word.ez as String?) ?? '-'),
+              _FieldRow('Kategorî', word.kat as String),
+              _FieldRow('Zehmetî', '${word.zor}'),
               if ((word.not as String?) != null)
-                _FieldRow('Not', word.not as String),
+                _FieldRow('Nîşe', word.not as String),
               const SizedBox(height: AppSpacing.sm),
               if ((word.her as List<String>).isNotEmpty) ...[
-                Text('Heritage:',
+                Text('Mîrateyî:',
                     style: AppTypography.labelSmall.copyWith(
                         color: AppColors.primary, fontWeight: FontWeight.w700)),
                 ...(word.her as List<String>).map((s) => Padding(
@@ -1418,7 +1952,7 @@ class _FullWordDetail extends StatelessWidget {
                 const SizedBox(height: 6),
               ],
               if ((word.gen as List<String>).isNotEmpty) ...[
-                Text('Genel:',
+                Text('Giştî:',
                     style: AppTypography.labelSmall.copyWith(
                         color: AppColors.accent, fontWeight: FontWeight.w700)),
                 ...(word.gen as List<String>).map((s) => Padding(

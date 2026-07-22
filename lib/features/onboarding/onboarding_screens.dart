@@ -31,7 +31,7 @@ class DialectSelectScreen extends StatelessWidget {
         children: [
           _OnboardingHeader(
             kuTitle: 'Zaravaya xwe hilbijêre',
-            trTitle: 'Zaravaya xwe hilbijêre',
+            trTitle: 'Bi kîjan zaravayî dixwazî hîn bibî?',
             icon: Icons.language_outlined,
           ),
           const SizedBox(height: AppSpacing.xl),
@@ -39,7 +39,7 @@ class DialectSelectScreen extends StatelessWidget {
           // Kurmancî seçeneği
           _DialectCard(
             name: 'Kurmancî',
-            subtitle: 'Kurdiya Bakur — Bakurê Kurdistanê',
+            subtitle: 'Kurdiya Bakur — li Bakurê Kurdistanê',
             isRecommended: true,
             onTap: () => context.push(AppRoutes.scenarioSelect),
           ),
@@ -49,7 +49,7 @@ class DialectSelectScreen extends StatelessWidget {
           // Zazaca — şeffaf yönlendirme (İlke §9b #5)
           _DialectCard(
             name: 'Zazakî',
-            subtitle: 'Zazaca — Dimilî',
+            subtitle: 'Zazakî — Dimilî',
             isRecommended: false,
             onTap: () => _showZazaInfo(context),
           ),
@@ -78,8 +78,8 @@ class DialectSelectScreen extends StatelessWidget {
             const SizedBox(height: AppSpacing.md),
             Text(
               // İlke §9b #5: Şeffaf ve kullanıcıyı kaybetmeyen mesaj
-              'Zazakî û Kurmancî zimên xwişk û bira ne — lê du zimanên cuda ne.\n\n'
-              'Em niha Kurmancî hîn dikin. Tu dikari bi Kurmancî dest pê bikî.\n'
+              'Zazakî û Kurmancî zimanên xwişk û bira ne — lê du zimanên cuda ne.\n\n'
+              'Em niha Kurmancî hîn dikin. Tu dikarî bi Kurmancî dest pê bikî.\n'
               'Piştî demekê Zazakî jî dê were zêdekirin.',
               style: AppTypography.bodyMedium.copyWith(
                   color: AppColors.textSecondary),
@@ -220,7 +220,7 @@ class ScenarioSelectScreen extends StatelessWidget {
         children: [
           _OnboardingHeader(
             kuTitle: 'Rêya xwe hilbijêre',
-            trTitle: 'Rêya xwe hilbijêre',
+            trTitle: 'Ji kîjan rêyê dest pê bikî?',
             icon: Icons.fork_right_outlined,
           ),
           const SizedBox(height: AppSpacing.xl),
@@ -228,10 +228,10 @@ class ScenarioSelectScreen extends StatelessWidget {
           // Heritage yolu — İlke §7.1
           _ScenarioCard(
             kuTitle: 'Rêya Malê',
-            trTitle: 'Rêya Malê — Heritage',
+            trTitle: 'Ji bo mîrasgiran',
             description:
-                'Malbata te Kurmancî dipeyive an tu berê fêr bûyî.\n'
-                '"Çay bi dapîrê, li ser sifrê, bi dê re li ser têlefonê"',
+                'Malbata te Kurmancî dipeyive an tu berê hînî Kurmancî bûyî.\n'
+                '"Çay bi dapîrê re, li ser sifrê, bi dê re li ser têlefonê."',
             icon: Icons.home_outlined,
             isPrimary: true,
             onTap: () => context.push(AppRoutes.goalSelect),
@@ -242,10 +242,10 @@ class ScenarioSelectScreen extends StatelessWidget {
           // Genel yol
           _ScenarioCard(
             kuTitle: 'Rêya Nû',
-            trTitle: 'Rêya Nû — Ji Destpêkê',
+            trTitle: 'Ji destpêkê',
             description:
-                'Kurmancîyê ji destpêkê fêr dibî.\n'
-                'Alfabe → Dengên → Rojane jiyan',
+                'Tu ê Kurmancî ji sifirê hîn bibî.\n'
+                'Alfabe → Deng → Jiyana rojane',
             icon: Icons.school_outlined,
             isPrimary: false,
             onTap: () => context.push(AppRoutes.goalSelect),
@@ -344,9 +344,9 @@ class _GoalSelectScreenState extends State<GoalSelectScreen> {
   int _selectedGoal = 20;
 
   final _goals = [
-    (10, 'Sivik', 'Hêsanî — ~5 dk', Icons.coffee_outlined),
-    (20, 'Navîn', 'Pêşniyar — ~10 dk', Icons.local_library_outlined),
-    (30, 'Dijwar', 'Zêde pêşve — ~15 dk', Icons.rocket_launch_outlined),
+    (10, 'Sivik', 'Hêsanî — ~5 deq', Icons.coffee_outlined),
+    (20, 'Navîn', 'Pêşniyar — ~10 deq', Icons.local_library_outlined),
+    (30, 'Dijwar', 'Pêşketî — ~15 deq', Icons.rocket_launch_outlined),
   ];
 
   @override
@@ -404,8 +404,8 @@ class _GoalSelectScreenState extends State<GoalSelectScreen> {
                   children: [
                     const SizedBox(height: AppSpacing.lg),
                     _OnboardingHeader(
-                      kuTitle: 'Armanca rojane',
-                      trTitle: 'Armanca rojane',
+                      kuTitle: 'Armanca Rojane',
+                      trTitle: 'Tu rojê çi qas dixwazî hîn bibî?',
                       icon: Icons.flag_outlined,
                     ),
                     const SizedBox(height: AppSpacing.xl),
@@ -515,7 +515,7 @@ class SettingsScreen extends ConsumerWidget {
         backgroundColor: AppColors.backgroundPrimary,
         elevation: 0,
         title: Text(
-          'Mîhengên — Ayarlar',
+          'Sazkirin',
           style: AppTypography.headingSmall.copyWith(
               color: AppColors.textPrimary, fontWeight: FontWeight.w700),
         ),
@@ -536,8 +536,8 @@ class SettingsScreen extends ConsumerWidget {
             title: 'Ziman',
             children: const [
               _SettingsTile(
-                title: 'Zimanê navnîşê',
-                subtitle: 'Kurmancî / Türkçe / English',
+                title: 'Zimanê sepanê',
+                subtitle: 'Kurmancî · Türkçe · English',
                 icon: Icons.translate,
               ),
             ],
@@ -558,7 +558,7 @@ class SettingsScreen extends ConsumerWidget {
               ),
               _SettingsTile(
                 title: 'Livîn kêm bike',
-                subtitle: 'Livînan kêm bike',
+                subtitle: 'Anîmasyon û livînan kêm dike',
                 icon: Icons.animation,
               ),
             ],
@@ -569,8 +569,40 @@ class SettingsScreen extends ConsumerWidget {
             children: const [
               _SettingsTile(
                 title: 'Bîranîna rojane',
-                subtitle: 'Bîranîna her roj',
+                subtitle: 'Em her roj bîranînek dişînin',
                 icon: Icons.notifications_outlined,
+              ),
+            ],
+          ),
+
+          // ── Yasal — KVKK / Play Store gereksinimi ─────────────
+          const SizedBox(height: AppSpacing.md),
+          _SettingsSection(
+            title: 'Yasal',
+            children: [
+              GestureDetector(
+                onTap: () => context.push(AppRoutes.privacyPolicy),
+                child: const _SettingsTile(
+                  title: 'Gizlilik Politikası',
+                  subtitle: 'Verilerinizi nasıl koruyoruz',
+                  icon: Icons.privacy_tip_outlined,
+                ),
+              ),
+              GestureDetector(
+                onTap: () => context.push(AppRoutes.termsOfService),
+                child: const _SettingsTile(
+                  title: 'Kullanım Koşulları',
+                  subtitle: 'Uygulama kullanım şartları',
+                  icon: Icons.gavel_outlined,
+                ),
+              ),
+              GestureDetector(
+                onTap: () => context.push(AppRoutes.aboutLegal),
+                child: const _SettingsTile(
+                  title: 'Hakkında',
+                  subtitle: 'LÛTKE 1.0.0 · İletişim',
+                  icon: Icons.info_outline,
+                ),
               ),
             ],
           ),
@@ -643,6 +675,11 @@ class _SettingsTile extends StatelessWidget {
 }
 
 // ── HATA EKRANI ───────────────────────────────────────────────
+// UX FIX #4: 404/deep-link hataları için iki aşamalı kurtarma.
+// Önceden: "Ana Sayfa" butonu giriş yapmamış kullanıcıyı /home'a atardı
+// → redirect logic tetiklenmez → beyaz ekran tuzağı.
+// Şimdi: önce splash'a (Smart CTA doğru yere yönlendirir), yedekte
+// track-select direkt link.
 class ErrorScreen extends StatelessWidget {
   final Exception? error;
   const ErrorScreen({super.key, this.error});
@@ -657,26 +694,43 @@ class ErrorScreen extends StatelessWidget {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Icon(Icons.error_outline,
-                  size: 64, color: AppColors.primary.withOpacity(0.5)),
+              Icon(Icons.explore_off_outlined,
+                  size: 72, color: AppColors.primary.withOpacity(0.5)),
               const SizedBox(height: AppSpacing.lg),
               Text('Rê nehat dîtin',
                   style: AppTypography.headingSmall.copyWith(
-                      color: AppColors.textPrimary)),
+                      color: AppColors.textPrimary,
+                      fontWeight: FontWeight.w700)),
               const SizedBox(height: AppSpacing.sm),
-              Text('Rûpel nehate dîtin.',
-                  style: AppTypography.bodyMedium.copyWith(
-                      color: AppColors.textSecondary)),
+              Text(
+                'Ev rûpel nayê dîtin an jî êdî tune ye.\n'
+                'Ji kerema xwe vegere destpêkê.',
+                textAlign: TextAlign.center,
+                style: AppTypography.bodyMedium.copyWith(
+                    color: AppColors.textSecondary, height: 1.5),
+              ),
               const SizedBox(height: AppSpacing.xl),
+              // Splash → SmartCTA otomatik olarak oturum + track durumuna göre
+              // doğru yola yönlendirir. Beyaz ekran tuzağı yok.
               ElevatedButton.icon(
-                onPressed: () => context.go(AppRoutes.home),
+                onPressed: () => context.go(AppRoutes.splash),
                 icon: const Icon(Icons.home_outlined),
-                label: const Text('Vegere serê — Ana Sayfa'),
+                label: const Text('Vegere destpêkê'),
                 style: ElevatedButton.styleFrom(
                   backgroundColor: AppColors.primary,
                   foregroundColor: Colors.white,
+                  minimumSize: const Size(220, AppSpacing.touchPreferred),
                   shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(12)),
+                ),
+              ),
+              const SizedBox(height: AppSpacing.sm),
+              TextButton.icon(
+                onPressed: () => context.go(AppRoutes.trackSelect),
+                icon: const Icon(Icons.fork_right_outlined, size: 18),
+                label: const Text('Rêya xwe hilbijêre'),
+                style: TextButton.styleFrom(
+                  foregroundColor: AppColors.textSecondary,
                 ),
               ),
             ],

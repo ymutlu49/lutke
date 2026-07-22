@@ -6,7 +6,8 @@ import '../../lessons/domain/entities/lesson.dart';
 //
 // Mevcut A1/A2 derslerini çocuklar için adapte eder:
 //   - Typing ve MinimalPair egzersizlerini filtreler
-//   - Ders başına 3-5 egzersiz sınırı
+//   - Ders başına max 4 egzersiz (7-8 yaş sustained attention ~15-20
+//     dk, 1.5 dk/egzersiz → 6 dk hedef — Ruff-Rothbart 1996)
 //   - SentenceOrder max 4 kelime
 // ════════════════════════════════════════════════════════════════
 
@@ -14,6 +15,8 @@ abstract class ChildLessonAdapter {
   /// Çocuklar için uygun egzersiz tipleri.
   /// - PictureMatch: görsel eşleştirme — disleksi dostu, 7-10 yaş için ideal
   /// - MemoryMatch: klasik hafıza oyunu — yazı yükü yok, dikkat+bellek
+  /// Typing: çıkarıldı — Piaget somut-işlem evresinde orthographic
+  /// production yükü henüz erken; FillInBlank (seçmeli) yeter.
   static const _allowedTypes = {
     ExerciseType.listenAndSelect,
     ExerciseType.multipleChoice,
@@ -28,10 +31,11 @@ abstract class ChildLessonAdapter {
   static Lesson adaptLesson(Lesson lesson) {
     final filtered = lesson.exercises.where(_isChildSafe).toList();
 
-    // Max 5 egzersiz
-    final limited = filtered.length > 5 ? filtered.sublist(0, 5) : filtered;
+    // Max 4 egzersiz (attention span, Ruff-Rothbart 1996 ve
+    // Anderson 2010: 7 yaş sürdürülebilir dikkat 15-20 dk).
+    final limited = filtered.length > 4 ? filtered.sublist(0, 4) : filtered;
 
-    // En az 3 egzersiz yoksa mevcut haliyle dön
+    // En az 2 egzersiz yoksa mevcut haliyle dön
     if (limited.length < 2) return lesson;
 
     return Lesson(

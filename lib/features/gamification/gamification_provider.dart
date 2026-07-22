@@ -2,9 +2,6 @@ import 'dart:convert';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-import '../lessons/domain/lesson_entities.dart';
-import '../lessons/data/lesson_repository.dart';
-
 // ════════════════════════════════════════════════════════════════
 // XP KURALLARI
 // Araştırma bulgularına göre tasarlanmış — her anlamlı eylem ödüllenir
@@ -137,12 +134,21 @@ class WeeklyRhythmState {
       };
 
   factory WeeklyRhythmState.fromJson(Map<String, dynamic> json) {
+    // Backward-compat: eski sürüm verilerinde eksik alan olabilir.
+    final activeDays = (json['activeDays'] as List?)?.cast<bool>() ??
+        List.filled(7, false);
+    final weekStartRaw = json['weekStartDate'] as String?;
+    final parsedStart =
+        weekStartRaw != null ? DateTime.tryParse(weekStartRaw) : null;
+    final now = DateTime.now();
+    final monday = now.subtract(Duration(days: now.weekday - 1));
     return WeeklyRhythmState._(
-      activeDays: (json['activeDays'] as List).cast<bool>(),
-      weekStreak: json['weekStreak'] as int,
-      weekStartDate: DateTime.parse(json['weekStartDate'] as String),
-      totalActiveDays: json['totalActiveDays'] as int,
-      weekGoalMet: json['weekGoalMet'] as bool,
+      activeDays: activeDays.length == 7 ? activeDays : List.filled(7, false),
+      weekStreak: (json['weekStreak'] as int?) ?? 0,
+      weekStartDate:
+          parsedStart ?? DateTime(monday.year, monday.month, monday.day),
+      totalActiveDays: (json['totalActiveDays'] as int?) ?? 0,
+      weekGoalMet: (json['weekGoalMet'] as bool?) ?? false,
     );
   }
 }
@@ -157,12 +163,25 @@ class WeeklyRhythmState {
 // ════════════════════════════════════════════════════════════════
 
 abstract class LevelSystem {
-  /// Her seviye için gereken kümülatif XP
+  /// Her seviye için gereken kümülatif XP.
+  ///
+  /// 2026-04 yumuşatılmış eğri:
+  /// - Seviye 1-5: kademeli artış (120, 280, 480, 720, 1000)
+  /// - Seviye 6+: logaritmik — motivation plateau'ya ulaşmaz
+  ///
+  /// Amaç: İlk dersle seviye atlatma (empty dopamine spike) önlemek.
+  /// Araştırma: Yu-kai Chou + Clash Royale ekonomisi.
   static int xpForLevel(int level) {
     if (level <= 1) return 0;
-    // Seviye 2: 100, 3: 250, 4: 500, 5: 800, 6: 1200, ...
-    // Formül: level^2 * 25 + level * 25
-    return (level * level * 25) + (level * 25);
+    if (level <= 5) {
+      // Lineer artış: 120, 280, 480, 720, 1000
+      return 120 + (level - 2) * 200 + ((level - 2) * (level - 2) * 30);
+    }
+    // Level 6+: logaritmik yumuşaklık
+    // Seviye 6: 1300, 7: 1650, 8: 2050, 9: 2500, 10: 3000
+    final base = 1000;
+    final increment = 300 + ((level - 5) * 50);
+    return base + (level - 5) * increment;
   }
 
   /// XP'den seviye hesapla
@@ -222,6 +241,8 @@ class GamificationState {
   final bool dailyRewardAvailable;  // Bugün ödül alınabilir mi?
   final int perfectScoreCount;      // Mükemmel skor sayısı
   final int totalWordsLearned;      // Toplam öğrenilen kelime
+  final int comboCount;             // Ardışık doğru cevap (oturum)
+  final int lastMilestoneShown;     // Son gösterilen milestone (3/5/10)
 
   const GamificationState({
     this.totalXP = 0,
@@ -238,6 +259,8 @@ class GamificationState {
     this.dailyRewardAvailable = true,
     this.perfectScoreCount = 0,
     this.totalWordsLearned = 0,
+    this.comboCount = 0,
+    this.lastMilestoneShown = 0,
   });
 
   GamificationState copyWith({
@@ -255,6 +278,8 @@ class GamificationState {
     bool? dailyRewardAvailable,
     int? perfectScoreCount,
     int? totalWordsLearned,
+    int? comboCount,
+    int? lastMilestoneShown,
   }) =>
       GamificationState(
         totalXP: totalXP ?? this.totalXP,
@@ -271,6 +296,8 @@ class GamificationState {
         dailyRewardAvailable: dailyRewardAvailable ?? this.dailyRewardAvailable,
         perfectScoreCount: perfectScoreCount ?? this.perfectScoreCount,
         totalWordsLearned: totalWordsLearned ?? this.totalWordsLearned,
+        comboCount: comboCount ?? this.comboCount,
+        lastMilestoneShown: lastMilestoneShown ?? this.lastMilestoneShown,
       );
 
   double get levelProgress => LevelSystem.progressInLevel(totalXP);
@@ -321,8 +348,10 @@ class GamificationNotifier extends StateNotifier<GamificationState> {
         final numLevel = LevelSystem.levelFromXP(xp);
 
         // Hafta kontrolü — yeni hafta başlamış mı?
-        final rhythm = WeeklyRhythmState.fromJson(
-            data['weeklyRhythm'] as Map<String, dynamic>);
+        final rhythmRaw = data['weeklyRhythm'];
+        final rhythm = rhythmRaw is Map<String, dynamic>
+            ? WeeklyRhythmState.fromJson(rhythmRaw)
+            : WeeklyRhythmState.initial();
         final updatedRhythm = _checkWeekAdvance(rhythm);
 
         // Günlük ödül kontrolü
@@ -407,7 +436,64 @@ class GamificationNotifier extends StateNotifier<GamificationState> {
 
     // Bugünü aktif gün olarak işaretle
     await markTodayActive();
+    // Günlük XP log — weekly chart için gerçek veri kaynağı
+    await _addToDailyXpLog(amount);
     await _saveToPrefs();
+  }
+
+  // ── Günlük XP Logu (weekly chart için) ─────────────────────────
+
+  static const _dailyLogKey = 'gamification_daily_xp_log';
+
+  Future<void> _addToDailyXpLog(int amount) async {
+    final prefs = await SharedPreferences.getInstance();
+    final today = DateTime.now();
+    final key = '${today.year}-${today.month.toString().padLeft(2, '0')}-${today.day.toString().padLeft(2, '0')}';
+    final raw = prefs.getString(_dailyLogKey);
+    Map<String, dynamic> map = <String, dynamic>{};
+    if (raw != null && raw.isNotEmpty) {
+      try {
+        final decoded = jsonDecode(raw);
+        if (decoded is Map<String, dynamic>) map = decoded;
+      } catch (_) {
+        // Bozuk veri — yeni başlat
+      }
+    }
+    final prev = map[key] as int? ?? 0;
+    map[key] = prev + amount;
+    // Son 30 günü koru
+    final cutoff = today.subtract(const Duration(days: 30));
+    map.removeWhere((k, _) {
+      final parts = k.split('-');
+      if (parts.length != 3) return true;
+      final d = DateTime.tryParse(k);
+      return d == null || d.isBefore(cutoff);
+    });
+    await prefs.setString(_dailyLogKey, jsonEncode(map));
+  }
+
+  /// Son 7 günün günlük XP'sini döndürür (Pzt..Paz, geçmişten bugüne).
+  Future<List<int>> getLast7DaysXP() async {
+    final prefs = await SharedPreferences.getInstance();
+    final raw = prefs.getString(_dailyLogKey);
+    Map<String, dynamic> map = <String, dynamic>{};
+    if (raw != null && raw.isNotEmpty) {
+      try {
+        final decoded = jsonDecode(raw);
+        if (decoded is Map<String, dynamic>) map = decoded;
+      } catch (_) {
+        // Bozuk veri — boş liste döndür
+      }
+    }
+    final result = <int>[];
+    final now = DateTime.now();
+    final monday = now.subtract(Duration(days: now.weekday - 1));
+    for (int i = 0; i < 7; i++) {
+      final d = monday.add(Duration(days: i));
+      final key = '${d.year}-${d.month.toString().padLeft(2, '0')}-${d.day.toString().padLeft(2, '0')}';
+      result.add(map[key] as int? ?? 0);
+    }
+    return result;
   }
 
   // ── Günlük Ödül ────────────────────────────────────────────────
@@ -453,6 +539,7 @@ class GamificationNotifier extends StateNotifier<GamificationState> {
     required bool hasSpeaking,
     required bool hasFamilyDialogue,
     required int wordCount,
+    String? category, // "malbat" vb. — rozet koşulu için
   }) async {
     final xp = XPRules.calculateLessonXP(
       correctCount: correctCount,
@@ -463,8 +550,9 @@ class GamificationNotifier extends StateNotifier<GamificationState> {
 
     await addXP(xp);
 
-    // Rozet kontrolü
-    final newBadges = await _checkBadges(wordCount: wordCount);
+    // Rozet kontrolü — kategori bilgisiyle (malbatvan için "malbat" ailesi)
+    final newBadges =
+        await _checkBadges(wordCount: wordCount, category: category);
     return newBadges;
   }
 
@@ -506,7 +594,10 @@ class GamificationNotifier extends StateNotifier<GamificationState> {
 
   // ── Rozet Kontrolü ─────────────────────────────────────────────
 
-  Future<List<String>> _checkBadges({int wordCount = 0}) async {
+  Future<List<String>> _checkBadges({
+    int wordCount = 0,
+    String? category,
+  }) async {
     final newBadges = <String>[];
     final existing = Set<String>.from(state.earnedBadgeIds);
 
@@ -549,8 +640,14 @@ class GamificationNotifier extends StateNotifier<GamificationState> {
       newBadges.add('a1_qediya');
     }
 
-    // Malbatvan — 10 aile kelimesi
-    if (!existing.contains('malbatvan') && wordCount >= 10) {
+    // Malbatvan — 10 aile kelimesi (sadece "malbat" kategorisindeki
+    // ders/ünitelerde tetiklenir; rastgele 10 kelime değil)
+    if (!existing.contains('malbatvan') &&
+        wordCount >= 10 &&
+        category != null &&
+        (category == 'malbat' ||
+            category == 'family' ||
+            category.startsWith('malbat'))) {
       newBadges.add('malbatvan');
     }
 
@@ -570,6 +667,41 @@ class GamificationNotifier extends StateNotifier<GamificationState> {
   /// Rozet animasyonu gösterildikten sonra temizle
   void clearNewBadge() {
     state = state.copyWith(newlyEarnedBadgeId: null);
+  }
+
+  // ── Combo (ardışık doğru cevap) sayacı ─────────────────────────
+  //
+  // Oturum içi ardışık doğru cevapları sayar. 3/5/10 eşiklerinde
+  // milestone kutlaması tetiklenebilir.
+
+  /// Doğru cevap sonrası çağrılır → combo+1 döner.
+  /// Dönüş: geçilmiş yeni bir milestone var mı (3/5/10); yoksa 0.
+  int registerCorrectForCombo() {
+    final newCombo = state.comboCount + 1;
+    int milestone = 0;
+    // Daha önce aynı milestone gösterildiyse tekrar gösterme.
+    if (newCombo == 10 && state.lastMilestoneShown < 10) {
+      milestone = 10;
+    } else if (newCombo == 5 && state.lastMilestoneShown < 5) {
+      milestone = 5;
+    } else if (newCombo == 3 && state.lastMilestoneShown < 3) {
+      milestone = 3;
+    } else if (newCombo > 10 && newCombo % 10 == 0) {
+      // 20, 30 ... her 10'da bir fanfar
+      milestone = 10;
+    }
+
+    state = state.copyWith(
+      comboCount: newCombo,
+      lastMilestoneShown: milestone > 0 ? milestone : state.lastMilestoneShown,
+    );
+    return milestone;
+  }
+
+  /// Yanlış cevap → combo sıfırlanır.
+  void resetCombo() {
+    if (state.comboCount == 0 && state.lastMilestoneShown == 0) return;
+    state = state.copyWith(comboCount: 0, lastMilestoneShown: 0);
   }
 }
 

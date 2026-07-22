@@ -51,8 +51,8 @@ enum AdminNoteStatus { open, fixed, ignored }
 extension AdminNoteStatusX on AdminNoteStatus {
   String get labelKu => switch (this) {
         AdminNoteStatus.open => 'Vekirî',
-        AdminNoteStatus.fixed => 'Çareser',
-        AdminNoteStatus.ignored => 'Paş de',
+        AdminNoteStatus.fixed => 'Çareserkirî',
+        AdminNoteStatus.ignored => 'Paşxistî',
       };
 }
 
@@ -100,15 +100,16 @@ class AdminNote {
       };
 
   factory AdminNote.fromJson(Map<String, dynamic> json) => AdminNote(
-        id: json['id'] as String,
-        created: DateTime.parse(json['created'] as String),
+        id: (json['id'] as String?) ?? '',
+        created: DateTime.tryParse((json['created'] as String?) ?? '') ??
+            DateTime.now(),
         category: AdminNoteCategory.values.firstWhere(
           (c) => c.name == json['category'],
           orElse: () => AdminNoteCategory.other,
         ),
-        route: json['route'] as String,
+        route: (json['route'] as String?) ?? '',
         context: json['context'] as String?,
-        message: json['message'] as String,
+        message: (json['message'] as String?) ?? '',
         status: AdminNoteStatus.values.firstWhere(
           (s) => s.name == json['status'],
           orElse: () => AdminNoteStatus.open,

@@ -9,7 +9,12 @@ import '../../../core/constants/app_colors.dart';
 import '../../../core/constants/app_spacing.dart';
 import '../../../core/constants/app_typography.dart';
 import '../../../shared/providers/language_mode_provider.dart';
+import '../../../shared/providers/learning_module_provider.dart';
 import '../../../shared/providers/review_provider.dart';
+import '../../../shared/services/skill_progress_service.dart';
+import '../../en_learning/presentation/en_coming_soon_screen.dart';
+import '../../gamification/gamification_provider.dart';
+import '../../admin/data/content_override_service.dart';
 import '../../lessons/domain/a1_kelime_db.dart';
 import '../../lessons/domain/a2_kelime_db.dart';
 import '../../lessons/domain/b1_kelime_db.dart';
@@ -48,7 +53,22 @@ class _ReviewCardData {
 }
 
 class SmartReviewScreen extends ConsumerStatefulWidget {
-  const SmartReviewScreen({super.key});
+  // ── Opsiyonel bölüm filtresi ────────────────────────────────
+  // Bölüm sonundaki "bilinmeyenleri tekrar et" akışından gelindiğinde
+  // kuyruk SADECE o bölümün kelimeleriyle sınırlanır. Ana ekrandan
+  // (global tekrar) gelindiğinde filtre boş kalır → tüm zayıf kelimeler.
+  // Router: /home/review?level=A1&category=malbat&title=Malbat
+  //         veya extra: {'level': ..., 'category': ..., 'title': ...}
+  final String? filterLevel;    // 'A1'..'C2'
+  final String? filterCategory; // kelime kategorisi (unit katKey)
+  final String? filterTitle;    // başlıkta gösterilecek bölüm adı
+
+  const SmartReviewScreen({
+    super.key,
+    this.filterLevel,
+    this.filterCategory,
+    this.filterTitle,
+  });
 
   @override
   ConsumerState<SmartReviewScreen> createState() => _SmartReviewScreenState();
@@ -63,6 +83,30 @@ class _SmartReviewScreenState extends ConsumerState<SmartReviewScreen>
   int _didntKnowCount = 0;
   bool _sessionComplete = false;
   bool _isFlipped = false;
+
+  // Bölüm filtresi aktifken bölüme ait tüm kelime id'leri —
+  // tamamlanma ekranındaki "kalan kelime" sayacı bölümle sınırlı kalsın diye.
+  Set<String> _scopeWordIds = const <String>{};
+
+  /// Bölüm/seviye filtresi verilmiş mi? (unit hub / bölüm sonu akışı)
+  bool get _hasScopeFilter =>
+      widget.filterLevel != null || widget.filterCategory != null;
+
+  /// Başlık altındaki kapsam etiketi — filtre yoksa "Hemû beş"
+  /// (tüm bölümler), varsa bölüm adı (ör. "A1 · Malbat").
+  String get _scopeLabel {
+    if (!_hasScopeFilter) return 'Hemû beş';
+    final title = widget.filterTitle;
+    if (title != null && title.isNotEmpty) {
+      return widget.filterLevel != null
+          ? '${widget.filterLevel} · $title'
+          : title;
+    }
+    return [
+      if (widget.filterLevel != null) widget.filterLevel!,
+      if (widget.filterCategory != null) widget.filterCategory!,
+    ].join(' · ');
+  }
 
   // ── Animasyonlar ───────────────────────────────────────────
   late AnimationController _flipController;
@@ -91,48 +135,109 @@ class _SmartReviewScreenState extends ConsumerState<SmartReviewScreen>
 
     // Kartları bir sonraki frame'de yükle (provider hazır olduğunda)
     WidgetsBinding.instance.addPostFrameCallback((_) {
+      if (!mounted) return;
       _loadReviewCards();
     });
   }
 
   void _loadReviewCards() {
     final reviewState = ref.read(reviewProvider);
-    final reviewWords = reviewState.getReviewWords(maxCount: 20);
+    // BÖLÜM FİLTRESİ FIX: Filtre aktifken önce TÜM due kelimeler alınır —
+    // global öncelik sıralaması 20 sınırıyla bölümün kelimelerini eleyebilir.
+    // Bölüme göre süzüldükten sonra oturum yine 20 kartla sınırlanır.
+    final reviewWords = _hasScopeFilter
+        ? reviewState.getReviewWords(maxCount: reviewState.weakWords.length)
+        : reviewState.getReviewWords(maxCount: 20);
 
     if (reviewWords.isEmpty) {
+      if (!mounted) return;
       setState(() => _sessionComplete = true);
       return;
     }
 
-    // Kelime DB'lerinden verileri bul
-    final allDbWords = [
-      ...kA1TamListe,
-      ...kA2TamListe,
-      ...kB1All,
-      ...kB2All,
-      ...kC1All,
-      ...kC2All,
+    // Kelime DB'lerinden verileri bul + CRUD uyarlı (edit/delete/custom).
+    // Seviye filtresi varsa YALNIZ o seviyenin DB'si yüklenir — diğer
+    // seviyelerin kelimeleri eşleşemez, dolayısıyla kuyruğa giremez.
+    final overrides = ref.read(contentOverridesProvider);
+    final deletedIds = ref.read(deletedWordIdsProvider);
+    final customWords = ref.read(customWordsProvider);
+    final levelFilter = widget.filterLevel?.toUpperCase();
+    final allDbWords = <dynamic>[
+      if (levelFilter == null || levelFilter == 'A1')
+        ...applyVocabulary(List<dynamic>.from(kA1TamListe),
+            level: 'A1',
+            overrides: overrides,
+            deletedIds: deletedIds,
+            customWords: customWords),
+      if (levelFilter == null || levelFilter == 'A2')
+        ...applyVocabulary(List<dynamic>.from(kA2TamListe),
+            level: 'A2',
+            overrides: overrides,
+            deletedIds: deletedIds,
+            customWords: customWords),
+      if (levelFilter == null || levelFilter == 'B1')
+        ...applyVocabulary(List<dynamic>.from(kB1All),
+            level: 'B1',
+            overrides: overrides,
+            deletedIds: deletedIds,
+            customWords: customWords),
+      if (levelFilter == null || levelFilter == 'B2')
+        ...applyVocabulary(List<dynamic>.from(kB2All),
+            level: 'B2',
+            overrides: overrides,
+            deletedIds: deletedIds,
+            customWords: customWords),
+      if (levelFilter == null || levelFilter == 'C1')
+        ...applyVocabulary(List<dynamic>.from(kC1All),
+            level: 'C1',
+            overrides: overrides,
+            deletedIds: deletedIds,
+            customWords: customWords),
+      if (levelFilter == null || levelFilter == 'C2')
+        ...applyVocabulary(List<dynamic>.from(kC2All),
+            level: 'C2',
+            overrides: overrides,
+            deletedIds: deletedIds,
+            customWords: customWords),
     ];
+
+    // Filtre aktifken bölüm kapsamındaki kelime id'lerini sakla —
+    // tamamlanma ekranındaki "Peyvên mane" sayacı bölümle sınırlı kalsın.
+    _scopeWordIds = _hasScopeFilter
+        ? allDbWords
+            .where((w) =>
+                widget.filterCategory == null ||
+                (w.kat as String) == widget.filterCategory)
+            .map((w) => w.id as String)
+            .toSet()
+        : const <String>{};
 
     final cards = <_ReviewCardData>[];
     for (final weakWord in reviewWords) {
       final dbMatch = allDbWords.where((w) => w.id == weakWord.wordId).firstOrNull;
-      if (dbMatch != null) {
-        cards.add(_ReviewCardData(
-          id: dbMatch.id,
-          kurmanji: dbMatch.ku,
-          turkce: dbMatch.tr,
-          ingilizce: dbMatch.en,
-          grammarNote: dbMatch.not as String?,
-          exampleSentences: (dbMatch.her as List).cast<String>(),
-          category: dbMatch.kat as String,
-        ));
+      if (dbMatch == null) continue;
+      // Bölüm filtresi: kategorisi eşleşmeyen kelimeleri atla.
+      if (widget.filterCategory != null &&
+          (dbMatch.kat as String) != widget.filterCategory) {
+        continue;
       }
+      cards.add(_ReviewCardData(
+        id: dbMatch.id,
+        kurmanji: dbMatch.ku,
+        turkce: dbMatch.tr,
+        ingilizce: dbMatch.en,
+        grammarNote: dbMatch.not as String?,
+        exampleSentences: (dbMatch.her as List).cast<String>(),
+        category: dbMatch.kat as String,
+      ));
     }
 
+    // Filtre sonrası oturum uzunluğu sınırı (öncelik sırası korunur).
+    final limited = _hasScopeFilter ? cards.take(20).toList() : cards;
+
     setState(() {
-      _reviewCards = cards;
-      if (cards.isEmpty) _sessionComplete = true;
+      _reviewCards = limited;
+      if (limited.isEmpty) _sessionComplete = true;
     });
   }
 
@@ -186,6 +291,7 @@ class _SmartReviewScreenState extends ConsumerState<SmartReviewScreen>
 
   void _advanceCard() {
     _fadeController.reverse().then((_) {
+      if (!mounted) return;
       setState(() {
         _currentIndex++;
         _isFlipped = false;
@@ -194,6 +300,16 @@ class _SmartReviewScreenState extends ConsumerState<SmartReviewScreen>
         if (_currentIndex >= _reviewCards.length) {
           _sessionComplete = true;
           ref.read(reviewProvider.notifier).completeReviewSession();
+          // İLERLEME FIX: Dubare oturumu hiçbir XP/istatistik yazmıyordu —
+          // kutlama ekranı gösteriliyor ama toplam XP, haftalık ritim ve
+          // beceri panosu hiç ilerlemiyordu. Oturum sonunda kayıt yazılır.
+          final earnedXp = _knewCount * 5 + _didntKnowCount * 2;
+          if (earnedXp > 0) {
+            ref.read(gamificationProvider.notifier).addXP(earnedXp);
+          }
+          // Beceri panosu: kelime tekrarı 'reading' (Xwendin) sayacına işlenir.
+          markSkillCompletedAndNotify(ref,
+              module: 'ku', skill: 'reading', xp: 10);
         }
       });
       _fadeController.forward();
@@ -204,6 +320,18 @@ class _SmartReviewScreenState extends ConsumerState<SmartReviewScreen>
 
   @override
   Widget build(BuildContext context) {
+    // ── TRACK-AWARE GUARD ──────────────────────────────────
+    // Smart Review Kurmancî weak word listesini kullanır — EN için uygun değil.
+    // EN track'te FSRS kuyruğu ayrı olacak; bu arada EN Quiz Hub öner.
+    final isEn = ref.watch(isEnglishModuleProvider);
+    if (isEn) {
+      return const EnComingSoonScreen(
+        activityKu: 'Dubare',
+        suggestedRoute: '/en/quiz-hub',
+        suggestedLabel: 'EN Quiz Hub',
+      );
+    }
+
     final showTurkish = ref.watch(showTurkishProvider);
 
     return Scaffold(
@@ -215,9 +343,23 @@ class _SmartReviewScreenState extends ConsumerState<SmartReviewScreen>
           icon: const Icon(Icons.close_rounded, color: AppColors.textPrimary),
           onPressed: () { if (context.canPop()) context.pop(); else context.go(AppRoutes.home); },
         ),
-        title: Text(
-          'Dubare',
-          style: AppTypography.title.copyWith(color: AppColors.textPrimary),
+        title: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Text(
+              'Dubare',
+              style: AppTypography.title.copyWith(color: AppColors.textPrimary),
+            ),
+            // Kapsam etiketi — bölüm filtresi varsa bölüm adı, yoksa "Hemû beş"
+            Text(
+              _scopeLabel,
+              style: AppTypography.caption.copyWith(
+                color: AppColors.textSecondary,
+              ),
+              maxLines: 1,
+              overflow: TextOverflow.ellipsis,
+            ),
+          ],
         ),
         centerTitle: true,
         actions: [
@@ -493,7 +635,7 @@ class _SmartReviewScreenState extends ConsumerState<SmartReviewScreen>
 
             const SizedBox(height: AppSpacing.sm),
 
-            // Çeviri
+            // Çeviri — sadece Tirkî (kuTr modunda). İngilizce gösterilmez.
             if (showTurkish) ...[
               Center(
                 child: Text(
@@ -506,15 +648,6 @@ class _SmartReviewScreenState extends ConsumerState<SmartReviewScreen>
               ),
               const SizedBox(height: 4),
             ],
-
-            if (card.ingilizce.isNotEmpty)
-              Center(
-                child: Text(
-                  card.ingilizce,
-                  style: AppTypography.translation,
-                  textAlign: TextAlign.center,
-                ),
-              ),
 
             const SizedBox(height: AppSpacing.lg),
 
@@ -611,7 +744,10 @@ class _SmartReviewScreenState extends ConsumerState<SmartReviewScreen>
               filterQuality: FilterQuality.medium),
             const SizedBox(height: AppSpacing.lg),
             Text(
-              'Peyv ji bo dubareyê tune!',
+              // Bölüm filtresi varken mesaj bölümle sınırlı olduğunu söyler
+              _hasScopeFilter
+                  ? 'Di vê beşê de peyv ji bo dubareyê tune!'
+                  : 'Peyv ji bo dubareyê tune!',
               style: AppTypography.headline.copyWith(
                 color: AppColors.textPrimary,
               ),
@@ -619,7 +755,9 @@ class _SmartReviewScreenState extends ConsumerState<SmartReviewScreen>
             ),
             const SizedBox(height: AppSpacing.sm),
             Text(
-              'Quiz an flashcard bixebitîne da ku peyvên qels werin tomarkirin.',
+              _hasScopeFilter
+                  ? 'Peyvên qels ên vê beşê tune — pêşî quiz an flashcarda vê beşê bixebitîne.'
+                  : 'Quiz an flashcard bixebitîne da ku peyvên qels werin tomarkirin.',
               style: AppTypography.body.copyWith(
                 color: AppColors.textSecondary,
               ),
@@ -746,11 +884,11 @@ class _SmartReviewScreenState extends ConsumerState<SmartReviewScreen>
 
                 const Divider(height: AppSpacing.lg),
 
-                // Kalan zayıf kelimeler
+                // Kalan zayıf kelimeler — filtre varsa yalnız bu bölümdekiler
                 _StatRow(
                   icon: Icons.replay_rounded,
                   label: 'Peyvên mane',
-                  value: '${reviewState.dueCount}',
+                  value: '${_remainingDueCount(reviewState)}',
                   color: AppColors.primary,
                 ),
               ],
@@ -759,9 +897,11 @@ class _SmartReviewScreenState extends ConsumerState<SmartReviewScreen>
 
           const SizedBox(height: AppSpacing.lg),
 
-          // Mastery ilerleme çubuğu
-          if (reviewState.masteredCount > 0 ||
-              reviewState.dueCount > 0) ...[
+          // Mastery ilerleme çubuğu — global sayaçlara dayanır; bölüm
+          // filtresi aktifken yanıltıcı olacağından yalnız global modda göster
+          if (!_hasScopeFilter &&
+              (reviewState.masteredCount > 0 ||
+                  reviewState.dueCount > 0)) ...[
             Container(
               padding: const EdgeInsets.all(AppSpacing.md),
               decoration: BoxDecoration(
@@ -858,6 +998,15 @@ class _SmartReviewScreenState extends ConsumerState<SmartReviewScreen>
     return state.masteredCount / total;
   }
 
+  /// Kalan zayıf kelime sayısı — bölüm filtresi aktifken yalnız
+  /// bölüm kapsamındaki (_scopeWordIds) kelimeler sayılır.
+  int _remainingDueCount(ReviewState state) {
+    if (!_hasScopeFilter) return state.dueCount;
+    return state.weakWords.values
+        .where((w) => !w.isMastered && _scopeWordIds.contains(w.wordId))
+        .length;
+  }
+
   void _restartSession() {
     setState(() {
       _currentIndex = 0;
@@ -929,31 +1078,43 @@ class _ReviewButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Material(
-      color: surfaceColor,
-      borderRadius: BorderRadius.circular(AppSpacing.radiusLg),
-      child: InkWell(
-        onTap: onTap,
-        borderRadius: BorderRadius.circular(AppSpacing.radiusLg),
-        child: Container(
-          padding: const EdgeInsets.symmetric(vertical: 16),
-          decoration: BoxDecoration(
+    // SEMANTICS + TOUCH TARGET: Ekran okuyucu için label+button, min 48dp
+    // dokunma hedefi. WCAG 2.5.5 AAA (44x44 AA).
+    // COLOR-BLIND DUAL ENCODING: Kırmızı/yeşil ayrımı yalnız renk değil,
+    // icon (check/close) + kalın kenarlık ile de iletilir.
+    return Semantics(
+      button: true,
+      label: label,
+      child: ExcludeSemantics(
+        child: Material(
+          color: surfaceColor,
+          borderRadius: BorderRadius.circular(AppSpacing.radiusLg),
+          child: InkWell(
+            onTap: onTap,
             borderRadius: BorderRadius.circular(AppSpacing.radiusLg),
-            border: Border.all(color: color.withOpacity(0.3)),
-          ),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Icon(icon, color: color, size: 24),
-              const SizedBox(width: 8),
-              Text(
-                label,
-                style: AppTypography.labelLarge.copyWith(
-                  color: color,
-                  fontWeight: FontWeight.w600,
-                ),
+            child: Container(
+              constraints: const BoxConstraints(minHeight: 48),
+              padding: const EdgeInsets.symmetric(vertical: 16),
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(AppSpacing.radiusLg),
+                // Kalın kenarlık — renk körü kullanıcılar için ek sinyal
+                border: Border.all(color: color, width: 2),
               ),
-            ],
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Icon(icon, color: color, size: 24),
+                  const SizedBox(width: 8),
+                  Text(
+                    label,
+                    style: AppTypography.labelLarge.copyWith(
+                      color: color,
+                      fontWeight: FontWeight.w600,
+                    ),
+                  ),
+                ],
+              ),
+            ),
           ),
         ),
       ),

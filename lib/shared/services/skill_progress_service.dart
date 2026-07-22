@@ -66,15 +66,52 @@ class SkillProgressService {
   }
 }
 
-/// Riverpod provider — modül toplam XP'si (async)
+/// Riverpod provider — modül toplam XP'si (async).
+/// autoDispose: family üye sayısı sınırsız büyümesin (mem leak önlemi).
 final skillTotalXpProvider =
-    FutureProvider.family<int, String>((ref, module) async {
+    FutureProvider.autoDispose.family<int, String>((ref, module) async {
+  // Mutation bump'ina bagli — markCompleted sonrasi counter arttirilinca
+  // watcher'lar yeniden fetch eder.
+  ref.watch(skillProgressVersionProvider);
   return SkillProgressService.getTotalXp(module);
 });
 
 /// Bir beceri için tamamlanan sayı
-final skillCompletedProvider = FutureProvider.family<int, ({String module, String skill})>(
+final skillCompletedProvider = FutureProvider.autoDispose
+    .family<int, ({String module, String skill})>(
   (ref, params) async {
-    return SkillProgressService.getCompleted(module: params.module, skill: params.skill);
+    ref.watch(skillProgressVersionProvider);
+    return SkillProgressService.getCompleted(
+        module: params.module, skill: params.skill);
   },
 );
+
+/// BUG FIX: markCompleted SharedPreferences'e yazar ama FutureProvider'lar
+/// otomatik yenilenmezdi — skill dashboard stale veri gosteriyordu.
+/// Bu counter'i increment ederek dependent provider'lari invalidate ederiz.
+/// StateProvider yerine StateNotifier — global olarak erisim (container
+/// gerekmeden) StatefulWidget ve ConsumerStatefulWidget'tan cagrilabilir.
+final skillProgressVersionProvider = StateProvider<int>((ref) => 0);
+
+/// Yardimci: markCompleted sonrasi cagir — UI otomatik yenilensin.
+/// `ref` tipi `WidgetRef` ya da `Ref` olabilir (ikisinde de .read vardir).
+Future<void> markSkillCompletedAndNotify(
+  dynamic ref, {
+  required String module,
+  required String skill,
+  int xp = 10,
+}) async {
+  // Notifier'i AWAIT'TEN ONCE oku: cagiran widget await sirasinda dispose
+  // edilirse (fire-and-forget cagrilar + ekran gecisi) ref.read
+  // "Cannot use ref after the widget was disposed" firlatirdi.
+  // ignore: avoid_dynamic_calls
+  final notifier = ref.read(skillProgressVersionProvider.notifier);
+  await SkillProgressService.markCompleted(
+      module: module, skill: skill, xp: xp);
+  try {
+    // ignore: avoid_dynamic_calls
+    notifier.state = (notifier.state as int) + 1;
+  } catch (_) {
+    // Provider container kapandiysa sessiz gec — veri zaten kaydedildi.
+  }
+}

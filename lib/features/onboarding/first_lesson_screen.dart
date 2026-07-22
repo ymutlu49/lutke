@@ -166,14 +166,9 @@ class _FirstLessonScreenState extends ConsumerState<FirstLessonScreen> {
                     Gap.lg,
 
                     // Yönerge
-                    Builder(
-                      builder: (context) {
-                        final showTr = ref.watch(showTurkishProvider);
-                        return Text(
-                          showTr ? 'Ne anlama geliyor?' : 'Wateya wê çi ye?',
-                          style: AppTypography.headline,
-                        );
-                      },
+                    Text(
+                      'Wateya wê çi ye?',
+                      style: AppTypography.headline,
                     ).animate(key: ValueKey(_currentIndex)).fadeIn(duration: 300.ms),
 
                     Gap.xl,
@@ -295,14 +290,9 @@ class _WordCardState extends ConsumerState<_WordCard> {
               ),
             ),
             Gap.xs,
-            Builder(
-              builder: (context) {
-                final showTr = ref.watch(showTurkishProvider);
-                return Text(
-                  showTr ? 'Sesi duy' : 'Deng lê bide',
-                  style: AppTypography.caption.copyWith(color: AppColors.primary),
-                );
-              },
+            Text(
+              'Deng lê bide',
+              style: AppTypography.caption.copyWith(color: AppColors.primary),
             ),
           ],
         ),
@@ -468,7 +458,7 @@ class _AnswerFeedbackBar extends ConsumerWidget {
             onPressed: onNext,
             style: ElevatedButton.styleFrom(backgroundColor: accentColor),
             child: Text(
-              isLast ? 'Hat temamkirin!' : 'Berdewam bike →',
+              isLast ? 'Temam bû!' : 'Berdewam bike →',
               style: AppTypography.labelLarge.onPrimary,
             ),
           ),
@@ -569,9 +559,9 @@ class _CompletionScreen extends StatelessWidget {
                             ),
                             Gap.sm,
                             Text(
-                              'Te 3 peyvên Kurmancî hîn bûn.\n'
+                              'Tu fêrî 3 peyvên Kurmancî bûyî.\n'
                               'Tovên vî zimanî berê di te de hebûn —\n'
-                              'îro dest bi mezinbûnê kirin.',
+                              'îro dest bi şînbûnê kirin.',
                               style: AppTypography.body,
                               textAlign: TextAlign.center,
                             ),
@@ -608,7 +598,7 @@ class _CompletionScreen extends StatelessWidget {
                   const SizedBox(height: AppSpacing.xs),
 
                   TextButton(
-                    onPressed: () => context.go(AppRoutes.home),
+                    onPressed: () => context.go(AppRoutes.trackSelect),
                     style: TextButton.styleFrom(
                       minimumSize: const Size(double.infinity, AppSpacing.touchMin),
                     ),

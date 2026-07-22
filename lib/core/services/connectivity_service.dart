@@ -22,9 +22,11 @@ class ConnectivityNotifier extends StateNotifier<ConnectionStatus> {
 
   Future<void> _init() async {
     final result = await Connectivity().checkConnectivity();
+    if (!mounted) return;
     state = _fromResult(result);
 
     _sub = Connectivity().onConnectivityChanged.listen((results) {
+      if (!mounted) return;
       state = _fromResult(results);
     });
   }
@@ -85,7 +87,7 @@ class OfflineBanner extends ConsumerWidget {
               const Icon(Icons.wifi_off, size: 14, color: Colors.white),
               Gap.hXs,
               Text(
-                'Bê girêdan — ders berdewam dikin',
+                'Bê girêdan — wane berdewam dikin',
                 style: AppTypography.captionStrong.copyWith(
                   color: Colors.white,
                 ),

@@ -3,8 +3,6 @@ import 'package:flutter_animate/flutter_animate.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../core/constants/app_colors.dart';
-import '../../core/constants/app_typography.dart';
-import '../../core/constants/app_spacing.dart';
 import '../../core/router/app_router.dart';
 
 /// LÛTKE markasının tek gerçek kaynağı.

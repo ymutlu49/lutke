@@ -1,10 +1,12 @@
 import 'dart:convert';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:drift/drift.dart' show Value;
+import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../../core/database/app_database.dart' hide UserProfile;
 import '../../../core/utils/fsrs_algorithm.dart';
 import '../../../core/utils/user_segment.dart';
+import '../../../shared/providers/learning_track_provider.dart';
 import '../domain/lesson_entities.dart';
 
 // ── Kelime veritabanları A1-C2 ───────────────────────────────
@@ -57,16 +59,69 @@ final lessonRepositoryProvider = Provider<LessonRepository>((ref) {
   return LessonRepository(ref.watch(databaseProvider));
 });
 
-/// Kullanıcı profili — auth_service'ten gelecek
-final userProfileProvider = Provider<UserProfile>((ref) {
-  return const UserProfile(
-    userId: 'anonymous',
-    currentLevel: 'a1',
-    targetLevel: 'b2',
-    isHeritage: false,
-    dailyGoal: 20,
-  );
-});
+/// Placement test sonucunda belirlenen CEFR seviyesini SharedPreferences'tan
+/// okur. Aktif track'e (ku/en) göre doğru anahtarı kullanır.
+/// Sonuç yoksa `a1` döner (yeni başlayan varsayımı).
+class _UserProfileNotifier extends StateNotifier<UserProfile> {
+  final Ref ref;
+
+  _UserProfileNotifier(this.ref) : super(_defaultProfile()) {
+    _hydrate();
+    // Track değişirse uygun placement seviyesini yeniden yükle.
+    ref.listen<LearningTrack?>(activeTrackProvider, (_, __) {
+      _hydrate();
+    });
+  }
+
+  static UserProfile _defaultProfile() => const UserProfile(
+        userId: 'anonymous',
+        currentLevel: 'a1',
+        targetLevel: 'b2',
+        isHeritage: false,
+        dailyGoal: 20,
+      );
+
+  Future<void> _hydrate() async {
+    try {
+      final prefs = await SharedPreferences.getInstance();
+      final track = ref.read(currentTrackProvider);
+      final key = track.languageCode == 'en'
+          ? 'placement_level_en'
+          : 'placement_level_ku';
+      final level = (prefs.getString(key) ?? 'a1').toLowerCase();
+      final safe = _sanitizeLevel(level);
+      state = state.copyWith(currentLevel: safe);
+    } catch (_) {
+      // Sessiz başarısızlık — default state korunur.
+    }
+  }
+
+  /// Dışarıdan seviyeyi günceller (placement test / manuel override).
+  Future<void> setLevel(String level) async {
+    final safe = _sanitizeLevel(level);
+    state = state.copyWith(currentLevel: safe);
+    try {
+      final prefs = await SharedPreferences.getInstance();
+      final track = ref.read(currentTrackProvider);
+      final key = track.languageCode == 'en'
+          ? 'placement_level_en'
+          : 'placement_level_ku';
+      await prefs.setString(key, safe);
+    } catch (_) {}
+  }
+
+  static String _sanitizeLevel(String raw) {
+    const allowed = {'a1', 'a2', 'b1', 'b2', 'c1', 'c2'};
+    return allowed.contains(raw) ? raw : 'a1';
+  }
+}
+
+/// Kullanıcı profili — placement test sonucunu (SharedPreferences) okur.
+/// Track değişiminde otomatik yeniden yüklenir.
+final userProfileProvider =
+    StateNotifierProvider<_UserProfileNotifier, UserProfile>(
+  (ref) => _UserProfileNotifier(ref),
+);
 
 // ════════════════════════════════════════════════════════════════
 // LESSON REPOSITORY
@@ -104,7 +159,7 @@ class LessonRepository {
       gender: Value(k.cins),
     )).toList();
 
-    await _db!.batchInsertCards(companions);
+    await _db.batchInsertCards(companions);
   }
 
   List<dynamic> _wordsForLevel(int level) => switch (level) {
@@ -123,10 +178,11 @@ class LessonRepository {
     required String userId,
     required UserProfile profile,
   }) async {
+    if (!_hasDb) return [];
     final reviews = await _db!.getDueCards(userId);
     final result = <VocabularyCardModel>[];
     for (final r in reviews) {
-      final card = await _db!.getCard(r.cardId);
+      final card = await _db.getCard(r.cardId);
       if (card == null) continue;
       result.add(_toModel(card, FSRSCard(
         cardId: r.cardId,
@@ -147,18 +203,21 @@ class LessonRepository {
     required int level,
     required int limit,
   }) async {
+    if (!_hasDb) return [];
     final cards = await _db!.getNewCardsByLevel(level, limit);
     return cards.map((c) => _toModel(c, FSRSCard.newCard(c.id))).toList();
   }
 
   Future<List<VocabularyCardModel>> getCardsByCategory(
       String category, int level) async {
+    if (!_hasDb) return [];
     final cards = await _db!.getCardsByCategory(category, level);
     return cards.map((c) => _toModel(c, FSRSCard.newCard(c.id))).toList();
   }
 
   Future<List<VocabularyCardModel>> searchCards(String query) async {
     if (query.trim().isEmpty) return [];
+    if (!_hasDb) return [];
     final cards = await _db!.searchCards(query.trim());
     return cards.map((c) => _toModel(c, FSRSCard.newCard(c.id))).toList();
   }
@@ -170,10 +229,11 @@ class LessonRepository {
     required String cardId,
     required Rating rating,
   }) async {
+    if (!_hasDb) return;
     final existing = await _db!.getReview(userId, cardId);
     if (existing == null) {
       final updated = FSRSAlgorithm.schedule(FSRSCard.newCard(cardId), rating);
-      await _db!.createReview(userId, cardId, updated);
+      await _db.createReview(userId, cardId, updated);
     } else {
       final fsrs = FSRSCard(
         cardId: cardId,
@@ -186,7 +246,7 @@ class LessonRepository {
         reviewCount: existing.reviewCount,
         lapseCount: existing.lapseCount,
       );
-      await _db!.updateReview(userId, cardId, FSRSAlgorithm.schedule(fsrs, rating));
+      await _db.updateReview(userId, cardId, FSRSAlgorithm.schedule(fsrs, rating));
     }
   }
 
@@ -207,36 +267,57 @@ class LessonRepository {
     ...kB2Lessons, ...kC1Lessons, ...kC2Lessons,
   ];
 
-  Future<void> markLessonComplete(String userId, String lessonId) =>
-      _db!.markLessonComplete(userId, lessonId);
+  Future<void> markLessonComplete(String userId, String lessonId) async {
+    if (!_hasDb) return;
+    return _db!.markLessonComplete(userId, lessonId);
+  }
 
-  Future<Set<String>> getCompletedLessons(String userId) =>
-      _db!.getCompletedLessons(userId);
+  Future<Set<String>> getCompletedLessons(String userId) async {
+    if (!_hasDb) return <String>{};
+    return _db!.getCompletedLessons(userId);
+  }
 
   // ── İSTATİSTİK ───────────────────────────────────────────
 
   Future<DailyStats> getDailyStats(String userId) async {
+    if (!_hasDb) {
+      return DailyStats(
+          totalReviewed: 0,
+          correctCount: 0,
+          dueCount: 0,
+          streakDays: 0,
+          xpToday: 0);
+    }
     final reviews = await _db!.getReviewsForDate(userId, DateTime.now());
     return DailyStats(
       totalReviewed: reviews.length,
       correctCount: reviews.where((r) => r.wasCorrect).length,
-      dueCount: await _db!.getDueCardCount(userId),
-      streakDays: await _db!.getStreakDays(userId),
+      dueCount: await _db.getDueCardCount(userId),
+      streakDays: await _db.getStreakDays(userId),
       xpToday: reviews.length * 10,
     );
   }
 
   Future<LevelProgress> getLevelProgress(String userId, int level) async {
     final total = kLevelWordCount[level] ?? 0;
+    if (!_hasDb) {
+      return LevelProgress(
+        level: level,
+        levelName: kLevelNames[level] ?? 'A1',
+        totalCards: total,
+        learnedCards: 0,
+        masteredCards: 0,
+        completionPercent: 0.0,
+      );
+    }
+    final learned = await _db!.getLearnedCardCount(userId, level);
     return LevelProgress(
       level: level,
       levelName: kLevelNames[level] ?? 'A1',
       totalCards: total,
-      learnedCards: await _db!.getLearnedCardCount(userId, level),
-      masteredCards: await _db!.getMasteredCardCount(userId, level),
-      completionPercent: total > 0
-          ? (await _db!.getLearnedCardCount(userId, level)) / total
-          : 0.0,
+      learnedCards: learned,
+      masteredCards: await _db.getMasteredCardCount(userId, level),
+      completionPercent: total > 0 ? learned / total : 0.0,
     );
   }
 
@@ -334,8 +415,12 @@ class LevelProgress {
 // RIVERPOD FEATURE PROVIDERS
 // ════════════════════════════════════════════════════════════════
 
+// BUG FIX: family + autoDispose — family uyeler sinirsiz birikmesin (mem leak).
+// Onceden autoDispose yoktu; farkli userId/level/query kombinasyonu her
+// cagrilan her varyant cache'de kaliyordu. Simdi kullanilmadiginda GC olur.
 final dueCardsProvider =
-    FutureProvider.family<List<VocabularyCardModel>, String>((ref, userId) {
+    FutureProvider.autoDispose.family<List<VocabularyCardModel>, String>(
+        (ref, userId) {
   return ref.watch(lessonRepositoryProvider).getDueCards(
     userId: userId,
     profile: ref.watch(userProfileProvider),
@@ -343,12 +428,12 @@ final dueCardsProvider =
 });
 
 final levelLessonsProvider =
-    Provider.family<List<LessonModel>, int>((ref, level) {
+    Provider.autoDispose.family<List<LessonModel>, int>((ref, level) {
   return ref.watch(lessonRepositoryProvider).getLessonsForLevel(level);
 });
 
-final levelProgressProvider =
-    FutureProvider.family<LevelProgress, ({String userId, int level})>(
+final levelProgressProvider = FutureProvider.autoDispose
+    .family<LevelProgress, ({String userId, int level})>(
         (ref, args) async {
   try {
     return await ref.watch(lessonRepositoryProvider)
@@ -362,7 +447,7 @@ final levelProgressProvider =
 });
 
 final dailyStatsProvider =
-    FutureProvider.family<DailyStats, String>((ref, userId) async {
+    FutureProvider.autoDispose.family<DailyStats, String>((ref, userId) async {
   try {
     return await ref.watch(lessonRepositoryProvider).getDailyStats(userId);
   } catch (_) {
@@ -370,8 +455,8 @@ final dailyStatsProvider =
   }
 });
 
-final searchResultsProvider =
-    FutureProvider.family<List<VocabularyCardModel>, String>((ref, query) async {
+final searchResultsProvider = FutureProvider.autoDispose
+    .family<List<VocabularyCardModel>, String>((ref, query) async {
   try {
     return await ref.watch(lessonRepositoryProvider).searchCards(query);
   } catch (_) {

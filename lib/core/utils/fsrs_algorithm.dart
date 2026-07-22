@@ -40,7 +40,7 @@ enum KurmanjiCategory {
   colors,          // Renkler — görsel bağlam yardımcı
   food,            // Yemek — orta maruziyet
   daily,           // Günlük hayat — orta
-  grammar_ezafe,   // Ezafe — Türkçe'de yok, zor
+  grammar_ezafe,   // Veqetandek — Türkçe'de yok, zor
   grammar_ergative,// Ergatiflik — en zor konu
   phoneme_xq,      // x/q sesleri — Türkçe'de yok
   minimal_pair,    // ker/kêr çiftleri — anlam bozucu fark
@@ -362,13 +362,6 @@ class LutkeScheduler {
   /// Hatırlama sonrası yeni stabilite
   static double _recallStability(
       double s, double d, double r, Rating rating) {
-    const Map<Rating, double> ratingMultiplier = {
-      Rating.hard: 1.0,
-      Rating.good: 1.0,
-      Rating.easy: 1.0,
-      Rating.again: 1.0,
-    };
-
     final hardPenalty = rating == Rating.hard ? _w[15] : 1.0;
     final easyBonus = rating == Rating.easy ? _w[16] : 1.0;
 
@@ -410,13 +403,25 @@ class LutkeScheduler {
     return _retrievability(card.stability, elapsed);
   }
 
-  /// Gün sayısına göre kart listesini sıralar (en acil önce)
+  /// Kart listesini acil olanlar önde olacak şekilde sıralar.
+  /// Öncelik: en erken dueDate (most overdue / soonest due).
+  /// Tiebreaker: en düşük retrievability. dueDate null ise en sona gider.
   static List<FSRSCard> sortByUrgency(List<FSRSCard> cards) {
     final sorted = List<FSRSCard>.from(cards);
     sorted.sort((a, b) {
+      final aDue = a.dueDate;
+      final bDue = b.dueDate;
+      if (aDue != null && bDue != null) {
+        final dueCmp = aDue.compareTo(bDue);
+        if (dueCmp != 0) return dueCmp;
+      } else if (aDue == null && bDue != null) {
+        return 1;
+      } else if (aDue != null && bDue == null) {
+        return -1;
+      }
       final aR = currentRetrievability(a);
       final bR = currentRetrievability(b);
-      return aR.compareTo(bR); // En düşük R en acil
+      return aR.compareTo(bR);
     });
     return sorted;
   }

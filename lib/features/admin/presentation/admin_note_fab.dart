@@ -38,7 +38,7 @@ class AdminNoteFab extends ConsumerWidget {
         backgroundColor: AppColors.primary.withOpacity(0.85),
         foregroundColor: Colors.white,
         elevation: 3,
-        tooltip: 'Hata bildir / not düş',
+        tooltip: 'Xeletiyê ragihîne / nîşe bike',
         onPressed: () => _showNoteDialog(context, ref),
         child: const Icon(Icons.bug_report_outlined, size: 20),
       ),
@@ -103,7 +103,7 @@ class _AdminNoteDialogState extends ConsumerState<_AdminNoteDialog> {
         Navigator.of(context).pop();
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
-            content: const Text('Not kaydedildi'),
+            content: const Text('Nîşe hat tomarkirin'),
             duration: const Duration(seconds: 2),
             backgroundColor: AppColors.success,
           ),
@@ -131,7 +131,7 @@ class _AdminNoteDialogState extends ConsumerState<_AdminNoteDialog> {
                 Icon(Icons.bug_report_rounded,
                     color: AppColors.primary, size: 22),
                 const SizedBox(width: 8),
-                Text('Hata Bildir / Not Düş',
+                Text('Xeletiyê Ragihîne / Nîşe Bike',
                     style: AppTypography.title.copyWith(
                       fontWeight: FontWeight.w700,
                     )),
@@ -139,7 +139,7 @@ class _AdminNoteDialogState extends ConsumerState<_AdminNoteDialog> {
             ),
             const SizedBox(height: 4),
             Text(
-              'Ekran: ${widget.route}',
+              'Dîmen: ${widget.route}',
               style: AppTypography.caption.copyWith(
                 color: AppColors.textSecondary,
                 fontFamily: 'monospace',
@@ -192,7 +192,7 @@ class _AdminNoteDialogState extends ConsumerState<_AdminNoteDialog> {
               maxLength: 500,
               autofocus: true,
               decoration: InputDecoration(
-                hintText: 'Hatayı veya öneriyi yaz...',
+                hintText: 'Xeletî an pêşniyara xwe binivîse...',
                 border: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(12),
                 ),
@@ -210,7 +210,7 @@ class _AdminNoteDialogState extends ConsumerState<_AdminNoteDialog> {
                   onPressed: _saving
                       ? null
                       : () => Navigator.of(context).pop(),
-                  child: const Text('Vazgeç'),
+                  child: const Text('Betal'),
                 ),
                 const SizedBox(width: 8),
                 ElevatedButton.icon(
@@ -223,7 +223,7 @@ class _AdminNoteDialogState extends ConsumerState<_AdminNoteDialog> {
                               CircularProgressIndicator(strokeWidth: 2),
                         )
                       : const Icon(Icons.save_rounded, size: 18),
-                  label: const Text('Kaydet'),
+                  label: const Text('Tomar bike'),
                   style: ElevatedButton.styleFrom(
                     backgroundColor: AppColors.primary,
                     foregroundColor: Colors.white,

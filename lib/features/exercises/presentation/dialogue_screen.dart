@@ -11,7 +11,9 @@ import '../../../core/constants/app_typography.dart';
 import '../../../core/router/app_router.dart';
 import '../../../core/services/sound_service.dart';
 import '../../../shared/providers/language_mode_provider.dart';
+import '../../../shared/providers/learning_module_provider.dart';
 import '../../../shared/widgets/speak_button.dart';
+import '../../en_learning/presentation/en_coming_soon_screen.dart';
 import '../../lessons/domain/a1_kelime_db.dart';
 import '../../lessons/domain/a2_kelime_db.dart';
 import '../../lessons/domain/b1_kelime_db.dart';
@@ -86,7 +88,7 @@ class _DialogueScreenState extends ConsumerState<DialogueScreen> {
 
       // Cümleden kelimeyi maskeleyerek boşluk oluştur
       // Word boundary ile maskeleme — substring match değil.
-      // Kurmancî ezafe ekleri (-a, -ê, -î, -an, -ên) için opsiyonel eşleşme.
+      // Kurmancî veqetandek ekleri (-a, -ê, -î, -an, -ên) için opsiyonel eşleşme.
       final maskRe = RegExp(
         r'\b' + RegExp.escape(ku) + r'(a|ê|î|an|ên|yê|ya|yên)?\b',
         caseSensitive: false,
@@ -125,6 +127,17 @@ class _DialogueScreenState extends ConsumerState<DialogueScreen> {
 
   @override
   Widget build(BuildContext context) {
+    // ── TRACK-AWARE GUARD ──────────────────────────────────
+    // Hevpeyvîn Kurmancî heritage cümle tabanlı — EN track için uygun değil.
+    final isEn = ref.watch(isEnglishModuleProvider);
+    if (isEn) {
+      return const EnComingSoonScreen(
+        activityKu: 'Hevpeyvîn',
+        suggestedRoute: '/en/speaking',
+        suggestedLabel: 'EN Speaking',
+      );
+    }
+
     if (_exchanges.isEmpty) {
       return Scaffold(
         backgroundColor: AppColors.backgroundPrimary,
@@ -137,7 +150,7 @@ class _DialogueScreenState extends ConsumerState<DialogueScreen> {
           ),
         ),
         body: Center(
-          child: Text('Vê beşê de hevpeyvîn bes nine.',
+          child: Text('Di vê beşê de hevpeyvîn nîne.',
               style: AppTypography.body.copyWith(color: AppColors.textSecondary)),
         ),
       );
@@ -217,7 +230,7 @@ class _DialogueScreenState extends ConsumerState<DialogueScreen> {
                         ),
                       ),
                       const SizedBox(height: 24),
-                      _buildPhaseButton('Fêm kir, dûv re', () {
+                      _buildPhaseButton('Min fêm kir', () {
                         setState(() => _phase = 1);
                       }),
                     ],
@@ -266,7 +279,7 @@ class _DialogueScreenState extends ConsumerState<DialogueScreen> {
                       const SizedBox(height: 24),
                       _buildPhaseButton(
                         exchange.options.isNotEmpty
-                            ? 'Dubare kir, dûv re'
+                            ? 'Min dubare kir'
                             : 'Temam',
                         () {
                           if (exchange.options.isNotEmpty) {

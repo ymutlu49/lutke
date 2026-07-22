@@ -31,10 +31,21 @@ class StreakWidget extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final streak = ref.watch(streakProvider);
 
-    return Column(
-      children: [
-        // ── Ana Streak Karti ────────────────────────────────────
-        Container(
+    // A11Y (19 Nisan 2026, WCAG denetimi): StreakWidget'in tamamı
+    // ekran okuyuculara görünmezdi. Üst-seviye Semantics label ile
+    // streak + günlük hedef + XP özetini tek kerede okutuyoruz.
+    final a11ySummary =
+        'Rêza te: ${streak.streakDays} roj. '
+        'Îro: ${streak.todayWordsReviewed} ji ${streak.dailyGoal} peyv. '
+        'XP: ${streak.todayXP}.';
+
+    return Semantics(
+      container: true,
+      label: a11ySummary,
+      child: Column(
+        children: [
+          // ── Ana Streak Karti ────────────────────────────────────
+          Container(
           padding: const EdgeInsets.symmetric(
             horizontal: AppSpacing.md,
             vertical: 12,
@@ -103,6 +114,7 @@ class StreakWidget extends ConsumerWidget {
             },
           ),
       ],
+      ),
     );
   }
 }
@@ -472,14 +484,14 @@ class _StreakBrokenBanner extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    'Destpekek nuh!',
+                    'Destpêkek nû!',
                     style: AppTypography.labelMedium.copyWith(
                       color: AppColors.textPrimary,
                       fontWeight: FontWeight.w600,
                     ),
                   ),
                   Text(
-                    'Her roj firsendek nuh e. Ka em dest pe bikin!',
+                    'Her roj firsendek nû e. Ka em dest pê bikin!',
                     style: AppTypography.caption.copyWith(
                       color: AppColors.textSecondary,
                       fontSize: 11,
@@ -572,8 +584,8 @@ class CompactStreakCard extends ConsumerWidget {
                 ),
                 Text(
                   streak.dailyGoalMet
-                      ? 'Armanc hat bidestxistin!'
-                      : 'Armanca roje',
+                      ? 'Armanc temam bû!'
+                      : 'Armanca rojê',
                   style: AppTypography.caption.copyWith(
                     color: streak.dailyGoalMet
                         ? AppColors.success

@@ -4,7 +4,10 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import '../config/admin_config.dart';
 import '../utils/user_segment.dart';
+import 'local_auth_service.dart' show localCurrentUserProvider;
+import 'cloudflare_auth_service.dart' show cloudflareCurrentUserProvider;
 
 // ════════════════════════════════════════════════════════════════
 // AUTH SERVICE — LÛTKE
@@ -28,26 +31,105 @@ final currentUserProvider = Provider<User?>((ref) {
   return ref.watch(authStateProvider).value;
 });
 
+/// Firebase-only login flag.
+/// NOT: Uygulama çoğunlukla yerel auth'ta (SharedPreferences) çalıştığı için
+/// gerçek "logged in" kontrolü `isAnyLoggedInProvider` üzerinden yapılmalı.
+/// Yalnızca Firebase'e özgü akışlar için `isLoggedInProvider` kullan.
 final isLoggedInProvider = Provider<bool>((ref) {
   return ref.watch(currentUserProvider) != null;
 });
 
-/// LÛTKE sahibi — Prof. Dr. Yılmaz Mutlu.
-/// Bu mail ile giriş yapan kullanıcı admin paneline ve hata bildirim
-/// FAB'ına erişebilir.
-const kOwnerEmail = 'y.mutlu@alparslan.edu.tr';
+/// Herhangi bir auth yoluyla oturum açık mı?
+/// Firebase user varsa ya da yerel auth user varsa true döner.
+/// Router redirect'i ve splash CTA bu provider'a bakmalı — aksi halde yerel
+/// auth kullanıcıları her açılışta yeniden "Tomar bibe" görür.
+///
+/// Cold start'ta `localCurrentUserProvider` henüz Future'ı çözmediği için
+/// değer false olabilir; ancak Future tamamlanır tamamlanmaz provider
+/// otomatik re-evaluate eder (Riverpod async streaming) ve splash/router
+/// yeniden render olur. Bu davranış doğru: yüklenene kadar splash Logo'yla
+/// gösterilir, Future biter ve gerçek duruma göre yönlendirilir.
+final isAnyLoggedInProvider = Provider<bool>((ref) {
+  final firebaseLoggedIn = ref.watch(currentUserProvider) != null;
+  if (firebaseLoggedIn) return true;
+  // Yerel auth — localCurrentUserProvider async okuma. Data yoksa false.
+  final localAsync = ref.watch(_localLoggedInAsyncProvider);
+  return localAsync.maybeWhen(
+    data: (v) => v,
+    orElse: () => false,
+  );
+});
+
+/// Yerel auth FutureProvider'ı bool'a indirger — cold start'ta SharedPrefs
+/// okumasını splash'ten önce çözer. Async tamamlanınca router redirect
+/// otomatik re-evaluate olur.
+final _localLoggedInAsyncProvider = FutureProvider<bool>((ref) async {
+  try {
+    final prefs = await SharedPreferences.getInstance();
+    final raw = prefs.getString('lutke_local_user_v1');
+    return raw != null && raw.isNotEmpty;
+  } catch (_) {
+    return false;
+  }
+});
+
+/// LÛTKE sahibi (Prof. Dr. Yılmaz Mutlu) email'i ve dil uzmanları listesi
+/// `core/config/admin_config.dart`'a taşındı (Nisan 2026).
+///
+/// Build-time'da override etmek için:
+///   flutter build apk --release \
+///     --dart-define=LUTKE_OWNER_EMAIL=info@example.com \
+///     --dart-define=LUTKE_REVIEWER_EMAILS=a@x.com,b@x.com
+///
+/// Backwards compatibility için aşağıdaki re-export'lar tutulur — yeni
+/// kod doğrudan AdminConfig'i kullanmalı.
+/// Multi-owner desteği (Mayıs 2026): kOwnerEmail const kaldırıldı,
+/// yerine AdminConfig.isOwner(email) kullanın (liste kontrolü).
+List<String> get kOwnerEmails => AdminConfig.ownerEmails;
+List<String> get kReviewerEmails => AdminConfig.reviewerEmails;
 
 /// Sahip kontrolü — Firebase + yerel auth bileşik kontrolü.
 /// Firebase yapılandırıldıysa user.email; aksi halde yerel auth'tan.
+///
+/// Önemli: `_localOwnerCheckProvider` sadece aktif login/logout sonrası
+/// set ediliyor. Sayfa reload / cold start'ta `false` kalır, edit butonu
+/// görünmez. Bu yüzden `localCurrentUserProvider` (FutureProvider —
+/// SharedPreferences'tan hidrate) yedek olarak da kontrol edilir.
 final isOwnerProvider = Provider<bool>((ref) {
   // Firebase yolu (Firebase aktif ise)
   final firebaseUser = ref.watch(currentUserProvider);
-  if (firebaseUser?.email?.toLowerCase() == kOwnerEmail.toLowerCase()) {
+  if (AdminConfig.isOwner(firebaseUser?.email)) {
     return true;
   }
-  // Yerel auth yolu (Firebase yokken)
+  // Cloudflare auth (Mayıs 2026): D1'deki is_owner=1 flag'i.
+  // Backend zaten OWNER_EMAIL env kontrolü yapıyor; biz JWT claim'ine
+  // bakıyoruz — ekstra şifre kontrolüne gerek yok.
+  final cfAsync = ref.watch(cloudflareCurrentUserProvider);
+  final cfOwner = cfAsync.maybeWhen(
+    data: (u) => u?.isOwner ?? false,
+    orElse: () => false,
+  );
+  if (cfOwner) return true;
+  // Yerel auth — state provider (hızlı, login sonrası anında güncel)
   final localOwner = ref.watch(_localOwnerCheckProvider);
-  return localOwner;
+  if (localOwner) return true;
+  // Yerel auth — prefs-hydrated FutureProvider (cold start / reload'ta da çalışır)
+  final async = ref.watch(localCurrentUserProvider);
+  return async.maybeWhen(
+    data: (user) => user?.isOwner ?? false,
+    orElse: () => false,
+  );
+});
+
+/// Dil uzmanı (reviewer) kontrolü — email whitelist'e göre.
+/// Owner + reviewer email'leri birlikte reviewer yetkisine sahiptir.
+final isReviewerProvider = Provider<bool>((ref) {
+  final isOwner = ref.watch(isOwnerProvider);
+  if (isOwner) return true;
+  final firebaseUser = ref.watch(currentUserProvider);
+  final email = firebaseUser?.email?.toLowerCase();
+  if (email == null) return false;
+  return kReviewerEmails.any((e) => e.toLowerCase() == email);
 });
 
 /// Yerel auth'tan owner durumunu okur — local_auth_service.dart'a delege.
@@ -55,22 +137,31 @@ final isOwnerProvider = Provider<bool>((ref) {
 /// import'unu önler (string-tabanlı SharedPreferences okuma).
 final _localOwnerCheckProvider = StateProvider<bool>((_) => false);
 
-/// Yerel auth durumunu ref provider'a yansıtır (login/register sonrası çağrılır).
-/// `ref` parametresi `WidgetRef` veya `Ref` olabilir — sadece `read` kullanılır.
+/// Yerel auth durumunu ref provider'a yansıtır (login/register/logout sonrası çağrılır).
+/// `ref` parametresi `WidgetRef` veya `Ref` olabilir — sadece `read`/`invalidate`
+/// kullanılır.
+///
+/// `_localOwnerCheckProvider`'ı owner flag'i için günceller + async
+/// `_localLoggedInAsyncProvider`'ı invalidate eder, böylece login/logout
+/// sonrası router/splash yeniden değerlendirir.
 Future<void> refreshLocalOwnerState(dynamic ref) async {
   try {
     final prefs = await SharedPreferences.getInstance();
     final raw = prefs.getString('lutke_local_user_v1');
     if (raw == null) {
       ref.read(_localOwnerCheckProvider.notifier).state = false;
-      return;
+    } else {
+      final json = jsonDecode(raw) as Map<String, dynamic>;
+      final isOwner = json['isOwner'] as bool? ?? false;
+      ref.read(_localOwnerCheckProvider.notifier).state = isOwner;
     }
-    final json = jsonDecode(raw) as Map<String, dynamic>;
-    final isOwner = json['isOwner'] as bool? ?? false;
-    ref.read(_localOwnerCheckProvider.notifier).state = isOwner;
   } catch (_) {
     ref.read(_localOwnerCheckProvider.notifier).state = false;
   }
+  // Async login flag'ini invalidate et — yeni değer SharedPreferences'tan okunsun.
+  try {
+    ref.invalidate(_localLoggedInAsyncProvider);
+  } catch (_) {}
 }
 
 final userProfileFirestoreProvider =
@@ -178,7 +269,42 @@ class AuthService {
   Future<void> signOut() async {
     await _auth.signOut();
     final prefs = await SharedPreferences.getInstance();
+    // Oturumla bağlı tüm yerel state'i temizle — farklı hesapla gelen
+    // kullanıcı eski track/onboarding/challenge state'iyle karşılaşmasın.
     await prefs.remove('is_anonymous');
+    await prefs.remove('learning_track_v1');
+    await prefs.remove('child_onboarding_complete');
+    await prefs.remove('onboarding_complete');
+    await prefs.remove('is_child_mode');
+    // BUG FIX: Anahtarlar provider ile uyumsuzdu (learning_module_v1 vs learning_module,
+    // language_mode eksikti). Bu yüzden logout sonrası yeni hesap eski modül/dili görüyordu.
+    await prefs.remove('learning_module');
+    await prefs.remove('language_mode');
+    await prefs.remove('user_mode_preference_v1');
+    await prefs.remove('kurmanci_tts_source_v1');
+    // Challenge/streak/gamification state'i de sıfırla
+    await prefs.remove('streak_state');
+    await prefs.remove('gamification_state');
+    await prefs.remove('gamification_daily_xp_log');
+    await prefs.remove('child_challenge_date');
+    await prefs.remove('bizer_evolution_stars');
+    await prefs.remove('review_weak_words');
+    await prefs.remove('review_last_session');
+    await prefs.remove('lutke_completed_activities');
+    // NOT (2026-05-06): Eskiden placement_level_ku/en burada silinirdi
+    // ("oturum-scoped" niyetiyle) — ama bu kullanıcı her login olduğunda
+    // CEFR testini tekrar tetikliyordu. Kullanıcı isteği: test sadece ilk
+    // kayıt + ilk girişte gösterilsin. Artık placement level cihazda
+    // kalıcı; aynı kullanıcı tekrar login → track-select doğrudan home'a.
+    await prefs.remove('motivation_anchor_name');
+    // Skill XP — her modül × her skill için kaldır
+    for (final module in ['ku', 'en']) {
+      for (final skill in ['grammar', 'writing', 'reading', 'listening',
+          'speaking', 'quiz']) {
+        await prefs.remove('skill_${module}_${skill}_completed');
+        await prefs.remove('skill_${module}_${skill}_xp');
+      }
+    }
   }
 
   // ── PROFİL ─────────────────────────────────────────────────

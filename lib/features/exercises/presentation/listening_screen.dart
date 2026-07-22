@@ -1,7 +1,5 @@
-import 'dart:async';
 import 'dart:math';
 
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_animate/flutter_animate.dart';
@@ -12,15 +10,21 @@ import '../../../core/router/app_router.dart';
 import '../../../core/constants/app_colors.dart';
 import '../../../core/constants/app_spacing.dart';
 import '../../../core/constants/app_typography.dart';
+import '../../../core/services/audio_service.dart';
+import '../../../core/services/tts_service.dart';
+import '../../../core/services/tts_source_preferences.dart';
+import '../../../shared/providers/learning_module_provider.dart';
 import '../../../shared/widgets/speak_button.dart';
+import '../../en_learning/presentation/en_listening_screen.dart';
 import '../../lessons/domain/a1_kelime_db.dart';
 import '../../../core/services/sound_service.dart';
 import '../../lessons/domain/a2_kelime_db.dart';import '../../lessons/domain/b1_kelime_db.dart';import '../../lessons/domain/b2_kelime_db.dart';import '../../lessons/domain/c1_kelime_db.dart';import '../../lessons/domain/c2_kelime_db.dart';
-
-// Conditional import for direct TTS calls
-import '../../../core/services/js_eval_stub.dart'
-    if (dart.library.html) '../../../core/services/js_eval_web.dart'
-    as js_bridge;
+import '../../gamification/gamification_provider.dart';
+import '../../../shared/services/skill_progress_service.dart';
+import '../../../shared/widgets/persistent_xp_badge.dart';
+import '../../../shared/widgets/xp_float_animation.dart';
+import '../../../shared/widgets/streak_milestone_toast.dart';
+import '../../child_mode/domain/child_daily_challenge.dart';
 
 // ════════════════════════════════════════════════════════════════
 // LISTENING COMPREHENSION — Guhdarî bike
@@ -185,7 +189,7 @@ List<_ListeningQuestion> _generateListeningSession({int questionCount = 8, Strin
           'ber','bo','bê','bes','her','hin',
           // Zamirler
           'min','te','wî','wê','em','hûn','ew','ez','tu',
-          // Ezafe parçaları / soru kelimeleri
+          // Veqetandek parçaları / soru kelimeleri
           'a','ê','î','ên','ya','yê','yên','ko','ku','çi','kî','kê',
         };
 
@@ -331,96 +335,63 @@ class _ListeningScreenState extends ConsumerState<ListeningScreen>
   bool _isSlowMode = false;
   bool _answered = false;
   String? _selectedOption;
-  bool _sentenceRevealed = false;
   bool _isPlaying = false; // TTS playback state for waveform
 
-  // Typewriter animation
-  String _displayedText = '';
-  Timer? _typewriterTimer;
+  // Bayat ses gardı: soru değişince/ekran kapanınca eski (geç gelen)
+  // TTS sonucu ÇALINMAZ. HF synthesize saniyeler sürebilir; kullanıcı
+  // sonraki soruya geçtiyse önceki cümlenin sesi duyulmamalı.
+  int _ttsGeneration = 0;
 
   @override
   void initState() {
     super.initState();
     _questions = _generateListeningSession(questionCount: 8, category: widget.category, level: widget.level);
     if (_questions.isNotEmpty) {
-      _startTypewriter();
+      // Dinleme sorusu: cümle EKRANDA GÖSTERİLMEZ, otomatik SESLENDİRİLİR.
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        if (mounted) _replayTts();
+      });
     }
   }
 
   @override
   void dispose() {
-    _typewriterTimer?.cancel();
+    _ttsGeneration++; // geç gelen synthesize sonucu çalmasın
     super.dispose();
   }
 
-  void _startTypewriter() {
-    _typewriterTimer?.cancel();
-    _displayedText = '';
-    _sentenceRevealed = false;
-
-    final sentence = _questions[_currentIndex].sentence;
-    final words = sentence.split(' ');
-    int wordIndex = 0;
-
-    final interval = _isSlowMode ? 400 : 200;
-
-    _typewriterTimer = Timer.periodic(Duration(milliseconds: interval), (timer) {
-      if (!mounted) {
-        timer.cancel();
-        return;
-      }
-      if (wordIndex < words.length) {
-        setState(() {
-          _displayedText = words.sublist(0, wordIndex + 1).join(' ');
-        });
-        wordIndex++;
-      } else {
-        timer.cancel();
-        if (mounted) {
-          setState(() => _sentenceRevealed = true);
-        }
-      }
-    });
-  }
-
-  /// Play TTS for given text — Kurdish-first voice strategy
-  void _playTts(String text, {double rate = 0.82}) {
-    if (!kIsWeb) return;
-    final escaped = text
-        .replaceAll("'", "\\'")
-        .replaceAll('"', '\\"')
-        .replaceAll('\n', ' ');
-    final script = '''
-      (function() {
-        const u = new SpeechSynthesisUtterance('$escaped');
-        const voices = speechSynthesis.getVoices();
-        const kurdish = voices.find(v => v.lang.startsWith('ku'));
-        const turkish = voices.find(v => v.lang.startsWith('tr'));
-        if (kurdish) {
-          u.voice = kurdish;
-          u.lang = kurdish.lang;
-        } else if (turkish) {
-          u.voice = turkish;
-          u.lang = 'tr-TR';
-        } else {
-          u.lang = 'tr-TR';
-        }
-        u.rate = $rate;
-        u.pitch = 1.0;
-        speechSynthesis.cancel();
-        speechSynthesis.speak(u);
-      })();
-    ''';
+  /// Kurmancî TTS — yalnızca HuggingFace amedcj/kmr_tts.
+  /// Browser Türkçe/İngilizce fallback YOKTUR (yanlış telaffuz olmasın).
+  Future<void> _playTts(String text, {double rate = 0.82}) async {
+    final trimmed = text.trim();
+    if (trimmed.isEmpty) return;
+    final gen = _ttsGeneration;
     try {
-      js_bridge.evalJs(script);
-    } catch (_) {}
+      final tts = ref.read(ttsServiceProvider);
+      // Profîl > Mîheng > Dengê Kurmancî tercihini senkronize et.
+      // Aksi halde SpeakButton'a hiç basılmamışsa default assetFirst'te kalır,
+      // kullanıcı assetOnly seçmiş olsa bile HF'e düşer.
+      tts.source = ref.read(ttsSourceProvider);
+      final audioUrl = await tts.synthesize(trimmed);
+      // Soru değiştiyse ya da ekran kapandıysa bayat sesi çalma.
+      if (audioUrl == null || !mounted || gen != _ttsGeneration) return;
+      final audio = ref.read(audioServiceProvider.notifier);
+      if (audioUrl.startsWith('asset:')) {
+        await audio.playAsset(audioUrl.substring('asset:'.length), speed: rate);
+      } else {
+        await audio.playUrl(audioUrl, speed: rate);
+      }
+    } catch (_) {
+      // Sessiz geç — yanlış telaffuz yerine susmak tercih edilir
+    }
   }
 
   /// Replay current sentence TTS with speed setting
   void _replayTts() {
     if (_questions.isEmpty) return;
     final sentence = _questions[_currentIndex].sentence;
-    final rate = _isSlowMode ? 0.7 : 0.85;
+    // Etiketlerle tutarlı: "Hêdî (0.7x)" / "Normal (1.0x)"
+    final rate = _isSlowMode ? 0.7 : 1.0;
     _playTts(sentence, rate: rate);
     setState(() => _isPlaying = true);
     // Estimate duration and reset playing state
@@ -454,13 +425,28 @@ class _ListeningScreenState extends ConsumerState<ListeningScreen>
       if (isCorrect) {
         _correctCount++;
         SoundService.playCorrect();
+        SoundService.playXpGain();
         HapticFeedback.mediumImpact();
       } else {
         _hearts = (_hearts - 1).clamp(0, 3);
         SoundService.playWrong();
+        SoundService.playFail();
         HapticFeedback.heavyImpact();
       }
     });
+    if (isCorrect) {
+      showXpFloat(context, 12);
+      final milestone = ref
+          .read(gamificationProvider.notifier)
+          .registerCorrectForCombo();
+      if (milestone > 0) {
+        final isEn = ref.read(isEnglishModuleProvider);
+        final newCombo = ref.read(gamificationProvider).comboCount;
+        showStreakMilestone(context, newCombo, isEnglish: isEn);
+      }
+    } else {
+      ref.read(gamificationProvider.notifier).resetCombo();
+    }
 
     // Auto-play correct answer TTS so user hears the right pronunciation
     Future.delayed(const Duration(milliseconds: 400), () {
@@ -479,12 +465,34 @@ class _ListeningScreenState extends ConsumerState<ListeningScreen>
           _selectedOption = null;
           _isPlaying = false;
         });
-        _startTypewriter();
+        _ttsGeneration++; // önceki sorunun bekleyen sesi iptal
+        _replayTts(); // yeni soruyu otomatik seslendir
       }
     });
   }
 
   void _showResults() {
+    // ── GAMIFICATION CANLI VERİ ──────────────────────
+    SoundService.playSessionComplete();
+    final total = _currentIndex + 1;
+    final gami = ref.read(gamificationProvider.notifier);
+    gami.resetCombo();
+    gami.addXP(_correctCount * 12);
+    gami.updateWordsLearned(_correctCount);
+    if (total > 0 && _correctCount == total) gami.recordPerfectScore();
+    // İLERLEME FIX (Temmuz 2026): Beceri panosundaki 'listening' (Guhdarî)
+    // sayacına bu ekran hiç yazmıyordu — dinleme oturumu tamamlanınca işle.
+    // (Ekran KU'ya özel; EN track EnListeningScreen'e yönleniyor.)
+    markSkillCompletedAndNotify(ref, module: 'ku', skill: 'listening');
+    // Daily challenge: listenAudio + correctAnswers
+    // BUG FIX: Wrapper ile invalidate — daily kart sürekli stale kalirdi.
+    recordChallengeProgressAndNotify(
+        ref, ChallengeKind.listenAudio, amount: total);
+    if (_correctCount > 0) {
+      recordChallengeProgressAndNotify(
+          ref, ChallengeKind.correctAnswers, amount: _correctCount);
+    }
+
     showModalBottomSheet(
       context: context,
       isDismissible: false,
@@ -507,7 +515,8 @@ class _ListeningScreenState extends ConsumerState<ListeningScreen>
             _answered = false;
             _selectedOption = null;
           });
-          if (_questions.isNotEmpty) _startTypewriter();
+          _ttsGeneration++;
+          if (_questions.isNotEmpty) _replayTts();
         },
       ),
     );
@@ -518,12 +527,19 @@ class _ListeningScreenState extends ConsumerState<ListeningScreen>
     setState(() {
       _isSlowMode = !_isSlowMode;
     });
-    // Restart typewriter with new speed
-    _startTypewriter();
   }
 
   @override
   Widget build(BuildContext context) {
+    // ── TRACK-AWARE REDIRECT ────────────────────────────────
+    // English track kullanıcısı bu ekrana ulaşırsa (deep-link ya da
+    // unit_hub /activity/listening), Kurmancî cümleler yerine EN
+    // listening ekranını render ederiz. Aksi halde cross-track leak olur.
+    final isEn = ref.watch(isEnglishModuleProvider);
+    if (isEn) {
+      return const EnListeningScreen();
+    }
+
     if (_questions.isEmpty) {
       return Scaffold(
         backgroundColor: AppColors.backgroundPrimary,
@@ -602,6 +618,8 @@ class _ListeningScreenState extends ConsumerState<ListeningScreen>
                       );
                     }),
                   ),
+                  const SizedBox(width: 6),
+                  const PersistentXpBadge(),
                 ],
               ),
             ).animate().fadeIn(duration: 300.ms),
@@ -628,18 +646,17 @@ class _ListeningScreenState extends ConsumerState<ListeningScreen>
                 padding: const EdgeInsets.symmetric(horizontal: AppSpacing.md),
                 child: Column(
                   children: [
-                    // Speaker button + sentence + waveform
+                    // Speaker button + waveform. Cümle CEVAPTAN SONRA
+                    // gösterilir — dinleme sorusunda metin önceden
+                    // görünürse egzersiz anlamını yitirir.
                     _AudioSimulationCard(
                       sentence: question.sentence,
-                      displayedText: _displayedText,
-                      sentenceRevealed: _sentenceRevealed,
+                      displayedText: _answered ? question.sentence : '',
+                      sentenceRevealed: _answered,
                       isSlowMode: _isSlowMode,
                       isPlaying: _isPlaying,
                       onToggleSpeed: _toggleSpeed,
-                      onReplay: () {
-                        _startTypewriter();
-                        _replayTts();
-                      },
+                      onReplay: _replayTts,
                       onReplayTts: _replayTts,
                     ),
 
@@ -839,36 +856,34 @@ class _AudioSimulationCard extends StatelessWidget {
 
           const SizedBox(height: AppSpacing.md),
 
-          // Typewriter text
-          AnimatedDefaultTextStyle(
-            duration: const Duration(milliseconds: 200),
-            style: isSlowMode
-                ? AppTypography.kurmanjiLarge.copyWith(
-                    color: AppColors.textPrimary,
-                    height: 1.6,
-                  )
-                : AppTypography.kurmanji.copyWith(
-                    color: AppColors.textPrimary,
-                    height: 1.6,
-                  ),
-            child: Text(
-              displayedText,
-              textAlign: TextAlign.center,
-            ),
-          ),
-
-          // Cursor blink while typing
-          if (!sentenceRevealed)
-            const Text(
-              '|',
-              style: TextStyle(
-                fontSize: 22,
-                color: AppColors.primary,
-                fontWeight: FontWeight.w300,
+          // Cevaptan sonra: dinlenen cümle geri bildirim olarak gösterilir.
+          if (sentenceRevealed)
+            AnimatedDefaultTextStyle(
+              duration: const Duration(milliseconds: 200),
+              style: isSlowMode
+                  ? AppTypography.kurmanjiLarge.copyWith(
+                      color: AppColors.textPrimary,
+                      height: 1.6,
+                    )
+                  : AppTypography.kurmanji.copyWith(
+                      color: AppColors.textPrimary,
+                      height: 1.6,
+                    ),
+              child: Text(
+                displayedText,
+                textAlign: TextAlign.center,
               ),
-            ).animate(onPlay: (c) => c.repeat(reverse: true)).fadeIn(
-                  duration: 500.ms,
-                ),
+            ).animate().fadeIn(duration: 300.ms)
+          else
+            // Cevaptan önce: metin gizli — kullanıcı yalnızca dinler.
+            Text(
+              'Guhdarî bike û bersiva rast hilbijêre',
+              textAlign: TextAlign.center,
+              style: AppTypography.caption.copyWith(
+                color: AppColors.textTertiary,
+                fontStyle: FontStyle.italic,
+              ),
+            ),
         ],
       ),
     ).animate().fadeIn(duration: 400.ms).slideY(begin: -0.05);

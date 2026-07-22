@@ -45,9 +45,8 @@ class FSRSRatingCard extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final showTurkish = ref.watch(showTurkishProvider);
-    // Caller provides the appropriate translation text (Turkish or English).
-    // If caller passes Turkish directly, use english fallback in Kurdish-only mode.
-    final translationText = showTurkish ? turkish : (english ?? turkish);
+    // Dil moduna göre çeviri: kuTr → Türkçe, kuEn → İngilizce.
+    final translationText = showTurkish ? turkish : english;
     return Column(
       children: [
         // Kelime kartı
@@ -105,14 +104,15 @@ class FSRSRatingCard extends ConsumerWidget {
 
                 const SizedBox(height: AppSpacing.sm),
 
-                // Translation — conditional (İlke §0.5)
-                Text(
-                  translationText,
-                  style: AppTypography.bodyLarge.copyWith(
-                    color: AppColors.textSecondary,
+                // Translation — kuOnly modda gizlenir (null → gizli).
+                if (translationText != null)
+                  Text(
+                    translationText,
+                    style: AppTypography.bodyLarge.copyWith(
+                      color: AppColors.textSecondary,
+                    ),
+                    textAlign: TextAlign.center,
                   ),
-                  textAlign: TextAlign.center,
-                ),
 
                 // Örnek cümleler
                 if (sentences.isNotEmpty) ...[
@@ -173,7 +173,7 @@ class _FSRSRatingRow extends StatelessWidget {
                 Expanded(
                   child: _RatingButton(
                     kuLabel: 'Dubare',
-                    trLabel: showTurkish ? 'Ji nû ve' : 'Again',
+                    trLabel: showTurkish ? 'Tekrar' : 'Again',
                     color: const Color(0xFFEF5350),
                     icon: Icons.refresh_rounded,
                     onTap: () {

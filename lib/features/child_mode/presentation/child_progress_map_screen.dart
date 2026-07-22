@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../../core/constants/child_theme.dart';
+import '../../../shared/providers/language_mode_provider.dart';
 import 'widgets/star_display_widget.dart';
 
 // ════════════════════════════════════════════════════════════════
@@ -78,7 +80,7 @@ class ChildProgressMapScreen extends StatelessWidget {
   }
 }
 
-class _MapNode extends StatelessWidget {
+class _MapNode extends ConsumerWidget {
   final _NodeData node;
   final int index;
   final bool isCompleted;
@@ -94,8 +96,9 @@ class _MapNode extends StatelessWidget {
   });
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     final delay = (200 + index * 150).ms;
+    final showTurkish = ref.watch(showTurkishProvider);
 
     Widget nodeWidget = Container(
       width: double.infinity,
@@ -162,16 +165,18 @@ class _MapNode extends StatelessWidget {
                     color: isLocked ? Colors.grey : null,
                   ),
                 ),
-                const SizedBox(height: 2),
-                Text(
-                  node.titleTr,
-                  style: TextStyle(
-                    fontSize: 13,
-                    color: isLocked
-                        ? Colors.grey.shade400
-                        : ChildColors.textSecondary,
+                if (showTurkish) ...[
+                  const SizedBox(height: 2),
+                  Text(
+                    node.titleTr,
+                    style: TextStyle(
+                      fontSize: 13,
+                      color: isLocked
+                          ? Colors.grey.shade400
+                          : ChildColors.textSecondary,
+                    ),
                   ),
-                ),
+                ],
                 if (isCompleted) ...[
                   const SizedBox(height: 6),
                   StarDisplay(count: node.stars, size: 18),

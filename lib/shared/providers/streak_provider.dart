@@ -15,7 +15,10 @@ class StreakState {
   final int todayXP;
   final List<bool> weeklyActivity; // 7 eleman: Pzt=0 ... Paz=6
   final int dailyGoal;
-  final bool streakBroken; // Dün aktif değilse
+  final bool streakBroken; // Dün aktif değilse (görsel not — ceza değil)
+  final int freezeTokens; // Roja Rihet — haftalık otomatik freeze
+  final String lastFreezeGrantDate; // ISO — hafta içi granting
+  final List<String> usedFreezeDates; // Hangi günlere freeze uygulandı
 
   const StreakState({
     this.streakDays = 0,
@@ -25,6 +28,9 @@ class StreakState {
     this.weeklyActivity = const [false, false, false, false, false, false, false],
     this.dailyGoal = 20,
     this.streakBroken = false,
+    this.freezeTokens = 1, // Haftada 1 Roja Rihet
+    this.lastFreezeGrantDate = '',
+    this.usedFreezeDates = const [],
   });
 
   double get dailyProgress =>
@@ -42,6 +48,9 @@ class StreakState {
     List<bool>? weeklyActivity,
     int? dailyGoal,
     bool? streakBroken,
+    int? freezeTokens,
+    String? lastFreezeGrantDate,
+    List<String>? usedFreezeDates,
   }) {
     return StreakState(
       streakDays: streakDays ?? this.streakDays,
@@ -51,6 +60,9 @@ class StreakState {
       weeklyActivity: weeklyActivity ?? this.weeklyActivity,
       dailyGoal: dailyGoal ?? this.dailyGoal,
       streakBroken: streakBroken ?? this.streakBroken,
+      freezeTokens: freezeTokens ?? this.freezeTokens,
+      lastFreezeGrantDate: lastFreezeGrantDate ?? this.lastFreezeGrantDate,
+      usedFreezeDates: usedFreezeDates ?? this.usedFreezeDates,
     );
   }
 
@@ -61,6 +73,9 @@ class StreakState {
         'todayXP': todayXP,
         'weeklyActivity': weeklyActivity,
         'dailyGoal': dailyGoal,
+        'freezeTokens': freezeTokens,
+        'lastFreezeGrantDate': lastFreezeGrantDate,
+        'usedFreezeDates': usedFreezeDates,
       };
 
   factory StreakState.fromJson(Map<String, dynamic> json) {
@@ -72,6 +87,10 @@ class StreakState {
       weeklyActivity: (json['weeklyActivity'] as List?)?.cast<bool>() ??
           List.filled(7, false),
       dailyGoal: json['dailyGoal'] as int? ?? 20,
+      freezeTokens: json['freezeTokens'] as int? ?? 1,
+      lastFreezeGrantDate: json['lastFreezeGrantDate'] as String? ?? '',
+      usedFreezeDates:
+          (json['usedFreezeDates'] as List?)?.cast<String>() ?? const [],
     );
   }
 }
@@ -95,6 +114,7 @@ class StreakNotifier extends StateNotifier<StreakState> {
         final data = jsonDecode(json) as Map<String, dynamic>;
         var loaded = StreakState.fromJson(data);
         loaded = _reconcileDate(loaded);
+        loaded = _grantWeeklyFreeze(loaded, DateTime.now());
         state = loaded;
       } catch (_) {
         // Bozuk veri — varsayilan state ile devam
@@ -139,8 +159,23 @@ class StreakNotifier extends StateNotifier<StreakState> {
         weeklyActivity: newWeekly,
         streakBroken: false,
       );
+    } else if (daysDiff == 2 && s.freezeTokens > 0) {
+      // Bir gun atlanmis — Roja Rihet ile koru (streak kirilmaz)
+      final freezeDate = _dateToIso(
+          DateTime(lastDate.year, lastDate.month, lastDate.day)
+              .add(const Duration(days: 1)));
+      final newWeekly = _buildWeeklyForToday(s.weeklyActivity, now);
+      return s.copyWith(
+        lastActiveDate: todayStr,
+        todayWordsReviewed: 0,
+        todayXP: 0,
+        weeklyActivity: newWeekly,
+        streakBroken: false,
+        freezeTokens: s.freezeTokens - 1,
+        usedFreezeDates: [...s.usedFreezeDates, freezeDate],
+      );
     } else if (daysDiff > 1) {
-      // Streak kirildi
+      // Streak kirildi — cezasiz, sadece tamam hissiyle yeniden basla
       final newWeekly = _buildWeeklyForToday(null, now);
       return s.copyWith(
         streakDays: 0,
@@ -153,6 +188,19 @@ class StreakNotifier extends StateNotifier<StreakState> {
     }
 
     return s;
+  }
+
+  /// Haftalık Roja Rihet yenileme: her Pazartesi 1 token.
+  /// Max 2 biriktirilebilir (Duolingo araştırması: 2 token optimum).
+  StreakState _grantWeeklyFreeze(StreakState s, DateTime now) {
+    final todayStr = _dateToIso(now);
+    if (now.weekday != DateTime.monday) return s;
+    if (s.lastFreezeGrantDate == todayStr) return s;
+    final newTokens = (s.freezeTokens + 1).clamp(0, 2);
+    return s.copyWith(
+      freezeTokens: newTokens,
+      lastFreezeGrantDate: todayStr,
+    );
   }
 
   /// Haftalik aktiviteyi guncelle (yeni hafta ise sifirla)

@@ -18,6 +18,7 @@ import '../domain/b2_kelime_db.dart';
 import '../domain/c1_kelime_db.dart';
 import '../domain/c2_kelime_db.dart';
 import '../../../shared/utils/word_emoji_map.dart';
+import '../../admin/data/content_override_service.dart';
 
 // ════════════════════════════════════════════════════════════════
 // KELİME TARAYICI — Tüm seviyelerdeki kelimeleri görüntüle
@@ -59,41 +60,9 @@ Color _categoryColor(String kat) {
   return _kCategoryColors[key] ?? AppColors.primary;
 }
 
-/// Kategori -> emoji eslesmesi (gorsel baglamsal ipucu)
-String _emojiForCategory(String kat) => switch (kat) {
-  'silav' || 'selamlama' => '\u{1F44B}',
-  'malbat'               => '\u{1F468}\u{200D}\u{1F469}\u{200D}\u{1F467}\u{200D}\u{1F466}',
-  'xwarin'               => '\u{1F37D}\u{FE0F}',
-  'vexwarin'             => '\u{1F964}',
-  'mêwe' || 'mewe'       => '\u{1F34E}',
-  'ajal'                 => '\u{1F43E}',
-  'reng'                 => '\u{1F3A8}',
-  'jimar'                => '\u{1F522}',
-  'mal'                  => '\u{1F3E0}',
-  'cil'                  => '\u{1F455}',
-  'beden'                => '\u{1FAC1}',
-  'tendurist'            => '\u{1F48A}',
-  'pîşe' || 'pise'       => '\u{1F477}',
-  'dem'                  => '\u{23F0}',
-  'roj'                  => '\u{1F4C5}',
-  'demsal'               => '\u{1F326}\u{FE0F}',
-  'cih'                  => '\u{1F4CD}',
-  'gihanî'               => '\u{1F697}',
-  'leker'                => '\u{1F3C3}',
-  'xweza'                => '\u{1F33F}',
-  'perwerde'             => '\u{1F4DA}',
-  'çand' || 'cand'       => '\u{1F3AD}',
-  'alfabe'               => '\u{1F524}',
-  'cinavk'               => '\u{1F464}',
-  'rengder'              => '\u{1F4DD}',
-  'daçek' || 'dacek'     => '\u{1F517}',
-  'temel'                => '\u{1F4A1}',
-  'dua'                  => '\u{1F932}',
-  'peyvben'              => '\u{1F500}',
-  'pirs'                 => '\u{2753}',
-  'bun'                  => '\u{2728}',
-  _                      => '',
-};
+// Kategori emoji helper'ı artık shared/utils/word_emoji_map.dart içinde
+// `categoryEmoji(kat)` olarak export ediliyor. Bu ekran zaten kelime-spesifik
+// `emojiForWord()` kullandığından, eski kopya kaldırıldı (unused_element).
 
 /// Seviye -> emoji eslesmesi
 String _emojiForLevel(String level) => switch (level) {
@@ -284,7 +253,18 @@ class _VocabularyBrowseScreenState extends ConsumerState<VocabularyBrowseScreen>
   }
 
   List<dynamic> _getFilteredWords(_LevelData level) {
-    var list = level.words.where((w) {
+    // CRUD-aware: delete + custom + edit override uygula.
+    final overrides = ref.read(contentOverridesProvider);
+    final deletedIds = ref.read(deletedWordIdsProvider);
+    final customWords = ref.read(customWordsProvider);
+    final merged = applyVocabulary(
+      List<dynamic>.from(level.words),
+      level: level.name,
+      overrides: overrides,
+      deletedIds: deletedIds,
+      customWords: customWords,
+    );
+    var list = merged.where((w) {
       return _wordMatchesSearch(w, _searchQuery) && _wordMatchesCategory(w);
     }).toList();
 
@@ -296,7 +276,8 @@ class _VocabularyBrowseScreenState extends ConsumerState<VocabularyBrowseScreen>
         break;
       case _SortMode.difficulty:
         list.sort(
-            (a, b) => (b.zor as double).compareTo(a.zor as double));
+            (a, b) => ((b.zor as num).toDouble())
+                .compareTo((a.zor as num).toDouble()));
         break;
       case _SortMode.category:
         list.sort(
@@ -394,6 +375,7 @@ class _VocabularyBrowseScreenState extends ConsumerState<VocabularyBrowseScreen>
 
   Future<void> _onRefresh() async {
     await Future.delayed(const Duration(milliseconds: 600));
+    if (!mounted) return;
     setState(() {});
   }
 
@@ -974,7 +956,7 @@ class _LevelSectionState extends State<_LevelSection> {
 // KELİME KARTI
 // ════════════════════════════════════════════════════════════════
 
-class _WordCard extends StatelessWidget {
+class _WordCard extends ConsumerWidget {
   final dynamic word;
   final Color levelColor;
   final bool isExpanded;
@@ -994,16 +976,20 @@ class _WordCard extends StatelessWidget {
   });
 
   @override
-  Widget build(BuildContext context) {
-    final ku = word.ku as String;
-    final tr = word.tr as String;
-    final en = word.en as String;
-    final kat = word.kat as String;
-    final cins = word.cins as String;
-    final ez = word.ez as String?;
-    final not_ = word.not as String?;
-    final her = word.her as List<String>;
-    final gen = word.gen as List<String>;
+  Widget build(BuildContext context, WidgetRef ref) {
+    // Owner runtime override (yalnızca Kurmancî DB için)
+    final overrides = ref.watch(contentOverridesProvider);
+    final rawId = word.id as String;
+    final displayWord = applyOverride(word, overrides[rawId]);
+    final ku = displayWord.ku as String;
+    final tr = displayWord.tr as String;
+    final en = displayWord.en as String;
+    final kat = displayWord.kat as String;
+    final cins = displayWord.cins as String;
+    final ez = displayWord.ez as String?;
+    final not_ = displayWord.not as String?;
+    final her = displayWord.her as List<String>;
+    final gen = displayWord.gen as List<String>;
 
     return GestureDetector(
       onTap: onTap,
@@ -1129,7 +1115,7 @@ class _WordCard extends StatelessWidget {
               Divider(height: 1, color: AppColors.border),
               const SizedBox(height: AppSpacing.sm),
 
-              // Cinsiyet ve Ezafe
+              // Cinsiyet ve Veqetandek
               Row(
                 children: [
                   _DetailChip(
@@ -1145,15 +1131,16 @@ class _WordCard extends StatelessWidget {
                     const SizedBox(width: 8),
                     _DetailChip(
                       icon: Icons.link,
-                      label: 'Ezafe: $ez',
+                      label: 'Veqetandek: $ez',
                       color: AppColors.primary,
                     ),
                   ],
                 ],
               ),
 
-              // Gramer notu
-              if (not_ != null && not_.isNotEmpty) ...[
+              // Gramer notu — sadece Türkçe mod açıkken (not: alanı Türkçe).
+              // Kurmancî modda Türkçe metin sızıntısı önlenir.
+              if (showTurkish && not_ != null && not_.isNotEmpty) ...[
                 const SizedBox(height: AppSpacing.sm),
                 Container(
                   width: double.infinity,

@@ -4,7 +4,8 @@
   <base href="$FLUTTER_BASE_HREF">
   <meta charset="UTF-8">
   <meta content="IE=Edge" http-equiv="X-UA-Compatible">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <!-- WCAG 2.2 1.4.4 Resize Text: zoom'a izin ver (max 5x) -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
   <meta name="description" content="LÛTKE — Kurmancî dil öğretim uygulaması.">
   <meta name="theme-color" content="#1A7B6B">
   <meta name="mobile-web-app-capable" content="yes">
@@ -15,12 +16,728 @@
   <link rel="icon" type="image/png" href="favicon.png"/>
   <title>LÛTKE — Zimanê Kurdî</title>
   <link rel="manifest" href="manifest.json">
+  <!-- WEB-COMPAT: google_fonts paketi runtime'da fonts.gstatic.com'dan Lexend /
+       AtkinsonHyperlegible çeker (disleksi erişilebilirlik modu). Preconnect
+       ile ilk font indirme gecikmesini ~100-200ms kısaltır.
+       PERF 2026-04: preconnect ek olarak fonts.googleapis.com için de eklendi
+       (CSS manifest'i oradan iniyor). dns-prefetch fallback as-is. -->
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
+  <link rel="dns-prefetch" href="https://fonts.gstatic.com">
+  <link rel="dns-prefetch" href="https://fonts.googleapis.com">
+  <!-- PERF 2026-04 (güncel): canvaskit.wasm preload AÇIK. Paralel fetch
+       TTI'yi ~600ms erken getiriyor (kritik-ajan raporu, 19 Nisan). -->
+  <link rel="preload" href="canvaskit/canvaskit.wasm" as="fetch" crossorigin>
+  <!-- Google Identity Services (GIS) — "Google ile Têkeve" butonu için.
+       async + defer: render'i geciktirmiyor. clientId backend'den gelir,
+       LutkeGoogleSignIn objesi GIS yüklendikten sonra init edilir. -->
+  <script src="https://accounts.google.com/gsi/client" async defer></script>
+  <script>
+    // LÛTKE Google Sign-In bridge — Dart tarafından kullanılır.
+    // initGoogleSignIn(clientId) → GIS'i ayarlar.
+    // promptGoogleSignIn() → popup açar, Promise<idToken|null> döner.
+    window.LutkeGoogleSignIn = (function () {
+      var _initialized = false;
+      var _clientId = null;
+      var _pendingResolve = null;
+
+      function _waitForGis() {
+        return new Promise(function (resolve) {
+          var tries = 0;
+          var iv = setInterval(function () {
+            tries++;
+            if (window.google && window.google.accounts && window.google.accounts.id) {
+              clearInterval(iv);
+              resolve(true);
+            } else if (tries > 50) { // ~5s
+              clearInterval(iv);
+              resolve(false);
+            }
+          }, 100);
+        });
+      }
+
+      function init(clientId) {
+        if (!clientId) return Promise.resolve(false);
+        if (_initialized && _clientId === clientId) return Promise.resolve(true);
+        return _waitForGis().then(function (ok) {
+          if (!ok) return false;
+          window.google.accounts.id.initialize({
+            client_id: clientId,
+            callback: function (resp) {
+              var r = _pendingResolve;
+              _pendingResolve = null;
+              if (r) r(resp && resp.credential ? resp.credential : null);
+            },
+            auto_select: false,
+            cancel_on_tap_outside: true,
+            itp_support: true, // Safari ITP / 3rd-party cookie kısıtları
+            // NOT: use_fedcm_for_prompt kaldırıldı (2026-05-14 Cejna deploy).
+            //   FedCM Chrome'a Google ile signed-in olmayan kullanıcılarda
+            //   "Not signed in with the identity provider" hatası veriyordu.
+            //   Aşağıdaki prompt() fallback'i FedCM fail olursa OAuth popup'a geçer.
+          });
+          _initialized = true;
+          _clientId = clientId;
+          return true;
+        });
+      }
+
+      // ─── Full-redirect handoff (popup engellenmişse) ────────────
+      // Popup blocker → _signInPopup son çare olarak full-redirect yapar;
+      // /oauth-callback sayfası token'ı sessionStorage'a yazıp /app/'e döner.
+      // Buradaki consume, bir sonraki prompt() çağrısında o token'ı popup
+      // açmadan kullanır (state doğrulamalı, tek seferlik).
+      function _consumeRedirectResult() {
+        var raw = null;
+        try {
+          raw = sessionStorage.getItem('lutke_google_redirect_result');
+          if (raw !== null) sessionStorage.removeItem('lutke_google_redirect_result');
+        } catch (_) { return null; }
+        if (!raw) return null;
+        var payload;
+        try { payload = JSON.parse(raw); } catch (_) { return null; }
+        if (!payload || payload.type !== 'lutke_google_callback') return null;
+        var expectedState = null;
+        try {
+          expectedState = sessionStorage.getItem('lutke_google_state');
+          sessionStorage.removeItem('lutke_google_state');
+          sessionStorage.removeItem('lutke_google_nonce');
+        } catch (_) {}
+        if (payload.error) return null;
+        if (expectedState && payload.state !== expectedState) {
+          try { console.error('[LUTKE] redirect state mismatch'); } catch (_) {}
+          return null;
+        }
+        return payload.token || null;
+      }
+
+      // ─── FedCM-aware prompt + OAuth popup fallback ──────────────
+      // Akış:
+      //  0) Full-redirect'ten dönen bekleyen token varsa onu kullan.
+      //  1) GIS prompt() (One Tap) dene — kullanıcı Chrome'a signed in ise
+      //     anında token gelir.
+      //  2) FedCM "not displayed" / "skipped" / "throw" / 4sn timeout
+      //     durumlarında popup fallback'e geç (OAuth 2.0 implicit flow).
+      //  3) Popup → /oauth-callback → postMessage ile token döner.
+      function prompt() {
+        if (!_initialized) return Promise.resolve(null);
+        var redirectToken = _consumeRedirectResult();
+        if (redirectToken) return Promise.resolve(redirectToken);
+        if (_pendingResolve) { try { _pendingResolve(null); } catch (e) {} _pendingResolve = null; }
+        return new Promise(function (resolve) {
+          _pendingResolve = resolve;
+          var fallbackTriggered = false;
+
+          function triggerFallback(reason) {
+            if (fallbackTriggered) return;
+            fallbackTriggered = true;
+            try { console.warn('[LUTKE] FedCM fallback → OAuth popup:', reason); } catch (_) {}
+            _signInPopup(resolve);
+          }
+
+          try {
+            window.google.accounts.id.prompt(function (notification) {
+              if (notification && notification.isNotDisplayed && notification.isNotDisplayed()) {
+                var nd = notification.getNotDisplayedReason && notification.getNotDisplayedReason();
+                triggerFallback('not_displayed:' + nd);
+                return;
+              }
+              if (notification && notification.isSkippedMoment && notification.isSkippedMoment()) {
+                var sk = notification.getSkippedReason && notification.getSkippedReason();
+                triggerFallback('skipped:' + sk);
+                return;
+              }
+            });
+          } catch (e) {
+            triggerFallback('prompt_threw:' + (e && e.message));
+            return;
+          }
+
+          // FedCM yanıtsızsa (notification callback hiç fire olmazsa) 4sn sonra fallback.
+          setTimeout(function () {
+            if (_pendingResolve === resolve && !fallbackTriggered) {
+              triggerFallback('timeout_no_response');
+            }
+          }, 4000);
+
+          // Son güvenlik: 90sn'de hâlâ pending ise null resolve.
+          setTimeout(function () {
+            if (_pendingResolve === resolve) {
+              _pendingResolve = null;
+              resolve(null);
+            }
+          }, 90000);
+        });
+      }
+
+      // OAuth 2.0 implicit flow popup — FedCM fallback'i.
+      // Google Cloud Console > Authorized redirect URIs'a
+      // `<origin>/oauth-callback` eklenmeli (.html SUFFIX YOK —
+      // Cloudflare Pages clean-URL davranışı .html'i 308 redirect eder,
+      // bu da OAuth fragment'ini bozar).
+      function _signInPopup(resolve) {
+        var state = _nonce();
+        var nonce = _nonce();
+        try {
+          sessionStorage.setItem('lutke_google_state', state);
+          sessionStorage.setItem('lutke_google_nonce', nonce);
+        } catch (_) {}
+
+        var redirectUri = window.location.origin + '/oauth-callback';
+        var url = 'https://accounts.google.com/o/oauth2/v2/auth?' +
+          'client_id=' + encodeURIComponent(_clientId) +
+          '&response_type=id_token' +
+          '&scope=' + encodeURIComponent('openid email profile') +
+          '&redirect_uri=' + encodeURIComponent(redirectUri) +
+          '&state=' + state +
+          '&nonce=' + nonce +
+          '&prompt=select_account';
+
+        // Popup pencere boyutu + merkeze konumlandırma
+        var w = 500, h = 620;
+        var dsl = window.screenLeft !== undefined ? window.screenLeft : window.screenX;
+        var dst = window.screenTop  !== undefined ? window.screenTop  : window.screenY;
+        var sw = window.innerWidth  || document.documentElement.clientWidth  || screen.width;
+        var sh = window.innerHeight || document.documentElement.clientHeight || screen.height;
+        var left = Math.max(0, ((sw / 2) - (w / 2)) + dsl);
+        var top  = Math.max(0, ((sh / 2) - (h / 2)) + dst);
+
+        var popup;
+        try {
+          popup = window.open(url, 'lutke_google_signin',
+            'width=' + w + ',height=' + h + ',top=' + top + ',left=' + left +
+            ',scrollbars=yes,resizable=yes,status=yes');
+        } catch (_) {}
+
+        if (!popup || popup.closed || typeof popup.closed === 'undefined') {
+          // Popup blocker — son çare full redirect.
+          try { console.warn('[LUTKE] popup blocked; redirecting'); } catch (_) {}
+          if (_pendingResolve === resolve) _pendingResolve = null;
+          resolve(null);
+          window.location.href = url;
+          return;
+        }
+
+        try { popup.focus(); } catch (_) {}
+
+        var handler = function (e) {
+          if (e.origin !== window.location.origin) return;
+          if (!e.data || e.data.type !== 'lutke_google_callback') return;
+          window.removeEventListener('message', handler);
+          clearInterval(checkClosed);
+          try { popup.close(); } catch (_) {}
+          if (_pendingResolve !== resolve) return;
+          _pendingResolve = null;
+
+          var expectedState = null;
+          try {
+            expectedState = sessionStorage.getItem('lutke_google_state');
+            sessionStorage.removeItem('lutke_google_state');
+            sessionStorage.removeItem('lutke_google_nonce');
+          } catch (_) {}
+
+          if (e.data.error) {
+            try { console.warn('[LUTKE] OAuth callback error:', e.data.error); } catch (_) {}
+            resolve(null); return;
+          }
+          if (expectedState && e.data.state !== expectedState) {
+            try { console.error('[LUTKE] state mismatch'); } catch (_) {}
+            resolve(null); return;
+          }
+          resolve(e.data.token || null);
+        };
+        window.addEventListener('message', handler);
+
+        // Kullanıcı popup'ı kapatırsa null resolve.
+        var checkClosed = setInterval(function () {
+          if (popup.closed) {
+            clearInterval(checkClosed);
+            window.removeEventListener('message', handler);
+            if (_pendingResolve === resolve) {
+              _pendingResolve = null;
+              resolve(null);
+            }
+          }
+        }, 500);
+      }
+
+      function _nonce() {
+        try {
+          var a = new Uint8Array(16);
+          (window.crypto || window.msCrypto).getRandomValues(a);
+          return Array.from(a, function (b) { return b.toString(16).padStart(2, '0'); }).join('');
+        } catch (_) {
+          return Date.now().toString(36) + Math.random().toString(36).slice(2);
+        }
+      }
+
+      function isAvailable() {
+        return !!(window.google && window.google.accounts && window.google.accounts.id);
+      }
+
+      return { init: init, prompt: prompt, isAvailable: isAvailable };
+    })();
+  </script>
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
-    body { background: #EDF7F4; height: 100vh; overflow: hidden; }
+    body {
+      background: linear-gradient(180deg, #1A7B6B 0%, #0A3D35 100%);
+      /* WEB-COMPAT: iOS Safari'de 100vh address bar'ı dahil eder →
+         boot splash ekranın alt kısmına taşar. dvh (dynamic viewport) fallback
+         ile vh. Desktop/Android'de dvh = vh, iOS Safari'de daralır/genişler. */
+      height: 100vh;
+      height: 100dvh;
+      overflow: hidden;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      color: #fff;
+      /* WEB-COMPAT: iOS dokunma vurgusunu kapat — Flutter kendi ripple'ı var. */
+      -webkit-tap-highlight-color: transparent;
+      -webkit-touch-callout: none;
+      -webkit-text-size-adjust: 100%;
+    }
+    /* UX FIX #1: Loading splash — kullanıcı 9.6MB'lik indirmede boş ekran görmesin.
+       Flutter mount olduğunda bu div otomatik kapanır (flutter_bootstrap boş hale
+       getirince gizlenir). "Installing..." yerine doğru kültürel dilde slogan. */
+    #lutke-boot {
+      position: fixed; inset: 0;
+      /* WEB-COMPAT: dvh fallback — iOS Safari address bar dahil edilmesin. */
+      height: 100vh;
+      height: 100dvh;
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      gap: 22px;
+      opacity: 1;
+      transition: opacity 600ms ease;
+      z-index: 9999;
+      padding: 24px;
+      text-align: center;
+    }
+    #lutke-boot.fade-out { opacity: 0; pointer-events: none; }
+    .boot-logo {
+      width: 96px; height: 96px;
+      border-radius: 50%;
+      background: #fff;
+      display: flex; align-items: center; justify-content: center;
+      box-shadow: 0 4px 24px rgba(0,0,0,.25);
+      animation: pulse 1.6s ease-in-out infinite;
+    }
+    .boot-logo img { width: 72%; height: 72%; object-fit: contain; }
+    .boot-title {
+      font-size: 28px; font-weight: 900;
+      letter-spacing: 2px;
+    }
+    .boot-sub {
+      font-size: 13px; opacity: .75;
+      max-width: 280px; line-height: 1.5;
+    }
+    .boot-progress {
+      width: 220px; height: 4px;
+      background: rgba(255,255,255,.15);
+      border-radius: 4px; overflow: hidden;
+    }
+    .boot-bar {
+      width: 40%; height: 100%;
+      background: #fff;
+      border-radius: 4px;
+      animation: slide 1.4s ease-in-out infinite;
+    }
+    .boot-hint {
+      font-size: 11px; opacity: .55;
+      margin-top: 8px;
+    }
+    /* CEJN BANNER — 15ê Gulanê 2026 (Dünya Kürt Dili Günü).
+       GEÇİCİ: 16 Mayıs 2026 sonrası bu blok + HTML'deki .boot-cejn kaldırılacak. */
+    .boot-cejn {
+      display: flex; flex-direction: column;
+      align-items: center; gap: 3px;
+      padding: 12px 22px;
+      border: 1.3px solid rgba(255, 215, 100, 0.5);
+      border-radius: 16px;
+      background: linear-gradient(135deg,
+        rgba(255, 215, 100, 0.14),
+        rgba(255, 165, 0, 0.06));
+      margin-bottom: 4px;
+      max-width: 320px;
+    }
+    .boot-cejn-date {
+      font-size: 10px; font-weight: 800;
+      letter-spacing: 2.5px;
+      color: rgba(255, 215, 100, 0.95);
+      text-transform: uppercase;
+    }
+    .boot-cejn-msg {
+      font-size: 15px; font-weight: 800;
+      color: #fff; letter-spacing: 0.3px;
+      text-align: center;
+    }
+    .boot-cejn-quote {
+      font-size: 10.5px; font-style: italic;
+      color: rgba(255, 255, 255, 0.7);
+      margin-top: 1px;
+    }
+    @keyframes pulse {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.06); }
+    }
+    @keyframes slide {
+      0% { transform: translateX(-100%); }
+      100% { transform: translateX(350%); }
+    }
   </style>
 </head>
 <body>
+  <div id="lutke-boot" role="status" aria-live="polite" aria-label="LÛTKE tê barkirin">
+    <!-- CEJN BANNER — 15ê Gulanê 2026 (geçici, 16 Mayıs sonrası kaldır) -->
+    <div class="boot-cejn" aria-label="Cejna Zimanê Kurdî pîroz be">
+      <div class="boot-cejn-date">15ê Gulanê 2026</div>
+      <div class="boot-cejn-msg">Cejna Zimanê Kurdî Pîroz Be!</div>
+      <div class="boot-cejn-quote">— Bê ziman, mirov bê kok e —</div>
+    </div>
+    <div class="boot-logo">
+      <img src="icons/Icon-192.png" alt="" aria-hidden="true"/>
+    </div>
+    <div>
+      <div class="boot-title">LÛTKE</div>
+      <div class="boot-sub" style="margin-top:6px">Zimanê Kurdî tê amadekirin…<br/><span style="opacity:.7">Kerem bike bisekine</span></div>
+    </div>
+    <div class="boot-progress"><div class="boot-bar"></div></div>
+    <div class="boot-hint" id="boot-slow-hint" style="display:none">
+      Girêdana înternetê qels e? Kerem bike bisekine.<br/>
+      <span style="opacity:.7">Dibe ku girêdan hêdî be.</span>
+    </div>
+  </div>
+  <script>
+    // EMERGENCY RESET: ?reset=1 query parameter — tüm storage + cache + SW
+    // unregister, sonra /auth/login'e yönlendir. Cache stuck olan kullanıcılar
+    // için tek-tık çıkış yolu. (Mayıs 2026 — Cloudflare auth migration)
+    (function () {
+      var u = new URL(window.location.href);
+      if (u.searchParams.get('reset') === '1') {
+        try { localStorage.clear(); } catch (e) {}
+        try { sessionStorage.clear(); } catch (e) {}
+        var cleanup = [];
+        if ('serviceWorker' in navigator) {
+          cleanup.push(navigator.serviceWorker.getRegistrations().then(function (rs) {
+            return Promise.all(rs.map(function (r) { return r.unregister(); }));
+          }));
+        }
+        if (window.caches && caches.keys) {
+          cleanup.push(caches.keys().then(function (names) {
+            return Promise.all(names.map(function (n) { return caches.delete(n); }));
+          }));
+        }
+        Promise.all(cleanup).finally(function () {
+          window.location.replace('/auth/login');
+        });
+        // Boot ekranını gizle, "temizleniyor" mesajı bas
+        document.body.innerHTML =
+          '<div style="display:flex;flex-direction:column;align-items:center;' +
+          'justify-content:center;min-height:100vh;font-family:system-ui;' +
+          'color:#1F4634;background:#E8F5E9;padding:24px;text-align:center">' +
+          '<div style="font-size:42px;margin-bottom:12px">🐐</div>' +
+          '<div style="font-size:18px;font-weight:700">Tê paqijkirin...</div>' +
+          '<div style="opacity:.7;margin-top:6px">Tu yê demek din vegerî têketinê.</div>' +
+          '</div>';
+        return;
+      }
+    })();
+
+    // UX FIX #1b: Yavaş bağlantıda (>5sn) kullanıcıya ekstra context ver —
+    // "donduğunu sanmasın". 12sn sonra da hâlâ orada ise daha güçlü mesaj.
+    setTimeout(function(){
+      var h = document.getElementById('boot-slow-hint');
+      if (h) h.style.display = 'block';
+    }, 5000);
+    // Flutter mount olunca boot ekranı fade-out yapar.
+    window.addEventListener('flutter-first-frame', function() {
+      var el = document.getElementById('lutke-boot');
+      if (!el) return;
+      el.classList.add('fade-out');
+      setTimeout(function(){ if (el && el.parentNode) el.parentNode.removeChild(el); }, 700);
+    });
+    // ═══════════════════════════════════════════════════════════
+    // PWA INSTALL + SERVICE WORKER (Mayıs 2026 — Cejn deploy)
+    //
+    // Strateji:
+    //  1. ESKİ flutter_service_worker.js (default Flutter SW, agresif
+    //     cache) kayıtlıysa kaldır — bir kerelik, LocalStorage flag.
+    //  2. YENİ service_worker_passthrough.js kaydet — minimal, cache
+    //     yapmaz, sadece PWA install prompt için zorunlu kayıt.
+    //  3. beforeinstallprompt event yakala — Android Chrome'da floating
+    //     "📱 Sazkirin / Yükle" butonu göster.
+    //  4. iOS Safari için "Paylaş → Ana Ekrana Ekle" hint banner (auto-
+    //     install yok; manuel adım gerekli).
+    // ═══════════════════════════════════════════════════════════
+    if ('serviceWorker' in navigator) {
+      // Yeni SW activate olduğunda mevcut sekmeleri kontrolüne al.
+      navigator.serviceWorker.addEventListener('controllerchange', function () {
+        if (window._lutkeReloading) return;
+        window._lutkeReloading = true;
+        window.location.reload();
+      });
+
+      // ── (1) Eski Flutter default SW'yi temizle (bir kerelik) ──
+      // Yeni passthrough SW'yi (service_worker_passthrough.js) etkilemez —
+      // path filtresi sadece "flutter_service_worker" içerenleri kaldırır.
+      if (!localStorage.getItem('_lutkeOldSwCleaned_v2')) {
+        navigator.serviceWorker.getRegistrations().then(function (rs) {
+          var oldOnes = rs.filter(function (r) {
+            var url =
+              (r.active && r.active.scriptURL) ||
+              (r.installing && r.installing.scriptURL) ||
+              (r.waiting && r.waiting.scriptURL) || '';
+            return url.indexOf('flutter_service_worker') !== -1;
+          });
+          var promises = oldOnes.map(function (r) { return r.unregister(); });
+          // Eski Flutter/app-shell cache'lerini boşalt.
+          if (window.caches && caches.keys) {
+            promises.push(caches.keys().then(function (names) {
+              var staleCaches = names.filter(function (n) {
+                return n.indexOf('flutter') !== -1 || n.indexOf('app-shell') !== -1;
+              });
+              return Promise.all(staleCaches.map(function (n) { return caches.delete(n); }));
+            }));
+          }
+          Promise.all(promises).finally(function () {
+            localStorage.setItem('_lutkeOldSwCleaned_v2', '1');
+            // Sadece gerçekten eski SW vardıysa reload (sessionStorage tek-sefer).
+            if (oldOnes.length > 0 && !sessionStorage.getItem('_lutkeSwReloaded')) {
+              sessionStorage.setItem('_lutkeSwReloaded', '1');
+              window.location.reload();
+            }
+          });
+        });
+      }
+
+      // ── (2) Yeni passthrough SW register ─────────────────────
+      window.addEventListener('load', function () {
+        navigator.serviceWorker
+          .register('/service_worker_passthrough.js')
+          .catch(function () { /* sessiz hata — kullanıcı deneyimini bozma */ });
+      });
+    }
+
+    // ═══════════════════════════════════════════════════════════
+    // GÜNCELLEME BEKÇİSİ (Temmuz 2026)
+    //
+    // Passthrough SW cache yapmadığı için SW-update sinyali yok;
+    // güncelleme tespiti version.json'daki deploy_id üzerinden yapılır
+    // (build-site.mjs her deploy'da damgalar; _headers no-cache).
+    // Yeni deploy tespit edilince alt kenarda iki dilli "Nû bike /
+    // Yenile" çubuğu gösterilir — açık sekmeler ve yüklü PWA'lar
+    // uygulamayı kapatmadan yeni sürüme geçebilsin.
+    // ═══════════════════════════════════════════════════════════
+    (function () {
+      var baseline = null;
+      var shown = false;
+      var verUrl = new URL('version.json', document.baseURI).toString();
+
+      function fetchDeployId() {
+        return fetch(verUrl + '?t=' + Date.now(), { cache: 'no-store' })
+          .then(function (r) { return r.ok ? r.json() : null; })
+          .then(function (j) { return j && (j.deploy_id || j.build_number || null); })
+          .catch(function () { return null; });
+      }
+
+      function showBanner() {
+        if (shown || sessionStorage.getItem('_lutkeUpdateSnoozed')) return;
+        shown = true;
+        var bar = document.createElement('div');
+        bar.id = 'lutke-update-bar';
+        bar.setAttribute('role', 'alert');
+        bar.style.cssText =
+          'position:fixed;left:0;right:0;bottom:0;z-index:2147483646;' +
+          'display:flex;align-items:center;gap:10px;padding:12px 16px;' +
+          'background:#1A7B6B;color:#fff;font-family:system-ui,sans-serif;' +
+          'font-size:14px;box-shadow:0 -2px 12px rgba(0,0,0,.25)';
+        bar.innerHTML =
+          '<span style="font-size:18px">🔄</span>' +
+          '<span style="flex:1;line-height:1.35">' +
+          'Guhertoyeke nû ya LÛTKE amade ye.' +
+          '<span style="opacity:.75;display:block;font-size:12px">' +
+          'LÛTKE’nin yeni sürümü hazır.</span></span>' +
+          '<button id="lutke-update-go" type="button" style="background:#fff;' +
+          'color:#1A7B6B;border:0;border-radius:10px;padding:8px 16px;' +
+          'font-weight:700;font-size:13px;cursor:pointer">Nû bike · Yenile</button>' +
+          '<button id="lutke-update-x" type="button" aria-label="Bigire" ' +
+          'style="background:none;border:0;color:#fff;opacity:.7;' +
+          'font-size:18px;cursor:pointer;padding:4px 6px">✕</button>';
+        document.body.appendChild(bar);
+        document.getElementById('lutke-update-go').addEventListener('click', function () {
+          // index/bootstrap/main.dart.js no-cache olduğundan düz reload yeter.
+          window.location.reload();
+        });
+        document.getElementById('lutke-update-x').addEventListener('click', function () {
+          sessionStorage.setItem('_lutkeUpdateSnoozed', '1');
+          if (bar.parentNode) bar.parentNode.removeChild(bar);
+          shown = false;
+        });
+      }
+
+      function check() {
+        fetchDeployId().then(function (id) {
+          if (!id) return;
+          if (baseline === null) { baseline = id; return; }
+          if (id !== baseline) showBanner();
+        });
+      }
+
+      // Açılışta baseline al; sonra 20 dakikada bir + sekme öne gelince kontrol.
+      setTimeout(check, 8000);
+      setInterval(check, 20 * 60 * 1000);
+      document.addEventListener('visibilitychange', function () {
+        if (document.visibilityState === 'visible') check();
+      });
+    })();
+
+    // ── (3) PWA install button — Android Chrome ───────────────
+    // beforeinstallprompt → kullanıcı tıkladığında prompt aç.
+    // 7 gün boyunca reddedildiyse tekrar gösterme.
+    (function () {
+      var isStandalone =
+        window.matchMedia('(display-mode: standalone)').matches ||
+        window.navigator.standalone === true;
+      if (isStandalone) return; // zaten yüklü
+
+      var dismissed = localStorage.getItem('_lutkePwaDismissed');
+      if (dismissed && (Date.now() - parseInt(dismissed, 10)) < 7 * 24 * 60 * 60 * 1000) {
+        return; // 7 gün dolmamış
+      }
+
+      var deferredPrompt = null;
+      var btn = null;
+
+      function createBtn() {
+        var b = document.createElement('button');
+        b.id = 'lutke-pwa-install';
+        b.type = 'button';
+        b.setAttribute('aria-label', 'LÛTKE\'yê wek sepan saz bike');
+        b.innerHTML =
+          '<span style="font-size:18px;margin-right:6px">📱</span>' +
+          '<span>Sazkirin / Yükle</span>';
+        Object.assign(b.style, {
+          position: 'fixed',
+          bottom: '20px',
+          right: '20px',
+          zIndex: '9998',
+          padding: '12px 18px',
+          background: 'linear-gradient(135deg,#1A7B6B,#0A5A4E)',
+          color: '#fff',
+          border: 'none',
+          borderRadius: '24px',
+          fontSize: '13px',
+          fontWeight: '700',
+          letterSpacing: '0.3px',
+          boxShadow: '0 4px 16px rgba(0,0,0,0.28)',
+          cursor: 'pointer',
+          display: 'flex',
+          alignItems: 'center',
+          fontFamily: 'inherit',
+        });
+        return b;
+      }
+
+      function removeBtn() {
+        if (btn && btn.parentNode) btn.parentNode.removeChild(btn);
+        btn = null;
+      }
+
+      window.addEventListener('beforeinstallprompt', function (e) {
+        e.preventDefault();
+        deferredPrompt = e;
+        if (btn) return;
+        btn = createBtn();
+        btn.addEventListener('click', function () {
+          if (!deferredPrompt) return;
+          deferredPrompt.prompt();
+          deferredPrompt.userChoice.then(function (choice) {
+            deferredPrompt = null;
+            localStorage.setItem('_lutkePwaDismissed', Date.now().toString());
+            removeBtn();
+          });
+        });
+        document.body.appendChild(btn);
+      });
+
+      // App yüklendiğinde butonu kaldır.
+      window.addEventListener('appinstalled', function () {
+        deferredPrompt = null;
+        removeBtn();
+        localStorage.setItem('_lutkePwaInstalled', '1');
+      });
+
+      // ── (4) iOS Safari hint — manuel "Ana Ekrana Ekle" ────────
+      var ua = navigator.userAgent;
+      var isIOS = /iPhone|iPad|iPod/.test(ua) && !window.MSStream;
+      // Sadece Safari (Chrome iOS'ta aynı engine'i kullansa da prompt yok)
+      var isIOSChrome = /CriOS/.test(ua);
+      if (isIOS && !isIOSChrome) {
+        // 4 sn sonra hint banner — kullanıcı sayfayı keşfetsin
+        setTimeout(function () {
+          if (localStorage.getItem('_lutkePwaDismissed')) return;
+          var hint = document.createElement('div');
+          hint.id = 'lutke-ios-hint';
+          hint.setAttribute('role', 'dialog');
+          hint.setAttribute('aria-label', 'LÛTKE sazkirin / Yükleme önerisi');
+          Object.assign(hint.style, {
+            position: 'fixed',
+            bottom: '20px',
+            left: '50%',
+            transform: 'translateX(-50%)',
+            maxWidth: '320px',
+            width: 'calc(100% - 32px)',
+            padding: '14px 18px',
+            paddingRight: '36px',
+            background: 'linear-gradient(135deg,#1A7B6B,#0A5A4E)',
+            color: '#fff',
+            borderRadius: '14px',
+            fontSize: '13px',
+            lineHeight: '1.45',
+            textAlign: 'center',
+            boxShadow: '0 4px 18px rgba(0,0,0,0.32)',
+            zIndex: '9998',
+            fontFamily: 'inherit',
+          });
+          hint.innerHTML =
+            '<div style="font-weight:700;font-size:14px;margin-bottom:4px">' +
+            '📱 LÛTKE\'yê wek sepan saz bike' +
+            '</div>' +
+            '<div style="opacity:.9;font-size:12px">' +
+            'Belavkirin <span style="font-size:14px">⬆️</span> → ' +
+            '<b>"Add to Home Screen"</b>' +
+            '</div>';
+          var close = document.createElement('button');
+          close.type = 'button';
+          close.innerHTML = '&times;';
+          close.setAttribute('aria-label', 'Kapat');
+          Object.assign(close.style, {
+            position: 'absolute',
+            top: '6px',
+            right: '10px',
+            background: 'transparent',
+            border: 'none',
+            color: '#fff',
+            fontSize: '22px',
+            cursor: 'pointer',
+            opacity: '0.7',
+            padding: '4px 8px',
+            lineHeight: '1',
+          });
+          close.addEventListener('click', function () {
+            localStorage.setItem('_lutkePwaDismissed', Date.now().toString());
+            if (hint.parentNode) hint.parentNode.removeChild(hint);
+          });
+          hint.appendChild(close);
+          document.body.appendChild(hint);
+          // 14 sn sonra otomatik kapanır
+          setTimeout(function () {
+            if (hint.parentNode) hint.parentNode.removeChild(hint);
+          }, 14000);
+        }, 4000);
+      }
+    })();
+  </script>
   <script src="flutter_bootstrap.js" async></script>
 </body>
 </html>

@@ -6,8 +6,11 @@ import 'package:go_router/go_router.dart';
 import '../../../core/constants/app_colors.dart';
 import '../../../core/constants/app_typography.dart';
 import '../../../core/constants/app_spacing.dart';
+import '../../../core/utils/nav_guard.dart';
 import '../../../shared/providers/language_mode_provider.dart';
+import '../../../shared/providers/learning_module_provider.dart';
 import '../../../shared/providers/progression_provider.dart';
+import '../../en_learning/domain/en_to_quiz_adapter.dart';
 import '../domain/a1_kelime_db.dart';
 import '../domain/a2_kelime_db.dart';
 import '../domain/b1_kelime_db.dart';
@@ -37,6 +40,8 @@ class _ActivityDef {
   final String titleKu;
   final String descKu;
   final String descTr;
+  final String titleEn;
+  final String descEn;
   final Color color;
   final String route;
 
@@ -46,6 +51,8 @@ class _ActivityDef {
     required this.titleKu,
     required this.descKu,
     required this.descTr,
+    required this.titleEn,
+    required this.descEn,
     required this.color,
     required this.route,
   });
@@ -55,36 +62,43 @@ const _activities = [
   _ActivityDef(
     index: 1, emoji: '🃏', titleKu: 'Peld', route: '/activity/flashcard',
     descKu: 'Bi peldan fêr bibe', descTr: 'Kartlarla öğren',
+    titleEn: 'Flashcards', descEn: 'Learn with cards',
     color: Color(0xFFD4783A),
   ),
   _ActivityDef(
     index: 2, emoji: '📝', titleKu: 'Ceribandin', route: '/activity/quiz',
     descKu: 'Zanîna xwe biceribîne', descTr: 'Bilgini test et',
+    titleEn: 'Quiz', descEn: 'Test your knowledge',
     color: Color(0xFF1A7B6B),
   ),
   _ActivityDef(
     index: 3, emoji: '🔊', titleKu: 'Guhdarêkirin', route: '/activity/listening',
     descKu: 'Guh bide û hilbijêre', descTr: 'Dinle ve seç',
+    titleEn: 'Listening', descEn: 'Listen and choose',
     color: Color(0xFF2196F3),
   ),
   _ActivityDef(
     index: 4, emoji: '🔗', titleKu: 'Lîhevhatên', route: '/activity/word-match',
     descKu: 'Peyv û wateyan li hev bîne', descTr: 'Kelime eşleştir',
+    titleEn: 'Word Match', descEn: 'Match word and meaning',
     color: Color(0xFFFF5722),
   ),
   _ActivityDef(
     index: 5, emoji: '🧩', titleKu: 'Hevokê çêke', route: '/activity/sentence-builder',
     descKu: 'Peyvan bi rêz bike', descTr: 'Cümle kur',
+    titleEn: 'Sentence Builder', descEn: 'Build sentences',
     color: Color(0xFF9C27B0),
   ),
   _ActivityDef(
     index: 6, emoji: '💬', titleKu: 'Hevpeyvîn', route: '/activity/dialogue',
     descKu: 'Diyalog û axaftin', descTr: 'Sohbet ve konuşma',
+    titleEn: 'Dialogue', descEn: 'Conversation practice',
     color: Color(0xFF00BCD4),
   ),
   _ActivityDef(
     index: 7, emoji: '🎤', titleKu: 'Bilêvkirin', route: '/activity/pronunciation',
     descKu: 'Telaffuz û dubarekirin', descTr: 'Telaffuz pratiği',
+    titleEn: 'Pronunciation', descEn: 'Repeat and practice',
     color: Color(0xFFE91E63),
   ),
 ];
@@ -110,9 +124,11 @@ class UnitHubScreen extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final showTr = ref.watch(showTurkishProvider);
+    // TRACK-AWARE FIX: EN track'te Kurmancî labels ve KU DB gösterilmesin.
+    final isEn = ref.watch(isEnglishModuleProvider);
     final completed = ref.watch(progressionProvider);
     final progression = ref.read(progressionProvider.notifier);
-    final words = _loadCategoryWords(category, level);
+    final words = _loadCategoryWords(category, level, isEn: isEn);
     final completedCount = progression.completedCountForStop(level, category);
 
     return Scaffold(
@@ -127,7 +143,7 @@ class UnitHubScreen extends ConsumerWidget {
               child: Row(
                 children: [
                   GestureDetector(
-                    onTap: () => context.pop(),
+                    onTap: () => context.canPop() ? context.pop() : context.go('/home'),
                     child: Container(
                       width: 40, height: 40,
                       decoration: BoxDecoration(
@@ -147,7 +163,9 @@ class UnitHubScreen extends ConsumerWidget {
                       borderRadius: BorderRadius.circular(20),
                     ),
                     child: Text(
-                      '$completedCount / $kActivityCount temam',
+                      isEn
+                          ? '$completedCount / $kActivityCount done'
+                          : '$completedCount / $kActivityCount temam',
                       style: AppTypography.label.copyWith(
                         color: AppColors.primary,
                         fontWeight: FontWeight.w700,
@@ -198,12 +216,51 @@ class UnitHubScreen extends ConsumerWidget {
                   ),
                   const SizedBox(height: 4),
                   Text(
-                    '${words.length} peyv',
+                    isEn ? '${words.length} words' : '${words.length} peyv',
                     style: AppTypography.caption,
                   ),
                 ],
               ),
             ).animate().fadeIn(duration: 300.ms),
+
+            // ── Bölüm tekrarı (Dubare) ───────────────────
+            // Zayıf kelimeleri YALNIZCA bu bölümle sınırlı tekrar et.
+            // Kullanıcı geri bildirimi (Temmuz 2026): global tekrarda
+            // "diğer bölümlerin kelimeleri karşıma çıkıyor" — SmartReview'a
+            // eklenen bölüm filtresinin uygulama içi giriş noktası budur.
+            // (EN track'te SmartReview kapsam dışı — buton gizli.)
+            if (!isEn)
+              Padding(
+                padding: const EdgeInsets.fromLTRB(24, 12, 24, 0),
+                child: SizedBox(
+                  width: double.infinity,
+                  child: OutlinedButton.icon(
+                    onPressed: () => context.push(
+                      '/home/review',
+                      extra: {
+                        'level': level,
+                        'category': category,
+                        'title': titleKu,
+                      },
+                    ),
+                    icon: const Icon(Icons.refresh_rounded, size: 18),
+                    label: Text(
+                      showTr
+                          ? 'Dubare bike — Bu bölümü tekrar et'
+                          : 'Dubare bike (ev beş)',
+                      style: const TextStyle(fontWeight: FontWeight.w700),
+                    ),
+                    style: OutlinedButton.styleFrom(
+                      foregroundColor: AppColors.primary,
+                      side: BorderSide(
+                          color: AppColors.primary.withOpacity(0.4)),
+                      padding: const EdgeInsets.symmetric(vertical: 10),
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(12)),
+                    ),
+                  ),
+                ),
+              ).animate().fadeIn(delay: 150.ms),
 
             const SizedBox(height: 16),
 
@@ -228,8 +285,12 @@ class UnitHubScreen extends ConsumerWidget {
                     isLocked: !isUnlocked,
                     isActive: isActive,
                     showTr: showTr,
+                    isEn: isEn,
                     onTap: isUnlocked
-                        ? () async {
+                        ? () => NavGuard.guardAsync(() async {
+                            // NAV FIX: Çift tıklama koruması — aksi halde
+                            // kullanıcı etkinlik kartına hızla iki kez basınca
+                            // iki kez push olur ve markComplete iki defa çalışır.
                             await context.push(
                               act.route,
                               extra: {
@@ -243,7 +304,7 @@ class UnitHubScreen extends ConsumerWidget {
                               ref.read(progressionProvider.notifier)
                                   .markComplete(lessonId);
                             }
-                          }
+                          })
                         : null,
                   ).animate().fadeIn(delay: delay).slideX(begin: 0.03);
                 },
@@ -255,7 +316,16 @@ class UnitHubScreen extends ConsumerWidget {
     );
   }
 
-  List<_SimpleWord> _loadCategoryWords(String category, String level) {
+  List<_SimpleWord> _loadCategoryWords(String category, String level,
+      {bool isEn = false}) {
+    // TRACK-AWARE: İngilizce track'te getEnWordsForLevel (adapter tr=Kurmancî).
+    // Aksi halde Kurmancî DB.
+    if (isEn) {
+      return getEnWordsForLevel(level.toUpperCase())
+          .where((w) => w.kat == category)
+          .map<_SimpleWord>((w) => _SimpleWord(w.ku, w.tr))
+          .toList();
+    }
     final all = switch (level.toUpperCase()) {
       'A1' => kA1TamListe,
       'A2' => kA2TamListe,
@@ -287,6 +357,7 @@ class _ActivityStepCard extends StatelessWidget {
   final bool isLocked;
   final bool isActive;
   final bool showTr;
+  final bool isEn;
   final VoidCallback? onTap;
 
   const _ActivityStepCard({
@@ -296,6 +367,7 @@ class _ActivityStepCard extends StatelessWidget {
     required this.isLocked,
     required this.isActive,
     required this.showTr,
+    this.isEn = false,
     this.onTap,
   });
 
@@ -396,13 +468,13 @@ class _ActivityStepCard extends StatelessWidget {
             ),
             const SizedBox(width: 14),
 
-            // Başlık + açıklama
+            // Başlık + açıklama — track-aware
             Expanded(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    activity.titleKu,
+                    isEn ? activity.titleEn : activity.titleKu,
                     style: AppTypography.title.copyWith(
                       color: isLocked ? Colors.grey.shade400 : color,
                       fontSize: 16,
@@ -411,7 +483,9 @@ class _ActivityStepCard extends StatelessWidget {
                   ),
                   const SizedBox(height: 2),
                   Text(
-                    showTr ? activity.descTr : activity.descKu,
+                    isEn
+                        ? activity.descEn
+                        : (showTr ? activity.descTr : activity.descKu),
                     style: AppTypography.caption.copyWith(
                       fontSize: 12,
                       color: isLocked ? Colors.grey.shade400 : null,

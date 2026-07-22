@@ -161,14 +161,30 @@ class TimeLimitNotifier extends StateNotifier<TimeLimitState> {
   }
 
   /// Mola onaylandı — çocuk uygulamayı kullanmaya devam edebilir.
-  /// 30 dakikalık sayacı sıfırlar (yeni oturum başlar), warning/expired
-  /// bayraklarını kapatır. Engelleyici değil; sağlıklı alışkanlık önerisi.
-  Future<void> acknowledgeBreak() async {
+  /// Sayacı sıfırlar (yeni oturum başlar), warning/expired bayraklarını
+  /// kapatır.
+  ///
+  /// EXPLOIT FIX (Nisan 2026): Eskiden bu fonksiyon SINIRSIZ çağrılabilirdi —
+  /// çocuk her 30 dakikada "mola al" diyerek günlük limitini sıfırsız uzatabilirdi.
+  /// Artık günde MAX 2 mola sıfırlama hakkı var. Sonrasında acknowledgeBreak
+  /// no-op olur ve [hasUsedAllBreaks] true döner.
+  ///
+  /// Returns: true if the break was applied; false if quota exhausted.
+  Future<bool> acknowledgeBreak() async {
+    final prefs = await SharedPreferences.getInstance();
+    final breakKey = _breakCountKey();
+    final breaksUsed = prefs.getInt(breakKey) ?? 0;
+
+    // Günlük 2 mola sınırı — pedagojik: çocuk gerçek molaya yönlendirilir.
+    if (breaksUsed >= _maxBreaksPerDay) {
+      return false;
+    }
+
     _ticker?.cancel();
     _ticker = null;
 
-    final prefs = await SharedPreferences.getInstance();
     await prefs.setInt(_todayKey(), 0);
+    await prefs.setInt(breakKey, breaksUsed + 1);
 
     state = state.copyWith(
       usedMinutes: 0,
@@ -181,6 +197,22 @@ class TimeLimitNotifier extends StateNotifier<TimeLimitState> {
     _ticker = Timer.periodic(const Duration(minutes: 1), (_) {
       _tick();
     });
+    return true;
+  }
+
+  /// Bugün ne kadar mola sıfırlama hakkı kaldı? (0..2)
+  Future<int> remainingBreaks() async {
+    final prefs = await SharedPreferences.getInstance();
+    final used = prefs.getInt(_breakCountKey()) ?? 0;
+    return (_maxBreaksPerDay - used).clamp(0, _maxBreaksPerDay);
+  }
+
+  /// Günlük mola hakkı: 2 (yetişkin standart önerisidir).
+  static const int _maxBreaksPerDay = 2;
+
+  String _breakCountKey() {
+    final now = DateTime.now();
+    return 'child_breaks_${now.year}-${now.month.toString().padLeft(2, '0')}-${now.day.toString().padLeft(2, '0')}';
   }
 
   Future<void> _persistUsage(int minutes) async {

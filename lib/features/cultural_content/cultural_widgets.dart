@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:go_router/go_router.dart';
 
 import '../../core/constants/app_colors.dart';
 import '../../core/constants/app_typography.dart';
@@ -165,7 +164,7 @@ class _CulturalRewardCardState extends State<CulturalRewardCard> {
                           onPressed: widget.onShare,
                           icon: const Icon(Icons.share_outlined, size: 16),
                           label: Text(
-                            'Paylaş',
+                            'Parve bike',
                             style: AppTypography.label.primary,
                           ),
                         ),
@@ -206,10 +205,15 @@ class _CardHeader extends StatelessWidget {
         CulturalContentType.song => AppColors.accent,
         CulturalContentType.poem => AppColors.primaryLight,
         CulturalContentType.story => AppColors.accent,
-        CulturalContentType.celebration => AppColors.accent,
         CulturalContentType.foodTradition => AppColors.success,
-        CulturalContentType.culturalNote => AppColors.primaryLight,
         CulturalContentType.historicalFigure => AppColors.primaryDark,
+        CulturalContentType.singer => AppColors.accent,
+        CulturalContentType.poet => AppColors.primaryLight,
+        CulturalContentType.writer => AppColors.primaryDark,
+        CulturalContentType.celebration => AppColors.accent,
+        CulturalContentType.folkDance => AppColors.primaryLight,
+        CulturalContentType.historicalEvent => AppColors.primaryDark,
+        CulturalContentType.architecture => AppColors.primary,
       };
 
   IconData get _icon => switch (item.type) {
@@ -217,10 +221,15 @@ class _CardHeader extends StatelessWidget {
         CulturalContentType.song => Icons.music_note,
         CulturalContentType.poem => Icons.auto_stories,
         CulturalContentType.story => Icons.menu_book,
-        CulturalContentType.celebration => Icons.celebration,
         CulturalContentType.foodTradition => Icons.restaurant,
-        CulturalContentType.culturalNote => Icons.info_outline,
         CulturalContentType.historicalFigure => Icons.person_outline,
+        CulturalContentType.singer => Icons.mic_rounded,
+        CulturalContentType.poet => Icons.auto_stories_rounded,
+        CulturalContentType.writer => Icons.menu_book_rounded,
+        CulturalContentType.celebration => Icons.cake_rounded,
+        CulturalContentType.folkDance => Icons.music_video_rounded,
+        CulturalContentType.historicalEvent => Icons.event_note_rounded,
+        CulturalContentType.architecture => Icons.location_city_rounded,
       };
 
   @override
@@ -324,7 +333,7 @@ class _AudioButton extends StatelessWidget {
             ),
             Gap.hSm,
             Text(
-              isPlaying ? 'Çalıyor...' : 'Sesi dinle',
+              isPlaying ? 'Lêdixe...' : 'Guhdarî bike',
               style: AppTypography.label.copyWith(
                 color: isPlaying ? AppColors.primary : AppColors.textSecondary,
               ),
@@ -398,7 +407,7 @@ class _KeywordsRow extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text('Bu içerikteki kelimeler:',
+        Text('Peyvên vê naverokê:',
             style: AppTypography.captionStrong),
         Gap.xs,
         Wrap(
@@ -623,13 +632,6 @@ class _NewrozBanner extends StatelessWidget {
 class _SectionHeader extends ConsumerWidget {
   final CulturalContentType type;
   const _SectionHeader({required this.type});
-
-  static final _sample = CulturalItem(
-    id: '', type: CulturalContentType.proverb,
-    kurmanjTitle: '', turkishTitle: '',
-    kurmanjContent: '', turkishContent: '',
-    level: 1, unitId: '',
-  );
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -913,7 +915,7 @@ class _NewrozScreenState extends State<NewrozScreen>
                             const Icon(Icons.info_outline,
                                 color: AppColors.primaryLight, size: 16),
                             Gap.hSm,
-                            Text('Newroz hakkında',
+                            Text('Derbarê Newrozê',
                                 style: AppTypography.captionStrong.copyWith(
                                   color: AppColors.primaryLight,
                                 )),

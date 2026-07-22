@@ -12,7 +12,6 @@ import '../../core/services/js_eval_stub.dart'
 /// Offline değil — Google Cloud Speech API'ye istek gider.
 class SpeechRecognitionService {
   static bool _isListening = false;
-  static String _lastResult = '';
 
   /// Tarayıcı desteği var mı kontrol et.
   static bool get isSupported {
@@ -38,7 +37,6 @@ class SpeechRecognitionService {
 
     // Global callback hook via JS bridge
     // We use a simple polling approach: store result in window._lutkeSpeech
-    _lastResult = '';
     _isListening = true;
 
     js_bridge.evalJs('''

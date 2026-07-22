@@ -3,10 +3,12 @@ import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
-import '../../../core/constants/app_colors.dart';
 import '../../../core/constants/child_theme.dart';
 import '../../../core/router/app_router.dart';
-import '../../../shared/providers/child_mode_provider.dart';
+import '../../gamification/gamification_provider.dart';
+import '../domain/bizer_evolution.dart';
+import 'widgets/bizer_evolution_card.dart';
+import 'widgets/daily_challenge_card.dart';
 import 'widgets/star_display_widget.dart';
 
 // ════════════════════════════════════════════════════════════════
@@ -61,7 +63,7 @@ class ChildHomeScreen extends ConsumerWidget {
                             ),
                           ),
                           Text(
-                            'Karik bi te re ye',
+                            'Karîk bi te re ye',
                             style: ChildTypography.body.copyWith(
                               color: ChildColors.textSecondary,
                             ),
@@ -69,61 +71,91 @@ class ChildHomeScreen extends ConsumerWidget {
                         ],
                       ),
                     ),
+                    // TrackSwitchChip kaldırıldı — track değişimi Profile'dan
                   ],
                 ),
               ),
             ),
 
-            // ── Günlük Yıldız İlerleme ─────────────────────
+            // ── Günlük Yıldız İlerleme (CANLI VERİ) ──────────
+            // Önceden hardcoded '12/3/5' görünüyordu; artık gamification +
+            // karîk evolution provider'larından okur.
             SliverToBoxAdapter(
               child: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
-                child: Container(
-                  padding: const EdgeInsets.all(20),
-                  decoration: BoxDecoration(
-                    gradient: LinearGradient(
-                      colors: [
-                        ChildColors.accent.withOpacity(0.1),
-                        ChildColors.starYellow.withOpacity(0.08),
-                      ],
-                    ),
-                    borderRadius: BorderRadius.circular(ChildSpacing.radiusLg),
-                    border: Border.all(
-                      color: ChildColors.accent.withOpacity(0.2),
-                    ),
-                  ),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceAround,
-                    children: [
-                      _DailyStat(
-                        icon: '⭐',
-                        value: '12',
-                        label: 'Stêrk',
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
+                child: Consumer(
+                  builder: (context, ref, _) {
+                    final gam = ref.watch(gamificationProvider);
+                    final karik = ref.watch(karikEvolutionProvider);
+                    return Container(
+                      padding: const EdgeInsets.all(20),
+                      decoration: BoxDecoration(
+                        gradient: LinearGradient(
+                          colors: [
+                            ChildColors.accent.withOpacity(0.1),
+                            ChildColors.starYellow.withOpacity(0.08),
+                          ],
+                        ),
+                        borderRadius:
+                            BorderRadius.circular(ChildSpacing.radiusLg),
+                        border: Border.all(
+                          color: ChildColors.accent.withOpacity(0.2),
+                        ),
                       ),
-                      Container(
-                        width: 1,
-                        height: 40,
-                        color: ChildColors.accent.withOpacity(0.2),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceAround,
+                        children: [
+                          _DailyStat(
+                            icon: '⭐',
+                            value: '${karik.totalStars}',
+                            label: 'Stêrk',
+                          ),
+                          Container(
+                            width: 1,
+                            height: 40,
+                            color: ChildColors.accent.withOpacity(0.2),
+                          ),
+                          _DailyStat(
+                            icon: '📚',
+                            value: '${gam.totalWordsLearned}',
+                            label: 'Peyv',
+                          ),
+                          Container(
+                            width: 1,
+                            height: 40,
+                            color: ChildColors.accent.withOpacity(0.2),
+                          ),
+                          _DailyStat(
+                            icon: '🔥',
+                            value:
+                                '${gam.weeklyRhythm.activeDayCount}',
+                            label: 'Roj',
+                          ),
+                        ],
                       ),
-                      _DailyStat(
-                        icon: '📚',
-                        value: '3',
-                        label: 'Wane',
-                      ),
-                      Container(
-                        width: 1,
-                        height: 40,
-                        color: ChildColors.accent.withOpacity(0.2),
-                      ),
-                      _DailyStat(
-                        icon: '🔥',
-                        value: '5',
-                        label: 'Roj',
-                      ),
-                    ],
-                  ),
+                    );
+                  },
                 ),
               ).animate().fadeIn(delay: 200.ms).slideY(begin: 0.1),
+            ),
+
+            // ── Karîk Evolution Kartı ────────────────────────
+            SliverToBoxAdapter(
+              child: Padding(
+                padding: const EdgeInsets.symmetric(
+                    horizontal: 24, vertical: 12),
+                child: const KarikEvolutionCard(),
+              ).animate().fadeIn(delay: 250.ms).slideY(begin: 0.1),
+            ),
+
+            // ── Günlük Meydan Okuma Kartı ────────────────────
+            SliverToBoxAdapter(
+              child: Padding(
+                padding: const EdgeInsets.symmetric(
+                    horizontal: 24, vertical: 12),
+                child: const DailyChallengeCard(),
+              ).animate().fadeIn(delay: 300.ms).slideY(begin: 0.1),
             ),
 
             // ── Ders Başlığı ────────────────────────────────
@@ -156,18 +188,16 @@ class ChildHomeScreen extends ConsumerWidget {
                       stars: lesson.stars,
                       isLocked: isLocked,
                       cardColor: ChildColors.categoryColor(lesson.category),
-                      onTap: isLocked
-                          ? null
-                          : () => context.push(
-                              AppRoutes.childUnitHub,
-                              extra: {
-                                'category': lesson.category,
-                                'titleKu': lesson.titleKu,
-                                'titleTr': lesson.titleTr,
-                                'emoji': lesson.emoji,
-                                'level': 'A1',
-                              },
-                            ),
+                      onTap: () => context.push(
+                        AppRoutes.childUnitHub,
+                        extra: {
+                          'category': lesson.category,
+                          'titleKu': lesson.titleKu,
+                          'titleTr': lesson.titleTr,
+                          'emoji': lesson.emoji,
+                          'level': lesson.level,
+                        },
+                      ),
                     ),
                   ).animate().fadeIn(delay: delay).slideX(begin: 0.05);
                 },
@@ -367,6 +397,8 @@ class _ChildLessonData {
   final String titleKu;
   final String titleTr;
   final String category;
+  // A1/A2 seçimi: Laş & Hest A2 DB'sinde. Default: A1.
+  final String level;
   final int stars;
 
   const _ChildLessonData({
@@ -375,17 +407,22 @@ class _ChildLessonData {
     required this.titleKu,
     required this.titleTr,
     required this.category,
+    this.level = 'A1',
     this.stars = 0,
   });
 }
 
 const _childLessons = [
+  // ── A1 dersler (kChildA1Kelimeler DB'siyle birebir uyumlu kategoriler) ──
+  // DB: silav(12), malbat(6), reng(6), heywan(6), xwarin(6), hejmar(10),
+  //     dibistan(9), listik(6)
   _ChildLessonData(
     id: 'child_a1_01',
     emoji: '👋',
     titleKu: 'Silav!',
     titleTr: 'Merhaba!',
-    category: 'selamlama',
+    category: 'silav',
+    level: 'A1',
     stars: 0,
   ),
   _ChildLessonData(
@@ -394,6 +431,7 @@ const _childLessons = [
     titleKu: 'Malbata min',
     titleTr: 'Ailem',
     category: 'malbat',
+    level: 'A1',
     stars: 0,
   ),
   _ChildLessonData(
@@ -402,6 +440,7 @@ const _childLessons = [
     titleKu: 'Rengên min',
     titleTr: 'Renklerim',
     category: 'reng',
+    level: 'A1',
     stars: 0,
   ),
   _ChildLessonData(
@@ -410,6 +449,7 @@ const _childLessons = [
     titleKu: 'Heywan',
     titleTr: 'Hayvanlar',
     category: 'heywan',
+    level: 'A1',
   ),
   _ChildLessonData(
     id: 'child_a1_05',
@@ -417,6 +457,7 @@ const _childLessons = [
     titleKu: 'Xwarin',
     titleTr: 'Yiyecekler',
     category: 'xwarin',
+    level: 'A1',
   ),
   _ChildLessonData(
     id: 'child_a1_06',
@@ -424,6 +465,7 @@ const _childLessons = [
     titleKu: 'Hejmar',
     titleTr: 'Sayılar',
     category: 'hejmar',
+    level: 'A1',
   ),
   _ChildLessonData(
     id: 'child_a1_07',
@@ -431,6 +473,7 @@ const _childLessons = [
     titleKu: 'Dibistan',
     titleTr: 'Okul',
     category: 'dibistan',
+    level: 'A1',
   ),
   _ChildLessonData(
     id: 'child_a1_08',
@@ -438,19 +481,23 @@ const _childLessons = [
     titleKu: 'Lîstik!',
     titleTr: 'Oyun!',
     category: 'listik',
+    level: 'A1',
   ),
+  // ── A2 dersler (kChildA2Kelimeler DB: fiil, hest, las, xweza) ──
   _ChildLessonData(
-    id: 'child_a1_09',
+    id: 'child_a2_01',
     emoji: '🧍',
     titleKu: 'Laş',
     titleTr: 'Vücut',
     category: 'las',
+    level: 'A2',
   ),
   _ChildLessonData(
-    id: 'child_a1_10',
+    id: 'child_a2_02',
     emoji: '😊',
     titleKu: 'Hest',
     titleTr: 'Duygular',
     category: 'hest',
+    level: 'A2',
   ),
 ];
