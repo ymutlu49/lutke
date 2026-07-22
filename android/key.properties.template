@@ -1,0 +1,44 @@
+# ════════════════════════════════════════════════════════════════
+# LÛTKE — Release Signing Configuration TEMPLATE
+# ════════════════════════════════════════════════════════════════
+# Bu dosyayı `key.properties` adıyla kopyalayın ve gerçek değerlerle
+# doldurun. ASLA git'e commit ETMEYİN — .gitignore'da listelenmiştir.
+#
+# 1. Keystore üretimi (ilk kurulum, sadece bir kez):
+#
+#    keytool -genkey -v -keystore ~/lutke-release-key.jks \
+#      -keyalg RSA -keysize 2048 -validity 25000 \
+#      -alias lutke
+#
+#    Sizden istenecek:
+#    - Keystore parolası (kaybedilirse uygulama bir daha güncellenemez!)
+#    - Key parolası (genelde keystore ile aynı)
+#    - İsim/Kuruluş bilgileri (Play Console'da görünmez ama meta veridir)
+#
+# 2. Üretilen .jks dosyasını GÜVENLİ bir yerde saklayın:
+#    - Cloud backup (encrypted): Google Drive, iCloud
+#    - Yerel: USB veya şifreli klasör
+#    - ASLA repo'ya commit etmeyin
+#
+# 3. Bu dosyayı `key.properties` olarak kopyalayın ve aşağıdaki
+#    değerleri doldurun:
+# ════════════════════════════════════════════════════════════════
+
+# Keystore parolası (keytool -genkey'de girdiğiniz parola)
+storePassword=YOUR_KEYSTORE_PASSWORD_HERE
+
+# Key parolası (genelde aynı)
+keyPassword=YOUR_KEY_PASSWORD_HERE
+
+# Key alias (-alias parametresi, default 'lutke')
+keyAlias=lutke
+
+# Keystore dosyasının ABSOLUTE path'i
+# Windows örneği: C:\\Users\\yilma\\keystore\\lutke-release-key.jks
+# macOS/Linux:   /Users/yilma/keystore/lutke-release-key.jks
+storeFile=/ABSOLUTE/PATH/TO/lutke-release-key.jks
+
+# ════════════════════════════════════════════════════════════════
+# UYARI: BU DOSYA REPO'YA COMMIT EDİLMEMELİDİR!
+# .gitignore'da `key.properties` ve `*.jks` listelenmiştir.
+# ════════════════════════════════════════════════════════════════

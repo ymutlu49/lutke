@@ -54,8 +54,8 @@ Hem Kurmancî hem İngilizce öğrenim — tek uygulama.
 • Kemal Badıllı dilbilim kaynakları
 • Institut Kurde de Paris referansları
 
-🎁 7 Gün Ücretsiz Deneme
-Yıllık abonelik 299 ₺. Reklam yok, kart bilgisi olmadan deneyin.
+🎁 Tamamen Ücretsiz
+LÛTKE tüm özellikleriyle ücretsizdir. Abonelik, satın alma veya reklam yoktur — sadece kayıt yeterli.
 
 📞 İletişim
 info@lutke.app
@@ -64,23 +64,7 @@ www.lutke.app
 
 ## In-App Products / Subscriptions
 
-### Yıllık Premium Abonelik
-- **SKU (Play Console):** `lutke_yearly_299_try`
-- **Fiyat:** 299 ₺ (TRY) / yıl
-- **Süre:** 365 gün, otomatik yenilemeli
-- **Cayma:** Play Store → Ödemeler ve abonelikler menüsünden istenildiği zaman
-- **Free trial:** 7 gün (Play Console: "Introductory price → Free trial")
-- **Tek seferlik ücretsiz deneme** (account-level — restore akışında dikkate alınır)
-
-### Play Console Setup Steps
-1. Monetize → Subscriptions → Create subscription
-2. Product ID: `lutke_yearly_299_try`
-3. Name: `LÛTKE Premium — Salane / Yıllık`
-4. Description: `Tev de Kurmancî bê sînor — hemû ast, hemû çalakî.`
-5. Base plan: Auto-renewing, 1 year, 299 TRY
-6. Offer: 7-day free trial (eligible: new subscribers)
-7. Tax: KDV %18 (digital service)
-8. Save & activate
+**Yok.** Uygulama tamamen ücretsizdir, in-app purchase ürünü tanımlanmaz, abonelik yoktur. Play Console "Monetization" sekmesinde ürün oluşturulmasına gerek yoktur.
 
 ## What's New (500 char max — for v1.0.0)
 
@@ -171,9 +155,7 @@ Geri bildiriminizi bekliyoruz: info@lutke.app
 - [ ] Target audience and content declared
 - [ ] App access (any login required) declared
 - [ ] Pre-launch report reviewed (no critical issues)
-- [ ] **Subscription product `lutke_yearly_299_try` created & activated** (Monetize → Subscriptions)
-- [ ] **Free trial offer (7 days)** configured for the subscription
-- [ ] **`in_app_purchase` Flutter package** integrated (call `activatePremium()` on `purchaseUpdated`)
+- [x] **No in-app purchases / subscriptions** — application is fully free
 
 ### Post-launch
 - [ ] Monitor crash-free rate (target: >99.5%)

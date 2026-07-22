@@ -2,7 +2,7 @@
 
 **Kurmancî dil öğretim uygulaması**
 
-Prof. Dr. Yılmaz Mutlu & Prof. Dr. Osman Aslanoğlu ortaklığında.
+Prof. Dr. Yılmaz Mutlu tarafından geliştirilmiştir.
 
 ## Kurulum
 

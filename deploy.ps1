@@ -13,7 +13,8 @@ if (-not ($env:Path -like "*$flutterBin*")) {
     $env:Path = "$flutterBin;$env:Path"
 }
 
-$projectRoot = "C:\Users\yilma\Desktop\Jimaro\Diskalkuli_Platform\Lutke\LUTKE_v1\lutke_flutter_project"
+# Proje kökü = bu skriptin bulunduğu klasör (taşınmaya dayanıklı).
+$projectRoot = $PSScriptRoot
 Set-Location $projectRoot
 
 Write-Host "== 1/4 Flutter clean ==" -ForegroundColor Cyan
@@ -24,8 +25,8 @@ Write-Host "== 2/4 Flutter pub get ==" -ForegroundColor Cyan
 flutter pub get
 if ($LASTEXITCODE -ne 0) { throw "flutter pub get failed" }
 
-Write-Host "== 3/4 Flutter build web (base-href=/lutke/) ==" -ForegroundColor Cyan
-flutter build web --base-href="/lutke/" --release
+Write-Host "== 3/4 Flutter build web (base-href=/lutke/, tree-shake-icons) ==" -ForegroundColor Cyan
+flutter build web --base-href="/lutke/" --release --tree-shake-icons
 if ($LASTEXITCODE -ne 0) { throw "flutter build failed" }
 
 Write-Host "== 4/4 Deploy to gh-pages (worktree) ==" -ForegroundColor Cyan

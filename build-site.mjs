@@ -428,6 +428,8 @@ function buildHeaders() {
   Cache-Control: no-cache
 /app/flutter.js
   Cache-Control: no-cache
+/app/version.json
+  Cache-Control: no-cache
 /app/canvaskit/*
   Cache-Control: public, max-age=2592000
 `;
@@ -450,6 +452,16 @@ async function copyAppBuild() {
   idx = idx.replace(/<base href="\/">/, '<base href="/app/">');
   await fs.writeFile(idxPath, idx);
   log('  base-href set to /app/');
+
+  // version.json'a benzersiz deploy_id damgala — index.html'deki güncelleme
+  // bekçisi bunu yoklar; id değişince kullanıcıya "yeni sürüm hazır" çubuğu
+  // gösterilir (pubspec sürümü her deploy'da artmadığı için tek güvenilir sinyal).
+  const verPath = path.join(DIST, 'app', 'version.json');
+  let ver = {};
+  try { ver = JSON.parse(await read(verPath)); } catch { /* yoksa sıfırdan */ }
+  ver.deploy_id = new Date().toISOString();
+  await fs.writeFile(verPath, JSON.stringify(ver));
+  log(`  version.json stamped: deploy_id=${ver.deploy_id}`);
 
   const oauthSrc = path.join(BUILD_WEB, 'oauth-callback.html');
   if (existsSync(oauthSrc)) {

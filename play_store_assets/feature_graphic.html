@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="ku">
+<head>
+<meta charset="UTF-8">
+<title>LÛTKE — Feature Graphic 1024×500</title>
+<style>
+  /* Tarayıcıda açıp F12 → DevTools → "Capture full size screenshot" ile
+     1024×500 PNG indir. (Veya Mac'te Cmd+Shift+P → Capture full size). */
+  *, *:before, *:after { margin: 0; padding: 0; box-sizing: border-box; }
+  html, body {
+    width: 1024px;
+    height: 500px;
+    overflow: hidden;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", sans-serif;
+  }
+  .canvas {
+    width: 1024px;
+    height: 500px;
+    background: linear-gradient(135deg, #1A7B6B 0%, #0A3D35 100%);
+    position: relative;
+    overflow: hidden;
+    color: white;
+    display: flex;
+    align-items: center;
+    padding: 0 60px;
+  }
+  /* Decorative geometric shapes */
+  .canvas::before {
+    content: '';
+    position: absolute;
+    width: 500px; height: 500px;
+    background: radial-gradient(circle, rgba(255,255,255,0.08) 0%, transparent 70%);
+    top: -100px; right: -100px;
+    border-radius: 50%;
+  }
+  .canvas::after {
+    content: '';
+    position: absolute;
+    width: 300px; height: 300px;
+    background: radial-gradient(circle, rgba(255,255,255,0.05) 0%, transparent 70%);
+    bottom: -50px; left: 200px;
+    border-radius: 50%;
+  }
+  .left {
+    flex: 0 0 360px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    z-index: 2;
+  }
+  .logo-circle {
+    width: 220px; height: 220px;
+    background: white;
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    box-shadow: 0 12px 40px rgba(0,0,0,0.25);
+  }
+  .logo-circle img { width: 78%; height: 78%; object-fit: contain; }
+  .right {
+    flex: 1;
+    padding-left: 50px;
+    z-index: 2;
+  }
+  .brand {
+    font-size: 76px;
+    font-weight: 900;
+    letter-spacing: 6px;
+    line-height: 1;
+    margin-bottom: 8px;
+  }
+  .sub {
+    font-size: 22px;
+    opacity: 0.85;
+    margin-bottom: 22px;
+    letter-spacing: 1px;
+  }
+  .quote {
+    font-style: italic;
+    font-size: 20px;
+    font-weight: 600;
+    line-height: 1.4;
+    margin-bottom: 18px;
+    color: rgba(255,255,255,0.96);
+  }
+  .levels {
+    display: flex;
+    gap: 8px;
+    margin-top: 6px;
+  }
+  .level {
+    width: 44px; height: 44px;
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-weight: 800;
+    font-size: 14px;
+    color: white;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+  }
+  .a1 { background: #4CAF50; }
+  .a2 { background: #8BC34A; }
+  .b1 { background: #FF9800; }
+  .b2 { background: #FF5722; }
+  .c1 { background: #9C27B0; }
+  .c2 { background: #673AB7; }
+  .langs {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-top: 18px;
+    font-size: 18px;
+    font-weight: 700;
+  }
+  .pill {
+    background: rgba(255,255,255,0.18);
+    padding: 6px 18px;
+    border-radius: 999px;
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255,255,255,0.2);
+  }
+</style>
+</head>
+<body>
+<div class="canvas">
+  <div class="left">
+    <div class="logo-circle">
+      <img src="../assets/images/logo_512.png" alt="LÛTKE">
+    </div>
+  </div>
+  <div class="right">
+    <div class="brand">LÛTKE</div>
+    <div class="sub">Zimanê Kurdî · Kurmancî & English</div>
+    <div class="quote">"Ji peyvekê heya welatekî"</div>
+    <div class="langs">
+      <span class="pill">🇹🇷 Kurmancî</span>
+      <span class="pill">🌍 English</span>
+    </div>
+    <div class="levels">
+      <div class="level a1">A1</div>
+      <div class="level a2">A2</div>
+      <div class="level b1">B1</div>
+      <div class="level b2">B2</div>
+      <div class="level c1">C1</div>
+      <div class="level c2">C2</div>
+    </div>
+  </div>
+</div>
+</body>
+</html>

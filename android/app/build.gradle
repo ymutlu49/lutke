@@ -2,7 +2,11 @@ plugins {
     id "com.android.application"
     id "kotlin-android"
     id "dev.flutter.flutter-gradle-plugin"
-    id "com.google.gms.google-services"
+    // NOT (Mayıs 2026): com.google.gms.google-services plugin'i kaldırıldı.
+    // Firebase kullanmıyoruz; Cloudflare Pages Functions + D1 ile auth.
+    // Plugin google-services.json gerektiriyordu, dosya yoktu → build fail.
+    // Firebase paketleri pubspec'te kalsın diye dependency'ler korunuyor
+    // (lib/ içinde stub olarak duruyor, runtime'da try-catch ile yakalanır).
 }
 
 def localProperties = new Properties()
@@ -32,7 +36,7 @@ if (keystorePropertiesFile.exists()) {
 
 android {
     namespace "com.lutke.kurmanci"
-    compileSdk 35
+    compileSdk 36
     ndkVersion flutter.ndkVersion
 
     compileOptions {
@@ -46,8 +50,8 @@ android {
 
     defaultConfig {
         applicationId "com.lutke.kurmanci"
-        minSdk 23
-        targetSdk 35
+        minSdkVersion flutter.minSdkVersion
+        targetSdk 36
         versionCode flutterVersionCode.toInteger()
         versionName flutterVersionName
         multiDexEnabled true
@@ -69,9 +73,26 @@ android {
             signingConfig keystorePropertiesFile.exists()
                 ? signingConfigs.release
                 : signingConfigs.debug
+            // NOT (Mayıs 2026): R8 minification geçici olarak kapatıldı —
+            // proguard-rules.pro'da bazı reflection-using kütüphaneler için
+            // (drift, riverpod codegen, just_audio) kurallar eksikti, build
+            // fail ediyordu. İlk Play Store yayınından sonra kuralları
+            // tamamlayıp minify'i tekrar açacağız (~%40 boyut tasarrufu).
             shrinkResources false
             minifyEnabled false
         }
+        debug {
+            // Debug build hızlı kalsın — minify yok.
+            shrinkResources false
+            minifyEnabled false
+        }
+    }
+
+    // ── App Bundle yapılandırması (Play Store için) ────────────
+    bundle {
+        language { enableSplit = true }
+        density  { enableSplit = true }
+        abi      { enableSplit = true }
     }
 }
 
@@ -79,7 +100,9 @@ flutter {
     source = "../.."
 }
 
+// Firebase dependency'leri kaldırıldı (Mayıs 2026): Cloudflare auth'a geçtik,
+// Firebase analytics + plugin Kotlin 2.x ile uyumsuzluk yaratıyordu.
+// firebase_auth Flutter plugin'i kendi Android dep'lerini getiriyor (FlutterFire),
+// bu manual dep'lere gerek yok.
 dependencies {
-    implementation platform("com.google.firebase:firebase-bom:33.0.0")
-    implementation "com.google.firebase:firebase-analytics"
 }

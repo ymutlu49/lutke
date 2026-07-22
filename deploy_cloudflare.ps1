@@ -33,7 +33,8 @@ if (-not ($env:Path -like "*$flutterBin*")) {
     $env:Path = "$flutterBin;$env:Path"
 }
 
-$projectRoot = "C:\Users\yilma\Desktop\Jimaro\Diskalkuli_Platform\Kurmanci\Lutke\LUTKE_v1\lutke_flutter_project"
+# Proje kökü = bu skriptin bulunduğu klasör (taşınmaya dayanıklı).
+$projectRoot = $PSScriptRoot
 Set-Location $projectRoot
 
 # Cloudflare Pages projesi adi. Ilk deploy'da otomatik olusturulur (subdomain: <name>.pages.dev).
