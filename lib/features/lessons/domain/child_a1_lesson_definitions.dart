@@ -21,10 +21,11 @@ const _kChildLessons = <Lesson>[
     estimatedMinutes: 5,
     targetCardIds: ['z_a1_001', 'z_a1_002', 'z_a1_003', 'z_a1_004'],
     exercises: [
+      // audioAsset: null → TTS dinamik üretir (asset eksikliği fallback).
       ListenAndSelectExercise(
         id: 'ch_ex_001',
         kurmanjiText: 'Silav!',
-        audioAsset: 'assets/audio/silav.mp3',
+        audioAsset: null,
         options: ['Merhaba', 'Teşekkür', 'Evet', 'Hayır'],
         correctIndex: 0,
       ),
@@ -86,7 +87,7 @@ const _kChildLessons = <Lesson>[
       ),
       FillInBlankExercise(
         id: 'ch_ex_012',
-        sentenceWithBlank: '___ min biçûk e.',
+        sentenceWithBlank: '👧 ___ min biçûk e.',
         correctWord: 'Xwişka',
         options: ['Xwişka', 'Bavê', 'Segê'],
       ),
@@ -94,6 +95,15 @@ const _kChildLessons = <Lesson>[
         id: 'ch_ex_013',
         shuffledWords: ['min', 'Dapîra', 'xweş', 'e'],
         correctOrder: ['Dapîra', 'min', 'xweş', 'e'],
+      ),
+      // Piaget concrete-operational (7-10 yaş): orthographic production
+      // (typing) yerine seçim-tabanlı scaffolding — bilişsel yük azaltılır,
+      // metabilişsel yorgunluk önlenir.
+      FillInBlankExercise(
+        id: 'ch_ex_013b',
+        sentenceWithBlank: '👩 ___ li mitbexê ye.',
+        correctWord: 'Dê',
+        options: ['Dê', 'Bav', 'Bira'],
       ),
       CulturalContentExercise(
         id: 'ch_ex_014',
@@ -145,6 +155,15 @@ const _kChildLessons = <Lesson>[
         options: ['Mavi', 'Siyah', 'Sarı', 'Kırmızı'],
         correctIndex: 2,
       ),
+      // Piaget/Vygotsky: 7-10 yaş için renk-kelime eşleştirmesi,
+      // klavye yazımından pedagojik olarak çok daha uygun.
+      // NOT: Roj (güneş) sarı renktir — "sor" (kırmızı) değil. Olgusal doğruluk.
+      FillInBlankExercise(
+        id: 'ch_ex_023b',
+        sentenceWithBlank: 'Roj ___ e.',
+        correctWord: 'zer',
+        options: ['sor', 'zer', 'kesk'],
+      ),
       CulturalContentExercise(
         id: 'ch_ex_024',
         contentKu: 'Ala Kurdistanê: sor, spî, kesk û roja zer.',
@@ -186,7 +205,7 @@ const _kChildLessons = <Lesson>[
       ),
       FillInBlankExercise(
         id: 'ch_ex_032',
-        sentenceWithBlank: '___ li çiyê ye.',
+        sentenceWithBlank: '___ li çiyayî ye.',
         correctWord: 'Karîk',
         options: ['Masî', 'Karîk', 'Pisîk'],
       ),
@@ -196,10 +215,18 @@ const _kChildLessons = <Lesson>[
         options: ['Balık', 'Tavuk', 'Kuş', 'Keçi'],
         correctIndex: 2,
       ),
+      // YL 4-10 için üçlü veqetandek zinciri kognitif yük yarattığı için
+      // basitleştirildi. "Pisîk li malê ye" — somut, tek veqetandek, açık.
+      FillInBlankExercise(
+        id: 'ch_ex_033b',
+        sentenceWithBlank: '___ li malê ye.',
+        correctWord: 'Pisîk',
+        options: ['Pisîk', 'Masî', 'Çûk'],
+      ),
       CulturalContentExercise(
         id: 'ch_ex_034',
-        contentKu: 'Karîk li çiyayên Kurdistanê dijîn. Karik jî karîkek e!',
-        contentTr: 'Oğlaklar Kürdistan dağlarında yaşar. Karik da bir oğlaktır!',
+        contentKu: 'Karik li çiyayên Kurdistanê dijîn. Karîk jî karikek e!',
+        contentTr: 'Oğlaklar Kürdistan dağlarında yaşar. Karîk de bir oğlaktır!',
         contentType: CulturalType.story,
       ),
     ],
@@ -241,6 +268,12 @@ const _kChildLessons = <Lesson>[
         shuffledWords: ['vedixwim', 'Ez', 'av'],
         correctOrder: ['Ez', 'av', 'vedixwim'],
       ),
+      FillInBlankExercise(
+        id: 'ch_ex_043b',
+        sentenceWithBlank: '🍞 Ez ___ dixwim.',
+        correctWord: 'nan',
+        options: ['nan', 'av', 'şîr'],
+      ),
     ],
   ),
 
@@ -275,11 +308,19 @@ const _kChildLessons = <Lesson>[
         options: ['Çar', 'Pênc', 'Şeş', 'Du'],
         correctIndex: 1,
       ),
+      // Tam cümle: "___ tiliyên min hene" (benim beş parmağım var).
+      // YL için noun phrase yerine gerçek cümle daha anlaşılır.
       FillInBlankExercise(
         id: 'ch_ex_053',
-        sentenceWithBlank: '___ tiliyên destê min.',
+        sentenceWithBlank: '___ tiliyên min hene.',
         correctWord: 'Pênc',
         options: ['Sê', 'Pênc', 'Deh'],
+      ),
+      FillInBlankExercise(
+        id: 'ch_ex_053b',
+        sentenceWithBlank: 'Min ___ bira hene.',
+        correctWord: 'du',
+        options: ['yek', 'du', 'sê'],
       ),
     ],
   ),
@@ -300,7 +341,7 @@ const _kChildLessons = <Lesson>[
       MultipleChoiceExercise(
         id: 'ch_ex_060',
         prompt: '📚 Bu Kurmancî\'de ne?',
-        options: ['Qelem', 'Mamoste', 'Pirtûk', 'Top'],
+        options: ['Pênûsk', 'Mamoste', 'Pirtûk', 'Top'],
         correctIndex: 2,
       ),
       MultipleChoiceExercise(
@@ -309,11 +350,20 @@ const _kChildLessons = <Lesson>[
         options: ['Kitap', 'Öğretmen', 'Kalem', 'Okul'],
         correctIndex: 1,
       ),
+      // Belirsizlik önlendi: emoji (✏️) ile "kalem" kastı netleştirildi.
+      // Aksi halde "Pirtûka min sor e" de doğru olabilirdi — çocukta
+      // haksız hata hissi yaratır.
       FillInBlankExercise(
         id: 'ch_ex_062',
-        sentenceWithBlank: '___ min sor e.',
-        correctWord: 'Qelema',
-        options: ['Qelema', 'Pirtûka', 'Topê'],
+        sentenceWithBlank: '✏️ ___ min sor e.',
+        correctWord: 'Pênûska',
+        options: ['Pênûska', 'Pirtûka', 'Topê'],
+      ),
+      FillInBlankExercise(
+        id: 'ch_ex_062b',
+        sentenceWithBlank: 'Ez ___ dixwînim.',
+        correctWord: 'pirtûk',
+        options: ['pirtûk', 'pênûsk', 'top'],
       ),
     ],
   ),
@@ -334,7 +384,7 @@ const _kChildLessons = <Lesson>[
       MultipleChoiceExercise(
         id: 'ch_ex_070',
         prompt: '⚽ Bu Kurmancî\'de ne?',
-        options: ['Gogik', 'Lîstik', 'Top', 'Pirtûk'],
+        options: ['Sêv', 'Lîstik', 'Top', 'Pirtûk'],
         correctIndex: 2,
       ),
       MultipleChoiceExercise(

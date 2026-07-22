@@ -65,15 +65,15 @@ const kChildA2Kelimeler = [
 
   (id:'z_a2_020', ku:'Roj', tr:'Güneş/Gün', en:'Sun/Day', cins:'mê', ez:'roja',
    kat:'xweza', zor:0.85, not:'Doğa', emoji: '☀️',
-   her:['Roj li ezmanan e.', 'Roj baş!'], gen:['Roj zer e.']),
+   her:['Roj li ezmên e.', 'Roj baş!'], gen:['Roj zer e.']),
 
   (id:'z_a2_021', ku:'Heyv', tr:'Ay', en:'Moon', cins:'mê', ez:'heyva',
    kat:'xweza', zor:0.80, not:'Gece gökyüzü', emoji: '🌙',
-   her:['Heyv li ezmanan e.', 'Heyv spî ye.'], gen:['Heyv — ay', 'Heyva tije.']),
+   her:['Heyv li ezmên e.', 'Heyv spî ye.'], gen:['Heyv — ay', 'Heyva tije.']),
 
   (id:'z_a2_022', ku:'Stêr', tr:'Yıldız', en:'Star', cins:'mê', ez:'stêra',
    kat:'xweza', zor:0.82, not:'Gece gökyüzü', emoji: '⭐',
-   her:['Stêr li ezmanan in.', 'Stêrên gelek xweş in.'], gen:['Stêr dibiriqin.']),
+   her:['Stêr li ezmên in.', 'Stêr gelek xweş in.'], gen:['Stêr dibiriqin.']),
 
   (id:'z_a2_023', ku:'Av', tr:'Su', en:'Water', cins:'mê', ez:'ava',
    kat:'xweza', zor:0.88, not:'Doğa elementi', emoji: '🌊',
@@ -105,7 +105,7 @@ const kChildA2Kelimeler = [
 
   (id:'z_a2_032', ku:'Lîstin', tr:'Oynamak', en:'To play', cins:'bêcins', ez:null,
    kat:'fiil', zor:0.82, not:'Lêkera zarokan', emoji: '🎮',
-   her:['Em dilîzin li parkê.', 'Ez bi xwişka xwe re dilîzim.'], gen:['Lîstin — oynamak', 'Em dilîzin.']),
+   her:['Em li parkê dilîzin.', 'Ez bi xwişka xwe re dilîzim.'], gen:['Lîstin — oynamak', 'Em dilîzin.']),
 
   (id:'z_a2_033', ku:'Xwendin', tr:'Okumak', en:'To read', cins:'bêcins', ez:null,
    kat:'fiil', zor:0.75, not:'Eğitim fiili', emoji: '📖',
@@ -139,7 +139,7 @@ const kChildA2Kelimeler = [
 
   (id:'z_a2_043', ku:'Gotin', tr:'Söylemek', en:'To say', cins:'bêcins', ez:null,
    kat:'fiil', zor:0.75, not:'Temel fiil', emoji: '💬',
-   her:['Dê dibêje çîrokekê.', 'Ez dibêjim: silav!'], gen:['Tu çi dibêjî?']),
+   her:['Dê çîrokekê dibêje.', 'Ez dibêjim: silav!'], gen:['Tu çi dibêjî?']),
 
   (id:'z_a2_044', ku:'Zanîn', tr:'Bilmek', en:'To know', cins:'bêcins', ez:null,
    kat:'fiil', zor:0.75, not:'Temel fiil', emoji: '🧠',

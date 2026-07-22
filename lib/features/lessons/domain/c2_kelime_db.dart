@@ -15,11 +15,11 @@ final kC2Kelimeler = [
   (id:"c2_001", ku:"Arûz", tr:"Aruz vezni", en:"Aruz prosody",
    cins:"nêr", ez:"arûzê", kat:"edebiyat", zor:0.50,
    not:"Eril — Klasik Kürt şiirinin vezin sistemi. Farsça/Arapçadan alınmış. Xanî ve Mela arûz kullandı.",
-   her:["Şiîra bi arûzê.", "Arûzê fêr bûm."],
+   her:["Şiîra bi arûzê.", "Ez fêrî arûzê bûm."],
    gen:["Arûz û hece", "Arûzê klasîk"]),
 
   (id:"c2_002", ku:"Qafiye", tr:"Kafiye / Uyak", en:"Rhyme",
-   cins:"mê", ez:"qafiyê", kat:"edebiyat", zor:0.52,
+   cins:"mê", ez:"qafiyeya", kat:"edebiyat", zor:0.52,
    not:"Dişil — [BH]: qafiye n.f. Şiirde ses uyumu.",
    her:["Qafiyeya şiîrê.", "Bi qafiyeyê."],
    gen:["Qafiye û rîtm", "Qafiyeya şiîrê"]),
@@ -31,7 +31,7 @@ final kC2Kelimeler = [
    gen:["Heyam û serdem", "Heyamê zêrîn"]),
 
   (id:"c2_004", ku:"Meyxane", tr:"Meyhane (mecazi)", en:"Tavern (metaphorical)",
-   cins:"mê", ez:"meyxanê", kat:"edebiyat", zor:0.49,
+   cins:"mê", ez:"meyxaneya", kat:"edebiyat", zor:0.49,
    not:"Dişil — Tasavvuf şiirinde: meyxane = ilahi aşkın mekanı.",
    her:["Li meyxaneyê ne.", "Meyxaneya evînê."],
    gen:["Meyxane û baxçe", "Meyxaneya Mela"]),
@@ -39,7 +39,7 @@ final kC2Kelimeler = [
   (id:"c2_005", ku:"Şahbaz", tr:"Şahin / Asil kişi", en:"Falcon / Noble person",
    cins:"nêr", ez:"şahbazê", kat:"edebiyat", zor:0.48,
    not:"Eril — Klasik şiirde metafor: güçlü, asil kişi.",
-   her:["Weke şahbazê.", "Şahbazê Kurdistan."],
+   her:["Weke şahbazekî.", "Şahbazê Kurdistanê."],
    gen:["Şahbaz û bilbil", "Şahbazê me"]),
 
   (id:"c2_006", ku:"Destpêkirina şiîrê", tr:"Şiir başlangıcı", en:"Poem opening",
@@ -68,9 +68,9 @@ final kC2Kelimeler = [
    her:["Rêbaza lêkolînê.", "Di rêbaza lêkolînê de."],
    gen:["Rêbaza lêkolînê", "Rêbaza me"]),
 
-  (id:"c2_012", ku:"Hevçerxî", tr:"Yinelenebilirlik", en:"Reproducibility",
-   cins:"mê", ez:"hevçerxiyê", kat:"zanist", zor:0.48,
-   not:"Dişil — bilimsel yöntem ilkesi.",
+  (id:"c2_012", ku:"Hevçerxî", tr:"Çağdaşlık / Eşzamanlılık", en:"Contemporaneity",
+   cins:"mê", ez:"hevçerxiya", kat:"zanist", zor:0.48,
+   not:"Dişil — \"hev\" + \"çerx\" (aynı çağ/çark). Aynı dönemde olma; çağdaşlık.",
    her:["Hevçerxî di lêkolînê de.", "Di hevçerxiyê de."],
    gen:["Hevçerxî û rast bûn", "Hevçerxîya zanistî"]),
 
@@ -82,20 +82,20 @@ final kC2Kelimeler = [
 
   (id:"c2_014", ku:"Tabloya daneyê", tr:"Veri tablosu", en:"Data table",
    cins:"mê", ez:"tabloya daneyê", kat:"zanist", zor:0.50,
-   not:"\"Tabloye\" + \"daneyê\" (verinin).",
+   not:"\"Tablo\" + \"daneyê\" (verinin).",
    her:["Tabloya daneyê hat amade kirin.", "Di tabloya daneyê de."],
    gen:["Tabloya daneyê", "Tabloya me"]),
 
   // ── İLERİ SİYASİ SÖYLEM ─────────────────────────────────────
 
   (id:"c2_020", ku:"Jeopolîtîk", tr:"Jeopolitik", en:"Geopolitics",
-   cins:"mê", ez:"jeopolîtîkê", kat:"siyaset", zor:0.50,
+   cins:"mê", ez:"jeopolîtîka", kat:"siyaset", zor:0.50,
    not:"Dişil — \"Jeopolîtîka Rojhilata Navîn\" = Orta Doğu jeopolitiği.",
    her:["Jeopolîtîka Kurdistanê.", "Di jeopolîtîkê de."],
    gen:["Jeopolîtîk û dîplomasi", "Jeopolîtîka me"]),
 
   (id:"c2_021", ku:"Dîplomasi", tr:"Diplomasi", en:"Diplomacy",
-   cins:"mê", ez:"dîplomasiyê", kat:"siyaset", zor:0.51,
+   cins:"mê", ez:"dîplomasiya", kat:"siyaset", zor:0.51,
    not:"Dişil — uluslararası terim.",
    her:["Dîplomasiya kurdî.", "Di dîplomasiyê de."],
    gen:["Dîplomasi û têkoşîn", "Dîplomasîya me"]),
@@ -113,14 +113,14 @@ final kC2Kelimeler = [
    gen:["Çareserkirin û danûstandin", "Çareser bike!"]),
 
   (id:"c2_024", ku:"Danûstandin", tr:"Müzakere", en:"Negotiation",
-   cins:"mê", ez:"danûstandinê", kat:"siyaset", zor:0.52,
+   cins:"mê", ez:"danûstandina", kat:"siyaset", zor:0.52,
    not:"Dişil — \"dan\" + \"û\" + \"standin\".",
    her:["Danûstandin dest pê kir.", "Di danûstandinê de."],
-   gen:["Danûstandin û cenga", "Danûstandina me"]),
+   gen:["Danûstandin û ceng", "Danûstandina me"]),
 
   // ── ÇEVİRİ VE DİL AKTARIMI ──────────────────────────────────
 
-  (id:"c2_030", ku:"Wergerandin wêjeyî", tr:"Edebi çeviri", en:"Literary translation",
+  (id:"c2_030", ku:"Wergerandina wêjeyî", tr:"Edebi çeviri", en:"Literary translation",
    cins:"mê", ez:"wergerandina wêjeyî", kat:"ziman", zor:0.51,
    not:"\"Wergerandin\" + \"wêjeyî\".",
    her:["Wergerandina wêjeyî zehmet e.", "Di wergerandina wêjeyî de."],
@@ -185,7 +185,7 @@ final kC2Kelimeler = [
    gen:["Guhêrbara vegotinê", "Guhêrbarên rêzimanî"]),
 
   (id:"c2_051", ku:"Demsazî", tr:"Zaman uyumu", en:"Temporal coherence",
-   cins:"mê", ez:"demsaziyê", kat:"rêziman", zor:0.48,
+   cins:"mê", ez:"demsaziya", kat:"rêziman", zor:0.48,
    not:"Dişil — \"dem\" + \"-sazî\". Metin tutarlılığı.",
    her:["Demsazîya metnê.", "Di demsaziyê de."],
    gen:["Demsazî û girêdan", "Demsazîya kurdî"]),
@@ -217,11 +217,11 @@ final kC2Kelimeler = [
    her:["Bi kûrbûnî lêkolîn kirin.", "Bi kûrbûnî analîz kir."],
    gen:["Bi kûrbûnî û bi kurtasî", "Bi kûrbûnî"]),
 
-  (id:"c2_063", ku:"Têgehê navdar", tr:"Anahtar kavram", en:"Key concept",
-   cins:"nêr", ez:"têgehê navdar", kat:"zanist", zor:0.54,
-   not:"\"Têgeh\" + \"navdar\".",
-   her:["Têgehê navdar ê lêkolînê.", "Di têgehê navdar de."],
-   gen:["Têgehê navdar", "Têgehên navdar"]),
+  (id:"c2_063", ku:"Têgeha sereke", tr:"Anahtar kavram", en:"Key concept",
+   cins:"mê", ez:"têgeha sereke", kat:"zanist", zor:0.54,
+   not:"\"Têgeh\" (dişil) + \"sereke\" (temel/ana).",
+   her:["Têgeha sereke ya lêkolînê.", "Di têgeha sereke de."],
+   gen:["Têgeha sereke", "Têgehên sereke"]),
 
   (id:"c2_064", ku:"Raman û pratîk", tr:"Teori ve pratik", en:"Theory and practice",
    cins:"bêcins", ez:null, kat:"zanist", zor:0.55,
@@ -231,11 +231,11 @@ final kC2Kelimeler = [
 
   // ── KÜLTÜREL BELLEK VE MİRAS ─────────────────────────────────
 
-  (id:"c2_070", ku:"Muîn bûna çandî", tr:"Kültürel muhatap olma", en:"Cultural encounter",
-   cins:"mê", ez:"muîn bûna çandî", kat:"çand", zor:0.49,
-   not:"\"Muîn bûn\" + \"çandî\".",
-   her:["Muîn bûna çandî ya Kurdan.", "Di muîn bûna çandî de."],
-   gen:["Muîn bûna çandî", "Muîn bûna me"]),
+  (id:"c2_070", ku:"Rûbirûbûna çandî", tr:"Kültürel karşılaşma", en:"Cultural encounter",
+   cins:"mê", ez:"rûbirûbûna çandî", kat:"çand", zor:0.49,
+   not:"\"Rûbirûbûn\" (karşı karşıya gelme) + \"çandî\".",
+   her:["Rûbirûbûna çandî ya Kurdan.", "Di rûbirûbûna çandî de."],
+   gen:["Rûbirûbûna çandî", "Rûbirûbûna me"]),
 
   (id:"c2_071", ku:"Mîrasa zindî", tr:"Yaşayan miras", en:"Living heritage",
    cins:"mê", ez:"mîrasa zindî", kat:"çand", zor:0.52,
@@ -252,7 +252,7 @@ final kC2Kelimeler = [
   // ── C2 SON KELİMELER ─────────────────────────────────────────
 
   (id:"c2_080", ku:"Bêalîgirî", tr:"Tarafsızlık", en:"Impartiality",
-   cins:"mê", ez:"bêalîgiriyê", kat:"felsefe", zor:0.53,
+   cins:"mê", ez:"bêalîgiriya", kat:"felsefe", zor:0.53,
    not:"Dişil — \"bê\" + \"alîgirî\".",
    her:["Bêalîgirî lazim e.", "Bi bêalîgiriyê."],
    gen:["Bêalîgirî û alîgirî", "Bêalîgirîya me"]),
@@ -305,11 +305,11 @@ final kC2_Genisleme = [
    her:["Epistemolojîya kolonyal.", "Di epistemolojîya kolonyal de."],
    gen:["Epistemolojîya kolonyal", "Epistemolojîya me"]),
 
-  (id:"c2_104", ku:"Zanîna dêrxistî", tr:"Marjinalleştirilmiş bilgi", en:"Marginalized knowledge",
-   cins:"mê", ez:"zanîna dêrxistî", kat:"felsefe", zor:0.47,
-   not:"\"Zanîn\" + \"dêrxistî\" (kenara itilmiş).",
-   her:["Zanîna dêrxistî ya kurdan.", "Di zanîna dêrxistî de."],
-   gen:["Zanîna dêrxistî", "Zanîna me"]),
+  (id:"c2_104", ku:"Zanîna derxistî", tr:"Marjinalleştirilmiş bilgi", en:"Marginalized knowledge",
+   cins:"mê", ez:"zanîna derxistî", kat:"felsefe", zor:0.47,
+   not:"\"Zanîn\" + \"derxistî\" (dışarı atılmış, kenara itilmiş).",
+   her:["Zanîna derxistî ya kurdan.", "Di zanîna derxistî de."],
+   gen:["Zanîna derxistî", "Zanîna me"]),
 
   // ── DİL PLANLAMASI DERİN (30) ────────────────────────────────
   (id:"c2_110", ku:"Standardên zimanî", tr:"Dil standartları", en:"Language standards",
@@ -318,11 +318,11 @@ final kC2_Genisleme = [
    her:["Standardên zimanî hatine tayîn kirin.", "Di standardên zimanî de."],
    gen:["Standardên zimanî", "Standardên me"]),
 
-  (id:"c2_111", ku:"Pevajoya normalizasyonê", tr:"Normalleştirme süreci", en:"Normalization process",
-   cins:"mê", ez:"pevajoya normalizasyonê", kat:"ziman", zor:0.48,
-   not:"\"Pevajo\" + \"normalizasyonê\".",
-   her:["Pevajoya normalizasyonê.", "Di pevajoya normalizasyonê de."],
-   gen:["Pevajoya normalizasyonê", "Pevajoya me"]),
+  (id:"c2_111", ku:"Pêvajoya normalizasyonê", tr:"Normalleştirme süreci", en:"Normalization process",
+   cins:"mê", ez:"pêvajoya normalizasyonê", kat:"ziman", zor:0.48,
+   not:"\"Pêvajo\" + \"normalizasyonê\".",
+   her:["Pêvajoya normalizasyonê.", "Di pêvajoya normalizasyonê de."],
+   gen:["Pêvajoya normalizasyonê", "Pêvajoya me"]),
 
   (id:"c2_112", ku:"Ziman û hêz", tr:"Dil ve güç", en:"Language and power",
    cins:"bêcins", ez:null, kat:"ziman", zor:0.50,
@@ -333,7 +333,7 @@ final kC2_Genisleme = [
   (id:"c2_113", ku:"Vejîna zimanî ya serkeftî", tr:"Başarılı dil canlanması", en:"Successful language revitalization",
    cins:"mê", ez:"vejîna zimanî ya serkeftî", kat:"ziman", zor:0.48,
    not:"\"Vejîna zimanî\" + \"serkeftî\".",
-   her:["Vejîna zimanî ya serkeftî nimûne e.", "Di vejîna zimanî ya serkeftî de."],
+   her:["Vejîna zimanî ya serkeftî nimûne ye.", "Di vejîna zimanî ya serkeftî de."],
    gen:["Vejîna zimanî ya serkeftî", "Vejîna zimanî ya me"]),
 
   (id:"c2_114", ku:"Têkilîya zimanê dê û zimanê nû", tr:"Ana dil ve yeni dil ilişkisi", en:"Relation of mother tongue and new language",
@@ -409,9 +409,9 @@ final kC2_Genisleme = [
 
 final kC2_Buyuk = [
   // ── ELEŞTİREL/AKADEMİK — 50 ──────────────────────────────────
-  (id:"c2_200", ku:"Parêzvaniya zimanê", tr:"Dil savunuculuğu", en:"Language advocacy",
-   cins:"mê", ez:"parêzvaniya zimanê", kat:"ziman", zor:0.48, not:"\"Parêzvanî\"+\"zimanê\".",
-   her:["Parêzvaniya zimanê.", "Di parêzvaniya zimanê de."], gen:["Parêzvaniya zimanê", "Parêzvaniya me"]),
+  (id:"c2_200", ku:"Parêzvaniya zimên", tr:"Dil savunuculuğu", en:"Language advocacy",
+   cins:"mê", ez:"parêzvaniya zimên", kat:"ziman", zor:0.48, not:"\"Parêzvanî\"+\"zimên\" (dilin — bükünlü eğik hâl).",
+   her:["Parêzvaniya zimên.", "Di parêzvaniya zimên de."], gen:["Parêzvaniya zimên", "Parêzvaniya me"]),
   (id:"c2_201", ku:"Çêkirina peyva nû", tr:"Yeni kelime oluşturma", en:"Neologism creation",
    cins:"mê", ez:"çêkirina peyva nû", kat:"ziman", zor:0.49, not:"\"Çêkirin\"+\"peyva nû\".",
    her:["Çêkirina peyva nû.", "Di çêkirina peyva nû de."], gen:["Çêkirina peyva nû", "Çêkirina me"]),
@@ -447,9 +447,9 @@ final kC2_Buyuk = [
   (id:"c2_211", ku:"Felsefeya mafan", tr:"Haklar felsefesi", en:"Philosophy of rights",
    cins:"mê", ez:"felsefeya mafan", kat:"felsefe", zor:0.48, not:"\"Felsefe\"+\"mafan\".",
    her:["Felsefeya mafan.", "Di felsefeya mafan de."], gen:["Felsefeya mafan", "Felsefeya me"]),
-  (id:"c2_212", ku:"Azadîya ramiyar", tr:"Düşünce özgürlüğü", en:"Freedom of thought",
-   cins:"mê", ez:"azadîya ramiyar", kat:"felsefe", zor:0.49, not:"\"Azadî\"+\"ramiyar\" (düşünür).",
-   her:["Azadîya ramiyar lazim e.", "Di azadîya ramiyar de."], gen:["Azadîya ramiyar", "Azadîya me"]),
+  (id:"c2_212", ku:"Azadîya ramanê", tr:"Düşünce özgürlüğü", en:"Freedom of thought",
+   cins:"mê", ez:"azadîya ramanê", kat:"felsefe", zor:0.49, not:"\"Azadî\"+\"raman\" (düşünce).",
+   her:["Azadîya ramanê lazim e.", "Di azadîya ramanê de."], gen:["Azadîya ramanê", "Azadîya me"]),
   (id:"c2_213", ku:"Têkilîya hêz û zanistê ya Foucault", tr:"Foucault\'nun güç-bilgi ilişkisi", en:"Foucault\'s power-knowledge relation",
    cins:"mê", ez:"têkilîya hêz û zanistê ya Foucault", kat:"felsefe", zor:0.46, not:"Foucault kavramı C2.",
    her:["Têkilîya hêz û zanistê ya Foucault.", "Di têkilîya hêz û zanistê de."], gen:["Têkilîya hêz û zanistê ya Foucault", "Têkilîya me"]),
@@ -500,7 +500,7 @@ final kC2_Buyuk = [
 final kC2_Buyuk2 = [
   (id:"c2_300", ku:"Teorîya zimanê ya Chomsky", tr:"Chomsky dil teorisi", en:"Chomsky's language theory",
    cins:"mê", ez:"teorîya zimanê ya Chomsky", kat:"ziman", zor:0.46, not:"\"Teorîya zimanê ya Chomsky\".",
-   her:["Teorîya zimanê ya Chomsky.", "Di arûzê de."], gen:["Teorîya zimanê ya Chomsky", "Konsêpta me"]),
+   her:["Teorîya zimanê ya Chomsky.", "Di teorîya zimanê ya Chomsky de."], gen:["Teorîya zimanê ya Chomsky", "Konsêpta me"]),
   (id:"c2_301", ku:"Naveroka implicit", tr:"Örtük içerik", en:"Implicit content",
    cins:"mê", ez:"naveroka implicit", kat:"ziman", zor:0.47, not:"\"Naveroka implicit\".",
    her:["Naveroka implicit.", "Di naveroka implicit de dixebitin."], gen:["Naveroka implicit", "Konsêpta me"]),
@@ -515,22 +515,22 @@ final kC2_Buyuk2 = [
    her:["Felsefeya exlaqê.", "Di felsefeya exlaqê de dixebitin."], gen:["Felsefeya exlaqê", "Konsêpta me"]),
   (id:"c2_305", ku:"Têkilîya hêz û zayendê", tr:"Güç ve cinsiyet ilişkisi", en:"Power-gender relation",
    cins:"mê", ez:"têkilîya hêz û zayendê", kat:"felsefe", zor:0.46, not:"\"Têkilîya hêz û zayendê\".",
-   her:["Têkilîya hêz û zayendê.", "Di mijara arûz de dixebitin."], gen:["Têkilîya hêz û zayendê", "Konsêpta me"]),
-  (id:"c2_306", ku:"Zimanê akademîk ya kûr", tr:"Derin akademik dil", en:"Deep academic language",
-   cins:"nêr", ez:"zimanê akademîk ya kûr", kat:"ziman", zor:0.47, not:"\"Zimanê akademîk ya kûr\".",
-   her:["Zimanê akademîk ya kûr.", "Di zimanê akademîk ya kûr de xebat heye."], gen:["Zimanê akademîk ya kûr", "Konsêpta me"]),
+   her:["Têkilîya hêz û zayendê.", "Di têkilîya hêz û zayendê de dixebitin."], gen:["Têkilîya hêz û zayendê", "Konsêpta me"]),
+  (id:"c2_306", ku:"Zimanê akademîk ê kûr", tr:"Derin akademik dil", en:"Deep academic language",
+   cins:"nêr", ez:"zimanê akademîk ê kûr", kat:"ziman", zor:0.47, not:"\"Zimanê akademîk ê kûr\" — ziman eril, ravekera dirêjker \"ê\".",
+   her:["Zimanê akademîk ê kûr.", "Di zimanê akademîk ê kûr de xebat heye."], gen:["Zimanê akademîk ê kûr", "Konsêpta me"]),
   (id:"c2_307", ku:"Rêzimana kûr ya Kurmancî", tr:"Derin Kurmancî dilbilgisi", en:"Deep Kurmancî grammar",
    cins:"mê", ez:"rêzimana kûr ya Kurmancî", kat:"rêziman", zor:0.47, not:"\"Rêzimana kûr ya Kurmancî\".",
    her:["Rêzimana kûr ya Kurmancî.", "Di rêzimana kûr ya kurmancî de xebat heye."], gen:["Rêzimana kûr ya Kurmancî", "Konsêpta me"]),
   (id:"c2_308", ku:"Şêweyê wêjeyî", tr:"Belagat figürü / Söz sanatı", en:"Figure of speech",
-   cins:"nêr", ez:"şêweyê wêjeyî", kat:"ziman", zor:0.47, not:"\"Şêweyê wêjeyî\" = söz sanatı; metafor, tezat, teşbîh vb. kapsar. Eşdeğer: \"hunera gotinê\".",
+   cins:"nêr", ez:"şêweyê wêjeyî", kat:"ziman", zor:0.47, not:"\"Şêweyê wêjeyî\" = söz sanatı; metafor, tezat, teşbîh vb. kapsar. \"Şêwe\" eril (krş. \"bi şêweyekî giştî\"). Eşdeğer: \"hunera gotinê\".",
    her:["Şêweyê wêjeyî di helbestê de.", "Di şêweyê wêjeyî de hêz heye."], gen:["Şêweyê wêjeyî", "Hunera gotinê"]),
   (id:"c2_309", ku:"Figura edebî", tr:"Edebi figür", en:"Literary figure",
    cins:"mê", ez:"figura edebî", kat:"edebiyat", zor:0.47, not:"\"Figura edebî\" = edebî söz sanatı / kişileştirme, metafor, alegori. \"Hunera edebî\" eşdeğer.",
    her:["Figura edebî di romanê de.", "Di figura edebî de derbirîn heye."], gen:["Figura edebî", "Hunera edebî"]),
-  (id:"c2_310", ku:"Zimanê siyasî ya kûr", tr:"Derin siyasi dil", en:"Deep political language",
-   cins:"nêr", ez:"zimanê siyasî ya kûr", kat:"siyaset", zor:0.47, not:"\"Zimanê siyasî ya kûr\".",
-   her:["Zimanê siyasî ya kûr.", "Di zimanê siyasî ya kûr de xebat heye."], gen:["Zimanê siyasî ya kûr", "Konsêpta me"]),
+  (id:"c2_310", ku:"Zimanê siyasî yê kûr", tr:"Derin siyasi dil", en:"Deep political language",
+   cins:"nêr", ez:"zimanê siyasî yê kûr", kat:"siyaset", zor:0.47, not:"\"Zimanê siyasî yê kûr\" — ziman eril, ravekera dirêjker \"yê\".",
+   her:["Zimanê siyasî yê kûr.", "Di zimanê siyasî yê kûr de xebat heye."], gen:["Zimanê siyasî yê kûr", "Konsêpta me"]),
   (id:"c2_311", ku:"Civaka paşkolonyal", tr:"Postkolonyal toplum", en:"Postcolonial society",
    cins:"mê", ez:"civaka paşkolonyal", kat:"felsefe", zor:0.46, not:"\"Civaka paşkolonyal\".",
    her:["Civaka paşkolonyal.", "Di civaka paşkolonyal de."], gen:["Civaka paşkolonyal", "Konsêpta me"]),
@@ -564,21 +564,21 @@ final kC2_Buyuk2 = [
   (id:"c2_321", ku:"Naveroka çandî ya kûr", tr:"Derin kültürel içerik", en:"Deep cultural content",
    cins:"mê", ez:"naveroka çandî ya kûr", kat:"çand", zor:0.47, not:"\"Naveroka çandî ya kûr\".",
    her:["Naveroka çandî ya kûr.", "Di naveroka çandî ya kûr de ne."], gen:["Naveroka çandî ya kûr", "Konsêpta me"]),
-  (id:"c2_322", ku:"Şaredariya zimanî", tr:"Dilsel düzenleme", en:"Linguistic regulation",
-   cins:"mê", ez:"şaredariya zimanî", kat:"ziman", zor:0.46, not:"\"Şaredariya zimanî\".",
-   her:["Şaredariya zimanî.", "Di şaredariya zimanî de xebat heye."], gen:["Şaredariya zimanî", "Konsêpta me"]),
+  (id:"c2_322", ku:"Birêkûpêkkirina zimanî", tr:"Dilsel düzenleme", en:"Linguistic regulation",
+   cins:"mê", ez:"birêkûpêkkirina zimanî", kat:"ziman", zor:0.46, not:"\"Birêkûpêkkirin\" (düzenleme) + \"zimanî\".",
+   her:["Birêkûpêkkirina zimanî.", "Di birêkûpêkkirina zimanî de xebat heye."], gen:["Birêkûpêkkirina zimanî", "Konsêpta me"]),
   (id:"c2_323", ku:"Pêvajoya standartkirinê", tr:"Standardizasyon süreci", en:"Standardization process",
    cins:"mê", ez:"pêvajoya standartkirinê", kat:"ziman", zor:0.47, not:"\"Pêvajoya standartkirinê\".",
    her:["Pêvajoya standartkirinê.", "Di pêvajoya standartkirinê de."], gen:["Pêvajoya standartkirinê", "Konsêpta me"]),
   (id:"c2_324", ku:"Çêkirina termînolojiya kurdî", tr:"Kürtçe terminoloji oluşturma", en:"Creating Kurdish terminology",
    cins:"mê", ez:"çêkirina termînolojiya kurdî", kat:"ziman", zor:0.46, not:"\"Çêkirina termînolojiya kurdî\".",
    her:["Çêkirina termînolojiya kurdî.", "Di çêkirina termînolojiya kurdî de ne."], gen:["Çêkirina termînolojiya kurdî", "Konsêpta me"]),
-  (id:"c2_325", ku:"Normativa daxistî", tr:"İniş normativi", en:"Prescriptive norm",
+  (id:"c2_325", ku:"Normativa daxistî", tr:"Kuralcı norm", en:"Prescriptive norm",
    cins:"mê", ez:"normativa daxistî", kat:"rêziman", zor:0.46, not:"\"Normativa daxistî\".",
    her:["Normativa daxistî di rêzimanê de.", "Di normativa daxistî de kar dikin."], gen:["Normativa daxistî", "Konsêpta me"]),
   (id:"c2_326", ku:"Zimanzanîya sosyolojîk", tr:"Sosyolojik dilbilim", en:"Sociological linguistics",
    cins:"mê", ez:"zimanzanîya sosyolojîk", kat:"ziman", zor:0.46, not:"\"Zimanzanîya sosyolojîk\".",
-   her:["Zimanzanîya sosyolojîk.", "Di normativa daxistî de."], gen:["Zimanzanîya sosyolojîk", "Konsêpta me"]),
+   her:["Zimanzanîya sosyolojîk.", "Di zimanzanîya sosyolojîk de."], gen:["Zimanzanîya sosyolojîk", "Konsêpta me"]),
   (id:"c2_327", ku:"Zimanzanîya rewşenbîrî", tr:"Entelektüel dilbilim", en:"Intellectual linguistics",
    cins:"mê", ez:"zimanzanîya rewşenbîrî", kat:"ziman", zor:0.46, not:"\"Zimanzanîya rewşenbîrî\".",
    her:["Zimanzanîya rewşenbîrî.", "Di zimanzanîya rewşenbîrî de xebat heye."], gen:["Zimanzanîya rewşenbîrî", "Konsêpta me"]),
@@ -601,52 +601,52 @@ final kC2_Buyuk_ext = [
   (id:"c2_812", ku:"Performatîvîteya zimên", tr:"Dilin performatifliği", en:"Performativity of language", cins:"mê", ez:"performatîvîteya zimên", kat:"ziman", zor:0.46, not:"\"Performatîvîte\" = J.L. Austin. Dil eylem olarak.", her:["Performatîvîteya zimên.", "Di performatîvîteya zimên de."], gen:["Performatîvîteya zimên", "Performatîvîteya me"]),
   (id:"c2_813", ku:"Têkilîya ziman û hêzê", tr:"Dil-güç ilişkisi", en:"Language-power relation", cins:"mê", ez:"têkilîya ziman û hêzê", kat:"ziman", zor:0.47, not:"Foucault: dil güç üretir. Temel postmodern önerme.", her:["Têkilîya ziman û hêzê.", "Di têkilîya ziman û hêzê de."], gen:["Têkilîya ziman û hêzê", "Têkilîya me"]),
   (id:"c2_814", ku:"Ziman û siyaseta nasname", tr:"Dil ve kimlik siyaseti", en:"Language and identity politics", cins:"bêcins", ez:null, kat:"ziman", zor:0.47, not:"\"Ziman\"+\"siyaseta nasname\". Dil siyaseti.", her:["Ziman û siyaseta nasname.", "Di ziman û siyaseta nasname de."], gen:["Ziman û siyaseta nasname", "Zimanê me"]),
-  (id:"c2_815", ku:"Metakomunîkasyon", tr:"Üst iletişim", en:"Meta-communication", cins:"mê", ez:"metakomunîkasyonê", kat:"ziman", zor:0.46, not:"\"Meta\" + \"komunîkasyon\". İletişim hakkında iletişim.", her:["Metakomunîkasyon dibe.", "Di metakomunîkasyonê de."], gen:["Metakomunîkasyon", "Metakomunîkasyona me"]),
+  (id:"c2_815", ku:"Metakomunîkasyon", tr:"Üst iletişim", en:"Meta-communication", cins:"mê", ez:"metakomunîkasyona", kat:"ziman", zor:0.46, not:"\"Meta\" + \"komunîkasyon\". İletişim hakkında iletişim.", her:["Metakomunîkasyon dibe.", "Di metakomunîkasyonê de."], gen:["Metakomunîkasyon", "Metakomunîkasyona me"]),
   (id:"c2_816", ku:"Yekalîbûna zimanî", tr:"Dil standardizasyonu", en:"Language standardization", cins:"mê", ez:"yekalîbûna zimanî", kat:"ziman", zor:0.47, not:"\"Yekalîbûn\"+\"zimanî\". Standardizasyon süreci.", her:["Yekalîbûna zimanî.", "Di yekalîbûna zimanî de."], gen:["Yekalîbûna zimanî", "Yekalîbûna me"]),
   (id:"c2_817", ku:"Nûpeyvên kurdî", tr:"Yeni Kürtçe kelimeler", en:"New Kurdish words", cins:"bêcins", ez:"nûpeyvên kurdî", kat:"ziman", zor:0.48, not:"\"Nûpeyv\" = neolojizm. Kürtçe kelime türetme.", her:["Nûpeyvên kurdî saz kirin.", "Di nûpeyvên kurdî de."], gen:["Nûpeyvên kurdî", "Nûpeyvên me"]),
   (id:"c2_818", ku:"Pêvajoya standardkirinê ya nûjen", tr:"Modern standardizasyon süreci", en:"Modern standardization process", cins:"mê", ez:"pêvajoya standardkirinê ya nûjen", kat:"ziman", zor:0.46, not:"\"Pêvajo\"+\"standardkirin\"+\"nûjen\".", her:["Pêvajoya standardkirinê ya nûjen.", "Di pêvajoya standardkirinê ya nûjen de."], gen:["Pêvajoya standardkirinê ya nûjen", "Pêvajoya me"]),
 
   // ── AKADEMİK ÜRETİM VE SUNUM (30) ────────────────────────────
 
-  (id:"c2_819", ku:"Gotareke pêzanistî", tr:"Bilimsel makale yazımı", en:"Writing a scientific article", cins:"mê", ez:"gotareke pêzanistî", kat:"akademik", zor:0.47, not:"\"Gotar\"+\"pêzanistî\". Akademik yazım.", her:["Gotareke pêzanistî nivîsand.", "Di gotareke pêzanistî de."], gen:["Gotareke pêzanistî", "Gotarên me"]),
+  (id:"c2_819", ku:"Gotareke zanistî", tr:"Bilimsel makale", en:"A scientific article", cins:"mê", ez:"gotareke zanistî", kat:"akademik", zor:0.47, not:"\"Gotar\"+\"zanistî\". Akademik yazım.", her:["Wê gotareke zanistî nivîsand.", "Di gotareke zanistî de."], gen:["Gotareke zanistî", "Gotarên me"]),
   (id:"c2_820", ku:"Argumana akademîk ya serkeftî", tr:"Başarılı akademik argüman", en:"Successful academic argument", cins:"mê", ez:"argumana akademîk ya serkeftî", kat:"akademik", zor:0.46, not:"\"Arguman\"+\"akademîk\"+\"serkeftî\".", her:["Argumana akademîk ya serkeftî.", "Di argumana akademîk de."], gen:["Argumana akademîk ya serkeftî", "Argumana me"]),
   (id:"c2_821", ku:"Debata zanistî", tr:"Bilimsel tartışma", en:"Scientific debate", cins:"mê", ez:"debata zanistî", kat:"akademik", zor:0.48, not:"\"Debat\"+\"zanistî\".", her:["Debata zanistî hat.", "Di debata zanistî de."], gen:["Debata zanistî", "Debata me"]),
   (id:"c2_822", ku:"Pêxistina têgehên nû", tr:"Yeni kavramlar önerme", en:"Proposing new concepts", cins:"mê", ez:"pêxistina têgehên nû", kat:"akademik", zor:0.46, not:"\"Pêxistin\"+\"têgeh\"+\"nû\".", her:["Pêxistina têgehên nû.", "Di pêxistina têgehên nû de."], gen:["Pêxistina têgehên nû", "Pêxistina me"]),
-  (id:"c2_823", ku:"Serhilana akademîk", tr:"Akademik itiraz", en:"Academic challenge", cins:"mê", ez:"serhilana akademîk", kat:"akademik", zor:0.47, not:"\"Serhilan\"+\"akademîk\".", her:["Serhilana akademîk hat.", "Di serhilana akademîk de."], gen:["Serhilana akademîk", "Serhilana me"]),
+  (id:"c2_823", ku:"Nerazîbûna akademîk", tr:"Akademik itiraz", en:"Academic objection", cins:"mê", ez:"nerazîbûna akademîk", kat:"akademik", zor:0.47, not:"\"Nerazîbûn\" (itiraz)+\"akademîk\".", her:["Nerazîbûna akademîk hat.", "Di nerazîbûna akademîk de."], gen:["Nerazîbûna akademîk", "Nerazîbûna me"]),
 
   // ── ELEŞTİREL KURAM DERİN (40) ────────────────────────────────
 
   (id:"c2_824", ku:"Derûnnasiya kurdî", tr:"Kürt psikolojisi", en:"Kurdish psychology", cins:"mê", ez:"derûnnasiya kurdî", kat:"felsefe", zor:0.47, not:"\"Derûnnasî\"+\"kurdî\". Kolektif travma ve kimlik.", her:["Derûnnasiya kurdî.", "Di derûnnasiya kurdî de."], gen:["Derûnnasiya kurdî", "Derûnnasiya me"]),
   (id:"c2_825", ku:"Travmaya kolektîf", tr:"Kolektif travma", en:"Collective trauma", cins:"mê", ez:"travmaya kolektîf", kat:"psikoloji", zor:0.48, not:"\"Travma\"+\"kolektîf\". Kürt tarihsel travması.", her:["Travmaya kolektîf.", "Di travmaya kolektîf de."], gen:["Travmaya kolektîf", "Travmaya me"]),
   (id:"c2_826", ku:"Zordarîya çandî", tr:"Kültürel baskı", en:"Cultural oppression", cins:"mê", ez:"zordarîya çandî", kat:"felsefe", zor:0.48, not:"\"Zordarî\"+\"çandî\". Kültürel hegemonya eleştirisi.", her:["Zordarîya çandî.", "Di zordarîya çandî de."], gen:["Zordarîya çandî", "Zordarîya me"]),
-  (id:"c2_827", ku:"Dekonstiruksiyona nasnameya kolonyal", tr:"Sömürge kimliğinin dekonstruksiyonu", en:"Deconstruction of colonial identity", cins:"mê", ez:"dekonstiruksiyona nasnameya kolonyal", kat:"felsefe", zor:0.45, not:"\"Dekonstrüksiyona\" + \"nasnameya kolonyal\". Derrida/Spivak.", her:["Dekonstiruksiyona nasnameya kolonyal.", "Di dekonstiruksiyona nasnameya kolonyal de."], gen:["Dekonstiruksiyona nasnameya kolonyal", "Dekonstiruksiyon"]),
+  (id:"c2_827", ku:"Dekonstiruksiyona nasnameya kolonyal", tr:"Sömürge kimliğinin dekonstruksiyonu", en:"Deconstruction of colonial identity", cins:"mê", ez:"dekonstiruksiyona nasnameya kolonyal", kat:"felsefe", zor:0.45, not:"\"Dekonstiruksiyon\" + \"nasnameya kolonyal\". Derrida/Spivak.", her:["Dekonstiruksiyona nasnameya kolonyal.", "Di dekonstiruksiyona nasnameya kolonyal de."], gen:["Dekonstiruksiyona nasnameya kolonyal", "Dekonstiruksiyon"]),
   (id:"c2_828", ku:"Hêmana paşkolonyalîst", tr:"Postkolonyal unsur", en:"Postcolonial element", cins:"mê", ez:"hêmana paşkolonyalîst", kat:"felsefe", zor:0.46, not:"\"Hêman\"+\"paşkolonyalîst\".", her:["Hêmana paşkolonyalîst.", "Di hêmana paşkolonyalîst de."], gen:["Hêmana paşkolonyalîst", "Hêmanên me"]),
   (id:"c2_829", ku:"Têkilîya navend û deverê", tr:"Merkez ve çevre ilişkisi", en:"Center-periphery relation", cins:"mê", ez:"têkilîya navend û deverê", kat:"felsefe", zor:0.47, not:"\"Têkilî\"+\"navend û dever\". Dünya sistemi teorisi.", her:["Têkilîya navend û deverê.", "Di têkilîya navend û deverê de."], gen:["Têkilîya navend û deverê", "Têkilîya me"]),
-  (id:"c2_830", ku:"Zanista bêdestpêk", tr:"Disiplinlerarası bilim", en:"Interdisciplinary science", cins:"mê", ez:"zanista bêdestpêk", kat:"zanist", zor:0.47, not:"\"Zanist\"+\"bêdestpêk\". Sınır aşan araştırma.", her:["Zanista bêdestpêk.", "Di zanista bêdestpêk de."], gen:["Zanista bêdestpêk", "Zanista me"]),
-  (id:"c2_831", ku:"Metodolojîya mîkso", tr:"Karma metodoloji", en:"Mixed methodology", cins:"mê", ez:"metodolojîya mîkso", kat:"akademik", zor:0.47, not:"\"Metodolojî\"+\"mîkso\". Nitel+nicel birleşimi.", her:["Metodolojîya mîkso.", "Di metodolojîya mîkso de."], gen:["Metodolojîya mîkso", "Metodolojîya me"]),
+  (id:"c2_830", ku:"Zanista navdîsîplînî", tr:"Disiplinlerarası bilim", en:"Interdisciplinary science", cins:"mê", ez:"zanista navdîsîplînî", kat:"zanist", zor:0.47, not:"\"Zanist\"+\"navdîsîplînî\" (disiplinlerarası). Sınır aşan araştırma.", her:["Zanista navdîsîplînî.", "Di zanista navdîsîplînî de."], gen:["Zanista navdîsîplînî", "Zanista me"]),
+  (id:"c2_831", ku:"Metodolojîya têkel", tr:"Karma metodoloji", en:"Mixed methodology", cins:"mê", ez:"metodolojîya têkel", kat:"akademik", zor:0.47, not:"\"Metodolojî\"+\"têkel\" (karma, karışım). Nitel+nicel birleşimi. (\"tevlihev\" = düzensiz karışık; terim için uygun değil.)", her:["Metodolojîya têkel.", "Di metodolojîya têkel de."], gen:["Metodolojîya têkel", "Metodolojîya me"]),
 
   // ── DİL ÜRETME VE KÜLTÜR (30) ─────────────────────────────────
 
   (id:"c2_832", ku:"Helbestên azad yên kurdî", tr:"Kürtçe serbest nazım", en:"Kurdish free verse", cins:"bêcins", ez:"helbestên azad yên kurdî", kat:"edebiyat", zor:0.48, not:"\"Helbesta azad\" = serbest nazım. Modern Kürt şiiri.", her:["Helbestên azad yên kurdî.", "Di helbestên azad yên kurdî de."], gen:["Helbestên azad yên kurdî", "Helbestên me"]),
-  (id:"c2_833", ku:"Naveroka têgehî ya helbesta", tr:"Şiirin kavramsal içeriği", en:"Conceptual content of poetry", cins:"mê", ez:"naveroka têgehî ya helbesta", kat:"edebiyat", zor:0.47, not:"\"Navero\"+\"têgehî\"+\"helbest\".", her:["Naveroka têgehî ya helbesta.", "Di naveroka têgehî de."], gen:["Naveroka têgehî ya helbesta", "Naveroka me"]),
+  (id:"c2_833", ku:"Naveroka têgehî ya helbestê", tr:"Şiirin kavramsal içeriği", en:"Conceptual content of poetry", cins:"mê", ez:"naveroka têgehî ya helbestê", kat:"edebiyat", zor:0.47, not:"\"Naverok\"+\"têgehî\"+\"helbestê\" (eğik hâl).", her:["Naveroka têgehî ya helbestê.", "Di naveroka têgehî de."], gen:["Naveroka têgehî ya helbestê", "Naveroka me"]),
   (id:"c2_834", ku:"Çêkirina têgehên nû yên kurdî", tr:"Yeni Kürtçe kavramlar yaratma", en:"Creating new Kurdish concepts", cins:"mê", ez:"çêkirina têgehên nû yên kurdî", kat:"ziman", zor:0.47, not:"\"Çêkirin\"+\"têgeh\"+\"nû\"+\"kurdî\".", her:["Çêkirina têgehên nû yên kurdî.", "Di çêkirina têgehên nû de."], gen:["Çêkirina têgehên nû yên kurdî", "Çêkirina me"]),
   (id:"c2_226", ku:"Wergera edebî ya kûr", tr:"Derin edebi çeviri", en:"Deep literary translation", cins:"mê", ez:"wergera edebî ya kûr", kat:"edebiyat", zor:0.47, not:"\"Werger\"+\"edebî\"+\"kûr\".", her:["Wergera edebî ya kûr.", "Di wergera edebî ya kûr de."], gen:["Wergera edebî ya kûr", "Wergera me"]),
   (id:"c2_227", ku:"Pêşengiya wêjeyî", tr:"Edebi öncülük", en:"Literary leadership", cins:"mê", ez:"pêşengiya wêjeyî", kat:"edebiyat", zor:0.47, not:"\"Pêşengî\"+\"wêjeyî\".", her:["Pêşengiya wêjeyî.", "Di pêşengiya wêjeyî de."], gen:["Pêşengiya wêjeyî", "Pêşengiya me"]),
-  (id:"c2_228", ku:"Wêje û civakê re têkildar", tr:"Edebiyatın toplumla ilişkisi", en:"Literature's relation with society", cins:"bêcins", ez:null, kat:"edebiyat", zor:0.47, not:"\"Wêje\"+\"civak\". Sosyal eleştiri.", her:["Wêje û civakê re têkildar.", "Di wêje û civakê re têkildar de."], gen:["Wêje û civakê re têkildar", "Wêjeya me"]),
+  (id:"c2_228", ku:"Têkiliya wêje û civakê", tr:"Edebiyatın toplumla ilişkisi", en:"Literature's relation with society", cins:"mê", ez:"têkiliya wêje û civakê", kat:"edebiyat", zor:0.47, not:"\"Têkilî\"+\"wêje û civak\". Sosyal eleştiri.", her:["Têkiliya wêje û civakê.", "Di têkiliya wêje û civakê de."], gen:["Têkiliya wêje û civakê", "Wêjeya me"]),
 
   // ── JEOPOLİTİK VE ULUSLARARASI (30) ──────────────────────────
 
   (id:"c2_229", ku:"Jeopolîtîka Kurdan", tr:"Kürtlerin jeopolitiği", en:"Geopolitics of Kurds", cins:"mê", ez:"jeopolîtîka Kurdan", kat:"siyaset", zor:0.48, not:"\"Jeopolîtîk\"+\"Kurdan\". Kürt jeopolitiği.", her:["Jeopolîtîka Kurdan.", "Di jeopolîtîka Kurdan de."], gen:["Jeopolîtîka Kurdan", "Jeopolîtîka me"]),
   (id:"c2_230", ku:"Têkilîyên navdewletî ya Kurdan", tr:"Kürtlerin uluslararası ilişkileri", en:"International relations of Kurds", cins:"bêcins", ez:"têkilîyên navdewletî ya Kurdan", kat:"siyaset", zor:0.47, not:"\"Têkilî\"+\"navdewletî\"+\"Kurdan\".", her:["Têkilîyên navdewletî ya Kurdan.", "Di têkilîyên navdewletî ya Kurdan de."], gen:["Têkilîyên navdewletî ya Kurdan", "Têkilîyên me"]),
   (id:"c2_231", ku:"Stratejîya siyasî ya kurd", tr:"Kürt siyasi stratejisi", en:"Kurdish political strategy", cins:"mê", ez:"stratejîya siyasî ya kurd", kat:"siyaset", zor:0.48, not:"\"Stratejî\"+\"siyasî\"+\"kurd\".", her:["Stratejîya siyasî ya kurd.", "Di stratejîya siyasî ya kurd de."], gen:["Stratejîya siyasî ya kurd", "Stratejîya me"]),
-  (id:"c2_232", ku:"Fedratîvîteya Kurdistanê", tr:"Kürdistanın federatifliği", en:"Federalism of Kurdistan", cins:"mê", ez:"fedratîvîteya Kurdistanê", kat:"siyaset", zor:0.47, not:"\"Fedratîvîte\"+\"Kurdistanê\". Siyasi model.", her:["Fedratîvîteya Kurdistanê.", "Di fedratîvîteya Kurdistanê de."], gen:["Fedratîvîteya Kurdistanê", "Fedratîvîteya me"]),
-  (id:"c2_233", ku:"Siyaseta herêmî ya Xawermiyan", tr:"Orta Doğu bölgesel siyaseti", en:"Middle East regional politics", cins:"mê", ez:"siyaseta herêmî ya Xawermiyan", kat:"siyaset", zor:0.47, not:"\"Siyaset\"+\"herêmî\"+\"Xawermiya\".", her:["Siyaseta herêmî ya Xawermiyan.", "Di siyaseta herêmî de."], gen:["Siyaseta herêmî ya Xawermiyan", "Siyaseta me"]),
+  (id:"c2_232", ku:"Federatîvîteya Kurdistanê", tr:"Kürdistanın federatifliği", en:"Federalism of Kurdistan", cins:"mê", ez:"federatîvîteya Kurdistanê", kat:"siyaset", zor:0.47, not:"\"Federatîvîte\"+\"Kurdistanê\". Siyasi model.", her:["Federatîvîteya Kurdistanê.", "Di federatîvîteya Kurdistanê de."], gen:["Federatîvîteya Kurdistanê", "Federatîvîteya me"]),
+  (id:"c2_233", ku:"Siyaseta herêmî ya Rojhilata Navîn", tr:"Orta Doğu bölgesel siyaseti", en:"Middle East regional politics", cins:"mê", ez:"siyaseta herêmî ya Rojhilata Navîn", kat:"siyaset", zor:0.47, not:"\"Siyaset\"+\"herêmî\"+\"Rojhilata Navîn\" (Orta Doğu).", her:["Siyaseta herêmî ya Rojhilata Navîn.", "Di siyaseta herêmî de."], gen:["Siyaseta herêmî ya Rojhilata Navîn", "Siyaseta me"]),
 
   // ── HITABET VE SUNUM (20) ─────────────────────────────────────
 
   (id:"c2_234", ku:"Hîtabeta siyasî ya serkeftî", tr:"Başarılı siyasi hitabet", en:"Successful political oratory", cins:"mê", ez:"hîtabeta siyasî ya serkeftî", kat:"akademik", zor:0.47, not:"\"Hîtabet\"+\"siyasî\"+\"serkeftî\".", her:["Hîtabeta siyasî ya serkeftî.", "Di hîtabeta siyasî ya serkeftî de."], gen:["Hîtabeta siyasî ya serkeftî", "Hîtabeta me"]),
   (id:"c2_235", ku:"Axaftina li pêşiya girseyê", tr:"Kitleye konuşma", en:"Speaking to a crowd", cins:"mê", ez:"axaftina li pêşiya girseyê", kat:"akademik", zor:0.48, not:"\"Axaftin\"+\"li pêşiya girseyê\".", her:["Axaftina li pêşiya girseyê.", "Di axaftina li pêşiya girseyê de."], gen:["Axaftina li pêşiya girseyê", "Axaftina me"]),
-  (id:"c2_236", ku:"Rêbazên metinperêziyê", tr:"Metin yorum yöntemleri", en:"Methods of textual interpretation", cins:"bêcins", ez:"rêbazên metinperêziyê", kat:"edebiyat", zor:0.46, not:"\"Rêbaz\"+\"metinperêzî\".", her:["Rêbazên metinperêziyê hene.", "Di rêbazên metinperêziyê de."], gen:["Rêbazên metinperêziyê", "Rêbazên me"]),
+  (id:"c2_236", ku:"Rêbazên şîroveya metnan", tr:"Metin yorum yöntemleri", en:"Methods of textual interpretation", cins:"bêcins", ez:"rêbazên şîroveya metnan", kat:"edebiyat", zor:0.46, not:"\"Rêbaz\"+\"şîroveya metnan\" (metinlerin yorumu).", her:["Rêbazên şîroveya metnan hene.", "Di rêbazên şîroveya metnan de."], gen:["Rêbazên şîroveya metnan", "Rêbazên me"]),
   (id:"c2_237", ku:"Danûstandina navçandî", tr:"Kültürlerarası diyalog", en:"Intercultural dialogue", cins:"mê", ez:"danûstandina navçandî", kat:"çand", zor:0.47, not:"\"Danûstandin\"+\"navçandî\".", her:["Danûstandina navçandî lazim e.", "Di danûstandina navçandî de."], gen:["Danûstandina navçandî", "Danûstandina me"]),
   (id:"c2_238", ku:"Pêkanîna reformê", tr:"Reform gerçekleştirme", en:"Implementing reform", cins:"mê", ez:"pêkanîna reformê", kat:"siyaset", zor:0.48, not:"\"Pêkanîn\"+\"reform\".", her:["Pêkanîna reformê lazim e.", "Di pêkanîna reformê de."], gen:["Pêkanîna reformê", "Pêkanîna me"]),
 ];
@@ -674,17 +674,17 @@ final kC2_Tamamlama = [
    her:["Naveroka îdeolojîk ya metnê.", "Di naveroka îdeolojîk de."],
    gen:["Naveroka îdeolojîk ya metnê", "Naveroka me"]),
 
-  (id:"c2_838", ku:"Têkilîya niviskar û civakê", tr:"Yazar ve toplum ilişkisi", en:"Author-society relation",
-   cins:"mê", ez:"têkilîya niviskar û civakê", kat:"edebiyat", zor:0.46,
-   not:"\"Têkilî\"+\"niviskar û civak\".",
-   her:["Têkilîya niviskar û civakê.", "Di têkilîya niviskar û civakê de."],
-   gen:["Têkilîya niviskar û civakê", "Têkilîya me"]),
+  (id:"c2_838", ku:"Têkilîya nivîskar û civakê", tr:"Yazar ve toplum ilişkisi", en:"Author-society relation",
+   cins:"mê", ez:"têkilîya nivîskar û civakê", kat:"edebiyat", zor:0.46,
+   not:"\"Têkilî\"+\"nivîskar û civak\".",
+   her:["Têkilîya nivîskar û civakê.", "Di têkilîya nivîskar û civakê de."],
+   gen:["Têkilîya nivîskar û civakê", "Têkilîya me"]),
 
-  (id:"c2_839", ku:"Wêjeya bergirî", tr:"Engelleme edebiyatı", en:"Literature of resistance",
-   cins:"mê", ez:"wêjeya bergirî", kat:"edebiyat", zor:0.46,
-   not:"\"Wêje\"+\"bergirî\". Kürt sürgün edebiyatı.",
-   her:["Wêjeya bergirî ya kurdî.", "Di wêjeya bergirî de."],
-   gen:["Wêjeya bergirî", "Wêjeya me"]),
+  (id:"c2_839", ku:"Wêjeya berxwedanê", tr:"Direniş edebiyatı", en:"Literature of resistance",
+   cins:"mê", ez:"wêjeya berxwedanê", kat:"edebiyat", zor:0.46,
+   not:"\"Wêje\"+\"berxwedan\" (direniş). Kürt direniş/sürgün edebiyatı.",
+   her:["Wêjeya berxwedanê ya kurdî.", "Di wêjeya berxwedanê de."],
+   gen:["Wêjeya berxwedanê", "Wêjeya me"]),
 
   (id:"c2_840", ku:"Zanistiya wêjeyî ya nûjen", tr:"Modern edebiyat bilimi", en:"Modern literary science",
    cins:"mê", ez:"zanistiya wêjeyî ya nûjen", kat:"edebiyat", zor:0.46,
@@ -692,25 +692,25 @@ final kC2_Tamamlama = [
    her:["Zanistiya wêjeyî ya nûjen.", "Di zanistiya wêjeyî ya nûjen de."],
    gen:["Zanistiya wêjeyî ya nûjen", "Zanistiya me"]),
 
-  (id:"c2_841", ku:"Metaforên rizgariyê di wêjeyê", tr:"Edebiyatta özgürleşme metaforları", en:"Liberation metaphors in literature",
-   cins:"bêcins", ez:"metaforên rizgariyê di wêjeyê", kat:"edebiyat", zor:0.45,
+  (id:"c2_841", ku:"Metaforên rizgariyê di wêjeyê de", tr:"Edebiyatta özgürleşme metaforları", en:"Liberation metaphors in literature",
+   cins:"bêcins", ez:"metaforên rizgariyê di wêjeyê de", kat:"edebiyat", zor:0.45,
    not:"\"Metafor\"+\"rizgarî\"+\"wêje\".",
-   her:["Metaforên rizgariyê di wêjeyê.", "Di metaforên rizgariyê de."],
-   gen:["Metaforên rizgariyê di wêjeyê", "Metaforên me"]),
+   her:["Metaforên rizgariyê di wêjeyê de hene.", "Di metaforên rizgariyê de."],
+   gen:["Metaforên rizgariyê di wêjeyê de", "Metaforên me"]),
 
   // ── KİMLİK VE KÜLTÜR DERİN (30) ──────────────────────────────
 
-  (id:"c2_842", ku:"Perçebûna nasnameya birêkûpêk", tr:"Parçalanmış kimliği yeniden kurma", en:"Reconstructing fragmented identity",
-   cins:"mê", ez:"perçebûna nasnameya birêkûpêk", kat:"kimlik", zor:0.45,
-   not:"\"Perçebûn\"+\"nasname\"+\"birêkûpêk\". Diaspora kimlik inşası.",
-   her:["Perçebûna nasnameya birêkûpêk.", "Di perçebûna nasnameya birêkûpêk de."],
-   gen:["Perçebûna nasnameya birêkûpêk", "Nasnameya me"]),
+  (id:"c2_842", ku:"Jinûveavakirina nasnameya perçebûyî", tr:"Parçalanmış kimliği yeniden kurma", en:"Reconstructing fragmented identity",
+   cins:"mê", ez:"jinûveavakirina nasnameya perçebûyî", kat:"kimlik", zor:0.45,
+   not:"\"Jinûveavakirin\" (yeniden inşa)+\"nasnameya perçebûyî\". Diaspora kimlik inşası.",
+   her:["Jinûveavakirina nasnameya perçebûyî.", "Di jinûveavakirina nasnameyê de."],
+   gen:["Jinûveavakirina nasnameya perçebûyî", "Nasnameya me"]),
 
-  (id:"c2_843", ku:"Hybridîteya çandî", tr:"Kültürel melez kimlik", en:"Cultural hybridity",
-   cins:"mê", ez:"hybridîteya çandî", kat:"kimlik", zor:0.45,
-   not:"\"Hybridîte\"+\"çandî\". Homi K. Bhabha kavramı. Diaspora bağlamı.",
-   her:["Hybridîteya çandî.", "Di hybridîteya çandî de."],
-   gen:["Hybridîteya çandî", "Hybridîteya me"]),
+  (id:"c2_843", ku:"Hîbrîdîteya çandî", tr:"Kültürel melez kimlik", en:"Cultural hybridity",
+   cins:"mê", ez:"hîbrîdîteya çandî", kat:"kimlik", zor:0.45,
+   not:"\"Hîbrîdîte\"+\"çandî\". Homi K. Bhabha kavramı. Diaspora bağlamı.",
+   her:["Hîbrîdîteya çandî.", "Di hîbrîdîteya çandî de."],
+   gen:["Hîbrîdîteya çandî", "Hîbrîdîteya me"]),
 
   (id:"c2_844", ku:"Nasnameya serhêl ya kurdî", tr:"Kürt çevrimiçi kimliği", en:"Kurdish online identity",
    cins:"mê", ez:"nasnameya serhêl ya kurdî", kat:"kimlik", zor:0.46,
@@ -718,11 +718,11 @@ final kC2_Tamamlama = [
    her:["Nasnameya serhêl ya kurdî.", "Di nasnameya serhêl ya kurdî de."],
    gen:["Nasnameya serhêl ya kurdî", "Nasnameya me"]),
 
-  (id:"c2_845", ku:"Tejbûna çandî", tr:"Kültürel asimilasyon süreci", en:"Cultural assimilation process",
-   cins:"mê", ez:"tejbûna çandî", kat:"kimlik", zor:0.46,
-   not:"\"Tejbûn\"+\"çandî\". Eritme politikası etkisi.",
-   her:["Tejbûna çandî.", "Di tejbûna çandî de."],
-   gen:["Tejbûna çandî", "Tejbûna me"]),
+  (id:"c2_845", ku:"Pişaftina çandî", tr:"Kültürel asimilasyon", en:"Cultural assimilation",
+   cins:"mê", ez:"pişaftina çandî", kat:"kimlik", zor:0.46,
+   not:"\"Pişaftin\" (asimilasyon/eritme)+\"çandî\". Eritme politikası etkisi.",
+   her:["Pişaftina çandî.", "Di pişaftina çandî de."],
+   gen:["Pişaftina çandî", "Pişaftina me"]),
 
   (id:"c2_846", ku:"Vegerandina zimanê winda", tr:"Kayıp dilin geri kazanılması", en:"Reclaiming a lost language",
    cins:"mê", ez:"vegerandina zimanê winda", kat:"kimlik", zor:0.46,
@@ -738,17 +738,17 @@ final kC2_Tamamlama = [
    her:["Ontolojîya zimanî.", "Di ontolojîya zimanî de."],
    gen:["Ontolojîya zimanî", "Ontolojîya me"]),
 
-  (id:"c2_848", ku:"Felsefa neteweyî ya kurd", tr:"Kürt ulusal felsefesi", en:"Kurdish national philosophy",
-   cins:"mê", ez:"felsefa neteweyî ya kurd", kat:"felsefe", zor:0.45,
+  (id:"c2_848", ku:"Felsefeya neteweyî ya kurd", tr:"Kürt ulusal felsefesi", en:"Kurdish national philosophy",
+   cins:"mê", ez:"felsefeya neteweyî ya kurd", kat:"felsefe", zor:0.45,
    not:"\"Felsefe\"+\"neteweyî\"+\"kurd\".",
-   her:["Felsefa neteweyî ya kurd.", "Di felsefa neteweyî ya kurd de."],
-   gen:["Felsefa neteweyî ya kurd", "Felsefa me"]),
+   her:["Felsefeya neteweyî ya kurd.", "Di felsefeya neteweyî ya kurd de."],
+   gen:["Felsefeya neteweyî ya kurd", "Felsefeya me"]),
 
-  (id:"c2_849", ku:"Têgihîştina azadiyê di çanda kurdî", tr:"Kürt kültüründe özgürlük anlayışı", en:"Understanding freedom in Kurdish culture",
-   cins:"mê", ez:"têgihîştina azadiyê di çanda kurdî", kat:"felsefe", zor:0.45,
+  (id:"c2_849", ku:"Têgihîştina azadiyê di çanda kurdî de", tr:"Kürt kültüründe özgürlük anlayışı", en:"Understanding freedom in Kurdish culture",
+   cins:"mê", ez:"têgihîştina azadiyê di çanda kurdî de", kat:"felsefe", zor:0.45,
    not:"\"Têgihîştin\"+\"azadî\"+\"çanda kurdî\".",
-   her:["Têgihîştina azadiyê di çanda kurdî.", "Di têgihîştina azadiyê de."],
-   gen:["Têgihîştina azadiyê di çanda kurdî", "Têgihîştina me"]),
+   her:["Têgihîştina azadiyê di çanda kurdî de.", "Di têgihîştina azadiyê de."],
+   gen:["Têgihîştina azadiyê di çanda kurdî de", "Têgihîştina me"]),
 
   (id:"c2_850", ku:"Rexneya modernîteyê", tr:"Modernliğin eleştirisi", en:"Critique of modernity",
    cins:"mê", ez:"rexneya modernîteyê", kat:"felsefe", zor:0.45,
@@ -764,17 +764,17 @@ final kC2_Tamamlama = [
 
   // ── DİLBİLİM VE DİL PLANLAMASI (25) ─────────────────────────
 
-  (id:"c2_852", ku:"Plankirina statuyê zimanî", tr:"Dil statüsü planlaması", en:"Language status planning",
-   cins:"mê", ez:"plankirina statuyê zimanî", kat:"ziman", zor:0.45,
-   not:"\"Plankirin\"+\"statu\"+\"zimanî\". Haugen'ın dil planlaması modeli.",
-   her:["Plankirina statuyê zimanî.", "Di plankirina statuyê zimanî de."],
-   gen:["Plankirina statuyê zimanî", "Plankirina me"]),
+  (id:"c2_852", ku:"Plankirina statuya zimên", tr:"Dil statüsü planlaması", en:"Language status planning",
+   cins:"mê", ez:"plankirina statuya zimên", kat:"ziman", zor:0.45,
+   not:"\"Plankirin\"+\"statuya zimên\" (dilin statüsü). Haugen'ın dil planlaması modeli.",
+   her:["Plankirina statuya zimên.", "Di plankirina statuya zimên de."],
+   gen:["Plankirina statuya zimên", "Plankirina me"]),
 
-  (id:"c2_853", ku:"Plankirina corpus zimanî", tr:"Dil corpus planlaması", en:"Language corpus planning",
-   cins:"mê", ez:"plankirina corpus zimanî", kat:"ziman", zor:0.44,
-   not:"\"Plankirin\"+\"corpus\"+\"zimanî\". Standartizasyon süreci.",
-   her:["Plankirina corpus zimanî.", "Di plankirina corpus zimanî de."],
-   gen:["Plankirina corpus zimanî", "Plankirina me"]),
+  (id:"c2_853", ku:"Plankirina korpusa zimên", tr:"Dil korpusu planlaması", en:"Language corpus planning",
+   cins:"mê", ez:"plankirina korpusa zimên", kat:"ziman", zor:0.44,
+   not:"\"Plankirin\"+\"korpusa zimên\" (dilin korpusu). Standardizasyon süreci.",
+   her:["Plankirina korpusa zimên.", "Di plankirina korpusa zimên de."],
+   gen:["Plankirina korpusa zimên", "Plankirina me"]),
 
   (id:"c2_854", ku:"Pratîkên normalkirinê", tr:"Normalleştirme pratikleri", en:"Normalization practices",
    cins:"bêcins", ez:"pratîkên normalkirinê", kat:"ziman", zor:0.45,
@@ -782,19 +782,19 @@ final kC2_Tamamlama = [
    her:["Pratîkên normalkirinê hene.", "Di pratîkên normalkirinê de."],
    gen:["Pratîkên normalkirinê", "Pratîkên me"]),
 
-  (id:"c2_855", ku:"Pêşengîya zimansaz", tr:"Dilbilimcinin önderliği", en:"Linguist's leadership",
-   cins:"mê", ez:"pêşengîya zimansaz", kat:"ziman", zor:0.45,
-   not:"\"Pêşengî\"+\"zimansaz\". Dil aktivizmi.",
-   her:["Pêşengîya zimansaz lazim e.", "Di pêşengîya zimansaz de."],
-   gen:["Pêşengîya zimansaz", "Pêşengîya me"]),
+  (id:"c2_855", ku:"Pêşengîya zimannasan", tr:"Dilbilimcilerin önderliği", en:"Linguists' leadership",
+   cins:"mê", ez:"pêşengîya zimannasan", kat:"ziman", zor:0.45,
+   not:"\"Pêşengî\"+\"zimannas\" (dilbilimci). Dil aktivizmi.",
+   her:["Pêşengîya zimannasan lazim e.", "Di pêşengîya zimannasan de."],
+   gen:["Pêşengîya zimannasan", "Pêşengîya me"]),
 
   // ── AKADEMİK VE ARAŞTIRMA C2 (20) ────────────────────────────
 
-  (id:"c2_856", ku:"Gotara referandûmê akademîk", tr:"Akademik hakemlik", en:"Academic peer review",
-   cins:"mê", ez:"gotara referandûmê akademîk", kat:"akademik", zor:0.45,
-   not:"\"Referandûm\"+\"akademîk\". Hakemli dergi süreci.",
-   her:["Gotara referandûmê akademîk.", "Di gotara referandûmê akademîk de."],
-   gen:["Gotara referandûmê akademîk", "Gotara me"]),
+  (id:"c2_856", ku:"Nirxandina hevpîşeyan", tr:"Akademik hakemlik", en:"Academic peer review",
+   cins:"mê", ez:"nirxandina hevpîşeyan", kat:"akademik", zor:0.45,
+   not:"\"Nirxandin\"+\"hevpîşe\" (meslektaş). Hakemli dergi süreci.",
+   her:["Nirxandina hevpîşeyan girîng e.", "Di nirxandina hevpîşeyan de."],
+   gen:["Nirxandina hevpîşeyan", "Nirxandina me"]),
 
   (id:"c2_857", ku:"Xebata pirbir a lêkolînê", tr:"Çok katmanlı araştırma", en:"Multi-layered research",
    cins:"mê", ez:"xebata pirbir a lêkolînê", kat:"akademik", zor:0.44,
@@ -808,19 +808,19 @@ final kC2_Tamamlama = [
    her:["Têgihîştina semîotîk.", "Di têgihîştina semîotîk de."],
    gen:["Têgihîştina semîotîk", "Têgihîştina me"]),
 
-  (id:"c2_859", ku:"Analîza hermenôtîk", tr:"Hermenötik analiz", en:"Hermeneutic analysis",
-   cins:"mê", ez:"analîza hermenôtîk", kat:"akademik", zor:0.44,
-   not:"\"Analîz\"+\"hermenôtîk\". Yorum bilgisi.",
-   her:["Analîza hermenôtîk.", "Di analîza hermenôtîk de."],
-   gen:["Analîza hermenôtîk", "Analîza me"]),
+  (id:"c2_859", ku:"Analîza hermenewtîk", tr:"Hermenötik analiz", en:"Hermeneutic analysis",
+   cins:"mê", ez:"analîza hermenewtîk", kat:"akademik", zor:0.44,
+   not:"\"Analîz\"+\"hermenewtîk\". Yorum bilgisi. (Hawar alfabesinde \"ô/ö\" yoktur.)",
+   her:["Analîza hermenewtîk.", "Di analîza hermenewtîk de."],
+   gen:["Analîza hermenewtîk", "Analîza me"]),
 
   // ── DİLBİLGİSİ C2 (10) ───────────────────────────────────────
 
-  (id:"c2_860", ku:"Aspektê lêkerê ya kûr", tr:"Fiilin derin görünüşü", en:"Deep verb aspect",
-   cins:"nêr", ez:"aspektê lêkerê ya kûr", kat:"rêziman", zor:0.44,
-   not:"\"Aspekt\"+\"lêker\". Kurmancîde görünüş sistemi: perfective/imperfective.",
-   her:["Aspektê lêkerê ya kûr.", "Di aspektê lêkerê de."],
-   gen:["Aspektê lêkerê ya kûr", "Aspektê kurdî"]),
+  (id:"c2_860", ku:"Aspektê lêkerê yê kûr", tr:"Fiilin derin görünüşü", en:"Deep verb aspect",
+   cins:"nêr", ez:"aspektê lêkerê yê kûr", kat:"rêziman", zor:0.44,
+   not:"\"Aspekt\"+\"lêker\". Aspekt eril, ravekera dirêjker \"yê\". Kurmancîde görünüş sistemi: perfective/imperfective.",
+   her:["Aspektê lêkerê yê kûr.", "Di aspektê lêkerê de."],
+   gen:["Aspektê lêkerê yê kûr", "Aspektê kurdî"]),
 
   (id:"c2_861", ku:"Modalîteya ezmûnî", tr:"Kanıtsal kiplik", en:"Evidential modality",
    cins:"mê", ez:"modalîteya ezmûnî", kat:"rêziman", zor:0.44,
@@ -828,11 +828,11 @@ final kC2_Tamamlama = [
    her:["Modalîteya ezmûnî.", "Di modalîteya ezmûnî de."],
    gen:["Modalîteya ezmûnî", "Modalîteya me"]),
 
-  (id:"c2_862", ku:"Têkiliya derheqê ya C2", tr:"C2 ilgi cümlesi", en:"C2 relative clause",
-   cins:"mê", ez:"têkiliya derheqê ya C2", kat:"rêziman", zor:0.44,
-   not:"\"Têkilî\"+\"derheqê\". C2 sözdizimi. \"Ew kesê ku...\" yapısı.",
-   her:["Têkiliya derheqê ya C2.", "Di têkiliya derheqê de."],
-   gen:["Têkiliya derheqê ya C2", "Têkiliyên C2"]),
+  (id:"c2_862", ku:"Hevoka raveker a C2", tr:"C2 ilgi cümlesi", en:"C2 relative clause",
+   cins:"mê", ez:"hevoka raveker a C2", kat:"rêziman", zor:0.44,
+   not:"\"Hevoka raveker\" = ilgi/niteleme cümlesi. C2 sözdizimi. \"Ew kesê ku...\" yapısı.",
+   her:["Hevoka raveker a C2.", "Di hevoka raveker de."],
+   gen:["Hevoka raveker a C2", "Hevokên C2"]),
 
   // ── JEOPOLİTİK VE BÖLGESEL (10) ──────────────────────────────
 
@@ -891,11 +891,11 @@ final kC2_Son109 = [
    her:["Hevsazîya navçeyî lazim e.", "Di hevsazîya navçeyî de."],
    gen:["Hevsazîya navçeyî", "Hevsazîya me"]),
 
-  (id:"c2_401", ku:"Dîplomasyaya zimanî", tr:"Dil diplomasisi", en:"Language diplomacy",
-   cins:"mê", ez:"dîplomasyaya zimanî", kat:"siyaset", zor:0.45,
-   not:"\"Dîplomasya\"+\"zimanî\". Dil, uluslararası ilişkilerde araç.",
-   her:["Dîplomasyaya zimanî.", "Di dîplomasyaya zimanî de."],
-   gen:["Dîplomasyaya zimanî", "Dîplomasyaya me"]),
+  (id:"c2_401", ku:"Dîplomasiya zimanî", tr:"Dil diplomasisi", en:"Language diplomacy",
+   cins:"mê", ez:"dîplomasiya zimanî", kat:"siyaset", zor:0.45,
+   not:"\"Dîplomasi\"+\"zimanî\". Dil, uluslararası ilişkilerde araç.",
+   her:["Dîplomasiya zimanî.", "Di dîplomasiya zimanî de."],
+   gen:["Dîplomasiya zimanî", "Dîplomasiya me"]),
 
   (id:"c2_402", ku:"Patronên navnetewî yên Kurdan", tr:"Kürtlerin uluslararası hamilileri", en:"International patrons of Kurds",
    cins:"bêcins", ez:"patronên navnetewî yên Kurdan", kat:"siyaset", zor:0.45,
@@ -1002,11 +1002,11 @@ final kC2_Son109 = [
    her:["Bêmalîya çandî.", "Di bêmalîya çandî de."],
    gen:["Bêmalîya çandî", "Bêmalîya me"]),
 
-  (id:"c2_419", ku:"Vejandin û vehiştin", tr:"Hatırlamak ve unutmak", en:"Remembering and forgetting",
+  (id:"c2_419", ku:"Bîranîn û jibîrkirin", tr:"Hatırlamak ve unutmak", en:"Remembering and forgetting",
    cins:"bêcins", ez:null, kat:"kimlik", zor:0.46,
-   not:"\"Vejandin\"+\"vehiştin\". Kolektif hafıza dinamiği.",
-   her:["Vejandin û vehiştin.", "Di vejandin û vehiştin de."],
-   gen:["Vejandin û vehiştin", "Bîranîn û ji bîranîn"]),
+   not:"\"Bîranîn\" (hatırlama) + \"jibîrkirin\" (unutma). Kolektif hafıza dinamiği.",
+   her:["Bîranîn û jibîrkirin.", "Di navbera bîranîn û jibîrkirinê de."],
+   gen:["Bîranîn û jibîrkirin", "Bîranîna kolektîf"]),
 
   // ── KÜLTÜR VE EDEBİYAT C2 (15) ───────────────────────────────
   (id:"c2_420", ku:"Wergerandina çandî ya xwecihî", tr:"Yerli kültürel çeviri", en:"Indigenous cultural translation",
@@ -1088,11 +1088,11 @@ final kC2_Son80 = [
    her:["Vegerandina ser zimanê wendabûyî.", "Di vegerandina ser zimanê wendabûyî de."],
    gen:["Vegerandina ser zimanê wendabûyî", "Vegerandina me"]),
 
-  (id:"c2_503", ku:"Piranîbûna nasnameya Kurdî", tr:"Kürt kimliğinin çoğulluğu", en:"Plurality of Kurdish identity",
-   cins:"mê", ez:"piranîbûna nasnameya Kurdî", kat:"kimlik", zor:0.44,
-   not:"\"Piranîbûn\"+\"nasname\"+\"Kurdî\". Kürt kimliğinin monolitik olmadığı.",
-   her:["Piranîbûna nasnameya Kurdî.", "Di piranîbûna nasnameya Kurdî de."],
-   gen:["Piranîbûna nasnameya Kurdî", "Piranîbûna me"]),
+  (id:"c2_503", ku:"Pirrengiya nasnameya Kurdî", tr:"Kürt kimliğinin çoğulluğu", en:"Plurality of Kurdish identity",
+   cins:"mê", ez:"pirrengiya nasnameya Kurdî", kat:"kimlik", zor:0.44,
+   not:"\"Pirrengî\" (çoğulluk/çeşitlilik)+\"nasname\"+\"Kurdî\". Kürt kimliğinin monolitik olmadığı.",
+   her:["Pirrengiya nasnameya Kurdî.", "Di pirrengiya nasnameya Kurdî de."],
+   gen:["Pirrengiya nasnameya Kurdî", "Pirrengiya me"]),
 
   (id:"c2_504", ku:"Hînbûna ji nû ve ya nasnameya çandî", tr:"Kültürel kimliği yeniden öğrenme", en:"Re-learning cultural identity",
    cins:"mê", ez:"hînbûna ji nû ve ya nasnameya çandî", kat:"kimlik", zor:0.44,
@@ -1124,7 +1124,7 @@ final kC2_Son80 = [
    cins:"mê", ez:"fenomenolojîya zimanî", kat:"felsefe", zor:0.43,
    not:"Merleau-Ponty: beden ve dil. Husserl fenomenolojisi.",
    her:["Fenomenolojîya zimanî.", "Di fenomenolojîya zimanî de."],
-   gen:["Fenomenolojîya zimanî", "Fenomonolojîya me"]),
+   gen:["Fenomenolojîya zimanî", "Fenomenolojîya me"]),
 
   (id:"c2_509", ku:"Civakbûna mirov û ziman", tr:"İnsan ve dilin toplumsallığı", en:"Sociality of human and language",
    cins:"mê", ez:"civakbûna mirov û ziman", kat:"felsefe", zor:0.43,
@@ -1139,11 +1139,11 @@ final kC2_Son80 = [
    gen:["Têkiliya moralê û siyasetê", "Têkiliya me"]),
 
   // ── PSİKOLOJİ DERİN — 8 ───────────────────────────────────────
-  (id:"c2_511", ku:"Hişmendiya bajêrvanîtiyê", tr:"Diaspora bilinci", en:"Diaspora consciousness",
-   cins:"mê", ez:"hişmendiya bajêrvanîtiyê", kat:"psikoloji", zor:0.44,
-   not:"\"Hişmendî\"+\"bajêrvanî\". Sürgün/diaspora psikolojisi.",
-   her:["Hişmendiya bajêrvanîtiyê.", "Di hişmendiya bajêrvanîtiyê de."],
-   gen:["Hişmendiya bajêrvanîtiyê", "Hişmendiya me"]),
+  (id:"c2_511", ku:"Hişmendiya diasporayê", tr:"Diaspora bilinci", en:"Diaspora consciousness",
+   cins:"mê", ez:"hişmendiya diasporayê", kat:"psikoloji", zor:0.44,
+   not:"\"Hişmendî\"+\"diaspora\". Sürgün/diaspora psikolojisi.",
+   her:["Hişmendiya diasporayê.", "Di hişmendiya diasporayê de."],
+   gen:["Hişmendiya diasporayê", "Hişmendiya me"]),
 
   (id:"c2_512", ku:"Girtêk û azadîya hişmendî", tr:"Bilinçsel kısıtlama ve özgürlük", en:"Mental constraint and freedom",
    cins:"bêcins", ez:null, kat:"psikoloji", zor:0.43,
@@ -1208,34 +1208,34 @@ final kC2_Bitis = [
   // Felsefe
   (id:"c2_600", ku:"Fenomena çandî", tr:"Kültürel fenomen", en:"Cultural phenomenon", cins:"mê", ez:"fenomena çandî", kat:"felsefe", zor:0.43, not:"\"Fenomen\"+\"çandî\". Sosyal olgu.", her:["Fenomena çandî.", "Di fenomena çandî de."], gen:["Fenomena çandî", "Fenomena me"]),
   (id:"c2_601", ku:"Praksîsa zimanî", tr:"Dilsel pratik", en:"Language praxis", cins:"mê", ez:"praksîsa zimanî", kat:"felsefe", zor:0.42, not:"\"Praksîs\"+\"zimanî\". Bourdieu: pratik teori.", her:["Praksîsa zimanî.", "Di praksîsa zimanî de."], gen:["Praksîsa zimanî", "Praksîsa me"]),
-  (id:"c2_602", ku:"Têgîhîştina dialektîk", tr:"Diyalektik anlayış", en:"Dialectical understanding", cins:"mê", ez:"têgîhîştina dialektîk", kat:"felsefe", zor:0.42, not:"\"Têgîhîştin\"+\"dialektîk\". Hegel ve Marx.", her:["Têgîhîştina dialektîk.", "Di têgîhîştina dialektîk de."], gen:["Têgîhîştina dialektîk", "Têgîhîştina me"]),
+  (id:"c2_602", ku:"Têgihîştina dialektîk", tr:"Diyalektik anlayış", en:"Dialectical understanding", cins:"mê", ez:"têgihîştina dialektîk", kat:"felsefe", zor:0.42, not:"\"Têgihîştin\"+\"dialektîk\". Hegel ve Marx.", her:["Têgihîştina dialektîk.", "Di têgihîştina dialektîk de."], gen:["Têgihîştina dialektîk", "Têgihîştina me"]),
   (id:"c2_603", ku:"Rastîya xwendina rexneyî", tr:"Eleştirel okumanın gerçekliği", en:"Reality of critical reading", cins:"mê", ez:"rastîya xwendina rexneyî", kat:"felsefe", zor:0.42, not:"\"Rastî\"+\"xwendin\"+\"rexneyî\".", her:["Rastîya xwendina rexneyî.", "Di rastîya xwendina rexneyî de."], gen:["Rastîya xwendina rexneyî", "Rastîya me"]),
   // Ziman
   (id:"c2_604", ku:"Lêpirsîna mîkrozaman", tr:"Mikrodizim araştırması", en:"Microgenetic research", cins:"mê", ez:"lêpirsîna mîkrozaman", kat:"ziman", zor:0.42, not:"\"Lêpirsîn\"+\"mîkro\". Kısa vadeli dil gelişimi.", her:["Lêpirsîna mîkrozaman.", "Di lêpirsîna mîkrozaman de."], gen:["Lêpirsîna mîkrozaman", "Lêpirsîna me"]),
-  (id:"c2_605", ku:"Têgîhîştina semîotîk a çandê", tr:"Kültürün göstergebilimsel anlayışı", en:"Semiotic understanding of culture", cins:"mê", ez:"têgîhîştina semîotîk a çandê", kat:"ziman", zor:0.42, not:"\"Têgîhîştin\"+\"semîotîk\"+\"çand\". Lotman kültür semiyotiği.", her:["Têgîhîştina semîotîk a çandê.", "Di têgîhîştina semîotîk a çandê de."], gen:["Têgîhîştina semîotîk a çandê", "Têgîhîştina me"]),
+  (id:"c2_605", ku:"Têgihîştina semîotîk a çandê", tr:"Kültürün göstergebilimsel anlayışı", en:"Semiotic understanding of culture", cins:"mê", ez:"têgihîştina semîotîk a çandê", kat:"ziman", zor:0.42, not:"\"Têgihîştin\"+\"semîotîk\"+\"çand\". Lotman kültür semiyotiği.", her:["Têgihîştina semîotîk a çandê.", "Di têgihîştina semîotîk a çandê de."], gen:["Têgihîştina semîotîk a çandê", "Têgihîştina me"]),
   (id:"c2_606", ku:"Pragmatîka nav-çandî", tr:"Kültürlerarası pragmatik", en:"Cross-cultural pragmatics", cins:"mê", ez:"pragmatîka nav-çandî", kat:"ziman", zor:0.43, not:"\"Pragmatîk\"+\"nav-çandî\". Kültürlerarası iletişim.", her:["Pragmatîka nav-çandî.", "Di pragmatîka nav-çandî de."], gen:["Pragmatîka nav-çandî", "Pragmatîka me"]),
   (id:"c2_607", ku:"Standardkirina alfabeyê", tr:"Alfabe standardizasyonu", en:"Alphabet standardization", cins:"mê", ez:"standardkirina alfabeyê", kat:"ziman", zor:0.44, not:"\"Standardkirin\"+\"alfabe\". Kürt Latin alfabesi (1932).", her:["Standardkirina alfabeyê.", "Di standardkirina alfabeyê de."], gen:["Standardkirina alfabeyê", "Standardkirina me"]),
-  (id:"c2_608", ku:"Dewsa zimên di zagonê de", tr:"Dilin hukuktaki yeri", en:"Place of language in law", cins:"mê", ez:"dewsa zimên di zagonê de", kat:"ziman", zor:0.44, not:"\"Dewse\"+\"zimên\"+\"zagon\". Dil hakları.", her:["Dewsa zimên di zagonê de.", "Di dewsa zimên di zagonê de."], gen:["Dewsa zimên di zagonê de", "Dewsa zimên"]),
+  (id:"c2_608", ku:"Dewsa zimên di zagonê de", tr:"Dilin hukuktaki yeri", en:"Place of language in law", cins:"mê", ez:"dewsa zimên di zagonê de", kat:"ziman", zor:0.44, not:"\"Dewse\"+\"zimên\"+\"zagon\". Dil hakları.", her:["Dewsa zimên di zagonê de.", "Di zagonê de dewsa zimên girîng e."], gen:["Dewsa zimên di zagonê de", "Dewsa zimên"]),
   // Akademik
   (id:"c2_609", ku:"Senteza nêrînan", tr:"Görüşlerin sentezi", en:"Synthesis of views", cins:"mê", ez:"senteza nêrînan", kat:"akademik", zor:0.44, not:"\"Sentez\"+\"nêrîn\". Akademik argüman sentezi.", her:["Senteza nêrînan.", "Di senteza nêrînan de."], gen:["Senteza nêrînan", "Senteza me"]),
   (id:"c2_610", ku:"Lêpirsîna çalak", tr:"Eylem araştırması", en:"Action research", cins:"mê", ez:"lêpirsîna çalak", kat:"akademik", zor:0.44, not:"\"Lêpirsîn\"+\"çalak\". Participatory action research.", her:["Lêpirsîna çalak.", "Di lêpirsîna çalak de."], gen:["Lêpirsîna çalak", "Lêpirsîna me"]),
-  (id:"c2_611", ku:"Têgîhîştina fenomenolojîk", tr:"Fenomenolojik anlayış", en:"Phenomenological understanding", cins:"mê", ez:"têgîhîştina fenomenolojîk", kat:"akademik", zor:0.42, not:"\"Têgîhîştin\"+\"fenomenolojîk\". Husserl'in bracketing yöntemi.", her:["Têgîhîştina fenomenolojîk.", "Di têgîhîştina fenomenolojîk de."], gen:["Têgîhîştina fenomenolojîk", "Têgîhîştina me"]),
+  (id:"c2_611", ku:"Têgihîştina fenomenolojîk", tr:"Fenomenolojik anlayış", en:"Phenomenological understanding", cins:"mê", ez:"têgihîştina fenomenolojîk", kat:"akademik", zor:0.42, not:"\"Têgihîştin\"+\"fenomenolojîk\". Husserl'in bracketing yöntemi.", her:["Têgihîştina fenomenolojîk.", "Di têgihîştina fenomenolojîk de."], gen:["Têgihîştina fenomenolojîk", "Têgihîştina me"]),
   (id:"c2_612", ku:"Nirxandina kûr a pratîkê", tr:"Pratiğin derin değerlendirmesi", en:"Deep assessment of practice", cins:"mê", ez:"nirxandina kûr a pratîkê", kat:"akademik", zor:0.43, not:"\"Nirxandin\"+\"kûr\"+\"pratîk\".", her:["Nirxandina kûr a pratîkê.", "Di nirxandina kûr a pratîkê de."], gen:["Nirxandina kûr a pratîkê", "Nirxandina me"]),
   // Siyaset
   (id:"c2_613", ku:"Pêşkeftina mafên Kurdan", tr:"Kürt haklarının gelişimi", en:"Development of Kurdish rights", cins:"mê", ez:"pêşkeftina mafên Kurdan", kat:"siyaset", zor:0.46, not:"\"Pêşkeftin\"+\"mafên Kurdan\".", her:["Pêşkeftina mafên Kurdan.", "Di pêşkeftina mafên Kurdan de."], gen:["Pêşkeftina mafên Kurdan", "Pêşkeftina me"]),
   (id:"c2_614", ku:"Nexşeya siyasî ya gelêrî", tr:"Halkın siyasi haritası", en:"People's political map", cins:"mê", ez:"nexşeya siyasî ya gelêrî", kat:"siyaset", zor:0.45, not:"\"Nexşe\"+\"siyasî\"+\"gelêrî\".", her:["Nexşeya siyasî ya gelêrî.", "Di nexşeya siyasî ya gelêrî de."], gen:["Nexşeya siyasî ya gelêrî", "Nexşeya me"]),
   (id:"c2_615", ku:"Tevkarîya sivîl a Kurdan", tr:"Kürtlerin sivil katkısı", en:"Kurdish civil contribution", cins:"mê", ez:"tevkarîya sivîl a Kurdan", kat:"siyaset", zor:0.46, not:"\"Tevkarî\"+\"sivîl\"+\"Kurdan\".", her:["Tevkarîya sivîl a Kurdan.", "Di tevkarîya sivîl a Kurdan de."], gen:["Tevkarîya sivîl a Kurdan", "Tevkarîya me"]),
   // Kimlik/Çand
-  (id:"c2_616", ku:"Jiyana di navbera du welatan de", tr:"İki vatan arasında yaşam", en:"Life between two homelands", cins:"mê", ez:"jiyana di navbera du welatan de", kat:"kimlik", zor:0.46, not:"\"Jiyan\"+\"navbera du welat\". Diaspora deneyimi.", her:["Jiyana di navbera du welatan de.", "Di jiyana di navbera du welatan de."], gen:["Jiyana di navbera du welatan de", "Jiyana me"]),
+  (id:"c2_616", ku:"Jiyana di navbera du welatan de", tr:"İki vatan arasında yaşam", en:"Life between two homelands", cins:"mê", ez:"jiyana di navbera du welatan de", kat:"kimlik", zor:0.46, not:"\"Jiyan\"+\"navbera du welat\". Diaspora deneyimi.", her:["Jiyana di navbera du welatan de.", "Jiyana di navbera du welatan de ne hêsan e."], gen:["Jiyana di navbera du welatan de", "Jiyana me"]),
   (id:"c2_617", ku:"Xizmeta çandê ya hevbeş", tr:"Ortak kültürel hizmet", en:"Shared cultural service", cins:"mê", ez:"xizmeta çandê ya hevbeş", kat:"çand", zor:0.45, not:"\"Xizmet\"+\"çand\"+\"hevbeş\".", her:["Xizmeta çandê ya hevbeş.", "Di xizmeta çandê ya hevbeş de."], gen:["Xizmeta çandê ya hevbeş", "Xizmeta me"]),
-  (id:"c2_618", ku:"Çanda êzmanî", tr:"Ruh/gök kültürü", en:"Celestial culture", cins:"mê", ez:"çanda êzmanî", kat:"çand", zor:0.44, not:"\"Çand\"+\"êzman\" (gök/evren). Mistik kültür boyutu.", her:["Çanda êzmanî.", "Di çanda êzmanî de."], gen:["Çanda êzmanî", "Çanda me"]),
+  (id:"c2_618", ku:"Çanda ezmanî", tr:"Ruh/gök kültürü", en:"Celestial culture", cins:"mê", ez:"çanda ezmanî", kat:"çand", zor:0.44, not:"\"Çand\"+\"ezman\" (gök/evren). Mistik kültür boyutu.", her:["Çanda ezmanî.", "Di çanda ezmanî de."], gen:["Çanda ezmanî", "Çanda me"]),
   // Rêziman
   (id:"c2_619", ku:"Têkiliya aspekt û dem", tr:"Görünüş ve zaman ilişkisi", en:"Aspect-tense relation", cins:"mê", ez:"têkiliya aspekt û dem", kat:"rêziman", zor:0.42, not:"\"Têkilî\"+\"aspekt û dem\". Zamansal semantik.", her:["Têkiliya aspekt û dem.", "Di têkiliya aspekt û dem de."], gen:["Têkiliya aspekt û dem", "Têkiliya me"]),
   (id:"c2_620", ku:"Prosodîya kurdî", tr:"Kürtçe prozodi", en:"Kurdish prosody", cins:"mê", ez:"prosodîya kurdî", kat:"rêziman", zor:0.42, not:"\"Prosodî\"+\"kurdî\". Kürtçe vurgu ve tonlama sistemi.", her:["Prosodîya kurdî.", "Di prosodîya kurdî de."], gen:["Prosodîya kurdî", "Prosodîya me"]),
   // Medya
   (id:"c2_621", ku:"Ziman û pêşkêşkirin di medyayê de", tr:"Medyada dil ve sunum", en:"Language and presentation in media", cins:"bêcins", ez:null, kat:"medya", zor:0.45, not:"\"Ziman\"+\"pêşkêşkirin\"+\"medya\".", her:["Ziman û pêşkêşkirin di medyayê de.", "Di ziman û pêşkêşkirin de."], gen:["Ziman û pêşkêşkirin di medyayê de", "Zimanê me"]),
   // Psikoloji
-  (id:"c2_622", ku:"Wesnandin û zanîn", tr:"Duygu ve bilgi", en:"Emotion and knowledge", cins:"bêcins", ez:null, kat:"psikoloji", zor:0.43, not:"\"Wesnandin\"+\"zanîn\". Duygu-biliş ilişkisi.", her:["Wesnandin û zanîn.", "Di wesnandin û zanîn de."], gen:["Wesnandin û zanîn", "Hestên me"]),
+  (id:"c2_622", ku:"Hest û zanîn", tr:"Duygu ve bilgi", en:"Emotion and knowledge", cins:"bêcins", ez:null, kat:"psikoloji", zor:0.43, not:"\"Hest\" (duygu)+\"zanîn\". Duygu-biliş ilişkisi.", her:["Hest û zanîn.", "Di navbera hest û zanînê de."], gen:["Hest û zanîn", "Hestên me"]),
   // Daçek
   (id:"c2_623", ku:"Ji aliyê zanistî ve", tr:"Bilimsel açıdan", en:"From a scientific standpoint", cins:"bêcins", ez:null, kat:"daçek", zor:0.46, not:"\"Ji aliyê zanistî ve\" = bilimsel açıdan. Akademik çerçeveleme.", her:["Ji aliyê zanistî ve.", "Ji aliyê zanistî ve, ev rast e."], gen:["Ji aliyê zanistî ve", "Ji aliyê teorîkî ve"]),
 ];
@@ -1247,8 +1247,8 @@ final kC2_Tamam35 = [
   (id:"c2_702", ku:"Têkiliya gotin û ramanê", tr:"Söz ve düşünce ilişkisi", en:"Word-thought relation", cins:"mê", ez:"têkiliya gotin û ramanê", kat:"ziman", zor:0.43, not:"Sapir-Whorf hipotezi bağlamı.", her:["Têkiliya gotin û ramanê.", "Di têkiliya gotin û ramanê de."], gen:["Têkiliya gotin û ramanê", "Têkiliya me"]),
   (id:"c2_703", ku:"Helwest û çalakî di zimên de", tr:"Dilde tutum ve eylem", en:"Attitude and action in language", cins:"bêcins", ez:null, kat:"ziman", zor:0.43, not:"\"Helwest û çalakî\"+\"zimên\". Söylem analizi.", her:["Helwest û çalakî di zimên de.", "Di helwest û çalakî de."], gen:["Helwest û çalakî di zimên de", "Zimanê me"]),
   (id:"c2_704", ku:"Teorîya çanda bazarê", tr:"Pazar kültürü teorisi", en:"Marketplace culture theory", cins:"mê", ez:"teorîya çanda bazarê", kat:"felsefe", zor:0.43, not:"\"Teorî\"+\"çanda bazarê\". Kültürün metalaşması.", her:["Teorîya çanda bazarê.", "Di teorîya çanda bazarê de."], gen:["Teorîya çanda bazarê", "Teorîya me"]),
-  (id:"c2_705", ku:"Analîza girêbesta axaftinê", tr:"Söz edimi analizinin", en:"Speech act analysis", cins:"mê", ez:"analîza girêbesta axaftinê", kat:"ziman", zor:0.42, not:"\"Analîz\"+\"girêbest\"+\"axaftin\". Austin/Searle.", her:["Analîza girêbesta axaftinê.", "Di analîza girêbesta axaftinê de."], gen:["Analîza girêbesta axaftinê", "Analîza me"]),
-  (id:"c2_706", ku:"Pêşkêşkirina xwe a zimanî", tr:"Dilsel öz sunumu", en:"Linguistic self-presentation", cins:"mê", ez:"pêşkêşkirina xwe a zimanî", kat:"ziman", zor:0.43, not:"\"Pêşkêşkirin\"+\"xwe\"+\"zimanî\". Goffman dramaturjisi.", her:["Pêşkêşkirina xwe a zimanî.", "Di pêşkêşkirina xwe a zimanî de."], gen:["Pêşkêşkirina xwe a zimanî", "Pêşkêşkirina me"]),
+  (id:"c2_705", ku:"Analîza kiryarên axaftinê", tr:"Söz edimi analizi", en:"Speech act analysis", cins:"mê", ez:"analîza kiryarên axaftinê", kat:"ziman", zor:0.42, not:"\"Analîz\"+\"kiryarên axaftinê\" (söz edimleri). Austin/Searle.", her:["Analîza kiryarên axaftinê.", "Di analîza kiryarên axaftinê de."], gen:["Analîza kiryarên axaftinê", "Analîza me"]),
+  (id:"c2_706", ku:"Pêşkêşkirina xwe ya zimanî", tr:"Dilsel öz sunumu", en:"Linguistic self-presentation", cins:"mê", ez:"pêşkêşkirina xwe ya zimanî", kat:"ziman", zor:0.43, not:"\"Pêşkêşkirin\"+\"xwe\"+\"zimanî\". Goffman dramaturjisi.", her:["Pêşkêşkirina xwe ya zimanî.", "Di pêşkêşkirina xwe ya zimanî de."], gen:["Pêşkêşkirina xwe ya zimanî", "Pêşkêşkirina me"]),
   (id:"c2_707", ku:"Nirxên zanistî û exlaqî", tr:"Bilimsel ve etik değerler", en:"Scientific and ethical values", cins:"bêcins", ez:"nirxên zanistî û exlaqî", kat:"akademik", zor:0.44, not:"\"Nirx\"+\"zanistî û exlaqî\". Araştırma etiği.", her:["Nirxên zanistî û exlaqî.", "Di nirxên zanistî û exlaqî de."], gen:["Nirxên zanistî û exlaqî", "Nirxên me"]),
   (id:"c2_708", ku:"Netewebûna zimanî", tr:"Dilsel millileşme", en:"Linguistic nationalization", cins:"mê", ez:"netewebûna zimanî", kat:"siyaset", zor:0.45, not:"\"Netewebûn\"+\"zimanî\". Dil ve ulus inşası.", her:["Netewebûna zimanî.", "Di netewebûna zimanî de."], gen:["Netewebûna zimanî", "Netewebûna me"]),
   (id:"c2_709", ku:"Siyaseta maf û welêt", tr:"Hak ve vatan siyaseti", en:"Rights and homeland politics", cins:"mê", ez:"siyaseta maf û welêt", kat:"siyaset", zor:0.46, not:"\"Siyaset\"+\"maf û welêt\".", her:["Siyaseta maf û welêt.", "Di siyaseta maf û welêt de."], gen:["Siyaseta maf û welêt", "Siyaseta me"]),
@@ -1256,7 +1256,7 @@ final kC2_Tamam35 = [
   (id:"c2_711", ku:"Wêjeya ezmûna diasporayê", tr:"Diaspora deneyimi edebiyatı", en:"Literature of diaspora experience", cins:"mê", ez:"wêjeya ezmûna diasporayê", kat:"edebiyat", zor:0.45, not:"\"Wêje\"+\"ezmûn\"+\"diaspora\".", her:["Wêjeya ezmûna diasporayê.", "Di wêjeya ezmûna diasporayê de."], gen:["Wêjeya ezmûna diasporayê", "Wêjeya me"]),
   (id:"c2_712", ku:"Metnên bingehîn ên teorîkî", tr:"Temel teorik metinler", en:"Foundational theoretical texts", cins:"bêcins", ez:"metnên bingehîn ên teorîkî", kat:"akademik", zor:0.43, not:"\"Metn\"+\"bingehîn\"+\"teorîkî\". Kanon teorik metinler.", her:["Metnên bingehîn ên teorîkî.", "Di metnên bingehîn ên teorîkî de."], gen:["Metnên bingehîn ên teorîkî", "Metnên me"]),
   (id:"c2_713", ku:"Têkiliya hêz û zanînê", tr:"Güç ve bilgi ilişkisi", en:"Power-knowledge relation", cins:"mê", ez:"têkiliya hêz û zanînê", kat:"felsefe", zor:0.43, not:"Foucault: pouvoir-savoir. Bilgi iktidar üretir.", her:["Têkiliya hêz û zanînê.", "Di têkiliya hêz û zanînê de."], gen:["Têkiliya hêz û zanînê", "Têkiliya me"]),
-  (id:"c2_714", ku:"Nîvromaka kurdî ya nûjen", tr:"Çağdaş Kürt romanı", en:"Contemporary Kurdish novel", cins:"mê", ez:"nîvromaka kurdî ya nûjen", kat:"edebiyat", zor:0.46, not:"\"Nîvromak\"+\"kurdî\"+\"nûjen\". Modern Kürt nesri.", her:["Nîvromaka kurdî ya nûjen.", "Di nîvromaka kurdî ya nûjen de."], gen:["Nîvromaka kurdî ya nûjen", "Nîvromaka me"]),
+  (id:"c2_714", ku:"Romana kurdî ya nûjen", tr:"Çağdaş Kürt romanı", en:"Contemporary Kurdish novel", cins:"mê", ez:"romana kurdî ya nûjen", kat:"edebiyat", zor:0.46, not:"\"Roman\"+\"kurdî\"+\"nûjen\". Modern Kürt nesri.", her:["Romana kurdî ya nûjen.", "Di romana kurdî ya nûjen de."], gen:["Romana kurdî ya nûjen", "Romana me"]),
   (id:"c2_715", ku:"Girêbesta civakî ya C2", tr:"C2 toplumsal sözleşme", en:"C2 social contract", cins:"mê", ez:"girêbesta civakî ya C2", kat:"felsefe", zor:0.43, not:"Rousseau'nun sözleşme teorisi — Kürt bağlamı.", her:["Girêbesta civakî ya C2.", "Di girêbesta civakî ya C2 de."], gen:["Girêbesta civakî ya C2", "Girêbesta civakî"]),
   (id:"c2_716", ku:"Dîroka şaristanîya kurdî", tr:"Kürt medeniyeti tarihi", en:"History of Kurdish civilization", cins:"mê", ez:"dîroka şaristanîya kurdî", kat:"edebiyat", zor:0.47, not:"\"Dîrok\"+\"şaristanî\"+\"kurdî\". Kürt kadim tarihi.", her:["Dîroka şaristanîya kurdî.", "Di dîroka şaristanîya kurdî de."], gen:["Dîroka şaristanîya kurdî", "Dîroka me"]),
   (id:"c2_717", ku:"Têkoşîna siyasî ya nav-herêmî", tr:"Bölgelerarası siyasi mücadele", en:"Inter-regional political struggle", cins:"mê", ez:"têkoşîna siyasî ya nav-herêmî", kat:"siyaset", zor:0.45, not:"\"Têkoşîn\"+\"siyasî\"+\"nav-herêmî\".", her:["Têkoşîna siyasî ya nav-herêmî.", "Di têkoşîna siyasî ya nav-herêmî de."], gen:["Têkoşîna siyasî ya nav-herêmî", "Têkoşîna me"]),
@@ -1264,7 +1264,7 @@ final kC2_Tamam35 = [
   (id:"c2_719", ku:"Medyaya alternatîf a kurdî", tr:"Kürt alternatif medyası", en:"Kurdish alternative media", cins:"mê", ez:"medyaya alternatîf a kurdî", kat:"medya", zor:0.46, not:"\"Medya\"+\"alternatîf\"+\"kurdî\". Bağımsız Kürt medyası.", her:["Medyaya alternatîf a kurdî.", "Di medyaya alternatîf a kurdî de."], gen:["Medyaya alternatîf a kurdî", "Medyaya me"]),
   (id:"c2_720", ku:"Têkiliya edebiyat û hêzê", tr:"Edebiyat ve güç ilişkisi", en:"Literature-power relation", cins:"mê", ez:"têkiliya edebiyat û hêzê", kat:"edebiyat", zor:0.43, not:"\"Têkilî\"+\"edebiyat û hêz\". Siyasal edebiyat.", her:["Têkiliya edebiyat û hêzê.", "Di têkiliya edebiyat û hêzê de."], gen:["Têkiliya edebiyat û hêzê", "Têkiliya me"]),
   (id:"c2_721", ku:"Agahdariya kûr a medyayê", tr:"Derinlemesine medya haberciliği", en:"In-depth media reporting", cins:"mê", ez:"agahdariya kûr a medyayê", kat:"medya", zor:0.45, not:"\"Agahdarî\"+\"kûr\"+\"medya\". Araştırmacı gazetecilik.", her:["Agahdariya kûr a medyayê.", "Di agahdariya kûr a medyayê de."], gen:["Agahdariya kûr a medyayê", "Agahdariya me"]),
-  (id:"c2_722", ku:"Xweza zimên a siyasî", tr:"Dilin siyasal doğası", en:"Political nature of language", cins:"mê", ez:"xweza zimên a siyasî", kat:"ziman", zor:0.43, not:"\"Xweza\"+\"zimên\"+\"siyasî\". Dil her zaman siyasaldır.", her:["Xweza zimên a siyasî.", "Di xweza zimên a siyasî de."], gen:["Xweza zimên a siyasî", "Xweza zimên"]),
+  (id:"c2_722", ku:"Xwezaya zimên a siyasî", tr:"Dilin siyasal doğası", en:"Political nature of language", cins:"mê", ez:"xwezaya zimên a siyasî", kat:"ziman", zor:0.43, not:"\"Xweza\"+\"zimên\"+\"siyasî\". Dil her zaman siyasaldır.", her:["Xwezaya zimên a siyasî.", "Di xwezaya zimên a siyasî de."], gen:["Xwezaya zimên a siyasî", "Xwezaya zimên"]),
   (id:"c2_723", ku:"Pêvajoya wergera çandî", tr:"Kültürel çeviri süreci", en:"Cultural translation process", cins:"mê", ez:"pêvajoya wergera çandî", kat:"çand", zor:0.44, not:"\"Pêvajo\"+\"werger\"+\"çandî\". Kavramların kültürel aktarımı.", her:["Pêvajoya wergera çandî.", "Di pêvajoya wergera çandî de."], gen:["Pêvajoya wergera çandî", "Pêvajoya me"]),
   (id:"c2_724", ku:"Di encamê de dikare bê gotin ku", tr:"Sonuç olarak şunu söylemek mümkün", en:"In conclusion it can be said that", cins:"bêcins", ez:null, kat:"daçek", zor:0.46, not:"C2 akademik söylem kapanışı.", her:["Di encamê de dikare bê gotin ku...", "Di encamê de..."], gen:["Di encamê de dikare bê gotin ku", "Di encamê de"]),
   (id:"c2_725", ku:"Li gorî nêrîna... em dikarin bibêjin", tr:"... görüşüne göre şunu söyleyebiliriz", en:"According to the view of..., we can say", cins:"bêcins", ez:null, kat:"daçek", zor:0.45, not:"C2 akademik atıf kalıbı.", her:["Li gorî nêrîna Foucault em dikarin bibêjin.", "Li gorî nêrîna me..."], gen:["Li gorî nêrîna... em dikarin bibêjin", "Li gorî nêrîna me"]),
@@ -1276,11 +1276,11 @@ final kC2_Son9 = [
   (id:"c2_801", ku:"Biyografîya zimanzanekî kurd", tr:"Bir Kürt dilbilimcinin biyografisi", en:"Biography of a Kurdish linguist", cins:"mê", ez:"biyografîya zimanzanekî kurd", kat:"edebiyat", zor:0.45, not:"\"Biyografî\"+\"zimanzanekî kurd\".", her:["Biyografîya zimanzanekî kurd.", "Di biyografîya zimanzanekî kurd de."], gen:["Biyografîya zimanzanekî kurd", "Biyografîya me"]),
   (id:"c2_802", ku:"Ziman û hebûna civakî", tr:"Dil ve toplumsal varoluş", en:"Language and social existence", cins:"bêcins", ez:null, kat:"ziman", zor:0.42, not:"\"Ziman\"+\"hebûn\"+\"civakî\". Vygotsky sosyal biliş.", her:["Ziman û hebûna civakî.", "Di ziman û hebûna civakî de."], gen:["Ziman û hebûna civakî", "Zimanê me"]),
   (id:"c2_803", ku:"Têkoşîna nasnameya nûjen", tr:"Modern kimlik mücadelesi", en:"Contemporary identity struggle", cins:"mê", ez:"têkoşîna nasnameya nûjen", kat:"kimlik", zor:0.45, not:"\"Têkoşîn\"+\"nasname\"+\"nûjen\".", her:["Têkoşîna nasnameya nûjen.", "Di têkoşîna nasnameya nûjen de."], gen:["Têkoşîna nasnameya nûjen", "Têkoşîna me"]),
-  (id:"c2_804", ku:"Têgîhîştina etnografîk", tr:"Etnografik anlayış", en:"Ethnographic understanding", cins:"mê", ez:"têgîhîştina etnografîk", kat:"akademik", zor:0.42, not:"\"Têgîhîştin\"+\"etnografîk\". Katılımcı gözlem.", her:["Têgîhîştina etnografîk.", "Di têgîhîştina etnografîk de."], gen:["Têgîhîştina etnografîk", "Têgîhîştina me"]),
+  (id:"c2_804", ku:"Têgihîştina etnografîk", tr:"Etnografik anlayış", en:"Ethnographic understanding", cins:"mê", ez:"têgihîştina etnografîk", kat:"akademik", zor:0.42, not:"\"Têgihîştin\"+\"etnografîk\". Katılımcı gözlem.", her:["Têgihîştina etnografîk.", "Di têgihîştina etnografîk de."], gen:["Têgihîştina etnografîk", "Têgihîştina me"]),
   (id:"c2_805", ku:"Nexşeya dîroka zimanî", tr:"Dilsel tarih haritası", en:"Map of linguistic history", cins:"mê", ez:"nexşeya dîroka zimanî", kat:"ziman", zor:0.43, not:"\"Nexşe\"+\"dîrok\"+\"zimanî\". Diyakronik dilbilim.", her:["Nexşeya dîroka zimanî.", "Di nexşeya dîroka zimanî de."], gen:["Nexşeya dîroka zimanî", "Nexşeya me"]),
-  (id:"c2_806", ku:"Xweşbûna zimanzaniyê ya C2", tr:"C2 dilbilim yetkinliği", en:"C2 linguistic competence", cins:"mê", ez:"xweşbûna zimanzaniyê ya C2", kat:"ziman", zor:0.43, not:"\"Xweşbûn\"+\"zimanzanî\"+\"C2\". Üst düzey dil bilgisi.", her:["Xweşbûna zimanzaniyê ya C2.", "Di xweşbûna zimanzaniyê ya C2 de."], gen:["Xweşbûna zimanzaniyê ya C2", "Xweşbûna me"]),
+  (id:"c2_806", ku:"Şarezayîya zimanî ya C2", tr:"C2 dilbilim yetkinliği", en:"C2 linguistic competence", cins:"mê", ez:"şarezayîya zimanî ya C2", kat:"ziman", zor:0.43, not:"\"Şarezayî\" (yetkinlik/uzmanlık)+\"zimanî\"+\"C2\". Üst düzey dil bilgisi.", her:["Şarezayîya zimanî ya C2.", "Di şarezayîya zimanî ya C2 de."], gen:["Şarezayîya zimanî ya C2", "Şarezayîya me"]),
   (id:"c2_807", ku:"Têkiliya dîrokî ya nav çandan", tr:"Kültürler arası tarihsel ilişki", en:"Historical intercultural relation", cins:"mê", ez:"têkiliya dîrokî ya nav çandan", kat:"çand", zor:0.44, not:"\"Têkilî\"+\"dîrokî\"+\"nav çandan\".", her:["Têkiliya dîrokî ya nav çandan.", "Di têkiliya dîrokî ya nav çandan de."], gen:["Têkiliya dîrokî ya nav çandan", "Têkiliya me"]),
-  (id:"c2_808", ku:"Daxwaza nas bûnê", tr:"Tanınma talebi", en:"Demand for recognition", cins:"mê", ez:"daxwaza nas bûnê", kat:"felsefe", zor:0.44, not:"Honneth'in tanınma teorisi — Kürt kimliği bağlamında.", her:["Daxwaza nas bûnê.", "Di daxwaza nas bûnê de."], gen:["Daxwaza nas bûnê", "Daxwaza me"]),
+  (id:"c2_808", ku:"Daxwaza naskirinê", tr:"Tanınma talebi", en:"Demand for recognition", cins:"mê", ez:"daxwaza naskirinê", kat:"felsefe", zor:0.44, not:"Honneth'in tanınma teorisi — Kürt kimliği bağlamında.", her:["Daxwaza naskirinê.", "Di daxwaza naskirinê de."], gen:["Daxwaza naskirinê", "Daxwaza me"]),
 ];
 
 final kC2Temam = [...kC2_Son9];
@@ -1289,27 +1289,27 @@ final kC2Temam = [...kC2_Son9];
 final kC2_EkTamam = [
   // ── psikolojî (5 ek kelime) ──
   (id:"c2_865", ku:"xwenasîn", tr:"Öz farkındalık / Kendini tanıma", en:"Self-awareness",
-   cins:"mê", ez:"xwenasîn", kat:"psikolojî", zor:0.44,
+   cins:"mê", ez:"xwenasîn", kat:"psikoloji", zor:0.44,
    not:"Têgeha psîkolojîk — xwe-nas-în.",
    her:["Xwenasîn gavê yekem e.", "Di xwenasînê de pêşketin."], gen:["Xwenasîn", "Xwenasîna me"]),
 
   (id:"c2_866", ku:"bihîstwerî", tr:"Empatik dinleme / İşitkenlik", en:"Active listening / Receptivity",
-   cins:"mê", ez:"bihîstwerî", kat:"psikolojî", zor:0.45,
+   cins:"mê", ez:"bihîstwerî", kat:"psikoloji", zor:0.45,
    not:"Têgeha psîkolojîk — guhdarîkirina kûr.",
    her:["Bihîstwerî jêhatîbûnek e.", "Di bihîstwerîyê de."], gen:["Bihîstwerî", "Bihîstwerîya me"]),
 
   (id:"c2_867", ku:"hişmendî", tr:"Bilinçlilik / Farkındalık", en:"Mindfulness / Awareness",
-   cins:"mê", ez:"hişmendî", kat:"psikolojî", zor:0.44,
+   cins:"mê", ez:"hişmendî", kat:"psikoloji", zor:0.44,
    not:"Têgeha psîkolojîk — hişyarî û baldarî.",
    her:["Hişmendî pratîkek e.", "Di hişmendîyê de hêz heye."], gen:["Hişmendî", "Hişmendîya me"]),
 
   (id:"c2_868", ku:"xweragirtin", tr:"Öz denetim / Kendini tutma", en:"Self-control / Self-regulation",
-   cins:"mê", ez:"xweragirtin", kat:"psikolojî", zor:0.45,
+   cins:"mê", ez:"xweragirtin", kat:"psikoloji", zor:0.45,
    not:"Têgeha psîkolojîk — kontrola hestî.",
    her:["Xweragirtin hêz e.", "Di xweragirtinê de serkeftî bû."], gen:["Xweragirtin", "Xweragirtina me"]),
 
   (id:"c2_869", ku:"derûnnasî", tr:"Psikoloji", en:"Psychology",
-   cins:"mê", ez:"derûnnasî", kat:"psikolojî", zor:0.43,
+   cins:"mê", ez:"derûnnasî", kat:"psikoloji", zor:0.43,
    not:"Zanista derûnî.",
    her:["Derûnnasî zanisteke girîng e.", "Di derûnnasîyê de lêkolîn."], gen:["Derûnnasî", "Derûnnasîya me"]),
 ];
@@ -1322,7 +1322,7 @@ final kC2_Cegerxwin = [
   (id:"c2_900", ku:"ronakbîr", tr:"Aydın / Entelektüel", en:"Intellectual",
    cins:"nêr", ez:"ronakbîrê", kat:"çand", zor:0.52,
    not:"Ronak (aydınlık) + bîr (fikir). Modern Kürt terminolojisi. Cegerxwîn bağlamı.",
-   her:["Ronakbîr pêwîstê civakê ye.", "Cegerxwîn ronakbîrekî mezin bû."],
+   her:["Ronakbîr ji bo civakê pêwîst e.", "Cegerxwîn ronakbîrekî mezin bû."],
    gen:["Ronakbîr", "Ronakbîrê me"]),
 
   (id:"c2_901", ku:"şoreş", tr:"Devrim / Ayaklanma", en:"Revolution",
@@ -1370,7 +1370,7 @@ final kC2_Cegerxwin = [
   (id:"c2_908", ku:"serbilindî", tr:"Onur / Gurur", en:"Pride / Honor",
    cins:"mê", ez:"serbilindiya", kat:"kimlik", zor:0.38,
    not:"Ser (baş) + bilind (yüksek) + î. Ulusal onur — Cegerxwîn ana tema.",
-   her:["Serbilindî ji me naye birîn.", "Serbilindiya netewî divê hebe."],
+   her:["Serbilindî ji me nayê birin.", "Serbilindiya netewî divê hebe."],
    gen:["Serbilindî", "Serbilindiya gel"]),
 
   (id:"c2_909", ku:"welatparêzî", tr:"Vatanseverlik", en:"Patriotism",
@@ -1394,13 +1394,13 @@ final kC2_Cegerxwin = [
   (id:"c2_912", ku:"zarave", tr:"Lehçe", en:"Dialect",
    cins:"nêr", ez:"zaraveyê", kat:"ziman", zor:0.45,
    not:"Dilbilim terimi. Kurmancî, Soranî, Zazakî lehçe-zarave tartışması.",
-   her:["Zarave ji zimanê cuda ne.", "Zaraveyê Behdînî di Başûr de."],
+   her:["Zarave ji zimên cuda ne.", "Zaraveyê Behdînî li Başûr tê axaftin."],
    gen:["Zarave", "Zaraveyê Kurmancî"]),
 
   (id:"c2_913", ku:"fonolojî", tr:"Fonoloji / Ses Bilgisi", en:"Phonology",
    cins:"mê", ez:"fonolojiya", kat:"ziman", zor:0.60,
    not:"Zanyarî dilbilim alanı. Kurmancî fonolojisi ç, ş, x, q özgün.",
-   her:["Fonolojî qada ziman-nasiyê ye.", "Fonolojiya Kurmancî dewlemend e."],
+   her:["Fonolojî qada zimannasiyê ye.", "Fonolojiya Kurmancî dewlemend e."],
    gen:["Fonolojî", "Fonolojiya ziman"]),
 
   (id:"c2_914", ku:"dengbêjî", tr:"Dengbêjlik / Ozanlık", en:"Dengbêj tradition",
@@ -1412,13 +1412,13 @@ final kC2_Cegerxwin = [
   (id:"c2_915", ku:"neolojîzm", tr:"Neolojizm / Yeni Sözcük", en:"Neologism",
    cins:"nêr", ez:"neolojîzmê", kat:"ziman", zor:0.62,
    not:"Yeni terim üretimi. Modern Kurmancî gelişiminde tartışılan konu.",
-   her:["Neolojîzm pêwîst e.", "Neolojîzmên zoraxî nayê qebûlkirin."],
+   her:["Neolojîzm pêwîst e.", "Neolojîzmên zorakî nayên qebûlkirin."],
    gen:["Neolojîzm", "Neolojîzmê kurdî"]),
 
   (id:"c2_916", ku:"standardkirin", tr:"Standartlaştırma", en:"Standardization",
    cins:"mê", ez:"standardkirina", kat:"ziman", zor:0.55,
    not:"Ziman standardizasyonu — Bedirxan Hawar alfabesinden bugüne.",
-   her:["Standardkirina Kurmancî sedsala 20an de dest pê kir.", "Standardkirina ziman dirêj e."],
+   her:["Standardkirina Kurmancî di sedsala 20an de dest pê kir.", "Standardkirina ziman dirêj e."],
    gen:["Standardkirin", "Standardkirina Kurmancî"]),
 
   (id:"c2_917", ku:"bîrşokbûn", tr:"Unutkanlık / Amnezi", en:"Forgetfulness / Amnesia",
@@ -1428,7 +1428,7 @@ final kC2_Cegerxwin = [
    gen:["Bîrşokbûn", "Bîrşokbûna dîrokî"]),
 
   (id:"c2_918", ku:"mîras", tr:"Miras", en:"Heritage / Inheritance",
-   cins:"nêr", ez:"mîrasê", kat:"çand", zor:0.40,
+   cins:"mê", ez:"mîrasa", kat:"çand", zor:0.40,
    not:"Maddi ve kültürel miras. Çok sık kullanım.",
    her:["Mîras divê bête parastin.", "Mîrasa edebî ya Xanî mezin e."],
    gen:["Mîras", "Mîrasa me"]),
@@ -1448,7 +1448,7 @@ final kC2_Cegerxwin = [
   (id:"c2_921", ku:"Bedew", tr:"Güzel / Estetik", en:"Beautiful / Aesthetic",
    cins:"bêcins", ez:null, kat:"edebiyat", zor:0.68,
    not:"Klasik edebiyatta güzellik kavramı. Farsça \"bedew\" kökenli. Kadın güzelliği için de kullanılır.",
-   her:["Bedewiya evînê di şiîrê de xuya ye.", "Bedewa şiîrê Cizîrî."],
+   her:["Bedewiya evînê di şiîrê de xuya ye.", "Bedewiya şiîra Cizîrî."],
    gen:["Bedew û rind", "Bedewiya klasîk"]),
 
   (id:"c2_922", ku:"etnolenguîstîk", tr:"Etnik-Dilbilim", en:"Ethnolinguistics",
@@ -1457,11 +1457,11 @@ final kC2_Cegerxwin = [
    her:["Etnolenguîstîk qada nûjen e.", "Etnolenguîstîka Kurdî geş e."],
    gen:["Etnolenguîstîk", "Etnolenguîstîka me"]),
 
-  (id:"c2_923", ku:"paradîgm", tr:"Paradigma", en:"Paradigm",
-   cins:"mê", ez:"paradîgma", kat:"akademik", zor:0.62,
-   not:"Thomas Kuhn — bilim felsefesinin temeli. Akademik C2 termini.",
-   her:["Paradîgm guherîn dipejirîne.", "Paradîgma nû ava bû."],
-   gen:["Paradîgm", "Paradîgma zanistî"]),
+  (id:"c2_923", ku:"paradîgma", tr:"Paradigma", en:"Paradigm",
+   cins:"mê", ez:"paradîgmaya", kat:"akademik", zor:0.62,
+   not:"Thomas Kuhn — bilim felsefesinin temeli. Akademik C2 terimi.",
+   her:["Paradîgma bi demê re diguhere.", "Paradîgmaya nû ava bû."],
+   gen:["Paradîgma", "Paradîgmaya zanistî"]),
 
   (id:"c2_924", ku:"dîskûr", tr:"Söylem / Discourse", en:"Discourse",
    cins:"nêr", ez:"dîskûrê", kat:"akademik", zor:0.60,
@@ -1469,13 +1469,13 @@ final kC2_Cegerxwin = [
    her:["Dîskûr desthilatê dide.", "Analîza dîskûrê zehmet e."],
    gen:["Dîskûr", "Dîskûrê siyasî"]),
 
-  (id:"c2_925", ku:"mezhebe", tr:"Mezhep / Ekol", en:"Sect / School",
-   cins:"mê", ez:"mezhebeya", kat:"felsefe", zor:0.52,
-   not:"Arapça kökenli. Dini ve felsefi ekol.",
-   her:["Her mezhebe dîtina xwe heye.", "Mezhebeya klasîk bû."],
-   gen:["Mezhebe", "Mezhebeya sofîtiyê"]),
+  (id:"c2_925", ku:"mezheb", tr:"Mezhep / Ekol", en:"Sect / School",
+   cins:"nêr", ez:"mezhebê", kat:"felsefe", zor:0.52,
+   not:"Arapça kökenli; eril (Thackston: mezheb m). Dini ve felsefi ekol.",
+   her:["Her mezheb xwedî dîtina xwe ye.", "Mezhebê wî klasîk bû."],
+   gen:["Mezheb", "Mezhebê sofîtiyê"]),
 
-  (id:"c2_926", ku:"pêşrew", tr:"Öncü / Pionier", en:"Pioneer / Forerunner",
+  (id:"c2_926", ku:"pêşrew", tr:"Öncü / Piyoner", en:"Pioneer / Forerunner",
    cins:"nêr", ez:"pêşrewê", kat:"çand", zor:0.55,
    not:"Pêş (ön) + rew (giden). Öncü — akademik-sanat terimi.",
    her:["Koyî pêşrewê neteweperweriya edebî bû.", "Pêşrew cesaret dixwaze."],
@@ -1487,11 +1487,11 @@ final kC2_Cegerxwin = [
    her:["Mîtolojî bîra kolektîv e.", "Mîtolojiya Kurdî dewlemend e."],
    gen:["Mîtolojî", "Mîtolojiya netewî"]),
 
-  (id:"c2_928", ku:"hermenötîk", tr:"Hermenötik / Yorumbilim", en:"Hermeneutics",
-   cins:"mê", ez:"hermenötîka", kat:"felsefe", zor:0.72,
-   not:"Gadamer, Ricoeur — yorumlama felsefesi. C2 uzmanlık alanı.",
-   her:["Hermenötîk şiroveyê hêsan dike.", "Hermenötîka Gadamer bingehîn e."],
-   gen:["Hermenötîk", "Hermenötîka nûjen"]),
+  (id:"c2_928", ku:"hermenewtîk", tr:"Hermenötik / Yorumbilim", en:"Hermeneutics",
+   cins:"mê", ez:"hermenewtîka", kat:"felsefe", zor:0.72,
+   not:"Gadamer, Ricoeur — yorumlama felsefesi. C2 uzmanlık alanı. (Hawar alfabesinde \"ö\" yoktur.)",
+   her:["Hermenewtîk şîroveyê hêsan dike.", "Hermenewtîka Gadamer bingehîn e."],
+   gen:["Hermenewtîk", "Hermenewtîka nûjen"]),
 
   (id:"c2_929", ku:"postkolonyalî", tr:"Postkolonyalizm", en:"Postcolonialism",
    cins:"mê", ez:"postkolonyaliya", kat:"felsefe", zor:0.68,

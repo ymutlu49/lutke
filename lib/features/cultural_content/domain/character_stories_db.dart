@@ -130,8 +130,8 @@ const kCharacterStories = <CharacterStory>[
       StoryQuestion(
         questionKu: 'Pîrê çawa ye?',
         questionTr: 'Büyükanne nasıl?',
-        options: ['Sar û dûr', 'Aciz û bêdil', 'Bêdeng û tirsnak', 'Germ û dilovan'],
-        correctIndex: 3,
+        options: ['Germ û dilovan', 'Aciz û bêdil', 'Bêdeng û tirsnak', 'Sar û dûr'],
+        correctIndex: 0,
       ),
     ],
     xpReward: 30,
@@ -174,7 +174,7 @@ const kCharacterStories = <CharacterStory>[
       ),
       StoryLine(
         speaker: 'Narrator',
-        textKu: 'Kawa û gel Dehak hilweşandin. Li ser çiyayan agirê mezin pêxistin.',
+        textKu: 'Kawa û gel Dehak hilweşand. Li ser çiyayan agirê mezin pêxist.',
         textTr: 'Kawa ve halk Dehak\'ı yıktılar. Dağlarda büyük ateş yaktılar.',
       ),
       StoryLine(
@@ -363,8 +363,8 @@ const kCharacterStories = <CharacterStory>[
       StoryQuestion(
         questionKu: 'Cegerxwîn li ku hat dinyayê?',
         questionTr: 'Cegerxwîn nerede doğdu?',
-        options: ['Amedê', 'Şamê', 'Hewlêrê', 'Hesarê (Gercûş)'],
-        correctIndex: 3,
+        options: ['Amedê (Diyarbekir)', 'Şamê (Şam)', 'Hesarê (Gercûş)', 'Hewlêrê (Erbîl)'],
+        correctIndex: 2,
       ),
       StoryQuestion(
         questionKu: 'Pirsa bingehî ya Cegerxwîn çi ye?',
@@ -372,7 +372,7 @@ const kCharacterStories = <CharacterStory>[
         options: [
           'Çawa ye hewa?',
           'Kî me ez?',
-          'Ku ne welatê min?',
+          'Welatê min li ku ye?',
           'Kengî tê kar?'
         ],
         correctIndex: 1,

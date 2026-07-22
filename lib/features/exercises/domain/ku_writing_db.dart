@@ -72,7 +72,7 @@ const List<KuWritingExercise> kKuWritingExercises = [
     correctAnswer: 'Navê min Azad e.',
     words: null,
     explanationTr: 'Nav (ad) + ê (ezafe eril) + min (benim) + Azad + e. Ezafe yapısı.',
-    explanationKu: 'Nav (nêr) + ezafe -ê + cînavk + navê taybetî + e.',
+    explanationKu: 'Nav (nêr) + veqetandek -ê + cînavk + navê taybetî + e.',
   ),
   KuWritingExercise(
     id: 'ku_write_006',
@@ -162,7 +162,7 @@ const List<KuWritingExercise> kKuWritingExercises = [
     correctAnswer: 'Diya min nexweş e.',
     words: null,
     explanationTr: 'Dê (anne, mê) → diya + min + nexweş + e. "Dê" dişildir, ezafe -a alır.',
-    explanationKu: 'Dê (mê) + ezafe -a + min + rengdêr + e. Di ezafê de "dê" dibe "diya".',
+    explanationKu: 'Dê (mê) + veqetandek -a + min + rengdêr + e. Di veqetandekê de "dê" dibe "diya".',
   ),
   KuWritingExercise(
     id: 'ku_write_015',
@@ -202,7 +202,7 @@ const List<KuWritingExercise> kKuWritingExercises = [
     correctAnswer: 'Bavê min çay vexwar.',
     words: null,
     explanationTr: 'ERGATİF: Bav (baba, nêr) + ê (ezafe) + min. Geçmiş zamanda özne ergatifte.',
-    explanationKu: 'Bav (nêr) + ezafe -ê + min + çay + vexwar. Di borî de ergatîv.',
+    explanationKu: 'Bav (nêr) + veqetandek -ê + min + çay + vexwar. Di borî de ergatîv.',
   ),
   KuWritingExercise(
     id: 'ku_write_019',
@@ -232,7 +232,7 @@ const List<KuWritingExercise> kKuWritingExercises = [
     correctAnswer: 'Mala wî mezin e.',
     words: null,
     explanationTr: 'Mal (ev, mê) + -a (ezafe dişil) + wî (onun, eril) + mezin + e.',
-    explanationKu: 'Mal mê ye → mala. Wî ji bo nêr, wê ji bo mê. Ezafe + cînavka xwedîtiyê.',
+    explanationKu: 'Mal mê ye → mala. Wî ji bo nêr, wê ji bo mê. Veqetandek + cînavka xwedîtiyê.',
   ),
   KuWritingExercise(
     id: 'ku_write_022',
@@ -252,7 +252,7 @@ const List<KuWritingExercise> kKuWritingExercises = [
     correctAnswer: 'Mamosteyên dibistanê baş in.',
     words: null,
     explanationTr: 'Mamoste + -yên (çoğul ezafe) + dibistan-ê + baş + in. Çoğul ezafe -yên/-ên.',
-    explanationKu: 'Ezafeya pirjimar: -yên piştî dengdêr, -ên piştî bêdeng. Dibistan (mê) → dibistanê.',
+    explanationKu: 'Veqetandeka pirjimar: -yên piştî dengdêr, -ên piştî bêdeng. Dibistan (mê) → dibistanê.',
   ),
   KuWritingExercise(
     id: 'ku_write_024',
@@ -346,7 +346,7 @@ const List<KuWritingExercise> kKuWritingExercises = [
     correctAnswer: 'a',
     words: null,
     explanationTr: 'Mal DİŞİL bir kelimedir, bu yüzden ezafe eki -a olur: "Mala min".',
-    explanationKu: 'Mal (mê) → ezafe -a. "Mala min" = evim.',
+    explanationKu: 'Mal (mê) → veqetandek -a. "Mala min" = evim.',
   ),
   KuWritingExercise(
     id: 'ku_write_033',
@@ -356,7 +356,7 @@ const List<KuWritingExercise> kKuWritingExercises = [
     correctAnswer: 'ê',
     words: null,
     explanationTr: 'Bav ERİL bir kelimedir, ezafe eki -ê olur: "Bavê min".',
-    explanationKu: 'Bav (nêr) → ezafe -ê. Forma "Bavê min" diyare xwedîtiyê.',
+    explanationKu: 'Bav (nêr) → veqetandek -ê. Forma "Bavê min" diyare xwedîtiyê.',
   ),
   KuWritingExercise(
     id: 'ku_write_034',
@@ -386,7 +386,7 @@ const List<KuWritingExercise> kKuWritingExercises = [
     correctAnswer: 'a',
     words: null,
     explanationTr: 'Keç (kız) dişildir. Ezafe: -a. "Keça mezin" = büyük kız.',
-    explanationKu: 'Keç (mê) + ezafe -a + rengdêr.',
+    explanationKu: 'Keç (mê) + veqetandek -a + rengdêr.',
   ),
   KuWritingExercise(
     id: 'ku_write_037',
@@ -396,7 +396,7 @@ const List<KuWritingExercise> kKuWritingExercises = [
     correctAnswer: 'ê',
     words: null,
     explanationTr: 'Kur (oğlan) erildir. Ezafe: -ê. "Kurê biçûk" = küçük oğlan.',
-    explanationKu: 'Kur (nêr) + ezafe -ê + rengdêr.',
+    explanationKu: 'Kur (nêr) + veqetandek -ê + rengdêr.',
   ),
   KuWritingExercise(
     id: 'ku_write_038',
@@ -436,7 +436,7 @@ const List<KuWritingExercise> kKuWritingExercises = [
     correctAnswer: 'ên',
     words: null,
     explanationTr: 'Çoğul ezafe: -ên (bêdeng sonrası) veya -yên (dengdêr sonrası). "Pirtûkên min".',
-    explanationKu: 'Ezafeya pirjimar: -ên / -yên. Pirtûk + -ên = pirtûkên.',
+    explanationKu: 'Veqetandeka pirjimar: -ên / -yên. Pirtûk + -ên = pirtûkên.',
   ),
   KuWritingExercise(
     id: 'ku_write_042',
@@ -466,7 +466,7 @@ const List<KuWritingExercise> kKuWritingExercises = [
     correctAnswer: 'ê',
     words: null,
     explanationTr: 'Dergeh (kapı) erildir. Ezafe: -ê. "Dergehê bajar" = şehrin kapısı.',
-    explanationKu: 'Dergeh (nêr) + ezafe -ê + bajar (nêr, bêtewang).',
+    explanationKu: 'Dergeh (nêr) + veqetandek -ê + bajar (nêr, bêtewang).',
   ),
   KuWritingExercise(
     id: 'ku_write_045',
@@ -496,17 +496,17 @@ const List<KuWritingExercise> kKuWritingExercises = [
     correctAnswer: 'ê',
     words: null,
     explanationTr: 'Deng (ses) erildir. Ezafe -ê + çoğul ad "zarokan" (ergatif/oblik çoğul).',
-    explanationKu: 'Deng (nêr) + ezafe -ê + pirjimara tewandî (-an).',
+    explanationKu: 'Deng (nêr) + veqetandek -ê + pirjimara tewandî (-an).',
   ),
   KuWritingExercise(
     id: 'ku_write_048',
     level: 'B2',
     type: 'fill_blank',
-    promptTr: 'PASSIVE: "Der ___ vekirin." (Kapı açıldı) — "hatin" çekimi',
+    promptTr: 'PASSIVE: "Derî ___ vekirin." (Kapı açıldı) — "hatin" çekimi',
     correctAnswer: 'hat',
     words: null,
-    explanationTr: 'Passive geçmiş: "hat" (3.tekil) + mastar. "Der hat vekirin" = Kapı açıldı.',
-    explanationKu: 'Pasîv: "hat" + rader. Der (mê, lê vir bêtewang) + hat + vekirin.',
+    explanationTr: 'Passive geçmiş: "hat" (3.tekil) + mastar. "Derî hat vekirin" = Kapı açıldı.',
+    explanationKu: 'Pasîv: "hat" + rader. Derî (nêr) + hat + vekirin.',
   ),
   KuWritingExercise(
     id: 'ku_write_049',
@@ -526,7 +526,7 @@ const List<KuWritingExercise> kKuWritingExercises = [
     correctAnswer: 'hevalê',
     words: null,
     explanationTr: 'Heval (dost) eril → ezafe zinciri: Nav-ê heval-ê min. "Hevalê" (nêr).',
-    explanationKu: 'Zincîra ezafê: Nav-ê + heval-ê (nêr) + min. Ji bo mê: hevala min.',
+    explanationKu: 'Zincîra veqetandekê: Nav-ê + heval-ê (nêr) + min. Ji bo mê: hevala min.',
   ),
 
   // ============================================================
@@ -550,7 +550,7 @@ const List<KuWritingExercise> kKuWritingExercises = [
     correctAnswer: 'Ev mala min e.',
     words: ['mala', 'Ev', 'e', 'min'],
     explanationTr: 'Ev (bu) + mala (ev+ezafe) + min (benim) + e (-dir). Ezafe yapısı.',
-    explanationKu: 'Ev + mal-a + min + e. Avahiya ezafê bi cînavka xwedîtiyê.',
+    explanationKu: 'Ev + mal-a + min + e. Avahiya veqetandekê bi cînavka xwedîtiyê.',
   ),
   KuWritingExercise(
     id: 'ku_write_053',
@@ -590,7 +590,7 @@ const List<KuWritingExercise> kKuWritingExercises = [
     correctAnswer: 'Bavê min çay vexwar.',
     words: ['çay', 'Bavê', 'vexwar', 'min'],
     explanationTr: 'Bavê min (ergatif öbek) + çay + vexwar (vexwarin-içmek, geçmiş).',
-    explanationKu: 'Bavê min (ergatîv) + bireser + lêker. Bav (nêr) + ezafe -ê.',
+    explanationKu: 'Bavê min (ergatîv) + bireser + lêker. Bav (nêr) + veqetandek -ê.',
   ),
   KuWritingExercise(
     id: 'ku_write_057',
@@ -657,9 +657,9 @@ const List<KuWritingExercise> kKuWritingExercises = [
     level: 'B2',
     type: 'reorder',
     promptTr: 'Kelimeleri sırala (anlam: "Kapı açıldı" - passive):',
-    correctAnswer: 'Der hat vekirin.',
-    words: ['vekirin', 'Der', 'hat'],
-    explanationTr: 'PASSIVE: Der + hat (hatin-3.tekil) + vekirin (mastar).',
+    correctAnswer: 'Derî hat vekirin.',
+    words: ['vekirin', 'Derî', 'hat'],
+    explanationTr: 'PASSIVE: Derî + hat (hatin-3.tekil) + vekirin (mastar).',
     explanationKu: 'Pasîv: kirde + hat + rader. "Hatin" + rader = pasîv.',
   ),
   KuWritingExercise(
@@ -677,9 +677,9 @@ const List<KuWritingExercise> kKuWritingExercises = [
     level: 'B2',
     type: 'reorder',
     promptTr: 'Kelimeleri sırala (anlam: "Gelirse, konuşurum"):',
-    correctAnswer: 'Eger were, ez peyivim.',
-    words: ['peyivim', 'were', 'Eger', 'ez'],
-    explanationTr: 'Şart: Eger + subjunktif (were) + sonuç (ez peyivim). Virgülle ayrılır.',
+    correctAnswer: 'Eger were, ez dipeyivim.',
+    words: ['dipeyivim', 'were', 'Eger', 'ez'],
+    explanationTr: 'Şart: Eger + subjunktif (were) + sonuç geniş zamanda (ez dipeyivim). Virgülle ayrılır.',
     explanationKu: 'Hevoka şertî: Eger + subjunktîv + encam.',
   ),
 
@@ -704,7 +704,7 @@ const List<KuWritingExercise> kKuWritingExercises = [
     correctAnswer: 'Mala min mezin e.',
     words: null,
     explanationTr: 'EZAFE CİNSİYET: Mal DİŞİLDİR, -a alır, -ê değil. "Mala min" doğru.',
-    explanationKu: 'Mal (mê) → ezafe -a ye, ne -ê. Şaştî di zayendê de.',
+    explanationKu: 'Mal (mê) → veqetandek -a ye, ne -ê. Şaştî di zayendê de.',
   ),
   KuWritingExercise(
     id: 'ku_write_068',
@@ -714,7 +714,7 @@ const List<KuWritingExercise> kKuWritingExercises = [
     correctAnswer: 'Bavê min hat.',
     words: null,
     explanationTr: 'EZAFE CİNSİYET: Bav ERİLDİR, -ê alır, -a değil. "Bavê min" doğru.',
-    explanationKu: 'Bav (nêr) → ezafe -ê. Şaşî: "bava" → rast: "bavê".',
+    explanationKu: 'Bav (nêr) → veqetandek -ê. Şaşî: "bava" → rast: "bavê".',
   ),
   KuWritingExercise(
     id: 'ku_write_069',
@@ -760,11 +760,11 @@ const List<KuWritingExercise> kKuWritingExercises = [
     id: 'ku_write_073',
     level: 'B1',
     type: 'correct',
-    promptTr: 'HATA: "Mala bavê min a mezin." (Babamın büyük evi) — düzelt:',
-    correctAnswer: 'Mala mezin a bavê min.',
+    promptTr: 'HATA: "Mala bavê min ê mezin." (Babamın büyük evi) — düzelt:',
+    correctAnswer: 'Mala bavê min a mezin.',
     words: null,
-    explanationTr: 'EZAFE zinciri: ad + sıfat ezafe, sonra iyelik ezafe. "Mala mezin a bavê min".',
-    explanationKu: 'Zincîra ezafê: navdêr + rengdêr (ezafe) + ezafeya duyem + xwedî.',
+    explanationTr: 'EZAFE genişletici cinsiyeti: baş ad "mal" DİŞİLDİR, bu yüzden genişletici "a/ya" olur, "ê" değil. "Mala bavê min a mezin".',
+    explanationKu: 'Ravekera dirêjkirî li gor navdêra serî ye: mal (mê) → a/ya, ne ê. "Mala bavê min a mezin".',
   ),
   KuWritingExercise(
     id: 'ku_write_074',
@@ -818,7 +818,7 @@ const List<KuWritingExercise> kKuWritingExercises = [
     correctAnswer: 'Babamın evi Diyarbakır\'dadır.',
     words: null,
     explanationTr: 'Mala (ev+ezafe) bavê min (babamın) + li Amedê (Diyarbakır\'da) + ye.',
-    explanationKu: 'Mal (mê) + ezafe + xwedî + cih. Amed = Diyarbekir.',
+    explanationKu: 'Mal (mê) + veqetandek + xwedî + cih. Amed = Diyarbekir.',
   ),
   KuWritingExercise(
     id: 'ku_write_079',

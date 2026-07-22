@@ -140,7 +140,7 @@ const List<DilGotin> kDilMotivasyonGotin = [
     source: 'LÛTKE',
   ),
   (
-    ku: 'Bi her dersek, tu nêzîkî dapîr û bapîrên xwe dibî.',
+    ku: 'Bi her waneyek, tu nêzîkî dapîr û bapîrên xwe dibî.',
     tr: 'Her dersle, dedelerine ve ninelerine yaklaşıyorsun.',
     source: 'LÛTKE',
   ),
