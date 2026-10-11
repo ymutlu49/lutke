@@ -291,6 +291,7 @@ class AuthService {
     await prefs.remove('review_weak_words');
     await prefs.remove('review_last_session');
     await prefs.remove('lutke_completed_activities');
+    await prefs.remove('lutke_lesson_scores'); // kLessonScoresKey
     // NOT (2026-05-06): Eskiden placement_level_ku/en burada silinirdi
     // ("oturum-scoped" niyetiyle) — ama bu kullanıcı her login olduğunda
     // CEFR testini tekrar tetikliyordu. Kullanıcı isteği: test sadece ilk

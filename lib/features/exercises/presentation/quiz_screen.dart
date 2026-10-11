@@ -11,6 +11,9 @@ import '../../../shared/widgets/speak_button.dart';
 import '../../../core/constants/app_colors.dart';
 import '../../../core/constants/app_spacing.dart';
 import '../../../core/constants/app_typography.dart';
+import '../../../core/services/tts_asset_manifest.dart';
+import '../../../shared/providers/activity_outcome.dart';
+import '../domain/typed_answer.dart';
 import '../../../shared/providers/language_mode_provider.dart';
 import '../../../shared/providers/review_provider.dart';
 import '../../lessons/domain/a1_kelime_db.dart';
@@ -35,6 +38,7 @@ import '../../../shared/widgets/streak_milestone_toast.dart';
 import '../../child_mode/domain/child_daily_challenge.dart';
 import '../../child_mode/domain/bizer_evolution.dart';
 import '../../admin/data/content_override_service.dart';
+import '../../lessons/domain/ornek_ceviri_db.dart';
 
 // ════════════════════════════════════════════════════════════════
 // QUIZ SESSION — 4 Egzersiz Tipi, 10 Soru, Duolingo Tarzı
@@ -328,6 +332,15 @@ List<_QuizQuestion> _generateQuizSession({
       type = _ExerciseType.translation;
     }
 
+    // Dinleme sorusu kelimenin SESİNE dayanır; hazır ses yoksa (dış servis
+    // de kesintideyken) soru sessiz kalır ve yanıtlanamaz. Çeviri sorusuna
+    // çevrilir. (EN track kendi TTS'ini kullanır — kapsam dışı.)
+    if (type == _ExerciseType.listening &&
+        !isEnglishModule &&
+        TtsAssetManifest.lookup(word.ku) == null) {
+      type = _ExerciseType.translation;
+    }
+
     // Kurmancî-only modda translation = cloze test. Heritage cümle
     // yoksa veya zayıfsa SAÇMA SORU üretir ("____" gösterir). Bu
     // durumda picture-tipine geç (emoji varsa) veya reverse'e zorla
@@ -387,7 +400,7 @@ List<_QuizQuestion> _generateQuizSession({
         final candWords = cand.split(RegExp(r'\s+')).length;
         final wordCountDiff = (candWords - targetWords).abs();
         final lenDiff = (cand.length - target.length).abs();
-        final dist = _levenshteinDistance(cand, target);
+        final dist = levenshteinDistance(cand, target);
         int s = wordCountDiff * 30; // sınıf farkı = büyük ceza
         s += lenDiff * 2;
         if (dist >= 1 && dist <= 3) {
@@ -612,125 +625,8 @@ bool _isSuitableForPictureQuiz(_QuizWord w) {
   return true;
 }
 
-int _levenshteinDistance(String a, String b) {
-  final la = a.length;
-  final lb = b.length;
-  if (la == 0) return lb;
-  if (lb == 0) return la;
-
-  var prev = List<int>.generate(lb + 1, (i) => i);
-  var curr = List<int>.filled(lb + 1, 0);
-
-  for (int i = 1; i <= la; i++) {
-    curr[0] = i;
-    for (int j = 1; j <= lb; j++) {
-      final cost = a[i - 1] == b[j - 1] ? 0 : 1;
-      curr[j] = [
-        prev[j] + 1, // deletion
-        curr[j - 1] + 1, // insertion
-        prev[j - 1] + cost, // substitution
-      ].reduce(min);
-    }
-    final tmp = prev;
-    prev = curr;
-    curr = tmp;
-  }
-
-  return prev[lb];
-}
-
-/// Kelime uzunluğuna göre kabul edilebilir maksimum Levenshtein hatası.
-/// Kısa kelimelerde sıkı, uzun kelimelerde tolere edilebilir.
-/// - len < 4: 0 hata (örn. "av" için tam eşleşme)
-/// - len 4-6: 1 hata
-/// - len >= 7: 2 hata
-int _lenToleranceFor(int expectedLen) {
-  if (expectedLen < 4) return 0;
-  if (expectedLen <= 6) return 1;
-  return 2;
-}
-
-/// Kurmancî diakritik varyant normalizasyonu — iki yönlü simetrik.
-/// Kullanıcı "ê" yerine "e" ya da "e" yerine "ê" yazarsa her iki yönü kabul et.
-/// Hedef ("expected") string'ini kullanıcı girdisiyle aynı normalize forma indirger.
-String _normalizeKurmanciDiacritics(String s) {
-  return s
-      .replaceAll('ê', 'e')
-      .replaceAll('î', 'i')
-      .replaceAll('û', 'u')
-      .replaceAll('ç', 'c')
-      .replaceAll('ş', 's');
-}
-
-/// Kabul edilen Kurmancî alternatif (eş anlam) yazımları.
-/// Yazma alıştırmalarında kullanıcı "asıl" cevabın yerine eş bir form
-/// yazsa da kabul edilir.
-///
-/// Anahtar: orijinal `word.ku` (lowercase, trim).
-/// Değer: kabul edilen alternatifler listesi (lowercase, trim).
-///
-/// Genişletme: yeni kabul edilen formları buraya ekle. Çift yönlü
-/// (her iki form da hedef olabilir) — `_acceptsAlternative` her iki
-/// yönü kontrol eder.
-const Map<String, List<String>> _kurmanciAlternatives = {
-  // Selamlama
-  'sibê baş': ['roj baş', 'rojbaş', 'roj baş!', 'sibe baş', 'sibebaş'],
-  'roj baş': ['sibê baş', 'rojbaş', 'sibebaş'],
-  'spas': ['sipas', 'spas dikim'],
-  'silav': ['silaw', 'silaman'],
-  'tu çawa yî?': ['tu çawanî?', 'çawa yî?', 'çawanî?'],
-  'ez baş im': ['baş im', 'ez baş', 'ez başim'],
-  'bi xêr hatî': ['xêr hatî', 'bi xêr hatî!'],
-  'bila xweş be': ['bi xêr', 'xweş be'],
-  // Vedalaşma
-  'bi xatirê te': ['bixatirê te', 'xatirê te', 'xatire te'],
-  'oxir be': ['oxirbe', 'rê veke'],
-  // Misafirperverlik
-  'destê te xweş be': ['dest xweş', 'destxweş', 'destê te xweş'],
-  // Sayılar (alternatif yazımlar)
-  'yek': ['1'],
-  'du': ['2', 'didu'],
-  'sê': ['3', 'se'],
-  'çar': ['4', 'car'],
-  'pênc': ['5', 'penc'],
-  'şeş': ['6', 'ses'],
-  'heft': ['7'],
-  'heşt': ['8', 'hest'],
-  'neh': ['9', 'no'],
-  'deh': ['10'],
-};
-
-/// İki yönlü kabul: hem `expected → user` hem `user → expected`.
-/// Tüm karşılaştırmalar lowercase + trim sonrası yapılır.
-bool _acceptsAlternative(String userInput, String expected) {
-  final u = userInput.trim().toLowerCase();
-  final e = expected.trim().toLowerCase();
-  if (u == e) return true;
-
-  // expected'ın alternatifleri arasında user var mı?
-  final altsForExpected = _kurmanciAlternatives[e];
-  if (altsForExpected != null && altsForExpected.contains(u)) return true;
-
-  // user'ın alternatifleri arasında expected var mı?
-  final altsForUser = _kurmanciAlternatives[u];
-  if (altsForUser != null && altsForUser.contains(e)) return true;
-
-  // Diakritik-normalize eşitlik
-  final un = _normalizeKurmanciDiacritics(u);
-  final en = _normalizeKurmanciDiacritics(e);
-  if (un == en) return true;
-
-  // Normalize edilmiş alternatif kontrolü
-  if (altsForExpected != null) {
-    for (final a in altsForExpected) {
-      if (_normalizeKurmanciDiacritics(a.trim().toLowerCase()) == un) {
-        return true;
-      }
-    }
-  }
-
-  return false;
-}
+// Yazılı cevabın değerlendirilmesi (mesafe, tolerans, eş biçimler, şapkalı
+// harf denetimi) domain/typed_answer.dart içindedir.
 
 // ════════════════════════════════════════════════════════════════
 // QUIZ SCREEN — Ana Ekran
@@ -765,6 +661,9 @@ class _QuizScreenState extends ConsumerState<QuizScreen>
   // cevap kabul edilir ama doğru form gösterilir (öğrenmeyi destekler).
   bool _nearMiss = false;
   String _expectedForm = ''; // Kullanıcıya gösterilecek doğru form
+  // Yanlış cevap yalnız şapkalı/çengelli harfte ayrışıyorsa karışan çiftler:
+  // (olması gereken, yazılan). Boş değilse geri bildirim bunu söyler.
+  List<(String, String)> _diacriticPairs = const [];
 
   /// Per-question results: true = correct, false = wrong.
   final List<bool> _questionResults = [];
@@ -822,71 +721,25 @@ class _QuizScreenState extends ConsumerState<QuizScreen>
     bool correct = false;
 
     if (q.type == _ExerciseType.typing) {
-      final userInput = (typed ?? _typedAnswer).trim().toLowerCase();
-      final expected = q.word.ku.trim().toLowerCase();
-      // Önce kabul edilen alternatif (eş anlam) kontrolü — örn. "Sibê baş!"
-      // için "roj baş" da kabul edilir.
-      if (_acceptsAlternative(userInput, expected)) {
-        correct = true;
-        // Alternatif kabul edildi — kullanıcıya bilgi notu göster.
-        if (userInput != expected &&
-            _normalizeKurmanciDiacritics(userInput) !=
-                _normalizeKurmanciDiacritics(expected)) {
+      // Şapkalı harf farkı (ker ↔ kêr) artık bağışlanmaz; ayrıntı
+      // domain/typed_answer.dart başlığında.
+      final sonuc = evaluateTypedAnswer(typed ?? _typedAnswer, q.word.ku);
+      correct = sonuc.isCorrect;
+      switch (sonuc.verdict) {
+        case TypedVerdict.variant:
+          // Eş biçim kabul edildi — kullanıcıya bilgi notu göster.
           _variantAccepted = true;
           _variantNote = 'Forma cuda lê kabûl — "${q.word.ku}" jî tê bikaranîn.';
-        }
-      }
-      // Uzunluk-bazlı adaptif tolerans (kısa kelimede sıkı, uzunda gevşek)
-      final maxDist = _lenToleranceFor(expected.length);
-      final distance = _levenshteinDistance(userInput, expected);
-      if (!correct) correct = distance <= maxDist;
-
-      // Accept common Kurmancî variants: iki yönlü simetrik diakritik kabul.
-      // Kullanıcı "ê"→"e" ya da "e"→"ê" yazsa da — her iki tarafı normalize edip karşılaştır.
-      if (!correct) {
-        final userNorm = _normalizeKurmanciDiacritics(userInput);
-        final expectedNorm = _normalizeKurmanciDiacritics(expected);
-        final normalizedDist = _levenshteinDistance(userNorm, expectedNorm);
-        // Normalize edildiğinde hata payı biraz daha sıkı: maxDist - 1 (min 0)
-        final normMaxDist = maxDist > 0 ? maxDist - 1 : 0;
-        if (normalizedDist <= normMaxDist) {
-          correct = true;
-          _variantAccepted = true;
-          // Build a note about which characters should be used
-          final notes = <String>[];
-          if (expected.contains('ê') && userInput.contains('e'))
-            notes.add('ê bi xêr');
-          if (expected.contains('î') && userInput.contains('i'))
-            notes.add('î bi xêr');
-          if (expected.contains('û') && userInput.contains('u'))
-            notes.add('û bi xêr');
-          if (expected.contains('ç') && userInput.contains('c'))
-            notes.add('ç bi xêr');
-          if (expected.contains('ş') && userInput.contains('s'))
-            notes.add('ş bi xêr');
-          _variantNote = notes.isNotEmpty
-              ? '${notes.join(', ')} — tîpên Kurmancî bi kar bîne'
-              : '';
-        }
-      }
-
-      // NEAR-MISS: Yakın cevap kabulü — %75-95 benzerlik aralığı.
-      // Öğrenenleri cesaretlendirir, doğru formu gösterir.
-      // Sadece dictation'da etkin; kısa kelimelerde (<4 harf) uygulanmaz.
-      if (!correct && expected.length >= 4 && userInput.isNotEmpty) {
-        final userNorm = _normalizeKurmanciDiacritics(userInput);
-        final expectedNorm = _normalizeKurmanciDiacritics(expected);
-        final d = _levenshteinDistance(userNorm, expectedNorm);
-        final maxLen = userNorm.length > expectedNorm.length
-            ? userNorm.length
-            : expectedNorm.length;
-        final similarity = 1.0 - (d / maxLen);
-        // %75 eşiği: 4 harfte 1, 8 harfte 2, 16 harfte 4 hata tolere edilir.
-        if (similarity >= 0.75) {
-          correct = true;
+        case TypedVerdict.typo:
+        case TypedVerdict.nearMiss:
+          // Küçük yazım hatası: doğru sayılır ama doğru biçim gösterilir.
           _nearMiss = true;
           _expectedForm = q.word.ku.trim();
-        }
+        case TypedVerdict.diacritic:
+          _diacriticPairs = sonuc.diacriticPairs;
+        case TypedVerdict.exact:
+        case TypedVerdict.wrong:
+          break;
       }
     } else {
       // Multiple choice
@@ -984,6 +837,7 @@ class _QuizScreenState extends ConsumerState<QuizScreen>
       _variantNote = '';
       _nearMiss = false;
       _expectedForm = '';
+      _diacriticPairs = const [];
       _typingController.clear();
     });
   }
@@ -991,6 +845,7 @@ class _QuizScreenState extends ConsumerState<QuizScreen>
   @override
   Widget build(BuildContext context) {
     if (_questions.isEmpty) {
+      ActivityOutcome.reportNoContent();
       return Scaffold(
         backgroundColor: AppColors.backgroundPrimary,
         appBar: AppBar(
@@ -1931,7 +1786,9 @@ class _QuizScreenState extends ConsumerState<QuizScreen>
                       ? (_nearMiss
                           ? _nearMissMessage()
                           : (_variantAccepted ? 'Nêzîk e!' : 'Pîroz be!'))
-                      : 'Rast bersiv:',
+                      : (_diacriticPairs.isNotEmpty
+                          ? 'Hema hema! Bala xwe bide tîpan.'
+                          : 'Rast bersiv:'),
                   style: AppTypography.label.copyWith(
                     color: _isCorrect
                         ? ((_variantAccepted || _nearMiss)
@@ -2014,6 +1871,18 @@ class _QuizScreenState extends ConsumerState<QuizScreen>
                   fontWeight: FontWeight.w600,
                   fontSize: 11,
                 ),
+              ),
+            ),
+          ],
+
+          // Şapkalı harf hatası: hangi iki sesin karıştığını söyle
+          if (!_isCorrect && _diacriticPairs.isNotEmpty) ...[
+            const SizedBox(height: 6),
+            Text(
+              _diacriticNote(),
+              style: AppTypography.caption.copyWith(
+                color: AppColors.errorSoft,
+                fontWeight: FontWeight.w600,
               ),
             ),
           ],
@@ -2508,6 +2377,18 @@ class _QuizScreenState extends ConsumerState<QuizScreen>
     return messages[Random().nextInt(messages.length)];
   }
 
+  /// Şapkalı harf hatasında gösterilen açıklama: "ê" û "e" du dengên cuda ne.
+  String _diacriticNote() {
+    final ku = _diacriticPairs
+        .map((p) => '"${p.$1}" û "${p.$2}" du dengên cuda ne.')
+        .join(' ');
+    if (!_showTurkish) return ku;
+    final tr = _diacriticPairs
+        .map((p) => '"${p.$1}" ile "${p.$2}" ayrı seslerdir.')
+        .join(' ');
+    return '$ku\n$tr';
+  }
+
   /// Yakın-cevap altına motivasyonel ipucu — doğru formu öğrensin.
   String _nearMissEncouragement() {
     final messages = [
@@ -2831,12 +2712,27 @@ class _QuizScreenState extends ConsumerState<QuizScreen>
                           ),
                         ),
                         Expanded(
-                          child: Text(
-                            sentence.toString(),
-                            style: AppTypography.body.copyWith(
-                              color: AppColors.textPrimary,
-                              fontStyle: FontStyle.italic,
-                            ),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                sentence.toString(),
+                                style: AppTypography.body.copyWith(
+                                  color: AppColors.textPrimary,
+                                  fontStyle: FontStyle.italic,
+                                ),
+                              ),
+                              // Cümle havuzundan gelen örneklerin Türkçesi (Faz 3).
+                              if (_showTurkish)
+                                if (ornekCevirisi(sentence.toString()) case final ceviri?)
+                                Text(
+                                  ceviri,
+                                  style: AppTypography.caption.copyWith(
+                                    color: AppColors.textSecondary,
+                                    height: 1.4,
+                                  ),
+                                ),
+                            ],
                           ),
                         ),
                       ],
@@ -2939,6 +2835,7 @@ class _QuizScreenState extends ConsumerState<QuizScreen>
     // ── GAMIFICATION CANLI VERİ (tek seferlik) ──────────────
     if (!_reportedToGamification && answeredCount > 0) {
       _reportedToGamification = true;
+      ActivityOutcome.report(ActivityOutcome(_correctCount, answeredCount));
       // Oturum tamamlandı — şenlikli çan.
       SoundService.playSessionComplete();
       WidgetsBinding.instance.addPostFrameCallback((_) {

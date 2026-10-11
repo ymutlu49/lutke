@@ -1,4 +1,3 @@
-import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
@@ -10,9 +9,12 @@ import '../../../shared/providers/language_mode_provider.dart';
 import '../../../shared/services/skill_progress_service.dart';
 import '../../gamification/gamification_provider.dart';
 import '../domain/ku_writing_db.dart';
+import '../domain/level_pick.dart';
 
 class KuWritingScreen extends ConsumerStatefulWidget {
-  const KuWritingScreen({super.key});
+  /// Öğrencinin düzeyi (A1…C2); verilirse ögeler o düzeyden başlanarak seçilir.
+  final String? level;
+  const KuWritingScreen({super.key, this.level});
   @override
   ConsumerState<KuWritingScreen> createState() => _KuWritingScreenState();
 }
@@ -28,8 +30,7 @@ class _KuWritingScreenState extends ConsumerState<KuWritingScreen> {
   @override
   void initState() {
     super.initState();
-    _items = List.from(kKuWritingExercises)..shuffle(Random());
-    _items = _items.take(10).toList();
+    _items = pickForLevel(kKuWritingExercises, widget.level, (e) => e.level);
   }
 
   @override

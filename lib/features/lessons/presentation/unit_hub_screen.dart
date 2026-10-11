@@ -7,9 +7,14 @@ import '../../../core/constants/app_colors.dart';
 import '../../../core/constants/app_typography.dart';
 import '../../../core/constants/app_spacing.dart';
 import '../../../core/utils/nav_guard.dart';
+import '../../../shared/providers/activity_outcome.dart';
 import '../../../shared/providers/language_mode_provider.dart';
 import '../../../shared/providers/learning_module_provider.dart';
+import '../../../shared/providers/lesson_progress_provider.dart';
 import '../../../shared/providers/progression_provider.dart';
+import '../domain/lesson_catalog.dart';
+import '../domain/lesson_entities.dart';
+import 'wane_list_screen.dart';
 import '../../en_learning/domain/en_to_quiz_adapter.dart';
 import '../domain/a1_kelime_db.dart';
 import '../domain/a2_kelime_db.dart';
@@ -130,6 +135,9 @@ class UnitHubScreen extends ConsumerWidget {
     final progression = ref.read(progressionProvider.notifier);
     final words = _loadCategoryWords(category, level, isEn: isEn);
     final completedCount = progression.completedCountForStop(level, category);
+    final dersler =
+        isEn ? const <LessonModel>[] : lessonsForUnit(level, category);
+    final dersPuanlari = ref.watch(lessonProgressProvider);
 
     return Scaffold(
       backgroundColor: AppColors.backgroundPrimary,
@@ -264,13 +272,25 @@ class UnitHubScreen extends ConsumerWidget {
 
             const SizedBox(height: 16),
 
-            // ── Etkinlik Basamakları ─────────────────────
+            // ── Dersler + Etkinlik Basamakları ───────────
+            // Birimin elle yazılmış dersi (varsa) en üstte durur: dilbilgisi
+            // notu ve yazılmış egzersizler. Etkinlikleri kilitlemez; sıra
+            // önerilir. (EN izinin kendi dersleri yok.)
             Expanded(
               child: ListView.separated(
                 padding: const EdgeInsets.symmetric(horizontal: 20),
-                itemCount: _activities.length,
+                itemCount: dersler.length + _activities.length,
                 separatorBuilder: (_, __) => const SizedBox(height: 12),
-                itemBuilder: (context, i) {
+                itemBuilder: (context, index) {
+                  if (index < dersler.length) {
+                    final ders = dersler[index];
+                    return WaneCard(
+                      lesson: ders,
+                      puan: dersPuanlari[ders.id],
+                      showTr: showTr,
+                    );
+                  }
+                  final i = index - dersler.length;
                   final act = _activities[i];
                   final lessonId = ProgressionNotifier.makeLessonId(level, category, act.index);
                   final isCompleted = completed.contains(lessonId);
@@ -291,6 +311,7 @@ class UnitHubScreen extends ConsumerWidget {
                             // NAV FIX: Çift tıklama koruması — aksi halde
                             // kullanıcı etkinlik kartına hızla iki kez basınca
                             // iki kez push olur ve markComplete iki defa çalışır.
+                            ActivityOutcome.clear();
                             await context.push(
                               act.route,
                               extra: {
@@ -299,10 +320,19 @@ class UnitHubScreen extends ConsumerWidget {
                                 'lessonId': lessonId,
                               },
                             );
-                            // Etkinlikten döndüğünde tamamlanmış say
-                            if (context.mounted) {
+                            if (!context.mounted) return;
+                            // Etkinlik yalnız oturum bitirilip eşik geçildiyse
+                            // tamamlanmış sayılır (bkz. ActivityOutcome).
+                            // İngilizce izinde etkinliklerin bir bölümü henüz
+                            // yok ("yakında" ekranı) ya da ayrı ekranlara
+                            // yönleniyor; ölçüt orada uygulanmaz.
+                            final outcome = ActivityOutcome.take();
+                            if (isEn || (outcome != null && outcome.passed)) {
                               ref.read(progressionProvider.notifier)
                                   .markComplete(lessonId);
+                            } else if (!isCompleted) {
+                              _showNotPassed(context, outcome,
+                                  showTr: showTr, isEn: isEn);
                             }
                           })
                         : null,
@@ -314,6 +344,35 @@ class UnitHubScreen extends ConsumerWidget {
         ),
       ),
     );
+  }
+
+  /// Etkinlikten dönüldü ama basamak tamamlanmadı: nedenini söyle.
+  /// `outcome == null` → oturum bitirilmeden çıkıldı; aksi halde eşik altı.
+  void _showNotPassed(BuildContext context, ActivityOutcome? outcome,
+      {required bool showTr, required bool isEn}) {
+    const esik = 70; // ActivityOutcome.passRatio
+    final String mesaj;
+    if (outcome == null) {
+      mesaj = isEn
+          ? 'Finish the activity to complete this step.'
+          : showTr
+              ? 'Çalakî neqediya — etkinliği sonuna kadar bitir.'
+              : 'Çalakî neqediya. Heta dawiyê bidomîne.';
+    } else {
+      final p = outcome.percent;
+      mesaj = isEn
+          ? '$p% correct — $esik% needed. Try again.'
+          : showTr
+              ? 'Ji sedî $p rast e — geçmek için %$esik gerekli. Bir daha dene.'
+              : 'Ji sedî $p rast e — ji sedî $esik pêwîst e. Careke din biceribîne.';
+    }
+    ScaffoldMessenger.of(context)
+      ..hideCurrentSnackBar()
+      ..showSnackBar(SnackBar(
+        content: Text(mesaj),
+        behavior: SnackBarBehavior.floating,
+        duration: const Duration(seconds: 4),
+      ));
   }
 
   List<_SimpleWord> _loadCategoryWords(String category, String level,

@@ -6,7 +6,10 @@ import 'package:shared_preferences/shared_preferences.dart';
 import '../../core/constants/app_colors.dart';
 import '../../core/constants/app_spacing.dart';
 import '../../core/constants/app_typography.dart';
+import '../../core/router/app_router.dart';
 import '../../shared/providers/learning_track_provider.dart';
+import '../../shared/providers/lesson_progress_provider.dart';
+import '../lessons/domain/olcme.dart';
 import 'certificate_painter.dart';
 import 'certificate_service.dart';
 
@@ -44,6 +47,7 @@ class _CertificateScreenState extends ConsumerState<CertificateScreen> {
   String? _fullName;
   bool _loading = true;
   bool _downloading = false;
+  bool _adSoruldu = false;
 
   @override
   void initState() {
@@ -63,11 +67,6 @@ class _CertificateScreenState extends ConsumerState<CertificateScreen> {
       _fullName = name;
       _loading = false;
     });
-    if (name == null) {
-      WidgetsBinding.instance.addPostFrameCallback((_) {
-        if (mounted) _askForName();
-      });
-    }
   }
 
   Future<void> _askForName() async {
@@ -126,6 +125,56 @@ class _CertificateScreenState extends ConsumerState<CertificateScreen> {
 
   @override
   Widget build(BuildContext context) {
+    // Faz 6.3: sertifika düzey sınavını geçene verilir. İngilizce izinde
+    // sınav olmadığı için eski davranış sürer.
+    final sinavKimligi = ezmunKimligi(widget.level);
+    if (!ref.watch(currentTrackProvider).isEnglish && !lessonPassed(ref.watch(lessonProgressProvider), sinavKimligi)) {
+      return Scaffold(
+        backgroundColor: AppColors.backgroundPrimary,
+        appBar: AppBar(
+          backgroundColor: AppColors.backgroundPrimary,
+          elevation: 0,
+          leading: IconButton(
+            icon: const Icon(Icons.arrow_back_rounded, color: AppColors.textSecondary),
+            onPressed: () => context.pop(),
+          ),
+        ),
+        body: Padding(
+          padding: const EdgeInsets.all(24),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: [
+              const Text('🎓', textAlign: TextAlign.center, style: TextStyle(fontSize: 56)),
+              const SizedBox(height: 16),
+              Text(
+                'Ji bo belgeya ${widget.level.toUpperCase()} divê tu ezmûna astê derbas bikî.',
+                textAlign: TextAlign.center,
+                style: const TextStyle(fontSize: 18, fontWeight: FontWeight.w600),
+              ),
+              const SizedBox(height: 8),
+              const Text(
+                '20 pirs · ji sedî 70 pêwîst e',
+                textAlign: TextAlign.center,
+              ),
+              const SizedBox(height: 24),
+              ElevatedButton(
+                onPressed: () => context.push(AppRoutes.wanePlay, extra: {'lessonId': sinavKimligi}),
+                child: const Text('Dest bi ezmûnê bike'),
+              ),
+            ],
+          ),
+        ),
+      );
+    }
+
+    // İsim, sınav geçildikten sonra ve bir kez sorulur.
+    if (!_loading && _fullName == null && !_adSoruldu) {
+      _adSoruldu = true;
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        if (mounted) _askForName();
+      });
+    }
     if (_loading) {
       return const Scaffold(
         backgroundColor: AppColors.backgroundPrimary,

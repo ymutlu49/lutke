@@ -39,6 +39,9 @@ import '../../features/lessons/presentation/progress_map_screen.dart';
 import '../../features/exercises/presentation/listening_screen.dart';
 import '../../features/exercises/presentation/listening_pilot_screen.dart';
 import '../../features/lessons/presentation/unit_hub_screen.dart';
+import '../../features/lessons/presentation/wane_list_screen.dart';
+import '../../features/lessons/presentation/wane_screen.dart';
+import '../../features/lessons/presentation/xwendin_screen.dart';
 import '../../features/en_learning/presentation/en_home_screen.dart';
 import '../../features/en_learning/presentation/en_grammar_screen.dart';
 import '../../features/en_learning/presentation/en_quiz_hub_screen.dart';
@@ -124,6 +127,11 @@ abstract class AppRoutes {
   static const listeningPilot    = '/listening-pilot'; // PÎLOT: Azadiya Welat ses denemesi (izole)
 
   static const unitHub               = '/unit-hub';
+  // Elle yazılmış dersler (wane): düzey listesi ve ders oynatıcı.
+  static const wane                  = '/wane';
+  static const wanePlay              = '/wane/play';
+  static const xwendin               = '/xwendin';
+  static const xwendinRead           = '/xwendin/read';
 
   // ── Lûtke Zarok (Çocuk Modu) ────────────────────────────────
   static const childOnboarding       = '/child/onboarding';
@@ -312,11 +320,15 @@ GoRouter appRouter(AppRouterRef ref) {
       ),
       GoRoute(
         path: AppRoutes.speaking,
-        builder: (_, __) => const KuSpeakingScreen(),
+        builder: (_, state) => KuSpeakingScreen(
+          level: (state.extra as Map<String, dynamic>?)?['level'] as String?,
+        ),
       ),
       GoRoute(
         path: AppRoutes.writing,
-        builder: (_, __) => const KuWritingScreen(),
+        builder: (_, state) => KuWritingScreen(
+          level: (state.extra as Map<String, dynamic>?)?['level'] as String?,
+        ),
       ),
       GoRoute(
         path: AppRoutes.welcome,
@@ -589,6 +601,38 @@ GoRouter appRouter(AppRouterRef ref) {
             category: extra?['category'] as String?,
             level: extra?['level'] as String? ?? 'A1',
           );
+        },
+      ),
+
+      // ── Wane — elle yazılmış dersler ──────────────────────
+      GoRoute(
+        path: AppRoutes.wane,
+        builder: (_, state) {
+          final extra = state.extra as Map<String, dynamic>?;
+          return WaneListScreen(level: extra?['level'] as String? ?? 'A1');
+        },
+      ),
+      GoRoute(
+        path: AppRoutes.wanePlay,
+        builder: (_, state) {
+          final extra = state.extra as Map<String, dynamic>?;
+          return WaneScreen(lessonId: extra?['lessonId'] as String? ?? '');
+        },
+      ),
+
+      // ── Xwendin — okuma metinleri ───────────────────────
+      GoRoute(
+        path: AppRoutes.xwendin,
+        builder: (_, state) {
+          final extra = state.extra as Map<String, dynamic>?;
+          return XwendinListScreen(level: extra?['level'] as String? ?? 'A1');
+        },
+      ),
+      GoRoute(
+        path: AppRoutes.xwendinRead,
+        builder: (_, state) {
+          final extra = state.extra as Map<String, dynamic>?;
+          return XwendinScreen(id: extra?['id'] as String? ?? '');
         },
       ),
 

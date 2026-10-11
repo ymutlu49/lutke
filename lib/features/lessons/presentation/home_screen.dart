@@ -25,7 +25,9 @@ import '../../en_learning/domain/en_to_quiz_adapter.dart' show getEnWordsForLeve
 import '../../../shared/providers/learning_module_provider.dart';
 // daily_word_widget import removed — widget no longer on home screen
 import '../../../shared/providers/language_mode_provider.dart';
+import '../../../shared/providers/lesson_progress_provider.dart';
 import '../../../shared/providers/progression_provider.dart';
+import '../domain/lesson_catalog.dart';
 import '../../gamification/gamification_provider.dart';
 import '../../gamification/gamification_widgets.dart';
 import '../../cultural_content/widgets/daily_proverb_card.dart';
@@ -38,6 +40,147 @@ import '../../auth/email_verification_screen.dart' show EmailVerificationBanner;
 // İlke: Kurmancî birincil dil. Heritage + Genel yol.
 // Gamification: Destekleyici, kimlik odaklı (ceza yok).
 // ════════════════════════════════════════════════════════════════
+
+/// Ana ekrandaki "Wane" girişi: düzeyin ders listesine götürür ve kaç
+/// dersin geçildiğini gösterir.
+class _WaneEntryCard extends ConsumerWidget {
+  final String level;
+  const _WaneEntryCard({required this.level});
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final dersler = lessonsForLevel(level);
+    if (dersler.isEmpty) return const SizedBox.shrink();
+    final puanlar = ref.watch(lessonProgressProvider);
+    final showTr = ref.watch(showTurkishProvider);
+    final gecilen = dersler.where((d) => lessonPassed(puanlar, d.id)).length;
+
+    return Padding(
+      padding: const EdgeInsets.only(bottom: AppSpacing.md),
+      child: Material(
+        color: AppColors.surface,
+        borderRadius: BorderRadius.circular(AppSpacing.radiusLg),
+        child: InkWell(
+          borderRadius: BorderRadius.circular(AppSpacing.radiusLg),
+          onTap: () => context.push(AppRoutes.wane, extra: {'level': level}),
+          child: Container(
+            padding: const EdgeInsets.all(AppSpacing.md),
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(AppSpacing.radiusLg),
+              border: Border.all(
+                  color: AppColors.primary.withOpacity(0.25), width: 1.5),
+            ),
+            child: Row(
+              children: [
+                Container(
+                  width: 44,
+                  height: 44,
+                  decoration: BoxDecoration(
+                    color: AppColors.primary.withOpacity(0.1),
+                    borderRadius: BorderRadius.circular(12),
+                  ),
+                  child: const Icon(Icons.menu_book_rounded,
+                      color: AppColors.primary),
+                ),
+                const SizedBox(width: AppSpacing.md),
+                Expanded(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        'Wane',
+                        style: AppTypography.title.copyWith(
+                            color: AppColors.primary, fontSize: 16),
+                      ),
+                      const SizedBox(height: 2),
+                      Text(
+                        showTr
+                            ? 'Rêziman û mînak — dilbilgisi ve örneklerle dersler'
+                            : 'Rêziman û mînak',
+                        style: AppTypography.caption,
+                      ),
+                    ],
+                  ),
+                ),
+                Text(
+                  '$gecilen / ${dersler.length}',
+                  style: AppTypography.label.copyWith(
+                      color: AppColors.primary, fontWeight: FontWeight.w700),
+                ),
+                const SizedBox(width: 4),
+                const Icon(Icons.chevron_right_rounded,
+                    color: AppColors.primary),
+              ],
+            ),
+          ),
+        ),
+      ),
+    ).animate().fadeIn(delay: 180.ms);
+  }
+}
+
+/// Ana ekrandaki beceri girişleri: yazma, konuşma, hikâye.
+/// Yazma ve konuşma ögeleri öğrencinin düzeyinden seçilir.
+class _SkillsRow extends ConsumerWidget {
+  final String level;
+  const _SkillsRow({required this.level});
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final showTr = ref.watch(showTurkishProvider);
+    final girisler = <(String, String, String, String)>[
+      ('✍️', 'Nivîsîn', 'Yazma', AppRoutes.writing),
+      ('🗣️', 'Axaftin', 'Konuşma', AppRoutes.speaking),
+      ('📖', 'Çîrok', 'Hikâye', AppRoutes.story),
+      ('📚', 'Xwendin', 'Okuma', AppRoutes.xwendin),
+    ];
+    return Padding(
+      padding: const EdgeInsets.only(bottom: AppSpacing.md),
+      child: Row(
+        children: [
+          for (int i = 0; i < girisler.length; i++) ...[
+            if (i > 0) const SizedBox(width: AppSpacing.sm),
+            Expanded(
+              child: Material(
+                color: AppColors.surface,
+                borderRadius: BorderRadius.circular(AppSpacing.radiusMd),
+                child: InkWell(
+                  borderRadius: BorderRadius.circular(AppSpacing.radiusMd),
+                  onTap: () =>
+                      context.push(girisler[i].$4, extra: {'level': level}),
+                  child: Container(
+                    padding: const EdgeInsets.symmetric(
+                        vertical: AppSpacing.sm + 2, horizontal: 6),
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(AppSpacing.radiusMd),
+                      border: Border.all(
+                          color: AppColors.primary.withOpacity(0.2)),
+                    ),
+                    child: Column(
+                      children: [
+                        Text(girisler[i].$1,
+                            style: const TextStyle(fontSize: 22)),
+                        const SizedBox(height: 4),
+                        Text(
+                          girisler[i].$2,
+                          style: AppTypography.label.copyWith(
+                              color: AppColors.primary,
+                              fontWeight: FontWeight.w700),
+                        ),
+                        if (showTr)
+                          Text(girisler[i].$3, style: AppTypography.caption),
+                      ],
+                    ),
+                  ),
+                ),
+              ),
+            ),
+          ],
+        ],
+      ),
+    ).animate().fadeIn(delay: 200.ms);
+  }
+}
 
 class HomeScreen extends ConsumerWidget {
   const HomeScreen({super.key});
@@ -184,6 +327,15 @@ class HomeScreen extends ConsumerWidget {
                       ],
                     ),
                   ).animate().fadeIn(delay: 160.ms),
+
+                  // ── Wane: düzeyin elle yazılmış dersleri ─────
+                  // 105 ders yazılmıştı ama yola bağlı değildi. Yalnız
+                  // Kurmancî izinde (EN izinin kendi dersleri yok).
+                  if (!isEn) _WaneEntryCard(level: profile.currentLevel),
+
+                  // ── Beceriler: yazma, konuşma, hikâye ────────
+                  // Bu üç ekran yazılmıştı ama uygulamada gidiş yoktu.
+                  if (!isEn) _SkillsRow(level: profile.currentLevel),
 
                   _SkillTreePath(
                     userId: userId,
@@ -594,7 +746,7 @@ List<dynamic> _getWordsForLevel(String level, {bool isEnglishModule = false}) {
 Color _colorForCategory(String kat) => switch (kat) {
   'selamlama' || 'silav' => const Color(0xFF1A7B6B), // teal
   'cinavk' || 'navdêr' => const Color(0xFF7B1FA2), // mor
-  'hejmar' || 'jimar' => const Color(0xFF2196F3), // mavi
+  'hejmar' || 'jimar' || 'matematîk' => const Color(0xFF2196F3), // mavi
   'malbat' => const Color(0xFFE91E63), // pembe
   'bun' => const Color(0xFFD4783A), // turuncu
   'reng' => const Color(0xFFFF5722), // koyu turuncu
@@ -686,6 +838,7 @@ String _enNameForCategory(String kat) => switch (kat) {
   'roj' => 'Days of Week',
   'demsal' || 'werzî' => 'Seasons',
   'xwarin' => 'Food',
+  'matematîk' => 'Mathematics',
   'vexwarin' => 'Drinks',
   'mêwe' => 'Fruits',
   'beden' => 'Body',
@@ -749,6 +902,7 @@ String _kuNameForCategory(String kat) => switch (kat) {
   'roj' => 'Rojên hefteyê',
   'demsal' || 'werzî' => 'Demsalên salê',
   'xwarin' => 'Xwarin',
+  'matematîk' => 'Matematîk',
   'vexwarin' => 'Vexwarin',
   'mêwe' => 'Fêkî û mêwe',
   'beden' => 'Laş',
@@ -792,6 +946,19 @@ String _kuNameForCategory(String kat) => switch (kat) {
   'ekoloji' => 'Ekolojî',
   'neyekî' => 'Neyînî',
   'navdêr' => 'Navdêr',
+  'cînavk' => 'Cînav',
+  // Dilbilgisi kategorileri: anahtarlar teknik adlar (dem_temam, bileşik_leker,
+  // subjunctive…) olduğu için varsayılan başlık "Dem_temam", "Bileşik_leker"
+  // çıkıyordu. Başlıklar Samî Tan, Rêzimana Kurmancî'deki terimlerdir
+  // (korpusta tanıklı). Ders başlıklarındaki terimlerle eşitlenmesi ayrı iş
+  // (iyileştirme planı Faz 4.5).
+  'dem_temam' => 'Dema boriya têdeyî',
+  'dem_devam' => 'Dema boriya berdest',
+  'subjunctive' => 'Raweya bilanî',
+  'şart' => 'Raweya mercî',
+  'mastar' => 'Rader',
+  'bileşik_leker' => 'Lêkerên hevedudanî',
+  'pasif' => 'Avaniya tebatî',
   _ => kat.isEmpty ? '' : kat[0].toUpperCase() + kat.substring(1),
 };
 

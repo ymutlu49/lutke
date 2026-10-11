@@ -10,6 +10,7 @@ import '../../../core/router/app_router.dart';
 import '../../../core/constants/app_colors.dart';
 import '../../../core/constants/app_spacing.dart';
 import '../../../core/constants/app_typography.dart';
+import '../../../shared/providers/activity_outcome.dart';
 import '../../../shared/providers/language_mode_provider.dart';
 import '../../../shared/providers/learning_module_provider.dart';
 import '../../../shared/services/skill_progress_service.dart';
@@ -759,6 +760,9 @@ class _WordMatchScreenState extends ConsumerState<WordMatchScreen>
   Widget _buildResultScreen() {
     if (!_sessionCompleteSoundFired) {
       _sessionCompleteSoundFired = true;
+      // Doğru eşleştirme / toplam deneme; süre dolup hiç deneme yapılmadıysa 0.
+      ActivityOutcome.report(
+          ActivityOutcome(_totalCorrect, _totalCorrect + _totalWrong));
       SoundService.playSessionComplete();
       WidgetsBinding.instance.addPostFrameCallback((_) {
         final gami = ref.read(gamificationProvider.notifier);

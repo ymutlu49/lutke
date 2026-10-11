@@ -11,8 +11,10 @@ import '../../../core/constants/app_colors.dart';
 import '../../../core/constants/app_spacing.dart';
 import '../../../core/constants/app_typography.dart';
 import '../../../core/services/audio_service.dart';
+import '../../../core/services/tts_asset_manifest.dart';
 import '../../../core/services/tts_service.dart';
 import '../../../core/services/tts_source_preferences.dart';
+import '../../../shared/providers/activity_outcome.dart';
 import '../../../shared/providers/learning_module_provider.dart';
 import '../../../shared/widgets/speak_button.dart';
 import '../../en_learning/presentation/en_listening_screen.dart';
@@ -103,12 +105,29 @@ List<_ListeningWord> _loadListeningWords({String? category, String? level}) {
 
 // ── Soru Üretici ───────────────────────────────────────────────
 
+/// Bir dinleme oturumu için gereken en az sesli kelime sayısı.
+const int _enAzSesliKelime = 4;
+
+/// Metnin önceden üretilmiş ses dosyası var mı?
+bool _hazirSesVar(String metin) => TtsAssetManifest.lookup(metin) != null;
+
 List<_ListeningQuestion> _generateListeningSession({int questionCount = 8, String? category, String? level}) {
   final allWords = _loadListeningWords(category: category, level: level);
   if (allWords.length < 6) return [];
 
+  // Yalnız HAZIR SESİ olan cümleler sorulur. Cümle ekranda gösterilmediği
+  // için ses yoksa soru yanıtlanamaz; canlı seslendirme dış servise bağlı,
+  // saniyeler sürüyor ve kesintiye açık. Sesi olmayan kelimeler çeldirici
+  // olarak havuzda kalır. Birimde yeterli sesli cümle yoksa oturum kurulmaz
+  // (ekran "yeterli içerik yok" der ve basamak yolu kilitlemez).
+  final sesli = <_ListeningWord, List<String>>{
+    for (final w in allWords)
+      if (w.her.any(_hazirSesVar)) w: w.her.where(_hazirSesVar).toList(),
+  };
+  if (sesli.length < _enAzSesliKelime) return [];
+
   final rng = Random();
-  final shuffled = List<_ListeningWord>.from(allWords)..shuffle(rng);
+  final shuffled = sesli.keys.toList()..shuffle(rng);
   final count = min(questionCount, shuffled.length);
   final sessionWords = shuffled.take(count).toList();
 
@@ -129,7 +148,8 @@ List<_ListeningQuestion> _generateListeningSession({int questionCount = 8, Strin
   for (int i = 0; i < count; i++) {
     final word = sessionWords[i];
     final type = baseTypes[i % baseTypes.length];
-    final sentence = word.her[rng.nextInt(word.her.length)];
+    final sesliCumleler = sesli[word]!;
+    final sentence = sesliCumleler[rng.nextInt(sesliCumleler.length)];
 
     switch (type) {
       case _ListeningQuestionType.meaning:
@@ -475,6 +495,7 @@ class _ListeningScreenState extends ConsumerState<ListeningScreen>
     // ── GAMIFICATION CANLI VERİ ──────────────────────
     SoundService.playSessionComplete();
     final total = _currentIndex + 1;
+    ActivityOutcome.report(ActivityOutcome(_correctCount, total));
     final gami = ref.read(gamificationProvider.notifier);
     gami.resetCombo();
     gami.addXP(_correctCount * 12);
@@ -541,6 +562,7 @@ class _ListeningScreenState extends ConsumerState<ListeningScreen>
     }
 
     if (_questions.isEmpty) {
+      ActivityOutcome.reportNoContent();
       return Scaffold(
         backgroundColor: AppColors.backgroundPrimary,
         appBar: AppBar(

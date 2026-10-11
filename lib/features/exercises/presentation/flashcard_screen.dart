@@ -9,6 +9,7 @@ import '../../../core/router/app_router.dart';
 import '../../../core/constants/app_colors.dart';
 import '../../../core/constants/app_spacing.dart';
 import '../../../core/constants/app_typography.dart';
+import '../../../shared/providers/activity_outcome.dart';
 import '../../../shared/providers/language_mode_provider.dart';
 import '../../../shared/providers/learning_module_provider.dart';
 import '../../../shared/providers/review_provider.dart';
@@ -32,6 +33,7 @@ import '../../../shared/widgets/streak_milestone_toast.dart';
 import '../../child_mode/domain/child_daily_challenge.dart';
 import '../../child_mode/domain/bizer_evolution.dart';
 import '../../admin/data/content_override_service.dart';
+import '../../lessons/domain/ornek_ceviri_db.dart';
 
 // ════════════════════════════════════════════════════════════════
 // FLASHCARD EKRANI — Tinder-Style Swipeable Kartlar
@@ -307,6 +309,9 @@ class _FlashcardScreenState extends ConsumerState<FlashcardScreen>
   void _awardGamificationOnce() {
     if (_gamificationReported) return;
     _gamificationReported = true;
+    // Kartlar kendi kendini değerlendirmedir; basamak için destenin
+    // sonuna kadar gidilmesi yeterli.
+    ActivityOutcome.report(const ActivityOutcome.completed());
     SoundService.playSessionComplete();
     final gami = ref.read(gamificationProvider.notifier);
     gami.resetCombo();
@@ -1024,13 +1029,28 @@ class _FlashcardScreenState extends ConsumerState<FlashcardScreen>
                       ),
                       const SizedBox(width: 6),
                       Expanded(
-                        child: Text(
-                          sentence,
-                          style: AppTypography.body.copyWith(
-                            color: AppColors.textPrimary,
-                            fontStyle: FontStyle.italic,
-                            height: 1.6,
-                          ),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              sentence,
+                              style: AppTypography.body.copyWith(
+                                color: AppColors.textPrimary,
+                                fontStyle: FontStyle.italic,
+                                height: 1.6,
+                              ),
+                            ),
+                            // Cümle havuzundan gelen örneklerin Türkçesi (Faz 3).
+                            if (ref.watch(showTurkishProvider))
+                              if (ornekCevirisi(sentence) case final ceviri?)
+                              Text(
+                                ceviri,
+                                style: AppTypography.caption.copyWith(
+                                  color: AppColors.textSecondary,
+                                  height: 1.4,
+                                ),
+                              ),
+                          ],
                         ),
                       ),
                     ],

@@ -12,6 +12,7 @@ import '../../../shared/widgets/speak_button.dart';
 import '../../../shared/widgets/suggestion_sheet.dart';
 import '../../../shared/providers/language_mode_provider.dart';
 import '../../admin/data/content_override_service.dart';
+import '../domain/ornek_ceviri_db.dart';
 
 // ════════════════════════════════════════════════════════════════
 // KELİME DETAY EKRANI — Tam ekran kelime görünümü
@@ -179,7 +180,7 @@ class WordDetailScreen extends ConsumerWidget {
 
                 // 3) Ornek Cumleler
                 if (her.isNotEmpty || gen.isNotEmpty)
-                  _ExampleSentencesSection(her: her, gen: gen)
+                  _ExampleSentencesSection(her: her, gen: gen, showTurkish: showTurkish)
                       .animate()
                       .fadeIn(duration: 400.ms, delay: 300.ms)
                       .slideY(begin: 0.1, end: 0),
@@ -596,11 +597,15 @@ class _GrammarBadge extends StatelessWidget {
         children: [
           Icon(icon, size: 14, color: color),
           const SizedBox(width: 5),
-          Text(
-            label,
-            style: AppTypography.labelSmall.copyWith(
-              color: color,
-              fontWeight: FontWeight.w600,
+          // Uzun etiket dar ekranda satırı taşırıyordu; sığmazsa kısalır.
+          Flexible(
+            child: Text(
+              label,
+              overflow: TextOverflow.ellipsis,
+              style: AppTypography.labelSmall.copyWith(
+                color: color,
+                fontWeight: FontWeight.w600,
+              ),
             ),
           ),
         ],
@@ -616,10 +621,12 @@ class _GrammarBadge extends StatelessWidget {
 class _ExampleSentencesSection extends StatelessWidget {
   final List<String> her;
   final List<String> gen;
+  final bool showTurkish;
 
   const _ExampleSentencesSection({
     required this.her,
     required this.gen,
+    this.showTurkish = true,
   });
 
   @override
@@ -662,6 +669,7 @@ class _ExampleSentencesSection extends StatelessWidget {
           if (her.isNotEmpty) ...[
             const SizedBox(height: AppSpacing.md),
             _SentenceGroup(
+              showTurkish: showTurkish,
               title: 'Heritage (Malbat)',
               sentences: her,
               accentColor: AppColors.primary,
@@ -672,6 +680,7 @@ class _ExampleSentencesSection extends StatelessWidget {
           if (gen.isNotEmpty) ...[
             const SizedBox(height: AppSpacing.sm),
             _SentenceGroup(
+              showTurkish: showTurkish,
               title: 'Giştî',
               sentences: gen,
               accentColor: AppColors.accent,
@@ -687,11 +696,13 @@ class _SentenceGroup extends StatelessWidget {
   final String title;
   final List<String> sentences;
   final Color accentColor;
+  final bool showTurkish;
 
   const _SentenceGroup({
     required this.title,
     required this.sentences,
     required this.accentColor,
+    this.showTurkish = true,
   });
 
   @override
@@ -721,13 +732,31 @@ class _SentenceGroup extends StatelessWidget {
                   left: BorderSide(color: accentColor, width: 3),
                 ),
               ),
-              child: Text(
-                '\u201C$s\u201D',
-                style: AppTypography.body.copyWith(
-                  color: AppColors.textPrimary,
-                  fontStyle: FontStyle.italic,
-                  height: 1.5,
-                ),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    '\u201C$s\u201D',
+                    style: AppTypography.body.copyWith(
+                      color: AppColors.textPrimary,
+                      fontStyle: FontStyle.italic,
+                      height: 1.5,
+                    ),
+                  ),
+                  // C\u00FCmle havuzundan gelen \u00F6rneklerin T\u00FCrk\u00E7esi (Faz 3).
+                  if (showTurkish)
+                    if (ornekCevirisi(s) case final ceviri?)
+                    Padding(
+                      padding: const EdgeInsets.only(top: 2),
+                      child: Text(
+                        ceviri,
+                        style: AppTypography.caption.copyWith(
+                          color: AppColors.textSecondary,
+                          height: 1.4,
+                        ),
+                      ),
+                    ),
+                ],
               ),
             )),
       ],

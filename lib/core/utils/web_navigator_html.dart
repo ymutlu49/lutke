@@ -6,3 +6,9 @@ import 'dart:html' as html;
 void replaceLocation(String url) {
   html.window.location.replace(url);
 }
+
+/// Bağlantıyı yeni sekmede açar; açıldıysa `true`.
+bool openInNewTab(String url) {
+  html.window.open(url, '_blank');
+  return true;
+}

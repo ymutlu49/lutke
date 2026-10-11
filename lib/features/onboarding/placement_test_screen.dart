@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../lessons/domain/olcme.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
@@ -374,15 +375,19 @@ const List<_PQ> _enQuestions = [
 
 /// CEFR puanlaması — `correct` = doğru cevap sayısı (0..10).
 /// Dağılım: 2×A1 + 2×A2 + 2×B1 + 2×B2 + 1×C1 + 1×C2 = 10.
-/// Eşik (kümülatif):
-///   0-1 → A1, 2-3 → A2, 4-5 → B1, 6-7 → B2, 8 → C1, 9-10 → C2.
-PlacementCefr computePlacementLevel(int correct) {
-  if (correct <= 1) return PlacementCefr.a1;
-  if (correct <= 3) return PlacementCefr.a2;
-  if (correct <= 5) return PlacementCefr.b1;
-  if (correct <= 7) return PlacementCefr.b2;
-  if (correct <= 8) return PlacementCefr.c1;
-  return PlacementCefr.c2;
+///
+/// Düzey toplam puanla değil, bant bazında başarıyla belirlenir (Faz 6.1):
+/// aşağıdan yukarı, soruların en az dörtte üçü doğru olmayan ilk bant
+/// başlanacak düzeydir. Eski toplam puan kuralı (2–3 doğru → A2) dört
+/// seçenekli soruları rastgele işaretleyen birini beklenen 2,5 doğruyla A2'ye
+/// yerleştiriyordu; üst bantta şans eseri doğrular da düzeyi yükseltiyordu.
+///
+/// [bantlar]: düzey → (doğru, toplam).
+PlacementCefr computePlacementLevel(Map<PlacementCefr, (int, int)> bantlar) {
+  final kod = yerlestirmeDuzeyi({
+    for (final e in bantlar.entries) e.key.label: e.value,
+  });
+  return PlacementCefr.values.firstWhere((c) => c.label == kod);
 }
 
 class PlacementTestScreen extends ConsumerStatefulWidget {
@@ -565,7 +570,12 @@ class _PlacementTestScreenState extends ConsumerState<PlacementTestScreen> {
       return;
     }
     // Test bitti — sonucu hesapla ve sakla
-    final level = computePlacementLevel(_correctCount);
+    final bantlar = <PlacementCefr, (int, int)>{};
+    for (final q in _questions) {
+      final (dogru, toplam) = bantlar[q.cefr] ?? (0, 0);
+      bantlar[q.cefr] = (dogru + (_answers[q.id] == q.correctIndex ? 1 : 0), toplam + 1);
+    }
+    final level = computePlacementLevel(bantlar);
     final track = ref.read(currentTrackProvider);
     await _persistLevel(track.languageCode, level);
     // Pêşniyara testê serbixwe sakla — paşê bikarhêner asta xwe biguherîne

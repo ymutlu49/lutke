@@ -10,6 +10,7 @@ import '../../../core/constants/app_spacing.dart';
 import '../../../core/constants/app_typography.dart';
 import '../../../core/router/app_router.dart';
 import '../../../core/services/sound_service.dart';
+import '../../../shared/providers/activity_outcome.dart';
 import '../../../shared/providers/language_mode_provider.dart';
 import '../../../shared/providers/learning_module_provider.dart';
 import '../../../shared/widgets/speak_button.dart';
@@ -139,6 +140,7 @@ class _DialogueScreenState extends ConsumerState<DialogueScreen> {
     }
 
     if (_exchanges.isEmpty) {
+      ActivityOutcome.reportNoContent();
       return Scaffold(
         backgroundColor: AppColors.backgroundPrimary,
         appBar: AppBar(
@@ -436,10 +438,16 @@ class _DialogueScreenState extends ConsumerState<DialogueScreen> {
     });
   }
 
+  bool _outcomeReported = false;
+
   Widget _buildResultScreen() {
     final accuracy = _exchanges.isNotEmpty
         ? _correctCount / _exchanges.length
         : 0.0;
+    if (!_outcomeReported) {
+      _outcomeReported = true;
+      ActivityOutcome.report(ActivityOutcome(_correctCount, _exchanges.length));
+    }
 
     return Scaffold(
       backgroundColor: AppColors.backgroundPrimary,

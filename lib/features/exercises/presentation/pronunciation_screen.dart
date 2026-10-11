@@ -10,6 +10,7 @@ import '../../../core/constants/app_typography.dart';
 import '../../../core/router/app_router.dart';
 import '../../../core/services/asr_service.dart';
 import '../../../core/services/sound_service.dart';
+import '../../../shared/providers/activity_outcome.dart';
 import '../../../shared/providers/learning_module_provider.dart';
 import '../../../shared/services/skill_progress_service.dart';
 import '../../../shared/widgets/speak_button.dart';
@@ -167,6 +168,7 @@ class _PronunciationScreenState extends ConsumerState<PronunciationScreen> {
     }
 
     if (_items.isEmpty) {
+      ActivityOutcome.reportNoContent();
       return Scaffold(
         backgroundColor: AppColors.backgroundPrimary,
         appBar: AppBar(
@@ -479,6 +481,9 @@ class _PronunciationScreenState extends ConsumerState<PronunciationScreen> {
     // sonunda bir kez XP + beceri panosu ('speaking' / Axaftin) kaydı yazılır.
     if (!_progressRecorded) {
       _progressRecorded = true;
+      // Telaffuz kendi kendini değerlendirmedir (Kurmancî konuşma tanıma
+      // yok); basamak için oturumun bitirilmesi yeterli.
+      ActivityOutcome.report(const ActivityOutcome.completed());
       WidgetsBinding.instance.addPostFrameCallback((_) {
         if (!mounted) return;
         // Taban 10 XP + her "Baş bû" için konuşma bonusu (XPRules.speakingPractice)

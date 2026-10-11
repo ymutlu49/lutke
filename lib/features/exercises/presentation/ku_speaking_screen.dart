@@ -1,4 +1,3 @@
-import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
@@ -11,11 +10,14 @@ import '../../../shared/widgets/speak_button.dart';
 import '../../../shared/services/speech_recognition_service.dart';
 import '../../../shared/services/skill_progress_service.dart';
 import '../domain/ku_speaking_db.dart';
+import '../domain/level_pick.dart';
 
 /// Kurmancî konuşma/telaffuz ekranı.
 /// HuggingFace Kurmancî TTS ile model ses + self-check.
 class KuSpeakingScreen extends ConsumerStatefulWidget {
-  const KuSpeakingScreen({super.key});
+  /// Öğrencinin düzeyi (A1…C2); verilirse ögeler o düzeyden başlanarak seçilir.
+  final String? level;
+  const KuSpeakingScreen({super.key, this.level});
   @override
   ConsumerState<KuSpeakingScreen> createState() => _KuSpeakingScreenState();
 }
@@ -29,8 +31,7 @@ class _KuSpeakingScreenState extends ConsumerState<KuSpeakingScreen> {
   @override
   void initState() {
     super.initState();
-    _items = List.from(kKuSpeakingExercises)..shuffle(Random());
-    _items = _items.take(10).toList();
+    _items = pickForLevel(kKuSpeakingExercises, widget.level, (e) => e.level);
   }
 
   bool _listening = false;

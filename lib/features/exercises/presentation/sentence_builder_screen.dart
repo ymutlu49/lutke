@@ -9,6 +9,7 @@ import '../../../core/router/app_router.dart';
 import '../../../core/constants/app_colors.dart';
 import '../../../core/constants/app_spacing.dart';
 import '../../../core/constants/app_typography.dart';
+import '../../../shared/providers/activity_outcome.dart';
 import '../../../shared/providers/language_mode_provider.dart';
 import '../../../shared/providers/learning_module_provider.dart';
 import '../../../shared/services/skill_progress_service.dart';
@@ -397,6 +398,7 @@ class _SentenceBuilderScreenState extends ConsumerState<SentenceBuilderScreen>
 
     // Yeterli cümle bulunamadıysa (pool boş) — erken boş ekran.
     if (_questions.isEmpty || _currentIndex >= _questions.length) {
+      ActivityOutcome.reportNoContent();
       return Scaffold(
         backgroundColor: AppColors.backgroundPrimary,
         appBar: AppBar(
@@ -924,6 +926,12 @@ class _SentenceBuilderScreenState extends ConsumerState<SentenceBuilderScreen>
   Widget _buildResultScreen() {
     if (!_sessionCompleteSoundFired) {
       _sessionCompleteSoundFired = true;
+      if (_questions.isEmpty) {
+        ActivityOutcome.reportNoContent();
+      } else {
+        ActivityOutcome.report(
+            ActivityOutcome(_correctCount, _questions.length));
+      }
       SoundService.playSessionComplete();
       WidgetsBinding.instance.addPostFrameCallback((_) {
         final gami = ref.read(gamificationProvider.notifier);

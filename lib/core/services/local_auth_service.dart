@@ -197,6 +197,7 @@ class LocalAuthService {
     await prefs.remove('review_weak_words');
     await prefs.remove('review_last_session');
     await prefs.remove('lutke_completed_activities');
+    await prefs.remove('lutke_lesson_scores'); // kLessonScoresKey
     // BUG FIX: Placement level de oturum-bağlı — iki farklı kullanıcı aynı
     // cihazda kullanırsa önceki C1 yeni hesaba sızmasın.
     await prefs.remove('placement_level_ku');
