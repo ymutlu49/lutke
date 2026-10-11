@@ -1,0 +1,45 @@
+kimlik	alan	eski	yeni	kural	gerekce
+b1_nv02	tr	Vicdan	Sömürge	anlam	mêtingeh = sömürge (ku-tr-sozluk: freedict + Wîkîferheng); vicdan = wîjdan (b1_943)
+b1_nv02	en	Conscience	Colony	anlam	mêtingeh = sömürge (ku-tr-sozluk: freedict + Wîkîferheng); vicdan = wîjdan (b1_943)
+b1_nv02	kat	nirx	dîrok	anlam	sömürge bir değer değil; tarih birimine
+b1_nv02	not	"""Mêtingeh"" = vicdan."	"""Mêtingeh"" = sömürge. ""Mêtinger"" = sömürgeci. Vicdan için ""wîjdan"" kullanılır."	anlam	mêtingeh = sömürge (ku-tr-sozluk: freedict + Wîkîferheng); vicdan = wîjdan (b1_943)
+b1_nv02	her	Mêtingeh heye.	Hindistan mêtingeha Brîtanyayê bû.	anlam	örnek yeni anlama göre
+b1_nv02	gen	Mêtingeh û aqlê	Mêtingeh û mêtinger	anlam	örnek yeni anlama göre
+b1_nv02	gen	Mêtingeha me	Mêtingeheke kevn	anlam	örnek yeni anlama göre
+b1_085	tr	Asimilasyon / Dilde erime	Yenilgi / Çöküş	anlam	têkçûn = yenilgi, bozgun, çöküş (ku-tr-sozluk; korpus: Mehmed Uzun); asimilasyon = asîmîlasyon (b2_372), bişaftin (c1_073)
+b1_085	en	Assimilation / Linguistic erosion	Defeat / Collapse	anlam	têkçûn = yenilgi, bozgun, çöküş (ku-tr-sozluk; korpus: Mehmed Uzun); asimilasyon = asîmîlasyon (b2_372), bişaftin (c1_073)
+b1_085	kat	kimlik	dîrok	anlam	yeni anlamıyla tarih birimine
+b1_085	not	"Dişil — ""Têkçûn"" = Kurmancî özgün terim — ""têk"" (bozuk/dağılmış) + ""çûn"" (gitmek). Hem dilbilimsel hem kültürel asimilasyon için. Heritage kullanıcının yaşadığı süreç. Dişil oblique: têkçûnê."	"Dişil — ""têk"" (bozuk/dağılmış) + ""çûn"" (gitmek) = yenilgi, çöküş. Dişil oblique: têkçûnê. Asimilasyon için ""asîmîlasyon"" ya da ""bişaftin"" kullanılır."	anlam	têkçûn = yenilgi, bozgun, çöküş (ku-tr-sozluk; korpus: Mehmed Uzun); asimilasyon = asîmîlasyon (b2_372), bişaftin (c1_073)
+b1_085	her	Têkçûna zimanî zimanê me qels kir.	Piştî têkçûnê her tişt guherî.	anlam	örnek yeni anlama göre (korpus: piştî têkçûnê)
+b1_085	gen	Têkçûn û nasname	Têkçûn û serkeftin	anlam	örnek yeni anlama göre
+b2_373	tr	Asimilasyon / Erime	Yenilgi / Çöküş	anlam	têkçûn = yenilgi, bozgun, çöküş (ku-tr-sozluk; korpus: Mehmed Uzun); asimilasyon = asîmîlasyon (b2_372), bişaftin (c1_073)
+b2_373	en	Assimilation (loss of identity)	Defeat / Collapse	anlam	têkçûn = yenilgi, bozgun, çöküş (ku-tr-sozluk; korpus: Mehmed Uzun); asimilasyon = asîmîlasyon (b2_372), bişaftin (c1_073)
+b2_373	not	"""Têk"" (bütün) + ""çûn"" (gitmek). Kimlik kaybı için Kurmancî özgün terim."	"""Têk"" (bozuk/dağılmış) + ""çûn"" (gitmek) = yenilgi, çöküş. Kimlik kaybı (asimilasyon) için ""asîmîlasyon"" ya da ""bişaftin"" kullanılır."	anlam	têkçûn = yenilgi, bozgun, çöküş (ku-tr-sozluk; korpus: Mehmed Uzun); asimilasyon = asîmîlasyon (b2_372), bişaftin (c1_073)
+b2_373	her	Têkçûna zimanî gelek e.	Têkçûna artêşê mezin bû.	anlam	örnek yeni anlama göre
+b2_373	gen	Têkçûn û parastin	Têkçûn û serkeftin	anlam	örnek yeni anlama göre
+b2_373	gen	Têkçûna zimanî	Têkçûna dewletê	anlam	örnek yeni anlama göre
+b1_1283	ku	Destûrê bingehîn	Mafê bingehîn	anlam	hak = maf; destûr = izin. Kaydın kendi örneği de Mafê bingehîn; çoğulu b2_h10 Mafên bingehîn
+b1_1283	ez	destûrê bingehîn	mafê bingehîn	anlam	hak = maf; destûr = izin. Kaydın kendi örneği de Mafê bingehîn; çoğulu b2_h10 Mafên bingehîn
+b1_1283	not	"""Destûr"" (hak/izin) + ""bingehîn""."	"""Maf"" (hak) + ""bingehîn"" (temel). ""Destûr"" izin demektir."	anlam	hak = maf; destûr = izin. Kaydın kendi örneği de Mafê bingehîn; çoğulu b2_h10 Mafên bingehîn
+b1_1283	her	Destûrê bingehîn yên mirovan.	Mafên bingehîn ên mirovan.	anlam	hak = maf; destûr = izin. Kaydın kendi örneği de Mafê bingehîn; çoğulu b2_h10 Mafên bingehîn
+b1_1283	her	Mafê bingehîn.	Jiyan mafê bingehîn e.	anlam	madde başıyla aynı olan örnek yerine cümle
+b1_1283	gen	Destûrê bingehîn	Mafê bingehîn	anlam	hak = maf; destûr = izin. Kaydın kendi örneği de Mafê bingehîn; çoğulu b2_h10 Mafên bingehîn
+a2_891	her	Planê min amade ye.	Plana min amade ye.	izafe	plan dişil (Wîkîferheng; korpus -a 5 / -ê 2; LÛTKE'de 5 kez plana)
+a2_891	gen	Planê min	Plana min	izafe	plan dişil
+a2_891	not	"""Planê te çi ye?"""	"""Plana te çi ye?"""	izafe	plan dişil
+a1_ek402	her	Şerbetê Newrozê xweş e.	Şerbeta Newrozê xweş e.	izafe	şerbet dişil (Wîkîferheng; LÛTKE'de 10 kez şerbeta)
+a1_ek402	not	şerbetê Newrozê	şerbeta Newrozê	izafe	şerbet dişil
+b1_1122	her	Hiqûqê mirovan.	Hiqûqa mirovan.	izafe	hiqûq dişil (Wîkîferheng; LÛTKE'de 22 kez hiqûqa)
+b1_1122	gen	Hiqûqê me	Hiqûqa me	izafe	hiqûq dişil
+b1_1122	not	"""Hiqûqê mirovan"""	"""Hiqûqa mirovan"""	izafe	hiqûq dişil
+b1_k06b	cins	nêr	mê	cins	baş ad hiqûq dişil
+b1_k06b	ku	Hiqûqê mirovî	Hiqûqa mirovî	izafe	hiqûq dişil
+b1_k06b	ez	hiqûqê mirovî	hiqûqa mirovî	izafe	hiqûq dişil
+b1_k06b	her	Hiqûqê mirovî.	Hiqûqa mirovî.	izafe	hiqûq dişil
+b1_k06b	her	Di hiqûqê mirovî de.	Di hiqûqa mirovî de.	izafe	hiqûq dişil
+b1_k06b	gen	Hiqûqê mirovî	Hiqûqa mirovî	izafe	hiqûq dişil
+b1_k06b	gen	Hiqûqê me	Hiqûqa me	izafe	hiqûq dişil
+b2_275	cins	mê	nêr	cins	geri alındı: korpus -a 15 / -ê 9, iki kullanım da yerleşik (Rojhilata Navîn; Rojhilatê Kurdistanê). Editöre.
+b2_275	ez	Rojhilata	Rojhilatê	cins	geri alındı: korpus -a 15 / -ê 9, iki kullanım da yerleşik (Rojhilata Navîn; Rojhilatê Kurdistanê). Editöre.
+b2_275	not	Dişil — 	Eril — 	cins	geri alındı: korpus -a 15 / -ê 9, iki kullanım da yerleşik (Rojhilata Navîn; Rojhilatê Kurdistanê). Editöre.
+b2_275	gen	Rojhilatê Kurdistan	Rojhilatê Kurdistanê	izafe	tamlayan çekimli

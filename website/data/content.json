@@ -1,12 +1,12 @@
 {
   "meta": {
-    "wordTotal": 3604,
+    "wordTotal": 3632,
     "lessonTotal": 105,
     "exerciseTotal": 590,
     "dialogueTotal": 8,
     "culturalTotal": 9,
     "candTotal": 155,
-    "proverbTotal": 3361,
+    "proverbTotal": 3359,
     "motivationTotal": 35,
     "grammarTotal": 10,
     "levels": [
@@ -18,8 +18,8 @@
       "c2"
     ],
     "wordsByLevel": {
-      "a1": 510,
-      "a2": 700,
+      "a1": 517,
+      "a2": 721,
       "b1": 951,
       "b2": 598,
       "c1": 510,
@@ -2261,17 +2261,17 @@
         "ku": "Xwê",
         "tr": "Tuz",
         "en": "Salt",
-        "cins": "nêr",
-        "ez": "xwêyê",
+        "cins": "mê",
+        "ez": "xwêya",
         "kat": "xwarin",
         "zor": 0.82,
-        "not": "Xwê (eril/nêr) — x sesi gırtlaktan. Veqetandek: xwêyê me. Mînak: \"Nan û xwê\" = ekmek ve tuz = misafirperverlik sembolü.",
+        "not": "Xwê (dişil/mê) — x sesi gırtlaktan. Veqetandek: xwêya me. Mînak: \"Nan û xwê\" = ekmek ve tuz = misafirperverlik sembolü.",
         "her": [
           "Nan û xwê bide mêvanan.",
           "Xwê tê de heye."
         ],
         "gen": [
-          "Xwêyê me kêm e.",
+          "Xwêya me kêm e.",
           "Xwê û îsot hene."
         ]
       },
@@ -2755,17 +2755,17 @@
         "ku": "Serşok",
         "tr": "Tuvalet / Banyo",
         "en": "Bathroom / Toilet",
-        "cins": "nêr",
-        "ez": "serşokê",
+        "cins": "mê",
+        "ez": "serşoka",
         "kat": "mal",
         "zor": 0.78,
-        "not": "Serşok (eril/nêr). Veqetandek: serşokê me. Mînak: serşok li jor e.",
+        "not": "Serşok (dişil/mê). Veqetandek: serşoka me. Mînak: serşok li jor e.",
         "her": [
           "Serşok li jor e.",
-          "Serşokê me paqij e."
+          "Serşoka me paqij e."
         ],
         "gen": [
-          "Serşokê me paqij e.",
+          "Serşoka me paqij e.",
           "Serşok û ode hene."
         ]
       },
@@ -3933,18 +3933,18 @@
         "ku": "Bahoz",
         "tr": "Fırtına",
         "en": "Storm",
-        "cins": "nêr",
-        "ez": "bahozê",
+        "cins": "mê",
+        "ez": "bahoza",
         "kat": "xweza",
         "zor": 0.8,
-        "not": "Bahoz (eril/nêr) — \"ba\" (rüzgar) kökünden. Veqetandek: bahozê biharê. Mînak: Bahoz mezin e. Têbinî: çoğul \"bahozan\" (ileri).",
+        "not": "Bahoz (dişil/mê) — \"ba\" (rüzgar) kökünden. Veqetandek: bahoza biharê. Mînak: Bahoz mezin e. Têbinî: çoğul \"bahozan\" (ileri).",
         "her": [
           "Bahoz mezin e.",
           "Bahoz tê, pîrê!"
         ],
         "gen": [
           "Bahoz dûr e.",
-          "Bahozê mezin nêzîk e."
+          "Bahoza mezin nêzîk e."
         ]
       },
       {
@@ -4693,11 +4693,11 @@
         "ku": "Destan",
         "tr": "Destan",
         "en": "Epic",
-        "cins": "nêr",
-        "ez": "destanê",
+        "cins": "mê",
+        "ez": "destana",
         "kat": "çand",
         "zor": 0.84,
-        "not": "\"Destan\" — eril. Destanên Kurdî navdar in.",
+        "not": "\"Destan\" — dişil (mê). Destanên Kurdî navdar in.",
         "her": [
           "Pîrê destanê ji me re dibêje.",
           "Bavê min ji destanan hez dike."
@@ -5643,14 +5643,14 @@
         "ku": "Hêk",
         "tr": "Yumurta",
         "en": "Egg",
-        "cins": "nêr",
-        "ez": "hêkê",
+        "cins": "mê",
+        "ez": "hêka",
         "kat": "xwarin",
         "zor": 0.82,
-        "not": "Hêk (eril/nêr) — yumurta. Veqetandek: hêkê mirîşkê. Mînak: Hêk xweş e. Têbinî: ê uzun söylenir.",
+        "not": "Hêk (dişil/mê) — yumurta. Veqetandek: hêka mirîşkê. Mînak: Hêk xweş e. Têbinî: ê uzun söylenir.",
         "her": [
           "Pîrê hêk dixwe.",
-          "Hêkê mirîşkê xweş e."
+          "Hêka mirîşkê xweş e."
         ],
         "gen": [
           "Hêk xweş e.",
@@ -5719,13 +5719,13 @@
         "ku": "Îsot",
         "tr": "Biber",
         "en": "Pepper",
-        "cins": "nêr",
-        "ez": "îsotê",
+        "cins": "mê",
+        "ez": "îsota",
         "kat": "xwarin",
         "zor": 0.81,
-        "not": "Îsot (eril/nêr) — biber. Veqetandek: îsotê sor. Mînak: Îsot sor e. Têbinî: \"bîharek\" karabiber ayrı kelime.",
+        "not": "Îsot (dişil/mê) — biber. Veqetandek: îsota sor. Mînak: Îsot sor e. Têbinî: \"bîharek\" karabiber ayrı kelime.",
         "her": [
-          "Îsotê pîrê sor e.",
+          "Îsota pîrê sor e.",
           "Pîrê îsot dixwe."
         ],
         "gen": [
@@ -5928,13 +5928,13 @@
         "ku": "Lêv",
         "tr": "Dudak",
         "en": "Lip",
-        "cins": "nêr",
-        "ez": "lêvê",
+        "cins": "mê",
+        "ez": "lêva",
         "kat": "beden",
         "zor": 0.79,
-        "not": "Lêv (eril/nêr) — dudak. Veqetandek: lêvê min. Mînak: Lêv sor e. Têbinî: çoğul \"lêvên\" (dudaklar).",
+        "not": "Lêv (dişil/mê) — dudak. Veqetandek: lêva min. Mînak: Lêv sor e. Têbinî: çoğul \"lêvên\" (dudaklar).",
         "her": [
-          "Lêvê pîrê sor e.",
+          "Lêva pîrê sor e.",
           "Lêvên min sor in."
         ],
         "gen": [
@@ -6669,13 +6669,13 @@
         "ku": "Zevî",
         "tr": "Tarla",
         "en": "Field",
-        "cins": "nêr",
-        "ez": "zeviyê",
+        "cins": "mê",
+        "ez": "zeviya",
         "kat": "xweza",
         "zor": 0.79,
-        "not": "Zevî (eril/nêr) — tarla. Veqetandek: zeviyê me. Mînak: Zevî mezin e. Têbinî: cotkar/tarım bağlamı.",
+        "not": "Zevî (dişil/mê) — tarla. Veqetandek: zeviya me. Mînak: Zevî mezin e. Têbinî: cotkar/tarım bağlamı.",
         "her": [
-          "Zeviyê me mezin e.",
+          "Zeviya me mezin e.",
           "Bavê min li zeviyê ye."
         ],
         "gen": [
@@ -6726,13 +6726,13 @@
         "ku": "Pêlav",
         "tr": "Ayakkabı",
         "en": "Shoe",
-        "cins": "nêr",
-        "ez": "pêlavê",
+        "cins": "mê",
+        "ez": "pêlava",
         "kat": "cil",
         "zor": 0.83,
-        "not": "Pêlav (eril/nêr) — ayakkabı. Veqetandek: pêlavê min. Mînak: Pêlavê min nû ye. Têbinî: çoğul veqetandek \"pêlavên\".",
+        "not": "Pêlav (dişil/mê) — ayakkabı. Veqetandek: pêlava min. Mînak: Pêlava min nû ye. Têbinî: çoğul veqetandek \"pêlavên\".",
         "her": [
-          "Pêlavê pîrê reş e.",
+          "Pêlava pîrê reş e.",
           "Pêlav li malê ye."
         ],
         "gen": [
@@ -6745,13 +6745,13 @@
         "ku": "Gore",
         "tr": "Çorap",
         "en": "Sock",
-        "cins": "nêr",
-        "ez": "gorê",
+        "cins": "mê",
+        "ez": "goreya",
         "kat": "cil",
         "zor": 0.81,
-        "not": "Gore (eril/nêr) — çorap. Veqetandek: gorê min. Mînak: Gorê min germ e. Têbinî: çoğul veqetandek \"goreyên\".",
+        "not": "Gore (dişil/mê) — çorap. Veqetandek: goreya min. Mînak: Goreya min germ e. Têbinî: çoğul veqetandek \"goreyên\".",
         "her": [
-          "Gorê kal germ e.",
+          "Goreya kal germ e.",
           "Gore li malê ye."
         ],
         "gen": [
@@ -6821,13 +6821,13 @@
         "ku": "Sinif",
         "tr": "Sınıf",
         "en": "Classroom",
-        "cins": "nêr",
-        "ez": "sinifê",
+        "cins": "mê",
+        "ez": "sinifa",
         "kat": "cih",
         "zor": 0.83,
-        "not": "Sinif (eril/nêr) — Türkçe alıntı. Veqetandek: sinifê me. Mînak: Sinifê me mezin e. Têbinî: öz Kurmancî alternatif \"pol\".",
+        "not": "Sinif (dişil/mê) — Türkçe alıntı. Veqetandek: sinifa me. Mînak: Sinifa me mezin e. Têbinî: öz Kurmancî alternatif \"pol\".",
         "her": [
-          "Sinifê me mezin e.",
+          "Sinifa me mezin e.",
           "Bira li sinifê ye."
         ],
         "gen": [
@@ -6878,18 +6878,18 @@
         "ku": "Kaxez",
         "tr": "Kağıt",
         "en": "Paper",
-        "cins": "nêr",
-        "ez": "kaxezê",
+        "cins": "mê",
+        "ez": "kaxeza",
         "kat": "mal",
         "zor": 0.82,
-        "not": "Kaxez (eril/nêr) — kağıt. Veqetandek: kaxezê min. Mînak: Kaxezê min spî ye. Têbinî: çoğul \"kaxezan\" (oblique).",
+        "not": "Kaxez (dişil/mê) — kağıt. Veqetandek: kaxeza min. Mînak: Kaxeza min spî ye. Têbinî: çoğul \"kaxezan\" (oblique).",
         "her": [
           "Kaxez li mêzê ye.",
-          "Kaxezê pîrê spî ye."
+          "Kaxeza pîrê spî ye."
         ],
         "gen": [
           "Kaxez spî ye.",
-          "Kaxezê me nû ye."
+          "Kaxeza me nû ye."
         ]
       },
       {
@@ -7623,7 +7623,7 @@
         "ez": null,
         "kat": "leker",
         "zor": 0.83,
-        "not": "Kirîn — fiil mastarı (satın almak). Mînak: Kirîna nan baş e. Têbinî: ergative geçmiş \"Min kir\" — A1'de ileri.",
+        "not": "Kirîn — fiil mastarı (satın almak). Mînak: Kirîna nan baş e. Têbinî: ergative geçmiş \"Min kirî\" — A1'de ileri.",
         "her": [
           "Kirîna nan baş e.",
           "Pîrê pirtûk dikire."
@@ -8170,14 +8170,14 @@
         "ku": "Şerbet",
         "tr": "Şerbet",
         "en": "Sherbet",
-        "cins": "nêr",
-        "ez": "şerbetê",
+        "cins": "mê",
+        "ez": "şerbeta",
         "kat": "vexwarin",
         "zor": 0.72,
-        "not": "Şerbet (eril/nêr) — geleneksel tatlı içecek. Veqetandek: şerbetê Newrozê. Mînak: Şerbet xweş e. Têbinî: Newroz şerbeti yaygın.",
+        "not": "Şerbet (dişil/mê) — geleneksel tatlı içecek. Veqetandek: şerbeta Newrozê. Mînak: Şerbet xweş e. Têbinî: Newroz şerbeti yaygın.",
         "her": [
           "Pîrê şerbet vedixwe.",
-          "Şerbetê Newrozê xweş e."
+          "Şerbeta Newrozê xweş e."
         ],
         "gen": [
           "Şerbet xweş e.",
@@ -8911,13 +8911,13 @@
         "ku": "Destmal",
         "tr": "Mendil / Eşarp",
         "en": "Scarf / Handkerchief",
-        "cins": "nêr",
-        "ez": "destmalê",
+        "cins": "mê",
+        "ez": "destmala",
         "kat": "cil",
         "zor": 0.7,
-        "not": "Destmal (eril/nêr) — mendil veya eşarp. \"Dest\" (el) + \"mal\" (silme). Veqetandek: destmalê min. Mînak: Destmal spî ye.",
+        "not": "Destmal (dişil/mê) — mendil veya eşarp. \"Dest\" (el) + \"mal\" (silme). Veqetandek: destmala min. Mînak: Destmal spî ye.",
         "her": [
-          "Destmalê pîrê spî ye.",
+          "Destmala pîrê spî ye.",
           "Pîrê destmal dibîne."
         ],
         "gen": [
@@ -9329,14 +9329,14 @@
         "ku": "Taştê",
         "tr": "Kahvaltı",
         "en": "Breakfast",
-        "cins": "nêr",
-        "ez": "taştê",
+        "cins": "mê",
+        "ez": "taştêya",
         "kat": "xwarin",
         "zor": 0.84,
-        "not": "Taştê (eril/nêr) — kahvaltı (sabah yemeği). Veqetandek: taştê pîrê. Mînak: Taştê li mêzê ye. Têbinî: \"Xwarina sibehê\" de denir.",
+        "not": "Taştê (dişil/mê) — kahvaltı (sabah yemeği). Veqetandek: taştê pîrê. Mînak: Taştê li mêzê ye. Têbinî: \"Xwarina sibehê\" de denir.",
         "her": [
           "Pîrê taştê dixwe.",
-          "Taştê pîrê xweş e."
+          "Taştêya pîrê xweş e."
         ],
         "gen": [
           "Taştê li mêzê ye.",
@@ -9348,11 +9348,11 @@
         "ku": "Firavîn",
         "tr": "Öğle yemeği",
         "en": "Lunch",
-        "cins": "nêr",
-        "ez": "firavînê",
+        "cins": "mê",
+        "ez": "firavîna",
         "kat": "xwarin",
         "zor": 0.83,
-        "not": "Firavîn (eril/nêr) — öğle yemeği. Veqetandek: firavînê me. Mînak: Firavîn li mêzê ye. Têbinî: \"taştê\" sabah, \"şîv\" akşam.",
+        "not": "Firavîn (dişil/mê) — öğle yemeği. Veqetandek: firavîna me. Mînak: Firavîn li mêzê ye. Têbinî: \"taştê\" sabah, \"şîv\" akşam.",
         "her": [
           "Pîrê firavîn dixwe.",
           "Firavîn xweş e, pîrê."
@@ -9367,14 +9367,14 @@
         "ku": "Şîv",
         "tr": "Akşam yemeği",
         "en": "Dinner",
-        "cins": "nêr",
-        "ez": "şîvê",
+        "cins": "mê",
+        "ez": "şîva",
         "kat": "xwarin",
         "zor": 0.83,
-        "not": "Şîv (eril/nêr) — akşam yemeği. Veqetandek: şîvê me. Mînak: Şîv li mêzê ye. Têbinî: \"şîr\" (süt) ile karıştırma.",
+        "not": "Şîv (dişil/mê) — akşam yemeği. Veqetandek: şîva me. Mînak: Şîv li mêzê ye. Têbinî: \"şîr\" (süt) ile karıştırma.",
         "her": [
           "Pîrê şîv dixwe.",
-          "Şîvê pîrê xweş e."
+          "Şîva pîrê xweş e."
         ],
         "gen": [
           "Şîv li mêzê ye.",
@@ -9386,13 +9386,13 @@
         "ku": "Pol",
         "tr": "Sınıf",
         "en": "Classroom / Class",
-        "cins": "nêr",
-        "ez": "polê",
+        "cins": "mê",
+        "ez": "pola",
         "kat": "perwerde",
         "zor": 0.83,
-        "not": "Pol (eril/nêr) — sınıf. Veqetandek: polê me. Mînak: Polê me xweş e. Têbinî: alıntı \"sinif\" yerine \"pol\".",
+        "not": "Pol (dişil/mê) — sınıf. Veqetandek: pola me. Mînak: Pola me xweş e. Têbinî: alıntı \"sinif\" yerine \"pol\".",
         "her": [
-          "Polê me xweş e.",
+          "Pola me xweş e.",
           "Em di polê de ne."
         ],
         "gen": [
@@ -9424,11 +9424,11 @@
         "ku": "Spartek",
         "tr": "Ödev",
         "en": "Homework",
-        "cins": "nêr",
-        "ez": "spartekê",
+        "cins": "mê",
+        "ez": "sparteka",
         "kat": "perwerde",
         "zor": 0.82,
-        "not": "Spartek (eril/nêr) — ödev. Veqetandek: spartekê min. Mînak: Spartek hene. Têbinî: çoğul \"spartekên\" (ödevler).",
+        "not": "Spartek (dişil/mê) — ödev. Veqetandek: sparteka min. Mînak: Spartek hene. Têbinî: çoğul \"spartekên\" (ödevler).",
         "her": [
           "Spartekên min hene.",
           "Pîrê spartek dibîne."
@@ -9721,6 +9721,139 @@
         "gen": [
           "Hesp beza ye.",
           "Ew beza ye."
+        ]
+      },
+      {
+        "id": "a1_cf_01",
+        "ku": "Kirin",
+        "tr": "Yapmak / Etmek",
+        "en": "To do / To make",
+        "cins": "bêcins",
+        "ez": null,
+        "kat": "leker",
+        "zor": 0.92,
+        "not": "Kirin — yapmak, etmek. Şimdiki zaman kökü \"k\": ez dikim, tu dikî, ew dike. Emir: bike! Birleşik fiillerin çoğu \"kirin\" ile kurulur: kar kirin (çalışmak), spas kirin (teşekkür etmek).",
+        "her": [
+          "Tu çi dikî?",
+          "Ez karê xwe dikim."
+        ],
+        "gen": [
+          "Ew çi dike?",
+          "Em îro kar dikin."
+        ]
+      },
+      {
+        "id": "a1_cf_02",
+        "ku": "Gotin",
+        "tr": "Söylemek / Demek",
+        "en": "To say / To tell",
+        "cins": "bêcins",
+        "ez": null,
+        "kat": "leker",
+        "zor": 0.91,
+        "not": "Gotin — söylemek, demek. Şimdiki zaman kökü \"bêj\": ez dibêjim, tu dibêjî, ew dibêje. Emir: bibêje!",
+        "her": [
+          "Tu çi dibêjî?",
+          "Ew rast dibêje."
+        ],
+        "gen": [
+          "Ez ji te re dibêjim.",
+          "Bavê min wiha dibêje."
+        ]
+      },
+      {
+        "id": "a1_cf_03",
+        "ku": "Hatin",
+        "tr": "Gelmek",
+        "en": "To come",
+        "cins": "bêcins",
+        "ez": null,
+        "kat": "leker",
+        "zor": 0.92,
+        "not": "Hatin — gelmek. Şimdiki zamanı düzensiz: ez têm, tu têyî, ew tê, em tên. Emir: were!",
+        "her": [
+          "Ez ji malê têm.",
+          "Tu kengî têyî?"
+        ],
+        "gen": [
+          "Ew îro tê.",
+          "Em bi hev re tên."
+        ]
+      },
+      {
+        "id": "a1_cf_04",
+        "ku": "Çûn",
+        "tr": "Gitmek",
+        "en": "To go",
+        "cins": "bêcins",
+        "ez": null,
+        "kat": "leker",
+        "zor": 0.92,
+        "not": "Çûn — gitmek. Şimdiki zaman kökü \"ç\": ez diçim, tu diçî, ew diçe. Emir: here! ya da biçe!",
+        "her": [
+          "Ez diçim malê.",
+          "Tu bi ku ve diçî?"
+        ],
+        "gen": [
+          "Em diçin dibistanê.",
+          "Ew îro naçe."
+        ]
+      },
+      {
+        "id": "a1_cf_05",
+        "ku": "Bûn",
+        "tr": "Olmak",
+        "en": "To be / To become",
+        "cins": "bêcins",
+        "ez": null,
+        "kat": "leker",
+        "zor": 0.9,
+        "not": "Bûn — olmak. \"Dibe\" = oluyor, olur. Koşaç (im, î, e, in) ayrı bir konudur: Ez mamoste me.",
+        "her": [
+          "Hewa sar dibe.",
+          "Zarok mezin dibin."
+        ],
+        "gen": [
+          "Ez dixwazim bibim mamoste.",
+          "Ew kêfxweş bû."
+        ]
+      },
+      {
+        "id": "a1_cf_06",
+        "ku": "Xwarin",
+        "tr": "Yemek (fiil)",
+        "en": "To eat",
+        "cins": "bêcins",
+        "ez": null,
+        "kat": "leker",
+        "zor": 0.92,
+        "not": "Xwarin — yemek (fiil). Aynı sözcük \"yemek, yiyecek\" anlamında ad olarak da kullanılır. Şimdiki zaman kökü \"xw\": ez dixwim, tu dixwî, ew dixwe. Emir: bixwe!",
+        "her": [
+          "Ez nan dixwim.",
+          "Tu çi dixwî?"
+        ],
+        "gen": [
+          "Em şîv dixwin.",
+          "Zarok sêvan dixwin."
+        ]
+      },
+      {
+        "id": "a1_cf_07",
+        "ku": "Dan",
+        "tr": "Vermek",
+        "en": "To give",
+        "cins": "bêcins",
+        "ez": null,
+        "kat": "leker",
+        "zor": 0.9,
+        "not": "Dan — vermek. Şimdiki zaman kökü \"d\": ez didim, tu didî, ew dide. Emir: bide!",
+        "her": [
+          "Ez pirtûkê didim te.",
+          "Avê bide min!"
+        ],
+        "gen": [
+          "Ew pere dide.",
+          "Mamoste pirtûkan dide me."
         ]
       }
     ],
@@ -10858,7 +10991,7 @@
         "not": "Nêr — [FB]: derman n.m. \"Ziman dermanê dilê mirov e\" atasözünde geçer. Hem \"ilaç\" hem mecazi \"derman\"",
         "her": [
           "Bijîşk derman da min.",
-          "Derman bixwe!"
+          "Divê tu dermanê xwe bixwî."
         ],
         "gen": [
           "Derman û nexweşxane",
@@ -11294,7 +11427,7 @@
         "zor": 0.8,
         "not": "\"Heta\" = -e kadar. [TH] §: prepositions. [AZ] Wane 13",
         "her": [
-          "Heta bajêr.",
+          "Min heta nîvro kar kir.",
           "Heta sibê bisekine."
         ],
         "gen": [
@@ -11618,7 +11751,7 @@
         "not": "Mê — [FB]: pêlav n.f. \"Pê\" (ayak) + \"lav\" (örtü). DÜZELTME: Önce \"kêlav\" yazılmıştı; doğru form \"pêlav\". [AZ] giyim bölümü.",
         "her": [
           "Pêlavên min reş in.",
-          "Pêlav bikire."
+          "Pêlavên min li ber derî ne."
         ],
         "gen": [
           "Pêlav û corab",
@@ -11732,7 +11865,7 @@
         "not": "Rengdêra neguherbar — [FB]: tarî adj. \"Şeva tarî\" = karanlık gece",
         "her": [
           "Şev tarî ye.",
-          "Rengê tarî."
+          "Li derve hewa tarî bû."
         ],
         "gen": [
           "Tarî û geş",
@@ -11989,19 +12122,19 @@
       {
         "id": "a2_242",
         "ku": "Ji ber",
-        "tr": "Önünde / Karşısında",
-        "en": "In front of / Because of",
+        "tr": "-den dolayı / Yüzünden",
+        "en": "Because of",
         "cins": "bêcins",
         "ez": null,
         "kat": "daçek",
         "zor": 0.79,
         "not": "\"Ji ber\" hem \"önünde\" hem \"yüzünden\". [TH] §42. \"Ji ber malê\" = evin önünde",
         "her": [
-          "Ji ber malê radiweste.",
+          "Ji ber baranê nehat.",
           "Ji ber ku nexweş im."
         ],
         "gen": [
-          "Ji ber malê",
+          "Ji ber baranê",
           "Ji ber ku baş e"
         ]
       },
@@ -12092,8 +12225,8 @@
         "zor": 0.81,
         "not": "\"Par\" = geçen yıl. [TH] §85: time adverbs. \"Parêsal\" de denir",
         "her": [
-          "Par em çûn gundê.",
-          "Par baş bû."
+          "Par em çûn gundê xwe.",
+          "Ew par ji gund derket."
         ],
         "gen": [
           "Par û îsal",
@@ -12435,7 +12568,7 @@
         "not": "[FB]: bilind adj. Hem boy hem yükseklik. \"Çiyayê bilind\" = yüksek dağ",
         "her": [
           "Birayê min gelek bilind e.",
-          "Çiyayê bilind."
+          "Dengê xwe zêde bilind neke."
         ],
         "gen": [
           "Bilind û kurt",
@@ -12492,7 +12625,7 @@
         "not": "\"Qebûl kirin\" — [FB]: qebûl v. [Arapça kökenli]. \"Qebûl dikim\" = kabul ediyorum",
         "her": [
           "Erê, qebûl dikim!",
-          "Ew qebûl nekir."
+          "Wî qebûl nekir."
         ],
         "gen": [
           "Qebûl kirin û red kirin",
@@ -13176,7 +13309,7 @@
         "not": "\"Vegerîn\" (mesdar) — \"Ez vedigerim\" = dönüyorum, \"ez vegeriyam\" = döndüm. [TH] §65. DÜZELTME: Önce \"Vegerin\" (imperatif/3pl) yazılmıştı.",
         "her": [
           "Sibê vedigerim malê.",
-          "Kengî vedigerî?"
+          "Tu kengî vedigerî malê?"
         ],
         "gen": [
           "Vegerîn û çûn",
@@ -13224,8 +13357,8 @@
       {
         "id": "a2_420",
         "ku": "Hewz",
-        "tr": "Göl",
-        "en": "Lake / Pond",
+        "tr": "Havuz",
+        "en": "Pool / Pond",
         "cins": "nêr",
         "ez": "hewzê",
         "kat": "xweza",
@@ -13287,14 +13420,14 @@
         "ez": "axa",
         "kat": "xweza",
         "zor": 0.79,
-        "not": "Mê — [FB]: ax n.f. \"Axê Kurdistanê\" = Kürdistan toprağı (duygusal)",
+        "not": "Mê — [FB]: ax n.f. \"Axa Kurdistanê\" = Kürdistan toprağı (duygusal)",
         "her": [
-          "Axê welat xweş e.",
-          "Kevirê û ax."
+          "Axa welat xweş e.",
+          "Axa vî gundî pir baş e."
         ],
         "gen": [
           "Ax û erd",
-          "Axê me"
+          "Axa me"
         ]
       },
       {
@@ -13689,7 +13822,7 @@
         "not": "Nêr — [FB]: neyar n.m. \"Ne\" (olumsuz) + \"yar\" (dost) = dost-olmayan. \"Dijmin\" de kullanılır.",
         "her": [
           "Neyar tune ye.",
-          "Neyar û dost."
+          "Ew ne neyarê me ye."
         ],
         "gen": [
           "Neyar û heval",
@@ -13821,7 +13954,7 @@
         "zor": 0.82,
         "not": "\"Nîv\" = yarım. [BH]: \"Nîvro\" = öğle (nîv + roj). [FB]: nîv n./adj.",
         "her": [
-          "Nîv saet man.",
+          "Saet çar û nîv e.",
           "Nîv nan dixwazim."
         ],
         "gen": [
@@ -13841,7 +13974,7 @@
         "not": "Nêr — [FB]: çaryek n.m. \"Çar\" (dört) + \"yek\" (bir). \"Çaryek saet\" = çeyrek saat. DÜZELTME: Önceki yazım \"çeryek\" yanlıştı; doğru form \"çaryek\" (a2_1601 ile tutarlı).",
         "her": [
           "Çaryek saet man.",
-          "Çaryek kîlo."
+          "Saet pênc û çaryek e."
         ],
         "gen": [
           "Çaryek û nîv",
@@ -13917,7 +14050,7 @@
         "not": "\"Zêde\" = fazla/çok fazla. [FB]: zêde adj./adv. \"Pir zêde\" = çok fazla",
         "her": [
           "Zêde nexwe!",
-          "Ev zêde ye."
+          "Îro karê min pir zêde ye."
         ],
         "gen": [
           "Zêde û kêm",
@@ -13967,18 +14100,18 @@
         "ku": "Wêne",
         "tr": "Fotoğraf / Resim",
         "en": "Photo / Image",
-        "cins": "mê",
-        "ez": "wêneya",
+        "cins": "nêr",
+        "ez": "wêneyê",
         "kat": "teknoloji",
         "zor": 0.81,
-        "not": "Mê — [FB]: wêne n.f. \"Wêneya min\" = fotoğrafım. \"Wêje\" (edebiyat) ile karıştırma",
+        "not": "Nêr — \"Wêneyê min\" = fotoğrafım. \"Wêje\" (edebiyat) ile karıştırma",
         "her": [
-          "Wêneya pîrê heye.",
-          "Wêneyekê bikişîne!"
+          "Wêneyê pîrê heye.",
+          "Wêneyekî bikişîne!"
         ],
         "gen": [
           "Wêne û muzîk",
-          "Wêneya min"
+          "Wêneyê min"
         ]
       },
       {
@@ -14050,7 +14183,7 @@
         "not": "Mê — [FB]: cejn n.f. \"Cejna we pîroz be!\" = bayramınız kutlu olsun! [Aslanoğlu: \"Cejna te pîroz be\"]",
         "her": [
           "Cejna we pîroz be!",
-          "Cejn xweş bû."
+          "Tu roja cejnê çi dikî?"
         ],
         "gen": [
           "Cejn û Newroz",
@@ -14202,7 +14335,7 @@
         "not": "Mê — [FB]: lêkolîn n.f. \"Lêkolîna min\" = araştırmam",
         "her": [
           "Lêkolîna Prof. Dr. Mutlu girîng e.",
-          "Lêkolîn dikim."
+          "Ez li ser vê mijarê lêkolîn dikim."
         ],
         "gen": [
           "Lêkolîn û zanist",
@@ -14233,11 +14366,11 @@
         "ku": "Werzîş",
         "tr": "Spor / Egzersiz",
         "en": "Sport/Exercise",
-        "cins": "nêr",
-        "ez": "werzîşê",
+        "cins": "mê",
+        "ez": "werzîşa",
         "kat": "werzî",
         "zor": 0.82,
-        "not": "Nêr — [AS] s.40: \"WERZÎ\" bölümü. \"Werzîş kirin\" = spor yapmak",
+        "not": "Mê — [AS] s.40: \"WERZÎ\" bölümü. \"Werzîş kirin\" = spor yapmak",
         "her": [
           "Werzîş baş e.",
           "Ez werzîş dikim."
@@ -14252,18 +14385,18 @@
         "ku": "Meydan",
         "tr": "Alan / Saha",
         "en": "Field / Ground",
-        "cins": "nêr",
-        "ez": "meydanê",
+        "cins": "mê",
+        "ez": "meydana",
         "kat": "werzî",
         "zor": 0.8,
-        "not": "Nêr — [FB]: meydan n.m. \"Meydanê futbolê\" = futbol sahası",
+        "not": "Mê — \"Meydana futbolê\" = futbol sahası",
         "her": [
           "Em diçin meydanê.",
           "Meydan mezin e."
         ],
         "gen": [
           "Meydan û park",
-          "Meydanê bajêr"
+          "Meydana bajêr"
         ]
       },
       {
@@ -14309,11 +14442,11 @@
         "ku": "Serşok",
         "tr": "Banyo / Duş",
         "en": "Shower / Bath",
-        "cins": "nêr",
-        "ez": "serşokê",
+        "cins": "mê",
+        "ez": "serşoka",
         "kat": "mal",
         "zor": 0.82,
-        "not": "Nêr — \"ser\" (baş) + \"şok\" (yıkama). [AS] s.53 bölümü. \"Serşok kirin\" = duş almak",
+        "not": "Mê — \"ser\" (baş) + \"şok\" (yıkama). [AS] s.53 bölümü. \"Serşok kirin\" = duş almak",
         "her": [
           "Serşok dikim.",
           "Serşok li kû ye?"
@@ -14591,7 +14724,7 @@
       },
       {
         "id": "a2_643",
-        "ku": "Pênciyem",
+        "ku": "Pêncem",
         "tr": "Beşinci",
         "en": "Fifth",
         "cins": "bêcins",
@@ -14600,12 +14733,12 @@
         "zor": 0.79,
         "not": "\"Pênc\" + \"-iyem\" = beşinci",
         "her": [
-          "Pênciyem hat.",
-          "Sinifa pênciyem."
+          "Pêncem hat.",
+          "Sinifa pêncem."
         ],
         "gen": [
-          "Pênciyem û şeşem",
-          "Roja pênciyem"
+          "Pêncem û şeşem",
+          "Roja pêncem"
         ]
       },
       {
@@ -14934,8 +15067,8 @@
       {
         "id": "a2_680",
         "ku": "Derya",
-        "tr": "Okyanus",
-        "en": "Ocean",
+        "tr": "Deniz / Derya",
+        "en": "Sea",
         "cins": "mê",
         "ez": "deryaya",
         "kat": "xweza",
@@ -15285,7 +15418,7 @@
         "not": "\"Biryar dan\" — [FB]: biryar n.m. + dan (vermek). \"Biryara min hat\" = kararımı verdim",
         "her": [
           "Min biryar da ku biçim.",
-          "Tu biryar dayî?"
+          "Te biryar da?"
         ],
         "gen": [
           "Biryar dan û xwestin",
@@ -15390,20 +15523,20 @@
       {
         "id": "a2_720",
         "ku": "Girêk",
-        "tr": "Sorun / Mesele",
-        "en": "Problem / Issue",
+        "tr": "Düğüm",
+        "en": "Knot",
         "cins": "mê",
         "ez": "girêka",
         "kat": "temel",
         "zor": 0.81,
         "not": "Mê — girêk (dişil; krş. \"pirsgirêk\" mê). \"Pirsgirêk\" de kullanılır (pirs + girêk = soru + sorun)",
         "her": [
-          "Girêk çi ye?",
-          "Girêka min heye."
+          "Girêk vekir.",
+          "Wî girêkek li ben da."
         ],
         "gen": [
-          "Girêk û çareser",
-          "Girêka me"
+          "Girêk û ben",
+          "Girêka ben"
         ]
       },
       {
@@ -15549,7 +15682,7 @@
         "zor": 0.84,
         "not": "A1'de var, A2'de mesleki bağlamda derinleşir. [AS]: \"doktor = bijîşk\"",
         "her": [
-          "Bijîşk hat.",
+          "Ez îro diçim ba bijîşk.",
           "Ez bijîşk im."
         ],
         "gen": [
@@ -16062,7 +16195,7 @@
         "zor": 0.83,
         "not": "Nêr — [AS]: \"tren = trên\" ✓. [FB]: trên n.m.",
         "her": [
-          "Trên hat.",
+          "Trên kengê derbas dibe?",
           "Bi trênê diçim."
         ],
         "gen": [
@@ -16094,18 +16227,18 @@
         "ku": "Balafir",
         "tr": "Uçak",
         "en": "Airplane",
-        "cins": "nêr",
-        "ez": "balafirê",
+        "cins": "mê",
+        "ez": "balafira",
         "kat": "rêwîtî",
         "zor": 0.83,
-        "not": "Nêr — [AS]: \"uçak = balafir\". [FB]: balafir n.m.",
+        "not": "Mê — [AS]: \"uçak = balafir\".",
         "her": [
           "Balafir tê.",
           "Bi balafirê çûm."
         ],
         "gen": [
           "Balafir û trên",
-          "Balafirê me"
+          "Balafira me"
         ]
       },
       {
@@ -16158,7 +16291,7 @@
         "not": "Mê — \"sekinîn\" (durmak) + \"-geh\" (yer). [AS]: \"otobüs durağı = sekingeha basê\".",
         "her": [
           "Li sekingehê me.",
-          "Sekingehê nêzîk e."
+          "Sekingeh nêzîk e."
         ],
         "gen": [
           "Sekingeh û istasyon",
@@ -16214,7 +16347,7 @@
         "zor": 0.82,
         "not": "Mê — [AS]: \"teyze = xaltî\". [FB]: xaltî n.f. Heritage diyaloglarında sık geçti.",
         "her": [
-          "Xaltî hat.",
+          "Ev xaltiya min e.",
           "Ez diçim cem xaltiya xwe."
         ],
         "gen": [
@@ -16309,8 +16442,8 @@
         "zor": 0.83,
         "not": "Nêr — \"nîv\" (yarım) + \"roj\" (gün). [BH] bileşik. \"Di nîvroyê de\" = öğleyin.",
         "her": [
-          "Nîvro xwarin.",
-          "Di nîvroyê de."
+          "Em nîvro bi hev re dixwin.",
+          "Piştî nîvro ez têm mala we."
         ],
         "gen": [
           "Nîvro û êvare",
@@ -16424,7 +16557,7 @@
         "not": "Nêr — [AS]: \"at = hesp\". [FB]: hesp n.m. Kürt kültüründe simgesel hayvan.",
         "her": [
           "Hesp xweş e.",
-          "Hespê boz"
+          "Hespê wî reş e."
         ],
         "gen": [
           "Hesp û ker",
@@ -16462,7 +16595,7 @@
         "not": "Mê — [AS]: \"keçi = bizin\". [FB]: bizin n.f.",
         "her": [
           "Bizin li çiyê ye.",
-          "Şîrê bizinê."
+          "Bizin çû ser darê."
         ],
         "gen": [
           "Bizin û mî",
@@ -16500,7 +16633,7 @@
         "not": "Mê — [AS]: \"tavuk = mirîşk\". [FB]: mirîşk n.f.",
         "her": [
           "Mirîşk li hewşê ye.",
-          "Hêkên mirîşkê."
+          "Mirîşkên me her roj hêkan dikin."
         ],
         "gen": [
           "Mirîşk û çêlek",
@@ -16556,7 +16689,7 @@
         "zor": 0.83,
         "not": "Nêr — [AS]: \"köpek = kûçik\". [FB]: kûçik n.m.",
         "her": [
-          "Kûçik direye.",
+          "Çend kûçik di hewşê de ne.",
           "Kûçikê me baş e."
         ],
         "gen": [
@@ -16588,11 +16721,11 @@
         "ku": "Raman",
         "tr": "Fikir / Düşünce",
         "en": "Idea / Thought",
-        "cins": "nêr",
-        "ez": "ramanê",
+        "cins": "mê",
+        "ez": "ramana",
         "kat": "temel",
         "zor": 0.81,
-        "not": "Nêr — \"raman\" özgün Kurmancî (raman/ramandin = düşünmek). [BH] §: raman = düşünce/fikir. \"Fikir\" Arapça kökenli; \"raman\" tercih edilir.",
+        "not": "Mê — \"raman\" özgün Kurmancî (raman/ramandin = düşünmek). [BH] §: raman = düşünce/fikir. \"Fikir\" Arapça kökenli; \"raman\" tercih edilir.",
         "her": [
           "Ramana te çi ye?",
           "Raman baş e."
@@ -16607,18 +16740,18 @@
         "ku": "Plan",
         "tr": "Plan",
         "en": "Plan",
-        "cins": "nêr",
-        "ez": "planê",
+        "cins": "mê",
+        "ez": "plana",
         "kat": "temel",
         "zor": 0.82,
-        "not": "Nêr — [FB]: plan n.m. \"Planê te çi ye?\" = planın ne?",
+        "not": "Mê — \"Plana te çi ye?\" = planın ne?",
         "her": [
-          "Planê min amade ye.",
+          "Plana min amade ye.",
           "Plan çi ye?"
         ],
         "gen": [
           "Plan û biryar",
-          "Planê min"
+          "Plana min"
         ]
       },
       {
@@ -16652,7 +16785,7 @@
         "not": "Değişmez — [FB]: hewce adj. \"Hewce ye\" = gereklidir. \"Lazim\" ile eş anlamlı.",
         "her": [
           "Derman hewce ye.",
-          "Ev hewce nîye."
+          "Hewce ye ez herim."
         ],
         "gen": [
           "Hewce û lazim",
@@ -17221,7 +17354,7 @@
         "zor": 0.83,
         "not": "Nêr — [FB]: ba n.m. \"Ba tê\" = rüzgâr geliyor.",
         "her": [
-          "Ba tê.",
+          "Îro bayekî xurt tê.",
           "Ba gelek e."
         ],
         "gen": [
@@ -17336,7 +17469,7 @@
         "not": "Mê — [FB]: çîrok n.f. \"Pîrê çîrok digot.\"",
         "her": [
           "Pîrê çîrokek got.",
-          "Çîroka xweş!"
+          "Çîroka wî pir xweş bû."
         ],
         "gen": [
           "Çîrok û stran",
@@ -17365,8 +17498,8 @@
       {
         "id": "a2_1044",
         "ku": "Pêşgotin",
-        "tr": "Atasözü",
-        "en": "Proverb",
+        "tr": "Önsöz",
+        "en": "Preface / Foreword",
         "cins": "mê",
         "ez": "pêşgotina",
         "kat": "çand",
@@ -17374,10 +17507,10 @@
         "not": "Mê — [FB]: pêşgotin n.f.",
         "her": [
           "Ev pêşgotineke xweş e.",
-          "Pîrê pêşgotin got."
+          "Min pêşgotina pirtûkê xwend."
         ],
         "gen": [
-          "Pêşgotin û stran",
+          "Pêşgotin û naverok",
           "Pêşgotinên me"
         ]
       },
@@ -17468,7 +17601,7 @@
         "zor": 0.84,
         "not": "Mê — [AS]: \"saat = saet\" ✓.",
         "her": [
-          "Saetek ma.",
+          "Ez du saetan li benda te mam.",
           "Du saet rêwîtî ye."
         ],
         "gen": [
@@ -17488,7 +17621,7 @@
         "not": "Mê — [AS]: \"dakika = hûrdem, deqîqe\" ✓.",
         "her": [
           "Pênc deqîqe man.",
-          "Di deqîqeyê de."
+          "Saet çar û bîst deqîqe ye."
         ],
         "gen": [
           "Deqîqe û saet",
@@ -17701,7 +17834,7 @@
         ],
         "gen": [
           "Nîsk û birinc",
-          "Nîskê sor"
+          "Nîska sor"
         ]
       },
       {
@@ -17887,7 +18020,7 @@
         "not": "Nêr — [FB]: gûz n.m. Kürdistan'da bol yetişir.",
         "her": [
           "Gûz û hingiv.",
-          "Darê gûzê."
+          "Dara gûzê."
         ],
         "gen": [
           "Gûz û badam",
@@ -18011,19 +18144,19 @@
       {
         "id": "a2_1231",
         "ku": "Germ bûn",
-        "tr": "Ateşlenmek",
-        "en": "To have fever",
+        "tr": "Isınmak",
+        "en": "To get warm",
         "cins": "bêcins",
         "ez": null,
         "kat": "tendurist",
         "zor": 0.8,
         "not": "\"Germ bûn\" = ısınmak / ateşi olmak. \"Germahiya min heye\" = ateşim var.",
         "her": [
-          "Germahiya min heye.",
+          "Hewa germ dibe.",
           "Ew germ bûye."
         ],
         "gen": [
-          "Germ bûn û nexweş",
+          "Germ bûn û sar bûn",
           "Germahî heye"
         ]
       },
@@ -18267,7 +18400,7 @@
         "not": "\"Huner\" (sanat) + \"mend\". [FB]: hunermend n.",
         "her": [
           "Ew hunermend e.",
-          "Hunermendên kurd."
+          "Xwişka min hunermendeke baş e."
         ],
         "gen": [
           "Hunermend û mamosta",
@@ -18314,21 +18447,21 @@
       },
       {
         "id": "a2_1263",
-        "ku": "Derzî",
+        "ku": "Terzî",
         "tr": "Terzi",
         "en": "Tailor",
         "cins": "bêcins",
-        "ez": "derziyê",
+        "ez": "terziyê",
         "kat": "pîşe",
         "zor": 0.78,
         "not": "\"Derzî\" — [FB]: derzî n. Hem terzi hem iğne anlamı.",
         "her": [
-          "Derzî cil dikişîne.",
-          "Ew derzî ye."
+          "Terzî cil dikişîne.",
+          "Ew terzî ye."
         ],
         "gen": [
-          "Derzî û hunermend",
-          "Derziyê bajêr"
+          "Terzî û hunermend",
+          "Terziyê bajêr"
         ]
       },
       {
@@ -18640,18 +18773,18 @@
         "ku": "Îmtîhan",
         "tr": "Sınav",
         "en": "Exam",
-        "cins": "nêr",
-        "ez": "îmtîhanê",
+        "cins": "mê",
+        "ez": "îmtîhana",
         "kat": "perwerde",
         "zor": 0.83,
-        "not": "Nêr — [AS]: \"sınav = îmtîhan\" ✓.",
+        "not": "Mê — [AS]: \"sınav = îmtîhan\" ✓.",
         "her": [
           "Îmtîhan zehmet bû.",
           "Îmtîhan dê were."
         ],
         "gen": [
           "Îmtîhan û wane",
-          "Îmtîhanê me"
+          "Îmtîhana me"
         ]
       },
       {
@@ -18837,7 +18970,7 @@
         "not": "Mê — [BH] p.278: \"germahî\" dişil ✓.",
         "her": [
           "Germahî bilind e.",
-          "Germahiya îroyîn."
+          "Germahiya îro pir zêde ye."
         ],
         "gen": [
           "Germahî û sarî",
@@ -18944,18 +19077,18 @@
         "ku": "Keser",
         "tr": "Üzüntü / Hüzün",
         "en": "Sadness / Grief",
-        "cins": "nêr",
-        "ez": "keserê",
+        "cins": "mê",
+        "ez": "kesera",
         "kat": "his",
         "zor": 0.79,
-        "not": "Nêr — [FB]: keser n.m. \"Dil keser e\" = gönül hüzünlü.",
+        "not": "Mê — \"Dil keser e\" = gönül hüzünlü.",
         "her": [
           "Dil keser e.",
           "Ji keserê diêşim."
         ],
         "gen": [
           "Keser û kêfxweşî",
-          "Keserê dil"
+          "Kesera dil"
         ]
       },
       {
@@ -19501,7 +19634,7 @@
         "zor": 0.79,
         "not": "\"Ceribandin\" — [AS] no.969 ✓.",
         "her": [
-          "Min tişta nû ceriband.",
+          "Min tiştê nû ceriband.",
           "Ceribandin riya fêrbûnê ye."
         ],
         "gen": [
@@ -19957,8 +20090,8 @@
         "zor": 0.84,
         "not": "Nêr — [AS]: \"et = goşt\" ✓.",
         "her": [
-          "Goşt pijandin.",
-          "Goştê beriyan."
+          "Em êvaran goşt û birinc dixwin.",
+          "Ez goşt naxwim, masî dixwim."
         ],
         "gen": [
           "Goşt û nan",
@@ -20110,7 +20243,7 @@
         "not": "\"Zû\" — [AS]: \"erken = zû\" ✓. Hem hız hem erkenlik.",
         "her": [
           "Zû were!",
-          "Zû rabûm."
+          "Ez îro sibehê zû rabûm."
         ],
         "gen": [
           "Zû û dereng",
@@ -20166,8 +20299,8 @@
         "zor": 0.83,
         "not": "\"Mîna\" — [TH] §45: mîna + eğik = gibi.",
         "her": [
-          "Mîna bavê min.",
-          "Mîna te."
+          "Ew mîna bavê xwe dixebite.",
+          "Jiyan mîna guleke xweş e."
         ],
         "gen": [
           "Mîna û weke",
@@ -20977,18 +21110,18 @@
         "ku": "Toz",
         "tr": "Toz",
         "en": "Dust",
-        "cins": "nêr",
-        "ez": "tozê",
+        "cins": "mê",
+        "ez": "toza",
         "kat": "xweza",
         "zor": 0.78,
-        "not": "Nêr — [FB]: toz n.m.",
+        "not": "Mê — \"toza rê\" = yol tozu.",
         "her": [
           "Toz heye.",
           "Toz gelek e."
         ],
         "gen": [
           "Toz û av",
-          "Tozê rê"
+          "Toza rê"
         ]
       },
       {
@@ -21306,7 +21439,7 @@
         "zor": 0.84,
         "not": "\"Carinan\" — [AS]: \"bazen = carinan\" ✓.",
         "her": [
-          "Carinan diçim.",
+          "Ew carinan tê mala me.",
           "Carinan baş e."
         ],
         "gen": [
@@ -22238,7 +22371,7 @@
         "not": "Mê — [Fêrkera D.7] ✓. Kürdistan'da bol yetişir.",
         "her": [
           "Zerdele şîrîn e.",
-          "Zerdeleyên zer."
+          "Zarok zerdele û sêvan dixwin."
         ],
         "gen": [
           "Zerdele û sêv",
@@ -22256,7 +22389,7 @@
         "zor": 0.81,
         "not": "Mê — [Fêrkera D.8] ✓: \"helbest, çîrok, şanoname\" listede. Şiir.",
         "her": [
-          "Helbest xwend.",
+          "Wê helbesteke xweş xwend.",
           "Helbesteke xweş."
         ],
         "gen": [
@@ -22314,7 +22447,7 @@
         "not": "Mê — [Fêrkera D.8] ✓: \"Em kovarekê derdixin.\" Dergi.",
         "her": [
           "Kovar derdikeve.",
-          "Kovara kurdî."
+          "Ev kovar her meh derdikeve."
         ],
         "gen": [
           "Kovar û rojname",
@@ -22770,7 +22903,7 @@
         "not": "Mê — \"roj\" hem güneş hem gün; DİŞİLDİR: \"roja xweş\" [Badillî: \"roj, di., gün\"; KURMANCI_RULES: roj F].",
         "her": [
           "Roj derdikeve.",
-          "Roja xweş."
+          "Dawet roja yekşemê ye."
         ],
         "gen": [
           "Roj û heyv",
@@ -22901,7 +23034,7 @@
         "zor": 0.81,
         "not": "\"Lewma\" = bu yüzden/onun için. \"Lewre\" de kullanılır.",
         "her": [
-          "Lewma nehatim.",
+          "Tu nehatî, lewma ez jî neçûm.",
           "Lewma ez dixwînim."
         ],
         "gen": [
@@ -22977,7 +23110,7 @@
         "zor": 0.8,
         "not": "Mê — [Fêrkera D.2] ✓: \"nexşe\" listede. Harita.",
         "her": [
-          "Nexşe heye?",
+          "Di polê de du nexşe hene.",
           "Li nexşeyê binêre."
         ],
         "gen": [
@@ -22990,18 +23123,18 @@
         "ku": "Mêjer",
         "tr": "Miktar / Ölçü",
         "en": "Amount / Measure",
-        "cins": "nêr",
-        "ez": "mêjerê",
+        "cins": "mê",
+        "ez": "mêjera",
         "kat": "jimar",
         "zor": 0.78,
-        "not": "Nêr — \"mêjer\" = miktar/ölçü. [BH] ✓ mêzîn (ölçmek) kökünden.",
+        "not": "Mê — \"mêjer\" = miktar/ölçü. [BH] ✓ mêzîn (ölçmek) kökünden.",
         "her": [
-          "Mêjerê çend e?",
+          "Mêjera wê çend e?",
           "Mêjer gelek e."
         ],
         "gen": [
           "Mêjer û biha",
-          "Mêjerê çend"
+          "Mêjera wê"
         ]
       },
       {
@@ -23021,6 +23154,384 @@
         "gen": [
           "Ciwan bûn û mezin bûn",
           "Tu ciwan bûyî!"
+        ]
+      },
+      {
+        "id": "a2_mt_01",
+        "ku": "Cihwara",
+        "tr": "Konum",
+        "en": "Position",
+        "cins": "bêcins",
+        "ez": null,
+        "kat": "matematîk",
+        "zor": 0.75,
+        "not": "Matematik terimi: konum. Tanım ve örnek FerMat terim tabanından.",
+        "her": [
+          "Top li bin maseyê ye — cihwara topê 'li bin maseyê' ye. Pisîk li ser kursiyê ye — 'li ser kursiyê'.",
+          "Cihê ku tiştekî lê ye; bi peyvên wekî jor, jêr, çep, rast, nav, derveyî tê ravekirin."
+        ],
+        "gen": [
+          "Di lîstikê de zarok dipirsin: 'Top li ku ye?' — 'Li bin maseyê!' — 'Na, li paş dîwêr!' — cihwara topê bibîne!"
+        ]
+      },
+      {
+        "id": "a2_mt_02",
+        "ku": "Dabeşkirin",
+        "tr": "Paylaşma",
+        "en": "Sharing",
+        "cins": "mê",
+        "ez": "dabeşkirina",
+        "kat": "matematîk",
+        "zor": 0.75,
+        "not": "Matematik terimi: paylaşma. Tanım ve örnek FerMat terim tabanından.",
+        "her": [
+          "6 sêvan li 2 zarokan wekhev dabeş bike: her yekî 3 sêv digire.",
+          "Tiştên wekhev di nav koman an kesan de parvekirin; her kesî heman hejmar digire."
+        ],
+        "gen": [
+          "Li malê: 'Dê 8 gûzan anîn — li 4 zarokan wekhev dabeş bike!' Zarok yek bi yek belav dikin: her yekî 2 gûz!"
+        ]
+      },
+      {
+        "id": "a2_mt_03",
+        "ku": "Deste",
+        "tr": "Onluk grup",
+        "en": "Group of ten",
+        "cins": "mê",
+        "ez": "desteya",
+        "kat": "matematîk",
+        "zor": 0.75,
+        "not": "Matematik terimi: onluk grup. Tanım ve örnek FerMat terim tabanından.",
+        "her": [
+          "Yek deste hêk = 10 hêk. Du deste sêv = 20 sêv.",
+          "Koma deh tiştan; di jiyana rojane de deh tiştên hev cins bi hev re deste ne."
+        ],
+        "gen": [
+          "Li bazarê: 'Yek deste hêk bide, ji kerema xwe!' — firoşkar 10 hêkan dihejmêre û dide — yek deste!"
+        ]
+      },
+      {
+        "id": "a2_mt_04",
+        "ku": "Gav",
+        "tr": "Adım",
+        "en": "Step / pace",
+        "cins": "mê",
+        "ez": "gava",
+        "kat": "matematîk",
+        "zor": 0.75,
+        "not": "Matematik terimi: adım. Tanım ve örnek FerMat terim tabanından.",
+        "her": [
+          "Odeyê bi gavên min 10 gav e, bi gavên hevalê min 8 gav e — gavên me ne wekhev in!",
+          "Yekeya ne-standart a dirêjahiyê; dema gavek biavêjî dûrahiya di navbêna du lingan de."
+        ],
+        "gen": [
+          "Li hewşê zarok dipirsin: 'Ji vir heta darê çend gav e?' Her zarokî dihejmêre — encamên cuda! Ji ber ku lingên wan cuda ne!"
+        ]
+      },
+      {
+        "id": "a2_mt_05",
+        "ku": "Gilover",
+        "tr": "Daire",
+        "en": "Circle",
+        "cins": "bêcins",
+        "ez": null,
+        "kat": "matematîk",
+        "zor": 0.75,
+        "not": "Matematik terimi: daire. Tanım ve örnek FerMat terim tabanından.",
+        "her": [
+          "Têkerê gilover e — hem derdor hem jî hundirê. Goşe û hêl tune!",
+          "Teşeya gilover a girtî; hem xêza derdorê hem jî rûberê hundirê digire. Hemû xalên derdorê ji navendekê hevdûr in."
+        ],
+        "gen": [
+          "Di govendê de zarok dest bi hev digirin û giloverekê çêdikin — teşeya govendê gilover e!"
+        ]
+      },
+      {
+        "id": "a2_mt_06",
+        "ku": "Hevaltî",
+        "tr": "Sayı ikilileri / eş",
+        "en": "Number pairs / complement",
+        "cins": "mê",
+        "ez": "hevaltiya",
+        "kat": "matematîk",
+        "zor": 0.75,
+        "not": "Matematik terimi: sayı ikilileri / eş. Tanım ve örnek FerMat terim tabanından.",
+        "her": [
+          "Hevaltiyên 10ê: 1+9, 2+8, 3+7, 4+6, 5+5.",
+          "Du hejmarên ku gava li hev tên zêdekirin, hejmarekî taybet didin; wekî hevaltiyên 10ê."
+        ],
+        "gen": [
+          "Di lîstikê de: 10 zarok hene — çend li hundirê ne, çend li derveyî? 4 li hundirê, 6 li derveyî — hevaltiyên 10ê!"
+        ]
+      },
+      {
+        "id": "a2_mt_07",
+        "ku": "Hêl",
+        "tr": "Doğru",
+        "en": "Line",
+        "cins": "mê",
+        "ez": "hêla",
+        "kat": "matematîk",
+        "zor": 0.75,
+        "not": "Matematik terimi: doğru. Tanım ve örnek FerMat terim tabanından.",
+        "her": [
+          "Hêl wekî rêçeke rast e ku qet naqede — ji her du aliyan bêdawî ye.",
+          "Xêza rast ku ji her du aliyan bêdawî diçe; ne destpêk û ne dawiya wê heye."
+        ],
+        "gen": [
+          "Li ser kilîmê rêzên dirêj hene ku ji destpêkê heta dawiyê diçin — wekî hêlan!"
+        ]
+      },
+      {
+        "id": "a2_mt_08",
+        "ku": "Jimarîbûn",
+        "tr": "Sayı duyusu",
+        "en": "Number sense",
+        "cins": "mê",
+        "ez": "jimarîbûna",
+        "kat": "matematîk",
+        "zor": 0.75,
+        "not": "Matematik terimi: sayı duyusu. Tanım ve örnek FerMat terim tabanından.",
+        "her": [
+          "Bêyî jimartinê dizanî ku 8 ji 3 zêdetir e! Li komekê binêre û tavilê texmîn bike: nêzîkî 20!",
+          "Hestkirina xwezayî bi hejmaran, mezinahî û têkiliyên wan; bêyî hesabkirinê zanîna nêzîkahiyê."
+        ],
+        "gen": [
+          "Li bazarê: firoşkar bêyî teraziyê dibêje 'ev nêzîkî 1 kîlo ye' — jimarîbûna wî/wê ji ezmûnê ye!"
+        ]
+      },
+      {
+        "id": "a2_mt_09",
+        "ku": "Jê derxistin",
+        "tr": "Eksiltme",
+        "en": "Take away",
+        "cins": "mê",
+        "ez": null,
+        "kat": "matematîk",
+        "zor": 0.75,
+        "not": "Matematik terimi: eksiltme. Tanım ve örnek FerMat terim tabanından.",
+        "her": [
+          "Li ser masê 8 sêv hene — 3 jê derxe, 5 dimînin: 8 − 3 = 5.",
+          "Tiştên ji komekê rakirin; gava ji komê hejmaran jê derdixî, ev jê derxistin e. Yek ji awayên fêmkirina kemkirinê ye."
+        ],
+        "gen": [
+          "Li hewşê: '8 zarok dilîzin, 3 çûn malê — çend li hewşê man? 8 − 3 = 5!'"
+        ]
+      },
+      {
+        "id": "a2_mt_10",
+        "ku": "Kare",
+        "tr": "Kare",
+        "en": "Square",
+        "cins": "mê",
+        "ez": "kareya",
+        "kat": "matematîk",
+        "zor": 0.75,
+        "not": "Matematik terimi: kare. Tanım ve örnek FerMat terim tabanından.",
+        "her": [
+          "Kaxezdank kare ye: 4 hêl hevdirêj in, hemû goşe 90° ne.",
+          "Çarçikê taybetî ku hemû çar hêl hevdirêj in û hemû goşe rast (90°) in."
+        ],
+        "gen": [
+          "Di kilîma kurdî de motîfên kare yên rengîn hene — zarok dibêje: 'Çend kare di kilîmê de hene?' û dihejmêre!"
+        ]
+      },
+      {
+        "id": "a2_mt_11",
+        "ku": "Kom",
+        "tr": "Küme / grup",
+        "en": "Set / group",
+        "cins": "mê",
+        "ez": "koma",
+        "kat": "matematîk",
+        "zor": 0.75,
+        "not": "Matematik terimi: küme / grup. Tanım ve örnek FerMat terim tabanından.",
+        "her": [
+          "3 sêv li hev danê — koma sêvan çêbû! 5 kevir li hev danê — koma keviran!",
+          "Çend tiştên ku bi hev re têne danîn û berhev dibin; koma tiştan."
+        ],
+        "gen": [
+          "Li malê: 'Pêlavên xwe kom bike!' — hemû pêlav bi hev re = koma pêlavan. 'Lîstikên xwe kom bike!' — koma lîstikan!"
+        ]
+      },
+      {
+        "id": "a2_mt_12",
+        "ku": "Nav",
+        "tr": "Iç",
+        "en": "Inside",
+        "cins": "bêcins",
+        "ez": null,
+        "kat": "matematîk",
+        "zor": 0.75,
+        "not": "Matematik terimi: iç. Tanım ve örnek FerMat terim tabanından.",
+        "her": [
+          "Pisîk di nav qutiyê de ye — li hundirê! Top li derveyî qutiyê ye — li derê!",
+          "Du cihên berevajî: nav = di hundirê tiştekî de, derveyî = li derveyî tiştekî."
+        ],
+        "gen": [
+          "Li malê dê dibêje: 'Pisîk di nav malê de ye an li derveyî?' Zarok li pencereyê dinêre: 'Li derveyî ye, li baxçê ye!'"
+        ]
+      },
+      {
+        "id": "a2_mt_13",
+        "ku": "Neyeksan",
+        "tr": "Eşit değil",
+        "en": "Not equal",
+        "cins": "bêcins",
+        "ez": null,
+        "kat": "matematîk",
+        "zor": 0.75,
+        "not": "Matematik terimi: eşit değil. Tanım ve örnek FerMat terim tabanından.",
+        "her": [
+          "3 sêv û 5 porteqal — hejmar ne wekhev e: 3 ≠ 5.",
+          "Rewşa ku du hejmar an du kom heman mîqdarê ne ne; ne wekhev in."
+        ],
+        "gen": [
+          "Li bazarê: 'Min 3 kîlo kirî, te 5 kîlo — yên me ne wekhev in! Yên te zêdetir in!'"
+        ]
+      },
+      {
+        "id": "a2_mt_14",
+        "ku": "Sêgoşe",
+        "tr": "Üçgen",
+        "en": "Triangle",
+        "cins": "mê",
+        "ez": "sêgoşeya",
+        "kat": "matematîk",
+        "zor": 0.75,
+        "not": "Matematik terimi: üçgen. Tanım ve örnek FerMat terim tabanından.",
+        "her": [
+          "Sêgoşeyê 3 hêl û 3 goşe hene. Çadira koçeran sêgoşe ye.",
+          "Teşeya girtî ku sê hêl û sê goşe hene; herî hêsan pirgoşe ye."
+        ],
+        "gen": [
+          "Çadira koçerên kurd sêgoşe ye: sê hêlên darîn û li serê wan goşeyek — sêgoşeya xwezayê!"
+        ]
+      },
+      {
+        "id": "a2_mt_15",
+        "ku": "Teşe",
+        "tr": "Şekil",
+        "en": "Shape",
+        "cins": "mê",
+        "ez": "teşeya",
+        "kat": "matematîk",
+        "zor": 0.75,
+        "not": "Matematik terimi: şekil. Tanım ve örnek FerMat terim tabanından.",
+        "her": [
+          "Sêgoşe, çarçik û gilover teşeyên dudîmen in. Kûb, gilor û lûle teşeyên sêdîmen in.",
+          "Forma tiştekî; teşeyên dudîmen (li ser kaxezê: sêgoşe, çarçik, gilover) û sêdîmen (di destê de: kûb, gilor, lûle) hene."
+        ],
+        "gen": [
+          "Li kilîma kurdî binêre: motîfên rengîn hene — sêgoşe, çarçik, kare — hemû teşe ne!"
+        ]
+      },
+      {
+        "id": "a2_mt_16",
+        "ku": "Tîlî",
+        "tr": "Karış",
+        "en": "Span",
+        "cins": "bêcins",
+        "ez": null,
+        "kat": "matematîk",
+        "zor": 0.75,
+        "not": "Matematik terimi: karış. Tanım ve örnek FerMat terim tabanından.",
+        "her": [
+          "Pirtûk 2 tîlî dirêj e. Masê 5 tîlî fireh e. Lê tîliyên te û yên min ne wekhev in!",
+          "Yekeya ne-standart a dirêjahiyê; dema dest tam vebû, dûrahiya ji tiliya mezîn heta tiliya biçûk."
+        ],
+        "gen": [
+          "Li gund dapîr dibêje: 'Ev qumaş çend tîlî ye?' û bi destê xwe dipive — wekî xêzkeşa kevnar!"
+        ]
+      },
+      {
+        "id": "a2_mt_17",
+        "ku": "Yekane",
+        "tr": "Birler basamağı",
+        "en": "Ones place",
+        "cins": "bêcins",
+        "ez": null,
+        "kat": "matematîk",
+        "zor": 0.75,
+        "not": "Matematik terimi: birler basamağı. Tanım ve örnek FerMat terim tabanından.",
+        "her": [
+          "Di 47 de, 7 li yekane ye = 7 yek.",
+          "Xaneya yekan; jimareya herî rastê ya di hejmarê de. Ew diyar dike çend yek hene."
+        ],
+        "gen": [
+          "Li malê: 'Di destê te de çend pere hene?' — '7 sikke' — ew 7 li xaneya yekan e, wekî sikkeyên yek-perekî!"
+        ]
+      },
+      {
+        "id": "a2_mt_18",
+        "ku": "Yeksan",
+        "tr": "Eşit",
+        "en": "Equal",
+        "cins": "bêcins",
+        "ez": null,
+        "kat": "matematîk",
+        "zor": 0.75,
+        "not": "Matematik terimi: eşit. Tanım ve örnek FerMat terim tabanından.",
+        "her": [
+          "3 sêv û 3 porteqal — hejmarên wan yeksan e: 3 = 3.",
+          "Rewşa ku du hejmar an du kom heman mîqdarê ne; wekhev in."
+        ],
+        "gen": [
+          "Li malê nan belav dikin: 'Her zarokî du perçe nan — hemû wekhev in, yeksan e! Kes ji yê din zêdetir negirt!'"
+        ]
+      },
+      {
+        "id": "a2_mt_19",
+        "ku": "Çarçik",
+        "tr": "Dikdörtgen",
+        "en": "Rectangle",
+        "cins": "bêcins",
+        "ez": null,
+        "kat": "matematîk",
+        "zor": 0.75,
+        "not": "Matematik terimi: dikdörtgen. Tanım ve örnek FerMat terim tabanından.",
+        "her": [
+          "Derî çarçik e: du hêlên dirêj (bilindahî) û du hêlên kurt (firehî), hemû goşe 90°.",
+          "Teşeya girtî ku çar hêl û çar goşeyên rast (90°) hene; du hêlên berember dirêj in, du hêlên din kurt in."
+        ],
+        "gen": [
+          "Li malê: derî çarçik e, textê çarçik e, pencere çarçik e — li derdora xwe çend çarçik dibînî?"
+        ]
+      },
+      {
+        "id": "a2_mt_20",
+        "ku": "Çep",
+        "tr": "Sol",
+        "en": "Left",
+        "cins": "bêcins",
+        "ez": null,
+        "kat": "matematîk",
+        "zor": 0.75,
+        "not": "Matematik terimi: sol. Tanım ve örnek FerMat terim tabanından.",
+        "her": [
+          "Destê çep li aliyê çepê ye, destê rast li aliyê rastê — du arah!",
+          "Du arahên berevajî yên leqî: çep = aliyê destê çepê, rast = aliyê destê rastê."
+        ],
+        "gen": [
+          "Di trafîkê de dê dibêje: 'Li çepê biçe, paşê li rastê!' — zarok arahên xwe dizane!"
+        ]
+      },
+      {
+        "id": "a2_mt_21",
+        "ku": "Şaşî",
+        "tr": "Hata",
+        "en": "Error",
+        "cins": "mê",
+        "ez": "şaşiya",
+        "kat": "matematîk",
+        "zor": 0.75,
+        "not": "Matematik terimi: hata. Tanım ve örnek FerMat terim tabanından.",
+        "her": [
+          "3+4=8 — şaşî ye! Lê ne xirab e: sererast bike: 3+4=7. Ji şaşiyê hîn bû!",
+          "Bersîva ku ne rast e; firsendek ji bo fêrbûnê ye — ji şaşiyan em hîn dibin!"
+        ],
+        "gen": [
+          "Zarokên ku şaşî dikin û sererast dikin, zûtir hîn dibin! Mamoste dibêje: 'Şaşî ne xirab e — girîng e ku sererast bikî!'"
         ]
       }
     ],
@@ -23249,7 +23760,7 @@
           "Bavê min digot ku dem guherî."
         ],
         "gen": [
-          "Ew digot.",
+          "Wî digot.",
           "Mamosta digot."
         ]
       },
@@ -23828,14 +24339,14 @@
         "ku": "Destpêk",
         "tr": "Başlangıç",
         "en": "Beginning",
-        "cins": "nêr",
-        "ez": "destpêkê",
+        "cins": "mê",
+        "ez": "destpêka",
         "kat": "edebiyat",
         "zor": 0.74,
-        "not": "Eril — [FB]: destpêk n.m. \"Dest\" (el) + \"pêk\" = başlangıç. \"Destpêk\" aynı zamanda A1 düzey rozeti!",
+        "not": "Dişil — \"Dest\" (el) + \"pêk\" = başlangıç. \"Destpêk\" aynı zamanda A1 düzey rozeti!",
         "her": [
-          "Destpêkê jiyanê xweş e.",
-          "Destpêkê baş kir."
+          "Destpêka jiyanê xweş e.",
+          "Destpêkeke baş kir."
         ],
         "gen": [
           "Destpêk û dawî",
@@ -23877,7 +24388,7 @@
         ],
         "gen": [
           "Bereket û xêr",
-          "Bereketê malê"
+          "Bereketa malê"
         ]
       },
       {
@@ -23942,11 +24453,11 @@
         "ku": "Mêjû",
         "tr": "Tarih (olaylar)",
         "en": "History (events)",
-        "cins": "nêr",
-        "ez": "mêjûyê",
+        "cins": "mê",
+        "ez": "mêjûya",
         "kat": "dîrok",
         "zor": 0.72,
-        "not": "Eril — [FB]: mêjû n.m. \"Dîrok\" daha genel; \"mêjû\" özellikle olaylar tarihi",
+        "not": "Dişil — \"Dîrok\" daha genel; \"mêjû\" özellikle olaylar tarihi",
         "her": [
           "Mêjûya Kurdistanê zehmet bû.",
           "Mêjû û pêşeroj."
@@ -24035,19 +24546,19 @@
       {
         "id": "b1_085",
         "ku": "Têkçûn",
-        "tr": "Asimilasyon / Dilde erime",
-        "en": "Assimilation / Linguistic erosion",
-        "cins": "nêr",
-        "ez": "têkçûnê",
-        "kat": "kimlik",
+        "tr": "Yenilgi / Çöküş",
+        "en": "Defeat / Collapse",
+        "cins": "mê",
+        "ez": "têkçûna",
+        "kat": "dîrok",
         "zor": 0.7,
-        "not": "Eril — \"Têkçûn\" = Kurmancî özgün terim — \"têk\" (bozuk/dağılmış) + \"çûn\" (gitmek). Hem dilbilimsel hem kültürel asimilasyon için. Heritage kullanıcının yaşadığı süreç. Eril oblique: têkçûnê.",
+        "not": "Dişil — \"têk\" (bozuk/dağılmış) + \"çûn\" (gitmek) = yenilgi, çöküş. Dişil oblique: têkçûnê. Asimilasyon için \"asîmîlasyon\" ya da \"bişaftin\" kullanılır.",
         "her": [
-          "Têkçûna zimanî zimanê me qels kir.",
+          "Piştî têkçûnê her tişt guherî.",
           "Li hember têkçûnê bisekine!"
         ],
         "gen": [
-          "Têkçûn û nasname",
+          "Têkçûn û serkeftin",
           "Têkçûnê"
         ]
       },
@@ -24390,7 +24901,7 @@
         ],
         "gen": [
           "Keskesor û baran",
-          "Keskesorê biharê"
+          "Keskesora biharê"
         ]
       },
       {
@@ -24968,11 +25479,11 @@
         "ku": "Hawirdor",
         "tr": "Çevre / Ortam",
         "en": "Environment / Surroundings",
-        "cins": "nêr",
-        "ez": "hawirdorê",
+        "cins": "mê",
+        "ez": "hawirdora",
         "kat": "xweza",
         "zor": 0.72,
-        "not": "Eril — [AS] s.62 + [AZ] Wane 19. \"Hawirdorê xwezayî\" = doğal çevre. \"Jîngeh\" ile yakın.",
+        "not": "Dişil — [AS] s.62 + [AZ] Wane 19. \"Hawirdora xwezayî\" = doğal çevre. \"Jîngeh\" ile yakın.",
         "her": [
           "Hawirdor xirabtir dibe.",
           "Hawirdora me biparêzin!"
@@ -25119,11 +25630,11 @@
         "ku": "Werger",
         "tr": "Çeviri",
         "en": "Translation",
-        "cins": "nêr",
-        "ez": "wergerê",
+        "cins": "mê",
+        "ez": "wergera",
         "kat": "ziman",
         "zor": 0.71,
-        "not": "Eril — [FB]: werger n.m. \"Wergera Mem û Zîn\" = Mem û Zîn'in çevirisi.",
+        "not": "Dişil — \"Wergera Mem û Zîn\" = Mem û Zîn'in çevirisi.",
         "her": [
           "Werger zehmet e.",
           "Wergera baş lazim e."
@@ -25233,13 +25744,13 @@
         "ku": "Berhem",
         "tr": "Ürün / Eser",
         "en": "Product / Work",
-        "cins": "nêr",
-        "ez": "berhemê",
+        "cins": "mê",
+        "ez": "berhema",
         "kat": "aborî",
         "zor": 0.72,
-        "not": "Eril — [FB]: berhem n.m. Hem \"ürün\" (tarım/sanayi) hem \"eser\" (edebiyat). \"Berhemên Xanî\" = Xanî'nin eserleri.",
+        "not": "Dişil — Hem \"ürün\" (tarım/sanayi) hem \"eser\" (edebiyat). \"Berhemên Xanî\" = Xanî'nin eserleri.",
         "her": [
-          "Berhemên kund.",
+          "Berhemên gund.",
           "Berhem baş e."
         ],
         "gen": [
@@ -25309,11 +25820,11 @@
         "ku": "Tevger",
         "tr": "Hareket / Eylem",
         "en": "Movement / Action",
-        "cins": "nêr",
-        "ez": "tevgerê",
+        "cins": "mê",
+        "ez": "tevgera",
         "kat": "civakî",
         "zor": 0.71,
-        "not": "Eril — [FB]: tevger n.m. \"Tevgera kurdî\" = Kürt hareketi. Hem fiziksel hem siyasi.",
+        "not": "Dişil — \"Tevgera kurdî\" = Kürt hareketi. Hem fiziksel hem siyasi.",
         "her": [
           "Tevgera zimanê kurdî.",
           "Tevger mezin dibe."
@@ -26088,18 +26599,18 @@
         "ku": "Navdêr",
         "tr": "İsim (dilbilgisi)",
         "en": "Noun",
-        "cins": "nêr",
-        "ez": "navdêrê",
+        "cins": "mê",
+        "ez": "navdêra",
         "kat": "rêziman",
         "zor": 0.72,
-        "not": "Eril — \"nav\" (ad) + \"dêr\" (veren). [BH] terminoloji. \"Navdêra mê\" = dişil isim. DÜZELTME: Terim olarak navdêr genelde eril; cümle içinde dişil kullanıma da rastlanır ama standart \"nêr\".",
+        "not": "Dişil — \"nav\" (ad) + \"dêr\" (veren). [BH] terminoloji. \"Navdêra mê\" = dişil isim.",
         "her": [
           "Ev navdêr e.",
           "Navdêrên kurdî."
         ],
         "gen": [
           "Navdêr û lêker",
-          "Navdêrê me"
+          "Navdêra me"
         ]
       },
       {
@@ -26107,18 +26618,18 @@
         "ku": "Lêker",
         "tr": "Fiil (dilbilgisi)",
         "en": "Verb",
-        "cins": "nêr",
-        "ez": "lêkerê",
+        "cins": "mê",
+        "ez": "lêkera",
         "kat": "rêziman",
         "zor": 0.72,
-        "not": "Eril — \"lê\" (ona/üstüne) + \"ker\" (yapan). [BH] terminoloji.",
+        "not": "Dişil — \"lê\" (ona/üstüne) + \"ker\" (yapan). [BH] terminoloji.",
         "her": [
           "Ev lêker e.",
           "Lêkerên ergatif."
         ],
         "gen": [
           "Lêker û navdêr",
-          "Lêkerê me"
+          "Lêkera me"
         ]
       },
       {
@@ -26126,18 +26637,18 @@
         "ku": "Rengdêr",
         "tr": "Sıfat (dilbilgisi)",
         "en": "Adjective",
-        "cins": "nêr",
-        "ez": "rengdêrê",
+        "cins": "mê",
+        "ez": "rengdêra",
         "kat": "rêziman",
         "zor": 0.71,
-        "not": "Eril — \"reng\" (renk/nitelik) + \"dêr\" (veren). [BH] terminoloji.",
+        "not": "Dişil — \"reng\" (renk/nitelik) + \"dêr\" (veren). [BH] terminoloji.",
         "her": [
           "Ev rengdêr e.",
           "Rengdêrên kurdî nayên guhêztin."
         ],
         "gen": [
           "Rengdêr û navdêr",
-          "Rengdêrê me"
+          "Rengdêra me"
         ]
       },
       {
@@ -26164,18 +26675,18 @@
         "ku": "Cînavk",
         "tr": "Zamir (dilbilgisi)",
         "en": "Pronoun",
-        "cins": "nêr",
-        "ez": "cînavkê",
+        "cins": "mê",
+        "ez": "cînavka",
         "kat": "rêziman",
         "zor": 0.71,
-        "not": "Eril — [BH]: cînavk = zamir. \"Cînavkên şexsî\" = kişi zamirleri.",
+        "not": "Dişil — [BH]: cînavk = zamir. \"Cînavkên şexsî\" = kişi zamirleri.",
         "her": [
           "Ev cînavk e.",
           "Cînavkên kurdî."
         ],
         "gen": [
           "Cînavk û navdêr",
-          "Cînavkê me"
+          "Cînavka me"
         ]
       },
       {
@@ -26183,11 +26694,11 @@
         "ku": "Kok",
         "tr": "Kök (dilbilgisi)",
         "en": "Root / Stem",
-        "cins": "nêr",
-        "ez": "kokê",
+        "cins": "mê",
+        "ez": "koka",
         "kat": "rêziman",
         "zor": 0.71,
-        "not": "Eril — \"Koka lêkerê\" = fiilin kökü. [BH] morfoloji terminolojisi. \"Pêşgir\" = önek, \"paşgir\" = sonek (ikisi de Kurmancî özgün).",
+        "not": "Dişil — \"Koka lêkerê\" = fiilin kökü. [BH] morfoloji terminolojisi. \"Pêşgir\" = önek, \"paşgir\" = sonek (ikisi de Kurmancî özgün).",
         "her": [
           "Koka lêkerê çi ye?",
           "Kok û paşgir."
@@ -26259,14 +26770,14 @@
         "ku": "Arşîv",
         "tr": "Arşiv",
         "en": "Archive",
-        "cins": "nêr",
-        "ez": "arşîvê",
+        "cins": "mê",
+        "ez": "arşîva",
         "kat": "dîrok",
         "zor": 0.69,
-        "not": "Eril — [FB]: arşîv n.m. \"Arşîva folklorê\" = folklor arşivi.",
+        "not": "Dişil — \"Arşîva folklorê\" = folklor arşivi.",
         "her": [
           "Arşîv di enstîtuyê de ye.",
-          "Arşîvê lêkolîn kir."
+          "Di arşîvê de lêkolîn kir."
         ],
         "gen": [
           "Arşîv û pirtûkxane",
@@ -26817,7 +27328,7 @@
         "not": "Kürt dua ifadesi. \"Xwedê\" + \"xêr\" + \"dan\". Selamlama ve vedada.",
         "her": [
           "Xwedê xêrê bide!",
-          "Serkeftinê te — Xwedê xêrê bide."
+          "Serkeftina te — Xwedê xêrê bide."
         ],
         "gen": [
           "Xwedê xêrê bide!",
@@ -26867,11 +27378,11 @@
         "ku": "Pratîk",
         "tr": "Pratik / Uygulama",
         "en": "Practice / Practical",
-        "cins": "nêr",
-        "ez": "pratîkê",
+        "cins": "mê",
+        "ez": "pratîka",
         "kat": "felsefe",
         "zor": 0.7,
-        "not": "Eril — alıntı isim. \"Pratîkî\" = pratikte.",
+        "not": "Dişil — alıntı isim. \"Pratîkî\" = pratikte.",
         "her": [
           "Pratîkî baştir e.",
           "Teorî û pratîk."
@@ -26943,18 +27454,18 @@
         "ku": "Mêjû",
         "tr": "Tarih (geçmiş)",
         "en": "History / Past",
-        "cins": "nêr",
-        "ez": "mêjûyê",
+        "cins": "mê",
+        "ez": "mêjûya",
         "kat": "dîrok",
         "zor": 0.72,
-        "not": "Eril — [FB]: mêjû n.m. \"Dîrok\" (yazılı tarih) yanı sıra \"mêjû\" (sözlü tarih/geçmiş).",
+        "not": "Dişil — \"Dîrok\" (yazılı tarih) yanı sıra \"mêjû\" (sözlü tarih/geçmiş).",
         "her": [
-          "Mêjûyê kurd dûr û dirêj e.",
+          "Mêjûya kurd dûr û dirêj e.",
           "Mêjû biparêze!"
         ],
         "gen": [
           "Mêjû û pêşeroj",
-          "Mêjûyê me"
+          "Mêjûya me"
         ]
       },
       {
@@ -27272,12 +27783,12 @@
         "zor": 0.7,
         "not": "\"Ax\" (toprak) + \"erd\" (yer/zemin). İkisi beraber kullanılır.",
         "her": [
-          "Axê me bereketdar e.",
-          "Erd û ax ya me."
+          "Axa me bereketdar e.",
+          "Erd û axa me."
         ],
         "gen": [
           "Ax û erd",
-          "Axê Kurdistan"
+          "Axa Kurdistanê"
         ]
       },
       {
@@ -27475,18 +27986,18 @@
         "ku": "Destan",
         "tr": "Destan / Epos",
         "en": "Epic / Saga",
-        "cins": "nêr",
-        "ez": "destanê",
+        "cins": "mê",
+        "ez": "destana",
         "kat": "edebiyat",
         "zor": 0.7,
-        "not": "Eril — [FB]: destan n.m. \"Destanê Mem û Zîn\" = Mem û Zîn destanı.",
+        "not": "Dişil — \"Destana Mem û Zîn\" = Mem û Zîn destanı.",
         "her": [
           "Destan dirêj e.",
-          "Destanê kurdî gelek in."
+          "Destanên kurdî gelek in."
         ],
         "gen": [
           "Destan û helbest",
-          "Destanê kurdî"
+          "Destana kurdî"
         ]
       },
       {
@@ -27720,15 +28231,15 @@
       {
         "id": "b1_805",
         "ku": "Nesaxî",
-        "tr": "Sakatlık / Engel",
-        "en": "Disability",
+        "tr": "Hastalık",
+        "en": "Illness",
         "cins": "mê",
         "ez": "nesaxiya",
         "kat": "tendurist",
         "zor": 0.68,
         "not": "Dişil — \"ne\" + \"sax\" + \"-î\". [FB]: nesaxî n.f.",
         "her": [
-          "Bavê wî nesaxî ye.",
+          "Bavê wî nesax e.",
           "Nesaxî ne sebebê şerm e."
         ],
         "gen": [
@@ -28251,21 +28762,21 @@
       },
       {
         "id": "b1_870",
-        "ku": "Tûtî",
+        "ku": "Tû",
         "tr": "Dut",
         "en": "Mulberry",
-        "cins": "nêr",
-        "ez": "tûtiyê",
+        "cins": "mê",
+        "ez": "tûya",
         "kat": "xweza",
         "zor": 0.69,
-        "not": "Eril — [FB]: tûtî n.m. Kürdistan'da yaygın.",
+        "not": "Dişil — Kürdistan'da yaygın.",
         "her": [
-          "Darê tûtiyê mezin e.",
-          "Tûtî çin kirin."
+          "Dara tûyê mezin e.",
+          "Me tû çinîn."
         ],
         "gen": [
-          "Tûtî û gûz",
-          "Darê tûtiyê"
+          "Tû û gûz",
+          "Dara tûyê"
         ]
       },
       {
@@ -28594,8 +29105,8 @@
       {
         "id": "b1_910",
         "ku": "Karîger",
-        "tr": "Yetenekli / Uzman",
-        "en": "Skilled / Expert",
+        "tr": "Etkili",
+        "en": "Effective / Influential",
         "cins": "bêcins",
         "ez": "karîgerê",
         "kat": "pîşe",
@@ -28748,11 +29259,11 @@
         "ku": "Encam",
         "tr": "Sonuç",
         "en": "Result / Conclusion",
-        "cins": "nêr",
-        "ez": "encamê",
+        "cins": "mê",
+        "ez": "encama",
         "kat": "zanist",
         "zor": 0.72,
-        "not": "Eril — [FB]: encam n.m. \"Encama lêkolînê.\"",
+        "not": "Dişil — \"Encama lêkolînê.\"",
         "her": [
           "Encam baş e.",
           "Encamên lêkolînê."
@@ -28767,14 +29278,14 @@
         "ku": "Rêbaz",
         "tr": "Yöntem / Metod",
         "en": "Method",
-        "cins": "nêr",
-        "ez": "rêbazê",
+        "cins": "mê",
+        "ez": "rêbaza",
         "kat": "zanist",
         "zor": 0.69,
-        "not": "Eril — \"rê\" + \"baz\". [FB]: rêbaz n.m.",
+        "not": "Dişil — \"rê\" + \"baz\".",
         "her": [
           "Rêbaza baş.",
-          "Bi rêbazekî zanistî."
+          "Bi rêbazeke zanistî."
         ],
         "gen": [
           "Rêbaz û teorî",
@@ -28786,11 +29297,11 @@
         "ku": "Nîqaş",
         "tr": "Tartışma",
         "en": "Discussion / Debate",
-        "cins": "nêr",
-        "ez": "nîqaşê",
+        "cins": "mê",
+        "ez": "nîqaşa",
         "kat": "zanist",
         "zor": 0.7,
-        "not": "Eril — [AS] no.1099: \"tartışmak = nîgaş kirin, gengeşî kirin\" ✓.",
+        "not": "Dişil — [AS] no.1099: \"tartışmak = nîgaş kirin, gengeşî kirin\" ✓.",
         "her": [
           "Nîqaş baş bû.",
           "Di nîqaşê de axivî."
@@ -28995,11 +29506,11 @@
         "ku": "Dengdar",
         "tr": "Ünsüz",
         "en": "Consonant",
-        "cins": "nêr",
-        "ez": "dengdarê",
+        "cins": "mê",
+        "ez": "dengdara",
         "kat": "rêziman",
         "zor": 0.68,
-        "not": "Eril — \"deng\" + \"-dar\" (tutan). [BH] §265: dengdar = ünsüz. DÜZELTME: Önceki \"dengdêr\" yanlıştı; BH'e göre dengdar = ünsüz (consonant). Kürtçede b, p, t, d, k, g vb.",
+        "not": "Dişil — \"deng\" + \"-dar\" (tutan). [BH] §265: dengdar = ünsüz. DÜZELTME: Önceki \"dengdêr\" yanlıştı; BH'e göre dengdar = ünsüz (consonant). Kürtçede b, p, t, d, k, g vb.",
         "her": [
           "Dengdarên kurdî.",
           "Ev dengdar e."
@@ -29033,11 +29544,11 @@
         "ku": "Kêşan",
         "tr": "Çekim (dilbilgisi)",
         "en": "Conjugation / Declension",
-        "cins": "nêr",
-        "ez": "kêşanê",
+        "cins": "mê",
+        "ez": "kêşana",
         "kat": "rêziman",
         "zor": 0.67,
-        "not": "Eril — [BH]: kêşan = çekim. \"Kêşana lêkerê\" = fiilin çekimi.",
+        "not": "Dişil — [BH]: kêşan = çekim. \"Kêşana lêkerê\" = fiilin çekimi.",
         "her": [
           "Kêşana lêkerê.",
           "Kêşana navdêrê."
@@ -29071,11 +29582,11 @@
         "ku": "Zagon",
         "tr": "Kanun / Yasa",
         "en": "Law / Statute",
-        "cins": "nêr",
-        "ez": "zagonê",
+        "cins": "mê",
+        "ez": "zagona",
         "kat": "zagon",
         "zor": 0.72,
-        "not": "Eril — [AS] s.60: HIQÛQ bölümü. [FB]: zagon n.m.",
+        "not": "Dişil — [AS] s.60: HIQÛQ bölümü.",
         "her": [
           "Zagon hate dayîn.",
           "Li gorî zagonê."
@@ -29487,15 +29998,15 @@
       {
         "id": "b1_1060",
         "ku": "Zanistname",
-        "tr": "Bilim dalı",
-        "en": "Scientific discipline",
+        "tr": "Ansiklopedi",
+        "en": "Encyclopedia",
         "cins": "mê",
         "ez": "zanistnameya",
         "kat": "zanist",
         "zor": 0.67,
         "not": "\"Zanist\" + \"name\". Bileşik akademik terim.",
         "her": [
-          "Zanistname ya wî biyolojî ye.",
+          "Zanistname li pirtûkxaneyê ye.",
           "Zanistname dibe sermayeya gel."
         ],
         "gen": [
@@ -30002,18 +30513,18 @@
         "ku": "Hiqûq",
         "tr": "Hukuk",
         "en": "Law (field)",
-        "cins": "nêr",
-        "ez": "hiqûqê",
+        "cins": "mê",
+        "ez": "hiqûqa",
         "kat": "zagon",
         "zor": 0.69,
-        "not": "Eril — [AS] s.60: \"HIQÛQ\" başlığı. \"Hiqûqê mirovan\" = insan hukuku.",
+        "not": "Dişil — [AS] s.60: \"HIQÛQ\" başlığı. \"Hiqûqa mirovan\" = insan hukuku.",
         "her": [
           "Ez hiqûqê dixwînim.",
-          "Hiqûqê mirovan."
+          "Hiqûqa mirovan."
         ],
         "gen": [
           "Hiqûq û siyaset",
-          "Hiqûqê me"
+          "Hiqûqa me"
         ]
       },
       {
@@ -30165,7 +30676,7 @@
         ],
         "gen": [
           "Dem vala û kar",
-          "Demê vala"
+          "Dema vala"
         ]
       },
       {
@@ -30382,18 +30893,18 @@
         "ku": "Taxê",
         "tr": "Mahalle",
         "en": "Neighbourhood",
-        "cins": "nêr",
-        "ez": "taxê",
+        "cins": "mê",
+        "ez": "taxa",
         "kat": "cih",
         "zor": 0.72,
-        "not": "Eril — [FB]: tax n.m. \"Taxê me.\"",
+        "not": "Dişil — \"Taxa me.\"",
         "her": [
           "Li taxê de ne.",
-          "Taxê me xweş e."
+          "Taxa me xweş e."
         ],
         "gen": [
           "Tax û gund",
-          "Taxê me"
+          "Taxa me"
         ]
       },
       {
@@ -30658,8 +31169,8 @@
           "Di zanista kompîturê de."
         ],
         "gen": [
-          "Zanistê kompîturê",
-          "Zanistê me"
+          "Zanista kompîturê",
+          "Zanista me"
         ]
       },
       {
@@ -30816,20 +31327,20 @@
       },
       {
         "id": "b1_1283",
-        "ku": "Destûrê bingehîn",
+        "ku": "Mafê bingehîn",
         "tr": "Temel hak",
         "en": "Fundamental right",
         "cins": "nêr",
-        "ez": "destûrê bingehîn",
+        "ez": "mafê bingehîn",
         "kat": "zagon",
         "zor": 0.69,
-        "not": "\"Destûr\" (hak/izin) + \"bingehîn\".",
+        "not": "\"Maf\" (hak) + \"bingehîn\" (temel). \"Destûr\" izin demektir.",
         "her": [
-          "Destûrê bingehîn yên mirovan.",
-          "Mafê bingehîn."
+          "Mafên bingehîn ên mirovan.",
+          "Jiyan mafê bingehîn e."
         ],
         "gen": [
-          "Destûrê bingehîn",
+          "Mafê bingehîn",
           "Mafên bingehîn"
         ]
       },
@@ -30911,21 +31422,21 @@
       },
       {
         "id": "b1_1302",
-        "ku": "Biharê taze",
+        "ku": "Bihara taze",
         "tr": "Taze bahar",
         "en": "Fresh spring",
         "cins": "mê",
-        "ez": "biharê taze",
+        "ez": "bihara taze",
         "kat": "xweza",
         "zor": 0.71,
         "not": "\"Bihar\" + \"taze\". \"Taze\" = taze/yeni.",
         "her": [
-          "Biharê taze hat.",
-          "Kulîlkên biharê taze."
+          "Bihara taze hat.",
+          "Kulîlkên bihara taze."
         ],
         "gen": [
-          "Biharê taze û payîza sor",
-          "Biharê taze"
+          "Bihara taze û payîza sor",
+          "Bihara taze"
         ]
       },
       {
@@ -31358,7 +31869,7 @@
         "not": "\"Hêk\" (yumurta) bileşeni. \"Zerêka hêkê\" = yumurta sarısı.",
         "her": [
           "Zerêka hêkê.",
-          "Hêkê spî û zer."
+          "Hêka spî û zer."
         ],
         "gen": [
           "Zer û spî",
@@ -31370,11 +31881,11 @@
         "ku": "Hêk",
         "tr": "Yumurta",
         "en": "Egg",
-        "cins": "nêr",
-        "ez": "hêkê",
+        "cins": "mê",
+        "ez": "hêka",
         "kat": "xwarin",
         "zor": 0.82,
-        "not": "Eril — [FB]: hêk n.m. \"Hêkê mirîşkê.\"",
+        "not": "Dişil — \"Hêka mirîşkê.\"",
         "her": [
           "Hêk pijandin.",
           "Hêkên me."
@@ -31640,7 +32151,7 @@
         "ez": "mizgefta",
         "kat": "cih",
         "zor": 0.74,
-        "not": "Dişil — [FB]: mizgeft n.f. \"Mizgeftê Mezin\" = Ulu Cami. DÜZELTME: Önceki notta \"Kürtçe kelimesi\" yanıltıcıydı — aslında Arapça \"mescid\" ve Farsça üzerinden geçmiş alıntı; ancak Kurmancî'de naturalleşmiş standart terim.",
+        "not": "Dişil — [FB]: mizgeft n.f. \"Mizgefta Mezin\" = Ulu Cami. DÜZELTME: Önceki notta \"Kürtçe kelimesi\" yanıltıcıydı — aslında Arapça \"mescid\" ve Farsça üzerinden geçmiş alıntı; ancak Kurmancî'de naturalleşmiş standart terim.",
         "her": [
           "Li mizgeftê ne.",
           "Mizgeft nêzîk e."
@@ -32605,11 +33116,11 @@
         "ku": "Tewang",
         "tr": "Çekim / Ek",
         "en": "Inflection",
-        "cins": "nêr",
-        "ez": "tewangê",
+        "cins": "mê",
+        "ez": "tewanga",
         "kat": "rêziman",
         "zor": 0.67,
-        "not": "Eril — [BH] §: tewang = çekim/ek. \"Tewanga navdêrê\" = ismin çekimi.",
+        "not": "Dişil — [BH] §: tewang = çekim/ek. \"Tewanga navdêrê\" = ismin çekimi.",
         "her": [
           "Tewanga navdêrê.",
           "Di tewangê de."
@@ -32624,11 +33135,11 @@
         "ku": "Paşgir",
         "tr": "Son ek",
         "en": "Suffix",
-        "cins": "nêr",
-        "ez": "paşgirê",
+        "cins": "mê",
+        "ez": "paşgira",
         "kat": "rêziman",
         "zor": 0.68,
-        "not": "Eril — [BH] §270 ✓: \"paşgir\" = son ek. \"-vanî, -zan, -dar, -ger\".",
+        "not": "Dişil — [BH] §270 ✓: \"paşgir\" = son ek. \"-vanî, -zan, -dar, -ger\".",
         "her": [
           "Paşgira Kurmancî fêr bibe.",
           "Paşgirên kurdî gelek in."
@@ -32643,11 +33154,11 @@
         "ku": "Pêşgir",
         "tr": "Ön ek",
         "en": "Prefix",
-        "cins": "nêr",
-        "ez": "pêşgirê",
+        "cins": "mê",
+        "ez": "pêşgira",
         "kat": "rêziman",
         "zor": 0.68,
-        "not": "Eril — [BH] §269 ✓: \"pêşgir\" = ön ek. \"bi-, ne-, ve-, ji-\".",
+        "not": "Dişil — [BH] §269 ✓: \"pêşgir\" = ön ek. \"bi-, ne-, ve-, ji-\".",
         "her": [
           "Pêşgira Kurmancî fêr bibe.",
           "Pêşgirên kurdî."
@@ -32871,18 +33382,18 @@
         "ku": "Salon",
         "tr": "Salon / Oturma odası",
         "en": "Living room",
-        "cins": "nêr",
-        "ez": "salonê",
+        "cins": "mê",
+        "ez": "salona",
         "kat": "mal",
         "zor": 0.73,
-        "not": "Eril — uluslararası terim.",
+        "not": "Dişil — uluslararası terim.",
         "her": [
           "Salon mezin e.",
           "Di salonê de nin."
         ],
         "gen": [
           "Salon û ode",
-          "Salonê me"
+          "Salona me"
         ]
       },
       {
@@ -32947,11 +33458,11 @@
         "ku": "Kêzik",
         "tr": "Böcek / Haşere",
         "en": "Insect / Bug",
-        "cins": "nêr",
-        "ez": "kêzikê",
+        "cins": "mê",
+        "ez": "kêzika",
         "kat": "mal",
         "zor": 0.69,
-        "not": "Eril — [FB]: kêzik n.m.",
+        "not": "Dişil.",
         "her": [
           "Kêzik heye.",
           "Kêzikê avêt."
@@ -33118,11 +33629,11 @@
         "ku": "Kiras",
         "tr": "Gömlek / Elbise",
         "en": "Shirt / Dress",
-        "cins": "mê",
-        "ez": "kirasa",
+        "cins": "nêr",
+        "ez": "kirasê",
         "kat": "cil",
         "zor": 0.74,
-        "not": "Dişil — [AS]: \"gömlek = kiras\" ✓.",
+        "not": "Eril — [AS]: \"gömlek = kiras\" ✓.",
         "her": [
           "Kiras xweş e.",
           "Kirasê nû."
@@ -33156,18 +33667,18 @@
         "ku": "Kember",
         "tr": "Kemer",
         "en": "Belt",
-        "cins": "nêr",
-        "ez": "kemberê",
+        "cins": "mê",
+        "ez": "kembera",
         "kat": "cil",
         "zor": 0.71,
-        "not": "Eril — [AS]: \"kemer = kember\" ✓.",
+        "not": "Dişil — [AS]: \"kemer = kember\" ✓.",
         "her": [
           "Kember li xwe kir.",
-          "Kemberê çerm."
+          "Kembera çerm."
         ],
         "gen": [
           "Kember û pêlav",
-          "Kemberê me"
+          "Kembera me"
         ]
       },
       {
@@ -33213,18 +33724,18 @@
         "ku": "Destmal",
         "tr": "Mendil / El bezi",
         "en": "Handkerchief",
-        "cins": "nêr",
-        "ez": "destmalê",
+        "cins": "mê",
+        "ez": "destmala",
         "kat": "cil",
         "zor": 0.7,
-        "not": "Eril — [AS]: \"mendil = destmal\" ✓.",
+        "not": "Dişil — [AS]: \"mendil = destmal\" ✓.",
         "her": [
           "Destmal li cêbê ye.",
-          "Destmalê spî."
+          "Destmala spî."
         ],
         "gen": [
           "Destmal û xirz",
-          "Destmalê me"
+          "Destmala me"
         ]
       },
       {
@@ -33441,18 +33952,18 @@
         "ku": "Meydan",
         "tr": "Meydan",
         "en": "Square / Plaza",
-        "cins": "nêr",
-        "ez": "meydanê",
+        "cins": "mê",
+        "ez": "meydana",
         "kat": "cih",
         "zor": 0.72,
-        "not": "Eril — [AS]: \"meydan\" ✓.",
+        "not": "Dişil — [AS]: \"meydan\" ✓.",
         "her": [
           "Meydan mezin e.",
           "Li meydanê nin."
         ],
         "gen": [
           "Meydan û kolan",
-          "Meydanê bajêr"
+          "Meydana bajêr"
         ]
       },
       {
@@ -33593,11 +34104,11 @@
         "ku": "Lêçûn",
         "tr": "Masraf / Harcama",
         "en": "Expense / Cost",
-        "cins": "nêr",
-        "ez": "lêçûnê",
+        "cins": "mê",
+        "ez": "lêçûna",
         "kat": "aborî",
         "zor": 0.7,
-        "not": "Eril — \"lêçûn\" = masraf.",
+        "not": "Dişil — \"lêçûn\" = masraf.",
         "her": [
           "Lêçûn gelek e.",
           "Lêçûna rêwîtiyê."
@@ -33827,12 +34338,12 @@
         "zor": 0.74,
         "not": "\"Têlefon\" + \"desta\".",
         "her": [
-          "Têlefonê desta windabûye.",
-          "Di têlefonê desta de."
+          "Têlefona desta winda bûye.",
+          "Di têlefona desta de."
         ],
         "gen": [
-          "Têlefonê desta",
-          "Têlefonê me"
+          "Têlefona desta",
+          "Têlefona me"
         ]
       },
       {
@@ -34027,21 +34538,21 @@
       },
       {
         "id": "b1_tk19",
-        "ku": "Tevlihevî",
-        "tr": "Turnuva / Rekabet",
-        "en": "Tournament / Competition",
+        "ku": "Pêşbirk",
+        "tr": "Yarışma / Müsabaka",
+        "en": "Competition / Contest",
         "cins": "mê",
-        "ez": "tevliheviya",
+        "ez": "pêşbirka",
         "kat": "spor",
         "zor": 0.68,
         "not": "Dişil — \"tevlihev\" bileşik.",
         "her": [
-          "Tevlihevî dest pê kir.",
-          "Di tevliheviyê de ne."
+          "Pêşbirk dest pê kir.",
+          "Di pêşbirkê de ne."
         ],
         "gen": [
-          "Tevlihevî û lîstik",
-          "Tevliheviya me"
+          "Pêşbirk û lîstik",
+          "Pêşbirka me"
         ]
       },
       {
@@ -34559,20 +35070,20 @@
       },
       {
         "id": "b1_d07",
-        "ku": "Golê kûr",
+        "ku": "Gola kûr",
         "tr": "Derin göl",
         "en": "Deep lake",
-        "cins": "nêr",
-        "ez": "golê kûr",
+        "cins": "mê",
+        "ez": "gola kûr",
         "kat": "xweza",
         "zor": 0.7,
         "not": "\"Gol\" + \"kûr\".",
         "her": [
-          "Golê kûr heye.",
-          "Li golê kûr ne."
+          "Gola kûr heye.",
+          "Li gola kûr in."
         ],
         "gen": [
-          "Golê kûr",
+          "Gola kûr",
           "Golên Kurdistanê"
         ]
       },
@@ -34611,7 +35122,7 @@
         ],
         "gen": [
           "Berf û qeşa",
-          "Berfê Kurdistanê"
+          "Berfa Kurdistanê"
         ]
       },
       {
@@ -35702,11 +36213,11 @@
         "ku": "Rûtîn",
         "tr": "Rutin",
         "en": "Routine",
-        "cins": "nêr",
-        "ez": "rûtînê",
+        "cins": "mê",
+        "ez": "rûtîna",
         "kat": "jiyan",
         "zor": 0.7,
-        "not": "Eril — uluslararası terim.",
+        "not": "Dişil — uluslararası terim.",
         "her": [
           "Rûtîna rojane.",
           "Di rûtînê de."
@@ -36074,7 +36585,7 @@
         ],
         "gen": [
           "Gel û mirov",
-          "Gela me"
+          "Gelê me"
         ]
       },
       {
@@ -36307,7 +36818,7 @@
       },
       {
         "id": "b1_t2_04",
-        "ku": "Berfê daketin",
+        "ku": "Berf daketin",
         "tr": "Kar yağmak",
         "en": "Snow falling",
         "cins": "bêcins",
@@ -36320,13 +36831,13 @@
           "Berf dikeve."
         ],
         "gen": [
-          "Berfê daketin",
+          "Berf daketin",
           "Berf dikeve."
         ]
       },
       {
         "id": "b1_t2_05",
-        "ku": "Baranê barîn",
+        "ku": "Baran barîn",
         "tr": "Yağmur yağmak",
         "en": "Rain falling",
         "cins": "bêcins",
@@ -36339,7 +36850,7 @@
           "Baran dibare."
         ],
         "gen": [
-          "Baranê barîn",
+          "Baran barîn",
           "Baran dibare."
         ]
       },
@@ -38435,21 +38946,21 @@
       },
       {
         "id": "b1_tm11",
-        "ku": "Kûsî",
+        "ku": "Kundir",
         "tr": "Kabak",
         "en": "Zucchini / Squash",
-        "cins": "mê",
-        "ez": "kûsiya",
+        "cins": "nêr",
+        "ez": "kundirê",
         "kat": "xwarin",
         "zor": 0.7,
-        "not": "Dişil — [AS]: \"kabak = kûsî\" ✓.",
+        "not": "Eril — [AS]: \"kabak = kûsî\" ✓.",
         "her": [
-          "Kûsî xweş e.",
-          "Kûsiya pijandî."
+          "Kundir xweş e.",
+          "Kundirê pijandî."
         ],
         "gen": [
-          "Kûsî û xiyar",
-          "Kûsiya me"
+          "Kundir û xiyar",
+          "Kundirê me"
         ]
       },
       {
@@ -39483,11 +39994,11 @@
         "ku": "Bûyer",
         "tr": "Olay / Hadise",
         "en": "Event",
-        "cins": "nêr",
-        "ez": "bûyerê",
+        "cins": "mê",
+        "ez": "bûyera",
         "kat": "dem",
         "zor": 0.72,
-        "not": "Eril — [AS]: \"olay = bûyer\" ✓.",
+        "not": "Dişil — [AS]: \"olay = bûyer\" ✓.",
         "her": [
           "Bûyer çi ye?",
           "Bûyera mezin."
@@ -40392,20 +40903,20 @@
       },
       {
         "id": "b1_gt26",
-        "ku": "Destûrê xwestin",
+        "ku": "Destûr xwestin",
         "tr": "İzin istemek",
         "en": "Asking permission",
         "cins": "mê",
-        "ez": "destûrê xwestin",
+        "ez": "destûr xwestin",
         "kat": "leker",
         "zor": 0.7,
         "not": "\"Destûr\"+\"xwestin\". [Fêrkera] ✓.",
         "her": [
           "Destûr dixwazim.",
-          "Destûrê xwest."
+          "Destûr xwest."
         ],
         "gen": [
-          "Destûrê xwestin",
+          "Destûr xwestin",
           "Destûrê dixwazim"
         ]
       },
@@ -42202,18 +42713,18 @@
         "ku": "Zagon",
         "tr": "Kanun / Yasa",
         "en": "Law / Statute",
-        "cins": "nêr",
-        "ez": "zagonê",
+        "cins": "mê",
+        "ez": "zagona",
         "kat": "zagon",
         "zor": 0.67,
-        "not": "Eril — [BH] + [TH]: zagon n.m. Kurmancîde standart \"kanun/yasa\" kelimesi. \"Hiqûq\" Arapça/Soranî etkisi — doğrusu \"zagon\" (yasa) veya \"maf\" (hak). [AZ] Wane 18: law",
+        "not": "Dişil — Kurmancîde standart \"kanun/yasa\" kelimesi. \"Hiqûq\" Arapça/Soranî etkisi — doğrusu \"zagon\" (yasa) veya \"maf\" (hak). [AZ] Wane 18: law",
         "her": [
-          "Zagonê welêt divê were parastin.",
+          "Zagona welêt divê were parastin.",
           "Li gorî zagonê."
         ],
         "gen": [
           "Zagon û maf",
-          "Zagonê welêt"
+          "Zagona welêt"
         ]
       },
       {
@@ -42639,11 +43150,11 @@
         "ku": "Rêbaz",
         "tr": "Yöntem",
         "en": "Method",
-        "cins": "nêr",
-        "ez": "rêbazê",
+        "cins": "mê",
+        "ez": "rêbaza",
         "kat": "felsefe",
         "zor": 0.68,
-        "not": "Eril — \"rê\" (yol) + \"baz\" (giden). [FB]: rêbaz n.m.",
+        "not": "Dişil — \"rê\" (yol) + \"baz\" (giden).",
         "her": [
           "Rêbaza baş heye.",
           "Rêbaza zanistî."
@@ -42943,11 +43454,11 @@
         "ku": "Destûr",
         "tr": "Anayasa / İzin",
         "en": "Constitution / Permission",
-        "cins": "nêr",
-        "ez": "destûrê",
+        "cins": "mê",
+        "ez": "destûra",
         "kat": "zagon",
         "zor": 0.69,
-        "not": "Eril — [FB]: destûr n.m. \"Destûra bingehîn\" = anayasa. Aynı zamanda \"izin\" anlamı.",
+        "not": "Dişil — \"Destûra bingehîn\" = anayasa. Aynı zamanda \"izin\" anlamı.",
         "her": [
           "Destûr heye.",
           "Destûra welêt."
@@ -43201,7 +43712,7 @@
         ],
         "gen": [
           "Rojhilat û Rojava",
-          "Rojhilatê Kurdistan"
+          "Rojhilatê Kurdistanê"
         ]
       },
       {
@@ -43684,11 +44195,11 @@
         "ku": "Mebest",
         "tr": "Niyet / Amaç",
         "en": "Intent / Purpose",
-        "cins": "nêr",
-        "ez": "mebestê",
+        "cins": "mê",
+        "ez": "mebesta",
         "kat": "felsefe",
         "zor": 0.69,
-        "not": "Eril — [FB]: mebest n.m. \"Mebesta te çi ye?\" = amacın ne?",
+        "not": "Dişil — \"Mebesta te çi ye?\" = amacın ne?",
         "her": [
           "Mebesta min baş e.",
           "Mebest û armancê."
@@ -43967,20 +44478,20 @@
       {
         "id": "b2_373",
         "ku": "Têkçûn",
-        "tr": "Asimilasyon / Erime",
-        "en": "Assimilation (loss of identity)",
+        "tr": "Yenilgi / Çöküş",
+        "en": "Defeat / Collapse",
         "cins": "mê",
         "ez": "têkçûna",
         "kat": "kimlik",
         "zor": 0.68,
-        "not": "\"Têk\" (bütün) + \"çûn\" (gitmek). Kimlik kaybı için Kurmancî özgün terim.",
+        "not": "\"Têk\" (bozuk/dağılmış) + \"çûn\" (gitmek) = yenilgi, çöküş. Kimlik kaybı (asimilasyon) için \"asîmîlasyon\" ya da \"bişaftin\" kullanılır.",
         "her": [
-          "Têkçûna zimanî gelek e.",
+          "Têkçûna artêşê mezin bû.",
           "Li hemberî têkçûnê."
         ],
         "gen": [
-          "Têkçûn û parastin",
-          "Têkçûna zimanî"
+          "Têkçûn û serkeftin",
+          "Têkçûna dewletê"
         ]
       },
       {
@@ -44520,11 +45031,11 @@
         "ku": "Pluralîzm",
         "tr": "Çoğulculuk",
         "en": "Pluralism",
-        "cins": "nêr",
-        "ez": "pluralîzmê",
+        "cins": "mê",
+        "ez": "pluralîzma",
         "kat": "felsefe",
         "zor": 0.65,
-        "not": "Eril — uluslararası terim. \"Cihêrengî\" Kurmancî karşılığı.",
+        "not": "Dişil — uluslararası terim. \"Cihêrengî\" Kurmancî karşılığı.",
         "her": [
           "Pluralîzm û cihêrengî.",
           "Di pluralîzmê de."
@@ -44615,11 +45126,11 @@
         "ku": "Xwebûn",
         "tr": "Benlik / Öz varlık",
         "en": "Self-being / Identity",
-        "cins": "nêr",
-        "ez": "xwebûnê",
+        "cins": "mê",
+        "ez": "xwebûna",
         "kat": "kimlik",
         "zor": 0.67,
-        "not": "Eril — \"xwe\" + \"bûn\". Felsefi kimlik kavramı.",
+        "not": "Dişil — \"xwe\" + \"bûn\". Felsefi kimlik kavramı.",
         "her": [
           "Xwebûna kurdî.",
           "Di xwebûnê de."
@@ -45258,21 +45769,21 @@
       },
       {
         "id": "b2_730",
-        "ku": "Zanistê civakî",
+        "ku": "Zanistên civakî",
         "tr": "Sosyal bilimler",
         "en": "Social sciences",
         "cins": "bêcins",
-        "ez": "zanistê civakî",
+        "ez": "zanistên civakî",
         "kat": "zanist",
         "zor": 0.67,
         "not": "\"Zanist\" + \"civakî\". Akademik disiplin.",
         "her": [
-          "Zanistê civakî girîng in.",
-          "Di zanistê civakî de."
+          "Zanistên civakî girîng in.",
+          "Di zanistên civakî de."
         ],
         "gen": [
-          "Zanistê civakî û xwezayî",
-          "Zanistê civakî"
+          "Zanistên civakî û xwezayî",
+          "Zanistên civakî"
         ]
       },
       {
@@ -46977,7 +47488,7 @@
         "zor": 0.63,
         "not": "\"Rewş\" + \"dualî\". Heritage diaspora durumu.",
         "her": [
-          "Rewşa dualî ya kurdan di diasporayê.",
+          "Rewşa dualî ya kurdan di diasporayê de.",
           "Di rewşa dualî de."
         ],
         "gen": [
@@ -47861,20 +48372,20 @@
       },
       {
         "id": "b2_f06",
-        "ku": "Serdema Newrozê di wêjeyê",
+        "ku": "Serdema Newrozê di wêjeyê de",
         "tr": "Edebiyatta Newroz dönemi",
         "en": "Newroz era in literature",
         "cins": "mê",
-        "ez": "serdema Newrozê di wêjeyê",
+        "ez": "serdema Newrozê di wêjeyê de",
         "kat": "edebiyat",
         "zor": 0.62,
         "not": "\"Serdem\"+\"Newroz\"+\"wêje\".",
         "her": [
-          "Serdema Newrozê di wêjeyê.",
+          "Serdema Newrozê di wêjeyê de.",
           "Di serdema Newrozê de."
         ],
         "gen": [
-          "Serdema Newrozê di wêjeyê",
+          "Serdema Newrozê di wêjeyê de",
           "Serdema me"
         ]
       },
@@ -49870,7 +50381,7 @@
         ],
         "gen": [
           "Cihêtîya zayendî di ziman de",
-          "Zayendê kurdî"
+          "Zayenda kurdî"
         ]
       },
       {
@@ -50877,7 +51388,7 @@
         ],
         "gen": [
           "Deşt",
-          "Deştê me"
+          "Deşta me"
         ]
       },
       {
@@ -50982,7 +51493,7 @@
         "en": "I had brought it",
         "cins": "bêcins",
         "ez": null,
-        "kat": "ergatîf_b2",
+        "kat": "ergatif_b2",
         "zor": 0.65,
         "not": "Ergatîf + dema borî ya dûr.",
         "her": [
@@ -51001,7 +51512,7 @@
         "en": "They had done it",
         "cins": "bêcins",
         "ez": null,
-        "kat": "ergatîf_b2",
+        "kat": "ergatif_b2",
         "zor": 0.66,
         "not": "Ergatîf pirjimar + dema borî ya dûr. (\"kiribû\" ji \"kirin\"; \"kirîbû\" ji \"kirîn\" = satın almıştı.)",
         "her": [
@@ -51020,7 +51531,7 @@
         "en": "What did you say?",
         "cins": "bêcins",
         "ez": null,
-        "kat": "ergatîf_b2",
+        "kat": "ergatif_b2",
         "zor": 0.62,
         "not": "Ergatîf pirsyar.",
         "her": [
@@ -51039,7 +51550,7 @@
         "en": "We read it",
         "cins": "bêcins",
         "ez": null,
-        "kat": "ergatîf_b2",
+        "kat": "ergatif_b2",
         "zor": 0.63,
         "not": "Ergatîf pirjimar.",
         "her": [
@@ -51058,7 +51569,7 @@
         "en": "He hit him/her",
         "cins": "bêcins",
         "ez": null,
-        "kat": "ergatîf_b2",
+        "kat": "ergatif_b2",
         "zor": 0.65,
         "not": "Ergatîf + lêker bileşik.",
         "her": [
@@ -51077,7 +51588,7 @@
         "en": "She had sold it",
         "cins": "bêcins",
         "ez": null,
-        "kat": "ergatîf_b2",
+        "kat": "ergatif_b2",
         "zor": 0.67,
         "not": "Ergatîf mê + dema borî ya dûr.",
         "her": [
@@ -51096,7 +51607,7 @@
         "en": "I had heard",
         "cins": "bêcins",
         "ez": null,
-        "kat": "ergatîf_b2",
+        "kat": "ergatif_b2",
         "zor": 0.66,
         "not": "Ergatîf + dema borî ya dûr.",
         "her": [
@@ -51115,7 +51626,7 @@
         "en": "They wrote",
         "cins": "bêcins",
         "ez": null,
-        "kat": "ergatîf_b2",
+        "kat": "ergatif_b2",
         "zor": 0.64,
         "not": "Ergatîf pirjimar.",
         "her": [
@@ -51286,7 +51797,7 @@
         "en": "Prominent / Noticeable",
         "cins": "bêcins",
         "ez": null,
-        "kat": "rengdêr",
+        "kat": "rengder",
         "zor": 0.6,
         "not": "Rengdêrê pêşketî.",
         "her": [
@@ -51305,7 +51816,7 @@
         "en": "Difficult / Hard",
         "cins": "bêcins",
         "ez": null,
-        "kat": "rengdêr",
+        "kat": "rengder",
         "zor": 0.58,
         "not": "Rengdêrê pêşketî.",
         "her": [
@@ -51324,7 +51835,7 @@
         "en": "Savage / Brutal",
         "cins": "bêcins",
         "ez": null,
-        "kat": "rengdêr",
+        "kat": "rengder",
         "zor": 0.62,
         "not": "Rengdêrê pêşketî.",
         "her": [
@@ -51343,7 +51854,7 @@
         "en": "Remarkable",
         "cins": "bêcins",
         "ez": null,
-        "kat": "rengdêr",
+        "kat": "rengder",
         "zor": 0.61,
         "not": "Rengdêrê pêşketî.",
         "her": [
@@ -51362,7 +51873,7 @@
         "en": "Meaningless",
         "cins": "bêcins",
         "ez": null,
-        "kat": "rengdêr",
+        "kat": "rengder",
         "zor": 0.59,
         "not": "\"Bê\"+\"wate\".",
         "her": [
@@ -51381,7 +51892,7 @@
         "en": "Worthy / Valuable",
         "cins": "bêcins",
         "ez": null,
-        "kat": "rengdêr",
+        "kat": "rengder",
         "zor": 0.58,
         "not": "Rengdêrê pêşketî.",
         "her": [
@@ -51400,7 +51911,7 @@
         "en": "Extensive / Broad",
         "cins": "bêcins",
         "ez": null,
-        "kat": "rengdêr",
+        "kat": "rengder",
         "zor": 0.62,
         "not": "Rengdêrê pêşketî.",
         "her": [
@@ -51419,7 +51930,7 @@
         "en": "Secret / Hidden",
         "cins": "bêcins",
         "ez": null,
-        "kat": "rengdêr",
+        "kat": "rengder",
         "zor": 0.61,
         "not": "Rengdêrê pêşketî.",
         "her": [
@@ -51571,7 +52082,7 @@
         "en": "Database",
         "cins": "mê",
         "ez": "database",
-        "kat": "teknolojî",
+        "kat": "teknoloji",
         "zor": 0.63,
         "not": "Têgeha teknolojiyê.",
         "her": [
@@ -51590,7 +52101,7 @@
         "en": "Algorithm",
         "cins": "mê",
         "ez": "algorîtma",
-        "kat": "teknolojî",
+        "kat": "teknoloji",
         "zor": 0.65,
         "not": "Têgeha bername û zanistê.",
         "her": [
@@ -51609,7 +52120,7 @@
         "en": "Source / Resource",
         "cins": "mê",
         "ez": "çavkanî",
-        "kat": "teknolojî",
+        "kat": "teknoloji",
         "zor": 0.59,
         "not": "Çavkanîya agahdariyê.",
         "her": [
@@ -51628,7 +52139,7 @@
         "en": "System",
         "cins": "mê",
         "ez": "pergala",
-        "kat": "teknolojî",
+        "kat": "teknoloji",
         "zor": 0.6,
         "not": "Dişil — Pergala teknolojîk. Veqetandek: pergala (mê).",
         "her": [
@@ -51647,7 +52158,7 @@
         "en": "Network / Internet",
         "cins": "mê",
         "ez": "torgiloka",
-        "kat": "teknolojî",
+        "kat": "teknoloji",
         "zor": 0.62,
         "not": "Dişil — Torgiloka dîjîtal. Veqetandek: torgiloka (mê).",
         "her": [
@@ -51666,7 +52177,7 @@
         "en": "Application / App",
         "cins": "mê",
         "ez": "sepan",
-        "kat": "teknolojî",
+        "kat": "teknoloji",
         "zor": 0.6,
         "not": "Sepana mobîl.",
         "her": [
@@ -51685,7 +52196,7 @@
         "en": "Security",
         "cins": "mê",
         "ez": "ewlehî",
-        "kat": "teknolojî",
+        "kat": "teknoloji",
         "zor": 0.62,
         "not": "Ewlehîya dîjîtal.",
         "her": [
@@ -51932,7 +52443,7 @@
         "en": "Is done / Is made",
         "cins": "bêcins",
         "ez": null,
-        "kat": "pasîf",
+        "kat": "pasif",
         "zor": 0.62,
         "not": "Awayê pasîf — \"tê\" + kirin.",
         "her": [
@@ -51951,7 +52462,7 @@
         "en": "Is said",
         "cins": "bêcins",
         "ez": null,
-        "kat": "pasîf",
+        "kat": "pasif",
         "zor": 0.61,
         "not": "Awayê pasîf — \"tê\" + gotin.",
         "her": [
@@ -51970,7 +52481,7 @@
         "en": "Is read",
         "cins": "bêcins",
         "ez": null,
-        "kat": "pasîf",
+        "kat": "pasif",
         "zor": 0.62,
         "not": "Awayê pasîf — \"tê\" + xwendin.",
         "her": [
@@ -51989,7 +52500,7 @@
         "en": "Was done",
         "cins": "bêcins",
         "ez": null,
-        "kat": "pasîf",
+        "kat": "pasif",
         "zor": 0.63,
         "not": "Awayê pasîf dema borî.",
         "her": [
@@ -52008,7 +52519,7 @@
         "en": "Was seen / Was found",
         "cins": "bêcins",
         "ez": null,
-        "kat": "pasîf",
+        "kat": "pasif",
         "zor": 0.64,
         "not": "Awayê pasîf dema borî.",
         "her": [
@@ -52027,7 +52538,7 @@
         "en": "Is known",
         "cins": "bêcins",
         "ez": null,
-        "kat": "pasîf",
+        "kat": "pasif",
         "zor": 0.62,
         "not": "Awayê pasîf — \"tê\" + zanîn.",
         "her": [
@@ -52327,16 +52838,16 @@
       {
         "id": "b2_690",
         "ku": "ber xwe dan",
-        "tr": "Kendini vermek / Yönelmek",
-        "en": "To devote oneself",
+        "tr": "Direnmek / Dayanmak",
+        "en": "To resist / To hold out",
         "cins": "bêcins",
         "ez": null,
         "kat": "bileşik_leker",
         "zor": 0.64,
         "not": "Lêkera bileşik.",
         "her": [
-          "Wê ber xwe da xwendinê.",
-          "Ber xwe bidin karê xwe."
+          "Gel li hember zilmê ber xwe da.",
+          "Ber xwe bidin!"
         ],
         "gen": [
           "Ber xwe dan",
@@ -52508,7 +53019,7 @@
         "zor": 0.66,
         "not": "Dişil — [BH]: xem n.f. (\"ji xema û keseran\"). Dengbêj geleneğinde merkezi duygu. \"Xema dil\" = kalbin hüznü.",
         "her": [
-          "Xemê dil dagirtiye.",
+          "Xema dil dagirtiye.",
           "Xem û kul di helbesta kurdî de."
         ],
         "gen": [
@@ -52563,14 +53074,14 @@
         "ez": "gula",
         "kat": "edebiyat",
         "zor": 0.65,
-        "not": "Dişil — [BH]: gul n.f. Klasik şiirde \"sevgilinin yüzü\". \"Gulê Kurdistan\" = Kürdistan'ın gülü.",
+        "not": "Dişil — [BH]: gul n.f. Klasik şiirde \"sevgilinin yüzü\". \"Gula Kurdistanê\" = Kürdistan'ın gülü.",
         "her": [
           "Gul dikeve.",
           "Gulên sor ji baxçê me ne."
         ],
         "gen": [
           "Gul û bilbil",
-          "Gulê Kurdistan"
+          "Gula Kurdistanê"
         ]
       },
       {
@@ -52603,7 +53114,7 @@
         "zor": 0.66,
         "not": "\"Derd û êş\" = dert ve acı. Dengbêj ve halk şiirinde çift kullanım.",
         "her": [
-          "Derd û êşê min.",
+          "Derd û êşa min.",
           "Ji derd û êşê derbas bûm."
         ],
         "gen": [
@@ -53357,11 +53868,11 @@
         "ku": "Federalîzm",
         "tr": "Federalizm",
         "en": "Federalism",
-        "cins": "nêr",
-        "ez": "federalîzmê",
+        "cins": "mê",
+        "ez": "federalîzma",
         "kat": "siyaset",
         "zor": 0.62,
-        "not": "Eril — uluslararası terim.",
+        "not": "Dişil — uluslararası terim.",
         "her": [
           "Federalîzm û xweserî.",
           "Di federalîzmê de."
@@ -53515,7 +54026,7 @@
         "zor": 0.64,
         "not": "\"Nasname\" + \"dualî\". Heritage öğrenicinin merkezi kavramı.",
         "her": [
-          "Nasnameya dualî ya Kurdan di diasporayê.",
+          "Nasnameya dualî ya Kurdan di diasporayê de.",
           "Di nasnameya dualî de."
         ],
         "gen": [
@@ -53867,20 +54378,20 @@
       },
       {
         "id": "c1_160",
-        "ku": "Têgehê bingehîn",
+        "ku": "Têgeha bingehîn",
         "tr": "Temel kavram",
         "en": "Core concept",
-        "cins": "nêr",
-        "ez": "têgehê bingehîn",
+        "cins": "mê",
+        "ez": "têgeha bingehîn",
         "kat": "zanist",
         "zor": 0.62,
         "not": "\"Têgeh\" (kavram) + \"bingehîn\".",
         "her": [
-          "Têgehê bingehîn çi ye?",
+          "Têgeha bingehîn çi ye?",
           "Têgehên bingehîn ên zimannasiyê."
         ],
         "gen": [
-          "Têgehê bingehîn",
+          "Têgeha bingehîn",
           "Têgehên me"
         ]
       },
@@ -53914,7 +54425,7 @@
         "zor": 0.63,
         "not": "\"Nêzîk bûn\" akademik bağlamda \"ele almak/yaklaşmak\" anlamında.",
         "her": [
-          "Pirsgirêkê nêzîk bûm.",
+          "Nêzîkî pirsgirêkê bûm.",
           "Çawa nêzîk bûn?"
         ],
         "gen": [
@@ -57681,7 +58192,7 @@
         ],
         "gen": [
           "Diaspora û welat",
-          "Diaspora û welata me"
+          "Diaspora û welatê me"
         ]
       },
       {
@@ -57819,20 +58330,20 @@
       },
       {
         "id": "c1_366",
-        "ku": "Şingalê Êzîdîyan",
+        "ku": "Şingala Êzîdiyan",
         "tr": "Êzidilerin Şengali",
         "en": "Yazidis' Sinjar",
-        "cins": "nêr",
-        "ez": "Şingalê Êzîdîyan",
+        "cins": "mê",
+        "ez": "Şingala Êzîdiyan",
         "kat": "dîrok",
         "zor": 0.62,
         "not": "\"Şingal\" (Sinjar) = Êzidi yurdu. 2014 soykırımı.",
         "her": [
-          "Şingalê Êzîdîyan.",
-          "Di Şingalê Êzîdîyan de."
+          "Şingala Êzîdiyan.",
+          "Di Şingala Êzîdiyan de."
         ],
         "gen": [
-          "Şingalê Êzîdîyan",
+          "Şingala Êzîdiyan",
           "Şingal"
         ]
       },
@@ -62194,18 +62705,18 @@
         "ku": "Heyam",
         "tr": "Dönem / Çağ (şiirsel)",
         "en": "Era (poetic)",
-        "cins": "nêr",
-        "ez": "heyamê",
+        "cins": "mê",
+        "ez": "heyama",
         "kat": "edebiyat",
         "zor": 0.5,
-        "not": "Eril — [BH]: heyam n.m. \"Heyamê zêrîn\" = altın çağ.",
+        "not": "Dişil — \"Heyama zêrîn\" = altın çağ.",
         "her": [
           "Di heyamê de.",
-          "Heyamê zêrîn."
+          "Heyama zêrîn."
         ],
         "gen": [
           "Heyam û serdem",
-          "Heyamê zêrîn"
+          "Heyama zêrîn"
         ]
       },
       {
@@ -62535,14 +63046,14 @@
         "ku": "Navok",
         "tr": "İçerik / Öz",
         "en": "Content / Essence",
-        "cins": "nêr",
-        "ez": "navokê",
+        "cins": "mê",
+        "ez": "navoka",
         "kat": "ziman",
         "zor": 0.53,
-        "not": "Eril — \"nav\" + \"-ok\". [BH]: navok n.m.",
+        "not": "Dişil — \"nav\" + \"-ok\".",
         "her": [
-          "Navokê gotarê.",
-          "Navokê metnê."
+          "Navoka gotarê.",
+          "Navoka metnê."
         ],
         "gen": [
           "Navok û şêwe",
@@ -67861,7 +68372,7 @@
         "zor": 0.44,
         "not": "Têgeha psîkolojîk — xwe-nas-în.",
         "her": [
-          "Xwenasîn gavê yekem e.",
+          "Xwenasîn gava yekem e.",
           "Di xwenasînê de pêşketin."
         ],
         "gen": [
@@ -68235,8 +68746,8 @@
         "ku": "neolojîzm",
         "tr": "Neolojizm / Yeni Sözcük",
         "en": "Neologism",
-        "cins": "nêr",
-        "ez": "neolojîzmê",
+        "cins": "mê",
+        "ez": "neolojîzma",
         "kat": "ziman",
         "zor": 0.62,
         "not": "Yeni terim üretimi. Modern Kurmancî gelişiminde tartışılan konu.",
@@ -68246,7 +68757,7 @@
         ],
         "gen": [
           "Neolojîzm",
-          "Neolojîzmê kurdî"
+          "Neolojîzma kurdî"
         ]
       },
       {
@@ -68311,14 +68822,14 @@
         "ku": "tesewuf",
         "tr": "Tasavvuf / Sufizm",
         "en": "Sufism",
-        "cins": "nêr",
-        "ez": "tesewufê",
+        "cins": "mê",
+        "ez": "tesewufa",
         "kat": "felsefe",
         "zor": 0.6,
         "not": "Arapça kökenli. İslam mistisizmi. Cizîrî ve Feqiyê Teyran geleneği.",
         "her": [
           "Tesewuf felsefeyeke kûr e.",
-          "Tesewufê Cizîrî navdar e."
+          "Tesewufa Cizîrî navdar e."
         ],
         "gen": [
           "Tesewuf",
@@ -76103,7 +76614,7 @@
           "b1_080",
           "b1_081",
           "b1_082",
-          "b1_250"
+          "b1_085"
         ],
         "exercises": [
           {
@@ -76515,7 +77026,9 @@
           "b2_012",
           "b2_013",
           "b2_ps01",
-          "b2_ps02"
+          "b2_ps02",
+          "b2_669",
+          "b2_670"
         ],
         "exercises": [
           {
@@ -78952,14 +79465,14 @@
           {
             "id": "c1_l05_e6",
             "type": "speakingPractice",
-            "kurmanjPrompt": "Azadiya pozîtîf û negatîf du ramînên cuda ne. Exlaqa Kantî li ser vîndariya mirov disekine.",
+            "kurmanjPrompt": "Azadiya pozîtîf û negatîf du ramînên cuda ne. Exlaqê Kantî li ser vîndariya mirov disekine.",
             "turkishPrompt": "Pozitif ve negatif özgürlük iki farklı düşüncedir. Kantçı ahlak insan iradesine dayanır.",
             "options": [
               "Gelek baş",
               "Nêzîk",
               "Carek din"
             ],
-            "correctAnswer": "Azadiya pozîtîf û negatîf du ramînên cuda ne. Exlaqa Kantî li ser vîndariya mirov disekine.",
+            "correctAnswer": "Azadiya pozîtîf û negatîf du ramînên cuda ne. Exlaqê Kantî li ser vîndariya mirov disekine.",
             "correctIndex": null,
             "grammarNote": null,
             "culturalNote": null,
@@ -80269,7 +80782,7 @@
           {
             "id": "c1_l15_e3",
             "type": "multipleChoice",
-            "kurmanjPrompt": "Peyveke girêdanê ji bo nîşandana ramanê dijber çi ye?",
+            "kurmanjPrompt": "Peyveke girêdanê ji bo nîşandana ramana dijber çi ye?",
             "turkishPrompt": "Doğru bağlayıcıyı seç",
             "options": [
               "jixwe",
@@ -80897,7 +81410,7 @@
       },
       {
         "id": "c2_l05",
-        "kurmanjTitle": "Cegerxwîn: Mîrasê Edebî",
+        "kurmanjTitle": "Cegerxwîn: Mîrasa Edebî",
         "turkishTitle": "Cegerxwîn: Edebi Miras",
         "unitNumber": 1,
         "lessonNumber": 5,
@@ -83931,7 +84444,7 @@
         "group": "literature",
         "kurmanjTitle": "Eyşan û Bezo",
         "turkishTitle": "Eyşan ve Bezo",
-        "kurmanjContent": "Eyşan û Bezo, çîrokeke evînê ya gelêrî ye ji gundên Botan û Hekarî. Ji destanên dengbêjiyê yên evînê.\n\nÇîrok:\nEyşan, keçeke ji gundê piçûk, bi Bezo, lawekî gunêwer ê jor diçiya, dilketî dibe. Lê Bezo dûr e — di nav çiyayan de şivan e û ji bo serdarîya gund pêşbazî dike.\n\nEyşan li bin lîla pîvanê (lîlandanê) li bende Bezo dimîne. Çiya gewre ye, demên wexta dirêj. Eyşan bi xwe re — rojan, mehan, salan — peyivîn dike: \"Bezo, ka tu li ku derê yî?\"\n\nEncam:\nÇend versiyon hene:\n• Yek dibêje Bezo vedigere û her dû dilketî dewatê dikin.\n• Yek dibêje Bezo di şer de mir, Eyşan li ser gora wî   saqas dirêjîne û dîlana xwe ya dawiyê dike.\n• Yek dibêje, di dawiyê de, Eyşan diçe çiya û bi Bezo   re bibe yek — bi laş an jî bi ruh.\n\nWateya çandî: Eyşan û Bezo destanê pîvana evîna jina Kurd e — pîvanek ku ne hewceyî maddî ye, lê di hundir de tê meşandin.",
+        "kurmanjContent": "Eyşan û Bezo, çîrokeke evînê ya gelêrî ye ji gundên Botan û Hekarî. Ji destanên dengbêjiyê yên evînê.\n\nÇîrok:\nEyşan, keçeke ji gundê piçûk, bi Bezo, lawekî gunêwer ê jor diçiya, dilketî dibe. Lê Bezo dûr e — di nav çiyayan de şivan e û ji bo serdarîya gund pêşbazî dike.\n\nEyşan li bin lîla pîvanê (lîlandanê) li bende Bezo dimîne. Çiya gewre ye, demên wexta dirêj. Eyşan bi xwe re — rojan, mehan, salan — peyivîn dike: \"Bezo, ka tu li ku derê yî?\"\n\nEncam:\nÇend versiyon hene:\n• Yek dibêje Bezo vedigere û her dû dilketî dewatê dikin.\n• Yek dibêje Bezo di şer de mir, Eyşan li ser gora wî   saqas dirêjîne û dîlana xwe ya dawiyê dike.\n• Yek dibêje, di dawiyê de, Eyşan diçe çiya û bi Bezo   re bibe yek — bi laş an jî bi ruh.\n\nWateya çandî: Eyşan û Bezo destana pîvana evîna jina Kurd e — pîvanek ku ne hewceyî maddî ye, lê di hundir de tê meşandin.",
         "turkishContent": "Eyşan ve Bezo, Botan ve Hekkari köylerinden bir halk aşk hikâyesidir. Aşk dengbêj destanlarındandır.\n\nHikâye:\nKüçük bir köyden Eyşan, dağa giden köylü genç Bezo'ya âşık olur. Ama Bezo uzaktadır — dağlarda çobandır ve köy reisliği için yarışır.\n\nEyşan, \"lîlandan\" (özlem ezgileri) eşliğinde Bezo'yu beklemekte kalır. Dağ büyüktür, zaman uzun. Eyşan kendi kendisiyle — günler, aylar, yıllar — konuşur: \"Bezo, neredesin?\"\n\nSonuç:\nBirkaç versiyon vardır:\n• Biri der ki Bezo döner ve iki âşık düğün yapar.\n• Biri der ki Bezo savaşta öldü, Eyşan mezarında uzanır   ve son halayını yapar.\n• Biri der ki sonunda Eyşan dağa gider ve Bezo'yla   birleşir — bedence ya da ruhça.\n\nKültürel anlam: Eyşan ve Bezo, Kürt kadınının aşk \"lîlandan\"ının destanıdır — maddi olmaya gerek duymayan, içte yaşayan bir özlem.",
         "backgroundNote": "\"Lîlandan\" (uzun süreli özlem ezgisi) Kürt kadın müzikgeleneğinin yapısal bir öğesidir. Eyşan ve Bezo destanı çeşitli bölgesel varyantlarda — Hekarî, Botan, Berazî — kayıt altına alınmıştır.",
         "level": 3,
@@ -84113,7 +84626,7 @@
         "group": "lifeTradition",
         "kurmanjTitle": "Awxa",
         "turkishTitle": "Awxa — yoğurt çorbası",
-        "kurmanjContent": "Awxa, şorbeya kevneşopî ye ji mast, savar û nehniyê. Bi taybetî ji bo nexweşan û kesên ku ji ber zikan diêşin tê amade kirin — sivik û saxlemiya zik e.\n\nMaddey:\n• Mastê kelandî (bi rûnê heywan).\n• Savara hûr.\n• Nehniyê ziwa.\n• Sîr û îsotê germ.\n\nAwa: Mast hêdî hêdî tê hejandin da ku nepişke. Savar tê avêtin, paşê nehniyê ziwa û li dawiyê sîrê di rûnê de sorkirî tê li ser dirêjandin.\n\nÇand: \"Awxa ji bo dilê dilovîn\" — wek dîyariyek ji cîranên nexweş re tê şandin.",
+        "kurmanjContent": "Awxa, şorbeya kevneşopî ye ji mast, savar û nehniyê. Bi taybetî ji bo nexweşan û kesên ku ji ber zikan diêşin tê amade kirin — sivik û saxlemiya zik e.\n\nMaddey:\n• Mastê kelandî (bi rûnê heywan).\n• Savara hûr.\n• Nehniyê ziwa.\n• Sîr û îsota germ.\n\nAwa: Mast hêdî hêdî tê hejandin da ku nepişke. Savar tê avêtin, paşê nehniyê ziwa û li dawiyê sîrê di rûnê de sorkirî tê li ser dirêjandin.\n\nÇand: \"Awxa ji bo dilê dilovîn\" — wek dîyariyek ji cîranên nexweş re tê şandin.",
         "turkishContent": "Awxa, yoğurt, bulgur ve nane ile yapılan geleneksel çorbadır. Özellikle hastalar ve mide rahatsızlıkları için hazırlanır — hafif ve mide dostudur.\n\nMalzemeler:\n• Pişirilmiş yoğurt (hayvansal yağda).\n• İnce bulgur.\n• Kuru nane.\n• Sarımsak ve acı biber.\n\nYapılışı: Yoğurt yavaşça çırpılarak kesmemesi sağlanır. Bulgur eklenir, ardından kuru nane, en üste yağda kavrulmuş sarımsak gezdirilir.\n\nKültür: \"Şefkatli kalp için awxa\" — hasta komşulara hediye olarak gönderilir.",
         "backgroundNote": "Yoğurt çorbası tüm Doğu Akdeniz ve Mezopotamya halklarında ortaktır. Kürt awxasının ayırt edici özelliği bulgurun ince olmasıdır — kentsel \"yayla çorbası\"ndan farkı budur.",
         "level": 2,
@@ -84355,7 +84868,7 @@
         "group": "people",
         "kurmanjTitle": "Mîr Bedirxan Beg (1802–1869)",
         "turkishTitle": "Mîr Bedirhan Bey (1802-1869)",
-        "kurmanjContent": "Mîr Bedirxan Beg, mîrê dawî yê Botanê (Cizîr) û lîderê\nserhildana modern a yekem a Kurdan e. Bavê Bedirxaniyan,\nku malbata wê dê di sedsala 20'î de bavê alfabeya Hawar\nû çapxaneya Kurmancî bibe.\n\nJiyana wî:\n• Mîrê Botanê ji 1820'î heta 1847'an.\n• Bi piştevanên xwe re mîrekiyek otonom rêvebir kir.\n• Pere û tîpên xwe yên çapkirinê hebûn.\n\nSerhildana 1843–1847:\nPiştî Tanzîmatê (1839) Osmanî biryara betalkirina mîrekiyên\nKurd dan. Bedirxan li dijî vê biryarê rabû:\n• 1843: serhildan dest pê kir li Cizîrê.\n• Bi mîrekiyên Hekarî, Bohtan, Soran re hevkarî.\n• Pênc salan li hember leşkerê Osmanî berxwedan kir.\n\nEncam:\n• 1847: Osmanî bi 100,000 leşker hêz peyda kir.\n• Bedirxan teslîm bû. Hate sirgûn kirin Stembol, paşê Şamê.\n• Li Şamê di 1869'î de mir.\n\nMîras:\nLawên Bedirxan — Mîr Celadet û Kamûran — paşê damezrînerên\nkovara Hawar (1932) û alfabeya Latînî bûn. Bi vî awayî,\nserhildana 1843 mîrasê xwe heta îro daye.",
+        "kurmanjContent": "Mîr Bedirxan Beg, mîrê dawî yê Botanê (Cizîr) û lîderê\nserhildana modern a yekem a Kurdan e. Bavê Bedirxaniyan,\nku malbata wê dê di sedsala 20'î de bavê alfabeya Hawar\nû çapxaneya Kurmancî bibe.\n\nJiyana wî:\n• Mîrê Botanê ji 1820'î heta 1847'an.\n• Bi piştevanên xwe re mîrekiyek otonom rêvebir kir.\n• Pere û tîpên xwe yên çapkirinê hebûn.\n\nSerhildana 1843–1847:\nPiştî Tanzîmatê (1839) Osmanî biryara betalkirina mîrekiyên\nKurd dan. Bedirxan li dijî vê biryarê rabû:\n• 1843: serhildan dest pê kir li Cizîrê.\n• Bi mîrekiyên Hekarî, Bohtan, Soran re hevkarî.\n• Pênc salan li hember leşkerê Osmanî berxwedan kir.\n\nEncam:\n• 1847: Osmanî bi 100,000 leşker hêz peyda kir.\n• Bedirxan teslîm bû. Hate sirgûn kirin Stembol, paşê Şamê.\n• Li Şamê di 1869'î de mir.\n\nMîras:\nLawên Bedirxan — Mîr Celadet û Kamûran — paşê damezrînerên\nkovara Hawar (1932) û alfabeya Latînî bûn. Bi vî awayî,\nserhildana 1843 mîrasa xwe heta îro daye.",
         "turkishContent": "Mîr Bedirhan Bey, Botan'ın (Cizre) son mîreki ve modern\nKürtlerin ilk ayaklanmasının lideridir. Bedirhanlar'ın\nbabasıdır — bu aile 20. yüzyılda Hawar alfabesinin ve\nKurmancî yayıncılığının kurucusu olacaktır.\n\nHayatı:\n• 1820-1847 arasında Botan mîreki.\n• Destekçileriyle özerk bir mîrekilik yönetti.\n• Kendi parası ve matbaa harfleri vardı.\n\nAyaklanma 1843-1847:\nTanzimat'tan (1839) sonra Osmanlı, Kürt mîreklerini\nkaldırma kararı aldı. Bedirhan bu karara karşı çıktı:\n• 1843: Cizre'de ayaklanma başladı.\n• Hakkari, Bohtan, Soran mîrekleriyle işbirliği.\n• Beş yıl Osmanlı ordusuna direndi.\n\nSonuç:\n• 1847: Osmanlı 100.000 askerlik kuvvet topladı.\n• Bedirhan teslim oldu. İstanbul'a, sonra Şam'a sürgün\n  edildi.\n• 1869'da Şam'da öldü.\n\nMiras:\nBedirhan'ın oğulları — Mîr Celadet ve Kamûran — sonradan\nHawar dergisi (1932) ve Latin alfabesinin kurucusu oldu.\nBöylece 1843 ayaklanması mirasını günümüze taşıdı.",
         "backgroundNote": "Bedirxan Beg'in Şam'daki mezarı 1990'larda Bedirxan ailesi tarafından restore edildi. Sürgünde yazdığı mektuplar Kürt aydınlanma hareketinin ilk belgeleridir.",
         "level": 4,
@@ -84475,7 +84988,7 @@
         "group": "people",
         "kurmanjTitle": "Leyla Qasim (1952–1974)",
         "turkishTitle": "Leyla Qasım (1952-1974)",
-        "kurmanjContent": "Leyla Qasim, xwendekara zankoya Bexdayê û aktîvîsta yekem\na jin a Kurd e ku ji aliyê rejîma Saddam Husên ve hate\ndardakirin. Sembola berxwedana jinên Kurd e.\n\nJiyana wê:\n• Ji Xanaqînê hatibû dinyayê (rojhilatê Iraqê).\n• Xwendekara zaningeha Bexdayê — beşa edebiyatê.\n• Endama tevgera xwendekarên Kurd a li ser sosyalîstî û\n  parastina mafên Kurdan.\n\nGirtin û dadgehê:\n• 1974: di nav 4 xwendekarên Kurd de hate girtin ji ber\n  \"êrîşên li ser dewletê\" (gizlî pişgiriya pêşmergeyên\n  Mistefa Barzanî).\n• Dadgehê Saddam Husên: 5 mehên zindanê, paşê biryara\n  dardakirinê.\n\nDardakirin:\n12ê Gulanê 1974'an de, Leyla Qasim û 4 xwendekarên Kurd\nli meydana Tehrîr a Bexdayê hatin dardakirin. Leyla 22-\nsalî bû.\n\nGotina dawî:\n\"Em ne tirsiyan in. Em xwendekarên welatê xwe ne. Em\nxwendekarên gelê xwe ne.\"\n\nMîras:\nLeyla Qasim, sembola \"jin-aktîvîsta Kurd\" a yekem a\nmodernê. Strana \"Lê Leyla, Leyla\" ji bo bîranîna wê hate\nçêkirin. Wêneya wê li seranserê Kurdistanê tê dîtin.",
+        "kurmanjContent": "Leyla Qasim, xwendekara zankoya Bexdayê û aktîvîsta yekem\na jin a Kurd e ku ji aliyê rejîma Saddam Husên ve hate\ndardakirin. Sembola berxwedana jinên Kurd e.\n\nJiyana wê:\n• Ji Xanaqînê hatibû dinyayê (rojhilatê Iraqê).\n• Xwendekara zaningeha Bexdayê — beşa edebiyatê.\n• Endama tevgera xwendekarên Kurd a li ser sosyalîstî û\n  parastina mafên Kurdan.\n\nGirtin û dadgehê:\n• 1974: di nav 4 xwendekarên Kurd de hate girtin ji ber\n  \"êrîşên li ser dewletê\" (gizlî pişgiriya pêşmergeyên\n  Mistefa Barzanî).\n• Dadgeha Saddam Husên: 5 mehên zindanê, paşê biryara\n  dardakirinê.\n\nDardakirin:\n12ê Gulanê 1974'an de, Leyla Qasim û 4 xwendekarên Kurd\nli meydana Tehrîr a Bexdayê hatin dardakirin. Leyla 22-\nsalî bû.\n\nGotina dawî:\n\"Em ne tirsiyan in. Em xwendekarên welatê xwe ne. Em\nxwendekarên gelê xwe ne.\"\n\nMîras:\nLeyla Qasim, sembola \"jin-aktîvîsta Kurd\" a yekem a\nmodernê. Strana \"Lê Leyla, Leyla\" ji bo bîranîna wê hate\nçêkirin. Wêneya wê li seranserê Kurdistanê tê dîtin.",
         "turkishContent": "Leyla Qasım, Bağdat üniversitesi öğrencisi ve Saddam\nHüseyin rejimi tarafından idam edilen ilk Kürt kadın\naktivisttir. Kürt kadın direnişinin simgesidir.\n\nHayatı:\n• Hanekin'de doğmuştur (Doğu Irak).\n• Bağdat Üniversitesi edebiyat öğrencisi.\n• Sosyalizm ve Kürt haklarının savunulması için Kürt\n  öğrenci hareketinin üyesi.\n\nTutuklanma ve dava:\n• 1974: 4 Kürt öğrenci ile birlikte \"devlete karşı\n  saldırılar\" suçlamasıyla tutuklandı (Mustafa Barzani\n  peşmergelerine gizli destek).\n• Saddam Hüseyin mahkemesi: 5 ay hapis, sonrasında idam\n  kararı.\n\nİdam:\n12 Mayıs 1974'te Leyla Qasım ve 4 Kürt öğrenci Bağdat\nTahrir meydanında idam edildi. Leyla 22 yaşındaydı.\n\nSon sözü:\n\"Biz korkmuyoruz. Biz vatanımızın öğrencileriyiz. Biz\nhalkımızın öğrencileriyiz.\"\n\nMiras:\nLeyla Qasım, modern dönemin \"ilk Kürt kadın aktivist\"\nsembolüdür. \"Lê Leyla, Leyla\" şarkısı anısına yazılmıştır.\nResmi tüm Kürdistan'da görülür.",
         "backgroundNote": "Leyla Qasım'ın idamı, Saddam Hüseyin'in Kürt kadınlara karşı politikasının başlangıç simgesidir. 12 Mayıs her yıl Kürdistan'da \"Kürt Kadın Direniş Günü\" olarak anılır.",
         "level": 4,
@@ -84617,7 +85130,7 @@
         "group": "lifeTradition",
         "kurmanjTitle": "Cejna Remezanê û Sofraya Îftarê",
         "turkishTitle": "Ramazan Bayramı ve İftar Sofrası",
-        "kurmanjContent": "Meha Remezanê û Cejna piştî wê, di çanda Kurdî de bi sofraya xwe ya taybet û rîtuela \"îftarê\" tê naskirin.\n\nSofraya îftarê:\nDi sofraya îftara Kurdî de hin xwarin her tim hene:\n• Hêjîrên hişk an xurmê — ji bo destpêka îftarê.\n• Şorbeya nehniyê an awxa — sivik û saxlemî.\n• Nan û penîr.\n• Tom û kifte (di rojên taybet de).\n• Çay û şîranî — di dawiyê de.\n\nAdetên Kurdî:\n• \"Telheyê îftarê\" — pênc deqîqe beriya azanê, malbat   hev tê dor sofreyê. Ev kêlî ji bo dua û bîranînê ye.\n• \"Mêvanê Remezanê\" — gava mêvan tê di Remezanê de,   ne tenê wek mêvan e, lê wek \"ezmûneka pîroz\" tê   pejirandin.\n• Şevê 27'an (Leyleyê Qedrê): malbat tev de hîn dimîne,   qehwe û şîranî tê pêşkêş kirin, bîranînên malbatî   tên parvekirin.\n\nCejn:\nSê rojên Cejna Remezanê:\n• Roja yekem: çapkirina cilên nû, ziyareta goristanê.\n• Roja duyem: ziyareta xizm û cîranan.\n• Roja sêyem: govend û şahî ya giştî.",
+        "kurmanjContent": "Meha Remezanê û Cejna piştî wê, di çanda Kurdî de bi sofraya xwe ya taybet û rîtuela \"îftarê\" tê naskirin.\n\nSofraya îftarê:\nDi sofraya îftara Kurdî de hin xwarin her tim hene:\n• Hêjîrên hişk an xurmê — ji bo destpêka îftarê.\n• Şorbeya nehniyê an awxa — sivik û saxlemî.\n• Nan û penîr.\n• Tom û kifte (di rojên taybet de).\n• Çay û şîranî — di dawiyê de.\n\nAdetên Kurdî:\n• \"Telheyê îftarê\" — pênc deqîqe beriya azanê, malbat   hev tê dor sofreyê. Ev kêlî ji bo dua û bîranînê ye.\n• \"Mêvanê Remezanê\" — gava mêvan tê di Remezanê de,   ne tenê wek mêvan e, lê wek \"ezmûneka pîroz\" tê   pejirandin.\n• Şeva 27'an (Leyleyê Qedrê): malbat tev de hîn dimîne,   qehwe û şîranî tê pêşkêş kirin, bîranînên malbatî   tên parvekirin.\n\nCejn:\nSê rojên Cejna Remezanê:\n• Roja yekem: çapkirina cilên nû, ziyareta goristanê.\n• Roja duyem: ziyareta xizm û cîranan.\n• Roja sêyem: govend û şahî ya giştî.",
         "turkishContent": "Ramazan ayı ve sonrasındaki Bayram, Kürt kültüründe kendine has sofrası ve \"iftar\" ritüeli ile bilinir.\n\nİftar sofrası:\nKürt iftar sofrasında daima bulunan bazı yiyecekler:\n• Kuru incir veya hurma — iftarın başlangıcı için.\n• Nane çorbası veya awxa — hafif ve sağlıklı.\n• Ekmek ve peynir.\n• Dolma ve köfte (özel günlerde).\n• Çay ve tatlı — sona doğru.\n\nKürt adetleri:\n• \"Telheyê îftarê\" — ezandan beş dakika önce, aile sofra   başında toplanır. Bu an dua ve anma içindir.\n• \"Ramazan misafiri\" — Ramazan'da gelen misafir, sadece   misafir değil, \"kutsal bir sınav\" olarak kabul edilir.\n• 27. Gece (Kadir Gecesi): aile birlikte uyanık kalır,   kahve ve tatlı sunulur, aile anıları paylaşılır.\n\nBayram:\nRamazan Bayramı'nın üç günü:\n• Birinci gün: yeni kıyafet giyme, mezarlık ziyareti.\n• İkinci gün: akraba ve komşu ziyareti.\n• Üçüncü gün: halay ve genel şenlik.",
         "backgroundNote": "\"Telheyê îftarê\" (iftar öncesi dua anı) ve mezarlık ziyareti bayramın ilk günü — Kürt İslam pratiğinin ayırt edici unsurlarındandır. Sofraya nane çorbası (şorbeya nehniyê) konması Mezopotamya kökenlidir, binlerce yıllık geleneğin İslami ritüele eklemlenmesidir.",
         "level": 2,
@@ -84637,7 +85150,7 @@
         "group": "lifeTradition",
         "kurmanjTitle": "Sersal — Mîlata Sala Nû",
         "turkishTitle": "Sersal — Yeni Yıl (1 Ocak)",
-        "kurmanjContent": "Sersal, mîlata sala nû ye li gor salnameya Mîladî — di 1ê Çileyê de tê pîroz kirin. Di Kurdistanê de ev cejnek nû ye, lê di nav diasporayê de gelek belav e.\n\nAdetên kurdî yên Sersalê:\n• Şevê 31ê Kanûnê: malbat li mal kom dibe.\n• Sofreya taybet: kifte, dolme, salate, baklawa.\n• Pêşkêşkirina diyarîyan ji zarokan re.\n• Diraxsana Sersalê: \"Sala nû ji we re pîroz be!\"   (\"Yeni yılınız kutlu olsun!\").\n• Telefonkirin bi xizmên ku dûr in.\n\nDiaspora:\nJi bo Kurdên ku li Ewropa û Amerîkayê dijîn, Sersal firsetekî ye ji bo:\n• Bîranîna welêt û bîranîna kal û pîran.\n• Hevdîtina malbatî bi platforman dîjîtal.\n• Tomarkirina helbesta nû ya zimanê Kurdî.\n\nCûdahî ji Newrozê: Sersal cejneke navneteweyî ye, Newroz cejneke neteweyî-Kurdî. Lê di salên dawî de, Kurdistan herdu jî dipejirîne — biçûk û mezin tev pîroz dikin.",
+        "kurmanjContent": "Sersal, mîlata sala nû ye li gor salnameya Mîladî — di 1ê Çileyê de tê pîroz kirin. Di Kurdistanê de ev cejnek nû ye, lê di nav diasporayê de gelek belav e.\n\nAdetên kurdî yên Sersalê:\n• Şeva 31ê Kanûnê: malbat li mal kom dibe.\n• Sofreya taybet: kifte, dolme, salate, baklawa.\n• Pêşkêşkirina diyarîyan ji zarokan re.\n• Diraxsana Sersalê: \"Sala nû ji we re pîroz be!\"   (\"Yeni yılınız kutlu olsun!\").\n• Telefonkirin bi xizmên ku dûr in.\n\nDiaspora:\nJi bo Kurdên ku li Ewropa û Amerîkayê dijîn, Sersal firsetekî ye ji bo:\n• Bîranîna welêt û bîranîna kal û pîran.\n• Hevdîtina malbatî bi platforman dîjîtal.\n• Tomarkirina helbesta nû ya zimanê Kurdî.\n\nCûdahî ji Newrozê: Sersal cejneke navneteweyî ye, Newroz cejneke neteweyî-Kurdî. Lê di salên dawî de, Kurdistan herdu jî dipejirîne — biçûk û mezin tev pîroz dikin.",
         "turkishContent": "Sersal, Miladi takvime göre yeni yılın başlangıcıdır — 1 Ocak'ta kutlanır. Kürdistan'da yeni bir bayram, ama diasporada oldukça yaygın.\n\nKürt Sersal adetleri:\n• 31 Aralık gecesi: aile evde toplanır.\n• Özel sofra: köfte, dolma, salata, baklava.\n• Çocuklara hediye sunma.\n• Sersal kutlaması: \"Sala nû ji we re pîroz be!\"   (Yeni yılınız kutlu olsun!).\n• Uzaktaki akrabaları telefonla arama.\n\nDiaspora:\nAvrupa ve Amerika'da yaşayan Kürtler için Sersal bir fırsattır:\n• Vatanın ve dedelerin anılması.\n• Dijital platformlarla aile buluşması.\n• Yeni Kürtçe şiir kaydetme.\n\nNewroz'dan farkı: Sersal uluslararası bir bayramdır, Newroz Kürt-ulusal bir bayramdır. Ancak son yıllarda Kürdistan ikisini de kabul ediyor — çocuk ve büyük birlikte kutluyor.",
         "backgroundNote": "Sersal'in Kürt diasporasında yaygınlaşması 1980'lerden itibarendir. Geleneksel olarak Kürt yıl başlangıcı Newroz (21 Mart) ve Mihrcan (2 Ekim)'dur, ancak küreselleşmeyle birlikte 1 Ocak da bir aile buluşma günü haline gelmiştir.",
         "level": 2,
@@ -84739,7 +85252,7 @@
         "group": "lifeTradition",
         "kurmanjTitle": "Şal û Şepik — Cil û Berga Mêran",
         "turkishTitle": "Şal û Şepik — Erkek Geleneksel Kıyafeti",
-        "kurmanjContent": "Şal û Şepik, cil û berga kevneşopî ya mêrên Kurd ên Hekarî,\nBotan û Şirnexê ye. Du parçeyên sereke jê pêk tê: şal\n(şalwarê fereh) û şepik (kura kîşmî).\n\nŞal:\n• Şalwarekî fereh ji ardê hêl an pembû.\n• Renga gelîya: reş, kesk-tarî, an pîşk.\n• Lîfa şalê li ser piyê wê tê girtin.\n• Çiyê piyê: berfîn (renga reş bi qêdên zer).\n\nŞepik:\n• Kura kîşmî bi qollên dirêj.\n• Ji ber renga şalê tê hilbijartin.\n• Pêdivîya wî pîvazên zîvîn an pirteqalî.\n\nAksesûar:\n• Şidda mîrî (kuşak): bi rengên zêr û sor.\n• Pelek (yelek): kura bê qol li ser şepikê.\n• Kofiya reş an spî (şitil): li serî tê girtin.\n\nÇand:\nŞal û Şepik di Newroz, dawet û cejnan de tê lixwekirin.\nMêr-zarok bi vê cilê re hîn dibe ku rûmeta wî bi cilûberga\nmalbatê ve girêdayî ye.\n\nHilberîn:\nBi piranî jin malbatê bi destê xwe çêdikirin. Roj-bi-roj,\ncilûberga Şal û Şepik vegera xwe ya nûjen kiriye di nav\nsembolên kurdî de — Şivan Perwer û aktîvîstên çand bi\nserbestî di şahî û nirxgirtinên xwe de lixwedikin.",
+        "kurmanjContent": "Şal û Şepik, cil û berga kevneşopî ya mêrên Kurd ên Hekarî,\nBotan û Şirnexê ye. Du parçeyên sereke jê pêk tê: şal\n(şalwarê fereh) û şepik (kura kîşmî).\n\nŞal:\n• Şalwarekî fereh ji ardê hêl an pembû.\n• Rengê gelîya: reş, kesk-tarî, an pîşk.\n• Lîfa şalê li ser piyê wê tê girtin.\n• Çiyê piyê: berfîn (rengê reş bi qêdên zer).\n\nŞepik:\n• Kura kîşmî bi qollên dirêj.\n• Ji ber rengê şalê tê hilbijartin.\n• Pêdivîya wî pîvazên zîvîn an pirteqalî.\n\nAksesûar:\n• Şidda mîrî (kuşak): bi rengên zêr û sor.\n• Pelek (yelek): kura bê qol li ser şepikê.\n• Kofiya reş an spî (şitil): li serî tê girtin.\n\nÇand:\nŞal û Şepik di Newroz, dawet û cejnan de tê lixwekirin.\nMêr-zarok bi vê cilê re hîn dibe ku rûmeta wî bi cilûberga\nmalbatê ve girêdayî ye.\n\nHilberîn:\nBi piranî jin malbatê bi destê xwe çêdikirin. Roj-bi-roj,\ncilûberga Şal û Şepik vegera xwe ya nûjen kiriye di nav\nsembolên kurdî de — Şivan Perwer û aktîvîstên çand bi\nserbestî di şahî û nirxgirtinên xwe de lixwedikin.",
         "turkishContent": "Şal û Şepik, Hakkari, Botan ve Şirnak'lı Kürt erkeklerinin\ngeleneksel kıyafetidir. İki ana parçadan oluşur: şal (geniş\nşalvar) ve şepik (kısa ceket).\n\nŞal:\n• Yün veya pamuktan geniş bir şalvardır.\n• Renkler: siyah, koyu yeşil veya bej.\n• Şalın paçası ayağına bağlanır.\n• Ayak detayı: \"berfîn\" (sarı detaylı siyah).\n\nŞepik:\n• Uzun kollu kısa cekettir.\n• Şalın rengine göre seçilir.\n• Üzerinde gümüş veya turuncu detaylar.\n\nAksesuar:\n• Şidda mîrî (kuşak): altın ve kırmızı renkli.\n• Pelek (yelek): şepik üzerinde kolsuz ceket.\n• Siyah veya beyaz \"kofî\": başa bağlanır.\n\nKültür:\nŞal û Şepik Newroz, düğün ve bayramlarda giyilir. Erkek\nçocuk bu kıyafetle birlikte ailenin onurunun kıyafete bağlı\nolduğunu öğrenir.\n\nÜretim:\nEskiden çoğunlukla kadınlar el emeğiyle dikerdi. Bugün Şal\nû Şepik modern bir Kürt sembolü olarak yeniden değer\nkazanmıştır — Şivan Perwer ve kültür aktivistleri kutlamalarda\ngururla giyer.",
         "backgroundNote": "Şal û Şepik 1990'lardan itibaren modern Kürt kimliğinin sembolü olarak görünür hale geldi. Diaspora kadın koleksiyonerleri bu kıyafeti müzelere bağışlamaktadır. Diyarbakır Kürt Müzesi koleksiyonunda 200'den fazla örnek vardır.",
         "level": 2,
@@ -84759,7 +85272,7 @@
         "group": "lifeTradition",
         "kurmanjTitle": "Kraz û Fîstan — Cil û Berga Jinan",
         "turkishTitle": "Kraz û Fîstan — Kadın Geleneksel Kıyafeti",
-        "kurmanjContent": "Kraz û Fîstan, cilûberga kevneşopî ya jinên Kurd e. Du\nparçeyên sereke: kraz (kura jêr a hundirîn) û fîstan\n(kura jor a fereh).\n\nFîstan:\n• Kurakî fereh ji hevsenc/atlas an dîba.\n• Bi qoltên dirêj û ferehkirî.\n• Renga gelîya: sor, mor, kesk, zer.\n• Çepatî bi nexşên kûr ên kurdî:\n  - Pelg û kulîlk: nîşana baharê.\n  - Tîp û şîr: nîşana yekîtiya malbatê.\n  - Govend: di binê kurê de — sembola dîlanê.\n\nKraz:\n• Kurakî hundirî yê ji pembû spî yê pak.\n• Bi neqşên kûr li ser sêneyê.\n\nAksesûar (yên jinê):\n• Kofî: kelekê piçûk a li ser serî, bi xeleyên zêrîn.\n• Sîngê: takiya şîranî li ser sêneyê.\n• Bazinên zîv: 7-8 li ser her destê.\n• Şal: bi awayekî sembolîk li dorpêç tê girêdan.\n\nCûreyên herêmî:\n• Hekarî: fîstan kûr û rengîn, kofî dirêjtir.\n• Botan: fîstan reş û qehweyî, neqşên zîv.\n• Mêrdîn: fîstan zer û pîşk, neqşên zîv-zêr.\n\nÇand:\nBûka di dawetê de fîstana xwe ya zêrîn lixwedike — ku jê re\n\"fîstana sor\" tê gotin (tevî ku ne tenê sor be). Ev nîşana\nbûyîna bûka malbatê ye.",
+        "kurmanjContent": "Kraz û Fîstan, cilûberga kevneşopî ya jinên Kurd e. Du\nparçeyên sereke: kraz (kura jêr a hundirîn) û fîstan\n(kura jor a fereh).\n\nFîstan:\n• Kurakî fereh ji hevsenc/atlas an dîba.\n• Bi qoltên dirêj û ferehkirî.\n• Rengê gelîya: sor, mor, kesk, zer.\n• Çepatî bi nexşên kûr ên kurdî:\n  - Pelg û kulîlk: nîşana baharê.\n  - Tîp û şîr: nîşana yekîtiya malbatê.\n  - Govend: di binê kurê de — sembola dîlanê.\n\nKraz:\n• Kurakî hundirî yê ji pembû spî yê pak.\n• Bi neqşên kûr li ser sêneyê.\n\nAksesûar (yên jinê):\n• Kofî: keleka piçûk a li ser serî, bi xeleyên zêrîn.\n• Sîngê: takiya şîranî li ser sêneyê.\n• Bazinên zîv: 7-8 li ser her destê.\n• Şal: bi awayekî sembolîk li dorpêç tê girêdan.\n\nCûreyên herêmî:\n• Hekarî: fîstan kûr û rengîn, kofî dirêjtir.\n• Botan: fîstan reş û qehweyî, neqşên zîv.\n• Mêrdîn: fîstan zer û pîşk, neqşên zîv-zêr.\n\nÇand:\nBûka di dawetê de fîstana xwe ya zêrîn lixwedike — ku jê re\n\"fîstana sor\" tê gotin (tevî ku ne tenê sor be). Ev nîşana\nbûyîna bûka malbatê ye.",
         "turkishContent": "Kraz û Fîstan, Kürt kadınlarının geleneksel kıyafetidir.\nİki ana parça: kraz (alt iç giyim) ve fîstan (üst geniş\nelbise).\n\nFîstan:\n• Saten, atlas veya dibadan geniş elbisedir.\n• Uzun ve geniş kollu.\n• Yaygın renkler: kırmızı, mor, yeşil, sarı.\n• Derin Kürt motifleriyle:\n  - Yaprak ve çiçek: bahar sembolü.\n  - Üçgen ve aslan: aile birliği sembolü.\n  - Halay: eteğin altında — şenlik sembolü.\n\nKraz:\n• Beyaz pamuktan iç elbisedir.\n• Göğüste derin nakışlarla.\n\nAksesuar (kadına ait):\n• Kofî: başa bağlanan altın ipliklerle küçük başlık.\n• Sîngê: göğüste tatlı takı.\n• Gümüş bilezikler: her elde 7-8 tane.\n• Şal: sembolik olarak bele bağlanır.\n\nBölgesel çeşitler:\n• Hakkari: derin ve renkli fîstan, uzun kofî.\n• Botan: siyah-kahverengi fîstan, gümüş nakış.\n• Mardin: sarı-bej fîstan, gümüş-altın nakış.\n\nKültür:\nDüğünde gelin altın fîstanını giyer — buna \"fîstana sor\"\n(kırmızı elbise) denir (yalnız kırmızı olmasa da). Bu evin\ngelini olmanın simgesidir.",
         "backgroundNote": "Geleneksel Kürt kadın kıyafeti UNESCO Somut Olmayan Kültürel Miras listesinde yer alır. El nakışı ustaları (jinên çapxan) bu mirasın taşıyıcılarıdır. Diyarbakır ve Erbil'de modern tasarımcılar fîstanı çağdaşlaştırmaktadır.",
         "level": 2,
@@ -84779,7 +85292,7 @@
         "group": "lifeTradition",
         "kurmanjTitle": "Kofî û Şitil — Serpêçên Kurdî",
         "turkishTitle": "Kürt Başlıkları — Kofî ve Şitil",
-        "kurmanjContent": "Kofî, ne tenê serpêçek e — sembolê nasnameya gelî û herêmî\nye di çanda Kurdî de.\n\nKofiya jinan:\n• Kelek piçûk e ji pembû an hevsenc.\n• Bi xeleyên zêrîn û neqşên kûr.\n• Bi pirtuqalê li serî tê girêdan.\n• Cûreyên wê li gor herêman:\n  - Hekarî: kofî dirêj û pir-pîvanî, bi xeleyên dirêj.\n  - Botan: kofî kurt û nizm, renga reş.\n  - Mêrdîn: kofî dirêj û rengîn, neqşên gulî.\n\nKofiya mêran:\n• Çepiya / şitil — kura piçûk û tewra hesin (kese-pîla).\n• Bi piştevaniya rengê reş, gewr an spî.\n• Li ser kofiyê, \"kofiya sor\" — beriya cejna Newrozê.\n\nSembolîk:\n• Renga sor: bextiyarî, jiyana nû.\n• Renga reş: rûmeta malbatî.\n• Renga spî: paqijbûna pîr û pîrejinan.\n• Renga kesk: hêvî û baharê.\n\nÇand:\n• \"Kofiya min, rûmeta min\" — gotina kal û pîran.\n• Di Sersala Êzîdiyan û Newroz de, kofiya rengîn nirxgirtina\n  bingehîn e.\n• Heger di govendê de kofî ji serî biketa, kes wê\n  hilbidaya — wek nîşana hevkariyê.",
+        "kurmanjContent": "Kofî, ne tenê serpêçek e — sembolê nasnameya gelî û herêmî\nye di çanda Kurdî de.\n\nKofiya jinan:\n• Kelek piçûk e ji pembû an hevsenc.\n• Bi xeleyên zêrîn û neqşên kûr.\n• Bi pirtuqalê li serî tê girêdan.\n• Cûreyên wê li gor herêman:\n  - Hekarî: kofî dirêj û pir-pîvanî, bi xeleyên dirêj.\n  - Botan: kofî kurt û nizm, rengê reş.\n  - Mêrdîn: kofî dirêj û rengîn, neqşên gulî.\n\nKofiya mêran:\n• Çepiya / şitil — kura piçûk û tewra hesin (kese-pîla).\n• Bi piştevaniya rengê reş, gewr an spî.\n• Li ser kofiyê, \"kofiya sor\" — beriya cejna Newrozê.\n\nSembolîk:\n• Rengê sor: bextiyarî, jiyana nû.\n• Rengê reş: rûmeta malbatî.\n• Rengê spî: paqijbûna pîr û pîrejinan.\n• Rengê kesk: hêvî û baharê.\n\nÇand:\n• \"Kofiya min, rûmeta min\" — gotina kal û pîran.\n• Di Sersala Êzîdiyan û Newroz de, kofiya rengîn nirxgirtina\n  bingehîn e.\n• Heger di govendê de kofî ji serî biketa, kes wê\n  hilbidaya — wek nîşana hevkariyê.",
         "turkishContent": "Kofî, sadece bir başlık değil — Kürt kültüründe halk ve\nbölge kimliğinin sembolüdür.\n\nKadın kofîsi:\n• Pamuk veya satenden küçük bir başlıktır.\n• Altın ipliklerle ve derin nakışlarla.\n• Bant veya kurdele ile başa bağlanır.\n• Bölgesel çeşitleri:\n  - Hakkari: uzun, çok ölçülü, uzun ipliklerle.\n  - Botan: kısa ve alçak, siyah renkli.\n  - Mardin: uzun ve renkli, gül nakışlı.\n\nErkek kofîsi:\n• Çepiya / şitil — küçük ve iri demir başlıktır.\n• Siyah, gri veya beyaz desteğiyle.\n• Kofînin üzerinde \"kofiya sor\" — Newroz öncesinde.\n\nSembolizm:\n• Kırmızı renk: mutluluk, yeni hayat.\n• Siyah renk: aile onuru.\n• Beyaz renk: yaşlıların temizliği.\n• Yeşil renk: umut ve bahar.\n\nKültür:\n• \"Kofim benim, onurum benim\" — yaşlıların sözü.\n• Yezidi yeni yılı (Çarşema Sor) ve Newroz'da renkli kofî\n  temel takıdır.\n• Halayda kofî baştan düşerse, biri onu kaldırır — yardımlaşma sembolü.",
         "backgroundNote": "Kürt kofî yapımı geleneksel olarak kadınlardan kadınlara aktarılır. Diyarbakır Sur ilçesi ve Erbil çarşılarında kofî ustaları hâlâ el emeğiyle üretim yapar. UNESCO Somut Olmayan Kültürel Miras adayıdır.",
         "level": 2,
@@ -84799,7 +85312,7 @@
         "group": "lifeTradition",
         "kurmanjTitle": "Cilûberga Newrozê",
         "turkishTitle": "Newroz Kıyafeti — Bayram Giyimi",
-        "kurmanjContent": "Cilûberga Newrozê, lixwekirina taybet a Newrozê (21 Adar)\nye. Kurdên Bakurê û Başûrê Kurdistanê di vê rojê de bi\nlixwekirina cilên xwe yên kurdî dest pê dikin.\n\nReng û Sembolîk:\nNewroz cejneke baharê ye. Renga sor (agir, jiyan), kesk\n(qawa, zindîbûn), zer (roj, ronî) — sêwana alaya kurdî —\nbingeh in.\n\nLixwekirina jinan:\n• Fîstan: bi rengên Newrozê — sor an kesk.\n• Sîngê: takiya zêrîn li ser sêneyê.\n• Kofî: rengîn, bi pelg û kulîlkan.\n• Bazinên zîv: 7-8 li ser her destê — heft sêwa baharê.\n• Şal: bi rengên reş-sor li dorpêç.\n\nLixwekirina mêran:\n• Şal û Şepik: di rengên reş, kesk û berfîn.\n• Pelek: ji ardê hêlê reş.\n• Kofiya sor an spî bi nîşana sembolîk.\n• Bi şidda mîrî bi rengên zêr û sor.\n\nLixwekirina zarokan:\n• Mîn fîstan û şal û şepik — wek mezinan.\n• Cilûbergên kurdî yên zarokan ji bo Newrozê her sal nû\n  tên çêkirin — sembola \"geşbûna nesla nû\".\n\nAdetên ber bi cejnê:\n• Sê heft beriya Newrozê, jinan dest bi amadekirin dikirin.\n• Cilûberg ji nav malbatê dihatin parastin — \"fîstana dapîrê\"\n  ji bo neviyê.\n• Roja Newrozê, hemû tev de cilên xwe lixwedikirin û li\n  ser çiyayan ji bo dîlanê derdiketin.",
+        "kurmanjContent": "Cilûberga Newrozê, lixwekirina taybet a Newrozê (21 Adar)\nye. Kurdên Bakurê û Başûrê Kurdistanê di vê rojê de bi\nlixwekirina cilên xwe yên kurdî dest pê dikin.\n\nReng û Sembolîk:\nNewroz cejneke baharê ye. Rengê sor (agir, jiyan), kesk\n(qawa, zindîbûn), zer (roj, ronî) — sêwana alaya kurdî —\nbingeh in.\n\nLixwekirina jinan:\n• Fîstan: bi rengên Newrozê — sor an kesk.\n• Sîngê: takiya zêrîn li ser sêneyê.\n• Kofî: rengîn, bi pelg û kulîlkan.\n• Bazinên zîv: 7-8 li ser her destê — heft sêwa baharê.\n• Şal: bi rengên reş-sor li dorpêç.\n\nLixwekirina mêran:\n• Şal û Şepik: di rengên reş, kesk û berfîn.\n• Pelek: ji ardê hêlê reş.\n• Kofiya sor an spî bi nîşana sembolîk.\n• Bi şidda mîrî bi rengên zêr û sor.\n\nLixwekirina zarokan:\n• Mîn fîstan û şal û şepik — wek mezinan.\n• Cilûbergên kurdî yên zarokan ji bo Newrozê her sal nû\n  tên çêkirin — sembola \"geşbûna nesla nû\".\n\nAdetên ber bi cejnê:\n• Sê heft beriya Newrozê, jinan dest bi amadekirin dikirin.\n• Cilûberg ji nav malbatê dihatin parastin — \"fîstana dapîrê\"\n  ji bo neviyê.\n• Roja Newrozê, hemû tev de cilên xwe lixwedikirin û li\n  ser çiyayan ji bo dîlanê derdiketin.",
         "turkishContent": "Newroz kıyafeti, Newroz (21 Mart) gününün özel giyimidir.\nKuzey ve Güney Kürdistan'lı Kürtler bu günde Kürt\nkıyafetlerini giyerek kutlamaya başlar.\n\nRenkler ve sembolizm:\nNewroz bahar bayramıdır. Kırmızı (ateş, yaşam), yeşil\n(çayır, canlılık), sarı (güneş, ışık) — Kürt bayrağının\nüç rengi — temeldir.\n\nKadınların giyimi:\n• Fîstan: Newroz renklerinde — kırmızı veya yeşil.\n• Sîngê: göğüste altın takı.\n• Kofî: renkli, yapraklı ve çiçekli.\n• Gümüş bilezikler: her elde 7-8 — baharın yedi hilali.\n• Şal: siyah-kırmızı renklerde belde.\n\nErkeklerin giyimi:\n• Şal û Şepik: siyah, yeşil ve berfîn renklerinde.\n• Pelek: siyah yünden.\n• Kırmızı veya beyaz kofî sembol işaretle.\n• Altın ve kırmızı renkli mîrî kuşak.\n\nÇocuk giyimi:\n• Mini fîstan ve şal û şepik — büyükler gibi.\n• Çocukların Newroz Kürt kıyafetleri her yıl yeni dikilir —\n  \"yeni neslin gelişmesi\" sembolü.\n\nBayram öncesi adetler:\n• Newroz'dan üç hafta önce kadınlar hazırlığa başlardı.\n• Kıyafetler aile içinde korunurdu — \"büyükannenin elbisesi\"\n  toruna.\n• Newroz günü herkes kıyafetini giyer ve dağlara halay için\n  çıkardı.",
         "backgroundNote": "Newroz kıyafetinin görünür sembolik kullanımı 1990'lardan beri Kürt diasporasında yoğunlaşmıştır. Berlin, Stockholm ve Brüksel'deki Newroz kutlamalarında binlerce kişi geleneksel kıyafetle katılır. Bu, Kürt kimliğinin küresel görünürlüğünün simgesidir.",
         "level": 3,
@@ -85262,7 +85775,7 @@
         "group": "people",
         "kurmanjTitle": "Şehrîbana Kurdî (j.d. 1955)",
         "turkishTitle": "Şehrîbana Kurdî (d. 1955)",
-        "kurmanjContent": "Şehrîbana Kurdî, stranbêjeke jin a kevneşop û nûjen e\nji Mêrdînê. Bi dengê xwe yê germ û şîroveya kilamên\nklasîk, hem mîrasê dengbêjiyê parastiye hem nûjeniya\nwê pêşkêş kiriye.\n\n★ Berhemên navdar:\n1. \"Yêmen yêmen\" — kilama dûriya welêt.\n2. \"Hayno\" — kilama jinê di şer de.\n3. \"Lê dayê\" — bi yadê re — sembola koçberiyê.",
+        "kurmanjContent": "Şehrîbana Kurdî, stranbêjeke jin a kevneşop û nûjen e\nji Mêrdînê. Bi dengê xwe yê germ û şîroveya kilamên\nklasîk, hem mîrasa dengbêjiyê parastiye hem nûjeniya\nwê pêşkêş kiriye.\n\n★ Berhemên navdar:\n1. \"Yêmen yêmen\" — kilama dûriya welêt.\n2. \"Hayno\" — kilama jinê di şer de.\n3. \"Lê dayê\" — bi yadê re — sembola koçberiyê.",
         "turkishContent": "Şehrîbana Kurdî, Mardin'den geleneksel ve modern bir\nkadın şarkıcıdır. Sıcak sesi ve klasik kilamları\nyorumlamasıyla hem dengbêj mirasını korumuş hem de\nmodernleştirmiştir.\n\n★ Ünlü eserleri:\n1. \"Yêmen yêmen\" — vatan özlemi kilamı.\n2. \"Hayno\" — savaşta kadın kilamı.\n3. \"Lê dayê\" — anne özlemi — göçmenliğin sembolü.",
         "backgroundNote": "Şehrîbana Kurdî, 1980'lerden beri Avrupa'da yaşar, Kurmancî ve Soranî repertuvarını birleştirir. Klasik kilamları modern çalgılarla yorumlayarak yeni nesle aktarır.",
         "level": 3,
@@ -85466,7 +85979,7 @@
         "group": "historyHeritage",
         "kurmanjTitle": "Şerê Çaldiranê — 1514",
         "turkishTitle": "Çaldıran Savaşı — 1514",
-        "kurmanjContent": "Şerê Çaldiranê di 23ê Tebaxa 1514'an de, di navbera Osmanî (Sultan Selîmê I) û Sefewî (Şah Îsmaîl) de pêk hat. Çaldiran li bakurê Wanê ye.\n\nBeriya şer:\nMîrekiyên Kurd di navbera du împaratoriyan de mabûn. Îdrîsê Bedlîsî, alimê Kurd, peymana di navbera Sultan Selîm û 16 mîrekiyên Kurd de çêkir: piştevaniya leşkerî bidin Osmanî, di berdêla otonomiya hundirîn de.\n\nEncam:\n• Sefewî hatin têkbirin.\n• Mîrekiyên Kurd ên wek Botan, Hekarî, Bedlîs, Sêwregî   bûn beşek otonom a Osmanî.\n• Sînorên Kurdistanê ber bi rojhilatê ve hatin diyar   kirin — sînora ku îro jî heye.\n\nMîras:\nPeymana Çaldiranê 300 salan otonomiya Kurd parast (1514–1839). Lê bi navendîbûna Tanzîmatê (1839) re, mîrekiyên Kurd hatin betalkirin — ev sedema serhildanên paşî bû.",
+        "kurmanjContent": "Şerê Çaldiranê di 23ê Tebaxa 1514'an de, di navbera Osmanî (Sultan Selîmê I) û Sefewî (Şah Îsmaîl) de pêk hat. Çaldiran li bakurê Wanê ye.\n\nBeriya şer:\nMîrekiyên Kurd di navbera du împaratoriyan de mabûn. Îdrîsê Bedlîsî, alimê Kurd, peymana di navbera Sultan Selîm û 16 mîrekiyên Kurd de çêkir: piştevaniya leşkerî bidin Osmanî, di berdêla otonomiya hundirîn de.\n\nEncam:\n• Sefewî hatin têkbirin.\n• Mîrekiyên Kurd ên wek Botan, Hekarî, Bedlîs, Sêwregî   bûn beşek otonom a Osmanî.\n• Sînorên Kurdistanê ber bi rojhilatê ve hatin diyar   kirin — sînorê ku îro jî heye.\n\nMîras:\nPeymana Çaldiranê 300 salan otonomiya Kurd parast (1514–1839). Lê bi navendîbûna Tanzîmatê (1839) re, mîrekiyên Kurd hatin betalkirin — ev sedema serhildanên paşî bû.",
         "turkishContent": "Çaldıran Savaşı, 23 Ağustos 1514'te Osmanlı (I. Selim) ve Safevi (Şah İsmail) arasında yaşandı. Çaldıran Van'ın kuzeyindedir.\n\nSavaş öncesi:\nKürt mîrekleri (beylikleri) iki imparatorluk arasında kalmıştı. Kürt âlimi İdris-i Bidlisi, Sultan Selim ile 16 Kürt mîreki arasında antlaşma yaptı: askeri destek verecekler, karşılığında iç özerklik alacaklardı.\n\nSonuç:\n• Safeviler yenildi.\n• Botan, Hekarî, Bidlis, Soran gibi Kürt mîrekleri   Osmanlı'nın özerk parçası oldu.\n• Kürdistan'ın doğu sınırı belirlendi — bugün de var   olan sınır.\n\nMiras:\nÇaldıran antlaşması 300 yıl Kürt özerkliğini korudu (1514-1839). Ancak Tanzimat'ın merkeziyetçiliği (1839) ile Kürt mîrekleri kaldırıldı — sonraki ayaklanmaların sebebi bu oldu.",
         "backgroundNote": "Çaldıran çağdaş Kürt-Osmanlı ilişkilerinin temeli sayılır. Şerefname (Şerefxan Bidlîsî, 1597), bu peymanın önemini kayıt altına alır. Pasifik bir özerklik dönemi olarak modern Kürt tarihçilerince incelenir.",
         "level": 4,
@@ -85506,7 +86019,7 @@
         "group": "historyHeritage",
         "kurmanjTitle": "Serhildana Bedirxan Beg — 1843",
         "turkishTitle": "Bedirxan Bey Ayaklanması — 1843",
-        "kurmanjContent": "Serhildana yekem a modern a Kurdan, di sala 1843'an de li mîrekiya Botanê (Cizre) dest pê kir. Lîderê wê: Mîr Bedirxan Beg (1802–1869).\n\nSedem:\nBi navendîbûna Tanzîmatê (1839), Osmanî mîrekiyên Kurd betal kirin. Bedirxan, mîrê Botanê, dîn û çanda Kurdan wek piştgiriyê tevliyî vê serhildanê dît.\n\nAktîvîte:\n• Bedirxan li Cizre dewleta xwe ya otonom îlan kir.\n• Bi mîrekiyên Hekarî, Bohtan, Soran re hevkarî kir.\n• Pere û tîpên xwe yên çapkirinê hebûn.\n• Pênc salan li hember leşkerê Osmanî berxwedan kir.\n\nEncam:\n• 1847: Osmanî bi 100,000 leşker hêz peyda kirin.\n• Bedirxan teslîm bû, hate sirgûn kirin Stembol, paşê   Şamê.\n• Mîrekiyên Kurd hate hilweşandin.\n\nMîras:\nLawên Bedirxan — Mîr Celadet û Kamûran — paşê damezrînerên kovara Hawar û alfabeya Latînî bûn (1932). Bi vî awayî, serhildana 1843 mîrasê xwe heta îro daye.",
+        "kurmanjContent": "Serhildana yekem a modern a Kurdan, di sala 1843'an de li mîrekiya Botanê (Cizre) dest pê kir. Lîderê wê: Mîr Bedirxan Beg (1802–1869).\n\nSedem:\nBi navendîbûna Tanzîmatê (1839), Osmanî mîrekiyên Kurd betal kirin. Bedirxan, mîrê Botanê, dîn û çanda Kurdan wek piştgiriyê tevliyî vê serhildanê dît.\n\nAktîvîte:\n• Bedirxan li Cizre dewleta xwe ya otonom îlan kir.\n• Bi mîrekiyên Hekarî, Bohtan, Soran re hevkarî kir.\n• Pere û tîpên xwe yên çapkirinê hebûn.\n• Pênc salan li hember leşkerê Osmanî berxwedan kir.\n\nEncam:\n• 1847: Osmanî bi 100,000 leşker hêz peyda kirin.\n• Bedirxan teslîm bû, hate sirgûn kirin Stembol, paşê   Şamê.\n• Mîrekiyên Kurd hate hilweşandin.\n\nMîras:\nLawên Bedirxan — Mîr Celadet û Kamûran — paşê damezrînerên kovara Hawar û alfabeya Latînî bûn (1932). Bi vî awayî, serhildana 1843 mîrasa xwe heta îro daye.",
         "turkishContent": "Modern Kürtlerin ilk ayaklanması 1843'te Botan mîrekiliği (Cizre)'de başladı. Lider: Mîr Bedirxan Beg (1802-1869).\n\nSebep:\nTanzimat merkeziyetçiliği (1839) ile Osmanlı, Kürt mîrekiliklerini kaldırdı. Botan mîreki Bedirxan, dini ve kültürel Kürt birikimini ayaklanmanın temeline koydu.\n\nFaaliyet:\n• Bedirxan Cizre'de özerk devletini ilan etti.\n• Hakkari, Bohtan, Soran mîrekleriyle işbirliği yaptı.\n• Kendi parası ve matbaa harfleri vardı.\n• Beş yıl Osmanlı ordusuna direndi.\n\nSonuç:\n• 1847: Osmanlı 100.000 askerlik kuvvet topladı.\n• Bedirxan teslim oldu, İstanbul'a, sonra Şam'a sürgün   edildi.\n• Kürt mîrekilikleri kaldırıldı.\n\nMiras:\nBedirxan'ın oğulları — Mîr Celadet ve Kamûran — sonradan Hawar dergisi ve Latin alfabesinin kurucuları oldular (1932). Böylece 1843 ayaklanması mirasını günümüze taşıdı.",
         "backgroundNote": "Bedirxan Beg'in sürgünde yazdığı mektuplar Kürt aydınlanma hareketinin ilk belgeleridir. Ailesi 20. yy boyunca Şam, Kahire ve Avrupa'da Kürt davasını sürdürdü — Bedirxanlar modern Kürt kültürünün kurucu hanedanıdır.",
         "level": 4,
@@ -93847,12 +94360,6 @@
     },
     {
       "letter": "G",
-      "num": 10,
-      "ku": "Gotinên Pêşîyan ( Kûrt Atasözleri)",
-      "tr": null
-    },
-    {
-      "letter": "G",
       "num": 11,
       "ku": "Galgala ket nav dev û dirana, wê bigere li bajar û şaristana",
       "tr": "Ağız ve dişlerin arasına düşen söz, kentleri memleketleri dolaşır"
@@ -99296,8 +99803,8 @@
     {
       "letter": "M",
       "num": 16,
-      "ku": "Mala pir jina xirabu ji bina- Evde çok kadin (hanim; Örnek: gelin, kayin valide vs.) varsa o evin dûzeni kökten bozulur",
-      "tr": null
+      "ku": "Mala pir jina xirabu ji bina",
+      "tr": "Evde çok kadın (hanım; örnek: gelin, kayınvalide vs.) varsa o evin düzeni kökten bozulur"
     },
     {
       "letter": "M",
@@ -101749,12 +102256,6 @@
     },
     {
       "letter": "P",
-      "num": 58,
-      "ku": "Pîrê bawer ne diker kîre ki bivi ne.Xedi heft Kîr daye. Nene inanmiyordu bir penis göremeye allah 7 tane gösterdi",
-      "tr": null
-    },
-    {
-      "letter": "P",
       "num": 59,
       "ku": "Pîrê bawer ne dikir mêr bike, mêr kir ija mal xeşytek dûxazi",
       "tr": "Nine inanmıyordu evlenmeye, evlendi şimdi de çocuk istiyor"
@@ -102212,8 +102713,8 @@
     {
       "letter": "R",
       "num": 20,
-      "ku": "Rê reya mirine be jî, tu her li pêş be.-Yol ölûme giden yol olsa bile daima önde ol",
-      "tr": null
+      "ku": "Rê reya mirine be jî, tu her li pêş be.",
+      "tr": "Yol ölüme giden yol olsa bile daima önde ol"
     },
     {
       "letter": "R",
@@ -103532,8 +104033,8 @@
     {
       "letter": "Ş",
       "num": 59,
-      "ku": "Şûşeya dil ku şikest nacebire. Gönûl cami bir kirilirsa artik birbirine yapişmaz",
-      "tr": null
+      "ku": "Şûşeya dil ku şikest nacebire.",
+      "tr": "Gönül camı bir kırılırsa artık birbirine yapışmaz"
     },
     {
       "letter": "Ş",

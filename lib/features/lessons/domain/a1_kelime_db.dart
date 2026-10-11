@@ -728,11 +728,11 @@ const kA1TamKelimeler = [
    her:['Rûnê bizinê xweş e.', 'Pîrê rûn dike.'],
    gen:['Rûnê me kêm e.', 'Rûn û mast hene.']),
 
-  (id:'a1_159', ku:'Xwê', tr:'Tuz', en:'Salt', cins:'nêr', ez:'xwêyê',
+  (id:'a1_159', ku:'Xwê', tr:'Tuz', en:'Salt', cins:'mê', ez:'xwêya',
    kat:'xwarin', zor:0.82,
-   not:'Xwê (eril/nêr) — x sesi gırtlaktan. Veqetandek: xwêyê me. Mînak: "Nan û xwê" = ekmek ve tuz = misafirperverlik sembolü.',
+   not:'Xwê (dişil/mê) — x sesi gırtlaktan. Veqetandek: xwêya me. Mînak: "Nan û xwê" = ekmek ve tuz = misafirperverlik sembolü.',
    her:['Nan û xwê bide mêvanan.', 'Xwê tê de heye.'],
-   gen:['Xwêyê me kêm e.', 'Xwê û îsot hene.']),
+   gen:['Xwêya me kêm e.', 'Xwê û îsot hene.']),
 
   (id:'a1_160', ku:'Sêv', tr:'Elma', en:'Apple', cins:'mê', ez:'sêva',
    kat:'mêwe', zor:0.83,
@@ -894,11 +894,11 @@ const kA1TamKelimeler = [
    her:['Dê li mitbexê nan dipijîne.', 'Mitbexa me mezin e.'],
    gen:['Mitbexa me xweş e.', 'Mitbex û ode hene.']),
 
-  (id:'a1_199', ku:'Serşok', tr:'Tuvalet / Banyo', en:'Bathroom / Toilet', cins:'nêr', ez:'serşokê',
+  (id:'a1_199', ku:'Serşok', tr:'Tuvalet / Banyo', en:'Bathroom / Toilet', cins:'mê', ez:'serşoka',
    kat:'mal', zor:0.78,
-   not:'Serşok (eril/nêr). Veqetandek: serşokê me. Mînak: serşok li jor e.',
-   her:['Serşok li jor e.', 'Serşokê me paqij e.'],
-   gen:['Serşokê me paqij e.', 'Serşok û ode hene.']),
+   not:'Serşok (dişil/mê). Veqetandek: serşoka me. Mînak: serşok li jor e.',
+   her:['Serşok li jor e.', 'Serşoka me paqij e.'],
+   gen:['Serşoka me paqij e.', 'Serşok û ode hene.']),
 
   (id:'a1_200', ku:'Baxçe', tr:'Bahçe', en:'Garden', cins:'nêr', ez:'baxçeyê',
    kat:'mal', zor:0.81,
@@ -1303,11 +1303,11 @@ const kA1TamKelimeler = [
    her:['Hewa germ e, pîrê.', 'Hewaya îro xweş e.'],
    gen:['Hewa sar e.', 'Hewaya bajêr xweş e.']),
 
-  (id:'a1_287', ku:'Bahoz', tr:'Fırtına', en:'Storm', cins:'nêr', ez:'bahozê',
+  (id:'a1_287', ku:'Bahoz', tr:'Fırtına', en:'Storm', cins:'mê', ez:'bahoza',
    kat:'xweza', zor:0.80,
-   not:'Bahoz (eril/nêr) — "ba" (rüzgar) kökünden. Veqetandek: bahozê biharê. Mînak: Bahoz mezin e. Têbinî: çoğul "bahozan" (ileri).',
+   not:'Bahoz (dişil/mê) — "ba" (rüzgar) kökünden. Veqetandek: bahoza biharê. Mînak: Bahoz mezin e. Têbinî: çoğul "bahozan" (ileri).',
    her:['Bahoz mezin e.', 'Bahoz tê, pîrê!'],
-   gen:['Bahoz dûr e.', 'Bahozê mezin nêzîk e.']),
+   gen:['Bahoz dûr e.', 'Bahoza mezin nêzîk e.']),
 
   (id:'a1_288', ku:'Baran', tr:'Yağmur', en:'Rain', cins:'mê', ez:'barana',
    kat:'xweza', zor:0.82,
@@ -1552,8 +1552,8 @@ const kA1TamKelimeler = [
    her:['Pîrê ji strandinê hez dike.', 'Dê, strandina te xweş e!'],
    gen:['Strandin xweş e.', 'Ew strandinê dike.']),
 
-  (id:'a1_512', ku:'Destan', tr:'Destan', en:'Epic', cins:'nêr', ez:'destanê',
-   kat:'çand', zor:0.84, not:'"Destan" — eril. Destanên Kurdî navdar in.',
+  (id:'a1_512', ku:'Destan', tr:'Destan', en:'Epic', cins:'mê', ez:'destana',
+   kat:'çand', zor:0.84, not:'"Destan" — dişil (mê). Destanên Kurdî navdar in.',
    her:['Pîrê destanê ji me re dibêje.', 'Bavê min ji destanan hez dike.'],
    gen:['Destan kevn e.', 'Destanên Kurdî xweş in.']),
 
@@ -1885,10 +1885,10 @@ const kA1EkKelimeler = [
   // [AS] s.47: "hêk" = yumurta
   // [BH]: hêk, eril — "hêkê mirîşkê"
   // [FB]: hêk n.m.
-  (id:'a1_411', ku:'Hêk', tr:'Yumurta', en:'Egg', cins:'nêr', ez:'hêkê',
+  (id:'a1_411', ku:'Hêk', tr:'Yumurta', en:'Egg', cins:'mê', ez:'hêka',
    kat:'xwarin', zor:0.82,
-   not:'Hêk (eril/nêr) — yumurta. Veqetandek: hêkê mirîşkê. Mînak: Hêk xweş e. Têbinî: ê uzun söylenir.',
-   her:['Pîrê hêk dixwe.', 'Hêkê mirîşkê xweş e.'],
+   not:'Hêk (dişil/mê) — yumurta. Veqetandek: hêka mirîşkê. Mînak: Hêk xweş e. Têbinî: ê uzun söylenir.',
+   her:['Pîrê hêk dixwe.', 'Hêka mirîşkê xweş e.'],
    gen:['Hêk xweş e.', 'Hêk û penîr hene.']),
 
   // [AS] s.47: "şorbe/şorba" = çorba
@@ -1920,10 +1920,10 @@ const kA1EkKelimeler = [
   // [AS]: "xwêdan" → actually "xwê" = tuz (already have)
   // "Biber" = îsot — [AS] s.47
   // [FB]: îsot n.m.
-  (id:'a1_415', ku:'Îsot', tr:'Biber', en:'Pepper', cins:'nêr', ez:'îsotê',
+  (id:'a1_415', ku:'Îsot', tr:'Biber', en:'Pepper', cins:'mê', ez:'îsota',
    kat:'xwarin', zor:0.81,
-   not:'Îsot (eril/nêr) — biber. Veqetandek: îsotê sor. Mînak: Îsot sor e. Têbinî: "bîharek" karabiber ayrı kelime.',
-   her:['Îsotê pîrê sor e.', 'Pîrê îsot dixwe.'],
+   not:'Îsot (dişil/mê) — biber. Veqetandek: îsota sor. Mînak: Îsot sor e. Têbinî: "bîharek" karabiber ayrı kelime.',
+   her:['Îsota pîrê sor e.', 'Pîrê îsot dixwe.'],
    gen:['Îsot sor e.', 'Îsot û xwê hene.']),
 
   // [AS]: "fêkî" = meyve (genel)
@@ -2024,10 +2024,10 @@ const kA1EkKelimeler = [
   // [AS] s.37: "lêv" = dudak (no.239)
   // [BH]: lêv eril
   // [FB]: lêv n.m.
-  (id:'a1_429', ku:'Lêv', tr:'Dudak', en:'Lip', cins:'nêr', ez:'lêvê',
+  (id:'a1_429', ku:'Lêv', tr:'Dudak', en:'Lip', cins:'mê', ez:'lêva',
    kat:'beden', zor:0.79,
-   not:'Lêv (eril/nêr) — dudak. Veqetandek: lêvê min. Mînak: Lêv sor e. Têbinî: çoğul "lêvên" (dudaklar).',
-   her:['Lêvê pîrê sor e.', 'Lêvên min sor in.'],
+   not:'Lêv (dişil/mê) — dudak. Veqetandek: lêva min. Mînak: Lêv sor e. Têbinî: çoğul "lêvên" (dudaklar).',
+   her:['Lêva pîrê sor e.', 'Lêvên min sor in.'],
    gen:['Lêv sor e.', 'Lêvên me sor in.']),
 
   // ─────────────────────────────────────────────────────────────
@@ -2388,10 +2388,10 @@ const kA1EkKelimeler = [
 
   // [FB]: Zevî = tarla — eril
   // [AS]: "tarla" kelimesi
-  (id:'a1_746', ku:'Zevî', tr:'Tarla', en:'Field', cins:'nêr', ez:'zeviyê',
+  (id:'a1_746', ku:'Zevî', tr:'Tarla', en:'Field', cins:'mê', ez:'zeviya',
    kat:'xweza', zor:0.79,
-   not:'Zevî (eril/nêr) — tarla. Veqetandek: zeviyê me. Mînak: Zevî mezin e. Têbinî: cotkar/tarım bağlamı.',
-   her:['Zeviyê me mezin e.', 'Bavê min li zeviyê ye.'],
+   not:'Zevî (dişil/mê) — tarla. Veqetandek: zeviya me. Mînak: Zevî mezin e. Têbinî: cotkar/tarım bağlamı.',
+   her:['Zeviya me mezin e.', 'Bavê min li zeviyê ye.'],
    gen:['Zevî mezin e.', 'Zevî û baxçe hene.']),
 
 ];
@@ -2453,15 +2453,15 @@ const kA1EkKelimeler2 = [
    gen:['Pantol nû ye.', 'Pantolê me kesk e.']),
 
   (id:'a1_749', ku:'Pêlav', tr:'Ayakkabı', en:'Shoe',
-   cins:'nêr', ez:'pêlavê', kat:'cil', zor:0.83,
-   not:'Pêlav (eril/nêr) — ayakkabı. Veqetandek: pêlavê min. Mînak: Pêlavê min nû ye. Têbinî: çoğul veqetandek "pêlavên".',
-   her:['Pêlavê pîrê reş e.', 'Pêlav li malê ye.'],
+   cins:'mê', ez:'pêlava', kat:'cil', zor:0.83,
+   not:'Pêlav (dişil/mê) — ayakkabı. Veqetandek: pêlava min. Mînak: Pêlava min nû ye. Têbinî: çoğul veqetandek "pêlavên".',
+   her:['Pêlava pîrê reş e.', 'Pêlav li malê ye.'],
    gen:['Pêlav nû ye.', 'Pêlavên me xweş in.']),
 
   (id:'a1_750', ku:'Gore', tr:'Çorap', en:'Sock',
-   cins:'nêr', ez:'gorê', kat:'cil', zor:0.81,
-   not:'Gore (eril/nêr) — çorap. Veqetandek: gorê min. Mînak: Gorê min germ e. Têbinî: çoğul veqetandek "goreyên".',
-   her:['Gorê kal germ e.', 'Gore li malê ye.'],
+   cins:'mê', ez:'goreya', kat:'cil', zor:0.81,
+   not:'Gore (dişil/mê) — çorap. Veqetandek: goreya min. Mînak: Goreya min germ e. Têbinî: çoğul veqetandek "goreyên".',
+   her:['Goreya kal germ e.', 'Gore li malê ye.'],
    gen:['Gore nû ye.', 'Goreyên me reş in.']),
 
   (id:'a1_751', ku:'Kirasê jorîn', tr:'Üst elbise / Ceket', en:'Jacket / Coat',
@@ -2484,9 +2484,9 @@ const kA1EkKelimeler2 = [
    gen:['Muze mezin e.', 'Muzeya bajêr xweş e.']),
 
   (id:'a1_754', ku:'Sinif', tr:'Sınıf', en:'Classroom',
-   cins:'nêr', ez:'sinifê', kat:'cih', zor:0.83,
-   not:'Sinif (eril/nêr) — Türkçe alıntı. Veqetandek: sinifê me. Mînak: Sinifê me mezin e. Têbinî: öz Kurmancî alternatif "pol".',
-   her:['Sinifê me mezin e.', 'Bira li sinifê ye.'],
+   cins:'mê', ez:'sinifa', kat:'cih', zor:0.83,
+   not:'Sinif (dişil/mê) — Türkçe alıntı. Veqetandek: sinifa me. Mînak: Sinifa me mezin e. Têbinî: öz Kurmancî alternatif "pol".',
+   her:['Sinifa me mezin e.', 'Bira li sinifê ye.'],
    gen:['Sinif mezin e.', 'Sinif nû ye.']),
 
   (id:'a1_755', ku:'Texte', tr:'Tahta / Yazı tahtası', en:'Blackboard',
@@ -2502,10 +2502,10 @@ const kA1EkKelimeler2 = [
    gen:['Pênûsk nû ye.', 'Pênûska min reş e.']),
 
   (id:'a1_757', ku:'Kaxez', tr:'Kağıt', en:'Paper',
-   cins:'nêr', ez:'kaxezê', kat:'mal', zor:0.82,
-   not:'Kaxez (eril/nêr) — kağıt. Veqetandek: kaxezê min. Mînak: Kaxezê min spî ye. Têbinî: çoğul "kaxezan" (oblique).',
-   her:['Kaxez li mêzê ye.', 'Kaxezê pîrê spî ye.'],
-   gen:['Kaxez spî ye.', 'Kaxezê me nû ye.']),
+   cins:'mê', ez:'kaxeza', kat:'mal', zor:0.82,
+   not:'Kaxez (dişil/mê) — kağıt. Veqetandek: kaxeza min. Mînak: Kaxeza min spî ye. Têbinî: çoğul "kaxezan" (oblique).',
+   her:['Kaxez li mêzê ye.', 'Kaxeza pîrê spî ye.'],
+   gen:['Kaxez spî ye.', 'Kaxeza me nû ye.']),
 
   (id:'a1_758', ku:'Çante', tr:'Çanta', en:'Bag',
    cins:'mê', ez:'çanteya', kat:'mal', zor:0.83,
@@ -2745,7 +2745,7 @@ const kA1EkKelimeler2 = [
 
   (id:'a1_591', ku:'Kirîn', tr:'Satın almak', en:'To buy',
    cins:'bêcins', ez:null, kat:'leker', zor:0.83,
-   not:'Kirîn — fiil mastarı (satın almak). Mînak: Kirîna nan baş e. Têbinî: ergative geçmiş "Min kir" — A1\'de ileri.',
+   not:'Kirîn — fiil mastarı (satın almak). Mînak: Kirîna nan baş e. Têbinî: ergative geçmiş "Min kirî" — A1\'de ileri.',
    her:['Kirîna nan baş e.', 'Pîrê pirtûk dikire.'],
    gen:['Ez nan dikirim.', 'Kirîn û firotin baş in.']),
 
@@ -2985,29 +2985,29 @@ const kA1FerkeraDersler = [
   // ── ÖĞÜNLER — [Fêrkera D.5] ────────────────────────────────────
 
   (id:'a1_fk_09', ku:'Taştê', tr:'Kahvaltı', en:'Breakfast',
-   cins:'nêr', ez:'taştê', kat:'xwarin', zor:0.84,
-   not:'Taştê (eril/nêr) — kahvaltı (sabah yemeği). Veqetandek: taştê pîrê. Mînak: Taştê li mêzê ye. Têbinî: "Xwarina sibehê" de denir.',
-   her:['Pîrê taştê dixwe.', 'Taştê pîrê xweş e.'],
+   cins:'mê', ez:'taştêya', kat:'xwarin', zor:0.84,
+   not:'Taştê (dişil/mê) — kahvaltı (sabah yemeği). Veqetandek: taştê pîrê. Mînak: Taştê li mêzê ye. Têbinî: "Xwarina sibehê" de denir.',
+   her:['Pîrê taştê dixwe.', 'Taştêya pîrê xweş e.'],
    gen:['Taştê li mêzê ye.', 'Taştê xweş e.']),
 
   (id:'a1_fk_10', ku:'Firavîn', tr:'Öğle yemeği', en:'Lunch',
-   cins:'nêr', ez:'firavînê', kat:'xwarin', zor:0.83,
-   not:'Firavîn (eril/nêr) — öğle yemeği. Veqetandek: firavînê me. Mînak: Firavîn li mêzê ye. Têbinî: "taştê" sabah, "şîv" akşam.',
+   cins:'mê', ez:'firavîna', kat:'xwarin', zor:0.83,
+   not:'Firavîn (dişil/mê) — öğle yemeği. Veqetandek: firavîna me. Mînak: Firavîn li mêzê ye. Têbinî: "taştê" sabah, "şîv" akşam.',
    her:['Pîrê firavîn dixwe.', 'Firavîn xweş e, pîrê.'],
    gen:['Firavîn li mêzê ye.', 'Firavîn û taştê hene.']),
 
   (id:'a1_fk_11', ku:'Şîv', tr:'Akşam yemeği', en:'Dinner',
-   cins:'nêr', ez:'şîvê', kat:'xwarin', zor:0.83,
-   not:'Şîv (eril/nêr) — akşam yemeği. Veqetandek: şîvê me. Mînak: Şîv li mêzê ye. Têbinî: "şîr" (süt) ile karıştırma.',
-   her:['Pîrê şîv dixwe.', 'Şîvê pîrê xweş e.'],
+   cins:'mê', ez:'şîva', kat:'xwarin', zor:0.83,
+   not:'Şîv (dişil/mê) — akşam yemeği. Veqetandek: şîva me. Mînak: Şîv li mêzê ye. Têbinî: "şîr" (süt) ile karıştırma.',
+   her:['Pîrê şîv dixwe.', 'Şîva pîrê xweş e.'],
    gen:['Şîv li mêzê ye.', 'Şîv û firavîn hene.']),
 
   // ── OKUL — [Fêrkera D.2] ───────────────────────────────────────
 
   (id:'a1_fk_12', ku:'Pol', tr:'Sınıf', en:'Classroom / Class',
-   cins:'nêr', ez:'polê', kat:'perwerde', zor:0.83,
-   not:'Pol (eril/nêr) — sınıf. Veqetandek: polê me. Mînak: Polê me xweş e. Têbinî: alıntı "sinif" yerine "pol".',
-   her:['Polê me xweş e.', 'Em di polê de ne.'],
+   cins:'mê', ez:'pola', kat:'perwerde', zor:0.83,
+   not:'Pol (dişil/mê) — sınıf. Veqetandek: pola me. Mînak: Pola me xweş e. Têbinî: alıntı "sinif" yerine "pol".',
+   her:['Pola me xweş e.', 'Em di polê de ne.'],
    gen:['Pol mezin e.', 'Pol li dibistanê ye.']),
 
   (id:'a1_fk_13', ku:'Mase', tr:'Masa / Sıra', en:'Desk / Table',
@@ -3017,8 +3017,8 @@ const kA1FerkeraDersler = [
    gen:['Mase li polê ye.', 'Mase û texte hene.']),
 
   (id:'a1_fk_14', ku:'Spartek', tr:'Ödev', en:'Homework',
-   cins:'nêr', ez:'spartekê', kat:'perwerde', zor:0.82,
-   not:'Spartek (eril/nêr) — ödev. Veqetandek: spartekê min. Mînak: Spartek hene. Têbinî: çoğul "spartekên" (ödevler).',
+   cins:'mê', ez:'sparteka', kat:'perwerde', zor:0.82,
+   not:'Spartek (dişil/mê) — ödev. Veqetandek: sparteka min. Mînak: Spartek hene. Têbinî: çoğul "spartekên" (ödevler).',
    her:['Spartekên min hene.', 'Pîrê spartek dibîne.'],
    gen:['Spartek hene.', 'Mamosta spartek dixwaze.']),
 
@@ -3092,9 +3092,9 @@ const kA1EkKelimeler4 = [
    gen:['Ava germ baş e.', 'Ava germ û çay hene.']),
 
   (id:'a1_ek402', ku:'Şerbet', tr:'Şerbet', en:'Sherbet',
-   cins:'nêr', ez:'şerbetê', kat:'vexwarin', zor:0.72,
-   not:'Şerbet (eril/nêr) — geleneksel tatlı içecek. Veqetandek: şerbetê Newrozê. Mînak: Şerbet xweş e. Têbinî: Newroz şerbeti yaygın.',
-   her:['Pîrê şerbet vedixwe.', 'Şerbetê Newrozê xweş e.'],
+   cins:'mê', ez:'şerbeta', kat:'vexwarin', zor:0.72,
+   not:'Şerbet (dişil/mê) — geleneksel tatlı içecek. Veqetandek: şerbeta Newrozê. Mînak: Şerbet xweş e. Têbinî: Newroz şerbeti yaygın.',
+   her:['Pîrê şerbet vedixwe.', 'Şerbeta Newrozê xweş e.'],
    gen:['Şerbet xweş e.', 'Şerbet û av hene.']),
 
   (id:'a1_ek403', ku:'Lîmonata', tr:'Limonata', en:'Lemonade',
@@ -3340,9 +3340,9 @@ const kA1EkKelimeler4 = [
    gen:['Şapik germ e.', 'Şapik û şal hene.']),
 
   (id:'a1_ek441', ku:'Destmal', tr:'Mendil / Eşarp', en:'Scarf / Handkerchief',
-   cins:'nêr', ez:'destmalê', kat:'cil', zor:0.70,
-   not:'Destmal (eril/nêr) — mendil veya eşarp. "Dest" (el) + "mal" (silme). Veqetandek: destmalê min. Mînak: Destmal spî ye.',
-   her:['Destmalê pîrê spî ye.', 'Pîrê destmal dibîne.'],
+   cins:'mê', ez:'destmala', kat:'cil', zor:0.70,
+   not:'Destmal (dişil/mê) — mendil veya eşarp. "Dest" (el) + "mal" (silme). Veqetandek: destmala min. Mînak: Destmal spî ye.',
+   her:['Destmala pîrê spî ye.', 'Pîrê destmal dibîne.'],
    gen:['Destmal spî ye.', 'Destmal û kumik hene.']),
 
   // ── Dua (Dua / Dilek) ─────────────────────────────────────
@@ -3477,6 +3477,57 @@ const kA1Son7 = [
    gen:['Hesp beza ye.', 'Ew beza ye.']),
 ];
 
+// ════════════════════════════════════════════════════════════
+// A1 ÇEKİRDEK FİİLLER (iyileştirme planı Faz 4.1, Ekim 2026)
+// En sık yedi fiil madde başı olarak yoktu; yalnız çekimli biçimleri
+// (Dihat, Digot) ve "X kirin" bileşikleri vardı.
+// Örnek cümleler docs/cumle/havuz.tsv'de çevirileriyle kayıtlı.
+// ════════════════════════════════════════════════════════════
+const kA1CekirdekFiil = [
+  (id:'a1_cf_01', ku:'Kirin', tr:'Yapmak / Etmek', en:'To do / To make',
+   cins:'bêcins', ez:null, kat:'leker', zor:0.92,
+   not:'Kirin — yapmak, etmek. Şimdiki zaman kökü "k": ez dikim, tu dikî, ew dike. Emir: bike! Birleşik fiillerin çoğu "kirin" ile kurulur: kar kirin (çalışmak), spas kirin (teşekkür etmek).',
+   her:['Tu çi dikî?', 'Ez karê xwe dikim.'],
+   gen:['Ew çi dike?', 'Em îro kar dikin.']),
+
+  (id:'a1_cf_02', ku:'Gotin', tr:'Söylemek / Demek', en:'To say / To tell',
+   cins:'bêcins', ez:null, kat:'leker', zor:0.91,
+   not:'Gotin — söylemek, demek. Şimdiki zaman kökü "bêj": ez dibêjim, tu dibêjî, ew dibêje. Emir: bibêje!',
+   her:['Tu çi dibêjî?', 'Ew rast dibêje.'],
+   gen:['Ez ji te re dibêjim.', 'Bavê min wiha dibêje.']),
+
+  (id:'a1_cf_03', ku:'Hatin', tr:'Gelmek', en:'To come',
+   cins:'bêcins', ez:null, kat:'leker', zor:0.92,
+   not:'Hatin — gelmek. Şimdiki zamanı düzensiz: ez têm, tu têyî, ew tê, em tên. Emir: were!',
+   her:['Ez ji malê têm.', 'Tu kengî têyî?'],
+   gen:['Ew îro tê.', 'Em bi hev re tên.']),
+
+  (id:'a1_cf_04', ku:'Çûn', tr:'Gitmek', en:'To go',
+   cins:'bêcins', ez:null, kat:'leker', zor:0.92,
+   not:'Çûn — gitmek. Şimdiki zaman kökü "ç": ez diçim, tu diçî, ew diçe. Emir: here! ya da biçe!',
+   her:['Ez diçim malê.', 'Tu bi ku ve diçî?'],
+   gen:['Em diçin dibistanê.', 'Ew îro naçe.']),
+
+  (id:'a1_cf_05', ku:'Bûn', tr:'Olmak', en:'To be / To become',
+   cins:'bêcins', ez:null, kat:'leker', zor:0.9,
+   not:'Bûn — olmak. "Dibe" = oluyor, olur. Koşaç (im, î, e, in) ayrı bir konudur: Ez mamoste me.',
+   her:['Hewa sar dibe.', 'Zarok mezin dibin.'],
+   gen:['Ez dixwazim bibim mamoste.', 'Ew kêfxweş bû.']),
+
+  (id:'a1_cf_06', ku:'Xwarin', tr:'Yemek (fiil)', en:'To eat',
+   cins:'bêcins', ez:null, kat:'leker', zor:0.92,
+   not:'Xwarin — yemek (fiil). Aynı sözcük "yemek, yiyecek" anlamında ad olarak da kullanılır. Şimdiki zaman kökü "xw": ez dixwim, tu dixwî, ew dixwe. Emir: bixwe!',
+   her:['Ez nan dixwim.', 'Tu çi dixwî?'],
+   gen:['Em şîv dixwin.', 'Zarok sêvan dixwin.']),
+
+  (id:'a1_cf_07', ku:'Dan', tr:'Vermek', en:'To give',
+   cins:'bêcins', ez:null, kat:'leker', zor:0.9,
+   not:'Dan — vermek. Şimdiki zaman kökü "d": ez didim, tu didî, ew dide. Emir: bide!',
+   her:['Ez pirtûkê didim te.', 'Avê bide min!'],
+   gen:['Ew pere dide.', 'Mamoste pirtûkan dide me.']),
+
+];
+
 final kA1TamListe = [
   ...kA1TamKelimeler,
   ...kA1EkKelimeler,
@@ -3485,4 +3536,5 @@ final kA1TamListe = [
   ...kA1EkKelimeler4,
   ...kA1FerkeraDersler,
   ...kA1Son7,
+  ...kA1CekirdekFiil,
 ];

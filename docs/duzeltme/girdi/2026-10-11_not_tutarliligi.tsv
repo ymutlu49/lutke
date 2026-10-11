@@ -1,0 +1,19 @@
+kimlik	alan	eski	yeni	kural	gerekce
+a1_159	not	Veqetandek: xwêyê me	Veqetandek: xwêya me	izafe	nottaki izafe örneği kaydın cins/ez alanıyla çelişiyordu (mê, ez xwêya; korpus xwêya 2)
+a1_199	not	Veqetandek: serşokê me	Veqetandek: serşoka me	izafe	nottaki izafe örneği kaydın cins/ez alanıyla çelişiyordu (mê, ez serşoka; korpus serşoka 4)
+a1_287	not	Veqetandek: bahozê biharê	Veqetandek: bahoza biharê	izafe	nottaki izafe örneği kaydın cins/ez alanıyla çelişiyordu (mê, ez bahoza; korpus bahoza 4)
+a1_749	not	Veqetandek: pêlavê min	Veqetandek: pêlava min	izafe	nottaki izafe örneği kaydın cins/ez alanıyla çelişiyordu (mê, ez pêlava; korpus pêlava 3)
+a1_749	not	Mînak: Pêlavê min nû ye	Mînak: Pêlava min nû ye	izafe	nottaki izafe örneği kaydın cins/ez alanıyla çelişiyordu (mê, ez pêlava)
+a1_fk_10	not	Veqetandek: firavînê me	Veqetandek: firavîna me	izafe	nottaki izafe örneği kaydın cins/ez alanıyla çelişiyordu (mê, ez firavîna; korpus firavîna 8)
+a1_fk_11	not	Veqetandek: şîvê me	Veqetandek: şîva me	izafe	nottaki izafe örneği kaydın cins/ez alanıyla çelişiyordu (mê, ez şîva; korpus -a 25 / -ê 6)
+a2_602	not	Meydanê futbolê	Meydana futbolê	izafe	nottaki izafe örneği kaydın cins/ez alanıyla çelişiyordu (mê, ez meydana; korpus meydana 39)
+b1_712	not	Destanê Mem û Zîn	Destana Mem û Zîn	izafe	nottaki izafe örneği kaydın cins/ez alanıyla çelişiyordu (mê, ez destana; korpus destana 41 geçiş 7 kaynak)
+b1_y04	not	Hêkê mirîşkê.	Hêka mirîşkê.	izafe	nottaki izafe örneği kaydın cins/ez alanıyla çelişiyordu (mê, ez hêka; Farqînî -a 2 / -ê 0)
+b1_e03	not	Mizgeftê Mezin	Mizgefta Mezin	izafe	nottaki izafe örneği kaydın cins/ez alanıyla çelişiyordu (mê, ez mizgefta; korpus mizgefta 14, mizgefta mezin 1)
+c1_006	not	Gulê Kurdistan	Gula Kurdistanê	izafe	nottaki izafe örneği kaydın cins/ez alanıyla çelişiyordu (mê, ez gula; kaydın gen örneği de Gula Kurdistanê; Farqînî -a 3 / -ê 0)
+b1_870	not	Eril — [FB]: tûtî n.m. Kürdistan'da yaygın.	Dişil — Kürdistan'da yaygın.	atif	not etiketi kaydın cins/ez alanıyla (mê, tûya) çelişiyordu; atıf başka bir sözcüğe (tûtî) aitti. tû dişil: korpus tûyê 45 (5 kaynak), tûyî 0; Farqînî tû bot/m
+b1_tm11	not	Dişil — [AS]	Eril — [AS]	cins	not etiketi kaydın cins/ez alanıyla (nêr, kundirê) çelişiyordu; kundir eril: Wîkîferheng nêr; korpus -a 0 / -ê 5; Farqînî -a 0 / -ê 1
+b2_110	not	Dişil — [BH] + [TH]: zagon n.m. Kurmancîde	Dişil — Kurmancîde	atif	nota yazılan sözlük atfı (n.m.) kaydın cinsiyle ve kanıtla çelişiyordu; kaldırıldı (Wîkîferheng mê; Farqînî -a 1 / -ê 0)
+b1_1220	cins	nêr	mê	cins	tax dişil: Wîkîferheng mê; korpus -a 31 / -ê 3 (taxa 52 geçiş 13 kaynak; taxeke 5, taxekî 0); Farqînî -a 1 / -ê 0; kaydın kendi örnekleri de Taxa me
+b1_1220	ez	taxê	taxa	cins	izafe biçimi cinsiyete göre
+b1_1220	not	"Eril — [FB]: tax n.m. ""Taxê me."""	"Dişil — ""Taxa me."""	atif	nota yazılan sözlük atfı kanıtla çelişiyordu; kaldırıldı

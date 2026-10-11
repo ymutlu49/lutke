@@ -248,7 +248,7 @@ const kKurdishFoods = <CulturalItem>[
         '• Mastê kelandî (bi rûnê heywan).\n'
         '• Savara hûr.\n'
         '• Nehniyê ziwa.\n'
-        '• Sîr û îsotê germ.\n\n'
+        '• Sîr û îsota germ.\n\n'
         'Awa: Mast hêdî hêdî tê hejandin da ku nepişke. Savar tê '
         'avêtin, paşê nehniyê ziwa û li dawiyê sîrê di rûnê de '
         'sorkirî tê li ser dirêjandin.\n\n'

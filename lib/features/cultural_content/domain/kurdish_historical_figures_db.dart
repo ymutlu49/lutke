@@ -211,7 +211,7 @@ const kKurdishHistoricalFigures = <CulturalItem>[
         'Mîras:\n'
         'Lawên Bedirxan — Mîr Celadet û Kamûran — paşê damezrînerên\n'
         'kovara Hawar (1932) û alfabeya Latînî bûn. Bi vî awayî,\n'
-        'serhildana 1843 mîrasê xwe heta îro daye.',
+        'serhildana 1843 mîrasa xwe heta îro daye.',
     turkishContent:
         'Mîr Bedirhan Bey, Botan\'ın (Cizre) son mîreki ve modern\n'
         'Kürtlerin ilk ayaklanmasının lideridir. Bedirhanlar\'ın\n'
@@ -592,7 +592,7 @@ const kKurdishHistoricalFigures = <CulturalItem>[
         '• 1974: di nav 4 xwendekarên Kurd de hate girtin ji ber\n'
         '  "êrîşên li ser dewletê" (gizlî pişgiriya pêşmergeyên\n'
         '  Mistefa Barzanî).\n'
-        '• Dadgehê Saddam Husên: 5 mehên zindanê, paşê biryara\n'
+        '• Dadgeha Saddam Husên: 5 mehên zindanê, paşê biryara\n'
         '  dardakirinê.\n\n'
         'Dardakirin:\n'
         '12ê Gulanê 1974\'an de, Leyla Qasim û 4 xwendekarên Kurd\n'

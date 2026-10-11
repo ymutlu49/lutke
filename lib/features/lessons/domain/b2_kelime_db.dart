@@ -429,10 +429,10 @@ final kB2Kelimeler = [
   // ════════════════════════════════════════════════════════════
 
   (id:"b2_110", ku:"Zagon", tr:"Kanun / Yasa", en:"Law / Statute",
-   cins:"nêr", ez:"zagonê", kat:"zagon", zor:0.67,
-   not:"Eril — [BH] + [TH]: zagon n.m. Kurmancîde standart \"kanun/yasa\" kelimesi. \"Hiqûq\" Arapça/Soranî etkisi — doğrusu \"zagon\" (yasa) veya \"maf\" (hak). [AZ] Wane 18: law",
-   her:["Zagonê welêt divê were parastin.", "Li gorî zagonê."],
-   gen:["Zagon û maf", "Zagonê welêt"]),
+   cins:"mê", ez:"zagona", kat:"zagon", zor:0.67,
+   not:"Dişil — Kurmancîde standart \"kanun/yasa\" kelimesi. \"Hiqûq\" Arapça/Soranî etkisi — doğrusu \"zagon\" (yasa) veya \"maf\" (hak). [AZ] Wane 18: law",
+   her:["Zagona welêt divê were parastin.", "Li gorî zagonê."],
+   gen:["Zagon û maf", "Zagona welêt"]),
 
   (id:"b2_110b", ku:"Maf", tr:"Hak / Hukuk", en:"Right / Law",
    cins:"nêr", ez:"mafê", kat:"zagon", zor:0.70,
@@ -593,8 +593,8 @@ final kB2EkKelimeler = [
    her:["Nêzîkatiya baş.", "Nêzîkatiya me."], gen:["Nêzîkatî û rêbaz", "Nêzîkatiya me"]),
 
   (id:"b2_204", ku:"Rêbaz", tr:"Yöntem", en:"Method",
-   cins:"nêr", ez:"rêbazê", kat:"felsefe", zor:0.68,
-   not:"Eril — \"rê\" (yol) + \"baz\" (giden). [FB]: rêbaz n.m.",
+   cins:"mê", ez:"rêbaza", kat:"felsefe", zor:0.68,
+   not:"Dişil — \"rê\" (yol) + \"baz\" (giden).",
    her:["Rêbaza baş heye.", "Rêbaza zanistî."], gen:["Rêbaz û nêzîkatî", "Rêbaza me"]),
 
   // ─────────────────────────────────────────────────────────────
@@ -693,8 +693,8 @@ final kB2EkKelimeler = [
   // ─────────────────────────────────────────────────────────────
 
   (id:"b2_250", ku:"Destûr", tr:"Anayasa / İzin", en:"Constitution / Permission",
-   cins:"nêr", ez:"destûrê", kat:"zagon", zor:0.69,
-   not:"Eril — [FB]: destûr n.m. \"Destûra bingehîn\" = anayasa. Aynı zamanda \"izin\" anlamı.",
+   cins:"mê", ez:"destûra", kat:"zagon", zor:0.69,
+   not:"Dişil — \"Destûra bingehîn\" = anayasa. Aynı zamanda \"izin\" anlamı.",
    her:["Destûr heye.", "Destûra welêt."], gen:["Destûr û zagon", "Destûra me"]),
 
   (id:"b2_251", ku:"Dadgeh", tr:"Mahkeme", en:"Court",
@@ -768,7 +768,7 @@ final kB2EkKelimeler = [
   (id:"b2_275", ku:"Rojhilat", tr:"Doğu", en:"East",
    cins:"nêr", ez:"Rojhilatê", kat:"cografî", zor:0.71,
    not:"Eril — \"roj\" (güneş) + \"hilat\" (doğu). \"Rojhilatê Kurdistanê\" = Doğu Kürdistan (İran).",
-   her:["Rojhilatê Kurdistanê.", "Li Rojhilat in."], gen:["Rojhilat û Rojava", "Rojhilatê Kurdistan"]),
+   her:["Rojhilatê Kurdistanê.", "Li Rojhilat in."], gen:["Rojhilat û Rojava", "Rojhilatê Kurdistanê"]),
 
   // ─────────────────────────────────────────────────────────────
   // SANAT VE PERFORMANS
@@ -947,8 +947,8 @@ final kB2EkKelimeler2 = [
 
   // ── FELSEFİ KAVRAMLAR TAM ─────────────────────────────────
   (id:"b2_340", ku:"Mebest", tr:"Niyet / Amaç", en:"Intent / Purpose",
-   cins:"nêr", ez:"mebestê", kat:"felsefe", zor:0.69,
-   not:"Eril — [FB]: mebest n.m. \"Mebesta te çi ye?\" = amacın ne?",
+   cins:"mê", ez:"mebesta", kat:"felsefe", zor:0.69,
+   not:"Dişil — \"Mebesta te çi ye?\" = amacın ne?",
    her:["Mebesta min baş e.", "Mebest û armancê."],
    gen:["Mebest û armanc", "Mebesta min"]),
 
@@ -1039,11 +1039,11 @@ final kB2EkKelimeler2 = [
    her:["Asîmîlasyon ziyan dide.", "Li hemberî asîmîlasyonê."],
    gen:["Asîmîlasyon û têkçûn", "Li hemberî asîmîlasyonê"]),
 
-  (id:"b2_373", ku:"Têkçûn", tr:"Asimilasyon / Erime", en:"Assimilation (loss of identity)",
+  (id:"b2_373", ku:"Têkçûn", tr:"Yenilgi / Çöküş", en:"Defeat / Collapse",
    cins:"mê", ez:"têkçûna", kat:"kimlik", zor:0.68,
-   not:"\"Têk\" (bütün) + \"çûn\" (gitmek). Kimlik kaybı için Kurmancî özgün terim.",
-   her:["Têkçûna zimanî gelek e.", "Li hemberî têkçûnê."],
-   gen:["Têkçûn û parastin", "Têkçûna zimanî"]),
+   not:"\"Têk\" (bozuk/dağılmış) + \"çûn\" (gitmek) = yenilgi, çöküş. Kimlik kaybı (asimilasyon) için \"asîmîlasyon\" ya da \"bişaftin\" kullanılır.",
+   her:["Têkçûna artêşê mezin bû.", "Li hemberî têkçûnê."],
+   gen:["Têkçûn û serkeftin", "Têkçûna dewletê"]),
 
   // ── ÇEVRE VE EKOLOJİ ──────────────────────────────────────
   (id:"b2_380", ku:"Guhertina avhewayê", tr:"İklim değişikliği", en:"Climate change",
@@ -1232,8 +1232,8 @@ final kB2EkKelimeler3 = [
    gen:["Demokrasî û otoriter", "Demokrasîya me"]),
 
   (id:"b2_532", ku:"Pluralîzm", tr:"Çoğulculuk", en:"Pluralism",
-   cins:"nêr", ez:"pluralîzmê", kat:"felsefe", zor:0.65,
-   not:"Eril — uluslararası terim. \"Cihêrengî\" Kurmancî karşılığı.",
+   cins:"mê", ez:"pluralîzma", kat:"felsefe", zor:0.65,
+   not:"Dişil — uluslararası terim. \"Cihêrengî\" Kurmancî karşılığı.",
    her:["Pluralîzm û cihêrengî.", "Di pluralîzmê de."],
    gen:["Pluralîzm û yekgirtî", "Pluralîzma civakî"]),
 
@@ -1263,8 +1263,8 @@ final kB2EkKelimeler3 = [
    gen:["Têkoşîna ziman û azadî", "Têkoşîna zimanî"]),
 
   (id:"b2_542", ku:"Xwebûn", tr:"Benlik / Öz varlık", en:"Self-being / Identity",
-   cins:"nêr", ez:"xwebûnê", kat:"kimlik", zor:0.67,
-   not:"Eril — \"xwe\" + \"bûn\". Felsefi kimlik kavramı.",
+   cins:"mê", ez:"xwebûna", kat:"kimlik", zor:0.67,
+   not:"Dişil — \"xwe\" + \"bûn\". Felsefi kimlik kavramı.",
    her:["Xwebûna kurdî.", "Di xwebûnê de."],
    gen:["Xwebûn û nasname", "Xwebûna me"]),
 
@@ -1484,11 +1484,11 @@ final kB2EkKelimeler4 = [
 
   // ── KAVRAMSAL VE FELSEFİ ──────────────────────────────────
 
-  (id:"b2_730", ku:"Zanistê civakî", tr:"Sosyal bilimler", en:"Social sciences",
-   cins:"bêcins", ez:"zanistê civakî", kat:"zanist", zor:0.67,
+  (id:"b2_730", ku:"Zanistên civakî", tr:"Sosyal bilimler", en:"Social sciences",
+   cins:"bêcins", ez:"zanistên civakî", kat:"zanist", zor:0.67,
    not:"\"Zanist\" + \"civakî\". Akademik disiplin.",
-   her:["Zanistê civakî girîng in.", "Di zanistê civakî de."],
-   gen:["Zanistê civakî û xwezayî", "Zanistê civakî"]),
+   her:["Zanistên civakî girîng in.", "Di zanistên civakî de."],
+   gen:["Zanistên civakî û xwezayî", "Zanistên civakî"]),
 
   (id:"b2_731", ku:"Tevger û bersiv", tr:"Eylem ve tepki", en:"Action and reaction",
    cins:"bêcins", ez:null, kat:"felsefe", zor:0.65,
@@ -2061,7 +2061,7 @@ final kB2_Kultur2 = [  // KÜLTÜR VE KİMLİK DERİN — 70 kelime
   (id:"b2_k04", ku:"Rewşa dualî", tr:"İkili durum / Çift kimlik", en:"Dual situation",
    cins:"mê", ez:"rewşa dualî", kat:"kimlik", zor:0.63,
    not:"\"Rewş\" + \"dualî\". Heritage diaspora durumu.",
-   her:["Rewşa dualî ya kurdan di diasporayê.", "Di rewşa dualî de."],
+   her:["Rewşa dualî ya kurdan di diasporayê de.", "Di rewşa dualî de."],
    gen:["Rewşa dualî", "Rewşa me"]),
 
   (id:"b2_k05", ku:"Veguhestina çandî", tr:"Kültürel aktarım", en:"Cultural transmission",
@@ -2236,7 +2236,7 @@ final kB2_Final = [
   (id:"b2_f03", ku:"Xeyala edebiyatê", tr:"Edebi imgelem", en:"Literary imagination", cins:"mê", ez:"xeyala edebiyatê", kat:"edebiyat", zor:0.62, not:"\"Xeyal\"+\"edebiyatê\".", her:["Xeyala edebiyatê.","Di xeyala edebiyatê de."], gen:["Xeyala edebiyatê","Xeyala me"]),
   (id:"b2_f04", ku:"Sembolîzm di wêjeyê de", tr:"Edebiyatta sembolizm", en:"Symbolism in literature", cins:"nêr", ez:"sembolîzm di wêjeyê de", kat:"edebiyat", zor:0.61, not:"\"Sembolîzm\"+\"wêje\".", her:["Sembolîzm di wêjeyê de.","Di sembolîzmê de."], gen:["Sembolîzm di wêjeyê de","Sembolîzma me"]),
   (id:"b2_f05", ku:"Tematîka destan", tr:"Destan temaları", en:"Epic themes", cins:"mê", ez:"tematîka destan", kat:"edebiyat", zor:0.62, not:"\"Tematîk\"+\"destan\".", her:["Tematîka destan.","Di tematîka destan de."], gen:["Tematîka destan","Tematîka me"]),
-  (id:"b2_f06", ku:"Serdema Newrozê di wêjeyê", tr:"Edebiyatta Newroz dönemi", en:"Newroz era in literature", cins:"mê", ez:"serdema Newrozê di wêjeyê", kat:"edebiyat", zor:0.62, not:"\"Serdem\"+\"Newroz\"+\"wêje\".", her:["Serdema Newrozê di wêjeyê.","Di serdema Newrozê de."], gen:["Serdema Newrozê di wêjeyê","Serdema me"]),
+  (id:"b2_f06", ku:"Serdema Newrozê di wêjeyê de", tr:"Edebiyatta Newroz dönemi", en:"Newroz era in literature", cins:"mê", ez:"serdema Newrozê di wêjeyê de", kat:"edebiyat", zor:0.62, not:"\"Serdem\"+\"Newroz\"+\"wêje\".", her:["Serdema Newrozê di wêjeyê de.","Di serdema Newrozê de."], gen:["Serdema Newrozê di wêjeyê de","Serdema me"]),
   (id:"b2_f07", ku:"Zimanê berhevokê", tr:"Derleme dili", en:"Anthology language", cins:"nêr", ez:"zimanê berhevokê", kat:"edebiyat", zor:0.61, not:"\"Ziman\" (eril) + \"berhevok\" (dişil) veqetandek: \"zimanê berhevokê\".", her:["Zimanê berhevokê.","Di zimanê berhevokê de."], gen:["Zimanê berhevokê","Zimanê me"]),
   (id:"b2_f08", ku:"Lêkolîna wêjeyî", tr:"Edebi araştırma", en:"Literary research", cins:"mê", ez:"lêkolîna wêjeyî", kat:"edebiyat", zor:0.62, not:"\"Lêkolîn\"+\"wêjeyî\".", her:["Lêkolîna wêjeyî.","Di lêkolîna wêjeyî de."], gen:["Lêkolîna wêjeyî","Lêkolîna me"]),
   (id:"b2_f09", ku:"Naveroka çandî ya wêjeyê", tr:"Edebiyatın kültürel içeriği", en:"Cultural content of literature", cins:"mê", ez:"naveroka çandî ya wêjeyê", kat:"edebiyat", zor:0.61, not:"\"Navero\"+\"çandî\"+\"wêje\".", her:["Naveroka çandî ya wêjeyê.","Di naveroka çandî de."], gen:["Naveroka çandî ya wêjeyê","Naveroka me"]),
@@ -2452,7 +2452,7 @@ final kB2_Final46 = [
    cins:"mê", ez:"cihêtîya zayendî di ziman de", kat:"rêziman", zor:0.63,
    not:"\"Cihêtî\"+\"zayendî\"+\"ziman\". Kurmancî cinsiyet sistemi.",
    her:["Cihêtîya zayendî di ziman de.", "Di cihêtîya zayendî de."],
-   gen:["Cihêtîya zayendî di ziman de", "Zayendê kurdî"]),
+   gen:["Cihêtîya zayendî di ziman de", "Zayenda kurdî"]),
 
   (id:"b2_r08", ku:"Veguherîna hevokê", tr:"Cümle dönüşümü", en:"Sentence transformation",
    cins:"mê", ez:"veguherîna hevokê", kat:"rêziman", zor:0.64,
@@ -2782,7 +2782,7 @@ final kB2_EkTamam = [
   (id:"b2_613", ku:"deşt", tr:"Ova", en:"Plain",
    cins:"mê", ez:"deşta", kat:"erdnîgarî", zor:0.57,
    not:"Dişil — Deşta mezin. Veqetandek: deşta (mê).",
-   her:["Deştên berfire hene.", "Li deştê çandinî tê kirin."], gen:["Deşt","Deştê me"]),
+   her:["Deştên berfire hene.", "Li deştê çandinî tê kirin."], gen:["Deşt","Deşta me"]),
 
   (id:"b2_614", ku:"çiya", tr:"Dağ", en:"Mountain",
    cins:"nêr", ez:"çiyayê", kat:"erdnîgarî", zor:0.56,
@@ -2811,42 +2811,42 @@ final kB2_EkTamam = [
 
   // ── ergatîf_b2 (8 ek kelime) ──
   (id:"b2_619", ku:"min ew anîbû", tr:"Ben onu getirmiştim", en:"I had brought it",
-   cins:"bêcins", ez:null, kat:"ergatîf_b2", zor:0.65,
+   cins:"bêcins", ez:null, kat:"ergatif_b2", zor:0.65,
    not:"Ergatîf + dema borî ya dûr.",
    her:["Min ew anîbû.", "Min pirtûk anîbû."], gen:["Min ew anîbû","Min anîbû"]),
 
   (id:"b2_620", ku:"wan ew kiribû", tr:"Onlar onu yapmıştı", en:"They had done it",
-   cins:"bêcins", ez:null, kat:"ergatîf_b2", zor:0.66,
+   cins:"bêcins", ez:null, kat:"ergatif_b2", zor:0.66,
    not:"Ergatîf pirjimar + dema borî ya dûr. (\"kiribû\" ji \"kirin\"; \"kirîbû\" ji \"kirîn\" = satın almıştı.)",
    her:["Wan ew kiribû.", "Wan karê xwe kiribû."], gen:["Wan ew kiribû","Wan kiribû"]),
 
   (id:"b2_621", ku:"te çi got?", tr:"Sen ne dedin?", en:"What did you say?",
-   cins:"bêcins", ez:null, kat:"ergatîf_b2", zor:0.62,
+   cins:"bêcins", ez:null, kat:"ergatif_b2", zor:0.62,
    not:"Ergatîf pirsyar.",
    her:["Te çi got?", "Te ji wî re çi got?"], gen:["Te çi got","Te got"]),
 
   (id:"b2_622", ku:"me ew xwend", tr:"Biz onu okuduk", en:"We read it",
-   cins:"bêcins", ez:null, kat:"ergatîf_b2", zor:0.63,
+   cins:"bêcins", ez:null, kat:"ergatif_b2", zor:0.63,
    not:"Ergatîf pirjimar.",
    her:["Me ew xwend.", "Me pirtûk xwend."], gen:["Me ew xwend","Me xwend"]),
 
   (id:"b2_623", ku:"wî lê xist", tr:"O ona vurdu (eril)", en:"He hit him/her",
-   cins:"bêcins", ez:null, kat:"ergatîf_b2", zor:0.65,
+   cins:"bêcins", ez:null, kat:"ergatif_b2", zor:0.65,
    not:"Ergatîf + lêker bileşik.",
    her:["Wî lê xist.", "Wî topê lê xist."], gen:["Wî lê xist","Lê xistin"]),
 
   (id:"b2_624", ku:"wê ew firotibû", tr:"O onu satmıştı (dişil)", en:"She had sold it",
-   cins:"bêcins", ez:null, kat:"ergatîf_b2", zor:0.67,
+   cins:"bêcins", ez:null, kat:"ergatif_b2", zor:0.67,
    not:"Ergatîf mê + dema borî ya dûr.",
    her:["Wê ew firotibû.", "Wê mala xwe firotibû."], gen:["Wê ew firotibû","Wê firotibû"]),
 
   (id:"b2_625", ku:"min bihîstibû", tr:"Ben duymuştum", en:"I had heard",
-   cins:"bêcins", ez:null, kat:"ergatîf_b2", zor:0.66,
+   cins:"bêcins", ez:null, kat:"ergatif_b2", zor:0.66,
    not:"Ergatîf + dema borî ya dûr.",
    her:["Min ew bihîstibû.", "Min ev nûçe bihîstibû."], gen:["Min bihîstibû","Me bihîstibû"]),
 
   (id:"b2_626", ku:"wan nivîsand", tr:"Onlar yazdı", en:"They wrote",
-   cins:"bêcins", ez:null, kat:"ergatîf_b2", zor:0.64,
+   cins:"bêcins", ez:null, kat:"ergatif_b2", zor:0.64,
    not:"Ergatîf pirjimar.",
    her:["Wan nameyek nivîsand.", "Wan ew nivîsand."], gen:["Wan nivîsand","Me nivîsand"]),
 
@@ -2893,42 +2893,42 @@ final kB2_EkTamam = [
 
   // ── rengdêr (8 ek kelime) ──
   (id:"b2_635", ku:"berçav", tr:"Göze çarpan / Belirgin", en:"Prominent / Noticeable",
-   cins:"bêcins", ez:null, kat:"rengdêr", zor:0.60,
+   cins:"bêcins", ez:null, kat:"rengder", zor:0.60,
    not:"Rengdêrê pêşketî.",
    her:["Ev pêşkeftin berçav e.", "Guherîna berçav."], gen:["Berçav","Berçavtir"]),
 
   (id:"b2_636", ku:"dijwar", tr:"Zor / Güç", en:"Difficult / Hard",
-   cins:"bêcins", ez:null, kat:"rengdêr", zor:0.58,
+   cins:"bêcins", ez:null, kat:"rengder", zor:0.58,
    not:"Rengdêrê pêşketî.",
    her:["Ev pirsgirêk dijwar e.", "Rewşa dijwar."], gen:["Dijwar","Dijwartir"]),
 
   (id:"b2_637", ku:"hovane", tr:"Vahşice", en:"Savage / Brutal",
-   cins:"bêcins", ez:null, kat:"rengdêr", zor:0.62,
+   cins:"bêcins", ez:null, kat:"rengder", zor:0.62,
    not:"Rengdêrê pêşketî.",
    her:["Êrîşa hovane bû.", "Bi awayekî hovane."], gen:["Hovane","Hovanetir"]),
 
   (id:"b2_638", ku:"berbiçav", tr:"Dikkat çekici", en:"Remarkable",
-   cins:"bêcins", ez:null, kat:"rengdêr", zor:0.61,
+   cins:"bêcins", ez:null, kat:"rengder", zor:0.61,
    not:"Rengdêrê pêşketî.",
    her:["Serkeftina berbiçav.", "Ev encam berbiçav e."], gen:["Berbiçav","Berbiçavtir"]),
 
   (id:"b2_639", ku:"bêwate", tr:"Anlamsız", en:"Meaningless",
-   cins:"bêcins", ez:null, kat:"rengdêr", zor:0.59,
+   cins:"bêcins", ez:null, kat:"rengder", zor:0.59,
    not:"\"Bê\"+\"wate\".",
    her:["Ev gotin bêwate ye.", "Xebata bêwate."], gen:["Bêwate","Bêwatetir"]),
 
   (id:"b2_640", ku:"hêja", tr:"Değerli", en:"Worthy / Valuable",
-   cins:"bêcins", ez:null, kat:"rengdêr", zor:0.58,
+   cins:"bêcins", ez:null, kat:"rengder", zor:0.58,
    not:"Rengdêrê pêşketî.",
    her:["Ev mirov hêja ye.", "Xebata hêja."], gen:["Hêja","Hêjatir"]),
 
   (id:"b2_641", ku:"berfireh", tr:"Geniş / Kapsamlı", en:"Extensive / Broad",
-   cins:"bêcins", ez:null, kat:"rengdêr", zor:0.62,
+   cins:"bêcins", ez:null, kat:"rengder", zor:0.62,
    not:"Rengdêrê pêşketî.",
    her:["Lêkolîna berfireh.", "Ev warê berfireh e."], gen:["Berfireh","Berfiretir"]),
 
   (id:"b2_642", ku:"nepenî", tr:"Gizli", en:"Secret / Hidden",
-   cins:"bêcins", ez:null, kat:"rengdêr", zor:0.61,
+   cins:"bêcins", ez:null, kat:"rengder", zor:0.61,
    not:"Rengdêrê pêşketî.",
    her:["Agahîya nepenî.", "Ev nepenî bû."], gen:["Nepenî","Nepenîtir"]),
 
@@ -2970,37 +2970,37 @@ final kB2_EkTamam = [
 
   // ── teknolojî (7 ek kelime) ──
   (id:"b2_650", ku:"database", tr:"Veritabanı", en:"Database",
-   cins:"mê", ez:"database", kat:"teknolojî", zor:0.63,
+   cins:"mê", ez:"database", kat:"teknoloji", zor:0.63,
    not:"Têgeha teknolojiyê.",
    her:["Databasa me mezin e.", "Di databaseyê de."], gen:["Database","Databasa me"]),
 
   (id:"b2_651", ku:"algorîtma", tr:"Algoritma", en:"Algorithm",
-   cins:"mê", ez:"algorîtma", kat:"teknolojî", zor:0.65,
+   cins:"mê", ez:"algorîtma", kat:"teknoloji", zor:0.65,
    not:"Têgeha bername û zanistê.",
    her:["Algorîtma kar dike.", "Algorîtmaya nû."], gen:["Algorîtma","Algorîtmaya me"]),
 
   (id:"b2_652", ku:"çavkanî", tr:"Kaynak", en:"Source / Resource",
-   cins:"mê", ez:"çavkanî", kat:"teknolojî", zor:0.59,
+   cins:"mê", ez:"çavkanî", kat:"teknoloji", zor:0.59,
    not:"Çavkanîya agahdariyê.",
    her:["Çavkanîyên vekirî hene.", "Di çavkanîya vê agahîyê de."], gen:["Çavkanî","Çavkanîya me"]),
 
   (id:"b2_653", ku:"pergal", tr:"Sistem", en:"System",
-   cins:"mê", ez:"pergala", kat:"teknolojî", zor:0.60,
+   cins:"mê", ez:"pergala", kat:"teknoloji", zor:0.60,
    not:"Dişil — Pergala teknolojîk. Veqetandek: pergala (mê).",
    her:["Pergala me baş dixebite.", "Di vê pergalê de."], gen:["Pergal","Pergala me"]),
 
   (id:"b2_654", ku:"torgilok", tr:"Ağ / İnternet", en:"Network / Internet",
-   cins:"mê", ez:"torgiloka", kat:"teknolojî", zor:0.62,
+   cins:"mê", ez:"torgiloka", kat:"teknoloji", zor:0.62,
    not:"Dişil — Torgiloka dîjîtal. Veqetandek: torgiloka (mê).",
    her:["Torgilok qut bû.", "Torgiloka me hêdî ye."], gen:["Torgilok","Torgiloka me"]),
 
   (id:"b2_655", ku:"sepan", tr:"Uygulama", en:"Application / App",
-   cins:"mê", ez:"sepan", kat:"teknolojî", zor:0.60,
+   cins:"mê", ez:"sepan", kat:"teknoloji", zor:0.60,
    not:"Sepana mobîl.",
    her:["Sepaneke nû hat.", "Sepana me baş e."], gen:["Sepan","Sepana me"]),
 
   (id:"b2_656", ku:"ewlehî", tr:"Güvenlik", en:"Security",
-   cins:"mê", ez:"ewlehî", kat:"teknolojî", zor:0.62,
+   cins:"mê", ez:"ewlehî", kat:"teknoloji", zor:0.62,
    not:"Ewlehîya dîjîtal.",
    her:["Ewlehîya daneyê girîng e.", "Di ewlehîyê de."], gen:["Ewlehî","Ewlehîya me"]),
 
@@ -3068,32 +3068,32 @@ final kB2_EkTamam = [
 
   // ── pasîf (6 ek kelime) ──
   (id:"b2_669", ku:"tê kirin", tr:"Yapılır", en:"Is done / Is made",
-   cins:"bêcins", ez:null, kat:"pasîf", zor:0.62,
+   cins:"bêcins", ez:null, kat:"pasif", zor:0.62,
    not:"Awayê pasîf — \"tê\" + kirin.",
    her:["Ev kar tê kirin.", "Ev tişt tê kirin."], gen:["Tê kirin","Tê çêkirin"]),
 
   (id:"b2_670", ku:"tê gotin", tr:"Denir / Söylenir", en:"Is said",
-   cins:"bêcins", ez:null, kat:"pasîf", zor:0.61,
+   cins:"bêcins", ez:null, kat:"pasif", zor:0.61,
    not:"Awayê pasîf — \"tê\" + gotin.",
    her:["Tê gotin ku...", "Li vir tê gotin."], gen:["Tê gotin","Tê zanîn"]),
 
   (id:"b2_671", ku:"tê xwendin", tr:"Okunur", en:"Is read",
-   cins:"bêcins", ez:null, kat:"pasîf", zor:0.62,
+   cins:"bêcins", ez:null, kat:"pasif", zor:0.62,
    not:"Awayê pasîf — \"tê\" + xwendin.",
    her:["Ev pirtûk gelek tê xwendin.", "Tê xwendin ku..."], gen:["Tê xwendin","Tê nivîsandin"]),
 
   (id:"b2_672", ku:"hat kirin", tr:"Yapıldı", en:"Was done",
-   cins:"bêcins", ez:null, kat:"pasîf", zor:0.63,
+   cins:"bêcins", ez:null, kat:"pasif", zor:0.63,
    not:"Awayê pasîf dema borî.",
    her:["Ev kar hat kirin.", "Ev hat kirin."], gen:["Hat kirin","Hat gotin"]),
 
   (id:"b2_673", ku:"hat dîtin", tr:"Görüldü / Bulundu", en:"Was seen / Was found",
-   cins:"bêcins", ez:null, kat:"pasîf", zor:0.64,
+   cins:"bêcins", ez:null, kat:"pasif", zor:0.64,
    not:"Awayê pasîf dema borî.",
    her:["Ev hat dîtin.", "Ew hat dîtin."], gen:["Hat dîtin","Hat zanîn"]),
 
   (id:"b2_674", ku:"tê zanîn", tr:"Biliniyor / Bilinir", en:"Is known",
-   cins:"bêcins", ez:null, kat:"pasîf", zor:0.62,
+   cins:"bêcins", ez:null, kat:"pasif", zor:0.62,
    not:"Awayê pasîf — \"tê\" + zanîn.",
    her:["Tê zanîn ku ew baş e.", "Ev tişt tê zanîn."], gen:["Tê zanîn","Tê gotin"]),
 
@@ -3175,10 +3175,10 @@ final kB2_EkTamam = [
    not:"Lêkera bileşik: \"serî\" + \"lê\" + \"dan\".",
    her:["Wî serî lê da.", "Em ê serî lê bidin."], gen:["Serî lê dan","Serî lê da."]),
 
-  (id:"b2_690", ku:"ber xwe dan", tr:"Kendini vermek / Yönelmek", en:"To devote oneself",
+  (id:"b2_690", ku:"ber xwe dan", tr:"Direnmek / Dayanmak", en:"To resist / To hold out",
    cins:"bêcins", ez:null, kat:"bileşik_leker", zor:0.64,
    not:"Lêkera bileşik.",
-   her:["Wê ber xwe da xwendinê.", "Ber xwe bidin karê xwe."], gen:["Ber xwe dan","Ber xwe da"]),
+   her:["Gel li hember zilmê ber xwe da.", "Ber xwe bidin!"], gen:["Ber xwe dan","Ber xwe da"]),
 
   (id:"b2_691", ku:"bîr kirin", tr:"Özlemek / Hasretini çekmek", en:"To miss (someone)",
    cins:"bêcins", ez:null, kat:"bileşik_leker", zor:0.61,

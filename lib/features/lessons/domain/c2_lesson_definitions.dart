@@ -307,7 +307,7 @@ final kC2Lessons = <LessonModel>[
 
   LessonModel(
     id: 'c2_l05',
-    kurmanjTitle: 'Cegerxwîn: Mîrasê Edebî',
+    kurmanjTitle: 'Cegerxwîn: Mîrasa Edebî',
     turkishTitle: 'Cegerxwîn: Edebi Miras',
     unitNumber: 1, lessonNumber: 5, level: 6,
     path: LessonPath.cultural,

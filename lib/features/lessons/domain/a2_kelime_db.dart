@@ -20,6 +20,8 @@
 
 // ignore_for_file: constant_identifier_names
 
+import 'matematik_kelime_db.dart';
+
 const kA2Kelimeler = [
 
   // ════════════════════════════════════════════════════════════
@@ -465,7 +467,7 @@ const kA2Kelimeler = [
    cins:'nêr', ez:'dermanê',
    kat:'tendurist', zor:0.83,
    not:'Nêr — [FB]: derman n.m. "Ziman dermanê dilê mirov e" atasözünde geçer. Hem "ilaç" hem mecazi "derman"',
-   her:['Bijîşk derman da min.', 'Derman bixwe!'],
+   her:['Bijîşk derman da min.', 'Divê tu dermanê xwe bixwî.'],
    gen:['Derman û nexweşxane', 'Dermanê min']),
 
   (id:'a2_093', ku:'Muayene', tr:'Muayene', en:'Examination (medical)',
@@ -632,7 +634,7 @@ const kA2Kelimeler = [
   (id:'a2_132', ku:'Heta', tr:'Kadar / -e dek', en:'Until / As far as',
    cins:'bêcins', ez:null, kat:'daçek', zor:0.80,
    not:'"Heta" = -e kadar. [TH] §: prepositions. [AZ] Wane 13',
-   her:['Heta bajêr.', 'Heta sibê bisekine.'],
+   her:['Min heta nîvro kar kir.', 'Heta sibê bisekine.'],
    gen:['Heta dawiyê', 'Heta malê']),
 
   (id:'a2_133', ku:'Dema ku', tr:'-dığında / -ince', en:'When / While',
@@ -766,7 +768,7 @@ const kA2EkKelimeler = [
   (id:'a2_202', ku:'Pêlav', tr:'Ayakkabı', en:'Shoe',
    cins:'mê', ez:'pêlava', kat:'cil', zor:0.81,
    not:'Mê — [FB]: pêlav n.f. "Pê" (ayak) + "lav" (örtü). DÜZELTME: Önce "kêlav" yazılmıştı; doğru form "pêlav". [AZ] giyim bölümü.',
-   her:['Pêlavên min reş in.', 'Pêlav bikire.'],
+   her:['Pêlavên min reş in.', 'Pêlavên min li ber derî ne.'],
    gen:['Pêlav û corab', 'Pêlavên nû']),
 
   (id:'a2_203', ku:'Corab', tr:'Çorap', en:'Sock',
@@ -806,7 +808,7 @@ const kA2EkKelimeler = [
   (id:'a2_211', ku:'Tarî', tr:'Karanlık / Koyu', en:'Dark',
    cins:'bêcins', ez:null, kat:'rengder', zor:0.80,
    not:'Rengdêra neguherbar — [FB]: tarî adj. "Şeva tarî" = karanlık gece',
-   her:['Şev tarî ye.', 'Rengê tarî.'],
+   her:['Şev tarî ye.', 'Li derve hewa tarî bû.'],
    gen:['Tarî û geş', 'Ev tarî ye.']),
 
   (id:'a2_212', ku:'Hêşîn', tr:'Yeşil (doğa için) / Yeşermiş', en:'Fresh green / Verdant',
@@ -902,11 +904,11 @@ const kA2EkKelimeler = [
    her:['Ber bi malê ve diçim.', 'Ber bi bajêr ve.'],
    gen:['Ber bi … ve', 'Ber bi rê ve']),
 
-  (id:'a2_242', ku:'Ji ber', tr:'Önünde / Karşısında', en:'In front of / Because of',
+  (id:'a2_242', ku:'Ji ber', tr:'-den dolayı / Yüzünden', en:'Because of',
    cins:'bêcins', ez:null, kat:'daçek', zor:0.79,
    not:'"Ji ber" hem "önünde" hem "yüzünden". [TH] §42. "Ji ber malê" = evin önünde',
-   her:['Ji ber malê radiweste.', 'Ji ber ku nexweş im.'],
-   gen:['Ji ber malê', 'Ji ber ku baş e']),
+   her:['Ji ber baranê nehat.', 'Ji ber ku nexweş im.'],
+   gen:['Ji ber baranê', 'Ji ber ku baş e']),
 
   (id:'a2_243', ku:'Di pêşiya', tr:'İlerisinde / Önünde', en:'Ahead of / In front of',
    cins:'bêcins', ez:null, kat:'daçek', zor:0.78,
@@ -939,7 +941,7 @@ const kA2EkKelimeler = [
   (id:'a2_250', ku:'Par', tr:'Geçen yıl', en:'Last year',
    cins:'bêcins', ez:null, kat:'dem', zor:0.81,
    not:'"Par" = geçen yıl. [TH] §85: time adverbs. "Parêsal" de denir',
-   her:['Par em çûn gundê.', 'Par baş bû.'],
+   her:['Par em çûn gundê xwe.', 'Ew par ji gund derket.'],
    gen:['Par û îsal', 'Par hat.']),
 
   (id:'a2_251', ku:'Îsal', tr:'Bu yıl', en:'This year',
@@ -1056,7 +1058,7 @@ const kA2EkKelimeler = [
   (id:'a2_273', ku:'Bilind', tr:'Uzun boylu / Yüksek', en:'Tall / High',
    cins:'bêcins', ez:null, kat:'beden', zor:0.80,
    not:'[FB]: bilind adj. Hem boy hem yükseklik. "Çiyayê bilind" = yüksek dağ',
-   her:['Birayê min gelek bilind e.', 'Çiyayê bilind.'],
+   her:['Birayê min gelek bilind e.', 'Dengê xwe zêde bilind neke.'],
    gen:['Bilind û kurt', 'Ev bilind e.']),
 
   // ─────────────────────────────────────────────────────────────
@@ -1078,7 +1080,7 @@ const kA2EkKelimeler = [
   (id:'a2_282', ku:'Qebûl kirin', tr:'Kabul etmek', en:'To accept',
    cins:'bêcins', ez:null, kat:'civakî', zor:0.79,
    not:'"Qebûl kirin" — [FB]: qebûl v. [Arapça kökenli]. "Qebûl dikim" = kabul ediyorum',
-   her:['Erê, qebûl dikim!', 'Ew qebûl nekir.'],
+   her:['Erê, qebûl dikim!', 'Wî qebûl nekir.'],
    gen:['Qebûl kirin û red kirin', 'Qebûl dikim.']),
 
   (id:'a2_283', ku:'Red kirin', tr:'Reddetmek', en:'To refuse',
@@ -1325,7 +1327,7 @@ const kA2EkKelimeler2 = [
   (id:'a2_414', ku:'Vegerîn', tr:'Dönmek', en:'To return',
    cins:'bêcins', ez:null, kat:'leker', zor:0.79,
    not:'"Vegerîn" (mesdar) — "Ez vedigerim" = dönüyorum, "ez vegeriyam" = döndüm. [TH] §65. DÜZELTME: Önce "Vegerin" (imperatif/3pl) yazılmıştı.',
-   her:['Sibê vedigerim malê.', 'Kengî vedigerî?'],
+   her:['Sibê vedigerim malê.', 'Tu kengî vedigerî malê?'],
    gen:['Vegerîn û çûn', 'Em vedigerin.']),
 
   (id:'a2_415', ku:'Şandin', tr:'Göndermek', en:'To send',
@@ -1344,7 +1346,7 @@ const kA2EkKelimeler2 = [
   // DOĞA VE ÇEVRE GENİŞLEME — [AS] + [TH] §85
   // ─────────────────────────────────────────────────────────────
 
-  (id:'a2_420', ku:'Hewz', tr:'Göl', en:'Lake / Pond',
+  (id:'a2_420', ku:'Hewz', tr:'Havuz', en:'Pool / Pond',
    cins:'nêr', ez:'hewzê', kat:'xweza', zor:0.80,
    not:'Nêr — [FB]: hewz n.m. [Arapça kökenli]. "Hewzê mezin" = büyük göl',
    her:['Hewz xweş e.', 'Li hewzê masiyan girt.'],
@@ -1364,9 +1366,9 @@ const kA2EkKelimeler2 = [
 
   (id:'a2_423', ku:'Ax', tr:'Toprak / Kil', en:'Soil / Clay',
    cins:'mê', ez:'axa', kat:'xweza', zor:0.79,
-   not:'Mê — [FB]: ax n.f. "Axê Kurdistanê" = Kürdistan toprağı (duygusal)',
-   her:['Axê welat xweş e.', 'Kevirê û ax.'],
-   gen:['Ax û erd', 'Axê me']),
+   not:'Mê — [FB]: ax n.f. "Axa Kurdistanê" = Kürdistan toprağı (duygusal)',
+   her:['Axa welat xweş e.', 'Axa vî gundî pir baş e.'],
+   gen:['Ax û erd', 'Axa me']),
 
   (id:'a2_424', ku:'Dema zivistanê', tr:'Kış mevsimi', en:'Winter season',
    cins:'bêcins', ez:null, kat:'xweza', zor:0.79,
@@ -1511,7 +1513,7 @@ const kA2EkKelimeler2 = [
   (id:'a2_471', ku:'Neyar', tr:'Düşman', en:'Enemy',
    cins:'nêr', ez:'neyarê', kat:'civakî', zor:0.78,
    not:'Nêr — [FB]: neyar n.m. "Ne" (olumsuz) + "yar" (dost) = dost-olmayan. "Dijmin" de kullanılır.',
-   her:['Neyar tune ye.', 'Neyar û dost.'],
+   her:['Neyar tune ye.', 'Ew ne neyarê me ye.'],
    gen:['Neyar û heval', 'Neyarên me']),
 
   (id:'a2_472', ku:'Berpirsiyar', tr:'Sorumlu', en:'Responsible',
@@ -1558,13 +1560,13 @@ const kA2EkKelimeler2 = [
   (id:'a2_482', ku:'Nîv', tr:'Yarım / Orta', en:'Half / Middle',
    cins:'bêcins', ez:null, kat:'jimar', zor:0.82,
    not:'"Nîv" = yarım. [BH]: "Nîvro" = öğle (nîv + roj). [FB]: nîv n./adj.',
-   her:['Nîv saet man.', 'Nîv nan dixwazim.'],
+   her:['Saet çar û nîv e.', 'Nîv nan dixwazim.'],
    gen:['Nîv û tam', 'Nîv saet']),
 
   (id:'a2_483', ku:'Çaryek', tr:'Çeyrek / Dörtte bir', en:'Quarter',
    cins:'nêr', ez:'çaryekê', kat:'jimar', zor:0.79,
    not:'Nêr — [FB]: çaryek n.m. "Çar" (dört) + "yek" (bir). "Çaryek saet" = çeyrek saat. DÜZELTME: Önceki yazım "çeryek" yanlıştı; doğru form "çaryek" (a2_1601 ile tutarlı).',
-   her:['Çaryek saet man.', 'Çaryek kîlo.'],
+   her:['Çaryek saet man.', 'Saet pênc û çaryek e.'],
    gen:['Çaryek û nîv', 'Çaryek saet']),
 
   // ─────────────────────────────────────────────────────────────
@@ -1592,7 +1594,7 @@ const kA2EkKelimeler2 = [
   (id:'a2_493', ku:'Zêde', tr:'Fazla / Aşırı', en:'Too much / Excessive',
    cins:'bêcins', ez:null, kat:'daçek', zor:0.80,
    not:'"Zêde" = fazla/çok fazla. [FB]: zêde adj./adv. "Pir zêde" = çok fazla',
-   her:['Zêde nexwe!', 'Ev zêde ye.'],
+   her:['Zêde nexwe!', 'Îro karê min pir zêde ye.'],
    gen:['Zêde û kêm', 'Pir zêde ye.']),
 
   (id:'a2_494', ku:'Kêm', tr:'Az / Eksik', en:'Few / Lacking',
@@ -1612,10 +1614,10 @@ const kA2EkKelimeler2 = [
   // ─────────────────────────────────────────────────────────────
 
   (id:'a2_500', ku:'Wêne', tr:'Fotoğraf / Resim', en:'Photo / Image',
-   cins:'mê', ez:'wêneya', kat:'teknoloji', zor:0.81,
-   not:'Mê — [FB]: wêne n.f. "Wêneya min" = fotoğrafım. "Wêje" (edebiyat) ile karıştırma',
-   her:['Wêneya pîrê heye.', 'Wêneyekê bikişîne!'],
-   gen:['Wêne û muzîk', 'Wêneya min']),
+   cins:'nêr', ez:'wêneyê', kat:'teknoloji', zor:0.81,
+   not:'Nêr — "Wêneyê min" = fotoğrafım. "Wêje" (edebiyat) ile karıştırma',
+   her:['Wêneyê pîrê heye.', 'Wêneyekî bikişîne!'],
+   gen:['Wêne û muzîk', 'Wêneyê min']),
 
   (id:'a2_501', ku:'Vîdyo', tr:'Video', en:'Video',
    cins:'mê', ez:'vîdyoya', kat:'teknoloji', zor:0.82,
@@ -1642,7 +1644,7 @@ const kA2EkKelimeler2 = [
   (id:'a2_511', ku:'Cejn', tr:'Bayram / Şenlik', en:'Feast / Festival',
    cins:'mê', ez:'cejna', kat:'çand', zor:0.81,
    not:'Mê — [FB]: cejn n.f. "Cejna we pîroz be!" = bayramınız kutlu olsun! [Aslanoğlu: "Cejna te pîroz be"]',
-   her:['Cejna we pîroz be!', 'Cejn xweş bû.'],
+   her:['Cejna we pîroz be!', 'Tu roja cejnê çi dikî?'],
    gen:['Cejn û Newroz', 'Cejna me']),
 
   (id:'a2_512', ku:'Dawet', tr:'Düğün', en:'Wedding celebration',
@@ -1698,7 +1700,7 @@ const kA2EkKelimeler2 = [
   (id:'a2_532', ku:'Lêkolîn', tr:'Araştırma', en:'Research / Investigation',
    cins:'mê', ez:'lêkolîna', kat:'perwerde', zor:0.78,
    not:'Mê — [FB]: lêkolîn n.f. "Lêkolîna min" = araştırmam',
-   her:['Lêkolîna Prof. Dr. Mutlu girîng e.', 'Lêkolîn dikim.'],
+   her:['Lêkolîna Prof. Dr. Mutlu girîng e.', 'Ez li ser vê mijarê lêkolîn dikim.'],
    gen:['Lêkolîn û zanist', 'Lêkolîna me']),
 
 ];
@@ -1822,7 +1824,7 @@ const kA2EkKelimeler5 = [
   (id:'a2_1030', ku:'Ba', tr:'Rüzgâr', en:'Wind',
    cins:'nêr', ez:'bayê', kat:'xweza', zor:0.83,
    not:'Nêr — [FB]: ba n.m. "Ba tê" = rüzgâr geliyor.',
-   her:['Ba tê.', 'Ba gelek e.'],
+   her:['Îro bayekî xurt tê.', 'Ba gelek e.'],
    gen:['Ba û baran', 'Bayê xurt']),
 
   (id:'a2_1031', ku:'Bahoz', tr:'Fırtına', en:'Storm',
@@ -1859,7 +1861,7 @@ const kA2EkKelimeler5 = [
   (id:'a2_1042', ku:'Çîrok', tr:'Hikâye / Masal', en:'Story / Tale',
    cins:'mê', ez:'çîroka', kat:'çand', zor:0.83,
    not:'Mê — [FB]: çîrok n.f. "Pîrê çîrok digot."',
-   her:['Pîrê çîrokek got.', 'Çîroka xweş!'],
+   her:['Pîrê çîrokek got.', 'Çîroka wî pir xweş bû.'],
    gen:['Çîrok û stran', 'Çîroka me']),
 
   (id:'a2_1043', ku:'Kevneşopî', tr:'Gelenek', en:'Tradition',
@@ -1868,11 +1870,11 @@ const kA2EkKelimeler5 = [
    her:['Newroz kevneşopiya me ye.', 'Govend kevneşopiyek kurdî ye.'],
    gen:['Kevneşopî û nûgerî', 'Kevneşopiya me']),
 
-  (id:'a2_1044', ku:'Pêşgotin', tr:'Atasözü', en:'Proverb',
+  (id:'a2_1044', ku:'Pêşgotin', tr:'Önsöz', en:'Preface / Foreword',
    cins:'mê', ez:'pêşgotina', kat:'çand', zor:0.79,
    not:'Mê — [FB]: pêşgotin n.f.',
-   her:['Ev pêşgotineke xweş e.', 'Pîrê pêşgotin got.'],
-   gen:['Pêşgotin û stran', 'Pêşgotinên me']),
+   her:['Ev pêşgotineke xweş e.', 'Min pêşgotina pirtûkê xwend.'],
+   gen:['Pêşgotin û naverok', 'Pêşgotinên me']),
 
   // SIFATLAR
   (id:'a2_1050', ku:'Wêrek', tr:'Cesur', en:'Brave',
@@ -1903,13 +1905,13 @@ const kA2EkKelimeler5 = [
   (id:'a2_1060', ku:'Saet', tr:'Saat (süre)', en:'Hour',
    cins:'mê', ez:'saeta', kat:'dem', zor:0.84,
    not:'Mê — [AS]: "saat = saet" ✓.',
-   her:['Saetek ma.', 'Du saet rêwîtî ye.'],
+   her:['Ez du saetan li benda te mam.', 'Du saet rêwîtî ye.'],
    gen:['Saet û deqîqe', 'Saetek']),
 
   (id:'a2_1061', ku:'Deqîqe', tr:'Dakika', en:'Minute',
    cins:'mê', ez:'deqîqeya', kat:'dem', zor:0.83,
    not:'Mê — [AS]: "dakika = hûrdem, deqîqe" ✓.',
-   her:['Pênc deqîqe man.', 'Di deqîqeyê de.'],
+   her:['Pênc deqîqe man.', 'Saet çar û bîst deqîqe ye.'],
    gen:['Deqîqe û saet', 'Pênc deqîqe']),
 
   (id:'a2_1062', ku:'Saniye', tr:'Saniye', en:'Second',
@@ -1986,7 +1988,7 @@ const kA2EkKelimeler4 = [
   (id:'a2_800', ku:'Bijîşk', tr:'Doktor', en:'Doctor',
    cins:'bêcins', ez:'bijîşkê', kat:'pîşe', zor:0.84,
    not:'A1\'de var, A2\'de mesleki bağlamda derinleşir. [AS]: "doktor = bijîşk"',
-   her:['Bijîşk hat.', 'Ez bijîşk im.'], gen:['Bijîşk û hekim', 'Bijîşkê me']),
+   her:['Ez îro diçim ba bijîşk.', 'Ez bijîşk im.'], gen:['Bijîşk û hekim', 'Bijîşkê me']),
 
   (id:'a2_801', ku:'Parêzer', tr:'Avukat', en:'Lawyer',
    cins:'bêcins', ez:'parêzerê', kat:'pîşe', zor:0.80,
@@ -2133,7 +2135,7 @@ const kA2EkKelimeler4 = [
   (id:'a2_850', ku:'Trên', tr:'Tren', en:'Train',
    cins:'nêr', ez:'trênê', kat:'rêwîtî', zor:0.83,
    not:'Nêr — [AS]: "tren = trên" ✓. [FB]: trên n.m.',
-   her:['Trên hat.', 'Bi trênê diçim.'], gen:['Trên û bas', 'Trênê me']),
+   her:['Trên kengê derbas dibe?', 'Bi trênê diçim.'], gen:['Trên û bas', 'Trênê me']),
 
   (id:'a2_851', ku:'Keştî', tr:'Gemi', en:'Ship / Boat',
    cins:'mê', ez:'keştiya', kat:'rêwîtî', zor:0.81,
@@ -2141,9 +2143,9 @@ const kA2EkKelimeler4 = [
    her:['Keştî li behrê ye.', 'Bi keştiyê çûm.'], gen:['Keştî û balafir', 'Keştiya me']),
 
   (id:'a2_852', ku:'Balafir', tr:'Uçak', en:'Airplane',
-   cins:'nêr', ez:'balafirê', kat:'rêwîtî', zor:0.83,
-   not:'Nêr — [AS]: "uçak = balafir". [FB]: balafir n.m.',
-   her:['Balafir tê.', 'Bi balafirê çûm.'], gen:['Balafir û trên', 'Balafirê me']),
+   cins:'mê', ez:'balafira', kat:'rêwîtî', zor:0.83,
+   not:'Mê — [AS]: "uçak = balafir".',
+   her:['Balafir tê.', 'Bi balafirê çûm.'], gen:['Balafir û trên', 'Balafira me']),
 
   (id:'a2_853', ku:'Duçerxe', tr:'Bisiklet', en:'Bicycle',
    cins:'mê', ez:'duçerxa', kat:'rêwîtî', zor:0.80,
@@ -2158,7 +2160,7 @@ const kA2EkKelimeler4 = [
   (id:'a2_855', ku:'Sekingeha basê', tr:'Otobüs durağı', en:'Bus stop',
    cins:'mê', ez:'sekingeha', kat:'rêwîtî', zor:0.80,
    not:'Mê — "sekinîn" (durmak) + "-geh" (yer). [AS]: "otobüs durağı = sekingeha basê".',
-   her:['Li sekingehê me.', 'Sekingehê nêzîk e.'], gen:['Sekingeh û istasyon', 'Sekingehe basê']),
+   her:['Li sekingehê me.', 'Sekingeh nêzîk e.'], gen:['Sekingeh û istasyon', 'Sekingehe basê']),
 
   // ─────────────────────────────────────────────────────────────
   // AİLE GENİŞLEME — [AS] s.31-32 MALBAT tam
@@ -2177,7 +2179,7 @@ const kA2EkKelimeler4 = [
   (id:'a2_862', ku:'Xaltî', tr:'Teyze', en:'Aunt',
    cins:'mê', ez:'xaltiya', kat:'malbat', zor:0.82,
    not:'Mê — [AS]: "teyze = xaltî". [FB]: xaltî n.f. Heritage diyaloglarında sık geçti.',
-   her:['Xaltî hat.', 'Ez diçim cem xaltiya xwe.'], gen:['Xaltî û mam', 'Xaltiya min']),
+   her:['Ev xaltiya min e.', 'Ez diçim cem xaltiya xwe.'], gen:['Xaltî û mam', 'Xaltiya min']),
 
   (id:'a2_863', ku:'Nevî', tr:'Torun', en:'Grandchild',
    cins:'bêcins', ez:'neviyê', kat:'malbat', zor:0.81,
@@ -2206,7 +2208,7 @@ const kA2EkKelimeler4 = [
   (id:'a2_870', ku:'Nîvro', tr:'Öğle', en:'Noon / Midday',
    cins:'nêr', ez:'nîvroyê', kat:'dem', zor:0.83,
    not:'Nêr — "nîv" (yarım) + "roj" (gün). [BH] bileşik. "Di nîvroyê de" = öğleyin.',
-   her:['Nîvro xwarin.', 'Di nîvroyê de.'], gen:['Nîvro û êvare', 'Nîvroyê me']),
+   her:['Em nîvro bi hev re dixwin.', 'Piştî nîvro ez têm mala we.'], gen:['Nîvro û êvare', 'Nîvroyê me']),
 
   (id:'a2_871', ku:'Spêde', tr:'Gün doğumu / Şafak', en:'Dawn / Early morning',
    cins:'mê', ez:'spêdeya', kat:'dem', zor:0.80,
@@ -2240,7 +2242,7 @@ const kA2EkKelimeler4 = [
   (id:'a2_880', ku:'Hesp', tr:'At', en:'Horse',
    cins:'nêr', ez:'hespê', kat:'ajal', zor:0.83,
    not:'Nêr — [AS]: "at = hesp". [FB]: hesp n.m. Kürt kültüründe simgesel hayvan.',
-   her:['Hesp xweş e.', 'Hespê boz'], gen:['Hesp û ker', 'Hespê me']),
+   her:['Hesp xweş e.', 'Hespê wî reş e.'], gen:['Hesp û ker', 'Hespê me']),
 
   (id:'a2_881', ku:'Ga', tr:'Öküz', en:'Ox / Bull',
    cins:'nêr', ez:'gayê', kat:'ajal', zor:0.81,
@@ -2250,7 +2252,7 @@ const kA2EkKelimeler4 = [
   (id:'a2_882', ku:'Bizin', tr:'Keçi', en:'Goat',
    cins:'mê', ez:'bizina', kat:'ajal', zor:0.82,
    not:'Mê — [AS]: "keçi = bizin". [FB]: bizin n.f.',
-   her:['Bizin li çiyê ye.', 'Şîrê bizinê.'], gen:['Bizin û mî', 'Bizina me']),
+   her:['Bizin li çiyê ye.', 'Bizin çû ser darê.'], gen:['Bizin û mî', 'Bizina me']),
 
   (id:'a2_883', ku:'Mî', tr:'Koyun', en:'Sheep',
    cins:'mê', ez:'miya', kat:'ajal', zor:0.82,
@@ -2260,7 +2262,7 @@ const kA2EkKelimeler4 = [
   (id:'a2_884', ku:'Mirîşk', tr:'Tavuk', en:'Chicken',
    cins:'mê', ez:'mirîşka', kat:'ajal', zor:0.82,
    not:'Mê — [AS]: "tavuk = mirîşk". [FB]: mirîşk n.f.',
-   her:['Mirîşk li hewşê ye.', 'Hêkên mirîşkê.'], gen:['Mirîşk û çêlek', 'Mirîşka me']),
+   her:['Mirîşk li hewşê ye.', 'Mirîşkên me her roj hêkan dikin.'], gen:['Mirîşk û çêlek', 'Mirîşka me']),
 
   (id:'a2_885', ku:'Çêlek', tr:'İnek', en:'Cow',
    cins:'mê', ez:'çêleka', kat:'ajal', zor:0.82,
@@ -2275,7 +2277,7 @@ const kA2EkKelimeler4 = [
   (id:'a2_887', ku:'Kûçik', tr:'Köpek', en:'Dog',
    cins:'nêr', ez:'kûçikê', kat:'ajal', zor:0.83,
    not:'Nêr — [AS]: "köpek = kûçik". [FB]: kûçik n.m.',
-   her:['Kûçik direye.', 'Kûçikê me baş e.'], gen:['Kûçik û pisîk', 'Kûçikê me']),
+   her:['Çend kûçik di hewşê de ne.', 'Kûçikê me baş e.'], gen:['Kûçik û pisîk', 'Kûçikê me']),
 
   (id:'a2_888', ku:'Pisîk', tr:'Kedi', en:'Cat',
    cins:'mê', ez:'pisîka', kat:'ajal', zor:0.83,
@@ -2287,14 +2289,14 @@ const kA2EkKelimeler4 = [
   // ─────────────────────────────────────────────────────────────
 
   (id:'a2_890', ku:'Raman', tr:'Fikir / Düşünce', en:'Idea / Thought',
-   cins:'nêr', ez:'ramanê', kat:'temel', zor:0.81,
-   not:'Nêr — "raman" özgün Kurmancî (raman/ramandin = düşünmek). [BH] §: raman = düşünce/fikir. "Fikir" Arapça kökenli; "raman" tercih edilir.',
+   cins:'mê', ez:'ramana', kat:'temel', zor:0.81,
+   not:'Mê — "raman" özgün Kurmancî (raman/ramandin = düşünmek). [BH] §: raman = düşünce/fikir. "Fikir" Arapça kökenli; "raman" tercih edilir.',
    her:['Ramana te çi ye?', 'Raman baş e.'], gen:['Raman û biryar', 'Ramana me']),
 
   (id:'a2_891', ku:'Plan', tr:'Plan', en:'Plan',
-   cins:'nêr', ez:'planê', kat:'temel', zor:0.82,
-   not:'Nêr — [FB]: plan n.m. "Planê te çi ye?" = planın ne?',
-   her:['Planê min amade ye.', 'Plan çi ye?'], gen:['Plan û biryar', 'Planê min']),
+   cins:'mê', ez:'plana', kat:'temel', zor:0.82,
+   not:'Mê — "Plana te çi ye?" = planın ne?',
+   her:['Plana min amade ye.', 'Plan çi ye?'], gen:['Plan û biryar', 'Plana min']),
 
   (id:'a2_892', ku:'Armanc', tr:'Hedef / Amaç', en:'Goal / Purpose',
    cins:'mê', ez:'armanca', kat:'temel', zor:0.80,
@@ -2304,7 +2306,7 @@ const kA2EkKelimeler4 = [
   (id:'a2_893', ku:'Hewce', tr:'Gerekli / Lazım', en:'Necessary',
    cins:'bêcins', ez:null, kat:'temel', zor:0.82,
    not:'Değişmez — [FB]: hewce adj. "Hewce ye" = gereklidir. "Lazim" ile eş anlamlı.',
-   her:['Derman hewce ye.', 'Ev hewce nîye.'], gen:['Hewce û lazim', 'Ev hewce ye.']),
+   her:['Derman hewce ye.', 'Hewce ye ez herim.'], gen:['Hewce û lazim', 'Ev hewce ye.']),
 
   (id:'a2_894', ku:'Muhim', tr:'Önemli', en:'Important',
    cins:'bêcins', ez:null, kat:'temel', zor:0.82,
@@ -2391,16 +2393,16 @@ const kA2EkKelimeler3 = [
    gen:['Futbol û basket', 'Futbolê me']),
 
   (id:'a2_601', ku:'Werzîş', tr:'Spor / Egzersiz', en:'Sport/Exercise',
-   cins:'nêr', ez:'werzîşê', kat:'werzî', zor:0.82,
-   not:'Nêr — [AS] s.40: "WERZÎ" bölümü. "Werzîş kirin" = spor yapmak',
+   cins:'mê', ez:'werzîşa', kat:'werzî', zor:0.82,
+   not:'Mê — [AS] s.40: "WERZÎ" bölümü. "Werzîş kirin" = spor yapmak',
    her:['Werzîş baş e.', 'Ez werzîş dikim.'],
    gen:['Werzîş û tenduristî', 'Werzîşê bike!']),
 
   (id:'a2_602', ku:'Meydan', tr:'Alan / Saha', en:'Field / Ground',
-   cins:'nêr', ez:'meydanê', kat:'werzî', zor:0.80,
-   not:'Nêr — [FB]: meydan n.m. "Meydanê futbolê" = futbol sahası',
+   cins:'mê', ez:'meydana', kat:'werzî', zor:0.80,
+   not:'Mê — "Meydana futbolê" = futbol sahası',
    her:['Em diçin meydanê.', 'Meydan mezin e.'],
-   gen:['Meydan û park', 'Meydanê bajêr']),
+   gen:['Meydan û park', 'Meydana bajêr']),
 
   (id:'a2_603', ku:'Bezîn', tr:'Koşmak', en:'To run',
    cins:'bêcins', ez:null, kat:'werzî', zor:0.81,
@@ -2419,8 +2421,8 @@ const kA2EkKelimeler3 = [
   // ─────────────────────────────────────────────────────────────
 
   (id:'a2_610', ku:'Serşok', tr:'Banyo / Duş', en:'Shower / Bath',
-   cins:'nêr', ez:'serşokê', kat:'mal', zor:0.82,
-   not:'Nêr — "ser" (baş) + "şok" (yıkama). [AS] s.53 bölümü. "Serşok kirin" = duş almak',
+   cins:'mê', ez:'serşoka', kat:'mal', zor:0.82,
+   not:'Mê — "ser" (baş) + "şok" (yıkama). [AS] s.53 bölümü. "Serşok kirin" = duş almak',
    her:['Serşok dikim.', 'Serşok li kû ye?'],
    gen:['Serşok û serûber', 'Serşoka me']),
 
@@ -2520,11 +2522,11 @@ const kA2EkKelimeler3 = [
    her:['Çarem hat.', 'Kilasa çarem.'],
    gen:['Çarem û pênciyem', 'Roja çarem']),
 
-  (id:'a2_643', ku:'Pênciyem', tr:'Beşinci', en:'Fifth',
+  (id:'a2_643', ku:'Pêncem', tr:'Beşinci', en:'Fifth',
    cins:'bêcins', ez:null, kat:'jimar', zor:0.79,
    not:'"Pênc" + "-iyem" = beşinci',
-   her:['Pênciyem hat.', 'Sinifa pênciyem.'],
-   gen:['Pênciyem û şeşem', 'Roja pênciyem']),
+   her:['Pêncem hat.', 'Sinifa pêncem.'],
+   gen:['Pêncem û şeşem', 'Roja pêncem']),
 
   // ─────────────────────────────────────────────────────────────
   // AKADEMİK / OKUL — [AS] s.36 PERWERDEHÎ derinleşme
@@ -2644,7 +2646,7 @@ const kA2EkKelimeler3 = [
   // TABIAT VE ÇEVRE EK
   // ─────────────────────────────────────────────────────────────
 
-  (id:'a2_680', ku:'Derya', tr:'Okyanus', en:'Ocean',
+  (id:'a2_680', ku:'Derya', tr:'Deniz / Derya', en:'Sea',
    cins:'mê', ez:'deryaya', kat:'xweza', zor:0.79,
    not:'Mê — [FB]: derya n.f. [Farsça]. "Behr" = deniz, "derya" = okyanus/büyük su',
    her:['Derya gelek mezin e.', 'Deryaya Atlantîk.'],
@@ -2767,7 +2769,7 @@ const kA2EkKelimeler3 = [
   (id:'a2_712', ku:'Biryar dan', tr:'Karar vermek', en:'To decide',
    cins:'bêcins', ez:null, kat:'leker', zor:0.81,
    not:'"Biryar dan" — [FB]: biryar n.m. + dan (vermek). "Biryara min hat" = kararımı verdim',
-   her:['Min biryar da ku biçim.', 'Tu biryar dayî?'],
+   her:['Min biryar da ku biçim.', 'Te biryar da?'],
    gen:['Biryar dan û xwestin', 'Biryar bide!']),
 
   (id:'a2_713', ku:'Amade kirin', tr:'Hazırlamak', en:'To prepare',
@@ -2804,11 +2806,11 @@ const kA2EkKelimeler3 = [
   // SOYUT İFADELER — A2 sonu / B1 giriş köprüsü
   // ─────────────────────────────────────────────────────────────
 
-  (id:'a2_720', ku:'Girêk', tr:'Sorun / Mesele', en:'Problem / Issue',
+  (id:'a2_720', ku:'Girêk', tr:'Düğüm', en:'Knot',
    cins:'mê', ez:'girêka', kat:'temel', zor:0.81,
    not:'Mê — girêk (dişil; krş. "pirsgirêk" mê). "Pirsgirêk" de kullanılır (pirs + girêk = soru + sorun)',
-   her:['Girêk çi ye?', 'Girêka min heye.'],
-   gen:['Girêk û çareser', 'Girêka me']),
+   her:['Girêk vekir.', 'Wî girêkek li ben da.'],
+   gen:['Girêk û ben', 'Girêka ben']),
 
   (id:'a2_721', ku:'Pirsgirêk', tr:'Problem / Sorun', en:'Problem',
    cins:'mê', ez:'pirsgirêka', kat:'temel', zor:0.82,
@@ -2881,7 +2883,7 @@ const kA2EkKelimeler6 = [
    cins:'mê', ez:'nîska', kat:'xwarin', zor:0.81,
    not:'Mê — [FB]: nîsk n.f. "Şorba nîskê" = mercimek çorbası.',
    her:['Şorba nîskê xweş e.', 'Nîsk pijandin.'],
-   gen:['Nîsk û birinc', 'Nîskê sor']),
+   gen:['Nîsk û birinc', 'Nîska sor']),
 
   (id:'a2_1202', ku:'Zeytûn', tr:'Zeytin', en:'Olive',
    cins:'nêr', ez:'zeytûnê', kat:'xwarin', zor:0.81,
@@ -2940,7 +2942,7 @@ const kA2EkKelimeler6 = [
   (id:'a2_1211', ku:'Gûz', tr:'Ceviz', en:'Walnut',
    cins:'nêr', ez:'gûzê', kat:'xwarin', zor:0.80,
    not:'Nêr — [FB]: gûz n.m. Kürdistan\'da bol yetişir.',
-   her:['Gûz û hingiv.', 'Darê gûzê.'],
+   her:['Gûz û hingiv.', 'Dara gûzê.'],
    gen:['Gûz û badam', 'Gûzê kurdî']),
 
   (id:'a2_1212', ku:'Badam', tr:'Badem', en:'Almond',
@@ -2981,11 +2983,11 @@ const kA2EkKelimeler6 = [
    her:['Masaj bike!', 'Masaj kir.'],
    gen:['Masaj û bêhnvedan', 'Masaj bike!']),
 
-  (id:'a2_1231', ku:'Germ bûn', tr:'Ateşlenmek', en:'To have fever',
+  (id:'a2_1231', ku:'Germ bûn', tr:'Isınmak', en:'To get warm',
    cins:'bêcins', ez:null, kat:'tendurist', zor:0.80,
    not:'"Germ bûn" = ısınmak / ateşi olmak. "Germahiya min heye" = ateşim var.',
-   her:['Germahiya min heye.', 'Ew germ bûye.'],
-   gen:['Germ bûn û nexweş', 'Germahî heye']),
+   her:['Hewa germ dibe.', 'Ew germ bûye.'],
+   gen:['Germ bûn û sar bûn', 'Germahî heye']),
 
   (id:'a2_1232', ku:'Rêçete', tr:'Reçete', en:'Prescription',
    cins:'mê', ez:'rêçeteya', kat:'tendurist', zor:0.78,
@@ -3065,7 +3067,7 @@ const kA2EkKelimeler6 = [
   (id:'a2_1260', ku:'Hunermend', tr:'Sanatçı', en:'Artist',
    cins:'bêcins', ez:'hunermendê', kat:'pîşe', zor:0.79,
    not:'"Huner" (sanat) + "mend". [FB]: hunermend n.',
-   her:['Ew hunermend e.', 'Hunermendên kurd.'],
+   her:['Ew hunermend e.', 'Xwişka min hunermendeke baş e.'],
    gen:['Hunermend û mamosta', 'Hunermendê me']),
 
   (id:'a2_1261', ku:'Xebatkar', tr:'İşçi / Emekçi', en:'Worker / Laborer',
@@ -3080,11 +3082,11 @@ const kA2EkKelimeler6 = [
    her:['Karker li fabrikayê dixebite.', 'Karkerên nû.'],
    gen:['Karker û xebatkar', 'Karkerên me']),
 
-  (id:'a2_1263', ku:'Derzî', tr:'Terzi', en:'Tailor',
-   cins:'bêcins', ez:'derziyê', kat:'pîşe', zor:0.78,
+  (id:'a2_1263', ku:'Terzî', tr:'Terzi', en:'Tailor',
+   cins:'bêcins', ez:'terziyê', kat:'pîşe', zor:0.78,
    not:'"Derzî" — [FB]: derzî n. Hem terzi hem iğne anlamı.',
-   her:['Derzî cil dikişîne.', 'Ew derzî ye.'],
-   gen:['Derzî û hunermend', 'Derziyê bajêr']),
+   her:['Terzî cil dikişîne.', 'Ew terzî ye.'],
+   gen:['Terzî û hunermend', 'Terziyê bajêr']),
 
   // ── TOPLUM VE İLİŞKİLER ────────────────────────────────────
   (id:'a2_1270', ku:'Civat', tr:'Toplantı / Cemiyet', en:'Meeting / Society',
@@ -3196,10 +3198,10 @@ const kA2EkKelimeler7 = [
 
   // ── OKUL VE EĞİTİM TAM ─────────────────────────────────────
   (id:'a2_1400', ku:'Îmtîhan', tr:'Sınav', en:'Exam',
-   cins:'nêr', ez:'îmtîhanê', kat:'perwerde', zor:0.83,
-   not:'Nêr — [AS]: "sınav = îmtîhan" ✓.',
+   cins:'mê', ez:'îmtîhana', kat:'perwerde', zor:0.83,
+   not:'Mê — [AS]: "sınav = îmtîhan" ✓.',
    her:['Îmtîhan zehmet bû.', 'Îmtîhan dê were.'],
-   gen:['Îmtîhan û wane', 'Îmtîhanê me']),
+   gen:['Îmtîhan û wane', 'Îmtîhana me']),
 
   (id:'a2_1401', ku:'Sinif derbas kirin', tr:'Sınıf geçmek', en:'To pass the class',
    cins:'bêcins', ez:null, kat:'perwerde', zor:0.79,
@@ -3260,7 +3262,7 @@ const kA2EkKelimeler7 = [
   (id:'a2_1421', ku:'Germahî', tr:'Sıcaklık / Isı', en:'Heat / Temperature',
    cins:'mê', ez:'germahiya', kat:'xweza', zor:0.81,
    not:'Mê — [BH] p.278: "germahî" dişil ✓.',
-   her:['Germahî bilind e.', 'Germahiya îroyîn.'],
+   her:['Germahî bilind e.', 'Germahiya îro pir zêde ye.'],
    gen:['Germahî û sarî', 'Germahiya havînê']),
 
   (id:'a2_1422', ku:'Sarî', tr:'Soğuk (isim)', en:'Cold (noun)',
@@ -3296,10 +3298,10 @@ const kA2EkKelimeler7 = [
 
   // ── DUYGULAR TAM ─────────────────────────────────────────
   (id:'a2_1440', ku:'Keser', tr:'Üzüntü / Hüzün', en:'Sadness / Grief',
-   cins:'nêr', ez:'keserê', kat:'his', zor:0.79,
-   not:'Nêr — [FB]: keser n.m. "Dil keser e" = gönül hüzünlü.',
+   cins:'mê', ez:'kesera', kat:'his', zor:0.79,
+   not:'Mê — "Dil keser e" = gönül hüzünlü.',
    her:['Dil keser e.', 'Ji keserê diêşim.'],
-   gen:['Keser û kêfxweşî', 'Keserê dil']),
+   gen:['Keser û kêfxweşî', 'Kesera dil']),
 
   (id:'a2_1441', ku:'Heyecan', tr:'Heyecan', en:'Excitement',
    cins:'mê', ez:'heyecana', kat:'his', zor:0.81,
@@ -3489,7 +3491,7 @@ const kA2EkKelimeler8 = [
   (id:'a2_1514', ku:'Ceribandin', tr:'Denemek / Sınamak', en:'To try / test',
    cins:'bêcins', ez:null, kat:'leker', zor:0.79,
    not:'"Ceribandin" — [AS] no.969 ✓.',
-   her:['Min tişta nû ceriband.', 'Ceribandin riya fêrbûnê ye.'],
+   her:['Min tiştê nû ceriband.', 'Ceribandin riya fêrbûnê ye.'],
    gen:['Ceribandin û biryar', 'Biceribîne!']),
 
   (id:'a2_1515', ku:'Bala xwe dan', tr:'Dikkat etmek', en:'To pay attention',
@@ -3635,7 +3637,7 @@ const kA2EkKelimeler8 = [
   (id:'a2_1547', ku:'Goşt', tr:'Et', en:'Meat',
    cins:'nêr', ez:'goştê', kat:'xwarin', zor:0.84,
    not:'Nêr — [AS]: "et = goşt" ✓.',
-   her:['Goşt pijandin.', 'Goştê beriyan.'],
+   her:['Em êvaran goşt û birinc dixwin.', 'Ez goşt naxwim, masî dixwim.'],
    gen:['Goşt û nan', 'Goştê kurdî']),
 
   // ── BAKIM VE TEMİZLİK ──────────────────────────────────────
@@ -3687,7 +3689,7 @@ const kA2EkKelimeler8 = [
   (id:'a2_1564', ku:'Zû', tr:'Çabuk / Erken', en:'Fast / Early',
    cins:'bêcins', ez:null, kat:'dem', zor:0.85,
    not:'"Zû" — [AS]: "erken = zû" ✓. Hem hız hem erkenlik.',
-   her:['Zû were!', 'Zû rabûm.'],
+   her:['Zû were!', 'Ez îro sibehê zû rabûm.'],
    gen:['Zû û dereng', 'Gelek zû!']),
 
   (id:'a2_1565', ku:'Dereng', tr:'Geç', en:'Late',
@@ -3707,7 +3709,7 @@ const kA2EkKelimeler8 = [
   (id:'a2_1571', ku:'Mîna', tr:'Gibi', en:'Like / Similar to',
    cins:'bêcins', ez:null, kat:'daçek', zor:0.83,
    not:'"Mîna" — [TH] §45: mîna + eğik = gibi.',
-   her:['Mîna bavê min.', 'Mîna te.'],
+   her:['Ew mîna bavê xwe dixebite.', 'Jiyan mîna guleke xweş e.'],
    gen:['Mîna û weke', 'Mîna min']),
 
   (id:'a2_1572', ku:'Ji... pêve', tr:'-den başka / -e ek olarak', en:'In addition to',
@@ -3984,10 +3986,10 @@ const kA2EkKelimeler9 = [
    gen:['Gurmîn û birûsk', 'Dengê gurmînê']),
 
   (id:'a2_1752', ku:'Toz', tr:'Toz', en:'Dust',
-   cins:'nêr', ez:'tozê', kat:'xweza', zor:0.78,
-   not:'Nêr — [FB]: toz n.m.',
+   cins:'mê', ez:'toza', kat:'xweza', zor:0.78,
+   not:'Mê — "toza rê" = yol tozu.',
    her:['Toz heye.', 'Toz gelek e.'],
-   gen:['Toz û av', 'Tozê rê']),
+   gen:['Toz û av', 'Toza rê']),
 
   (id:'a2_1753', ku:'Nîşaneyên hewayê', tr:'Hava tahmini', en:'Weather forecast',
    cins:'bêcins', ez:null, kat:'xweza', zor:0.77,
@@ -4096,7 +4098,7 @@ const kA2EkKelimeler9 = [
   (id:'a2_1792', ku:'Carinan', tr:'Bazen', en:'Sometimes',
    cins:'bêcins', ez:null, kat:'dem', zor:0.84,
    not:'"Carinan" — [AS]: "bazen = carinan" ✓.',
-   her:['Carinan diçim.', 'Carinan baş e.'],
+   her:['Ew carinan tê mala me.', 'Carinan baş e.'],
    gen:['Carinan û timî', 'Carinan']),
 
   (id:'a2_1793', ku:'Pir caran', tr:'Çok sık / Sık sık', en:'Often / Frequently',
@@ -4427,7 +4429,7 @@ const kA2FerkeraDersler = [
   (id:'a2_fk_09', ku:'Zerdele', tr:'Kayısı', en:'Apricot',
    cins:'mê', ez:'zerdeleya', kat:'xwarin', zor:0.78,
    not:'Mê — [Fêrkera D.7] ✓. Kürdistan\'da bol yetişir.',
-   her:['Zerdele şîrîn e.', 'Zerdeleyên zer.'],
+   her:['Zerdele şîrîn e.', 'Zarok zerdele û sêvan dixwin.'],
    gen:['Zerdele û sêv', 'Zerdeleyên me']),
 
   // ── DİL VE EDEBİYAT — [Fêrkera D.8] ──────────────────────────
@@ -4435,7 +4437,7 @@ const kA2FerkeraDersler = [
   (id:'a2_fk_10', ku:'Helbest', tr:'Şiir', en:'Poem / Poetry',
    cins:'mê', ez:'helbesta', kat:'edebiyat', zor:0.81,
    not:'Mê — [Fêrkera D.8] ✓: "helbest, çîrok, şanoname" listede. Şiir.',
-   her:['Helbest xwend.', 'Helbesteke xweş.'],
+   her:['Wê helbesteke xweş xwend.', 'Helbesteke xweş.'],
    gen:['Helbest û çîrok', 'Helbestên kurdî']),
 
   (id:'a2_fk_11', ku:'Çîrok', tr:'Hikaye / Öykü', en:'Story',
@@ -4453,7 +4455,7 @@ const kA2FerkeraDersler = [
   (id:'a2_fk_13', ku:'Kovar', tr:'Dergi', en:'Magazine / Journal',
    cins:'mê', ez:'kovara', kat:'medya', zor:0.81,
    not:'Mê — [Fêrkera D.8] ✓: "Em kovarekê derdixin." Dergi.',
-   her:['Kovar derdikeve.', 'Kovara kurdî.'],
+   her:['Kovar derdikeve.', 'Ev kovar her meh derdikeve.'],
    gen:['Kovar û rojname', 'Kovara me']),
 
   (id:'a2_fk_14', ku:'Weşandin', tr:'Yayımlamak / Yayınlamak', en:'To publish',
@@ -4611,7 +4613,7 @@ const kA2Son30 = [
   (id:'a2_z17', ku:'Roj', tr:'Güneş / Gün', en:'Sun / Day',
    cins:'mê', ez:'roja', kat:'xweza', zor:0.85,
    not:'Mê — "roj" hem güneş hem gün; DİŞİLDİR: "roja xweş" [Badillî: "roj, di., gün"; KURMANCI_RULES: roj F].',
-   her:['Roj derdikeve.', 'Roja xweş.'],
+   her:['Roj derdikeve.', 'Dawet roja yekşemê ye.'],
    gen:['Roj û heyv', 'Roja me']),
 
   // ── BESLENME VE SAĞLIK ──────────────────────────────────────
@@ -4656,7 +4658,7 @@ const kA2Son30 = [
   (id:'a2_z24', ku:'Lewma', tr:'Bu yüzden / Onun için', en:'Therefore',
    cins:'bêcins', ez:null, kat:'daçek', zor:0.81,
    not:'"Lewma" = bu yüzden/onun için. "Lewre" de kullanılır.',
-   her:['Lewma nehatim.', 'Lewma ez dixwînim.'],
+   her:['Tu nehatî, lewma ez jî neçûm.', 'Lewma ez dixwînim.'],
    gen:['Lewma û ji ber ku', 'Lewma']),
 
   (id:'a2_z25', ku:'Helbet', tr:'Tabii ki / Elbette', en:'Of course',
@@ -4682,14 +4684,14 @@ const kA2Son30 = [
   (id:'a2_z28', ku:'Nexşe', tr:'Harita', en:'Map',
    cins:'mê', ez:'nexşeya', kat:'rêwîtî', zor:0.80,
    not:'Mê — [Fêrkera D.2] ✓: "nexşe" listede. Harita.',
-   her:['Nexşe heye?', 'Li nexşeyê binêre.'],
+   her:['Di polê de du nexşe hene.', 'Li nexşeyê binêre.'],
    gen:['Nexşe û rê', 'Nexşeya Kurdistanê']),
 
   (id:'a2_z29', ku:'Mêjer', tr:'Miktar / Ölçü', en:'Amount / Measure',
-   cins:'nêr', ez:'mêjerê', kat:'jimar', zor:0.78,
-   not:'Nêr — "mêjer" = miktar/ölçü. [BH] ✓ mêzîn (ölçmek) kökünden.',
-   her:['Mêjerê çend e?', 'Mêjer gelek e.'],
-   gen:['Mêjer û biha', 'Mêjerê çend']),
+   cins:'mê', ez:'mêjera', kat:'jimar', zor:0.78,
+   not:'Mê — "mêjer" = miktar/ölçü. [BH] ✓ mêzîn (ölçmek) kökünden.',
+   her:['Mêjera wê çend e?', 'Mêjer gelek e.'],
+   gen:['Mêjer û biha', 'Mêjera wê']),
 
   (id:'a2_z30', ku:'Ciwan bûn', tr:'Büyümek (güzel olmak)', en:'To grow up beautifully',
    cins:'bêcins', ez:null, kat:'jiyan', zor:0.79,
@@ -4704,4 +4706,6 @@ final kA2TamListe = [
   ...kA2EkKelimeler4, ...kA2EkKelimeler5, ...kA2EkKelimeler6,
   ...kA2EkKelimeler7, ...kA2EkKelimeler8, ...kA2EkKelimeler9,
   ...kA2EkKelimeler10, ...kA2FerkeraDersler, ...kA2Son30,
+  // FerMat köprüsü (Faz 7): terim tabanından üretilen matematik birimi.
+  ...kA2Matematik,
 ];

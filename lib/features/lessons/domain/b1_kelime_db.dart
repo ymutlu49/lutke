@@ -103,7 +103,7 @@ final kB1Kelimeler = [
    cins:"bêcins", ez:null, kat:"dem_devam", zor:0.70,
    not:"Sürekli geçmiş — gotin. [TH] §70. Büyükanne hikayelerinde: \"Pîrê digot ku…\"",
    her:["Pîrê her tim digot çîrokên xwe.", "Bavê min digot ku dem guherî."],
-   gen:["Ew digot.", "Mamosta digot."]),
+   gen:["Wî digot.", "Mamosta digot."]),
 
   (id:"b1_017", ku:"Dixwend", tr:"Okuyordu", en:"Was reading / Used to read",
    cins:"bêcins", ez:null, kat:"dem_devam", zor:0.69,
@@ -311,9 +311,9 @@ final kB1Kelimeler = [
    gen:["Pêşgotin û dawî", "Pêşgotina me"]),
 
   (id:"b1_064", ku:"Destpêk", tr:"Başlangıç", en:"Beginning",
-   cins:"nêr", ez:"destpêkê", kat:"edebiyat", zor:0.74,
-   not:"Eril — [FB]: destpêk n.m. \"Dest\" (el) + \"pêk\" = başlangıç. \"Destpêk\" aynı zamanda A1 düzey rozeti!",
-   her:["Destpêkê jiyanê xweş e.", "Destpêkê baş kir."],
+   cins:"mê", ez:"destpêka", kat:"edebiyat", zor:0.74,
+   not:"Dişil — \"Dest\" (el) + \"pêk\" = başlangıç. \"Destpêk\" aynı zamanda A1 düzey rozeti!",
+   her:["Destpêka jiyanê xweş e.", "Destpêkeke baş kir."],
    gen:["Destpêk û dawî", "Destpêkê"]),
 
   (id:"b1_065", ku:"Dawî", tr:"Son / Bitiş", en:"End / Conclusion",
@@ -331,7 +331,7 @@ final kB1Kelimeler = [
    cins:"mê", ez:"bereketa", kat:"xweza", zor:0.73,
    not:"Dişil — [FB]: bereket n.f. [Arapça]. \"Erdê bereketdar\" = bereketli toprak. Kürt dualarında sık",
    her:["Erdê Kurdistanê bereketdar e.", "Sala nû bi bereket be!"],
-   gen:["Bereket û xêr", "Bereketê malê"]),
+   gen:["Bereket û xêr", "Bereketa malê"]),
 
   (id:"b1_071", ku:"Çandin", tr:"Ekmek / Ürün yetiştirmek", en:"To sow / cultivate",
    cins:"bêcins", ez:null, kat:"xweza", zor:0.71,
@@ -357,8 +357,8 @@ final kB1Kelimeler = [
   // ════════════════════════════════════════════════════════════
 
   (id:"b1_080", ku:"Mêjû", tr:"Tarih (olaylar)", en:"History (events)",
-   cins:"nêr", ez:"mêjûyê", kat:"dîrok", zor:0.72,
-   not:"Eril — [FB]: mêjû n.m. \"Dîrok\" daha genel; \"mêjû\" özellikle olaylar tarihi",
+   cins:"mê", ez:"mêjûya", kat:"dîrok", zor:0.72,
+   not:"Dişil — \"Dîrok\" daha genel; \"mêjû\" özellikle olaylar tarihi",
    her:["Mêjûya Kurdistanê zehmet bû.", "Mêjû û pêşeroj."],
    gen:["Mêjû û dîrok", "Mêjûya me"]),
 
@@ -386,11 +386,11 @@ final kB1Kelimeler = [
    her:["Em Kurdistanî ne!", "Kurdistanî û serbixwe."],
    gen:["Kurdistanî û kurd", "Ez Kurdistanî me."]),
 
-  (id:"b1_085", ku:"Têkçûn", tr:"Asimilasyon / Dilde erime", en:"Assimilation / Linguistic erosion",
-   cins:"nêr", ez:"têkçûnê", kat:"kimlik", zor:0.70,
-   not:"Eril — \"Têkçûn\" = Kurmancî özgün terim — \"têk\" (bozuk/dağılmış) + \"çûn\" (gitmek). Hem dilbilimsel hem kültürel asimilasyon için. Heritage kullanıcının yaşadığı süreç. Eril oblique: têkçûnê.",
-   her:["Têkçûna zimanî zimanê me qels kir.", "Li hember têkçûnê bisekine!"],
-   gen:["Têkçûn û nasname", "Têkçûnê"]),
+  (id:"b1_085", ku:"Têkçûn", tr:"Yenilgi / Çöküş", en:"Defeat / Collapse",
+   cins:"mê", ez:"têkçûna", kat:"dîrok", zor:0.70,
+   not:"Dişil — \"têk\" (bozuk/dağılmış) + \"çûn\" (gitmek) = yenilgi, çöküş. Dişil oblique: têkçûnê. Asimilasyon için \"asîmîlasyon\" ya da \"bişaftin\" kullanılır.",
+   her:["Piştî têkçûnê her tişt guherî.", "Li hember têkçûnê bisekine!"],
+   gen:["Têkçûn û serkeftin", "Têkçûnê"]),
 
   // ════════════════════════════════════════════════════════════
   // B1 BİRİM 11 — İnsan İlişkileri ve Psikoloji
@@ -522,7 +522,7 @@ final kB1Kelimeler = [
    cins:"mê", ez:"keskesora", kat:"xweza", zor:0.72,
    not:"Dişil — [BH] p.277: \"Keskesor, diş., gökkuşağı (kesk, yeşil; sor, kırmızı)\". Bileşik kelime!",
    her:["Piştî baranê keskesor hat.", "Keskesor xweş e!"],
-   gen:["Keskesor û baran", "Keskesorê biharê"]),
+   gen:["Keskesor û baran", "Keskesora biharê"]),
 
   (id:"b1_131", ku:"Tevn", tr:"Renk tonu / Çeşit", en:"Shade / Variety",
    cins:"nêr", ez:"tevnê", kat:"rengder", zor:0.70,
@@ -751,8 +751,8 @@ final kB1EkKelimeler = [
   // ─────────────────────────────────────────────────────────────
 
   (id:"b1_260", ku:"Hawirdor", tr:"Çevre / Ortam", en:"Environment / Surroundings",
-   cins:"nêr", ez:"hawirdorê", kat:"xweza", zor:0.72,
-   not:"Eril — [AS] s.62 + [AZ] Wane 19. \"Hawirdorê xwezayî\" = doğal çevre. \"Jîngeh\" ile yakın.",
+   cins:"mê", ez:"hawirdora", kat:"xweza", zor:0.72,
+   not:"Dişil — [AS] s.62 + [AZ] Wane 19. \"Hawirdora xwezayî\" = doğal çevre. \"Jîngeh\" ile yakın.",
    her:["Hawirdor xirabtir dibe.", "Hawirdora me biparêzin!"],
    gen:["Hawirdor û jîngeh", "Hawirdora me"]),
 
@@ -803,8 +803,8 @@ final kB1EkKelimeler = [
    gen:["Ferheng û rêziman", "Ferhenga me"]),
 
   (id:"b1_274", ku:"Werger", tr:"Çeviri", en:"Translation",
-   cins:"nêr", ez:"wergerê", kat:"ziman", zor:0.71,
-   not:"Eril — [FB]: werger n.m. \"Wergera Mem û Zîn\" = Mem û Zîn\'in çevirisi.",
+   cins:"mê", ez:"wergera", kat:"ziman", zor:0.71,
+   not:"Dişil — \"Wergera Mem û Zîn\" = Mem û Zîn\'in çevirisi.",
    her:["Werger zehmet e.", "Wergera baş lazim e."],
    gen:["Werger û nivîsîn", "Wergera me"]),
 
@@ -847,9 +847,9 @@ final kB1EkKelimeler = [
   // ─────────────────────────────────────────────────────────────
 
   (id:"b1_290", ku:"Berhem", tr:"Ürün / Eser", en:"Product / Work",
-   cins:"nêr", ez:"berhemê", kat:"aborî", zor:0.72,
-   not:"Eril — [FB]: berhem n.m. Hem \"ürün\" (tarım/sanayi) hem \"eser\" (edebiyat). \"Berhemên Xanî\" = Xanî\'nin eserleri.",
-   her:["Berhemên kund.", "Berhem baş e."],
+   cins:"mê", ez:"berhema", kat:"aborî", zor:0.72,
+   not:"Dişil — Hem \"ürün\" (tarım/sanayi) hem \"eser\" (edebiyat). \"Berhemên Xanî\" = Xanî\'nin eserleri.",
+   her:["Berhemên gund.", "Berhem baş e."],
    gen:["Berhem û bazirganî", "Berhemên me"]),
 
   (id:"b1_291", ku:"Çavkanî", tr:"Kaynak / Kaynaklar", en:"Source / Resource",
@@ -875,8 +875,8 @@ final kB1EkKelimeler = [
    gen:["Bername û wane", "Bernameya me"]),
 
   (id:"b1_301", ku:"Tevger", tr:"Hareket / Eylem", en:"Movement / Action",
-   cins:"nêr", ez:"tevgerê", kat:"civakî", zor:0.71,
-   not:"Eril — [FB]: tevger n.m. \"Tevgera kurdî\" = Kürt hareketi. Hem fiziksel hem siyasi.",
+   cins:"mê", ez:"tevgera", kat:"civakî", zor:0.71,
+   not:"Dişil — \"Tevgera kurdî\" = Kürt hareketi. Hem fiziksel hem siyasi.",
    her:["Tevgera zimanê kurdî.", "Tevger mezin dibe."],
    gen:["Tevger û siyaset", "Tevgera me"]),
 
@@ -1004,7 +1004,7 @@ final kB1EkKelimeler3 = [
   (id:"b1_624", ku:"Xwedê xêrê bide", tr:"Allah hayırlısını versin", en:"May God give goodness",
    cins:"bêcins", ez:null, kat:"dua", zor:0.70,
    not:"Kürt dua ifadesi. \"Xwedê\" + \"xêr\" + \"dan\". Selamlama ve vedada.",
-   her:["Xwedê xêrê bide!", "Serkeftinê te — Xwedê xêrê bide."],
+   her:["Xwedê xêrê bide!", "Serkeftina te — Xwedê xêrê bide."],
    gen:["Xwedê xêrê bide!", "Xêr be!"]),
 
   // SOYUT FİKİR VE TARTIŞMA
@@ -1021,8 +1021,8 @@ final kB1EkKelimeler3 = [
    gen:["Teorî û pratîk", "Teoriya me"]),
 
   (id:"b1_632", ku:"Pratîk", tr:"Pratik / Uygulama", en:"Practice / Practical",
-   cins:"nêr", ez:"pratîkê", kat:"felsefe", zor:0.70,
-   not:"Eril — alıntı isim. \"Pratîkî\" = pratikte.",
+   cins:"mê", ez:"pratîka", kat:"felsefe", zor:0.70,
+   not:"Dişil — alıntı isim. \"Pratîkî\" = pratikte.",
    her:["Pratîkî baştir e.", "Teorî û pratîk."],
    gen:["Pratîk û teorî", "Pratîkî"]),
 
@@ -1046,10 +1046,10 @@ final kB1EkKelimeler3 = [
    gen:["Şoreş û aştî", "Şoreşa me"]),
 
   (id:"b1_642", ku:"Mêjû", tr:"Tarih (geçmiş)", en:"History / Past",
-   cins:"nêr", ez:"mêjûyê", kat:"dîrok", zor:0.72,
-   not:"Eril — [FB]: mêjû n.m. \"Dîrok\" (yazılı tarih) yanı sıra \"mêjû\" (sözlü tarih/geçmiş).",
-   her:["Mêjûyê kurd dûr û dirêj e.", "Mêjû biparêze!"],
-   gen:["Mêjû û pêşeroj", "Mêjûyê me"]),
+   cins:"mê", ez:"mêjûya", kat:"dîrok", zor:0.72,
+   not:"Dişil — \"Dîrok\" (yazılı tarih) yanı sıra \"mêjû\" (sözlü tarih/geçmiş).",
+   her:["Mêjûya kurd dûr û dirêj e.", "Mêjû biparêze!"],
+   gen:["Mêjû û pêşeroj", "Mêjûya me"]),
 
   (id:"b1_643", ku:"Serdem", tr:"Dönem / Çağ", en:"Era / Period",
    cins:"mê", ez:"serdema", kat:"dîrok", zor:0.71,
@@ -1154,8 +1154,8 @@ final kB1EkKelimeler3 = [
   (id:"b1_681", ku:"Ax û erd", tr:"Toprak ve yer", en:"Soil and land",
    cins:"bêcins", ez:null, kat:"xweza", zor:0.70,
    not:"\"Ax\" (toprak) + \"erd\" (yer/zemin). İkisi beraber kullanılır.",
-   her:["Axê me bereketdar e.", "Erd û ax ya me."],
-   gen:["Ax û erd", "Axê Kurdistan"]),
+   her:["Axa me bereketdar e.", "Erd û axa me."],
+   gen:["Ax û erd", "Axa Kurdistanê"]),
 
   (id:"b1_682", ku:"Baxçevanî", tr:"Bahçecilik", en:"Gardening",
    cins:"mê", ez:"baxçevaniya", kat:"xweza", zor:0.70,
@@ -1221,10 +1221,10 @@ final kB1EkKelimeler3 = [
    gen:["Helbest û stran", "Helbesta kurdî"]),
 
   (id:"b1_712", ku:"Destan", tr:"Destan / Epos", en:"Epic / Saga",
-   cins:"nêr", ez:"destanê", kat:"edebiyat", zor:0.70,
-   not:"Eril — [FB]: destan n.m. \"Destanê Mem û Zîn\" = Mem û Zîn destanı.",
-   her:["Destan dirêj e.", "Destanê kurdî gelek in."],
-   gen:["Destan û helbest", "Destanê kurdî"]),
+   cins:"mê", ez:"destana", kat:"edebiyat", zor:0.70,
+   not:"Dişil — \"Destana Mem û Zîn\" = Mem û Zîn destanı.",
+   her:["Destan dirêj e.", "Destanên kurdî gelek in."],
+   gen:["Destan û helbest", "Destana kurdî"]),
 
   (id:"b1_713", ku:"Çîrok", tr:"Masal", en:"Fairy tale",
    cins:"mê", ez:"çîroka", kat:"edebiyat", zor:0.73,
@@ -1494,19 +1494,19 @@ final kB1EkKelimeler2 = [
   // ─────────────────────────────────────────────────────────────
 
   (id:"b1_470", ku:"Navdêr", tr:"İsim (dilbilgisi)", en:"Noun",
-   cins:"nêr", ez:"navdêrê", kat:"rêziman", zor:0.72,
-   not:"Eril — \"nav\" (ad) + \"dêr\" (veren). [BH] terminoloji. \"Navdêra mê\" = dişil isim. DÜZELTME: Terim olarak navdêr genelde eril; cümle içinde dişil kullanıma da rastlanır ama standart \"nêr\".",
-   her:["Ev navdêr e.", "Navdêrên kurdî."], gen:["Navdêr û lêker", "Navdêrê me"]),
+   cins:"mê", ez:"navdêra", kat:"rêziman", zor:0.72,
+   not:"Dişil — \"nav\" (ad) + \"dêr\" (veren). [BH] terminoloji. \"Navdêra mê\" = dişil isim.",
+   her:["Ev navdêr e.", "Navdêrên kurdî."], gen:["Navdêr û lêker", "Navdêra me"]),
 
   (id:"b1_471", ku:"Lêker", tr:"Fiil (dilbilgisi)", en:"Verb",
-   cins:"nêr", ez:"lêkerê", kat:"rêziman", zor:0.72,
-   not:"Eril — \"lê\" (ona/üstüne) + \"ker\" (yapan). [BH] terminoloji.",
-   her:["Ev lêker e.", "Lêkerên ergatif."], gen:["Lêker û navdêr", "Lêkerê me"]),
+   cins:"mê", ez:"lêkera", kat:"rêziman", zor:0.72,
+   not:"Dişil — \"lê\" (ona/üstüne) + \"ker\" (yapan). [BH] terminoloji.",
+   her:["Ev lêker e.", "Lêkerên ergatif."], gen:["Lêker û navdêr", "Lêkera me"]),
 
   (id:"b1_472", ku:"Rengdêr", tr:"Sıfat (dilbilgisi)", en:"Adjective",
-   cins:"nêr", ez:"rengdêrê", kat:"rêziman", zor:0.71,
-   not:"Eril — \"reng\" (renk/nitelik) + \"dêr\" (veren). [BH] terminoloji.",
-   her:["Ev rengdêr e.", "Rengdêrên kurdî nayên guhêztin."], gen:["Rengdêr û navdêr", "Rengdêrê me"]),
+   cins:"mê", ez:"rengdêra", kat:"rêziman", zor:0.71,
+   not:"Dişil — \"reng\" (renk/nitelik) + \"dêr\" (veren). [BH] terminoloji.",
+   her:["Ev rengdêr e.", "Rengdêrên kurdî nayên guhêztin."], gen:["Rengdêr û navdêr", "Rengdêra me"]),
 
   (id:"b1_473", ku:"Daçek", tr:"Edat (dilbilgisi)", en:"Preposition",
    cins:"nêr", ez:"daçekê", kat:"rêziman", zor:0.70,
@@ -1514,13 +1514,13 @@ final kB1EkKelimeler2 = [
    her:["Ev daçek e.", "Daçekên kurdî gelek in."], gen:["Daçek û cînavk", "Daçekê me"]),
 
   (id:"b1_474", ku:"Cînavk", tr:"Zamir (dilbilgisi)", en:"Pronoun",
-   cins:"nêr", ez:"cînavkê", kat:"rêziman", zor:0.71,
-   not:"Eril — [BH]: cînavk = zamir. \"Cînavkên şexsî\" = kişi zamirleri.",
-   her:["Ev cînavk e.", "Cînavkên kurdî."], gen:["Cînavk û navdêr", "Cînavkê me"]),
+   cins:"mê", ez:"cînavka", kat:"rêziman", zor:0.71,
+   not:"Dişil — [BH]: cînavk = zamir. \"Cînavkên şexsî\" = kişi zamirleri.",
+   her:["Ev cînavk e.", "Cînavkên kurdî."], gen:["Cînavk û navdêr", "Cînavka me"]),
 
   (id:"b1_475", ku:"Kok", tr:"Kök (dilbilgisi)", en:"Root / Stem",
-   cins:"nêr", ez:"kokê", kat:"rêziman", zor:0.71,
-   not:"Eril — \"Koka lêkerê\" = fiilin kökü. [BH] morfoloji terminolojisi. \"Pêşgir\" = önek, \"paşgir\" = sonek (ikisi de Kurmancî özgün).",
+   cins:"mê", ez:"koka", kat:"rêziman", zor:0.71,
+   not:"Dişil — \"Koka lêkerê\" = fiilin kökü. [BH] morfoloji terminolojisi. \"Pêşgir\" = önek, \"paşgir\" = sonek (ikisi de Kurmancî özgün).",
    her:["Koka lêkerê çi ye?", "Kok û paşgir."], gen:["Kok û paşgir", "Koka lêkerê"]),
 
   // ─────────────────────────────────────────────────────────────
@@ -1543,9 +1543,9 @@ final kB1EkKelimeler2 = [
    her:["Sazî baş e.", "Saziyên me gelek in."], gen:["Sazî û rêxistin", "Saziya me"]),
 
   (id:"b1_483", ku:"Arşîv", tr:"Arşiv", en:"Archive",
-   cins:"nêr", ez:"arşîvê", kat:"dîrok", zor:0.69,
-   not:"Eril — [FB]: arşîv n.m. \"Arşîva folklorê\" = folklor arşivi.",
-   her:["Arşîv di enstîtuyê de ye.", "Arşîvê lêkolîn kir."], gen:["Arşîv û pirtûkxane", "Arşîva me"]),
+   cins:"mê", ez:"arşîva", kat:"dîrok", zor:0.69,
+   not:"Dişil — \"Arşîva folklorê\" = folklor arşivi.",
+   her:["Arşîv di enstîtuyê de ye.", "Di arşîvê de lêkolîn kir."], gen:["Arşîv û pirtûkxane", "Arşîva me"]),
 
   // ─────────────────────────────────────────────────────────────
   // HAYAT KALİTESİ VE GÜNDELIK YAŞAM
@@ -1680,10 +1680,10 @@ final kB1EkKelimeler4 = [
    her:["Mêşk kar dike.", "Mêşkê te baş e."],
    gen:["Mêşk û dil", "Mêşkê me"]),
 
-  (id:"b1_805", ku:"Nesaxî", tr:"Sakatlık / Engel", en:"Disability",
+  (id:"b1_805", ku:"Nesaxî", tr:"Hastalık", en:"Illness",
    cins:"mê", ez:"nesaxiya", kat:"tendurist", zor:0.68,
    not:"Dişil — \"ne\" + \"sax\" + \"-î\". [FB]: nesaxî n.f.",
-   her:['Bavê wî nesaxî ye.', 'Nesaxî ne sebebê şerm e.'],
+   her:['Bavê wî nesax e.', 'Nesaxî ne sebebê şerm e.'],
    gen:["Nesaxî û tenduristî", "Nesaxiya min"]),
 
   // ── ERGATİF GELIŞMIŞ ───────────────────────────────────────
@@ -1855,11 +1855,11 @@ final kB1EkKelimeler4 = [
    gen:["Şahî û dawet", "Şahiya me"]),
 
   // ── BİTKİ VE TARIM ─────────────────────────────────────────
-  (id:"b1_870", ku:"Tûtî", tr:"Dut", en:"Mulberry",
-   cins:"nêr", ez:"tûtiyê", kat:"xweza", zor:0.69,
-   not:"Eril — [FB]: tûtî n.m. Kürdistan'da yaygın.",
-   her:["Darê tûtiyê mezin e.", "Tûtî çin kirin."],
-   gen:["Tûtî û gûz", "Darê tûtiyê"]),
+  (id:"b1_870", ku:"Tû", tr:"Dut", en:"Mulberry",
+   cins:"mê", ez:"tûya", kat:"xweza", zor:0.69,
+   not:"Dişil — Kürdistan'da yaygın.",
+   her:["Dara tûyê mezin e.", "Me tû çinîn."],
+   gen:["Tû û gûz", "Dara tûyê"]),
 
   (id:"b1_871", ku:"Encîr", tr:"İncir", en:"Fig",
    cins:"nêr", ez:"encîrê", kat:"xweza", zor:0.69,
@@ -1967,7 +1967,7 @@ final kB1EkKelimeler4 = [
    gen:["Pişkdarî û dûrxistin", "Pişkdariya me"]),
 
   // ── MESLEKİ GELİŞİM ────────────────────────────────────────
-  (id:"b1_910", ku:"Karîger", tr:"Yetenekli / Uzman", en:"Skilled / Expert",
+  (id:"b1_910", ku:"Karîger", tr:"Etkili", en:"Effective / Influential",
    cins:"bêcins", ez:"karîgerê", kat:"pîşe", zor:0.69,
    not:"\"Kar\" + \"-îger\". [FB]: karîger n. \"Karîgerên kurdî.\"",
    her:["Ew karîger e.", "Karîgerên me."],
@@ -2018,20 +2018,20 @@ final kB1EkKelimeler4 = [
    gen:["Lêgerîn û lêkolîn", "Lêgerîna me"]),
 
   (id:"b1_931", ku:"Encam", tr:"Sonuç", en:"Result / Conclusion",
-   cins:"nêr", ez:"encamê", kat:"zanist", zor:0.72,
-   not:"Eril — [FB]: encam n.m. \"Encama lêkolînê.\"",
+   cins:"mê", ez:"encama", kat:"zanist", zor:0.72,
+   not:"Dişil — \"Encama lêkolînê.\"",
    her:["Encam baş e.", "Encamên lêkolînê."],
    gen:["Encam û sedem", "Encama me"]),
 
   (id:"b1_932", ku:"Rêbaz", tr:"Yöntem / Metod", en:"Method",
-   cins:"nêr", ez:"rêbazê", kat:"zanist", zor:0.69,
-   not:"Eril — \"rê\" + \"baz\". [FB]: rêbaz n.m.",
-   her:["Rêbaza baş.", "Bi rêbazekî zanistî."],
+   cins:"mê", ez:"rêbaza", kat:"zanist", zor:0.69,
+   not:"Dişil — \"rê\" + \"baz\".",
+   her:["Rêbaza baş.", "Bi rêbazeke zanistî."],
    gen:["Rêbaz û teorî", "Rêbaza me"]),
 
   (id:"b1_933", ku:"Nîqaş", tr:"Tartışma", en:"Discussion / Debate",
-   cins:"nêr", ez:"nîqaşê", kat:"zanist", zor:0.70,
-   not:"Eril — [AS] no.1099: \"tartışmak = nîgaş kirin, gengeşî kirin\" ✓.",
+   cins:"mê", ez:"nîqaşa", kat:"zanist", zor:0.70,
+   not:"Dişil — [AS] no.1099: \"tartışmak = nîgaş kirin, gengeşî kirin\" ✓.",
    her:["Nîqaş baş bû.", "Di nîqaşê de axivî."],
    gen:["Nîqaş û biryar", "Nîqaşa me"]),
 
@@ -2110,8 +2110,8 @@ final kB1EkKelimeler5 = [
    gen:["Ergatîvî û aktîvî", "Avahiya ergatîvî"]),
 
   (id:"b1_1011", ku:"Dengdar", tr:"Ünsüz", en:"Consonant",
-   cins:"nêr", ez:"dengdarê", kat:"rêziman", zor:0.68,
-   not:"Eril — \"deng\" + \"-dar\" (tutan). [BH] §265: dengdar = ünsüz. DÜZELTME: Önceki \"dengdêr\" yanlıştı; BH'e göre dengdar = ünsüz (consonant). Kürtçede b, p, t, d, k, g vb.",
+   cins:"mê", ez:"dengdara", kat:"rêziman", zor:0.68,
+   not:"Dişil — \"deng\" + \"-dar\" (tutan). [BH] §265: dengdar = ünsüz. DÜZELTME: Önceki \"dengdêr\" yanlıştı; BH'e göre dengdar = ünsüz (consonant). Kürtçede b, p, t, d, k, g vb.",
    her:["Dengdarên kurdî.", "Ev dengdar e."],
    gen:["Dengdar û bideng", "Dengdarên kurdî"]),
 
@@ -2122,8 +2122,8 @@ final kB1EkKelimeler5 = [
    gen:["Bideng û dengdar", "Bidengên kurdî"]),
 
   (id:"b1_1013", ku:"Kêşan", tr:"Çekim (dilbilgisi)", en:"Conjugation / Declension",
-   cins:"nêr", ez:"kêşanê", kat:"rêziman", zor:0.67,
-   not:"Eril — [BH]: kêşan = çekim. \"Kêşana lêkerê\" = fiilin çekimi.",
+   cins:"mê", ez:"kêşana", kat:"rêziman", zor:0.67,
+   not:"Dişil — [BH]: kêşan = çekim. \"Kêşana lêkerê\" = fiilin çekimi.",
    her:["Kêşana lêkerê.", "Kêşana navdêrê."],
    gen:["Kêşan û avahî", "Kêşana kurdî"]),
 
@@ -2135,8 +2135,8 @@ final kB1EkKelimeler5 = [
 
   // ── HUKUK VE YÖNETİM — [AS] s.60 ─────────────────────────
   (id:"b1_1020", ku:"Zagon", tr:"Kanun / Yasa", en:"Law / Statute",
-   cins:"nêr", ez:"zagonê", kat:"zagon", zor:0.72,
-   not:"Eril — [AS] s.60: HIQÛQ bölümü. [FB]: zagon n.m.",
+   cins:"mê", ez:"zagona", kat:"zagon", zor:0.72,
+   not:"Dişil — [AS] s.60: HIQÛQ bölümü.",
    her:["Zagon hate dayîn.", "Li gorî zagonê."],
    gen:["Zagon û maf", "Zagonên me"]),
 
@@ -2270,10 +2270,10 @@ final kB1EkKelimeler5 = [
    gen:["Civaka dîjîtal", "Civaka nû"]),
 
   // ── FELSEFİ VE AKADEMİK KELİMELER ────────────────────────
-  (id:"b1_1060", ku:"Zanistname", tr:"Bilim dalı", en:"Scientific discipline",
+  (id:"b1_1060", ku:"Zanistname", tr:"Ansiklopedi", en:"Encyclopedia",
    cins:"mê", ez:"zanistnameya", kat:"zanist", zor:0.67,
    not:"\"Zanist\" + \"name\". Bileşik akademik terim.",
-   her:['Zanistname ya wî biyolojî ye.', 'Zanistname dibe sermayeya gel.'],
+   her:['Zanistname li pirtûkxaneyê ye.', 'Zanistname dibe sermayeya gel.'],
    gen:["Zanistname û enstîtu", "Zanistnameyên kurdî"]),
 
   (id:"b1_1061", ku:"Nêzîkatiya zanistî", tr:"Bilimsel yaklaşım", en:"Scientific approach",
@@ -2439,10 +2439,10 @@ final kB1EkKelimeler5 = [
    gen:["Serbest û bindest", "Ev serbest e."]),
 
   (id:"b1_1122", ku:"Hiqûq", tr:"Hukuk", en:"Law (field)",
-   cins:"nêr", ez:"hiqûqê", kat:"zagon", zor:0.69,
-   not:"Eril — [AS] s.60: \"HIQÛQ\" başlığı. \"Hiqûqê mirovan\" = insan hukuku.",
-   her:["Ez hiqûqê dixwînim.", "Hiqûqê mirovan."],
-   gen:["Hiqûq û siyaset", "Hiqûqê me"]),
+   cins:"mê", ez:"hiqûqa", kat:"zagon", zor:0.69,
+   not:"Dişil — [AS] s.60: \"HIQÛQ\" başlığı. \"Hiqûqa mirovan\" = insan hukuku.",
+   her:["Ez hiqûqê dixwînim.", "Hiqûqa mirovan."],
+   gen:["Hiqûq û siyaset", "Hiqûqa me"]),
 
   (id:"b1_1123", ku:"Dadwer", tr:"Hâkim / Yargıç", en:"Judge",
    cins:"bêcins", ez:"dadwerê", kat:"zagon", zor:0.68,
@@ -2492,7 +2492,7 @@ final kB1EkKelimeler5 = [
    cins:"mê", ez:"dema vala", kat:"jiyan", zor:0.71,
    not:"\"Dem\" + \"vala\". \"Demên vala\" = boş zamanlar.",
    her:["Demê vala heye?", "Di dema vala de."],
-   gen:["Dem vala û kar", "Demê vala"]),
+   gen:["Dem vala û kar", "Dema vala"]),
 
   // ── EK FIIL VE KAYNAKLI FORMLAR ───────────────────────────
   (id:"b1_1150", ku:"Bipêş xistin", tr:"İlerletmek / Geliştirmek", en:"To advance / promote",
@@ -2573,10 +2573,10 @@ final kB1EkKelimeler6 = [
   // ── TOPLUMSAL YAŞAM DERİN ─────────────────────────────────
 
   (id:"b1_1220", ku:"Taxê", tr:"Mahalle", en:"Neighbourhood",
-   cins:"nêr", ez:"taxê", kat:"cih", zor:0.72,
-   not:"Eril — [FB]: tax n.m. \"Taxê me.\"",
-   her:["Li taxê de ne.", "Taxê me xweş e."],
-   gen:["Tax û gund", "Taxê me"]),
+   cins:"mê", ez:"taxa", kat:"cih", zor:0.72,
+   not:"Dişil — \"Taxa me.\"",
+   her:["Li taxê de ne.", "Taxa me xweş e."],
+   gen:["Tax û gund", "Taxa me"]),
 
   (id:"b1_1221", ku:"Hewşa bajêr", tr:"Şehir meydanı", en:"City square",
    cins:"mê", ez:"hewşa bajêr", kat:"cih", zor:0.69,
@@ -2668,7 +2668,7 @@ final kB1EkKelimeler6 = [
    cins:"mê", ez:"zanista kompîturê", kat:"teknoloji", zor:0.68,
    not:"\"Zanist\" (mê) + \"kompîturê\".",
    her:["Ez zanista kompîturê dixwînim.", "Di zanista kompîturê de."],
-   gen:["Zanistê kompîturê", "Zanistê me"]),
+   gen:["Zanista kompîturê", "Zanista me"]),
 
   (id:"b1_1261", ku:"Kompîtur", tr:"Bilgisayar", en:"Computer",
    cins:"nêr", ez:"kompîturê", kat:"teknoloji", zor:0.82,
@@ -2722,11 +2722,11 @@ final kB1EkKelimeler6 = [
    her:["Serdestiya zimanan.", "Li hemberî serdestiyê."],
    gen:["Serdestî û azadî", "Serdestiya zimanî"]),
 
-  (id:"b1_1283", ku:"Destûrê bingehîn", tr:"Temel hak", en:"Fundamental right",
-   cins:"nêr", ez:"destûrê bingehîn", kat:"zagon", zor:0.69,
-   not:"\"Destûr\" (hak/izin) + \"bingehîn\".",
-   her:["Destûrê bingehîn yên mirovan.", "Mafê bingehîn."],
-   gen:["Destûrê bingehîn", "Mafên bingehîn"]),
+  (id:"b1_1283", ku:"Mafê bingehîn", tr:"Temel hak", en:"Fundamental right",
+   cins:"nêr", ez:"mafê bingehîn", kat:"zagon", zor:0.69,
+   not:"\"Maf\" (hak) + \"bingehîn\" (temel). \"Destûr\" izin demektir.",
+   her:["Mafên bingehîn ên mirovan.", "Jiyan mafê bingehîn e."],
+   gen:["Mafê bingehîn", "Mafên bingehîn"]),
 
   // ── ERGATİF ALIŞTIRIMALAR ─────────────────────────────────
 
@@ -2756,11 +2756,11 @@ final kB1EkKelimeler6 = [
    her:["Zivistana sar hat.", "Di zivistana sar de."],
    gen:["Zivistana sar û havîna germ", "Zivistana sar"]),
 
-  (id:"b1_1302", ku:"Biharê taze", tr:"Taze bahar", en:"Fresh spring",
-   cins:"mê", ez:"biharê taze", kat:"xweza", zor:0.71,
+  (id:"b1_1302", ku:"Bihara taze", tr:"Taze bahar", en:"Fresh spring",
+   cins:"mê", ez:"bihara taze", kat:"xweza", zor:0.71,
    not:"\"Bihar\" + \"taze\". \"Taze\" = taze/yeni.",
-   her:["Biharê taze hat.", "Kulîlkên biharê taze."],
-   gen:["Biharê taze û payîza sor", "Biharê taze"]),
+   her:["Bihara taze hat.", "Kulîlkên bihara taze."],
+   gen:["Bihara taze û payîza sor", "Bihara taze"]),
 
   // ── KÜRT HAREKETİ VE DİYASPORA ───────────────────────────
 
@@ -2984,12 +2984,12 @@ final kB1Buyuk1 = [
   (id:"b1_y03", ku:"Zer û spî", tr:"Sarı ve beyaz (yumurta)", en:"Yolk and white",
    cins:"bêcins", ez:null, kat:"xwarin", zor:0.68,
    not:"\"Hêk\" (yumurta) bileşeni. \"Zerêka hêkê\" = yumurta sarısı.",
-   her:["Zerêka hêkê.", "Hêkê spî û zer."],
+   her:["Zerêka hêkê.", "Hêka spî û zer."],
    gen:["Zer û spî", "Zerêka hêkê"]),
 
   (id:"b1_y04", ku:"Hêk", tr:"Yumurta", en:"Egg",
-   cins:"nêr", ez:"hêkê", kat:"xwarin", zor:0.82,
-   not:"Eril — [FB]: hêk n.m. \"Hêkê mirîşkê.\"",
+   cins:"mê", ez:"hêka", kat:"xwarin", zor:0.82,
+   not:"Dişil — \"Hêka mirîşkê.\"",
    her:["Hêk pijandin.", "Hêkên me."],
    gen:["Hêk û şîr", "Hêkên mirîşkê"]),
 
@@ -3081,7 +3081,7 @@ final kB1Buyuk3 = [
 
   (id:"b1_e03", ku:"Mizgeft", tr:"Cami", en:"Mosque",
    cins:"mê", ez:"mizgefta", kat:"cih", zor:0.74,
-   not:"Dişil — [FB]: mizgeft n.f. \"Mizgeftê Mezin\" = Ulu Cami. DÜZELTME: Önceki notta \"Kürtçe kelimesi\" yanıltıcıydı — aslında Arapça \"mescid\" ve Farsça üzerinden geçmiş alıntı; ancak Kurmancî'de naturalleşmiş standart terim.",
+   not:"Dişil — [FB]: mizgeft n.f. \"Mizgefta Mezin\" = Ulu Cami. DÜZELTME: Önceki notta \"Kürtçe kelimesi\" yanıltıcıydı — aslında Arapça \"mescid\" ve Farsça üzerinden geçmiş alıntı; ancak Kurmancî'de naturalleşmiş standart terim.",
    her:["Li mizgeftê ne.", "Mizgeft nêzîk e."],
    gen:["Mizgeft û xwendegeh", "Mizgefta bajêr"]),
 
@@ -3404,20 +3404,20 @@ final kB1Buyuk7 = [
    gen:["Lêkera alîkar", "Lêkerên kurdî"]),
 
   (id:"b1_z04", ku:"Tewang", tr:"Çekim / Ek", en:"Inflection",
-   cins:"nêr", ez:"tewangê", kat:"rêziman", zor:0.67,
-   not:"Eril — [BH] §: tewang = çekim/ek. \"Tewanga navdêrê\" = ismin çekimi.",
+   cins:"mê", ez:"tewanga", kat:"rêziman", zor:0.67,
+   not:"Dişil — [BH] §: tewang = çekim/ek. \"Tewanga navdêrê\" = ismin çekimi.",
    her:["Tewanga navdêrê.", "Di tewangê de."],
    gen:["Tewang û paşgir", "Tewanga kurdî"]),
 
   (id:"b1_z05", ku:"Paşgir", tr:"Son ek", en:"Suffix",
-   cins:"nêr", ez:"paşgirê", kat:"rêziman", zor:0.68,
-   not:"Eril — [BH] §270 ✓: \"paşgir\" = son ek. \"-vanî, -zan, -dar, -ger\".",
+   cins:"mê", ez:"paşgira", kat:"rêziman", zor:0.68,
+   not:"Dişil — [BH] §270 ✓: \"paşgir\" = son ek. \"-vanî, -zan, -dar, -ger\".",
    her:["Paşgira Kurmancî fêr bibe.", "Paşgirên kurdî gelek in."],
    gen:["Paşgir û pêşgir", "Paşgirên kurdî"]),
 
   (id:"b1_z06", ku:"Pêşgir", tr:"Ön ek", en:"Prefix",
-   cins:"nêr", ez:"pêşgirê", kat:"rêziman", zor:0.68,
-   not:"Eril — [BH] §269 ✓: \"pêşgir\" = ön ek. \"bi-, ne-, ve-, ji-\".",
+   cins:"mê", ez:"pêşgira", kat:"rêziman", zor:0.68,
+   not:"Dişil — [BH] §269 ✓: \"pêşgir\" = ön ek. \"bi-, ne-, ve-, ji-\".",
    her:["Pêşgira Kurmancî fêr bibe.", "Pêşgirên kurdî."],
    gen:["Pêşgir û paşgir", "Pêşgirên kurdî"]),
 
@@ -3490,10 +3490,10 @@ final kB1_Ev = [  // EV VE YAŞAYıŞ — 50 kelime
    gen:["Mitbax û salon", "Mitbaxê me"]),
 
   (id:"b1_m08", ku:"Salon", tr:"Salon / Oturma odası", en:"Living room",
-   cins:"nêr", ez:"salonê", kat:"mal", zor:0.73,
-   not:"Eril — uluslararası terim.",
+   cins:"mê", ez:"salona", kat:"mal", zor:0.73,
+   not:"Dişil — uluslararası terim.",
    her:["Salon mezin e.", "Di salonê de nin."],
-   gen:["Salon û ode", "Salonê me"]),
+   gen:["Salon û ode", "Salona me"]),
 
   (id:"b1_m09", ku:"Ode", tr:"Oda", en:"Room / Bedroom",
    cins:"mê", ez:"odeya", kat:"mal", zor:0.74,
@@ -3514,8 +3514,8 @@ final kB1_Ev = [  // EV VE YAŞAYıŞ — 50 kelime
    gen:["Mal û milk", "Mala me"]),
 
   (id:"b1_m12", ku:"Kêzik", tr:"Böcek / Haşere", en:"Insect / Bug",
-   cins:"nêr", ez:"kêzikê", kat:"mal", zor:0.69,
-   not:"Eril — [FB]: kêzik n.m.",
+   cins:"mê", ez:"kêzika", kat:"mal", zor:0.69,
+   not:"Dişil.",
    her:["Kêzik heye.", "Kêzikê avêt."],
    gen:["Kêzik û mar", "Kêzikên malê"]),
 
@@ -3571,8 +3571,8 @@ final kB1_Ev = [  // EV VE YAŞAYıŞ — 50 kelime
 
 final kB1_Giyim = [  // GİYİM VE GÖRÜNÜŞ — 40 kelime
   (id:"b1_c01b", ku:"Kiras", tr:"Gömlek / Elbise", en:"Shirt / Dress",
-   cins:"mê", ez:"kirasa", kat:"cil", zor:0.74,
-   not:"Dişil — [AS]: \"gömlek = kiras\" ✓.",
+   cins:"nêr", ez:"kirasê", kat:"cil", zor:0.74,
+   not:"Eril — [AS]: \"gömlek = kiras\" ✓.",
    her:["Kiras xweş e.", "Kirasê nû."],
    gen:["Kiras û pantol", "Kirasê me"]),
 
@@ -3583,10 +3583,10 @@ final kB1_Giyim = [  // GİYİM VE GÖRÜNÜŞ — 40 kelime
    gen:["Pantol û kiras", "Pantolê me"]),
 
   (id:"b1_c03b", ku:"Kember", tr:"Kemer", en:"Belt",
-   cins:"nêr", ez:"kemberê", kat:"cil", zor:0.71,
-   not:"Eril — [AS]: \"kemer = kember\" ✓.",
-   her:["Kember li xwe kir.", "Kemberê çerm."],
-   gen:["Kember û pêlav", "Kemberê me"]),
+   cins:"mê", ez:"kembera", kat:"cil", zor:0.71,
+   not:"Dişil — [AS]: \"kemer = kember\" ✓.",
+   her:["Kember li xwe kir.", "Kembera çerm."],
+   gen:["Kember û pêlav", "Kembera me"]),
 
   (id:"b1_c04b", ku:"Çakêtî", tr:"Ceket", en:"Jacket",
    cins:"mê", ez:"çakêtiya", kat:"cil", zor:0.72,
@@ -3601,10 +3601,10 @@ final kB1_Giyim = [  // GİYİM VE GÖRÜNÜŞ — 40 kelime
    gen:["Xirz û kiras", "Xirzê me"]),
 
   (id:"b1_c06b", ku:"Destmal", tr:"Mendil / El bezi", en:"Handkerchief",
-   cins:"nêr", ez:"destmalê", kat:"cil", zor:0.70,
-   not:"Eril — [AS]: \"mendil = destmal\" ✓.",
-   her:["Destmal li cêbê ye.", "Destmalê spî."],
-   gen:["Destmal û xirz", "Destmalê me"]),
+   cins:"mê", ez:"destmala", kat:"cil", zor:0.70,
+   not:"Dişil — [AS]: \"mendil = destmal\" ✓.",
+   her:["Destmal li cêbê ye.", "Destmala spî."],
+   gen:["Destmal û xirz", "Destmala me"]),
 
   (id:"b1_c07b", ku:"Cizdan", tr:"Cüzdan", en:"Wallet",
    cins:"nêr", ez:"cizdanê", kat:"jiyan", zor:0.70,
@@ -3675,10 +3675,10 @@ final kB1_Yolculuk = [  // SEYAHAT VE ULAŞIM — 60 kelime
    gen:["Kolan û meydan", "Kolana me"]),
 
   (id:"b1_r08", ku:"Meydan", tr:"Meydan", en:"Square / Plaza",
-   cins:"nêr", ez:"meydanê", kat:"cih", zor:0.72,
-   not:"Eril — [AS]: \"meydan\" ✓.",
+   cins:"mê", ez:"meydana", kat:"cih", zor:0.72,
+   not:"Dişil — [AS]: \"meydan\" ✓.",
    her:["Meydan mezin e.", "Li meydanê nin."],
-   gen:["Meydan û kolan", "Meydanê bajêr"]),
+   gen:["Meydan û kolan", "Meydana bajêr"]),
 
   (id:"b1_r09", ku:"Nexşeya rê", tr:"Yol haritası", en:"Road map",
    cins:"mê", ez:"nexşeya rê", kat:"rêwîtî", zor:0.69,
@@ -3723,8 +3723,8 @@ final kB1_Yolculuk = [  // SEYAHAT VE ULAŞIM — 60 kelime
    gen:["Odeya mêvanan", "Odeya me"]),
 
   (id:"b1_r16", ku:"Lêçûn", tr:"Masraf / Harcama", en:"Expense / Cost",
-   cins:"nêr", ez:"lêçûnê", kat:"aborî", zor:0.70,
-   not:"Eril — \"lêçûn\" = masraf.",
+   cins:"mê", ez:"lêçûna", kat:"aborî", zor:0.70,
+   not:"Dişil — \"lêçûn\" = masraf.",
    her:["Lêçûn gelek e.", "Lêçûna rêwîtiyê."],
    gen:["Lêçûn û bacgeh", "Lêçûna me"]),
 
@@ -3799,8 +3799,8 @@ final kB1_Teknoloji = [  // TEKNOLOJİ VE MEDYA — 60 kelime
   (id:"b1_tk08", ku:"Têlefona desta", tr:"Cep telefonu", en:"Mobile phone",
    cins:"mê", ez:"têlefona desta", kat:"teknoloji", zor:0.74,
    not:"\"Têlefon\" + \"desta\".",
-   her:["Têlefonê desta windabûye.", "Di têlefonê desta de."],
-   gen:["Têlefonê desta", "Têlefonê me"]),
+   her:["Têlefona desta winda bûye.", "Di têlefona desta de."],
+   gen:["Têlefona desta", "Têlefona me"]),
 
   (id:"b1_tk09", ku:"Arşîvkirin", tr:"Arşivlemek", en:"To archive",
    cins:"bêcins", ez:null, kat:"teknoloji", zor:0.67,
@@ -3864,11 +3864,11 @@ final kB1_Teknoloji = [  // TEKNOLOJİ VE MEDYA — 60 kelime
    her:["Lîstik xweş bû.", "Lîstika îro."],
    gen:["Lîstik û spor", "Lîstika me"]),
 
-  (id:"b1_tk19", ku:"Tevlihevî", tr:"Turnuva / Rekabet", en:"Tournament / Competition",
-   cins:"mê", ez:"tevliheviya", kat:"spor", zor:0.68,
+  (id:"b1_tk19", ku:"Pêşbirk", tr:"Yarışma / Müsabaka", en:"Competition / Contest",
+   cins:"mê", ez:"pêşbirka", kat:"spor", zor:0.68,
    not:"Dişil — \"tevlihev\" bileşik.",
-   her:["Tevlihevî dest pê kir.", "Di tevliheviyê de ne."],
-   gen:["Tevlihevî û lîstik", "Tevliheviya me"]),
+   her:["Pêşbirk dest pê kir.", "Di pêşbirkê de ne."],
+   gen:["Pêşbirk û lîstik", "Pêşbirka me"]),
 
   (id:"b1_tk20", ku:"Werzişvanê profesyonel", tr:"Profesyonel sporcu", en:"Professional athlete",
    cins:"bêcins", ez:"werzişvanê profesyonel", kat:"spor", zor:0.68,
@@ -4038,11 +4038,11 @@ final kB1_Doga = [  // DOĞA GENİŞLEME — 60 kelime
    her:["Çemê mezin diherike.", "Li çemê mezin ne."],
    gen:["Çemê mezin", "Çemên Kurdistanê"]),
 
-  (id:"b1_d07", ku:"Golê kûr", tr:"Derin göl", en:"Deep lake",
-   cins:"nêr", ez:"golê kûr", kat:"xweza", zor:0.70,
+  (id:"b1_d07", ku:"Gola kûr", tr:"Derin göl", en:"Deep lake",
+   cins:"mê", ez:"gola kûr", kat:"xweza", zor:0.70,
    not:"\"Gol\" + \"kûr\".",
-   her:["Golê kûr heye.", "Li golê kûr ne."],
-   gen:["Golê kûr", "Golên Kurdistanê"]),
+   her:["Gola kûr heye.", "Li gola kûr in."],
+   gen:["Gola kûr", "Golên Kurdistanê"]),
 
   (id:"b1_d08", ku:"Serma", tr:"Soğuk hava / Ayaz", en:"Frost / Cold air",
    cins:"mê", ez:"sermaya", kat:"xweza", zor:0.71,
@@ -4054,7 +4054,7 @@ final kB1_Doga = [  // DOĞA GENİŞLEME — 60 kelime
    cins:"bêcins", ez:null, kat:"xweza", zor:0.70,
    not:"\"Berf\" (kar) + \"qeşa\" (buz). Kış simgeleri.",
    her:["Berf û qeşa heye.", "Zivistan berf û qeşa ye."],
-   gen:["Berf û qeşa", "Berfê Kurdistanê"]),
+   gen:["Berf û qeşa", "Berfa Kurdistanê"]),
 
   (id:"b1_d10", ku:"Zozanên bilind", tr:"Yüksek yaylalar", en:"High plateaus",
    cins:"bêcins", ez:"zozanên bilind", kat:"xweza", zor:0.70,
@@ -4279,10 +4279,10 @@ final kB1_Xwarin = [
    gen:["Pijandin û xwarin", "Min pijand."]),
 
   (id:"b1_xw08", ku:"Savar", tr:"Bulgur", en:"Bulgur wheat",
-   cins:"nêr", ez:"savarê", kat:"xwarin", zor:0.70,
-   not:"Eril — [FB]: savar n.m. Özgün Kurmancî form. DÜZELTME: Önceki \"kelekê\" yanlıştı (keleke = tekne/sal). Kurmancî'de bulgur için \"savar\" standarttır.",
+   cins:"mê", ez:"savara", kat:"xwarin", zor:0.70,
+   not:"Dişil — Özgün Kurmancî form. DÜZELTME: Önceki \"kelekê\" yanlıştı (keleke = tekne/sal). Kurmancî'de bulgur için \"savar\" standarttır.",
    her:['Savar li sifrê xweş tê.', 'Em ji savarê hez dikin.'],
-   gen:["Savar û birinc", "Savarê me"]),
+   gen:["Savar û birinc", "Savara me"]),
 
   (id:"b1_xw09", ku:"Mercûmek", tr:"Mercimek", en:"Lentil",
    cins:"nêr", ez:"mercûmekê", kat:"xwarin", zor:0.72,
@@ -4291,10 +4291,10 @@ final kB1_Xwarin = [
    gen:["Mercûmek û birinc", "Mercûmekê me"]),
 
   (id:"b1_xw10", ku:"Nîsk", tr:"Nohut", en:"Chickpea",
-   cins:"nêr", ez:"nîskê", kat:"xwarin", zor:0.71,
-   not:"Eril — [AS]: \"nohut = nîsk\" ✓.",
+   cins:"mê", ez:"nîska", kat:"xwarin", zor:0.71,
+   not:"Dişil — [AS]: \"nohut = nîsk\" ✓.",
    her:["Nîsk xweş e.", "Şorba nîskê."],
-   gen:["Nîsk û mercûmek", "Nîskê me"]),
+   gen:["Nîsk û mercûmek", "Nîska me"]),
 
   (id:"b1_xw11", ku:"Fasûlî", tr:"Fasulye", en:"Bean",
    cins:"nêr", ez:"fasûliyê", kat:"xwarin", zor:0.71,
@@ -4372,7 +4372,7 @@ final kB1_Xwarin = [
    cins:"mê", ez:"destpêka sifrê", kat:"xwarin", zor:0.67,
    not:"\"Destpêk\" (mê) + \"sifre\" (sofra). Yemek başlangıcı.",
    her:["Destpêka sifrê.", "Berî xwarinê."],
-   gen:["Destpêkê sifirê", "Xwarina destpêkê"]),
+   gen:["Destpêka sifrê", "Xwarina destpêkê"]),
 
   (id:"b1_xw24", ku:"Nanê genim", tr:"Buğday ekmeği", en:"Wheat bread",
    cins:"nêr", ez:"nanê genim", kat:"xwarin", zor:0.71,
@@ -4504,7 +4504,7 @@ final kB1_Xwarin = [
    cins:"mê", ez:"destxwarina", kat:"xwarin", zor:0.68,
    not:"\"Dest\" + \"xwarin\". Elyapımı yiyecek.",
    her:["Destxwarin xweş e.", "Destxwarina me."],
-   gen:["Destxwarin û fabrika", "Destxwarinê me"]),
+   gen:["Destxwarin û fabrika", "Destxwarina me"]),
 
   (id:"b1_xw46", ku:"Belaşî", tr:"Bedava / Ücretsiz", en:"Free / Gratis",
    cins:"bêcins", ez:null, kat:"aborî", zor:0.71,
@@ -4633,7 +4633,7 @@ final kB1_Malbat = [
   (id:"b1_ml16", ku:"Şahidê dawetê", tr:"Düğün şahidi", en:"Wedding witness",
    cins:"bêcins", ez:"şahidê dawetê", kat:"malbat", zor:0.67,
    not:"\"Şahid\" + \"dawetê\".",
-   her:["Şahidê dawetê ye.", "Di dawetê şahid bûm."],
+   her:["Şahidê dawetê ye.", "Di dawetê de şahid bûm."],
    gen:["Şahidê dawetê", "Şahida me"]),
 
   (id:"b1_ml17", ku:"Şîn", tr:"Yas / Matem", en:"Mourning",
@@ -4767,14 +4767,14 @@ final kB1_Jiyan = [
    gen:["Çêkirina planê", "Planên me"]),
 
   (id:"b1_jy18", ku:"Pêşeroj", tr:"Gelecek", en:"Future",
-   cins:"nêr", ez:"pêşerojê", kat:"dem", zor:0.73,
-   not:"Eril — \"pêş\" + \"roj\". [AS] ✓.",
+   cins:"mê", ez:"pêşeroja", kat:"dem", zor:0.73,
+   not:"Dişil — \"pêş\" + \"roj\". [AS] ✓.",
    her:["Pêşeroj baş e.", "Di pêşerojê de."],
    gen:["Pêşeroj û raborî", "Pêşeroja me"]),
 
   (id:"b1_jy19", ku:"Raborî", tr:"Geçmiş", en:"Past",
-   cins:"nêr", ez:"raboriyê", kat:"dem", zor:0.73,
-   not:"Eril — \"ra\" + \"borî\". [AS] ✓.",
+   cins:"mê", ez:"raboriya", kat:"dem", zor:0.73,
+   not:"Dişil — \"ra\" + \"borî\". [AS] ✓.",
    her:["Raborî baş bû.", "Di raboriyê de."],
    gen:["Raborî û pêşeroj", "Raboriya me"]),
 
@@ -4983,8 +4983,8 @@ final kB1_Reziman = [
    gen:["Cînavên nîşanê", "Ev û ew"]),
 
   (id:"b1_rz07", ku:"Gihanek", tr:"Bağlaç", en:"Conjunction",
-   cins:"nêr", ez:"gihanekê", kat:"rêziman", zor:0.70,
-   not:"Eril — [Fêrkera D.5] ✓: \"gihanek\" = bağlaç. \"û, lê, ji ber ku, ku...\"",
+   cins:"mê", ez:"gihaneka", kat:"rêziman", zor:0.70,
+   not:"Dişil — [Fêrkera D.5] ✓: \"gihanek\" = bağlaç. \"û, lê, ji ber ku, ku...\"",
    her:["Gihanek e.", "Gihanekên kurdî."],
    gen:["Gihanek û daçek", "Gihanekên kurdî"]),
 
@@ -5589,7 +5589,7 @@ final kB1_Beden = [
    her:["Gewriya min êşiye.", "Gewrî êşe."],
    gen:["Gewriya mirov", "Gewriya me"]),
 
-  (id:"b1_bd04", ku:"Pişik", tr:"Kalça", en:"Hip / Waist",
+  (id:"b1_bd04", ku:"Pişik", tr:"Akciğer", en:"Lung",
    cins:"mê", ez:"pişika", kat:"beden", zor:0.68,
    not:"Dişil — [FB]: pişik n.f. Kalça.",
    her:["Pişika min êşiye.", "Di pişikê de."],
@@ -5637,11 +5637,11 @@ final kB1_Beden = [
    her:["Gewriya giran heye.", "Gewriya min êşiye."],
    gen:["Gewriya giranê", "Gewriya me"]),
 
-  (id:"b1_bd12", ku:"Tayêt", tr:"Ateş", en:"Fever",
-   cins:"mê", ez:"tayêta", kat:"tendurist", zor:0.72,
+  (id:"b1_bd12", ku:"Taya bilind", tr:"Yüksek ateş", en:"High fever",
+   cins:"mê", ez:"taya bilind", kat:"tendurist", zor:0.72,
    not:"Dişil — [AS]: \"ateş = tayêt\" ✓.",
-   her:["Tayêt bilind e.", "Tayêta min heye."],
-   gen:["Tayêt û êş", "Tayêta me"]),
+   her:["Taya wî bilind e.", "Taya min heye."],
+   gen:["Ta û êş", "Taya bilind"]),
 
   (id:"b1_bd13", ku:"Serêşî", tr:"Baş ağrısı", en:"Headache",
    cins:"mê", ez:"serêşiya", kat:"tendurist", zor:0.72,
@@ -5695,7 +5695,7 @@ final kB1_Huner = [
    her:["Ew lîstikvan e.", "Lîstikvanên kurd."],
    gen:["Lîstikvan û derhêner", "Lîstikvanên me"]),
 
-  (id:"b1_hn06", ku:"Wênesazî", tr:"Mimarlık / İnşaat sanatı", en:"Architecture",
+  (id:"b1_hn06", ku:"Wênesazî", tr:"Ressamlık / Resim sanatı", en:"Painting (art)",
    cins:"mê", ez:"wênesaziya", kat:"huner", zor:0.68,
    not:"Dişil — \"wêne\" + \"-sazî\". Mimarlık.",
    her:["Wênesazî dixwînim.", "Di wênesaziyê de."],
@@ -6096,8 +6096,8 @@ final kB1_T1 = [
    gen:["Çalakiya rojane", "Çalakiyên me"]),
 
   (id:"b1_t1_02", ku:"Rûtîn", tr:"Rutin", en:"Routine",
-   cins:"nêr", ez:"rûtînê", kat:"jiyan", zor:0.70,
-   not:"Eril — uluslararası terim.",
+   cins:"mê", ez:"rûtîna", kat:"jiyan", zor:0.70,
+   not:"Dişil — uluslararası terim.",
    her:["Rûtîna rojane.", "Di rûtînê de."],
    gen:["Rûtîn û guhertin", "Rûtîna me"]),
 
@@ -6215,7 +6215,7 @@ final kB1_T1 = [
    cins:"bêcins", ez:null, kat:"civakî", zor:0.71,
    not:"\"Gel\" + \"mirov\". Toplumsal bütün.",
    her:["Gel û mirov.", "Di nav gel û mirovan de."],
-   gen:["Gel û mirov", "Gela me"]),
+   gen:["Gel û mirov", "Gelê me"]),
 
   (id:"b1_t1_22", ku:"Nûnertiya gelê", tr:"Halk temsilciliği", en:"People\'s representation",
    cins:"mê", ez:"nûnertiya gelê", kat:"siyaset", zor:0.69,
@@ -6294,17 +6294,17 @@ final kB1_T2 = [
    her:["Toza çolê tê.", "Di toza çolê de."],
    gen:["Toza çolê", "Toza bayê"]),
 
-  (id:"b1_t2_04", ku:"Berfê daketin", tr:"Kar yağmak", en:"Snow falling",
+  (id:"b1_t2_04", ku:"Berf daketin", tr:"Kar yağmak", en:"Snow falling",
    cins:"bêcins", ez:null, kat:"xweza", zor:0.70,
    not:"\"Berf\" + \"daketin\".",
    her:["Berf daket.", "Berf dikeve."],
-   gen:["Berfê daketin", "Berf dikeve."]),
+   gen:["Berf daketin", "Berf dikeve."]),
 
-  (id:"b1_t2_05", ku:"Baranê barîn", tr:"Yağmur yağmak", en:"Rain falling",
+  (id:"b1_t2_05", ku:"Baran barîn", tr:"Yağmur yağmak", en:"Rain falling",
    cins:"bêcins", ez:null, kat:"xweza", zor:0.72,
    not:"\"Baran\" + \"barîn\".",
    her:["Baran barî.", "Baran dibare."],
-   gen:["Baranê barîn", "Baran dibare."]),
+   gen:["Baran barîn", "Baran dibare."]),
 
   (id:"b1_t2_06", ku:"Bahara zû", tr:"Erken ilkbahar", en:"Early spring",
    cins:"mê", ez:"bahara zû", kat:"xweza", zor:0.69,
@@ -7019,8 +7019,8 @@ final kB1_Ziman2 = [
    gen:["Peyva nû", "Peyvên nû"]),
 
   (id:"b1_zm12", ku:"Ferhengok", tr:"Sözlük / Kelime listesi", en:"Dictionary / Vocabulary list",
-   cins:"nêr", ez:"ferhengokê", kat:"ziman", zor:0.71,
-   not:"Eril — [Fêrkera D.1] ✓: \"ferhengok\" = sözlükçük.",
+   cins:"mê", ez:"ferhengoka", kat:"ziman", zor:0.71,
+   not:"Dişil — [Fêrkera D.1] ✓: \"ferhengok\" = sözlükçük.",
    her:["Ferhengok heye?", "Ferhengokê bide."],
    gen:["Ferhengok û ferhenga", "Ferhengoka me"]),
 
@@ -7204,7 +7204,7 @@ final kB1_Spor = [
    cins:"bêcins", ez:null, kat:"cih", zor:0.70,
    not:"\"Meydan\" + \"park\". Spor alanları.",
    her:["Meydan û park hene.", "Li meydan û parkê dilêzin."],
-   gen:["Meydan û park", "Parkê me"]),
+   gen:["Meydan û park", "Parka me"]),
 
   (id:"b1_1363", ku:"Avjenî", tr:"Yüzme", en:"Swimming",
    cins:"mê", ez:"avjeniya", kat:"spor", zor:0.69,
@@ -7252,11 +7252,11 @@ final kB1_Dema = [
    her:["Serê salê hat.", "Di serê salê de."],
    gen:["Serê salê û newroz", "Serê salê"]),
 
-  (id:"b1_dm02", ku:"Nîva salê", tr:"Yılın ortası", en:"Mid-year",
-   cins:"mê", ez:"nîva salê", kat:"dem", zor:0.69,
+  (id:"b1_dm02", ku:"Nîvê salê", tr:"Yılın ortası", en:"Mid-year",
+   cins:"nêr", ez:"nîvê salê", kat:"dem", zor:0.69,
    not:"\"Nîv\" + \"salê\".",
-   her:["Nîva salê hat.", "Di nîva salê de."],
-   gen:["Nîva salê", "Nîva me"]),
+   her:["Nîvê salê hat.", "Di nîvê salê de."],
+   gen:["Nîvê salê", "Nîvê me"]),
 
   (id:"b1_dm03", ku:"Salên borî", tr:"Geçen yıllar", en:"Past years",
    cins:"bêcins", ez:"salên borî", kat:"dem", zor:0.70,
@@ -7307,8 +7307,8 @@ final kB1_Dema = [
    gen:["Danê û şevê", "Danê tê."]),
 
   (id:"b1_dm11", ku:"Rojbûn", tr:"Doğum günü", en:"Birthday",
-   cins:"nêr", ez:"rojbûnê", kat:"dem", zor:0.73,
-   not:"Eril — \"roj\" + \"bûn\". [AS] ✓.",
+   cins:"mê", ez:"rojbûna", kat:"dem", zor:0.73,
+   not:"Dişil — \"roj\" + \"bûn\". [AS] ✓.",
    her:["Rojbûna te pîroz be!", "Rojbûna te xweş be."],
    gen:["Rojbûn û cejn", "Rojbûna me"]),
 
@@ -7573,8 +7573,8 @@ final kB1_Genel = [
    gen:["Dewrîşandin", "Min dewrîşand."]),
 
   (id:"b1_gn19", ku:"Berbang", tr:"Sabah ışığı / Şafak", en:"Dawn",
-   cins:"nêr", ez:"berbangê", kat:"dem", zor:0.69,
-   not:"Eril — [BH] ✓: \"berbang\" = şafak.",
+   cins:"mê", ez:"berbanga", kat:"dem", zor:0.69,
+   not:"Dişil — [BH] ✓: \"berbang\" = şafak.",
    her:["Berbang hat.", "Di berbangê de."],
    gen:["Berbang û êvar", "Berbanga me"]),
 
@@ -7736,7 +7736,7 @@ final kB1_Tamam = [
   (id:"b1_tm10", ku:"Rêhevalên jiyanê", tr:"Yol arkadaşları", en:"Fellow travelers of life", cins:"bêcins", ez:"rêhevalên jiyanê", kat:"malbat", zor:0.69, not:"\"Rêheval\"+\"jiyanê\".", her:["Rêhevalên jiyanê.", "Di nav rêhevalên jiyanê de."], gen:["Rêhevalên jiyanê", "Rêhevalên me"]),
 
   // XWARIN (yiyecek) devam — 20
-  (id:"b1_tm11", ku:"Kûsî", tr:"Kabak", en:"Zucchini / Squash", cins:"mê", ez:"kûsiya", kat:"xwarin", zor:0.70, not:"Dişil — [AS]: \"kabak = kûsî\" ✓.", her:["Kûsî xweş e.", "Kûsiya pijandî."], gen:["Kûsî û xiyar", "Kûsiya me"]),
+  (id:"b1_tm11", ku:"Kundir", tr:"Kabak", en:"Zucchini / Squash", cins:"nêr", ez:"kundirê", kat:"xwarin", zor:0.70, not:"Eril — [AS]: \"kabak = kûsî\" ✓.", her:["Kundir xweş e.", "Kundirê pijandî."], gen:["Kundir û xiyar", "Kundirê me"]),
   (id:"b1_tm12", ku:"Qolîflar", tr:"Karnabahar", en:"Cauliflower", cins:"nêr", ez:"qolîflarê", kat:"xwarin", zor:0.68, not:"Eril — [AS] ✓.", her:["Qolîflar xweş e.", "Qolîflara pijandî."], gen:["Qolîflar û kelem", "Qolîflarê me"]),
   (id:"b1_tm13", ku:"Îspanax", tr:"Ispanak", en:"Spinach", cins:"nêr", ez:"îspanaxê", kat:"xwarin", zor:0.70, not:"Eril — [AS]: \"ıspanak = îspanax\" ✓.", her:["Îspanax sax e.", "Şorba îspanaxê."], gen:["Îspanax û kelem", "Îspanaxê me"]),
   (id:"b1_tm14", ku:"Dohîn", tr:"Yoğurt çorbası", en:"Yogurt soup", cins:"nêr", ez:"dohînê", kat:"xwarin", zor:0.68, not:"Eril — Kürt mutfağı. \"Dohîn\" = yoğurtlu çorba.", her:["Dohîn germ e.", "Dohîna me."], gen:["Dohîn û şorba", "Dohîna me"]),
@@ -7802,7 +7802,7 @@ final kB1_Tamam = [
   (id:"b1_tm63", ku:"Mafê jiyana şexsî", tr:"Özel yaşam hakkı", en:"Right to private life", cins:"nêr", ez:"mafê jiyana şexsî", kat:"zagon", zor:0.68, not:"\"Maf\"+\"jiyana şexsî\".", her:["Mafê jiyana şexsî.", "Ji bo mafê jiyana şexsî."], gen:["Mafê jiyana şexsî", "Mafên me"]),
   (id:"b1_tm64", ku:"Pêkanîna armancê", tr:"Hedefe ulaşma", en:"Achieving the goal", cins:"mê", ez:"pêkanîna armancê", kat:"jiyan", zor:0.69, not:"\"Pêkanîn\"+\"armancê\".", her:["Pêkanîna armancê.", "Di pêkanîna armancê de."], gen:["Pêkanîna armancê", "Pêkanîna me"]),
   (id:"b1_tm65", ku:"Giraniya jiyanê", tr:"Hayatın ağırlığı", en:"Weight of life", cins:"mê", ez:"giraniya jiyanê", kat:"jiyan", zor:0.67, not:"\"Giranî\"+\"jiyanê\".", her:["Giraniya jiyanê.", "Di giraniya jiyanê de."], gen:["Giraniya jiyanê", "Giraniya me"]),
-  (id:"b1_tm66", ku:"Bûyer", tr:"Olay / Hadise", en:"Event", cins:"nêr", ez:"bûyerê", kat:"dem", zor:0.72, not:"Eril — [AS]: \"olay = bûyer\" ✓.", her:["Bûyer çi ye?", "Bûyera mezin."], gen:["Bûyer û çîrok", "Bûyera me"]),
+  (id:"b1_tm66", ku:"Bûyer", tr:"Olay / Hadise", en:"Event", cins:"mê", ez:"bûyera", kat:"dem", zor:0.72, not:"Dişil — [AS]: \"olay = bûyer\" ✓.", her:["Bûyer çi ye?", "Bûyera mezin."], gen:["Bûyer û çîrok", "Bûyera me"]),
   (id:"b1_tm67", ku:"Çavdêrên navnetewî", tr:"Uluslararası gözlemciler", en:"International observers", cins:"bêcins", ez:"çavdêrên navnetewî", kat:"medya", zor:0.68, not:"\"Çavdêr\"+\"navnetewî\".", her:["Çavdêrên navnetewî hatin.", "Di nav çavdêrên navnetewî de."], gen:["Çavdêrên navnetewî", "Çavdêrên me"]),
   (id:"b1_tm68", ku:"Nûçeyên herî girîng", tr:"En önemli haberler", en:"Most important news", cins:"bêcins", ez:"nûçeyên herî girîng", kat:"medya", zor:0.70, not:"\"Nûçe\"+\"herî girîng\".", her:["Nûçeyên herî girîng.", "Di nûçeyên herî girîng de."], gen:["Nûçeyên herî girîng", "Nûçeyên me"]),
   (id:"b1_tm69", ku:"Xebatên çandî", tr:"Kültür çalışmaları", en:"Cultural works", cins:"bêcins", ez:"xebatên çandî", kat:"çand", zor:0.69, not:"\"Xebat\"+\"çandî\".", her:["Xebatên çandî hene.", "Di xebatên çandî de."], gen:["Xebatên çandî", "Xebatên me"]),
@@ -7891,9 +7891,9 @@ final kB1_Bitirim = [
   (id:"b1_1375",ku:"Dawiya hefteyê",tr:"Hafta sonu",en:"Weekend",
    cins:"mê",ez:"dawiya hefteyê",kat:"dem",zor:0.72,
    not:"\"Dawî\"+\"hefteyê\".",her:["Dawiya hefteyê xweş e.", "Di dawiya hefteyê de."],gen:["Dawiya hefteyê", "Dawiya hefteyê me"]),
-  (id:"b1_1376",ku:"Demê xwarinê",tr:"Yemek zamanı",en:"Mealtime",
-   cins:"nêr",ez:"demê xwarinê",kat:"dem",zor:0.71,
-   not:"\"Dem\"+\"xwarinê\".",her:["Demê xwarinê hat.", "Di demê xwarinê de."],gen:["Demê xwarinê", "Demê xwarinê ye"]),
+  (id:"b1_1376",ku:"Dema xwarinê",tr:"Yemek zamanı",en:"Mealtime",
+   cins:"mê",ez:"dema xwarinê",kat:"dem",zor:0.71,
+   not:"\"Dem\"+\"xwarinê\".",her:["Dema xwarinê hat.", "Di dema xwarinê de."],gen:["Dema xwarinê", "Dema xwarinê ye"]),
 
 // ── DUYGULAR EK — 30 ──────────────────────────────────────────
   (id:"b1_hs01",ku:"Girtîbûna dilê",tr:"Kalp daralması / Bunalma",en:"Heart constriction",
@@ -7904,7 +7904,7 @@ final kB1_Bitirim = [
    not:"\"Kêf\"+\"jiyanê\".",her:["Kêfa jiyanê heye.", "Bi kêfa jiyanê bijî."],gen:["Kêfa jiyanê", "Kêfa me"]),
   (id:"b1_hs03",ku:"Xemgînî û kêfxweşî",tr:"Hüzün ve sevinç",en:"Sadness and happiness",
    cins:"bêcins",ez:null,kat:"his",zor:0.70,
-   not:"\"Xemgînî\"+\"kêfxweşî\".",her:["Xemgînî û kêfxweşî.", "Di jiyanê xemgînî û kêfxweşî heye."],gen:["Xemgînî û kêfxweşî", "Hestên me"]),
+   not:"\"Xemgînî\"+\"kêfxweşî\".",her:["Xemgînî û kêfxweşî.", "Di jiyanê de xemgînî û kêfxweşî hene."],gen:["Xemgînî û kêfxweşî", "Hestên me"]),
   (id:"b1_hs04",ku:"Hezkirina kûr",tr:"Derin sevgi",en:"Deep love",
    cins:"mê",ez:"hezkirina kûr",kat:"his",zor:0.70,
    not:"\"Hezkirin\"+\"kûr\".",her:["Hezkirina kûr heye.", "Bi hezkirina kûr."],gen:["Hezkirina kûr", "Hezkirina me"]),
@@ -7913,7 +7913,7 @@ final kB1_Bitirim = [
    not:"\"Hêvî\"+\"rastîn\".",her:["Hêviya rastîn heye.", "Bi hêviya rastîn."],gen:["Hêviya rastîn", "Hêviya me"]),
   (id:"b1_hs06",ku:"Tirs û wêrekî",tr:"Korku ve cesaret",en:"Fear and courage",
    cins:"bêcins",ez:null,kat:"his",zor:0.70,
-   not:"\"Tirs\"+\"wêrekî\".",her:["Tirs û wêrekî.", "Di jiyanê tirs û wêrekî heye."],gen:["Tirs û wêrekî", "Hestên jiyanê"]),
+   not:"\"Tirs\"+\"wêrekî\".",her:["Tirs û wêrekî.", "Di jiyanê de tirs û wêrekî hene."],gen:["Tirs û wêrekî", "Hestên jiyanê"]),
   (id:"b1_hs07",ku:"Şermezarî",tr:"Utanç / Rezillik",en:"Shame / Disgrace",
    cins:"mê",ez:"şermezariya",kat:"his",zor:0.67,
    not:"\"Şerm\"+\"ezarî\".",her:["Şermezarî heye.", "Di şermezariyê de."],gen:["Şermezarî û rûmet", "Şermezariya me"]),
@@ -7952,9 +7952,9 @@ final kB1_Bitirim = [
   (id:"b1_rz38",ku:"Aktarîbûna lêkerê",tr:"Fiilin geçişliliği",en:"Verb transitivity",
    cins:"mê",ez:"aktarîbûna lêkerê",kat:"rêziman",zor:0.68,
    not:"\"Aktarîbûn\"+\"lêkerê\".",her:["Aktarîbûna lêkerê.", "Di aktarîbûna lêkerê de."],gen:["Aktarîbûna lêkerê", "Aktarîbûna me"]),
-  (id:"b1_rz39",ku:"Pêwendiya di navbera hevokan",tr:"Cümleler arası ilişki",en:"Relation between sentences",
-   cins:"mê",ez:"pêwendiya di navbera hevokan",kat:"rêziman",zor:0.67,
-   not:"\"Pêwendî\"+\"di navbera hevokan\".",her:["Pêwendiya di navbera hevokan.", "Di pêwendiya navbera hevokan de."],gen:["Pêwendiya di navbera hevokan", "Pêwendiya me"]),
+  (id:"b1_rz39",ku:"Pêwendiya di navbera hevokan de",tr:"Cümleler arası ilişki",en:"Relation between sentences",
+   cins:"mê",ez:"pêwendiya di navbera hevokan de",kat:"rêziman",zor:0.67,
+   not:"\"Pêwendî\"+\"di navbera hevokan de\".",her:["Pêwendiya di navbera hevokan de.", "Di pêwendiya navbera hevokan de."],gen:["Pêwendiya di navbera hevokan de", "Pêwendiya me"]),
   (id:"b1_rz40",ku:"Rêzika rêzimanê",tr:"Dilbilgisi kuralı",en:"Grammar rule",
    cins:"mê",ez:"rêzika rêzimanê",kat:"rêziman",zor:0.70,
    not:"\"Rêzik\"+\"rêzimanê\".",her:["Rêzika rêzimanê.", "Di rêzika rêzimanê de."],gen:["Rêzika rêzimanê", "Rêzikên rêzimanê"]),
@@ -7995,15 +7995,15 @@ final kB1_Bitirim = [
   (id:"b1_nv01",ku:"Rêya rast",tr:"Doğru yol",en:"Right path",
    cins:"mê",ez:"rêya rast",kat:"nirx",zor:0.70,
    not:"\"Rê\"+\"rast\".",her:["Rêya rast bibine.", "Di rêya rast de."],gen:["Rêya rast û xelet", "Rêya rast"]),
-  (id:"b1_nv02",ku:"Mêtingeh",tr:"Vicdan",en:"Conscience",
-   cins:"nêr",ez:"mêtingê",kat:"nirx",zor:0.69,
-   not:"\"Mêtingeh\" = vicdan.",her:["Mêtingeh heye.", "Di mêtingê de."],gen:["Mêtingeh û aqlê", "Mêtingeha me"]),
+  (id:"b1_nv02",ku:"Mêtingeh",tr:"Sömürge",en:"Colony",
+   cins:"mê",ez:"mêtingeha",kat:"dîrok",zor:0.69,
+   not:"\"Mêtingeh\" = sömürge. \"Mêtinger\" = sömürgeci. Vicdan için \"wîjdan\" kullanılır.",her:["Hindistan mêtingeha Brîtanyayê bû.", "Di mêtingehê de."],gen:["Mêtingeh û mêtinger", "Mêtingeheke kevn"]),
   (id:"b1_nv03",ku:"Qencî kirin",tr:"İyilik yapmak",en:"To do good",
    cins:"bêcins",ez:null,kat:"nirx",zor:0.71,
    not:"\"Qencî\"+\"kirin\".",her:["Qencî bike!", "Qencî kir."],gen:["Qencî kirin", "Qencî bike!"]),
   (id:"b1_nv04",ku:"Xirabî û qencî",tr:"Kötülük ve iyilik",en:"Evil and good",
    cins:"bêcins",ez:null,kat:"nirx",zor:0.70,
-   not:"\"Xirabî\"+\"qencî\".",her:["Xirabî û qencî.", "Di jiyanê xirabî û qencî heye."],gen:["Xirabî û qencî", "Nirxên jiyanê"]),
+   not:"\"Xirabî\"+\"qencî\".",her:["Xirabî û qencî.", "Di jiyanê de xirabî û qencî hene."],gen:["Xirabî û qencî", "Nirxên jiyanê"]),
   (id:"b1_nv05",ku:"Yekbûnê",tr:"Birlik",en:"Unity",
    cins:"nêr",ez:"yekbûnê",kat:"nirx",zor:0.72,
    not:"\"Yek\"+\"bûn\"+\"-ê\".",her:["Yekbûn lazim e.", "Di yekbûnê de."],gen:["Yekbûn û cudatî", "Yekbûna me"]),
@@ -8143,9 +8143,9 @@ final kB1_B1Final = [
   (id:"b1_f14",ku:"Xweşkirin",tr:"Güzelleştirmek",en:"To beautify",
    cins:"bêcins",ez:null,kat:"leker_ergatif",zor:0.68,
    not:"\"Xweşkirin\" — ergatif.",her:['Me mala xwe xweş kir.', 'Xweşkirina jiyanê wezîfeya me ye.'],gen:["Xweşkirin û paqijkirin", "Min xweş kir."]),
-  (id:"b1_f15",ku:"Xirabtirîn",tr:"Daha kötü olmak",en:"To worsen",
+  (id:"b1_f15",ku:"Xirabtirîn",tr:"En kötü",en:"Worst",
    cins:"bêcins",ez:null,kat:"leker",zor:0.68,
-   not:"\"Xerab\"+\"tirîn\". Karşılaştırmalı.",her:['Hewa xirabtirîn ji duh.', 'Xirabtirîn ji vê tişt heye.'],gen:["Xirabtirîn", "Xerabtir bû."]),
+   not:"\"Xerab\"+\"tirîn\". Karşılaştırmalı.",her:['Ev roja xirabtirîn e.', 'Ya xirabtirîn derbas bû.'],gen:["Xirabtirîn", "Xerabtir bû."]),
   (id:"b1_f16",ku:"Çêtirîn",tr:"Daha iyi olmak",en:"To improve",
    cins:"bêcins",ez:null,kat:"leker",zor:0.70,
    not:"\"Çêtir\"+\"bûn\". Karşılaştırmalı.",her:['Tendurista min çêtirîn ji duh.', 'Çêtirîn rê her demê tê dîtin.'],gen:["Çêtirîn", "Çêtir bibe."]),
@@ -8269,9 +8269,9 @@ final kB1_Kapanis = [
   (id:"b1_k05b",ku:"Mafê xwendinê",tr:"Eğitim hakkı",en:"Right to education",
    cins:"nêr",ez:"mafê xwendinê",kat:"zagon",zor:0.71,not:"\"Maf\"+\"xwendinê\".",
    her:["Mafê xwendinê girîng e.", "Di mafê xwendinê de."],gen:["Mafê xwendinê", "Mafên me"]),
-  (id:"b1_k06b",ku:"Hiqûqê mirovî",tr:"İnsan hukuku",en:"Human law",
-   cins:"nêr",ez:"hiqûqê mirovî",kat:"zagon",zor:0.70,not:"\"Hiqûq\"+\"mirovî\".",
-   her:["Hiqûqê mirovî.", "Di hiqûqê mirovî de."],gen:["Hiqûqê mirovî", "Hiqûqê me"]),
+  (id:"b1_k06b",ku:"Hiqûqa mirovî",tr:"İnsan hukuku",en:"Human law",
+   cins:"mê",ez:"hiqûqa mirovî",kat:"zagon",zor:0.70,not:"\"Hiqûq\"+\"mirovî\".",
+   her:["Hiqûqa mirovî.", "Di hiqûqa mirovî de."],gen:["Hiqûqa mirovî", "Hiqûqa me"]),
   (id:"b1_k07b",ku:"Berpirsiyariya dewletê",tr:"Devletin sorumluluğu",en:"State responsibility",
    cins:"mê",ez:"berpirsiyariya dewletê",kat:"siyaset",zor:0.69,not:"\"Berpirsiyarî\"+\"dewletê\".",
    her:["Berpirsiyariya dewletê.", "Di berpirsiyariya dewletê de."],gen:["Berpirsiyariya dewletê", "Berpirsiyariya me"]),
@@ -8505,9 +8505,9 @@ final kB1_SonTam = [
    cins:"mê", ez:"avêtina paşê", kat:"leker", zor:0.68,
    not:"\"Avêtin\"+\"paşê\".", her:["Hat avêtin paşê.", "Di avêtina paşê de."], gen:["Avêtina paşê", "Avêtina me"]),
 
-  (id:"b1_gt26", ku:"Destûrê xwestin", tr:"İzin istemek", en:"Asking permission",
-   cins:"mê", ez:"destûrê xwestin", kat:"leker", zor:0.70,
-   not:"\"Destûr\"+\"xwestin\". [Fêrkera] ✓.", her:["Destûr dixwazim.", "Destûrê xwest."], gen:["Destûrê xwestin", "Destûrê dixwazim"]),
+  (id:"b1_gt26", ku:"Destûr xwestin", tr:"İzin istemek", en:"Asking permission",
+   cins:"mê", ez:"destûr xwestin", kat:"leker", zor:0.70,
+   not:"\"Destûr\"+\"xwestin\". [Fêrkera] ✓.", her:["Destûr dixwazim.", "Destûr xwest."], gen:["Destûr xwestin", "Destûrê dixwazim"]),
 
   (id:"b1_gt27", ku:"Têgihîştina hev", tr:"Birbirini anlama", en:"Mutual understanding",
    cins:"mê", ez:"têgihîştina hev", kat:"civakî", zor:0.70,
@@ -8659,7 +8659,7 @@ final kB1_SonTam = [
 final kB1_EkTamam = [
   // ── temel (10 ek kelime) ──
   (id:"b1_1377", ku:"roj", tr:"Gün", en:"Day",
-   cins:"nêr", ez:"roj", kat:"temel", zor:0.60,
+   cins:"mê", ez:"roja", kat:"temel", zor:0.60,
    not:"Temel zaman kavramı.",
    her:["Roj baş e.", "Ev roj xweş e."], gen:["Roj", "Rojek"]),
 
@@ -8674,17 +8674,17 @@ final kB1_EkTamam = [
    her:["Hefteya borî ez çûm.", "Di vê hefteyê de."], gen:["Hefte", "Hefteyekê"]),
 
   (id:"b1_1380", ku:"meh", tr:"Ay", en:"Month",
-   cins:"nêr", ez:"meh", kat:"temel", zor:0.61,
+   cins:"mê", ez:"meha", kat:"temel", zor:0.61,
    not:"Temel zaman kavramı.",
    her:["Mehek din jî derbas bû.", "Di vê mehê de."], gen:["Meh", "Mehekê"]),
 
   (id:"b1_1381", ku:"sal", tr:"Yıl", en:"Year",
-   cins:"nêr", ez:"sal", kat:"temel", zor:0.60,
+   cins:"mê", ez:"sala", kat:"temel", zor:0.60,
    not:"Temel zaman kavramı.",
    her:["Sala nû pîroz be!", "Di vê salê de."], gen:["Sal", "Salek"]),
 
   (id:"b1_905", ku:"dem", tr:"Zaman", en:"Time",
-   cins:"nêr", ez:"dem", kat:"temel", zor:0.62,
+   cins:"mê", ez:"dema", kat:"temel", zor:0.62,
    not:"Temel zaman kavramı.",
    her:["Dema min tune ye.", "Di vê demê de."], gen:["Dem", "Demek"]),
 
@@ -8828,37 +8828,37 @@ final kB1_EkTamam = [
 
   // ── ekolojî (7 ek kelime) ──
   (id:"b1_1392", ku:"avhewa", tr:"İklim", en:"Climate",
-   cins:"mê", ez:"avhewa", kat:"ekolojî", zor:0.65,
+   cins:"mê", ez:"avhewa", kat:"ekoloji", zor:0.65,
    not:"Avhewa û jîngeh.",
    her:["Avhewa diguhere.", "Avhewa li vir sar e."], gen:["Avhewa", "Avhewaya me"]),
 
   (id:"b1_934", ku:"germahiya global", tr:"Küresel ısınma", en:"Global warming",
-   cins:"mê", ez:"germahiya global", kat:"ekolojî", zor:0.68,
+   cins:"mê", ez:"germahiya global", kat:"ekoloji", zor:0.68,
    not:"Pirsgirêka jîngeh.",
    her:["Germahiya global pirsgirêk e.", "Di germahiya global de."], gen:["Germahiya global", "Germahî"]),
 
   (id:"b1_935", ku:"paqijî", tr:"Temizlik", en:"Cleanliness",
-   cins:"mê", ez:"paqijî", kat:"ekolojî", zor:0.63,
+   cins:"mê", ez:"paqijî", kat:"ekoloji", zor:0.63,
    not:"Paqijiya jîngeh.",
    her:["Paqijî girîng e.", "Paqijiya avê lazim e."], gen:["Paqijî", "Paqijiya jîngeh"]),
 
   (id:"b1_936", ku:"çop", tr:"Çöp", en:"Garbage / Trash",
-   cins:"nêr", ez:"çop", kat:"ekolojî", zor:0.62,
+   cins:"nêr", ez:"çop", kat:"ekoloji", zor:0.62,
    not:"Çopê jîngeh.",
    her:["Çopê xwe bavêje.", "Çop li her derê ye."], gen:["Çop", "Çopê"]),
 
   (id:"b1_937", ku:"veguhestin", tr:"Geri dönüşüm", en:"Recycling",
-   cins:"mê", ez:"veguhestin", kat:"ekolojî", zor:0.68,
+   cins:"mê", ez:"veguhestin", kat:"ekoloji", zor:0.68,
    not:"Veguhestina çopê.",
    her:["Veguhestin girîng e.", "Divê em veguhestinê bikin."], gen:["Veguhestin", "Veguhestina çopê"]),
 
   (id:"b1_938", ku:"daristanî", tr:"Ormancılık", en:"Forestry",
-   cins:"mê", ez:"daristanî", kat:"ekolojî", zor:0.67,
+   cins:"mê", ez:"daristanî", kat:"ekoloji", zor:0.67,
    not:"Parastina daristanan.",
    her:["Daristanî girîng e.", "Di daristaniyê de dixebitin."], gen:["Daristanî", "Daristaniya me"]),
 
   (id:"b1_939", ku:"enerjiya kesk", tr:"Yeşil enerji", en:"Green energy",
-   cins:"mê", ez:"enerjiya kesk", kat:"ekolojî", zor:0.68,
+   cins:"mê", ez:"enerjiya kesk", kat:"ekoloji", zor:0.68,
    not:"Enerjiya paqij.",
    her:["Enerjiya kesk pêşeroj e.", "Divê em enerjiya kesk bikar bînin."], gen:["Enerjiya kesk", "Enerjî"]),
 
@@ -8885,17 +8885,17 @@ final kB1_EkTamam = [
 
   // ── ergatîf (3 ek kelime) ──
   (id:"b1_944", ku:"min dît", tr:"Ben gördüm", en:"I saw",
-   cins:"bêcins", ez:null, kat:"ergatîf", zor:0.68,
+   cins:"bêcins", ez:null, kat:"ergatif", zor:0.68,
    not:"Ergatîf: \"min\" ne \"ez\" — lêkera gerguhêz.",
    her:["Min ew dît.", "Min pirtûk dît."], gen:["Min dît", "Min ev dît"]),
 
   (id:"b1_945", ku:"wî got", tr:"O söyledi (eril)", en:"He said",
-   cins:"bêcins", ez:null, kat:"ergatîf", zor:0.69,
+   cins:"bêcins", ez:null, kat:"ergatif", zor:0.69,
    not:"Ergatîf: \"wî\" ne \"ew\" — lêkera gerguhêz.",
    her:["Wî ev got.", "Wî ji min re got."], gen:["Wî got", "Wî gotina xwe got"]),
 
   (id:"b1_946", ku:"wê kir", tr:"O yaptı (dişil)", en:"She did",
-   cins:"bêcins", ez:null, kat:"ergatîf", zor:0.69,
+   cins:"bêcins", ez:null, kat:"ergatif", zor:0.69,
    not:"Ergatîf: \"wê\" ne \"ew\" — lêkera gerguhêz.",
    her:["Wê karê xwe kir.", "Wê ev kir."], gen:["Wê kir", "Wê ew kir"]),
 
@@ -8917,17 +8917,17 @@ final kB1_EkTamam = [
 
   // ── subjunctîf (3 ek kelime) ──
   (id:"b1_950", ku:"bila ez bêm", tr:"Geleyim (dilek kipi)", en:"Let me come",
-   cins:"bêcins", ez:null, kat:"subjunctîf", zor:0.68,
+   cins:"bêcins", ez:null, kat:"subjunctive", zor:0.68,
    not:"Awayê bilanê. \"Bila\" + subjunctîf.",
    her:["Bila ez bêm.", "Bila ez sibê bêm."], gen:["Bila ez bêm", "Bila bêm"]),
 
   (id:"b1_951", ku:"bila ew biçe", tr:"Gitsin (dilek kipi)", en:"Let him/her go",
-   cins:"bêcins", ez:null, kat:"subjunctîf", zor:0.69,
+   cins:"bêcins", ez:null, kat:"subjunctive", zor:0.69,
    not:"Awayê bilanê. Sêyemîn kes.",
    her:["Bila ew biçe.", "Bila ew biçe malê."], gen:["Bila ew biçe", "Bila biçe"]),
 
   (id:"b1_952", ku:"bila em bixwînin", tr:"Okuyalım (dilek kipi)", en:"Let us read",
-   cins:"bêcins", ez:null, kat:"subjunctîf", zor:0.70,
+   cins:"bêcins", ez:null, kat:"subjunctive", zor:0.70,
    not:"Awayê bilanê. Pirjimar.",
    her:["Bila em bixwînin.", "Bila em pirtûkê bixwînin."], gen:["Bila em bixwînin", "Bila bixwînin"]),
 

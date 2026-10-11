@@ -867,7 +867,7 @@ const kKurdishSingers = <CulturalItem>[
     kurmanjContent:
         'Şehrîbana Kurdî, stranbêjeke jin a kevneşop û nûjen e\n'
         'ji Mêrdînê. Bi dengê xwe yê germ û şîroveya kilamên\n'
-        'klasîk, hem mîrasê dengbêjiyê parastiye hem nûjeniya\n'
+        'klasîk, hem mîrasa dengbêjiyê parastiye hem nûjeniya\n'
         'wê pêşkêş kiriye.\n\n'
         '★ Berhemên navdar:\n'
         '1. "Yêmen yêmen" — kilama dûriya welêt.\n'

@@ -25,10 +25,10 @@ final kC2Kelimeler = [
    gen:["Qafiye û rîtm", "Qafiyeya şiîrê"]),
 
   (id:"c2_003", ku:"Heyam", tr:"Dönem / Çağ (şiirsel)", en:"Era (poetic)",
-   cins:"nêr", ez:"heyamê", kat:"edebiyat", zor:0.50,
-   not:"Eril — [BH]: heyam n.m. \"Heyamê zêrîn\" = altın çağ.",
-   her:["Di heyamê de.", "Heyamê zêrîn."],
-   gen:["Heyam û serdem", "Heyamê zêrîn"]),
+   cins:"mê", ez:"heyama", kat:"edebiyat", zor:0.50,
+   not:"Dişil — \"Heyama zêrîn\" = altın çağ.",
+   her:["Di heyamê de.", "Heyama zêrîn."],
+   gen:["Heyam û serdem", "Heyama zêrîn"]),
 
   (id:"c2_004", ku:"Meyxane", tr:"Meyhane (mecazi)", en:"Tavern (metaphorical)",
    cins:"mê", ez:"meyxaneya", kat:"edebiyat", zor:0.49,
@@ -139,9 +139,9 @@ final kC2Kelimeler = [
    gen:["Dijwate û hevwate", "Dijwateyên me"]),
 
   (id:"c2_033", ku:"Navok", tr:"İçerik / Öz", en:"Content / Essence",
-   cins:"nêr", ez:"navokê", kat:"ziman", zor:0.53,
-   not:"Eril — \"nav\" + \"-ok\". [BH]: navok n.m.",
-   her:["Navokê gotarê.", "Navokê metnê."],
+   cins:"mê", ez:"navoka", kat:"ziman", zor:0.53,
+   not:"Dişil — \"nav\" + \"-ok\".",
+   her:["Navoka gotarê.", "Navoka metnê."],
    gen:["Navok û şêwe", "Navoka me"]),
 
   (id:"c2_034", ku:"Şêweya derbirînê", tr:"Anlatım biçimi", en:"Mode of expression",
@@ -1291,7 +1291,7 @@ final kC2_EkTamam = [
   (id:"c2_865", ku:"xwenasîn", tr:"Öz farkındalık / Kendini tanıma", en:"Self-awareness",
    cins:"mê", ez:"xwenasîn", kat:"psikoloji", zor:0.44,
    not:"Têgeha psîkolojîk — xwe-nas-în.",
-   her:["Xwenasîn gavê yekem e.", "Di xwenasînê de pêşketin."], gen:["Xwenasîn", "Xwenasîna me"]),
+   her:["Xwenasîn gava yekem e.", "Di xwenasînê de pêşketin."], gen:["Xwenasîn", "Xwenasîna me"]),
 
   (id:"c2_866", ku:"bihîstwerî", tr:"Empatik dinleme / İşitkenlik", en:"Active listening / Receptivity",
    cins:"mê", ez:"bihîstwerî", kat:"psikoloji", zor:0.45,
@@ -1410,10 +1410,10 @@ final kC2_Cegerxwin = [
    gen:["Dengbêjî", "Dengbêjiya gel"]),
 
   (id:"c2_915", ku:"neolojîzm", tr:"Neolojizm / Yeni Sözcük", en:"Neologism",
-   cins:"nêr", ez:"neolojîzmê", kat:"ziman", zor:0.62,
+   cins:"mê", ez:"neolojîzma", kat:"ziman", zor:0.62,
    not:"Yeni terim üretimi. Modern Kurmancî gelişiminde tartışılan konu.",
    her:["Neolojîzm pêwîst e.", "Neolojîzmên zorakî nayên qebûlkirin."],
-   gen:["Neolojîzm", "Neolojîzmê kurdî"]),
+   gen:["Neolojîzm", "Neolojîzma kurdî"]),
 
   (id:"c2_916", ku:"standardkirin", tr:"Standartlaştırma", en:"Standardization",
    cins:"mê", ez:"standardkirina", kat:"ziman", zor:0.55,
@@ -1434,9 +1434,9 @@ final kC2_Cegerxwin = [
    gen:["Mîras", "Mîrasa me"]),
 
   (id:"c2_919", ku:"tesewuf", tr:"Tasavvuf / Sufizm", en:"Sufism",
-   cins:"nêr", ez:"tesewufê", kat:"felsefe", zor:0.60,
+   cins:"mê", ez:"tesewufa", kat:"felsefe", zor:0.60,
    not:"Arapça kökenli. İslam mistisizmi. Cizîrî ve Feqiyê Teyran geleneği.",
-   her:["Tesewuf felsefeyeke kûr e.", "Tesewufê Cizîrî navdar e."],
+   her:["Tesewuf felsefeyeke kûr e.", "Tesewufa Cizîrî navdar e."],
    gen:["Tesewuf", "Tesewufa klasîk"]),
 
   (id:"c2_920", ku:"fena", tr:"Fena / Benlik Yitimi", en:"Fana / Self-annihilation",

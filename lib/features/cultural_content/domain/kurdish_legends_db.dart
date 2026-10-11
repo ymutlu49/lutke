@@ -967,7 +967,7 @@ const kKurdishLegends = <CulturalItem>[
         '  saqas dirêjîne û dîlana xwe ya dawiyê dike.\n'
         '• Yek dibêje, di dawiyê de, Eyşan diçe çiya û bi Bezo '
         '  re bibe yek — bi laş an jî bi ruh.\n\n'
-        'Wateya çandî: Eyşan û Bezo destanê pîvana evîna jina '
+        'Wateya çandî: Eyşan û Bezo destana pîvana evîna jina '
         'Kurd e — pîvanek ku ne hewceyî maddî ye, lê di hundir '
         'de tê meşandin.',
     turkishContent:

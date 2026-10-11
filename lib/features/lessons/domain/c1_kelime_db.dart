@@ -30,7 +30,7 @@ final kC1Kelimeler = [
   (id:"c1_003", ku:"Xem", tr:"Tasa / Keder / Hüzün", en:"Grief / Melancholy",
    cins:"mê", ez:"xema", kat:"edebiyat", zor:0.66,
    not:"Dişil — [BH]: xem n.f. (\"ji xema û keseran\"). Dengbêj geleneğinde merkezi duygu. \"Xema dil\" = kalbin hüznü.",
-   her:["Xemê dil dagirtiye.", "Xem û kul di helbesta kurdî de."],
+   her:["Xema dil dagirtiye.", "Xem û kul di helbesta kurdî de."],
    gen:["Xem û şahî", "Xema dil"]),
 
   (id:"c1_004", ku:"Zarîn", tr:"Figan / Ağıt", en:"Lament",
@@ -47,9 +47,9 @@ final kC1Kelimeler = [
 
   (id:"c1_006", ku:"Gul", tr:"Gül", en:"Rose",
    cins:"mê", ez:"gula", kat:"edebiyat", zor:0.65,
-   not:"Dişil — [BH]: gul n.f. Klasik şiirde \"sevgilinin yüzü\". \"Gulê Kurdistan\" = Kürdistan\'ın gülü.",
+   not:"Dişil — [BH]: gul n.f. Klasik şiirde \"sevgilinin yüzü\". \"Gula Kurdistanê\" = Kürdistan\'ın gülü.",
    her:["Gul dikeve.", "Gulên sor ji baxçê me ne."],
-   gen:["Gul û bilbil", "Gulê Kurdistan"]),
+   gen:["Gul û bilbil", "Gula Kurdistanê"]),
 
   (id:"c1_007", ku:"Baxçe", tr:"Bahçe", en:"Garden",
    cins:"nêr", ez:"baxçê", kat:"edebiyat", zor:0.63,
@@ -60,7 +60,7 @@ final kC1Kelimeler = [
   (id:"c1_008", ku:"Derd û êş", tr:"Dert ve acı", en:"Trouble and pain",
    cins:"bêcins", ez:null, kat:"edebiyat", zor:0.66,
    not:"\"Derd û êş\" = dert ve acı. Dengbêj ve halk şiirinde çift kullanım.",
-   her:["Derd û êşê min.", "Ji derd û êşê derbas bûm."],
+   her:["Derd û êşa min.", "Ji derd û êşê derbas bûm."],
    gen:["Derd û êş", "Derd û êşa jiyanê"]),
 
   (id:"c1_009", ku:"Saz û kelam", tr:"Saz ve söz", en:"Instrument and word",
@@ -312,8 +312,8 @@ final kC1Kelimeler = [
    gen:["Neteweperwerî û fedralîzm", "Neteweperwerîya me"]),
 
   (id:"c1_075", ku:"Federalîzm", tr:"Federalizm", en:"Federalism",
-   cins:"nêr", ez:"federalîzmê", kat:"siyaset", zor:0.62,
-   not:"Eril — uluslararası terim.",
+   cins:"mê", ez:"federalîzma", kat:"siyaset", zor:0.62,
+   not:"Dişil — uluslararası terim.",
    her:["Federalîzm û xweserî.", "Di federalîzmê de."],
    gen:["Federalîzm û yekgirtî", "Federalîzma me"]),
 
@@ -369,7 +369,7 @@ final kC1Kelimeler = [
   (id:"c1_101", ku:"Nasnameya dualî", tr:"Çift kimlik", en:"Dual identity",
    cins:"mê", ez:"nasnameya dualî", kat:"kimlik", zor:0.64,
    not:"\"Nasname\" + \"dualî\". Heritage öğrenicinin merkezi kavramı.",
-   her:["Nasnameya dualî ya Kurdan di diasporayê.", "Di nasnameya dualî de."],
+   her:["Nasnameya dualî ya Kurdan di diasporayê de.", "Di nasnameya dualî de."],
    gen:["Nasnameya dualî", "Nasnameya me"]),
 
   (id:"c1_102", ku:"Têkilîya navçandî", tr:"Kültürlerarası ilişki", en:"Intercultural relation",
@@ -492,11 +492,11 @@ final kC1Kelimeler = [
 
   // ── C1 EK KELİMELER ─────────────────────────────────────────
 
-  (id:"c1_160", ku:"Têgehê bingehîn", tr:"Temel kavram", en:"Core concept",
-   cins:"nêr", ez:"têgehê bingehîn", kat:"zanist", zor:0.62,
+  (id:"c1_160", ku:"Têgeha bingehîn", tr:"Temel kavram", en:"Core concept",
+   cins:"mê", ez:"têgeha bingehîn", kat:"zanist", zor:0.62,
    not:"\"Têgeh\" (kavram) + \"bingehîn\".",
-   her:["Têgehê bingehîn çi ye?", "Têgehên bingehîn ên zimannasiyê."],
-   gen:["Têgehê bingehîn", "Têgehên me"]),
+   her:["Têgeha bingehîn çi ye?", "Têgehên bingehîn ên zimannasiyê."],
+   gen:["Têgeha bingehîn", "Têgehên me"]),
 
   (id:"c1_161", ku:"Têgeh", tr:"Kavram", en:"Concept",
    cins:"mê", ez:"têgeha", kat:"zanist", zor:0.63,
@@ -507,7 +507,7 @@ final kC1Kelimeler = [
   (id:"c1_162", ku:"Nêzîk bûn", tr:"Yaklaşmak / Ele almak", en:"To approach / deal with",
    cins:"bêcins", ez:null, kat:"leker", zor:0.63,
    not:"\"Nêzîk bûn\" akademik bağlamda \"ele almak/yaklaşmak\" anlamında.",
-   her:["Pirsgirêkê nêzîk bûm.", "Çawa nêzîk bûn?"],
+   her:["Nêzîkî pirsgirêkê bûm.", "Çawa nêzîk bûn?"],
    gen:["Nêzîk bûn û dûr bûn", "Nêzîk bûm."]),
 
   (id:"c1_163", ku:"Girêdana navbera", tr:"Arasındaki bağlantı", en:"Connection between",
@@ -1135,7 +1135,7 @@ final kC1_Buyuk_ext = [
 
   // ── DIASPORA VE KİMLİK (30) ───────────────────────────────────
 
-  (id:"c1_358", ku:"Diaspora û welat", tr:"Diaspora ve vatan", en:"Diaspora and homeland", cins:"bêcins", ez:null, kat:"kimlik", zor:0.61, not:"\"Diaspora\"+\"welat\".", her:["Diaspora û welat.", "Di navbera diaspora û welat de."], gen:["Diaspora û welat","Diaspora û welata me"]),
+  (id:"c1_358", ku:"Diaspora û welat", tr:"Diaspora ve vatan", en:"Diaspora and homeland", cins:"bêcins", ez:null, kat:"kimlik", zor:0.61, not:"\"Diaspora\"+\"welat\".", her:["Diaspora û welat.", "Di navbera diaspora û welat de."], gen:["Diaspora û welat","Diaspora û welatê me"]),
   (id:"c1_359", ku:"Girêdana koka ferhengî", tr:"Kültürel kök bağlantısı", en:"Cultural root connection", cins:"mê", ez:"girêdana koka ferhengî", kat:"kimlik", zor:0.59, not:"\"Girêdan\"+\"koka ferhengî\".", her:["Girêdana koka ferhengî.", "Di girêdana koka ferhengî de."], gen:["Girêdana koka ferhengî","Girêdana me"]),
   (id:"c1_360", ku:"Rêveçûna nasnameya kurd", tr:"Kürt kimliğinin seyri", en:"Course of Kurdish identity", cins:"mê", ez:"rêveçûna nasnameya kurd", kat:"kimlik", zor:0.59, not:"\"Rêveçûn\"+\"nasname\"+\"kurd\".", her:["Rêveçûna nasnameya kurd.", "Di rêveçûna nasnameya kurd de."], gen:["Rêveçûna nasnameya kurd","Rêveçûna me"]),
   (id:"c1_361", ku:"Koçberî û nasname", tr:"Göç ve kimlik", en:"Migration and identity", cins:"bêcins", ez:null, kat:"kimlik", zor:0.61, not:"\"Koçberî\"+\"nasname\".", her:["Koçberî û nasname.", "Di navbera koçberî û nasname de."], gen:["Koçberî û nasname","Nasname û koçberîya me"]),
@@ -1146,7 +1146,7 @@ final kC1_Buyuk_ext = [
   // ── ÊZÎDÎTÎ VE DİNİ KÜLTÜR (20) ──────────────────────────────
 
   (id:"c1_365", ku:"Êzîdîtî", tr:"Êzidilik", en:"Yazidism", cins:"mê", ez:"Êzîdîtiya", kat:"çand", zor:0.62, not:"\"Êzîdîtî\" = Êzidi inanç sistemi. Kürdistan\'ın özgün dinlerinden biri (kevn).", her:["Êzîdîtî baweriyeke kevnar e.", "Di Êzîdîtiyê de cejnên kevn hene."], gen:["Êzîdîtî","Baweriya kevnar"]),
-  (id:"c1_366", ku:"Şingalê Êzîdîyan", tr:"Êzidilerin Şengali", en:"Yazidis' Sinjar", cins:"nêr", ez:"Şingalê Êzîdîyan", kat:"dîrok", zor:0.62, not:"\"Şingal\" (Sinjar) = Êzidi yurdu. 2014 soykırımı.", her:["Şingalê Êzîdîyan.", "Di Şingalê Êzîdîyan de."], gen:["Şingalê Êzîdîyan","Şingal"]),
+  (id:"c1_366", ku:"Şingala Êzîdiyan", tr:"Êzidilerin Şengali", en:"Yazidis' Sinjar", cins:"mê", ez:"Şingala Êzîdiyan", kat:"dîrok", zor:0.62, not:"\"Şingal\" (Sinjar) = Êzidi yurdu. 2014 soykırımı.", her:["Şingala Êzîdiyan.", "Di Şingala Êzîdiyan de."], gen:["Şingala Êzîdiyan","Şingal"]),
   (id:"c1_367", ku:"Cenabê Tawûsî Melek", tr:"Tavus Meleği", en:"Melek Taus / Peacock Angel", cins:"nêr", ez:"Cenabê Tawûsî Melek", kat:"çand", zor:0.61, not:"\"Tawûsî Melek\" = Êzidi inanç merkezi. Kutsal figür.", her:["Tawûsî Melek.", "Di baweriya Tawûsî Melek de."], gen:["Tawûsî Melek","Baweriya me"]),
   (id:"c1_368", ku:"Elewîtî û Kurdanê", tr:"Alevilik ve Kürtler", en:"Alevism and Kurds", cins:"bêcins", ez:null, kat:"çand", zor:0.61, not:"\"Elewîtî\"+\"Kurd\". Kürtlerde Alevilik.", her:["Elewîtî û Kurdanê.", "Di navbera Elewîtî û Kurdanê de."], gen:["Elewîtî û Kurdanê","Elewîtiya me"]),
 

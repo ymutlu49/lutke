@@ -35,7 +35,7 @@ const kKurdishEvents = <CulturalItem>[
         '• Mîrekiyên Kurd ên wek Botan, Hekarî, Bedlîs, Sêwregî '
         '  bûn beşek otonom a Osmanî.\n'
         '• Sînorên Kurdistanê ber bi rojhilatê ve hatin diyar '
-        '  kirin — sînora ku îro jî heye.\n\n'
+        '  kirin — sînorê ku îro jî heye.\n\n'
         'Mîras:\n'
         'Peymana Çaldiranê 300 salan otonomiya Kurd parast (1514–'
         '1839). Lê bi navendîbûna Tanzîmatê (1839) re, mîrekiyên '
@@ -150,7 +150,7 @@ const kKurdishEvents = <CulturalItem>[
         'Mîras:\n'
         'Lawên Bedirxan — Mîr Celadet û Kamûran — paşê damezrînerên '
         'kovara Hawar û alfabeya Latînî bûn (1932). Bi vî awayî, '
-        'serhildana 1843 mîrasê xwe heta îro daye.',
+        'serhildana 1843 mîrasa xwe heta îro daye.',
     turkishContent:
         'Modern Kürtlerin ilk ayaklanması 1843\'te Botan mîrekiliği '
         '(Cizre)\'de başladı. Lider: Mîr Bedirxan Beg (1802-1869).\n\n'

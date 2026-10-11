@@ -1,0 +1,658 @@
+tarih	kimlik	alan	eski	yeni	kural	gerekce
+2026-10-11	a1_411	cins	nêr	mê	cins	Wîkîferheng mê; korpus -a 2 / -ê 1; Farqînî -a 2 / -ê 0
+2026-10-11	a1_411	ez	hêkê	hêka	cins	izafe biçimi cinsiyete göre
+2026-10-11	a1_411	not	Hêk (eril/nêr)	Hêk (dişil/mê)	cins	cinsiyet düzeltmesinin devamı
+2026-10-11	a1_411	not	hêkê mirîşkê	hêka mirîşkê	cins	cinsiyet düzeltmesinin devamı
+2026-10-11	a1_411	her	Hêkê mirîşkê xweş e.	Hêka mirîşkê xweş e.	cins	cinsiyet düzeltmesinin devamı
+2026-10-11	a1_415	cins	nêr	mê	cins	Wîkîferheng mê; korpus -a 3 / -ê 1; Farqînî -a 4 / -ê 0
+2026-10-11	a1_415	ez	îsotê	îsota	cins	izafe biçimi cinsiyete göre
+2026-10-11	a1_415	not	Îsot (eril/nêr)	Îsot (dişil/mê)	cins	cinsiyet düzeltmesinin devamı
+2026-10-11	a1_415	not	îsotê sor	îsota sor	cins	cinsiyet düzeltmesinin devamı
+2026-10-11	a1_415	her	Îsotê pîrê sor e.	Îsota pîrê sor e.	cins	cinsiyet düzeltmesinin devamı
+2026-10-11	a1_429	cins	nêr	mê	cins	Wîkîferheng mê; korpus -a 9 / -ê 4; Farqînî -a 2 / -ê 0
+2026-10-11	a1_429	ez	lêvê	lêva	cins	izafe biçimi cinsiyete göre
+2026-10-11	a1_429	not	Lêv (eril/nêr)	Lêv (dişil/mê)	cins	cinsiyet düzeltmesinin devamı
+2026-10-11	a1_429	not	lêvê min	lêva min	cins	cinsiyet düzeltmesinin devamı
+2026-10-11	a1_429	her	Lêvê pîrê sor e.	Lêva pîrê sor e.	cins	cinsiyet düzeltmesinin devamı
+2026-10-11	a1_512	cins	nêr	mê	cins	Wîkîferheng mê; korpus -a 10 / -ê 0
+2026-10-11	a1_512	ez	destanê	destana	cins	izafe biçimi cinsiyete göre
+2026-10-11	a1_512	not	"""Destan"" — eril."	"""Destan"" — dişil (mê)."	cins	cinsiyet düzeltmesinin devamı
+2026-10-11	a1_746	cins	nêr	mê	cins	Wîkîferheng mê; Farqînî -a 1 / -ê 0
+2026-10-11	a1_746	ez	zeviyê	zeviya	cins	izafe biçimi cinsiyete göre
+2026-10-11	a1_746	not	Zevî (eril/nêr)	Zevî (dişil/mê)	cins	cinsiyet düzeltmesinin devamı
+2026-10-11	a1_746	not	zeviyê me	zeviya me	cins	cinsiyet düzeltmesinin devamı
+2026-10-11	a1_746	her	Zeviyê me mezin e.	Zeviya me mezin e.	cins	cinsiyet düzeltmesinin devamı
+2026-10-11	a1_750	cins	nêr	mê	cins	Wîkîferheng mê; Farqînî -a 1 / -ê 0
+2026-10-11	a1_750	ez	gorê	goreya	cins	izafe biçimi cinsiyete göre
+2026-10-11	a1_750	not	Gore (eril/nêr)	Gore (dişil/mê)	cins	cinsiyet düzeltmesinin devamı
+2026-10-11	a1_750	not	Veqetandek: gorê min. Mînak: Gorê min germ e.	Veqetandek: goreya min. Mînak: Goreya min germ e.	cins	cinsiyet düzeltmesinin devamı
+2026-10-11	a1_750	her	Gorê kal germ e.	Goreya kal germ e.	cins	cinsiyet düzeltmesinin devamı
+2026-10-11	a1_754	cins	nêr	mê	cins	Wîkîferheng mê; korpus -a 3 / -ê 0; Farqînî -a 1 / -ê 0
+2026-10-11	a1_754	ez	sinifê	sinifa	cins	izafe biçimi cinsiyete göre
+2026-10-11	a1_754	not	Sinif (eril/nêr)	Sinif (dişil/mê)	cins	cinsiyet düzeltmesinin devamı
+2026-10-11	a1_754	not	Veqetandek: sinifê me. Mînak: Sinifê me mezin e.	Veqetandek: sinifa me. Mînak: Sinifa me mezin e.	cins	cinsiyet düzeltmesinin devamı
+2026-10-11	a1_754	her	Sinifê me mezin e.	Sinifa me mezin e.	cins	cinsiyet düzeltmesinin devamı
+2026-10-11	a1_757	cins	nêr	mê	cins	Wîkîferheng mê; korpus -a 12 / -ê 2
+2026-10-11	a1_757	ez	kaxezê	kaxeza	cins	izafe biçimi cinsiyete göre
+2026-10-11	a1_757	not	Kaxez (eril/nêr)	Kaxez (dişil/mê)	cins	cinsiyet düzeltmesinin devamı
+2026-10-11	a1_757	not	Veqetandek: kaxezê min. Mînak: Kaxezê min spî ye.	Veqetandek: kaxeza min. Mînak: Kaxeza min spî ye.	cins	cinsiyet düzeltmesinin devamı
+2026-10-11	a1_757	her	Kaxezê pîrê spî ye.	Kaxeza pîrê spî ye.	cins	cinsiyet düzeltmesinin devamı
+2026-10-11	a1_757	gen	Kaxezê me nû ye.	Kaxeza me nû ye.	cins	cinsiyet düzeltmesinin devamı
+2026-10-11	a1_ek441	cins	nêr	mê	cins	korpus -a 6 / -ê 1; Farqînî -a 1 / -ê 0
+2026-10-11	a1_ek441	ez	destmalê	destmala	cins	izafe biçimi cinsiyete göre
+2026-10-11	a1_ek441	not	Destmal (eril/nêr)	Destmal (dişil/mê)	cins	cinsiyet düzeltmesinin devamı
+2026-10-11	a1_ek441	not	destmalê min	destmala min	cins	cinsiyet düzeltmesinin devamı
+2026-10-11	a1_ek441	her	Destmalê pîrê spî ye.	Destmala pîrê spî ye.	cins	cinsiyet düzeltmesinin devamı
+2026-10-11	a1_fk_12	cins	nêr	mê	cins	korpus -a 12 / -ê 0; Farqînî -a 1 / -ê 0
+2026-10-11	a1_fk_12	ez	polê	pola	cins	izafe biçimi cinsiyete göre
+2026-10-11	a1_fk_12	not	Pol (eril/nêr)	Pol (dişil/mê)	cins	cinsiyet düzeltmesinin devamı
+2026-10-11	a1_fk_12	not	Veqetandek: polê me. Mînak: Polê me xweş e.	Veqetandek: pola me. Mînak: Pola me xweş e.	cins	cinsiyet düzeltmesinin devamı
+2026-10-11	a1_fk_12	her	Polê me xweş e.	Pola me xweş e.	cins	cinsiyet düzeltmesinin devamı
+2026-10-11	a1_fk_14	cins	nêr	mê	cins	Wîkîferheng mê; Farqînî -a 1 / -ê 0
+2026-10-11	a1_fk_14	ez	spartekê	sparteka	cins	izafe biçimi cinsiyete göre
+2026-10-11	a1_fk_14	not	Spartek (eril/nêr)	Spartek (dişil/mê)	cins	cinsiyet düzeltmesinin devamı
+2026-10-11	a1_fk_14	not	spartekê min	sparteka min	cins	cinsiyet düzeltmesinin devamı
+2026-10-11	a2_1752	cins	nêr	mê	cins	Wîkîferheng mê; korpus -a 9 / -ê 2; Farqînî -a 2 / -ê 0
+2026-10-11	a2_1752	ez	tozê	toza	cins	izafe biçimi cinsiyete göre
+2026-10-11	a2_1752	not	Nêr — [FB]: toz n.m.	"Mê — ""toza rê"" = yol tozu."	atif	nota yazılan sözlük atfı kanıtla çelişiyordu; kaldırıldı
+2026-10-11	a2_1752	gen	Tozê rê	Toza rê	cins	cinsiyet düzeltmesinin devamı
+2026-10-11	a2_500	cins	mê	nêr	cins	Wîkîferheng nêr; Farqînî -a 0 / -ê 2
+2026-10-11	a2_500	ez	wêneya	wêneyê	cins	izafe biçimi cinsiyete göre
+2026-10-11	a2_500	not	"Mê — [FB]: wêne n.f. ""Wêneya min"" = fotoğrafım."	"Nêr — ""Wêneyê min"" = fotoğrafım."	atif	nota yazılan sözlük atfı kanıtla çelişiyordu; kaldırıldı
+2026-10-11	a2_500	her	Wêneya pîrê heye.	Wêneyê pîrê heye.	cins	cinsiyet düzeltmesinin devamı
+2026-10-11	a2_500	her	Wêneyekê bikişîne!	Wêneyekî bikişîne!	cins	cinsiyet düzeltmesinin devamı
+2026-10-11	a2_500	gen	Wêneya min	Wêneyê min	cins	cinsiyet düzeltmesinin devamı
+2026-10-11	a2_890	cins	nêr	mê	cins	Wîkîferheng mê; korpus -a 11 / -ê 2; Farqînî -a 1 / -ê 0; kaydın kendi örneği -a 2
+2026-10-11	a2_890	ez	ramanê	ramana	cins	izafe biçimi cinsiyete göre
+2026-10-11	a2_890	not	Nêr — 	Mê — 	cins	cinsiyet düzeltmesinin devamı
+2026-10-11	b1_064	cins	nêr	mê	cins	Wîkîferheng mê; korpus -a 42 / -ê 7; Farqînî -a 1 / -ê 0
+2026-10-11	b1_064	ez	destpêkê	destpêka	cins	izafe biçimi cinsiyete göre
+2026-10-11	b1_064	not	Eril — [FB]: destpêk n.m. 	Dişil — 	atif	nota yazılan sözlük atfı kanıtla çelişiyordu; kaldırıldı
+2026-10-11	b1_064	her	Destpêkê jiyanê xweş e.	Destpêka jiyanê xweş e.	cins	cinsiyet düzeltmesinin devamı
+2026-10-11	b1_064	her	Destpêkê baş kir.	Destpêkeke baş kir.	cins	cinsiyet düzeltmesinin devamı
+2026-10-11	b1_085	cins	nêr	mê	cins	Wîkîferheng mê; korpus -a 3 / -ê 1; son ek -çûn; kaydın kendi örneği -a 1
+2026-10-11	b1_085	ez	têkçûnê	têkçûna	cins	izafe biçimi cinsiyete göre
+2026-10-11	b1_085	not	Eril — 	Dişil — 	cins	cinsiyet düzeltmesinin devamı
+2026-10-11	b1_085	not	Eril oblique: têkçûnê.	Dişil oblique: têkçûnê.	cins	cinsiyet düzeltmesinin devamı
+2026-10-11	b1_1011	cins	nêr	mê	cins	Wîkîferheng mê; korpus -a 3 / -ê 0; Farqînî -a 1 / -ê 0
+2026-10-11	b1_1011	ez	dengdarê	dengdara	cins	izafe biçimi cinsiyete göre
+2026-10-11	b1_1011	not	Eril — 	Dişil — 	cins	cinsiyet düzeltmesinin devamı
+2026-10-11	b1_1013	cins	nêr	mê	cins	Wîkîferheng mê; korpus -a 5 / -ê 0; Farqînî -a 1 / -ê 0; kaydın kendi örneği -a 4
+2026-10-11	b1_1013	ez	kêşanê	kêşana	cins	izafe biçimi cinsiyete göre
+2026-10-11	b1_1013	not	Eril — 	Dişil — 	cins	cinsiyet düzeltmesinin devamı
+2026-10-11	b1_1020	cins	nêr	mê	cins	Wîkîferheng mê; Farqînî -a 1 / -ê 0
+2026-10-11	b1_1020	ez	zagonê	zagona	cins	izafe biçimi cinsiyete göre
+2026-10-11	b1_1020	not	Eril — [AS] s.60: HIQÛQ bölümü. [FB]: zagon n.m.	Dişil — [AS] s.60: HIQÛQ bölümü.	atif	nota yazılan sözlük atfı kanıtla çelişiyordu; kaldırıldı
+2026-10-11	b1_290	cins	nêr	mê	cins	Wîkîferheng mê; korpus -a 11 / -ê 5; Farqînî -a 2 / -ê 0
+2026-10-11	b1_290	ez	berhemê	berhema	cins	izafe biçimi cinsiyete göre
+2026-10-11	b1_290	not	Eril — [FB]: berhem n.m. 	Dişil — 	atif	nota yazılan sözlük atfı kanıtla çelişiyordu; kaldırıldı
+2026-10-11	b1_290	her	Berhemên kund.	Berhemên gund.	yazim	kund = baykuş; kastedilen gund (köy ürünleri)
+2026-10-11	b1_301	cins	nêr	mê	cins	Wîkîferheng mê; korpus -a 37 / -ê 0; Farqînî -a 2 / -ê 0; kaydın kendi örneği -a 3
+2026-10-11	b1_301	ez	tevgerê	tevgera	cins	izafe biçimi cinsiyete göre
+2026-10-11	b1_301	not	Eril — [FB]: tevger n.m. 	Dişil — 	atif	nota yazılan sözlük atfı kanıtla çelişiyordu; kaldırıldı
+2026-10-11	b1_470	cins	nêr	mê	cins	Wîkîferheng mê; korpus -a 12 / -ê 14; Farqînî -a 2 / -ê 0; kaydın kendi örneği -a 1
+2026-10-11	b1_470	ez	navdêrê	navdêra	cins	izafe biçimi cinsiyete göre
+2026-10-11	b1_470	not	Eril — 	Dişil — 	cins	cinsiyet düzeltmesinin devamı
+2026-10-11	b1_470	not	" DÜZELTME: Terim olarak navdêr genelde eril; cümle içinde dişil kullanıma da rastlanır ama standart ""nêr""."		atif	kanıtla çelişen açıklama kaldırıldı (korpus, Farqînî, Wîkîferheng: dişil)
+2026-10-11	b1_470	gen	Navdêrê me	Navdêra me	cins	cinsiyet düzeltmesinin devamı
+2026-10-11	b1_471	cins	nêr	mê	cins	korpus -a 140 / -ê 8; Farqînî -a 6 / -ê 0
+2026-10-11	b1_471	ez	lêkerê	lêkera	cins	izafe biçimi cinsiyete göre
+2026-10-11	b1_471	not	Eril — 	Dişil — 	cins	cinsiyet düzeltmesinin devamı
+2026-10-11	b1_471	gen	Lêkerê me	Lêkera me	cins	cinsiyet düzeltmesinin devamı
+2026-10-11	b1_472	cins	nêr	mê	cins	Wîkîferheng mê; korpus -a 28 / -ê 5
+2026-10-11	b1_472	ez	rengdêrê	rengdêra	cins	izafe biçimi cinsiyete göre
+2026-10-11	b1_472	not	Eril — 	Dişil — 	cins	cinsiyet düzeltmesinin devamı
+2026-10-11	b1_472	gen	Rengdêrê me	Rengdêra me	cins	cinsiyet düzeltmesinin devamı
+2026-10-11	b1_474	cins	nêr	mê	cins	Wîkîferheng mê; korpus -a 15 / -ê 4; Farqînî -a 2 / -ê 0
+2026-10-11	b1_474	ez	cînavkê	cînavka	cins	izafe biçimi cinsiyete göre
+2026-10-11	b1_474	not	Eril — 	Dişil — 	cins	cinsiyet düzeltmesinin devamı
+2026-10-11	b1_474	gen	Cînavkê me	Cînavka me	cins	cinsiyet düzeltmesinin devamı
+2026-10-11	b1_475	cins	nêr	mê	cins	Wîkîferheng mê; korpus -a 28 / -ê 2; kaydın kendi örneği -a 3
+2026-10-11	b1_475	ez	kokê	koka	cins	izafe biçimi cinsiyete göre
+2026-10-11	b1_475	not	Eril — 	Dişil — 	cins	cinsiyet düzeltmesinin devamı
+2026-10-11	b1_905	cins	nêr	mê	cins	Wîkîferheng mê; korpus -a 593 / -ê 51; Farqînî -a 5 / -ê 0; kaydın kendi örneği -a 1
+2026-10-11	b1_905	ez	dem	dema	cins	izafe biçimi cinsiyete göre
+2026-10-11	b1_932	cins	nêr	mê	cins	Wîkîferheng mê; korpus -a 3 / -ê 0; Farqînî -a 1 / -ê 0; kaydın kendi örneği -a 2
+2026-10-11	b1_932	ez	rêbazê	rêbaza	cins	izafe biçimi cinsiyete göre
+2026-10-11	b1_932	not	"Eril — ""rê"" + ""baz"". [FB]: rêbaz n.m."	"Dişil — ""rê"" + ""baz""."	atif	nota yazılan sözlük atfı kanıtla çelişiyordu; kaldırıldı
+2026-10-11	b1_932	her	Bi rêbazekî zanistî.	Bi rêbazeke zanistî.	cins	cinsiyet düzeltmesinin devamı
+2026-10-11	b1_c03b	cins	nêr	mê	cins	Wîkîferheng mê; korpus -a 5 / -ê 1; Farqînî -a 1 / -ê 0
+2026-10-11	b1_c03b	ez	kemberê	kembera	cins	izafe biçimi cinsiyete göre
+2026-10-11	b1_c03b	not	Eril — 	Dişil — 	cins	cinsiyet düzeltmesinin devamı
+2026-10-11	b1_c03b	her	Kemberê çerm.	Kembera çerm.	cins	cinsiyet düzeltmesinin devamı
+2026-10-11	b1_c03b	gen	Kemberê me	Kembera me	cins	cinsiyet düzeltmesinin devamı
+2026-10-11	b1_dm11	cins	nêr	mê	cins	Wîkîferheng mê; son ek -bûn; kaydın kendi örneği -a 3
+2026-10-11	b1_dm11	ez	rojbûnê	rojbûna	cins	izafe biçimi cinsiyete göre
+2026-10-11	b1_dm11	not	Eril — 	Dişil — 	cins	cinsiyet düzeltmesinin devamı
+2026-10-11	b1_jy19	cins	nêr	mê	cins	Wîkîferheng mê; son ek -î
+2026-10-11	b1_jy19	ez	raboriyê	raboriya	cins	izafe biçimi cinsiyete göre
+2026-10-11	b1_jy19	not	Eril — 	Dişil — 	cins	cinsiyet düzeltmesinin devamı
+2026-10-11	b1_m12	cins	nêr	mê	cins	Wîkîferheng mê; korpus -a 7 / -ê 6; Farqînî -a 1 / -ê 0
+2026-10-11	b1_m12	ez	kêzikê	kêzika	cins	izafe biçimi cinsiyete göre
+2026-10-11	b1_m12	not	Eril — [FB]: kêzik n.m.	Dişil.	atif	nota yazılan sözlük atfı kanıtla çelişiyordu; kaldırıldı
+2026-10-11	b1_nv02	cins	nêr	mê	cins	Wîkîferheng mê; son ek -geh; kaydın kendi örneği -a 1
+2026-10-11	b1_nv02	ez	mêtingê	mêtingeha	cins	izafe biçimi cinsiyete göre
+2026-10-11	b1_nv02	her	Di mêtingê de.	Di mêtingehê de.	yazim	çekimde kök kısaltılmış; mêtingeh + ê
+2026-10-11	b1_r16	cins	nêr	mê	cins	Wîkîferheng mê; Farqînî -a 1 / -ê 0; son ek -çûn; kaydın kendi örneği -a 2
+2026-10-11	b1_r16	ez	lêçûnê	lêçûna	cins	izafe biçimi cinsiyete göre
+2026-10-11	b1_r16	not	Eril — 	Dişil — 	cins	cinsiyet düzeltmesinin devamı
+2026-10-11	b1_rz07	cins	nêr	mê	cins	Wîkîferheng mê; Farqînî -a 1 / -ê 0
+2026-10-11	b1_rz07	ez	gihanekê	gihaneka	cins	izafe biçimi cinsiyete göre
+2026-10-11	b1_rz07	not	Eril — 	Dişil — 	cins	cinsiyet düzeltmesinin devamı
+2026-10-11	b1_z04	cins	nêr	mê	cins	Wîkîferheng mê; korpus -a 11 / -ê 0; kaydın kendi örneği -a 3
+2026-10-11	b1_z04	ez	tewangê	tewanga	cins	izafe biçimi cinsiyete göre
+2026-10-11	b1_z04	not	Eril — 	Dişil — 	cins	cinsiyet düzeltmesinin devamı
+2026-10-11	b2_340	cins	nêr	mê	cins	Wîkîferheng mê; korpus -a 15 / -ê 1; kaydın kendi örneği -a 3
+2026-10-11	b2_340	ez	mebestê	mebesta	cins	izafe biçimi cinsiyete göre
+2026-10-11	b2_340	not	Eril — [FB]: mebest n.m. 	Dişil — 	atif	nota yazılan sözlük atfı kanıtla çelişiyordu; kaldırıldı
+2026-10-11	b2_532	cins	nêr	mê	cins	Wîkîferheng mê; son ek -îzm; kaydın kendi örneği -a 1
+2026-10-11	b2_532	ez	pluralîzmê	pluralîzma	cins	izafe biçimi cinsiyete göre
+2026-10-11	b2_532	not	Eril — 	Dişil — 	cins	cinsiyet düzeltmesinin devamı
+2026-10-11	b2_542	cins	nêr	mê	cins	Wîkîferheng mê; son ek -bûn; kaydın kendi örneği -a 2
+2026-10-11	b2_542	ez	xwebûnê	xwebûna	cins	izafe biçimi cinsiyete göre
+2026-10-11	b2_542	not	Eril — 	Dişil — 	cins	cinsiyet düzeltmesinin devamı
+2026-10-11	c1_075	cins	nêr	mê	cins	Wîkîferheng mê; son ek -îzm; kaydın kendi örneği -a 1
+2026-10-11	c1_075	ez	federalîzmê	federalîzma	cins	izafe biçimi cinsiyete göre
+2026-10-11	c1_075	not	Eril — 	Dişil — 	cins	cinsiyet düzeltmesinin devamı
+2026-10-11	c2_003	cins	nêr	mê	cins	Wîkîferheng mê; korpus -a 9 / -ê 2
+2026-10-11	c2_003	ez	heyamê	heyama	cins	izafe biçimi cinsiyete göre
+2026-10-11	c2_003	not	"Eril — [BH]: heyam n.m. ""Heyamê zêrîn"" = altın çağ."	"Dişil — ""Heyama zêrîn"" = altın çağ."	atif	nota yazılan sözlük atfı kanıtla çelişiyordu; kaldırıldı
+2026-10-11	c2_003	her	Heyamê zêrîn.	Heyama zêrîn.	cins	cinsiyet düzeltmesinin devamı
+2026-10-11	c2_003	gen	Heyamê zêrîn	Heyama zêrîn	cins	cinsiyet düzeltmesinin devamı
+2026-10-11	c2_915	cins	nêr	mê	cins	Wîkîferheng mê; son ek -îzm
+2026-10-11	c2_915	ez	neolojîzmê	neolojîzma	cins	izafe biçimi cinsiyete göre
+2026-10-11	c2_915	gen	Neolojîzmê kurdî	Neolojîzma kurdî	cins	cinsiyet düzeltmesinin devamı
+2026-10-11	b1_080	cins	nêr	mê	cins	Wîkîferheng mê; kaydın kendi örneği -a 2
+2026-10-11	b1_080	ez	mêjûyê	mêjûya	cins	izafe biçimi cinsiyete göre
+2026-10-11	b1_080	not	Eril — [FB]: mêjû n.m. 	Dişil — 	atif	nota yazılan sözlük atfı kanıtla çelişiyordu; kaldırıldı
+2026-10-11	b1_260	cins	nêr	mê	cins	Wîkîferheng mê; kaydın kendi örneği -a 2
+2026-10-11	b1_260	ez	hawirdorê	hawirdora	cins	izafe biçimi cinsiyete göre
+2026-10-11	b1_260	not	Eril — 	Dişil — 	cins	cinsiyet düzeltmesinin devamı
+2026-10-11	b1_260	not	"""Hawirdorê xwezayî"""	"""Hawirdora xwezayî"""	cins	cinsiyet düzeltmesinin devamı
+2026-10-11	b1_274	cins	nêr	mê	cins	Wîkîferheng mê; korpus -a 3 / -ê 0; kaydın kendi örneği -a 3
+2026-10-11	b1_274	ez	wergerê	wergera	cins	izafe biçimi cinsiyete göre
+2026-10-11	b1_274	not	Eril — [FB]: werger n.m. 	Dişil — 	atif	nota yazılan sözlük atfı kanıtla çelişiyordu; kaldırıldı
+2026-10-11	b1_483	cins	nêr	mê	cins	Wîkîferheng mê; kaydın kendi örneği -a 2
+2026-10-11	b1_483	ez	arşîvê	arşîva	cins	izafe biçimi cinsiyete göre
+2026-10-11	b1_483	not	Eril — [FB]: arşîv n.m. 	Dişil — 	atif	nota yazılan sözlük atfı kanıtla çelişiyordu; kaldırıldı
+2026-10-11	b1_933	cins	nêr	mê	cins	Wîkîferheng mê; kaydın kendi örneği -a 1
+2026-10-11	b1_933	ez	nîqaşê	nîqaşa	cins	izafe biçimi cinsiyete göre
+2026-10-11	b1_933	not	Eril — 	Dişil — 	cins	cinsiyet düzeltmesinin devamı
+2026-10-11	b1_t1_02	cins	nêr	mê	cins	Wîkîferheng mê; kaydın kendi örneği -a 2
+2026-10-11	b1_t1_02	ez	rûtînê	rûtîna	cins	izafe biçimi cinsiyete göre
+2026-10-11	b1_t1_02	not	Eril — 	Dişil — 	cins	cinsiyet düzeltmesinin devamı
+2026-10-11	b1_tm66	cins	nêr	mê	cins	Wîkîferheng mê; korpus -a 24 / -ê 10; kaydın kendi örneği -a 2
+2026-10-11	b1_tm66	ez	bûyerê	bûyera	cins	izafe biçimi cinsiyete göre
+2026-10-11	b1_tm66	not	Eril — 	Dişil — 	cins	cinsiyet düzeltmesinin devamı
+2026-10-11	b1_z05	cins	nêr	mê	cins	Wîkîferheng mê; kaydın kendi örneği -a 1
+2026-10-11	b1_z05	ez	paşgirê	paşgira	cins	izafe biçimi cinsiyete göre
+2026-10-11	b1_z05	not	Eril — 	Dişil — 	cins	cinsiyet düzeltmesinin devamı
+2026-10-11	b1_z06	cins	nêr	mê	cins	Wîkîferheng mê; kaydın kendi örneği -a 1
+2026-10-11	b1_z06	ez	pêşgirê	pêşgira	cins	izafe biçimi cinsiyete göre
+2026-10-11	b1_z06	not	Eril — 	Dişil — 	cins	cinsiyet düzeltmesinin devamı
+2026-10-11	b1_zm12	cins	nêr	mê	cins	Wîkîferheng mê; kaydın kendi örneği -a 1
+2026-10-11	b1_zm12	ez	ferhengokê	ferhengoka	cins	izafe biçimi cinsiyete göre
+2026-10-11	b1_zm12	not	Eril — 	Dişil — 	cins	cinsiyet düzeltmesinin devamı
+2026-10-11	b2_250	cins	nêr	mê	cins	Wîkîferheng mê; korpus -a 17 / -ê 5; kaydın kendi örneği -a 3
+2026-10-11	b2_250	ez	destûrê	destûra	cins	izafe biçimi cinsiyete göre
+2026-10-11	b2_250	not	Eril — [FB]: destûr n.m. 	Dişil — 	atif	nota yazılan sözlük atfı kanıtla çelişiyordu; kaldırıldı
+2026-10-11	c2_033	cins	nêr	mê	cins	Wîkîferheng mê; kaydın kendi örneği -a 1
+2026-10-11	c2_033	ez	navokê	navoka	cins	izafe biçimi cinsiyete göre
+2026-10-11	c2_033	not	"Eril — ""nav"" + ""-ok"". [BH]: navok n.m."	"Dişil — ""nav"" + ""-ok""."	atif	nota yazılan sözlük atfı kanıtla çelişiyordu; kaldırıldı
+2026-10-11	c2_033	her	Navokê gotarê.	Navoka gotarê.	cins	cinsiyet düzeltmesinin devamı
+2026-10-11	c2_033	her	Navokê metnê.	Navoka metnê.	cins	cinsiyet düzeltmesinin devamı
+2026-10-11	c2_919	cins	nêr	mê	cins	Wîkîferheng mê; kaydın kendi örneği -a 1
+2026-10-11	c2_919	ez	tesewufê	tesewufa	cins	izafe biçimi cinsiyete göre
+2026-10-11	c2_919	her	Tesewufê Cizîrî navdar e.	Tesewufa Cizîrî navdar e.	cins	cinsiyet düzeltmesinin devamı
+2026-10-11	b1_1122	cins	nêr	mê	cins	Wîkîferheng mê; korpus -a 0 / -ê 7; LÛTKE metinlerinde 22 kez hiqûqa
+2026-10-11	b1_1122	ez	hiqûqê	hiqûqa	cins	izafe biçimi cinsiyete göre
+2026-10-11	b1_1122	not	"Eril — [AS] s.60: ""HIQÛQ"" başlığı. ""Hiqûqê mirovan"" = insan hukuku."	"Dişil — [AS] s.60: ""HIQÛQ"" başlığı. ""Hiqûqê mirovan"" = insan hukuku."	cins	nottaki cinsiyet bilgisi
+2026-10-11	a1_ek402	cins	nêr	mê	cins	Wîkîferheng mê; LÛTKE metinlerinde 10 kez şerbeta
+2026-10-11	a1_ek402	ez	şerbetê	şerbeta	cins	izafe biçimi cinsiyete göre
+2026-10-11	a1_ek402	not	Şerbet (eril/nêr) — geleneksel tatlı içecek. Veqetandek: şerbetê Newrozê. Mînak: Şerbet xweş e. Têbinî: Newroz şerbeti yaygın.	Şerbet (dişil/mê) — geleneksel tatlı içecek. Veqetandek: şerbetê Newrozê. Mînak: Şerbet xweş e. Têbinî: Newroz şerbeti yaygın.	cins	nottaki cinsiyet bilgisi
+2026-10-11	a2_602	cins	nêr	mê	cins	Wîkîferheng mê; LÛTKE metinlerinde 9 kez meydana
+2026-10-11	a2_602	ez	meydanê	meydana	cins	izafe biçimi cinsiyete göre
+2026-10-11	a2_602	not	"Nêr — [FB]: meydan n.m. ""Meydanê futbolê"" = futbol sahası"	"Mê — ""Meydanê futbolê"" = futbol sahası"	cins	nottaki cinsiyet bilgisi
+2026-10-11	a2_891	cins	nêr	mê	cins	Wîkîferheng mê; korpus -a 5 / -ê 2; LÛTKE metinlerinde 5 kez plana
+2026-10-11	a2_891	ez	planê	plana	cins	izafe biçimi cinsiyete göre
+2026-10-11	a2_891	not	"Nêr — [FB]: plan n.m. ""Planê te çi ye?"" = planın ne?"	"Mê — ""Planê te çi ye?"" = planın ne?"	cins	nottaki cinsiyet bilgisi
+2026-10-11	b2_275	cins	nêr	mê	cins	Wîkîferheng mê; korpus -a 15 / -ê 9; LÛTKE metinlerinde Rojhilata Navîn
+2026-10-11	b2_275	ez	Rojhilatê	Rojhilata	cins	izafe biçimi cinsiyete göre
+2026-10-11	b2_275	not	"Eril — ""roj"" (güneş) + ""hilat"" (doğu). ""Rojhilatê Kurdistanê"" = Doğu Kürdistan (İran)."	"Dişil — ""roj"" (güneş) + ""hilat"" (doğu). ""Rojhilatê Kurdistanê"" = Doğu Kürdistan (İran)."	cins	nottaki cinsiyet bilgisi
+2026-10-11	a1_199	cins	nêr	mê	cins	Wîkîferheng mê; kaydın kendi örneği Serşoka me
+2026-10-11	a1_199	ez	serşokê	serşoka	cins	izafe biçimi cinsiyete göre
+2026-10-11	a1_199	not	Serşok (eril/nêr). Veqetandek: serşokê me. Mînak: serşok li jor e.	Serşok (dişil/mê). Veqetandek: serşokê me. Mînak: serşok li jor e.	cins	nottaki cinsiyet bilgisi
+2026-10-11	b1_632	cins	nêr	mê	cins	Wîkîferheng mê; kaydın kendi örneği Pratîka me
+2026-10-11	b1_632	ez	pratîkê	pratîka	cins	izafe biçimi cinsiyete göre
+2026-10-11	b1_632	not	"Eril — alıntı isim. ""Pratîkî"" = pratikte."	"Dişil — alıntı isim. ""Pratîkî"" = pratikte."	cins	nottaki cinsiyet bilgisi
+2026-10-11	b1_1376	ku	Demê xwarinê	Dema xwarinê	izafe	dem dişil (korpus -a 593 / -ê 51)
+2026-10-11	b1_1376	ez	demê xwarinê	dema xwarinê	izafe	dem dişil (korpus -a 593 / -ê 51)
+2026-10-11	b1_1376	her	Demê xwarinê	Dema xwarinê	izafe	dem dişil (korpus -a 593 / -ê 51)
+2026-10-11	b1_1376	her	demê xwarinê	dema xwarinê	izafe	dem dişil (korpus -a 593 / -ê 51)
+2026-10-11	b1_1376	gen	Demê xwarinê	Dema xwarinê	izafe	dem dişil (korpus -a 593 / -ê 51)
+2026-10-11	b1_d07	ku	Golê kûr	Gola kûr	izafe	gol dişil (Wîkîferheng; korpus -a 10 / -ê 1)
+2026-10-11	b1_d07	ez	golê kûr	gola kûr	izafe	gol dişil (Wîkîferheng; korpus -a 10 / -ê 1)
+2026-10-11	b1_d07	her	Golê kûr	Gola kûr	izafe	gol dişil (Wîkîferheng; korpus -a 10 / -ê 1)
+2026-10-11	b1_d07	her	golê kûr	gola kûr	izafe	gol dişil (Wîkîferheng; korpus -a 10 / -ê 1)
+2026-10-11	b1_d07	gen	Golê kûr	Gola kûr	izafe	gol dişil (Wîkîferheng; korpus -a 10 / -ê 1)
+2026-10-11	c1_160	ku	Têgehê bingehîn	Têgeha bingehîn	izafe	têgeh dişil (korpus -a 14 / -ê 4; son ek -geh)
+2026-10-11	c1_160	ez	têgehê bingehîn	têgeha bingehîn	izafe	têgeh dişil (korpus -a 14 / -ê 4; son ek -geh)
+2026-10-11	c1_160	her	Têgehê bingehîn	Têgeha bingehîn	izafe	têgeh dişil (korpus -a 14 / -ê 4; son ek -geh)
+2026-10-11	c1_160	gen	Têgehê bingehîn	Têgeha bingehîn	izafe	têgeh dişil (korpus -a 14 / -ê 4; son ek -geh)
+2026-10-11	b1_1302	ku	Biharê taze	Bihara taze	izafe	bihar dişil (Wîkîferheng)
+2026-10-11	b1_1302	ez	biharê taze	bihara taze	izafe	bihar dişil (Wîkîferheng)
+2026-10-11	b1_1302	her	Biharê taze	Bihara taze	izafe	bihar dişil (Wîkîferheng)
+2026-10-11	b1_1302	her	biharê taze	bihara taze	izafe	bihar dişil (Wîkîferheng)
+2026-10-11	b1_1302	gen	Biharê taze	Bihara taze	izafe	bihar dişil (Wîkîferheng)
+2026-10-11	b1_1376	cins	nêr	mê	cins	baş ad dişil
+2026-10-11	b1_d07	cins	nêr	mê	cins	baş ad dişil
+2026-10-11	c1_160	cins	nêr	mê	cins	baş ad dişil
+2026-10-11	b1_d07	her	kûr ne.	kûr in.	yazim	koşaç ünsüzden sonra in
+2026-10-11	c1_366	cins	nêr	mê	cins	yer adları dişil
+2026-10-11	c1_366	ku	Şingalê Êzîdîyan	Şingala Êzîdiyan	izafe	yer adı dişil; î + y -> iy (Rêbera Rastnivîsînê)
+2026-10-11	c1_366	ez	Şingalê Êzîdîyan	Şingala Êzîdiyan	izafe	yer adı dişil; î + y -> iy (Rêbera Rastnivîsînê)
+2026-10-11	c1_366	her	Şingalê Êzîdîyan	Şingala Êzîdiyan	izafe	yer adı dişil; î + y -> iy (Rêbera Rastnivîsînê)
+2026-10-11	c1_366	gen	Şingalê Êzîdîyan	Şingala Êzîdiyan	izafe	yer adı dişil; î + y -> iy (Rêbera Rastnivîsînê)
+2026-10-11	b2_730	ku	Zanistê civakî	Zanistên civakî	izafe	çoğul: Sosyal bilimler; fiil de çoğul (girîng in)
+2026-10-11	b2_730	ez	zanistê civakî	zanistên civakî	izafe	çoğul: Sosyal bilimler; fiil de çoğul (girîng in)
+2026-10-11	b2_730	her	Zanistê civakî	Zanistên civakî	izafe	çoğul: Sosyal bilimler; fiil de çoğul (girîng in)
+2026-10-11	b2_730	her	zanistê civakî	zanistên civakî	izafe	çoğul: Sosyal bilimler; fiil de çoğul (girîng in)
+2026-10-11	b2_730	gen	Zanistê civakî	Zanistên civakî	izafe	çoğul: Sosyal bilimler; fiil de çoğul (girîng in)
+2026-10-11	b1_tk08	her	Têlefonê desta	Têlefona desta	izafe	têlefon dişil (Wîkîferheng); madde başı zaten Têlefona
+2026-10-11	b1_tk08	her	têlefonê desta	têlefona desta	izafe	têlefon dişil (Wîkîferheng); madde başı zaten Têlefona
+2026-10-11	b1_tk08	gen	Têlefonê desta	Têlefona desta	izafe	têlefon dişil (Wîkîferheng); madde başı zaten Têlefona
+2026-10-11	b1_tk08	her	windabûye	winda bûye	yazim	birleşik fiil ayrı yazılır
+2026-10-11	b1_tk08	gen	Têlefonê me	Têlefona me	izafe	têlefon dişil
+2026-10-11	b1_gt26	ku	Destûrê xwestin	Destûr xwestin	nesne	mastar öbeğinde nesne yalın
+2026-10-11	b1_gt26	ez	destûrê xwestin	destûr xwestin	nesne	mastar öbeğinde nesne yalın
+2026-10-11	b1_gt26	gen	Destûrê xwestin	Destûr xwestin	nesne	mastar öbeğinde nesne yalın
+2026-10-11	b1_gt26	her	Destûrê xwest.	Destûr xwest.	nesne	geçmiş zaman geçişli fiilde nesne yalın
+2026-10-11	b1_t2_04	ku	Berfê daketin	Berf daketin	nesne	geçişsiz fiilin öznesi yalın (örnekleri de Berf daket)
+2026-10-11	b1_t2_04	gen	Berfê daketin	Berf daketin	nesne	geçişsiz fiilin öznesi yalın (örnekleri de Berf daket)
+2026-10-11	b1_t2_05	ku	Baranê barîn	Baran barîn	nesne	geçişsiz fiilin öznesi yalın (örnekleri de Baran barî)
+2026-10-11	b1_t2_05	gen	Baranê barîn	Baran barîn	nesne	geçişsiz fiilin öznesi yalın (örnekleri de Baran barî)
+2026-10-11	a2_423	her	Axê welat xweş e.	Axa welat xweş e.	izafe	ax dişil (Wîkîferheng; Farqînî)
+2026-10-11	a2_423	gen	Axê me	Axa me	izafe	ax dişil
+2026-10-11	a2_423	not	"""Axê Kurdistanê"""	"""Axa Kurdistanê"""	izafe	ax dişil
+2026-10-11	b1_681	her	Axê me bereketdar e.	Axa me bereketdar e.	izafe	ax dişil
+2026-10-11	b1_681	her	Erd û ax ya me.	Erd û axa me.	izafe	ax dişil; izafe ada bitişir
+2026-10-11	b1_681	gen	Axê Kurdistan	Axa Kurdistanê	izafe	ax dişil; tamlayan çekimli
+2026-10-11	a2_855	her	Sekingehê nêzîk e.	Sekingeh nêzîk e.	izafe	özne yalın
+2026-10-11	b1_1260	gen	Zanistê kompîturê	Zanista kompîturê	izafe	zanist dişil (Wîkîferheng; Farqînî)
+2026-10-11	b1_1260	gen	Zanistê me	Zanista me	izafe	zanist dişil
+2026-10-11	b1_1143	gen	Demê vala	Dema vala	izafe	dem dişil
+2026-10-11	b1_d09	gen	Berfê Kurdistanê	Berfa Kurdistanê	izafe	berf dişil (Wîkîferheng)
+2026-10-11	b1_xw23	gen	Destpêkê sifirê	Destpêka sifrê	izafe	destpêk dişil; madde başıyla aynı yazım
+2026-10-11	b1_1220	her	Taxê me	Taxa me	izafe	tax dişil (korpus -a 19 / -ê 2)
+2026-10-11	b1_1220	gen	Taxê me	Taxa me	izafe	tax dişil
+2026-10-11	a2_1514	her	tişta nû	tiştê nû	izafe	tişt eril (korpus)
+2026-10-11	b1_t1_21	gen	Gela me	Gelê me	izafe	gel eril (korpus -a 1 / -ê 41)
+2026-10-11	b1_070	gen	Bereketê malê	Bereketa malê	izafe	bereket dişil (Wîkîferheng)
+2026-10-11	b1_130	gen	Keskesorê biharê	Keskesora biharê	izafe	keskesor dişil (Wîkîferheng)
+2026-10-11	b1_1362	gen	Parkê me	Parka me	izafe	park dişil (Wîkîferheng)
+2026-10-11	b2_r07	gen	Zayendê kurdî	Zayenda kurdî	izafe	zayend dişil (korpus)
+2026-10-11	b2_613	gen	Deştê me	Deşta me	izafe	deşt dişil (Wîkîferheng)
+2026-10-11	c1_358	gen	welata me	welatê me	izafe	welat eril (korpus -a 1 / -ê 236)
+2026-10-11	c1_003	her	Xemê dil	Xema dil	izafe	xem dişil (korpus -a 18 / -ê 5)
+2026-10-11	c1_006	gen	Gulê Kurdistan	Gula Kurdistanê	izafe	gul dişil; tamlayan çekimli
+2026-10-11	c1_008	her	Derd û êşê min.	Derd û êşa min.	izafe	êş dişil (Farqînî -a 5)
+2026-10-11	c1_162	her	Pirsgirêkê nêzîk bûm.	Nêzîkî pirsgirêkê bûm.	izafe	nêzîkî ... bûn; Türkçe söz dizimi
+2026-10-11	a2_1211	her	Darê gûzê.	Dara gûzê.	izafe	dar (ağaç) dişil (korpus -a 105 / -ê 49)
+2026-10-11	b1_870	her	Darê tûtiyê	Dara tûtiyê	izafe	dar (ağaç) dişil
+2026-10-11	b1_870	gen	Darê tûtiyê	Dara tûtiyê	izafe	dar (ağaç) dişil
+2026-10-11	b1_483	her	Arşîvê lêkolîn kir.	Di arşîvê de lêkolîn kir.	izafe	edatsız çekim anlamı bulanıklaştırıyordu
+2026-10-11	b1_624	her	Serkeftinê te	Serkeftina te	izafe	mastardan ad dişil (Wîkîferheng)
+2026-10-11	b1_xw45	gen	Destxwarinê me	Destxwarina me	izafe	xwarin dişil
+2026-10-11	@lib/features/cultural_content/domain/kurdish_folk_dances_db.dart		Renga 	Rengê 	izafe	reng eril (korpus)
+2026-10-11	@lib/features/cultural_content/domain/kurdish_folk_dances_db.dart		 renga 	 rengê 	izafe	reng eril (korpus)
+2026-10-11	@lib/features/cultural_content/domain/kurdish_folk_dances_db.dart		(renga reş	(rengê reş	izafe	reng eril (korpus)
+2026-10-11	@lib/features/cultural_content/domain/kurdish_folk_dances_db.dart		kelekê piçûk a	keleka piçûk a	izafe	bağlayıcı a ile aynı cins
+2026-10-11	@lib/features/cultural_content/domain/kurdish_events_db.dart		serhildana 1843 mîrasê xwe	serhildana 1843 mîrasa xwe	izafe	mîras dişil (Wîkîferheng)
+2026-10-11	@lib/features/cultural_content/domain/kurdish_historical_figures_db.dart		serhildana 1843 mîrasê xwe	serhildana 1843 mîrasa xwe	izafe	mîras dişil (Wîkîferheng)
+2026-10-11	@lib/features/cultural_content/domain/kurdish_artists_db.dart		mîrasê dengbêjiyê	mîrasa dengbêjiyê	izafe	mîras dişil (Wîkîferheng)
+2026-10-11	@lib/features/cultural_content/domain/kurdish_historical_figures_db.dart		Dadgehê Saddam	Dadgeha Saddam	izafe	dadgeh dişil (Wîkîferheng; Farqînî -a 5)
+2026-10-11	@lib/features/cultural_content/domain/kurdish_celebrations_db.dart		Şevê 27	Şeva 27	izafe	şev dişil (Wîkîferheng; Farqînî)
+2026-10-11	@lib/features/cultural_content/domain/kurdish_celebrations_db.dart		Şevê 31ê	Şeva 31ê	izafe	şev dişil
+2026-10-11	@lib/features/cultural_content/domain/kurdish_events_db.dart		sînora ku	sînorê ku	izafe	sînor eril (Wîkîferheng)
+2026-10-11	@lib/features/cultural_content/domain/kurdish_foods_db.dart		îsotê germ	îsota germ	izafe	îsot dişil (Wîkîferheng; Farqînî -a 4)
+2026-10-11	@lib/features/lessons/domain/c2_lesson_definitions.dart		Mîrasê Edebî	Mîrasa Edebî	izafe	mîras dişil (Wîkîferheng)
+2026-10-11	@lib/features/lessons/domain/c1_lesson_definitions.dart		Exlaqa Kantî	Exlaqê Kantî	izafe	exlaq eril (Wîkîferheng)
+2026-10-11	b1_nv02	tr	Vicdan	Sömürge	anlam	mêtingeh = sömürge (ku-tr-sozluk: freedict + Wîkîferheng); vicdan = wîjdan (b1_943)
+2026-10-11	b1_nv02	en	Conscience	Colony	anlam	mêtingeh = sömürge (ku-tr-sozluk: freedict + Wîkîferheng); vicdan = wîjdan (b1_943)
+2026-10-11	b1_nv02	kat	nirx	dîrok	anlam	sömürge bir değer değil; tarih birimine
+2026-10-11	b1_nv02	not	"""Mêtingeh"" = vicdan."	"""Mêtingeh"" = sömürge. ""Mêtinger"" = sömürgeci. Vicdan için ""wîjdan"" kullanılır."	anlam	mêtingeh = sömürge (ku-tr-sozluk: freedict + Wîkîferheng); vicdan = wîjdan (b1_943)
+2026-10-11	b1_nv02	her	Mêtingeh heye.	Hindistan mêtingeha Brîtanyayê bû.	anlam	örnek yeni anlama göre
+2026-10-11	b1_nv02	gen	Mêtingeh û aqlê	Mêtingeh û mêtinger	anlam	örnek yeni anlama göre
+2026-10-11	b1_nv02	gen	Mêtingeha me	Mêtingeheke kevn	anlam	örnek yeni anlama göre
+2026-10-11	b1_085	tr	Asimilasyon / Dilde erime	Yenilgi / Çöküş	anlam	têkçûn = yenilgi, bozgun, çöküş (ku-tr-sozluk; korpus: Mehmed Uzun); asimilasyon = asîmîlasyon (b2_372), bişaftin (c1_073)
+2026-10-11	b1_085	en	Assimilation / Linguistic erosion	Defeat / Collapse	anlam	têkçûn = yenilgi, bozgun, çöküş (ku-tr-sozluk; korpus: Mehmed Uzun); asimilasyon = asîmîlasyon (b2_372), bişaftin (c1_073)
+2026-10-11	b1_085	kat	kimlik	dîrok	anlam	yeni anlamıyla tarih birimine
+2026-10-11	b1_085	not	"Dişil — ""Têkçûn"" = Kurmancî özgün terim — ""têk"" (bozuk/dağılmış) + ""çûn"" (gitmek). Hem dilbilimsel hem kültürel asimilasyon için. Heritage kullanıcının yaşadığı süreç. Dişil oblique: têkçûnê."	"Dişil — ""têk"" (bozuk/dağılmış) + ""çûn"" (gitmek) = yenilgi, çöküş. Dişil oblique: têkçûnê. Asimilasyon için ""asîmîlasyon"" ya da ""bişaftin"" kullanılır."	anlam	têkçûn = yenilgi, bozgun, çöküş (ku-tr-sozluk; korpus: Mehmed Uzun); asimilasyon = asîmîlasyon (b2_372), bişaftin (c1_073)
+2026-10-11	b1_085	her	Têkçûna zimanî zimanê me qels kir.	Piştî têkçûnê her tişt guherî.	anlam	örnek yeni anlama göre (korpus: piştî têkçûnê)
+2026-10-11	b1_085	gen	Têkçûn û nasname	Têkçûn û serkeftin	anlam	örnek yeni anlama göre
+2026-10-11	b2_373	tr	Asimilasyon / Erime	Yenilgi / Çöküş	anlam	têkçûn = yenilgi, bozgun, çöküş (ku-tr-sozluk; korpus: Mehmed Uzun); asimilasyon = asîmîlasyon (b2_372), bişaftin (c1_073)
+2026-10-11	b2_373	en	Assimilation (loss of identity)	Defeat / Collapse	anlam	têkçûn = yenilgi, bozgun, çöküş (ku-tr-sozluk; korpus: Mehmed Uzun); asimilasyon = asîmîlasyon (b2_372), bişaftin (c1_073)
+2026-10-11	b2_373	not	"""Têk"" (bütün) + ""çûn"" (gitmek). Kimlik kaybı için Kurmancî özgün terim."	"""Têk"" (bozuk/dağılmış) + ""çûn"" (gitmek) = yenilgi, çöküş. Kimlik kaybı (asimilasyon) için ""asîmîlasyon"" ya da ""bişaftin"" kullanılır."	anlam	têkçûn = yenilgi, bozgun, çöküş (ku-tr-sozluk; korpus: Mehmed Uzun); asimilasyon = asîmîlasyon (b2_372), bişaftin (c1_073)
+2026-10-11	b2_373	her	Têkçûna zimanî gelek e.	Têkçûna artêşê mezin bû.	anlam	örnek yeni anlama göre
+2026-10-11	b2_373	gen	Têkçûn û parastin	Têkçûn û serkeftin	anlam	örnek yeni anlama göre
+2026-10-11	b2_373	gen	Têkçûna zimanî	Têkçûna dewletê	anlam	örnek yeni anlama göre
+2026-10-11	b1_1283	ku	Destûrê bingehîn	Mafê bingehîn	anlam	hak = maf; destûr = izin. Kaydın kendi örneği de Mafê bingehîn; çoğulu b2_h10 Mafên bingehîn
+2026-10-11	b1_1283	ez	destûrê bingehîn	mafê bingehîn	anlam	hak = maf; destûr = izin. Kaydın kendi örneği de Mafê bingehîn; çoğulu b2_h10 Mafên bingehîn
+2026-10-11	b1_1283	not	"""Destûr"" (hak/izin) + ""bingehîn""."	"""Maf"" (hak) + ""bingehîn"" (temel). ""Destûr"" izin demektir."	anlam	hak = maf; destûr = izin. Kaydın kendi örneği de Mafê bingehîn; çoğulu b2_h10 Mafên bingehîn
+2026-10-11	b1_1283	her	Destûrê bingehîn yên mirovan.	Mafên bingehîn ên mirovan.	anlam	hak = maf; destûr = izin. Kaydın kendi örneği de Mafê bingehîn; çoğulu b2_h10 Mafên bingehîn
+2026-10-11	b1_1283	her	Mafê bingehîn.	Jiyan mafê bingehîn e.	anlam	madde başıyla aynı olan örnek yerine cümle
+2026-10-11	b1_1283	gen	Destûrê bingehîn	Mafê bingehîn	anlam	hak = maf; destûr = izin. Kaydın kendi örneği de Mafê bingehîn; çoğulu b2_h10 Mafên bingehîn
+2026-10-11	a2_891	her	Planê min amade ye.	Plana min amade ye.	izafe	plan dişil (Wîkîferheng; korpus -a 5 / -ê 2; LÛTKE'de 5 kez plana)
+2026-10-11	a2_891	gen	Planê min	Plana min	izafe	plan dişil
+2026-10-11	a2_891	not	"""Planê te çi ye?"""	"""Plana te çi ye?"""	izafe	plan dişil
+2026-10-11	a1_ek402	her	Şerbetê Newrozê xweş e.	Şerbeta Newrozê xweş e.	izafe	şerbet dişil (Wîkîferheng; LÛTKE'de 10 kez şerbeta)
+2026-10-11	a1_ek402	not	şerbetê Newrozê	şerbeta Newrozê	izafe	şerbet dişil
+2026-10-11	b1_1122	her	Hiqûqê mirovan.	Hiqûqa mirovan.	izafe	hiqûq dişil (Wîkîferheng; LÛTKE'de 22 kez hiqûqa)
+2026-10-11	b1_1122	gen	Hiqûqê me	Hiqûqa me	izafe	hiqûq dişil
+2026-10-11	b1_1122	not	"""Hiqûqê mirovan"""	"""Hiqûqa mirovan"""	izafe	hiqûq dişil
+2026-10-11	b1_k06b	cins	nêr	mê	cins	baş ad hiqûq dişil
+2026-10-11	b1_k06b	ku	Hiqûqê mirovî	Hiqûqa mirovî	izafe	hiqûq dişil
+2026-10-11	b1_k06b	ez	hiqûqê mirovî	hiqûqa mirovî	izafe	hiqûq dişil
+2026-10-11	b1_k06b	her	Hiqûqê mirovî.	Hiqûqa mirovî.	izafe	hiqûq dişil
+2026-10-11	b1_k06b	her	Di hiqûqê mirovî de.	Di hiqûqa mirovî de.	izafe	hiqûq dişil
+2026-10-11	b1_k06b	gen	Hiqûqê mirovî	Hiqûqa mirovî	izafe	hiqûq dişil
+2026-10-11	b1_k06b	gen	Hiqûqê me	Hiqûqa me	izafe	hiqûq dişil
+2026-10-11	b2_275	cins	mê	nêr	cins	geri alındı: korpus -a 15 / -ê 9, iki kullanım da yerleşik (Rojhilata Navîn; Rojhilatê Kurdistanê). Editöre.
+2026-10-11	b2_275	ez	Rojhilata	Rojhilatê	cins	geri alındı: korpus -a 15 / -ê 9, iki kullanım da yerleşik (Rojhilata Navîn; Rojhilatê Kurdistanê). Editöre.
+2026-10-11	b2_275	not	Dişil — 	Eril — 	cins	geri alındı: korpus -a 15 / -ê 9, iki kullanım da yerleşik (Rojhilata Navîn; Rojhilatê Kurdistanê). Editöre.
+2026-10-11	b2_275	gen	Rojhilatê Kurdistan	Rojhilatê Kurdistanê	izafe	tamlayan çekimli
+2026-10-11	a2_1263	ku	Derzî	Terzî	anlam	derzî = iğne; terzi = terzî (ku-tr-sozluk)
+2026-10-11	a2_1263	ez	derziyê	terziyê	anlam	derzî = iğne; terzi = terzî (ku-tr-sozluk)
+2026-10-11	a2_1263	her	Derzî cil dikişîne.	Terzî cil dikişîne.	anlam	derzî = iğne; terzi = terzî (ku-tr-sozluk)
+2026-10-11	a2_1263	her	Ew derzî ye.	Ew terzî ye.	anlam	derzî = iğne; terzi = terzî (ku-tr-sozluk)
+2026-10-11	a2_1263	gen	Derzî û hunermend	Terzî û hunermend	anlam	derzî = iğne; terzi = terzî (ku-tr-sozluk)
+2026-10-11	a2_1263	gen	Derziyê bajêr	Terziyê bajêr	anlam	derzî = iğne; terzi = terzî (ku-tr-sozluk)
+2026-10-11	a2_643	ku	Pênciyem	Pêncem	anlam	pênciyem = ellinci; beşinci = pêncem (ku-tr-sozluk); dizinin devamı şeşem
+2026-10-11	a2_643	her	Pênciyem hat.	Pêncem hat.	anlam	pênciyem = ellinci; beşinci = pêncem (ku-tr-sozluk); dizinin devamı şeşem
+2026-10-11	a2_643	her	Sinifa pênciyem.	Sinifa pêncem.	anlam	pênciyem = ellinci; beşinci = pêncem (ku-tr-sozluk); dizinin devamı şeşem
+2026-10-11	a2_643	gen	Pênciyem û şeşem	Pêncem û şeşem	anlam	pênciyem = ellinci; beşinci = pêncem (ku-tr-sozluk); dizinin devamı şeşem
+2026-10-11	a2_643	gen	Roja pênciyem	Roja pêncem	anlam	pênciyem = ellinci; beşinci = pêncem (ku-tr-sozluk); dizinin devamı şeşem
+2026-10-11	b1_870	ku	Tûtî	Tû	anlam	tûtî = papağan; dut = tû (ku-tr-sozluk)
+2026-10-11	b1_870	cins	nêr	mê	anlam	dara tûyê: dişil çekim
+2026-10-11	b1_870	ez	tûtiyê	tûya	anlam	tûtî = papağan; dut = tû (ku-tr-sozluk)
+2026-10-11	b1_870	her	Dara tûtiyê mezin e.	Dara tûyê mezin e.	anlam	tûtî = papağan; dut = tû (ku-tr-sozluk)
+2026-10-11	b1_870	her	Tûtî çin kirin.	Me tû çinîn.	anlam	tûtî = papağan; dut = tû (ku-tr-sozluk)
+2026-10-11	b1_870	gen	Tûtî û gûz	Tû û gûz	anlam	tûtî = papağan; dut = tû (ku-tr-sozluk)
+2026-10-11	b1_870	gen	Dara tûtiyê	Dara tûyê	anlam	tûtî = papağan; dut = tû (ku-tr-sozluk)
+2026-10-11	b1_tm11	ku	Kûsî	Kundir	anlam	kûsî = kaplumbağa; kabak = kundir (ku-tr-sozluk; Wîkîferheng: eril)
+2026-10-11	b1_tm11	cins	mê	nêr	anlam	kûsî = kaplumbağa; kabak = kundir (ku-tr-sozluk; Wîkîferheng: eril)
+2026-10-11	b1_tm11	ez	kûsiya	kundirê	anlam	kûsî = kaplumbağa; kabak = kundir (ku-tr-sozluk; Wîkîferheng: eril)
+2026-10-11	b1_tm11	her	Kûsî xweş e.	Kundir xweş e.	anlam	kûsî = kaplumbağa; kabak = kundir (ku-tr-sozluk; Wîkîferheng: eril)
+2026-10-11	b1_tm11	her	Kûsiya pijandî.	Kundirê pijandî.	anlam	kûsî = kaplumbağa; kabak = kundir (ku-tr-sozluk; Wîkîferheng: eril)
+2026-10-11	b1_tm11	gen	Kûsî û xiyar	Kundir û xiyar	anlam	kûsî = kaplumbağa; kabak = kundir (ku-tr-sozluk; Wîkîferheng: eril)
+2026-10-11	b1_tm11	gen	Kûsiya me	Kundirê me	anlam	kûsî = kaplumbağa; kabak = kundir (ku-tr-sozluk; Wîkîferheng: eril)
+2026-10-11	b1_tk19	ku	Tevlihevî	Pêşbirk	anlam	tevlihevî = karışıklık, kargaşa; yarışma = pêşbirk (ku-tr-sozluk)
+2026-10-11	b1_tk19	ez	tevliheviya	pêşbirka	anlam	tevlihevî = karışıklık, kargaşa; yarışma = pêşbirk (ku-tr-sozluk)
+2026-10-11	b1_tk19	tr	Turnuva / Rekabet	Yarışma / Müsabaka	anlam	tevlihevî = karışıklık, kargaşa; yarışma = pêşbirk (ku-tr-sozluk)
+2026-10-11	b1_tk19	en	Tournament / Competition	Competition / Contest	anlam	tevlihevî = karışıklık, kargaşa; yarışma = pêşbirk (ku-tr-sozluk)
+2026-10-11	b1_tk19	her	Tevlihevî dest pê kir.	Pêşbirk dest pê kir.	anlam	tevlihevî = karışıklık, kargaşa; yarışma = pêşbirk (ku-tr-sozluk)
+2026-10-11	b1_tk19	her	Di tevliheviyê de ne.	Di pêşbirkê de ne.	anlam	tevlihevî = karışıklık, kargaşa; yarışma = pêşbirk (ku-tr-sozluk)
+2026-10-11	b1_tk19	gen	Tevlihevî û lîstik	Pêşbirk û lîstik	anlam	tevlihevî = karışıklık, kargaşa; yarışma = pêşbirk (ku-tr-sozluk)
+2026-10-11	b1_tk19	gen	Tevliheviya me	Pêşbirka me	anlam	tevlihevî = karışıklık, kargaşa; yarışma = pêşbirk (ku-tr-sozluk)
+2026-10-11	b1_bd12	ku	Tayêt	Taya bilind	anlam	tayêt = deterjan; ateş = ta (a1_548, a2_091). Kayıt yüksek ateş öbeğine çevrildi
+2026-10-11	b1_bd12	ez	tayêta	taya bilind	anlam	tayêt = deterjan; ateş = ta (a1_548, a2_091). Kayıt yüksek ateş öbeğine çevrildi
+2026-10-11	b1_bd12	tr	Ateş	Yüksek ateş	anlam	tayêt = deterjan; ateş = ta (a1_548, a2_091). Kayıt yüksek ateş öbeğine çevrildi
+2026-10-11	b1_bd12	en	Fever	High fever	anlam	tayêt = deterjan; ateş = ta (a1_548, a2_091). Kayıt yüksek ateş öbeğine çevrildi
+2026-10-11	b1_bd12	her	Tayêt bilind e.	Taya wî bilind e.	anlam	tayêt = deterjan; ateş = ta (a1_548, a2_091). Kayıt yüksek ateş öbeğine çevrildi
+2026-10-11	b1_bd12	her	Tayêta min heye.	Taya min heye.	anlam	tayêt = deterjan; ateş = ta (a1_548, a2_091). Kayıt yüksek ateş öbeğine çevrildi
+2026-10-11	b1_bd12	gen	Tayêt û êş	Ta û êş	anlam	tayêt = deterjan; ateş = ta (a1_548, a2_091). Kayıt yüksek ateş öbeğine çevrildi
+2026-10-11	b1_bd12	gen	Tayêta me	Taya bilind	anlam	tayêt = deterjan; ateş = ta (a1_548, a2_091). Kayıt yüksek ateş öbeğine çevrildi
+2026-10-11	a2_420	tr	Göl	Havuz	anlam	hewz = havuz; göl = gol (ku-tr-sozluk)
+2026-10-11	a2_420	en	Lake / Pond	Pool / Pond	anlam	hewz = havuz; göl = gol (ku-tr-sozluk)
+2026-10-11	a2_680	tr	Okyanus	Deniz / Derya	anlam	derya = deniz; okyanus = okyanûs (ku-tr-sozluk)
+2026-10-11	a2_680	en	Ocean	Sea	anlam	derya = deniz; okyanus = okyanûs (ku-tr-sozluk)
+2026-10-11	a2_1044	tr	Atasözü	Önsöz	anlam	pêşgotin = önsöz; atasözü = gotina pêşiyan (b1_t4_05)
+2026-10-11	a2_1044	en	Proverb	Preface / Foreword	anlam	pêşgotin = önsöz; atasözü = gotina pêşiyan (b1_t4_05)
+2026-10-11	a2_1044	her	Pîrê pêşgotin got.	Min pêşgotina pirtûkê xwend.	anlam	pêşgotin = önsöz; atasözü = gotina pêşiyan (b1_t4_05)
+2026-10-11	a2_1044	gen	Pêşgotin û stran	Pêşgotin û naverok	anlam	pêşgotin = önsöz; atasözü = gotina pêşiyan (b1_t4_05)
+2026-10-11	a2_1231	tr	Ateşlenmek	Isınmak	anlam	germ bûn = ısınmak; ateşlenmek = ta girtin
+2026-10-11	a2_1231	en	To have fever	To get warm	anlam	germ bûn = ısınmak; ateşlenmek = ta girtin
+2026-10-11	a2_1231	her	Germahiya min heye.	Hewa germ dibe.	anlam	germ bûn = ısınmak; ateşlenmek = ta girtin
+2026-10-11	a2_1231	gen	Germ bûn û nexweş	Germ bûn û sar bûn	anlam	germ bûn = ısınmak; ateşlenmek = ta girtin
+2026-10-11	b1_805	tr	Sakatlık / Engel	Hastalık	anlam	nesaxî = hastalık (ku-tr-sozluk); sakatlık = seqetî
+2026-10-11	b1_805	en	Disability	Illness	anlam	nesaxî = hastalık (ku-tr-sozluk); sakatlık = seqetî
+2026-10-11	b1_805	her	Bavê wî nesaxî ye.	Bavê wî nesax e.	anlam	nesaxî = hastalık (ku-tr-sozluk); sakatlık = seqetî
+2026-10-11	b1_910	tr	Yetenekli / Uzman	Etkili	anlam	karîger = etkili, etken (ku-tr-sozluk); uzman = pispor
+2026-10-11	b1_910	en	Skilled / Expert	Effective / Influential	anlam	karîger = etkili, etken (ku-tr-sozluk); uzman = pispor
+2026-10-11	b1_1060	tr	Bilim dalı	Ansiklopedi	anlam	zanistname = ansiklopedi (ku-tr-sozluk)
+2026-10-11	b1_1060	en	Scientific discipline	Encyclopedia	anlam	zanistname = ansiklopedi (ku-tr-sozluk)
+2026-10-11	b1_1060	her	Zanistname ya wî biyolojî ye.	Zanistname li pirtûkxaneyê ye.	anlam	zanistname = ansiklopedi (ku-tr-sozluk)
+2026-10-11	b1_hn06	tr	Mimarlık / İnşaat sanatı	Ressamlık / Resim sanatı	anlam	wênesazî = ressamlık (ku-tr-sozluk); mimarlık = mîmarî
+2026-10-11	b1_hn06	en	Architecture	Painting (art)	anlam	wênesazî = ressamlık (ku-tr-sozluk); mimarlık = mîmarî
+2026-10-11	b1_f15	tr	Daha kötü olmak	En kötü	anlam	-tirîn üstünlük derecesi: en kötü; fiil değil
+2026-10-11	b1_f15	en	To worsen	Worst	anlam	-tirîn üstünlük derecesi: en kötü; fiil değil
+2026-10-11	b1_f15	her	Hewa xirabtirîn ji duh.	Ev roja xirabtirîn e.	anlam	-tirîn üstünlük derecesi: en kötü; fiil değil
+2026-10-11	b1_f15	her	Xirabtirîn ji vê tişt heye.	Ya xirabtirîn derbas bû.	anlam	-tirîn üstünlük derecesi: en kötü; fiil değil
+2026-10-11	a2_242	tr	Önünde / Karşısında	-den dolayı / Yüzünden	anlam	ji ber = -den dolayı, yüzünden (ku-tr-sozluk); önünde = li ber
+2026-10-11	a2_242	en	In front of / Because of	Because of	anlam	ji ber = -den dolayı, yüzünden (ku-tr-sozluk); önünde = li ber
+2026-10-11	a2_242	her	Ji ber malê radiweste.	Ji ber baranê nehat.	anlam	ji ber = -den dolayı, yüzünden (ku-tr-sozluk); önünde = li ber
+2026-10-11	a2_242	gen	Ji ber malê	Ji ber baranê	anlam	ji ber = -den dolayı, yüzünden (ku-tr-sozluk); önünde = li ber
+2026-10-11	b2_690	tr	Kendini vermek / Yönelmek	Direnmek / Dayanmak	anlam	ber xwe dan = dayanmak, direnmek (ku-tr-sozluk; berxwedan)
+2026-10-11	b2_690	en	To devote oneself	To resist / To hold out	anlam	ber xwe dan = dayanmak, direnmek (ku-tr-sozluk; berxwedan)
+2026-10-11	b2_690	her	Wê ber xwe da xwendinê.	Gel li hember zilmê ber xwe da.	anlam	ber xwe dan = dayanmak, direnmek (ku-tr-sozluk; berxwedan)
+2026-10-11	b2_690	her	Ber xwe bidin karê xwe.	Ber xwe bidin!	anlam	ber xwe dan = dayanmak, direnmek (ku-tr-sozluk; berxwedan)
+2026-10-11	b1_bd04	tr	Kalça	Akciğer	anlam	pişik = akciğer (ku-tr-sozluk; Wîkîferheng)
+2026-10-11	b1_bd04	en	Hip / Waist	Lung	anlam	pişik = akciğer (ku-tr-sozluk; Wîkîferheng)
+2026-10-11	a2_720	tr	Sorun / Mesele	Düğüm	anlam	girêk = düğüm (ku-tr-sozluk); sorun = pirsgirêk (a2_721)
+2026-10-11	a2_720	en	Problem / Issue	Knot	anlam	girêk = düğüm (ku-tr-sozluk); sorun = pirsgirêk (a2_721)
+2026-10-11	a2_720	her	Girêk çi ye?	Girêk vekir.	anlam	girêk = düğüm (ku-tr-sozluk); sorun = pirsgirêk (a2_721)
+2026-10-11	a2_720	her	Girêka min heye.	Girêkek li ben da.	anlam	girêk = düğüm (ku-tr-sozluk); sorun = pirsgirêk (a2_721)
+2026-10-11	a2_720	gen	Girêk û çareser	Girêk û ben	anlam	girêk = düğüm (ku-tr-sozluk); sorun = pirsgirêk (a2_721)
+2026-10-11	a2_720	gen	Girêka me	Girêka ben	anlam	girêk = düğüm (ku-tr-sozluk); sorun = pirsgirêk (a2_721)
+2026-10-11	@lib/features/cultural_content/domain/gotinen_pesiyan_db.dart		"  (letter: 'G', num: 10, ku: 'Gotinên Pêşîyan ( Kûrt Atasözleri)', tr: null),
+"		yapi	atasözü değil, kaynağın bölüm başlığı; listeden çıkarıldı
+2026-10-11	@lib/features/cultural_content/domain/gotinen_pesiyan_db.dart		ku: 'Mala pir jina xirabu ji bina- Evde çok kadin (hanim; Örnek: gelin, kayin valide vs.) varsa o evin dûzeni kökten bozulur', tr: null	ku: 'Mala pir jina xirabu ji bina', tr: 'Evde çok kadın (hanım; örnek: gelin, kayınvalide vs.) varsa o evin düzeni kökten bozulur'	yapi	Türkçe çeviri Kurmancî alanına yapışmıştı; ayrıldı
+2026-10-11	@lib/features/cultural_content/domain/gotinen_pesiyan_db.dart		ku: 'Rê reya mirine be jî, tu her li pêş be.-Yol ölûme giden yol olsa bile daima önde ol', tr: null	ku: 'Rê reya mirine be jî, tu her li pêş be.', tr: 'Yol ölüme giden yol olsa bile daima önde ol'	yapi	Türkçe çeviri Kurmancî alanına yapışmıştı; ayrıldı
+2026-10-11	@lib/features/cultural_content/domain/gotinen_pesiyan_db.dart		ku: 'Şûşeya dil ku şikest nacebire. Gönûl cami bir kirilirsa artik birbirine yapişmaz', tr: null	ku: 'Şûşeya dil ku şikest nacebire.', tr: 'Gönül camı bir kırılırsa artık birbirine yapışmaz'	yapi	Türkçe çeviri Kurmancî alanına yapışmıştı; ayrıldı
+2026-10-11	@lib/features/cultural_content/domain/gotinen_pesiyan_db.dart		"  (letter: 'P', num: 58, ku: 'Pîrê bawer ne diker kîre ki bivi ne.Xedi heft Kîr daye. Nene inanmiyordu bir penis göremeye allah 7 tane gösterdi', tr: null),
+"		icerik	müstehcen; çocuk izi de olan uygulamada gösterilmemeli. Geri konması kullanıcı kararı
+2026-10-11	a2_282	her	Ew qebûl nekir.	Wî qebûl nekir.	ergatif	geçmiş zaman geçişli fiilde özne çekimli (min got; ez got 0)
+2026-10-11	a2_712	her	Tu biryar dayî?	Te biryar da?	ergatif	geçmiş zaman geçişli fiilde özne çekimli (min got; ez got 0)
+2026-10-11	b1_016	gen	Ew digot.	Wî digot.	ergatif	geçmiş zaman geçişli fiilde özne çekimli (min got; ez got 0)
+2026-10-11	a2_720	her	Girêkek li ben da.	Wî girêkek li ben da.	ergatif	özne açık yazıldı; yoksa nesne özne sanılıyor
+2026-10-11	b1_ml16	her	Di dawetê şahid bûm.	Di dawetê de şahid bûm.	edat	çevreleyen edatın ikinci parçası: di ... de
+2026-10-11	b1_hs03	her	Di jiyanê xemgînî û kêfxweşî heye.	Di jiyanê de xemgînî û kêfxweşî hene.	edat	çevreleyen edatın ikinci parçası: di ... de; iki özne, çoğul fiil
+2026-10-11	b1_hs06	her	Di jiyanê tirs û wêrekî heye.	Di jiyanê de tirs û wêrekî hene.	edat	çevreleyen edatın ikinci parçası: di ... de; iki özne, çoğul fiil
+2026-10-11	b1_nv04	her	Di jiyanê xirabî û qencî heye.	Di jiyanê de xirabî û qencî hene.	edat	çevreleyen edatın ikinci parçası: di ... de; iki özne, çoğul fiil
+2026-10-11	b1_rz39		di navbera hevokan	di navbera hevokan de	edat	çevreleyen edatın ikinci parçası: di ... de
+2026-10-11	b2_f06		di wêjeyê	di wêjeyê de	edat	çevreleyen edatın ikinci parçası: di ... de
+2026-10-11	b2_k04	her	Rewşa dualî ya kurdan di diasporayê.	Rewşa dualî ya kurdan di diasporayê de.	edat	çevreleyen edatın ikinci parçası: di ... de
+2026-10-11	c1_101	her	Nasnameya dualî ya Kurdan di diasporayê.	Nasnameya dualî ya Kurdan di diasporayê de.	edat	çevreleyen edatın ikinci parçası: di ... de
+2026-10-11	@lib/features/lessons/domain/c1_lesson_definitions.dart		nîşandana ramanê dijber	nîşandana ramana dijber	izafe	raman dişil (Wîkîferheng; korpus -a 11 / -ê 2)
+2026-10-11	a2_092	her	Derman bixwe!	Divê tu dermanê xwe bixwî.	cumle	parça yerine tam cümle (yazıldı)
+2026-10-11	a2_132	her	Heta bajêr.	Min heta nîvro kar kir.	cumle	parça yerine tam cümle (korpus-sade)
+2026-10-11	a2_202	her	Pêlav bikire.	Pêlavên min li ber derî ne.	cumle	parça yerine tam cümle (korpus-sade)
+2026-10-11	a2_211	her	Rengê tarî.	Li derve hewa tarî bû.	cumle	parça yerine tam cümle (yazıldı)
+2026-10-11	a2_250	her	Par em çûn gundê.	Par em çûn gundê xwe.	cumle	parça yerine tam cümle (yazıldı)
+2026-10-11	a2_250	her	Par baş bû.	Ew par ji gund derket.	cumle	parça yerine tam cümle (korpus-sade)
+2026-10-11	a2_273	her	Çiyayê bilind.	Dengê xwe zêde bilind neke.	cumle	parça yerine tam cümle (korpus)
+2026-10-11	a2_414	her	Kengî vedigerî?	Tu kengî vedigerî malê?	cumle	parça yerine tam cümle (yazıldı)
+2026-10-11	a2_423	her	Kevirê û ax.	Axa vî gundî pir baş e.	cumle	parça yerine tam cümle (yazıldı)
+2026-10-11	a2_471	her	Neyar û dost.	Ew ne neyarê me ye.	cumle	parça yerine tam cümle (yazıldı)
+2026-10-11	a2_482	her	Nîv saet man.	Saet çar û nîv e.	cumle	parça yerine tam cümle (korpus)
+2026-10-11	a2_483	her	Çaryek kîlo.	Saet pênc û çaryek e.	cumle	parça yerine tam cümle (korpus)
+2026-10-11	a2_493	her	Ev zêde ye.	Îro karê min pir zêde ye.	cumle	parça yerine tam cümle (yazıldı)
+2026-10-11	a2_511	her	Cejn xweş bû.	Tu roja cejnê çi dikî?	cumle	parça yerine tam cümle (korpus)
+2026-10-11	a2_532	her	Lêkolîn dikim.	Ez li ser vê mijarê lêkolîn dikim.	cumle	parça yerine tam cümle (yazıldı)
+2026-10-11	a2_800	her	Bijîşk hat.	Ez îro diçim ba bijîşk.	cumle	parça yerine tam cümle (yazıldı)
+2026-10-11	a2_850	her	Trên hat.	Trên kengê derbas dibe?	cumle	parça yerine tam cümle (korpus)
+2026-10-11	a2_862	her	Xaltî hat.	Ev xaltiya min e.	cumle	parça yerine tam cümle (korpus)
+2026-10-11	a2_870	her	Nîvro xwarin.	Em nîvro bi hev re dixwin.	cumle	parça yerine tam cümle (yazıldı)
+2026-10-11	a2_870	her	Di nîvroyê de.	Piştî nîvro ez têm mala we.	cumle	parça yerine tam cümle (yazıldı)
+2026-10-11	a2_880	her	Hespê boz	Hespê wî reş e.	cumle	parça yerine tam cümle (korpus)
+2026-10-11	a2_882	her	Şîrê bizinê.	Bizin çû ser darê.	cumle	parça yerine tam cümle (korpus)
+2026-10-11	a2_884	her	Hêkên mirîşkê.	Mirîşkên me her roj hêkan dikin.	cumle	parça yerine tam cümle (yazıldı)
+2026-10-11	a2_887	her	Kûçik direye.	Çend kûçik di hewşê de ne.	cumle	parça yerine tam cümle (korpus)
+2026-10-11	a2_893	her	Ev hewce nîye.	Hewce ye ez herim.	cumle	parça yerine tam cümle (korpus)
+2026-10-11	a2_1030	her	Ba tê.	Îro bayekî xurt tê.	cumle	parça yerine tam cümle (yazıldı)
+2026-10-11	a2_1042	her	Çîroka xweş!	Çîroka wî pir xweş bû.	cumle	parça yerine tam cümle (korpus)
+2026-10-11	a2_1060	her	Saetek ma.	Ez du saetan li benda te mam.	cumle	parça yerine tam cümle (yazıldı)
+2026-10-11	a2_1061	her	Di deqîqeyê de.	Saet çar û bîst deqîqe ye.	cumle	parça yerine tam cümle (korpus)
+2026-10-11	a2_1260	her	Hunermendên kurd.	Xwişka min hunermendeke baş e.	cumle	parça yerine tam cümle (yazıldı)
+2026-10-11	a2_1421	her	Germahiya îroyîn.	Germahiya îro pir zêde ye.	cumle	parça yerine tam cümle (yazıldı)
+2026-10-11	a2_1547	her	Goşt pijandin.	Em êvaran goşt û birinc dixwin.	cumle	parça yerine tam cümle (yazıldı)
+2026-10-11	a2_1547	her	Goştê beriyan.	Ez goşt naxwim, masî dixwim.	cumle	parça yerine tam cümle (yazıldı)
+2026-10-11	a2_1564	her	Zû rabûm.	Ez îro sibehê zû rabûm.	cumle	parça yerine tam cümle (yazıldı)
+2026-10-11	a2_1571	her	Mîna bavê min.	Ew mîna bavê xwe dixebite.	cumle	parça yerine tam cümle (yazıldı)
+2026-10-11	a2_1571	her	Mîna te.	Jiyan mîna guleke xweş e.	cumle	parça yerine tam cümle (korpus)
+2026-10-11	a2_1792	her	Carinan diçim.	Ew carinan tê mala me.	cumle	parça yerine tam cümle (korpus)
+2026-10-11	a2_fk_09	her	Zerdeleyên zer.	Zarok zerdele û sêvan dixwin.	cumle	parça yerine tam cümle (korpus-sade)
+2026-10-11	a2_fk_10	her	Helbest xwend.	Wê helbesteke xweş xwend.	cumle	parça yerine tam cümle (yazıldı)
+2026-10-11	a2_fk_13	her	Kovara kurdî.	Ev kovar her meh derdikeve.	cumle	parça yerine tam cümle (yazıldı)
+2026-10-11	a2_z17	her	Roja xweş.	Dawet roja yekşemê ye.	cumle	parça yerine tam cümle (korpus)
+2026-10-11	a2_z24	her	Lewma nehatim.	Tu nehatî, lewma ez jî neçûm.	cumle	parça yerine tam cümle (korpus)
+2026-10-11	a2_z28	her	Nexşe heye?	Di polê de du nexşe hene.	cumle	parça yerine tam cümle (korpus)
+2026-10-11	a1_591	not	"ergative geçmiş ""Min kir"""	"ergative geçmiş ""Min kirî"""	yazim	"kirîn fiilinin geçmişi kirî; ""min kir"" kirin fiilinin geçmişi (korpus: çekimli zamir + kirî 5)"
+2026-10-11	b1_dm02	cins	mê	nêr	cins	nîv eril: Wîkîferheng nêr; onarılmış korpus -a 9 / -ê 100 (nîvê şevê 39, nîva şevê 1)
+2026-10-11	b1_dm02	ku	Nîva salê	Nîvê salê	izafe	nîv eril
+2026-10-11	b1_dm02	ez	nîva salê	nîvê salê	izafe	nîv eril
+2026-10-11	b1_dm02	her	Nîva salê hat.	Nîvê salê hat.	izafe	nîv eril
+2026-10-11	b1_dm02	her	Di nîva salê de.	Di nîvê salê de.	izafe	nîv eril
+2026-10-11	b1_dm02	gen	Nîva salê	Nîvê salê	izafe	nîv eril
+2026-10-11	b1_dm02	gen	Nîva me	Nîvê me	izafe	nîv eril
+2026-10-11	b1_1377	cins	nêr	mê	cins	Wîkîferheng mê; korpus -a 342 / -ê 78; Farqînî -a 5 / -ê 0; aynı madde başının öteki kaydı da mê
+2026-10-11	b1_1377	ez	roj	roja	cins	izafe biçimi cinsiyete göre
+2026-10-11	b1_1380	cins	nêr	mê	cins	Wîkîferheng mê; korpus -a 54 / -ê 8; Farqînî -a 2 / -ê 0; aynı madde başının öteki kaydı da mê
+2026-10-11	b1_1380	ez	meh	meha	cins	izafe biçimi cinsiyete göre
+2026-10-11	b1_1381	cins	nêr	mê	cins	Wîkîferheng mê; korpus -a 142 / -ê 28; Farqînî -a 3 / -ê 0; aynı madde başının öteki kaydı da mê
+2026-10-11	b1_1381	ez	sal	sala	cins	izafe biçimi cinsiyete göre
+2026-10-11	a1_152	cins	nêr	mê	cins	Wîkîferheng mê; korpus -a 21 / -ê 13; aynı madde başının öteki kaydı da mê
+2026-10-11	a1_152	ez	çayê	çaya	cins	izafe biçimi cinsiyete göre
+2026-10-11	a1_152	not	Çay (eril/nêr) — Kürt kültüründe misafir çayı zorunlu gelenektir. Veqetandek: çayê me. Mînak: çayê xweş.	Çay (dişil/mê) — Kürt kültüründe misafir çayı zorunlu gelenektir. Veqetandek: çayê me. Mînak: çayê xweş.	cins	nottaki cinsiyet bilgisi
+2026-10-11	a1_152	her	Çayê xweş vexwe!	Çaya xweş vexwe!	izafe	cinsiyet düzeltmesinin devamı
+2026-10-11	a1_152	gen	Çayê me germ e.	Çaya me germ e.	izafe	cinsiyet düzeltmesinin devamı
+2026-10-11	a1_159	cins	nêr	mê	cins	Wîkîferheng mê; aynı madde başının öteki kaydı da mê
+2026-10-11	a1_159	ez	xwêyê	xwêya	cins	izafe biçimi cinsiyete göre
+2026-10-11	a1_159	not	"Xwê (eril/nêr) — x sesi gırtlaktan. Veqetandek: xwêyê me. Mînak: ""Nan û xwê"" = ekmek ve tuz = misafirperverlik sembolü."	"Xwê (dişil/mê) — x sesi gırtlaktan. Veqetandek: xwêyê me. Mînak: ""Nan û xwê"" = ekmek ve tuz = misafirperverlik sembolü."	cins	nottaki cinsiyet bilgisi
+2026-10-11	a1_159	gen	Xwêyê me kêm e.	Xwêya me kêm e.	izafe	cinsiyet düzeltmesinin devamı
+2026-10-11	a1_287	cins	nêr	mê	cins	Wîkîferheng mê; korpus -a 4 / -ê 3; aynı madde başının öteki kaydı da mê
+2026-10-11	a1_287	ez	bahozê	bahoza	cins	izafe biçimi cinsiyete göre
+2026-10-11	a1_287	not	"Bahoz (eril/nêr) — ""ba"" (rüzgar) kökünden. Veqetandek: bahozê biharê. Mînak: Bahoz mezin e. Têbinî: çoğul ""bahozan"" (ileri)."	"Bahoz (dişil/mê) — ""ba"" (rüzgar) kökünden. Veqetandek: bahozê biharê. Mînak: Bahoz mezin e. Têbinî: çoğul ""bahozan"" (ileri)."	cins	nottaki cinsiyet bilgisi
+2026-10-11	a1_287	gen	Bahozê mezin nêzîk e.	Bahoza mezin nêzîk e.	izafe	cinsiyet düzeltmesinin devamı
+2026-10-11	b1_712	cins	nêr	mê	cins	Wîkîferheng mê; korpus -a 29 / -ê 1; aynı madde başının öteki kaydı da mê
+2026-10-11	b1_712	ez	destanê	destana	cins	izafe biçimi cinsiyete göre
+2026-10-11	b1_712	not	"Eril — [FB]: destan n.m. ""Destanê Mem û Zîn"" = Mem û Zîn destanı."	"Dişil — ""Destanê Mem û Zîn"" = Mem û Zîn destanı."	cins	nottaki cinsiyet bilgisi
+2026-10-11	b1_712	her	Destanê kurdî gelek in.	Destanên kurdî gelek in.	izafe	cinsiyet düzeltmesinin devamı
+2026-10-11	b1_712	gen	Destanê kurdî	Destana kurdî	izafe	cinsiyet düzeltmesinin devamı
+2026-10-11	b1_y04	cins	nêr	mê	cins	Wîkîferheng mê; korpus -a 3 / -ê 2; Farqînî -a 2 / -ê 0; aynı madde başının öteki kaydı da mê
+2026-10-11	b1_y04	ez	hêkê	hêka	cins	izafe biçimi cinsiyete göre
+2026-10-11	b1_y04	not	"Eril — [FB]: hêk n.m. ""Hêkê mirîşkê."""	"Dişil — ""Hêkê mirîşkê."""	cins	nottaki cinsiyet bilgisi
+2026-10-11	a2_852	cins	nêr	mê	cins	Wîkîferheng mê; aynı madde başının öteki kaydı da mê
+2026-10-11	a2_852	ez	balafirê	balafira	cins	izafe biçimi cinsiyete göre
+2026-10-11	a2_852	not	"Nêr — [AS]: ""uçak = balafir"". [FB]: balafir n.m."	"Mê — [AS]: ""uçak = balafir""."	cins	nottaki cinsiyet bilgisi
+2026-10-11	a2_852	gen	Balafirê me	Balafira me	izafe	cinsiyet düzeltmesinin devamı
+2026-10-11	a1_749	cins	nêr	mê	cins	Wîkîferheng mê; korpus -a 2 / -ê 3; aynı madde başının öteki kaydı da mê
+2026-10-11	a1_749	ez	pêlavê	pêlava	cins	izafe biçimi cinsiyete göre
+2026-10-11	a1_749	not	"Pêlav (eril/nêr) — ayakkabı. Veqetandek: pêlavê min. Mînak: Pêlavê min nû ye. Têbinî: çoğul veqetandek ""pêlavên""."	"Pêlav (dişil/mê) — ayakkabı. Veqetandek: pêlavê min. Mînak: Pêlavê min nû ye. Têbinî: çoğul veqetandek ""pêlavên""."	cins	nottaki cinsiyet bilgisi
+2026-10-11	a1_749	her	Pêlavê pîrê reş e.	Pêlava pîrê reş e.	izafe	cinsiyet düzeltmesinin devamı
+2026-10-11	b1_gn19	cins	nêr	mê	cins	Wîkîferheng mê; korpus -a 14 / -ê 8; aynı madde başının öteki kaydı da mê
+2026-10-11	b1_gn19	ez	berbangê	berbanga	cins	izafe biçimi cinsiyete göre
+2026-10-11	b1_gn19	not	"Eril — [BH] ✓: ""berbang"" = şafak."	"Dişil — [BH] ✓: ""berbang"" = şafak."	cins	nottaki cinsiyet bilgisi
+2026-10-11	b1_c06b	cins	nêr	mê	cins	korpus -a 12 / -ê 0; Farqînî -a 1 / -ê 0; aynı madde başının öteki kaydı da mê
+2026-10-11	b1_c06b	ez	destmalê	destmala	cins	izafe biçimi cinsiyete göre
+2026-10-11	b1_c06b	not	"Eril — [AS]: ""mendil = destmal"" ✓."	"Dişil — [AS]: ""mendil = destmal"" ✓."	cins	nottaki cinsiyet bilgisi
+2026-10-11	b1_c06b	her	Destmalê spî.	Destmala spî.	izafe	cinsiyet düzeltmesinin devamı
+2026-10-11	b1_c06b	gen	Destmalê me	Destmala me	izafe	cinsiyet düzeltmesinin devamı
+2026-10-11	a1_fk_09	cins	nêr	mê	cins	Wîkîferheng mê; aynı madde başının öteki kaydı da mê
+2026-10-11	a1_fk_09	ez	taştê	taştêya	cins	izafe biçimi cinsiyete göre
+2026-10-11	a1_fk_09	not	"Taştê (eril/nêr) — kahvaltı (sabah yemeği). Veqetandek: taştê pîrê. Mînak: Taştê li mêzê ye. Têbinî: ""Xwarina sibehê"" de denir."	"Taştê (dişil/mê) — kahvaltı (sabah yemeği). Veqetandek: taştê pîrê. Mînak: Taştê li mêzê ye. Têbinî: ""Xwarina sibehê"" de denir."	cins	nottaki cinsiyet bilgisi
+2026-10-11	a1_fk_09	her	Taştê pîrê xweş e.	Taştêya pîrê xweş e.	izafe	cinsiyet düzeltmesinin devamı
+2026-10-11	a1_fk_10	cins	nêr	mê	cins	Wîkîferheng mê; korpus -a 5 / -ê 3; aynı madde başının öteki kaydı da mê
+2026-10-11	a1_fk_10	ez	firavînê	firavîna	cins	izafe biçimi cinsiyete göre
+2026-10-11	a1_fk_10	not	"Firavîn (eril/nêr) — öğle yemeği. Veqetandek: firavînê me. Mînak: Firavîn li mêzê ye. Têbinî: ""taştê"" sabah, ""şîv"" akşam."	"Firavîn (dişil/mê) — öğle yemeği. Veqetandek: firavînê me. Mînak: Firavîn li mêzê ye. Têbinî: ""taştê"" sabah, ""şîv"" akşam."	cins	nottaki cinsiyet bilgisi
+2026-10-11	a1_fk_11	cins	nêr	mê	cins	Wîkîferheng mê; korpus -a 25 / -ê 6; aynı madde başının öteki kaydı da mê
+2026-10-11	a1_fk_11	ez	şîvê	şîva	cins	izafe biçimi cinsiyete göre
+2026-10-11	a1_fk_11	not	"Şîv (eril/nêr) — akşam yemeği. Veqetandek: şîvê me. Mînak: Şîv li mêzê ye. Têbinî: ""şîr"" (süt) ile karıştırma."	"Şîv (dişil/mê) — akşam yemeği. Veqetandek: şîvê me. Mînak: Şîv li mêzê ye. Têbinî: ""şîr"" (süt) ile karıştırma."	cins	nottaki cinsiyet bilgisi
+2026-10-11	a1_fk_11	her	Şîvê pîrê xweş e.	Şîva pîrê xweş e.	izafe	cinsiyet düzeltmesinin devamı
+2026-10-11	a2_1400	cins	nêr	mê	cins	Wîkîferheng mê; aynı madde başının öteki kaydı da mê
+2026-10-11	a2_1400	ez	îmtîhanê	îmtîhana	cins	izafe biçimi cinsiyete göre
+2026-10-11	a2_1400	not	"Nêr — [AS]: ""sınav = îmtîhan"" ✓."	"Mê — [AS]: ""sınav = îmtîhan"" ✓."	cins	nottaki cinsiyet bilgisi
+2026-10-11	a2_1400	gen	Îmtîhanê me	Îmtîhana me	izafe	cinsiyet düzeltmesinin devamı
+2026-10-11	b1_m08	cins	nêr	mê	cins	Wîkîferheng mê; korpus -a 27 / -ê 8; Farqînî -a 6 / -ê 0; aynı madde başının öteki kaydı da mê
+2026-10-11	b1_m08	ez	salonê	salona	cins	izafe biçimi cinsiyete göre
+2026-10-11	b1_m08	not	Eril — uluslararası terim.	Dişil — uluslararası terim.	cins	nottaki cinsiyet bilgisi
+2026-10-11	b1_m08	gen	Salonê me	Salona me	izafe	cinsiyet düzeltmesinin devamı
+2026-10-11	b1_jy18	cins	nêr	mê	cins	Wîkîferheng mê; korpus -a 6 / -ê 2; aynı madde başının öteki kaydı da mê
+2026-10-11	b1_jy18	ez	pêşerojê	pêşeroja	cins	izafe biçimi cinsiyete göre
+2026-10-11	b1_jy18	not	"Eril — ""pêş"" + ""roj"". [AS] ✓."	"Dişil — ""pêş"" + ""roj"". [AS] ✓."	cins	nottaki cinsiyet bilgisi
+2026-10-11	a2_601	cins	nêr	mê	cins	Wîkîferheng mê; aynı madde başının öteki kaydı da mê
+2026-10-11	a2_601	ez	werzîşê	werzîşa	cins	izafe biçimi cinsiyete göre
+2026-10-11	a2_601	not	"Nêr — [AS] s.40: ""WERZÎ"" bölümü. ""Werzîş kirin"" = spor yapmak"	"Mê — [AS] s.40: ""WERZÎ"" bölümü. ""Werzîş kirin"" = spor yapmak"	cins	nottaki cinsiyet bilgisi
+2026-10-11	b1_r08	cins	nêr	mê	cins	Wîkîferheng mê; aynı madde başının öteki kaydı da mê
+2026-10-11	b1_r08	ez	meydanê	meydana	cins	izafe biçimi cinsiyete göre
+2026-10-11	b1_r08	not	"Eril — [AS]: ""meydan"" ✓."	"Dişil — [AS]: ""meydan"" ✓."	cins	nottaki cinsiyet bilgisi
+2026-10-11	b1_r08	gen	Meydanê bajêr	Meydana bajêr	izafe	cinsiyet düzeltmesinin devamı
+2026-10-11	b1_931	cins	nêr	mê	cins	Wîkîferheng mê; korpus -a 5 / -ê 4; aynı madde başının öteki kaydı da mê
+2026-10-11	b1_931	ez	encamê	encama	cins	izafe biçimi cinsiyete göre
+2026-10-11	b1_931	not	"Eril — [FB]: encam n.m. ""Encama lêkolînê."""	"Dişil — ""Encama lêkolînê."""	cins	nottaki cinsiyet bilgisi
+2026-10-11	b1_xw10	cins	nêr	mê	cins	Wîkîferheng mê; aynı madde başının öteki kaydı da mê
+2026-10-11	b1_xw10	ez	nîskê	nîska	cins	izafe biçimi cinsiyete göre
+2026-10-11	b1_xw10	not	"Eril — [AS]: ""nohut = nîsk"" ✓."	"Dişil — [AS]: ""nohut = nîsk"" ✓."	cins	nottaki cinsiyet bilgisi
+2026-10-11	b1_xw10	gen	Nîskê me	Nîska me	izafe	cinsiyet düzeltmesinin devamı
+2026-10-11	b1_xw08	cins	nêr	mê	cins	Wîkîferheng mê; korpus -a 5 / -ê 0; aynı madde başının öteki kaydı da mê
+2026-10-11	b1_xw08	ez	savarê	savara	cins	izafe biçimi cinsiyete göre
+2026-10-11	b1_xw08	not	"Eril — [FB]: savar n.m. Özgün Kurmancî form. DÜZELTME: Önceki ""kelekê"" yanlıştı (keleke = tekne/sal). Kurmancî'de bulgur için ""savar"" standarttır."	"Dişil — Özgün Kurmancî form. DÜZELTME: Önceki ""kelekê"" yanlıştı (keleke = tekne/sal). Kurmancî'de bulgur için ""savar"" standarttır."	cins	nottaki cinsiyet bilgisi
+2026-10-11	b1_xw08	gen	Savarê me	Savara me	izafe	cinsiyet düzeltmesinin devamı
+2026-10-11	b1_642	cins	nêr	mê	cins	Wîkîferheng mê; aynı madde başının öteki kaydı da mê
+2026-10-11	b1_642	ez	mêjûyê	mêjûya	cins	izafe biçimi cinsiyete göre
+2026-10-11	b1_642	not	"Eril — [FB]: mêjû n.m. ""Dîrok"" (yazılı tarih) yanı sıra ""mêjû"" (sözlü tarih/geçmiş)."	"Dişil — ""Dîrok"" (yazılı tarih) yanı sıra ""mêjû"" (sözlü tarih/geçmiş)."	cins	nottaki cinsiyet bilgisi
+2026-10-11	b1_642	her	Mêjûyê kurd dûr û dirêj e.	Mêjûya kurd dûr û dirêj e.	izafe	cinsiyet düzeltmesinin devamı
+2026-10-11	b1_642	gen	Mêjûyê me	Mêjûya me	izafe	cinsiyet düzeltmesinin devamı
+2026-10-11	b2_204	cins	nêr	mê	cins	Wîkîferheng mê; korpus -a 6 / -ê 0; Farqînî -a 1 / -ê 0; aynı madde başının öteki kaydı da mê
+2026-10-11	b2_204	ez	rêbazê	rêbaza	cins	izafe biçimi cinsiyete göre
+2026-10-11	b2_204	not	"Eril — ""rê"" (yol) + ""baz"" (giden). [FB]: rêbaz n.m."	"Dişil — ""rê"" (yol) + ""baz"" (giden)."	cins	nottaki cinsiyet bilgisi
+2026-10-11	b2_110	cins	nêr	mê	cins	Wîkîferheng mê; Farqînî -a 1 / -ê 0; aynı madde başının öteki kaydı da mê
+2026-10-11	b2_110	ez	zagonê	zagona	cins	izafe biçimi cinsiyete göre
+2026-10-11	b2_110	not	"Eril — [BH] + [TH]: zagon n.m. Kurmancîde standart ""kanun/yasa"" kelimesi. ""Hiqûq"" Arapça/Soranî etkisi — doğrusu ""zagon"" (yasa) veya ""maf"" (hak). [AZ] Wane 18: law"	"Dişil — [BH] + [TH]: zagon n.m. Kurmancîde standart ""kanun/yasa"" kelimesi. ""Hiqûq"" Arapça/Soranî etkisi — doğrusu ""zagon"" (yasa) veya ""maf"" (hak). [AZ] Wane 18: law"	cins	nottaki cinsiyet bilgisi
+2026-10-11	b2_110	her	Zagonê welêt divê were parastin.	Zagona welêt divê were parastin.	izafe	cinsiyet düzeltmesinin devamı
+2026-10-11	b2_110	gen	Zagonê welêt	Zagona welêt	izafe	cinsiyet düzeltmesinin devamı
+2026-10-11	a2_610	cins	nêr	mê	cins	Wîkîferheng mê; aynı madde başının öteki kaydı da mê
+2026-10-11	a2_610	ez	serşokê	serşoka	cins	izafe biçimi cinsiyete göre
+2026-10-11	a2_610	not	"Nêr — ""ser"" (baş) + ""şok"" (yıkama). [AS] s.53 bölümü. ""Serşok kirin"" = duş almak"	"Mê — ""ser"" (baş) + ""şok"" (yıkama). [AS] s.53 bölümü. ""Serşok kirin"" = duş almak"	cins	nottaki cinsiyet bilgisi
+2026-10-11	b1_c01b	cins	mê	nêr	cins	Wîkîferheng nêr; korpus -a 1 / -ê 27; Farqînî -a 0 / -ê 2; aynı madde başının öteki kaydı da nêr
+2026-10-11	b1_c01b	ez	kirasa	kirasê	cins	izafe biçimi cinsiyete göre
+2026-10-11	b1_c01b	not	"Dişil — [AS]: ""gömlek = kiras"" ✓."	"Eril — [AS]: ""gömlek = kiras"" ✓."	cins	nottaki cinsiyet bilgisi
+2026-10-11	a2_602	gen	Meydanê bajêr	Meydana bajêr	izafe	meydan dişil
+2026-10-11	a2_1201	gen	Nîskê sor	Nîska sor	izafe	nîsk dişil
+2026-10-11	a1_199	her	Serşokê me paqij e.	Serşoka me paqij e.	izafe	serşok dişil
+2026-10-11	a1_199	gen	Serşokê me paqij e.	Serşoka me paqij e.	izafe	serşok dişil
+2026-10-11	c2_865	her	Xwenasîn gavê yekem e.	Xwenasîn gava yekem e.	izafe	gav dişil (cins.tsv; onarılmış korpus)
+2026-10-11	@lib/features/cultural_content/domain/kurdish_legends_db.dart		destanê pîvana	destana pîvana	izafe	destan dişil (Wîkîferheng; korpus -a 29 / -ê 1)
+2026-10-11	a2_1440	cins	nêr	mê	cins	keser dişil: Wîkîferheng mê; onarılmış korpus -a 13 / -ê 2
+2026-10-11	a2_1440	ez	keserê	kesera	cins	keser dişil: Wîkîferheng mê; onarılmış korpus -a 13 / -ê 2
+2026-10-11	a2_1440	not	"Nêr — [FB]: keser n.m. ""Dil keser e"" = gönül hüzünlü."	"Mê — ""Dil keser e"" = gönül hüzünlü."	cins	nottaki sözlük atfı kanıtla çelişiyordu; kaldırıldı
+2026-10-11	a2_1440	gen	Keserê dil	Kesera dil	izafe	keser dişil: Wîkîferheng mê; onarılmış korpus -a 13 / -ê 2
+2026-10-11	a2_z29	cins	nêr	mê	cins	mêjer dişil: Wîkîferheng mê; onarılmış korpus -a 35 / -ê 1
+2026-10-11	a2_z29	ez	mêjerê	mêjera	cins	mêjer dişil: Wîkîferheng mê; onarılmış korpus -a 35 / -ê 1
+2026-10-11	a2_z29	not	Nêr — 	Mê — 	cins	mêjer dişil: Wîkîferheng mê; onarılmış korpus -a 35 / -ê 1
+2026-10-11	a2_z29	her	Mêjerê çend e?	Mêjera wê çend e?	izafe	mêjer dişil: Wîkîferheng mê; onarılmış korpus -a 35 / -ê 1
+2026-10-11	a2_z29	gen	Mêjerê çend	Mêjera wê	izafe	mêjer dişil: Wîkîferheng mê; onarılmış korpus -a 35 / -ê 1
+2026-10-11	a1_152	cins	mê	nêr	cins	geri alındı: çay için kanıt karar vermiyor (Wîkîferheng mê; korpus -a 21 / -ê 13; LÛTKE metinlerinin çoğu eril: Çayê te, Çayê germ, Çayê dêlokê). Editöre.
+2026-10-11	a1_152	ez	çaya	çayê	cins	geri alındı: çay için kanıt karar vermiyor (Wîkîferheng mê; korpus -a 21 / -ê 13; LÛTKE metinlerinin çoğu eril: Çayê te, Çayê germ, Çayê dêlokê). Editöre.
+2026-10-11	a1_152	not	Çay (dişil/mê)	Çay (eril/nêr)	cins	geri alındı: çay için kanıt karar vermiyor (Wîkîferheng mê; korpus -a 21 / -ê 13; LÛTKE metinlerinin çoğu eril: Çayê te, Çayê germ, Çayê dêlokê). Editöre.
+2026-10-11	a1_152	her	Çaya xweş vexwe!	Çayê xweş vexwe!	izafe	geri alındı: çay için kanıt karar vermiyor (Wîkîferheng mê; korpus -a 21 / -ê 13; LÛTKE metinlerinin çoğu eril: Çayê te, Çayê germ, Çayê dêlokê). Editöre.
+2026-10-11	a1_152	gen	Çaya me germ e.	Çayê me germ e.	izafe	geri alındı: çay için kanıt karar vermiyor (Wîkîferheng mê; korpus -a 21 / -ê 13; LÛTKE metinlerinin çoğu eril: Çayê te, Çayê germ, Çayê dêlokê). Editöre.
+2026-10-11	b1_y03	her	Hêkê spî û zer.	Hêka spî û zer.	izafe	hêk dişil (Wîkîferheng; Farqînî -a 2)
+2026-10-11	a1_159	not	Veqetandek: xwêyê me	Veqetandek: xwêya me	izafe	nottaki izafe örneği kaydın cins/ez alanıyla çelişiyordu (mê, ez xwêya; korpus xwêya 2)
+2026-10-11	a1_199	not	Veqetandek: serşokê me	Veqetandek: serşoka me	izafe	nottaki izafe örneği kaydın cins/ez alanıyla çelişiyordu (mê, ez serşoka; korpus serşoka 4)
+2026-10-11	a1_287	not	Veqetandek: bahozê biharê	Veqetandek: bahoza biharê	izafe	nottaki izafe örneği kaydın cins/ez alanıyla çelişiyordu (mê, ez bahoza; korpus bahoza 4)
+2026-10-11	a1_749	not	Veqetandek: pêlavê min	Veqetandek: pêlava min	izafe	nottaki izafe örneği kaydın cins/ez alanıyla çelişiyordu (mê, ez pêlava; korpus pêlava 3)
+2026-10-11	a1_749	not	Mînak: Pêlavê min nû ye	Mînak: Pêlava min nû ye	izafe	nottaki izafe örneği kaydın cins/ez alanıyla çelişiyordu (mê, ez pêlava)
+2026-10-11	a1_fk_10	not	Veqetandek: firavînê me	Veqetandek: firavîna me	izafe	nottaki izafe örneği kaydın cins/ez alanıyla çelişiyordu (mê, ez firavîna; korpus firavîna 8)
+2026-10-11	a1_fk_11	not	Veqetandek: şîvê me	Veqetandek: şîva me	izafe	nottaki izafe örneği kaydın cins/ez alanıyla çelişiyordu (mê, ez şîva; korpus -a 25 / -ê 6)
+2026-10-11	a2_602	not	Meydanê futbolê	Meydana futbolê	izafe	nottaki izafe örneği kaydın cins/ez alanıyla çelişiyordu (mê, ez meydana; korpus meydana 39)
+2026-10-11	b1_712	not	Destanê Mem û Zîn	Destana Mem û Zîn	izafe	nottaki izafe örneği kaydın cins/ez alanıyla çelişiyordu (mê, ez destana; korpus destana 41 geçiş 7 kaynak)
+2026-10-11	b1_y04	not	Hêkê mirîşkê.	Hêka mirîşkê.	izafe	nottaki izafe örneği kaydın cins/ez alanıyla çelişiyordu (mê, ez hêka; Farqînî -a 2 / -ê 0)
+2026-10-11	b1_e03	not	Mizgeftê Mezin	Mizgefta Mezin	izafe	nottaki izafe örneği kaydın cins/ez alanıyla çelişiyordu (mê, ez mizgefta; korpus mizgefta 14, mizgefta mezin 1)
+2026-10-11	c1_006	not	Gulê Kurdistan	Gula Kurdistanê	izafe	nottaki izafe örneği kaydın cins/ez alanıyla çelişiyordu (mê, ez gula; kaydın gen örneği de Gula Kurdistanê; Farqînî -a 3 / -ê 0)
+2026-10-11	b1_870	not	Eril — [FB]: tûtî n.m. Kürdistan'da yaygın.	Dişil — Kürdistan'da yaygın.	atif	not etiketi kaydın cins/ez alanıyla (mê, tûya) çelişiyordu; atıf başka bir sözcüğe (tûtî) aitti. tû dişil: korpus tûyê 45 (5 kaynak), tûyî 0; Farqînî tû bot/m
+2026-10-11	b1_tm11	not	Dişil — [AS]	Eril — [AS]	cins	not etiketi kaydın cins/ez alanıyla (nêr, kundirê) çelişiyordu; kundir eril: Wîkîferheng nêr; korpus -a 0 / -ê 5; Farqînî -a 0 / -ê 1
+2026-10-11	b2_110	not	Dişil — [BH] + [TH]: zagon n.m. Kurmancîde	Dişil — Kurmancîde	atif	nota yazılan sözlük atfı (n.m.) kaydın cinsiyle ve kanıtla çelişiyordu; kaldırıldı (Wîkîferheng mê; Farqînî -a 1 / -ê 0)
+2026-10-11	b1_1220	cins	nêr	mê	cins	tax dişil: Wîkîferheng mê; korpus -a 31 / -ê 3 (taxa 52 geçiş 13 kaynak; taxeke 5, taxekî 0); Farqînî -a 1 / -ê 0; kaydın kendi örnekleri de Taxa me
+2026-10-11	b1_1220	ez	taxê	taxa	cins	izafe biçimi cinsiyete göre
+2026-10-11	b1_1220	not	"Eril — [FB]: tax n.m. ""Taxê me."""	"Dişil — ""Taxa me."""	atif	nota yazılan sözlük atfı kanıtla çelişiyordu; kaldırıldı

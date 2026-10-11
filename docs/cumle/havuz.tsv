@@ -1,0 +1,70 @@
+# LÛTKE cümle havuzu — `tools/qa/cumle.py` okur (--denetle, --uygula).
+#
+# kimlik  kelime kimliği
+# sira    kelimenin `her` listesinde değiştirilecek sıra (0 ya da 1)
+# ku, tr  cümle ve Türkçe çevirisi
+# kaynak  korpus       korpusta aynen geçen kısa cümle (dilbilgisi kitabı örneği ya da kısa edebî cümle)
+#         korpus-sade  korpus cümlesinden uyarlanmış (özne, iyelik ya da zaman değiştirilmiş)
+#         yazıldı      yeni yazılmış; eşdizimi korpusta aranmış
+# durum   taslak       dil editörü görmedi
+#         onaylı       dil editörü onayladı
+#
+# Uzunluk ölçüsü: A1 3–5, A2 4–7, B1 6–9, B2 8–12, C1–C2 10–15 sözcük.
+kimlik	sira	ku	tr	kaynak	durum
+a2_092	1	Divê tu dermanê xwe bixwî.	İlacını içmelisin.	yazıldı	taslak
+a2_132	0	Min heta nîvro kar kir.	Öğlene kadar çalıştım.	korpus-sade	taslak
+a2_202	1	Pêlavên min li ber derî ne.	Ayakkabılarım kapının önünde.	korpus-sade	taslak
+a2_211	1	Li derve hewa tarî bû.	Dışarıda hava karanlıktı.	yazıldı	taslak
+a2_250	0	Par em çûn gundê xwe.	Geçen yıl köyümüze gittik.	yazıldı	taslak
+a2_250	1	Ew par ji gund derket.	O geçen yıl köyden ayrıldı.	korpus-sade	taslak
+a2_273	1	Dengê xwe zêde bilind neke.	Sesini fazla yükseltme.	korpus	taslak
+a2_414	1	Tu kengî vedigerî malê?	Eve ne zaman dönüyorsun?	yazıldı	taslak
+a2_423	1	Axa vî gundî pir baş e.	Bu köyün toprağı çok iyi.	yazıldı	taslak
+a2_471	1	Ew ne neyarê me ye.	O bizim düşmanımız değil.	yazıldı	taslak
+a2_482	0	Saet çar û nîv e.	Saat dört buçuk.	korpus	taslak
+a2_483	1	Saet pênc û çaryek e.	Saat beşi çeyrek geçiyor.	korpus	taslak
+a2_493	1	Îro karê min pir zêde ye.	Bugün işim çok fazla.	yazıldı	taslak
+a2_511	1	Tu roja cejnê çi dikî?	Bayram günü ne yapıyorsun?	korpus	taslak
+a2_532	1	Ez li ser vê mijarê lêkolîn dikim.	Bu konu üzerine araştırma yapıyorum.	yazıldı	taslak
+a2_800	0	Ez îro diçim ba bijîşk.	Bugün doktora gidiyorum.	yazıldı	taslak
+a2_850	0	Trên kengê derbas dibe?	Tren ne zaman geçiyor?	korpus	taslak
+a2_862	0	Ev xaltiya min e.	Bu benim teyzem.	korpus	taslak
+a2_870	0	Em nîvro bi hev re dixwin.	Öğlen birlikte yemek yeriz.	yazıldı	taslak
+a2_870	1	Piştî nîvro ez têm mala we.	Öğleden sonra evinize geliyorum.	yazıldı	taslak
+a2_880	1	Hespê wî reş e.	Onun atı siyah.	korpus	taslak
+a2_882	1	Bizin çû ser darê.	Keçi ağaca çıktı.	korpus	taslak
+a2_884	1	Mirîşkên me her roj hêkan dikin.	Tavuklarımız her gün yumurtlar.	yazıldı	taslak
+a2_887	0	Çend kûçik di hewşê de ne.	Avluda birkaç köpek var.	korpus	taslak
+a2_893	1	Hewce ye ez herim.	Gitmem gerekiyor.	korpus	taslak
+a2_1030	0	Îro bayekî xurt tê.	Bugün sert bir rüzgâr esiyor.	yazıldı	taslak
+a2_1042	1	Çîroka wî pir xweş bû.	Onun hikâyesi çok güzeldi.	korpus	taslak
+a2_1060	0	Ez du saetan li benda te mam.	Seni iki saat bekledim.	yazıldı	taslak
+a2_1061	1	Saet çar û bîst deqîqe ye.	Saat dördü yirmi geçiyor.	korpus	taslak
+a2_1260	1	Xwişka min hunermendeke baş e.	Kız kardeşim iyi bir sanatçı.	yazıldı	taslak
+a2_1421	1	Germahiya îro pir zêde ye.	Bugünkü sıcaklık çok fazla.	yazıldı	taslak
+a2_1547	0	Em êvaran goşt û birinc dixwin.	Akşam et ve pilav yeriz.	yazıldı	taslak
+a2_1547	1	Ez goşt naxwim, masî dixwim.	Et yemem, balık yerim.	yazıldı	taslak
+a2_1564	1	Ez îro sibehê zû rabûm.	Bu sabah erken kalktım.	yazıldı	taslak
+a2_1571	0	Ew mîna bavê xwe dixebite.	O babası gibi çalışıyor.	yazıldı	taslak
+a2_1571	1	Jiyan mîna guleke xweş e.	Hayat güzel bir gül gibidir.	korpus	taslak
+a2_1792	0	Ew carinan tê mala me.	O bazen evimize gelir.	korpus	taslak
+a2_fk_09	1	Zarok zerdele û sêvan dixwin.	Çocuklar kayısı ve elma yiyor.	korpus-sade	taslak
+a2_fk_10	0	Wê helbesteke xweş xwend.	Güzel bir şiir okudu.	yazıldı	taslak
+a2_fk_13	1	Ev kovar her meh derdikeve.	Bu dergi her ay çıkıyor.	yazıldı	taslak
+a2_z17	1	Dawet roja yekşemê ye.	Düğün pazar günü.	korpus	taslak
+a2_z24	0	Tu nehatî, lewma ez jî neçûm.	Sen gelmedin, o yüzden ben de gitmedim.	korpus	taslak
+a2_z28	0	Di polê de du nexşe hene.	Sınıfta iki harita var.	korpus	taslak
+a1_cf_01	0	Tu çi dikî?	Ne yapıyorsun?	yazıldı	taslak
+a1_cf_01	1	Ez karê xwe dikim.	İşimi yapıyorum.	yazıldı	taslak
+a1_cf_02	0	Tu çi dibêjî?	Ne diyorsun?	yazıldı	taslak
+a1_cf_02	1	Ew rast dibêje.	O doğru söylüyor.	yazıldı	taslak
+a1_cf_03	0	Ez ji malê têm.	Evden geliyorum.	yazıldı	taslak
+a1_cf_03	1	Tu kengî têyî?	Ne zaman geliyorsun?	yazıldı	taslak
+a1_cf_04	0	Ez diçim malê.	Eve gidiyorum.	yazıldı	taslak
+a1_cf_04	1	Tu bi ku ve diçî?	Nereye gidiyorsun?	yazıldı	taslak
+a1_cf_05	0	Hewa sar dibe.	Hava soğuyor.	yazıldı	taslak
+a1_cf_05	1	Zarok mezin dibin.	Çocuklar büyüyor.	yazıldı	taslak
+a1_cf_06	0	Ez nan dixwim.	Ekmek yiyorum.	yazıldı	taslak
+a1_cf_06	1	Tu çi dixwî?	Ne yiyorsun?	yazıldı	taslak
+a1_cf_07	0	Ez pirtûkê didim te.	Kitabı sana veriyorum.	yazıldı	taslak
+a1_cf_07	1	Avê bide min!	Bana su ver!	yazıldı	taslak

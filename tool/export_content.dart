@@ -354,7 +354,7 @@ void main() {
     if (list.isNotEmpty) { cand[entry.key] = list; candTotal += list.length; }
   }
 
-  // Atasözleri (3361) — kompakt, harfe göre gruplu
+  // Atasözleri (3359) — kompakt, harfe göre gruplu
   final proverbs = kGotinenPesiyan
       .map((g) => {'letter': g.letter, 'num': g.num, 'ku': g.ku, 'tr': g.tr})
       .toList();

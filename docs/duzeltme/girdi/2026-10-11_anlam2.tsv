@@ -1,0 +1,84 @@
+kimlik	alan	eski	yeni	kural	gerekce
+a2_1263	ku	Derzî	Terzî	anlam	derzî = iğne; terzi = terzî (ku-tr-sozluk)
+a2_1263	ez	derziyê	terziyê	anlam	derzî = iğne; terzi = terzî (ku-tr-sozluk)
+a2_1263	her	Derzî cil dikişîne.	Terzî cil dikişîne.	anlam	derzî = iğne; terzi = terzî (ku-tr-sozluk)
+a2_1263	her	Ew derzî ye.	Ew terzî ye.	anlam	derzî = iğne; terzi = terzî (ku-tr-sozluk)
+a2_1263	gen	Derzî û hunermend	Terzî û hunermend	anlam	derzî = iğne; terzi = terzî (ku-tr-sozluk)
+a2_1263	gen	Derziyê bajêr	Terziyê bajêr	anlam	derzî = iğne; terzi = terzî (ku-tr-sozluk)
+a2_643	ku	Pênciyem	Pêncem	anlam	pênciyem = ellinci; beşinci = pêncem (ku-tr-sozluk); dizinin devamı şeşem
+a2_643	her	Pênciyem hat.	Pêncem hat.	anlam	pênciyem = ellinci; beşinci = pêncem (ku-tr-sozluk); dizinin devamı şeşem
+a2_643	her	Sinifa pênciyem.	Sinifa pêncem.	anlam	pênciyem = ellinci; beşinci = pêncem (ku-tr-sozluk); dizinin devamı şeşem
+a2_643	gen	Pênciyem û şeşem	Pêncem û şeşem	anlam	pênciyem = ellinci; beşinci = pêncem (ku-tr-sozluk); dizinin devamı şeşem
+a2_643	gen	Roja pênciyem	Roja pêncem	anlam	pênciyem = ellinci; beşinci = pêncem (ku-tr-sozluk); dizinin devamı şeşem
+b1_870	ku	Tûtî	Tû	anlam	tûtî = papağan; dut = tû (ku-tr-sozluk)
+b1_870	cins	nêr	mê	anlam	dara tûyê: dişil çekim
+b1_870	ez	tûtiyê	tûya	anlam	tûtî = papağan; dut = tû (ku-tr-sozluk)
+b1_870	her	Dara tûtiyê mezin e.	Dara tûyê mezin e.	anlam	tûtî = papağan; dut = tû (ku-tr-sozluk)
+b1_870	her	Tûtî çin kirin.	Me tû çinîn.	anlam	tûtî = papağan; dut = tû (ku-tr-sozluk)
+b1_870	gen	Tûtî û gûz	Tû û gûz	anlam	tûtî = papağan; dut = tû (ku-tr-sozluk)
+b1_870	gen	Dara tûtiyê	Dara tûyê	anlam	tûtî = papağan; dut = tû (ku-tr-sozluk)
+b1_tm11	ku	Kûsî	Kundir	anlam	kûsî = kaplumbağa; kabak = kundir (ku-tr-sozluk; Wîkîferheng: eril)
+b1_tm11	cins	mê	nêr	anlam	kûsî = kaplumbağa; kabak = kundir (ku-tr-sozluk; Wîkîferheng: eril)
+b1_tm11	ez	kûsiya	kundirê	anlam	kûsî = kaplumbağa; kabak = kundir (ku-tr-sozluk; Wîkîferheng: eril)
+b1_tm11	her	Kûsî xweş e.	Kundir xweş e.	anlam	kûsî = kaplumbağa; kabak = kundir (ku-tr-sozluk; Wîkîferheng: eril)
+b1_tm11	her	Kûsiya pijandî.	Kundirê pijandî.	anlam	kûsî = kaplumbağa; kabak = kundir (ku-tr-sozluk; Wîkîferheng: eril)
+b1_tm11	gen	Kûsî û xiyar	Kundir û xiyar	anlam	kûsî = kaplumbağa; kabak = kundir (ku-tr-sozluk; Wîkîferheng: eril)
+b1_tm11	gen	Kûsiya me	Kundirê me	anlam	kûsî = kaplumbağa; kabak = kundir (ku-tr-sozluk; Wîkîferheng: eril)
+b1_tk19	ku	Tevlihevî	Pêşbirk	anlam	tevlihevî = karışıklık, kargaşa; yarışma = pêşbirk (ku-tr-sozluk)
+b1_tk19	ez	tevliheviya	pêşbirka	anlam	tevlihevî = karışıklık, kargaşa; yarışma = pêşbirk (ku-tr-sozluk)
+b1_tk19	tr	Turnuva / Rekabet	Yarışma / Müsabaka	anlam	tevlihevî = karışıklık, kargaşa; yarışma = pêşbirk (ku-tr-sozluk)
+b1_tk19	en	Tournament / Competition	Competition / Contest	anlam	tevlihevî = karışıklık, kargaşa; yarışma = pêşbirk (ku-tr-sozluk)
+b1_tk19	her	Tevlihevî dest pê kir.	Pêşbirk dest pê kir.	anlam	tevlihevî = karışıklık, kargaşa; yarışma = pêşbirk (ku-tr-sozluk)
+b1_tk19	her	Di tevliheviyê de ne.	Di pêşbirkê de ne.	anlam	tevlihevî = karışıklık, kargaşa; yarışma = pêşbirk (ku-tr-sozluk)
+b1_tk19	gen	Tevlihevî û lîstik	Pêşbirk û lîstik	anlam	tevlihevî = karışıklık, kargaşa; yarışma = pêşbirk (ku-tr-sozluk)
+b1_tk19	gen	Tevliheviya me	Pêşbirka me	anlam	tevlihevî = karışıklık, kargaşa; yarışma = pêşbirk (ku-tr-sozluk)
+b1_bd12	ku	Tayêt	Taya bilind	anlam	tayêt = deterjan; ateş = ta (a1_548, a2_091). Kayıt yüksek ateş öbeğine çevrildi
+b1_bd12	ez	tayêta	taya bilind	anlam	tayêt = deterjan; ateş = ta (a1_548, a2_091). Kayıt yüksek ateş öbeğine çevrildi
+b1_bd12	tr	Ateş	Yüksek ateş	anlam	tayêt = deterjan; ateş = ta (a1_548, a2_091). Kayıt yüksek ateş öbeğine çevrildi
+b1_bd12	en	Fever	High fever	anlam	tayêt = deterjan; ateş = ta (a1_548, a2_091). Kayıt yüksek ateş öbeğine çevrildi
+b1_bd12	her	Tayêt bilind e.	Taya wî bilind e.	anlam	tayêt = deterjan; ateş = ta (a1_548, a2_091). Kayıt yüksek ateş öbeğine çevrildi
+b1_bd12	her	Tayêta min heye.	Taya min heye.	anlam	tayêt = deterjan; ateş = ta (a1_548, a2_091). Kayıt yüksek ateş öbeğine çevrildi
+b1_bd12	gen	Tayêt û êş	Ta û êş	anlam	tayêt = deterjan; ateş = ta (a1_548, a2_091). Kayıt yüksek ateş öbeğine çevrildi
+b1_bd12	gen	Tayêta me	Taya bilind	anlam	tayêt = deterjan; ateş = ta (a1_548, a2_091). Kayıt yüksek ateş öbeğine çevrildi
+a2_420	tr	Göl	Havuz	anlam	hewz = havuz; göl = gol (ku-tr-sozluk)
+a2_420	en	Lake / Pond	Pool / Pond	anlam	hewz = havuz; göl = gol (ku-tr-sozluk)
+a2_680	tr	Okyanus	Deniz / Derya	anlam	derya = deniz; okyanus = okyanûs (ku-tr-sozluk)
+a2_680	en	Ocean	Sea	anlam	derya = deniz; okyanus = okyanûs (ku-tr-sozluk)
+a2_1044	tr	Atasözü	Önsöz	anlam	pêşgotin = önsöz; atasözü = gotina pêşiyan (b1_t4_05)
+a2_1044	en	Proverb	Preface / Foreword	anlam	pêşgotin = önsöz; atasözü = gotina pêşiyan (b1_t4_05)
+a2_1044	her	Pîrê pêşgotin got.	Min pêşgotina pirtûkê xwend.	anlam	pêşgotin = önsöz; atasözü = gotina pêşiyan (b1_t4_05)
+a2_1044	gen	Pêşgotin û stran	Pêşgotin û naverok	anlam	pêşgotin = önsöz; atasözü = gotina pêşiyan (b1_t4_05)
+a2_1231	tr	Ateşlenmek	Isınmak	anlam	germ bûn = ısınmak; ateşlenmek = ta girtin
+a2_1231	en	To have fever	To get warm	anlam	germ bûn = ısınmak; ateşlenmek = ta girtin
+a2_1231	her	Germahiya min heye.	Hewa germ dibe.	anlam	germ bûn = ısınmak; ateşlenmek = ta girtin
+a2_1231	gen	Germ bûn û nexweş	Germ bûn û sar bûn	anlam	germ bûn = ısınmak; ateşlenmek = ta girtin
+b1_805	tr	Sakatlık / Engel	Hastalık	anlam	nesaxî = hastalık (ku-tr-sozluk); sakatlık = seqetî
+b1_805	en	Disability	Illness	anlam	nesaxî = hastalık (ku-tr-sozluk); sakatlık = seqetî
+b1_805	her	Bavê wî nesaxî ye.	Bavê wî nesax e.	anlam	nesaxî = hastalık (ku-tr-sozluk); sakatlık = seqetî
+b1_910	tr	Yetenekli / Uzman	Etkili	anlam	karîger = etkili, etken (ku-tr-sozluk); uzman = pispor
+b1_910	en	Skilled / Expert	Effective / Influential	anlam	karîger = etkili, etken (ku-tr-sozluk); uzman = pispor
+b1_1060	tr	Bilim dalı	Ansiklopedi	anlam	zanistname = ansiklopedi (ku-tr-sozluk)
+b1_1060	en	Scientific discipline	Encyclopedia	anlam	zanistname = ansiklopedi (ku-tr-sozluk)
+b1_1060	her	Zanistname ya wî biyolojî ye.	Zanistname li pirtûkxaneyê ye.	anlam	zanistname = ansiklopedi (ku-tr-sozluk)
+b1_hn06	tr	Mimarlık / İnşaat sanatı	Ressamlık / Resim sanatı	anlam	wênesazî = ressamlık (ku-tr-sozluk); mimarlık = mîmarî
+b1_hn06	en	Architecture	Painting (art)	anlam	wênesazî = ressamlık (ku-tr-sozluk); mimarlık = mîmarî
+b1_f15	tr	Daha kötü olmak	En kötü	anlam	-tirîn üstünlük derecesi: en kötü; fiil değil
+b1_f15	en	To worsen	Worst	anlam	-tirîn üstünlük derecesi: en kötü; fiil değil
+b1_f15	her	Hewa xirabtirîn ji duh.	Ev roja xirabtirîn e.	anlam	-tirîn üstünlük derecesi: en kötü; fiil değil
+b1_f15	her	Xirabtirîn ji vê tişt heye.	Ya xirabtirîn derbas bû.	anlam	-tirîn üstünlük derecesi: en kötü; fiil değil
+a2_242	tr	Önünde / Karşısında	-den dolayı / Yüzünden	anlam	ji ber = -den dolayı, yüzünden (ku-tr-sozluk); önünde = li ber
+a2_242	en	In front of / Because of	Because of	anlam	ji ber = -den dolayı, yüzünden (ku-tr-sozluk); önünde = li ber
+a2_242	her	Ji ber malê radiweste.	Ji ber baranê nehat.	anlam	ji ber = -den dolayı, yüzünden (ku-tr-sozluk); önünde = li ber
+a2_242	gen	Ji ber malê	Ji ber baranê	anlam	ji ber = -den dolayı, yüzünden (ku-tr-sozluk); önünde = li ber
+b2_690	tr	Kendini vermek / Yönelmek	Direnmek / Dayanmak	anlam	ber xwe dan = dayanmak, direnmek (ku-tr-sozluk; berxwedan)
+b2_690	en	To devote oneself	To resist / To hold out	anlam	ber xwe dan = dayanmak, direnmek (ku-tr-sozluk; berxwedan)
+b2_690	her	Wê ber xwe da xwendinê.	Gel li hember zilmê ber xwe da.	anlam	ber xwe dan = dayanmak, direnmek (ku-tr-sozluk; berxwedan)
+b2_690	her	Ber xwe bidin karê xwe.	Ber xwe bidin!	anlam	ber xwe dan = dayanmak, direnmek (ku-tr-sozluk; berxwedan)
+b1_bd04	tr	Kalça	Akciğer	anlam	pişik = akciğer (ku-tr-sozluk; Wîkîferheng)
+b1_bd04	en	Hip / Waist	Lung	anlam	pişik = akciğer (ku-tr-sozluk; Wîkîferheng)
+a2_720	tr	Sorun / Mesele	Düğüm	anlam	girêk = düğüm (ku-tr-sozluk); sorun = pirsgirêk (a2_721)
+a2_720	en	Problem / Issue	Knot	anlam	girêk = düğüm (ku-tr-sozluk); sorun = pirsgirêk (a2_721)
+a2_720	her	Girêk çi ye?	Girêk vekir.	anlam	girêk = düğüm (ku-tr-sozluk); sorun = pirsgirêk (a2_721)
+a2_720	her	Girêka min heye.	Girêkek li ben da.	anlam	girêk = düğüm (ku-tr-sozluk); sorun = pirsgirêk (a2_721)
+a2_720	gen	Girêk û çareser	Girêk û ben	anlam	girêk = düğüm (ku-tr-sozluk); sorun = pirsgirêk (a2_721)
+a2_720	gen	Girêka me	Girêka ben	anlam	girêk = düğüm (ku-tr-sozluk); sorun = pirsgirêk (a2_721)

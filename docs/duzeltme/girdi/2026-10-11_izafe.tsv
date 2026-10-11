@@ -1,0 +1,116 @@
+kimlik	alan	eski	yeni	kural	gerekce
+b1_1122	cins	nêr	mê	cins	Wîkîferheng mê; korpus -a 0 / -ê 7; LÛTKE metinlerinde 22 kez hiqûqa
+b1_1122	ez	hiqûqê	hiqûqa	cins	izafe biçimi cinsiyete göre
+b1_1122	not	"Eril — [AS] s.60: ""HIQÛQ"" başlığı. ""Hiqûqê mirovan"" = insan hukuku."	"Dişil — [AS] s.60: ""HIQÛQ"" başlığı. ""Hiqûqê mirovan"" = insan hukuku."	cins	nottaki cinsiyet bilgisi
+a1_ek402	cins	nêr	mê	cins	Wîkîferheng mê; LÛTKE metinlerinde 10 kez şerbeta
+a1_ek402	ez	şerbetê	şerbeta	cins	izafe biçimi cinsiyete göre
+a1_ek402	not	Şerbet (eril/nêr) — geleneksel tatlı içecek. Veqetandek: şerbetê Newrozê. Mînak: Şerbet xweş e. Têbinî: Newroz şerbeti yaygın.	Şerbet (dişil/mê) — geleneksel tatlı içecek. Veqetandek: şerbetê Newrozê. Mînak: Şerbet xweş e. Têbinî: Newroz şerbeti yaygın.	cins	nottaki cinsiyet bilgisi
+a2_602	cins	nêr	mê	cins	Wîkîferheng mê; LÛTKE metinlerinde 9 kez meydana
+a2_602	ez	meydanê	meydana	cins	izafe biçimi cinsiyete göre
+a2_602	not	"Nêr — [FB]: meydan n.m. ""Meydanê futbolê"" = futbol sahası"	"Mê — ""Meydanê futbolê"" = futbol sahası"	cins	nottaki cinsiyet bilgisi
+a2_891	cins	nêr	mê	cins	Wîkîferheng mê; korpus -a 5 / -ê 2; LÛTKE metinlerinde 5 kez plana
+a2_891	ez	planê	plana	cins	izafe biçimi cinsiyete göre
+a2_891	not	"Nêr — [FB]: plan n.m. ""Planê te çi ye?"" = planın ne?"	"Mê — ""Planê te çi ye?"" = planın ne?"	cins	nottaki cinsiyet bilgisi
+b2_275	cins	nêr	mê	cins	Wîkîferheng mê; korpus -a 15 / -ê 9; LÛTKE metinlerinde Rojhilata Navîn
+b2_275	ez	Rojhilatê	Rojhilata	cins	izafe biçimi cinsiyete göre
+b2_275	not	"Eril — ""roj"" (güneş) + ""hilat"" (doğu). ""Rojhilatê Kurdistanê"" = Doğu Kürdistan (İran)."	"Dişil — ""roj"" (güneş) + ""hilat"" (doğu). ""Rojhilatê Kurdistanê"" = Doğu Kürdistan (İran)."	cins	nottaki cinsiyet bilgisi
+a1_199	cins	nêr	mê	cins	Wîkîferheng mê; kaydın kendi örneği Serşoka me
+a1_199	ez	serşokê	serşoka	cins	izafe biçimi cinsiyete göre
+a1_199	not	Serşok (eril/nêr). Veqetandek: serşokê me. Mînak: serşok li jor e.	Serşok (dişil/mê). Veqetandek: serşokê me. Mînak: serşok li jor e.	cins	nottaki cinsiyet bilgisi
+b1_632	cins	nêr	mê	cins	Wîkîferheng mê; kaydın kendi örneği Pratîka me
+b1_632	ez	pratîkê	pratîka	cins	izafe biçimi cinsiyete göre
+b1_632	not	"Eril — alıntı isim. ""Pratîkî"" = pratikte."	"Dişil — alıntı isim. ""Pratîkî"" = pratikte."	cins	nottaki cinsiyet bilgisi
+b1_1376	ku	Demê xwarinê	Dema xwarinê	izafe	dem dişil (korpus -a 593 / -ê 51)
+b1_1376	ez	demê xwarinê	dema xwarinê	izafe	dem dişil (korpus -a 593 / -ê 51)
+b1_1376	her	Demê xwarinê	Dema xwarinê	izafe	dem dişil (korpus -a 593 / -ê 51)
+b1_1376	her	demê xwarinê	dema xwarinê	izafe	dem dişil (korpus -a 593 / -ê 51)
+b1_1376	gen	Demê xwarinê	Dema xwarinê	izafe	dem dişil (korpus -a 593 / -ê 51)
+b1_d07	ku	Golê kûr	Gola kûr	izafe	gol dişil (Wîkîferheng; korpus -a 10 / -ê 1)
+b1_d07	ez	golê kûr	gola kûr	izafe	gol dişil (Wîkîferheng; korpus -a 10 / -ê 1)
+b1_d07	her	Golê kûr	Gola kûr	izafe	gol dişil (Wîkîferheng; korpus -a 10 / -ê 1)
+b1_d07	her	golê kûr	gola kûr	izafe	gol dişil (Wîkîferheng; korpus -a 10 / -ê 1)
+b1_d07	gen	Golê kûr	Gola kûr	izafe	gol dişil (Wîkîferheng; korpus -a 10 / -ê 1)
+c1_160	ku	Têgehê bingehîn	Têgeha bingehîn	izafe	têgeh dişil (korpus -a 14 / -ê 4; son ek -geh)
+c1_160	ez	têgehê bingehîn	têgeha bingehîn	izafe	têgeh dişil (korpus -a 14 / -ê 4; son ek -geh)
+c1_160	her	Têgehê bingehîn	Têgeha bingehîn	izafe	têgeh dişil (korpus -a 14 / -ê 4; son ek -geh)
+c1_160	gen	Têgehê bingehîn	Têgeha bingehîn	izafe	têgeh dişil (korpus -a 14 / -ê 4; son ek -geh)
+b1_1302	ku	Biharê taze	Bihara taze	izafe	bihar dişil (Wîkîferheng)
+b1_1302	ez	biharê taze	bihara taze	izafe	bihar dişil (Wîkîferheng)
+b1_1302	her	Biharê taze	Bihara taze	izafe	bihar dişil (Wîkîferheng)
+b1_1302	her	biharê taze	bihara taze	izafe	bihar dişil (Wîkîferheng)
+b1_1302	gen	Biharê taze	Bihara taze	izafe	bihar dişil (Wîkîferheng)
+b1_1376	cins	nêr	mê	cins	baş ad dişil
+b1_d07	cins	nêr	mê	cins	baş ad dişil
+c1_160	cins	nêr	mê	cins	baş ad dişil
+b1_1302	her	Kulîlkên biharê taze.	Kulîlkên bihara taze.	izafe	zincirde sıfat alan ad izafe alır
+b1_d07	her	kûr ne.	kûr in.	yazim	koşaç ünsüzden sonra in
+c1_366	cins	nêr	mê	cins	yer adları dişil
+c1_366	ku	Şingalê Êzîdîyan	Şingala Êzîdiyan	izafe	yer adı dişil; î + y -> iy (Rêbera Rastnivîsînê)
+c1_366	ez	Şingalê Êzîdîyan	Şingala Êzîdiyan	izafe	yer adı dişil; î + y -> iy (Rêbera Rastnivîsînê)
+c1_366	her	Şingalê Êzîdîyan	Şingala Êzîdiyan	izafe	yer adı dişil; î + y -> iy (Rêbera Rastnivîsînê)
+c1_366	gen	Şingalê Êzîdîyan	Şingala Êzîdiyan	izafe	yer adı dişil; î + y -> iy (Rêbera Rastnivîsînê)
+b2_730	ku	Zanistê civakî	Zanistên civakî	izafe	çoğul: Sosyal bilimler; fiil de çoğul (girîng in)
+b2_730	ez	zanistê civakî	zanistên civakî	izafe	çoğul: Sosyal bilimler; fiil de çoğul (girîng in)
+b2_730	her	Zanistê civakî	Zanistên civakî	izafe	çoğul: Sosyal bilimler; fiil de çoğul (girîng in)
+b2_730	her	zanistê civakî	zanistên civakî	izafe	çoğul: Sosyal bilimler; fiil de çoğul (girîng in)
+b2_730	gen	Zanistê civakî	Zanistên civakî	izafe	çoğul: Sosyal bilimler; fiil de çoğul (girîng in)
+b1_tk08	her	Têlefonê desta	Têlefona desta	izafe	têlefon dişil (Wîkîferheng); madde başı zaten Têlefona
+b1_tk08	her	têlefonê desta	têlefona desta	izafe	têlefon dişil (Wîkîferheng); madde başı zaten Têlefona
+b1_tk08	gen	Têlefonê desta	Têlefona desta	izafe	têlefon dişil (Wîkîferheng); madde başı zaten Têlefona
+b1_tk08	her	windabûye	winda bûye	yazim	birleşik fiil ayrı yazılır
+b1_tk08	her	Di têlefonê desta de.	Di têlefona desta de.	izafe	têlefon dişil
+b1_tk08	gen	Têlefonê me	Têlefona me	izafe	têlefon dişil
+b1_gt26	ku	Destûrê xwestin	Destûr xwestin	nesne	mastar öbeğinde nesne yalın
+b1_gt26	ez	destûrê xwestin	destûr xwestin	nesne	mastar öbeğinde nesne yalın
+b1_gt26	gen	Destûrê xwestin	Destûr xwestin	nesne	mastar öbeğinde nesne yalın
+b1_gt26	her	Destûrê xwest.	Destûr xwest.	nesne	geçmiş zaman geçişli fiilde nesne yalın
+b1_t2_04	ku	Berfê daketin	Berf daketin	nesne	geçişsiz fiilin öznesi yalın (örnekleri de Berf daket)
+b1_t2_04	gen	Berfê daketin	Berf daketin	nesne	geçişsiz fiilin öznesi yalın (örnekleri de Berf daket)
+b1_t2_05	ku	Baranê barîn	Baran barîn	nesne	geçişsiz fiilin öznesi yalın (örnekleri de Baran barî)
+b1_t2_05	gen	Baranê barîn	Baran barîn	nesne	geçişsiz fiilin öznesi yalın (örnekleri de Baran barî)
+a2_423	her	Axê welat xweş e.	Axa welat xweş e.	izafe	ax dişil (Wîkîferheng; Farqînî)
+a2_423	gen	Axê me	Axa me	izafe	ax dişil
+a2_423	not	"""Axê Kurdistanê"""	"""Axa Kurdistanê"""	izafe	ax dişil
+b1_681	her	Axê me bereketdar e.	Axa me bereketdar e.	izafe	ax dişil
+b1_681	her	Erd û ax ya me.	Erd û axa me.	izafe	ax dişil; izafe ada bitişir
+b1_681	gen	Axê Kurdistan	Axa Kurdistanê	izafe	ax dişil; tamlayan çekimli
+a2_855	her	Sekingehê nêzîk e.	Sekingeh nêzîk e.	izafe	özne yalın
+b1_1260	gen	Zanistê kompîturê	Zanista kompîturê	izafe	zanist dişil (Wîkîferheng; Farqînî)
+b1_1260	gen	Zanistê me	Zanista me	izafe	zanist dişil
+b1_1143	gen	Demê vala	Dema vala	izafe	dem dişil
+b1_d09	gen	Berfê Kurdistanê	Berfa Kurdistanê	izafe	berf dişil (Wîkîferheng)
+b1_xw23	gen	Destpêkê sifirê	Destpêka sifrê	izafe	destpêk dişil; madde başıyla aynı yazım
+b1_1220	her	Taxê me	Taxa me	izafe	tax dişil (korpus -a 19 / -ê 2)
+b1_1220	gen	Taxê me	Taxa me	izafe	tax dişil
+a2_1514	her	tişta nû	tiştê nû	izafe	tişt eril (korpus)
+b1_t1_21	gen	Gela me	Gelê me	izafe	gel eril (korpus -a 1 / -ê 41)
+b1_070	gen	Bereketê malê	Bereketa malê	izafe	bereket dişil (Wîkîferheng)
+b1_130	gen	Keskesorê biharê	Keskesora biharê	izafe	keskesor dişil (Wîkîferheng)
+b1_1362	gen	Parkê me	Parka me	izafe	park dişil (Wîkîferheng)
+b2_r07	gen	Zayendê kurdî	Zayenda kurdî	izafe	zayend dişil (korpus)
+b2_613	gen	Deştê me	Deşta me	izafe	deşt dişil (Wîkîferheng)
+c1_358	gen	welata me	welatê me	izafe	welat eril (korpus -a 1 / -ê 236)
+c1_003	her	Xemê dil	Xema dil	izafe	xem dişil (korpus -a 18 / -ê 5)
+c1_006	gen	Gulê Kurdistan	Gula Kurdistanê	izafe	gul dişil; tamlayan çekimli
+c1_008	her	Derd û êşê min.	Derd û êşa min.	izafe	êş dişil (Farqînî -a 5)
+c1_162	her	Pirsgirêkê nêzîk bûm.	Nêzîkî pirsgirêkê bûm.	izafe	nêzîkî ... bûn; Türkçe söz dizimi
+a2_1211	her	Darê gûzê.	Dara gûzê.	izafe	dar (ağaç) dişil (korpus -a 105 / -ê 49)
+b1_870	her	Darê tûtiyê	Dara tûtiyê	izafe	dar (ağaç) dişil
+b1_870	gen	Darê tûtiyê	Dara tûtiyê	izafe	dar (ağaç) dişil
+b1_483	her	Arşîvê lêkolîn kir.	Di arşîvê de lêkolîn kir.	izafe	edatsız çekim anlamı bulanıklaştırıyordu
+b1_624	her	Serkeftinê te	Serkeftina te	izafe	mastardan ad dişil (Wîkîferheng)
+b1_xw45	gen	Destxwarinê me	Destxwarina me	izafe	xwarin dişil
+@lib/features/cultural_content/domain/kurdish_folk_dances_db.dart		Renga 	Rengê 	izafe	reng eril (korpus)
+@lib/features/cultural_content/domain/kurdish_folk_dances_db.dart		 renga 	 rengê 	izafe	reng eril (korpus)
+@lib/features/cultural_content/domain/kurdish_folk_dances_db.dart		(renga reş	(rengê reş	izafe	reng eril (korpus)
+@lib/features/cultural_content/domain/kurdish_folk_dances_db.dart		kelekê piçûk a	keleka piçûk a	izafe	bağlayıcı a ile aynı cins
+@lib/features/cultural_content/domain/kurdish_events_db.dart		serhildana 1843 mîrasê xwe	serhildana 1843 mîrasa xwe	izafe	mîras dişil (Wîkîferheng)
+@lib/features/cultural_content/domain/kurdish_historical_figures_db.dart		serhildana 1843 mîrasê xwe	serhildana 1843 mîrasa xwe	izafe	mîras dişil (Wîkîferheng)
+@lib/features/cultural_content/domain/kurdish_artists_db.dart		mîrasê dengbêjiyê	mîrasa dengbêjiyê	izafe	mîras dişil (Wîkîferheng)
+@lib/features/cultural_content/domain/kurdish_historical_figures_db.dart		Dadgehê Saddam	Dadgeha Saddam	izafe	dadgeh dişil (Wîkîferheng; Farqînî -a 5)
+@lib/features/cultural_content/domain/kurdish_celebrations_db.dart		Şevê 27	Şeva 27	izafe	şev dişil (Wîkîferheng; Farqînî)
+@lib/features/cultural_content/domain/kurdish_celebrations_db.dart		Şevê 31ê	Şeva 31ê	izafe	şev dişil
+@lib/features/cultural_content/domain/kurdish_events_db.dart		sînora ku	sînorê ku	izafe	sînor eril (Wîkîferheng)
+@lib/features/cultural_content/domain/kurdish_foods_db.dart		îsotê germ	îsota germ	izafe	îsot dişil (Wîkîferheng; Farqînî -a 4)
+@lib/features/lessons/domain/c2_lesson_definitions.dart		Mîrasê Edebî	Mîrasa Edebî	izafe	mîras dişil (Wîkîferheng)
+@lib/features/lessons/domain/c1_lesson_definitions.dart		Exlaqa Kantî	Exlaqê Kantî	izafe	exlaq eril (Wîkîferheng)

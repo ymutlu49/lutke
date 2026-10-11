@@ -1,0 +1,8 @@
+kimlik	alan	eski	yeni	kural	gerekce
+@lib/features/cultural_content/domain/gotinen_pesiyan_db.dart		"  (letter: 'G', num: 10, ku: 'Gotinên Pêşîyan ( Kûrt Atasözleri)', tr: null),
+"		yapi	atasözü değil, kaynağın bölüm başlığı; listeden çıkarıldı
+@lib/features/cultural_content/domain/gotinen_pesiyan_db.dart		ku: 'Mala pir jina xirabu ji bina- Evde çok kadin (hanim; Örnek: gelin, kayin valide vs.) varsa o evin dûzeni kökten bozulur', tr: null	ku: 'Mala pir jina xirabu ji bina', tr: 'Evde çok kadın (hanım; örnek: gelin, kayınvalide vs.) varsa o evin düzeni kökten bozulur'	yapi	Türkçe çeviri Kurmancî alanına yapışmıştı; ayrıldı
+@lib/features/cultural_content/domain/gotinen_pesiyan_db.dart		ku: 'Rê reya mirine be jî, tu her li pêş be.-Yol ölûme giden yol olsa bile daima önde ol', tr: null	ku: 'Rê reya mirine be jî, tu her li pêş be.', tr: 'Yol ölüme giden yol olsa bile daima önde ol'	yapi	Türkçe çeviri Kurmancî alanına yapışmıştı; ayrıldı
+@lib/features/cultural_content/domain/gotinen_pesiyan_db.dart		ku: 'Şûşeya dil ku şikest nacebire. Gönûl cami bir kirilirsa artik birbirine yapişmaz', tr: null	ku: 'Şûşeya dil ku şikest nacebire.', tr: 'Gönül camı bir kırılırsa artık birbirine yapışmaz'	yapi	Türkçe çeviri Kurmancî alanına yapışmıştı; ayrıldı
+@lib/features/cultural_content/domain/gotinen_pesiyan_db.dart		"  (letter: 'P', num: 58, ku: 'Pîrê bawer ne diker kîre ki bivi ne.Xedi heft Kîr daye. Nene inanmiyordu bir penis göremeye allah 7 tane gösterdi', tr: null),
+"		icerik	müstehcen; çocuk izi de olan uygulamada gösterilmemeli. Geri konması kullanıcı kararı
