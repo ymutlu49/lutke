@@ -1,0 +1,930 @@
+kural	grup	kimlik	alan	mesaj	metin
+edat	cand_dances	d_008	kurmanjContent	'di rengên reş' — çevreleyen edatın ikinci parçası (da|de|ra|re|ve) eksik olabilir	Cilûberga Newrozê, lixwekirina taybet a Newrozê (21 Adar) ye. Kurdên Bakurê û Başûrê Kurdistanê di vê rojê de bi lixwekirina cilên xwe yên kurdî dest pê dikin. 
+edat	peyv_b1	b1_dc05	gen1	'di nav' — çevreleyen edatın ikinci parçası (da|de|ra|re|ve) eksik olabilir	Di nav
+edat	peyv_b1	b1_dc06	gen1	'di dema ku' — çevreleyen edatın ikinci parçası (da|de|ra|re|ve) eksik olabilir	Di dema ku
+edat	peyv_b1	b1_dc06	gen2	'di dema ku hatim' — çevreleyen edatın ikinci parçası (da|de|ra|re|ve) eksik olabilir	Di dema ku hatim
+edat	peyv_b1	b1_dc06	her1	'di dema ku dixwand' — çevreleyen edatın ikinci parçası (da|de|ra|re|ve) eksik olabilir	Di dema ku dixwand...
+edat	peyv_b1	b1_dc19	gen1	'di guhê kirin' — çevreleyen edatın ikinci parçası (da|de|ra|re|ve) eksik olabilir	Xwarin di guhê kirin
+edat	peyv_b1	b1_dc19	her1	'di guhê kir' — çevreleyen edatın ikinci parçası (da|de|ra|re|ve) eksik olabilir	Xwarin di guhê kir.
+edat	peyv_b1	b1_dc19	her2	'di xwarinê neke' — çevreleyen edatın ikinci parçası (da|de|ra|re|ve) eksik olabilir	Guh bide, guh di xwarinê neke!
+edat	peyv_b2	b2_t24	gen2	'di warê' — çevreleyen edatın ikinci parçası (da|de|ra|re|ve) eksik olabilir	Di warê...
+edat	peyv_c2	c2_519	gen1	'di rêya' — çevreleyen edatın ikinci parçası (da|de|ra|re|ve) eksik olabilir	Di rêya... de
+izafe	cand_legends	l_016	kurmanjContent	'adetê Atarê' — 'adet' dişil (proje sözlüğü), izafe -a olmalı	Destana Şêxê Senan, mesnewîyek tesewufî ye ji aliyê Feqiyê Teyran (1590–1660) ve hatiye nivîsîn. Ji destanên sereke yên edebiyata Kurdî ya klasîk e û li gor ade
+izafe	cand_legends	l_021	kurmanjContent	'wexta dirêj' — 'wext' eril (proje sözlüğü), izafe -ê olmalı	Eyşan û Bezo, çîrokeke evînê ya gelêrî ye ji gundên Botan û Hekarî. Ji destanên dengbêjiyê yên evînê. Çîrok: Eyşan, keçeke ji gundê piçûk, bi Bezo, lawekî gunêw
+izafe	cand_seed	cf_003	kurmanjContent	'Rojhilata Anadoliyê' — 'rojhilat' eril (proje sözlüğü), izafe -ê olmalı	"""Meşrûtîyet û hurrîyet û dadperwerî — ev bingehên pêşveçûna gelan in."" Seîdê Kurdî zanayekî kurd ê sedsala 19–20an e. Ji Bîtlîsê ye û li ser perwerde, mafên gel"
+izafe	ders_b1	b1_l05_e2	kurmanjPrompt	'êvarê malê' — 'êvar' dişil (proje sözlüğü), izafe -a olmalı	Pîrê her êvarê ___ malê.
+izafe	ders_b1	b1_l12_e5	kurmanjPrompt	'Erdê Kurdistanê' — 'erd' dişil (proje sözlüğü), izafe -a olmalı	Erdê Kurdistanê gelek ___ e.
+izafe	listening_exercise_db	listening_exercise_db.dart:451	audioText	'Wexta min' — 'wext' eril (proje sözlüğü), izafe -ê olmalı	Wexta min hebe, ez ê pirtûkê bixwînim.
+izafe	peyv_a1	a1_067	her2	'Erdê qehweyî' — 'erd' dişil (proje sözlüğü), izafe -a olmalı	Erdê qehweyî ye.
+izafe	peyv_a2	a2_612	gen2	'Diranşera min' — 'diranşer' eril (proje sözlüğü), izafe -ê olmalı	Diranşera min
+izafe	peyv_a2	a2_612	her1	'Diranşera min' — 'diranşer' eril (proje sözlüğü), izafe -ê olmalı	Diranşera min kû ye?
+izafe	peyv_b1	b1_070	her1	'Erdê Kurdistanê' — 'erd' dişil (proje sözlüğü), izafe -a olmalı	Erdê Kurdistanê bereketdar e.
+izafe	peyv_b1	b1_1359	gen1	'Koçê teamê' — 'koç' dişil (proje sözlüğü), izafe -a olmalı	Koçê teamê
+izafe	peyv_b1	b1_1359	gen2	'Koçê me' — 'koç' dişil (proje sözlüğü), izafe -a olmalı	Koçê me
+izafe	peyv_b1	b1_1359	her1	'Koçê teamê' — 'koç' dişil (proje sözlüğü), izafe -a olmalı	Koçê teamê baş e.
+izafe	peyv_b1	b1_1359	her2	'Koçê teamê' — 'koç' dişil (proje sözlüğü), izafe -a olmalı	Koçê teamê hat.
+izafe	peyv_b1	b1_1359	ku	'Koçê teamê' — 'koç' dişil (proje sözlüğü), izafe -a olmalı	Koçê teamê
+izafe	peyv_b1	b1_bd05	gen1	'Çoka lingan' — 'çok' eril (proje sözlüğü), izafe -ê olmalı	Çoka lingan
+izafe	peyv_b1	b1_bd05	gen2	'Çoka me' — 'çok' eril (proje sözlüğü), izafe -ê olmalı	Çoka me
+izafe	peyv_b1	b1_bd05	her1	'Çoka lingan' — 'çok' eril (proje sözlüğü), izafe -ê olmalı	Çoka lingan êşiye.
+izafe	peyv_b1	b1_bd05	her2	'Çoka min' — 'çok' eril (proje sözlüğü), izafe -ê olmalı	Çoka min.
+izafe	peyv_b1	b1_bd05	ku	'Çoka lingan' — 'çok' eril (proje sözlüğü), izafe -ê olmalı	Çoka lingan
+izafe	peyv_b1	b1_c03	gen2	'Serheda me' — 'serhed' eril (proje sözlüğü), izafe -ê olmalı	Serheda me
+izafe	peyv_b1	b1_c05b	gen2	'Xirzê me' — 'xirz' dişil (proje sözlüğü), izafe -a olmalı	Xirzê me
+izafe	peyv_b1	b1_c05b	her2	'Xirzê germ' — 'xirz' dişil (proje sözlüğü), izafe -a olmalı	Xirzê germ.
+izafe	peyv_b1	b1_ct08	gen1	'Erdê baş' — 'erd' dişil (proje sözlüğü), izafe -a olmalı	Erdê baş û ziwa
+izafe	peyv_b1	b1_ct08	gen2	'Erdê me' — 'erd' dişil (proje sözlüğü), izafe -a olmalı	Erdê me
+izafe	peyv_b1	b1_ct08	ku	'Erdê baş' — 'erd' dişil (proje sözlüğü), izafe -a olmalı	Erdê baş
+izafe	peyv_b1	b1_fk_07	her1	'wexta xwe' — 'wext' eril (proje sözlüğü), izafe -ê olmalı	Me wexta xwe bi xweşî derbas kir.
+izafe	peyv_b1	b1_k17	her1	'dîploma ji' — 'dîplom' eril (proje sözlüğü), izafe -ê olmalı	Min dîploma ji zanîngehê wergirt.
+izafe	peyv_b1	b1_k17	her2	'Dîploma ya' — 'dîplom' eril (proje sözlüğü), izafe -ê olmalı	Dîploma ya wî perwerde nîşan dide.
+izafe	peyv_b1	b1_m12	her2	'Kêzikê avêt' — 'kêzik' dişil (proje sözlüğü), izafe -a olmalı	Kêzikê avêt.
+izafe	peyv_b1	b1_t2_10	gen1	'Erdê Kurdistanê' — 'erd' dişil (proje sözlüğü), izafe -a olmalı	Erdê Kurdistanê
+izafe	peyv_b1	b1_t2_10	gen2	'Erdê me' — 'erd' dişil (proje sözlüğü), izafe -a olmalı	Erdê me
+izafe	peyv_b1	b1_t2_10	her1	'Erdê Kurdistanê' — 'erd' dişil (proje sözlüğü), izafe -a olmalı	Erdê Kurdistanê dewlemend e.
+izafe	peyv_b1	b1_t2_10	ku	'Erdê Kurdistanê' — 'erd' dişil (proje sözlüğü), izafe -a olmalı	Erdê Kurdistanê
+izafe	peyv_b1	b1_tk02	gen2	'Înternetê bikar' — 'înternet' dişil (proje sözlüğü), izafe -a olmalı	Înternetê bikar bîne
+izafe	peyv_b1	b1_tk07	gen2	'Daneheva me' — 'danehev' eril (proje sözlüğü), izafe -ê olmalı	Daneheva me
+izafe	peyv_b1	b1_tm12	her2	'Qolîflara pijandî' — 'qolîflar' eril (proje sözlüğü), izafe -ê olmalı	Qolîflara pijandî.
+izafe	peyv_b1	b1_tm14	gen2	'Dohîna me' — 'dohîn' eril (proje sözlüğü), izafe -ê olmalı	Dohîna me
+izafe	peyv_b1	b1_tm14	her2	'Dohîna me' — 'dohîn' eril (proje sözlüğü), izafe -ê olmalı	Dohîna me.
+izafe	peyv_b1	b1_zm16	gen2	'Jêrxêza me' — 'jêrxêz' eril (proje sözlüğü), izafe -ê olmalı	Jêrxêza me
+izafe	peyv_b1	b1_zm16	her1	'Jêrxêza peyvê' — 'jêrxêz' eril (proje sözlüğü), izafe -ê olmalı	Jêrxêza peyvê.
+izafe	peyv_b2	b2_s01	gen1	'Dahata netewî' — 'dahat' eril (proje sözlüğü), izafe -ê olmalı	Dahata netewî
+izafe	peyv_b2	b2_s01	gen2	'Dahata me' — 'dahat' eril (proje sözlüğü), izafe -ê olmalı	Dahata me
+izafe	peyv_b2	b2_s01	her1	'Dahata netewî' — 'dahat' eril (proje sözlüğü), izafe -ê olmalı	Dahata netewî zêde bû.
+izafe	peyv_b2	b2_s01	her2	'dahata netewî' — 'dahat' eril (proje sözlüğü), izafe -ê olmalı	Di dahata netewî de.
+izafe	peyv_b2	b2_s01	ku	'Dahata netewî' — 'dahat' eril (proje sözlüğü), izafe -ê olmalı	Dahata netewî
+izafe	peyv_c2	c2_120	gen1	'Argumana bingehîn' — 'arguman' eril (proje sözlüğü), izafe -ê olmalı	Argumana bingehîn a gotarê
+izafe	peyv_c2	c2_120	gen2	'Argumana me' — 'arguman' eril (proje sözlüğü), izafe -ê olmalı	Argumana me
+izafe	peyv_c2	c2_120	her1	'Argumana bingehîn' — 'arguman' eril (proje sözlüğü), izafe -ê olmalı	Argumana bingehîn a gotarê.
+izafe	peyv_c2	c2_120	her2	'argumana bingehîn' — 'arguman' eril (proje sözlüğü), izafe -ê olmalı	Di argumana bingehîn de.
+izafe	peyv_c2	c2_120	ku	'Argumana bingehîn' — 'arguman' eril (proje sözlüğü), izafe -ê olmalı	Argumana bingehîn a gotarê
+izafe	peyv_c2	c2_233	gen1	'Rojhilata Navîn' — 'rojhilat' eril (proje sözlüğü), izafe -ê olmalı	Siyaseta herêmî ya Rojhilata Navîn
+izafe	peyv_c2	c2_233	her1	'Rojhilata Navîn' — 'rojhilat' eril (proje sözlüğü), izafe -ê olmalı	Siyaseta herêmî ya Rojhilata Navîn.
+izafe	peyv_c2	c2_233	ku	'Rojhilata Navîn' — 'rojhilat' eril (proje sözlüğü), izafe -ê olmalı	Siyaseta herêmî ya Rojhilata Navîn
+izafe	peyv_c2	c2_820	gen1	'Argumana akademîk' — 'arguman' eril (proje sözlüğü), izafe -ê olmalı	Argumana akademîk ya serkeftî
+izafe	peyv_c2	c2_820	gen2	'Argumana me' — 'arguman' eril (proje sözlüğü), izafe -ê olmalı	Argumana me
+izafe	peyv_c2	c2_820	her1	'Argumana akademîk' — 'arguman' eril (proje sözlüğü), izafe -ê olmalı	Argumana akademîk ya serkeftî.
+izafe	peyv_c2	c2_820	her2	'argumana akademîk' — 'arguman' eril (proje sözlüğü), izafe -ê olmalı	Di argumana akademîk de.
+izafe	peyv_c2	c2_820	ku	'Argumana akademîk' — 'arguman' eril (proje sözlüğü), izafe -ê olmalı	Argumana akademîk ya serkeftî
+norm	cand_architecture	m_002	kurmanjContent	'kanîya' -> 'kaniya' (î, y'den önce i olur)	"Lalîş, cihê pîroz ê herî girîng ê gelê Êzîdî ye. Li 60 kîlometre bakurê Mosulê (Iraq), di nav çiyayên Şêxanê de ye. Ji aliyê dînî ve: • Lalîş, ""wargehê yekem ê "
+norm	cand_architecture	m_003	kurmanjContent	'Tîpolojîya' -> 'Tîpolojiya' (î, y'den önce i olur)	Mêrdîn, bajarekî dîrokî ye ku 4,000 sal niştecîbûna mirovî lê hatiye kirin. Bi mîmariya xwe ya kevirîn û bajarê xwe yê li ser çiyê navdar e. Bingeh: • Mêrdîn, s
+norm	cand_architecture	m_004	kurmanjContent	'Kanîya' -> 'Kaniya' (î, y'den önce i olur)	Kelha Dimdimê, kelheke dîrokî ye li nêzîkî bajarê Urmê (Rojhilatê Kurdistanê, Îran). Sembola berxwedana Kurdan a sedsala 17'î ye. Bingeh: Kelha di sedsala 11'î 
+norm	cand_architecture	m_006	kurmanjContent	'serpêhatîya' -> 'serpêhatiya' (î, y'den önce i olur)	Mizgefta Mezin a Cizîrê (an: Mizgefta Sor), yek ji mizgeftên herî kevin ên rojhilatê Anadoluyê ye. Di 1156'an de ji aliyê Mîrê Cizîrê yê Eyûbî, Şehîn Sileyman v
+norm	cand_architecture	m_006	kurmanjContent	'Asurîyên' -> 'Asuriyên' (î, y'den önce i olur)	Mizgefta Mezin a Cizîrê (an: Mizgefta Sor), yek ji mizgeftên herî kevin ên rojhilatê Anadoluyê ye. Di 1156'an de ji aliyê Mîrê Cizîrê yê Eyûbî, Şehîn Sileyman v
+norm	cand_architecture	m_007	kurmanjContent	'kanîyên' -> 'kaniyên' (î, y'den önce i olur)	Kela Hoşap, kelheke dîrokî ye li herêma Wanê (Bakurê Kurdistanê, Tirkiye). Yek ji kelhên Kurd ên herî navdar û hîn jî parastî ye. Dîrok: • Bingeh: Wirartî (M.B.
+norm	cand_architecture	m_008	kurmanjContent	'banîyê' -> 'baniyê' (î, y'den önce i olur)	Sêwr (an: malbatê), navê mîmariya kevneşopî ya gundên Kurdistanê ye. Avahiyek bi du qatî, bi banîyê dûz a kerpîçî û jêr-zemînê ji kevirê herêmî. Avahî: Sêwr ji 
+norm	cand_artists	s_003	kurmanjContent	'gilîya' -> 'giliya' (î, y'den önce i olur)	"Ayşe Şan li Diyarbekirê (Amed) ji dayîk bûye. ""Diyarbekirê Bilbila"" tê navkirin. Dengê wê yê bi êş û dîrokî, jiyaneke dijwar û evîneke nedîtî vediguherîne stran"
+norm	cand_artists	s_016	kurmanjContent	'gazîya' -> 'gaziya' (î, y'den önce i olur)	Mihemed Şêxo, li Amûdê ya Rojavayê Kurdistanê ji dayîk bû. Stranên wî hem devkî, hem nûjen bûn; bi tembûr û bi pênûsa xwe ya helbestî, dengê Rojava bû. ★ Stranê
+norm	cand_artists	s_018	kurmanjContent	'gazîya' -> 'gaziya' (î, y'den önce i olur)	"Mem Ararat, li Agiriyê ji dayîk bû. Stranbêj û bestekarekî nûjen ê Kurmancî ye; folk û pop hev re tîne — nifşê nû pir jê hez dike. ★ Stranên navdar: 1. ""Narîn"" "
+norm	cand_celebrations	cel_001	kurmanjContent	'ronîya' -> 'roniya' (î, y'den önce i olur)	"Newroz, cejna gelêrî ya kurdî ye, di 21ê Adarê de tê pîroz kirin. Peyva ""Newroz"" ji du parçeyan tê: ""now"" (nû) û ""roz"" (roj) — yanî ""Roja Nû"". Mîtolojî: Li gor "
+norm	cand_celebrations	cel_005	kurmanjContent	'şikrîya' -> 'şikriya' (î, y'den önce i olur)	"Mihrcan, cejna kevneşopî ya payîzê ye, ji salnameya kevin a Îranî. Di 2 Cotmehê de (16ê Mihrê li gor salnameya Şemsî) tê pîroz kirin. Bingeh: Peyva ""Mihrcan"" ji"
+norm	cand_celebrations	cel_008	kurmanjContent	'diyarîyan' -> 'diyariyan' (î, y'den önce i olur)	Sersal, mîlata sala nû ye li gor salnameya Mîladî — di 1ê Çileyê de tê pîroz kirin. Di Kurdistanê de ev cejnek nû ye, lê di nav diasporayê de gelek belav e. Ade
+norm	cand_dances	d_001	kurmanjContent	'hierarşîya' -> 'hierarşiya' (î, y'den önce i olur)	Govenda Çepik, govendeke gelêrî ya kevneşopî ye ji deşta Botan û Cizîrê. Bi awayekî dor (çember) tê meşandin: dest û dest tên girtin, piyê rastê li pêş, piyê çe
+norm	cand_dances	d_005	kurmanjContent	'gelîya' -> 'geliya' (î, y'den önce i olur)	Şal û Şepik, cil û berga kevneşopî ya mêrên Kurd ên Hekarî, Botan û Şirnexê ye. Du parçeyên sereke jê pêk tê: şal (şalwarê fereh) û şepik (kura kîşmî). Şal: • Ş
+norm	cand_dances	d_005	kurmanjContent	'Pêdivîya' -> 'Pêdiviya' (î, y'den önce i olur)	Şal û Şepik, cil û berga kevneşopî ya mêrên Kurd ên Hekarî, Botan û Şirnexê ye. Du parçeyên sereke jê pêk tê: şal (şalwarê fereh) û şepik (kura kîşmî). Şal: • Ş
+norm	cand_dances	d_006	kurmanjContent	'gelîya' -> 'geliya' (î, y'den önce i olur)	Kraz û Fîstan, cilûberga kevneşopî ya jinên Kurd e. Du parçeyên sereke: kraz (kura jêr a hundirîn) û fîstan (kura jor a fereh). Fîstan: • Kurakî fereh ji hevsen
+norm	cand_events	evt_007	kurmanjContent	'elewîyên' -> 'elewiyên' (î, y'den önce i olur)	Komkujiya Dêrsim, ji aliyê hêzên leşkerî yên Komara Tirkiyeyê ve, li dijî kurd-elewîyên Dêrsimê (Tunceli) pêk hat. Bûyera herî tirsnak a sedsala 20'î ji bo Kurd
+norm	cand_events	evt_007	kurmanjContent	'kuştîyan' -> 'kuştiyan' (î, y'den önce i olur)	Komkujiya Dêrsim, ji aliyê hêzên leşkerî yên Komara Tirkiyeyê ve, li dijî kurd-elewîyên Dêrsimê (Tunceli) pêk hat. Bûyera herî tirsnak a sedsala 20'î ji bo Kurd
+norm	cand_events	evt_009	kurmanjContent	'Kurmancîya' -> 'Kurmanciya' (î, y'den önce i olur)	Hawar, kovara yekem a Kurmancî bi alfabeya Latînî, di 15ê Gulanê 1932'yan de li Şamê (Sûriye) hate weşandin. Damezrîner: Mîr Celadet Alî Bedirxan (1893–1951), b
+norm	cand_figures	h_011	kurmanjContent	'Avrupayîyên' -> 'Avrupayiyên' (î, y'den önce i olur)	Selahaddinê Eyyûbî, kesayeta dîrokî ya herî navdar a Kurd di nav dinyayê de ye. Ji Tikrîtê (Iraqa nûjen) hatibû dinyayê, ji malbateke kurd a ji Dwînê (Ermenista
+norm	cand_figures	h_013	kurmanjContent	'Sefewîyan' -> 'Sefewiyan' (î, y'den önce i olur)	Idrîsê Bedlîsî, alimekî Kurd ê Osmanî, dîrokzan û dewletmend. Ji malbateke alim a Bedlîsê hatibû dinyayê. Tê hesibîn ku mîmar û peymana hevkariya Osmanî-Kurd e.
+norm	cand_figures	h_013	kurmanjContent	'Sefewîyan' -> 'Sefewiyan' (î, y'den önce i olur)	Idrîsê Bedlîsî, alimekî Kurd ê Osmanî, dîrokzan û dewletmend. Ji malbateke alim a Bedlîsê hatibû dinyayê. Tê hesibîn ku mîmar û peymana hevkariya Osmanî-Kurd e.
+norm	cand_figures	h_013	kurmanjContent	'dîplomasîya' -> 'dîplomasiya' (î, y'den önce i olur)	Idrîsê Bedlîsî, alimekî Kurd ê Osmanî, dîrokzan û dewletmend. Ji malbateke alim a Bedlîsê hatibû dinyayê. Tê hesibîn ku mîmar û peymana hevkariya Osmanî-Kurd e.
+norm	cand_figures	h_019	kurmanjContent	'dîya' -> 'diya' (î, y'den önce i olur)	Sara Xatun, dîya Sultan Uzun Hesen ê Aq Qoyunlu û jin-rêvebirê dîrokî yê sedsala 15'an. Bi vê yekê di siyaseta navbera Aq Qoyunlu, Osmaniyan û mîrekiyên Kurd de
+norm	cand_figures	h_019	kurmanjContent	'dîya' -> 'diya' (î, y'den önce i olur)	Sara Xatun, dîya Sultan Uzun Hesen ê Aq Qoyunlu û jin-rêvebirê dîrokî yê sedsala 15'an. Bi vê yekê di siyaseta navbera Aq Qoyunlu, Osmaniyan û mîrekiyên Kurd de
+norm	cand_foods	f_003	kurmanjContent	'pêdivîya' -> 'pêdiviya' (î, y'den önce i olur)	Savar, ji genimê hilberî tê çêkirin: genim tê kelandin, tav tê dîtin (ziwa kirin) û tê hêran. Du celeb sereke hene: • Savara hûr — ji bo şorbê û pîlavê. • Savar
+norm	cand_legends	l_002	kurmanjContent	'dijîya' -> 'dijiya' (î, y'den önce i olur)	Şahmaran, şahbanûya marên bi aqil e: serê wê serê jinekê ye, beden û dûvê wê yê mar. Di efsaneyan de, di şikeftekê de dijîya û xwedîya zanîna derman bû. Çîrok: 
+norm	cand_legends	l_002	kurmanjContent	'xwedîya' -> 'xwediya' (î, y'den önce i olur)	Şahmaran, şahbanûya marên bi aqil e: serê wê serê jinekê ye, beden û dûvê wê yê mar. Di efsaneyan de, di şikeftekê de dijîya û xwedîya zanîna derman bû. Çîrok: 
+norm	cand_legends	l_010	kurmanjContent	'gazîyê' -> 'gaziyê' (î, y'den önce i olur)	Siyabend, şivanek ji herêma Serhedê — nêzîkî çiyayê Sîpanê — bû. Bi fîqa xwe û dengbêjiya xwe, dilê Xecê, keçeke ji malbateke mîrî, jê re kişand. Xecê bi yekî d
+norm	cand_legends	l_011	kurmanjContent	'çarşîyê' -> 'çarşiyê' (î, y'den önce i olur)	Memê Alan, destana herî mezin a gelê Kurd e. Wekî kilameke devkî li ser dengbêjan belav bû; di sala 1694an de (sala hicrî 1106), Ehmedê Xanî ew wekî helbesteke 
+norm	cand_legends	l_013	kurmanjContent	'Êzîdîyan' -> 'Êzîdiyan' (î, y'den önce i olur)	Di 3ê Tebaxa 2014an de, DAÎŞ êrîş kir ser herêma Şingalê (Sincar) a Başûrê Kurdistanê. Gelê Êzîdî — yek ji kevintirîn neteweyên herêmê, xwedî ayîn û ziman û çan
+norm	cand_legends	l_014	kurmanjContent	'piranîya' -> 'piraniya' (î, y'den önce i olur)	Di 16ê Adara 1988an de, hêzên Îraqê yên Sedam Huseyn bajarê Helebceyê — li Başûrê Kurdistanê — bi gaza jehrî (sarin, mustard, tabun) bombardiman kirin. Tenê di 
+norm	cand_legends	l_016	kurmanjContent	'mesnewîyek' -> 'mesnewiyek' (î, y'den önce i olur)	Destana Şêxê Senan, mesnewîyek tesewufî ye ji aliyê Feqiyê Teyran (1590–1660) ve hatiye nivîsîn. Ji destanên sereke yên edebiyata Kurdî ya klasîk e û li gor ade
+norm	cand_legends	l_016	kurmanjContent	'şaşîya' -> 'şaşiya' (î, y'den önce i olur)	Destana Şêxê Senan, mesnewîyek tesewufî ye ji aliyê Feqiyê Teyran (1590–1660) ve hatiye nivîsîn. Ji destanên sereke yên edebiyata Kurdî ya klasîk e û li gor ade
+norm	cand_legends	l_017	kurmanjContent	'modernîya' -> 'moderniya' (î, y'den önce i olur)	Filîtê Quto, destana modernîya berxwedanê ya Botanê ye, li ser bûyerên reş ên dawiya sedsala 19'an dest pê dike. Ji repertuara dengbêjên klasîk: Şakiro, Karapet
+norm	cand_legends	l_019	kurmanjContent	'kanîya' -> 'kaniya' (î, y'den önce i olur)	Lawkê Birîndar, ji lawikên herî navdar ên dengbêjiya Kurdî ye. Çîroka lawekî birîndar dike — ku li çiyê maye û nikare vegere malê. Bingeh: Lawik, ji ber sedemek
+norm	cand_legends	l_021	kurmanjContent	'serdarîya' -> 'serdariya' (î, y'den önce i olur)	Eyşan û Bezo, çîrokeke evînê ya gelêrî ye ji gundên Botan û Hekarî. Ji destanên dengbêjiyê yên evînê. Çîrok: Eyşan, keçeke ji gundê piçûk, bi Bezo, lawekî gunêw
+norm	cand_legends	l_022	kurmanjContent	'ronîya' -> 'roniya' (î, y'den önce i olur)	"Çiyayê Cûdî, çiyayekî pîroz e li herêma Cizîrê (Şirnex). Di mîtolojiya Kurd, Êzîdî, Misilman û Xirîstîanan de navdar e wek ""cihê dakeftina keştiya Nuh"". Bingeh:"
+norm	ders_b1	b1_l01_e1	kurmanjPrompt	'bikar' -> 'bi kar' (bi kar anîn çekimli biçimde ayrı yazılır)	Dema borî ya gerguhêz (ergatîf) ji bo kîjan lêkeran tê bikar anîn?
+norm	ders_b1	b1_l05_e1	kurmanjPrompt	'bikar' -> 'bi kar' (bi kar anîn çekimli biçimde ayrı yazılır)	Dema berdewam a borî ji bo kîjan rewşê tê bikar anîn?
+norm	ders_c1	c1_l05	kurmanjTitle	'Xweserîya' -> 'Xweseriya' (î, y'den önce i olur)	Azadî û Xweserîya Exlaqî
+norm	ders_c1	c1_l07_e1	kurmanjPrompt	'bikar' -> 'bi kar' (bi kar anîn çekimli biçimde ayrı yazılır)	"Di dîwana Cizîrî de ""yar"" û ""dilber"" li ser kîjan astê tê bikar anîn?"
+norm	diyalog	c1_dlg_akademi:1	kurmanci	'têkilîya' -> 'têkiliya' (î, y'den önce i olur)	Prof. Dr. Leyla, ez dixwazim li ser têkilîya navbera ziman û nasnameya kurdî lêkolîn bikim. Ji ku dest pê bikim?
+norm	diyalog	c1_dlg_akademi:4	kurmanci	'têkilîyeke' -> 'têkiliyeke' (î, y'den önce i olur)	Ev pirsgirêkeke cidî ye. Lê ji perspektîfa zimannasiyê, ziman û nasname têkilîyeke diyalektîk e — yek bi ya din mezin dibe, lê dibe jî ji hev veqete.
+norm	diyalog	c1_dlg_medya:4	kurmanci	'çavkanîyên' -> 'çavkaniyên' (î, y'den önce i olur)	5N1K: Kî, Çi, Kengî, Ku, Çima, Çawa. Bi vî awayî, nûçeya te tam dibe. Û tiştê herî girîng: çavkanîyên xwe kontrol bike.
+norm	diyalog	c2_dlg_konferans:1	kurmanci	'têkilîya' -> 'têkiliya' (î, y'den önce i olur)	Heval û hogirên hêja, silav û rêzên min ji we re. Îro em ê li ser têkilîya navbera zimanê zikmakî û nasnameya Kurdan ên li diasporayê biaxivin.
+norm	peyv_a1	a1_528	gen1	'Lêbelê' -> 'lê belê'	Lêbelê ew nehat.
+norm	peyv_a1	a1_528	gen2	'lêbelê' -> 'lê belê'	Ez dizanim, lêbelê ew zehmet e.
+norm	peyv_a1	a1_528	her1	'lêbelê' -> 'lê belê'	Ez dixwazim, lêbelê nikarim, dê.
+norm	peyv_a1	a1_528	her2	'lêbelê' -> 'lê belê'	Pîrê, lêbelê ew ne li vir e.
+norm	peyv_a1	a1_528	ku	'Lêbelê' -> 'lê belê'	Lêbelê
+norm	peyv_a2	a2_1073	gen1	'bikar' -> 'bi kar' (bi kar anîn çekimli biçimde ayrı yazılır)	Bikar anîn
+norm	peyv_a2	a2_1073	gen2	'bikar' -> 'bi kar' (bi kar anîn çekimli biçimde ayrı yazılır)	Bikar bîne!
+norm	peyv_a2	a2_1073	her1	'bikar' -> 'bi kar' (bi kar anîn çekimli biçimde ayrı yazılır)	Vê pirtûkê bikar bîne.
+norm	peyv_a2	a2_1073	her2	'bikar' -> 'bi kar' (bi kar anîn çekimli biçimde ayrı yazılır)	Ez Kurmancî bikar tînim.
+norm	peyv_a2	a2_1073	ku	'bikar' -> 'bi kar' (bi kar anîn çekimli biçimde ayrı yazılır)	Bikar anîn
+norm	peyv_a2	a2_1287	gen2	'bêrîya' -> 'bêriya' (î, y'den önce i olur)	Min bêrîya te kir.
+norm	peyv_a2	a2_1287	her1	'bêrîya' -> 'bêriya' (î, y'den önce i olur)	Min bêrîya te kir.
+norm	peyv_a2	a2_1287	her2	'Bêrîya' -> 'Bêriya' (î, y'den önce i olur)	Bêrîya welatê xwe dikim.
+norm	peyv_a2	a2_1443	gen2	'Aramîya' -> 'Aramiya' (î, y'den önce i olur)	Aramîya me
+norm	peyv_a2	a2_1952	her1	'bikar' -> 'bi kar' (bi kar anîn çekimli biçimde ayrı yazılır)	Ferhenga kurdî bikar tînim.
+norm	peyv_a2	a2_fk_04	gen2	'Bêhntengîya' -> 'Bêhntengiya' (î, y'den önce i olur)	Bêhntengîya bajêr
+norm	peyv_a2	a2_fk_04	her1	'Bêhntengîya' -> 'Bêhntengiya' (î, y'den önce i olur)	Bêhntengîya bajêr zehmet e.
+norm	peyv_a2	a2_fk_06	gen2	'Zevîya' -> 'Zeviya' (î, y'den önce i olur)	Zevîya me
+norm	peyv_b1	b1_1261	her1	'bikar' -> 'bi kar' (bi kar anîn çekimli biçimde ayrı yazılır)	Kompîtur bikar tînim.
+norm	peyv_b1	b1_939	her2	'bikar' -> 'bi kar' (bi kar anîn çekimli biçimde ayrı yazılır)	Divê em enerjiya kesk bikar bînin.
+norm	peyv_b1	b1_t05	her1	'bikar' -> 'bi kar' (bi kar anîn çekimli biçimde ayrı yazılır)	Dermanên dareyî bikar tînin.
+norm	peyv_b1	b1_t1_12	her2	'bikar' -> 'bi kar' (bi kar anîn çekimli biçimde ayrı yazılır)	Ji jêderên kar bikar bîne.
+norm	peyv_b1	b1_tk02	gen2	'bikar' -> 'bi kar' (bi kar anîn çekimli biçimde ayrı yazılır)	Înternetê bikar bîne
+norm	peyv_b1	b1_y06	her1	'bikar' -> 'bi kar' (bi kar anîn çekimli biçimde ayrı yazılır)	Rûnê giya bikar bîne.
+norm	peyv_b2	b2_046	gen2	'Dadmendîya' -> 'Dadmendiya' (î, y'den önce i olur)	Dadmendîya civakî
+norm	peyv_b2	b2_350	gen2	'Dengbêjîya' -> 'Dengbêjiya' (î, y'den önce i olur)	Dengbêjîya me
+norm	peyv_b2	b2_350	her2	'Dengbêjîya' -> 'Dengbêjiya' (î, y'den önce i olur)	Dengbêjîya kurdî.
+norm	peyv_b2	b2_351	gen2	'Stranbêjîya' -> 'Stranbêjiya' (î, y'den önce i olur)	Stranbêjîya me
+norm	peyv_b2	b2_351	her2	'Stranbêjîya' -> 'Stranbêjiya' (î, y'den önce i olur)	Stranbêjîya kurdî.
+norm	peyv_b2	b2_383	gen2	'Qirêjahîya' -> 'Qirêjahiya' (î, y'den önce i olur)	Qirêjahîya bajêr
+norm	peyv_b2	b2_383	her1	'Qirêjahîya' -> 'Qirêjahiya' (î, y'den önce i olur)	Qirêjahîya avê.
+norm	peyv_b2	b2_391	gen2	'Êzdîyên' -> 'Êzdiyên' (î, y'den önce i olur)	Êzdîyên me
+norm	peyv_b2	b2_391	her1	'Êzdîyên' -> 'Êzdiyên' (î, y'den önce i olur)	Êzdîyên Şengalê.
+norm	peyv_b2	b2_391	her2	'Êzdîyan' -> 'Êzdiyan' (î, y'den önce i olur)	Çanda Êzdîyan.
+norm	peyv_b2	b2_392	gen2	'Êzidîtîya' -> 'Êzidîtiya' (î, y'den önce i olur)	Êzidîtîya me
+norm	peyv_b2	b2_392	her1	'kevneşopîyek' -> 'kevneşopiyek' (î, y'den önce i olur)	Êzidîtî kevneşopîyek e.
+norm	peyv_b2	b2_513	gen2	'Edîtorîya' -> 'Edîtoriya' (î, y'den önce i olur)	Edîtorîya kovarê
+norm	peyv_b2	b2_513	her1	'Edîtorîya' -> 'Edîtoriya' (î, y'den önce i olur)	Edîtorîya kovarê.
+norm	peyv_b2	b2_520	gen2	'Nûjenîya' -> 'Nûjeniya' (î, y'den önce i olur)	Nûjenîya me
+norm	peyv_b2	b2_520	her1	'Nûjenîya' -> 'Nûjeniya' (î, y'den önce i olur)	Nûjenîya zimanî.
+norm	peyv_b2	b2_531	gen2	'Demokrasîya' -> 'Demokrasiya' (î, y'den önce i olur)	Demokrasîya me
+norm	peyv_b2	b2_540	gen2	'Teorîya' -> 'Teoriya' (î, y'den önce i olur)	Teorîya postkolonyalîzmê
+norm	peyv_b2	b2_562	gen2	'Hevsengîya' -> 'Hevsengiya' (î, y'den önce i olur)	Hevsengîya me
+norm	peyv_b2	b2_563	gen2	'Alîgirîya' -> 'Alîgiriya' (î, y'den önce i olur)	Alîgirîya me
+norm	peyv_b2	b2_609	her1	'destpê kir' -> 'dest pê kir'	Me proje destpê kir.
+norm	peyv_b2	b2_642	her1	'Agahîya' -> 'Agahiya' (î, y'den önce i olur)	Agahîya nepenî.
+norm	peyv_b2	b2_652	gen2	'Çavkanîya' -> 'Çavkaniya' (î, y'den önce i olur)	Çavkanîya me
+norm	peyv_b2	b2_652	her1	'Çavkanîyên' -> 'Çavkaniyên' (î, y'den önce i olur)	Çavkanîyên vekirî hene.
+norm	peyv_b2	b2_652	her2	'çavkanîya' -> 'çavkaniya' (î, y'den önce i olur)	Di çavkanîya vê agahîyê de.
+norm	peyv_b2	b2_652	her2	'agahîyê' -> 'agahiyê' (î, y'den önce i olur)	Di çavkanîya vê agahîyê de.
+norm	peyv_b2	b2_656	gen2	'Ewlehîya' -> 'Ewlehiya' (î, y'den önce i olur)	Ewlehîya me
+norm	peyv_b2	b2_656	her1	'Ewlehîya' -> 'Ewlehiya' (î, y'den önce i olur)	Ewlehîya daneyê girîng e.
+norm	peyv_b2	b2_656	her2	'ewlehîyê' -> 'ewlehiyê' (î, y'den önce i olur)	Di ewlehîyê de.
+norm	peyv_b2	b2_660	gen2	'Hevsengîya' -> 'Hevsengiya' (î, y'den önce i olur)	Hevsengîya me
+norm	peyv_b2	b2_660	her1	'Hevsengîya' -> 'Hevsengiya' (î, y'den önce i olur)	Hevsengîya civakî girîng e.
+norm	peyv_b2	b2_660	her2	'hevsengîyê' -> 'hevsengiyê' (î, y'den önce i olur)	Di hevsengîyê de.
+norm	peyv_b2	b2_661	gen2	'Berjewendîya' -> 'Berjewendiya' (î, y'den önce i olur)	Berjewendîya me
+norm	peyv_b2	b2_661	her1	'Berjewendîya' -> 'Berjewendiya' (î, y'den önce i olur)	Berjewendîya giştî.
+norm	peyv_b2	b2_661	her2	'berjewendîya' -> 'berjewendiya' (î, y'den önce i olur)	Di berjewendîya gel de.
+norm	peyv_b2	b2_695	gen2	'Wênesazîya' -> 'Wênesaziya' (î, y'den önce i olur)	Wênesazîya me
+norm	peyv_b2	b2_704	gen2	'Xweserîya' -> 'Xweseriya' (î, y'den önce i olur)	Xweserîya me
+norm	peyv_b2	b2_704	her1	'Xweserîya' -> 'Xweseriya' (î, y'den önce i olur)	Xweserîya Başûrê Kurdistanê.
+norm	peyv_b2	b2_711	gen1	'Sazîyên' -> 'Saziyên' (î, y'den önce i olur)	Sazîyên navdewletî
+norm	peyv_b2	b2_711	gen2	'Sazîyên' -> 'Saziyên' (î, y'den önce i olur)	Sazîyên me
+norm	peyv_b2	b2_711	her1	'Sazîyên' -> 'Saziyên' (î, y'den önce i olur)	Sazîyên navdewletî.
+norm	peyv_b2	b2_711	her2	'sazîyên' -> 'saziyên' (î, y'den önce i olur)	Di sazîyên navdewletî de.
+norm	peyv_b2	b2_711	ku	'Sazîyên' -> 'Saziyên' (î, y'den önce i olur)	Sazîyên navdewletî
+norm	peyv_b2	b2_712	gen2	'Nûnerîtîya' -> 'Nûnerîtiya' (î, y'den önce i olur)	Nûnerîtîya me
+norm	peyv_b2	b2_722	her1	'Êzdîyan' -> 'Êzdiyan' (î, y'den önce i olur)	Şingal warê Êzdîyan e.
+norm	peyv_b2	b2_753	gen1	'Stranbêjîya' -> 'Stranbêjiya' (î, y'den önce i olur)	Stranbêjîya neteweyî
+norm	peyv_b2	b2_753	gen2	'Stranbêjîya' -> 'Stranbêjiya' (î, y'den önce i olur)	Stranbêjîya me
+norm	peyv_b2	b2_753	her1	'Stranbêjîya' -> 'Stranbêjiya' (î, y'den önce i olur)	Stranbêjîya neteweyî.
+norm	peyv_b2	b2_753	her2	'stranbêjîya' -> 'stranbêjiya' (î, y'den önce i olur)	Di stranbêjîya neteweyî de.
+norm	peyv_b2	b2_772	gen2	'Çavkanîyên' -> 'Çavkaniyên' (î, y'den önce i olur)	Çavkanîyên me
+norm	peyv_b2	b2_773	gen2	'Metodolojîya' -> 'Metodolojiya' (î, y'den önce i olur)	Metodolojîya me
+norm	peyv_b2	b2_773	her1	'Metodolojîya' -> 'Metodolojiya' (î, y'den önce i olur)	Metodolojîya baş.
+norm	peyv_b2	b2_a06	gen2	'Çavkanîyên' -> 'Çavkaniyên' (î, y'den önce i olur)	Çavkanîyên me
+norm	peyv_b2	b2_a07	gen1	'Metodolojîya' -> 'Metodolojiya' (î, y'den önce i olur)	Metodolojîya lêkolînê
+norm	peyv_b2	b2_a07	gen2	'Metodolojîya' -> 'Metodolojiya' (î, y'den önce i olur)	Metodolojîya me
+norm	peyv_b2	b2_a07	her1	'Metodolojîya' -> 'Metodolojiya' (î, y'den önce i olur)	Metodolojîya lêkolînê baş e.
+norm	peyv_b2	b2_a07	her2	'metodolojîya' -> 'metodolojiya' (î, y'den önce i olur)	Di metodolojîya lêkolînê de.
+norm	peyv_b2	b2_a07	ku	'Metodolojîya' -> 'Metodolojiya' (î, y'den önce i olur)	Metodolojîya lêkolînê
+norm	peyv_b2	b2_a12	gen1	'Têkilîya' -> 'Têkiliya' (î, y'den önce i olur)	Têkilîya hêz û zanistê
+norm	peyv_b2	b2_a12	gen2	'Têkilîya' -> 'Têkiliya' (î, y'den önce i olur)	Têkilîya me
+norm	peyv_b2	b2_a12	her1	'Têkilîya' -> 'Têkiliya' (î, y'den önce i olur)	Têkilîya hêz û zanistê.
+norm	peyv_b2	b2_a12	her2	'têkilîya' -> 'têkiliya' (î, y'den önce i olur)	Di têkilîya hêz û zanistê de.
+norm	peyv_b2	b2_a12	ku	'Têkilîya' -> 'Têkiliya' (î, y'den önce i olur)	Têkilîya hêz û zanistê
+norm	peyv_b2	b2_a17	gen2	'Ronakbîrîya' -> 'Ronakbîriya' (î, y'den önce i olur)	Ronakbîrîya me
+norm	peyv_b2	b2_cv01	gen1	'Tevkarîya' -> 'Tevkariya' (î, y'den önce i olur)	Tevkarîya civakî
+norm	peyv_b2	b2_cv01	gen2	'Tevkarîya' -> 'Tevkariya' (î, y'den önce i olur)	Tevkarîya me
+norm	peyv_b2	b2_cv01	her1	'Tevkarîya' -> 'Tevkariya' (î, y'den önce i olur)	Tevkarîya civakî lazim e.
+norm	peyv_b2	b2_cv01	her2	'tevkarîya' -> 'tevkariya' (î, y'den önce i olur)	Di tevkarîya civakî de.
+norm	peyv_b2	b2_cv01	ku	'Tevkarîya' -> 'Tevkariya' (î, y'den önce i olur)	Tevkarîya civakî
+norm	peyv_b2	b2_cv03	gen2	'Wekhevîya' -> 'Wekheviya' (î, y'den önce i olur)	Wekhevîya me
+norm	peyv_b2	b2_cv04	gen1	'Piştgirîya' -> 'Piştgiriya' (î, y'den önce i olur)	Piştgirîya hevdû
+norm	peyv_b2	b2_cv04	gen2	'Piştgirîya' -> 'Piştgiriya' (î, y'den önce i olur)	Piştgirîya me
+norm	peyv_b2	b2_cv04	her1	'Piştgirîya' -> 'Piştgiriya' (î, y'den önce i olur)	Piştgirîya hevdû lazim e.
+norm	peyv_b2	b2_cv04	her2	'piştgirîya' -> 'piştgiriya' (î, y'den önce i olur)	Di piştgirîya hevdû de.
+norm	peyv_b2	b2_cv04	ku	'Piştgirîya' -> 'Piştgiriya' (î, y'den önce i olur)	Piştgirîya hevdû
+norm	peyv_b2	b2_e10	gen1	'Hêvîya' -> 'Hêviya' (î, y'den önce i olur)	Hêvîya vejînê
+norm	peyv_b2	b2_e10	gen2	'Hêvîya' -> 'Hêviya' (î, y'den önce i olur)	Hêvîya me
+norm	peyv_b2	b2_e10	her1	'Hêvîya' -> 'Hêviya' (î, y'den önce i olur)	Hêvîya vejînê heye.
+norm	peyv_b2	b2_e10	her2	'hêvîya' -> 'hêviya' (î, y'den önce i olur)	Di hêvîya vejînê de.
+norm	peyv_b2	b2_e10	ku	'Hêvîya' -> 'Hêviya' (î, y'den önce i olur)	Hêvîya vejînê
+norm	peyv_b2	b2_e11	gen1	'Neteweperestîya' -> 'Neteweperestiya' (î, y'den önce i olur)	Neteweperestîya çandî
+norm	peyv_b2	b2_e11	gen2	'Neteweperestîya' -> 'Neteweperestiya' (î, y'den önce i olur)	Neteweperestîya me
+norm	peyv_b2	b2_e11	her1	'Neteweperestîya' -> 'Neteweperestiya' (î, y'den önce i olur)	Neteweperestîya çandî.
+norm	peyv_b2	b2_e11	her2	'neteweperestîya' -> 'neteweperestiya' (î, y'den önce i olur)	Di neteweperestîya çandî de.
+norm	peyv_b2	b2_e11	ku	'Neteweperestîya' -> 'Neteweperestiya' (î, y'den önce i olur)	Neteweperestîya çandî
+norm	peyv_b2	b2_e13	gen1	'Têkilîya' -> 'Têkiliya' (î, y'den önce i olur)	Têkilîya dîrok û îroyê
+norm	peyv_b2	b2_e13	gen2	'Têkilîya' -> 'Têkiliya' (î, y'den önce i olur)	Têkilîya me
+norm	peyv_b2	b2_e13	her1	'Têkilîya' -> 'Têkiliya' (î, y'den önce i olur)	Têkilîya dîrok û îroyê.
+norm	peyv_b2	b2_e13	her2	'têkilîya' -> 'têkiliya' (î, y'den önce i olur)	Di têkilîya dîrok û îroyê de.
+norm	peyv_b2	b2_e13	ku	'Têkilîya' -> 'Têkiliya' (î, y'den önce i olur)	Têkilîya dîrok û îroyê
+norm	peyv_b2	b2_f01	gen1	'Teorîya' -> 'Teoriya' (î, y'den önce i olur)	Teorîya edebiyatê
+norm	peyv_b2	b2_f01	gen2	'Teorîya' -> 'Teoriya' (î, y'den önce i olur)	Teorîya me
+norm	peyv_b2	b2_f01	her1	'Teorîya' -> 'Teoriya' (î, y'den önce i olur)	Teorîya edebiyatê.
+norm	peyv_b2	b2_f01	her2	'teorîya' -> 'teoriya' (î, y'den önce i olur)	Di teorîya edebiyatê de.
+norm	peyv_b2	b2_f01	ku	'Teorîya' -> 'Teoriya' (î, y'den önce i olur)	Teorîya edebiyatê
+norm	peyv_b2	b2_f23	gen1	'Dîplomasîya' -> 'Dîplomasiya' (î, y'den önce i olur)	Dîplomasîya çandî
+norm	peyv_b2	b2_f23	gen2	'Dîplomasîya' -> 'Dîplomasiya' (î, y'den önce i olur)	Dîplomasîya me
+norm	peyv_b2	b2_f23	her1	'Dîplomasîya' -> 'Dîplomasiya' (î, y'den önce i olur)	Dîplomasîya çandî.
+norm	peyv_b2	b2_f23	her2	'dîplomasîya' -> 'dîplomasiya' (î, y'den önce i olur)	Di dîplomasîya çandî de.
+norm	peyv_b2	b2_f23	ku	'Dîplomasîya' -> 'Dîplomasiya' (î, y'den önce i olur)	Dîplomasîya çandî
+norm	peyv_b2	b2_f36	gen1	'Aborîya' -> 'Aboriya' (î, y'den önce i olur)	Aborîya rûberî
+norm	peyv_b2	b2_f36	gen2	'Aborîya' -> 'Aboriya' (î, y'den önce i olur)	Aborîya me
+norm	peyv_b2	b2_f36	her1	'Aborîya' -> 'Aboriya' (î, y'den önce i olur)	Aborîya rûberî.
+norm	peyv_b2	b2_f36	her2	'aborîya' -> 'aboriya' (î, y'den önce i olur)	Di aborîya rûberî de.
+norm	peyv_b2	b2_f36	ku	'Aborîya' -> 'Aboriya' (î, y'den önce i olur)	Aborîya rûberî
+norm	peyv_b2	b2_fk_02	gen2	'Jîngehparêzîya' -> 'Jîngehparêziya' (î, y'den önce i olur)	Jîngehparêzîya me
+norm	peyv_b2	b2_fk_05	gen1	'Xweşîya' -> 'Xweşiya' (î, y'den önce i olur)	Xweşîya candaran
+norm	peyv_b2	b2_fk_05	gen2	'Xweşîya' -> 'Xweşiya' (î, y'den önce i olur)	Xweşîya jîngehê
+norm	peyv_b2	b2_fk_05	her1	'Xweşîya' -> 'Xweşiya' (î, y'den önce i olur)	Xweşîya candaran lazim e.
+norm	peyv_b2	b2_fk_05	her2	'xweşîya' -> 'xweşiya' (î, y'den önce i olur)	Ji bo xweşîya candaran.
+norm	peyv_b2	b2_fk_05	ku	'Xweşîya' -> 'Xweşiya' (î, y'den önce i olur)	Xweşîya candaran
+norm	peyv_b2	b2_h03	gen2	'Bêsûcîya' -> 'Bêsûciya' (î, y'den önce i olur)	Bêsûcîya me
+norm	peyv_b2	b2_h07	gen2	'Daxuyanîya' -> 'Daxuyaniya' (î, y'den önce i olur)	Daxuyanîya me
+norm	peyv_b2	b2_h07	her2	'Daxuyanîya' -> 'Daxuyaniya' (î, y'den önce i olur)	Daxuyanîya fermî.
+norm	peyv_b2	b2_h12	gen1	'Aborîya' -> 'Aboriya' (î, y'den önce i olur)	Aborîya neteweperest
+norm	peyv_b2	b2_h12	gen2	'Aborîya' -> 'Aboriya' (î, y'den önce i olur)	Aborîya me
+norm	peyv_b2	b2_h12	her1	'Aborîya' -> 'Aboriya' (î, y'den önce i olur)	Aborîya neteweperest.
+norm	peyv_b2	b2_h12	her2	'aborîya' -> 'aboriya' (î, y'den önce i olur)	Di aborîya neteweperest de.
+norm	peyv_b2	b2_h12	ku	'Aborîya' -> 'Aboriya' (î, y'den önce i olur)	Aborîya neteweperest
+norm	peyv_b2	b2_h14	gen1	'Aborîya' -> 'Aboriya' (î, y'den önce i olur)	Aborîya bazar
+norm	peyv_b2	b2_h14	gen2	'Aborîya' -> 'Aboriya' (î, y'den önce i olur)	Aborîya me
+norm	peyv_b2	b2_h14	her1	'Aborîya' -> 'Aboriya' (î, y'den önce i olur)	Aborîya bazar heye.
+norm	peyv_b2	b2_h14	her2	'aborîya' -> 'aboriya' (î, y'den önce i olur)	Di aborîya bazar de.
+norm	peyv_b2	b2_h14	ku	'Aborîya' -> 'Aboriya' (î, y'den önce i olur)	Aborîya bazar
+norm	peyv_b2	b2_k07	gen2	'Wêjenasîya' -> 'Wêjenasiya' (î, y'den önce i olur)	Wêjenasîya me
+norm	peyv_b2	b2_k12	gen1	'Piştgirîya' -> 'Piştgiriya' (î, y'den önce i olur)	Piştgirîya civakî
+norm	peyv_b2	b2_k12	gen2	'Piştgirîya' -> 'Piştgiriya' (î, y'den önce i olur)	Piştgirîya me
+norm	peyv_b2	b2_k12	her1	'Piştgirîya' -> 'Piştgiriya' (î, y'den önce i olur)	Piştgirîya civakî lazim e.
+norm	peyv_b2	b2_k12	her2	'piştgirîya' -> 'piştgiriya' (î, y'den önce i olur)	Di piştgirîya civakî de.
+norm	peyv_b2	b2_k12	ku	'Piştgirîya' -> 'Piştgiriya' (î, y'den önce i olur)	Piştgirîya civakî
+norm	peyv_b2	b2_k14	gen1	'Çareserîya' -> 'Çareseriya' (î, y'den önce i olur)	Çareserîya demokrasîk
+norm	peyv_b2	b2_k14	gen2	'Çareserîya' -> 'Çareseriya' (î, y'den önce i olur)	Çareserîya me
+norm	peyv_b2	b2_k14	her1	'Çareserîya' -> 'Çareseriya' (î, y'den önce i olur)	Çareserîya demokrasîk lazim e.
+norm	peyv_b2	b2_k14	her2	'çareserîya' -> 'çareseriya' (î, y'den önce i olur)	Di çareserîya demokrasîk de.
+norm	peyv_b2	b2_k14	ku	'Çareserîya' -> 'Çareseriya' (î, y'den önce i olur)	Çareserîya demokrasîk
+norm	peyv_b2	b2_k15	gen1	'Yekîtîya' -> 'Yekîtiya' (î, y'den önce i olur)	Yekîtîya gelê kurd
+norm	peyv_b2	b2_k15	gen2	'Yekîtîya' -> 'Yekîtiya' (î, y'den önce i olur)	Yekîtîya me
+norm	peyv_b2	b2_k15	her1	'Yekîtîya' -> 'Yekîtiya' (î, y'den önce i olur)	Yekîtîya gelê kurd girîng e.
+norm	peyv_b2	b2_k15	her2	'yekîtîya' -> 'yekîtiya' (î, y'den önce i olur)	Di yekîtîya gelê kurd de.
+norm	peyv_b2	b2_k15	ku	'Yekîtîya' -> 'Yekîtiya' (î, y'den önce i olur)	Yekîtîya gelê kurd
+norm	peyv_b2	b2_q06	gen1	'Aborîya' -> 'Aboriya' (î, y'den önce i olur)	Aborîya dîjîtal
+norm	peyv_b2	b2_q06	gen2	'Aborîya' -> 'Aboriya' (î, y'den önce i olur)	Aborîya me
+norm	peyv_b2	b2_q06	her1	'Aborîya' -> 'Aboriya' (î, y'den önce i olur)	Aborîya dîjîtal mezin dibe.
+norm	peyv_b2	b2_q06	her2	'aborîya' -> 'aboriya' (î, y'den önce i olur)	Di aborîya dîjîtal de.
+norm	peyv_b2	b2_q06	ku	'Aborîya' -> 'Aboriya' (î, y'den önce i olur)	Aborîya dîjîtal
+norm	peyv_b2	b2_q19	gen1	'Sazîya' -> 'Saziya' (î, y'den önce i olur)	Sazîya sivîl
+norm	peyv_b2	b2_q19	gen2	'Sazîya' -> 'Saziya' (î, y'den önce i olur)	Sazîya me
+norm	peyv_b2	b2_q19	her1	'Sazîya' -> 'Saziya' (î, y'den önce i olur)	Sazîya sivîl heye.
+norm	peyv_b2	b2_q19	her2	'sazîya' -> 'saziya' (î, y'den önce i olur)	Di sazîya sivîl de.
+norm	peyv_b2	b2_q19	ku	'Sazîya' -> 'Saziya' (î, y'den önce i olur)	Sazîya sivîl
+norm	peyv_b2	b2_r03	gen2	'Nerêzîyên' -> 'Nerêziyên' (î, y'den önce i olur)	Nerêzîyên kurdî
+norm	peyv_b2	b2_r07	gen1	'Cihêtîya' -> 'Cihêtiya' (î, y'den önce i olur)	Cihêtîya zayendî di ziman de
+norm	peyv_b2	b2_r07	her1	'Cihêtîya' -> 'Cihêtiya' (î, y'den önce i olur)	Cihêtîya zayendî di ziman de.
+norm	peyv_b2	b2_r07	her2	'cihêtîya' -> 'cihêtiya' (î, y'den önce i olur)	Di cihêtîya zayendî de.
+norm	peyv_b2	b2_r07	ku	'Cihêtîya' -> 'Cihêtiya' (î, y'den önce i olur)	Cihêtîya zayendî di ziman de
+norm	peyv_b2	b2_s02	gen1	'Aborîya' -> 'Aboriya' (î, y'den önce i olur)	Aborîya hevbeş
+norm	peyv_b2	b2_s02	gen2	'Aborîya' -> 'Aboriya' (î, y'den önce i olur)	Aborîya me
+norm	peyv_b2	b2_s02	her1	'Aborîya' -> 'Aboriya' (î, y'den önce i olur)	Aborîya hevbeş baş e.
+norm	peyv_b2	b2_s02	her2	'aborîya' -> 'aboriya' (î, y'den önce i olur)	Di aborîya hevbeş de.
+norm	peyv_b2	b2_s02	ku	'Aborîya' -> 'Aboriya' (î, y'den önce i olur)	Aborîya hevbeş
+norm	peyv_b2	b2_s06	gen1	'Pêşengîya' -> 'Pêşengiya' (î, y'den önce i olur)	Pêşengîya aborî
+norm	peyv_b2	b2_s06	gen2	'Pêşengîya' -> 'Pêşengiya' (î, y'den önce i olur)	Pêşengîya me
+norm	peyv_b2	b2_s06	her1	'Pêşengîya' -> 'Pêşengiya' (î, y'den önce i olur)	Pêşengîya aborî lazim e.
+norm	peyv_b2	b2_s06	her2	'pêşengîya' -> 'pêşengiya' (î, y'den önce i olur)	Di pêşengîya aborî de.
+norm	peyv_b2	b2_s06	ku	'Pêşengîya' -> 'Pêşengiya' (î, y'den önce i olur)	Pêşengîya aborî
+norm	peyv_b2	b2_s11	gen2	'dewlemendîya' -> 'dewlemendiya' (î, y'den önce i olur)	Xizanî û dewlemendîya me
+norm	peyv_b2	b2_s14	gen1	'Têkilîya' -> 'Têkiliya' (î, y'den önce i olur)	Têkilîya aborî ya navnetewî
+norm	peyv_b2	b2_s14	gen2	'Têkilîya' -> 'Têkiliya' (î, y'den önce i olur)	Têkilîya me
+norm	peyv_b2	b2_s14	her1	'Têkilîya' -> 'Têkiliya' (î, y'den önce i olur)	Têkilîya aborî ya navnetewî.
+norm	peyv_b2	b2_s14	her2	'têkilîya' -> 'têkiliya' (î, y'den önce i olur)	Di têkilîya aborî ya navnetewî de.
+norm	peyv_b2	b2_s14	ku	'Têkilîya' -> 'Têkiliya' (î, y'den önce i olur)	Têkilîya aborî ya navnetewî
+norm	peyv_b2	b2_s40	gen1	'Serwerîya' -> 'Serweriya' (î, y'den önce i olur)	Serwerîya zimanî
+norm	peyv_b2	b2_s40	gen2	'Serwerîya' -> 'Serweriya' (î, y'den önce i olur)	Serwerîya me
+norm	peyv_b2	b2_s40	her1	'Serwerîya' -> 'Serweriya' (î, y'den önce i olur)	Serwerîya zimanî.
+norm	peyv_b2	b2_s40	her2	'serwerîya' -> 'serweriya' (î, y'den önce i olur)	Di serwerîya zimanî de.
+norm	peyv_b2	b2_s40	ku	'Serwerîya' -> 'Serweriya' (î, y'den önce i olur)	Serwerîya zimanî
+norm	peyv_b2	b2_s44	gen1	'Têkilîya' -> 'Têkiliya' (î, y'den önce i olur)	Têkilîya ziman û çand
+norm	peyv_b2	b2_s44	gen2	'Têkilîya' -> 'Têkiliya' (î, y'den önce i olur)	Têkilîya me
+norm	peyv_b2	b2_s44	her1	'Têkilîya' -> 'Têkiliya' (î, y'den önce i olur)	Têkilîya ziman û çand.
+norm	peyv_b2	b2_s44	her2	'têkilîya' -> 'têkiliya' (î, y'den önce i olur)	Di têkilîya ziman û çand de.
+norm	peyv_b2	b2_s44	ku	'Têkilîya' -> 'Têkiliya' (î, y'den önce i olur)	Têkilîya ziman û çand
+norm	peyv_b2	b2_t08	gen2	'Hevalbendîya' -> 'Hevalbendiya' (î, y'den önce i olur)	Hevalbendîya me
+norm	peyv_b2	b2_t10	gen2	'Nakokîya' -> 'Nakokiya' (î, y'den önce i olur)	Nakokîya me
+norm	peyv_b2	b2_t14	gen2	'Çavkanîyên' -> 'Çavkaniyên' (î, y'den önce i olur)	Çavkanîyên pêbawer
+norm	peyv_b2	b2_t14	her1	'Çavkanîyên' -> 'Çavkaniyên' (î, y'den önce i olur)	Çavkanîyên pêbawer.
+norm	peyv_b2	b2_x01	gen1	'Ronakbîrîya' -> 'Ronakbîriya' (î, y'den önce i olur)	Ronakbîrîya kurdî
+norm	peyv_b2	b2_x01	gen2	'Ronakbîrîya' -> 'Ronakbîriya' (î, y'den önce i olur)	Ronakbîrîya me
+norm	peyv_b2	b2_x01	her1	'Ronakbîrîya' -> 'Ronakbîriya' (î, y'den önce i olur)	Ronakbîrîya kurdî girîng e.
+norm	peyv_b2	b2_x01	her2	'ronakbîrîya' -> 'ronakbîriya' (î, y'den önce i olur)	Di ronakbîrîya kurdî de.
+norm	peyv_b2	b2_x01	ku	'Ronakbîrîya' -> 'Ronakbîriya' (î, y'den önce i olur)	Ronakbîrîya kurdî
+norm	peyv_b2	b2_x04	gen1	'Demografîya' -> 'Demografiya' (î, y'den önce i olur)	Demografîya Kurdistanê
+norm	peyv_b2	b2_x04	gen2	'Demografîya' -> 'Demografiya' (î, y'den önce i olur)	Demografîya me
+norm	peyv_b2	b2_x04	her1	'Demografîya' -> 'Demografiya' (î, y'den önce i olur)	Demografîya Kurdistanê.
+norm	peyv_b2	b2_x04	her2	'demografîya' -> 'demografiya' (î, y'den önce i olur)	Di demografîya Kurdistanê de.
+norm	peyv_b2	b2_x04	ku	'Demografîya' -> 'Demografiya' (î, y'den önce i olur)	Demografîya Kurdistanê
+norm	peyv_b2	b2_x06	gen2	'Welatparêzîya' -> 'Welatparêziya' (î, y'den önce i olur)	Welatparêzîya me
+norm	peyv_b2	b2_x07	gen1	'Pêwendîya' -> 'Pêwendiya' (î, y'den önce i olur)	Pêwendîya herêmî
+norm	peyv_b2	b2_x07	gen2	'Pêwendîya' -> 'Pêwendiya' (î, y'den önce i olur)	Pêwendîya me
+norm	peyv_b2	b2_x07	her1	'Pêwendîya' -> 'Pêwendiya' (î, y'den önce i olur)	Pêwendîya herêmî baş e.
+norm	peyv_b2	b2_x07	her2	'pêwendîya' -> 'pêwendiya' (î, y'den önce i olur)	Di pêwendîya herêmî de.
+norm	peyv_b2	b2_x07	ku	'Pêwendîya' -> 'Pêwendiya' (î, y'den önce i olur)	Pêwendîya herêmî
+norm	peyv_c1	c1_012	gen2	'Ontolojîya' -> 'Ontolojiya' (î, y'den önce i olur)	Ontolojîya kurdî
+norm	peyv_c1	c1_013	gen2	'Epistemolojîya' -> 'Epistemolojiya' (î, y'den önce i olur)	Epistemolojîya kurdî
+norm	peyv_c1	c1_016	gen2	'Fenomenolojîya' -> 'Fenomenolojiya' (î, y'den önce i olur)	Fenomenolojîya me
+norm	peyv_c1	c1_020	gen2	'Serwerîya' -> 'Serweriya' (î, y'den önce i olur)	Serwerîya me
+norm	peyv_c1	c1_020	her1	'Serwerîya' -> 'Serweriya' (î, y'den önce i olur)	Serwerîya netewî.
+norm	peyv_c1	c1_023	gen2	'Nêzîkatîya' -> 'Nêzîkatiya' (î, y'den önce i olur)	Nêzîkatîya me
+norm	peyv_c1	c1_025	gen2	'Bêrastîya' -> 'Bêrastiya' (î, y'den önce i olur)	Bêrastîya dîrokî
+norm	peyv_c1	c1_030	gen2	'Zimannasîya' -> 'Zimannasiya' (î, y'den önce i olur)	Zimannasîya me
+norm	peyv_c1	c1_030	her1	'Zimannasîya' -> 'Zimannasiya' (î, y'den önce i olur)	Zimannasîya kurdî.
+norm	peyv_c1	c1_031	gen2	'Morfolojîya' -> 'Morfolojiya' (î, y'den önce i olur)	Morfolojîya kurdî
+norm	peyv_c1	c1_031	her1	'Morfolojîya' -> 'Morfolojiya' (î, y'den önce i olur)	Morfolojîya kurdî.
+norm	peyv_c1	c1_050	gen1	'Nûçegirîya' -> 'Nûçegiriya' (î, y'den önce i olur)	Nûçegirîya lêkolînî
+norm	peyv_c1	c1_050	gen2	'Nûçegirîya' -> 'Nûçegiriya' (î, y'den önce i olur)	Nûçegirîya me
+norm	peyv_c1	c1_050	her1	'Nûçegirîya' -> 'Nûçegiriya' (î, y'den önce i olur)	Nûçegirîya lêkolînî.
+norm	peyv_c1	c1_050	her2	'nûçegirîya' -> 'nûçegiriya' (î, y'den önce i olur)	Di nûçegirîya lêkolînî de.
+norm	peyv_c1	c1_050	ku	'Nûçegirîya' -> 'Nûçegiriya' (î, y'den önce i olur)	Nûçegirîya lêkolînî
+norm	peyv_c1	c1_060	gen2	'Civaknasîya' -> 'Civaknasiya' (î, y'den önce i olur)	Civaknasîya me
+norm	peyv_c1	c1_060	her1	'Civaknasîya' -> 'Civaknasiya' (î, y'den önce i olur)	Civaknasîya kurdî.
+norm	peyv_c1	c1_061	gen2	'Mêjûnasîya' -> 'Mêjûnasiya' (î, y'den önce i olur)	Mêjûnasîya me
+norm	peyv_c1	c1_061	her1	'Mêjûnasîya' -> 'Mêjûnasiya' (î, y'den önce i olur)	Mêjûnasîya kurdî.
+norm	peyv_c1	c1_061	her2	'mêjûnasîyê' -> 'mêjûnasiyê' (î, y'den önce i olur)	Di mêjûnasîyê de.
+norm	peyv_c1	c1_072	gen2	'Çareserîya' -> 'Çareseriya' (î, y'den önce i olur)	Çareserîya me
+norm	peyv_c1	c1_072	her1	'Çareserîya' -> 'Çareseriya' (î, y'den önce i olur)	Çareserîya kurdî divê were.
+norm	peyv_c1	c1_072	her2	'çareserîya' -> 'çareseriya' (î, y'den önce i olur)	Di çareserîya kurdî de.
+norm	peyv_c1	c1_072	ku	'Çareserîya' -> 'Çareseriya' (î, y'den önce i olur)	Çareserîya kurdî
+norm	peyv_c1	c1_074	gen2	'Neteweperwerîya' -> 'Neteweperweriya' (î, y'den önce i olur)	Neteweperwerîya me
+norm	peyv_c1	c1_074	her1	'Neteweperwerîya' -> 'Neteweperweriya' (î, y'den önce i olur)	Neteweperwerîya kurd.
+norm	peyv_c1	c1_074	her2	'neteweperwerîyê' -> 'neteweperweriyê' (î, y'den önce i olur)	Di neteweperwerîyê de.
+norm	peyv_c1	c1_080	gen2	'Jîngehperwerîya' -> 'Jîngehperweriya' (î, y'den önce i olur)	Jîngehperwerîya me
+norm	peyv_c1	c1_080	her1	'Jîngehperwerîya' -> 'Jîngehperweriya' (î, y'den önce i olur)	Jîngehperwerîya kurdî.
+norm	peyv_c1	c1_090	gen2	'Mîmarîya' -> 'Mîmariya' (î, y'den önce i olur)	Mîmarîya kurdî
+norm	peyv_c1	c1_090	her1	'Mîmarîya' -> 'Mîmariya' (î, y'den önce i olur)	Mîmarîya kurdî.
+norm	peyv_c1	c1_091	gen1	'Wênekêşîya' -> 'Wênekêşiya' (î, y'den önce i olur)	Wênekêşîya çandî
+norm	peyv_c1	c1_091	gen2	'Wênekêşîya' -> 'Wênekêşiya' (î, y'den önce i olur)	Wênekêşîya me
+norm	peyv_c1	c1_091	her1	'Wênekêşîya' -> 'Wênekêşiya' (î, y'den önce i olur)	Wênekêşîya çandî ya Kurdistanê.
+norm	peyv_c1	c1_091	her2	'wênekêşîya' -> 'wênekêşiya' (î, y'den önce i olur)	Di wênekêşîya çandî de.
+norm	peyv_c1	c1_091	ku	'Wênekêşîya' -> 'Wênekêşiya' (î, y'den önce i olur)	Wênekêşîya çandî
+norm	peyv_c1	c1_1007	gen1	'Aborîya' -> 'Aboriya' (î, y'den önce i olur)	Aborîya Kurdistanê ya nûjen
+norm	peyv_c1	c1_1007	gen2	'Aborîya' -> 'Aboriya' (î, y'den önce i olur)	Aborîya me
+norm	peyv_c1	c1_1007	her1	'Aborîya' -> 'Aboriya' (î, y'den önce i olur)	Aborîya Kurdistanê ya nûjen.
+norm	peyv_c1	c1_1007	her2	'aborîya' -> 'aboriya' (î, y'den önce i olur)	Di aborîya Kurdistanê ya nûjen de.
+norm	peyv_c1	c1_1007	ku	'Aborîya' -> 'Aboriya' (î, y'den önce i olur)	Aborîya Kurdistanê ya nûjen
+norm	peyv_c1	c1_1008	gen1	'Têkilîya' -> 'Têkiliya' (î, y'den önce i olur)	Têkilîya aborî û siyasî
+norm	peyv_c1	c1_1008	gen2	'Têkilîya' -> 'Têkiliya' (î, y'den önce i olur)	Têkilîya me
+norm	peyv_c1	c1_1008	her1	'Têkilîya' -> 'Têkiliya' (î, y'den önce i olur)	Têkilîya aborî û siyasî.
+norm	peyv_c1	c1_1008	her2	'têkilîya' -> 'têkiliya' (î, y'den önce i olur)	Di têkilîya aborî û siyasî de.
+norm	peyv_c1	c1_1008	ku	'Têkilîya' -> 'Têkiliya' (î, y'den önce i olur)	Têkilîya aborî û siyasî
+norm	peyv_c1	c1_1009	gen2	'Bêdadîya' -> 'Bêdadiya' (î, y'den önce i olur)	Bêdadîya civakî
+norm	peyv_c1	c1_1010	gen1	'Alîgirîya' -> 'Alîgiriya' (î, y'den önce i olur)	Alîgirîya civakî
+norm	peyv_c1	c1_1010	gen2	'Alîgirîya' -> 'Alîgiriya' (î, y'den önce i olur)	Alîgirîya me
+norm	peyv_c1	c1_1010	her1	'Alîgirîya' -> 'Alîgiriya' (î, y'den önce i olur)	Alîgirîya civakî lazim e.
+norm	peyv_c1	c1_1010	her2	'alîgirîya' -> 'alîgiriya' (î, y'den önce i olur)	Di alîgirîya civakî de.
+norm	peyv_c1	c1_1010	ku	'Alîgirîya' -> 'Alîgiriya' (î, y'den önce i olur)	Alîgirîya civakî
+norm	peyv_c1	c1_1014	gen1	'Jîngehparêzîya' -> 'Jîngehparêziya' (î, y'den önce i olur)	Jîngehparêzîya gelêrî
+norm	peyv_c1	c1_1014	gen2	'Jîngehparêzîya' -> 'Jîngehparêziya' (î, y'den önce i olur)	Jîngehparêzîya me
+norm	peyv_c1	c1_1014	her1	'Jîngehparêzîya' -> 'Jîngehparêziya' (î, y'den önce i olur)	Jîngehparêzîya gelêrî.
+norm	peyv_c1	c1_1014	her2	'jîngehparêzîya' -> 'jîngehparêziya' (î, y'den önce i olur)	Di jîngehparêzîya gelêrî de.
+norm	peyv_c1	c1_1014	ku	'Jîngehparêzîya' -> 'Jîngehparêziya' (î, y'den önce i olur)	Jîngehparêzîya gelêrî
+norm	peyv_c1	c1_102	gen1	'Têkilîya' -> 'Têkiliya' (î, y'den önce i olur)	Têkilîya navçandî
+norm	peyv_c1	c1_102	gen2	'Têkilîya' -> 'Têkiliya' (î, y'den önce i olur)	Têkilîya me
+norm	peyv_c1	c1_102	her1	'Têkilîya' -> 'Têkiliya' (î, y'den önce i olur)	Têkilîya navçandî girîng e.
+norm	peyv_c1	c1_102	her2	'têkilîya' -> 'têkiliya' (î, y'den önce i olur)	Di têkilîya navçandî de.
+norm	peyv_c1	c1_102	ku	'Têkilîya' -> 'Têkiliya' (î, y'den önce i olur)	Têkilîya navçandî
+norm	peyv_c1	c1_1025	gen2	'Rastdarîya' -> 'Rastdariya' (î, y'den önce i olur)	Rastdarîya me
+norm	peyv_c1	c1_1026	gen2	'Pêbendîya' -> 'Pêbendiya' (î, y'den önce i olur)	Pêbendîya me
+norm	peyv_c1	c1_1027	gen2	'Xweserîya' -> 'Xweseriya' (î, y'den önce i olur)	Xweserîya me
+norm	peyv_c1	c1_1038	gen1	'Yekîtîya' -> 'Yekîtiya' (î, y'den önce i olur)	Yekîtîya aborî ya Kurdistanê
+norm	peyv_c1	c1_1038	gen2	'Yekîtîya' -> 'Yekîtiya' (î, y'den önce i olur)	Yekîtîya me
+norm	peyv_c1	c1_1038	her1	'Yekîtîya' -> 'Yekîtiya' (î, y'den önce i olur)	Yekîtîya aborî ya Kurdistanê.
+norm	peyv_c1	c1_1038	her2	'yekîtîya' -> 'yekîtiya' (î, y'den önce i olur)	Di yekîtîya aborî ya Kurdistanê de.
+norm	peyv_c1	c1_1038	ku	'Yekîtîya' -> 'Yekîtiya' (î, y'den önce i olur)	Yekîtîya aborî ya Kurdistanê
+norm	peyv_c1	c1_1039	gen1	'Şanogerîya' -> 'Şanogeriya' (î, y'den önce i olur)	Şanogerîya kurdî
+norm	peyv_c1	c1_1039	gen2	'Şanogerîya' -> 'Şanogeriya' (î, y'den önce i olur)	Şanogerîya me
+norm	peyv_c1	c1_1039	her1	'Şanogerîya' -> 'Şanogeriya' (î, y'den önce i olur)	Şanogerîya kurdî xweş e.
+norm	peyv_c1	c1_1039	her2	'şanogerîya' -> 'şanogeriya' (î, y'den önce i olur)	Di şanogerîya kurdî de.
+norm	peyv_c1	c1_1039	ku	'Şanogerîya' -> 'Şanogeriya' (î, y'den önce i olur)	Şanogerîya kurdî
+norm	peyv_c1	c1_1054	gen1	'Cotkarîya' -> 'Cotkariya' (î, y'den önce i olur)	Cotkarîya xwecihî
+norm	peyv_c1	c1_1054	gen2	'Cotkarîya' -> 'Cotkariya' (î, y'den önce i olur)	Cotkarîya me
+norm	peyv_c1	c1_1054	her1	'Cotkarîya' -> 'Cotkariya' (î, y'den önce i olur)	Cotkarîya xwecihî baş e.
+norm	peyv_c1	c1_1054	her2	'cotkarîya' -> 'cotkariya' (î, y'den önce i olur)	Di cotkarîya xwecihî de.
+norm	peyv_c1	c1_1054	ku	'Cotkarîya' -> 'Cotkariya' (î, y'den önce i olur)	Cotkarîya xwecihî
+norm	peyv_c1	c1_1060	gen1	'Pêwendîya' -> 'Pêwendiya' (î, y'den önce i olur)	Pêwendîya nav netewan
+norm	peyv_c1	c1_1060	gen2	'Pêwendîya' -> 'Pêwendiya' (î, y'den önce i olur)	Pêwendîya me
+norm	peyv_c1	c1_1060	her1	'Pêwendîya' -> 'Pêwendiya' (î, y'den önce i olur)	Pêwendîya nav netewan.
+norm	peyv_c1	c1_1060	her2	'pêwendîya' -> 'pêwendiya' (î, y'den önce i olur)	Di pêwendîya nav netewan de.
+norm	peyv_c1	c1_1060	ku	'Pêwendîya' -> 'Pêwendiya' (î, y'den önce i olur)	Pêwendîya nav netewan
+norm	peyv_c1	c1_1061	gen1	'Çalakîya' -> 'Çalakiya' (î, y'den önce i olur)	Çalakîya demokratîk
+norm	peyv_c1	c1_1061	gen2	'Çalakîya' -> 'Çalakiya' (î, y'den önce i olur)	Çalakîya me
+norm	peyv_c1	c1_1061	her1	'Çalakîya' -> 'Çalakiya' (î, y'den önce i olur)	Çalakîya demokratîk lazim e.
+norm	peyv_c1	c1_1061	her2	'çalakîya' -> 'çalakiya' (î, y'den önce i olur)	Di çalakîya demokratîk de.
+norm	peyv_c1	c1_1061	ku	'Çalakîya' -> 'Çalakiya' (î, y'den önce i olur)	Çalakîya demokratîk
+norm	peyv_c1	c1_1063	gen1	'Têkilîya' -> 'Têkiliya' (î, y'den önce i olur)	Têkilîya azadî û berpirsiyariyê
+norm	peyv_c1	c1_1063	gen2	'Têkilîya' -> 'Têkiliya' (î, y'den önce i olur)	Têkilîya me
+norm	peyv_c1	c1_1063	her1	'Têkilîya' -> 'Têkiliya' (î, y'den önce i olur)	Têkilîya azadî û berpirsiyariyê.
+norm	peyv_c1	c1_1063	her2	'têkilîya' -> 'têkiliya' (î, y'den önce i olur)	Di têkilîya azadî û berpirsiyariyê de.
+norm	peyv_c1	c1_1063	ku	'Têkilîya' -> 'Têkiliya' (î, y'den önce i olur)	Têkilîya azadî û berpirsiyariyê
+norm	peyv_c1	c1_1066	gen1	'Hişmendîya' -> 'Hişmendiya' (î, y'den önce i olur)	Hişmendîya çandî
+norm	peyv_c1	c1_1066	gen2	'Hişmendîya' -> 'Hişmendiya' (î, y'den önce i olur)	Hişmendîya me
+norm	peyv_c1	c1_1066	her1	'Hişmendîya' -> 'Hişmendiya' (î, y'den önce i olur)	Hişmendîya çandî lazim e.
+norm	peyv_c1	c1_1066	her2	'hişmendîya' -> 'hişmendiya' (î, y'den önce i olur)	Di hişmendîya çandî de.
+norm	peyv_c1	c1_1066	ku	'Hişmendîya' -> 'Hişmendiya' (î, y'den önce i olur)	Hişmendîya çandî
+norm	peyv_c1	c1_1067	gen1	'Temsîlkarîya' -> 'Temsîlkariya' (î, y'den önce i olur)	Temsîlkarîya medyayê
+norm	peyv_c1	c1_1067	gen2	'Temsîlkarîya' -> 'Temsîlkariya' (î, y'den önce i olur)	Temsîlkarîya me
+norm	peyv_c1	c1_1067	her1	'Temsîlkarîya' -> 'Temsîlkariya' (î, y'den önce i olur)	Temsîlkarîya medyayê.
+norm	peyv_c1	c1_1067	her2	'temsîlkarîya' -> 'temsîlkariya' (î, y'den önce i olur)	Di temsîlkarîya medyayê de.
+norm	peyv_c1	c1_1067	ku	'Temsîlkarîya' -> 'Temsîlkariya' (î, y'den önce i olur)	Temsîlkarîya medyayê
+norm	peyv_c1	c1_1079	gen1	'Berjewendîya' -> 'Berjewendiya' (î, y'den önce i olur)	Berjewendîya jîngeh
+norm	peyv_c1	c1_1079	gen2	'Berjewendîya' -> 'Berjewendiya' (î, y'den önce i olur)	Berjewendîya me
+norm	peyv_c1	c1_1079	her1	'Berjewendîya' -> 'Berjewendiya' (î, y'den önce i olur)	Berjewendîya jîngeh girîng e.
+norm	peyv_c1	c1_1079	her2	'berjewendîya' -> 'berjewendiya' (î, y'den önce i olur)	Di berjewendîya jîngeh de.
+norm	peyv_c1	c1_1079	ku	'Berjewendîya' -> 'Berjewendiya' (î, y'den önce i olur)	Berjewendîya jîngehê
+norm	peyv_c1	c1_131	gen1	'Xweserîya' -> 'Xweseriya' (î, y'den önce i olur)	Xweserîya aborî
+norm	peyv_c1	c1_131	gen2	'Xweserîya' -> 'Xweseriya' (î, y'den önce i olur)	Xweserîya me
+norm	peyv_c1	c1_131	her1	'Xweserîya' -> 'Xweseriya' (î, y'den önce i olur)	Xweserîya aborî divê.
+norm	peyv_c1	c1_131	her2	'xweserîya' -> 'xweseriya' (î, y'den önce i olur)	Di xweserîya aborî de.
+norm	peyv_c1	c1_131	ku	'Xweserîya' -> 'Xweseriya' (î, y'den önce i olur)	Xweserîya aborî
+norm	peyv_c1	c1_143	gen1	'Pêşkêşîya' -> 'Pêşkêşiya' (î, y'den önce i olur)	Pêşkêşîya akademîk
+norm	peyv_c1	c1_143	gen2	'Pêşkêşîya' -> 'Pêşkêşiya' (î, y'den önce i olur)	Pêşkêşîya me
+norm	peyv_c1	c1_143	her1	'Pêşkêşîya' -> 'Pêşkêşiya' (î, y'den önce i olur)	Pêşkêşîya akademîk kir.
+norm	peyv_c1	c1_143	her2	'pêşkêşîya' -> 'pêşkêşiya' (î, y'den önce i olur)	Di pêşkêşîya akademîk de.
+norm	peyv_c1	c1_143	ku	'Pêşkêşîya' -> 'Pêşkêşiya' (î, y'den önce i olur)	Pêşkêşîya akademîk
+norm	peyv_c1	c1_200	gen2	'Newekhevîya' -> 'Newekheviya' (î, y'den önce i olur)	Newekhevîya me
+norm	peyv_c1	c1_204	gen1	'Demokrasîya' -> 'Demokrasiya' (î, y'den önce i olur)	Demokrasîya beşdar
+norm	peyv_c1	c1_204	gen2	'Demokrasîya' -> 'Demokrasiya' (î, y'den önce i olur)	Demokrasîya me
+norm	peyv_c1	c1_204	her1	'Demokrasîya' -> 'Demokrasiya' (î, y'den önce i olur)	Demokrasîya beşdar girîng e.
+norm	peyv_c1	c1_204	her2	'demokrasîya' -> 'demokrasiya' (î, y'den önce i olur)	Di demokrasîya beşdar de.
+norm	peyv_c1	c1_204	ku	'Demokrasîya' -> 'Demokrasiya' (î, y'den önce i olur)	Demokrasîya beşdar
+norm	peyv_c1	c1_213	gen1	'Têkilîya' -> 'Têkiliya' (î, y'den önce i olur)	Têkilîya metnê û xwendevanan
+norm	peyv_c1	c1_213	gen2	'Têkilîya' -> 'Têkiliya' (î, y'den önce i olur)	Têkilîya me
+norm	peyv_c1	c1_213	her1	'Têkilîya' -> 'Têkiliya' (î, y'den önce i olur)	Têkilîya metnê û xwendevanan.
+norm	peyv_c1	c1_213	her2	'têkilîya' -> 'têkiliya' (î, y'den önce i olur)	Di têkilîya metnê de.
+norm	peyv_c1	c1_213	ku	'Têkilîya' -> 'Têkiliya' (î, y'den önce i olur)	Têkilîya metnê û xwendevanan
+norm	peyv_c1	c1_220	gen1	'Teorîya' -> 'Teoriya' (î, y'den önce i olur)	Teorîya zimannasiyê
+norm	peyv_c1	c1_220	gen2	'Teorîya' -> 'Teoriya' (î, y'den önce i olur)	Teorîya me
+norm	peyv_c1	c1_220	her1	'Teorîya' -> 'Teoriya' (î, y'den önce i olur)	Teorîya zimannasiyê.
+norm	peyv_c1	c1_220	her2	'teorîya' -> 'teoriya' (î, y'den önce i olur)	Di teorîya zimannasiyê de.
+norm	peyv_c1	c1_220	ku	'Teorîya' -> 'Teoriya' (î, y'den önce i olur)	Teorîya zimannasiyê
+norm	peyv_c1	c1_241	gen2	'Azadparêzîya' -> 'Azadparêziya' (î, y'den önce i olur)	Azadparêzîya me
+norm	peyv_c1	c1_243	gen1	'Nûnertîya' -> 'Nûnertiya' (î, y'den önce i olur)	Nûnertîya demokratîk
+norm	peyv_c1	c1_243	gen2	'Nûnertîya' -> 'Nûnertiya' (î, y'den önce i olur)	Nûnertîya me
+norm	peyv_c1	c1_243	her1	'Nûnertîya' -> 'Nûnertiya' (î, y'den önce i olur)	Nûnertîya demokratîk lazim e.
+norm	peyv_c1	c1_243	her2	'nûnertîya' -> 'nûnertiya' (î, y'den önce i olur)	Di nûnertîya demokratîk de.
+norm	peyv_c1	c1_243	ku	'Nûnertîya' -> 'Nûnertiya' (î, y'den önce i olur)	Nûnertîya demokratîk
+norm	peyv_c1	c1_302	gen1	'Xweserîya' -> 'Xweseriya' (î, y'den önce i olur)	Xweserîya çandî
+norm	peyv_c1	c1_302	gen2	'Xweserîya' -> 'Xweseriya' (î, y'den önce i olur)	Xweserîya me
+norm	peyv_c1	c1_302	her1	'Xweserîya' -> 'Xweseriya' (î, y'den önce i olur)	Xweserîya çandî.
+norm	peyv_c1	c1_302	her2	'xweserîya' -> 'xweseriya' (î, y'den önce i olur)	Di xweserîya çandî de.
+norm	peyv_c1	c1_302	ku	'Xweserîya' -> 'Xweseriya' (î, y'den önce i olur)	Xweserîya çandî
+norm	peyv_c1	c1_309	gen1	'Azadîya' -> 'Azadiya' (î, y'den önce i olur)	Azadîya çapemeniyê
+norm	peyv_c1	c1_309	gen2	'Azadîya' -> 'Azadiya' (î, y'den önce i olur)	Azadîya me
+norm	peyv_c1	c1_309	her1	'Azadîya' -> 'Azadiya' (î, y'den önce i olur)	Azadîya çapemeniyê lazim e.
+norm	peyv_c1	c1_309	her2	'azadîya' -> 'azadiya' (î, y'den önce i olur)	Di azadîya çapemeniyê de.
+norm	peyv_c1	c1_309	ku	'Azadîya' -> 'Azadiya' (î, y'den önce i olur)	Azadîya çapemeniyê
+norm	peyv_c1	c1_311	gen1	'Êzidîyan' -> 'Êzidiyan' (î, y'den önce i olur)	Mîrasa Êzidîyan
+norm	peyv_c1	c1_311	her1	'Êzidîyan' -> 'Êzidiyan' (î, y'den önce i olur)	Mîrasa Êzidîyan.
+norm	peyv_c1	c1_311	her2	'Êzidîyan' -> 'Êzidiyan' (î, y'den önce i olur)	Di mîrasa Êzidîyan de.
+norm	peyv_c1	c1_311	ku	'Êzidîyan' -> 'Êzidiyan' (î, y'den önce i olur)	Mîrasa Êzidîyan
+norm	peyv_c1	c1_312	gen2	'Êzidîtîya' -> 'Êzidîtiya' (î, y'den önce i olur)	Êzidîtîya me
+norm	peyv_c1	c1_321	gen1	'Teorîya' -> 'Teoriya' (î, y'den önce i olur)	Teorîya rexneyî
+norm	peyv_c1	c1_321	gen2	'Teorîya' -> 'Teoriya' (î, y'den önce i olur)	Teorîya me
+norm	peyv_c1	c1_321	her1	'Teorîya' -> 'Teoriya' (î, y'den önce i olur)	Teorîya rexneyî.
+norm	peyv_c1	c1_321	her2	'teorîya' -> 'teoriya' (î, y'den önce i olur)	Di teorîya rexneyî de.
+norm	peyv_c1	c1_321	ku	'Teorîya' -> 'Teoriya' (î, y'den önce i olur)	Teorîya rexneyî
+norm	peyv_c1	c1_346	gen2	'berpirsiyarîya' -> 'berpirsiyariya' (î, y'den önce i olur)	Azadî û berpirsiyarîya me
+norm	peyv_c1	c1_347	gen2	'dilsozîya' -> 'dilsoziya' (î, y'den önce i olur)	Hêvî û dilsozîya me
+norm	peyv_c1	c1_349	gen1	'Azadîya' -> 'Azadiya' (î, y'den önce i olur)	Azadîya ramanê û îfadeyê
+norm	peyv_c1	c1_349	gen2	'Azadîya' -> 'Azadiya' (î, y'den önce i olur)	Azadîya me
+norm	peyv_c1	c1_349	her1	'Azadîya' -> 'Azadiya' (î, y'den önce i olur)	Azadîya ramanê û îfadeyê.
+norm	peyv_c1	c1_349	her2	'azadîya' -> 'azadiya' (î, y'den önce i olur)	Ji bo azadîya ramanê û îfadeyê.
+norm	peyv_c1	c1_349	ku	'Azadîya' -> 'Azadiya' (î, y'den önce i olur)	Azadîya ramanê û îfadeyê
+norm	peyv_c1	c1_352	gen1	'Çavkanîya' -> 'Çavkaniya' (î, y'den önce i olur)	Çavkanîya pêbawerî
+norm	peyv_c1	c1_352	her1	'Çavkanîya' -> 'Çavkaniya' (î, y'den önce i olur)	Çavkanîya pêbawerî.
+norm	peyv_c1	c1_352	her2	'çavkanîya' -> 'çavkaniya' (î, y'den önce i olur)	Di çavkanîya pêbawerî de.
+norm	peyv_c1	c1_352	ku	'Çavkanîya' -> 'Çavkaniya' (î, y'den önce i olur)	Çavkanîya pêbawerî
+norm	peyv_c1	c1_354	gen1	'Azadîya' -> 'Azadiya' (î, y'den önce i olur)	Azadîya çapemeniyê
+norm	peyv_c1	c1_354	gen2	'Azadîya' -> 'Azadiya' (î, y'den önce i olur)	Azadîya me
+norm	peyv_c1	c1_354	her1	'Azadîya' -> 'Azadiya' (î, y'den önce i olur)	Azadîya çapemeniyê lazim e.
+norm	peyv_c1	c1_354	her2	'azadîya' -> 'azadiya' (î, y'den önce i olur)	Ji bo azadîya çapemeniyê.
+norm	peyv_c1	c1_354	ku	'Azadîya' -> 'Azadiya' (î, y'den önce i olur)	Azadîya çapemeniyê
+norm	peyv_c1	c1_361	gen2	'koçberîya' -> 'koçberiya' (î, y'den önce i olur)	Nasname û koçberîya me
+norm	peyv_c1	c1_369	gen1	'Azadîya' -> 'Azadiya' (î, y'den önce i olur)	Azadîya jinê ya Kurdî
+norm	peyv_c1	c1_369	gen2	'Azadîya' -> 'Azadiya' (î, y'den önce i olur)	Azadîya jinê
+norm	peyv_c1	c1_369	her1	'Azadîya' -> 'Azadiya' (î, y'den önce i olur)	Azadîya jinê ya Kurdî.
+norm	peyv_c1	c1_369	her2	'azadîya' -> 'azadiya' (î, y'den önce i olur)	Ji bo azadîya jinê ya Kurdî.
+norm	peyv_c1	c1_369	ku	'Azadîya' -> 'Azadiya' (î, y'den önce i olur)	Azadîya jinê ya Kurdî
+norm	peyv_c1	c1_408	gen1	'Têkilîya' -> 'Têkiliya' (î, y'den önce i olur)	Têkilîya gel û dewletê
+norm	peyv_c1	c1_408	gen2	'Têkilîya' -> 'Têkiliya' (î, y'den önce i olur)	Têkilîya me
+norm	peyv_c1	c1_408	her1	'Têkilîya' -> 'Têkiliya' (î, y'den önce i olur)	Têkilîya gel û dewletê.
+norm	peyv_c1	c1_408	her2	'têkilîya' -> 'têkiliya' (î, y'den önce i olur)	Di têkilîya gel û dewletê de.
+norm	peyv_c1	c1_408	ku	'Têkilîya' -> 'Têkiliya' (î, y'den önce i olur)	Têkilîya gel û dewletê
+norm	peyv_c1	c1_409	gen1	'Demokrasîya' -> 'Demokrasiya' (î, y'den önce i olur)	Demokrasîya pêşketî
+norm	peyv_c1	c1_409	gen2	'Demokrasîya' -> 'Demokrasiya' (î, y'den önce i olur)	Demokrasîya me
+norm	peyv_c1	c1_409	her1	'Demokrasîya' -> 'Demokrasiya' (î, y'den önce i olur)	Demokrasîya pêşketî.
+norm	peyv_c1	c1_409	her2	'demokrasîya' -> 'demokrasiya' (î, y'den önce i olur)	Di demokrasîya pêşketî de.
+norm	peyv_c1	c1_409	ku	'Demokrasîya' -> 'Demokrasiya' (î, y'den önce i olur)	Demokrasîya pêşketî
+norm	peyv_c1	c1_410	gen1	'Azadîya' -> 'Azadiya' (î, y'den önce i olur)	Azadîya xwendinê
+norm	peyv_c1	c1_410	gen2	'Azadîya' -> 'Azadiya' (î, y'den önce i olur)	Azadîya me
+norm	peyv_c1	c1_410	her1	'Azadîya' -> 'Azadiya' (î, y'den önce i olur)	Azadîya xwendinê lazim e.
+norm	peyv_c1	c1_410	her2	'azadîya' -> 'azadiya' (î, y'den önce i olur)	Di azadîya xwendinê de.
+norm	peyv_c1	c1_410	ku	'Azadîya' -> 'Azadiya' (î, y'den önce i olur)	Azadîya xwendinê
+norm	peyv_c1	c1_411	gen1	'Azadîya' -> 'Azadiya' (î, y'den önce i olur)	Azadîya ramyariyê
+norm	peyv_c1	c1_411	gen2	'Azadîya' -> 'Azadiya' (î, y'den önce i olur)	Azadîya me
+norm	peyv_c1	c1_411	her1	'Azadîya' -> 'Azadiya' (î, y'den önce i olur)	Azadîya ramyariyê.
+norm	peyv_c1	c1_411	her2	'azadîya' -> 'azadiya' (î, y'den önce i olur)	Di azadîya ramyariyê de.
+norm	peyv_c1	c1_411	ku	'Azadîya' -> 'Azadiya' (î, y'den önce i olur)	Azadîya ramyariyê
+norm	peyv_c1	c1_421	gen1	'Têkilîya' -> 'Têkiliya' (î, y'den önce i olur)	Têkilîya nêrîna û metnê
+norm	peyv_c1	c1_421	gen2	'Têkilîya' -> 'Têkiliya' (î, y'den önce i olur)	Têkilîya me
+norm	peyv_c1	c1_421	her1	'Têkilîya' -> 'Têkiliya' (î, y'den önce i olur)	Têkilîya nêrîna û metnê.
+norm	peyv_c1	c1_421	her2	'têkilîya' -> 'têkiliya' (î, y'den önce i olur)	Di têkilîya nêrîna û metnê de.
+norm	peyv_c1	c1_421	ku	'Têkilîya' -> 'Têkiliya' (î, y'den önce i olur)	Têkilîya nêrîna û metnê
+norm	peyv_c1	c1_422	gen1	'Xweserîya' -> 'Xweseriya' (î, y'den önce i olur)	Xweserîya edebî
+norm	peyv_c1	c1_422	gen2	'Xweserîya' -> 'Xweseriya' (î, y'den önce i olur)	Xweserîya me
+norm	peyv_c1	c1_422	her1	'Xweserîya' -> 'Xweseriya' (î, y'den önce i olur)	Xweserîya edebî.
+norm	peyv_c1	c1_422	her2	'xweserîya' -> 'xweseriya' (î, y'den önce i olur)	Di xweserîya edebî de.
+norm	peyv_c1	c1_422	ku	'Xweserîya' -> 'Xweseriya' (î, y'den önce i olur)	Xweserîya edebî
+norm	peyv_c1	c1_423	gen1	'Ekolojîya' -> 'Ekolojiya' (î, y'den önce i olur)	Ekolojîya zimanê
+norm	peyv_c1	c1_423	gen2	'Ekolojîya' -> 'Ekolojiya' (î, y'den önce i olur)	Ekolojîya me
+norm	peyv_c1	c1_423	her1	'Ekolojîya' -> 'Ekolojiya' (î, y'den önce i olur)	Ekolojîya zimanê.
+norm	peyv_c1	c1_423	her2	'ekolojîya' -> 'ekolojiya' (î, y'den önce i olur)	Di ekolojîya zimanê de.
+norm	peyv_c1	c1_423	ku	'Ekolojîya' -> 'Ekolojiya' (î, y'den önce i olur)	Ekolojîya zimanê
+norm	peyv_c1	c1_425	gen1	'Aborîya' -> 'Aboriya' (î, y'den önce i olur)	Aborîya çandî
+norm	peyv_c1	c1_425	gen2	'Aborîya' -> 'Aboriya' (î, y'den önce i olur)	Aborîya me
+norm	peyv_c1	c1_425	her1	'Aborîya' -> 'Aboriya' (î, y'den önce i olur)	Aborîya çandî.
+norm	peyv_c1	c1_425	her2	'aborîya' -> 'aboriya' (î, y'den önce i olur)	Di aborîya çandî de.
+norm	peyv_c1	c1_425	ku	'Aborîya' -> 'Aboriya' (î, y'den önce i olur)	Aborîya çandî
+norm	peyv_c1	c1_426	gen1	'aborîya' -> 'aboriya' (î, y'den önce i olur)	Pêşveçûna aborîya kurdî
+norm	peyv_c1	c1_426	her1	'aborîya' -> 'aboriya' (î, y'den önce i olur)	Pêşveçûna aborîya kurdî.
+norm	peyv_c1	c1_426	her2	'aborîya' -> 'aboriya' (î, y'den önce i olur)	Di pêşveçûna aborîya kurdî de.
+norm	peyv_c1	c1_426	ku	'aborîya' -> 'aboriya' (î, y'den önce i olur)	Pêşveçûna aborîya kurdî
+norm	peyv_c1	c1_434	gen1	'Têkilîya' -> 'Têkiliya' (î, y'den önce i olur)	Têkilîya mirovan û siruştê
+norm	peyv_c1	c1_434	gen2	'Têkilîya' -> 'Têkiliya' (î, y'den önce i olur)	Têkilîya me
+norm	peyv_c1	c1_434	her1	'Têkilîya' -> 'Têkiliya' (î, y'den önce i olur)	Têkilîya mirovan û siruştê.
+norm	peyv_c1	c1_434	her2	'têkilîya' -> 'têkiliya' (î, y'den önce i olur)	Di têkilîya mirovan û siruştê de.
+norm	peyv_c1	c1_434	ku	'Têkilîya' -> 'Têkiliya' (î, y'den önce i olur)	Têkilîya mirovan û siruştê
+norm	peyv_c1	c1_435	gen1	'Aramîya' -> 'Aramiya' (î, y'den önce i olur)	Aramîya hundurîn
+norm	peyv_c1	c1_435	gen2	'Aramîya' -> 'Aramiya' (î, y'den önce i olur)	Aramîya me
+norm	peyv_c1	c1_435	her1	'Aramîya' -> 'Aramiya' (î, y'den önce i olur)	Aramîya hundurîn lazim e.
+norm	peyv_c1	c1_435	her2	'aramîya' -> 'aramiya' (î, y'den önce i olur)	Di aramîya hundurîn de.
+norm	peyv_c1	c1_435	ku	'Aramîya' -> 'Aramiya' (î, y'den önce i olur)	Aramîya hundurîn
+norm	peyv_c1	c1_436	gen1	'Serdestîya' -> 'Serdestiya' (î, y'den önce i olur)	Serdestîya çandî
+norm	peyv_c1	c1_436	gen2	'Serdestîya' -> 'Serdestiya' (î, y'den önce i olur)	Serdestîya me
+norm	peyv_c1	c1_436	her1	'Serdestîya' -> 'Serdestiya' (î, y'den önce i olur)	Serdestîya çandî.
+norm	peyv_c1	c1_436	her2	'serdestîya' -> 'serdestiya' (î, y'den önce i olur)	Di serdestîya çandî de.
+norm	peyv_c1	c1_436	ku	'Serdestîya' -> 'Serdestiya' (î, y'den önce i olur)	Serdestîya çandî
+norm	peyv_c1	c1_511	gen1	'Teorîya' -> 'Teoriya' (î, y'den önce i olur)	Teorîya kolonyalîzmê
+norm	peyv_c1	c1_511	gen2	'teorîya' -> 'teoriya' (î, y'den önce i olur)	teorîya kolonyalîzmê ya me
+norm	peyv_c1	c1_511	her1	'Teorîya' -> 'Teoriya' (î, y'den önce i olur)	Teorîya kolonyalîzmê.
+norm	peyv_c1	c1_511	her2	'teorîya' -> 'teoriya' (î, y'den önce i olur)	Di teorîya kolonyalîzmê de.
+norm	peyv_c1	c1_511	ku	'Teorîya' -> 'Teoriya' (î, y'den önce i olur)	Teorîya kolonyalîzmê
+norm	peyv_c1	c1_513	gen1	'Têkilîya' -> 'Têkiliya' (î, y'den önce i olur)	Têkilîya nasnameya jinê û zimanê
+norm	peyv_c1	c1_513	gen2	'têkilîya' -> 'têkiliya' (î, y'den önce i olur)	têkilîya nasnameya jinê û zimanê ya me
+norm	peyv_c1	c1_513	her1	'Têkilîya' -> 'Têkiliya' (î, y'den önce i olur)	Têkilîya nasnameya jinê û zimanê.
+norm	peyv_c1	c1_513	her2	'têkilîya' -> 'têkiliya' (î, y'den önce i olur)	Di têkilîya nasnameya jinê û zimanê de.
+norm	peyv_c1	c1_513	ku	'Têkilîya' -> 'Têkiliya' (î, y'den önce i olur)	Têkilîya nasnameya jinê û zimanê
+norm	peyv_c1	c1_536	gen1	'Azadîya' -> 'Azadiya' (î, y'den önce i olur)	Azadîya ramandinê
+norm	peyv_c1	c1_536	gen2	'azadîya' -> 'azadiya' (î, y'den önce i olur)	azadîya ramandinê ya me
+norm	peyv_c1	c1_536	her1	'Azadîya' -> 'Azadiya' (î, y'den önce i olur)	Azadîya ramandinê.
+norm	peyv_c1	c1_536	her2	'azadîya' -> 'azadiya' (î, y'den önce i olur)	Di azadîya ramandinê de.
+norm	peyv_c1	c1_536	ku	'Azadîya' -> 'Azadiya' (î, y'den önce i olur)	Azadîya ramandinê
+norm	peyv_c1	c1_621	gen1	'Wekhevîya' -> 'Wekheviya' (î, y'den önce i olur)	Wekhevîya nasnameyan
+norm	peyv_c1	c1_621	gen2	'Wekhevîya' -> 'Wekheviya' (î, y'den önce i olur)	Wekhevîya me
+norm	peyv_c1	c1_621	her1	'Wekhevîya' -> 'Wekheviya' (î, y'den önce i olur)	Wekhevîya nasnameyan.
+norm	peyv_c1	c1_621	her2	'wekhevîya' -> 'wekheviya' (î, y'den önce i olur)	Di wekhevîya nasnameyan de.
+norm	peyv_c1	c1_621	ku	'Wekhevîya' -> 'Wekheviya' (î, y'den önce i olur)	Wekhevîya nasnameyan
+norm	peyv_c1	c1_628	gen1	'Bergirîya' -> 'Bergiriya' (î, y'den önce i olur)	Bergirîya jiyanê
+norm	peyv_c1	c1_628	gen2	'Bergirîya' -> 'Bergiriya' (î, y'den önce i olur)	Bergirîya me
+norm	peyv_c1	c1_628	her1	'Bergirîya' -> 'Bergiriya' (î, y'den önce i olur)	Bergirîya jiyanê heye.
+norm	peyv_c1	c1_628	her2	'bergirîya' -> 'bergiriya' (î, y'den önce i olur)	Di bergirîya jiyanê de.
+norm	peyv_c1	c1_628	ku	'Bergirîya' -> 'Bergiriya' (î, y'den önce i olur)	Bergirîya jiyanê
+norm	peyv_c1	c1_637	gen1	'Alîgirîya' -> 'Alîgiriya' (î, y'den önce i olur)	Alîgirîya siyasî ya Kurdan
+norm	peyv_c1	c1_637	gen2	'Alîgirîya' -> 'Alîgiriya' (î, y'den önce i olur)	Alîgirîya me
+norm	peyv_c1	c1_637	her1	'Alîgirîya' -> 'Alîgiriya' (î, y'den önce i olur)	Alîgirîya siyasî ya Kurdan.
+norm	peyv_c1	c1_637	her2	'alîgirîya' -> 'alîgiriya' (î, y'den önce i olur)	Di alîgirîya siyasî ya Kurdan de.
+norm	peyv_c1	c1_637	ku	'Alîgirîya' -> 'Alîgiriya' (î, y'den önce i olur)	Alîgirîya siyasî ya Kurdan
+norm	peyv_c1	c1_638	gen1	'Piranîya' -> 'Piraniya' (î, y'den önce i olur)	Piranîya demokratîk
+norm	peyv_c1	c1_638	gen2	'Piranîya' -> 'Piraniya' (î, y'den önce i olur)	Piranîya me
+norm	peyv_c1	c1_638	her1	'Piranîya' -> 'Piraniya' (î, y'den önce i olur)	Piranîya demokratîk.
+norm	peyv_c1	c1_638	her2	'piranîya' -> 'piraniya' (î, y'den önce i olur)	Di piranîya demokratîk de.
+norm	peyv_c1	c1_638	ku	'Piranîya' -> 'Piraniya' (î, y'den önce i olur)	Piranîya demokratîk
+norm	peyv_c1	c1_639	gen1	'Rêvebirîya' -> 'Rêvebiriya' (î, y'den önce i olur)	Rêvebirîya herêmî
+norm	peyv_c1	c1_639	gen2	'Rêvebirîya' -> 'Rêvebiriya' (î, y'den önce i olur)	Rêvebirîya me
+norm	peyv_c1	c1_639	her1	'Rêvebirîya' -> 'Rêvebiriya' (î, y'den önce i olur)	Rêvebirîya herêmî baş e.
+norm	peyv_c1	c1_639	her2	'rêvebirîya' -> 'rêvebiriya' (î, y'den önce i olur)	Di rêvebirîya herêmî de.
+norm	peyv_c1	c1_639	ku	'Rêvebirîya' -> 'Rêvebiriya' (î, y'den önce i olur)	Rêvebirîya herêmî
+norm	peyv_c1	c1_701	gen1	'Xweşbêjîya' -> 'Xweşbêjiya' (î, y'den önce i olur)	Xweşbêjîya zimanî
+norm	peyv_c1	c1_701	gen2	'Xweşbêjîya' -> 'Xweşbêjiya' (î, y'den önce i olur)	Xweşbêjîya me
+norm	peyv_c1	c1_701	her1	'Xweşbêjîya' -> 'Xweşbêjiya' (î, y'den önce i olur)	Xweşbêjîya zimanî lazim e.
+norm	peyv_c1	c1_701	her2	'xweşbêjîya' -> 'xweşbêjiya' (î, y'den önce i olur)	Di xweşbêjîya zimanî de.
+norm	peyv_c1	c1_701	ku	'Xweşbêjîya' -> 'Xweşbêjiya' (î, y'den önce i olur)	Xweşbêjîya zimanî
+norm	peyv_c1	c1_721	gen1	'Giştîtîya' -> 'Giştîtiya' (î, y'den önce i olur)	Giştîtîya civakî
+norm	peyv_c1	c1_721	gen2	'Giştîtîya' -> 'Giştîtiya' (î, y'den önce i olur)	Giştîtîya me
+norm	peyv_c1	c1_721	her1	'Giştîtîya' -> 'Giştîtiya' (î, y'den önce i olur)	Giştîtîya civakî.
+norm	peyv_c1	c1_721	her2	'giştîtîya' -> 'giştîtiya' (î, y'den önce i olur)	Di giştîtîya civakî de.
+norm	peyv_c1	c1_721	ku	'Giştîtîya' -> 'Giştîtiya' (î, y'den önce i olur)	Giştîtîya civakî
+norm	peyv_c1	c1_805	gen1	'Pêwendîya' -> 'Pêwendiya' (î, y'den önce i olur)	Pêwendîya aştiyane
+norm	peyv_c1	c1_805	gen2	'Pêwendîya' -> 'Pêwendiya' (î, y'den önce i olur)	Pêwendîya me
+norm	peyv_c1	c1_805	her1	'Pêwendîya' -> 'Pêwendiya' (î, y'den önce i olur)	Pêwendîya aştiyane lazim e.
+norm	peyv_c1	c1_805	her2	'pêwendîya' -> 'pêwendiya' (î, y'den önce i olur)	Di pêwendîya aştiyane de.
+norm	peyv_c1	c1_805	ku	'Pêwendîya' -> 'Pêwendiya' (î, y'den önce i olur)	Pêwendîya aştiyane
+norm	peyv_c1	c1_901	gen1	'Pêwendîya' -> 'Pêwendiya' (î, y'den önce i olur)	Pêwendîya nav-çandî
+norm	peyv_c1	c1_901	gen2	'Pêwendîya' -> 'Pêwendiya' (î, y'den önce i olur)	Pêwendîya me
+norm	peyv_c1	c1_901	her1	'Pêwendîya' -> 'Pêwendiya' (î, y'den önce i olur)	Pêwendîya nav-çandî.
+norm	peyv_c1	c1_901	her2	'pêwendîya' -> 'pêwendiya' (î, y'den önce i olur)	Di pêwendîya nav-çandî de.
+norm	peyv_c1	c1_901	ku	'Pêwendîya' -> 'Pêwendiya' (î, y'den önce i olur)	Pêwendîya nav-çandî
+norm	peyv_c1	c1_906	gen1	'Hevkarîya' -> 'Hevkariya' (î, y'den önce i olur)	Hevkarîya zanistî ya navnetewî
+norm	peyv_c1	c1_906	gen2	'Hevkarîya' -> 'Hevkariya' (î, y'den önce i olur)	Hevkarîya me
+norm	peyv_c1	c1_906	her1	'Hevkarîya' -> 'Hevkariya' (î, y'den önce i olur)	Hevkarîya zanistî ya navnetewî.
+norm	peyv_c1	c1_906	her2	'hevkarîya' -> 'hevkariya' (î, y'den önce i olur)	Di hevkarîya zanistî ya navnetewî de.
+norm	peyv_c1	c1_906	ku	'Hevkarîya' -> 'Hevkariya' (î, y'den önce i olur)	Hevkarîya zanistî ya navnetewî
+norm	peyv_c1	c1_915	gen1	'Têkilîya' -> 'Têkiliya' (î, y'den önce i olur)	Têkilîya berî û piştî şerî
+norm	peyv_c1	c1_915	gen2	'Têkilîya' -> 'Têkiliya' (î, y'den önce i olur)	Têkilîya me
+norm	peyv_c1	c1_915	her1	'Têkilîya' -> 'Têkiliya' (î, y'den önce i olur)	Têkilîya berî û piştî şerî.
+norm	peyv_c1	c1_915	her2	'têkilîya' -> 'têkiliya' (î, y'den önce i olur)	Di têkilîya berî û piştî şerî de.
+norm	peyv_c1	c1_915	ku	'Têkilîya' -> 'Têkiliya' (î, y'den önce i olur)	Têkilîya berî û piştî şerî
+norm	peyv_c1	c1_954	gen1	'Pêwendîya' -> 'Pêwendiya' (î, y'den önce i olur)	Pêwendîya dîroka nivîskî û devkî
+norm	peyv_c1	c1_954	gen2	'Pêwendîya' -> 'Pêwendiya' (î, y'den önce i olur)	Pêwendîya me
+norm	peyv_c1	c1_954	her1	'Pêwendîya' -> 'Pêwendiya' (î, y'den önce i olur)	Pêwendîya dîroka nivîskî û devkî.
+norm	peyv_c1	c1_954	her2	'pêwendîya' -> 'pêwendiya' (î, y'den önce i olur)	Di pêwendîya dîroka nivîskî û devkî de.
+norm	peyv_c1	c1_954	ku	'Pêwendîya' -> 'Pêwendiya' (î, y'den önce i olur)	Pêwendîya dîroka nivîskî û devkî
+norm	peyv_c1	c1_975	gen1	'Nûjenîya' -> 'Nûjeniya' (î, y'den önce i olur)	Nûjenîya zanistî
+norm	peyv_c1	c1_975	gen2	'Nûjenîya' -> 'Nûjeniya' (î, y'den önce i olur)	Nûjenîya me
+norm	peyv_c1	c1_975	her1	'Nûjenîya' -> 'Nûjeniya' (î, y'den önce i olur)	Nûjenîya zanistî lazim e.
+norm	peyv_c1	c1_975	her2	'nûjenîya' -> 'nûjeniya' (î, y'den önce i olur)	Di nûjenîya zanistî de.
+norm	peyv_c1	c1_975	ku	'Nûjenîya' -> 'Nûjeniya' (î, y'den önce i olur)	Nûjenîya zanistî
+norm	peyv_c1	c1_978	gen1	'Teorîya' -> 'Teoriya' (î, y'den önce i olur)	Teorîya aktarîna zimên
+norm	peyv_c1	c1_978	gen2	'Teorîya' -> 'Teoriya' (î, y'den önce i olur)	Teorîya me
+norm	peyv_c1	c1_978	her1	'Teorîya' -> 'Teoriya' (î, y'den önce i olur)	Teorîya aktarîna zimên.
+norm	peyv_c1	c1_978	her2	'teorîya' -> 'teoriya' (î, y'den önce i olur)	Di teorîya aktarîna zimên de.
+norm	peyv_c1	c1_978	ku	'Teorîya' -> 'Teoriya' (î, y'den önce i olur)	Teorîya aktarîna zimên
+norm	peyv_c1	c1_980	gen1	'Zimannasîya' -> 'Zimannasiya' (î, y'den önce i olur)	Zimannasîya civakî
+norm	peyv_c1	c1_980	gen2	'Zimannasîya' -> 'Zimannasiya' (î, y'den önce i olur)	Zimannasîya me
+norm	peyv_c1	c1_980	her1	'Zimannasîya' -> 'Zimannasiya' (î, y'den önce i olur)	Zimannasîya civakî dixwînim.
+norm	peyv_c1	c1_980	her2	'zimannasîya' -> 'zimannasiya' (î, y'den önce i olur)	Di zimannasîya civakî de.
+norm	peyv_c1	c1_980	ku	'Zimannasîya' -> 'Zimannasiya' (î, y'den önce i olur)	Zimannasîya civakî
+norm	peyv_c2	c2_012	gen2	'Hevçerxîya' -> 'Hevçerxiya' (î, y'den önce i olur)	Hevçerxîya zanistî
+norm	peyv_c2	c2_021	gen2	'Dîplomasîya' -> 'Dîplomasiya' (î, y'den önce i olur)	Dîplomasîya me
+norm	peyv_c2	c2_022	gen1	'Mîmarîya' -> 'Mîmariya' (î, y'den önce i olur)	Mîmarîya ewlehiyê
+norm	peyv_c2	c2_022	gen2	'Mîmarîya' -> 'Mîmariya' (î, y'den önce i olur)	Mîmarîya me
+norm	peyv_c2	c2_022	her1	'Mîmarîya' -> 'Mîmariya' (î, y'den önce i olur)	Mîmarîya ewlehiyê ya Kurdistanê.
+norm	peyv_c2	c2_022	her2	'mîmarîya' -> 'mîmariya' (î, y'den önce i olur)	Di mîmarîya ewlehiyê de.
+norm	peyv_c2	c2_022	ku	'Mîmarîya' -> 'Mîmariya' (î, y'den önce i olur)	Mîmarîya ewlehiyê
+norm	peyv_c2	c2_040	gen2	'Nêzîkatîya' -> 'Nêzîkatiya' (î, y'den önce i olur)	Nêzîkatîya paşkolonyalîst
+norm	peyv_c2	c2_051	gen2	'Demsazîya' -> 'Demsaziya' (î, y'den önce i olur)	Demsazîya kurdî
+norm	peyv_c2	c2_051	her1	'Demsazîya' -> 'Demsaziya' (î, y'den önce i olur)	Demsazîya metnê.
+norm	peyv_c2	c2_080	gen2	'Bêalîgirîya' -> 'Bêalîgiriya' (î, y'den önce i olur)	Bêalîgirîya me
+norm	peyv_c2	c2_101	gen1	'Cihêrengîya' -> 'Cihêrengiya' (î, y'den önce i olur)	Cihêrengîya çandî
+norm	peyv_c2	c2_101	gen2	'Cihêrengîya' -> 'Cihêrengiya' (î, y'den önce i olur)	Cihêrengîya me
+norm	peyv_c2	c2_101	her1	'Cihêrengîya' -> 'Cihêrengiya' (î, y'den önce i olur)	Cihêrengîya çandî dewlemend e.
+norm	peyv_c2	c2_101	her2	'cihêrengîya' -> 'cihêrengiya' (î, y'den önce i olur)	Di cihêrengîya çandî de.
+norm	peyv_c2	c2_101	ku	'Cihêrengîya' -> 'Cihêrengiya' (î, y'den önce i olur)	Cihêrengîya çandî
+norm	peyv_c2	c2_102	gen1	'Têkilîya' -> 'Têkiliya' (î, y'den önce i olur)	Têkilîya hêzê
+norm	peyv_c2	c2_102	gen2	'Têkilîya' -> 'Têkiliya' (î, y'den önce i olur)	Têkilîya me
+norm	peyv_c2	c2_102	her1	'Têkilîya' -> 'Têkiliya' (î, y'den önce i olur)	Têkilîya hêzê.
+norm	peyv_c2	c2_102	her2	'têkilîya' -> 'têkiliya' (î, y'den önce i olur)	Di têkilîya hêzê de.
+norm	peyv_c2	c2_102	ku	'Têkilîya' -> 'Têkiliya' (î, y'den önce i olur)	Têkilîya hêzê
+norm	peyv_c2	c2_103	gen1	'Epistemolojîya' -> 'Epistemolojiya' (î, y'den önce i olur)	Epistemolojîya kolonyal
+norm	peyv_c2	c2_103	gen2	'Epistemolojîya' -> 'Epistemolojiya' (î, y'den önce i olur)	Epistemolojîya me
+norm	peyv_c2	c2_103	her1	'Epistemolojîya' -> 'Epistemolojiya' (î, y'den önce i olur)	Epistemolojîya kolonyal.
+norm	peyv_c2	c2_103	her2	'epistemolojîya' -> 'epistemolojiya' (î, y'den önce i olur)	Di epistemolojîya kolonyal de.
+norm	peyv_c2	c2_103	ku	'Epistemolojîya' -> 'Epistemolojiya' (î, y'den önce i olur)	Epistemolojîya kolonyal
+norm	peyv_c2	c2_114	gen1	'Têkilîya' -> 'Têkiliya' (î, y'den önce i olur)	Têkilîya zimanê dê û zimanê nû
+norm	peyv_c2	c2_114	gen2	'Têkilîya' -> 'Têkiliya' (î, y'den önce i olur)	Têkilîya zimanî
+norm	peyv_c2	c2_114	her1	'Têkilîya' -> 'Têkiliya' (î, y'den önce i olur)	Têkilîya zimanê dê û zimanê nû.
+norm	peyv_c2	c2_114	her2	'têkilîya' -> 'têkiliya' (î, y'den önce i olur)	Di têkilîya de.
+norm	peyv_c2	c2_114	ku	'Têkilîya' -> 'Têkiliya' (î, y'den önce i olur)	Têkilîya zimanê dê û zimanê nû
+norm	peyv_c2	c2_123	gen1	'Çavdêrîya' -> 'Çavdêriya' (î, y'den önce i olur)	Çavdêrîya zanistî
+norm	peyv_c2	c2_123	gen2	'Çavdêrîya' -> 'Çavdêriya' (î, y'den önce i olur)	Çavdêrîya me
+norm	peyv_c2	c2_123	her1	'Çavdêrîya' -> 'Çavdêriya' (î, y'den önce i olur)	Çavdêrîya zanistî hat kirin.
+norm	peyv_c2	c2_123	her2	'çavdêrîya' -> 'çavdêriya' (î, y'den önce i olur)	Di çavdêrîya zanistî de.
+norm	peyv_c2	c2_123	ku	'Çavdêrîya' -> 'Çavdêriya' (î, y'den önce i olur)	Çavdêrîya zanistî
+norm	peyv_c2	c2_130	gen1	'Stratejîya' -> 'Stratejiya' (î, y'den önce i olur)	Stratejîya ragihandinê
+norm	peyv_c2	c2_130	gen2	'Stratejîya' -> 'Stratejiya' (î, y'den önce i olur)	Stratejîya me
+norm	peyv_c2	c2_130	her1	'Stratejîya' -> 'Stratejiya' (î, y'den önce i olur)	Stratejîya ragihandinê.
+norm	peyv_c2	c2_130	her2	'stratejîya' -> 'stratejiya' (î, y'den önce i olur)	Di stratejîya ragihandinê de.
+norm	peyv_c2	c2_130	ku	'Stratejîya' -> 'Stratejiya' (î, y'den önce i olur)	Stratejîya ragihandinê
+norm	peyv_c2	c2_134	gen1	'Pêşkêşîya' -> 'Pêşkêşiya' (î, y'den önce i olur)	Pêşkêşîya profesyonel
+norm	peyv_c2	c2_134	gen2	'Pêşkêşîya' -> 'Pêşkêşiya' (î, y'den önce i olur)	Pêşkêşîya me
+norm	peyv_c2	c2_134	her1	'Pêşkêşîya' -> 'Pêşkêşiya' (î, y'den önce i olur)	Pêşkêşîya profesyonel hat kirin.
+norm	peyv_c2	c2_134	her2	'pêşkêşîya' -> 'pêşkêşiya' (î, y'den önce i olur)	Di pêşkêşîya profesyonel de.
+norm	peyv_c2	c2_134	ku	'Pêşkêşîya' -> 'Pêşkêşiya' (î, y'den önce i olur)	Pêşkêşîya profesyonel
+norm	peyv_c2	c2_202	gen1	'Zimanzanîya' -> 'Zimanzaniya' (î, y'den önce i olur)	Zimanzanîya sazkirî
+norm	peyv_c2	c2_202	gen2	'Zimanzanîya' -> 'Zimanzaniya' (î, y'den önce i olur)	Zimanzanîya me
+norm	peyv_c2	c2_202	her1	'Zimanzanîya' -> 'Zimanzaniya' (î, y'den önce i olur)	Zimanzanîya sazkirî.
+norm	peyv_c2	c2_202	her2	'zimanzanîya' -> 'zimanzaniya' (î, y'den önce i olur)	Di zimanzanîya sazkirî de.
+norm	peyv_c2	c2_202	ku	'Zimanzanîya' -> 'Zimanzaniya' (î, y'den önce i olur)	Zimanzanîya sazkirî
+norm	peyv_c2	c2_203	gen1	'Teorîya' -> 'Teoriya' (î, y'den önce i olur)	Teorîya wergerê
+norm	peyv_c2	c2_203	gen2	'Teorîya' -> 'Teoriya' (î, y'den önce i olur)	Teorîya me
+norm	peyv_c2	c2_203	her1	'Teorîya' -> 'Teoriya' (î, y'den önce i olur)	Teorîya wergerê.
+norm	peyv_c2	c2_203	her2	'teorîya' -> 'teoriya' (î, y'den önce i olur)	Di teorîya wergerê de.
+norm	peyv_c2	c2_203	ku	'Teorîya' -> 'Teoriya' (î, y'den önce i olur)	Teorîya wergerê
+norm	peyv_c2	c2_206	gen1	'Teorîya' -> 'Teoriya' (î, y'den önce i olur)	Teorîya rêzimanê
+norm	peyv_c2	c2_206	gen2	'Teorîya' -> 'Teoriya' (î, y'den önce i olur)	Teorîya me
+norm	peyv_c2	c2_206	her1	'Teorîya' -> 'Teoriya' (î, y'den önce i olur)	Teorîya rêzimanê.
+norm	peyv_c2	c2_206	her2	'teorîya' -> 'teoriya' (î, y'den önce i olur)	Di teorîya rêzimanê de.
+norm	peyv_c2	c2_206	ku	'Teorîya' -> 'Teoriya' (î, y'den önce i olur)	Teorîya rêzimanê
+norm	peyv_c2	c2_209	gen1	'Pêwendîya' -> 'Pêwendiya' (î, y'den önce i olur)	Pêwendîya ziman û nasnameya civakî
+norm	peyv_c2	c2_209	gen2	'Pêwendîya' -> 'Pêwendiya' (î, y'den önce i olur)	Pêwendîya me
+norm	peyv_c2	c2_209	her1	'Pêwendîya' -> 'Pêwendiya' (î, y'den önce i olur)	Pêwendîya ziman û nasnameya civakî.
+norm	peyv_c2	c2_209	her2	'pêwendîyê' -> 'pêwendiyê' (î, y'den önce i olur)	Di vê pêwendîyê de.
+norm	peyv_c2	c2_209	ku	'Pêwendîya' -> 'Pêwendiya' (î, y'den önce i olur)	Pêwendîya ziman û nasnameya civakî
+norm	peyv_c2	c2_210	gen1	'Teorîya' -> 'Teoriya' (î, y'den önce i olur)	Teorîya dewletê
+norm	peyv_c2	c2_210	gen2	'Teorîya' -> 'Teoriya' (î, y'den önce i olur)	Teorîya me
+norm	peyv_c2	c2_210	her1	'Teorîya' -> 'Teoriya' (î, y'den önce i olur)	Teorîya dewletê.
+norm	peyv_c2	c2_210	her2	'teorîya' -> 'teoriya' (î, y'den önce i olur)	Di teorîya dewletê de.
+norm	peyv_c2	c2_210	ku	'Teorîya' -> 'Teoriya' (î, y'den önce i olur)	Teorîya dewletê
+norm	peyv_c2	c2_212	gen1	'Azadîya' -> 'Azadiya' (î, y'den önce i olur)	Azadîya ramanê
+norm	peyv_c2	c2_212	gen2	'Azadîya' -> 'Azadiya' (î, y'den önce i olur)	Azadîya me
+norm	peyv_c2	c2_212	her1	'Azadîya' -> 'Azadiya' (î, y'den önce i olur)	Azadîya ramanê lazim e.
+norm	peyv_c2	c2_212	her2	'azadîya' -> 'azadiya' (î, y'den önce i olur)	Di azadîya ramanê de.
+norm	peyv_c2	c2_212	ku	'Azadîya' -> 'Azadiya' (î, y'den önce i olur)	Azadîya ramanê
+norm	peyv_c2	c2_213	gen1	'Têkilîya' -> 'Têkiliya' (î, y'den önce i olur)	Têkilîya hêz û zanistê ya Foucault
+norm	peyv_c2	c2_213	gen2	'Têkilîya' -> 'Têkiliya' (î, y'den önce i olur)	Têkilîya me
+norm	peyv_c2	c2_213	her1	'Têkilîya' -> 'Têkiliya' (î, y'den önce i olur)	Têkilîya hêz û zanistê ya Foucault.
+norm	peyv_c2	c2_213	her2	'têkilîya' -> 'têkiliya' (î, y'den önce i olur)	Di têkilîya hêz û zanistê de.
+norm	peyv_c2	c2_213	ku	'Têkilîya' -> 'Têkiliya' (î, y'den önce i olur)	Têkilîya hêz û zanistê ya Foucault
+norm	peyv_c2	c2_215	gen2	'Navendparêzîya' -> 'Navendparêziya' (î, y'den önce i olur)	Navendparêzîya me
+norm	peyv_c2	c2_217	gen1	'Xweserîya' -> 'Xweseriya' (î, y'den önce i olur)	Xweserîya kulturî
+norm	peyv_c2	c2_217	gen2	'Xweserîya' -> 'Xweseriya' (î, y'den önce i olur)	Xweserîya me
+norm	peyv_c2	c2_217	her1	'Xweserîya' -> 'Xweseriya' (î, y'den önce i olur)	Xweserîya kulturî.
+norm	peyv_c2	c2_217	her2	'xweserîya' -> 'xweseriya' (î, y'den önce i olur)	Di xweserîya kulturî de.
+norm	peyv_c2	c2_217	ku	'Xweserîya' -> 'Xweseriya' (î, y'den önce i olur)	Xweserîya kulturî
+norm	peyv_c2	c2_230	gen1	'Têkilîyên' -> 'Têkiliyên' (î, y'den önce i olur)	Têkilîyên navdewletî ya Kurdan
+norm	peyv_c2	c2_230	gen2	'Têkilîyên' -> 'Têkiliyên' (î, y'den önce i olur)	Têkilîyên me
+norm	peyv_c2	c2_230	her1	'Têkilîyên' -> 'Têkiliyên' (î, y'den önce i olur)	Têkilîyên navdewletî ya Kurdan.
+norm	peyv_c2	c2_230	her2	'têkilîyên' -> 'têkiliyên' (î, y'den önce i olur)	Di têkilîyên navdewletî ya Kurdan de.
+norm	peyv_c2	c2_230	ku	'Têkilîyên' -> 'Têkiliyên' (î, y'den önce i olur)	Têkilîyên navdewletî ya Kurdan
+norm	peyv_c2	c2_231	gen1	'Stratejîya' -> 'Stratejiya' (î, y'den önce i olur)	Stratejîya siyasî ya kurd
+norm	peyv_c2	c2_231	gen2	'Stratejîya' -> 'Stratejiya' (î, y'den önce i olur)	Stratejîya me
+norm	peyv_c2	c2_231	her1	'Stratejîya' -> 'Stratejiya' (î, y'den önce i olur)	Stratejîya siyasî ya kurd.
+norm	peyv_c2	c2_231	her2	'stratejîya' -> 'stratejiya' (î, y'den önce i olur)	Di stratejîya siyasî ya kurd de.
+norm	peyv_c2	c2_231	ku	'Stratejîya' -> 'Stratejiya' (î, y'den önce i olur)	Stratejîya siyasî ya kurd
+norm	peyv_c2	c2_300	gen1	'Teorîya' -> 'Teoriya' (î, y'den önce i olur)	Teorîya zimanê ya Chomsky
+norm	peyv_c2	c2_300	her1	'Teorîya' -> 'Teoriya' (î, y'den önce i olur)	Teorîya zimanê ya Chomsky.
+norm	peyv_c2	c2_300	her2	'teorîya' -> 'teoriya' (î, y'den önce i olur)	Di teorîya zimanê ya Chomsky de.
+norm	peyv_c2	c2_300	ku	'Teorîya' -> 'Teoriya' (î, y'den önce i olur)	Teorîya zimanê ya Chomsky
+norm	peyv_c2	c2_305	gen1	'Têkilîya' -> 'Têkiliya' (î, y'den önce i olur)	Têkilîya hêz û zayendê
+norm	peyv_c2	c2_305	her1	'Têkilîya' -> 'Têkiliya' (î, y'den önce i olur)	Têkilîya hêz û zayendê.
+norm	peyv_c2	c2_305	her2	'têkilîya' -> 'têkiliya' (î, y'den önce i olur)	Di têkilîya hêz û zayendê de dixebitin.
+norm	peyv_c2	c2_305	ku	'Têkilîya' -> 'Têkiliya' (î, y'den önce i olur)	Têkilîya hêz û zayendê
+norm	peyv_c2	c2_315	gen1	'Teorîya' -> 'Teoriya' (î, y'den önce i olur)	Teorîya çandî ya Stuart Hall
+norm	peyv_c2	c2_315	her1	'Teorîya' -> 'Teoriya' (î, y'den önce i olur)	Teorîya çandî ya Stuart Hall.
+norm	peyv_c2	c2_315	her2	'teorîya' -> 'teoriya' (î, y'den önce i olur)	Di teorîya çandî ya Stuart Hall de ne.
+norm	peyv_c2	c2_315	ku	'Teorîya' -> 'Teoriya' (î, y'den önce i olur)	Teorîya çandî ya Stuart Hall
+norm	peyv_c2	c2_317	gen1	'Pêwendîya' -> 'Pêwendiya' (î, y'den önce i olur)	Pêwendîya nivîskar û xwendevan
+norm	peyv_c2	c2_317	her1	'Pêwendîya' -> 'Pêwendiya' (î, y'den önce i olur)	Pêwendîya nivîskar û xwendevan.
+norm	peyv_c2	c2_317	her2	'pêwendîya' -> 'pêwendiya' (î, y'den önce i olur)	Di pêwendîya nivîskar û xwendevan de dixebitin.
+norm	peyv_c2	c2_317	ku	'Pêwendîya' -> 'Pêwendiya' (î, y'den önce i olur)	Pêwendîya nivîskar û xwendevan
+norm	peyv_c2	c2_326	gen1	'Zimanzanîya' -> 'Zimanzaniya' (î, y'den önce i olur)	Zimanzanîya sosyolojîk
+norm	peyv_c2	c2_326	her1	'Zimanzanîya' -> 'Zimanzaniya' (î, y'den önce i olur)	Zimanzanîya sosyolojîk.
+norm	peyv_c2	c2_326	her2	'zimanzanîya' -> 'zimanzaniya' (î, y'den önce i olur)	Di zimanzanîya sosyolojîk de.
+norm	peyv_c2	c2_326	ku	'Zimanzanîya' -> 'Zimanzaniya' (î, y'den önce i olur)	Zimanzanîya sosyolojîk
+norm	peyv_c2	c2_327	gen1	'Zimanzanîya' -> 'Zimanzaniya' (î, y'den önce i olur)	Zimanzanîya rewşenbîrî
+norm	peyv_c2	c2_327	her1	'Zimanzanîya' -> 'Zimanzaniya' (î, y'den önce i olur)	Zimanzanîya rewşenbîrî.
+norm	peyv_c2	c2_327	her2	'zimanzanîya' -> 'zimanzaniya' (î, y'den önce i olur)	Di zimanzanîya rewşenbîrî de xebat heye.
+norm	peyv_c2	c2_327	ku	'Zimanzanîya' -> 'Zimanzaniya' (î, y'den önce i olur)	Zimanzanîya rewşenbîrî
+norm	peyv_c2	c2_400	gen1	'Hevsazîya' -> 'Hevsaziya' (î, y'den önce i olur)	Hevsazîya navçeyî
+norm	peyv_c2	c2_400	gen2	'Hevsazîya' -> 'Hevsaziya' (î, y'den önce i olur)	Hevsazîya me
+norm	peyv_c2	c2_400	her1	'Hevsazîya' -> 'Hevsaziya' (î, y'den önce i olur)	Hevsazîya navçeyî lazim e.
+norm	peyv_c2	c2_400	her2	'hevsazîya' -> 'hevsaziya' (î, y'den önce i olur)	Di hevsazîya navçeyî de.
+norm	peyv_c2	c2_400	ku	'Hevsazîya' -> 'Hevsaziya' (î, y'den önce i olur)	Hevsazîya navçeyî
+norm	peyv_c2	c2_404	gen1	'Alîkarîya' -> 'Alîkariya' (î, y'den önce i olur)	Alîkarîya mirovî ya navnetewî
+norm	peyv_c2	c2_404	gen2	'Alîkarîya' -> 'Alîkariya' (î, y'den önce i olur)	Alîkarîya me
+norm	peyv_c2	c2_404	her1	'Alîkarîya' -> 'Alîkariya' (î, y'den önce i olur)	Alîkarîya mirovî ya navnetewî hat.
+norm	peyv_c2	c2_404	her2	'alîkarîya' -> 'alîkariya' (î, y'den önce i olur)	Di alîkarîya mirovî ya navnetewî de.
+norm	peyv_c2	c2_404	ku	'Alîkarîya' -> 'Alîkariya' (î, y'den önce i olur)	Alîkarîya mirovî ya navnetewî
+norm	peyv_c2	c2_411	gen1	'Stratejîya' -> 'Stratejiya' (î, y'den önce i olur)	Stratejîya axaftinê
+norm	peyv_c2	c2_411	gen2	'Stratejîya' -> 'Stratejiya' (î, y'den önce i olur)	Stratejîya me
+norm	peyv_c2	c2_411	her1	'Stratejîya' -> 'Stratejiya' (î, y'den önce i olur)	Stratejîya axaftinê.
+norm	peyv_c2	c2_411	her2	'stratejîya' -> 'stratejiya' (î, y'den önce i olur)	Di stratejîya axaftinê de.
+norm	peyv_c2	c2_411	ku	'Stratejîya' -> 'Stratejiya' (î, y'den önce i olur)	Stratejîya axaftinê
+norm	peyv_c2	c2_418	gen1	'Bêmalîya' -> 'Bêmaliya' (î, y'den önce i olur)	Bêmalîya çandî
+norm	peyv_c2	c2_418	gen2	'Bêmalîya' -> 'Bêmaliya' (î, y'den önce i olur)	Bêmalîya me
+norm	peyv_c2	c2_418	her1	'Bêmalîya' -> 'Bêmaliya' (î, y'den önce i olur)	Bêmalîya çandî.
+norm	peyv_c2	c2_418	her2	'bêmalîya' -> 'bêmaliya' (î, y'den önce i olur)	Di bêmalîya çandî de.
+norm	peyv_c2	c2_418	ku	'Bêmalîya' -> 'Bêmaliya' (î, y'den önce i olur)	Bêmalîya çandî
+norm	peyv_c2	c2_424	gen1	'Psîkolojîya' -> 'Psîkolojiya' (î, y'den önce i olur)	Psîkolojîya rizgariyê
+norm	peyv_c2	c2_424	gen2	'Psîkolojîya' -> 'Psîkolojiya' (î, y'den önce i olur)	Psîkolojîya me
+norm	peyv_c2	c2_424	her1	'Psîkolojîya' -> 'Psîkolojiya' (î, y'den önce i olur)	Psîkolojîya rizgariyê.
+norm	peyv_c2	c2_424	her2	'psîkolojîya' -> 'psîkolojiya' (î, y'den önce i olur)	Di psîkolojîya rizgariyê de.
+norm	peyv_c2	c2_424	ku	'Psîkolojîya' -> 'Psîkolojiya' (î, y'den önce i olur)	Psîkolojîya rizgariyê
+norm	peyv_c2	c2_508	gen1	'Fenomenolojîya' -> 'Fenomenolojiya' (î, y'den önce i olur)	Fenomenolojîya zimanî
+norm	peyv_c2	c2_508	gen2	'Fenomenolojîya' -> 'Fenomenolojiya' (î, y'den önce i olur)	Fenomenolojîya me
+norm	peyv_c2	c2_508	her1	'Fenomenolojîya' -> 'Fenomenolojiya' (î, y'den önce i olur)	Fenomenolojîya zimanî.
+norm	peyv_c2	c2_508	her2	'fenomenolojîya' -> 'fenomenolojiya' (î, y'den önce i olur)	Di fenomenolojîya zimanî de.
+norm	peyv_c2	c2_508	ku	'Fenomenolojîya' -> 'Fenomenolojiya' (î, y'den önce i olur)	Fenomenolojîya zimanî
+norm	peyv_c2	c2_512	gen1	'azadîya' -> 'azadiya' (î, y'den önce i olur)	Girtêk û azadîya hişmendî
+norm	peyv_c2	c2_512	her1	'azadîya' -> 'azadiya' (î, y'den önce i olur)	Girtêk û azadîya hişmendî.
+norm	peyv_c2	c2_512	her2	'azadîya' -> 'azadiya' (î, y'den önce i olur)	Di girtêk û azadîya hişmendî de.
+norm	peyv_c2	c2_512	ku	'azadîya' -> 'azadiya' (î, y'den önce i olur)	Girtêk û azadîya hişmendî
+norm	peyv_c2	c2_603	gen1	'Rastîya' -> 'Rastiya' (î, y'den önce i olur)	Rastîya xwendina rexneyî
+norm	peyv_c2	c2_603	gen2	'Rastîya' -> 'Rastiya' (î, y'den önce i olur)	Rastîya me
+norm	peyv_c2	c2_603	her1	'Rastîya' -> 'Rastiya' (î, y'den önce i olur)	Rastîya xwendina rexneyî.
+norm	peyv_c2	c2_603	her2	'rastîya' -> 'rastiya' (î, y'den önce i olur)	Di rastîya xwendina rexneyî de.
+norm	peyv_c2	c2_603	ku	'Rastîya' -> 'Rastiya' (î, y'den önce i olur)	Rastîya xwendina rexneyî
+norm	peyv_c2	c2_615	gen1	'Tevkarîya' -> 'Tevkariya' (î, y'den önce i olur)	Tevkarîya sivîl a Kurdan
+norm	peyv_c2	c2_615	gen2	'Tevkarîya' -> 'Tevkariya' (î, y'den önce i olur)	Tevkarîya me
+norm	peyv_c2	c2_615	her1	'Tevkarîya' -> 'Tevkariya' (î, y'den önce i olur)	Tevkarîya sivîl a Kurdan.
+norm	peyv_c2	c2_615	her2	'tevkarîya' -> 'tevkariya' (î, y'den önce i olur)	Di tevkarîya sivîl a Kurdan de.
+norm	peyv_c2	c2_615	ku	'Tevkarîya' -> 'Tevkariya' (î, y'den önce i olur)	Tevkarîya sivîl a Kurdan
+norm	peyv_c2	c2_620	gen1	'Prosodîya' -> 'Prosodiya' (î, y'den önce i olur)	Prosodîya kurdî
+norm	peyv_c2	c2_620	gen2	'Prosodîya' -> 'Prosodiya' (î, y'den önce i olur)	Prosodîya me
+norm	peyv_c2	c2_620	her1	'Prosodîya' -> 'Prosodiya' (î, y'den önce i olur)	Prosodîya kurdî.
+norm	peyv_c2	c2_620	her2	'prosodîya' -> 'prosodiya' (î, y'den önce i olur)	Di prosodîya kurdî de.
+norm	peyv_c2	c2_620	ku	'Prosodîya' -> 'Prosodiya' (î, y'den önce i olur)	Prosodîya kurdî
+norm	peyv_c2	c2_704	gen1	'Teorîya' -> 'Teoriya' (î, y'den önce i olur)	Teorîya çanda bazarê
+norm	peyv_c2	c2_704	gen2	'Teorîya' -> 'Teoriya' (î, y'den önce i olur)	Teorîya me
+norm	peyv_c2	c2_704	her1	'Teorîya' -> 'Teoriya' (î, y'den önce i olur)	Teorîya çanda bazarê.
+norm	peyv_c2	c2_704	her2	'teorîya' -> 'teoriya' (î, y'den önce i olur)	Di teorîya çanda bazarê de.
+norm	peyv_c2	c2_704	ku	'Teorîya' -> 'Teoriya' (î, y'den önce i olur)	Teorîya çanda bazarê
+norm	peyv_c2	c2_716	gen1	'şaristanîya' -> 'şaristaniya' (î, y'den önce i olur)	Dîroka şaristanîya kurdî
+norm	peyv_c2	c2_716	her1	'şaristanîya' -> 'şaristaniya' (î, y'den önce i olur)	Dîroka şaristanîya kurdî.
+norm	peyv_c2	c2_716	her2	'şaristanîya' -> 'şaristaniya' (î, y'den önce i olur)	Di dîroka şaristanîya kurdî de.
+norm	peyv_c2	c2_716	ku	'şaristanîya' -> 'şaristaniya' (î, y'den önce i olur)	Dîroka şaristanîya kurdî
+norm	peyv_c2	c2_801	gen1	'Biyografîya' -> 'Biyografiya' (î, y'den önce i olur)	Biyografîya zimanzanekî kurd
+norm	peyv_c2	c2_801	gen2	'Biyografîya' -> 'Biyografiya' (î, y'den önce i olur)	Biyografîya me
+norm	peyv_c2	c2_801	her1	'Biyografîya' -> 'Biyografiya' (î, y'den önce i olur)	Biyografîya zimanzanekî kurd.
+norm	peyv_c2	c2_801	her2	'biyografîya' -> 'biyografiya' (î, y'den önce i olur)	Di biyografîya zimanzanekî kurd de.
+norm	peyv_c2	c2_801	ku	'Biyografîya' -> 'Biyografiya' (î, y'den önce i olur)	Biyografîya zimanzanekî kurd
+norm	peyv_c2	c2_806	gen1	'Şarezayîya' -> 'Şarezayiya' (î, y'den önce i olur)	Şarezayîya zimanî ya C2
+norm	peyv_c2	c2_806	gen2	'Şarezayîya' -> 'Şarezayiya' (î, y'den önce i olur)	Şarezayîya me
+norm	peyv_c2	c2_806	her1	'Şarezayîya' -> 'Şarezayiya' (î, y'den önce i olur)	Şarezayîya zimanî ya C2.
+norm	peyv_c2	c2_806	her2	'şarezayîya' -> 'şarezayiya' (î, y'den önce i olur)	Di şarezayîya zimanî ya C2 de.
+norm	peyv_c2	c2_806	ku	'Şarezayîya' -> 'Şarezayiya' (î, y'den önce i olur)	Şarezayîya zimanî ya C2
+norm	peyv_c2	c2_809	gen1	'Teorîya' -> 'Teoriya' (î, y'den önce i olur)	Teorîya zimanî ya Saussure
+norm	peyv_c2	c2_809	gen2	'Teorîya' -> 'Teoriya' (î, y'den önce i olur)	Teorîya me
+norm	peyv_c2	c2_809	her1	'Teorîya' -> 'Teoriya' (î, y'den önce i olur)	Teorîya zimanî ya Saussure.
+norm	peyv_c2	c2_809	her2	'teorîya' -> 'teoriya' (î, y'den önce i olur)	Di teorîya zimanî ya Saussure de.
+norm	peyv_c2	c2_809	ku	'Teorîya' -> 'Teoriya' (î, y'den önce i olur)	Teorîya zimanî ya Saussure
+norm	peyv_c2	c2_813	gen1	'Têkilîya' -> 'Têkiliya' (î, y'den önce i olur)	Têkilîya ziman û hêzê
+norm	peyv_c2	c2_813	gen2	'Têkilîya' -> 'Têkiliya' (î, y'den önce i olur)	Têkilîya me
+norm	peyv_c2	c2_813	her1	'Têkilîya' -> 'Têkiliya' (î, y'den önce i olur)	Têkilîya ziman û hêzê.
+norm	peyv_c2	c2_813	her2	'têkilîya' -> 'têkiliya' (î, y'den önce i olur)	Di têkilîya ziman û hêzê de.
+norm	peyv_c2	c2_813	ku	'Têkilîya' -> 'Têkiliya' (î, y'den önce i olur)	Têkilîya ziman û hêzê
+norm	peyv_c2	c2_826	gen1	'Zordarîya' -> 'Zordariya' (î, y'den önce i olur)	Zordarîya çandî
+norm	peyv_c2	c2_826	gen2	'Zordarîya' -> 'Zordariya' (î, y'den önce i olur)	Zordarîya me
+norm	peyv_c2	c2_826	her1	'Zordarîya' -> 'Zordariya' (î, y'den önce i olur)	Zordarîya çandî.
+norm	peyv_c2	c2_826	her2	'zordarîya' -> 'zordariya' (î, y'den önce i olur)	Di zordarîya çandî de.
+norm	peyv_c2	c2_826	ku	'Zordarîya' -> 'Zordariya' (î, y'den önce i olur)	Zordarîya çandî
+norm	peyv_c2	c2_829	gen1	'Têkilîya' -> 'Têkiliya' (î, y'den önce i olur)	Têkilîya navend û deverê
+norm	peyv_c2	c2_829	gen2	'Têkilîya' -> 'Têkiliya' (î, y'den önce i olur)	Têkilîya me
+norm	peyv_c2	c2_829	her1	'Têkilîya' -> 'Têkiliya' (î, y'den önce i olur)	Têkilîya navend û deverê.
+norm	peyv_c2	c2_829	her2	'têkilîya' -> 'têkiliya' (î, y'den önce i olur)	Di têkilîya navend û deverê de.
+norm	peyv_c2	c2_829	ku	'Têkilîya' -> 'Têkiliya' (î, y'den önce i olur)	Têkilîya navend û deverê
+norm	peyv_c2	c2_831	gen1	'Metodolojîya' -> 'Metodolojiya' (î, y'den önce i olur)	Metodolojîya têkel
+norm	peyv_c2	c2_831	gen2	'Metodolojîya' -> 'Metodolojiya' (î, y'den önce i olur)	Metodolojîya me
+norm	peyv_c2	c2_831	her1	'Metodolojîya' -> 'Metodolojiya' (î, y'den önce i olur)	Metodolojîya têkel.
+norm	peyv_c2	c2_831	her2	'metodolojîya' -> 'metodolojiya' (î, y'den önce i olur)	Di metodolojîya têkel de.
+norm	peyv_c2	c2_831	ku	'Metodolojîya' -> 'Metodolojiya' (î, y'den önce i olur)	Metodolojîya têkel
+norm	peyv_c2	c2_835	gen1	'Teorîya' -> 'Teoriya' (î, y'den önce i olur)	Teorîya girtêkxistina zimên
+norm	peyv_c2	c2_835	gen2	'Teorîya' -> 'Teoriya' (î, y'den önce i olur)	Teorîya me
+norm	peyv_c2	c2_835	her1	'Teorîya' -> 'Teoriya' (î, y'den önce i olur)	Teorîya girtêkxistina zimên.
+norm	peyv_c2	c2_835	her2	'teorîya' -> 'teoriya' (î, y'den önce i olur)	Di teorîya girtêkxistina zimên de.
+norm	peyv_c2	c2_835	ku	'Teorîya' -> 'Teoriya' (î, y'den önce i olur)	Teorîya girtêkxistina zimên
+norm	peyv_c2	c2_838	gen1	'Têkilîya' -> 'Têkiliya' (î, y'den önce i olur)	Têkilîya nivîskar û civakê
+norm	peyv_c2	c2_838	gen2	'Têkilîya' -> 'Têkiliya' (î, y'den önce i olur)	Têkilîya me
+norm	peyv_c2	c2_838	her1	'Têkilîya' -> 'Têkiliya' (î, y'den önce i olur)	Têkilîya nivîskar û civakê.
+norm	peyv_c2	c2_838	her2	'têkilîya' -> 'têkiliya' (î, y'den önce i olur)	Di têkilîya nivîskar û civakê de.
+norm	peyv_c2	c2_838	ku	'Têkilîya' -> 'Têkiliya' (î, y'den önce i olur)	Têkilîya nivîskar û civakê
+norm	peyv_c2	c2_847	gen1	'Ontolojîya' -> 'Ontolojiya' (î, y'den önce i olur)	Ontolojîya zimanî
+norm	peyv_c2	c2_847	gen2	'Ontolojîya' -> 'Ontolojiya' (î, y'den önce i olur)	Ontolojîya me
+norm	peyv_c2	c2_847	her1	'Ontolojîya' -> 'Ontolojiya' (î, y'den önce i olur)	Ontolojîya zimanî.
+norm	peyv_c2	c2_847	her2	'ontolojîya' -> 'ontolojiya' (î, y'den önce i olur)	Di ontolojîya zimanî de.
+norm	peyv_c2	c2_847	ku	'Ontolojîya' -> 'Ontolojiya' (î, y'den önce i olur)	Ontolojîya zimanî
+norm	peyv_c2	c2_855	gen1	'Pêşengîya' -> 'Pêşengiya' (î, y'den önce i olur)	Pêşengîya zimannasan
+norm	peyv_c2	c2_855	gen2	'Pêşengîya' -> 'Pêşengiya' (î, y'den önce i olur)	Pêşengîya me
+norm	peyv_c2	c2_855	her1	'Pêşengîya' -> 'Pêşengiya' (î, y'den önce i olur)	Pêşengîya zimannasan lazim e.
+norm	peyv_c2	c2_855	her2	'pêşengîya' -> 'pêşengiya' (î, y'den önce i olur)	Di pêşengîya zimannasan de.
+norm	peyv_c2	c2_855	ku	'Pêşengîya' -> 'Pêşengiya' (î, y'den önce i olur)	Pêşengîya zimannasan
+norm	peyv_c2	c2_866	gen2	'Bihîstwerîya' -> 'Bihîstweriya' (î, y'den önce i olur)	Bihîstwerîya me
+norm	peyv_c2	c2_866	her2	'bihîstwerîyê' -> 'bihîstweriyê' (î, y'den önce i olur)	Di bihîstwerîyê de.
+norm	peyv_c2	c2_867	gen2	'Hişmendîya' -> 'Hişmendiya' (î, y'den önce i olur)	Hişmendîya me
+norm	peyv_c2	c2_867	her2	'hişmendîyê' -> 'hişmendiyê' (î, y'den önce i olur)	Di hişmendîyê de hêz heye.
+norm	peyv_c2	c2_869	gen2	'Derûnnasîya' -> 'Derûnnasiya' (î, y'den önce i olur)	Derûnnasîya me
+norm	peyv_c2	c2_869	her2	'derûnnasîyê' -> 'derûnnasiyê' (î, y'den önce i olur)	Di derûnnasîyê de lêkolîn.
+yazim	cand_celebrations	cel_005	kurmanjContent	Hawar dışı 'ı' (çayır),) -> 'i'	"Mihrcan, cejna kevneşopî ya payîzê ye, ji salnameya kevin a Îranî. Di 2 Cotmehê de (16ê Mihrê li gor salnameya Şemsî) tê pîroz kirin. Bingeh: Peyva ""Mihrcan"" ji"
+yazim	cand_celebrations	cel_008	kurmanjContent	Hawar dışı 'ı' (yılınız) -> 'i'	Sersal, mîlata sala nû ye li gor salnameya Mîladî — di 1ê Çileyê de tê pîroz kirin. Di Kurdistanê de ev cejnek nû ye, lê di nav diasporayê de gelek belav e. Ade
+yazim	cand_celebrations	cel_008	kurmanjContent	Hawar dışı 'ı' (yılınız) -> 'i'	Sersal, mîlata sala nû ye li gor salnameya Mîladî — di 1ê Çileyê de tê pîroz kirin. Di Kurdistanê de ev cejnek nû ye, lê di nav diasporayê de gelek belav e. Ade
+yazim	cand_celebrations	cel_008	kurmanjContent	Hawar dışı 'ı' (yılınız) -> 'i'	Sersal, mîlata sala nû ye li gor salnameya Mîladî — di 1ê Çileyê de tê pîroz kirin. Di Kurdistanê de ev cejnek nû ye, lê di nav diasporayê de gelek belav e. Ade
+yazim	cand_events	evt_012	kurmanjContent	Hawar dışı 'ı' (kadın) -> 'i'	"Şerê Kobanê di navbera Îlon 2014 û Çile 2015'an de, di navbera hêzên YPJ/YPG (Kurd) û DAEŞ de pêk hat. Berxwedanek dîrokî, ku DAEŞ wek ""tu kar pê dernayê"" pêşkê"
+yazim	cand_foods	f_010	kurmanjContent	Hawar dışı 'ğ' (Doğum:) -> '-'	Hingivê çiyayê Hekarî û Kotur navdar e li seranserê rojhilatê. Ji kulîlkên çiyê yên xwezayî tê — meşên kovî di şikeftan de hingiv çêdikin, ji bo xwedaniya hingi
+yazim	gotin	E.6	ku	Hawar dışı 'â' (welât) -> 'a'	Eger xêr bê welatekiwê bigihije hemi cihê welât
+yazim	gotin	E.7	ku	Hawar dışı 'â' (welât) -> 'a'	Eger xêr bê welatekîwê bigihîje hemi cîhê welât
+yazim	gotin	H.186	ku	Hawar dışı 'â' (kâçikdaye) -> 'a'	Hingivê debeye di eyarê kâçikdaye
+yazim	gotin	H.42	ku	Hawar dışı 'â' (Sâlâ) -> 'a'	Heft Sâlâ çû sêferî disa hât kêri beri
+yazim	gotin	H.42	ku	Hawar dışı 'â' (Sâlâ) -> 'a'	Heft Sâlâ çû sêferî disa hât kêri beri
+yazim	gotin	H.42	ku	Hawar dışı 'â' (âlâ) -> 'a'	Heft Sâlâ çû sêferî disa hât kêri beri
+yazim	gotin	K.176	ku	Hawar dışı 'â' (yâr) -> 'a'	Ki tî be nan u av,Ki têrbe dîl'da yâr dîxwaze
+yazim	peyv_child_a1	z_a1_012	gen1	Hawar dışı 'ı' (kız) -> 'i'	Xwişk — kız kardeş

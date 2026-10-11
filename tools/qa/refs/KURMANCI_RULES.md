@@ -2,6 +2,15 @@
 
 # Kurmancî Linter Spesifikasyonu — Authoritative Spec
 
+> **Ekim 2026 notu.** Bu belge Hawar alfabesi ve dilbilgisi için başvuru olarak duruyor, ama
+> artık tek otorite değil. Çalışma alanının ortak kural belgesi `Kurmanci/Ziman/REBER.md`dir
+> (kurallar 2,14 milyon sözcüklük korpusta ölçülmüştür); ikisi ayrıştığında `REBER.md` geçerlidir.
+> Ayrışan noktalar ve korpus dökümü: `docs/norm_uzlasmasi.md`. Özellikle:
+> - §5.4 gelecek zaman belirtecinin ayrı yazımı doğru karar, ama dayanağı Bedirxan–Lescot değil;
+>   korpustaki Bedirxan metni bitişik yazıyor. Çağdaş normdur.
+> - §9.2 dil ve ay adlarının büyük harfi karara bağlanmış değil.
+> - §12.3 cinsiyet "ağız farkı" listesi ölçülmeden yazılmış; *dem* korpusta açık biçimde dişil.
+
 > **Audience:** Kurmancî–Türkçe iki dilli bakımcı (project maintainer).
 > **Purpose:** Bu doküman, 32.000+ satırlık Kurmancî öğrenme içeriğindeki yazım hatalarını otomatik olarak tespit eden Python tabanlı bir linter için tek otoriter kaynaktır.
 > **Standard:** Hawar imlâ standardı (Celadet Bedirxan–Roger Lescot, 1932 sonrası).

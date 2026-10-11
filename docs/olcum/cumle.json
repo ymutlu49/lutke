@@ -1,0 +1,50 @@
+{
+ "a1": {
+  "kelime": 517,
+  "ornek": 1034,
+  "tam": 959,
+  "bantta": 924,
+  "iki_tam": 459,
+  "hic_tam": 17
+ },
+ "a2": {
+  "kelime": 721,
+  "ornek": 1441,
+  "tam": 1121,
+  "bantta": 608,
+  "iki_tam": 454,
+  "hic_tam": 54
+ },
+ "b1": {
+  "kelime": 1555,
+  "ornek": 3106,
+  "tam": 1751,
+  "bantta": 107,
+  "iki_tam": 517,
+  "hic_tam": 321
+ },
+ "b2": {
+  "kelime": 598,
+  "ornek": 1196,
+  "tam": 582,
+  "bantta": 7,
+  "iki_tam": 154,
+  "hic_tam": 170
+ },
+ "c1": {
+  "kelime": 510,
+  "ornek": 1020,
+  "tam": 261,
+  "bantta": 0,
+  "iki_tam": 49,
+  "hic_tam": 298
+ },
+ "c2": {
+  "kelime": 335,
+  "ornek": 670,
+  "tam": 176,
+  "bantta": 0,
+  "iki_tam": 52,
+  "hic_tam": 211
+ }
+}

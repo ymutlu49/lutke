@@ -8,6 +8,7 @@ on:
       - 'lib/features/cultural_content/domain/**'
       - 'lib/features/en_learning/domain/**'
       - 'lib/features/onboarding/placement_test_screen.dart'
+      - 'website/data/content.json'
       - 'tools/qa/**'
   push:
     branches: [main]
@@ -28,3 +29,7 @@ jobs:
         run: python tools/qa/kurmanci_lint.py
       - name: Run assessment-validity scanner (weak distractors)
         run: python tools/qa/assessment_quality.py
+      - name: Check website export is in sync with Dart word lists
+        run: python tools/qa/icerik.py --sinama
+        env:
+          PYTHONUTF8: '1'

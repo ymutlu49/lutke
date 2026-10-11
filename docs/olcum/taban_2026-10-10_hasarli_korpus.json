@@ -1,0 +1,429 @@
+{
+ "tarih": "2026-10-10",
+ "icerik_json_eski": false,
+ "envanter": {
+  "duzey": {
+   "a1": {
+    "kayit": 510,
+    "benzersiz_madde": 491,
+    "web": 510,
+    "ders": 20,
+    "egzersiz": 101,
+    "ders_hedefi": 192,
+    "ders_kapsama": 37.6,
+    "cok_sozcuklu": 20.0
+   },
+   "a2": {
+    "kayit": 700,
+    "benzersiz_madde": 689,
+    "web": 700,
+    "ders": 25,
+    "egzersiz": 129,
+    "ders_hedefi": 320,
+    "ders_kapsama": 45.7,
+    "cok_sozcuklu": 30.6
+   },
+   "b1": {
+    "kayit": 1555,
+    "benzersiz_madde": 1478,
+    "web": 951,
+    "ders": 15,
+    "egzersiz": 90,
+    "ders_hedefi": 73,
+    "ders_kapsama": 4.7,
+    "cok_sozcuklu": 59.3
+   },
+   "b2": {
+    "kayit": 598,
+    "benzersiz_madde": 574,
+    "web": 598,
+    "ders": 15,
+    "egzersiz": 90,
+    "ders_hedefi": 89,
+    "ders_kapsama": 14.9,
+    "cok_sozcuklu": 59.5
+   },
+   "c1": {
+    "kayit": 510,
+    "benzersiz_madde": 505,
+    "web": 510,
+    "ders": 15,
+    "egzersiz": 90,
+    "ders_hedefi": 49,
+    "ders_kapsama": 9.6,
+    "cok_sozcuklu": 86.7
+   },
+   "c2": {
+    "kayit": 335,
+    "benzersiz_madde": 335,
+    "web": 335,
+    "ders": 15,
+    "egzersiz": 90,
+    "ders_hedefi": 42,
+    "ders_kapsama": 12.5,
+    "cok_sozcuklu": 84.5
+   }
+  },
+  "kayit": 4208,
+  "web": 3604,
+  "benzersiz_madde": 3732,
+  "cocuk": 92,
+  "ders": 105,
+  "egzersiz": 590,
+  "dinleme": 105,
+  "konusma": 60,
+  "yazma": 80,
+  "diyalog": 8,
+  "dilbilgisi_konusu": 10,
+  "dilbilgisi_duzeyleri": [
+   "A1",
+   "A2"
+  ],
+  "atasozu": 3361,
+  "kultur": 155
+ },
+ "ornek": {
+  "a1": {
+   "her": {
+    "n": 1020,
+    "ort_sozcuk": 3.99,
+    "noktasiz": 0.0,
+    "en_cok_2_sozcuk": 1.2,
+    "maddenin_aynisi": 0.0,
+    "yuklemsiz": 12.4
+   },
+   "gen": {
+    "n": 1012,
+    "ort_sozcuk": 3.59,
+    "noktasiz": 3.1,
+    "en_cok_2_sozcuk": 5.9,
+    "maddenin_aynisi": 2.3,
+    "yuklemsiz": 12.5
+   }
+  },
+  "a2": {
+   "her": {
+    "n": 1399,
+    "ort_sozcuk": 3.49,
+    "noktasiz": 0.2,
+    "en_cok_2_sozcuk": 16.4,
+    "maddenin_aynisi": 0.9,
+    "yuklemsiz": 20.6
+   },
+   "gen": {
+    "n": 1399,
+    "ort_sozcuk": 2.8,
+    "noktasiz": 73.1,
+    "en_cok_2_sozcuk": 38.2,
+    "maddenin_aynisi": 6.6,
+    "yuklemsiz": 67.2
+   }
+  },
+  "b1": {
+   "her": {
+    "n": 3106,
+    "ort_sozcuk": 3.48,
+    "noktasiz": 0.0,
+    "en_cok_2_sozcuk": 20.3,
+    "maddenin_aynisi": 7.3,
+    "yuklemsiz": 39.8
+   },
+   "gen": {
+    "n": 3106,
+    "ort_sozcuk": 2.44,
+    "noktasiz": 88.9,
+    "en_cok_2_sozcuk": 63.1,
+    "maddenin_aynisi": 28.5,
+    "yuklemsiz": 83.4
+   }
+  },
+  "b2": {
+   "her": {
+    "n": 1196,
+    "ort_sozcuk": 3.63,
+    "noktasiz": 0.0,
+    "en_cok_2_sozcuk": 17.2,
+    "maddenin_aynisi": 9.8,
+    "yuklemsiz": 53.4
+   },
+   "gen": {
+    "n": 1196,
+    "ort_sozcuk": 2.31,
+    "noktasiz": 94.3,
+    "en_cok_2_sozcuk": 69.1,
+    "maddenin_aynisi": 32.6,
+    "yuklemsiz": 88.0
+   }
+  },
+  "c1": {
+   "her": {
+    "n": 1020,
+    "ort_sozcuk": 3.84,
+    "noktasiz": 0.0,
+    "en_cok_2_sozcuk": 16.8,
+    "maddenin_aynisi": 25.4,
+    "yuklemsiz": 78.0
+   },
+   "gen": {
+    "n": 1020,
+    "ort_sozcuk": 2.49,
+    "noktasiz": 99.1,
+    "en_cok_2_sozcuk": 70.8,
+    "maddenin_aynisi": 42.9,
+    "yuklemsiz": 97.0
+   }
+  },
+  "c2": {
+   "her": {
+    "n": 670,
+    "ort_sozcuk": 4.09,
+    "noktasiz": 0.0,
+    "en_cok_2_sozcuk": 15.2,
+    "maddenin_aynisi": 32.8,
+    "yuklemsiz": 77.6
+   },
+   "gen": {
+    "n": 669,
+    "ort_sozcuk": 2.44,
+    "noktasiz": 99.6,
+    "en_cok_2_sozcuk": 73.4,
+    "maddenin_aynisi": 46.8,
+    "yuklemsiz": 97.9
+   }
+  }
+ },
+ "ses": {
+  "bildirim_anahtari": 9448,
+  "duzey": {
+   "a1": {
+    "madde": 69.0,
+    "her": 40.2,
+    "gen": 5.9
+   },
+   "a2": {
+    "madde": 61.0,
+    "her": 75.7,
+    "gen": 6.0
+   },
+   "b1": {
+    "madde": 39.1,
+    "her": 88.7,
+    "gen": 5.4
+   },
+   "b2": {
+    "madde": 36.8,
+    "her": 90.0,
+    "gen": 7.4
+   },
+   "c1": {
+    "madde": 11.8,
+    "her": 87.5,
+    "gen": 2.1
+   },
+   "c2": {
+    "madde": 9.9,
+    "her": 75.1,
+    "gen": 2.5
+   }
+  },
+  "madde": 40.4,
+  "her": 79.6,
+  "gen": 5.2,
+  "dinleme_var": 0,
+  "dinleme": 105
+ },
+ "atasozu": {
+  "n": 3361,
+  "turkce_harfli": 10,
+  "sapkasiz": 1030,
+  "sapkasiz_payda": 3187
+ },
+ "acik_norm": {
+  "dil_adi_buyuk": 239,
+  "dil_adi_kucuk": 596,
+  "ay_adi_buyuk": 25,
+  "ay_adi_kucuk": 0,
+  "herdu": 3,
+  "her_du": 3
+ },
+ "taniklik": {
+  "a1": {
+   "tek_sozcuklu": 399,
+   "sozlukte": 93.0,
+   "wikiferhengde": 92.5,
+   "farqinide": 85.0,
+   "korpusta_5": 86.2
+  },
+  "a2": {
+   "tek_sozcuklu": 485,
+   "sozlukte": 87.0,
+   "wikiferhengde": 93.2,
+   "farqinide": 77.9,
+   "korpusta_5": 72.8
+  },
+  "b1": {
+   "tek_sozcuklu": 633,
+   "sozlukte": 75.5,
+   "wikiferhengde": 82.0,
+   "farqinide": 65.1,
+   "korpusta_5": 51.7
+  },
+  "b2": {
+   "tek_sozcuklu": 236,
+   "sozlukte": 83.9,
+   "wikiferhengde": 89.8,
+   "farqinide": 61.4,
+   "korpusta_5": 53.0
+  },
+  "c1": {
+   "tek_sozcuklu": 68,
+   "sozlukte": 66.2,
+   "wikiferhengde": 76.5,
+   "farqinide": 45.6,
+   "korpusta_5": 29.4
+  },
+  "c2": {
+   "tek_sozcuklu": 52,
+   "sozlukte": 65.4,
+   "wikiferhengde": 76.9,
+   "farqinide": 38.5,
+   "korpusta_5": 36.5
+  },
+  "taniksiz": 158,
+  "taniksiz_duzey": {
+   "a1": 14,
+   "a2": 20,
+   "b1": 86,
+   "b2": 17,
+   "c1": 11,
+   "c2": 10
+  }
+ },
+ "kapsam": {
+  "cekirdek": 2497,
+  "duzey": {
+   "a1": {
+    "ilk_500": 39.6,
+    "ilk_1000": 26.5,
+    "ilk_2000": 16.6
+   },
+   "a2": {
+    "ilk_500": 57.2,
+    "ilk_1000": 43.1,
+    "ilk_2000": 29.6
+   },
+   "b1": {
+    "ilk_500": 74.4,
+    "ilk_1000": 57.4,
+    "ilk_2000": 42.4
+   },
+   "b2": {
+    "ilk_500": 76.6,
+    "ilk_1000": 59.9,
+    "ilk_2000": 44.6
+   },
+   "c1": {
+    "ilk_500": 77.4,
+    "ilk_1000": 61.7,
+    "ilk_2000": 46.1
+   },
+   "c2": {
+    "ilk_500": 77.8,
+    "ilk_1000": 62.2,
+    "ilk_2000": 46.5
+   }
+  },
+  "eksik_ilk_2000": 1069,
+  "eksik_ornek": [
+   "ko",
+   "ma",
+   "van",
+   "an",
+   "ka",
+   "car",
+   "hawar",
+   "herdu",
+   "hertim",
+   "dû",
+   "dîsan",
+   "pey",
+   "tiştekî",
+   "însan",
+   "ha",
+   "cin",
+   "axa",
+   "dinya",
+   "bîra",
+   "gor",
+   "hingê",
+   "yan",
+   "kurê",
+   "pirr",
+   "herîn",
+   "ey",
+   "hem",
+   "bêyî",
+   "ti",
+   "cem",
+   "dîn",
+   "welê",
+   "hinekî",
+   "carina",
+   "geh",
+   "xelk",
+   "bêdeng",
+   "nik",
+   "dora",
+   "beg"
+  ]
+ },
+ "cinsiyet": {
+  "ad": 916,
+  "wikiferheng_var": 620,
+  "korpus_var": 116,
+  "en_az_bir_kaynak": 639,
+  "iki_kaynak_var": 97,
+  "iki_kaynak_hemfikir": 88,
+  "kaynaklar ayrışıyor": 9,
+  "yalnız Wîkîferheng": 118,
+  "iki kaynak hemfikir": 13,
+  "yalnız korpus": 7,
+  "celiski": 138
+ },
+ "denetim": {
+  "edat": {
+   "toplam": 29,
+   "muaf": 9,
+   "acik": 20
+  },
+  "ergatif": {
+   "toplam": 3,
+   "acik": 3
+  },
+  "ergnav": {
+   "toplam": 1,
+   "acik": 1
+  },
+  "izafe": {
+   "toplam": 35,
+   "acik": 35
+  },
+  "norm": {
+   "toplam": 852,
+   "acik": 850,
+   "muaf": 2
+  },
+  "terim": {
+   "toplam": 38,
+   "muaf": 38
+  },
+  "yazim": {
+   "toplam": 39,
+   "acik": 21,
+   "muaf": 18
+  },
+  "_acik": 930,
+  "_muaf": 67,
+  "_norm_iy": 829
+ }
+}

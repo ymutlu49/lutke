@@ -1,0 +1,409 @@
+sinif	madde	kayit	kayitlar
+aynı düzeyde, aynı karşılık	dawet	4	a1:a1_514=Düğün | a2:a2_512=Düğün | b1:b1_861=Düğün | b1:b1_ml15=Düğün
+aynı düzeyde, aynı karşılık	govend	4	a1:a1_ek428=Halay / Halk dansı | b1:b1_860=Halay / Halk dansı | b1:b1_k01=Halay / Kürt halk dansı | b2:b2_282=Halay / Kürt halk dansı
+aynı düzeyde, aynı karşılık	pêşgotin	4	a2:a2_1044=Önsöz | b1:b1_063=Önsöz / Girişe söz | b1:b1_ed05=Önsöz | b2:b2_303=Önsöz / Giriş sözü
+aynı düzeyde, aynı karşılık	zanîn	4	a1:a1_598=Bilmek | a2:a2_407=Bilmek | b1:b1_605=Bilmek | b1:b1_gn06=Bilmek
+aynı düzeyde, aynı karşılık	avhewa	3	b1:b1_t2_01=İklim / Hava durumu | b1:b1_1392=İklim | b2:b2_381=İklim
+aynı düzeyde, aynı karşılık	bazirganî	3	b1:b1_121=Ticaret | b1:b1_661=Ticaret | b1:b1_ab01=Ticaret
+aynı düzeyde, aynı karşılık	bi vî awayî	3	b1:b1_621=Bu şekilde | b1:b1_t8_28=Bu şekilde / Böyle | c2:c2_518=Bu şekilde
+aynı düzeyde, aynı karşılık	dadmendî	3	b1:b1_1030=Adalet | b2:b2_046=Adalet | b2:b2_110c=Adalet / Adillik
+aynı düzeyde, aynı karşılık	helbest	3	a2:a2_fk_10=Şiir | b1:b1_060=Şiir | b1:b1_711=Şiir
+aynı düzeyde, aynı karşılık	helbestvan	3	b1:b1_061=Şair | b1:b1_710=Şair | b2:b2_f10=Şair
+aynı düzeyde, aynı karşılık	maf	3	b1:b1_052=Hak / Hukuk | b2:b2_110b=Hak / Hukuk | b2:b2_333=Hak
+aynı düzeyde, aynı karşılık	parastin	3	a2:a2_1700=Korumak | b1:b1_104=Korumak / Savunmak | b1:b1_1001=Korumak / Savunmak
+aynı düzeyde, aynı karşılık	parêzer	3	a2:a2_801=Avukat | b2:b2_h06=Avukat | b2:b2_644=Avukat
+aynı düzeyde, aynı karşılık	pênûsk	3	a1:a1_500=Kalem | a1:a1_756=Kalem / Yazı kalemi | b1:b1_1355=Kalem
+aynı düzeyde, aynı karşılık	pêvajoya hînbûnê	3	b2:b2_781=Öğrenme süreci | b2:b2_e18=Öğrenme süreci | b2:b2_s39=Öğrenme süreci
+aynı düzeyde, aynı karşılık	rêbaz	3	b1:b1_932=Yöntem / Metod | b1:b1_k08=Yöntem / Metot | b2:b2_204=Yöntem
+aynı düzeyde, aynı karşılık	serdem	3	b1:b1_082=Dönem / Devir | b1:b1_643=Dönem / Çağ | b2:b2_502=Dönem / Çağ
+aynı düzeyde, aynı karşılık	sînor	3	a2:a2_1721=Sınır | b2:b2_131=Sınır | b2:b2_618=Sınır
+aynı düzeyde, aynı karşılık	vexwarin	3	a1:a1_590=İçmek | b1:b1_404=İçmek | b1:b1_lk05=İçmek
+aynı düzeyde, aynı karşılık	wêrek	3	a2:a2_1050=Cesur | b1:b1_043=Cesur / Yiğit | b1:b1_p10=Cesur
+aynı düzeyde, aynı karşılık	zanîngeh	3	a1:a1_117=Üniversite | b1:b1_480=Üniversite | b1:b1_k15=Üniversite
+aynı düzeyde, aynı karşılık	zeytûn	3	a1:a1_539=Zeytin | a2:a2_433=Zeytin | a2:a2_1202=Zeytin
+aynı düzeyde, aynı karşılık	şandin	3	a2:a2_415=Göndermek | b1:b1_602=Göndermek | b1:b1_lk01=Göndermek
+aynı düzeyde, aynı karşılık	aborî	2	b1:b1_120=Ekonomi | b1:b1_660=Ekonomi
+aynı düzeyde, aynı karşılık	anîn	2	b1:b1_200=Getirmek | b1:b1_lk02=Getirmek
+aynı düzeyde, aynı karşılık	avêtin	2	b1:b1_400=Atmak / Fırlatmak | b1:b1_lk04=Atmak
+aynı düzeyde, aynı karşılık	azadî	2	b1:b1_050=Özgürlük | b1:b1_1394=Özgürlük
+aynı düzeyde, aynı karşılık	azadîya çapemeniyê	2	c1:c1_309=Basın özgürlüğü | c1:c1_354=Basın özgürlüğü
+aynı düzeyde, aynı karşılık	baş e	2	a1:a1_016=İyi / Tamam | a1:a1_615=İyi / Tamam!
+aynı düzeyde, aynı karşılık	bi bîr anîn	2	b1:b1_733=Hatırlamak | b1:b1_1005=Hatırlamak
+aynı düzeyde, aynı karşılık	bi giştî	2	b1:b1_515=Genel olarak | b1:b1_rz25=Genel olarak
+aynı düzeyde, aynı karşılık	bi taybetî	2	b1:b1_691=Özellikle | b1:b1_rz24=Özellikle
+aynı düzeyde, aynı karşılık	birin	2	b1:b1_201=Götürmek | b1:b1_lk03=Götürmek
+aynı düzeyde, aynı karşılık	biçûk	2	a1:a1_213=Küçük | a1:a1_602=Küçük
+aynı düzeyde, aynı karşılık	bêwate	2	b2:b2_342=Anlamsız | b2:b2_639=Anlamsız
+aynı düzeyde, aynı karşılık	ceza	2	b2:b2_253=Ceza | b2:b2_h04=Ceza
+aynı düzeyde, aynı karşılık	civaka wekhev	2	b1:b1_t1_25=Eşit toplum | b1:b1_tm44=Eşit toplum
+aynı düzeyde, aynı karşılık	demokrasî	2	b2:b2_044=Demokrasi | b2:b2_531=Demokrasi
+aynı düzeyde, aynı karşılık	derfet	2	a2:a2_473=Fırsat / İmkân | a2:a2_1430=Fırsat
+aynı düzeyde, aynı karşılık	derî	2	a1:a1_193=Kapı | a1:a1_570=Kapı
+aynı düzeyde, aynı karşılık	dewlet	2	b1:b1_054=Devlet | b1:b1_1022=Devlet
+aynı düzeyde, aynı karşılık	dirêj	2	a1:a1_218=Uzun | a1:a1_603=Uzun
+aynı düzeyde, aynı karşılık	gel	2	b1:b1_240=Halk / Millet | b1:b1_1352=Halk / İnsanlar
+aynı düzeyde, aynı karşılık	gotûbêj	2	b1:b1_1131=Diyalog / Konuşma | b1:b1_zm20=Diyalog / Söyleşi
+aynı düzeyde, aynı karşılık	hatiye	2	b1:b1_010=Gelmiş / Geldi (etkisi var) | b1:b1_1382=Gelmiş
+aynı düzeyde, aynı karşılık	havîna germ	2	b1:b1_1300=Sıcak yaz | b1:b1_t2_07=Sıcak yaz
+aynı düzeyde, aynı karşılık	hefteya borî	2	b1:b1_dm05=Geçen hafta | b1:b1_1370=Geçen hafta
+aynı düzeyde, aynı karşılık	hevdu	2	b1:b1_211=Birbirini | b1:b1_der09=Birbirini / Birbirimizi
+aynı düzeyde, aynı karşılık	hevsengî	2	b2:b2_562=Denge / Denge | b2:b2_660=Denge
+aynı düzeyde, aynı karşılık	hêrs bûn	2	b1:b1_645=Kızmak / Sinirlenmek | b1:b1_gn23=Kızmak / Sinirlemek
+aynı düzeyde, aynı karşılık	jiyana baş	2	b1:b1_t1_03=İyi yaşam | b1:b1_gn16=İyi yaşam
+aynı düzeyde, aynı karşılık	keser xwarin	2	b1:b1_p01=Üzülmek / Kederlenmek | b1:b1_f38=Üzülmek
+aynı düzeyde, aynı karşılık	kevn	2	a1:a1_215=Eski | a1:a1_600=Eski
+aynı düzeyde, aynı karşılık	kompîtur	2	b1:b1_1261=Bilgisayar | b1:b1_tk01=Bilgisayar
+aynı düzeyde, aynı karşılık	komîte	2	b1:b1_241=Komite / Kurul | b1:b1_sp07=Komite
+aynı düzeyde, aynı karşılık	kurdistanî	2	b1:b1_084=Kürdistanlı | b1:b1_453=Kürdistanlı / Kürdistana ait
+aynı düzeyde, aynı karşılık	kurt	2	a1:a1_219=Kısa | a1:a1_604=Kısa
+aynı düzeyde, aynı karşılık	li ku	2	a1:a1_252=Nerede? | a1:a1_775=Nerede?
+aynı düzeyde, aynı karşılık	mayîn	2	a2:a2_413=Kalmak | a2:a2_1704=Kalmak
+aynı düzeyde, aynı karşılık	mezopotamya	2	b2:b2_271=Mezopotamya | b2:b2_390=Mezopotamya
+aynı düzeyde, aynı karşılık	nasnameya kolektîf	2	b2:b2_k03=Kolektif kimlik | b2:b2_q16=Kolektif kimlik
+aynı düzeyde, aynı karşılık	navend	2	a2:a2_010=Merkez / Şehir merkezi | a2:a2_1720=Merkez
+aynı düzeyde, aynı karşılık	nefret kirin	2	a2:a2_1288=Nefret etmek | a2:a2_1907=Nefret etmek
+aynı düzeyde, aynı karşılık	nexweşiya dil	2	b1:b1_720=Kalp hastalığı | b1:b1_bd10=Kalp hastalığı
+aynı düzeyde, aynı karşılık	nexweşiya kronîk	2	b1:b1_1252=Kronik hastalık | b1:b1_bd09=Kronik hastalık
+aynı düzeyde, aynı karşılık	nêzîk	2	a1:a1_260=Yakın | a1:a1_586=Yakın / Yakınında
+aynı düzeyde, aynı karşılık	nîv	2	a2:a2_482=Yarım / Orta | a2:a2_1600=Yarım
+aynı düzeyde, aynı karşılık	nû	2	a1:a1_214=Yeni | a1:a1_601=Yeni
+aynı düzeyde, aynı karşılık	pace	2	a1:a1_194=Cam / Pencere | a1:a1_571=Cam / Pencere
+aynı düzeyde, aynı karşılık	pratîk	2	b1:b1_632=Pratik / Uygulama | b1:b1_k10=Pratik / Uygulama
+aynı düzeyde, aynı karşılık	qirêjahî	2	b2:b2_052=Kirlilik / Çevre kirliliği | b2:b2_383=Kirlilik / Çevre kirliliği
+aynı düzeyde, aynı karşılık	rast	2	a1:a1_225=Doğru / Sağ | a1:a1_607=Doğru
+aynı düzeyde, aynı karşılık	rêxistin	2	b1:b1_242=Örgüt / Organizasyon | b1:b1_sp06=Örgüt / Kurum
+aynı düzeyde, aynı karşılık	rêziman	2	b1:b1_272=Dilbilgisi | b1:b1_1014=Dilbilgisi
+aynı düzeyde, aynı karşılık	sar	2	a1:a1_217=Soğuk | a1:a1_525=Soğuk
+aynı düzeyde, aynı karşılık	sazî	2	b1:b1_482=Kurum / Müessese | b1:b1_t1_15=Kurum / Kuruluş
+aynı düzeyde, aynı karşılık	teorî	2	b1:b1_631=Teori | b1:b1_k09=Teori
+aynı düzeyde, aynı karşılık	têgeha bingehîn	2	c1:c1_160=Temel kavram | c1:c1_972=Temel kavram
+aynı düzeyde, aynı karşılık	têkoşîna jiyanê	2	b1:b1_nv09=Hayat mücadelesi | b1:b1_gt23=Hayat mücadelesi
+aynı düzeyde, aynı karşılık	veberhênan	2	b1:b1_292=Yatırım | b1:b1_i03=Yatırım
+aynı düzeyde, aynı karşılık	veguhêztin	2	b1:b1_105=Aktarmak / Taşımak | b1:b1_810=Aktarmak / İletmek
+aynı düzeyde, aynı karşılık	xweş	2	a1:a1_220=Güzel / İyi | a1:a1_741=Güzel / İyi
+aynı düzeyde, aynı karşılık	zanistên civakî	2	b2:b2_730=Sosyal bilimler | b2:b2_a15=Sosyal bilimler
+aynı düzeyde, aynı karşılık	zaravayê kurmancî	2	b1:b1_t4_11=Kurmancî lehçesi | b1:b1_zm07=Kurmancî lehçesi
+aynı düzeyde, aynı karşılık	zimanê medyayê	2	c1:c1_429=Medya dili | c1:c1_985=Medya dili
+aynı düzeyde, aynı karşılık	zimanê zikmakî	2	b1:b1_1084=Anadil | b1:b1_t4_13=Anadil
+aynı düzeyde, aynı karşılık	zivistana sar	2	b1:b1_1301=Soğuk kış | b1:b1_t2_09=Soğuk kış
+aynı düzeyde, aynı karşılık	çandin	2	b1:b1_071=Ekmek / Ürün yetiştirmek | b1:b1_1110=Ekmek / Dikmek
+aynı düzeyde, aynı karşılık	çaryek	2	a2:a2_483=Çeyrek / Dörtte bir | a2:a2_1601=Çeyrek
+aynı düzeyde, aynı karşılık	çavkanî û referans	2	b2:b2_772=Kaynak ve referans | b2:b2_a06=Kaynak ve referans
+aynı düzeyde, aynı karşılık	îmtîhan	2	a2:a2_085=Sınav | a2:a2_1400=Sınav
+aynı düzeyde, aynı karşılık	înternet	2	a2:a2_312=İnternet | a2:a2_1410=İnternet
+aynı düzeyde, aynı karşılık	şano	2	b2:b2_280=Tiyatro / Sahne | b2:b2_694=Tiyatro
+aynı düzeyde, aynı karşılık	şibandin	2	b2:b2_066=Benzetmek / Kıyaslamak | b2:b2_301=Benzetmek
+aynı düzeyde, farklı karşılık	ragihandin	7	b1:b1_811=Haberdar etmek / Bildirmek | b1:b1_tk15=Haber verme / İletişim | b1:b1_lk08=Bildirmek / Haber vermek | b2:b2_030=İletişim / Haberleşme | b2:b2_035=Rapor etmek / Haberdar etmek | b2:b2_300=Açıklamak / Bildirmek | b2:b2_662=İletişim
+aynı düzeyde, farklı karşılık	çîrok	5	a1:a1_ek429=Masal / Hikaye | a2:a2_1042=Hikâye / Masal | a2:a2_fk_11=Hikaye / Öykü | b1:b1_062=Hikaye / Masal | b1:b1_713=Masal
+aynı düzeyde, farklı karşılık	birîn	3	a1:a1_ek414=Yara | a2:a2_845=Yara | a2:a2_1706=Kesmek
+aynı düzeyde, farklı karşılık	bîranîn	3	b1:b1_1072=Anı / Hatıra | b2:b2_064=Anı / Hatıra | b2:b2_632=Hatırlamak
+aynı düzeyde, farklı karşılık	destnîşan kirin	3	b1:b1_lk10=Belirtmek / İşaret etmek | c1:c1_1019=Belirtmek / İşaret etmek | c1:c1_1078=Belirlemek / Tespit etmek
+aynı düzeyde, farklı karşılık	fêr bûn	3	a2:a2_081=Alışmak / Öğrenmek | b1:b1_jy01=Alışmak / Öğrenmek | b1:b1_gn07=Öğrenmek
+aynı düzeyde, farklı karşılık	lewre	3	a2:a2_1480=Bundan dolayı / O yüzden | b1:b1_220=Bu yüzden / Dolayısıyla | b1:b1_dc10=Bu yüzden
+aynı düzeyde, farklı karşılık	pişt	3	a1:a1_423=Sırt | a1:a1_583=Arkasında | a2:a2_840=Sırt
+aynı düzeyde, farklı karşılık	pêkanîn	3	b1:b1_600=Gerçekleştirmek | b1:b1_405=Uygulamak / Gerçekleştirmek | c1:c1_1077=Başarmak / Gerçekleştirmek
+aynı düzeyde, farklı karşılık	rûmet	3	b1:b1_091=Saygınlık / Onur | b1:b1_1034=İtibar / Saygınlık | b1:b1_der04=Onur / İtibar
+aynı düzeyde, farklı karşılık	wênesazî	3	b1:b1_hn06=Ressamlık / Resim sanatı | b2:b2_141=Resim sanatı / Boyama | b2:b2_695=Resim sanatı
+aynı düzeyde, farklı karşılık	xwe	3	a1:a1_532=Kendi / Kendisi | a1:a1_430=Kendim / Kendi | b1:b1_210=Kendi / Kendisi
+aynı düzeyde, farklı karşılık	dadwer	2	b1:b1_1123=Hâkim / Yargıç | b1:b1_tm47=Yargıç
+aynı düzeyde, farklı karşılık	daçek	2	b1:b1_473=Edat (dilbilgisi) | b1:b1_rz08=Edat / Öntakı
+aynı düzeyde, farklı karşılık	erd	2	a1:a1_743=Toprak / Yer | a1:a1_573=Zemin / Yer
+aynı düzeyde, farklı karşılık	giyanî	2	b1:b1_891=Manevi / Ruhsal | b1:b1_t02=Ruhsal / Manevi
+aynı düzeyde, farklı karşılık	hilbijartin	2	b1:b1_243=Seçmek / Oy vermek | b1:b1_sp05=Seçim
+aynı düzeyde, farklı karşılık	ji ber vê yekê	2	b1:b1_112=Bu yüzden / Bu nedenle | b1:b1_690=Bu nedenle / Bundan dolayı
+aynı düzeyde, farklı karşılık	jiyan	2	a1:a1_306=Hayat / Yaşam | a1:a1_ek451=Yaşam / Hayat
+aynı düzeyde, farklı karşılık	kobanê	2	b1:b1_845=Kobane | b1:b1_cj12=Kobane (Kobanê)
+aynı düzeyde, farklı karşılık	kovara zanistî ya kurdî	2	c1:c1_051=Kürt bilim dergisi | c1:c1_355=Kürtçe bilimsel dergi
+aynı düzeyde, farklı karşılık	li gorî min	2	b1:b1_701=Bence / Bana göre | b1:b1_rz21=Bana göre
+aynı düzeyde, farklı karşılık	mêjû	2	b1:b1_080=Tarih (olaylar) | b1:b1_642=Tarih (geçmiş)
+aynı düzeyde, farklı karşılık	mêrdîn	2	b1:b1_842=Mardin | b1:b1_cj14=Mardin (Mêrdîn)
+aynı düzeyde, farklı karşılık	netewe	2	b2:b2_042=Millet / Ulus | b2:b2_658=Ulus
+aynı düzeyde, farklı karşılık	parlamento	2	b2:b2_112=Meclis / Parlamento | b2:b2_330=Parlamento
+aynı düzeyde, farklı karşılık	pejirandin	2	b1:b1_731=Onaylamak / Kabul etmek | b1:b1_lk07=Kabul etmek / Onaylamak
+aynı düzeyde, farklı karşılık	peymana aştiyê	2	c1:c1_305=Barış antlaşması | c1:c1_718=Barış anlaşması
+aynı düzeyde, farklı karşılık	pêşkeftin	2	b1:b1_491=İlerleme / Gelişim | b1:b1_1092=Kalkınma / Gelişim
+aynı düzeyde, farklı karşılık	ser	2	a1:a1_170=Baş | a1:a1_584=Üstünde / Üzerinde
+aynı düzeyde, farklı karşılık	serhed	2	b1:b1_840=Sınır bölgesi | b1:b1_cj15=Serhad bölgesi
+aynı düzeyde, farklı karşılık	tê gotin	2	b2:b2_010=Söylenir / Denilir | b2:b2_670=Denir / Söylenir
+aynı düzeyde, farklı karşılık	veguhestin	2	b1:b1_lk06=Taşımak / Aktarmak | b1:b1_937=Geri dönüşüm
+aynı düzeyde, farklı karşılık	wê kir	2	b1:b1_004=O (dişil) yaptı | b1:b1_946=O yaptı (dişil)
+aynı düzeyde, farklı karşılık	wî got	2	b1:b1_003=O (eril) söyledi | b1:b1_945=O söyledi (eril)
+aynı düzeyde, farklı karşılık	çûye	2	b1:b1_011=Gitmiş (etkisi var) | b1:b1_1383=Gitmiş
+aynı düzeyde, farklı karşılık	û	2	a1:a1_004=û (uzun u) | a1:a1_274=Ve
+düzeyler arası, aynı karşılık	bûk	3	a1:a1_403=Gelin | a2:a2_864=Gelin | b1:b1_ml12=Gelin
+düzeyler arası, aynı karşılık	cotkar	3	a1:a1_114=Çiftçi | a2:a2_803=Çiftçi | b2:b2_648=Çiftçi
+düzeyler arası, aynı karşılık	destmal	3	a1:a1_ek441=Mendil / Eşarp | a2:a2_1222=Mendil / Eşarp | b1:b1_c06b=Mendil / El bezi
+düzeyler arası, aynı karşılık	dew	3	a1:a1_ek405=Ayran | a2:a2_1204=Ayran | b1:b1_xw25=Ayran
+düzeyler arası, aynı karşılık	gûz	3	a1:a1_ek411=Ceviz | a2:a2_1211=Ceviz | b1:b1_tm17=Ceviz
+düzeyler arası, aynı karşılık	kiras	3	a1:a1_747=Gömlek / Elbise | a2:a2_200=Gömlek / Elbise | b1:b1_c01b=Gömlek / Elbise
+düzeyler arası, aynı karşılık	lorî	3	a1:a1_ek430=Ninni | a2:a2_145=Ninni | b1:b1_1202=Ninni
+düzeyler arası, aynı karşılık	lênûsk	3	a1:a1_743b=Defter / Not defteri | a2:a2_1965=Defter | b1:b1_1356=Defter / Not defteri
+düzeyler arası, aynı karşılık	mûçe	3	a2:a2_292=Maaş | b1:b1_i06=Maaş | b2:b2_602=Maaş
+düzeyler arası, aynı karşılık	nevî	3	a1:a1_092=Torun | a2:a2_863=Torun | b1:b1_ml21=Torun
+düzeyler arası, aynı karşılık	nîvro	3	a1:a1_123=Öğle | a2:a2_870=Öğle | b1:b1_1372=Öğle
+düzeyler arası, aynı karşılık	pantol	3	a1:a1_748=Pantolon | a2:a2_201=Pantolon | b1:b1_c02b=Pantolon
+düzeyler arası, aynı karşılık	pirtûkxane	3	a1:a1_119=Kütüphane | a2:a2_700=Kütüphane | b1:b1_pw12=Kütüphane
+düzeyler arası, aynı karşılık	pêşkêş kirin	3	a2:a2_714=Sunmak / Takdim etmek | b1:b1_lk09=Sunmak / Takdim etmek | b2:b2_lk02=Sunmak
+düzeyler arası, aynı karşılık	rovî	3	a1:a1_563=Tilki | a2:a2_110=Tilki | b1:b1_d13=Tilki
+düzeyler arası, aynı karşılık	wane	3	a1:a1_502=Ders | a2:a2_082=Ders | b1:b1_pw06=Ders
+düzeyler arası, aynı karşılık	xwendin	3	a2:a2_402=Okumak | b1:b1_604=Okumak | b2:b2_627=Okumak
+düzeyler arası, aynı karşılık	xwê	3	a1:a1_159=Tuz | a2:a2_676=Tuz | b1:b1_xw19=Tuz
+düzeyler arası, aynı karşılık	zava	3	a1:a1_404=Damat | a2:a2_865=Damat | b1:b1_ml11=Damat
+düzeyler arası, aynı karşılık	zevî	3	a1:a1_746=Tarla | a2:a2_fk_06=Tarla | b1:b1_261=Tarla / Arazi
+düzeyler arası, aynı karşılık	ap	2	a1:a1_086=Amca (baba tarafı) | a2:a2_860=Amca (baba tarafı)
+düzeyler arası, aynı karşılık	av	2	a1:a1_151=Su | a2:a2_1543=Su
+düzeyler arası, aynı karşılık	avahîsaz	2	a1:a1_543=Mimar | b2:b2_643=Mimar
+düzeyler arası, aynı karşılık	azad	2	a2:a2_1561=Özgür | b1:b1_881=Özgür
+düzeyler arası, aynı karşılık	bahoz	2	a1:a1_287=Fırtına | a2:a2_1031=Fırtına
+düzeyler arası, aynı karşılık	balafir	2	a1:a1_442=Uçak | a2:a2_852=Uçak
+düzeyler arası, aynı karşılık	bawer kirin	2	a1:a1_599=İnanmak | a2:a2_410=İnanmak / Güvenmek
+düzeyler arası, aynı karşılık	baxçe	2	a1:a1_200=Bahçe | c1:c1_007=Bahçe
+düzeyler arası, aynı karşılık	bazirgan	2	a2:a2_804=Tüccar | b1:b1_ab02=Tüccar / Esnaf
+düzeyler arası, aynı karşılık	beran	2	a1:a1_fk_21=Koç | b1:b1_1113=Koç / Erkek koyun
+düzeyler arası, aynı karşılık	berpirsiyar	2	a2:a2_472=Sorumlu | b1:b1_1032=Sorumlu
+düzeyler arası, aynı karşılık	berpirsiyarî	2	b1:b1_der08=Sorumluluk | c1:c1_1073=Sorumluluk
+düzeyler arası, aynı karşılık	berxwedan	2	b2:b2_550=Direniş | c2:c2_911=Direniş
+düzeyler arası, aynı karşılık	bi hev re	2	a2:a2_284=Birlikte / Beraber | b1:b1_der12=Birlikte
+düzeyler arası, aynı karşılık	bi kurtasî	2	b1:b1_f26=Kısaca | b2:b2_591=Kısaca
+düzeyler arası, aynı karşılık	bi ser ketin	2	a2:a2_1517=Başarmak | b1:b1_p02=Başarmak
+düzeyler arası, aynı karşılık	bi vê yekê re	2	a2:a2_1922=Bununla birlikte | c2:c2_426=Bununla birlikte
+düzeyler arası, aynı karşılık	bijarte	2	a2:a2_1292=Seçkin / Özel | b2:b2_283=Seçkin / Önde gelen
+düzeyler arası, aynı karşılık	bijartin	2	a2:a2_412=Seçmek | b1:b1_1000=Seçmek
+düzeyler arası, aynı karşılık	bijîşk	2	a1:a1_112=Doktor / Hekim | a2:a2_800=Doktor
+düzeyler arası, aynı karşılık	bila xweş be	2	a2:a2_323=Güzel olsun | b1:b1_021=Güzel olsun
+düzeyler arası, aynı karşılık	bilbil	2	a2:a2_113=Bülbül | c1:c1_005=Bülbül
+düzeyler arası, aynı karşılık	bimîne bi xêr	2	a1:a1_ek446=Hoşça kal | b1:b1_928=Hoşça kal
+düzeyler arası, aynı karşılık	birinc	2	a1:a1_162=Pirinç | a2:a2_1200=Pirinç
+düzeyler arası, aynı karşılık	bizin	2	a1:a1_298=Keçi | a2:a2_882=Keçi
+düzeyler arası, aynı karşılık	bê guman	2	a2:a2_462=Şüphesiz / Kesinlikle | b1:b1_f29=Şüphesiz / Kesinlikle
+düzeyler arası, aynı karşılık	carinan	2	a1:a1_ek453=Bazen | a2:a2_1792=Bazen
+düzeyler arası, aynı karşılık	cejn	2	a1:a1_ek431=Bayram | a2:a2_511=Bayram / Şenlik
+düzeyler arası, aynı karşılık	civaknasî	2	b1:b1_fk_01=Sosyoloji | c1:c1_060=Sosyoloji
+düzeyler arası, aynı karşılık	daristan	2	a2:a2_114=Orman | b1:b1_873=Orman
+düzeyler arası, aynı karşılık	dereng	2	a1:a1_224=Geç / Geride | a2:a2_1565=Geç
+düzeyler arası, aynı karşılık	derman	2	a1:a1_ek415=İlaç | a2:a2_092=İlaç
+düzeyler arası, aynı karşılık	dermangeh	2	a1:a1_ek418=Eczane | a2:a2_015=Eczane
+düzeyler arası, aynı karşılık	dermanxane	2	a2:a2_1233=Eczane | b1:b1_s03=Eczane
+düzeyler arası, aynı karşılık	derûnnasî	2	b1:b1_fk_02=Psikoloji | c2:c2_869=Psikoloji
+düzeyler arası, aynı karşılık	dest pê kirin	2	a2:a2_694=Başlamak | b2:b2_688=Başlamak
+düzeyler arası, aynı karşılık	destan	2	a1:a1_512=Destan | b1:b1_712=Destan / Epos
+düzeyler arası, aynı karşılık	destûr xwestin	2	a2:a2_z13=İzin istemek | b1:b1_gt26=İzin istemek
+düzeyler arası, aynı karşılık	deşt	2	a2:a2_682=Ova / Düzlük | b2:b2_613=Ova
+düzeyler arası, aynı karşılık	di heman demê de	2	a2:a2_1573=Aynı zamanda | b1:b1_113=Aynı zamanda / Eş zamanlı
+düzeyler arası, aynı karşılık	dijwar	2	a2:a2_897=Zor / Sert | b2:b2_636=Zor / Güç
+düzeyler arası, aynı karşılık	dilgerm	2	a1:a1_s06=Candan / Sıcakkanlı | b1:b1_1334=Candan / Sıcak kalpli
+düzeyler arası, aynı karşılık	dilsozî	2	b1:b1_der07=Sadakat / Bağlılık | c1:c1_1072=Sadakat / Bağlılık
+düzeyler arası, aynı karşılık	duyem	2	a1:a1_771=İkinci | a2:a2_481=İkinci
+düzeyler arası, aynı karşılık	dîwar	2	a1:a1_572=Duvar | b1:b1_m02=Duvar
+düzeyler arası, aynı karşılık	encam	2	a2:a2_725=Sonuç | b1:b1_931=Sonuç
+düzeyler arası, aynı karşılık	endezyar	2	a2:a2_802=Mühendis | b2:b2_645=Mühendis
+düzeyler arası, aynı karşılık	erzan	2	a2:a2_062=Ucuz | b1:b1_rg02=Ucuz
+düzeyler arası, aynı karşılık	esman	2	a1:a1_744=Gökyüzü | a2:a2_z14=Gökyüzü
+düzeyler arası, aynı karşılık	firavîn	2	a1:a1_fk_10=Öğle yemeği | a2:a2_671=Öğle yemeği
+düzeyler arası, aynı karşılık	firax	2	a1:a1_450=Tabak / Kap | a2:a2_826=Tabak / Kap (genel)
+düzeyler arası, aynı karşılık	firotin	2	a1:a1_592=Satmak | b1:b1_kr07=Satmak
+düzeyler arası, aynı karşılık	firîn	2	a2:a2_1702=Uçmak | b1:b1_lk16=Uçmak
+düzeyler arası, aynı karşılık	futbol	2	a2:a2_600=Futbol | b1:b1_tk17=Futbol
+düzeyler arası, aynı karşılık	gelek	2	a1:a1_221=Çok | b1:b1_924=Çok
+düzeyler arası, aynı karşılık	genim	2	a1:a1_414=Buğday | b1:b1_262=Buğday
+düzeyler arası, aynı karşılık	germahî	2	a1:a1_524=Sıcaklık | a2:a2_1421=Sıcaklık / Isı
+düzeyler arası, aynı karşılık	gewr	2	a1:a1_066=Gri | a2:a2_623=Gri / Boz
+düzeyler arası, aynı karşılık	giran	2	a1:a1_605=Ağır | a2:a2_063=Ağır / Pahalı
+düzeyler arası, aynı karşılık	girîn	2	a2:a2_1002=Ağlamak | b1:b1_lk15=Ağlamak
+düzeyler arası, aynı karşılık	girîng	2	a1:a1_464=Önemli | a2:a2_1562=Önemli
+düzeyler arası, aynı karşılık	goşt	2	a1:a1_156=Et | a2:a2_1547=Et
+düzeyler arası, aynı karşılık	guh	2	a1:a1_172=Kulak | a2:a2_842=Kulak
+düzeyler arası, aynı karşılık	gul	2	a1:a1_285=Gül / Çiçek | c1:c1_006=Gül
+düzeyler arası, aynı karşılık	guman kirin	2	a2:a2_1906=Şüphelenmek | b1:b1_1321b=Şüphelenmek
+düzeyler arası, aynı karşılık	gumrik	2	a2:a2_704=Gümrük | b1:b1_r11=Gümrük
+düzeyler arası, aynı karşılık	gund	2	a1:a1_446=Köy | b1:b1_461=Köy
+düzeyler arası, aynı karşılık	hefte	2	a1:a1_127=Hafta | b1:b1_1379=Hafta
+düzeyler arası, aynı karşılık	her dem	2	a1:a1_ek452=Her zaman | a2:a2_z07=Her zaman / Daima
+düzeyler arası, aynı karşılık	hesp	2	a1:a1_297=At | a2:a2_880=At
+düzeyler arası, aynı karşılık	hewa	2	a1:a1_286=Hava | a2:a2_1423=Hava / Hava durumu
+düzeyler arası, aynı karşılık	hewlêr	2	b1:b1_cj09=Erbil / Hewler | b2:b2_721=Erbil
+düzeyler arası, aynı karşılık	hewz	2	a2:a2_420=Havuz | b1:b1_1043=Havuz / Gölet
+düzeyler arası, aynı karşılık	hezar	2	a1:a1_050=Bin | b1:b1_948=Bin
+düzeyler arası, aynı karşılık	hikûmet	2	b1:b1_1021=Hükümet | b2:b2_332=Hükümet
+düzeyler arası, aynı karşılık	hingiv	2	a2:a2_1205=Bal | b1:b1_s09=Bal
+düzeyler arası, aynı karşılık	hirmî	2	a1:a1_ek408=Armut | a2:a2_1209=Armut
+düzeyler arası, aynı karşılık	hirç	2	a1:a1_562=Ayı | b1:b1_d15=Ayı
+düzeyler arası, aynı karşılık	hunermend	2	a2:a2_1260=Sanatçı | b2:b2_143=Sanatçı
+düzeyler arası, aynı karşılık	hêja	2	a2:a2_fk_19=Değerli / Kıymetli | b2:b2_640=Değerli
+düzeyler arası, aynı karşılık	hêk	2	a1:a1_411=Yumurta | b1:b1_y04=Yumurta
+düzeyler arası, aynı karşılık	hêvî	2	a2:a2_266=Umut / Beklenti | b1:b1_1073=Umut
+düzeyler arası, aynı karşılık	ji ber ku	2	a2:a2_130=Çünkü | b1:b1_dc09=Çünkü
+düzeyler arası, aynı karşılık	ji dema ku	2	b1:b1_833=-den beri / -dığından beri | b2:b2_120=-den beri / -dığından beri
+düzeyler arası, aynı karşılık	ji kerema xwe	2	a1:a1_772=Lütfen | a2:a2_320=Lütfen
+düzeyler arası, aynı karşılık	ji nû ve	2	a2:a2_135=Yeniden / Tekrar | b1:b1_t8_25=Yeniden / Tekrar
+düzeyler arası, aynı karşılık	kar	2	a2:a2_290=İş / Çalışma | b1:b1_908=İş
+düzeyler arası, aynı karşılık	kenîn	2	a2:a2_1000=Gülmek | b1:b1_lk14=Gülmek
+düzeyler arası, aynı karşılık	ketin	2	a2:a2_1504=Düşmek | b1:b1_lk17=Düşmek
+düzeyler arası, aynı karşılık	keştî	2	a1:a1_538=Gemi | a2:a2_851=Gemi
+düzeyler arası, aynı karşılık	kirîn	2	a1:a1_591=Satın almak | b1:b1_kr08=Satın almak
+düzeyler arası, aynı karşılık	kolan	2	a2:a2_011=Sokak | b1:b1_r07=Sokak / Cadde
+düzeyler arası, aynı karşılık	kovar	2	a2:a2_fk_13=Dergi | b2:b2_032=Dergi
+düzeyler arası, aynı karşılık	kovara zanistî	2	b1:b1_md04=Bilimsel dergi | b2:b2_770=Bilimsel dergi
+düzeyler arası, aynı karşılık	kurdên diasporayê	2	b1:b1_1310=Diaspora Kürtleri | b2:b2_q12=Diaspora Kürtleri
+düzeyler arası, aynı karşılık	kursî	2	a1:a1_196=Sandalye / Koltuk | a2:a2_821=Sandalye
+düzeyler arası, aynı karşılık	kêr	2	a1:a1_453=Bıçak | a2:a2_829=Bıçak
+düzeyler arası, aynı karşılık	kûçik	2	a1:a1_295=Köpek | a2:a2_887=Köpek
+düzeyler arası, aynı karşılık	lêkolîner	2	b1:b1_k13=Araştırmacı | b2:b2_360=Araştırmacı
+düzeyler arası, aynı karşılık	mafê xwebirêvebirinê	2	b1:b1_sp09=Özyönetim hakkı | b2:b2_s33=Özyönetim hakkı
+düzeyler arası, aynı karşılık	mal	2	a1:a1_190=Ev / Yurt | b1:b1_909=Ev
+düzeyler arası, aynı karşılık	malper	2	a2:a2_502=Web sitesi | b1:b1_tk03=Web sitesi
+düzeyler arası, aynı karşılık	mast	2	a1:a1_155=Yoğurt | a2:a2_1203=Yoğurt
+düzeyler arası, aynı karşılık	meşrûiyet	2	b2:b2_045=Meşruiyet | c1:c1_021=Meşruiyet
+düzeyler arası, aynı karşılık	mil	2	a1:a1_422=Omuz | a2:a2_841=Omuz
+düzeyler arası, aynı karşılık	mirov	2	a1:a1_305=İnsan / Kişi | b1:b1_907=İnsan
+düzeyler arası, aynı karşılık	mirîşk	2	a1:a1_157=Tavuk | a2:a2_884=Tavuk
+düzeyler arası, aynı karşılık	mizgeft	2	a2:a2_018=Cami | b1:b1_e03=Cami
+düzeyler arası, aynı karşılık	mêz	2	a1:a1_197=Masa | a2:a2_820=Masa
+düzeyler arası, aynı karşılık	mî	2	a1:a1_299=Koyun | a2:a2_883=Koyun
+düzeyler arası, aynı karşılık	mîras	2	a2:a2_1040=Miras | c2:c2_918=Miras
+düzeyler arası, aynı karşılık	nasname	2	b2:b2_040=Kimlik | c2:c2_903=Kimlik
+düzeyler arası, aynı karşılık	nexweşxane	2	a1:a1_182=Hastane | a2:a2_014=Hastane
+düzeyler arası, aynı karşılık	nivîn	2	a1:a1_195=Yatak | a2:a2_822=Yatak
+düzeyler arası, aynı karşılık	nîqaş	2	b1:b1_933=Tartışma | b2:b2_048=Tartışma / Müzakere
+düzeyler arası, aynı karşılık	nîvşev	2	a2:a2_872=Gece yarısı | b1:b1_1373=Gece yarısı
+düzeyler arası, aynı karşılık	nîşandan	2	b1:b1_202=Göstermek | b2:b2_lk01=Göstermek
+düzeyler arası, aynı karşılık	nîşane	2	b1:b1_ed08=Sembol | b2:b2_211=Sembol
+düzeyler arası, aynı karşılık	nûjen	2	a2:a2_899=Modern / Yeni çağ | b2:b2_702=Modern / Çağdaş
+düzeyler arası, aynı karşılık	ode	2	a1:a1_192=Oda | b1:b1_m09=Oda
+düzeyler arası, aynı karşılık	paqijî	2	b1:b1_935=Temizlik | c2:c2_905=Temizlik / Saflık
+düzeyler arası, aynı karşılık	pasaport	2	a2:a2_075=Pasaport | b1:b1_r12=Pasaport
+düzeyler arası, aynı karşılık	pembe	2	a1:a1_068=Pembe | a2:a2_621=Pembe
+düzeyler arası, aynı karşılık	penîr	2	a1:a1_410=Peynir | b1:b1_y05=Peynir
+düzeyler arası, aynı karşılık	pijandin	2	a2:a2_430=Pişirmek | b1:b1_xw07=Pişirmek / Kaynatmak
+düzeyler arası, aynı karşılık	pisîk	2	a1:a1_296=Kedi | a2:a2_888=Kedi
+düzeyler arası, aynı karşılık	polîs	2	a1:a1_ek425=Polis | a2:a2_809=Polis
+düzeyler arası, aynı karşılık	poz	2	a1:a1_174=Burun | a2:a2_843=Burun
+düzeyler arası, aynı karşılık	pêlav	2	a1:a1_749=Ayakkabı | a2:a2_202=Ayakkabı
+düzeyler arası, aynı karşılık	pêşeroj	2	a2:a2_474=Gelecek / İstikbal | b1:b1_jy18=Gelecek
+düzeyler arası, aynı karşılık	pêşkêşkirin	2	b1:b1_k19=Sunum yapmak | b2:b2_606=Sunum yapmak
+düzeyler arası, aynı karşılık	qebûl kirin	2	a2:a2_282=Kabul etmek | b1:b1_1002=Kabul etmek
+düzeyler arası, aynı karşılık	qehwe	2	a1:a1_153=Kahve | a2:a2_1542=Kahve
+düzeyler arası, aynı karşılık	qehweyî	2	a1:a1_067=Kahverengi | a2:a2_622=Kahverengi
+düzeyler arası, aynı karşılık	red kirin	2	a2:a2_283=Reddetmek | b1:b1_1003=Reddetmek
+düzeyler arası, aynı karşılık	rûniştin	2	a1:a1_595=Oturmak | a2:a2_1007=Oturmak
+düzeyler arası, aynı karşılık	sal	2	a1:a1_129=Yıl | b1:b1_1381=Yıl
+düzeyler arası, aynı karşılık	sala bê	2	a2:a2_252=Gelecek yıl | b1:b1_1368=Gelecek yıl
+düzeyler arası, aynı karşılık	savar	2	a2:a2_1740=Bulgur | b1:b1_xw08=Bulgur
+düzeyler arası, aynı karşılık	sed	2	a1:a1_049=Yüz | b1:b1_947=Yüz
+düzeyler arası, aynı karşılık	sekinîn	2	a1:a1_594=Durmak | b1:b1_lk12=Durmak
+düzeyler arası, aynı karşılık	serkeftin	2	a1:a1_fk_05=Başarı / Başarılar | a2:a2_692=Başarı
+düzeyler arası, aynı karşılık	serêşî	2	a2:a2_090=Baş ağrısı | b1:b1_bd13=Baş ağrısı
+düzeyler arası, aynı karşılık	sewze	2	a2:a2_1546=Sebze | b1:b1_xw12=Sebze
+düzeyler arası, aynı karşılık	sibê baş	2	a1:a1_492=Günaydın! | a2:a2_001=Günaydın!
+düzeyler arası, aynı karşılık	sinif	2	a1:a1_754=Sınıf | a2:a2_083=Sınıf
+düzeyler arası, aynı karşılık	siyaset	2	b1:b1_1023=Siyaset | b2:b2_114=Siyaset / Politika
+düzeyler arası, aynı karşılık	standardkirin	2	b2:b2_521=Standartlaştırma | c2:c2_916=Standartlaştırma
+düzeyler arası, aynı karşılık	stranbêj	2	a2:a2_140=Şarkıcı | b1:b1_k02=Şarkıcı
+düzeyler arası, aynı karşılık	sêv	2	a1:a1_160=Elma | a2:a2_1208=Elma
+düzeyler arası, aynı karşılık	taştê	2	a1:a1_fk_09=Kahvaltı | a2:a2_670=Kahvaltı
+düzeyler arası, aynı karşılık	texmîn kirin	2	a2:a2_902=Tahmin etmek | b1:b1_gn09=Tahmin etmek
+düzeyler arası, aynı karşılık	tirî	2	a1:a1_161=Üzüm | a2:a2_1210=Üzüm
+düzeyler arası, aynı karşılık	tiştek	2	a1:a1_534=Bir şey | b1:b1_1385=Bir şey
+düzeyler arası, aynı karşılık	trên	2	a1:a1_443=Tren | a2:a2_850=Tren
+düzeyler arası, aynı karşılık	têgeh	2	b2:b2_047=Kavram | c1:c1_161=Kavram
+düzeyler arası, aynı karşılık	têkoşîn	2	b1:b1_231=Mücadele etmek / Direnmek | b2:b2_700=Mücadele etmek / Uğraşmak
+düzeyler arası, aynı karşılık	têkçûn	2	b1:b1_085=Yenilgi / Çöküş | b2:b2_373=Yenilgi / Çöküş
+düzeyler arası, aynı karşılık	vala	2	a1:a1_462=Boş | b1:b1_1142=Boş
+düzeyler arası, aynı karşılık	veguherîna çandî	2	b1:b1_t8_22=Kültürel dönüşüm | b2:b2_s28=Kültürel dönüşüm
+düzeyler arası, aynı karşılık	vîze	2	a2:a2_1241=Vize | b1:b1_r13=Vize
+düzeyler arası, aynı karşılık	weke mînak	2	a2:a2_z23=Örneğin | b2:b2_400=Örneğin
+düzeyler arası, aynı karşılık	wergirtin	2	a2:a2_416=Almak / Teslim almak | b1:b1_603=Almak / Kabul etmek
+düzeyler arası, aynı karşılık	werzîş	2	a2:a2_601=Spor / Egzersiz | b1:b1_tk16=Spor
+düzeyler arası, aynı karşılık	westiyayî	2	a2:a2_fk_20=Yorgun | b1:b1_rg17=Yorgun
+düzeyler arası, aynı karşılık	weşandin	2	a2:a2_fk_14=Yayımlamak / Yayınlamak | b2:b2_242=Yayımlamak
+düzeyler arası, aynı karşılık	wêjeya berxwedanê	2	c1:c1_506=Direniş edebiyatı | c2:c2_839=Direniş edebiyatı
+düzeyler arası, aynı karşılık	wêjezan	2	b2:b2_352=Edebiyatçı | c1:c1_1031=Edebiyatçı
+düzeyler arası, aynı karşılık	wênekêş	2	a2:a2_807=Fotoğrafçı / Ressam | c1:c1_1028=Fotoğrafçı
+düzeyler arası, aynı karşılık	xebata hevpar	2	b1:b1_f10=Ortak çalışma | b2:b2_tam01=Ortak çalışma
+düzeyler arası, aynı karşılık	xewn dîtin	2	a2:a2_1005=Rüya görmek | b1:b1_f18=Rüya görmek
+düzeyler arası, aynı karşılık	xwedê ji te razî be	2	a1:a1_506=Allah senden razı olsun | b1:b1_927=Allah senden razı olsun
+düzeyler arası, aynı karşılık	xwestin	2	a2:a2_408=İstemek | b1:b1_601=İstemek
+düzeyler arası, aynı karşılık	zagon	2	b1:b1_1020=Kanun / Yasa | b2:b2_110=Kanun / Yasa
+düzeyler arası, aynı karşılık	zanistvan	2	b1:b1_zn10=Bilim insanı | c1:c1_1075=Bilim insanı
+düzeyler arası, aynı karşılık	zebeş	2	a1:a1_ek409=Karpuz | b1:b1_tm19=Karpuz
+düzeyler arası, aynı karşılık	zimanzan	2	b1:b1_275=Dilbilimci | c1:c1_1030=Dilbilimci
+düzeyler arası, aynı karşılık	çavkanî	2	b1:b1_291=Kaynak / Kaynaklar | b2:b2_652=Kaynak
+düzeyler arası, aynı karşılık	çay	2	a1:a1_152=Çay | a2:a2_1541=Çay
+düzeyler arası, aynı karşılık	çem	2	a1:a1_281=Nehir / Irmak | b2:b2_616=Nehir
+düzeyler arası, aynı karşılık	çiya	2	a1:a1_280=Dağ | b2:b2_614=Dağ
+düzeyler arası, aynı karşılık	çêlek	2	a1:a1_300=İnek | a2:a2_885=İnek
+düzeyler arası, aynı karşılık	êvar baş	2	a1:a1_553=İyi akşamlar! | a2:a2_002=İyi akşamlar!
+düzeyler arası, aynı karşılık	êzidîtî	2	b2:b2_392=Ezidilik / Ezidi inancı | c1:c1_312=Ezidilik
+düzeyler arası, aynı karşılık	îsot	2	a1:a1_415=Biber | a2:a2_1206=Biber
+düzeyler arası, aynı karşılık	şev	2	a1:a1_121=Gece | b1:b1_1378=Gece
+düzeyler arası, aynı karşılık	şikandin	2	a2:a2_1530=Kırmak | b1:b1_101=Kırmak
+düzeyler arası, aynı karşılık	şirket	2	a2:a2_293=Şirket / Firma | b1:b1_kr03=Şirket
+düzeyler arası, aynı karşılık	şoreş	2	b1:b1_641=Devrim / İsyan | c2:c2_901=Devrim / Ayaklanma
+düzeyler arası, aynı karşılık	şîr	2	a1:a1_154=Süt | a2:a2_1544=Süt
+düzeyler arası, aynı karşılık	şîv	2	a1:a1_fk_11=Akşam yemeği | a2:a2_672=Akşam yemeği
+düzeyler arası, farklı karşılık	bi tenê	3	a1:a1_ek454=Yalnız / Tek başına | a2:a2_491=Yalnız / Tek başına | b1:b1_920=Yalnızca / Sadece
+düzeyler arası, farklı karşılık	gerîn	3	a1:a1_593=Gezmek / Dolaşmak | a2:a2_404=Gezmek / Dolaşmak | b1:b1_lk11=Dolaşmak / Gezmek
+düzeyler arası, farklı karşılık	karker	3	a1:a1_113=İşçi | a2:a2_1262=İşçi (fabrika) | b2:b2_603=İşçi
+düzeyler arası, farklı karşılık	kilam	3	a1:a1_513=Türkü / Şarkı | a2:a2_435=Kilam / Türkü | b2:b2_320=Türkü / Şarkı
+düzeyler arası, farklı karşılık	lêkolîn	3	a1:a1_505=Araştırma | a2:a2_532=Araştırma | b2:b2_631=Araştırmak
+düzeyler arası, farklı karşılık	met	3	a1:a1_402=Hala | a2:a2_866=Hala (babanın kız kardeşi) | b1:b1_ml08=Teyze
+düzeyler arası, farklı karşılık	roj	3	a1:a1_120=Gün / Güneş | a2:a2_z17=Güneş / Gün | b1:b1_1377=Gün
+düzeyler arası, farklı karşılık	vegerîn	3	a2:a2_414=Dönmek | b1:b1_lk20=Geri dönmek | b2:b2_323=Geri dönmek
+düzeyler arası, farklı karşılık	xaltî	3	a1:a1_087=Teyze | a2:a2_862=Teyze | b1:b1_ml07=Hala
+düzeyler arası, farklı karşılık	avjenî	2	a2:a2_604=Yüzmek / Yüzme | b1:b1_1363=Yüzme
+düzeyler arası, farklı karşılık	ba	2	a1:a1_ek419=Rüzgar | a2:a2_1030=Rüzgâr
+düzeyler arası, farklı karşılık	banî	2	a1:a1_574=Tavan / Çatı | b1:b1_m01=Dam / Çatı
+düzeyler arası, farklı karşılık	berbang	2	a1:a1_761=Şafak / Tan vakti | b1:b1_gn19=Sabah ışığı / Şafak
+düzeyler arası, farklı karşılık	berxwedana gelêrî	2	b1:b1_gt59=Halk direnci | c1:c1_407=Halk direnişi
+düzeyler arası, farklı karşılık	bi giranî	2	a2:a2_1574=Çoğunlukla / Yoğun olarak | b1:b1_921=Yoğun biçimde
+düzeyler arası, farklı karşılık	cil û berg	2	a2:a2_204=Elbise / Kıyafet (genel) | b1:b1_c10b=Giysi ve eşya
+düzeyler arası, farklı karşılık	dengbêjî	2	b2:b2_350=Dengbêjlik sanatı | c2:c2_914=Dengbêjlik / Ozanlık
+düzeyler arası, farklı karşılık	dersim	2	b1:b1_843=Dersim (Tunceli) | c1:c1_317=Dersim
+düzeyler arası, farklı karşılık	dotmam	2	a1:a1_400=Amca kızı | b1:b1_ml10=Kuzen (amca kızı)
+düzeyler arası, farklı karşılık	ez dixwînim	2	a1:a1_246=Ben okuyorum | b1:b1_953=Okuyorum
+düzeyler arası, farklı karşılık	gotinên pêşiyan	2	b1:b1_t4_05=Atalardan gelen sözler | c1:c1_633=Atalar sözleri
+düzeyler arası, farklı karşılık	hevpeyvîn	2	b1:b1_1130=Röportaj / Mülakat | b2:b2_607=Mülakat
+düzeyler arası, farklı karşılık	heyv	2	a1:a1_292=Ay (gökte) | a2:a2_z16=Ay
+düzeyler arası, farklı karşılık	hêşîn	2	a2:a2_212=Yeşil (doğa için) / Yeşermiş | b1:b1_132=Koyu yeşil / Çimen rengi
+düzeyler arası, farklı karşılık	ji xwe re	2	a2:a2_490=Kendine / Kendisi için | b1:b1_620=Kendi kendine
+düzeyler arası, farklı karşılık	jiyana koçerî	2	b1:b1_gt07=Göçebe yaşamı | b2:b2_q01=Göçer yaşamı
+düzeyler arası, farklı karşılık	jîr	2	a1:a1_s05=Akıllı / Zeki | b1:b1_041=Zeki / Kurnaz
+düzeyler arası, farklı karşılık	keçik	2	a1:a1_s03=Kız / Genç kız | a2:a2_044=Küçük kız / Kızcağız
+düzeyler arası, farklı karşılık	li ser	2	a2:a2_245=Üstünde | b1:b1_der16=Üzerinde / Hakkında
+düzeyler arası, farklı karşılık	lihevkirin	2	a2:a2_727=Anlaşmak / Uzlaşmak | b2:b2_t09=Uzlaşma / Anlaşma
+düzeyler arası, farklı karşılık	ling	2	a1:a1_176=Ayak / Bacak | a2:a2_632=Bacak / Ayak
+düzeyler arası, farklı karşılık	mal û milk	2	a2:a2_1250=Mülk / Ev bark | b1:b1_m11=Mülk ve mal
+düzeyler arası, farklı karşılık	meh	2	a1:a1_128=Ay (zaman) | b1:b1_1380=Ay
+düzeyler arası, farklı karşılık	melayê cizîrî	2	b2:b2_581=Mela (şair) | c1:c1_960=Melayê Ciziri
+düzeyler arası, farklı karşılık	meydan	2	a2:a2_602=Alan / Saha | b1:b1_r08=Meydan
+düzeyler arası, farklı karşılık	mêvanxane	2	a2:a2_1580=Misafirhane / Pansiyon | b1:b1_r14=Otel / Misafirhane
+düzeyler arası, farklı karşılık	nîsk	2	a2:a2_1201=Mercimek | b1:b1_xw10=Nohut
+düzeyler arası, farklı karşılık	nûjenî	2	b2:b2_520=Yenilik / İnovasyon | c2:c2_906=Modernlik / Yenilik
+düzeyler arası, farklı karşılık	pismam	2	a1:a1_401=Amca oğlu | b1:b1_ml09=Kuzen (amca oğlu)
+düzeyler arası, farklı karşılık	ronahî	2	a1:a1_527=Işık / Aydınlık | a2:a2_1772=Aydınlık (isim) / Işık
+düzeyler arası, farklı karşılık	ronakbîr	2	b2:b2_a18=Aydın (kişi) | c2:c2_900=Aydın / Entelektüel
+düzeyler arası, farklı karşılık	rûn	2	a1:a1_158=Yağ / Tereyağı | a2:a2_674=Tereyağı / Yağ
+düzeyler arası, farklı karşılık	salon	2	a2:a2_440=Oturma odası / Salon | b1:b1_m08=Salon / Oturma odası
+düzeyler arası, farklı karşılık	serbilindî	2	b1:b1_092=Gurur / Onur | c2:c2_908=Onur / Gurur
+düzeyler arası, farklı karşılık	serbixwe	2	a2:a2_294=Serbest / Bağımsız | b1:b1_880=Bağımsız
+düzeyler arası, farklı karşılık	serşok	2	a1:a1_199=Tuvalet / Banyo | a2:a2_610=Banyo / Duş
+düzeyler arası, farklı karşılık	serşûştegeh	2	a2:a2_1254=Tuvalet / WC | b1:b1_e01=Banyo / Duş
+düzeyler arası, farklı karşılık	sêtar	2	a2:a2_144=Saz / Kürt çalgısı | b1:b1_850=Saz (enstrüman)
+düzeyler arası, farklı karşılık	ta	2	a1:a1_548=Ateş / Humma | a2:a2_091=Ateş (hastalık)
+düzeyler arası, farklı karşılık	tarî	2	a1:a1_767=Koyu / Karanlık | a2:a2_211=Karanlık / Koyu
+düzeyler arası, farklı karşılık	tav	2	a1:a1_290=Güneş | a2:a2_1033=Güneş ışığı
+düzeyler arası, farklı karşılık	têgeha sereke	2	b2:b2_a14=Ana kavram | c2:c2_063=Anahtar kavram
+düzeyler arası, farklı karşılık	xal	2	a2:a2_861=Dayı (annenin erkek kardeşi) | b1:b1_ml06=Dayı
+düzeyler arası, farklı karşılık	xanî	2	a1:a1_191=Bina / Ev | b1:b1_640=Ehmedê Xanî (şair)
+düzeyler arası, farklı karşılık	xwarzî	2	a1:a1_fk_17=Yeğen (kız kardeşinin çocuğu) | b1:b1_ml04=Yeğen (kız kardeşin çocuğu)
+düzeyler arası, farklı karşılık	xwedê xêrê bide	2	a1:a1_ek444=Allah hayır versin | b1:b1_624=Allah hayırlısını versin
+düzeyler arası, farklı karşılık	xwendina bilind	2	a2:a2_1403=Yükseköğrenim | c1:c1_416=Yükseköğretim
+düzeyler arası, farklı karşılık	xêr be	2	a1:a1_ek442=Hayırlı olsun! | a2:a2_321=Hayırlı olsun
+düzeyler arası, farklı karşılık	yekî	2	a1:a1_533=Biri / Birisi | b1:b1_919=Birisi
+düzeyler arası, farklı karşılık	ziman	2	a1:a1_177=Dil (organ) | b1:b1_056=Dil (lisan)
+düzeyler arası, farklı karşılık	zû	2	a1:a1_223=Erken / Hızlı | a2:a2_1564=Çabuk / Erken
+düzeyler arası, farklı karşılık	çêbûn	2	a1:a1_ek450=Oluşmak / Doğmak | b1:b1_234=Olmak / Gerçekleşmek
+düzeyler arası, farklı karşılık	çîroka gelêrî	2	b1:b1_1203=Halk masalı | b2:b2_f15=Kürt halk masalı
+düzeyler arası, farklı karşılık	şahî	2	a1:a1_515=Kutlama / Şenlik | b1:b1_863=Şenlik / Kutlama
+düzeyler arası, farklı karşılık	şev baş	2	a1:a1_554=İyi geceler | a2:a2_003=İyi geceler!
+düzeyler arası, farklı karşılık	şîn	2	a1:a1_064=Mavi | b1:b1_ml17=Yas / Matem

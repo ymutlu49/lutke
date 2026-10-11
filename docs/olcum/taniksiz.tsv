@@ -1,0 +1,159 @@
+duzey	kimlik	madde	tr	kat
+a1	a1_070	Narencî	Turuncu	reng
+a1	a1_500	Pênûsk	Kalem	perwerde
+a1	a1_504	Zanîst	Bilim	perwerde
+a1	a1_526	Barandar	Yağmurlu	demsal
+a1	a1_537	Motorsîklêt	Motosiklet	gihanî
+a1	a1_550	Mastaw	Ayran	vexwarin
+a1	a1_413	Nêranc	Portakal	mêwe
+a1	a1_444	Sekingeh	Durak	gihanî
+a1	a1_769	Dehhezar	On bin (10.000)	jimar
+a1	a1_ek410	Fîstiq	Fıstık	mêwe
+a1	a1_ek437	Poşû	Poşu / Geleneksel Kürt atkısı	cil
+a1	a1_ek439	Qebayet	Palto / Mont	cil
+a1	a1_fk_06	Binevşî	Leylak / Mor	reng
+a1	a1_fk_22	Firîngî	Domates	xwarin
+a2	a2_103	Şiyarîn	Uyanmak	jiyan
+a2	a2_203	Corab	Çorap	cil
+a2	a2_311	Komputêr	Bilgisayar	teknoloji
+a2	a2_313	Şandname	E-posta	teknoloji
+a2	a2_432	Nêrxê	Tane / Adet	xwarin
+a2	a2_612	Diranşer	Diş fırçası	mal
+a2	a2_620	Portakalî	Turuncu	reng
+a2	a2_846	Masqe	Maske	tendurist
+a2	a2_873	Rojevê	Sabah vakti	dem
+a2	a2_1212	Badam	Badem	xwarin
+a2	a2_1232	Rêçete	Reçete	tendurist
+a2	a2_1254	Serşûştegeh	Tuvalet / WC	mal
+a2	a2_1461	Malişandin	Süpürmek / Silmek	leker
+a2	a2_1520	Gufilandin	Kilitlemek	leker
+a2	a2_1540	Sîgaret	Sigara	jiyan
+a2	a2_1563	Bêgirîng	Önemsiz	rengder
+a2	a2_fk_03	Hatûçû	Gidiş geliş / Trafik	bajêr
+a2	a2_z01	Destşûştin	El yıkamak	jiyan
+a2	a2_z27	Hefteyek	Bir hafta	dem
+a2	a2_mt_01	Cihwara	Konum	matematîk
+a2	a2_mt_08	Jimarîbûn	Sayı duyusu	matematîk
+a2	a2_mt_16	Tîlî	Karış	matematîk
+b1	b1_016	Digot	Diyordu / Söylerdi	dem_devam
+b1	b1_017	Dixwend	Okuyordu	dem_devam
+b1	b1_664	Bûçe	Bütçe	aborî
+b1	b1_670	Psîkolojînas	Psikolog	pîşe
+b1	b1_410	Diçûm	Gidiyordum (sürekli geçmiş)	dem_devam
+b1	b1_411	Dibûm	Oluyordum (sürekli geçmiş)	dem_devam
+b1	b1_412	Dixwestim	İstiyordum (sürekli geçmiş)	dem_devam
+b1	b1_450	Diaspora	Diaspora	kimlik
+b1	b1_454	Cûdaxwazî	Ayrılıkçılık / Özerklik talebi	siyaset
+b1	b1_460	Zozane	Yaylak / Yayla	xweza
+b1	b1_462	Gundiyan	Köylüler	civakî
+b1	b1_464	Payîzê	Sonbaharda	xweza
+b1	b1_481	Enstîtu	Enstitü	perwerde
+b1	b1_804	Mêşk	Beyin	beden
+b1	b1_820	Digotim	Söylüyordum (sürekli geçmiş)	dem_devam
+b1	b1_821	Dihatim	Geliyordum (sürekli geçmiş)	dem_devam
+b1	b1_822	Dimirîm	Ölüyorum (sürekli geçmiş)	dem_devam
+b1	b1_843	Dersim	Dersim (Tunceli)	cografî
+b1	b1_862	Mathera	Yas / Matem	çand
+b1	b1_871	Encîr	İncir	xweza
+b1	b1_872	Zêreşk	Alıç / Yaban meyvesi	xweza
+b1	b1_1010	Ergatîvî	Ergatif	rêziman
+b1	b1_1033	Şerêf	Şeref / Onur	nirx
+b1	b1_1094	Sermiaye	Sermaye	aborî
+b1	b1_1220	Taxê	Mahalle	cih
+b1	b1_1233	Burse	Burs	perwerde
+b1	b1_1242	Zazacî	Zazaca	ziman
+b1	b1_1311	Gurbetî	Gurbetçilik / Yurt özlemi	kimlik
+b1	b1_1353	Ciwanan	Gençler	civakî
+b1	b1_y02	Aşpêz	Aşçı	pîşe
+b1	b1_y08	Çeresk	Nar	xwarin
+b1	b1_y09	Qawît	Kavut / Kavrulmuş un	xwarin
+b1	b1_y10	Gerdenê	Boyun eti / Kuzugerdanı	xwarin
+b1	b1_p09	Şermgîn	Utangaç	rengder
+b1	b1_c01	Sîngal	Sincar dağları	cografî
+b1	b1_m04	Zozanxane	Köy evi / Yayla evi	mal
+b1	b1_m18	Carixa	Halı / Kilim	mal
+b1	b1_c04b	Çakêtî	Ceket	cil
+b1	b1_c05b	Xirz	Üst giysi / Hırka	cil
+b1	b1_r02	Biletxane	Bilet gişesi	rêwîtî
+b1	b1_r05	Qeseregeh	Tren istasyonu	cih
+b1	b1_tk02	Înternetê	İnternet	teknoloji
+b1	b1_tk11	Nûçegir	Gazeteci	medya
+b1	b1_xw05	Biryane	Kavurma / Rosto	xwarin
+b1	b1_xw09	Mercûmek	Mercimek	xwarin
+b1	b1_xw27	Girêva	Pasta / Tatlı	xwarin
+b1	b1_xw39	Sêvçûyandin	Elma çayı	xwarin
+b1	b1_xw43	Dîza	Diza (Kürt yemeği)	xwarin
+b1	b1_xw45	Destxwarin	El yapımı yemek	xwarin
+b1	b1_xw47	Çerezxane	Kuruyemişçi	cih
+b1	b1_ml13	Xwişkzade	Yeğen (kız kardeşin oğlu)	malbat
+b1	b1_ml14	Razamenî	Nişanlı / Söz kesme	malbat
+b1	b1_ml19	Malbatvanî	Aile değerleri	nirx
+b1	b1_lk19	Şiyandîn	Göndermek / Yollamak	leker_ergatif
+b1	b1_bd08	Pizişkî	Tıp bilgisi	tendurist
+b1	b1_bd15	Diranêşî	Diş ağrısı	tendurist
+b1	b1_jm01	Qedehek	Bir bardak	jimar
+b1	b1_jm02	Kiloyekî	Bir kilogram	jimar
+b1	b1_sn01	Xebatgeh	İşyeri	kar
+b1	b1_sn03	Serkarbidest	Müdür / Şef	kar
+b1	b1_t3_10	Gerîlaparêzî	Gerilla savunuculuğu	dîrok
+b1	b1_t5_06	Vaksînasiyon	Aşılama	tendurist
+b1	b1_zm16	Jêrxêz	Alt çizgi / Altı çizili	ziman
+b1	b1_kr05	Muştirî	Müşteri	kar
+b1	b1_kr11	Hesabdarkirin	Muhasebe yapmak	kar
+b1	b1_1365	Şoreşvankî	Dövüş sanatı	spor
+b1	b1_sp12	Stadyom	Stadyum	cih
+b1	b1_dm09	Nîvşevê	Gece yarısı	dem
+b1	b1_gn18	Dewrîşandin	Döndürmek	leker_ergatif
+b1	b1_gn35	Milyonek	Bir milyon	jimar
+b1	b1_gn36	Nîsfê	Yarısı	jimar
+b1	b1_tm12	Qolîflar	Karnabahar	xwarin
+b1	b1_tm13	Îspanax	Ispanak	xwarin
+b1	b1_tm14	Dohîn	Yoğurt çorbası	xwarin
+b1	b1_tm15	Kêzbar	Susam	xwarin
+b1	b1_ct01	Çandinîvan	Çiftçi	cotkarî
+b1	b1_ct06	Sewzefiroş	Sebzeci	pîşe
+b1	b1_ct09	Kulîlkxane	Sera	cotkarî
+b1	b1_zn07	Dozkarekî	Bir doz	tendurist
+b1	b1_f17	Neçarbûn	Zorunda kalmak	leker
+b1	b1_f25	Nêrwa	Nerwa vadisi	cografî
+b1	b1_915	xwariye	Yemiş	dem_temam
+b1	b1_916	nivîsandiye	Yazmış	dem_temam
+b1	b1_917	xwendiye	Okumuş	dem_temam
+b2	b2_052	Qirêjahî	Kirlilik / Çevre kirliliği	ekoloji
+b2	b2_103	Perwerdezanî	Eğitim bilimi / Pedagoji	perwerde
+b2	b2_104	Rewanzanî	Psikoloji	perwerde
+b2	b2_142	Xweşikzanî	Estetik / Güzellik bilimi	huner
+b2	b2_203	Nêzîkatî	Yaklaşım	felsefe
+b2	b2_221	Daristankirin	Ağaçlandırma	ekoloji
+b2	b2_311	Raporkirin	Rapor etmek	medya
+b2	b2_352	Wêjezan	Edebiyatçı	edebiyat
+b2	b2_540	Postkolonyalîzm	Postkolonyalizm	felsefe
+b2	b2_fk_02	Jîngehparêzî	Çevrecilik / Ekoloji	ekoloji
+b2	b2_a10	Dissertasyon	Tez / Doktora tezi	perwerde
+b2	b2_h08	Peymanek	Sözleşme / Antlaşma	zagon
+b2	b2_k01	Çandparêzî	Kültürel koruma	çand
+b2	b2_k07	Wêjenasî	Edebiyat bilimi	edebiyat
+b2	b2_q30	Mafname	Haklar beyannamesi	zagon
+b2	b2_650	database	Veritabanı	teknoloji
+b2	b2_654	torgilok	Ağ / İnternet	teknoloji
+c1	c1_013	Epistemolojî	Epistemoloji	felsefe
+c1	c1_015	Diyalektîk	Diyalektik	felsefe
+c1	c1_016	Fenomenolojî	Fenomenoloji	felsefe
+c1	c1_017	Hermeneutîk	Hermeneutik	felsefe
+c1	c1_025	Bêrastî	Yanlışlık / Adaletsizlik	felsefe
+c1	c1_033	Pragmatîk	Pragmatik	ziman
+c1	c1_043	Tekstanalîz	Metin analizi	edebiyat
+c1	c1_061	Mêjûnasî	Tarih bilimi	zanist
+c1	c1_080	Jîngehperwerî	Çevrecilik	ekoloji
+c1	c1_241	Azadparêzî	Özgürlükçülük	felsefe
+c1	c1_315	Halabja	Halepçe	dîrok
+c2	c2_020	Jeopolîtîk	Jeopolitik	siyaset
+c2	c2_021	Dîplomasi	Diplomasi	siyaset
+c2	c2_040	Paşkolonyalîzm	Postkolonyalizm	felsefe
+c2	c2_051	Demsazî	Zaman uyumu	rêziman
+c2	c2_815	Metakomunîkasyon	Üst iletişim	ziman
+c2	c2_866	bihîstwerî	Empatik dinleme / İşitkenlik	psikoloji
+c2	c2_917	bîrşokbûn	Unutkanlık / Amnezi	psikoloji
+c2	c2_922	etnolenguîstîk	Etnik-Dilbilim	zanist
+c2	c2_928	hermenewtîk	Hermenötik / Yorumbilim	felsefe
+c2	c2_929	postkolonyalî	Postkolonyalizm	felsefe

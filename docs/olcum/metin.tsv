@@ -1,0 +1,8 @@
+kimlik	duzey	baslik	sozcuk	soru	kapsama	uygun_duzey	bilinmeyen
+story_001	a1	Pîrê û Çay	27	2	70.4	hiçbiri	karik, pîrê, sibe, cem, pîr, qe
+story_002	a2	Kawayê Hesinker	46	3	82.6	hiçbiri	padîşah, zordar, kuştin, hildan, netirsin, hilweşandin, pêxist, azadî
+story_003	b1	"Ji ""Mem û Zîn""ê: Evîna Mem"	57	3	80.7	hiçbiri	pêket, ey, nihêrîna, kuştim, nahêle, fesadî, xapî, zîndan, gor, dilovanî, derd
+story_004	b2	"Cegerxwîn: ""Kî me ez?"""	53	3	92.5	hiçbiri	dinya, dûv, elît, cildî
+c1_dlg_akademi	c1	Zimannasî û Nasname	126	0	88.1	hiçbiri	bikim, hem, dr, leyla, diyar, veqetandin, tine, cidî, têkilîyeke, veqetîn, kûrbûn, bes, nake
+c1_dlg_medya	c1	Rojnameger û Ziman	81	0	91.4	hiçbiri	bikim, zîlan, xanim, bibî, cuda, kontrol
+c2_dlg_konferans	c2	Konferansa Zimannasiyê	107	0	92.5	hiçbiri	wenda, hogir, axivîn, vedihewîne, xeteredar, bişixulîne, entegrasyon

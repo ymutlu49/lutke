@@ -1,0 +1,111 @@
+duzey	kimlik	mastar	tr	gecis	gecmis	n_gecmis	cekimli	yalin	gecmis1	simdiki1	emir	neden
+a1	a1_150	nan	Ekmek	trans	na	2614	42	7			bine	geçişli ama yalın zamirle de kullanılmış
+a1	a1_590	vexwarin	İçmek	trans	vexwar	77	2	0		vedixwim		çekimli zamirli tanık 3'ten az
+a1	a1_591	kirîn	Satın almak	trans	kirî	174	11	3		dikirim	bikire	geçişli ama yalın zamirle de kullanılmış
+a1	a1_592	firotin	Satmak	trans	firot	17	1	0			bifiroşe	çekimli zamirli tanık 3'ten az
+a1	a1_593	gerîn	Gezmek	intra	gerî	4	0	0		digerim	bigere	yalın özneli tanık 3'ten az
+a1	a1_594	sekinîn	Durmak	intra	sekinî	73	0	5	sekinîm	disekinim	bisekine	
+a1	a1_595	rûniştin	Oturmak	intra	rûnişt	118	0	4	rûniştim	rûdinim		
+a1	a1_596	axaftin	Konuşmak		axaft	4	0	0				geçişlilik bilinmiyor ya da iki türlü
+a1	a1_597	bihîstin	Duymak	trans	bihîst	122	51	0		dibihîzim		
+a1	a1_598	zanîn	Bilmek	trans	zanî	109	24	23		dizanim	bizane	geçişli ama yalın zamirle de kullanılmış
+a1	a1_ek449	man	Kalmak	intra	ma	2112	5	14	mam	dimînim	bimîne	geçişsiz ama 'min' + 1. kişi biçimi geçiyor
+a1	a1_ek450	çêbûn	Oluşmak	intra	çêbû	55	0	1	çêbûm			yalın özneli tanık 3'ten az
+a1	a1_cf_01	kirin	Yapmak	trans	kir	2845	241	0		dikim	bike	
+a1	a1_cf_02	gotin	Söylemek	trans	got	2487	449	0		dibêjim	bibêje	
+a1	a1_cf_03	hatin	Gelmek	intra	hat	1048	0	97	hatim			
+a1	a1_cf_04	çûn	Gitmek	intra	çû	963	0	117	çûm	diçim	biçe	
+a1	a1_cf_05	bûn	Olmak	intra	bû	6165	0	111	bûm	dibim	bibe	
+a1	a1_cf_07	dan	Vermek	trans	da	4694	228	9		didim	bide	
+a2	a2_040	zewicîn	Evlenmek	intra	zewicî	29	0	4	zewicîm		bizewice	
+a2	a2_101	şûştin	Yıkamak	trans	şûşt	10	1	0		dişom		çekimli zamirli tanık 3'ten az
+a2	a2_102	razan	Uyumak	intra	raza	22	0	1	razam			yalın özneli tanık 3'ten az
+a2	a2_263	tirsîn	Korkmak	intra	tirsî	10	0	2		ditirsim	bitirse	yalın özneli tanık 3'ten az
+a2	a2_270	êşîn	Ağrımak	intra	êşî	2	0	0		diêşim	biêşe	geçmiş kökü korpusta 3'ten az
+a2	a2_281	vexwandin	Davet etmek	trans	vexwand	0	0	0				geçmiş kökü korpusta 3'ten az
+a2	a2_400	axiftin	Konuşmak		axift	3	0	0		diaxivim	biaxive	geçişlilik bilinmiyor ya da iki türlü
+a2	a2_402	xwendin	Okumak	trans	xwend	111	11	0		dixwînim	bixwîne	
+a2	a2_403	nivîsîn	Yazmak	trans	nivîsî	49	2	0		dinivîsim	binivîse	çekimli zamirli tanık 3'ten az
+a2	a2_405	lîstin	Oynamak	trans	lîst	12	2	0		dilîzim	bilîze	çekimli zamirli tanık 3'ten az
+a2	a2_408	xwestin	İstemek	trans	xwest	234	84	0		dixwazim	bixwaze	
+a2	a2_412	bijartin	Seçmek	trans	bijart	16	1	0			bibijêre	çekimli zamirli tanık 3'ten az
+a2	a2_413	mayîn	Kalmak	intra	mayî	99	0	1				yalın özneli tanık 3'ten az
+a2	a2_414	vegerîn	Dönmek	intra	vegerî	21	0	2		vedigerim		yalın özneli tanık 3'ten az
+a2	a2_415	şandin	Göndermek	trans	şand	46	9	0		dişînim	bişîne	
+a2	a2_416	wergirtin	Almak	trans	wergirt	21	3	0				
+a2	a2_430	pijandin	Pişirmek		pijand	2	0	0				geçişlilik bilinmiyor ya da iki türlü
+a2	a2_431	berbûn	Kaynatmak	intra	berbû	7	0	0				yalın özneli tanık 3'ten az
+a2	a2_603	bezîn	Koşmak	intra	bezî	22	0	3		dibezim	bibeze	
+a2	a2_673	çêkirin	Hazırlamak	trans	çêkir	35	1	0				çekimli zamirli tanık 3'ten az
+a2	a2_710	rawestin	Durmak	intra	rawest	30	0	0				yalın özneli tanık 3'ten az
+a2	a2_711	veguhastin	Taşımak	trans	veguhast	1	0	0				geçmiş kökü korpusta 3'ten az
+a2	a2_715	pirsîn	Sormak	trans	pirsî	353	76	0		dipirsim	bipirse	
+a2	a2_900	fikirîn	Düşünmek	intra	fikirî	66	1	13	fikirîm	difikirim	bifikire	geçişsiz ama 'min' + 1. kişi biçimi geçiyor
+a2	a2_1000	kenîn	Gülmek	intra	kenî	13	0	2		dikenim	bikene	yalın özneli tanık 3'ten az
+a2	a2_1001	bişirîn	Gülümsemek	intra	bişirî	11	0	1				yalın özneli tanık 3'ten az
+a2	a2_1002	girîn	Ağlamak	intra	girî	129	0	2				yalın özneli tanık 3'ten az
+a2	a2_1003	ramûsîn	Öpmek	trans	ramûsî	3	0	0		radimûsim		çekimli zamirli tanık 3'ten az
+a2	a2_1006	revîn	Kaçmak	intra	revî	24	0	1		direvim	bireve	yalın özneli tanık 3'ten az
+a2	a2_1008	westîn	Yorulmak	intra	westî	4	0	0		diwestim	biweste	yalın özneli tanık 3'ten az
+a2	a2_1072	vedîtin	Keşfetmek		vedît	0	0	0				geçişlilik bilinmiyor ya da iki türlü
+a2	a2_1077	şopandin	Takip etmek	trans	şopand	0	0	0				geçmiş kökü korpusta 3'ten az
+a2	a2_1282	wergerandin	Tercüme etmek	trans	wergerand	4	0	0				çekimli zamirli tanık 3'ten az
+a2	a2_1285	hizirîn	Düşünmek	intra	hizirî	9	0	0				yalın özneli tanık 3'ten az
+a2	a2_1460	kelandin	Kaynatmak	trans	keland	2	0	0				geçmiş kökü korpusta 3'ten az
+a2	a2_1504	ketin	Düşmek	intra	ket	593	0	40	ketim	dikevim	bikeve	
+a2	a2_1513	şêwirîn	Danışmak	intra	şêwirî	2	0	0				geçmiş kökü korpusta 3'ten az
+a2	a2_1514	ceribandin	Denemek	trans	ceriband	3	0	0			biceribîne	çekimli zamirli tanık 3'ten az
+a2	a2_1530	şikandin	Kırmak	trans	şikand	33	6	0				
+a2	a2_1700	parastin	Korumak	trans	parast	9	1	0		diparêzim	biparêze	çekimli zamirli tanık 3'ten az
+a2	a2_1701	hilkişîn	Tırmanmak	intra	hilkişî	2	0	0				geçmiş kökü korpusta 3'ten az
+a2	a2_1702	firîn	Uçmak	intra	firî	9	0	0		difirim	bifire	yalın özneli tanık 3'ten az
+a2	a2_1703	gihîştin	Ulaşmak	intra	gihîşt	19	0	0				yalın özneli tanık 3'ten az
+a2	a2_1706	birîn	Kesmek	trans	birî	89	31	2		dibirim	bibire	
+a2	a2_1707	şewitandin	Yakmak	trans	şewitand	13	7	0		dişewitînim	bişewitîne	
+a2	a2_1802	nalîn	Ağrımak	intra	nalî	9	0	0		dinalim	binale	yalın özneli tanık 3'ten az
+a2	a2_fk_14	weşandin	Yayımlamak	trans	weşand	6	0	0			biweşîne	çekimli zamirli tanık 3'ten az
+a2	a2_z03	raketin	Yatmak	intra	raket	13	0	0	raketim			yalın özneli tanık 3'ten az
+b1	b1_044	xeyidîn	Kızmak	intra	xeyidî	15	0	0			bixeyide	yalın özneli tanık 3'ten az
+b1	b1_071	çandin	Ekmek	trans	çand	53	2	0			biçîne	çekimli zamirli tanık 3'ten az
+b1	b1_100	kişandin	Çizmek	trans	kişand	111	15	0		dikişînim	bikişîne	
+b1	b1_102	vêxistin	Yakmak	trans	vêxist	44	0	0				çekimli zamirli tanık 3'ten az
+b1	b1_103	vemirandin	Söndürmek	trans	vemirand	10	0	0				çekimli zamirli tanık 3'ten az
+b1	b1_200	anîn	Getirmek	trans	anî	249	30	1			biîne	
+b1	b1_201	birin	Götürmek	trans	bir	5585	36	0		dibim	bibe	
+b1	b1_203	guhartin	Değiştirmek	trans	guhart	5	0	0			biguhêre	çekimli zamirli tanık 3'ten az
+b1	b1_243	hilbijartin	Seçmek	trans	hilbijart	5	0	0		hildibijêrim	hilbijêre	çekimli zamirli tanık 3'ten az
+b1	b1_244	vexwendin	Çağırmak	trans	vexwend	4	0	0				çekimli zamirli tanık 3'ten az
+b1	b1_303b	meşîn	Yürümek	intra	meşî	13	0	1		dimeşim	bimeşe	yalın özneli tanık 3'ten az
+b1	b1_731	pejirandin	Onaylamak	trans	pejirand	4	1	0				çekimli zamirli tanık 3'ten az
+b1	b1_400	avêtin	Atmak	trans	avêt	201	3	0		diavêjim	biavêje	
+b1	b1_401	girtin	Tutmak	trans	girt	345	78	1		digirim	bigire	
+b1	b1_402	berdan	Bırakmak	trans	berda	130	3	0				
+b1	b1_811	ragihandin	Haberdar etmek	trans	ragihand	3	0	0				çekimli zamirli tanık 3'ten az
+b1	b1_813	derxistin	Çıkarmak	trans	derxist	110	5	0		derdixim		
+b1	b1_1111	çinîn	Toplamak	trans	çinî	7	1	0		diçinim	biçine	çekimli zamirli tanık 3'ten az
+b1	b1_1151	vegerandin	Geri vermek	trans	vegerand	63	22	0		vedigerînim		
+b1	b1_lk06	veguhestin	Taşımak		veguhest	0	0	0				geçişlilik bilinmiyor ya da iki türlü
+b1	b1_lk18	rabûn	Kalkmak	intra	rabû	347	0	37	rabûm	radibim		
+b1	b1_kr06	hilberîn	Üretmek		hilberî	0	0	0				geçişlilik bilinmiyor ya da iki türlü
+b1	b1_gn01	gihandin	Ulaştırmak	trans	gihand	26	2	0		digihînim	bigihîne	çekimli zamirli tanık 3'ten az
+b1	b1_gn02	hildan	Kaldırmak	trans	hilda	78	3	0				
+b1	b1_gn03	danîn	Koymak	trans	danî	195	8	0				
+b1	b1_gn04	veşartin	Saklamak	trans	veşart	12	0	0				çekimli zamirli tanık 3'ten az
+b1	b1_gn05	dîtin	Görmek	trans	dît	581	157	1		dibînim	bibîne	
+b1	b1_gn10	hiştin	Bırakmak	trans	hişt	55	5	0		dihêlim	bihêle	
+b1	b1_f12	hesibandin	Hesaplamak	trans	hesiband	1	0	0				geçmiş kökü korpusta 3'ten az
+b2	b2_lk03	nirxandin	Değerlendirmek	trans	nirxand	0	0	0				geçmiş kökü korpusta 3'ten az
+b2	b2_628	nivîsandin	Yazmak	trans	nivîsand	26	2	0		dinivîsînim	binivîsîne	çekimli zamirli tanık 3'ten az
+b2	b2_633	vegotin	Anlatmak	trans	vegot	7	0	0				çekimli zamirli tanık 3'ten az
+b2	b2_634	danasîn	Tanıtmak	trans	danasî	0	0	0				geçmiş kökü korpusta 3'ten az
+c1	c1_073	bişaftin	Asimile edilmek	trans	bişaft	0	0	0				geçmiş kökü korpusta 3'ten az
+c1	c1_1020	ragirtin	Sürdürmek	trans	ragirt	20	0	0				çekimli zamirli tanık 3'ten az
+c1	c1_1021	pêçandin	Sarmak	trans	pêçand	2	0	0				geçmiş kökü korpusta 3'ten az
+c1	c1_1022	biriqîn	Parlamak	intra	biriqî	17	0	0				yalın özneli tanık 3'ten az
+c1	c1_1023	deranîn	Çıkarmak	trans	deranî	13	2	0				çekimli zamirli tanık 3'ten az
+		xwarin	Yemek	trans	xwar	367	25	1		dixwim	bixwe	
+		kuştin	Öldürmek	trans	kuşt	41	3	2		dikujim	bikuje	geçişli ama yalın zamirle de kullanılmış
+		mirin	Ölmek	intra	mir	180	0	11	mirim		bimire	
+		derketin	Çıkmak	intra	derket	210	0	9	derketim	derdikevim		
+		nêrîn	Bakmak	trans	nêrî	50	16	0		dinêrim	binêre	
+		geriyan	Gezmek	intra	geriya	82	0	1				yalın özneli tanık 3'ten az

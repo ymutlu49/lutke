@@ -1,0 +1,33 @@
+# LÛTKE için dil denetimi muafiyetleri — ziman_denetim.py okur.
+#
+# Bir işaret; kuralı eşleşiyorsa, `desen` (düzenli ifade, büyük-küçük harf
+# duyarsız) işaretin iletisinde ya da metninde geçiyorsa ve — verilmişse —
+# `kapsam` "grup:kimlik:alan" dizgisinde geçiyorsa muaf sayılır.
+#
+# Buraya yalnız İNCELENMİŞ ve HATA OLMADIĞINA karar verilmiş işaretler girer.
+# "Sonra bakarız" muafiyet değildir; o işaretler docs/olcum/ziman_isaret.tsv
+# dosyasında açık borç olarak durur. Her satırın gerekçesi yazılır.
+kural	desen	kapsam	gerekce
+terim	'heyv' yerine		heyv gökteki aydır; terim.tsv'deki MEH takvim ayı. Farklı kavramlar.
+terim	'navend' yerine		navend genel dilde merkez (kurum, şehir); NAVENDEK geometri terimi.
+terim	'çareserî' yerine		Genel dilde "çözüm"; matematik işlemi bağlamında kullanılmıyor.
+terim	'cûdahî' yerine		Genel dilde "farklılık"; FERQ iki sayı arasındaki farktır.
+terim	'guhêztin' yerine		Genel dilde "taşımak, aktarmak"; VEGUHESTIN geometrik öteleme.
+edat	.	:ku$	Madde başı sözlük biçimidir (Di navbera, Di nav); ikinci parça cümle içinde gelir.
+norm	'Emê' ->	cand_artists	Şarkı adı ("Emê", "Emê Gozê"); özgün yazımı korunur.
+yazim	Doğan		Özel ad: Aynur Doğan.
+yazim	Güney		Özel ad: Yılmaz Güney.
+yazim	Bediüzzaman		Özel ad: Bediüzzaman Said Nursî.
+yazim	\((Rüstem|Bingöl|Dağ)|Kapı\)		Ayraç içinde verilen Türkçe yer ya da kişi adı.
+yazim	"kapı"	diyalog:dlg_dersa_piree	Diyaloğun konusu: çocuk Türkçe "kapı"nın Kurmancîsini soruyor.
+#
+# --- Faz 2 (2026-10-11): izafe kuralına LÛTKE'nin cins sözlüğü verildikten sonra incelenip hata olmadığı görülenler
+izafe	^'(?:sibehê|êvarê|şevê|nîvşevê|havînê|zivistanê|biharê|payîzê|demê) (?:hatim|hat|hewa|dihat|xwarin|malê|çîrokên|xweş|germ|sar|baş|zû|bezîn|taştê|hişyarbûn|xewneke|zewicî|pêdivî)		Zaman adı çekimli hâlde zarf (Zivistanê hewa sar e; her êvarê dihat). İzafe değil.
+izafe	^'(?:Parêzera|Endezyara|Endama) 		Kişi adı iki cinsle de kullanılır; kadın için -a doğru.
+izafe	^'[Kk]ura 	cand_dances	Giysi adı (kura); 'kur' (oğul) + izafe değil.
+izafe	^'Keçê Kurdan		Aynur Doğan'ın albüm ve şarkı adı; alıntı.
+izafe	^'(?:Iraqê reviya|malê torbeyek|malê malişand|êşê derbas)		-ê edattan sonra ya da nesnede çekim; izafe değil.
+ergnav	Dewletek otonom a Kurd îlan kir		Dewletek nesne; özne önceki cümlede (Simko).
+ergatif	'tu dermanê'		Divê + dilek kipi (bixwî); geçmiş zaman değil. Korpus onarımından sonra çıkan sahte uyarı.
+izafe	^'qalê tirikê		Buradaki qal 'bahis' anlamındaki dişil ad değil; yemek metnindeki terim belirsiz, olgu denetimine (plan 2.10) bırakıldı.
+izafe	^'salê Xaçperestiyê		'88-salê' bileşik sıfat (88 yıllık); sal + izafe değil. Metin olgu denetimine (plan 2.10) bırakıldı.
