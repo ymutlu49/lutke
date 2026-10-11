@@ -44,7 +44,7 @@ const ENTITY_NODES = [
     alternateName: 'LÛTKE — Zimanê Kurdî',
     url: 'https://lutke.app/',
     logo: 'https://lutke.app/assets/site/logo-512.png',
-    description: 'Platformeke belaş a fêrbûna zimanê Kurmancî (Kurdiya Bakur): ferheng (3.900+ peyv, A1–C2), ders, rêziman û çanda Kurdî (gotinên pêşiyan, helbest, stran).',
+    description: 'Platformeke belaş a fêrbûna zimanê Kurmancî (Kurdiya Bakur): ferheng (3.600+ peyv, A1–C2), ders, rêziman û çanda Kurdî (gotinên pêşiyan, helbest, stran).',
     inLanguage: 'ku',
     slogan: 'Ji peyvekê heya welatekî.',
     founder: { '@id': 'https://lutke.app/#yilmaz-mutlu' },
@@ -382,17 +382,17 @@ function buildLlmsTxt() {
   return `# LÛTKE — Platforma fêrbûna Kurmancî
 
 > LÛTKE platformeke belaş a fêrbûna zimanê Kurmancî (Kurdiya Bakur) ye, ji aliyê
-> Prof. Dr. Yılmaz Mutlu ve. Tê de ferhengek bi 3.900+ peyvên A1–C2, ders û
+> Prof. Dr. Yılmaz Mutlu ve. Tê de ferhengek bi 3.600+ peyvên A1–C2, ders û
 > egzersîz, rêbera rêzimanê û naveroka çandî ya Kurdî (gotinên pêşiyan, helbest,
 > stran, kesayetên dîrokî) heye. Armanc: bibe çavkaniya vekirî ya bingehîn a Kurmancî.
 
 ## Naverok (Content)
 - [Naverok — hemû](${SITE_URL}/naverok): peyv, wane, rêziman û çand.
-- [Ferheng (Peyv)](${SITE_URL}/peyv/a1): 3.900+ peyvên Kurmancî bi wate û mînakan, A1–C2.
+- [Ferheng (Peyv)](${SITE_URL}/peyv/a1): 3.600+ peyvên Kurmancî bi wate û mînakan, A1–C2.
 - [Wane û Çalakî](${SITE_URL}/wane/a1): dersên Kurmancî bi egzersîzan.
 - [Rêziman](${SITE_URL}/reziman): rêbera rêzimana Kurmancî (alfabe, veqetandek, ergatîf, lêker).
 - [Çand](${SITE_URL}/cand): atasozî, helbest, stran û kesayetên dîrokî.
-- [Gotinên Pêşiyan](${SITE_URL}/cand/gotinen-pesiyan): 3.361 atasozîyên Kurmancî bi wergera tirkî.
+- [Gotinên Pêşiyan](${SITE_URL}/cand/gotinen-pesiyan): 3.359 gotinên pêşiyan ên Kurmancî bi wergera tirkî.
 
 ## Derbarê (About)
 - [LÛTKE Çi ye?](${SITE_URL}/lutke-ci-ye): naskirina platformê.

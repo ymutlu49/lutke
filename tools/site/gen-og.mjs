@@ -85,7 +85,7 @@ async function main() {
     logoUrl,
     title: 'Kurmancî Fêr Bibe',
     sub: 'Ji peyvekê heya welatekî',
-    tag: ['A1–C2', '3.900+ peyv', '137 ders'],
+    tag: ['A1–C2', '3.600+ peyv', '105 ders'],
   }), path.join(ASSETS, 'og-home.png'));
 
   await shoot(chrome, ogHtml({

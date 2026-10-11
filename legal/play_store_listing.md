@@ -8,6 +8,11 @@ Kurmancî öğren! A1-C2 seviyeleri, sesli alıştırmalar, kültürel içerik.
 
 ## Full Description (4000 char max)
 
+> **10 Ekim 2026 notu (mağazaya yapıştırılmaz).** Kelime ve ders sayıları ölçüme göre düzeltildi
+> (`docs/olcum/olcum.md`): 137 ders → 105, 3.900+ kelime → 4.200+. 105 ders yazılmış ama uygulamada
+> öğrencinin izlediği yola henüz bağlı değil (iyileştirme planı Faz 1). Bağlanmadan yayımlanacaksa
+> "105 ders" ifadesi aşağıdaki iki metinden de çıkarılmalı.
+
 ```
 LÛTKE — Zimanê Kurdî
 Kurmancî (Kuzey Kürtçe) dil öğretim uygulaması
@@ -18,7 +23,7 @@ Prof. Dr. Yılmaz Mutlu tarafından geliştirilmiştir.
 
 📚 Kapsamlı İçerik
 • 6 CEFR seviyesi: A1, A2, B1, B2, C1, C2
-• 137 ders, 3.900+ kelime
+• 105 ders, 4.200+ kelime
 • Hawar (Bedirxan) standardı
 
 🎓 Öğrenme Yöntemi
@@ -73,7 +78,7 @@ www.lutke.app
 
 İlk sürüm:
 • 6 CEFR seviyesi (A1-C2)
-• 137 ders, 3.900+ kelime
+• 105 ders, 4.200+ kelime
 • Heritage + Genel öğrenim yolu
 • Çocuk Modu (LÛTKE ZAROK)
 • OpenDyslexic + erişilebilirlik
