@@ -879,6 +879,12 @@ class _RegisterScreenState extends ConsumerState<RegisterScreen> {
                 .copyWith(color: AppColors.textPrimary)),
         const SizedBox(height: 6),
         TextFormField(
+          // Giriş ve kayıt aynı formu paylaşır; alanlar sırayla eşleştiği için
+          // anahtarsız bırakılınca bir kipteki doğrulama hatası öteki kipte
+          // yanlış alanın altında görünüyordu (girişte boş gönderim → kayıtta
+          // "Nav" altında "E-postanı yaz"). Anahtar kipe ve alana bağlı:
+          // kip değişince alan durumu yenilenir, yazılan metin denetleyicide kalır.
+          key: ValueKey('${_isLogin ? 'tekeve' : 'tomar'}:$label'),
           controller: ctrl,
           focusNode: focusNode,
           obscureText: obscure,
