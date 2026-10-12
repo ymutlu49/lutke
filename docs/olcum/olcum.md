@@ -1,8 +1,6 @@
-# LÛTKE içerik ölçümü — 2026-10-11
+# LÛTKE içerik ölçümü — 2026-10-12
 
 `python tools/qa/olcum.py` üretir; elle düzenlenmez. Yöntem ve sınırlar: [README.md](README.md).
-
-> **Uyarı:** `website/data/content.json` Dart kaynağından eski; ders ve kültür sayıları güncel olmayabilir.
 
 ## Tabana göre (2026-10-11)
 
@@ -46,11 +44,11 @@ Toplam 105 ders, 590 egzersiz · dinleme 105 · konuşma 60 · yazma 80 · diyal
 |  | A1 | A2 | B1 | B2 | C1 | C2 |
 |---|---:|---:|---:|---:|---:|---:|
 | Örnek sayısı | 1034 | 1441 | 3106 | 1196 | 1020 | 670 |
-| Ortalama sözcük | 3,98 | 3,91 | 3,48 | 3,63 | 3,84 | 4,09 |
+| Ortalama sözcük | 3,99 | 3,91 | 3,48 | 3,63 | 3,84 | 4,09 |
 | Sonunda nokta yok | %0,0 | %0,1 | %0,0 | %0,0 | %0,0 | %0,0 |
-| En çok 2 sözcük | %1,2 | %13,8 | %20,2 | %17,2 | %16,8 | %15,2 |
+| En çok 2 sözcük | %1,2 | %13,8 | %20,3 | %17,2 | %16,8 | %15,2 |
 | Maddenin aynısı | %0,0 | %0,8 | %7,3 | %9,8 | %25,4 | %32,8 |
-| Yüklemsiz (sezgisel) | %12,3 | %18,8 | %39,7 | %53,4 | %78,0 | %77,6 |
+| Yüklemsiz (sezgisel) | %12,2 | %18,8 | %39,7 | %53,3 | %78,0 | %77,6 |
 
 **`gen` örnekleri**
 
@@ -139,7 +137,7 @@ Listeler: [cins_celiski.tsv](cins_celiski.tsv) (açık sorular), [cins_kanit.tsv
 |  | A1 | A2 | B1 | B2 | C1 | C2 | Tümü |
 |---|---:|---:|---:|---:|---:|---:|---:|
 | Madde başı | %68,1 | %58,9 | %38,8 | %36,8 | %11,8 | %9,9 | %40,0 |
-| `her` cümleleri | %39,8 | %69,7 | %87,2 | %89,4 | %86,9 | %74,5 | %77,7 |
+| `her` cümleleri | %39,0 | %69,5 | %87,0 | %89,2 | %86,9 | %74,5 | %77,5 |
 | `gen` cümleleri | %5,8 | %5,9 | %5,4 | %7,4 | %2,1 | %2,5 | %5,2 |
 
 Dinleme metinleri: 0 / 105 · ses bildirimi 9.448 anahtar.

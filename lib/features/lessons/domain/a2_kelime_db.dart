@@ -2007,7 +2007,7 @@ const kA2EkKelimeler4 = [
 
   (id:'a2_804', ku:'Bazirgan', tr:'Tüccar', en:'Merchant',
    cins:'bêcins', ez:'bazirganê', kat:'pîşe', zor:0.81,
-   not:'"Bazar" kökünden. [FB]: bazirgan n. "Bazirganê baş mêvan hez dike."',
+   not:'"Bazar" kökünden. [FB]: bazirgan n. "Bazirganê baş ji mêvanan hez dike."',
    her:['Bazirgan hat bazarê.', 'Ew bazirgan e.'], gen:['Bazirgan û cotkar', 'Bazirganê me']),
 
   (id:'a2_805', ku:'Şofer', tr:'Şoför / Sürücü', en:'Driver',
@@ -2184,7 +2184,7 @@ const kA2EkKelimeler4 = [
   (id:'a2_863', ku:'Nevî', tr:'Torun', en:'Grandchild',
    cins:'bêcins', ez:'neviyê', kat:'malbat', zor:0.81,
    not:'[FB]: nevî n. "Neviyên pîrê" = büyükannenin torunları.',
-   her:['Pîrê neviyê xwe gelek hez dike.', 'Min sê nevî hene.'], gen:['Nevî û zarok', 'Neviyên me']),
+   her:['Pîrê gelek ji neviyê xwe hez dike.', 'Min sê nevî hene.'], gen:['Nevî û zarok', 'Neviyên me']),
 
   (id:'a2_864', ku:'Bûk', tr:'Gelin', en:'Bride / Daughter-in-law',
    cins:'mê', ez:'bûka', kat:'malbat', zor:0.81,
@@ -2413,7 +2413,7 @@ const kA2EkKelimeler3 = [
   (id:'a2_604', ku:'Avjenî', tr:'Yüzmek / Yüzme', en:'Swimming',
    cins:'mê', ez:'avjeniya', kat:'werzî', zor:0.80,
    not:'Mê — "av" (su) + "jenî" (vuruş). Kurmancî özgün bileşim. [FB]: avjenî n.f.',
-   her:['Avjenî hez dikim.', 'Ez avjeniyê hîn dibim.'],
+   her:['Ez ji avjeniyê hez dikim.', 'Ez avjeniyê hîn dibim.'],
    gen:['Avjenî û werzîş', 'Avjeniya me']),
 
   // ─────────────────────────────────────────────────────────────

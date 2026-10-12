@@ -1160,7 +1160,7 @@ final kB1EkKelimeler3 = [
   (id:"b1_682", ku:"Baxçevanî", tr:"Bahçecilik", en:"Gardening",
    cins:"mê", ez:"baxçevaniya", kat:"xweza", zor:0.70,
    not:"Dişil — \"baxçe\" + \"-vanî\". [BH] §273: -vanî soneki.",
-   her:["Baxçevanî hez dikim.", "Baxçevaniya me."],
+   her:["Ez ji baxçevaniyê hez dikim.", "Baxçevaniya me."],
    gen:["Baxçevanî û cotkarî", "Baxçevaniya me"]),
 
   // BAĞLAÇLAR — B1 ileri sözdizim
@@ -2491,7 +2491,7 @@ final kB1EkKelimeler5 = [
   (id:"b1_1143", ku:"Dema vala", tr:"Boş zaman", en:"Free time",
    cins:"mê", ez:"dema vala", kat:"jiyan", zor:0.71,
    not:"\"Dem\" + \"vala\". \"Demên vala\" = boş zamanlar.",
-   her:["Demê vala heye?", "Di dema vala de."],
+   her:["Dema vala heye?", "Di dema vala de."],
    gen:["Dem vala û kar", "Dema vala"]),
 
   // ── EK FIIL VE KAYNAKLI FORMLAR ───────────────────────────
@@ -2509,9 +2509,9 @@ final kB1EkKelimeler5 = [
 
   (id:"b1_1152", ku:"Hev dîtin", tr:"Görüşmek / Buluşmak", en:"To meet (each other)",
    cins:"bêcins", ez:null, kat:"leker", zor:0.71,
-   not:"\"Hev dîtin\" — [AS] no.1000 ✓. \"Em hev dîtin.\"",
-   her:["Em hev dîtin.", "Kengî hev dibînin?"],
-   gen:["Hev dîtin û veqetîn", "Em hev dîtin."]),
+   not:"\"Hev dîtin\" — [AS] no.1000 ✓. \"Me hev dît.\"",
+   her:["Me hev dît.", "Kengî hev dibînin?"],
+   gen:["Hev dîtin û veqetîn", "Me hev dît."]),
 
   (id:"b1_1153", ku:"Mezin bûn", tr:"Büyümek", en:"To grow up",
    cins:"bêcins", ez:null, kat:"jiyan", zor:0.72,
@@ -2863,7 +2863,7 @@ final kB1EkKelimeler6 = [
   (id:"b1_1343", ku:"Êdî ne", tr:"Artık değil", en:"No longer",
    cins:"bêcins", ez:null, kat:"daçek", zor:0.71,
    not:"\"Êdî\" (artık) + \"ne\" (değil).",
-   her:["Êdî ne hatiye.", "Êdî ne dixwînim."],
+   her:["Êdî nehatiye.", "Êdî naxwînim."],
    gen:["Êdî ne û hê jî", "Êdî ne"]),
 
   // ── B1 ÖZET KELİMELERİ ────────────────────────────────────

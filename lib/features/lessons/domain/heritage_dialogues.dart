@@ -112,9 +112,9 @@ const kDialoguePiree = HeritageDialogue(
     DialogueLine(
       speaker: 'Elif',
       speakerRole: 'Nevî',
-      kurmanci: 'Ez baş im jî, spas.',
+      kurmanci: 'Ez jî baş im, spas.',
       turkish: 'Ben de iyiyim, teşekkürler.',
-      grammarNote: '"Jî" = de/da (pekiştirme). "Ez baş im jî" = ben de iyiyim.',
+      grammarNote: '"Jî" = de/da; eklediği sözcükten hemen sonra gelir. "Ez jî baş im" = ben de iyiyim.',
       audioAsset: 'assets/audio/heritage/dlg1_05.mp3',
     ),
     DialogueLine(
@@ -122,7 +122,7 @@ const kDialoguePiree = HeritageDialogue(
       speakerRole: 'Dapîr',
       kurmanci: 'Rûne, rûne! Ez ê çayekê ji bo te çêkim.',
       turkish: 'Otur, otur! Sana bir çay yapayım.',
-      grammarNote: '"Rûne!" = otur! (emir). "Ez ê … çêkim" = yapacağım/hazırlayacağım. Native Kurmancî kullanır "çay çêkirin" (= çay hazırlamak), "çay kirin" değil — bu Türkçe "çay yapmak" kalkesi.',
+      grammarNote: '"Rûne!" = otur! (emir). "Ez ê … çêkim" = yapacağım/hazırlayacağım. Kurmancîde "çay çêkirin" (çay hazırlamak) denir; "çay kirin" Türkçedeki "çay yapmak"tan kopyadır.',
       culturalNote: 'Oturmaya davet etmeden çay teklifi — Kürt misafirperverliğinin özü.',
       audioAsset: 'assets/audio/heritage/dlg1_06.mp3',
     ),
@@ -145,9 +145,9 @@ const kDialoguePiree = HeritageDialogue(
     DialogueLine(
       speaker: 'Elif',
       speakerRole: 'Nevî',
-      kurmanci: 'Erê, pîrê! Ez Kurmancî hîn dibim. Zehmet e, lê ez gelek hez dikim!',
+      kurmanci: 'Erê, pîrê! Ez Kurmancî hîn dibim. Zehmet e, lê ez gelek jê hez dikim!',
       turkish: 'Evet büyükanne! Kurmancî öğreniyorum. Zor ama çok seviyorum!',
-      grammarNote: '"Lê" = ama. "Ji X hez dikim" = X-i seviyorum.',
+      grammarNote: '"Lê" = ama. "Ji X hez dikim" = X-i seviyorum; "jê" = ji + wî/wê (ondan): "jê hez dikim" = onu seviyorum.',
       audioAsset: 'assets/audio/heritage/dlg1_09.mp3',
     ),
     DialogueLine(
@@ -245,7 +245,7 @@ const kDialogueSifre = HeritageDialogue(
       speakerRole: 'Kur',
       kurmanci: 'Dayê, av heye?',
       turkish: 'Anneciğim, su var mı?',
-      grammarNote: '"Dayê" = anneciğim (vokatif/sevgi hitabı). Native günlük konuşmada en sık kullanılan; "Dêyê" daha edebî/şiirsel. "Av heye?" = su var mı?',
+      grammarNote: '"Dayê" = anneciğim (vokatif/sevgi hitabı). Günlük konuşmada anneye böyle seslenilir. "Av heye?" = su var mı?',
       audioAsset: 'assets/audio/heritage/dlg2_08.mp3',
     ),
     DialogueLine(
@@ -299,9 +299,9 @@ const kDialogueTelefon = HeritageDialogue(
     DialogueLine(
       speaker: 'Zeynep',
       speakerRole: 'Keç',
-      kurmanci: 'Silav, dêyê!',
+      kurmanci: 'Silav, dayê!',
       turkish: 'Merhaba anneciğim!',
-      grammarNote: '"Dêyê" = anneciğim (sevgi hitabı).',
+      grammarNote: '"Dayê" = anneciğim (sevgi hitabı).',
       audioAsset: 'assets/audio/heritage/dlg3_01.mp3',
     ),
     DialogueLine(
@@ -324,14 +324,14 @@ const kDialogueTelefon = HeritageDialogue(
       speakerRole: 'Dê',
       kurmanci: 'Baş im, spas! Keça min Kurmancî dipeyive!',
       turkish: 'İyiyim, teşekkürler! Kızım Kurmancî konuşuyor!',
-      grammarNote: '"Dipeyive" = konuşuyor (peyvîn fiili).',
+      grammarNote: '"Dipeyive" = konuşuyor (peyivîn fiili).',
       culturalNote: 'Annenin sürprizi ve sevinci — asimile çocuğun dili konuşması en büyük armağan.',
       audioAsset: 'assets/audio/heritage/dlg3_04.mp3',
     ),
     DialogueLine(
       speaker: 'Zeynep',
       speakerRole: 'Keç',
-      kurmanci: 'Erê, dêyê! Ez Kurmancî hîn dibim. Zehmet e, lê xweş e!',
+      kurmanci: 'Erê, dayê! Ez Kurmancî hîn dibim. Zehmet e, lê xweş e!',
       turkish: 'Evet anneciğim! Kurmancî öğreniyorum. Zor ama güzel!',
       grammarNote: '"Hîn dibim" = öğreniyorum. "Lê" = ama.',
       audioAsset: 'assets/audio/heritage/dlg3_05.mp3',
@@ -347,7 +347,7 @@ const kDialogueTelefon = HeritageDialogue(
     DialogueLine(
       speaker: 'Zeynep',
       speakerRole: 'Keç',
-      kurmanci: 'Erê, keyf xweş im! Dêyê, sibê em tên malê.',
+      kurmanci: 'Erê, keyf xweş im! Dayê, sibê em tên malê.',
       turkish: 'Evet, keyfim yerinde! Anneciğim, yarın eve geleceğiz.',
       grammarNote: '"Keyf xweş im" = keyfim yerinde. "Em tên" = geliyoruz.',
       audioAsset: 'assets/audio/heritage/dlg3_07.mp3',
@@ -363,15 +363,15 @@ const kDialogueTelefon = HeritageDialogue(
     DialogueLine(
       speaker: 'Zeynep',
       speakerRole: 'Keç',
-      kurmanci: 'Spas, dêyê. Xatirê te!',
-      turkish: 'Teşekkürler anneciğim. Güle güle!',
+      kurmanci: 'Spas, dayê. Xatirê te!',
+      turkish: 'Teşekkürler anneciğim. Hoşça kal!',
       audioAsset: 'assets/audio/heritage/dlg3_09.mp3',
     ),
     DialogueLine(
       speaker: 'Dê',
       speakerRole: 'Dê',
       kurmanci: 'Xatirê te, keça min. Ji te hez dikim!',
-      turkish: 'Güle git kızım. Seni seviyorum!',
+      turkish: 'Hoşça kal kızım. Seni seviyorum!',
       grammarNote: '"Ji te hez dikim" = seni seviyorum.',
       culturalNote: 'Kürtçede "hez dikim" söylemek — yıllarca söyleyememenin ardından ilk kez.',
       audioAsset: 'assets/audio/heritage/dlg3_10.mp3',
@@ -397,22 +397,22 @@ const kDialogueMalbat = HeritageDialogue(
       'Kürt kültüründe aile ziyareti en kutsal toplumsal ritüellerden biri. '
       'Kapıdan girildiğinde büyüklere önce selam verilir. '
       'Ziyarette hediye getirmek zorunlu sayılır.',
-  keyWords: ['bi xêr hatîn', 'rûne', 'malbat', 'kur', 'keç', 'ji bo te', 'ser çavim'],
+  keyWords: ['bi xêr hatin', 'rûne', 'malbat', 'kur', 'keç', 'ji bo te'],
   lines: [
     DialogueLine(
       speaker: 'Hasan',
       speakerRole: 'Kur',
-      kurmanci: 'Silav, dêyê! Bi xêr hatîn?',
-      turkish: 'Merhaba anneciğim! İyi misin?',
-      grammarNote: '"Bi xêr hatîn?" burada "nasılsın" anlamında kullanılır.',
+      kurmanci: 'Silav, dayê! Em hatin!',
+      turkish: 'Merhaba anneciğim! Biz geldik!',
+      grammarNote: '"Em hatin" = geldik (hatin, geçmiş zaman; çoğul eki -in).',
       audioAsset: 'assets/audio/heritage/dlg4_01.mp3',
     ),
     DialogueLine(
       speaker: 'Dapîr',
       speakerRole: 'Dapîr',
-      kurmanci: 'Bi xêr hatîn, malbato! Werin hundurê!',
-      turkish: 'Hoş geldiniz, ailem! İçeri gelin!',
-      grammarNote: '"Malbato" = ailem (sevgi hitabı). "Hundurê" = içeri.',
+      kurmanci: 'Hûn bi xêr hatin! Werin hundur!',
+      turkish: 'Hoş geldiniz! İçeri gelin!',
+      grammarNote: '"Hûn bi xêr hatin" = hoş geldiniz (çoğul; tekil: "Tu bi xêr hatî"). "Hundur" = içeri.',
       audioAsset: 'assets/audio/heritage/dlg4_02.mp3',
     ),
     DialogueLine(
@@ -421,7 +421,7 @@ const kDialogueMalbat = HeritageDialogue(
       kurmanci: 'Pîrê, tu çawa yî? Roja te baş be!',
       turkish: 'Büyükanne, nasılsın? İyi günler!',
       grammarNote: '"Roja te baş be" = günün iyi olsun.',
-      culturalNote: 'Gelin büyükanneye "pîrê" der — "dêyê" değil.',
+      culturalNote: 'Gelin büyükanneye "pîrê" der — "dayê" değil.',
       audioAsset: 'assets/audio/heritage/dlg4_03.mp3',
     ),
     DialogueLine(
@@ -436,7 +436,7 @@ const kDialogueMalbat = HeritageDialogue(
     DialogueLine(
       speaker: 'Hasan',
       speakerRole: 'Kur',
-      kurmanci: 'Hemî baş in, spas. Dêyê, ev ji bo te ye.',
+      kurmanci: 'Hemî baş in, spas. Dayê, ev ji bo te ye.',
       turkish: 'Hepsi iyidir, teşekkürler. Anneciğim, bu sana.',
       grammarNote: '"Ji bo te" = senin için.',
       culturalNote: 'Ziyarette hediye getirmek Kürt geleneğinde zorunlu sayılır.',
@@ -447,7 +447,7 @@ const kDialogueMalbat = HeritageDialogue(
       speakerRole: 'Dapîr',
       kurmanci: 'Çi ye ev? Pêwîst nebû! Gelek spas, kurê min.',
       turkish: 'Bu ne? Gerekmezdi! Çok teşekkürler, oğlum.',
-      grammarNote: '"Pêwîst nebû" = gerekmezdi. Native Kurmancî tercihi; "lazim" Arapça-Türkçe alıntısı, eşdeğer ama daha az saf.',
+      grammarNote: '"Pêwîst nebû" = gerekmezdi. Aynı anlamda "lazim nebû" da söylenir.',
       culturalNote: '"Pêwîst nebû!" demek kibarlık gereği — hediyeyi memnuniyetle alıyor.',
       audioAsset: 'assets/audio/heritage/dlg4_06.mp3',
     ),
@@ -463,14 +463,14 @@ const kDialogueMalbat = HeritageDialogue(
 );
 
 // ════════════════════════════════════════════════════════════════
-// DİYALOG 5 — Dapîr Mamostayê Min e
+// DİYALOG 5 — Dapîr Mamostaya Min e
 // Büyükannem Öğretmenim
 // Persona: Narin (31) büyükannesinden kelime öğreniyor.
 // ════════════════════════════════════════════════════════════════
 
 const kDialogueDersa = HeritageDialogue(
   id: 'dlg_dersa_piree',
-  kurmanjTitle: 'Dapîr Mamostayê Min e',
+  kurmanjTitle: 'Dapîr Mamostaya Min e',
   turkishTitle: 'Büyükannem Öğretmenim',
   lessonId: 'a1_l05',
   scene:
@@ -511,7 +511,7 @@ const kDialogueDersa = HeritageDialogue(
       speakerRole: 'Dapîr',
       kurmanci: 'Erê, rast e! Tu baş dibêjî!',
       turkish: 'Evet, doğru! Çok iyi söylüyorsun!',
-      grammarNote: '"Tu baş dibêjî" = iyi söylüyorsun (bêjin 2.tekil).',
+      grammarNote: '"Tu baş dibêjî" = iyi söylüyorsun (gotin fiili, şimdiki zaman kökü -bêj-, 2. tekil).',
       culturalNote: 'Teşvik etmek — öğrencinin motivasyonu için kritik.',
       audioAsset: 'assets/audio/heritage/dlg5_04.mp3',
     ),
@@ -525,26 +525,26 @@ const kDialogueDersa = HeritageDialogue(
     DialogueLine(
       speaker: 'Dapîr',
       speakerRole: 'Dapîr',
-      kurmanci: '"Pencere" ye — heman e! Weke Tirkî.',
-      turkish: '"Pencere" — aynısı! Türkçe gibi.',
-      grammarNote: '"Heman e" = aynısı. "Weke" = gibi.',
+      kurmanci: '"Pencere" ye — heman peyv e! Weke Tirkî.',
+      turkish: '"Pencere" — aynı sözcük! Türkçedeki gibi.',
+      grammarNote: '"Heman peyv e" = aynı sözcük ("heman" addan önce gelir). "Weke" = gibi.',
       culturalNote: 'Bazı kelimeler her iki dilde aynı — büyükannenin tatlı sürprizi.',
       audioAsset: 'assets/audio/heritage/dlg5_06.mp3',
     ),
     DialogueLine(
       speaker: 'Narin',
       speakerRole: 'Nevî',
-      kurmanci: 'Pîrê, tu mamostayê min î!',
-      turkish: 'Büyükanne, sen benim öğretmeninim!',
-      grammarNote: '"Mamostayê min î" = benim öğretmeninim (veqetandek + bûn 2.tekil).',
+      kurmanci: 'Pîrê, tu mamostaya min î!',
+      turkish: 'Büyükanne, sen benim öğretmenimsin!',
+      grammarNote: '"Mamostaya min î" = benim öğretmenimsin (dişil veqetandek -a: öğretmen kadın; erkek için "mamostayê min").',
       audioAsset: 'assets/audio/heritage/dlg5_07.mp3',
     ),
     DialogueLine(
       speaker: 'Dapîr',
       speakerRole: 'Dapîr',
-      kurmanci: 'Û tu xwendekarê baştirîn î!',
+      kurmanci: 'Û tu xwendekara baştirîn î!',
       turkish: 'Ve sen en iyi öğrencisin!',
-      grammarNote: '"Baştirîn" = en iyi (üstünlük derecesi: baş + -tirîn).',
+      grammarNote: '"Baştirîn" = en iyi (üstünlük derecesi: baş + -tirîn). "Xwendekara": öğrenci kadın olduğu için dişil -a.',
       audioAsset: 'assets/audio/heritage/dlg5_08.mp3',
     ),
     DialogueLine(

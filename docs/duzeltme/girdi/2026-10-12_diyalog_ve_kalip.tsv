@@ -1,0 +1,65 @@
+kimlik	alan	eski	yeni	kural	gerekce
+@lib/features/lessons/domain/heritage_dialogues.dart		Ez baş im jî, spas.	Ez jî baş im, spas.	soz_dizimi	jî eklediği ögeden sonra gelir; korpus «ez jî baş im» 4 (Fêrkera Kurdî), «baş im jî» 0; kullanıcı bildirdi
+@lib/features/lessons/domain/heritage_dialogues.dart		"""Jî"" = de/da (pekiştirme). ""Ez baş im jî"" = ben de iyiyim."	"""Jî"" = de/da; eklediği sözcükten hemen sonra gelir. ""Ez jî baş im"" = ben de iyiyim."	soz_dizimi	not yanlış sırayı öğretiyordu
+@lib/features/lessons/domain/heritage_dialogues.dart		Zehmet e, lê ez gelek hez dikim!	Zehmet e, lê ez gelek jê hez dikim!	edat	hez kirin «ji» ister: korpus «ji X hez dik-» 83, ji'siz 1; «jê hez dikim» 3
+@lib/features/lessons/domain/heritage_dialogues.dart		"""Lê"" = ama. ""Ji X hez dikim"" = X-i seviyorum."	"""Lê"" = ama. ""Ji X hez dikim"" = X-i seviyorum; ""jê"" = ji + wî/wê (ondan): ""jê hez dikim"" = onu seviyorum."	edat	cümledeki jê'nin açıklaması
+@lib/features/lessons/domain/heritage_dialogues.dart		"Native Kurmancî kullanır ""çay çêkirin"" (= çay hazırlamak), ""çay kirin"" değil — bu Türkçe ""çay yapmak"" kalkesi."	"Kurmancîde ""çay çêkirin"" (çay hazırlamak) denir; ""çay kirin"" Türkçedeki ""çay yapmak""tan kopyadır."	yazim	açıklama Türkçesi bozuktu
+@lib/features/lessons/domain/heritage_dialogues.dart		"Native günlük konuşmada en sık kullanılan; ""Dêyê"" daha edebî/şiirsel. ""Av heye?"" = su var mı?"	"Günlük konuşmada anneye böyle seslenilir. ""Av heye?"" = su var mı?"	atif	«dêyê daha edebî» savı dayanaksız: edebiyat ağırlıklı korpusta dêyê 0, dayê 159
+@lib/features/lessons/domain/heritage_dialogues.dart		Silav, dêyê! Bi xêr hatîn?	Silav, dayê! Em hatin!	anlam	«bi xêr hatin» hoş geldiniz demektir, ev sahibi söyler; gelen kişinin ağzında «nasılsın» anlamı yok. «em hatin» 33 tanık
+@lib/features/lessons/domain/heritage_dialogues.dart		Merhaba anneciğim! İyi misin?	Merhaba anneciğim! Biz geldik!	anlam	Kurmancî cümleyle birlikte
+@lib/features/lessons/domain/heritage_dialogues.dart		"""Bi xêr hatîn?"" burada ""nasılsın"" anlamında kullanılır."	"""Em hatin"" = geldik (hatin, geçmiş zaman; çoğul eki -in)."	anlam	not uydurma bir kullanım öğretiyordu
+@lib/features/lessons/domain/heritage_dialogues.dart		Bi xêr hatîn, malbato! Werin hundurê!	Hûn bi xêr hatin! Werin hundur!	yazim	çoğul geçmiş «hatin» (korpus «hûn bi xêr hatin/hatine» 2, hatîn 0); «werin hundur/hundir» 15 tanık, «hundurê» yalın kullanılmaz; «malbato» dişil ada eril seslenme eki, korpusta 0: seslenme çıkarıldı
+@lib/features/lessons/domain/heritage_dialogues.dart		Hoş geldiniz, ailem! İçeri gelin!	Hoş geldiniz! İçeri gelin!	anlam	Kurmancî cümleyle birlikte
+@lib/features/lessons/domain/heritage_dialogues.dart		"""Malbato"" = ailem (sevgi hitabı). ""Hundurê"" = içeri."	"""Hûn bi xêr hatin"" = hoş geldiniz (çoğul; tekil: ""Tu bi xêr hatî""). ""Hundur"" = içeri."	yazim	cümleyle birlikte
+@lib/features/lessons/domain/heritage_dialogues.dart		'bi xêr hatîn', 'rûne', 'malbat', 'kur', 'keç', 'ji bo te', 'ser çavim'	'bi xêr hatin', 'rûne', 'malbat', 'kur', 'keç', 'ji bo te'	yazim	hatîn -> hatin; «ser çavim» diyalogda geçmiyor ve böyle bir kalıp yok (ser çavan)
+@lib/features/lessons/domain/heritage_dialogues.dart		"Native Kurmancî tercihi; ""lazim"" Arapça-Türkçe alıntısı, eşdeğer ama daha az saf."	"Aynı anlamda ""lazim nebû"" da söylenir."	atif	açıklama Türkçesi bozuktu; «daha az saf» yargısı dayanaksız
+@lib/features/lessons/domain/heritage_dialogues.dart		Teşekkürler anneciğim. Güle güle!	Teşekkürler anneciğim. Hoşça kal!	anlam	«xatirê te» ayrılan kişinin sözüdür: hoşça kal
+@lib/features/lessons/domain/heritage_dialogues.dart		Güle git kızım. Seni seviyorum!	Hoşça kal kızım. Seni seviyorum!	anlam	aynı kalıp
+@lib/features/lessons/domain/heritage_dialogues.dart		"""Dipeyive"" = konuşuyor (peyvîn fiili)."	"""Dipeyive"" = konuşuyor (peyivîn fiili)."	yazim	mastar peyivîn
+@lib/features/lessons/domain/heritage_dialogues.dart		dêyê	dayê	yazim	seslenme biçimi «dayê»: korpus dayê 159 / dêyê 0
+@lib/features/lessons/domain/heritage_dialogues.dart		Dêyê	Dayê	yazim	seslenme biçimi «dayê»: korpus dayê 159 / dêyê 0
+@lib/features/lessons/domain/heritage_dialogues.dart		Dapîr Mamostayê Min e	Dapîr Mamostaya Min e	cins	öğretmen büyükanne: dişil izafe -a (a1_110 notu: mamostaya min dişil)
+@lib/features/lessons/domain/heritage_dialogues.dart		Pîrê, tu mamostayê min î!	Pîrê, tu mamostaya min î!	cins	aynı
+@lib/features/lessons/domain/heritage_dialogues.dart		Büyükanne, sen benim öğretmeninim!	Büyükanne, sen benim öğretmenimsin!	yazim	Türkçe çekim hatası
+@lib/features/lessons/domain/heritage_dialogues.dart		"""Mamostayê min î"" = benim öğretmeninim (veqetandek + bûn 2.tekil)."	"""Mamostaya min î"" = benim öğretmenimsin (dişil veqetandek -a: öğretmen kadın; erkek için ""mamostayê min"")."	cins	cümleyle birlikte
+@lib/features/lessons/domain/heritage_dialogues.dart		Û tu xwendekarê baştirîn î!	Û tu xwendekara baştirîn î!	cins	Narin kadın: dişil izafe -a
+@lib/features/lessons/domain/heritage_dialogues.dart		"""Baştirîn"" = en iyi (üstünlük derecesi: baş + -tirîn)."	"""Baştirîn"" = en iyi (üstünlük derecesi: baş + -tirîn). ""Xwendekara"": öğrenci kadın olduğu için dişil -a."	cins	cümleyle birlikte
+@lib/features/lessons/domain/heritage_dialogues.dart		"""Pencere"" ye — heman e! Weke Tirkî."	"""Pencere"" ye — heman peyv e! Weke Tirkî."	soz_dizimi	heman addan önce gelir: korpus «heman + ad» 46, tek başına 0
+@lib/features/lessons/domain/heritage_dialogues.dart		"""Pencere"" — aynısı! Türkçe gibi."	"""Pencere"" — aynı sözcük! Türkçedeki gibi."	soz_dizimi	cümleyle birlikte
+@lib/features/lessons/domain/heritage_dialogues.dart		"""Heman e"" = aynısı. ""Weke"" = gibi."	"""Heman peyv e"" = aynı sözcük (""heman"" addan önce gelir). ""Weke"" = gibi."	soz_dizimi	cümleyle birlikte
+@lib/features/lessons/domain/heritage_dialogues.dart		(bêjin 2.tekil)	(gotin fiili, şimdiki zaman kökü -bêj-, 2. tekil)	atif	mastar gotin; «bêjin» diye bir mastar yok
+@lib/features/lessons/domain/heritage_c_dialogues.dart		Destpêk bike ji Xanî.	Ji Xanî dest pê bike.	soz_dizimi	fiil «dest pê kirin»: korpus «dest pê bike» 16, «destpêk bike» 0
+@lib/features/lessons/domain/heritage_c_dialogues.dart		Lê ne dizanim ji ku dest pê bikim.	Lê nizanim ji ku dest pê bikim.	olumsuzluk	zanîn'in olumsuzu nizanim: korpus nizanim 219, «ne dizanim» 0
+@lib/features/lessons/domain/heritage_c_dialogues.dart		"""Ne dizanim ji ku dest pê bikim"""	"""Nizanim ji ku dest pê bikim"""	olumsuzluk	cümleyle birlikte
+@lib/features/lessons/domain/heritage_c_dialogues.dart		Hevpeyvîn kêrî ye.	Hevpeyvîn bi kêr tê.	soz_dizimi	«bi kêr hatin»: korpus «bi kêr tê/tên/nayê» 7; «kêrî ye» anlamsız
+@lib/features/lessons/domain/heritage_c_dialogues.dart		Min tiştekî girîng fêr bû	Ez fêrî tiştekî girîng bûm	ergatif	fêr bûn geçişsiz: özne yalın, fiil özneyle uyuşur; korpus «fêrî X bûm/bû» 4, «min ... fêr bû» 0
+@lib/features/lessons/domain/heritage_c_dialogues.dart		(ergatif + geçmiş)	"(""fêr bûn"" geçişsizdir: özne yalın kalır, ergatif yok)"	ergatif	not yanlış kural öğretiyordu
+@lib/features/lessons/domain/heritage_c_dialogues.dart		nasnameya Kurdan ên li diasporayê	nasnameya Kurdên li diasporayê	izafe	eğik durumdaki ada izafe parçacığı gelmez; niteleyen Kurd'un kendisi izafe alır
+@lib/features/lessons/domain/heritage_c_dialogues.dart		di xwe de vedihewîne: nasnameya	di xwe de vedihewînin: nasnameya	uyum	özne çoğul (xwendekarên ...): fiil -in
+@lib/features/lessons/domain/heritage_c_dialogues.dart		"""Du cureyên... vedihewîne"" = iki tür... barındırıyor."	"""Du cureyên... vedihewînin"" = iki tür... barındırıyorlar (özne çoğul: fiil -in alır)."	uyum	cümleyle birlikte
+@lib/features/lessons/domain/heritage_c_dialogues.dart		beşek ji nasname jî wenda dibe	beşek ji nasnameyê jî wenda dibe	edat	ji'den sonra eğik durum: nasnameyê
+@lib/features/exercises/presentation/story_screen.dart		"Kî got ""Lazim nebû!""?"	"Kî got ""Pêwîst nebû!""?"	atif	soru diyalogda olmayan bir cümleyi soruyordu (diyalog: Pêwîst nebû!)
+@lib/features/exercises/presentation/story_screen.dart		'Wanê dixwîne'	'Waneyê dixwîne'	yazim	wane (ders) eğik durumda waneyê; Wanê «Van'ı» demek
+@lib/features/lessons/domain/a1_lesson_definitions.dart		çay bide min, dêyê.	çay bide min, dayê.	yazim	seslenme biçimi «dayê»: korpus dayê 159 / dêyê 0
+@lib/features/lessons/domain/lesson_entities.dart		Dêyê, av bide min!	Dayê, av bide min!	yazim	seslenme biçimi «dayê»: korpus dayê 159 / dêyê 0
+a1_024	her	dêyê	dayê	yazim	seslenme biçimi «dayê»: korpus dayê 159 / dêyê 0
+a1_031	her	dêyê	dayê	yazim	seslenme biçimi «dayê»: korpus dayê 159 / dêyê 0
+a1_101	her	dêyê	dayê	yazim	seslenme biçimi «dayê»: korpus dayê 159 / dêyê 0
+a1_123	her	dêyê	dayê	yazim	seslenme biçimi «dayê»: korpus dayê 159 / dêyê 0
+a1_125	her	dêyê	dayê	yazim	seslenme biçimi «dayê»: korpus dayê 159 / dêyê 0
+a1_181	her	dêyê	dayê	yazim	seslenme biçimi «dayê»: korpus dayê 159 / dêyê 0
+a1_194	her	dêyê	dayê	yazim	seslenme biçimi «dayê»: korpus dayê 159 / dêyê 0
+a1_220	her	dêyê	dayê	yazim	seslenme biçimi «dayê»: korpus dayê 159 / dêyê 0
+a1_222	her	dêyê	dayê	yazim	seslenme biçimi «dayê»: korpus dayê 159 / dêyê 0
+a1_234	her	dêyê	dayê	yazim	seslenme biçimi «dayê»: korpus dayê 159 / dêyê 0
+a1_238	her	dêyê	dayê	yazim	seslenme biçimi «dayê»: korpus dayê 159 / dêyê 0
+a1_240	her	dêyê	dayê	yazim	seslenme biçimi «dayê»: korpus dayê 159 / dêyê 0
+a1_151	her	Dêyê	Dayê	yazim	seslenme biçimi «dayê»: korpus dayê 159 / dêyê 0
+a1_104	her	Hûn bi xêr hatîn!	Hûn bi xêr hatin!	yazim	çoğul geçmiş -in: korpus «hûn bi xêr hatin/hatine» 2, hatîn 0
+b1_1343	her	Êdî ne hatiye.	Êdî nehatiye.	olumsuzluk	geçmiş zaman olumsuzluk eki bitişik yazılır
+b1_1343	her	Êdî ne dixwînim.	Êdî naxwînim.	olumsuzluk	şimdiki zaman olumsuzu na-: naxwînim (korpus 1; «ne dixwînim» 0)
+a1_092	her	Pîrê neviyê xwe hez dike.	Pîrê ji neviyê xwe hez dike.	edat	hez kirin «ji» ister: korpus «ji X hez dik-» 83, ji'siz 1
+a2_863	her	Pîrê neviyê xwe gelek hez dike.	Pîrê gelek ji neviyê xwe hez dike.	edat	hez kirin «ji» ister: korpus «ji X hez dik-» 83, ji'siz 1
+a2_604	her	Avjenî hez dikim.	Ez ji avjeniyê hez dikim.	edat	hez kirin «ji» ister: korpus «ji X hez dik-» 83, ji'siz 1
+b1_682	her	Baxçevanî hez dikim.	Ez ji baxçevaniyê hez dikim.	edat	hez kirin «ji» ister: korpus «ji X hez dik-» 83, ji'siz 1
+a2_804	not	"""Bazirganê baş mêvan hez dike."""	"""Bazirganê baş ji mêvanan hez dike."""	edat	hez kirin «ji» ister: korpus «ji X hez dik-» 83, ji'siz 1

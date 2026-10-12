@@ -164,7 +164,7 @@ const kA1TamKelimeler = [
   (id:'a1_024', ku:'Destê te xweş be', tr:'Elinize sağlık', en:'Well done (for cooking)', cins:'bêcins', ez:null,
    kat:'silav', zor:0.78,
    not:'"Dest" = el, "xweş" = güzel. Yemekten sonra söylenen geleneksel ifade. Mînak: Destê te xweş be! Têbinî: çoğul → "Destên we xweş be!" (elinize sağlık - çoğul).',
-   her:['Destê te xweş be, dêyê!', 'Destê te xweş be, pîrê!'],
+   her:['Destê te xweş be, dayê!', 'Destê te xweş be, pîrê!'],
    gen:['Destê te xweş be!', 'Xwarin xweş bû!']),
 
   (id:'a1_025', ku:'Bextewar', tr:'Mutlu / Bahtiyar', en:'Happy', cins:'bêcins', ez:null,
@@ -185,7 +185,7 @@ const kA1TamKelimeler = [
 
   (id:'a1_031', ku:'Yek', tr:'Bir', en:'One', cins:'bêcins', ez:null, kat:'jimar', zor:0.85,
    not:'Sayma 1. Mînak: yek çay (bir çay). Têbinî: sayı + isim → isim tekil kalır (yek roj, du roj, sê roj).',
-   her:['Yek çay bide min, dêyê.', 'Yek birê min heye.'],
+   her:['Yek çay bide min, dayê.', 'Yek birê min heye.'],
    gen:['Yek pirs heye.', 'Yek saet e.']),
 
   (id:'a1_032', ku:'Du', tr:'İki', en:'Two', cins:'bêcins', ez:null, kat:'jimar', zor:0.85,
@@ -423,7 +423,7 @@ const kA1TamKelimeler = [
   (id:'a1_092', ku:'Nevî', tr:'Torun', en:'Grandchild', cins:'bêcins', ez:'neviyê/neviya',
    kat:'malbat', zor:0.78,
    not:'Nevî — eril ve dişil için kullanılır. Veqetandek: neviyê (eril) / neviya (dişil). Mînak: neviyê min (torunum). Têbinî: çoğul → neviyên min.',
-   her:['Pîrê neviyê xwe hez dike.', 'Sê neviyên min hene.'],
+   her:['Pîrê ji neviyê xwe hez dike.', 'Sê neviyên min hene.'],
    gen:['Neviyê wî mezin e.', 'Nevî û pîrê li malê ne.']),
 
   // ════════════════════════════════════════════════════════════
@@ -438,7 +438,7 @@ const kA1TamKelimeler = [
 
   (id:'a1_101', ku:'Tu', tr:'Sen', en:'You (singular)', cins:'bêcins', ez:null, kat:'cinavk', zor:0.88,
    not:'Yalın durum. Eğik hali: "te". Mînak: Tu baş î. Têbinî: bûn 2.tekil ünsüzden sonra "î", ünlüden sonra "yî" (Tu çawa yî?).',
-   her:['Tu çawa yî, pîrê?', 'Tu baş î, dêyê?'],
+   her:['Tu çawa yî, pîrê?', 'Tu baş î, dayê?'],
    gen:['Tu kî yî?', 'Tu xwendekar î?']),
 
   (id:'a1_102', ku:'Ew', tr:'O (eril ve dişil)', en:'He / She / It', cins:'bêcins', ez:null, kat:'cinavk', zor:0.85,
@@ -453,7 +453,7 @@ const kA1TamKelimeler = [
 
   (id:'a1_104', ku:'Hûn', tr:'Siz', en:'You (plural)', cins:'bêcins', ez:null, kat:'cinavk', zor:0.85,
    not:'2.çoğul. Eğik hali: "we". Mînak: Hûn xwendekar in. Têbinî: saygı için tekile de kullanılır (büyüklere "Tu" yerine "Hûn").',
-   her:['Hûn çawa ne, pîrê û kal?', 'Hûn bi xêr hatîn!'],
+   her:['Hûn çawa ne, pîrê û kal?', 'Hûn bi xêr hatin!'],
    gen:['Hûn kî ne?', 'Hûn xwendekar in.']),
 
   (id:'a1_105', ku:'Ew (pirjimar)', tr:'Onlar', en:'They', cins:'bêcins', ez:null, kat:'cinavk', zor:0.84,
@@ -562,7 +562,7 @@ const kA1TamKelimeler = [
   (id:'a1_123', ku:'Nîvro', tr:'Öğle', en:'Noon / Midday', cins:'nêr', ez:'nîvroyê',
    kat:'dem', zor:0.82,
    not:'Nîvro (eril/nêr) — "nîv" (yarım) + "ro(j)" (gün) = günün yarısı. Veqetandek: nîvroyê. Têbinî: oblique "di nîvroyê de" (öğleyin).',
-   her:['Nîvro hatim malê, dêyê.', 'Di nîvroyê de nan dixwim.'],
+   her:['Nîvro hatim malê, dayê.', 'Di nîvroyê de nan dixwim.'],
    gen:['Nîvro germ e.', 'Nîvro û êvar hene.']),
 
   (id:'a1_124', ku:'Êvar', tr:'Akşam', en:'Evening', cins:'mê', ez:'êvara',
@@ -574,7 +574,7 @@ const kA1TamKelimeler = [
   (id:'a1_125', ku:'Îro', tr:'Bugün', en:'Today', cins:'bêcins', ez:null,
    kat:'dem', zor:0.85,
    not:'Îro — "î-ro" (bu gün); zarf. Mînak: Îro çawa yî? Têbinî: karşıtı "duh" (dün), gelecek "sibê" (yarın).',
-   her:['Îro pîrê tê malê!', 'Îro çawa yî, dêyê?'],
+   her:['Îro pîrê tê malê!', 'Îro çawa yî, dayê?'],
    gen:['Îro baş e.', 'Îro û sibê hene.']),
 
   (id:'a1_126', ku:'Duh', tr:'Dün', en:'Yesterday', cins:'bêcins', ez:null,
@@ -683,7 +683,7 @@ const kA1TamKelimeler = [
   (id:'a1_151', ku:'Av', tr:'Su', en:'Water', cins:'mê', ez:'ava',
    kat:'vexwarin', zor:0.86,
    not:'Av (dişil/mê). Veqetandek: ava me. Mînak: avê bide min (su ver bana). Têbinî: oblique "li avê" (suda).',
-   her:['Dêyê, av bide min!', 'Av sar e, pîrê.'],
+   her:['Dayê, av bide min!', 'Av sar e, pîrê.'],
    gen:['Ava me sar e.', 'Av û çay hene.']),
 
   (id:'a1_152', ku:'Çay', tr:'Çay', en:'Tea', cins:'nêr', ez:'çayê',
@@ -826,7 +826,7 @@ const kA1TamKelimeler = [
   (id:'a1_181', ku:'Ez tî me', tr:'Susuzum', en:"I'm thirsty", cins:'bêcins', ez:null,
    kat:'tendurist', zor:0.82,
    not:'Hevok: "ez" + "tî" (susuz) + bûn 1.tekil "me" (ünlüden sonra). Mînak: Ez tî me, av bide.',
-   her:['Ez tî me, dêyê.', 'Kal, ez tî me.'],
+   her:['Ez tî me, dayê.', 'Kal, ez tî me.'],
    gen:['Ez tî me.', 'Av bide min, tî me.']),
 
   (id:'a1_182', ku:'Nexweşxane', tr:'Hastane', en:'Hospital', cins:'mê', ez:'nexweşxaneya',
@@ -867,7 +867,7 @@ const kA1TamKelimeler = [
   (id:'a1_194', ku:'Pace', tr:'Cam / Pencere', en:'Window', cins:'mê', ez:'paceya',
    kat:'mal', zor:0.83,
    not:'Pace (dişil/mê) — özgün Kurmancî form. Veqetandek: paceya min. Têbinî: "pencere" alıntı; "pace" tercih edilir.',
-   her:['Paceya malê kesk e.', 'Pace veke, dêyê!'],
+   her:['Paceya malê kesk e.', 'Pace veke, dayê!'],
    gen:['Paceya me mezin e.', 'Pace û derî hene.']),
 
   (id:'a1_195', ku:'Nivîn', tr:'Yatak', en:'Bed', cins:'nêr', ez:'nivînê',
@@ -974,7 +974,7 @@ const kA1TamKelimeler = [
   (id:'a1_220', ku:'Xweş', tr:'Güzel / İyi', en:'Beautiful / Nice', cins:'bêcins', ez:null,
    kat:'rengder', zor:0.85,
    not:'Rengdêra neguherbar — çok kullanılan. Mînak: pîrêya min xweş e. Têbinî: "xweş bî!" = iyi ol! (selamlama).',
-   her:['Pîrêya min xweş e!', 'Nan xweş bû, dêyê!'],
+   her:['Pîrêya min xweş e!', 'Nan xweş bû, dayê!'],
    gen:['Ev hewa xweş e.', 'Xweş û xerab dijwate ne.']),
 
   (id:'a1_221', ku:'Gelek', tr:'Çok', en:'Very / Many', cins:'bêcins', ez:null,
@@ -986,7 +986,7 @@ const kA1TamKelimeler = [
   (id:'a1_222', ku:'Hindik', tr:'Az / Biraz', en:'Little / Few', cins:'bêcins', ez:null,
    kat:'peyvben', zor:0.82,
    not:'Hoker (zarf) — az miktar. Mînak: hindik nan bide (az ekmek ver). Têbinî: "hinekî" = biraz; karşıtı "gelek" (çok).',
-   her:['Hindik nan bide min, dêyê.', 'Hindik av heye.'],
+   her:['Hindik nan bide min, dayê.', 'Hindik av heye.'],
    gen:['Ez hindik dixwim.', 'Hindik û gelek dijwate ne.']),
 
   (id:'a1_223', ku:'Zû', tr:'Erken / Hızlı', en:'Early / Fast', cins:'bêcins', ez:null,
@@ -1051,7 +1051,7 @@ const kA1TamKelimeler = [
   (id:'a1_234', ku:'Ez dixwazim', tr:'Ben istiyorum', en:'I want', cins:'bêcins', ez:null,
    kat:'leker', zor:0.83,
    not:'"Di-xwaz-im" — di (şimdiki ön ek) + xwaz (kök: istemek) + im (1.tekil). Mînak: Ez çay dixwazim. Têbinî: x sesi gırtlaktan.',
-   her:['Ez çay dixwazim, dêyê.', 'Ez nan dixwazim.'],
+   her:['Ez çay dixwazim, dayê.', 'Ez nan dixwazim.'],
    gen:['Ez xwarin dixwazim.', 'Ew av dixwaze.']),
 
   (id:'a1_235', ku:'Ez dixwim', tr:'Ben yiyorum', en:'I eat', cins:'bêcins', ez:null,
@@ -1075,7 +1075,7 @@ const kA1TamKelimeler = [
   (id:'a1_238', ku:'Ez têm', tr:'Ben geliyorum', en:'I come', cins:'bêcins', ez:null,
    kat:'leker', zor:0.82,
    not:'"Di-têm" — hatin fiili (gelmek). Düzensiz fiil. Mînak: Ez têm malê. Têbinî: karşıtı "diçim" (gidiyorum).',
-   her:['Ez têm malê, dêyê!', 'Ez sibê têm.'],
+   her:['Ez têm malê, dayê!', 'Ez sibê têm.'],
    gen:['Ez ji dibistanê têm.', 'Ew jî tê.']),
 
   (id:'a1_239', ku:'Ez dikim', tr:'Ben yapıyorum', en:'I do / make', cins:'bêcins', ez:null,
@@ -1087,7 +1087,7 @@ const kA1TamKelimeler = [
   (id:'a1_240', ku:'Ez dibêjim', tr:'Ben söylüyorum / diyorum', en:'I say', cins:'bêcins', ez:null,
    kat:'leker', zor:0.81,
    not:'"Di-bêj-im" — gotin fiili (söylemek). Mînak: Ez spas dibêjim. Têbinî: kök "bêj" şimdiki zamanda kullanılır.',
-   her:['Ez spas dibêjim, dêyê.', 'Ez rast dibêjim.'],
+   her:['Ez spas dibêjim, dayê.', 'Ez rast dibêjim.'],
    gen:['Ez dibêjim erê.', 'Ew çi dibêje?']),
 
   (id:'a1_241', ku:'Ez dizanim', tr:'Ben biliyorum', en:'I know', cins:'bêcins', ez:null,

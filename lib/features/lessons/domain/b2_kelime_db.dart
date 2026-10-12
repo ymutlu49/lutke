@@ -97,7 +97,7 @@ final kB2Kelimeler = [
   (id:"b2_023", ku:"Dest avêtin", tr:"Başlamak / Girişmek", en:"To begin / embark",
    cins:"bêcins", ez:null, kat:"bileşik_leker", zor:0.64,
    not:"\"Dest\" (el) + \"avêtin\" (atmak) = ele almak, başlamak. [BH] §200",
-   her:["Em dest avêtin xwendinê.", "Ew dest avêt karê."],
+   her:["Me dest avêt xwendinê.", "Wî dest avêt karî."],
    gen:["Dest avêtin û dawî kirin", "Dest avêt."]),
 
   (id:"b2_024", ku:"Xwe avêtin", tr:"Kendini vermek / Atlamak", en:"To throw oneself",

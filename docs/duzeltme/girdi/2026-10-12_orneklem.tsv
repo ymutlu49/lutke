@@ -1,0 +1,7 @@
+kimlik	alan	eski	yeni	kural	gerekce
+b1_1152	her	Em hev dîtin.	Me hev dît.	ergatif	geçişli fiilin geçmiş zamanında özne eğik, fiil nesneyle uyuşur; korpus «me hev dît» 2, «em hev dîtin» 0
+b1_1152	gen	Em hev dîtin.	Me hev dît.	ergatif	geçişli fiilin geçmiş zamanında özne eğik, fiil nesneyle uyuşur
+b1_1152	not	"""Em hev dîtin."""	"""Me hev dît."""	ergatif	nottaki örnek cümle
+b2_023	her	Em dest avêtin xwendinê.	Me dest avêt xwendinê.	ergatif	geçişli fiilin geçmiş zamanında özne eğik, fiil nesneyle uyuşur; korpus «me/min ... dest avêt» 1, yalın özneyle 0
+b2_023	her	Ew dest avêt karê.	Wî dest avêt karî.	ergatif	geçişli fiilin geçmiş zamanında özne eğik, fiil nesneyle uyuşur; kar eril, eğik durumu karî (karê izafe biçimidir)
+b1_1143	her	Demê vala heye?	Dema vala heye?	izafe	dem dişil; madde başı «Dema vala»

@@ -475,7 +475,7 @@ final kA1Lessons = <LessonModel>[
       _fillBlank(
         id: 'yek_fill_ex1',
         before: '',
-        after: 'çay bide min, dêyê.',
+        after: 'çay bide min, dayê.',
         turkish: '___ çay ver bana, anneciğim.',
         options: ['Du', 'Sê', 'Yek', 'Çar'],
         correctIndex: 2,

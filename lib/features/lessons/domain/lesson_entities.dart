@@ -504,7 +504,7 @@ const kA1SeedCards = [
     category: 'food',
     difficulty: 0.82,
     audioUrl: 'assets/audio/a1/av.mp3',
-    sentencesHeritage: ['Dêyê, av bide min!', 'Av sar e.'],
+    sentencesHeritage: ['Dayê, av bide min!', 'Av sar e.'],
     sentencesGeneral: ['Ez av dixwim.', 'Av lazim e.'],
   ),
   (

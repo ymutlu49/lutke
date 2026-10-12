@@ -462,7 +462,7 @@
         "zor": 0.78,
         "not": "\"Dest\" = el, \"xweş\" = güzel. Yemekten sonra söylenen geleneksel ifade. Mînak: Destê te xweş be! Têbinî: çoğul → \"Destên we xweş be!\" (elinize sağlık - çoğul).",
         "her": [
-          "Destê te xweş be, dêyê!",
+          "Destê te xweş be, dayê!",
           "Destê te xweş be, pîrê!"
         ],
         "gen": [
@@ -519,7 +519,7 @@
         "zor": 0.85,
         "not": "Sayma 1. Mînak: yek çay (bir çay). Têbinî: sayı + isim → isim tekil kalır (yek roj, du roj, sê roj).",
         "her": [
-          "Yek çay bide min, dêyê.",
+          "Yek çay bide min, dayê.",
           "Yek birê min heye."
         ],
         "gen": [
@@ -1336,7 +1336,7 @@
         "zor": 0.78,
         "not": "Nevî — eril ve dişil için kullanılır. Veqetandek: neviyê (eril) / neviya (dişil). Mînak: neviyê min (torunum). Têbinî: çoğul → neviyên min.",
         "her": [
-          "Pîrê neviyê xwe hez dike.",
+          "Pîrê ji neviyê xwe hez dike.",
           "Sê neviyên min hene."
         ],
         "gen": [
@@ -1375,7 +1375,7 @@
         "not": "Yalın durum. Eğik hali: \"te\". Mînak: Tu baş î. Têbinî: bûn 2.tekil ünsüzden sonra \"î\", ünlüden sonra \"yî\" (Tu çawa yî?).",
         "her": [
           "Tu çawa yî, pîrê?",
-          "Tu baş î, dêyê?"
+          "Tu baş î, dayê?"
         ],
         "gen": [
           "Tu kî yî?",
@@ -1432,7 +1432,7 @@
         "not": "2.çoğul. Eğik hali: \"we\". Mînak: Hûn xwendekar in. Têbinî: saygı için tekile de kullanılır (büyüklere \"Tu\" yerine \"Hûn\").",
         "her": [
           "Hûn çawa ne, pîrê û kal?",
-          "Hûn bi xêr hatîn!"
+          "Hûn bi xêr hatin!"
         ],
         "gen": [
           "Hûn kî ne?",
@@ -1754,7 +1754,7 @@
         "zor": 0.82,
         "not": "Nîvro (eril/nêr) — \"nîv\" (yarım) + \"ro(j)\" (gün) = günün yarısı. Veqetandek: nîvroyê. Têbinî: oblique \"di nîvroyê de\" (öğleyin).",
         "her": [
-          "Nîvro hatim malê, dêyê.",
+          "Nîvro hatim malê, dayê.",
           "Di nîvroyê de nan dixwim."
         ],
         "gen": [
@@ -1793,7 +1793,7 @@
         "not": "Îro — \"î-ro\" (bu gün); zarf. Mînak: Îro çawa yî? Têbinî: karşıtı \"duh\" (dün), gelecek \"sibê\" (yarın).",
         "her": [
           "Îro pîrê tê malê!",
-          "Îro çawa yî, dêyê?"
+          "Îro çawa yî, dayê?"
         ],
         "gen": [
           "Îro baş e.",
@@ -2115,7 +2115,7 @@
         "zor": 0.86,
         "not": "Av (dişil/mê). Veqetandek: ava me. Mînak: avê bide min (su ver bana). Têbinî: oblique \"li avê\" (suda).",
         "her": [
-          "Dêyê, av bide min!",
+          "Dayê, av bide min!",
           "Av sar e, pîrê."
         ],
         "gen": [
@@ -2552,7 +2552,7 @@
         "zor": 0.82,
         "not": "Hevok: \"ez\" + \"tî\" (susuz) + bûn 1.tekil \"me\" (ünlüden sonra). Mînak: Ez tî me, av bide.",
         "her": [
-          "Ez tî me, dêyê.",
+          "Ez tî me, dayê.",
           "Kal, ez tî me."
         ],
         "gen": [
@@ -2667,7 +2667,7 @@
         "not": "Pace (dişil/mê) — özgün Kurmancî form. Veqetandek: paceya min. Têbinî: \"pencere\" alıntı; \"pace\" tercih edilir.",
         "her": [
           "Paceya malê kesk e.",
-          "Pace veke, dêyê!"
+          "Pace veke, dayê!"
         ],
         "gen": [
           "Paceya me mezin e.",
@@ -2990,7 +2990,7 @@
         "not": "Rengdêra neguherbar — çok kullanılan. Mînak: pîrêya min xweş e. Têbinî: \"xweş bî!\" = iyi ol! (selamlama).",
         "her": [
           "Pîrêya min xweş e!",
-          "Nan xweş bû, dêyê!"
+          "Nan xweş bû, dayê!"
         ],
         "gen": [
           "Ev hewa xweş e.",
@@ -3027,7 +3027,7 @@
         "zor": 0.82,
         "not": "Hoker (zarf) — az miktar. Mînak: hindik nan bide (az ekmek ver). Têbinî: \"hinekî\" = biraz; karşıtı \"gelek\" (çok).",
         "her": [
-          "Hindik nan bide min, dêyê.",
+          "Hindik nan bide min, dayê.",
           "Hindik av heye."
         ],
         "gen": [
@@ -3179,7 +3179,7 @@
         "zor": 0.83,
         "not": "\"Di-xwaz-im\" — di (şimdiki ön ek) + xwaz (kök: istemek) + im (1.tekil). Mînak: Ez çay dixwazim. Têbinî: x sesi gırtlaktan.",
         "her": [
-          "Ez çay dixwazim, dêyê.",
+          "Ez çay dixwazim, dayê.",
           "Ez nan dixwazim."
         ],
         "gen": [
@@ -3255,7 +3255,7 @@
         "zor": 0.82,
         "not": "\"Di-têm\" — hatin fiili (gelmek). Düzensiz fiil. Mînak: Ez têm malê. Têbinî: karşıtı \"diçim\" (gidiyorum).",
         "her": [
-          "Ez têm malê, dêyê!",
+          "Ez têm malê, dayê!",
           "Ez sibê têm."
         ],
         "gen": [
@@ -3293,7 +3293,7 @@
         "zor": 0.81,
         "not": "\"Di-bêj-im\" — gotin fiili (söylemek). Mînak: Ez spas dibêjim. Têbinî: kök \"bêj\" şimdiki zamanda kullanılır.",
         "her": [
-          "Ez spas dibêjim, dêyê.",
+          "Ez spas dibêjim, dayê.",
           "Ez rast dibêjim."
         ],
         "gen": [
@@ -14429,7 +14429,7 @@
         "zor": 0.8,
         "not": "Mê — \"av\" (su) + \"jenî\" (vuruş). Kurmancî özgün bileşim. [FB]: avjenî n.f.",
         "her": [
-          "Avjenî hez dikim.",
+          "Ez ji avjeniyê hez dikim.",
           "Ez avjeniyê hîn dibim."
         ],
         "gen": [
@@ -15756,7 +15756,7 @@
         "ez": "bazirganê",
         "kat": "pîşe",
         "zor": 0.81,
-        "not": "\"Bazar\" kökünden. [FB]: bazirgan n. \"Bazirganê baş mêvan hez dike.\"",
+        "not": "\"Bazar\" kökünden. [FB]: bazirgan n. \"Bazirganê baş ji mêvanan hez dike.\"",
         "her": [
           "Bazirgan hat bazarê.",
           "Ew bazirgan e."
@@ -16366,7 +16366,7 @@
         "zor": 0.81,
         "not": "[FB]: nevî n. \"Neviyên pîrê\" = büyükannenin torunları.",
         "her": [
-          "Pîrê neviyê xwe gelek hez dike.",
+          "Pîrê gelek ji neviyê xwe hez dike.",
           "Min sê nevî hene."
         ],
         "gen": [
@@ -27802,7 +27802,7 @@
         "zor": 0.7,
         "not": "Dişil — \"baxçe\" + \"-vanî\". [BH] §273: -vanî soneki.",
         "her": [
-          "Baxçevanî hez dikim.",
+          "Ez ji baxçevaniyê hez dikim.",
           "Baxçevaniya me."
         ],
         "gen": [
@@ -30671,7 +30671,7 @@
         "zor": 0.71,
         "not": "\"Dem\" + \"vala\". \"Demên vala\" = boş zamanlar.",
         "her": [
-          "Demê vala heye?",
+          "Dema vala heye?",
           "Di dema vala de."
         ],
         "gen": [
@@ -30726,14 +30726,14 @@
         "ez": null,
         "kat": "leker",
         "zor": 0.71,
-        "not": "\"Hev dîtin\" — [AS] no.1000 ✓. \"Em hev dîtin.\"",
+        "not": "\"Hev dîtin\" — [AS] no.1000 ✓. \"Me hev dît.\"",
         "her": [
-          "Em hev dîtin.",
+          "Me hev dît.",
           "Kengî hev dibînin?"
         ],
         "gen": [
           "Hev dîtin û veqetîn",
-          "Em hev dîtin."
+          "Me hev dît."
         ]
       },
       {
@@ -31735,8 +31735,8 @@
         "zor": 0.71,
         "not": "\"Êdî\" (artık) + \"ne\" (değil).",
         "her": [
-          "Êdî ne hatiye.",
-          "Êdî ne dixwînim."
+          "Êdî nehatiye.",
+          "Êdî naxwînim."
         ],
         "gen": [
           "Êdî ne û hê jî",
@@ -41807,8 +41807,8 @@
         "zor": 0.64,
         "not": "\"Dest\" (el) + \"avêtin\" (atmak) = ele almak, başlamak. [BH] §200",
         "her": [
-          "Em dest avêtin xwendinê.",
-          "Ew dest avêt karê."
+          "Me dest avêt xwendinê.",
+          "Wî dest avêt karî."
         ],
         "gen": [
           "Dest avêtin û dawî kirin",
@@ -69775,7 +69775,7 @@
           {
             "id": "yek_fill_ex1",
             "type": "fillInBlank",
-            "kurmanjPrompt": " ___ çay bide min, dêyê.",
+            "kurmanjPrompt": " ___ çay bide min, dayê.",
             "turkishPrompt": "___ çay ver bana, anneciğim.",
             "options": [
               "Du",
@@ -82970,9 +82970,9 @@
         {
           "speaker": "Elif",
           "speakerRole": "Nevî",
-          "kurmanci": "Ez baş im jî, spas.",
+          "kurmanci": "Ez jî baş im, spas.",
           "turkish": "Ben de iyiyim, teşekkürler.",
-          "grammarNote": "\"Jî\" = de/da (pekiştirme). \"Ez baş im jî\" = ben de iyiyim.",
+          "grammarNote": "\"Jî\" = de/da; eklediği sözcükten hemen sonra gelir. \"Ez jî baş im\" = ben de iyiyim.",
           "culturalNote": null
         },
         {
@@ -82980,7 +82980,7 @@
           "speakerRole": "Dapîr",
           "kurmanci": "Rûne, rûne! Ez ê çayekê ji bo te çêkim.",
           "turkish": "Otur, otur! Sana bir çay yapayım.",
-          "grammarNote": "\"Rûne!\" = otur! (emir). \"Ez ê … çêkim\" = yapacağım/hazırlayacağım. Native Kurmancî kullanır \"çay çêkirin\" (= çay hazırlamak), \"çay kirin\" değil — bu Türkçe \"çay yapmak\" kalkesi.",
+          "grammarNote": "\"Rûne!\" = otur! (emir). \"Ez ê … çêkim\" = yapacağım/hazırlayacağım. Kurmancîde \"çay çêkirin\" (çay hazırlamak) denir; \"çay kirin\" Türkçedeki \"çay yapmak\"tan kopyadır.",
           "culturalNote": "Oturmaya davet etmeden çay teklifi — Kürt misafirperverliğinin özü."
         },
         {
@@ -83002,9 +83002,9 @@
         {
           "speaker": "Elif",
           "speakerRole": "Nevî",
-          "kurmanci": "Erê, pîrê! Ez Kurmancî hîn dibim. Zehmet e, lê ez gelek hez dikim!",
+          "kurmanci": "Erê, pîrê! Ez Kurmancî hîn dibim. Zehmet e, lê ez gelek jê hez dikim!",
           "turkish": "Evet büyükanne! Kurmancî öğreniyorum. Zor ama çok seviyorum!",
-          "grammarNote": "\"Lê\" = ama. \"Ji X hez dikim\" = X-i seviyorum.",
+          "grammarNote": "\"Lê\" = ama. \"Ji X hez dikim\" = X-i seviyorum; \"jê\" = ji + wî/wê (ondan): \"jê hez dikim\" = onu seviyorum.",
           "culturalNote": null
         },
         {
@@ -83096,7 +83096,7 @@
           "speakerRole": "Kur",
           "kurmanci": "Dayê, av heye?",
           "turkish": "Anneciğim, su var mı?",
-          "grammarNote": "\"Dayê\" = anneciğim (vokatif/sevgi hitabı). Native günlük konuşmada en sık kullanılan; \"Dêyê\" daha edebî/şiirsel. \"Av heye?\" = su var mı?",
+          "grammarNote": "\"Dayê\" = anneciğim (vokatif/sevgi hitabı). Günlük konuşmada anneye böyle seslenilir. \"Av heye?\" = su var mı?",
           "culturalNote": null
         },
         {
@@ -83145,9 +83145,9 @@
         {
           "speaker": "Zeynep",
           "speakerRole": "Keç",
-          "kurmanci": "Silav, dêyê!",
+          "kurmanci": "Silav, dayê!",
           "turkish": "Merhaba anneciğim!",
-          "grammarNote": "\"Dêyê\" = anneciğim (sevgi hitabı).",
+          "grammarNote": "\"Dayê\" = anneciğim (sevgi hitabı).",
           "culturalNote": null
         },
         {
@@ -83171,13 +83171,13 @@
           "speakerRole": "Dê",
           "kurmanci": "Baş im, spas! Keça min Kurmancî dipeyive!",
           "turkish": "İyiyim, teşekkürler! Kızım Kurmancî konuşuyor!",
-          "grammarNote": "\"Dipeyive\" = konuşuyor (peyvîn fiili).",
+          "grammarNote": "\"Dipeyive\" = konuşuyor (peyivîn fiili).",
           "culturalNote": "Annenin sürprizi ve sevinci — asimile çocuğun dili konuşması en büyük armağan."
         },
         {
           "speaker": "Zeynep",
           "speakerRole": "Keç",
-          "kurmanci": "Erê, dêyê! Ez Kurmancî hîn dibim. Zehmet e, lê xweş e!",
+          "kurmanci": "Erê, dayê! Ez Kurmancî hîn dibim. Zehmet e, lê xweş e!",
           "turkish": "Evet anneciğim! Kurmancî öğreniyorum. Zor ama güzel!",
           "grammarNote": "\"Hîn dibim\" = öğreniyorum. \"Lê\" = ama.",
           "culturalNote": null
@@ -83193,7 +83193,7 @@
         {
           "speaker": "Zeynep",
           "speakerRole": "Keç",
-          "kurmanci": "Erê, keyf xweş im! Dêyê, sibê em tên malê.",
+          "kurmanci": "Erê, keyf xweş im! Dayê, sibê em tên malê.",
           "turkish": "Evet, keyfim yerinde! Anneciğim, yarın eve geleceğiz.",
           "grammarNote": "\"Keyf xweş im\" = keyfim yerinde. \"Em tên\" = geliyoruz.",
           "culturalNote": null
@@ -83209,8 +83209,8 @@
         {
           "speaker": "Zeynep",
           "speakerRole": "Keç",
-          "kurmanci": "Spas, dêyê. Xatirê te!",
-          "turkish": "Teşekkürler anneciğim. Güle güle!",
+          "kurmanci": "Spas, dayê. Xatirê te!",
+          "turkish": "Teşekkürler anneciğim. Hoşça kal!",
           "grammarNote": null,
           "culturalNote": null
         },
@@ -83218,7 +83218,7 @@
           "speaker": "Dê",
           "speakerRole": "Dê",
           "kurmanci": "Xatirê te, keça min. Ji te hez dikim!",
-          "turkish": "Güle git kızım. Seni seviyorum!",
+          "turkish": "Hoşça kal kızım. Seni seviyorum!",
           "grammarNote": "\"Ji te hez dikim\" = seni seviyorum.",
           "culturalNote": "Kürtçede \"hez dikim\" söylemek — yıllarca söyleyememenin ardından ilk kez."
         }
@@ -83231,30 +83231,29 @@
       "scene": "Hasan ve ailesi büyükannenin evini ziyaret ediyor. Kapıda karşılaşıyorlar.",
       "culturalContext": "Kürt kültüründe aile ziyareti en kutsal toplumsal ritüellerden biri. Kapıdan girildiğinde büyüklere önce selam verilir. Ziyarette hediye getirmek zorunlu sayılır.",
       "keyWords": [
-        "bi xêr hatîn",
+        "bi xêr hatin",
         "rûne",
         "malbat",
         "kur",
         "keç",
-        "ji bo te",
-        "ser çavim"
+        "ji bo te"
       ],
       "lessonId": "a1_l09",
       "lines": [
         {
           "speaker": "Hasan",
           "speakerRole": "Kur",
-          "kurmanci": "Silav, dêyê! Bi xêr hatîn?",
-          "turkish": "Merhaba anneciğim! İyi misin?",
-          "grammarNote": "\"Bi xêr hatîn?\" burada \"nasılsın\" anlamında kullanılır.",
+          "kurmanci": "Silav, dayê! Em hatin!",
+          "turkish": "Merhaba anneciğim! Biz geldik!",
+          "grammarNote": "\"Em hatin\" = geldik (hatin, geçmiş zaman; çoğul eki -in).",
           "culturalNote": null
         },
         {
           "speaker": "Dapîr",
           "speakerRole": "Dapîr",
-          "kurmanci": "Bi xêr hatîn, malbato! Werin hundurê!",
-          "turkish": "Hoş geldiniz, ailem! İçeri gelin!",
-          "grammarNote": "\"Malbato\" = ailem (sevgi hitabı). \"Hundurê\" = içeri.",
+          "kurmanci": "Hûn bi xêr hatin! Werin hundur!",
+          "turkish": "Hoş geldiniz! İçeri gelin!",
+          "grammarNote": "\"Hûn bi xêr hatin\" = hoş geldiniz (çoğul; tekil: \"Tu bi xêr hatî\"). \"Hundur\" = içeri.",
           "culturalNote": null
         },
         {
@@ -83263,7 +83262,7 @@
           "kurmanci": "Pîrê, tu çawa yî? Roja te baş be!",
           "turkish": "Büyükanne, nasılsın? İyi günler!",
           "grammarNote": "\"Roja te baş be\" = günün iyi olsun.",
-          "culturalNote": "Gelin büyükanneye \"pîrê\" der — \"dêyê\" değil."
+          "culturalNote": "Gelin büyükanneye \"pîrê\" der — \"dayê\" değil."
         },
         {
           "speaker": "Dapîr",
@@ -83276,7 +83275,7 @@
         {
           "speaker": "Hasan",
           "speakerRole": "Kur",
-          "kurmanci": "Hemî baş in, spas. Dêyê, ev ji bo te ye.",
+          "kurmanci": "Hemî baş in, spas. Dayê, ev ji bo te ye.",
           "turkish": "Hepsi iyidir, teşekkürler. Anneciğim, bu sana.",
           "grammarNote": "\"Ji bo te\" = senin için.",
           "culturalNote": "Ziyarette hediye getirmek Kürt geleneğinde zorunlu sayılır."
@@ -83286,7 +83285,7 @@
           "speakerRole": "Dapîr",
           "kurmanci": "Çi ye ev? Pêwîst nebû! Gelek spas, kurê min.",
           "turkish": "Bu ne? Gerekmezdi! Çok teşekkürler, oğlum.",
-          "grammarNote": "\"Pêwîst nebû\" = gerekmezdi. Native Kurmancî tercihi; \"lazim\" Arapça-Türkçe alıntısı, eşdeğer ama daha az saf.",
+          "grammarNote": "\"Pêwîst nebû\" = gerekmezdi. Aynı anlamda \"lazim nebû\" da söylenir.",
           "culturalNote": "\"Pêwîst nebû!\" demek kibarlık gereği — hediyeyi memnuniyetle alıyor."
         },
         {
@@ -83301,7 +83300,7 @@
     },
     {
       "id": "dlg_dersa_piree",
-      "kurmanjTitle": "Dapîr Mamostayê Min e",
+      "kurmanjTitle": "Dapîr Mamostaya Min e",
       "turkishTitle": "Büyükannem Öğretmenim",
       "scene": "Narin büyükannesinin yanında oturmuş, sözcükler soruyor.",
       "culturalContext": "Büyükanneler, dili aktaran en doğal öğretmenlerdir. Bu sahne pek çok asimile Kürdün hayalindeki andır: \"Zimanê malbata min\" — ailenin dilini geri almak.",
@@ -83345,7 +83344,7 @@
           "speakerRole": "Dapîr",
           "kurmanci": "Erê, rast e! Tu baş dibêjî!",
           "turkish": "Evet, doğru! Çok iyi söylüyorsun!",
-          "grammarNote": "\"Tu baş dibêjî\" = iyi söylüyorsun (bêjin 2.tekil).",
+          "grammarNote": "\"Tu baş dibêjî\" = iyi söylüyorsun (gotin fiili, şimdiki zaman kökü -bêj-, 2. tekil).",
           "culturalNote": "Teşvik etmek — öğrencinin motivasyonu için kritik."
         },
         {
@@ -83359,25 +83358,25 @@
         {
           "speaker": "Dapîr",
           "speakerRole": "Dapîr",
-          "kurmanci": "\"Pencere\" ye — heman e! Weke Tirkî.",
-          "turkish": "\"Pencere\" — aynısı! Türkçe gibi.",
-          "grammarNote": "\"Heman e\" = aynısı. \"Weke\" = gibi.",
+          "kurmanci": "\"Pencere\" ye — heman peyv e! Weke Tirkî.",
+          "turkish": "\"Pencere\" — aynı sözcük! Türkçedeki gibi.",
+          "grammarNote": "\"Heman peyv e\" = aynı sözcük (\"heman\" addan önce gelir). \"Weke\" = gibi.",
           "culturalNote": "Bazı kelimeler her iki dilde aynı — büyükannenin tatlı sürprizi."
         },
         {
           "speaker": "Narin",
           "speakerRole": "Nevî",
-          "kurmanci": "Pîrê, tu mamostayê min î!",
-          "turkish": "Büyükanne, sen benim öğretmeninim!",
-          "grammarNote": "\"Mamostayê min î\" = benim öğretmeninim (veqetandek + bûn 2.tekil).",
+          "kurmanci": "Pîrê, tu mamostaya min î!",
+          "turkish": "Büyükanne, sen benim öğretmenimsin!",
+          "grammarNote": "\"Mamostaya min î\" = benim öğretmenimsin (dişil veqetandek -a: öğretmen kadın; erkek için \"mamostayê min\").",
           "culturalNote": null
         },
         {
           "speaker": "Dapîr",
           "speakerRole": "Dapîr",
-          "kurmanci": "Û tu xwendekarê baştirîn î!",
+          "kurmanci": "Û tu xwendekara baştirîn î!",
           "turkish": "Ve sen en iyi öğrencisin!",
-          "grammarNote": "\"Baştirîn\" = en iyi (üstünlük derecesi: baş + -tirîn).",
+          "grammarNote": "\"Baştirîn\" = en iyi (üstünlük derecesi: baş + -tirîn). \"Xwendekara\": öğrenci kadın olduğu için dişil -a.",
           "culturalNote": null
         },
         {
@@ -83418,7 +83417,7 @@
         {
           "speaker": "Prof. Dr. Leyla",
           "speakerRole": "Prof. Dr. Leyla",
-          "kurmanci": "Destpêk bike ji Xanî. Di pêşgotina Mem û Zîn de, Xanî bi zelal diyar dike ku ziman û yekîtî ji hev nayên veqetandin. Ev çarçoweya teorîkî ya herî xurt e.",
+          "kurmanci": "Ji Xanî dest pê bike. Di pêşgotina Mem û Zîn de, Xanî bi zelal diyar dike ku ziman û yekîtî ji hev nayên veqetandin. Ev çarçoweya teorîkî ya herî xurt e.",
           "turkish": "Xanî'den başla. Mem û Zîn'in önsözünde Xanî açıkça belirtir ki dil ve birlik birbirinden ayrılamaz. Bu en güçlü teorik çerçeve.",
           "grammarNote": "\"Bi zelal diyar dike ku...\" = açıkça belirtir ki (pasif değil, aktif). \"Ji hev nayên veqetandin\" = birbirinden ayrılamaz (pasif olumsuz).",
           "culturalNote": null
@@ -83469,9 +83468,9 @@
         {
           "speaker": "Selin",
           "speakerRole": "Selin",
-          "kurmanci": "Zîlan xanim, ez di medyayê de dixebitim û dixwazim bi kurmancî nûçe amade bikim. Lê ne dizanim ji ku dest pê bikim.",
+          "kurmanci": "Zîlan xanim, ez di medyayê de dixebitim û dixwazim bi kurmancî nûçe amade bikim. Lê nizanim ji ku dest pê bikim.",
           "turkish": "Zîlan hanım, medyada çalışıyorum ve Kürtçe haber hazırlamak istiyorum. Ama nereden başlayacağımı bilmiyorum.",
-          "grammarNote": "\"Di medyayê de dixebitim\" = medyada çalışıyorum (şimdiki). \"Ne dizanim ji ku dest pê bikim\" = nereden başlayacağımı bilmiyorum (bağımlı soru).",
+          "grammarNote": "\"Di medyayê de dixebitim\" = medyada çalışıyorum (şimdiki). \"Nizanim ji ku dest pê bikim\" = nereden başlayacağımı bilmiyorum (bağımlı soru).",
           "culturalNote": null
         },
         {
@@ -83485,7 +83484,7 @@
         {
           "speaker": "Selin",
           "speakerRole": "Selin",
-          "kurmanci": "Hevpeyvîn kêrî ye. Li gorî te, pirsên herî girîng ên hevpeyvînê çi ne?",
+          "kurmanci": "Hevpeyvîn bi kêr tê. Li gorî te, pirsên herî girîng ên hevpeyvînê çi ne?",
           "turkish": "Röportaj yararlı. Sana göre, röportajın en önemli soruları nelerdir?",
           "grammarNote": "\"Li gorî te\" = sana göre. \"Pirsên herî girîng... çi ne?\" = en önemli sorular... nelerdir?",
           "culturalNote": null
@@ -83501,9 +83500,9 @@
         {
           "speaker": "Selin",
           "speakerRole": "Selin",
-          "kurmanci": "Gelek spas. Min tiştekî girîng fêr bû: nûçegirî ne tenê ziman e — berpirsiyarî ye.",
+          "kurmanci": "Gelek spas. Ez fêrî tiştekî girîng bûm: nûçegirî ne tenê ziman e — berpirsiyarî ye.",
           "turkish": "Çok teşekkür ederim. Önemli bir şey öğrendim: gazetecilik sadece dil değil — sorumluluktur.",
-          "grammarNote": "\"Min tiştekî girîng fêr bû\" = önemli bir şey öğrendim (ergatif + geçmiş). \"Ne tenê... — jî...\" = sadece... değil — ... da...",
+          "grammarNote": "\"Ez fêrî tiştekî girîng bûm\" = önemli bir şey öğrendim (\"fêr bûn\" geçişsizdir: özne yalın kalır, ergatif yok). \"Ne tenê... — jî...\" = sadece... değil — ... da...",
           "culturalNote": "C1 sonucu: Kürtçe medya = hem dil hem etik sorumluluk."
         }
       ]
@@ -83520,7 +83519,7 @@
         {
           "speaker": "Goran",
           "speakerRole": "Goran",
-          "kurmanci": "Heval û hogirên hêja, silav û rêzên min ji we re. Îro em ê li ser têkilîya navbera zimanê zikmakî û nasnameya Kurdan ên li diasporayê biaxivin.",
+          "kurmanci": "Heval û hogirên hêja, silav û rêzên min ji we re. Îro em ê li ser têkilîya navbera zimanê zikmakî û nasnameya Kurdên li diasporayê biaxivin.",
           "turkish": "Değerli dostlar ve meslektaşlar, hepinize saygılarımı sunarım. Bugün diasporadaki Kürtlerin anadili ve kimliği arasındaki ilişki hakkında konuşacağız.",
           "grammarNote": "\"Heval û hogirên hêja\" = değerli dostlar (hitap). \"Em ê... biaxivin\" = konuşacağız (gelecek + subjunctive). \"Zimanê zikmakî\" = anadil.",
           "culturalNote": null
@@ -83528,15 +83527,15 @@
         {
           "speaker": "Goran",
           "speakerRole": "Goran",
-          "kurmanci": "Lêkolîna me nîşan dide ku xwendekarên Kurdan ên li Ewropayê du cureyên nasnameya zimanî di xwe de vedihewîne: nasnameya zimanê zikmakî û nasnameya zimanê mêvandar.",
+          "kurmanci": "Lêkolîna me nîşan dide ku xwendekarên Kurdan ên li Ewropayê du cureyên nasnameya zimanî di xwe de vedihewînin: nasnameya zimanê zikmakî û nasnameya zimanê mêvandar.",
           "turkish": "Araştırmamız gösteriyor ki Avrupa'daki Kürt öğrenciler iki tür dilsel kimliği kendi içinde barındırıyor: anadil kimliği ve ev sahibi dil kimliği.",
-          "grammarNote": "\"Lêkolîna me nîşan dide ku...\" = araştırmamız gösteriyor ki (C2 kanıt kalıbı). \"Du cureyên... vedihewîne\" = iki tür... barındırıyor.",
+          "grammarNote": "\"Lêkolîna me nîşan dide ku...\" = araştırmamız gösteriyor ki (C2 kanıt kalıbı). \"Du cureyên... vedihewînin\" = iki tür... barındırıyorlar (özne çoğul: fiil -in alır).",
           "culturalNote": null
         },
         {
           "speaker": "Goran",
           "speakerRole": "Goran",
-          "kurmanci": "Ji perspektîfa zimannasiyê, ev xeteredar e: ger ziman wenda bibe, beşek ji nasname jî wenda dibe. Lê ji perspektîfeke din, ev nû ye — nasnameyeke cot a dewlemend.",
+          "kurmanci": "Ji perspektîfa zimannasiyê, ev xeteredar e: ger ziman wenda bibe, beşek ji nasnameyê jî wenda dibe. Lê ji perspektîfeke din, ev nû ye — nasnameyeke cot a dewlemend.",
           "turkish": "Dilbilim perspektifinden bu tehlikelidir: dil kaybolursa kimliğin bir parçası da kaybolur. Ama başka bir perspektiften bu yenidir — zengin bir çift kimlik.",
           "grammarNote": "\"Ji perspektîfa... — ji perspektîfeke din\" = ... perspektifinden — başka bir perspektiften. \"Ger... wenda bibe... jî... wenda dibe\" = eğer kaybolursa... da kaybolur (şartlı).",
           "culturalNote": null

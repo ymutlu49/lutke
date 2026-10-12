@@ -1,6 +1,6 @@
 {
- "tarih": "2026-10-11",
- "icerik_json_eski": true,
+ "tarih": "2026-10-12",
+ "icerik_json_eski": false,
  "envanter": {
   "duzey": {
    "a1": {
@@ -86,11 +86,11 @@
   "a1": {
    "her": {
     "n": 1034,
-    "ort_sozcuk": 3.98,
+    "ort_sozcuk": 3.99,
     "noktasiz": 0.0,
     "en_cok_2_sozcuk": 1.2,
     "maddenin_aynisi": 0.0,
-    "yuklemsiz": 12.3
+    "yuklemsiz": 12.2
    },
    "gen": {
     "n": 1026,
@@ -124,7 +124,7 @@
     "n": 3106,
     "ort_sozcuk": 3.48,
     "noktasiz": 0.0,
-    "en_cok_2_sozcuk": 20.2,
+    "en_cok_2_sozcuk": 20.3,
     "maddenin_aynisi": 7.3,
     "yuklemsiz": 39.7
    },
@@ -144,7 +144,7 @@
     "noktasiz": 0.0,
     "en_cok_2_sozcuk": 17.2,
     "maddenin_aynisi": 9.8,
-    "yuklemsiz": 53.4
+    "yuklemsiz": 53.3
    },
    "gen": {
     "n": 1196,
@@ -197,22 +197,22 @@
   "duzey": {
    "a1": {
     "madde": 68.1,
-    "her": 39.8,
+    "her": 39.0,
     "gen": 5.8
    },
    "a2": {
     "madde": 58.9,
-    "her": 69.7,
+    "her": 69.5,
     "gen": 5.9
    },
    "b1": {
     "madde": 38.8,
-    "her": 87.2,
+    "her": 87.0,
     "gen": 5.4
    },
    "b2": {
     "madde": 36.8,
-    "her": 89.4,
+    "her": 89.2,
     "gen": 7.4
    },
    "c1": {
@@ -227,7 +227,7 @@
    }
   },
   "madde": 40.0,
-  "her": 77.7,
+  "her": 77.5,
   "gen": 5.2,
   "dinleme_var": 0,
   "dinleme": 105
