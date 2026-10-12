@@ -19,7 +19,7 @@ out-of-bounds `correctIndex`, length anomalies, ambiguous distractors).
 
 ## Content measurement and the shared language layer (October 2026)
 
-Three newer tools sit beside the quiz checks. Their docstrings and reports are in Turkish.
+Four newer tools sit beside the quiz checks. Their docstrings and reports are in Turkish.
 
 - `icerik.py` — shared loader. Parses the word lists out of the Dart sources the way the
   app uses them (`kB1All`, not the smaller `kB1Temam` the website export uses) and collects
@@ -31,6 +31,10 @@ Three newer tools sit beside the quiz checks. Their docstrings and reports are i
   skips cleanly when the layer is absent. `--kapi` fails on flags that are not already
   recorded in `docs/olcum/ziman_isaret.tsv`; reviewed false positives go in
   `ziman_muaf.tsv` with a reason.
+- `kalip_tara.py` — pattern sweep for error types the shared linter does not see
+  (misplaced `jî`, `dêyê`, `ne dizanim`, ergative with `fêr bûn`, `hez kirin` without `ji`, …).
+  Each pattern is listed in the docstring with its corpus counts. It flags, it does not
+  decide; proverbs are counted separately because they are quoted verbatim.
 - `olcum.py` — writes `docs/olcum/olcum.md`: inventory, example-sentence quality,
   attestation, core-vocabulary coverage, noun gender against two sources, linter flags,
   pre-rendered audio coverage. See `docs/olcum/README.md` for method and limits.
