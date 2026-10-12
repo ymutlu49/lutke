@@ -14731,7 +14731,7 @@
         "ez": null,
         "kat": "jimar",
         "zor": 0.79,
-        "not": "\"Pênc\" + \"-iyem\" = beşinci",
+        "not": "\"Pênc\" + \"-em\" = beşinci. \"Pênciyem\" ellinci demektir (pêncî + -em).",
         "her": [
           "Pêncem hat.",
           "Sinifa pêncem."
@@ -18454,7 +18454,7 @@
         "ez": "terziyê",
         "kat": "pîşe",
         "zor": 0.78,
-        "not": "\"Derzî\" — [FB]: derzî n. Hem terzi hem iğne anlamı.",
+        "not": "\"Terzî\" = terzi. \"Derzî\" ise iğne demektir.",
         "her": [
           "Terzî cil dikişîne.",
           "Ew terzî ye."
@@ -34545,7 +34545,7 @@
         "ez": "pêşbirka",
         "kat": "spor",
         "zor": 0.68,
-        "not": "Dişil — \"tevlihev\" bileşik.",
+        "not": "Dişil — yarışma, müsabaka. \"Tevlihevî\" ise karışıklık demektir.",
         "her": [
           "Pêşbirk dest pê kir.",
           "Di pêşbirkê de ne."
@@ -38953,7 +38953,7 @@
         "ez": "kundirê",
         "kat": "xwarin",
         "zor": 0.7,
-        "not": "Eril — [AS]: \"kabak = kûsî\" ✓.",
+        "not": "Eril — \"kundir\" = kabak. \"Kûsî\" ise kaplumbağa demektir.",
         "her": [
           "Kundir xweş e.",
           "Kundirê pijandî."

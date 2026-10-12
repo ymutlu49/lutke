@@ -3866,7 +3866,7 @@ final kB1_Teknoloji = [  // TEKNOLOJİ VE MEDYA — 60 kelime
 
   (id:"b1_tk19", ku:"Pêşbirk", tr:"Yarışma / Müsabaka", en:"Competition / Contest",
    cins:"mê", ez:"pêşbirka", kat:"spor", zor:0.68,
-   not:"Dişil — \"tevlihev\" bileşik.",
+   not:"Dişil — yarışma, müsabaka. \"Tevlihevî\" ise karışıklık demektir.",
    her:["Pêşbirk dest pê kir.", "Di pêşbirkê de ne."],
    gen:["Pêşbirk û lîstik", "Pêşbirka me"]),
 
@@ -5639,7 +5639,7 @@ final kB1_Beden = [
 
   (id:"b1_bd12", ku:"Taya bilind", tr:"Yüksek ateş", en:"High fever",
    cins:"mê", ez:"taya bilind", kat:"tendurist", zor:0.72,
-   not:"Dişil — [AS]: \"ateş = tayêt\" ✓.",
+   not:"Dişil — \"ta\" = ateş (hastalık belirtisi); \"taya bilind\" = yüksek ateş.",
    her:["Taya wî bilind e.", "Taya min heye."],
    gen:["Ta û êş", "Taya bilind"]),
 
@@ -7736,7 +7736,7 @@ final kB1_Tamam = [
   (id:"b1_tm10", ku:"Rêhevalên jiyanê", tr:"Yol arkadaşları", en:"Fellow travelers of life", cins:"bêcins", ez:"rêhevalên jiyanê", kat:"malbat", zor:0.69, not:"\"Rêheval\"+\"jiyanê\".", her:["Rêhevalên jiyanê.", "Di nav rêhevalên jiyanê de."], gen:["Rêhevalên jiyanê", "Rêhevalên me"]),
 
   // XWARIN (yiyecek) devam — 20
-  (id:"b1_tm11", ku:"Kundir", tr:"Kabak", en:"Zucchini / Squash", cins:"nêr", ez:"kundirê", kat:"xwarin", zor:0.70, not:"Eril — [AS]: \"kabak = kûsî\" ✓.", her:["Kundir xweş e.", "Kundirê pijandî."], gen:["Kundir û xiyar", "Kundirê me"]),
+  (id:"b1_tm11", ku:"Kundir", tr:"Kabak", en:"Zucchini / Squash", cins:"nêr", ez:"kundirê", kat:"xwarin", zor:0.70, not:"Eril — \"kundir\" = kabak. \"Kûsî\" ise kaplumbağa demektir.", her:["Kundir xweş e.", "Kundirê pijandî."], gen:["Kundir û xiyar", "Kundirê me"]),
   (id:"b1_tm12", ku:"Qolîflar", tr:"Karnabahar", en:"Cauliflower", cins:"nêr", ez:"qolîflarê", kat:"xwarin", zor:0.68, not:"Eril — [AS] ✓.", her:["Qolîflar xweş e.", "Qolîflara pijandî."], gen:["Qolîflar û kelem", "Qolîflarê me"]),
   (id:"b1_tm13", ku:"Îspanax", tr:"Ispanak", en:"Spinach", cins:"nêr", ez:"îspanaxê", kat:"xwarin", zor:0.70, not:"Eril — [AS]: \"ıspanak = îspanax\" ✓.", her:["Îspanax sax e.", "Şorba îspanaxê."], gen:["Îspanax û kelem", "Îspanaxê me"]),
   (id:"b1_tm14", ku:"Dohîn", tr:"Yoğurt çorbası", en:"Yogurt soup", cins:"nêr", ez:"dohînê", kat:"xwarin", zor:0.68, not:"Eril — Kürt mutfağı. \"Dohîn\" = yoğurtlu çorba.", her:["Dohîn germ e.", "Dohîna me."], gen:["Dohîn û şorba", "Dohîna me"]),

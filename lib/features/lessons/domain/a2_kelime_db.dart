@@ -2524,7 +2524,7 @@ const kA2EkKelimeler3 = [
 
   (id:'a2_643', ku:'Pêncem', tr:'Beşinci', en:'Fifth',
    cins:'bêcins', ez:null, kat:'jimar', zor:0.79,
-   not:'"Pênc" + "-iyem" = beşinci',
+   not:'"Pênc" + "-em" = beşinci. "Pênciyem" ellinci demektir (pêncî + -em).',
    her:['Pêncem hat.', 'Sinifa pêncem.'],
    gen:['Pêncem û şeşem', 'Roja pêncem']),
 
@@ -3084,7 +3084,7 @@ const kA2EkKelimeler6 = [
 
   (id:'a2_1263', ku:'Terzî', tr:'Terzi', en:'Tailor',
    cins:'bêcins', ez:'terziyê', kat:'pîşe', zor:0.78,
-   not:'"Derzî" — [FB]: derzî n. Hem terzi hem iğne anlamı.',
+   not:'"Terzî" = terzi. "Derzî" ise iğne demektir.',
    her:['Terzî cil dikişîne.', 'Ew terzî ye.'],
    gen:['Terzî û hunermend', 'Terziyê bajêr']),
 

@@ -656,3 +656,8 @@ tarih	kimlik	alan	eski	yeni	kural	gerekce
 2026-10-11	b1_1220	cins	nêr	mê	cins	tax dişil: Wîkîferheng mê; korpus -a 31 / -ê 3 (taxa 52 geçiş 13 kaynak; taxeke 5, taxekî 0); Farqînî -a 1 / -ê 0; kaydın kendi örnekleri de Taxa me
 2026-10-11	b1_1220	ez	taxê	taxa	cins	izafe biçimi cinsiyete göre
 2026-10-11	b1_1220	not	"Eril — [FB]: tax n.m. ""Taxê me."""	"Dişil — ""Taxa me."""	atif	nota yazılan sözlük atfı kanıtla çelişiyordu; kaldırıldı
+2026-10-12	a2_1263	not	"""Derzî"" — [FB]: derzî n. Hem terzi hem iğne anlamı."	"""Terzî"" = terzi. ""Derzî"" ise iğne demektir."	anlam	madde başı Faz 2'de düzeltilmişti; not eski sözcüğü anlatmaya devam ediyordu
+2026-10-12	a2_643	not	"""Pênc"" + ""-iyem"" = beşinci"	"""Pênc"" + ""-em"" = beşinci. ""Pênciyem"" ellinci demektir (pêncî + -em)."	anlam	madde başı Faz 2'de düzeltilmişti; not eski sözcüğü anlatmaya devam ediyordu
+2026-10-12	b1_tm11	not	"Eril — [AS]: ""kabak = kûsî"" ✓."	"Eril — ""kundir"" = kabak. ""Kûsî"" ise kaplumbağa demektir."	anlam	madde başı Faz 2'de düzeltilmişti; not eski sözcüğü anlatmaya devam ediyordu
+2026-10-12	b1_tk19	not	"Dişil — ""tevlihev"" bileşik."	"Dişil — yarışma, müsabaka. ""Tevlihevî"" ise karışıklık demektir."	anlam	madde başı Faz 2'de düzeltilmişti; not eski sözcüğü anlatmaya devam ediyordu
+2026-10-12	b1_bd12	not	"Dişil — [AS]: ""ateş = tayêt"" ✓."	"Dişil — ""ta"" = ateş (hastalık belirtisi); ""taya bilind"" = yüksek ateş."	anlam	madde başı Faz 2'de düzeltilmişti; not eski sözcüğü anlatmaya devam ediyordu
