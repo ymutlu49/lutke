@@ -426,8 +426,8 @@
     // Strateji:
     //  1. ESKİ flutter_service_worker.js (default Flutter SW, agresif
     //     cache) kayıtlıysa kaldır — bir kerelik, LocalStorage flag.
-    //  2. YENİ service_worker_passthrough.js kaydet — minimal, cache
-    //     yapmaz, sadece PWA install prompt için zorunlu kayıt.
+    //  2. service_worker_passthrough.js artık KAYDEDİLMEZ (Ekim 2026) —
+    //     gerekçesi aşağıda, (2) numaralı notta.
     //  3. beforeinstallprompt event yakala — Android Chrome'da floating
     //     "📱 Sazkirin / Yükle" butonu göster.
     //  4. iOS Safari için "Paylaş → Ana Ekrana Ekle" hint banner (auto-
@@ -474,12 +474,18 @@
         });
       }
 
-      // ── (2) Yeni passthrough SW register ─────────────────────
-      window.addEventListener('load', function () {
-        navigator.serviceWorker
-          .register('/service_worker_passthrough.js')
-          .catch(function () { /* sessiz hata — kullanıcı deneyimini bozma */ });
-      });
+      // ── (2) Passthrough SW KAYDEDİLMEZ (Ekim 2026) ───────────
+      // Kayıt Mayıs 2026'dan beri zaten düşüyordu: uygulama /app/ altına
+      // taşınınca '/service_worker_passthrough.js' kökte tanıtım sitesinin
+      // HTML'ini döndürdü (konsolda "unsupported MIME type" hatası).
+      // Yolu /app/'e göre düzeltmek ÇÖZÜM DEĞİL (önizlemede denendi):
+      // Flutter yükleyicisi (flutter_bootstrap.js) sayfayı kapsayan bir SW
+      // kaydı bulunca kendi kendini silen flutter_service_worker.js'i aynı
+      // kapsama kaydeder ve sayfayı yeniden yükler; iki işçi birbirini ezer,
+      // ilkinden sonraki her ziyarette açılış bir kez baştan başlar.
+      // Chromium kurulum (beforeinstallprompt) için artık SW istemiyor;
+      // manifest + HTTPS yeterli. SW geri gelecekse önce web/ altına
+      // serviceWorkerSettings içermeyen bir flutter_bootstrap.js konmalı.
     }
 
     // ═══════════════════════════════════════════════════════════

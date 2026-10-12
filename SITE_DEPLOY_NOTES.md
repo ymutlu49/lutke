@@ -7,6 +7,7 @@
 ```
 lutke.app/                 → Kurmancî tanıtım sitesi (statik, website/ → dist/)
 lutke.app/app/             → Flutter web app (build/web → dist/app, base-href=/app/)
+lutke.app/app/<rota>       → aynı kabuk (functions/app/[[path]].ts) — derin bağlantı, sayfa yenileme
 lutke.app/api/*            → Pages Functions (functions/, DEĞİŞMEDİ) — auth backend
 lutke.app/auth/verify-email→ KÖKTE statik sayfa (token'ı /api/auth/verify-email'e POST eder)
 lutke.app/reset-password   → KÖKTE statik sayfa (token'ı /api/auth/reset-password'e POST eder)
@@ -57,6 +58,8 @@ powershell -ExecutionPolicy Bypass -File deploy_site.ps1 -RebuildApp     # app'i
 ## Doğrulama (her deploy sonrası — apex'ten, *.pages.dev bu makineden TLS hatası verir)
 - `curl -I https://lutke.app/` → 200 (tanıtım sitesi)
 - `curl -I https://lutke.app/app/` → 200 (Flutter app, base-href=/app/)
+- `curl -s https://lutke.app/app/home | wc -c` → `/app/` ile aynı boyut (uygulama kabuğu, ~32 KB). Kök sayfanın boyutu (~16 KB) geliyorsa `functions/app/[[path]].ts` devrede değildir.
+- `curl -I https://lutke.app/app/main.dart.js` → `application/javascript` (kabuk HTML'i değil)
 - `curl https://lutke.app/api/public-config` → JSON
 - `curl -I https://lutke.app/auth/verify-email` → 200 (statik sayfa)
 - Auth E2E: kayıt → D1'den verify token oku → POST /api/auth/verify-email → D1'de `email_verified=1` doğrula.
@@ -69,4 +72,14 @@ Cloudflare Pages → Pages → lutke → Deployments → önceki **app-kökte** 
 - Mevcut PWA kurulumları (start_url="/") artık tanıtım sayfasını gösterir; kullanıcı "Sepanê veke" / "Têkeve" ile /app/'e gider. Yeni app manifesti /app/ scope'ludur.
 - `info@lutke.app` (Têkilî sayfası) için Cloudflare Email Routing kurulması önerilir (yoksa mail bounce eder).
 - Naverok sayfası gerçek DB'den (a1/a2/b1/c1_kelime_db.dart) 30 örnek kelime çeker; istenirse Dart export ile tam içerik gezgini eklenebilir.
-- **Ortam tuzağı:** `*.lutke.pages.dev` bu makineden hem curl (schannel TLS) hem node fetch (ECONNRESET) ile erişilemez. Preview doğrulaması için farklı ağ/cihaz gerekir; ya da doğrudan prod + rollback güvencesi.
+- **Ortam tuzağı:** `*.lutke.pages.dev` bu makineden hem curl (schannel TLS) hem node fetch (ECONNRESET) ile erişilemez. Preview doğrulaması için farklı ağ/cihaz gerekir; ya da doğrudan prod + rollback güvencesi. (2026-10-12: curl ve tarayıcıyla erişilebildi; önce önizlemeyi dene.)
+
+## `/app/*` derin bağlantıları ve hizmet işçisi (2026-10-12)
+
+Dört dosyalık bir deney sitesi önizleme dalına dağıtılarak ölçüldü:
+
+- `/app/*  /app/index.html  200` kuralı **yok sayılır** (wrangler: "Infinite loop detected"; uyarı dağıtım çıktısında görünmez). Kural düşünce Pages bulunamayan her yol için KÖKTEKİ `index.html`'i 200 ile döndürür: `/app/home`, `/app/auth/login` tanıtım sayfasını açıyordu.
+- `/app/*  /app/  200` kuralı dosya aramasından **önce** uygulanır: `/app/main.dart.js` ve `/app/assets/NOTICES` de kabuk HTML'ine döner. Kullanılmaz.
+- Çözüm `functions/app/[[path]].ts`: `/app/` altında, `assets/ canvaskit/ icons/` dışında kalan ve son parçasında nokta olmayan GET/HEAD isteklerine kabuğu döndürür.
+- `service_worker_passthrough.js` **kaydedilmez**. Flutter 3.41 yükleyicisi sayfayı kapsayan bir SW kaydı bulunca kendi kendini silen `flutter_service_worker.js`'i aynı kapsama kaydedip sayfayı yeniden yükler; passthrough `/app/` kapsamında kaydedilince ikinci ziyaretten itibaren her açılış bir kez baştan başladı (önizlemede ağ kaydında görüldü). Chromium kurulum için SW istemiyor. SW geri gelecekse önce `web/flutter_bootstrap.js` (içinde `serviceWorkerSettings` olmayan) eklenmeli.
+- Yalnız `web/index.html` değiştiyse Flutter'ı yeniden derlemek gerekmez: `build/web/index.html`, kaynaktaki `$FLUTTER_BASE_HREF` yerine `/app/` konmuş hâlidir (bayt bayt doğrulandı).

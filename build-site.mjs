@@ -354,9 +354,12 @@ function buildRedirects() {
   for (const x of appRoutes) r += `/${x}  /app/${x}  301\n`;
   for (const x of exactExtra) r += `/${x}  /app/${x}  301\n`;
   for (const x of splatRoutes) r += `/${x}/*  /app/${x}/:splat  301\n`;
-  r += `\n# Flutter app entry + SPA deep-link fallback\n`;
+  // SPA deep-link fallback (/app/home -> app shell) burada DEĞİL,
+  // functions/app/[[path]].ts içinde: `/app/*  /app/index.html  200` kuralını
+  // wrangler "Infinite loop detected" diyerek atar; `/app/*  /app/  200` ise
+  // dosya aramasından önce uygulanıp /app/main.dart.js'i de kabuğa çevirir.
+  r += `\n# Flutter app entry (derin bağlantılar: functions/app/[[path]].ts)\n`;
   r += `/app  /app/  301\n`;
-  r += `/app/*  /app/index.html  200\n`;
   return r;
 }
 
