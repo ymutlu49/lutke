@@ -15,11 +15,18 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import 'package:lutke/core/constants/app_theme.dart';
+import 'package:lutke/features/en_learning/domain/en_a1_kelime_db.dart';
+import 'package:lutke/features/en_learning/domain/en_a2_kelime_db.dart';
+import 'package:lutke/features/en_learning/domain/en_b1_kelime_db.dart';
+import 'package:lutke/features/en_learning/domain/en_b2_kelime_db.dart';
+import 'package:lutke/features/en_learning/domain/en_c1_kelime_db.dart';
+import 'package:lutke/features/en_learning/domain/en_c2_kelime_db.dart';
 import 'package:lutke/features/lessons/domain/lesson_catalog.dart';
 import 'package:lutke/features/lessons/domain/olcme.dart';
 import 'package:lutke/features/onboarding/placement_questions.dart';
 import 'package:lutke/features/onboarding/placement_test_screen.dart';
 import 'package:lutke/shared/widgets/placement_invite_card.dart';
+import 'package:lutke/shared/providers/learning_track_provider.dart';
 
 void main() {
   group('aşamalı karar', () {
@@ -186,6 +193,61 @@ void main() {
     });
   });
 
+  group('İngilizce: düzeyin kelime listesinden üretilen sorular', () {
+    test('her düzeyde, her tohumda 3 kelime sorusu; cevap veritabanındaki Kurmancî karşılık', () {
+      final listeler = {
+        'A1': kEnA1Liste, 'A2': kEnA2Liste, 'B1': kEnB1Liste,
+        'B2': kEnB2Liste, 'C1': kEnC1Liste, 'C2': kEnC2Liste,
+      };
+      for (final e in listeler.entries) {
+        final kayit = {for (final w in e.value) w.id: w};
+        for (var tohum = 0; tohum < 40; tohum++) {
+          final bant = enYerlestirmeBandi(e.key, 3, Random(tohum));
+          expect(bant, hasLength(3), reason: '${e.key} tohum $tohum');
+          for (final s in bant) {
+            final w = kayit[s.cardId]!;
+            expect(s.kurmanjPrompt, w.en.trim());
+            expect(s.correctAnswer, w.ku.trim());
+            expect(s.options, hasLength(4));
+            expect(s.options.toSet(), hasLength(4));
+            expect(s.options[s.correctIndex!], s.correctAnswer);
+            expect(s.turkishPrompt, 'Ev peyv bi Kurmancî çi ye?');
+          }
+        }
+      }
+    });
+
+    test('Kurmancîde akrabası olan sözcük sorulmaz (internet, computer, telephone)', () {
+      final sorulan = <String>{};
+      for (final d in ['A1', 'A2', 'B1']) {
+        for (var tohum = 0; tohum < 300; tohum++) {
+          sorulan.addAll(enYerlestirmeBandi(d, 3, Random(tohum)).map((e) => e.kurmanjPrompt));
+        }
+      }
+      expect(sorulan, isNot(contains('internet')));
+      expect(sorulan, isNot(contains('computer')));
+      expect(sorulan, isNot(contains('telephone')));
+      expect(sorulan.length, greaterThan(500));
+    });
+
+    test('bant: 3 elle yazılmış dilbilgisi sorusu + 3 kelime sorusu; tohum değişince test değişir', () {
+      final elKimlik = kPlacementEn.map((q) => q.id).toSet();
+      for (var tohum = 0; tohum < 20; tohum++) {
+        final s = buildPlacementQuestions(english: true, rng: Random(tohum));
+        expect(s, hasLength(36));
+        for (final c in PlacementCefr.values) {
+          final bant = s.where((q) => q.cefr == c).toList();
+          expect(bant, hasLength(6));
+          expect(bant.where((q) => elKimlik.contains(q.id)), hasLength(kEnElSayisi), reason: '${c.label} tohum $tohum');
+          expect(bant.where((q) => q.id.startsWith('yerlestirme_en_')), hasLength(6 - kEnElSayisi));
+        }
+      }
+      final a = buildPlacementQuestions(english: true, rng: Random(1)).map((q) => q.id).toSet();
+      final b = buildPlacementQuestions(english: true, rng: Random(2)).map((q) => q.id).toSet();
+      expect(a, isNot(b));
+    });
+  });
+
   group('ekran', () {
     Future<void> ac(WidgetTester tester, Widget ekran, {Map<String, Object> prefs = const {}}) async {
       SharedPreferences.setMockInitialValues(prefs);
@@ -210,6 +272,32 @@ void main() {
       expect(find.text('0 ji 2 rast'), findsOneWidget);
       final prefs = await SharedPreferences.getInstance();
       expect(prefs.getString('placement_level_ku'), 'a1');
+      await tester.pump(const Duration(seconds: 2));
+    });
+
+    testWidgets('İngilizce yolda: kelime sorusu Kurmancî yönergeyle gelir; iki "Nizanim" A1', (tester) async {
+      SharedPreferences.setMockInitialValues({});
+      tester.view.physicalSize = const Size(520, 3000);
+      tester.view.devicePixelRatio = 1.0;
+      addTearDown(tester.view.reset);
+      final sorular = buildPlacementQuestions(english: true, rng: Random(4));
+      await tester.pumpWidget(ProviderScope(
+        overrides: [currentTrackProvider.overrideWithValue(LearningTrack.englishAdult)],
+        child: MaterialApp(
+          theme: AppTheme.light,
+          home: PlacementTestScreen(retake: true, rng: Random(4)),
+        ),
+      ));
+      await tester.pump(const Duration(milliseconds: 600));
+      expect(find.text('Asta xwe bibîne — Îngilîzî'), findsOneWidget);
+      expect(find.text(sorular.first.prompt), findsWidgets);
+      await tester.tap(find.text('Nizanim · Bilmiyorum'));
+      await tester.pump(const Duration(milliseconds: 400));
+      await tester.tap(find.text('Nizanim · Bilmiyorum'));
+      await tester.pump(const Duration(milliseconds: 600));
+      expect(find.text('Asta te: A1'), findsOneWidget);
+      final prefs = await SharedPreferences.getInstance();
+      expect(prefs.getString('placement_level_en'), 'a1');
       await tester.pump(const Duration(seconds: 2));
     });
 

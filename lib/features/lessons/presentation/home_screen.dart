@@ -27,6 +27,7 @@ import '../../../shared/providers/language_mode_provider.dart';
 import '../../../shared/providers/lesson_progress_provider.dart';
 import '../../../shared/providers/progression_provider.dart';
 import '../domain/lesson_catalog.dart';
+import '../domain/en_ders.dart';
 import '../../gamification/gamification_provider.dart';
 import '../../gamification/gamification_widgets.dart';
 import '../../cultural_content/widgets/daily_proverb_card.dart';
@@ -45,15 +46,21 @@ import '../../../shared/widgets/placement_invite_card.dart';
 /// dersin geçildiğini gösterir.
 class _WaneEntryCard extends ConsumerWidget {
   final String level;
-  const _WaneEntryCard({required this.level});
+
+  /// İngilizce yol: kart dilbilgisi alıştırmalarına ve düzey sınavına götürür.
+  final bool english;
+  const _WaneEntryCard({required this.level, this.english = false});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final dersler = lessonsForLevel(level);
-    if (dersler.isEmpty) return const SizedBox.shrink();
+    // Kurmancî: elle yazılmış dersler; İngilizce: alıştırmaların kimlikleri.
+    final kimlikler = english
+        ? enBicimDersKimlikleri(level)
+        : [for (final d in lessonsForLevel(level)) d.id];
+    if (kimlikler.isEmpty) return const SizedBox.shrink();
     final puanlar = ref.watch(lessonProgressProvider);
     final showTr = ref.watch(showTurkishProvider);
-    final gecilen = dersler.where((d) => lessonPassed(puanlar, d.id)).length;
+    final gecilen = kimlikler.where((id) => lessonPassed(puanlar, id)).length;
 
     return Padding(
       padding: const EdgeInsets.only(bottom: AppSpacing.md),
@@ -94,16 +101,19 @@ class _WaneEntryCard extends ConsumerWidget {
                       ),
                       const SizedBox(height: 2),
                       Text(
-                        showTr
-                            ? 'Rêziman û mînak — dilbilgisi ve örneklerle dersler'
-                            : 'Rêziman û mînak',
+                        // İngilizce yolda Türkçe tutulmaz; var olan iki ad.
+                        english
+                            ? 'Rêziman · Ezmûna astê'
+                            : showTr
+                                ? 'Rêziman û mînak — dilbilgisi ve örneklerle dersler'
+                                : 'Rêziman û mînak',
                         style: AppTypography.caption,
                       ),
                     ],
                   ),
                 ),
                 Text(
-                  '$gecilen / ${dersler.length}',
+                  '$gecilen / ${kimlikler.length}',
                   style: AppTypography.label.copyWith(
                       color: AppColors.primary, fontWeight: FontWeight.w700),
                 ),
@@ -333,7 +343,9 @@ class HomeScreen extends ConsumerWidget {
                   // ── Wane: düzeyin elle yazılmış dersleri ─────
                   // 105 ders yazılmıştı ama yola bağlı değildi. Yalnız
                   // Kurmancî izinde (EN izinin kendi dersleri yok).
-                  if (!isEn) _WaneEntryCard(level: profile.currentLevel),
+                  // İngilizce izde (Ekim 2026): dilbilgisi alıştırmaları ve
+                  // düzey sınavı aynı karttan açılır.
+                  _WaneEntryCard(level: profile.currentLevel, english: isEn),
 
                   // ── Beceriler: yazma, konuşma, hikâye ────────
                   // Bu üç ekran yazılmıştı ama uygulamada gidiş yoktu.

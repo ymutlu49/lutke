@@ -10,7 +10,9 @@ import '../../../core/utils/nav_guard.dart';
 import '../../../shared/providers/language_mode_provider.dart';
 import '../../../shared/providers/lesson_progress_provider.dart';
 import '../domain/lesson_catalog.dart';
+import '../../../shared/providers/learning_track_provider.dart';
 import '../domain/bicim_alistirma.dart';
+import '../domain/en_ders.dart';
 import '../domain/lesson_entities.dart';
 import '../domain/olcme.dart';
 
@@ -30,15 +32,22 @@ class WaneListScreen extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final showTr = ref.watch(showTurkishProvider);
     final puanlar = ref.watch(lessonProgressProvider);
-    final dersler = lessonsForLevel(level);
-    final gecilen = dersler.where((d) => lessonPassed(puanlar, d.id)).length;
+    // İngilizce yol (Ekim 2026): elle yazılmış dersi yok; listede dilbilgisi
+    // alıştırmaları ve İngilizce düzey sınavı durur (en_ders.dart).
+    final english = ref.watch(currentTrackProvider).isEnglish;
+    final dersler = english ? const <LessonModel>[] : lessonsForLevel(level);
     // Veriden üretilen biçim alıştırmaları (Faz 4.6): listenin başında.
     final rahenan = [
-      for (final id in bicimDersKimlikleri(level))
-        if (bicimDersi(id) case final d?) d,
+      for (final id in english ? enBicimDersKimlikleri(level) : bicimDersKimlikleri(level))
+        if ((english ? enBicimDersi(id) : bicimDersi(id)) case final d?) d,
     ];
     // Düzey sınavı (Faz 6.2): listenin sonunda. Sertifika buna bağlı.
-    final ezmun = ezmunDersi(ezmunKimligi(level));
+    final ezmun = english
+        ? ezmunEnDersi(ezmunEnKimligi(level))
+        : ezmunDersi(ezmunKimligi(level));
+    // Sayaç: Kurmancîde elle yazılmış dersler, İngilizcede alıştırmalar.
+    final sayilan = english ? rahenan : dersler;
+    final gecilen = sayilan.where((d) => lessonPassed(puanlar, d.id)).length;
 
     return Scaffold(
       backgroundColor: AppColors.backgroundPrimary,
@@ -61,7 +70,7 @@ class WaneListScreen extends ConsumerWidget {
             child: Padding(
               padding: const EdgeInsets.only(right: AppSpacing.md),
               child: Text(
-                '$gecilen / ${dersler.length}',
+                '$gecilen / ${sayilan.length}',
                 style: AppTypography.label.copyWith(
                     color: AppColors.primary, fontWeight: FontWeight.w700),
               ),
@@ -69,7 +78,7 @@ class WaneListScreen extends ConsumerWidget {
           ),
         ],
       ),
-      body: dersler.isEmpty
+      body: dersler.isEmpty && rahenan.isEmpty && ezmun == null
           ? Center(
               child: Text('Wane tune ye.',
                   style: AppTypography.bodyLarge

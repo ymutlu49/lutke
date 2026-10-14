@@ -19,6 +19,13 @@ library;
 
 import 'dart:math';
 
+import '../../en_learning/domain/en_a1_kelime_db.dart';
+import '../../en_learning/domain/en_a2_kelime_db.dart';
+import '../../en_learning/domain/en_b1_kelime_db.dart';
+import '../../en_learning/domain/en_b2_kelime_db.dart';
+import '../../en_learning/domain/en_c1_kelime_db.dart';
+import '../../en_learning/domain/en_c2_kelime_db.dart';
+import '../../en_learning/domain/en_word.dart';
 import 'bicim_alistirma.dart';
 import 'lesson_catalog.dart';
 import 'lesson_entities.dart';
@@ -234,6 +241,96 @@ List<ExerciseModel> yerlestirmeBandi(String level, int adet, Random rng) {
     final ku = (w.ku as String).trim().toLowerCase();
     if (ku.length >= 3 && bicimMetni.contains(ku.substring(0, 3))) continue;
     final s = _yerlestirmePeyvSorusu(w, kelimeler, rng);
+    if (s != null) sorular.add(s);
+  }
+  return sorular;
+}
+
+// ── İngilizce yerleştirme (Ekim 2026) ────────────────────────────────────────
+//
+// Kurmancî testteki yaklaşımın İngilizce yolundaki karşılığı: bandın bir kısmı
+// o düzeyin İngilizce kelime listesinden üretilir ve her açılışta yeniden
+// örneklenir. Soru: İngilizce sözcük; seçenekler: veritabanındaki Kurmancî
+// karşılıklar (yeni Kurmancî metin yazılmaz). Çeldirici kuralları Kurmancî
+// kelime sorusuyla aynıdır: aynı düzey, aynı sözcük türü (pos), başka konu,
+// ortak sözcük yok; Kurmancîdeki akrabası olan sözcük (telephone/telefon)
+// sorulmaz.
+
+/// İngilizce yolunun (yetişkin) düzey listeleri.
+const Map<String, List<EnWord>> kEnDuzeyListeleri = {
+  'A1': kEnA1Liste,
+  'A2': kEnA2Liste,
+  'B1': kEnB1Liste,
+  'B2': kEnB2Liste,
+  'C1': kEnC1Liste,
+  'C2': kEnC2Liste,
+};
+
+/// Akrabalık karşılaştırması için İngilizce yazımı Kurmancî seslere yaklaştırır
+/// ("computer" → "komputer", "photo" → "foto").
+String _enOn(String en) => en.toLowerCase().replaceAll('ph', 'f').replaceAll('c', 'k');
+
+/// İngilizce kelime sorusu (İngilizce sözcük → Kurmancî karşılık). Yerleştirme
+/// testi ve İngilizce düzey sınavı kullanır.
+ExerciseModel? enPeyvSorusu(EnWord w, List<EnWord> hepsi, Random rng, {String onek = 'yerlestirme_en_'}) {
+  final en = w.en.trim();
+  final dogru = w.ku.trim();
+  if (en.isEmpty || en.contains(' ') || dogru.isEmpty) return null;
+  if (!_kisaKarsilik(dogru) || _hisim(_enOn(en), dogru)) return null;
+  final dogruSozcukler = <String>{
+    for (final p in _karsiliklar(dogru))
+      if (_yalin(p).isNotEmpty) _yalin(p),
+  };
+
+  bool uygun(EnWord x) {
+    final t = x.ku.trim();
+    if (x.kat == w.kat || x.pos != w.pos || !_kisaKarsilik(t)) return false;
+    if (_hisim(_enOn(en), t)) return false;
+    for (final p in _karsiliklar(t)) {
+      final y = _yalin(p);
+      if (y.isEmpty) continue;
+      for (final d in dogruSozcukler) {
+        if (y == d || y.contains(d) || d.contains(y)) return false;
+      }
+    }
+    return true;
+  }
+
+  final adaylar = [for (final x in hepsi) if (uygun(x)) x]..shuffle(rng);
+  final celdirici = <String>[];
+  final gorulen = <String>{};
+  for (final x in adaylar) {
+    final t = x.ku.trim();
+    final anahtar = _yalin(t);
+    if (gorulen.any((g) => g == anahtar || g.contains(anahtar) || anahtar.contains(g))) continue;
+    gorulen.add(anahtar);
+    celdirici.add(t);
+    if (celdirici.length == 3) break;
+  }
+  if (celdirici.length < 3) return null;
+  final secenekler = <String>[dogru, ...celdirici]..shuffle(rng);
+  return ExerciseModel(
+    id: '$onek${w.id}',
+    type: ExerciseType.multipleChoice,
+    kurmanjPrompt: en,
+    // İngilizce kelime alıştırmalarında zaten kullanılan yönerge.
+    turkishPrompt: 'Ev peyv bi Kurmancî çi ye?',
+    options: secenekler,
+    correctAnswer: dogru,
+    correctIndex: secenekler.indexOf(dogru),
+    cardId: w.id,
+  );
+}
+
+/// İngilizce yerleştirme bandı için, düzeyin İngilizce kelime listesinden
+/// [adet] kelime sorusu. Her açılışta yeniden örneklenir.
+List<ExerciseModel> enYerlestirmeBandi(String level, int adet, Random rng) {
+  final liste = kEnDuzeyListeleri[level];
+  if (adet <= 0 || liste == null) return const [];
+  final sorular = <ExerciseModel>[];
+  for (final w in [...liste]..shuffle(rng)) {
+    if (sorular.length >= adet) break;
+    final s = enPeyvSorusu(w, liste, rng);
     if (s != null) sorular.add(s);
   }
   return sorular;

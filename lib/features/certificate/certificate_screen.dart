@@ -9,6 +9,7 @@ import '../../core/constants/app_typography.dart';
 import '../../core/router/app_router.dart';
 import '../../shared/providers/learning_track_provider.dart';
 import '../../shared/providers/lesson_progress_provider.dart';
+import '../lessons/domain/en_ders.dart';
 import '../lessons/domain/olcme.dart';
 import 'certificate_painter.dart';
 import 'certificate_service.dart';
@@ -125,10 +126,12 @@ class _CertificateScreenState extends ConsumerState<CertificateScreen> {
 
   @override
   Widget build(BuildContext context) {
-    // Faz 6.3: sertifika düzey sınavını geçene verilir. İngilizce izinde
-    // sınav olmadığı için eski davranış sürer.
-    final sinavKimligi = ezmunKimligi(widget.level);
-    if (!ref.watch(currentTrackProvider).isEnglish && !lessonPassed(ref.watch(lessonProgressProvider), sinavKimligi)) {
+    // Faz 6.3: sertifika düzey sınavını geçene verilir. Ekim 2026'dan beri
+    // İngilizce izde de (en_ders.dart, `ezmun_en_<düzey>`).
+    final sinavKimligi = ref.watch(currentTrackProvider).isEnglish
+        ? ezmunEnKimligi(widget.level)
+        : ezmunKimligi(widget.level);
+    if (!lessonPassed(ref.watch(lessonProgressProvider), sinavKimligi)) {
       return Scaffold(
         backgroundColor: AppColors.backgroundPrimary,
         appBar: AppBar(

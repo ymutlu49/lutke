@@ -16,7 +16,11 @@ import '../lessons/domain/olcme.dart';
 //               bir biçim sorusu (izafe / ergatif). Her açılışta yeniden
 //               örneklenir. Yeni Kurmancî cümle yazılmaz; her sorunun
 //               doğru cevabı veritabanındaki kayıttır.
-//   İngilizce : 36 soruluk sabit havuz (bant başına 6).
+//   İngilizce : bant başına 6 soruluk elle yazılmış havuzdan her açılışta
+//               rastgele [kEnElSayisi] dilbilgisi sorusu + kalanı düzeyin
+//               İngilizce kelime listesinden üretilen kelime soruları
+//               (seçenekler veritabanındaki Kurmancî karşılıklar). Kurmancî
+//               testle aynı yaklaşım (Ekim 2026).
 // ════════════════════════════════════════════════════════════════
 
 /// "a1" | "a2" | "b1" | "b2" | "c1" | "c2"
@@ -554,20 +558,41 @@ const List<PlacementQuestion> kPlacementEn = [
   ),
 ];
 
+/// İngilizce testte bant başına elle yazılmış (dilbilgisi) soru sayısı;
+/// bandın kalanı kelime sorusudur.
+const int kEnElSayisi = 3;
+
 /// Testin soruları, bant sırasıyla (A1 → C2), bant başına [kBantSoruSayisi].
 /// Bant içi sıra karıştırılır. [rng] verilirse aynı tohum aynı testi üretir.
+///
+/// Kurmancî: elle yazılmış sorular (bant başına 1–2) + düzeyin içeriğinden
+/// üretilenler. İngilizce: elle yazılmış 6'lık havuzdan rastgele
+/// [kEnElSayisi] + düzeyin İngilizce kelime listesinden üretilenler; üretim
+/// yetmezse havuzun kalanıyla tamamlanır (bant hep 6 soru).
 List<PlacementQuestion> buildPlacementQuestions({
   required bool english,
   Random? rng,
 }) {
   final r = rng ?? Random();
-  final kaynak = english ? kPlacementEn : kPlacementKuEl;
   final sorular = <PlacementQuestion>[];
   for (final c in PlacementCefr.values) {
-    final bant = [for (final q in kaynak) if (q.cefr == c) q];
-    if (!english && bant.length < kBantSoruSayisi) {
-      for (final e in yerlestirmeBandi(c.label, kBantSoruSayisi - bant.length, r)) {
+    final List<PlacementQuestion> bant;
+    if (english) {
+      final el = [for (final q in kPlacementEn) if (q.cefr == c) q]..shuffle(r);
+      bant = el.take(kEnElSayisi).toList();
+      for (final e in enYerlestirmeBandi(c.label, kBantSoruSayisi - bant.length, r)) {
         bant.add(PlacementQuestion.fromExercise(e, c));
+      }
+      for (final q in el.skip(kEnElSayisi)) {
+        if (bant.length >= kBantSoruSayisi) break;
+        bant.add(q);
+      }
+    } else {
+      bant = [for (final q in kPlacementKuEl) if (q.cefr == c) q];
+      if (bant.length < kBantSoruSayisi) {
+        for (final e in yerlestirmeBandi(c.label, kBantSoruSayisi - bant.length, r)) {
+          bant.add(PlacementQuestion.fromExercise(e, c));
+        }
       }
     }
     bant.shuffle(r);

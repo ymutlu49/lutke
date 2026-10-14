@@ -24,6 +24,7 @@ import 'c1_lesson_definitions.dart';
 import 'c2_kelime_db.dart';
 import 'bicim_alistirma.dart';
 import 'c2_lesson_definitions.dart';
+import 'en_ders.dart';
 import 'lesson_entities.dart';
 import 'olcme.dart';
 import 'xwendin_catalog.dart';
@@ -55,6 +56,10 @@ List<dynamic> _wordsForLevel(String level) => switch (level.toUpperCase()) {
 List<dynamic> wordsForLevel(String level) => _wordsForLevel(level);
 
 LessonModel? lessonById(String id) {
+  // İngilizce yolun alıştırmaları ve düzey sınavı (en_ders.dart). Kurmancî
+  // öneklerden önce bakılır: 'bicim_en_…' de 'bicim_' ile başlar.
+  if (id.startsWith(kBicimEnOneki)) return enBicimDersi(id);
+  if (id.startsWith(kEzmunEnOneki)) return ezmunEnDersi(id);
   // Veriden üretilen biçim alıştırmaları: her çağrıda yeniden karılır.
   if (id.startsWith(kBicimOneki)) return bicimDersi(id);
   // Okuma metinlerinin anlama soruları.
