@@ -1,4 +1,4 @@
-import 'package:flutter/foundation.dart' show kIsWeb;
+import 'package:flutter/foundation.dart' show kIsWeb, visibleForTesting;
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
@@ -203,73 +203,130 @@ String _resolveInitialLocation() {
   return AppRoutes.splash;
 }
 
+/// Yönlendirme kuralları — saf işlev (GoRouter'dan bağımsız sınanır).
+///
+/// [loc] eşleşen konum (`state.matchedLocation`), [query] adresin sorgu
+/// bölümü. Dönen değer yönlendirilecek konum; `null` → yerinde kal.
+@visibleForTesting
+String? appRedirect({
+  required String loc,
+  required String query,
+  required bool isLoggedIn,
+  required AsyncValue<CloudflareUser?> cfUserAsync,
+  bool isLocalOwner = false,
+}) {
+  final cfUser = cfUserAsync.valueOrNull;
+  final isOnAuth = loc.startsWith('/auth');
+  final isOnSplash = loc == AppRoutes.splash;
+  final isOnWelcome = loc == AppRoutes.welcome;
+
+  // Eski mode/module ekranları → unified track seçim ekranına
+  if (loc == AppRoutes.modeSelect || loc == AppRoutes.moduleSelect) {
+    return AppRoutes.trackSelect;
+  }
+
+  // BACKWARDS COMPAT (Mayıs 2026): Önceki signup mailleri /verify-email?token=...
+  // URL'siyle gitmişti — Flutter'da bu route yoktu. Eski kullanıcıların hâlâ
+  // doğrulayabilmesi için yeni route'a redirect — query parametreleri
+  // (token=...) korunur.
+  if (loc == '/verify-email') {
+    final qp = query.isNotEmpty ? '?$query' : '';
+    return '${AppRoutes.emailVerification}$qp';
+  }
+
+  // /en/home ve /en/child/home route'ları KALDI (redirect yok):
+  // EnHomeScreen ve EnChildHomeScreen wrapper'ları initState'te
+  // activeTrackProvider'ı İngilizce'ye senkronlar. Redirect yapılırsa
+  // module set edilmez ve deep-link Kurmancî render eder (bug).
+
+  if (isOnSplash || isOnWelcome) return null;
+
+  // Yönetici paneli (ve /admin altındaki her şey) yalnız sahibe (Ekim 2026).
+  // Hesap bilgisi yüklenirken karar verilmez; sahip doğrudan adresle
+  // geldiğinde yanlışlıkla ana ekrana atılmasın.
+  if (loc == AppRoutes.admin || loc.startsWith('${AppRoutes.admin}/')) {
+    if (cfUserAsync.isLoading) return null;
+    if (!(cfUser?.isOwner ?? false) && !isLocalOwner) return AppRoutes.home;
+  }
+  // Email verification + reset-password ekranları her zaman ulaşılabilir
+  // olmalı — auth redirect'inden hariç tut. (Mayıs 2026 — Cloudflare auth)
+  final isOnVerifyEmail = loc.startsWith(AppRoutes.emailVerification);
+  final isOnResetPassword = loc.startsWith(AppRoutes.resetPassword);
+  if (isOnResetPassword) return null;
+
+  // ── EMAIL VERIFICATION GATE (router-level) ─────────────
+  // Cloudflare auth ile login olmuş ama email_verified=false olan
+  // user'lar için tüm app-içi route'lar verify-email'e yönlendirilir.
+  // Owner muafiyeti login.ts ile aynı; sen admin olarak kilitlenmezsin.
+  // (Mayıs 2026 — kayıt sonrası zorunlu doğrulama)
+  if (cfUser != null && !cfUser.emailVerified && !cfUser.isOwner) {
+    if (!isOnVerifyEmail && !isOnResetPassword && !isOnAuth) {
+      return AppRoutes.emailVerification;
+    }
+  }
+
+  // Logged-in user on /auth → akış: intro → track-select → home.
+  // Eski yönlendirme track-select idi; şimdi intro pêşkêşkirina LÛTKE'yê
+  // pêşî tê. (Nisan 2026)
+  //
+  // Hesap bilgisi yüklenirken karar verilmez: kayıttan hemen sonra yerel
+  // oturum hazır, Cloudflare kullanıcısı ise henüz yüklenmemiş olur;
+  // o an karar verilirse doğrulanmamış kullanıcı önce tanıtıma düşer,
+  // sonra doğrulama ekranına sekerdi. Yükleme bitince kural yeniden
+  // çalışır (refreshListenable).
+  if (isLoggedIn && isOnAuth && !isOnVerifyEmail) {
+    if (cfUserAsync.isLoading) return null;
+    if (cfUser != null && !cfUser.emailVerified && !cfUser.isOwner) {
+      return AppRoutes.emailVerification;
+    }
+    return AppRoutes.introFlow;
+  }
+  return null;
+}
+
+/// Oturum durumu değişince yönlendirme kurallarını yeniden çalıştırır.
+class _AuthRefresh extends ChangeNotifier {
+  void ping() => notifyListeners();
+}
+
 @riverpod
 GoRouter appRouter(AppRouterRef ref) {
+  // TEK ROUTER (Ekim 2026). Eskiden oturum sağlayıcıları burada `ref.watch`
+  // ile izleniyordu: her oturum değişikliğinde (kayıt, giriş, doğrulama
+  // denetimi, düzey kaydı) bu sağlayıcı yeniden çalışıyor, YENİ bir GoRouter
+  // kuruluyor ve gezinme baştan başlıyordu. Sonuç: "Tomar bibe"den sonra
+  // doğrulama ekranı yerine açılış ekranı; girişten sonra yine açılış ekranı;
+  // ekranların kendi `context.go` çağrıları (ekran o anda söküldüğü için)
+  // boşa düşüyordu. Kod bunu yer yer bekleme ve yeniden deneme ile
+  // dolanıyordu (bkz. register_screen "race fix", placement "router rebuild
+  // fix").
+  //
+  // Artık router bir kez kurulur. Oturum sağlayıcıları `ref.listen` ile
+  // dinlenir ve yalnız `refreshListenable` tetiklenir: GoRouter bulunduğu
+  // konumda `redirect` kurallarını yeniden değerlendirir, ekranlar yerinde
+  // kalır. Kuralların kendisi değişmedi.
+  final refresh = _AuthRefresh();
+  ref.onDispose(refresh.dispose);
   // Firebase + yerel auth birlikte. Yalnızca Firebase'e bakan eski redirect
   // yerel-authed kullanıcılarda çalışmazdı (authStateProvider null döndüğü
   // için splash'ta "oturum yok" sanılırdı).
-  final isLoggedInAny = ref.watch(isAnyLoggedInProvider);
+  ref.listen(isAnyLoggedInProvider, (_, __) => refresh.ping());
   // Cloudflare user (email_verified + isOwner) — verification gate için.
-  final cfUserAsync = ref.watch(cloudflareCurrentUserProvider);
-  final cfUser = cfUserAsync.valueOrNull;
+  ref.listen(cloudflareCurrentUserProvider, (_, __) => refresh.ping());
 
-  return GoRouter(
+  final router = GoRouter(
     navigatorKey: _rootKey,
     initialLocation: _resolveInitialLocation(),
     debugLogDiagnostics: false,
+    refreshListenable: refresh,
 
-    redirect: (context, state) {
-      final isLoggedIn = isLoggedInAny;
-      final loc = state.matchedLocation;
-      final isOnAuth = loc.startsWith('/auth');
-      final isOnSplash = loc == AppRoutes.splash;
-      final isOnWelcome = loc == AppRoutes.welcome;
-
-      // Eski mode/module ekranları → unified track seçim ekranına
-      if (loc == AppRoutes.modeSelect || loc == AppRoutes.moduleSelect) {
-        return AppRoutes.trackSelect;
-      }
-
-      // BACKWARDS COMPAT (Mayıs 2026): Önceki signup mailleri /verify-email?token=...
-      // URL'siyle gitmişti — Flutter'da bu route yoktu. Eski kullanıcıların hâlâ
-      // doğrulayabilmesi için yeni route'a redirect — query parametreleri
-      // (token=...) korunur.
-      if (loc == '/verify-email') {
-        final qp = state.uri.query.isNotEmpty ? '?${state.uri.query}' : '';
-        return '${AppRoutes.emailVerification}$qp';
-      }
-
-      // /en/home ve /en/child/home route'ları KALDI (redirect yok):
-      // EnHomeScreen ve EnChildHomeScreen wrapper'ları initState'te
-      // activeTrackProvider'ı İngilizce'ye senkronlar. Redirect yapılırsa
-      // module set edilmez ve deep-link Kurmancî render eder (bug).
-
-      if (isOnSplash || isOnWelcome) return null;
-      // Email verification + reset-password ekranları her zaman ulaşılabilir
-      // olmalı — auth redirect'inden hariç tut. (Mayıs 2026 — Cloudflare auth)
-      final isOnVerifyEmail = loc.startsWith(AppRoutes.emailVerification);
-      final isOnResetPassword = loc.startsWith(AppRoutes.resetPassword);
-      if (isOnResetPassword) return null;
-
-      // ── EMAIL VERIFICATION GATE (router-level) ─────────────
-      // Cloudflare auth ile login olmuş ama email_verified=false olan
-      // user'lar için tüm app-içi route'lar verify-email'e yönlendirilir.
-      // Owner muafiyeti login.ts ile aynı; sen admin olarak kilitlenmezsin.
-      // (Mayıs 2026 — kayıt sonrası zorunlu doğrulama)
-      if (cfUser != null && !cfUser.emailVerified && !cfUser.isOwner) {
-        if (!isOnVerifyEmail && !isOnResetPassword && !isOnAuth) {
-          return AppRoutes.emailVerification;
-        }
-      }
-
-      // Logged-in user on /auth → akış: intro → placement → track-select.
-      // Eski yönlendirme track-select idi; şimdi intro pêşkêşkirina LÛTKE'yê
-      // pêşî tê. (Nisan 2026)
-      if (isLoggedIn && isOnAuth && !isOnVerifyEmail) {
-        return AppRoutes.introFlow;
-      }
-      return null;
-    },
+    redirect: (context, state) => appRedirect(
+      loc: state.matchedLocation,
+      query: state.uri.query,
+      isLoggedIn: ref.read(isAnyLoggedInProvider),
+      cfUserAsync: ref.read(cloudflareCurrentUserProvider),
+      isLocalOwner: ref.read(isOwnerProvider),
+    ),
 
     routes: [
       // ── Splash & Onboarding (shell dışı) ───────────────────
@@ -373,7 +430,10 @@ GoRouter appRouter(AppRouterRef ref) {
           // /auth/verify-email?token=… → otomatik doğrula.
           // Param yoksa → "inboxa kontrol bike" sayfası.
           final token = state.uri.queryParameters['token'];
-          return EmailVerificationScreen(token: token);
+          return EmailVerificationScreen(
+            token: token,
+            sendFailed: state.uri.queryParameters['sent'] == '0',
+          );
         },
       ),
       GoRoute(
@@ -836,6 +896,8 @@ GoRouter appRouter(AppRouterRef ref) {
 
     errorBuilder: (_, state) => ErrorScreen(error: state.error),
   );
+  ref.onDispose(router.dispose);
+  return router;
 }
 
 // ════════════════════════════════════════════════════════════════

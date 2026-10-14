@@ -22,6 +22,7 @@ import {
   jsonResponse,
   readJson,
   type Env,
+  passwordVersion,
 } from "../../lib/http";
 import {
   createGoogleUser,
@@ -198,6 +199,7 @@ export const onRequestPost: PagesFunction<Env> = async ({ request, env }) => {
       email: user.email,
       isOwner: user.is_owner === 1,
       emailVerified: true,
+      pv: await passwordVersion(user.password_salt),
     },
     env.JWT_SECRET,
   );

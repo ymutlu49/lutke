@@ -314,6 +314,12 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
         try {
           isAnonymous = (user?.isAnonymous as bool?) ?? true;
         } catch (_) {}
+        // Firebase kullanılmadığı için `user` hep null'dır ve kayıtlı
+        // kullanıcı da "anonim" görünüp "Hesabê xwe biparêze" (kayıt ol)
+        // düğmesini görüyordu. Yerel/Cloudflare oturumu varsa anonim değildir.
+        try {
+          if (ref.watch(isAnyLoggedInProvider)) isAnonymous = false;
+        } catch (_) {}
         return [
           const _ActiveTrackCard(),
           gap,
@@ -1958,8 +1964,10 @@ class _QuickActionsSection extends ConsumerWidget {
             onTap: () => context.push(AppRoutes.progressMap),
           ),
         ),
+        // Admin panel — YALNIZ SAHİBE (Ekim 2026; eskiden her kullanıcıya
+        // görünüyordu). Veri sunucuda zaten sahibe kapalı; bağlantı da gizli.
+        if (ref.watch(isOwnerProvider)) ...[
         const SizedBox(height: AppSpacing.sm),
-        // Admin panel — ince ve gizli
         Center(
           child: TextButton(
             onPressed: () => context.push(AppRoutes.admin),
@@ -1970,6 +1978,7 @@ class _QuickActionsSection extends ConsumerWidget {
             child: const Text('Panêla Rêvebiriyê'),
           ),
         ),
+        ],
       ],
     )
         .animate()
@@ -2613,10 +2622,13 @@ class _AccountActions extends StatelessWidget {
     //   - Riverpod in-memory state'i tamamen sıfırlar
     //   - Cloudflare/local auth provider'ları yeniden hidrate olur
     //   - service worker (varsa) yeni bundle'ı çeker
-    // ?reset=1 query parameter'ı index.html'deki cleanup snippet'i tetikler:
-    // localStorage temizler, SW unregister eder, /auth/login'e yönlendirir.
+    //
+    // DÜZELTME (Ekim 2026): hedef eskiden '/?reset=1' idi. Uygulama /app/
+    // altına taşındığından beri "/" tanıtım sitesidir; çıkış yapan kullanıcı
+    // giriş ekranı yerine tanıtım sayfasına düşüyordu. Artık uygulamanın
+    // kendi giriş ekranına gidilir (oturum verisi yukarıda zaten silindi).
     if (kIsWeb) {
-      web_navigator.replaceLocation('/?reset=1');
+      web_navigator.replaceLocation(web_navigator.appUrl('auth/login'));
       return;
     }
     if (context.mounted) context.go(AppRoutes.splash);

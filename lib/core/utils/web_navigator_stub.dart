@@ -5,5 +5,8 @@ void replaceLocation(String url) {
   // tutar; conditional import ile bu fonksiyon cagrilmaz.
 }
 
+/// Web dışında kullanılmaz (çıkışta router ile gezinilir).
+String appUrl(String relative) => '/$relative';
+
 /// Web dışında yeni sekme yok; çağıran paylaşım sayfasına düşer.
 bool openInNewTab(String url) => false;

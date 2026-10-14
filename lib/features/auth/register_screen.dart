@@ -52,6 +52,10 @@ class _RegisterScreenState extends ConsumerState<RegisterScreen> {
   bool _confirmVisible = false;
   bool _googleReady = false;
 
+  /// İlk başarısız gönderimden sonra alanlar yazıldıkça yeniden denetlenir;
+  /// düzeltilen alanın kırmızı uyarısı düğmeye yeniden basmadan kalkar.
+  bool _autoValidate = false;
+
   @override
   void initState() {
     super.initState();
@@ -114,7 +118,10 @@ class _RegisterScreenState extends ConsumerState<RegisterScreen> {
 
   Future<void> _register() async {
     if (_loading) return; // Çift tıklama / Enter spam koruması
-    if (!_formKey.currentState!.validate()) return;
+    if (!_formKey.currentState!.validate()) {
+      setState(() => _autoValidate = true);
+      return;
+    }
     setState(() { _loading = true; _errorMsg = null; _errorCode = null; });
 
     final email = _emailCtrl.text.trim();
@@ -165,8 +172,12 @@ class _RegisterScreenState extends ConsumerState<RegisterScreen> {
       final isOwner = result.user?.isOwner ?? false;
       if (isOwner) {
         context.go(AppRoutes.introFlow);
-      } else {
+      } else if (result.emailSent) {
         context.go(AppRoutes.emailVerification);
+      } else {
+        // Hesap açıldı ama doğrulama e-postası gönderilemedi: ekran "gönderdik"
+        // demek yerine bunu söyler ve "yeniden gönder"i öne çıkarır.
+        context.go('${AppRoutes.emailVerification}?sent=0');
       }
     } catch (e) {
       if (!mounted) return;
@@ -181,7 +192,10 @@ class _RegisterScreenState extends ConsumerState<RegisterScreen> {
 
   Future<void> _login() async {
     if (_loading) return; // Çift tıklama / Enter spam koruması
-    if (!_formKey.currentState!.validate()) return;
+    if (!_formKey.currentState!.validate()) {
+      setState(() => _autoValidate = true);
+      return;
+    }
     setState(() { _loading = true; _errorMsg = null; _errorCode = null; });
 
     final email = _emailCtrl.text.trim();
@@ -214,7 +228,7 @@ class _RegisterScreenState extends ConsumerState<RegisterScreen> {
           _loading = false;
           _errorCode = result.errorCode;
           _errorMsg = _humanizeApiError(result.errorCode, result.error,
-              isLogin: true);
+              isLogin: true, verificationSent: result.verificationSent);
         });
         return;
       }
@@ -281,7 +295,8 @@ class _RegisterScreenState extends ConsumerState<RegisterScreen> {
   /// Bu yüzden her mesaj: Kurmancî satır + Türkçe satır.
   /// errorCode: backend'in döndürdüğü makine-okunabilir kod
   ///   (email_taken, invalid_credentials, weak_password, network, …)
-  String _humanizeApiError(String? code, String? raw, {required bool isLogin}) {
+  String _humanizeApiError(String? code, String? raw,
+      {required bool isLogin, bool verificationSent = false}) {
     final c = code ?? '';
     final m = (raw ?? '').toLowerCase();
 
@@ -310,6 +325,13 @@ class _RegisterScreenState extends ConsumerState<RegisterScreen> {
     if (c == 'invalid_email') {
       return 'E-naveke rast binivîse (mînak: nav@minak.com).\n'
           'Geçerli bir e-posta yaz (örnek: ad@ornek.com).';
+    }
+    if (c == 'email_not_verified' && verificationSent) {
+      // Sunucu bu girişte yeni bir doğrulama e-postası gönderdi.
+      return 'Divê tu e-nava xwe piştrast bikî. Lînka piştrastkirinê dîsa '
+          'hate şandin — inboxa xwe (û peldanka spam) kontrol bike.\n'
+          'E-postanı doğrulaman gerekiyor. Doğrulama linki tekrar gönderildi '
+          '— gelen kutunu (ve spam klasörünü) kontrol et.';
     }
     if (c == 'email_not_verified') {
       return 'Divê tu e-nava xwe piştrast bikî — inboxa xwe kontrol bike.\n'
@@ -390,21 +412,16 @@ class _RegisterScreenState extends ConsumerState<RegisterScreen> {
     final cf = ref.read(cloudflareAuthServiceProvider);
     // /api/auth/resend-verification authenticated bir endpoint (Bearer token).
     // Token yalnızca signup sonrası persist edilir; login 403 (email_not_verified)
-    // döndüğünde persist EDİLMEZ. Yani farklı bir cihazdan giriş deneyen
-    // doğrulanmamış kullanıcı buradan yeni lînk İSTEYEMEZ — bilinen backend
-    // sınırı (bkz. rapor: e-posta ile unauthenticated resend endpoint önerisi).
-    // Kullanıcıya dürüst ve yol gösteren iki dilli mesaj göster.
+    // döndüğünde persist EDİLMEZ. Eskiden farklı bir cihazdan giriş deneyen
+    // doğrulanmamış kullanıcı buradan yeni bağlantı isteyemiyor, çıkmaza
+    // giriyordu. Artık sunucu, şifresi doğru girilen doğrulanmamış girişte
+    // yeni doğrulama e-postasını kendisi gönderir (login.ts); belirteç yoksa
+    // "yeniden gönder" formdaki bilgilerle girişi yineler.
     final token = await cf.getStoredToken();
     if (token == null) {
       if (!mounted) return;
-      setState(() {
-        _loading = false;
-        _errorMsg =
-            'Lînka piştrastkirinê ya di e-nava te de bikar bîne — an jî li ser '
-            'amûra ku te tomar kiribû dîsa biceribîne.\n'
-            'Kayıt olurken gönderilen doğrulama e-postasındaki linki kullan — '
-            'veya kayıt olduğun cihazdan tekrar dene.';
-      });
+      setState(() => _loading = false);
+      await _login();
       return;
     }
     final result = await cf.resendVerification();
@@ -453,6 +470,9 @@ class _RegisterScreenState extends ConsumerState<RegisterScreen> {
           padding: const EdgeInsets.all(AppSpacing.xl),
           child: Form(
             key: _formKey,
+            autovalidateMode: _autoValidate
+                ? AutovalidateMode.onUserInteraction
+                : AutovalidateMode.disabled,
             child: AutofillGroup(
               child: Column(
               crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -822,6 +842,7 @@ class _RegisterScreenState extends ConsumerState<RegisterScreen> {
                 TextButton(
                   onPressed: () => setState(() {
                     _isLogin = !_isLogin;
+                    _autoValidate = false;
                     _errorMsg = null;
                     _errorCode = null;
                     // Kayda özgü alanlar gizlenirken içerikleri de sıfırlansın.

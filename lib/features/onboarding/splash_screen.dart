@@ -6,6 +6,8 @@ import 'package:go_router/go_router.dart';
 import '../../core/constants/app_colors.dart';
 import '../../core/router/app_router.dart';
 import '../../core/services/auth_service.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+
 import '../../core/services/cloudflare_auth_service.dart';
 import '../../shared/providers/intro_seen_provider.dart';
 import '../../shared/providers/learning_track_provider.dart';
@@ -275,8 +277,13 @@ class _PathLine extends StatelessWidget {
 // Akış matrisi:
 //   logged-out               → "Dest pê bike!" → register
 //   logged-in + intro yok    → "Dest pê bike!" → introFlow
-//   logged-in + intro + plc  → "Berdewam bike" → track.nativeHomePath (FRICTION'SIZ)
-//   logged-in + intro + ¬plc → "Rêya xwe hilbijêre" → trackSelect
+//   logged-in + intro + yol seçilmiş  → "Berdewam bike" → track.nativeHomePath
+//   logged-in + intro + yol seçilmemiş → "Rêya xwe hilbijêre" → trackSelect
+//
+// GÖNÜLLÜ TEST (Ekim 2026): düzey testi artık girişin koşulu değil. Eskiden
+// testi yapmamış kullanıcı her açılışta yol seçimine, oradan da teste
+// gönderiliyordu. Yol daha önce seçildiyse (ya da hesapta/cihazda düzey
+// varsa) doğrudan ana ekrana gidilir.
 // ════════════════════════════════════════════════════════════════
 
 class _SmartCta extends ConsumerStatefulWidget {
@@ -288,6 +295,8 @@ class _SmartCta extends ConsumerStatefulWidget {
 
 class _SmartCtaState extends ConsumerState<_SmartCta> {
   // null = henüz kontrol edilmedi (async loading); true/false = sonuç.
+  // "Yerleşik": bu cihazda yol seçilmiş YA DA düzey testi yapılmış (hesap
+  // ya da cihaz). İkisinden biri yeter; ikisi de yoksa yol seçimine gidilir.
   bool? _hasPlacement;
 
   @override
@@ -303,7 +312,12 @@ class _SmartCtaState extends ConsumerState<_SmartCta> {
   /// (KU → placementLevel, EN → placementLevelEn).
   Future<void> _checkPlacement() async {
     final track = ref.read(currentTrackProvider);
-    final placed = await hasPlacementForTrack(ref, track.languageCode);
+    var placed = false;
+    try {
+      final prefs = await SharedPreferences.getInstance();
+      placed = (prefs.getString('learning_track_v1') ?? '').isNotEmpty;
+    } catch (_) {}
+    placed = placed || await hasPlacementForTrack(ref, track.languageCode);
     if (!mounted) return;
     setState(() => _hasPlacement = placed);
   }
@@ -329,13 +343,13 @@ class _SmartCtaState extends ConsumerState<_SmartCta> {
       emoji = '✨';
       onTap = () => context.go(AppRoutes.introFlow);
     } else if (_hasPlacement == true) {
-      // Placement zaten yapılmış (localStorage VEYA hesap) — kullanıcı her
-      // açılışta track-select/placement test'i tekrar görmesin. Direkt dersliğe.
+      // Yol seçilmiş ya da düzey belli — kullanıcı her açılışta yol seçimini
+      // tekrar görmesin. Direkt dersliğe.
       label = 'Berdewam bike';
       emoji = '▶️';
       onTap = () => context.go(track.nativeHomePath);
     } else {
-      // Placement yapılmamış (veya hâlâ kontrol ediliyor) — track seçim.
+      // Yol henüz seçilmemiş (veya hâlâ kontrol ediliyor) — track seçim.
       label = 'Rêya xwe hilbijêre';
       emoji = '🎯';
       onTap = () => context.go(AppRoutes.trackSelect);

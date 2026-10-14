@@ -7,6 +7,13 @@ void replaceLocation(String url) {
   html.window.location.replace(url);
 }
 
+/// Uygulama içi bir yolun tam adresi. Uygulama /app/ altında sunulur
+/// (`<base href="/app/">`); "/" ile başlayan adres tanıtım sitesine gider.
+String appUrl(String relative) {
+  final base = html.document.baseUri ?? html.window.location.href;
+  return Uri.parse(base).resolve(relative).toString();
+}
+
 /// Bağlantıyı yeni sekmede açar; açıldıysa `true`.
 bool openInNewTab(String url) {
   html.window.open(url, '_blank');

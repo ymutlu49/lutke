@@ -9,7 +9,6 @@ import '../../core/constants/app_spacing.dart';
 import '../../core/constants/app_typography.dart';
 import '../../core/router/app_router.dart';
 import '../../shared/providers/learning_track_provider.dart';
-import '../../core/services/cloudflare_auth_service.dart';
 
 // ════════════════════════════════════════════════════════════════
 // LÛTKE — Track Seçim Ekranı
@@ -208,25 +207,11 @@ class TrackSelectScreen extends ConsumerWidget {
       }
     }
 
-    // YENİ AKIŞ (Mayıs 2026): track seçimi sonrası — eğer kullanıcı
-    // bu track için placement testi yapmadıysa, düzey belirleme
-    // testine gönder. Yapılmışsa direkt home'a.
-    // Çocuk tracks (kurdishChild/englishChild) zaten yukarıdaki kontrol
-    // ile child-onboarding'e veya doğrudan home'a yönlendiriliyor —
-    // placement testi yetişkin tracks için.
-    //
-    // YARIŞ DÜZELTMESİ (Temmuz 2026): önceden hesap .valueOrNull ile
-    // okunuyordu — /me henüz dönmemişse null gelir, prefs de boşsa (yeni
-    // cihaz) test yeniden gösterilirdi. hasPlacementForTrack hesap bilgisi
-    // YÜKLENENE kadar bekler (5 sn timeout → prefs fallback) ve
-    // track-duyarlıdır: KU → placementLevel, EN → placementLevelEn.
-    final hasPlacement =
-        await hasPlacementForTrack(ref, track.languageCode);
-    if (!context.mounted) return;
-    if (!hasPlacement) {
-      context.go(AppRoutes.placementTest);
-      return;
-    }
+    // GÖNÜLLÜ TEST (Ekim 2026): yol seçiminden sonra doğrudan ana ekrana.
+    // Mayıs 2026 akışı düzey testi yapmamış kullanıcıyı burada teste
+    // gönderiyordu (zorunlu). Artık düzey testi isteğe bağlı: kullanıcı A1'den
+    // başlar, düzeyini seçiciden kendisi değiştirebilir ya da testi ana
+    // ekrandaki davetten / düzey seçicisinden / profilden kendi isteğiyle açar.
     context.go(track.nativeHomePath);
   }
 }

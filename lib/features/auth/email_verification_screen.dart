@@ -29,7 +29,10 @@ import '../../shared/widgets/lutke_goat_icon.dart';
 
 class EmailVerificationScreen extends ConsumerStatefulWidget {
   final String? token;
-  const EmailVerificationScreen({super.key, this.token});
+
+  /// Kayıt sırasında doğrulama e-postası gönderilemedi (`?sent=0`).
+  final bool sendFailed;
+  const EmailVerificationScreen({super.key, this.token, this.sendFailed = false});
 
   @override
   ConsumerState<EmailVerificationScreen> createState() =>
@@ -45,7 +48,8 @@ class _EmailVerificationScreenState
   bool _checkBusy = false;
 
   // "Dîsa bişîne" cooldown'u — spam engeli + kullanıcıya net geri bildirim.
-  // Backend'de resend rate-limit yok; client tarafında 60 sn bekletiyoruz.
+  // Sunucu da sınırlar (kullanıcı başına 15 dakikada 5); buradaki 60 sn
+  // kullanıcıya düğmenin neden kapalı olduğunu gösterir.
   static const int _resendCooldownSecs = 60;
   int _cooldownLeft = 0;
   Timer? _cooldownTimer;
@@ -57,6 +61,8 @@ class _EmailVerificationScreenState
     if (t != null && t.isNotEmpty) {
       // Token varsa otomatik doğrula.
       WidgetsBinding.instance.addPostFrameCallback((_) => _verify(t));
+    } else if (widget.sendFailed) {
+      _errorMsg = _humanize('email_failed', null);
     }
   }
 

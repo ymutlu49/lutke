@@ -141,6 +141,10 @@ class CloudflareAuthResult {
   final String? errorCode;
   final bool emailSent;
 
+  /// Giriş 403 `email_not_verified` döndüğünde: sunucu bu denemede yeni bir
+  /// doğrulama e-postası gönderdiyse true.
+  final bool verificationSent;
+
   bool get isSuccess => error == null;
 
   const CloudflareAuthResult.success({
@@ -148,11 +152,13 @@ class CloudflareAuthResult {
     required this.token,
     this.emailSent = false,
   })  : error = null,
-        errorCode = null;
+        errorCode = null,
+        verificationSent = false;
 
   const CloudflareAuthResult.failure({
     required this.error,
     this.errorCode,
+    this.verificationSent = false,
   })  : user = null,
         token = null,
         emailSent = false;
@@ -284,6 +290,7 @@ class CloudflareAuthService {
         decoded['error']?.toString() ?? 'API hatası ($status)',
         decoded['code']?.toString(),
         status,
+        decoded,
       );
     }
     return decoded;
@@ -306,6 +313,7 @@ class CloudflareAuthService {
         decoded['error']?.toString() ?? 'API hatası ($status)',
         decoded['code']?.toString(),
         status,
+        decoded,
       );
     }
     return decoded;
@@ -427,7 +435,11 @@ class CloudflareAuthService {
       await _persistAuth(token, user);
       return CloudflareAuthResult.success(user: user, token: token);
     } on _AuthApiException catch (e) {
-      return CloudflareAuthResult.failure(error: e.message, errorCode: e.code);
+      return CloudflareAuthResult.failure(
+        error: e.message,
+        errorCode: e.code,
+        verificationSent: e.data['verificationSent'] == true,
+      );
     } catch (e) {
       return CloudflareAuthResult.failure(
         error: 'Bağlantı hatası. İnterneti kontrol et.',
@@ -601,7 +613,11 @@ class _AuthApiException implements Exception {
   final String message;
   final String? code;
   final int statusCode;
-  _AuthApiException(this.message, this.code, this.statusCode);
+
+  /// Hata yanıtının tüm gövdesi (ör. `verificationSent`).
+  final Map<String, dynamic> data;
+  _AuthApiException(this.message, this.code, this.statusCode,
+      [this.data = const {}]);
 }
 
 // ─── Riverpod providers ──────────────────────────────────

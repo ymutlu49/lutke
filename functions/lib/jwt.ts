@@ -10,6 +10,9 @@ interface JWTPayload {
   email: string;
   isOwner?: boolean;
   emailVerified?: boolean;
+  /// Şifre sürümü — bkz. http.ts passwordVersion. Ekim 2026 öncesi
+  /// belirteçlerde yoktur (süreleri dolana dek geçerli sayılır).
+  pv?: string;
   iat: number; // issued at (sec)
   exp: number; // expires at (sec)
 }

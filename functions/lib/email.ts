@@ -29,6 +29,11 @@ interface EmailEnv {
   MAILCHANNELS_DKIM_DOMAIN?: string;
   MAILCHANNELS_DKIM_SELECTOR?: string;
   MAILCHANNELS_DKIM_PRIVATE_KEY?: string;
+  // Yerel geliştirme anahtarı (üretimde TANIMLI DEĞİL):
+  //   "1"    → e-posta gönderilmez, metin gövdesi konsola yazılır (ok)
+  //   "fail" → gönderim başarısız sayılır (hata yollarını denemek için)
+  // Kullanım: wrangler pages dev dist --binding EMAIL_DRY_RUN=1
+  EMAIL_DRY_RUN?: string;
 }
 
 export async function sendEmail(
@@ -37,6 +42,17 @@ export async function sendEmail(
 ): Promise<{ ok: boolean; error?: string }> {
   const fromEmail = env.EMAIL_FROM ?? "no-reply@lutke.app";
   const fromName = env.EMAIL_FROM_NAME ?? "LÛTKE";
+
+  if (env.EMAIL_DRY_RUN === "1") {
+    console.log(
+      `[mail/dry-run] -> ${opts.to} subject="${opts.subject}"\n${opts.textBody}`,
+    );
+    return { ok: true };
+  }
+  if (env.EMAIL_DRY_RUN === "fail") {
+    console.log(`[mail/dry-run] FAIL -> ${opts.to} subject="${opts.subject}"`);
+    return { ok: false, error: "EMAIL_DRY_RUN=fail" };
+  }
 
   // Önce Resend dene (varsa)
   if (env.RESEND_API_KEY) {
@@ -169,7 +185,7 @@ export function verificationEmailTemplate(opts: {
 }): { html: string; text: string; subject: string } {
   const { displayName, verifyUrl } = opts;
   const safeName = escapeHtml(displayName);
-  const subject = "LÛTKE — E-nava xwe piştrast bike";
+  const subject = "LÛTKE — E-nava xwe piştrast bike · E-postanı doğrula";
 
   const html = `<!DOCTYPE html>
 <html lang="ku">
@@ -182,13 +198,14 @@ export function verificationEmailTemplate(opts: {
   <div style="background: white; padding: 32px; border-radius: 0 0 12px 12px; border: 1px solid #e5e5e5; border-top: none;">
     <h2 style="margin-top: 0;">Silav ${safeName},</h2>
     <p>Spas ku tu beşdarî LÛTKE bûyî. Ji bo ku hesabê te çalak bibe, ji kerema xwe li ser bişkoka jêrîn bitikîne:</p>
+    <p style="font-size: 14px; color: #555;">LÛTKE'ye katıldığın için teşekkürler. Hesabını etkinleştirmek için aşağıdaki düğmeye tıkla:</p>
     <p style="text-align: center; margin: 32px 0;">
-      <a href="${verifyUrl}" style="background: #1A7B6B; color: white; padding: 14px 28px; text-decoration: none; border-radius: 8px; font-weight: 700;">E-nava xwe piştrast bike</a>
+      <a href="${verifyUrl}" style="background: #1A7B6B; color: white; padding: 14px 28px; text-decoration: none; border-radius: 8px; font-weight: 700;">E-nava xwe piştrast bike · E-postanı doğrula</a>
     </p>
     <p style="font-size: 13px; color: #666;">An jî vê lînkê di geroka xwe de veke:<br><a href="${verifyUrl}" style="color: #1A7B6B; word-break: break-all;">${verifyUrl}</a></p>
     <hr style="border: none; border-top: 1px solid #e5e5e5; margin: 24px 0;">
-    <p style="font-size: 13px; color: #999;">Lînk ji bo 24 saetan derbasdar e.</p>
-    <p style="font-size: 13px; color: #999;">Heke te tomar nekiriye, vê e-nameyê paşguh bike — hesab nayê çêkirin.</p>
+    <p style="font-size: 13px; color: #999;">Lînk ji bo 24 saetan derbasdar e. · Bağlantı 24 saat geçerlidir.</p>
+    <p style="font-size: 13px; color: #999;">Heke te tomar nekiriye, vê e-nameyê paşguh bike — hesab nayê çêkirin.<br>Kayıt olmadıysan bu e-postayı yok sayabilirsin.</p>
     <p style="font-size: 13px; color: #999;">Bi silav,<br>LÛTKE · <a href="https://lutke.app" style="color: #1A7B6B;">lutke.app</a></p>
   </div>
 </body>
@@ -197,12 +214,14 @@ export function verificationEmailTemplate(opts: {
   const text = `Silav ${displayName},
 
 Spas ku tu beşdarî LÛTKE bûyî. Ji bo ku hesabê te çalak bibe, ji kerema xwe vê lînkê veke:
+(LÛTKE'ye katıldığın için teşekkürler. Hesabını etkinleştirmek için bu bağlantıyı aç:)
 
 ${verifyUrl}
 
-Lînk ji bo 24 saetan derbasdar e.
+Lînk ji bo 24 saetan derbasdar e. (Bağlantı 24 saat geçerlidir.)
 
 Heke te tomar nekiriye, vê e-nameyê paşguh bike — hesab nayê çêkirin.
+(Kayıt olmadıysan bu e-postayı yok sayabilirsin.)
 
 Bi silav,
 LÛTKE · lutke.app`;
@@ -216,7 +235,7 @@ export function passwordResetEmailTemplate(opts: {
 }): { html: string; text: string; subject: string } {
   const { displayName, resetUrl } = opts;
   const safeName = escapeHtml(displayName);
-  const subject = "LÛTKE — Sazkirina şîfreyê";
+  const subject = "LÛTKE — Sazkirina şîfreyê · Şifre sıfırlama";
 
   const html = `<!DOCTYPE html>
 <html lang="ku">
@@ -228,13 +247,14 @@ export function passwordResetEmailTemplate(opts: {
   <div style="background: white; padding: 32px; border-radius: 0 0 12px 12px; border: 1px solid #e5e5e5; border-top: none;">
     <h2 style="margin-top: 0;">Silav ${safeName},</h2>
     <p>Me daxwaza guhertina şîfreya hesabê te wergirt. Ji bo ku şîfreyeke nû binivîsî, ji kerema xwe li ser bişkoka jêrîn bitikîne:</p>
+    <p style="font-size: 14px; color: #555;">Hesabının şifresini değiştirme isteği aldık. Yeni bir şifre belirlemek için aşağıdaki düğmeye tıkla:</p>
     <p style="text-align: center; margin: 32px 0;">
-      <a href="${resetUrl}" style="background: #1A7B6B; color: white; padding: 14px 28px; text-decoration: none; border-radius: 8px; font-weight: 700;">Şîfreyê biguherîne</a>
+      <a href="${resetUrl}" style="background: #1A7B6B; color: white; padding: 14px 28px; text-decoration: none; border-radius: 8px; font-weight: 700;">Şîfreyê biguherîne · Şifreyi değiştir</a>
     </p>
     <p style="font-size: 13px; color: #666;">An jî vê lînkê di geroka xwe de veke:<br><a href="${resetUrl}" style="color: #1A7B6B; word-break: break-all;">${resetUrl}</a></p>
     <hr style="border: none; border-top: 1px solid #e5e5e5; margin: 24px 0;">
-    <p style="font-size: 13px; color: #999;">Lînk ji bo saetekê derbasdar e.</p>
-    <p style="font-size: 13px; color: #999;"><strong>Heke te ev daxwaz nekiriye</strong>, vê e-nameyê paşguh bike — şîfreya te dê neyê guhertin.</p>
+    <p style="font-size: 13px; color: #999;">Lînk ji bo saetekê derbasdar e. · Bağlantı 1 saat geçerlidir.</p>
+    <p style="font-size: 13px; color: #999;"><strong>Heke te ev daxwaz nekiriye</strong>, vê e-nameyê paşguh bike — şîfreya te dê neyê guhertin.<br>Bu isteği sen yapmadıysan bu e-postayı yok say; şifren değişmez.</p>
     <p style="font-size: 13px; color: #999;">Bi silav,<br>LÛTKE · <a href="https://lutke.app" style="color: #1A7B6B;">lutke.app</a></p>
   </div>
 </body>
@@ -243,12 +263,14 @@ export function passwordResetEmailTemplate(opts: {
   const text = `Silav ${displayName},
 
 Me daxwaza guhertina şîfreya hesabê te wergirt. Ji bo ku şîfreyeke nû binivîsî, ji kerema xwe vê lînkê veke:
+(Hesabının şifresini değiştirme isteği aldık. Yeni bir şifre belirlemek için bu bağlantıyı aç:)
 
 ${resetUrl}
 
-Lînk ji bo saetekê derbasdar e.
+Lînk ji bo saetekê derbasdar e. (Bağlantı 1 saat geçerlidir.)
 
 Heke te ev daxwaz nekiriye, vê e-nameyê paşguh bike — şîfreya te dê neyê guhertin.
+(Bu isteği sen yapmadıysan bu e-postayı yok say; şifren değişmez.)
 
 Bi silav,
 LÛTKE · lutke.app`;

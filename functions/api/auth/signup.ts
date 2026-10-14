@@ -28,6 +28,7 @@ import {
   getClientIp,
   isValidEmail,
   jsonResponse,
+  passwordVersion,
   readJson,
   type Env,
 } from "../../lib/http";
@@ -180,7 +181,13 @@ export const onRequestPost: PagesFunction<Env> = async ({ request, env }) => {
   // JWT döndür → kullanıcı hemen giriş yapabilir (verified=false durumunda
   // app banner gösterecek). isOwner=false: terfi doğrulamadan sonra.
   const token = await signJWT(
-    { sub: userId, email, isOwner: false, emailVerified: false },
+    {
+      sub: userId,
+      email,
+      isOwner: false,
+      emailVerified: false,
+      pv: await passwordVersion(salt),
+    },
     env.JWT_SECRET,
   );
 

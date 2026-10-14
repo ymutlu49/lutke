@@ -70,11 +70,21 @@ class LocalAuthUser {
 
 class LocalAuthService {
   static const _userKey = 'lutke_local_user_v1';
-  static const _passKey = 'lutke_local_pass_v1';
+
+  // GÜVENLİK (Ekim 2026): bu anahtar altında kullanıcının ŞİFRESİ düz metin
+  // olarak duruyordu (web'de localStorage). Sayfaya sızan bir betik, bir
+  // tarayıcı eklentisi ya da aynı bilgisayarı kullanan herkes okuyabilirdi.
+  // Şifre artık hiçbir biçimde saklanmıyor; anahtar yalnız eski kurulumlarda
+  // kalan değeri silmek için duruyor.
+  static const _eskiSifreAnahtari = 'lutke_local_pass_v1';
 
   Future<LocalAuthUser?> currentUser() async {
     try {
       final prefs = await SharedPreferences.getInstance();
+      // Eski sürümden kalan düz metin şifreyi ilk açılışta sil.
+      if (prefs.containsKey(_eskiSifreAnahtari)) {
+        await prefs.remove(_eskiSifreAnahtari);
+      }
       final raw = prefs.getString(_userKey);
       if (raw == null || raw.isEmpty) return null;
       return LocalAuthUser.fromJson(jsonDecode(raw) as Map<String, dynamic>);
@@ -83,7 +93,8 @@ class LocalAuthService {
     }
   }
 
-  /// Kayıt: email + şifre + isim → SharedPreferences'a yazar.
+  /// Kayıt: email + isim → SharedPreferences'a yazar. Şifre SAKLANMAZ;
+  /// yalnız sahip credential eşleşmesi için o an kullanılır.
   /// Sahip email'i ile özel şifre eşleşirse `isOwner: true` döner.
   ///
   /// [serverVerifiedOwner]: Cloudflare login/signup SUNUCUDAN doğrulanmış
@@ -129,19 +140,17 @@ class LocalAuthService {
 
     final prefs = await SharedPreferences.getInstance();
     await prefs.setString(_userKey, jsonEncode(user.toJson()));
-    // Şifreyi de saklayıp giriş kontrolü için tutuyoruz (yerel).
-    // Üretim için bunu hash'leyip backend'e yazmak gerek.
-    await prefs.setString(_passKey, password);
+    await prefs.remove(_eskiSifreAnahtari);
 
     return user;
   }
 
-  /// Giriş: email + şifre kontrol eder.
+  /// Çevrimdışı giriş (sunucuya ulaşılamadığında denenir).
   /// - Sahip credential'ları tam doğru (yalnız --dart-define enjekte
   ///   edildiyse mümkün) → owner
-  /// - Daha önce kayıt olmuş herhangi bir email/şifre eşleşirse → kabul
-  ///   (online owner girişi mirror'landıysa isOwner bayrağı kayıttan gelir)
-  /// - Yoksa null
+  /// - Yoksa null. Şifre saklanmadığı için başka çevrimdışı giriş yoktur;
+  ///   oturumu açık kullanıcı zaten giriş ekranına gelmez (router), çıkış
+  ///   yapan kullanıcının yerel kaydı ise silinmiştir.
   Future<LocalAuthUser?> login({
     required String email,
     required String password,
@@ -158,24 +167,13 @@ class LocalAuthService {
       );
     }
 
-    // Mevcut kullanıcıyla eşleşme
-    final stored = await currentUser();
-    final prefs = await SharedPreferences.getInstance();
-    final storedPass = prefs.getString(_passKey);
-
-    if (stored != null &&
-        stored.email == cleanEmail &&
-        storedPass == password) {
-      return stored;
-    }
-
     return null;
   }
 
   Future<void> logout() async {
     final prefs = await SharedPreferences.getInstance();
     await prefs.remove(_userKey);
-    await prefs.remove(_passKey);
+    await prefs.remove(_eskiSifreAnahtari);
     // Oturum bağlı yerel state'i sil — farklı kullanıcı eski track ile
     // karşılaşmasın (gizlilik + UX tuzağı önleme).
     await prefs.remove('is_anonymous');

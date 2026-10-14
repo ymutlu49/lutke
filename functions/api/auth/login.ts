@@ -2,6 +2,9 @@
 //
 // Body: { email, password }
 // Returns: 200 { user, token } | 401 invalid_credentials | 429 rate_limited
+//          403 { code: "email_not_verified", verificationSent } — şifre doğru
+//          ama e-posta doğrulanmamış; yeni doğrulama e-postası gönderildiyse
+//          verificationSent=true.
 //
 // GÜVENLİK (Tem 2026):
 //   - Kullanıcı bulunamadığında da PBKDF2 çalışır (dummy hash) — yanıt
@@ -18,6 +21,7 @@ import {
   getClientIp,
   isValidEmail,
   jsonResponse,
+  passwordVersion,
   readJson,
   type Env,
 } from "../../lib/http";
@@ -28,6 +32,7 @@ import {
 } from "../../lib/db";
 import { verifyPassword } from "../../lib/password";
 import { signJWT } from "../../lib/jwt";
+import { sendVerificationEmail } from "../../lib/verification";
 
 interface LoginBody {
   email: string;
@@ -125,10 +130,35 @@ export const onRequestPost: PagesFunction<Env> = async ({ request, env }) => {
   // doğrulanmamış sahte "owner" hesaplarına uygulanamaz.
   if (user.email_verified !== 1 && user.is_owner !== 1) {
     await logLoginAttempt(env.DB, email, user.id, false, "unverified", ipHash, ua);
-    return errorResponse(
-      "E-postanı doğrulaman gerekiyor. Inboxa kontrol bike.",
+
+    // ÇIKMAZ DÜZELTMESİ (Eki 2026): "yeniden gönder" ucu oturum belirteci
+    // ister; belirteç yalnız kayıt anında, kayıt yapılan tarayıcıda durur.
+    // Başka cihazdan (ya da çıkış yaptıktan sonra) giriş deneyen ve ilk
+    // e-postayı kaybeden/süresi dolan kullanıcı yeni bağlantı isteyemiyordu.
+    // Şifre doğru girildiği için burada yeni bir doğrulama e-postası
+    // gönderilir (yeniden gönder ucuyla aynı kova: kullanıcı başına 5/15 dk).
+    let verificationSent = false;
+    try {
+      if (
+        await checkRateLimit(env.DB, `resend:${user.id}`, 5, 15 * 60 * 1000)
+      ) {
+        const sent = await sendVerificationEmail(env, request, user);
+        verificationSent = sent.ok;
+        if (!sent.ok) {
+          console.error("[login] doğrulama e-postası gönderilemedi:", sent.error);
+        }
+      }
+    } catch (e) {
+      console.error("[login] doğrulama e-postası hatası:", e);
+    }
+
+    return jsonResponse(
+      {
+        error: "E-postanı doğrulaman gerekiyor. Gelen kutunu kontrol et.",
+        code: "email_not_verified",
+        verificationSent,
+      },
       403,
-      "email_not_verified",
     );
   }
 
@@ -143,6 +173,7 @@ export const onRequestPost: PagesFunction<Env> = async ({ request, env }) => {
       email: user.email,
       isOwner: user.is_owner === 1,
       emailVerified: user.email_verified === 1,
+      pv: await passwordVersion(user.password_salt),
     },
     env.JWT_SECRET,
   );

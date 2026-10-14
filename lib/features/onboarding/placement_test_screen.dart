@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import '../lessons/domain/olcme.dart';
 import 'package:flutter_animate/flutter_animate.dart';
@@ -11,15 +13,26 @@ import '../../core/constants/app_typography.dart';
 import '../../shared/providers/learning_track_provider.dart';
 import '../../core/services/cloudflare_auth_service.dart';
 import '../lessons/data/lesson_repository.dart';
+import '../../shared/widgets/placement_invite_card.dart'
+    show placementRevisionProvider;
+import 'placement_questions.dart';
+
+export 'placement_questions.dart' show PlacementCefr, PlacementCefrX, PlacementQuestion;
 
 // ════════════════════════════════════════════════════════════════
 // LÛTKE — Düzey Belirleme Testi (CEFR Placement Test)
 //
 // Register/Login → Track Select → BU EKRAN → Home
 //
-// - 20 soru, A1 → C2 artan zorluk (3 A1 + 4 A2 + 4 B1 + 4 B2 + 3 C1 + 2 C2)
-// - Track'e göre iki farklı soru seti (Kurmancî / İngilizce)
-// - Scoring: cefr eşik tablosu (computePlacementLevel) — a1..c2
+// - GÖNÜLLÜ (Ekim 2026): test artık akışta zorunlu değil. Kullanıcı
+//   uygulamaya doğrudan girer; testi ana ekrandaki davetten, düzey
+//   seçicisinden ya da profilden kendi isteğiyle açar.
+// - AŞAMALI (Ekim 2026): bantlar A1'den yukarı sırayla, bant başına 6 soru
+//   (en çok 36). Bir bandın sonucu kesinleşince beklenmez; geçilemeyen ilk
+//   bant başlanacak düzeydir ve test orada biter (bkz. olcme.dart).
+// - Sorular: placement_questions.dart (Kurmancî: elle yazılmış + düzeyin
+//   kendi içeriğinden üretilen; İngilizce: 36 soruluk sabit havuz)
+// - "Nizanim" (bilmiyorum) yanlış sayılır; tahmin yürütmeye zorlamaz.
 // - Skip ile doğrudan A1'den başlama seçeneği
 // - Sonuç kaydı: SharedPreferences `placement_level_{ku|en}` + hesap
 //   (POST /api/profile/placement, track parametreli)
@@ -44,337 +57,9 @@ String placementLevelKeyFor(String languageCode) =>
 String recommendedLevelKeyFor(String languageCode) =>
     languageCode == 'en' ? _kRecommendedLevelKeyEn : _kRecommendedLevelKeyKu;
 
-/// "a1" | "a2" | "b1" | "b2" | "c1" | "c2"
-enum PlacementCefr { a1, a2, b1, b2, c1, c2 }
+typedef _PQ = PlacementQuestion;
 
-extension _PlacementCefrX on PlacementCefr {
-  String get label => switch (this) {
-        PlacementCefr.a1 => 'A1',
-        PlacementCefr.a2 => 'A2',
-        PlacementCefr.b1 => 'B1',
-        PlacementCefr.b2 => 'B2',
-        PlacementCefr.c1 => 'C1',
-        PlacementCefr.c2 => 'C2',
-      };
-
-  String get code => label.toLowerCase();
-
-  /// Asta navîn şirovekirin — pure Kurmancî (Bedirxan-Hawar).
-  String get descKu => switch (this) {
-        PlacementCefr.a1 =>
-          'Bingehîn: silavên hêsan û naskirina hejmaran. Tu yê ji destpêkê dest pê bikî.',
-        PlacementCefr.a2 =>
-          'Destpêka pêşketî: hevokên hêsan, dema borî/niha. Pratîka rojane.',
-        PlacementCefr.b1 =>
-          'Asta navîn: hevokên kompozît, dem-form. Axaftina serbesttir.',
-        PlacementCefr.b2 =>
-          'Navîn-jor: îdyom, rêzimanên kompleks. Bikaranîna hilbijartî.',
-        PlacementCefr.c1 =>
-          'Pêşketî: peyvên abstrakt, nivîsên edebî. Asta pîşeyî.',
-        PlacementCefr.c2 =>
-          'Pispor: nuansên akademîk/edebî, herikbarî temam. Nêzîkî zimanê dayikê.',
-      };
-}
-
-class _PQ {
-  final String id;
-  final String prompt;
-  final PlacementCefr cefr;
-  final List<String> options;
-  final int correctIndex;
-  // Açıklama UI'da gösterilmiyor; bakım için kısa Kurmancî not.
-  final String explanationKu;
-
-  const _PQ({
-    required this.id,
-    required this.prompt,
-    required this.cefr,
-    required this.options,
-    required this.correctIndex,
-    required this.explanationKu,
-  });
-}
-
-// ── Kurmancî soru seti (10) ─────────────────────────────────────
-// Dağılım: 2×A1 + 2×A2 + 2×B1 + 2×B2 + 1×C1 + 1×C2 = 10
-// Tîpolojî (Mayîs 2026): Tev pirs û bersiv bi Kurmancî ne, bê tirkî.
-// Bedirxan-Hawar standardîya termînolojî. correctIndex dağılımı dengeli:
-// her pozîsyon (0,1,2,3) deqîqayekî ye, biaseyekî tunebe.
-const List<_PQ> _kuQuestions = [
-  // ─── A1 — Bingehîn (2) ─────────────────────────────────────
-  _PQ(
-    id: 'ku-1',
-    prompt: '"Silav" kengê tê bikaranîn?',
-    cefr: PlacementCefr.a1,
-    options: [
-      'Dema dîtina kesekî',
-      'Dema xwarinê',
-      'Dema xewê',
-      'Dema xwendinê',
-    ],
-    correctIndex: 0,
-    explanationKu: '"Silav" peyveke silavkirinê ye.',
-  ),
-  _PQ(
-    id: 'ku-2',
-    prompt: 'Kîjan rêz ji endamên malbatê pêk tê?',
-    cefr: PlacementCefr.a1,
-    options: [
-      'sêv, hêjîr, gûz',
-      'erd, av, agir',
-      'kitêb, qelem, defter',
-      'dayik, bav, bira',
-    ],
-    correctIndex: 3,
-    explanationKu: 'Endamên malbatê: dayik, bav, bira, xwişk, ap, met, ...',
-  ),
-  // ─── A2 — Hevokên hêsan (2) ──────────────────────────────
-  _PQ(
-    id: 'ku-3',
-    prompt: 'Forma rast: "Ez her roj ___ dibistanê."',
-    cefr: PlacementCefr.a2,
-    options: [
-      'çûm',
-      'diçim',
-      'biçim',
-      'çû',
-    ],
-    correctIndex: 1,
-    explanationKu: 'Dema niha, kesê yekem yekjimar: ez di-ç-im. '
-        '"çûm" borî ye, "biçim" subjûnktîv, "çû" kesê sêyem.',
-  ),
-  _PQ(
-    id: 'ku-4',
-    prompt: '"Tu ji ku derê yî?" — bersiva rast kîjan e?',
-    cefr: PlacementCefr.a2,
-    options: [
-      'Ez ji Amedê me',
-      'Ez baş im',
-      'Ez naxwazim',
-      'Ez westiyam',
-    ],
-    correctIndex: 0,
-    explanationKu: '"Ji ku derê" derbarê eslê (cihê ji-derketinê) ye. '
-        'Bersiv: "ji [navê cih]ê me".',
-  ),
-  // ─── B1 — Hevoka komplêks / ergatîvî (2) ─────────────────
-  _PQ(
-    id: 'ku-5',
-    prompt: '"Min pirtûk xwend" — di vê hevokê de "min" çi ye?',
-    cefr: PlacementCefr.b1,
-    options: [
-      'Bireser',
-      'Cihê pêkhatinê',
-      'Kirdeya tewandî',
-      'Xwedîtî',
-    ],
-    correctIndex: 2,
-    explanationKu: 'Avahiya ergatîv: di lêkerên derbasdar ên dema borî de '
-        'kirde tewandî dibe (min, te, wî/wê, me, we, wan). '
-        'Loma "min" li vir kirdeya tewandî ye, ne bireser.',
-  ),
-  _PQ(
-    id: 'ku-6',
-    prompt: '"Ger baran bibare, ez ê neyêm" — ev hevok çi nîşan dide?',
-    cefr: PlacementCefr.b1,
-    options: [
-      'Bibîranînek ji dema rabirdûyê',
-      'Diyarkirineke gelemperî ya rastiyê',
-      'Hewildaneke neguherbar a berdewam',
-      'Şertekî pêşerojê û encama neyînî',
-    ],
-    correctIndex: 3,
-    explanationKu: '"Ger ... bibare" = şertê pêşerojê (subjûnktîv). '
-        '"Ez ê neyêm" = encama neyînî ya pêşerojê.',
-  ),
-  // ─── B2 — Gotin / kompoze (2) ───────────────────────────
-  _PQ(
-    id: 'ku-7',
-    prompt: '"Dilê min geş e" — wateya rast kîjan e?',
-    cefr: PlacementCefr.b2,
-    options: [
-      'Ez xemgîn im',
-      'Ez bextiyar im',
-      'Ez aciz im',
-      'Ez bêhêvî me',
-    ],
-    correctIndex: 1,
-    explanationKu: 'Gotineke îmajîner: "dilê min ronî/geş e" → kêfxweşî.',
-  ),
-  _PQ(
-    id: 'ku-8',
-    prompt: '"Ez ji xewê şiyar bûm" — "ji" di vê hevokê de çi diyar dike?',
-    cefr: PlacementCefr.b2,
-    options: [
-      'Hevkarî',
-      'Armanc',
-      'Çavkanî',
-      'Xwedîtî',
-    ],
-    correctIndex: 2,
-    explanationKu: '"ji" daçeka çavkanî / dûrketinê ye. '
-        'Mînak: ji malê derketin, ji xewê şiyar bûn.',
-  ),
-  // ─── C1 — Abstrakt / edebî (1) ───────────────────────────
-  _PQ(
-    id: 'ku-9',
-    prompt: '"Civak bêyî ziman namîne; ziman jî bêyî civak namîne." '
-        'Wateya giştî ya vê gotinê kîjan e?',
-    cefr: PlacementCefr.c1,
-    options: [
-      'Ziman ji civakê girîngtir e',
-      'Ziman û civak bi hev ve girêdayî ne',
-      'Civak ziman çêdike',
-      'Ziman çarenûsa civakê diyar dike',
-    ],
-    correctIndex: 1,
-    explanationKu: 'Têkiliyeke dualî: ne diyarker e, ne jî yek-jêhatî — '
-        'her du jî bi hev re hene yan jî bi hev re ji holê radibin.',
-  ),
-  // ─── C2 — Pisporî / akademîk (1) ─────────────────────────
-  _PQ(
-    id: 'ku-10',
-    prompt: '"Zimannasî" kîjan disîplîna akademîk e?',
-    cefr: PlacementCefr.c2,
-    options: [
-      'Lêkolîna edebiyatê',
-      'Lêkolîna dîrokê',
-      'Lêkolîna felsefeyê',
-      'Lêkolîna ziman',
-    ],
-    correctIndex: 3,
-    explanationKu: 'ziman (dil) + -nasî (zanyarî) = lêkolîna sîstema ziman. '
-        'Termê standart yê Kurmancî (Bedirxan-Hawar).',
-  ),
-];
-
-// ── English soru seti (10) ──────────────────────────────────────
-// Dağılım: 2×A1 + 2×A2 + 2×B1 + 2×B2 + 1×C1 + 1×C2 = 10
-// Tîpolojî (Mayîs 2026): Pirsiyar bi Kurmancî ne, bersiv bi îngilîzî ne.
-// Hîç peyveke Tirkî tune. Kurmancî zimanê fêrkirinê ye → bikarhêner divê
-// dikare bi Kurmancî pirsê fêm bike, û rastiya gramerê/peyvê ya îngilîzî
-// hilbijêre.
-const List<_PQ> _enQuestions = [
-  // ─── A1 — Bingehîn (2) ─────────────────────────────────────
-  _PQ(
-    id: 'en-1',
-    prompt: 'Hevwateya peyva "Hello" çi ye?',
-    cefr: PlacementCefr.a1,
-    options: ['Hi', 'Goodbye', 'Thanks', 'Sorry'],
-    correctIndex: 0,
-    explanationKu: '"Hello" û "Hi" her du jî silavên hevwate ne. '
-        '"Goodbye" ji bo veqetînê ye.',
-  ),
-  _PQ(
-    id: 'en-2',
-    prompt: 'Hevoka rast: "I ___ a student."',
-    cefr: PlacementCefr.a1,
-    options: ['be', 'is', 'am', 'are'],
-    correctIndex: 2,
-    explanationKu: '"To be" bi kesê yekem yekjimar (I) re → "am".',
-  ),
-  // ─── A2 — Hevokên hêsan (2) ──────────────────────────────
-  _PQ(
-    id: 'en-3',
-    prompt: 'Forma rast a borî: "Yesterday I ___ to the park."',
-    cefr: PlacementCefr.a2,
-    options: ['go', 'gone', 'going', 'went'],
-    correctIndex: 3,
-    explanationKu: 'Borîya hêsan: "go → went". "gone" V3, "going" gerund.',
-  ),
-  _PQ(
-    id: 'en-4',
-    prompt: 'Hevoka rast: "There ___ three apples on the table."',
-    cefr: PlacementCefr.a2,
-    options: ['be', 'is', 'am', 'are'],
-    correctIndex: 3,
-    explanationKu: '"There + to be" pirjimar → "are". '
-        'Mînak: There is one apple / There are three apples.',
-  ),
-  // ─── B1 — Gramer navîn (2) ───────────────────────────────
-  _PQ(
-    id: 'en-5',
-    prompt: 'Forma rast: "I have lived here ___ 2020."',
-    cefr: PlacementCefr.b1,
-    options: ['for', 'since', 'from', 'at'],
-    correctIndex: 1,
-    explanationKu: 'Present perfect: "since" + xala destpêkê ya diyar (2020). '
-        '"for" + dirêjahiya demê (5 years).',
-  ),
-  _PQ(
-    id: 'en-6',
-    prompt: 'Hevoka rast: "If I had more time, I ___ travel more."',
-    cefr: PlacementCefr.b1,
-    options: ['will', 'shall', 'would', 'do'],
-    correctIndex: 2,
-    explanationKu: 'Şertê 2yem (unreal present): if + past simple, '
-        'apodosîs: would + bingeh.',
-  ),
-  // ─── B2 — Gramera bilind / gotin (2) ────────────────────
-  _PQ(
-    id: 'en-7',
-    prompt: 'Wateya gotina "hit the books" çi ye?',
-    cefr: PlacementCefr.b2,
-    options: [
-      'to sell books',
-      'to dislike books',
-      'to study hard',
-      'to tear pages',
-    ],
-    correctIndex: 2,
-    explanationKu: '"li pirtûkan dan" → dema xwendin/lêkolîna giran.',
-  ),
-  _PQ(
-    id: 'en-8',
-    prompt: 'Hevoka rast: "Had I known earlier, I ___ differently."',
-    cefr: PlacementCefr.b2,
-    options: [
-      'will act',
-      'acted',
-      'would have acted',
-      'would act',
-    ],
-    correctIndex: 2,
-    explanationKu:
-        '"Had I known" = inversion of "If I had known" → 3rd conditional. '
-        'Apodosîs: would have + V3.',
-  ),
-  // ─── C1 — Abstrakt / edebî (1) ───────────────────────────
-  _PQ(
-    id: 'en-9',
-    prompt:
-        '"He gave a cursory glance at the document." Wateya "cursory" çi ye?',
-    cefr: PlacementCefr.c1,
-    options: [
-      'quick and superficial',
-      'thorough and in-depth',
-      'careful and attentive',
-      'slow and long-lasting',
-    ],
-    correctIndex: 0,
-    explanationKu: '"cursory" = bilez û ne kûr, bê detay. '
-        '"in-depth" û "careful" dijber in.',
-  ),
-  // ─── C2 — Pisporî / akademîk (1) ─────────────────────────
-  _PQ(
-    id: 'en-10',
-    prompt:
-        '"The committee\'s decision was a fait accompli." Ev gotin çi diyar dike?',
-    cefr: PlacementCefr.c2,
-    options: [
-      'a newly drafted proposal',
-      'an openly debated decision',
-      'a partial interim result',
-      'an irreversible done deal',
-    ],
-    correctIndex: 3,
-    explanationKu: '"fait accompli" (Fransî → îngilîzî) = '
-        'kar berê hatiye qedandin, vegera gengaz nîne.',
-  ),
-];
-
-/// CEFR puanlaması — `correct` = doğru cevap sayısı (0..10).
-/// Dağılım: 2×A1 + 2×A2 + 2×B1 + 2×B2 + 1×C1 + 1×C2 = 10.
+/// CEFR puanlaması.
 ///
 /// Düzey toplam puanla değil, bant bazında başarıyla belirlenir (Faz 6.1):
 /// aşağıdan yukarı, soruların en az dörtte üçü doğru olmayan ilk bant
@@ -395,7 +80,10 @@ class PlacementTestScreen extends ConsumerStatefulWidget {
   /// yerleşiklik guard'ı atlanır. Router `extra: {'retake': true}` geçirir.
   final bool retake;
 
-  const PlacementTestScreen({super.key, this.retake = false});
+  /// Sınamalar için: verilirse aynı tohum aynı soruları üretir.
+  final Random? rng;
+
+  const PlacementTestScreen({super.key, this.retake = false, this.rng});
 
   @override
   ConsumerState<PlacementTestScreen> createState() =>
@@ -404,7 +92,17 @@ class PlacementTestScreen extends ConsumerStatefulWidget {
 
 class _PlacementTestScreenState extends ConsumerState<PlacementTestScreen> {
   int _index = 0;
-  final Map<String, int> _answers = {}; // questionId → selectedIndex
+
+  /// questionId → selectedIndex; "Nizanim" (bilmiyorum) için -1.
+  final Map<String, int> _answers = {};
+
+  /// Testin bütün soruları, bant sırasıyla. Ekran açılırken bir kez kurulur
+  /// (Kurmancî sorularının bir kısmı her açılışta yeniden örneklenir).
+  List<_PQ>? _sorular;
+
+  /// Sorulan sorular, soruluş sırasıyla (cevap anahtarı için). Aşamalı
+  /// testte bütün sorular sorulmaz.
+  final List<_PQ> _sorulanlar = [];
   bool _finished = false;
   PlacementCefr? _result;
 
@@ -447,18 +145,44 @@ class _PlacementTestScreenState extends ConsumerState<PlacementTestScreen> {
     });
   }
 
-  List<_PQ> get _questions {
-    final track = ref.read(currentTrackProvider);
-    return track.isEnglish ? _enQuestions : _kuQuestions;
-  }
+  List<_PQ> get _questions => _sorular ??= buildPlacementQuestions(
+        english: ref.read(currentTrackProvider).isEnglish,
+        rng: widget.rng,
+      );
 
   int get _correctCount {
     int c = 0;
-    for (final q in _questions) {
-      final selected = _answers[q.id];
-      if (selected != null && selected == q.correctIndex) c++;
+    for (final q in _sorulanlar) {
+      if (_answers[q.id] == q.correctIndex) c++;
     }
     return c;
+  }
+
+  /// Düzey → (doğru, yanlış, toplam). "Nizanim" yanlış sayılır.
+  Map<String, (int, int, int)> _bantDurumu() {
+    final bantlar = <String, (int, int, int)>{};
+    for (final q in _questions) {
+      final (dogru, yanlis, toplam) = bantlar[q.cefr.label] ?? (0, 0, 0);
+      final secilen = _answers[q.id];
+      bantlar[q.cefr.label] = (
+        dogru + (secilen != null && secilen == q.correctIndex ? 1 : 0),
+        yanlis + (secilen != null && secilen != q.correctIndex ? 1 : 0),
+        toplam + 1,
+      );
+    }
+    return bantlar;
+  }
+
+  /// Bu banttan şimdiye dek kaç soru yanıtlandı / bantta kaç soru var.
+  (int, int) _bantIlerlemesi(PlacementCefr cefr) {
+    final b = _bantDurumu()[cefr.label] ?? (0, 0, 0);
+    return (b.$1 + b.$2, b.$3);
+  }
+
+  /// "Nizanim": soruyu yanlış say ve ilerle.
+  void _bilmiyorum(_PQ q) {
+    _answers[q.id] = -1;
+    _goNext();
   }
 
   Future<void> _skipToA1(BuildContext context) async {
@@ -503,6 +227,8 @@ class _PlacementTestScreenState extends ConsumerState<PlacementTestScreen> {
     } catch (_) {
       // Sessiz hata — web/pref yoksa kullanıcıyı takılmaz.
     }
+    // Ana ekrandaki davet kartı sonucu görsün (aynı örnek olarak kalıyor).
+    ref.read(placementRevisionProvider.notifier).state++;
     // userProfileProvider state'ini anlık güncelle → home ekranı doğru
     // seviyeyi gösterir (reload gerekmez).
     try {
@@ -565,17 +291,29 @@ class _PlacementTestScreenState extends ConsumerState<PlacementTestScreen> {
   }
 
   Future<void> _goNext() async {
-    if (_index < _questions.length - 1) {
-      setState(() => _index++);
-      return;
+    final simdiki = _questions[_index];
+    if (!_answers.containsKey(simdiki.id)) return;
+    if (!_sorulanlar.contains(simdiki)) _sorulanlar.add(simdiki);
+
+    // Aşamalı karar: bant kesinleşmediyse aynı banttan sıradaki soru; geçildiyse
+    // üst bant; geçilemediyse test biter.
+    final durum = _bantDurumu();
+    final adim = yerlestirmeAdimi(durum);
+    if (adim.bant != null) {
+      final i = _questions.indexWhere(
+        (q) => q.cefr.label == adim.bant && !_answers.containsKey(q.id),
+      );
+      if (i >= 0) {
+        setState(() => _index = i);
+        return;
+      }
     }
-    // Test bitti — sonucu hesapla ve sakla
-    final bantlar = <PlacementCefr, (int, int)>{};
-    for (final q in _questions) {
-      final (dogru, toplam) = bantlar[q.cefr] ?? (0, 0);
-      bantlar[q.cefr] = (dogru + (_answers[q.id] == q.correctIndex ? 1 : 0), toplam + 1);
-    }
-    final level = computePlacementLevel(bantlar);
+    // Test bitti — sonucu hesapla ve sakla. (Yanıtlanmayan sorular yanlış
+    // sayılır; karar yerlestirmeAdimi ile aynıdır.)
+    final level = computePlacementLevel({
+      for (final c in PlacementCefr.values)
+        if (durum[c.label] != null) c: (durum[c.label]!.$1, durum[c.label]!.$3),
+    });
     final track = ref.read(currentTrackProvider);
     await _persistLevel(track.languageCode, level);
     // Pêşniyara testê serbixwe sakla — paşê bikarhêner asta xwe biguherîne
@@ -635,8 +373,8 @@ class _PlacementTestScreenState extends ConsumerState<PlacementTestScreen> {
                   ? _ResultView(
                       level: _result!,
                       correct: _correctCount,
-                      total: _questions.length,
-                      questions: _questions,
+                      total: _sorulanlar.length,
+                      questions: _sorulanlar,
                       answers: _answers,
                       onStart: (lvl) => _startAtLevel(context, lvl),
                     )
@@ -645,9 +383,20 @@ class _PlacementTestScreenState extends ConsumerState<PlacementTestScreen> {
                       index: _index,
                       answers: _answers,
                       isEnglishTrack: track.isEnglish,
+                      bantIlerlemesi: _bantIlerlemesi(_questions[_index].cefr),
                       onSelect: _selectOption,
                       onNext: _goNext,
+                      onDontKnow: () => _bilmiyorum(_questions[_index]),
                       onSkip: () => _skipToA1(context),
+                      onClose: () {
+                        // Test gönüllü: vazgeçen sonuç yazılmadan geri döner.
+                        // Doğrudan adresle gelindiyse (geri yığını yok) ana ekrana.
+                        if (context.canPop()) {
+                          context.pop();
+                        } else {
+                          context.go(track.nativeHomePath);
+                        }
+                      },
                     ),
             ),
           ),
@@ -664,18 +413,27 @@ class _QuestionView extends StatelessWidget {
   final int index;
   final Map<String, int> answers;
   final bool isEnglishTrack;
+  /// Bu bantta (yanıtlanan, toplam) soru sayısı.
+  final (int, int) bantIlerlemesi;
   final void Function(_PQ question, int selectedIndex) onSelect;
   final VoidCallback onNext;
+  final VoidCallback onDontKnow;
   final VoidCallback onSkip;
+
+  /// Testten sonuç yazmadan çık (düzey değişmez).
+  final VoidCallback onClose;
 
   const _QuestionView({
     required this.questions,
     required this.index,
     required this.answers,
     required this.isEnglishTrack,
+    required this.bantIlerlemesi,
     required this.onSelect,
     required this.onNext,
+    required this.onDontKnow,
     required this.onSkip,
+    required this.onClose,
   });
 
   @override
@@ -698,19 +456,12 @@ class _QuestionView extends StatelessWidget {
               child: IconButton(
                 tooltip: 'Vegere',
                 icon: const Icon(Icons.close_rounded),
-                onPressed: () {
-                  if (Navigator.of(context).canPop()) {
-                    Navigator.of(context).pop();
-                  } else {
-                    // Fallback: aktif track home'u
-                    Navigator.of(context).maybePop();
-                  }
-                },
+                onPressed: onClose,
               ),
             ),
             const Spacer(),
             Text(
-              '${index + 1} / ${questions.length}',
+              '${q.cefr.label} · ${bantIlerlemesi.$1 + 1} / ${bantIlerlemesi.$2}',
               style: AppTypography.caption.copyWith(
                 color: AppColors.textTertiary,
                 fontWeight: FontWeight.w600,
@@ -828,6 +579,17 @@ class _QuestionView extends StatelessWidget {
                           height: 1.5,
                         ),
                       ),
+                      // Üretilen sorularda yardımcı satır ("Türkçesi hangisi?").
+                      if ((q.subPrompt ?? '').isNotEmpty) ...[
+                        const SizedBox(height: 4),
+                        Text(
+                          q.subPrompt!,
+                          style: AppTypography.caption.copyWith(
+                            color: AppColors.textSecondary,
+                            height: 1.4,
+                          ),
+                        ),
+                      ],
                     ],
                   ),
                 ).animate().fadeIn(duration: 200.ms),
@@ -855,7 +617,21 @@ class _QuestionView extends StatelessWidget {
           ),
         ),
 
-        const SizedBox(height: AppSpacing.md),
+        // "Nizanim" — bilmeyen tahmin yürütmek zorunda kalmasın. Yanlış
+        // sayılır; testi kısaltır ve sonucu şansa bırakmaz. Kaydırma alanının
+        // dışında, her ekran boyunda görünür.
+        Align(
+          alignment: Alignment.center,
+          child: TextButton.icon(
+            onPressed: onDontKnow,
+            icon: const Icon(Icons.help_outline_rounded, size: 18),
+            label: const Text('Nizanim · Bilmiyorum'),
+            style: TextButton.styleFrom(
+              foregroundColor: AppColors.textSecondary,
+              minimumSize: const Size(0, AppSpacing.touchMin),
+            ),
+          ),
+        ),
 
         // Next button
         SizedBox(
@@ -1232,8 +1008,17 @@ class _AnswerKeyItem extends StatelessWidget {
               height: 1.4,
             ),
           ),
+          if ((q.subPrompt ?? '').isNotEmpty)
+            Text(
+              q.subPrompt!,
+              style: AppTypography.caption.copyWith(
+                color: AppColors.textSecondary,
+              ),
+            ),
           const SizedBox(height: AppSpacing.sm),
           for (var i = 0; i < q.options.length; i++) _optionRow(i),
+          // Üretilen soruların ve yeni İngilizce soruların açıklaması yok.
+          if (q.explanationKu.isNotEmpty) ...[
           const SizedBox(height: AppSpacing.sm),
           Container(
             padding: const EdgeInsets.all(AppSpacing.sm),
@@ -1259,6 +1044,7 @@ class _AnswerKeyItem extends StatelessWidget {
               ],
             ),
           ),
+          ],
         ],
       ),
     );

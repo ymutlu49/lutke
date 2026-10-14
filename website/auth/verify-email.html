@@ -20,12 +20,12 @@
       <div id="loading">
         <div class="spinner" role="status" aria-label="Tê barkirin"></div>
         <h1>E-nameya te tê piştrastkirin…</h1>
-        <p>Ji kerema xwe kêliyekê bisekine.</p>
+        <p>Ji kerema xwe kêliyekê bisekine.<br>E-postan doğrulanıyor, lütfen bekle.</p>
       </div>
 
       <div id="result" class="hide">
         <h1 id="r-title"></h1>
-        <div id="r-msg" class="msg"></div>
+        <div id="r-msg" class="msg" style="white-space: pre-line"></div>
         <div id="r-actions"></div>
       </div>
     </div>
@@ -51,11 +51,11 @@
         rActions.innerHTML = actionsHtml || '';
       }
 
-      var loginBtn = '<a class="btn btn-primary btn-block" href="/app/auth/login">Têkeve</a>';
-      var openBtn = '<a class="btn btn-ghost btn-block" style="margin-top:10px" href="/app/">Sepanê veke</a>';
+      var loginBtn = '<a class="btn btn-primary btn-block" href="/app/auth/login">Têkeve · Giriş yap</a>';
+      var openBtn = '<a class="btn btn-ghost btn-block" style="margin-top:10px" href="/app/">Sepanê veke · Uygulamayı aç</a>';
 
       if (!token) {
-        show('Lînk ne temam e', 'Ev lînk ne rast e an ne temam e. Ji kerema xwe lînkê di e-nameyê de ji nû ve veke.', 'err', openBtn);
+        show('Lînk ne temam e', 'Ev lînk ne rast e an ne temam e. Ji kerema xwe lînkê di e-nameyê de ji nû ve veke.\nBağlantı eksik. E-postadaki bağlantıyı yeniden aç.', 'err', openBtn);
         return;
       }
 
@@ -68,17 +68,18 @@
       }).then(function (res) {
         if (res.ok && res.data && res.data.ok) {
           show('E-name hat piştrastkirin! ✓',
-            'Hesabê te çalak bû. Niha tu dikarî têkevî LÛTKE.',
+            'Hesabê te çalak bû. Niha tu dikarî têkevî LÛTKE.\nHesabın etkinleşti. Artık LÛTKE\'ye giriş yapabilirsin.',
             'ok', loginBtn);
         } else {
           var code = res.data && res.data.code;
-          var m = 'Lînk nederbasdar e an dema wê qediyaye. Ji kerema xwe lînkek nû bixwaze.';
-          if (code === 'token_missing') m = 'Token winda ye. Lînkê ji nû ve veke.';
-          show('Piştrastkirin neçû serî', m, 'err',
-            openBtn.replace('btn-ghost', 'btn-primary').replace(' style="margin-top:10px"', ''));
+          // Giriş, şifresi doğru girilen doğrulanmamış hesaba yeni bağlantı
+          // gönderir (login.ts); bu yüzden hata ekranı kullanıcıyı girişe yollar.
+          var m = 'Lînk nederbasdar e an dema wê qediyaye. Ji kerema xwe lînkek nû bixwaze.\nBağlantı geçersiz ya da süresi dolmuş. Giriş yapmayı dene: hesabın doğrulanmamışsa sana yeni bir bağlantı gönderilir.';
+          if (code === 'token_missing') m = 'Token winda ye. Lînkê ji nû ve veke.\nBağlantı eksik. E-postadaki bağlantıyı yeniden aç.';
+          show('Piştrastkirin neçû serî', m, 'err', loginBtn + openBtn);
         }
       }).catch(function () {
-        show('Çewtiya girêdanê', 'Em nikarîn bigihîjin pêşkêşkerê. Girêdana înternetê kontrol bike û dîsa biceribîne.', 'err', openBtn);
+        show('Çewtiya girêdanê', 'Em nikarîn bigihîjin pêşkêşkerê. Girêdana înternetê kontrol bike û dîsa biceribîne.\nSunucuya ulaşılamadı. İnternet bağlantını kontrol edip tekrar dene.', 'err', openBtn);
       });
     })();
   </script>

@@ -66,3 +66,9 @@ dist/
 .stg.txt
 .commit.log
 .head.txt
+
+# Yerel wrangler durumu (pages dev, yerel D1)
+.wrangler/
+
+# Kişisel dosya — depoya girmemeli
+Parola.docx

@@ -33,6 +33,7 @@ import '../../cultural_content/widgets/daily_proverb_card.dart';
 import '../../../core/services/user_mode_preferences.dart';
 import '../../../shared/widgets/level_picker_sheet.dart';
 import '../../auth/email_verification_screen.dart' show EmailVerificationBanner;
+import '../../../shared/widgets/placement_invite_card.dart';
 
 // ════════════════════════════════════════════════════════════════
 // ANA SAYFA — İLERLEME HARİTASI
@@ -223,7 +224,12 @@ class HomeScreen extends ConsumerWidget {
                     children: [
                       // Mascot 40px
                       GestureDetector(
-                        onLongPress: () => context.push(AppRoutes.admin),
+                        // Yönetici paneli kısayolu — yalnız sahip.
+                        onLongPress: () {
+                          if (ref.read(isOwnerProvider)) {
+                            context.push(AppRoutes.admin);
+                          }
+                        },
                         child: SizedBox(
                           width: 40, height: 40,
                           child: Image.asset('assets/images/mascot_64.png',
@@ -276,6 +282,13 @@ class HomeScreen extends ConsumerWidget {
                   // hatırlatıcı çıkar; doğrulandıysa otomatik gizlenir.
                   // ════════════════════════════════════════════════
                   const EmailVerificationBanner(),
+
+                  // ════════════════════════════════════════════════
+                  // 2.06) DÜZEY TESTİNE GÖNÜLLÜ DAVET (Ekim 2026).
+                  // Test girişte zorunlu değil; yalnız bu yol için hiç
+                  // yapılmamışsa ve kullanıcı daveti kapatmamışsa görünür.
+                  // ════════════════════════════════════════════════
+                  const PlacementInviteCard(),
 
                   // ════════════════════════════════════════════════
                   // 2.5) GOTINA ÎRO — Sadece Kurmancî track'ta

@@ -6,6 +6,7 @@ export interface Env {
   EMAIL_FROM: string;
   EMAIL_FROM_NAME?: string;
   RESEND_API_KEY?: string; // Resend (öncelikli mail sağlayıcı) — secret
+  EMAIL_DRY_RUN?: string; // yalnız yerel geliştirme — bkz. lib/email.ts
   MAILCHANNELS_DKIM_DOMAIN?: string;
   MAILCHANNELS_DKIM_SELECTOR?: string;
   MAILCHANNELS_DKIM_PRIVATE_KEY?: string;
@@ -181,6 +182,30 @@ export function isOwnerEmail(email: string, env: Env): boolean {
 
 // ─── Auth from Bearer header ─────────────────────────────────
 
+/**
+ * Şifre sürümü: tuzun SHA-256 özetinin ilk 16 hanesi. Tuz her şifre
+ * değişikliğinde (hashPassword) yeniden üretildiği için, şifre sıfırlanınca
+ * sürüm değişir ve eski belirteçler geçersiz kalır. Tuzun kendisi
+ * belirtece yazılmaz.
+ */
+export async function passwordVersion(salt: string): Promise<string> {
+  const buf = await crypto.subtle.digest("SHA-256", new TextEncoder().encode(salt));
+  return Array.from(new Uint8Array(buf).slice(0, 8))
+    .map((b) => b.toString(16).padStart(2, "0"))
+    .join("");
+}
+
+/**
+ * Bearer belirtecini doğrular ve oturumu veritabanındaki GÜNCEL satıra bağlar
+ * (Ekim 2026):
+ *   - hesap silinmişse oturum yoktur;
+ *   - belirteçteki şifre sürümü satırdakiyle uyuşmuyorsa (şifre sıfırlandı)
+ *     oturum yoktur — eskiden çalınan bir oturum şifre değişse de 30 gün
+ *     geçerli kalıyordu;
+ *   - sahip yetkisi belirteçteki iddiadan değil satırdaki is_owner'dan okunur;
+ *     kaldırılan yetki hemen düşer.
+ * Veritabanı hatasında oturum verilmez (kapalı başarısızlık).
+ */
 export async function getAuthFromRequest(
   request: Request,
   env: Env,
@@ -193,11 +218,23 @@ export async function getAuthFromRequest(
   const { verifyJWT } = await import("./jwt");
   const payload = await verifyJWT(token, env.JWT_SECRET);
   if (!payload) return null;
-  return {
-    userId: payload.sub,
-    email: payload.email,
-    isOwner: payload.isOwner ?? false,
-  };
+
+  try {
+    const row = await env.DB
+      .prepare(
+        "SELECT id, email, is_owner, password_salt FROM users WHERE id = ? AND deleted_at IS NULL LIMIT 1",
+      )
+      .bind(payload.sub)
+      .first<{ id: string; email: string; is_owner: number; password_salt: string }>();
+    if (!row) return null;
+    if (payload.pv !== undefined && payload.pv !== (await passwordVersion(row.password_salt))) {
+      return null;
+    }
+    return { userId: row.id, email: row.email, isOwner: row.is_owner === 1 };
+  } catch (e) {
+    console.error("[auth] oturum satırı okunamadı:", e);
+    return null;
+  }
 }
 
 // ─── Public base URL (for verification links) ────────────────

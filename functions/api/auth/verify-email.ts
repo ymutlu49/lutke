@@ -48,6 +48,24 @@ export const onRequestPost: PagesFunction<Env> = async ({ request, env }) => {
   }
   const row = await findToken(env.DB, token, "verify_email");
   if (!row) {
+    // Aynı bağlantıya ikinci tıklama (ya da bağlantıyı önceden açan e-posta
+    // tarayıcısı): belirteç kullanılmış ve hesap doğrulanmışsa bu bir hata
+    // değildir. Eskiden "Token geçersiz" dönüyordu; kullanıcı hesabı
+    // doğrulanmış olduğu hâlde "doğrulama başarısız" ekranını görüyordu.
+    const used = await env.DB
+      .prepare(
+        `SELECT user_id FROM auth_tokens
+         WHERE token = ? AND type = 'verify_email' AND used_at IS NOT NULL
+         LIMIT 1`,
+      )
+      .bind(token)
+      .first<{ user_id: string }>();
+    if (used) {
+      const owner = await findUserById(env.DB, used.user_id);
+      if (owner && owner.email_verified === 1) {
+        return jsonResponse({ ok: true, alreadyVerified: true });
+      }
+    }
     return errorResponse(
       "Token geçersiz veya süresi dolmuş.",
       400,
