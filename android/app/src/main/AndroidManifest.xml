@@ -60,5 +60,10 @@
             <action android:name="android.intent.action.VIEW"/>
             <data android:scheme="https"/>
         </intent>
+        <!-- İngilizce TTS yedeği (flutter_tts) — Android 11+ paket görünürlüğü:
+             bu sorgu olmadan cihazın TTS motoru bulunamaz, İngilizce sessiz kalır. -->
+        <intent>
+            <action android:name="android.intent.action.TTS_SERVICE"/>
+        </intent>
     </queries>
 </manifest>

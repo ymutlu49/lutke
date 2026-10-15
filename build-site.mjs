@@ -451,18 +451,21 @@ function buildHeaders() {
 
 // Ses fabrikasının çıktısı (MP3, içerik = ad). Eski assets/audio/words/*.wav artık uygulamada değil;
 // güncellenmemiş Android sürümlerinin .wav istekleri functions/app/[[path]].ts ile yeni seslere yönlenir.
-const SES = process.env.LUTKE_SES || 'piper-berfin';
-const SES_KAYNAK = path.resolve(__dirname, '..', '..', '..', 'Ziman', 'ses', 'fabrika', 'cikti', SES);
+// Birden çok ses: Kurmancî (piper-berfin) + İngilizce (piper-ljspeech). LUTKE_SES ile değiştirilebilir.
+const SESLER = (process.env.LUTKE_SES || 'piper-berfin,piper-ljspeech').split(',').map(s => s.trim()).filter(Boolean);
+const SES_KOK = path.resolve(__dirname, '..', '..', '..', 'Ziman', 'ses', 'fabrika', 'cikti');
 async function copySes() {
-  if (!existsSync(SES_KAYNAK)) { log(`WARNING: ses kaynağı yok: ${SES_KAYNAK}`); return; }
-  const hedef = path.join(DIST, 'ses', SES);
   await rmrf(path.join(DIST, 'ses'));
-  try {
-    execFileSync('robocopy', [SES_KAYNAK, hedef, '*.mp3', '/E', '/NFL', '/NDL', '/NJH', '/NJS', '/NC', '/NS', '/MT:16'], { stdio: 'inherit' });
-  } catch (e) {
-    if (e.status !== undefined && e.status >= 8) throw e; // robocopy 0-7 = success
+  for (const ses of SESLER) {
+    const kaynak = path.join(SES_KOK, ses);
+    if (!existsSync(kaynak)) { log(`WARNING: ses kaynağı yok: ${kaynak}`); continue; }
+    try {
+      execFileSync('robocopy', [kaynak, path.join(DIST, 'ses', ses), '*.mp3', '/E', '/NFL', '/NDL', '/NJH', '/NJS', '/NC', '/NS', '/MT:16'], { stdio: 'inherit' });
+    } catch (e) {
+      if (e.status !== undefined && e.status >= 8) throw e; // robocopy 0-7 = success
+    }
+    log(`ses: ${ses} -> dist/ses/${ses}`);
   }
-  log(`ses: ${SES} -> dist/ses/${SES}`);
 }
 
 async function copyAppBuild() {

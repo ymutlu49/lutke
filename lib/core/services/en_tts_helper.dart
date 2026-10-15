@@ -1,6 +1,11 @@
+import 'dart:async';
 import 'dart:convert';
 
 import 'package:flutter/foundation.dart';
+import 'package:flutter_tts/flutter_tts.dart';
+import 'package:just_audio/just_audio.dart';
+
+import 'en_ses_manifest.dart';
 
 // Conditional JS import — web üzerinde speechSynthesis API'sine erişim
 import 'js_eval_stub.dart'
@@ -8,16 +13,18 @@ import 'js_eval_stub.dart'
 
 /// İngilizce TTS tek merkezli yardımcı.
 ///
-/// Mimari kural: Kurmancî TTS için HuggingFace kaynağı, İngilizce için
-/// browser SpeechSynthesis. SpeechSynthesis çağrıları bu helper üzerinden
-/// akar — en_* ekranlarında ham `js_bridge.evalJs` çağrılmamalı.
-///
+/// Mimari kural: İngilizce seslendirmenin TAMAMI bu helper üzerinden akar —
+/// en_* ekranlarında ham `js_bridge.evalJs` / `FlutterTts` çağrılmamalı.
 /// `SpeakButton(lang: 'en')` ve diğer İngilizce aktiviteler bu helper'ı
 /// kullanır; kod tekrarı ve yanlış aksan sızıntısı önlenir.
 ///
-/// NOT (Ekim 2026): Yalnızca web'de ses üretir. Android uygulamasında
-/// İngilizce TTS yolu henüz yok (flutter_tts eklenmedi) — `speak` orada
-/// sessizce hiçbir şey yapmaz.
+/// SES YOLU (Ekim 2026 — web ve Android'de aynı ses):
+///   1. Metin [EnSesManifest]'te varsa ÖNCEDEN ÜRETİLMİŞ dosya
+///      (lutke.app/ses/…) paylaşılan bir just_audio `AudioPlayer` ile çalınır.
+///      Web'de de Android'de de aynı kayıt — profesyonel, tutarlı telaffuz.
+///   2. Manifestte yoksa (ya da dosya yüklenemezse) cihaz TTS'ine düşülür:
+///      • web → tarayıcı speechSynthesis (parçalı, sıralı kuyruk)
+///      • Android/iOS → flutter_tts (en-US, parçalar sırayla, iptal edilebilir)
 class EnTtsHelper {
   EnTtsHelper._();
 
@@ -29,52 +36,76 @@ class EnTtsHelper {
   /// Yavaş hızda (rate < 0.8) parça sınırı — aynı süre bütçesi için kısa.
   static const int slowMaxChunk = 110;
 
-  /// İngilizce metni browser SpeechSynthesis API ile seslendirir.
+  /// Ses arka ucu — testlerde sahte arka uçla değiştirilir (dikiş).
+  @visibleForTesting
+  static EnSesArkaUcu arkaUc = _GercekArkaUc();
+
+  /// Metin → hazır ses adresi araması (manifestte yoksa null). Testlerde
+  /// sahte manifestle değiştirilir.
+  @visibleForTesting
+  static String? Function(String metin) sesAdresi = EnSesManifest.url;
+
+  /// İstek nesli: her [speak] / [cancel] artırır. Bekleyen (ağdan yüklenen)
+  /// eski istek nesli eskimişse ÇALINMAZ — bayat ses yeni sesin üstüne binmez.
+  static int _nesil = 0;
+
+  /// İngilizce metni seslendirir — önce hazır dosya, yoksa cihaz TTS'i.
   ///
-  /// [rate] — 0.6 (yavaş) ile 1.0 (normal) arası. Default: 1.0.
-  /// Yerel (cihaz üstü) en-US / en-GB ses tercih edilir.
+  /// [rate] — 0.6 (yavaş) ile 1.1 (hızlı) arası; 1.0 normal. Hazır dosyada
+  /// [oynatmaHizi] ile oynatma hızına çevrilir; cihaz TTS'inde doğrudan
+  /// konuşma hızıdır. Önceki okuma (dosya ya da TTS) her zaman kesilir.
   ///
-  /// "METİN YARIDA KESİLİYOR" FIX (Ekim 2026):
-  ///   • Metin Dart'ta cümle boyu parçalara bölünür ([chunkText]) ve JS'de
-  ///     SIRALI bir kuyrukla okunur (bir parça bitince sonraki). Tek dev
-  ///     utterance Chrome'da ~15 sn'de kesiliyordu.
-  ///   • Tüm utterance'lar okuma bitene dek `window._lutkeEnTts.queue`
-  ///     dizisinde tutulur — Chrome yerel değişkendeki utterance'ı çöpe
-  ///     toplayıp `onend`'i hiç ateşlemeden konuşmayı bitirebiliyordu.
-  ///   • Eski "10 sn'de bir pause()/resume()" dürtmesi kaldırıldı: Android
-  ///     Chrome'da konuşmayı kalıcı olarak durdurabiliyordu.
-  ///   • Yerel (`localService`) ses tercih edilir — uzak seslerdeki süre
-  ///     sınırı ve ağ kesintisi riski yok.
-  ///   • İlk çağrıda `getVoices()` boş dönebilir — `voiceschanged` (en çok
-  ///     500 ms) beklenir; ilk tıklama boşa düşmez.
-  ///   • `onend` hiç gelmezse bekçi zamanlayıcı kuyruğu ilerletir.
+  /// Ateşle-unut: çağıranlar beklemez (onTap içinde kullanılır).
   static void speak(String text, {double rate = 1.0}) {
-    if (!kIsWeb) return;
-    final chunks = chunkText(
-      text,
-      maxLength: rate < 0.8 ? slowMaxChunk : defaultMaxChunk,
-    );
-    if (chunks.isEmpty) return;
-    js_bridge.evalJs(_speakScript(chunks, rate));
+    unawaited(seslendir(text, rate: rate));
   }
 
-  /// Aktif konuşmayı ve bekleyen kuyruğu iptal et.
+  /// [speak]'in beklenebilir hâli — yönlendirme kararını test etmek için.
+  ///
+  /// Web notu: manifest ıskasında cihaz TTS'i ilk `await`'ten ÖNCE
+  /// (eşzamanlı) başlatılır — iOS Safari speechSynthesis'i yalnızca
+  /// kullanıcı jesti içinde konuşturur.
+  @visibleForTesting
+  static Future<void> seslendir(String text, {double rate = 1.0}) async {
+    final nesil = ++_nesil;
+    bool hala() => nesil == _nesil;
+    if (text.trim().isEmpty) return;
+
+    final url = sesAdresi(text);
+    if (url != null) {
+      // Hazır dosya: önce cihaz TTS'i sustur (yarım kalan okuma üst üste
+      // binmesin), sonra dosyayı çal.
+      unawaited(_sessiz(arkaUc.cihazTtsDurdur()));
+      bool calindi;
+      try {
+        calindi = await arkaUc.dosyaCal(url, oynatmaHizi(rate), hala);
+      } catch (e) {
+        if (kDebugMode) debugPrint('EN ses dosyası çalınamadı: $e');
+        calindi = false;
+      }
+      // Dosya çaldı ya da araya yeni istek/iptal girdi → iş bitti.
+      if (calindi || !hala()) return;
+      // Dosya yüklenemedi (ağ yok, dosya henüz yayında değil…) → TTS'e düş.
+    } else {
+      unawaited(_sessiz(arkaUc.dosyaDurdur()));
+    }
+    await _sessiz(arkaUc.cihazTts(text, rate, hala));
+  }
+
+  /// TTS hızını ([speak] `rate`) hazır dosyanın oynatma hızına çevirir.
+  ///
+  /// rate 1.0 → 1.0. Yavaş hızlar yumuşatılır (×0.8): kayıt zaten doğal
+  /// tempoda; 0.6'ya germek sesi bozar. 0.6 → 0.68, 0.7 → 0.76,
+  /// 0.85 → 0.88, 0.9 → 0.92, 1.1 → 1.08. Perde korunur (web: preservesPitch,
+  /// Android: ExoPlayer hız parametresi).
+  static double oynatmaHizi(double rate) =>
+      (1.0 + (rate - 1.0) * 0.8).clamp(0.5, 2.0).toDouble();
+
+  /// Aktif konuşmayı / çalan dosyayı ve bekleyen kuyruğu iptal et.
   static void cancel() {
-    if (!kIsWeb) return;
-    js_bridge.evalJs('''
-      (function() {
-        try {
-          var job = window._lutkeEnTts;
-          if (job) {
-            job.cancelled = true;
-            clearTimeout(job.watchdog);
-            clearTimeout(job.startTimer);
-            job.queue = [];
-          }
-          if (window.speechSynthesis) window.speechSynthesis.cancel();
-        } catch (e) {}
-      })();
-    ''');
+    _nesil++;
+    unawaited(_sessiz(arkaUc.dosyaDurdur()));
+    unawaited(_sessiz(arkaUc.cihazTtsDurdur()));
   }
 
   /// Browser voices'in önceden yüklenmesi — uygulama açılışında bir kez
@@ -83,7 +114,16 @@ class EnTtsHelper {
   /// yüklenir — ilk "Listen" click'i ses üretmez. Bu prime ile önlenir.
   static void warmUp() {
     if (!kIsWeb) return;
-    js_bridge.evalJs('''
+    js_bridge.evalJs(_warmUpScript);
+  }
+
+  /// Arka uç hatası okumayı / uygulamayı düşürmesin (eklenti yok, ağ yok…).
+  static Future<void> _sessiz(Future<void> f) =>
+      f.catchError((Object e) {
+        if (kDebugMode) debugPrint('EN TTS: $e');
+      });
+
+  static const String _warmUpScript = '''
       (function() {
         try {
           if (!window.speechSynthesis) return;
@@ -96,8 +136,28 @@ class EnTtsHelper {
           }
         } catch (e) { /* silent */ }
       })();
-    ''');
-  }
+    ''';
+
+  static const String _cancelScript = '''
+      (function() {
+        try {
+          var job = window._lutkeEnTts;
+          if (job) {
+            job.cancelled = true;
+            clearTimeout(job.watchdog);
+            clearTimeout(job.startTimer);
+            job.queue = [];
+          }
+          if (window.speechSynthesis) window.speechSynthesis.cancel();
+        } catch (e) {}
+      })();
+    ''';
+
+  /// Parça için tahmini konuşma süresi + pay — bekçi zamanlayıcı
+  /// (web JS kuyruğundaki `est` ile aynı formül).
+  static Duration _tahminiSure(String parca, double rate) => Duration(
+        milliseconds: (parca.length * 85 / rate.clamp(0.1, 2.0)).ceil() + 4000,
+      );
 
   // ── Parçalama (saf Dart — test edilebilir) ─────────────────────
 
@@ -304,5 +364,131 @@ class EnTtsHelper {
         } catch (e) { console.log('EN TTS error:', e); }
       })();
     ''';
+  }
+}
+
+// ── Arka uçlar ───────────────────────────────────────────────────
+
+/// İngilizce ses arka ucu — [EnTtsHelper]'ın yönlendirme kararını
+/// platformdan ayıran dikiş. Üretimde [_GercekArkaUc]; testlerde sahte.
+abstract class EnSesArkaUcu {
+  /// Hazır ses dosyasını [hiz] oynatma hızında çalar. Dosya yüklenemezse
+  /// `false` döner (çağıran cihaz TTS'ine düşer). Yükleme bitince [hala]
+  /// `false` ise (araya yeni istek / iptal girdi) çalma başlatılmaz.
+  Future<bool> dosyaCal(String url, double hiz, bool Function() hala);
+
+  /// Çalan hazır dosyayı durdurur.
+  Future<void> dosyaDurdur();
+
+  /// Cihaz TTS'i ile okur (web: speechSynthesis, mobil: flutter_tts).
+  /// [hala] `false` olunca sıradaki parçalar okunmaz.
+  Future<void> cihazTts(String text, double rate, bool Function() hala);
+
+  /// Cihaz TTS'ini (ve bekleyen parçaları) durdurur.
+  Future<void> cihazTtsDurdur();
+}
+
+/// Üretim arka ucu: just_audio (dosya) + speechSynthesis / flutter_tts.
+///
+/// Oynatıcı ve TTS motoru TEMBEL kurulur — İngilizce hiç çalınmazsa ya da
+/// yalnızca [EnTtsHelper.cancel] çağrılırsa eklenti kanalına dokunulmaz.
+class _GercekArkaUc implements EnSesArkaUcu {
+  AudioPlayer? _oyuncu;
+  FlutterTts? _tts;
+  Future<FlutterTts>? _ttsHazir;
+
+  /// Paylaşılan tek oynatıcı — her yeni dosya öncekinin yerini alır.
+  AudioPlayer get _paylasilanOyuncu => _oyuncu ??= AudioPlayer();
+
+  @override
+  Future<bool> dosyaCal(String url, double hiz, bool Function() hala) async {
+    final oyuncu = _paylasilanOyuncu;
+    try {
+      await oyuncu.setSpeed(hiz);
+      // setUrl önceki kaynağı keser ve yeni dosyayı yükler; ağ/404
+      // hatasında fırlatır → false → TTS yedeği.
+      await oyuncu.setUrl(url);
+    } catch (e) {
+      if (kDebugMode) debugPrint('EN ses dosyası yüklenemedi ($url): $e');
+      return false;
+    }
+    if (!hala()) return true; // bayat istek — çalma, yedeğe de düşme
+    unawaited(
+      oyuncu.play().catchError((Object e) {
+        if (kDebugMode) debugPrint('EN ses dosyası çalma hatası: $e');
+      }),
+    );
+    return true;
+  }
+
+  @override
+  Future<void> dosyaDurdur() async {
+    final oyuncu = _oyuncu;
+    if (oyuncu == null) return;
+    await oyuncu.stop();
+  }
+
+  @override
+  Future<void> cihazTts(String text, double rate, bool Function() hala) async {
+    final chunks = EnTtsHelper.chunkText(
+      text,
+      maxLength: rate < 0.8
+          ? EnTtsHelper.slowMaxChunk
+          : EnTtsHelper.defaultMaxChunk,
+    );
+    if (chunks.isEmpty) return;
+
+    if (kIsWeb) {
+      // Eşzamanlı — kullanıcı jesti içinde kalır (iOS Safari).
+      js_bridge.evalJs(EnTtsHelper._speakScript(chunks, rate));
+      return;
+    }
+
+    // Android / iOS: flutter_tts. awaitSpeakCompletion(true) ile her parça
+    // bitince sıradaki okunur; iptal (nesil değişimi) parça aralarında
+    // yakalanır, o anki parça cihazTtsDurdur → stop() ile kesilir.
+    final FlutterTts tts;
+    try {
+      tts = await (_ttsHazir ??= _ttsKur());
+    } catch (_) {
+      // Kurulum başarısız (motor yok / eklenti yok) — sonraki çağrı yeniden
+      // denesin; bozuk future önbellekte kalmasın.
+      _ttsHazir = null;
+      _tts = null;
+      rethrow;
+    }
+    if (!hala()) return;
+    await tts.stop();
+    // flutter_tts hız ölçeği: 0.5 = normal (Android'de ×2 → TextToSpeech
+    // 1.0; iOS'ta AVSpeechUtterance varsayılanı 0.5). rate 1.0 → 0.5.
+    await tts.setSpeechRate((rate * 0.5).clamp(0.1, 1.0).toDouble());
+    for (final parca in chunks) {
+      if (!hala()) return;
+      // Bekçi: flutter_tts stop()/hata sonrası speak future'ını hiç
+      // tamamlamayabiliyor — tahmini süre dolunca sıradakine geç.
+      await tts
+          .speak(parca)
+          .timeout(EnTtsHelper._tahminiSure(parca, rate), onTimeout: () => 0);
+    }
+  }
+
+  Future<FlutterTts> _ttsKur() async {
+    final tts = _tts = FlutterTts();
+    await tts.setLanguage('en-US');
+    await tts.setPitch(1.0);
+    await tts.setVolume(1.0);
+    await tts.awaitSpeakCompletion(true);
+    return tts;
+  }
+
+  @override
+  Future<void> cihazTtsDurdur() async {
+    if (kIsWeb) {
+      js_bridge.evalJs(EnTtsHelper._cancelScript);
+      return;
+    }
+    final tts = _tts;
+    if (tts == null) return;
+    await tts.stop();
   }
 }

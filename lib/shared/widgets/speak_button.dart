@@ -23,7 +23,9 @@ import '../../core/services/js_eval_stub.dart'
 ///
 /// **Dil seçimi metne bağlıdır**, aktif modüle değil:
 ///   - `lang: 'ku'` (default) → HuggingFace Kurmancî TTS (amedcj/kmr_tts)
-///   - `lang: 'en'` → Browser SpeechSynthesis (native İngilizce voice)
+///   - `lang: 'en'` → [EnTtsHelper]: önce hazır İngilizce ses dosyası
+///     (EnSesManifest), yoksa cihaz TTS'i (web speechSynthesis / mobil
+///     flutter_tts). Web'de de Android'de de — Kurmancî sese HİÇ düşmez.
 ///
 /// Kurmancî için Türkçe/İngilizce fallback YOKTUR — yanlış telaffuz
 /// olmasın diye. Başarısız olursa kullanıcıya görsel bilgi verir.
@@ -39,7 +41,7 @@ class SpeakButton extends ConsumerStatefulWidget {
   final bool slow;
 
   /// Metnin dili: `'ku'` (Kurmancî, default) veya `'en'` (İngilizce).
-  /// Kurmancî için HF TTS, İngilizce için browser TTS kullanılır.
+  /// Kurmancî için Kurmancî ses yolu, İngilizce için [EnTtsHelper].
   final String lang;
 
   /// True ise widget ilk göründüğünde ses BİR KEZ otomatik çalınır
@@ -64,8 +66,10 @@ class SpeakButton extends ConsumerStatefulWidget {
   /// Quiz'de sonraki soruya geçişte çağrılır — önceki sorunun sesi
   /// (HF cold-start gecikmesiyle geç başlasa bile) kesilir, "bayat ses"
   /// bir sonraki sorunun üzerine çalmaz. Hem Kurmancî web audio'yu
-  /// (`window.__lutkeAudio`) hem İngilizce browser TTS kuyruğunu keser.
+  /// (`window.__lutkeAudio`) hem İngilizce sesi (hazır dosya + TTS) keser.
   static void stopAll() {
+    // İngilizce her platformda (Android'de de) kesilir — kIsWeb kapısından önce.
+    EnTtsHelper.cancel();
     if (!kIsWeb) return;
     try {
       js_bridge.evalJs('''
@@ -79,7 +83,6 @@ class SpeakButton extends ConsumerStatefulWidget {
         })();
       ''');
     } catch (_) {}
-    EnTtsHelper.cancel();
   }
 
   @override
@@ -173,7 +176,7 @@ class _SpeakButtonState extends ConsumerState<SpeakButton> {
   /// 4. Aksi → Kurmancî (default)
   ///
   /// Bu yanlış yönlendirmeyi önler: İngilizce modda İngilizce kelimeler
-  /// HF Kurmancî TTS'e değil, browser speechSynthesis'e gönderilir.
+  /// Kurmancî ses yoluna değil, [EnTtsHelper]'a gönderilir.
   String _resolvedLang() {
     // Öncelik: çağıranın açıkça verdiği dil (widget.lang).
     // 'ku' ve 'en' değerleri olduğu gibi kullanılır.
@@ -210,10 +213,12 @@ class _SpeakButtonState extends ConsumerState<SpeakButton> {
 
     final lang = _resolvedLang();
 
-    // İngilizce metin → browser native speechSynthesis (hızlı, ücretsiz)
-    // Kurmancî metin → HF TTS (aşağıda). Metnin dili karar verir.
-    if (lang == 'en' && kIsWeb) {
-      _speakEnglishBrowser(requestText);
+    // İngilizce metin → EnTtsHelper (hazır dosya, yoksa cihaz TTS'i) —
+    // HER platformda. Eskiden yalnız web'de buraya giriyordu; Android'de
+    // İngilizce kelime aşağıdaki Kurmancî yola düşüp Kurmancî sesle
+    // okunuyordu (Ekim 2026 fix). Kurmancî metin → aşağıdaki yol.
+    if (lang == 'en') {
+      _speakEnglish(requestText);
       setState(() { _loading = false; _playing = true; });
       SoundService.playClick();
       // Tahmini süre sonra playing'i kapat (nesil eskimişse dokunma)
@@ -390,9 +395,9 @@ class _SpeakButtonState extends ConsumerState<SpeakButton> {
     });
   }
 
-  /// İngilizce için: browser'ın yerleşik speechSynthesis API'sini kullan.
-  /// Tek merkezi helper (EnTtsHelper) üzerinden akar — DRY.
-  void _speakEnglishBrowser(String text) {
+  /// İngilizce için: tek merkezi helper (EnTtsHelper) — hazır dosya, yoksa
+  /// cihaz TTS'i. Platform ayrımı helper'ın içinde.
+  void _speakEnglish(String text) {
     final rate = _slowMode ? 0.7 : 1.0;
     EnTtsHelper.speak(text, rate: rate);
   }
