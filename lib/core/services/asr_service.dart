@@ -1,10 +1,6 @@
-import 'dart:async';
-import 'dart:convert';
-
 import 'package:flutter/foundation.dart';
 
-import 'js_eval_stub.dart'
-    if (dart.library.html) 'js_eval_web.dart' as js_bridge;
+import 'web_speech_session.dart';
 
 /// LÛTKE — Otomatik Telaffuz Değerlendirme Servisi (ASR)
 ///
@@ -68,11 +64,11 @@ class PronunciationResult {
 class AsrService {
   AsrService._(); // Statik kullanım — SpeechRecognitionService ile tutarlı
 
-  // Aktif dinleme oturumu — cancel() ile geçersiz kılınır.
-  static int _session = 0;
-  static bool _isListening = false;
+  /// Ortak dinleme motoru — SpeechRecognitionService ile çakışmasın diye
+  /// ayrı window anahtarı (`_lutkeAsr*`) kullanılır.
+  static final WebSpeechSession _speech = WebSpeechSession('_lutkeAsr');
 
-  static bool get isListening => _isListening;
+  static bool get isListening => _speech.isActive;
 
   /// Tarayıcı desteği (gerçek kontrol JS tarafında yapılır;
   /// desteklenmiyorsa assess() sessizce null döner).
@@ -83,7 +79,12 @@ class AsrService {
   /// [language]: 'tr-TR' (Kurmancî yakın fallback) veya 'en-US' (İngilizce).
   /// [approximate]: tr-TR fallback kullanılıyorsa true bırak.
   ///
-  /// Her türlü hatada null döner — çağıran sessizce fallback yapmalı.
+  /// Dinleme sürekli kipte yapılır: öğrenci cümle ortasında duraksasa da
+  /// kesilmez; konuşma başladıktan sonra ~1.8 sn sessizlikte, [stop] ile
+  /// veya [timeout] dolunca biter ve o ana kadar söylenenler skorlanır.
+  ///
+  /// Her türlü hatada (ve [cancel] ile iptalde) null döner — çağıran
+  /// sessizce fallback yapmalı.
   static Future<PronunciationResult?> assess({
     required String target,
     String language = 'tr-TR',
@@ -94,138 +95,49 @@ class AsrService {
     final trimmedTarget = target.trim();
     if (trimmedTarget.isEmpty) return null;
 
-    cancel(); // varsa önceki oturumu kapat
-    final mySession = ++_session;
-    _isListening = true;
+    final outcome = await _speech.listen(
+      language: language,
+      maxAlternatives: 5,
+      timeout: timeout,
+    );
+    if (outcome == null) return null; // iptal edildi / yeni oturum başladı
 
-    js_bridge.evalJs(_startScript(language));
-
-    final deadline = DateTime.now().add(timeout);
-    try {
-      while (DateTime.now().isBefore(deadline)) {
-        await Future<void>.delayed(const Duration(milliseconds: 250));
-        // İptal edildi veya yeni oturum başladı
-        if (_session != mySession || !_isListening) return null;
-
-        final raw = js_bridge.evalJsSync(
-          '(function(){ return JSON.stringify({'
-          'done: !!window._lutkeAsrDone,'
-          'error: window._lutkeAsrError || "",'
-          'alts: window._lutkeAsrAlts || []'
-          '}); })()',
-        );
-        if (raw == null) return null; // JS köprüsü çalışmıyor
-
-        Map<String, dynamic> state;
-        try {
-          state = jsonDecode(raw.toString()) as Map<String, dynamic>;
-        } catch (_) {
-          continue; // geçici parse hatası — bir sonraki poll'u dene
-        }
-
-        if (state['done'] != true) continue;
-
-        final error = (state['error'] as String?) ?? '';
-        if (error.isNotEmpty) {
-          // 'not-allowed', 'no-speech', 'unsupported', 'network' vb.
-          if (kDebugMode) debugPrint('ASR: tanıma hatası — $error');
-          return null;
-        }
-
-        final alts =
-            ((state['alts'] as List?) ?? const []).whereType<String>().toList();
-        if (alts.isEmpty) return null; // ses algılanmadı
-
-        // Alternatifler içinden hedefe en yakın olanı seç —
-        // tr-TR fallback'te doğru okunuşa en yakın hipotez genelde
-        // ilk sırada olmaz.
-        var bestText = alts.first;
-        var bestSim = 0.0;
-        for (final alt in alts) {
-          final sim = similarity(alt, trimmedTarget);
-          if (sim > bestSim) {
-            bestSim = sim;
-            bestText = alt;
-          }
-        }
-
-        return PronunciationResult(
-          transcript: bestText.trim(),
-          similarity: bestSim,
-          verdict: verdictFor(bestSim),
-          isApproximate: approximate,
-        );
+    if (!outcome.hasSpeech) {
+      // 'not-allowed', 'no-speech', 'unsupported', 'network', 'timeout' vb.
+      if (kDebugMode) {
+        debugPrint('ASR: sonuç yok — ${outcome.error.isEmpty ? 'ses algılanmadı' : outcome.error}');
       }
-      if (kDebugMode) debugPrint('ASR: dinleme zaman aşımı');
       return null;
-    } finally {
-      if (_session == mySession) {
-        _isListening = false;
-        _stopJs();
+    }
+
+    // Alternatifler içinden hedefe en yakın olanı seç —
+    // tr-TR fallback'te doğru okunuşa en yakın hipotez genelde
+    // ilk sırada olmaz.
+    var bestText = outcome.transcript;
+    var bestSim = 0.0;
+    for (final alt in outcome.candidates) {
+      final sim = similarity(alt, trimmedTarget);
+      if (sim > bestSim) {
+        bestSim = sim;
+        bestText = alt;
       }
     }
-  }
 
-  /// Aktif dinlemeyi iptal et (ekran kapanırken/faz değişince çağır).
-  static void cancel() {
-    _session++; // devam eden assess() döngüsünü geçersiz kıl
-    _isListening = false;
-    _stopJs();
-  }
-
-  static void _stopJs() {
-    js_bridge.evalJs(
-      '(function(){ try { if (window._lutkeAsrRec) '
-      'window._lutkeAsrRec.abort(); } catch(e) {} })();',
+    return PronunciationResult(
+      transcript: bestText.trim(),
+      similarity: bestSim,
+      verdict: verdictFor(bestSim),
+      isApproximate: approximate,
     );
   }
 
-  /// SpeechRecognition başlatma script'i.
-  /// SpeechRecognitionService ile çakışmasın diye ayrı window anahtarları
-  /// (_lutkeAsr*) kullanılır.
-  static String _startScript(String language) => '''
-      (function() {
-        try {
-          var SR = window.SpeechRecognition || window.webkitSpeechRecognition;
-          if (!SR) {
-            window._lutkeAsrError = 'unsupported';
-            window._lutkeAsrDone = true;
-            return;
-          }
-          if (window._lutkeAsrRec) {
-            try { window._lutkeAsrRec.abort(); } catch(e) {}
-          }
-          window._lutkeAsrAlts = [];
-          window._lutkeAsrError = '';
-          window._lutkeAsrDone = false;
-          var r = new SR();
-          r.lang = '$language';
-          r.continuous = false;
-          r.interimResults = false;
-          r.maxAlternatives = 5;
-          r.onresult = function(e) {
-            var alts = [];
-            var res = e.results[0];
-            for (var i = 0; i < res.length; i++) {
-              alts.push(res[i].transcript || '');
-            }
-            window._lutkeAsrAlts = alts;
-          };
-          r.onerror = function(e) {
-            window._lutkeAsrError = e.error || 'unknown';
-            window._lutkeAsrDone = true;
-          };
-          r.onend = function() {
-            window._lutkeAsrDone = true;
-          };
-          window._lutkeAsrRec = r;
-          r.start();
-        } catch (e) {
-          window._lutkeAsrError = String(e);
-          window._lutkeAsrDone = true;
-        }
-      })();
-    ''';
+  /// Dinlemeyi ZARİF bitir: mikrofon kapanır, o ana kadar söylenenler
+  /// skorlanır ve bekleyen [assess] sonucu döndürür (durdur düğmesi için).
+  static void stop() => _speech.stop();
+
+  /// Aktif dinlemeyi iptal et (ekran kapanırken/faz değişince çağır).
+  /// Bekleyen [assess] null döner.
+  static void cancel() => _speech.cancel();
 
   // ── Skorlama ────────────────────────────────────────────────
 

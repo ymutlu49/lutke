@@ -1,6 +1,6 @@
 import 'package:flutter/foundation.dart';
-import '../../core/services/js_eval_stub.dart'
-    if (dart.library.html) '../../core/services/js_eval_web.dart' as js_bridge;
+
+import '../../core/services/web_speech_session.dart';
 
 /// Web Speech API (SpeechRecognition) kullanarak kullanıcının
 /// konuşmasını tanır ve metne dönüştürür.
@@ -10,8 +10,19 @@ import '../../core/services/js_eval_stub.dart'
 /// Safari: iOS 14.5+
 ///
 /// Offline değil — Google Cloud Speech API'ye istek gider.
+///
+/// Ekim 2026: dinleme ortak [WebSpeechSession] motoruna taşındı (sürekli
+/// kip + sessizlikte zarif bitiş). Eskiden `continuous = false` idi ve
+/// Chrome ilk kısa duraksamada kaydı kesiyordu. Window anahtarı
+/// `_lutkeSpeech*` — AsrService'in `_lutkeAsr*` oturumuyla çakışmaz.
 class SpeechRecognitionService {
-  static bool _isListening = false;
+  static final WebSpeechSession _speech = WebSpeechSession('_lutkeSpeech');
+
+  /// Her start() yeni nesil — eski oturumun geç gelen sonucu
+  /// yeni oturumun callback'lerine düşmesin.
+  static int _generation = 0;
+
+  static bool get isListening => _speech.isActive;
 
   /// Tarayıcı desteği var mı kontrol et.
   static bool get isSupported {
@@ -22,116 +33,49 @@ class SpeechRecognitionService {
 
   /// Dinlemeyi başlat.
   /// [language]: 'en-US', 'ku-KU' (Kurmancî için 'tr-TR' yakın fallback)
-  /// [onResult]: transcript geldiğinde çağrılır
-  /// [onError]: hata
+  /// [onResult]: konuşma bitince (sessizlik, [stop] veya zaman bütçesi)
+  ///   toplanan metinle BİR KEZ çağrılır
+  /// [onError]: hata ('not-allowed', 'no-speech', 'network', 'timeout' …)
+  ///
+  /// [cancel] ile iptal edilirse hiçbir callback çağrılmaz.
   static void start({
     required String language,
     required void Function(String transcript) onResult,
     required void Function(String error) onError,
+    Duration timeout = const Duration(seconds: 15),
   }) {
     if (!kIsWeb) {
-      onError('Speech recognition sadece web\'de çalışır');
+      onError("Speech recognition sadece web'de çalışır");
       return;
     }
-    if (_isListening) stop();
-
-    // Global callback hook via JS bridge
-    // We use a simple polling approach: store result in window._lutkeSpeech
-    _isListening = true;
-
-    js_bridge.evalJs('''
-      (function() {
-        try {
-          var SR = window.SpeechRecognition || window.webkitSpeechRecognition;
-          if (!SR) {
-            window._lutkeSpeechError = 'Tarayıcı desteklemiyor';
-            return;
-          }
-          if (window._lutkeRecognition) {
-            try { window._lutkeRecognition.stop(); } catch(e) {}
-          }
-          window._lutkeSpeechResult = '';
-          window._lutkeSpeechError = '';
-          window._lutkeSpeechDone = false;
-          var r = new SR();
-          r.lang = '$language';
-          r.continuous = false;
-          r.interimResults = false;
-          r.maxAlternatives = 3;
-          r.onresult = function(e) {
-            var t = e.results[0][0].transcript;
-            window._lutkeSpeechResult = t;
-            window._lutkeSpeechDone = true;
-          };
-          r.onerror = function(e) {
-            window._lutkeSpeechError = e.error || 'unknown';
-            window._lutkeSpeechDone = true;
-          };
-          r.onend = function() {
-            window._lutkeSpeechDone = true;
-          };
-          window._lutkeRecognition = r;
-          r.start();
-        } catch (e) {
-          window._lutkeSpeechError = String(e);
-          window._lutkeSpeechDone = true;
-        }
-      })();
-    ''');
-
-    // Polling for result (max 10s)
-    _pollResult(onResult, onError, 0);
-  }
-
-  static void _pollResult(
-    void Function(String) onResult,
-    void Function(String) onError,
-    int elapsedMs,
-  ) {
-    if (!_isListening) return;
-    if (elapsedMs > 15000) {
-      _isListening = false;
-      onError('Zeman qediya (timeout)');
-      return;
-    }
-    Future.delayed(const Duration(milliseconds: 300), () {
-      if (!_isListening) return;
-      // Check window._lutkeSpeechDone
-      final script = '''
-        (function() {
-          return JSON.stringify({
-            done: !!window._lutkeSpeechDone,
-            result: window._lutkeSpeechResult || '',
-            error: window._lutkeSpeechError || ''
-          });
-        })()
-      ''';
-      try {
-        final raw = js_bridge.evalJsSync(script);
-        if (raw != null && raw.toString().contains('"done":true')) {
-          _isListening = false;
-          final err = RegExp(r'"error":"([^"]*)"').firstMatch(raw.toString());
-          if (err != null && err.group(1)!.isNotEmpty) {
-            onError(err.group(1)!);
-            return;
-          }
-          final res = RegExp(r'"result":"([^"]*)"').firstMatch(raw.toString());
-          onResult(res?.group(1) ?? '');
-          return;
-        }
-      } catch (_) {}
-      _pollResult(onResult, onError, elapsedMs + 300);
+    final gen = ++_generation;
+    _speech
+        .listen(language: language, maxAlternatives: 3, timeout: timeout)
+        .then((outcome) {
+      if (outcome == null || gen != _generation) return; // iptal edildi
+      if (outcome.hasSpeech) {
+        onResult(outcome.transcript);
+      } else if (outcome.error == 'timeout') {
+        onError('Zeman qediya (timeout)');
+      } else {
+        onError(outcome.error.isEmpty ? 'no-speech' : outcome.error);
+      }
     });
   }
 
+  /// Dinlemeyi ZARİF bitir: mikrofon kapanır ve o ana kadar söylenenler
+  /// [start]'ın `onResult`'ına iletilir (durdur düğmesi için).
   static void stop() {
     if (!kIsWeb) return;
-    _isListening = false;
-    js_bridge.evalJs('''
-      (function() {
-        try { if (window._lutkeRecognition) window._lutkeRecognition.stop(); } catch(e) {}
-      })();
-    ''');
+    _speech.stop();
+  }
+
+  /// Dinlemeyi iptal et — sonuç atılır, callback çağrılmaz
+  /// (ekran kapanırken / dispose'ta kullan).
+  static void cancel() {
+    if (!kIsWeb) return;
+    _generation++;
+    _speech.cancel();
   }
 
   /// İki metnin ne kadar benzediğini (0.0-1.0) döner.
@@ -151,8 +95,12 @@ class SpeechRecognitionService {
     final m = a.length;
     final n = b.length;
     final dp = List.generate(m + 1, (_) => List.filled(n + 1, 0));
-    for (var i = 0; i <= m; i++) dp[i][0] = i;
-    for (var j = 0; j <= n; j++) dp[0][j] = j;
+    for (var i = 0; i <= m; i++) {
+      dp[i][0] = i;
+    }
+    for (var j = 0; j <= n; j++) {
+      dp[0][j] = j;
+    }
     for (var i = 1; i <= m; i++) {
       for (var j = 1; j <= n; j++) {
         final cost = a[i - 1] == b[j - 1] ? 0 : 1;

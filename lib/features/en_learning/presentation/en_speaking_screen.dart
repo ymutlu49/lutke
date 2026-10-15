@@ -39,8 +39,8 @@ class _EnSpeakingScreenState extends ConsumerState<EnSpeakingScreen> {
 
   @override
   void dispose() {
-    // Safety: ger mîkrofon hîn vekirî be, bi dernehatinê bigire.
-    SpeechRecognitionService.stop();
+    // Safety: mikrofon hâlâ açıksa kapat (sonuç atılır).
+    SpeechRecognitionService.cancel();
     EnTtsHelper.cancel();
     super.dispose();
   }
@@ -85,12 +85,14 @@ class _EnSpeakingScreenState extends ConsumerState<EnSpeakingScreen> {
       _similarity = null;
       _attempts++;
     });
+    // Hedef, dinleme başladığı andaki cümle — sonuç geç gelse de doğru
+    // cümleyle karşılaştırılır.
+    final target = _items[_idx].textEn;
     SpeechRecognitionService.start(
       language: 'en-US',
       onResult: (t) {
         if (!mounted) return;
-        final sim =
-            SpeechRecognitionService.similarity(t, _items[_idx].textEn);
+        final sim = SpeechRecognitionService.similarity(t, target);
         setState(() {
           _listening = false;
           _transcript = t;
@@ -131,12 +133,12 @@ class _EnSpeakingScreenState extends ConsumerState<EnSpeakingScreen> {
     return 'Xeletî: $err. Dîsa biceribîne.';
   }
 
+  /// Zarif durdurma: mikrofon kapanır ama söylenenler kaybolmaz —
+  /// `onResult` toplanan metinle çağrılır, `_listening` orada kapanır
+  /// (Ekim 2026: eskiden "Bisekine" sonucu çöpe atıyordu).
   void _stopRecording() {
     if (!_listening) return;
     SpeechRecognitionService.stop();
-    setState(() {
-      _listening = false;
-    });
   }
 
   void _iDid() {
@@ -185,9 +187,12 @@ class _EnSpeakingScreenState extends ConsumerState<EnSpeakingScreen> {
       );
       return;
     }
+    // Yeni cümle: eski dinleme hâlâ açıksa iptal et.
+    SpeechRecognitionService.cancel();
     setState(() {
       _idx++;
       _done = false;
+      _listening = false;
       _transcript = null;
       _similarity = null;
       _attempts = 0;

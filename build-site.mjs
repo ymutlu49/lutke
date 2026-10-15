@@ -310,6 +310,9 @@ ${[...staticUrls, ...contentSiteUrls].join('\n')}
     log('reusing existing dist/app');
   }
 
+  // 11) Kurmancî sesler -> dist/ses (Jimaro ses fabrikası, Ziman/ses/fabrika/cikti/<ses>)
+  await copySes();
+
   const files = await listFiles(DIST);
   log(`DONE. dist has ${files.length} files.`);
 }
@@ -417,6 +420,11 @@ function buildHeaders() {
 /assets/site/*
   Cache-Control: public, max-age=31536000, immutable
 
+# Kurmancî sesler: ad içerikten türetilir (değişmez)
+/ses/*
+  Cache-Control: public, max-age=31536000, immutable
+  Access-Control-Allow-Origin: *
+
 # Marketing pages: revalidate + security headers
 /*
   X-Content-Type-Options: nosniff
@@ -439,6 +447,22 @@ function buildHeaders() {
 /app/canvaskit/*
   Cache-Control: public, max-age=2592000
 `;
+}
+
+// Ses fabrikasının çıktısı (MP3, içerik = ad). Eski assets/audio/words/*.wav artık uygulamada değil;
+// güncellenmemiş Android sürümlerinin .wav istekleri functions/app/[[path]].ts ile yeni seslere yönlenir.
+const SES = process.env.LUTKE_SES || 'piper-berfin';
+const SES_KAYNAK = path.resolve(__dirname, '..', '..', '..', 'Ziman', 'ses', 'fabrika', 'cikti', SES);
+async function copySes() {
+  if (!existsSync(SES_KAYNAK)) { log(`WARNING: ses kaynağı yok: ${SES_KAYNAK}`); return; }
+  const hedef = path.join(DIST, 'ses', SES);
+  await rmrf(path.join(DIST, 'ses'));
+  try {
+    execFileSync('robocopy', [SES_KAYNAK, hedef, '*.mp3', '/E', '/NFL', '/NDL', '/NJH', '/NJS', '/NC', '/NS', '/MT:16'], { stdio: 'inherit' });
+  } catch (e) {
+    if (e.status !== undefined && e.status >= 8) throw e; // robocopy 0-7 = success
+  }
+  log(`ses: ${SES} -> dist/ses/${SES}`);
 }
 
 async function copyAppBuild() {

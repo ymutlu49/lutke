@@ -38,16 +38,25 @@ class _KuSpeakingScreenState extends ConsumerState<KuSpeakingScreen> {
   String? _transcript;
   double? _similarity;
 
+  @override
+  void dispose() {
+    // Ekrandan çıkınca mikrofon açık kalmasın (sonuç atılır).
+    SpeechRecognitionService.cancel();
+    super.dispose();
+  }
+
   void _startRecording() {
     if (_listening) return;
     setState(() { _listening = true; _transcript = null; _similarity = null; });
+    // Hedef, dinleme başladığı andaki ifade.
+    final target = _items[_idx].textKu;
     // Kurmancî için direkt dil desteği yok, en yakın fallback 'tr-TR' (Türkçe)
     // Bu yüzden sonuç yaklaşık — kullanıcıya bildir
     SpeechRecognitionService.start(
       language: 'tr-TR', // yakın fallback
       onResult: (t) {
         if (!mounted) return;
-        final sim = SpeechRecognitionService.similarity(t, _items[_idx].textKu);
+        final sim = SpeechRecognitionService.similarity(t, target);
         setState(() {
           _listening = false;
           _transcript = t;
@@ -87,7 +96,8 @@ class _KuSpeakingScreenState extends ConsumerState<KuSpeakingScreen> {
       );
       return;
     }
-    setState(() { _idx++; _done = false; });
+    SpeechRecognitionService.cancel();
+    setState(() { _idx++; _done = false; _listening = false; });
   }
 
   @override

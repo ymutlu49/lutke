@@ -6,6 +6,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import 'app_config.dart';
+import 'ses_manifest.dart';
 import 'tts_asset_manifest.dart';
 
 /// LÛTKE — Kurmancî TTS Servisi
@@ -99,6 +100,12 @@ class TtsService {
   /// Uygulama açılışında çağrılmalı — hem Gemini hem klasik space'i paralel uyandır.
   Future<void> warmUp() async {
     if (_warmedUp) return;
+    // Varsayılan yol kendi seslerimizi (SesManifest) kullanır; dış servisi uyandırmaya gerek yok.
+    if (source == KurmanciTtsSource.assetFirst ||
+        source == KurmanciTtsSource.assetOnly) {
+      _warmedUp = true;
+      return;
+    }
     _state = TtsState.warmingUp;
     try {
       // Her iki space'e paralel uyandırma isteği — kullanıcı hangisini
@@ -158,6 +165,17 @@ class TtsService {
     final processed = _preprocessText(text);
     final key = processed.toLowerCase();
     if (key.isEmpty) return null;
+
+    // 0) Jimaro ses fabrikası (Ziman/ses/fabrika) — kendi ürettiğimiz sesler,
+    //    Cloudflare R2'den. Dış servise bağımlı değil; varsayılan yolun ilk adımı.
+    if (source == KurmanciTtsSource.assetFirst ||
+        source == KurmanciTtsSource.assetOnly) {
+      final sesUrl = SesManifest.url(processed);
+      if (sesUrl != null) {
+        _state = TtsState.playing;
+        return sesUrl;
+      }
+    }
 
     // 1) Asset manifest — ön üretilmiş ses (0ms, orijinal kalite)
     // `huggingface` kaynağı seçilirse atla; asset'leri hiç kullanma.

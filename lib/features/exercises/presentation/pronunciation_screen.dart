@@ -76,11 +76,14 @@ class _PronunciationScreenState extends ConsumerState<PronunciationScreen> {
     super.dispose();
   }
 
-  /// Mikrofonla otomatik telaffuz kontrolü başlat/iptal et.
+  /// Mikrofonla otomatik telaffuz kontrolü başlat / bitir.
   Future<void> _startAutoCheck(String target) async {
     if (_isListening) {
-      AsrService.cancel();
-      setState(() => _isListening = false);
+      // İkinci dokunuş = "bitirdim": zarif durdurma. Söylenenler atılmaz;
+      // bekleyen assess() toplanan metinle skor döndürür ve durumu
+      // aşağıdaki setState kapatır (Ekim 2026: eskiden iptal edip
+      // sonucu çöpe atıyordu).
+      AsrService.stop();
       return;
     }
     final seq = ++_checkSeq;

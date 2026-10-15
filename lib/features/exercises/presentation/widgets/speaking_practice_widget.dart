@@ -51,6 +51,7 @@ class _SpeakingPracticeWidgetState
     extends ConsumerState<SpeakingPracticeWidget> {
   _SpeakingPhase _phase = _SpeakingPhase.listen;
   bool _isRecording = false;
+  bool _manualStop = false; // Kayıt düğmesiyle elle (zarif) durdurma istendi mi
   int? _selfAssessment; // 0=kötü, 1=yakın, 2=iyi
   bool _isShadowReading = false; // Shadow reading mode
   String? _encouragementMessage; // Kurmanci encouragement after attempt
@@ -111,11 +112,19 @@ class _SpeakingPracticeWidgetState
 
   void _toggleRecording() {
     if (_isRecording) {
-      // Elle durduruldu — aktif ASR varsa iptal, öz-değerlendirmeye düş
-      AsrService.cancel();
+      if (AsrService.isListening) {
+        // Elle durduruldu — ZARİF durdurma: söylenenler atılmaz, bekleyen
+        // _runAutoAssess() toplanan metinle skoru alıp kaydı bitirir
+        // (Ekim 2026: eskiden iptal edilip sonuç çöpe atılıyordu).
+        _manualStop = true;
+        AsrService.stop();
+        return;
+      }
+      // ASR yok / zaten sessizce düştü — öz-değerlendirmeye geç.
       _finishRecording(null);
       return;
     }
+    _manualStop = false;
     setState(() {
       _isRecording = true;
       _encouragementMessage = null;
@@ -136,8 +145,11 @@ class _SpeakingPracticeWidgetState
     final result = await AsrService.assess(target: _ex.targetText);
     if (!mounted || !_isRecording) return; // iptal edildi / ekran kapandı
     if (result == null) {
-      // Sessiz fallback: mikrofon izni/destek/ağ hatası — kayıt modunda
-      // kal, kullanıcı eski akıştaki gibi elle durdurup öz-değerlendirir.
+      // Kullanıcı elle durdurduysa bekletme — skorsuz öz-değerlendirmeye geç.
+      if (_manualStop) _finishRecording(null);
+      // Aksi hâlde sessiz fallback: mikrofon izni/destek/ağ hatası — kayıt
+      // modunda kal, kullanıcı eski akıştaki gibi elle durdurup
+      // öz-değerlendirir.
       return;
     }
     _finishRecording(result);
