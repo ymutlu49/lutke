@@ -1,7 +1,7 @@
 name: lutke
 description: LÛTKE — Zimanê Kurdî. Kurmancî dil öğretim uygulaması.
 publish_to: none
-version: 1.0.0+3
+version: 1.0.1+4
 
 environment:
   sdk: ">=3.6.0 <4.0.0"
@@ -37,7 +37,7 @@ dependencies:
   just_audio: ^0.9.41
   # İngilizce TTS yedeği (Android/iOS) — hazır ses dosyası (EnSesManifest)
   # yoksa cihazın TTS motoru okur. Web'de kullanılmaz (speechSynthesis).
-  flutter_tts: ^4.2.5
+  flutter_tts: 4.2.3  # 4.2.5 Kotlin 2.2 ister; proje Kotlin 1.9.22
   # PERF 2026-04: `record` (5.1.2) paketini kaldırdık — hiçbir import yoktu
   # (grep -r "package:record" lib/ → 0 hit). Paket ~150KB + platform channel.
   # Speaking ASR `shared/services/speech_recognition_service.dart` üzerinden
