@@ -451,8 +451,8 @@ function buildHeaders() {
 
 // Ses fabrikasının çıktısı (MP3, içerik = ad). Eski assets/audio/words/*.wav artık uygulamada değil;
 // güncellenmemiş Android sürümlerinin .wav istekleri functions/app/[[path]].ts ile yeni seslere yönlenir.
-// Birden çok ses: Kurmancî (piper-berfin) + İngilizce (piper-ljspeech). LUTKE_SES ile değiştirilebilir.
-const SESLER = (process.env.LUTKE_SES || 'piper-berfin,piper-ljspeech').split(',').map(s => s.trim()).filter(Boolean);
+// Birden çok ses: Kurmancî + İngilizce, öğrenen için yavaşlatılmış sürümler (2026-10-15). LUTKE_SES ile değiştirilebilir.
+const SESLER = (process.env.LUTKE_SES || 'piper-berfin-yavas,piper-ljspeech-yavas').split(',').map(s => s.trim()).filter(Boolean);
 const SES_KOK = path.resolve(__dirname, '..', '..', '..', 'Ziman', 'ses', 'fabrika', 'cikti');
 async function copySes() {
   await rmrf(path.join(DIST, 'ses'));
