@@ -1,4 +1,3 @@
-import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
@@ -10,9 +9,15 @@ import '../../../core/router/app_router.dart';
 import '../../../core/services/accessibility_settings.dart';
 import '../../../shared/services/skill_progress_service.dart';
 import '../domain/en_writing_db.dart';
+import '../../exercises/domain/level_pick.dart';
 
 class EnWritingScreen extends ConsumerStatefulWidget {
-  const EnWritingScreen({super.key});
+  /// Öğrencinin düzeyi (ana ekrandan). Sorular bu düzeyden seçilir; o düzeyde
+  /// yetmezse önce alt, sonra üst düzeylerle tamamlanır (Kurmancî beceri
+  /// ekranlarıyla aynı kural, `pickForLevel`). Eskiden bütün düzeylerden
+  /// rastgele 10 soru çekiliyordu: A1 öğrencisine C2 sorusu düşebiliyordu.
+  final String? level;
+  const EnWritingScreen({super.key, this.level});
   @override
   ConsumerState<EnWritingScreen> createState() => _EnWritingScreenState();
 }
@@ -29,8 +34,7 @@ class _EnWritingScreenState extends ConsumerState<EnWritingScreen> {
   @override
   void initState() {
     super.initState();
-    _items = List.from(kEnWritingExercises)..shuffle(Random());
-    _items = _items.take(10).toList();
+    _items = pickForLevel(kEnWritingExercises, widget.level, (e) => e.level);
     _ctrl.addListener(_onTextChanged);
   }
 

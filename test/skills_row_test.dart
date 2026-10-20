@@ -66,6 +66,44 @@ void main() {
     expect(tester.takeException(), isNull);
   });
 
+  // İngilizce beceri ekranları öğrencinin düzeyinden seçer (Kurmancî gibi).
+  for (final (ad, kur) in <(String, Widget Function(String))>[
+    ('dinleme', (l) => EnListeningScreen(level: l)),
+    ('yazma', (l) => EnWritingScreen(level: l)),
+    ('konuşma', (l) => EnSpeakingScreen(level: l)),
+  ]) {
+    testWidgets('İngilizce $ad ekranı öğrencinin düzeyinden başlar (B1)', (tester) async {
+      SharedPreferences.setMockInitialValues({});
+      tester.view.physicalSize = const Size(420, 2000);
+      tester.view.devicePixelRatio = 1.0;
+      addTearDown(tester.view.reset);
+      await tester.pumpWidget(ProviderScope(
+        child: MaterialApp(theme: AppTheme.light, home: kur('B1')),
+      ));
+      await tester.pump(const Duration(milliseconds: 800));
+      expect(find.textContaining('B1 · '), findsOneWidget);
+      expect(find.textContaining('C2 · '), findsNothing);
+      await tester.pump(const Duration(seconds: 2));
+    });
+  }
+
+  testWidgets('İngilizce okuma öğrencinin düzeyinde açılır; düzey yoksa A1', (tester) async {
+    SharedPreferences.setMockInitialValues({});
+    tester.view.physicalSize = const Size(420, 2000);
+    tester.view.devicePixelRatio = 1.0;
+    addTearDown(tester.view.reset);
+    final s = GlobalKey();
+    await tester.pumpWidget(ProviderScope(
+      child: MaterialApp(theme: AppTheme.light, home: EnReadingScreen(key: s, level: 'B2')),
+    ));
+    await tester.pump(const Duration(milliseconds: 800));
+    expect((s.currentState as dynamic).seciliDuzey, 'B2');
+    await tester.pumpWidget(ProviderScope(
+      child: MaterialApp(theme: AppTheme.light, home: EnReadingScreen(key: GlobalKey())),
+    ));
+    await tester.pump(const Duration(seconds: 2));
+  });
+
   // Ana ekrandan artık doğrudan açılan dört İngilizce ekran hatasız kurulur.
   for (final (ad, ekran) in <(String, Widget)>[
     ('okuma', const EnReadingScreen()),

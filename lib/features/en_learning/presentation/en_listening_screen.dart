@@ -1,4 +1,3 @@
-import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:go_router/go_router.dart';
@@ -9,10 +8,16 @@ import '../../../core/constants/app_typography.dart';
 import '../../../core/router/app_router.dart';
 import '../../../core/services/en_tts_helper.dart';
 import '../domain/en_listening_db.dart';
+import '../../exercises/domain/level_pick.dart';
 
 /// İngilizce guhdarîkirinê ekranı — TTS okur, kullanıcı yazar/seçer.
 class EnListeningScreen extends StatefulWidget {
-  const EnListeningScreen({super.key});
+  /// Öğrencinin düzeyi (ana ekrandan). Sorular bu düzeyden seçilir; o düzeyde
+  /// yetmezse önce alt, sonra üst düzeylerle tamamlanır (Kurmancî beceri
+  /// ekranlarıyla aynı kural, `pickForLevel`). Eskiden bütün düzeylerden
+  /// rastgele 10 soru çekiliyordu: A1 öğrencisine C2 sorusu düşebiliyordu.
+  final String? level;
+  const EnListeningScreen({super.key, this.level});
   @override
   State<EnListeningScreen> createState() => _EnListeningScreenState();
 }
@@ -33,8 +38,7 @@ class _EnListeningScreenState extends State<EnListeningScreen> {
   @override
   void initState() {
     super.initState();
-    _items = List.from(kEnListeningExercises)..shuffle(Random());
-    _items = _items.take(10).toList();
+    _items = pickForLevel(kEnListeningExercises, widget.level, (e) => e.level);
   }
 
   @override
@@ -118,9 +122,8 @@ class _EnListeningScreenState extends State<EnListeningScreen> {
                         _ctrl.clear();
                         _score = 0;
                         _playCount = 0;
-                        _items = List.from(kEnListeningExercises)
-                          ..shuffle(Random());
-                        _items = _items.take(10).toList();
+                        _items = pickForLevel(
+                            kEnListeningExercises, widget.level, (e) => e.level);
                       });
                     },
                     style: OutlinedButton.styleFrom(

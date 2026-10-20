@@ -1,4 +1,3 @@
-import 'dart:math';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -11,6 +10,7 @@ import '../../../core/router/app_router.dart';
 import '../../../core/services/accessibility_settings.dart';
 import '../../../core/services/en_tts_helper.dart';
 import '../domain/en_speaking_db.dart';
+import '../../exercises/domain/level_pick.dart';
 import '../../../shared/services/speech_recognition_service.dart';
 import '../../../shared/services/skill_progress_service.dart';
 
@@ -18,7 +18,12 @@ import '../../../shared/services/skill_progress_service.dart';
 // lê StatefulWidget bû — `ref` nediyar bû → build blocking error
 // (flutter analyze: undefined_identifier). Hate veguhertin ConsumerStatefulWidget.
 class EnSpeakingScreen extends ConsumerStatefulWidget {
-  const EnSpeakingScreen({super.key});
+  /// Öğrencinin düzeyi (ana ekrandan). Sorular bu düzeyden seçilir; o düzeyde
+  /// yetmezse önce alt, sonra üst düzeylerle tamamlanır (Kurmancî beceri
+  /// ekranlarıyla aynı kural, `pickForLevel`). Eskiden bütün düzeylerden
+  /// rastgele 10 soru çekiliyordu: A1 öğrencisine C2 sorusu düşebiliyordu.
+  final String? level;
+  const EnSpeakingScreen({super.key, this.level});
   @override
   ConsumerState<EnSpeakingScreen> createState() => _EnSpeakingScreenState();
 }
@@ -33,8 +38,7 @@ class _EnSpeakingScreenState extends ConsumerState<EnSpeakingScreen> {
   @override
   void initState() {
     super.initState();
-    _items = List.from(kEnSpeakingExercises)..shuffle(Random());
-    _items = _items.take(10).toList();
+    _items = pickForLevel(kEnSpeakingExercises, widget.level, (e) => e.level);
   }
 
   @override

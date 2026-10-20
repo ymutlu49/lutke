@@ -361,19 +361,27 @@ GoRouter appRouter(AppRouterRef ref) {
       ),
       GoRoute(
         path: AppRoutes.enReading,
-        builder: (_, __) => const EnReadingScreen(),
+        builder: (_, state) => EnReadingScreen(
+          level: (state.extra as Map<String, dynamic>?)?['level'] as String?,
+        ),
       ),
       GoRoute(
         path: AppRoutes.enWriting,
-        builder: (_, __) => const EnWritingScreen(),
+        builder: (_, state) => EnWritingScreen(
+          level: (state.extra as Map<String, dynamic>?)?['level'] as String?,
+        ),
       ),
       GoRoute(
         path: AppRoutes.enListening,
-        builder: (_, __) => const EnListeningScreen(),
+        builder: (_, state) => EnListeningScreen(
+          level: (state.extra as Map<String, dynamic>?)?['level'] as String?,
+        ),
       ),
       GoRoute(
         path: AppRoutes.enSpeaking,
-        builder: (_, __) => const EnSpeakingScreen(),
+        builder: (_, state) => EnSpeakingScreen(
+          level: (state.extra as Map<String, dynamic>?)?['level'] as String?,
+        ),
       ),
       GoRoute(
         path: AppRoutes.speaking,

@@ -11,7 +11,10 @@ import '../domain/en_reading_db.dart';
 
 /// İngilizce xwendin ekranı — CEFR seviyesine göre pasajlar.
 class EnReadingScreen extends StatefulWidget {
-  const EnReadingScreen({super.key});
+  /// Öğrencinin düzeyi (ana ekrandan). Düzey seçicisi bu düzeyde açılır;
+  /// eskiden hep A1'de açılıyordu. Öğrenci başka düzeye geçebilir.
+  final String? level;
+  const EnReadingScreen({super.key, this.level});
   @override
   State<EnReadingScreen> createState() => _EnReadingScreenState();
 }
@@ -19,7 +22,17 @@ class EnReadingScreen extends StatefulWidget {
 class _EnReadingScreenState extends State<EnReadingScreen> {
   static const Color _orange = Color(0xFFEF6C00);
 
-  String _selectedLevel = 'A1';
+  late String _selectedLevel = _baslangicDuzeyi(widget.level);
+
+  /// Sınamalar için: seçili düzey.
+  @visibleForTesting
+  String get seciliDuzey => _selectedLevel;
+
+  static String _baslangicDuzeyi(String? level) {
+    final l = (level ?? '').toUpperCase();
+    final var_ = kEnReadingPassages.any((p) => p.level == l);
+    return var_ ? l : 'A1';
+  }
   // Tüm pasajlar için paylaşılan okuma font ölçeği — a11y için.
   double _fontScale = 1.0;
 
