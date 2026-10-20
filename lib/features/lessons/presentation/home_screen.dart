@@ -28,6 +28,7 @@ import '../../../shared/providers/lesson_progress_provider.dart';
 import '../../../shared/providers/progression_provider.dart';
 import '../domain/lesson_catalog.dart';
 import '../domain/en_ders.dart';
+import 'skills_row.dart';
 import '../../gamification/gamification_provider.dart';
 import '../../gamification/gamification_widgets.dart';
 import '../../cultural_content/widgets/daily_proverb_card.dart';
@@ -126,69 +127,6 @@ class _WaneEntryCard extends ConsumerWidget {
         ),
       ),
     ).animate().fadeIn(delay: 180.ms);
-  }
-}
-
-/// Ana ekrandaki beceri girişleri: yazma, konuşma, hikâye.
-/// Yazma ve konuşma ögeleri öğrencinin düzeyinden seçilir.
-class _SkillsRow extends ConsumerWidget {
-  final String level;
-  const _SkillsRow({required this.level});
-
-  @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    final showTr = ref.watch(showTurkishProvider);
-    final girisler = <(String, String, String, String)>[
-      ('✍️', 'Nivîsîn', 'Yazma', AppRoutes.writing),
-      ('🗣️', 'Axaftin', 'Konuşma', AppRoutes.speaking),
-      ('📖', 'Çîrok', 'Hikâye', AppRoutes.story),
-      ('📚', 'Xwendin', 'Okuma', AppRoutes.xwendin),
-    ];
-    return Padding(
-      padding: const EdgeInsets.only(bottom: AppSpacing.md),
-      child: Row(
-        children: [
-          for (int i = 0; i < girisler.length; i++) ...[
-            if (i > 0) const SizedBox(width: AppSpacing.sm),
-            Expanded(
-              child: Material(
-                color: AppColors.surface,
-                borderRadius: BorderRadius.circular(AppSpacing.radiusMd),
-                child: InkWell(
-                  borderRadius: BorderRadius.circular(AppSpacing.radiusMd),
-                  onTap: () =>
-                      context.push(girisler[i].$4, extra: {'level': level}),
-                  child: Container(
-                    padding: const EdgeInsets.symmetric(
-                        vertical: AppSpacing.sm + 2, horizontal: 6),
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(AppSpacing.radiusMd),
-                      border: Border.all(
-                          color: AppColors.primary.withOpacity(0.2)),
-                    ),
-                    child: Column(
-                      children: [
-                        Text(girisler[i].$1,
-                            style: const TextStyle(fontSize: 22)),
-                        const SizedBox(height: 4),
-                        Text(
-                          girisler[i].$2,
-                          style: AppTypography.label.copyWith(
-                              color: AppColors.primary,
-                              fontWeight: FontWeight.w700),
-                        ),
-                        if (showTr)
-                          Text(girisler[i].$3, style: AppTypography.caption),
-                      ],
-                    ),
-                  ),
-                ),
-              ),
-            ),
-          ],
-        ],
-      ),
-    ).animate().fadeIn(delay: 200.ms);
   }
 }
 
@@ -349,7 +287,8 @@ class HomeScreen extends ConsumerWidget {
 
                   // ── Beceriler: yazma, konuşma, hikâye ────────
                   // Bu üç ekran yazılmıştı ama uygulamada gidiş yoktu.
-                  if (!isEn) _SkillsRow(level: profile.currentLevel),
+                  // İngilizce izde (Ekim 2026): okuma, dinleme, yazma, konuşma.
+                  SkillsRow(level: profile.currentLevel, english: isEn),
 
                   _SkillTreePath(
                     userId: userId,
