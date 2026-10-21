@@ -452,8 +452,8 @@ function buildHeaders() {
 // Ses fabrikasının çıktısı (MP3, içerik = ad). Eski assets/audio/words/*.wav artık uygulamada değil;
 // güncellenmemiş Android sürümlerinin .wav istekleri functions/app/[[path]].ts ile yeni seslere yönlenir.
 // Birden çok ses: Kurmancî + İngilizce, öğrenen için yavaşlatılmış sürümler (2026-10-15). LUTKE_SES ile değiştirilebilir.
-// Kurmancî 2026-10-21'den beri birleşik klasör (fabrika/karma.py): ElevenLabs Sarah (A1–C2 ve diğer metinler)
-// + piper-berfin-yavas (rakamlı ya da Sarah'da kusurlu çıkan birkaç metin);
+// Kurmancî 2026-10-21'den beri birleşik klasör (fabrika/karma.py): bütün metinler ElevenLabs Sarah; Sarah'da
+// olmayan yeni bir metin piper-berfin-yavas ile tamamlanır;
 // her metnin tek dosyası olur, Pages'in 20.000 dosya sınırı aşılmaz.
 const SESLER = (process.env.LUTKE_SES || 'lutke-kurmanci,piper-ljspeech-yavas').split(',').map(s => s.trim()).filter(Boolean);
 const SES_KOK = path.resolve(__dirname, '..', '..', '..', 'Ziman', 'ses', 'fabrika', 'cikti');
