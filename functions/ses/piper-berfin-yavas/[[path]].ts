@@ -1,10 +1,10 @@
 // LÛTKE — eski Kurmancî ses klasörü (/ses/piper-berfin-yavas/…).
 //
 // 2026-10-21'den beri site Kurmancî sesleri birleşik klasörden yayımlar (/ses/lutke-kurmanci/:
-// ElevenLabs Sarah A1 + geri kalan Piper; Ziman/ses/fabrika/karma.py). Eski klasör siteye konmaz:
+// ElevenLabs Sarah + Sarah'da olmayan birkaç Piper; Ziman/ses/fabrika/karma.py). Eski klasör siteye konmaz:
 // iki klasör birden Pages'in 20.000 dosya sınırını aşar. Ama Android 1.0.1+5 (2026-10-15) sesleri
 // hâlâ eski adresten ister. Bu işlev eski adı yeni dosyaya çevirir:
-//   - tabloda varsa (sesi değişen metin, ör. A1) → yeni dosya
+//   - tabloda varsa (sesi değişen metin) → yeni dosya
 //   - yoksa aynı ad yeni klasörde aranır (değişmeyen Piper dosyaları birleşik klasörde aynı adı taşır)
 // Yönlendirme değil, aynı adreste yanıt: kalıcı (301) yönlendirme önbelleğe girer ve sesler düzey düzey
 // değiştikçe eskimiş bir hedefi gösterirdi. Tablo: fabrika/lutke_esitle.py → functions/lib/eski_ses_klasoru.json.
