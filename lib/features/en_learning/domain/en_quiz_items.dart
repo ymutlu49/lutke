@@ -95,7 +95,7 @@ const List<EnQuizItem> kEnQuizItems = [
     promptEn: 'This is ___ pen.',
     correctAnswer: 'a',
     options: ['a', 'an', 'the', '—'],
-    explanationKu: 'Tekil, ünsüz "p" → "a". Kurmancî\'de "pênûskek".',
+    explanationKu: 'Tekil, ünsüz "p" → "a". Kurmancî\'de "pênûsek".',
   ),
   EnQuizItem(
     id: 'en_q_art_007',
@@ -3884,7 +3884,7 @@ const List<EnQuizItem> kEnQuizItems = [
     promptEn: 'He put ___ his pen and closed the book.',
     correctAnswer: 'down',
     options: ['down', 'up', 'off', 'away'],
-    explanationKu: '"Put down" = pênûskê danîn.',
+    explanationKu: '"Put down" = pênûsê danîn.',
   ),
   EnQuizItem(
     id: 'en_q_phr_068',
@@ -3992,7 +3992,7 @@ const List<EnQuizItem> kEnQuizItems = [
     promptEn: 'Can you give ___ my pen, please?',
     correctAnswer: 'back',
     options: ['back', 'up', 'away', 'in'],
-    explanationKu: '"Give back" = pênûskê vegerandin.',
+    explanationKu: '"Give back" = pênûsê vegerandin.',
   ),
   EnQuizItem(
     id: 'en_q_phr_080',

@@ -104,7 +104,7 @@ const List<EnWord> kEnA1Liste = [
    form:null, kat:'jimar', zor:0.93,
    notKu:'Hejmara çar.',
    her:["Four chairs here.", "I have four pens."],
-   herKu:['Çar kursî li vir in.', 'Çar pênûskên min hene.'], emoji:'4️⃣'),
+   herKu:['Çar kursî li vir in.', 'Çar pênûsên min hene.'], emoji:'4️⃣'),
 
   (id:'en_a1_016', en:'five', ku:'pênc', ipa:'/faɪv/', pos:'num',
    form:null, kat:'jimar', zor:0.93,
@@ -128,7 +128,7 @@ const List<EnWord> kEnA1Liste = [
    form:null, kat:'jimar', zor:0.92,
    notKu:'Hejmara heşt.',
    her:["Eight cats sleep.", "I have eight pens."],
-   herKu:['Heşt pisîk radizin.', 'Heşt pênûskên min hene.'], emoji:'8️⃣'),
+   herKu:['Heşt pisîk radizin.', 'Heşt pênûsên min hene.'], emoji:'8️⃣'),
 
   (id:'en_a1_020', en:'nine', ku:'neh', ipa:'/naɪn/', pos:'num',
    form:null, kat:'jimar', zor:0.92,
@@ -158,7 +158,7 @@ const List<EnWord> kEnA1Liste = [
    form:null, kat:'reng', zor:0.93,
    notKu:'Rengê şîn.',
    her:["The sky is blue.", "I have a blue pen."],
-   herKu:['Ezman şîn e.', 'Pênûskeke şîn a min heye.'], emoji:'🔵'),
+   herKu:['Ezman şîn e.', 'Pênûseke şîn a min heye.'], emoji:'🔵'),
 
   (id:'en_a1_025', en:'green', ku:'kesk', ipa:'/ɡriːn/', pos:'adj',
    form:null, kat:'reng', zor:0.92,
@@ -948,7 +948,7 @@ const List<EnWord> kEnA1Liste = [
 
   (id:'en_a1_156', en:'write', ku:'nivîsîn', ipa:'/raɪt/', pos:'v',
    form:null, kat:'leker', zor:0.92,
-   notKu:'Nivîsîn. Bi pênûskê.',
+   notKu:'Nivîsîn. Bi pênûsê.',
    her:["I write a letter.", "She writes well."],
    herKu:['Ez nameyekê dinivîsim.', 'Ew baş dinivîse.'], emoji:'✍️'),
 
@@ -1064,13 +1064,13 @@ const List<EnWord> kEnA1Liste = [
    form:null, kat:'leker', zor:0.90,
    notKu:'Bi kar anîn.',
    her:["I use a pen.", "She uses a phone."],
-   herKu:['Ez pênûskê bi kar tînim.', 'Ew telefonê bi kar tîne.'], emoji:'⚙️'),
+   herKu:['Ez pênûsê bi kar tînim.', 'Ew telefonê bi kar tîne.'], emoji:'⚙️'),
 
   (id:'en_a1_176', en:'find', ku:'dîtin', ipa:'/faɪnd/', pos:'v',
    form:null, kat:'leker', zor:0.90,
    notKu:'Dîtin. Tişt peyda kirin.',
    her:["I find my pen.", "She finds the key."],
-   herKu:['Ez pênûska xwe dibînim.', 'Ew mifteyê dibîne.'], emoji:'🔍'),
+   herKu:['Ez pênûsa xwe dibînim.', 'Ew mifteyê dibîne.'], emoji:'🔍'),
 
   (id:'en_a1_177', en:'call', ku:'gazî kirin', ipa:'/kɔːl/', pos:'v',
    form:null, kat:'leker', zor:0.90,
@@ -1292,7 +1292,7 @@ const List<EnWord> kEnA1Liste = [
    form:null, kat:'daçek', zor:0.92,
    notKu:'Bi. Daçeka tevdîrê.',
    her:["Come with me.", "I write with a pen."],
-   herKu:['Bi min re were.', 'Ez bi pênûskê dinivîsim.'], emoji:'🤝'),
+   herKu:['Bi min re were.', 'Ez bi pênûsê dinivîsim.'], emoji:'🤝'),
 
   (id:'en_a1_214', en:'and', ku:'û', ipa:'/ænd/', pos:'conj',
    form:null, kat:'daçek', zor:0.95,
@@ -1334,7 +1334,7 @@ const List<EnWord> kEnA1Liste = [
    form:null, kat:'pirsî', zor:0.92,
    notKu:'Li ku. Peyva pirsê ya cih.',
    her:["Where are you?", "Where is my pen?"],
-   herKu:['Tu li ku yî?', 'Pênûska min li ku ye?'], emoji:'📍'),
+   herKu:['Tu li ku yî?', 'Pênûsa min li ku ye?'], emoji:'📍'),
 
   (id:'en_a1_221', en:'when', ku:'kengê', ipa:'/wɛn/', pos:'pron',
    form:null, kat:'pirsî', zor:0.92,
@@ -1360,11 +1360,11 @@ const List<EnWord> kEnA1Liste = [
    her:["A new book.", "I read a book."],
    herKu:['Pirtûkeke nû.', 'Ez pirtûkekê dixwînim.'], emoji:'📖'),
 
-  (id:'en_a1_225', en:'pen', ku:'pênûsk', ipa:'/pɛn/', pos:'n',
+  (id:'en_a1_225', en:'pen', ku:'pênûs', ipa:'/pɛn/', pos:'n',
    form:null, kat:'tişt', zor:0.92,
-   notKu:'Pênûsk. Tişta nivîsînê.',
+   notKu:'Pênûs. Tişta nivîsînê.',
    her:["A blue pen.", "I write with a pen."],
-   herKu:['Pênûskeke şîn.', 'Ez bi pênûskê dinivîsim.'], emoji:'🖊️'),
+   herKu:['Pênûseke şîn.', 'Ez bi pênûsê dinivîsim.'], emoji:'🖊️'),
 
   (id:'en_a1_226', en:'paper', ku:'kaxez', ipa:'/ˈpeɪpər/', pos:'n',
    form:null, kat:'tişt', zor:0.90,

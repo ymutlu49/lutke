@@ -107,12 +107,17 @@ List<dynamic> izafeAdlari(String level) => [
         if (_izafeyeUygun(w)) w,
     ];
 
+/// Ortak cinsli adlar: kadın için dişil, erkek için eril izafe alır
+/// (*hevalê min* / *hevala min*). İzafe sorusunda iki doğru cevap olurdu.
+const Set<String> kOrtakCinsliAdlar = {'heval'};
+
 bool _izafeyeUygun(dynamic w) {
   final cins = w.cins as String?;
   final ez = w.ez as String?;
   final ku = (w.ku as String).trim();
   if (ez == null || (cins != 'mê' && cins != 'nêr')) return false;
   if (!kCinsKaniti.containsKey(w.id as String)) return false;
+  if (kOrtakCinsliAdlar.contains(ku.toLowerCase())) return false;
   if (ku.contains(' ') || ez.contains(' ')) return false;
   // Büyük harfle yazılan adlar (gün, ay, yer adı) iyelikle doğal durmuyor: "Pêncşema min".
   if (ez[0] != ez[0].toLowerCase()) return false;

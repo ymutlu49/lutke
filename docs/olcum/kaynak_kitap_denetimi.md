@@ -117,12 +117,46 @@ sayı, renk, giysi, sağlık, meslek; A2'de seyahat ve spor). Eksik tema: **oyun
 - Soru sözcüklerinde *li ku / ji ku* yazıldı: Fêrkera Kurdî ve MEB programı kısa *ku* kullanıyor (gramer
   kaynaklarında *li ku* 8 / *li kû* 18 — çoğu tek bir OCR kaynağından).
 
+## 2026-10-28 (2. tur): kullanıcının "bekleyen cümleleri de yaz ve ekle" isteğiyle uygulananlar
+
+- **Altı kayıt eklendi** (`a1_kelime_db.dart`, a1_fk_25, 27–31): *Ders, Zilam, Mih, Kevok, Aferîn, Nexêr*;
+  *Pênûs* yeni kayıt olmadı, düzeltilen a1_500'e katıldı (aşağıda *pênûsk*).
+  Uydurma cümle yazılmadı: 28 örneğin hepsi kaynaklardan; çoğu Fêrkera Kurdî'nin 1.–4. ve 10. derslerinden
+  (*Ew pênûsa bapîrî ye*, *Ev zilam kî ye?*, *Çend mihên we hene?*, *Nexêr, kurê min, ew ne şîn e, kesk e*).
+  Fêrkera'da örneği olmayanlar öteki kaynaklardan: *Ev dersa yekem e* ve *Aferîn ji we re* (Kurmanji Complete),
+  *Kî dersê dide te?* (Halil Aktug), *Ev zilam ne qenc bû* (Samî Tan), *Aferîn, kurê min* (Qedrî Can),
+  *Aferîn, lawê min* (Firat Cewerî), *Du kevokên spî difirin* ve *Kevok weke pembû spî ne* (Mehmed Uzun).
+  Değişiklik yalnız yan cümleyi atmak (*Du kevokên spî, li her du aliyên wî, difirin*) ya da virgül koymak
+  oldu. Tanıksız diye elenenler: *Ez bi pênûsê dinivîsim* (kaynakta *dinivîsînim*), *Kevok firî*, *Erê an nexêr*.
+- **Cinsiyet**: dördü dişil, *zilam* eril; `cins_kanit.py` hepsini doğruladı (Wîkîferheng; *ders* ve *pênûs*'ta
+  Farqînî de). `cins_kanit_db.dart` yeniden üretildi; *ders, pênûs, zilam, mih, kevok* izafe alıştırmasına girdi.
+- **Heval izafe alıştırmasından çıkarıldı** (`kOrtakCinsliAdlar`): kanıt listesi yeniden üretilince *Heval* de
+  girmişti; ortak cinsli olduğu için *hevala min* de doğru, soru iki doğru cevaplı olurdu. Canlı sürümde bu
+  soru yoktu (liste geçen yayında yeniden üretilmemişti). Sınama eklendi.
+- **Dinleme alıştırması**: anlam sorusunun çeldiricileri rastgele seçiliyor, eşanlamlılar elenmiyordu.
+  *Mî / Mih* (Koyun), *Na / Nexêr* (Hayır), *Wane / Ders* gibi çiftler, ayrıca A1'deki 18 eski çift
+  (*Sinif / Pol*, *Dew / Mastaw*…), aynı soruda iki doğru seçenek üretebilirdi. Ana sınavdaki kural
+  (`quiz_screen.dart`: Türkçe karşılığın '/'-parçalarından biri bile çakışan kelime elenir) buraya da kondu.
+- **Dil kapısı**: kayıt sonrası tek yeni işaret, kültür içeriğindeki özel ad *Mîr Mihê Beg* (izafe sanıldı),
+  muaf tutuldu. Kapı: yeni işaret 0.
+- **Pênûsk → pênûs** (kullanıcı onayıyla): Lütke "kalem" için *pênûsk* yazıyordu; bu biçim korpusta ve
+  sözlüklerde **hiç** geçmiyor (*pênûs* 80, *pênûsa* 34, *pênûsek* 22; Fêrkera, Îzolî, Farqînî hep *pênûs*).
+  Notlardaki "*pênûska hibrî*" örneği bile Farqînî'nin *pênûs* maddesinden. 59 geçiş düzeltildi: a1_500,
+  a1_756, b1_1355, z_a1_061, çocuk dersi soruları, a2_1965 cümlesi, İngilizce bölümün Kurmancî cümleleri.
+  a1_500'ün örnekleri Fêrkera'nınkilerle değişti (sesi zaten yenilenecekti; yeni a1_fk_26 üçüncü kopya
+  olmasın diye buraya katıldı). *Lênûsk* (defter) değiştirilmedi.
+- **Ses**: 25 yeni metin (6 madde başı + 19 mîrateyî cümle), Sarah / eleven_v4. Gerçek harcama, abonelik
+  bakiyesiyle ölçüldü: **195 kredi** (1.545 → 1.350; karakter başına 0,44). Kalite denetiminde şüpheli yok.
+
 ## Kararınızı bekleyenler (güncel)
 
-1. *ders, pênûs, zilam, mih, kevok, aferîn, nexêr* kayıtları: cinsiyet kanıtı hazır (*ders, pênûs, kevok, mih* dişil;
-   *zilam* eril), ama Lütke'de örnek cümleleri yok ve korpusta en doğal kalıplar bile tanıksız (*zilam hat*,
-   *mih û bizin* 0). Yeni cümleler editör turundan geçmeli. *çûk*'un cinsi karışık (4 / 3), editöre.
-2. Temel fiiller (*dîtin, birin, anîn, girtin*) B1'de kayıtlı; A1–A2'ye taşımak kimlik değişikliği ister
+1. **Mîr Mihê Beg** (`kurdish_architecture_db.dart`, Kelha Dimdimê): korpusta Dimdim destanının kahramanı
+   *Xanê Lepzêrîn* (Mehmed Uzun, *Hawara Dîcleyê*); *Mihê Beg* 0. Kültür alıntı denetimindeki (K1–K6)
+   uydurma ad bulgularıyla aynı türden görünüyor.
+2. *çûk*'un cinsi karışık (4 / 3); Lütke'de A1'de *Çûçik* (Kuş) var, ayrı kayıt gerekmeyebilir.
+3. *Lênûsk* (defter, 3 kayıt) tanıklı ama seyrek (*lênûsk* 2, *lênûska* 4; şiir ve Aslanoğlu dil kartları),
+   *defter* 36 / *deftera* 54. Yanlış değil; *defter*'in de kayıt olarak öğretilmesi düşünülebilir. Dokunulmadı.
+4. Temel fiiller (*dîtin, birin, anîn, girtin*) B1'de kayıtlı; A1–A2'ye taşımak kimlik değişikliği ister
    (ilerleme kayıtları kimliğe bağlı) ya da `kA1CekirdekFiil` gibi ikinci kayıt — karar.
 
 ## İlk denetimdeki karar listesi (2026-10-24)

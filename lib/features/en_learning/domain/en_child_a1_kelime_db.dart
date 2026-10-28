@@ -611,11 +611,11 @@ const List<EnWord> kEnChildA1Liste = [
    her:["I read a book.", "The book is new."],
    herKu:['Ez pirtûkekê dixwînim.', 'Pirtûk nû ye.'], emoji:'📖'),
 
-  (id:'en_child_a1_102', en:'pen', ku:'pênûsk', ipa:'/pen/', pos:'n',
+  (id:'en_child_a1_102', en:'pen', ku:'pênûs', ipa:'/pen/', pos:'n',
    form:null, kat:'dibistan', zor:0.94,
-   notKu:'Pênûsk. Em dinivîsin.',
+   notKu:'Pênûs. Em dinivîsin.',
    her:["I have a pen.", "The pen is blue."],
-   herKu:['Pênûskeke min heye.', 'Pênûsk şîn e.'], emoji:'🖊️'),
+   herKu:['Pênûseke min heye.', 'Pênûs şîn e.'], emoji:'🖊️'),
 
   (id:'en_child_a1_103', en:'pencil', ku:'qelem', ipa:'/ˈpensl/', pos:'n',
    form:null, kat:'dibistan', zor:0.93,

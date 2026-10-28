@@ -1488,10 +1488,13 @@ const kA1TamKelimeler = [
 
   // ── perwerde (eğitim) — 6 yeni ──────────────────────────────
 
-  (id:'a1_500', ku:'Pênûsk', tr:'Kalem', en:'Pen', cins:'mê', ez:'pênûska',
-   kat:'perwerde', zor:0.80, not:'"Pênûsk" — dişil. Özgün Kurmancî form. "Qelem" Arapça alıntısı yerine tercih edilen.',
-   her:['Pênûska te li ku ye, keça min?', 'Dayê, pênûskek bide min.'],
-   gen:['Pênûsk li ser masê ye.', 'Ez bi pênûskê dinivîsim.']),
+  // 2026-10-28: "pênûs" → "pênûs" (korpusta pênûs 0; pênûs 80, pênûsa 34 — Fêrkera, Îzolî, Farqînî).
+  // Örnekler Fêrkera Kurdî'den (2. ve 4. ders).
+  (id:'a1_500', ku:'Pênûs', tr:'Kalem', en:'Pen', cins:'mê', ez:'pênûsa',
+   kat:'perwerde', zor:0.80,
+   not:'Pênûs (dişil/mê). Veqetandek: pênûsa bapîrî (dedenin kalemi). Mînak: Ew pênûsa bapîrî ye. Têbinî: çoğul yalın hâlde eksiz: Şeş pênûs li ser maseyê ne. Arapça alıntı "qelem" yerine "pênûs" tercih edilir.',
+   her:['Ew pênûsa bapîrî ye.', 'Sê pênûsên wê hene.'],
+   gen:['Çend pênûs li ser maseyê ne?', 'Şeş pênûs li ser maseyê ne.']),
 
   (id:'a1_501', ku:'Defter', tr:'Defter', en:'Notebook', cins:'mê', ez:'deftera',
    kat:'perwerde', zor:0.78, not:'"Defter" — dişil. Her du zimanan de heman form.',
@@ -2495,11 +2498,11 @@ const kA1EkKelimeler2 = [
    her:['Texteyê me spî ye.', 'Texte li dibistanê ye.'],
    gen:['Mamostayê me li texteyê dinivîse.', 'Texte mezin e.']),
 
-  (id:'a1_756', ku:'Pênûsk', tr:'Kalem / Yazı kalemi', en:'Pen / Pencil',
-   cins:'mê', ez:'pênûska', kat:'mal', zor:0.83,
-   not:'Pênûsk (dişil/mê) — özgün Kurmancî form. Veqetandek: pênûska min. Mînak: Pênûska min reş e. Têbinî: alıntı "qelem" yerine "pênûsk" tercih edilir.',
-   her:['Pênûska pîrê reş e.', 'Pênûsk li mêzê ye.'],
-   gen:['Pênûsk nû ye.', 'Pênûska min reş e.']),
+  (id:'a1_756', ku:'Pênûs', tr:'Kalem / Yazı kalemi', en:'Pen / Pencil',
+   cins:'mê', ez:'pênûsa', kat:'mal', zor:0.83,
+   not:'Pênûs (dişil/mê) — özgün Kurmancî form. Veqetandek: pênûsa min. Mînak: Pênûsa min reş e. Têbinî: alıntı "qelem" yerine "pênûs" tercih edilir.',
+   her:['Pênûsa pîrê reş e.', 'Pênûs li mêzê ye.'],
+   gen:['Pênûs nû ye.', 'Pênûsa min reş e.']),
 
   (id:'a1_757', ku:'Kaxez', tr:'Kağıt', en:'Paper',
    cins:'mê', ez:'kaxeza', kat:'mal', zor:0.82,
@@ -3088,6 +3091,46 @@ const kA1FerkeraDersler = [
    not:'Pîroz — kutlu, mübarek. Kutlamada "… pîroz be!": Cejn pîroz be! (Bayramın kutlu olsun!) Fêrkera Kurdî 12. ders (Cejn).',
    her:['Cejn pîroz be!', 'Sala nû pîroz be!'],
    gen:['Pîroz be!', 'Cejna we pîroz be!']),
+
+  // 2026-10-28, kaynak kitap denetimi (2. tur): Fêrkera Kurdî'nin 2.–4. ve 10. derslerinde
+  // öğretilen altı sözcük daha (pênûs a1_500'de). Örnek cümleler kaynaklardan alındı (Fêrkera Kurdî; tanığı
+  // olmayanlarda Kurmanji Complete, Samî Tan, Halil Aktug, Qedrî Can, Firat Cewerî, Mehmed Uzun);
+  // yalnız yan cümle kısaltıldı ya da noktalama düzeltildi, sözcük eklenmedi.
+  (id:'a1_fk_25', ku:'Ders', tr:'Ders', en:'Lesson',
+   cins:'mê', ez:'dersa', kat:'perwerde', zor:0.84,
+   not:'Ders (dişil/mê). Veqetandek: dersa yekem (birinci ders). Mînak: Ev dersa yekem e. Têbinî: "wane" (a1_502) eşanlamı; kaynaklarda "ders" çok daha yaygın (ders 98 / wane 3).',
+   her:['Ev dersa yekem e.', 'Ew di dersên xwe de jêhatî ne.'],
+   gen:['Îro dersên me gelekî giran bûn.', 'Kî dersê dide te?']),
+
+  (id:'a1_fk_27', ku:'Zilam', tr:'Adam', en:'Man',
+   cins:'nêr', ez:'zilamê', kat:'malbat', zor:0.83,
+   not:'Zilam (eril/nêr) — adam, erkek. Belirsiz: zilamekî (bir adam). Mînak: Ew zilamekî qenc e. Têbinî: "mêr" (a1_090) daha çok koca anlamında.',
+   her:['Ev zilam kî ye?', 'Ew zilamekî qenc e.'],
+   gen:['Zilam xerîb e.', 'Ev zilam ne qenc bû.']),
+
+  (id:'a1_fk_28', ku:'Mih', tr:'Koyun', en:'Sheep',
+   cins:'mê', ez:'miha', kat:'ajal', zor:0.81,
+   not:'Mih (dişil/mê) — koyun. Fêrkera Kurdî bu biçimi kullanır; "mî" (a1_299) aynı sözcüğün öbür biçimi. Mînak: Çend mihên we hene?',
+   her:['Bavê min mih, bizin û çêlekan xwedî dike.', 'Mihên me hene.'],
+   gen:['Çend mihên we hene?', 'Sed û bîst û şeş mihên me hene.']),
+
+  (id:'a1_fk_29', ku:'Kevok', tr:'Güvercin', en:'Dove / Pigeon',
+   cins:'mê', ez:'kevoka', kat:'ajal', zor:0.82,
+   not:'Kevok (dişil/mê) — güvercin. Veqetandek: kevoka spî (beyaz güvercin). Mînak: Du kevokên spî difirin. Têbinî: "kevoka aştiyê" barış güvercini.',
+   her:['Du kevokên spî difirin.', 'Kevok weke pembû spî ne.'],
+   gen:['Kevoka spî', 'Kevoka aştiyê']),
+
+  (id:'a1_fk_30', ku:'Aferîn', tr:'Aferin / Bravo', en:'Well done',
+   cins:'bêcins', ez:null, kat:'silav', zor:0.88,
+   not:'Aferîn — övgü ünlemi (aferin, bravo). "Aferîn ji we re" (size aferin). Fêrkera Kurdî 10. ders: doğru cevaba "Aferîn!" denir.',
+   her:['Aferîn, kurê min!', 'Aferîn ji we re.'],
+   gen:['Aferîn!', 'Aferîn, lawê min.']),
+
+  (id:'a1_fk_31', ku:'Nexêr', tr:'Hayır', en:'No',
+   cins:'bêcins', ez:null, kat:'silav', zor:0.86,
+   not:'Nexêr — hayır; "na" (a1_015) ile aynı anlam. Fêrkera Kurdî 3. ve 10. derslerde kullanır; yazılı kaynaklarda "na" çok daha sık. Mînak: Nexêr, ew ne şîn e, kesk e.',
+   her:['Nexêr, kurê min, ew ne şîn e, kesk e.', 'Nexêr, ew ne di pola me de ne.'],
+   gen:['Nexêr, ez ne di beşa dîrokê de me.', 'Nexêr.']),
 
 ];
 

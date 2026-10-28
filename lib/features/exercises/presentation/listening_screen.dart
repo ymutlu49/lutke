@@ -111,6 +111,33 @@ const int _enAzSesliKelime = 4;
 /// Metnin önceden üretilmiş ses dosyası var mı?
 bool _hazirSesVar(String metin) => TtsAssetManifest.lookup(metin) != null;
 
+/// Anlam sorusunun seçenekleri: doğru Türkçe karşılık + 3 çeldirici.
+/// Eşanlamlılar ("Na" / "Nexêr" → Hayır, "Mî" / "Mih" → Koyun) aynı soruda iki
+/// doğru seçenek üretmesin diye Türkçesi '/'-parçalarından biri bile çakışan
+/// kelime elenir (quiz_screen'deki kuralın aynısı).
+List<String> _anlamSecenekleri(
+  _ListeningWord word,
+  List<_ListeningWord> allWords,
+  Random rng,
+) {
+  Set<String> parcalar(String s) => s
+      .toLowerCase()
+      .split(RegExp(r'[/;,]'))
+      .map((p) => p.trim())
+      .where((p) => p.isNotEmpty)
+      .toSet();
+  final hedef = parcalar(word.tr);
+  final gorulen = <String>{word.tr.trim().toLowerCase()};
+  final celdirici = <String>[];
+  for (final w in List<_ListeningWord>.from(allWords)..shuffle(rng)) {
+    if (celdirici.length >= 3) break;
+    if (w == word || parcalar(w.tr).intersection(hedef).isNotEmpty) continue;
+    if (!gorulen.add(w.tr.trim().toLowerCase())) continue;
+    celdirici.add(w.tr);
+  }
+  return [word.tr, ...celdirici]..shuffle(rng);
+}
+
 List<_ListeningQuestion> _generateListeningSession({int questionCount = 8, String? category, String? level}) {
   final allWords = _loadListeningWords(category: category, level: level);
   if (allWords.length < 6) return [];
@@ -155,13 +182,7 @@ List<_ListeningQuestion> _generateListeningSession({int questionCount = 8, Strin
       case _ListeningQuestionType.meaning:
         // Dogru cevap: Turkce karsiligi
         final correct = word.tr;
-        final distractors = (List<_ListeningWord>.from(allWords)
-              ..remove(word)
-              ..shuffle(rng))
-            .take(3)
-            .map((w) => w.tr)
-            .toList();
-        final options = [correct, ...distractors]..shuffle(rng);
+        final options = _anlamSecenekleri(word, allWords, rng);
         questions.add(_ListeningQuestion(
           type: type,
           sentence: sentence,
@@ -183,13 +204,7 @@ List<_ListeningQuestion> _generateListeningSession({int questionCount = 8, Strin
         if (!targetInSentence) {
           // Hedef kelime cümlede yok → meaning sorusuna düş
           final correct = word.tr;
-          final distractors = (List<_ListeningWord>.from(allWords)
-                ..remove(word)
-                ..shuffle(rng))
-              .take(3)
-              .map((w) => w.tr)
-              .toList();
-          final options = [correct, ...distractors]..shuffle(rng);
+          final options = _anlamSecenekleri(word, allWords, rng);
           questions.add(_ListeningQuestion(
             type: _ListeningQuestionType.meaning,
             sentence: sentence,
@@ -235,13 +250,7 @@ List<_ListeningQuestion> _generateListeningSession({int questionCount = 8, Strin
         // Hala 3 yoksa fallback ama placeholder değil — meaning'e düş
         if (distractorWords.length < 3) {
           final correct = word.tr;
-          final distractors = (List<_ListeningWord>.from(allWords)
-                ..remove(word)
-                ..shuffle(rng))
-              .take(3)
-              .map((w) => w.tr)
-              .toList();
-          final opts = [correct, ...distractors]..shuffle(rng);
+          final opts = _anlamSecenekleri(word, allWords, rng);
           questions.add(_ListeningQuestion(
             type: _ListeningQuestionType.meaning,
             sentence: sentence,
@@ -268,13 +277,7 @@ List<_ListeningQuestion> _generateListeningSession({int questionCount = 8, Strin
         if (longWords.isEmpty) {
           // Fallback to meaning
           final correct = word.tr;
-          final distractors = (List<_ListeningWord>.from(allWords)
-                ..remove(word)
-                ..shuffle(rng))
-              .take(3)
-              .map((w) => w.tr)
-              .toList();
-          final opts = [correct, ...distractors]..shuffle(rng);
+          final opts = _anlamSecenekleri(word, allWords, rng);
           questions.add(_ListeningQuestion(
             type: _ListeningQuestionType.meaning,
             sentence: sentence,
@@ -300,13 +303,7 @@ List<_ListeningQuestion> _generateListeningSession({int questionCount = 8, Strin
         if (fillDistractors.length < 3) {
           // Yetersiz distractor → bu soru için meaning tipine düş
           final correct = word.tr;
-          final distractors = (List<_ListeningWord>.from(allWords)
-                ..remove(word)
-                ..shuffle(rng))
-              .take(3)
-              .map((w) => w.tr)
-              .toList();
-          final opts = [correct, ...distractors]..shuffle(rng);
+          final opts = _anlamSecenekleri(word, allWords, rng);
           questions.add(_ListeningQuestion(
             type: _ListeningQuestionType.meaning,
             sentence: sentence,

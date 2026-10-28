@@ -90,6 +90,22 @@ void main() {
       expect(toplam, greaterThan(300));
     });
 
+    test('ortak cinsli adlar (heval) izafe sorusuna girmez', () {
+      for (final d in kLessonLevels) {
+        for (final w in izafeAdlari(d)) {
+          expect(
+            kOrtakCinsliAdlar,
+            isNot(contains((w.ku as String).toLowerCase())),
+            reason: '${w.id}: hem -ê hem -a doğru olur',
+          );
+        }
+      }
+      // Yeni Fêrkera adları (ders, kevok) ve düzeltilen pênûs alıştırmaya girer.
+      final a1 = {for (final w in izafeAdlari('A1')) w.id as String};
+      expect(a1, containsAll(['a1_fk_25', 'a1_fk_29', 'a1_500']));
+      expect(a1, isNot(contains('a1_fk_23')));
+    });
+
     test('üretilen sorularda doğru cevap adın kendi izafe biçimi', () {
       for (final d in ['A1', 'A2', 'B1']) {
         final adlar = {for (final w in izafeAdlari(d)) w.id as String: w};

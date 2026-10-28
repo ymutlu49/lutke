@@ -9528,7 +9528,7 @@ const List<EnWord> kEnB1Liste = [
 
   (id:'en_b1_1585', en:'drawing', ku:'wênekêşî', ipa:'/ˈdrɔːɪŋ/', pos:'n',
    form:null, kat:'huner', zor:0.70,
-   notKu:'Wênekêşî. Çêkirina wêneyan bi pênûskê.',
+   notKu:'Wênekêşî. Çêkirina wêneyan bi pênûsê.',
    her:["Her drawings are impressive.", "I make a drawing every day."],
    herKu:['Wêneyên wê bandor li mirov dikin.', 'Ez her roj wêneyekî çêdikim.'], emoji:'✏️'),
 

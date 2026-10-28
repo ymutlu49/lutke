@@ -4362,7 +4362,7 @@ const kA2EkKelimeler10 = [
   (id:'a2_1965', ku:'Lênûsk', tr:'Defter', en:'Notebook',
    cins:'mê', ez:'lênûska', kat:'perwerde', zor:0.82,
    not:'Mê — [AS] no.160: "defter = lênûsk, defter" ✓. "Lê" + "nûsk" — özgün Kurmancî bileşik. "Defter" de kullanılır.',
-   her:['Lênûska xwendekarê.', 'Lênûsk û pênûsk.'],
+   her:['Lênûska xwendekarê.', 'Lênûsk û pênûs.'],
    gen:['Lênûsk û pirtûk', 'Lênûska me']),
 
 

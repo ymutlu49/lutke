@@ -1744,7 +1744,7 @@ const List<EnWord> kEnA2Liste = [
    form:'lent / lent', kat:'kar', zor:0.86,
    notKu:'Paşeroj û beşdarî: lent. "lend" = tiştî deyn bide kesekî.',
    her:['Can you lend me your pen, please?', 'I lent him ten dollars last week.'],
-   herKu:['Ji kerema xwe tu dikarî pênûska xwe deynî min bide?', 'Min hefteya borî deh dolar deynî wî dan.'], emoji:'🤝'),
+   herKu:['Ji kerema xwe tu dikarî pênûsa xwe deynî min bide?', 'Min hefteya borî deh dolar deynî wî dan.'], emoji:'🤝'),
 
   (id:'en_a2_293', en:'belong', ku:'ji... re bûn', ipa:'/bɪˈlɒŋ/', pos:'v',
    form:null, kat:'kar', zor:0.86,
@@ -2860,7 +2860,7 @@ const List<EnWord> kEnA2Liste = [
    form:'past of "use"', kat:'leker_borî', zor:0.75,
    notKu:'Forma borî ya "use". Rêkûpêk.',
    her:['I used a pen.', 'She used my phone.'],
-   herKu:['Min pênûsk bi kar anî.', 'Wê telefona min bi kar anî.'], emoji:'🖊️'),
+   herKu:['Min pênûs bi kar anî.', 'Wê telefona min bi kar anî.'], emoji:'🖊️'),
 
   (id:'en_a2_479', en:'lived', ku:'jiya', ipa:'/lɪvd/', pos:'v',
    form:'past of "live"', kat:'leker_borî', zor:0.75,

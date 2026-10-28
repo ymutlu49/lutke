@@ -267,11 +267,11 @@ const kChildA1Kelimeler = [
    her:['Pirtûka min nû ye.', 'Ez pirtûk dixwînim.'],
    gen:['Pirtûk — kitap', 'Pirtûka Kurmancî.']),
 
-  (id:'z_a1_061', ku:'Pênûsk', tr:'Kalem', en:'Pen', cins:'mê', ez:'pênûska',
-   kat:'dibistan', zor:0.80, not:'Okul gereci — öz Kurmancî "pênûsk"',
+  (id:'z_a1_061', ku:'Pênûs', tr:'Kalem', en:'Pen', cins:'mê', ez:'pênûsa',
+   kat:'dibistan', zor:0.80, not:'Okul gereci — öz Kurmancî "pênûs"',
    emoji: '✏️',
-   her:['Pênûska min sor e.', 'Bi pênûskê binivîse.'],
-   gen:['Pênûsk — kalem', 'Pênûsk sor e.']),
+   her:['Pênûsa min sor e.', 'Bi pênûsê binivîse.'],
+   gen:['Pênûs — kalem', 'Pênûs sor e.']),
 
   (id:'z_a1_062', ku:'Mamoste', tr:'Öğretmen', en:'Teacher', cins:'bêcins', ez:'mamosteyê',
    kat:'dibistan', zor:0.78, not:'Okuldaki saygın figür',

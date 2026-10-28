@@ -2903,11 +2903,11 @@ final kB1EkKelimeler7 = [
 
 
   // ── OKUL EĞİTİM EK — özgün Kurmancî formlar ──────────────
-  (id:"b1_1355", ku:"Pênûsk", tr:"Kalem", en:"Pen / Pencil",
-   cins:"mê", ez:"pênûska", kat:"perwerde", zor:0.82,
-   not:"Dişil — Özgün Kurmancî form: \"pênûsk\". \"Pênûska hibrî\" (dolma kalem), \"pênûska zirîçî\" (kurşun kalem). \"Qelem\" Arapça alıntı — \"pênûsk\" tercih edilir.",
-   her:["Pênûska xwe bide min.", "Pênûsk û lênûsk."],
-   gen:["Pênûsk û lênûsk", "Pênûska me"]),
+  (id:"b1_1355", ku:"Pênûs", tr:"Kalem", en:"Pen / Pencil",
+   cins:"mê", ez:"pênûsa", kat:"perwerde", zor:0.82,
+   not:"Dişil — Özgün Kurmancî form: \"pênûs\". \"Pênûsa hibrî\" (dolma kalem), \"pênûsa zirîçî\" (kurşun kalem). \"Qelem\" Arapça alıntı — \"pênûs\" tercih edilir.",
+   her:["Pênûsa xwe bide min.", "Pênûs û lênûsk."],
+   gen:["Pênûs û lênûsk", "Pênûsa me"]),
 
   (id:"b1_1356", ku:"Lênûsk", tr:"Defter / Not defteri", en:"Notebook",
    cins:"mê", ez:"lênûska", kat:"perwerde", zor:0.82,

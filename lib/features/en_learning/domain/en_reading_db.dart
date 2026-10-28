@@ -175,13 +175,13 @@ const List<EnReadingPassage> kEnReadingPassages = [
     titleEn: 'My School Bag',
     titleKu: 'Çenteyê min ê dibistanê',
     passage: 'My school bag is blue. It has many things. There are five books and three notebooks. I have a red pen and a yellow pencil. My lunch box is inside. It has a sandwich and an apple.',
-    translationKu: 'Çenteyê min ê dibistanê şîn e. Tiştên gelek tê de hene. Pênc pirtûk û sê lênûsk hene. Pênûskeke sor û pênûskeke zer a min heye. Qutiya nîvroyê ya min tê de ye. Sandwîçek û sêvek tê de hene.',
+    translationKu: 'Çenteyê min ê dibistanê şîn e. Tiştên gelek tê de hene. Pênc pirtûk û sê lênûsk hene. Pênûseke sor û pênûseke zer a min heye. Qutiya nîvroyê ya min tê de ye. Sandwîçek û sêvek tê de hene.',
     questions: [
       EnReadingQuestion(
         questionEn: 'What color is the bag?',
         correctAnswer: 'Blue.',
         options: ['Red.', 'Blue.', 'Yellow.', 'Green.'],
-        explanationKu: '"My school bag is blue" = çenteyê min şîn e. Destkar: pênûska sor û zer ne reng ji bo çente ye.',
+        explanationKu: '"My school bag is blue" = çenteyê min şîn e. Destkar: pênûsa sor û zer ne reng ji bo çente ye.',
       ),
       EnReadingQuestion(
         questionEn: 'How many books are there?',

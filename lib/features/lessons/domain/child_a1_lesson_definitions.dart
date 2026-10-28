@@ -341,7 +341,7 @@ const _kChildLessons = <Lesson>[
       MultipleChoiceExercise(
         id: 'ch_ex_060',
         prompt: '📚 Bu Kurmancî\'de ne?',
-        options: ['Pênûsk', 'Mamoste', 'Pirtûk', 'Top'],
+        options: ['Pênûs', 'Mamoste', 'Pirtûk', 'Top'],
         correctIndex: 2,
       ),
       MultipleChoiceExercise(
@@ -356,14 +356,14 @@ const _kChildLessons = <Lesson>[
       FillInBlankExercise(
         id: 'ch_ex_062',
         sentenceWithBlank: '✏️ ___ min sor e.',
-        correctWord: 'Pênûska',
-        options: ['Pênûska', 'Pirtûka', 'Topê'],
+        correctWord: 'Pênûsa',
+        options: ['Pênûsa', 'Pirtûka', 'Topê'],
       ),
       FillInBlankExercise(
         id: 'ch_ex_062b',
         sentenceWithBlank: 'Ez ___ dixwînim.',
         correctWord: 'pirtûk',
-        options: ['pirtûk', 'pênûsk', 'top'],
+        options: ['pirtûk', 'pênûs', 'top'],
       ),
     ],
   ),
