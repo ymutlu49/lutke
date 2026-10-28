@@ -1,5 +1,5 @@
 // LÛTKE — Jimaro ses fabrikası manifesti (OTOMATİK ÜRETİLMİŞTİR, elle düzenleme).
-// Kaynak: Ziman/ses/fabrika (uret.py + dart_manifest.py). Ses: lutke-kurmanci · üretim 2026-10-21 · 11405 metin.
+// Kaynak: Ziman/ses/fabrika (uret.py + dart_manifest.py). Ses: lutke-kurmanci · üretim 2026-10-28 · 11406 metin.
 // Anahtar kuralı: boşluk sadeleştir, küçük harf, sondaki .,!? at, tipografik kesme → '.
 
 class SesManifest {
@@ -8245,6 +8245,7 @@ class SesManifest {
     'pêşwazîkirina mêvan': 'ff/ff8c710043cf8a43.mp3',
     'pêşxistina civakê lazim e': '51/519305bd4f54a96d.mp3',
     'pêşxistina zimanî lazim e': '6a/6a0272dc3cbac90f.mp3',
+    'pîroz': '84/849ad8278cf430ec.mp3',
     'pîroz be': 'bd/bdd9ab000e91f1e8.mp3',
     'pîroz û xwezayî': '51/510c5694fb200cc5.mp3',
     'pîrê': 'fd/fde04adf990bfe28.mp3',

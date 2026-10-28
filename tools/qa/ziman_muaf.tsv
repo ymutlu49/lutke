@@ -13,6 +13,7 @@ terim	'navend' yerine		navend genel dilde merkez (kurum, şehir); NAVENDEK geome
 terim	'çareserî' yerine		Genel dilde "çözüm"; matematik işlemi bağlamında kullanılmıyor.
 terim	'cûdahî' yerine		Genel dilde "farklılık"; FERQ iki sayı arasındaki farktır.
 terim	'guhêztin' yerine		Genel dilde "taşımak, aktarmak"; VEGUHESTIN geometrik öteleme.
+terim	'saet' yerine		Genel dilde "saat" (Saet çend e?); DEMJIMÊR matematik ölçü birimi. Korpus saet 451 / demjimêr 12; Fêrkera Kurdî 5. ders "Saet çend e?" (2026-10-28).
 edat	.	:ku$	Madde başı sözlük biçimidir (Di navbera, Di nav); ikinci parça cümle içinde gelir.
 norm	'Emê' ->	cand_artists	Şarkı adı ("Emê", "Emê Gozê"); özgün yazımı korunur.
 yazim	Doğan		Özel ad: Aynur Doğan.

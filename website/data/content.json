@@ -1,14 +1,14 @@
 {
   "meta": {
-    "wordTotal": 3632,
+    "wordTotal": 3634,
     "lessonTotal": 105,
-    "exerciseTotal": 590,
+    "exerciseTotal": 591,
     "dialogueTotal": 8,
     "culturalTotal": 9,
     "candTotal": 155,
     "proverbTotal": 3359,
     "motivationTotal": 35,
-    "grammarTotal": 10,
+    "grammarTotal": 18,
     "levels": [
       "a1",
       "a2",
@@ -18,7 +18,7 @@
       "c2"
     ],
     "wordsByLevel": {
-      "a1": 517,
+      "a1": 519,
       "a2": 721,
       "b1": 951,
       "b2": 598,
@@ -9588,6 +9588,44 @@
         "gen": [
           "Firîngiyên sor hene.",
           "Firîngî û birinc hene."
+        ]
+      },
+      {
+        "id": "a1_fk_23",
+        "ku": "Heval",
+        "tr": "Arkadaş",
+        "en": "Friend",
+        "cins": "nêr",
+        "ez": "hevalê",
+        "kat": "malbat",
+        "zor": 0.9,
+        "not": "Heval — arkadaş. Ortak cinsli: erkek arkadaş için \"hevalê min\", kız arkadaş için \"hevala min\" (korpusta hevalekî 73, hevaleke 21). Mînak: Tu hevalê min î.",
+        "her": [
+          "Tu hevalê min î.",
+          "Bi xêr hatî, heval!"
+        ],
+        "gen": [
+          "Silav, heval!",
+          "Heval hat."
+        ]
+      },
+      {
+        "id": "a1_fk_24",
+        "ku": "Pîroz",
+        "tr": "Kutlu, mübarek",
+        "en": "Blessed (in greetings)",
+        "cins": "bêcins",
+        "ez": null,
+        "kat": "silav",
+        "zor": 0.88,
+        "not": "Pîroz — kutlu, mübarek. Kutlamada \"… pîroz be!\": Cejn pîroz be! (Bayramın kutlu olsun!) Fêrkera Kurdî 12. ders (Cejn).",
+        "her": [
+          "Cejn pîroz be!",
+          "Sala nû pîroz be!"
+        ],
+        "gen": [
+          "Pîroz be!",
+          "Cejna we pîroz be!"
         ]
       },
       {
@@ -76057,7 +76095,7 @@
         "level": 3,
         "path": "general",
         "estimatedMinutes": 10,
-        "totalXP": 69,
+        "totalXP": 79,
         "emoji": null,
         "culturalRewardId": null,
         "targetCardIds": [
@@ -76122,7 +76160,7 @@
             ],
             "correctAnswer": "-tirîn",
             "correctIndex": 3,
-            "grammarNote": "Superlative eki \"-tirîn\": mezintirîn = en büyük. [TH] §86",
+            "grammarNote": "Superlative eki \"-tirîn\" (baştirîn sêv = en iyi elma). Daha yaygın olanı \"herî\" + sıfat: tiştê herî girîng = en önemli şey. [TH] §86",
             "culturalNote": null,
             "xpReward": 10,
             "cardId": null,
@@ -76161,6 +76199,25 @@
             "correctAnswer": "Zêdetir hişmend",
             "correctIndex": 3,
             "grammarNote": "Hişmend + tir = daha akıllı (comparative).",
+            "culturalNote": null,
+            "xpReward": 10,
+            "cardId": null,
+            "audioAsset": null
+          },
+          {
+            "id": "b1_l11_e7",
+            "type": "multipleChoice",
+            "kurmanjPrompt": "Kîjan rast e?",
+            "turkishPrompt": "\"En önemli şey\"",
+            "options": [
+              "tiştê herî girîng",
+              "tiştê girîngtir",
+              "herî tiştê girîng",
+              "tiştê girîng"
+            ],
+            "correctAnswer": "tiştê herî girîng",
+            "correctIndex": 0,
+            "grammarNote": "\"herî\" + sıfat = en …: tiştê herî girîng (en önemli şey). \"girîngtir\" = daha önemli.",
             "culturalNote": null,
             "xpReward": 10,
             "cardId": null,
@@ -107145,7 +107202,7 @@
       "rules": [
         "Her navdêrek Kurmancî ya nêr (erkek) an mê (dişi) ye.",
         "Zayend bi bîrkirinê tê naskirin — ne qaîdeyek giştî heye.",
-        "Nêr: nan, dest, dil, bav, bira, roj, çem",
+        "Nêr: nan, dest, dil, bav, bira, çem",
         "Mê: mal, av, dar, pirtûk, kitêb, dê, xwişk, ax"
       ],
       "tip": "Zayendê navdêran bi bîrkirîn lazim e. Di ferhengê de N (nêr) an M (mê) tê nivîsîn.",
@@ -107160,7 +107217,8 @@
         "Nêr: -ê (destê min = elim)",
         "Mê: -a (mala min = evim)",
         "Pirjimar: -ên (malên me = evlerimiz)",
-        "Veqetandek di navbera navdêr û cinavkan de tê."
+        "Veqetandek di navbera navdêr û cînavkê, navdêr û navdêrê, navdêr û rengdêrê de tê:",
+        "  mala min, mala bavê min, mala mezin"
       ],
       "tip": "Veqetandek di Kurmancî de yek ji qaîdeyên herî girîng e. Her roj bikar bîne!",
       "examples": [
@@ -107187,24 +107245,24 @@
       ]
     },
     {
-      "titleKu": "Cinavk",
+      "titleKu": "Cînavk",
       "titleTr": "Zamirler",
       "level": "A1",
       "rules": [
-        "Cinavkên kes — rewşa rast (navokî):",
+        "Cînavkên kesî — rewşa xwerû:",
         "  ez (ben), tu (sen), ew (o)",
         "  em (biz), hûn (siz), ew (onlar)",
-        "Rewşa berz (tewang):",
+        "Rewşa tewandî:",
         "  min (beni/benim), te (seni/senin), wî/wê (onu/onun)",
         "  me (bizi/bizim), we (sizi/sizin), wan (onları/onların)",
-        "Rewşa berz di dema borî de ji bo kerdox tê bikaranîn!"
+        "Di dema borî de, bi lêkerên gerguhêz, kirde di rewşa tewandî de ye!"
       ],
-      "tip": "Di dema borî de kerdox di rewşa berz de ye. Ev ergatîf e — ji Tirkî cuda ye!",
+      "tip": "Di dema borî de kirde di rewşa tewandî de ye. Ev ergatîf e — ji Tirkî cuda ye!",
       "examples": [
         {
           "ku": "Ez dixwînim.",
           "tr": "Ben okuyorum.",
-          "note": "Niha: cinavka rast"
+          "note": "Niha: cînavka xwerû"
         },
         {
           "ku": "Min xwend.",
@@ -107219,6 +107277,184 @@
         {
           "ku": "Wî got.",
           "tr": null,
+          "note": null
+        }
+      ]
+    },
+    {
+      "titleKu": "Hevokên Navdêrî",
+      "titleTr": "Ad Cümleleri (bûn: im, î, e, in)",
+      "level": "A1",
+      "rules": [
+        "Lêkera \"bûn\" piştî navdêr an rengdêrê tê û cuda tê nivîsîn:",
+        "  piştî tîpên bêdeng: ez … im, tu … î, ew … e, em/hûn/ew … in",
+        "  piştî tîpên dengdêr: ez … me, tu … yî, ew … ye, em/hûn/ew … ne",
+        "Neyînî bi du awayan:",
+        "  bi \"ne\": Şîlan ne mamoste ye.",
+        "  bi \"nîne / nînin\": Şîlan mamoste nîne. — Sêv sor nînin.",
+        "Pirs: Azad xort e? — Gelo ew xwendekar e?"
+      ],
+      "tip": "Lêkera \"bûn\" cuda tê nivîsîn: \"xwendekar im\", ne \"xwendekarim\".",
+      "examples": [
+        {
+          "ku": "Ez xwendekar im.",
+          "tr": "Ben öğrenciyim.",
+          "note": "Piştî tîpa bêdeng: im"
+        },
+        {
+          "ku": "Rêzan zana ye.",
+          "tr": "Rêzan bilgilidir.",
+          "note": "Piştî tîpa dengdêr: ye"
+        },
+        {
+          "ku": "Em heval in.",
+          "tr": "Biz arkadaşız.",
+          "note": null
+        },
+        {
+          "ku": "Şîlan ne mamoste ye.",
+          "tr": "Şîlan öğretmen değil.",
+          "note": "Neyînî: ne"
+        }
+      ]
+    },
+    {
+      "titleKu": "Cînavên Nîşanê",
+      "titleTr": "İşaret Zamirleri (ev, ew, vê, vî, van)",
+      "level": "A1",
+      "rules": [
+        "Nêzîk: ev (bu) — Dûr: ew (şu, o)",
+        "Bi navdêrê re: ev pirtûk, ew pirtûk",
+        "Rewşa tewandî (bi daçekan re, wek bireser):",
+        "  nêzîk: vê (mê), vî (nêr), van (pirjimar)",
+        "  dûr: wê (mê), wî (nêr), wan (pirjimar)",
+        "  Navdêr jî ditewe: vê pirtûkê, vî gundî, van zarokan"
+      ],
+      "tip": "Bi daçekan re cînava nîşanê û navdêr bi hev re ditewin: di vê malê de, ji vî gundî.",
+      "examples": [
+        {
+          "ku": "Ev çi ye?",
+          "tr": "Bu ne?",
+          "note": null
+        },
+        {
+          "ku": "di vê malê de",
+          "tr": "bu evde",
+          "note": "mê: vê … -ê"
+        },
+        {
+          "ku": "ji vî gundî",
+          "tr": "bu köyden",
+          "note": "nêr: vî … -î"
+        },
+        {
+          "ku": "bi van zarokan re",
+          "tr": "bu çocuklarla",
+          "note": "pirjimar: van … -an"
+        }
+      ]
+    },
+    {
+      "titleKu": "Peyvên Pirsê",
+      "titleTr": "Soru Sözcükleri",
+      "level": "A1",
+      "rules": [
+        "çi (ne) · kî (kim) · kîjan (hangi)",
+        "kengî (ne zaman) · çawa (nasıl) · çima (neden)",
+        "li ku (nerede) · ji ku (nereden) · çend (kaç)",
+        "Peyva pirsê li cihê bersivê tê:",
+        "  Navê te çi ye? — Navê min Amed e."
+      ],
+      "tip": "Ew kî ye? — Ew Amed e. · Navê te çi ye? — Navê min Amed e.",
+      "examples": [
+        {
+          "ku": "Navê te çi ye?",
+          "tr": "Adın ne?",
+          "note": null
+        },
+        {
+          "ku": "Ew kî ye?",
+          "tr": "O kim?",
+          "note": null
+        },
+        {
+          "ku": "Tu ji ku yî?",
+          "tr": "Nerelisin?",
+          "note": null
+        },
+        {
+          "ku": "Tu çend salî yî?",
+          "tr": "Kaç yaşındasın?",
+          "note": null
+        }
+      ]
+    },
+    {
+      "titleKu": "Jimar û Saet",
+      "titleTr": "Sayılar ve Saat",
+      "level": "A1",
+      "rules": [
+        "yek, du, sê, çar, pênc, şeş, heft, heşt, neh, deh",
+        "yanzdeh, diwazdeh, sêzdeh, çardeh, panzdeh, şanzdeh, hivdeh, hejdeh, nozdeh, bîst",
+        "Di navbera jimaran de \"û\": bîst û yek (21), sed û deh (110)",
+        "Saet çend e? — Saet heşt e.",
+        "  Saet heft û nîv e. (7.30) — Saet heşt û çaryek e. (8.15)",
+        "  Saet didu kêm deh deqîqe ye. (2'ye 10 var)"
+      ],
+      "tip": "Di gotina saetê de \"du\" û \"sê\" wek \"didu\" û \"sisê\" tên gotin: Saet didu ye.",
+      "examples": [
+        {
+          "ku": "Saet çend e?",
+          "tr": "Saat kaç?",
+          "note": null
+        },
+        {
+          "ku": "Saet heft û nîv e.",
+          "tr": "Saat yedi buçuk.",
+          "note": null
+        },
+        {
+          "ku": "bîst û yek",
+          "tr": "yirmi bir",
+          "note": "jimar + û + jimar"
+        },
+        {
+          "ku": "Saet didu ye.",
+          "tr": "Saat iki.",
+          "note": "Di saetê de: didu, sisê"
+        }
+      ]
+    },
+    {
+      "titleKu": "Hebûn: heye / hene",
+      "titleTr": "Var / Yok: iyelik",
+      "level": "A1",
+      "rules": [
+        "Xwedîtî: cînavk an navdêr di rewşa tewandî de + heye (yekjimar) / hene (pirjimar)",
+        "  Min kitêbek heye. (Bir kitabım var.)",
+        "  Min zarok hene. (Çocuklarım var.)",
+        "Neyînî: tune (Tune ye. = Yok.)"
+      ],
+      "tip": "\"Min kitêbek heye\" — xwedî \"min\" e (tewandî), ne \"ez\".",
+      "examples": [
+        {
+          "ku": "Min kitêbek heye.",
+          "tr": "Bir kitabım var.",
+          "note": null
+        },
+        {
+          "ku": "Min hevalek heye.",
+          "tr": "Bir arkadaşım var.",
+          "note": null
+        },
+        {
+          "ku": "Min zarok hene.",
+          "tr": "Çocuklarım var.",
+          "note": "pirjimar: hene"
+        },
+        {
+          "ku": "Tune ye.",
+          "tr": "Yok.",
           "note": null
         }
       ]
@@ -107266,15 +107502,17 @@
       "titleTr": "Fiiller — Geçmiş Zaman",
       "level": "A2",
       "rules": [
-        "Avahiya ergatîf: Di dema borî de kerdox rewşa berz (tewandî) digire!",
-        "Lêkerên veguhêzî (transîtîf): MIN dît. (Ben gördüm.)",
-        "  Kerdox (min) di rewşa berz de ye.",
-        "Lêkerên neveguhêzî (întransîtîf): EZ çûm. (Ben gittim.)",
-        "  Kerdox (ez) di rewşa rast de dimîne.",
+        "Avahiya ergatîf: Di dema borî de kirde (bi lêkerên gerguhêz) di rewşa tewandî de ye!",
+        "Lêkerên gerguhêz (transîtîf): MIN dît. (Ben gördüm.)",
+        "  Kirde (min) di rewşa tewandî de ye.",
+        "  Lêker li gorî bireserê tê kişandin, ne li gorî kirdeyê:",
+        "  Min ew dît. (Onu gördüm.) — Min tu dîtî. (Seni gördüm.)",
+        "Lêkerên negerguhêz (întransîtîf): EZ çûm. (Ben gittim.)",
+        "  Kirde (ez) di rewşa xwerû de dimîne.",
         "Koka borî ji rader tê çêkirin:",
         "  xwendin → xwend, dîtin → dît, çûn → çû"
       ],
-      "tip": "Ergatîf yek ji taybetiyên herî cuda yên Kurmancî ye. \"MIN dît\" = Ben gördüm — \"min\" ne \"beni\" ye, kerdox e!",
+      "tip": "Ergatîf yek ji taybetiyên herî cuda yên Kurmancî ye. \"MIN dît\" = Ben gördüm — \"min\" ne \"beni\" ye, kirde ye!",
       "examples": [
         {
           "ku": "Min dît.",
@@ -107307,7 +107545,7 @@
         "  dixwînim → naxwînim (okumuyorum)",
         "Dema borî: ne- pêşgir e:",
         "  xwend → nexwend (okumadı)",
-        "Fermankar (emir): me- an ne-:",
+        "Raweya fermanî (emir): me- an ne-:",
         "  mexwîne! (okuma!), meçe! (gitme!)"
       ],
       "tip": "Niha: di- → na-. Borî: ne- li pêşiya kokê. Du qaîdeyên hêsan!",
@@ -107330,7 +107568,7 @@
         {
           "ku": "Mexwîne!",
           "tr": "Okuma!",
-          "note": "Fermankar — neyînî"
+          "note": "Fermanî — neyînî"
         }
       ]
     },
@@ -107379,25 +107617,25 @@
       "titleTr": "Çoğul",
       "level": "A2",
       "rules": [
-        "Paşgira pirjimarê ya tewandî (oblique): -an",
-        "  zarok → zarokan (çocukları/çocuklara)",
-        "  kitêb → kitêban",
-        "  mirov → mirovan",
-        "Paşgira veqetandek ya pirjimarê: -ên",
+        "Di rewşa xwerû de pirjimar paşgir nagire:",
+        "  Zarok hatin. (Çocuklar geldi.) — lêker pirjimar e",
+        "Paşgira pirjimarê ya rewşa tewandî: -an",
+        "  ji zarokan re (çocuklara), kitêb → kitêban, mirov → mirovan",
+        "Paşgira veqetandekê ya pirjimarê: -ên",
         "  malên me (evlerimiz)",
         "  kitêbên wan (onların kitapları)"
       ],
-      "tip": "Piranî: navdêr + -an = pirjimar. Hêsan e!",
+      "tip": "Pirjimara rewşa xwerû paşgir nagire (Zarok hatin). -an tenê di rewşa tewandî de tê (ji zarokan re).",
       "examples": [
         {
-          "ku": "zarok → zarokan",
-          "tr": "çocuk → çocuklar",
-          "note": null
+          "ku": "Zarok hatin.",
+          "tr": "Çocuklar geldi.",
+          "note": "Xwerû: paşgir tune, lêker pirjimar e"
         },
         {
-          "ku": "dar → daran",
-          "tr": "ağaç → ağaçlar",
-          "note": null
+          "ku": "zarok → zarokan",
+          "tr": "çocuk → çocukları / çocuklara",
+          "note": "Tewandî: -an"
         },
         {
           "ku": "malên me",
@@ -107408,6 +107646,111 @@
           "ku": "kitêbên wî",
           "tr": "onun kitapları",
           "note": "Pirjimar veqetandek: -ên"
+        }
+      ]
+    },
+    {
+      "titleKu": "Tewang: -ê, -î, -an",
+      "titleTr": "Eğik Durum (tekil ve çoğul)",
+      "level": "A2",
+      "rules": [
+        "Bi daçekan re navdêr di rewşa tewandî de ye:",
+        "  mê: -ê (di malê de)",
+        "  nêr: -î (li gundî) — di axaftinê de pir caran nayê gotin (ji gund)",
+        "  pirjimar: -an (ji zarokan re)",
+        "Tewanga navîn: bajar → ji bajêr"
+      ],
+      "tip": "Mê -ê, nêr -î, pirjimar -an: zayenda navdêran bi bîr bîne!",
+      "examples": [
+        {
+          "ku": "di malê de",
+          "tr": "evde",
+          "note": null
+        },
+        {
+          "ku": "li gundî",
+          "tr": "köyde",
+          "note": null
+        },
+        {
+          "ku": "ji bajêr",
+          "tr": "şehirden",
+          "note": "bajar → bajêr"
+        },
+        {
+          "ku": "ji zarokan re",
+          "tr": "çocuklara",
+          "note": "pirjimar → -an"
+        }
+      ]
+    },
+    {
+      "titleKu": "Banglêkirin",
+      "titleTr": "Seslenme (bavo!, dayê!)",
+      "level": "A2",
+      "rules": [
+        "Qertafên rewşa banglêkirinê ev in:",
+        "  nêr: -o (bavo!, kuro!)",
+        "  mê: -ê (dayê!, keçê!)",
+        "  pirjimar: -ino (hevalino!) an \"gelî … -an\" (gelî hevalan!)"
+      ],
+      "tip": "Nêr -o, mê -ê, pirjimar -ino.",
+      "examples": [
+        {
+          "ku": "Bavo!",
+          "tr": "Baba!",
+          "note": "nêr: -o"
+        },
+        {
+          "ku": "Keçê!",
+          "tr": "Kızım! / Kız!",
+          "note": "mê: -ê"
+        },
+        {
+          "ku": "Hevalino!",
+          "tr": "Arkadaşlar!",
+          "note": "pirjimar: -ino"
+        },
+        {
+          "ku": "Gelî hevalan!",
+          "tr": "Ey arkadaşlar!",
+          "note": "gelî + -an"
+        }
+      ]
+    },
+    {
+      "titleKu": "Dema Bê û Fermanî",
+      "titleTr": "Gelecek Zaman ve Emir",
+      "level": "A2",
+      "rules": [
+        "Dema bê: ê / yê + bi- + kok + -im, -î, -e, -in",
+        "  Ez ê biçim. — Tu yê bixwî. — Em ê biçin.",
+        "  Neyînî: bi- → ne-: Ez ê neçim.",
+        "Fermanî: bi- + koka dema niha + -e (yekjimar) / -in (pirjimar)",
+        "  bixwîne! — bixwînin!",
+        "  Awarte: hatin → were! / werin!"
+      ],
+      "tip": "\"ê\" ji cînavkê cuda tê nivîsîn: ez ê, tu yê, em ê.",
+      "examples": [
+        {
+          "ku": "Ez ê biçim.",
+          "tr": "Gideceğim.",
+          "note": null
+        },
+        {
+          "ku": "Tu yê bixwî.",
+          "tr": "Yiyeceksin.",
+          "note": "piştî \"tu\": yê"
+        },
+        {
+          "ku": "Bixwîne!",
+          "tr": "Oku!",
+          "note": "Fermanî, yekjimar"
+        },
+        {
+          "ku": "Werin!",
+          "tr": "Gelin!",
+          "note": "Fermanî, pirjimar"
         }
       ]
     },
@@ -107444,8 +107787,8 @@
           "note": null
         },
         {
-          "ku": "Xatirê te! Sibê bibînim.",
-          "tr": "Hoşça kal! Yarın görüşelim.",
+          "ku": "Bi xatirê te! — Oxir be!",
+          "tr": "Hoşça kal! — Güle güle!",
           "note": null
         }
       ]

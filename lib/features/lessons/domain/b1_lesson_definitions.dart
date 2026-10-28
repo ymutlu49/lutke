@@ -656,7 +656,8 @@ final kB1Lessons = <LessonModel>[
         tr: 'Doğru eki bul',
         opts: ['-ek', '-tir', '-î', '-tirîn'],
         ci: 3,
-        note: 'Superlative eki "-tirîn": mezintirîn = en büyük. [TH] §86'),
+        note: 'Superlative eki "-tirîn" (baştirîn sêv = en iyi elma). Daha yaygın olanı "herî" + sıfat: '
+            'tiştê herî girîng = en önemli şey. [TH] §86'),
       _fill(id: 'b1_l11_e4', before: 'Ev pirtûk', after: ' pirtûka min e.',
         tr: 'Bu kitap en güzel kitabımdır.',
         opts: ['xweştir', 'xweştirîn', 'xweş', 'nexweş'],
@@ -673,6 +674,14 @@ final kB1Lessons = <LessonModel>[
         ],
         ci: 3,
         note: 'Hişmend + tir = daha akıllı (comparative).'),
+      // 2026-10-28, kaynak kitap denetimi: üstünlükte korpusun en yaygın biçimi "herî" + sıfat
+      // (ad + herî + sıfat 385 geçiş; -tirîn adın önünde 144, arkasında 55). Ders "herî"yi hiç öğretmiyordu.
+      _mc(id: 'b1_l11_e7',
+        ku: 'Kîjan rast e?',
+        tr: '"En önemli şey"',
+        opts: ['tiştê herî girîng', 'tiştê girîngtir', 'herî tiştê girîng', 'tiştê girîng'],
+        ci: 0,
+        note: '"herî" + sıfat = en …: tiştê herî girîng (en önemli şey). "girîngtir" = daha önemli.'),
       _speak(id: 'b1_l11_e6',
         ku: 'Pîrê ji min hişmendtir e. Xanî helbestvanê mezintirîn bû. Ev ya xweştirîn e.',
         tr: 'Büyükanne benden daha akıllıdır. Xanî en büyük şairdi. Bu en güzelidir.'),

@@ -14,6 +14,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 import 'package:lutke/core/constants/app_theme.dart';
 import 'package:lutke/features/lessons/domain/bicim_alistirma.dart';
+import 'package:lutke/features/lessons/domain/cekim_db.dart';
 import 'package:lutke/features/lessons/domain/cins_kanit_db.dart';
 import 'package:lutke/features/lessons/domain/fiil_db.dart';
 import 'package:lutke/features/lessons/domain/lesson_catalog.dart';
@@ -137,6 +138,56 @@ void main() {
     });
   });
 
+  group('şimdiki zaman', () {
+    test('çekim tablosu: dört biçim dolu ve tanıklı, olumsuz en az 2 kez', () {
+      expect(kCekimler.length, greaterThanOrEqualTo(20));
+      for (final c in kCekimler) {
+        expect({c.ez, c.tu, c.ew, c.pir}.length, 4, reason: c.mastar);
+        expect(c.ez.endsWith('im') && c.pir.endsWith('in'), isTrue, reason: c.mastar);
+        expect([c.nEz, c.nTu, c.nEw, c.nPir].every((n) => n > 0), isTrue, reason: c.mastar);
+        if (c.neyiniEz != null) {
+          expect(c.neyiniEz!.startsWith('na'), isTrue, reason: c.mastar);
+          expect(c.nNeyiniEz, greaterThanOrEqualTo(2), reason: c.mastar);
+        }
+        if (c.neyiniEw != null) expect(c.nNeyiniEw, greaterThanOrEqualTo(2), reason: c.mastar);
+      }
+      // Kural tek başına yanlış biçim üretir: "naavêjim" korpusta yok, tabloya girmemeli.
+      expect(kCekimler.where((c) => c.mastar == 'avêtin').single.neyiniEz, isNull);
+    });
+
+    test('kişi eki sorusunda doğru cevap öznenin tablodaki biçimi', () {
+      const kisi = {'Ez': 0, 'Tu': 1, 'Ew': 2, 'Em': 3, 'Hûn': 3};
+      for (var tohum = 0; tohum < 20; tohum++) {
+        final sorular = nihaSorulari(Random(tohum));
+        expect(sorular.length, kBicimSoruSayisi);
+        expect(sorular.map((s) => s.id).toSet().length, sorular.length);
+        for (final s in sorular) {
+          final c = kCekimler.firstWhere((c) => c.mastar == s.id.split('_')[2]);
+          final ozne = s.correctAnswer.split(' ').first;
+          expect(s.options.toSet().length, 3);
+          expect(s.options[s.correctIndex!], s.correctAnswer);
+          expect(s.options.every((o) => o.startsWith('$ozne ')), isTrue);
+          expect(s.correctAnswer, '$ozne ${[c.ez, c.tu, c.ew, c.pir][kisi[ozne]!]}.');
+          expect(s.grammarNote, contains('Korpusta'));
+        }
+      }
+    });
+
+    test('olumsuzluk sorusunda doğru cevap tanıklı na- biçimi, fiil yinelenmez', () {
+      for (var tohum = 0; tohum < 20; tohum++) {
+        final sorular = neyiniSorulari(Random(tohum));
+        expect(sorular.length, kBicimSoruSayisi);
+        expect(sorular.map((s) => s.id.split('_')[2]).toSet().length, sorular.length);
+        for (final s in sorular) {
+          final c = kCekimler.firstWhere((c) => c.mastar == s.id.split('_')[2]);
+          expect(s.options.toSet().length, 3);
+          expect(s.options[s.correctIndex!], s.correctAnswer);
+          expect(['Ez ${c.neyiniEz}.', 'Ew ${c.neyiniEw}.'], contains(s.correctAnswer));
+        }
+      }
+    });
+  });
+
   group('katalog', () {
     test('üretilen ders kimliğiyle bulunur; tanınmayan kimlik null', () {
       final d = lessonById('bicim_izafe_a1')!;
@@ -149,8 +200,12 @@ void main() {
     });
 
     test('düzeye göre sunulan alıştırmalar', () {
-      expect(bicimDersKimlikleri('A1'), ['bicim_izafe_a1']);
-      expect(bicimDersKimlikleri('A2'), ['bicim_izafe_a2', 'bicim_ergatif_a2']);
+      expect(bicimDersKimlikleri('A1'), ['bicim_izafe_a1', 'bicim_niha_a1']);
+      expect(bicimDersKimlikleri('A2'),
+          ['bicim_izafe_a2', 'bicim_niha_a2', 'bicim_neyini_a2', 'bicim_ergatif_a2']);
+      expect(lessonById('bicim_niha_a1')!.exercises.length, kBicimSoruSayisi);
+      expect(lessonById('bicim_neyini_a2')!.exercises.length, kBicimSoruSayisi);
+      expect(lessonById('bicim_neyini_a1'), isNull, reason: 'olumsuzluk A2\'de başlıyor');
       // Elle yazılmış derslerin sayısı değişmedi.
       expect([for (final d in kLessonLevels) ...lessonsForLevel(d)].length, 105);
     });

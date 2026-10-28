@@ -6,6 +6,10 @@
 ///     → "veqetandek" (izafe) alıştırması: *mala min* mı, *malê min* mi?
 ///   - [kFiiller]: geçişliliği sözlükten, geçmiş biçimi korpustan alınan fiiller
 ///     → ergatif alıştırması: *Min got* mu, *Ez got* mu?
+///   - [kCekimler]: şimdiki zaman biçimleri korpusta tanıklı fiiller
+///     → kişi eki alıştırması: *Tu dixwî* mi, *Tu dixwim* mi? ve olumsuzluk:
+///     *Ez naçim* mi, *Ez nediçim* mi? (2026-10-24; kaynak ders kitapları bu
+///     ikisini çekim tablosu ve dönüştürme alıştırmasıyla öğretiyor, Lütke'de yoktu)
 ///
 /// Doğru cevap veriden gelir ve açıklama kanıtı gösterir ("Korpusta: çekimli
 /// zamir + got 354, yalın zamir + got 0"). Kuralı ezberletmek yerine kanıtını
@@ -19,6 +23,7 @@ library;
 
 import 'dart:math';
 
+import 'cekim_db.dart';
 import 'cins_kanit_db.dart';
 import 'fiil_db.dart';
 import 'lesson_catalog.dart';
@@ -36,14 +41,30 @@ const int _enAzAd = 12;
 /// Ergatif alıştırmasının sunulduğu düzeyler (ergatif A2'de başlıyor).
 const Set<String> _ergatifDuzeyleri = {'A2', 'B1', 'B2'};
 
+/// Şimdiki zaman kişi eki alıştırması (dilbilgisi ipucu "Dema niha" A1'de).
+const Set<String> _nihaDuzeyleri = {'A1', 'A2'};
+
+/// Olumsuzluk alıştırması (dilbilgisi ipucu "Neyînî" A2'de).
+const Set<String> _neyiniDuzeyleri = {'A2', 'B1'};
+
 /// Bir düzeyde sunulan üretilmiş derslerin kimlikleri.
 List<String> bicimDersKimlikleri(String level) {
   final d = level.toUpperCase();
   return [
     if (izafeAdlari(d).length >= _enAzAd) '${kBicimOneki}izafe_${d.toLowerCase()}',
+    if (_nihaDuzeyleri.contains(d)) '${kBicimOneki}niha_${d.toLowerCase()}',
+    if (_neyiniDuzeyleri.contains(d)) '${kBicimOneki}neyini_${d.toLowerCase()}',
     if (_ergatifDuzeyleri.contains(d)) '${kBicimOneki}ergatif_${d.toLowerCase()}',
   ];
 }
+
+/// Ders başlıkları: (Kurmancî, Türkçe, simge)
+const Map<String, (String, String, String)> _basliklar = {
+  'izafe': ('Veqetandek: -a an -ê?', 'İzafe: dişil -a, eril -ê', '🔗'),
+  'ergatif': ('Ergatîf: Min an Ez?', 'Geçmiş zamanda özne: min mi, ez mi?', '⏳'),
+  'niha': ('Dema niha: dikim, dikî, dike', 'Şimdiki zaman: kişi ekleri', '▶️'),
+  'neyini': ('Neyînî: dikim → nakim', 'Olumsuzluk: di- yerine na-', '🚫'),
+};
 
 /// `bicim_izafe_a1`, `bicim_ergatif_a2` gibi bir kimlikten ders üretir;
 /// kimlik tanınmıyorsa ya da yeterli veri yoksa `null`.
@@ -57,21 +78,23 @@ LessonModel? bicimDersi(String id, {Random? rng}) {
   final sorular = switch (parca[0]) {
     'izafe' => izafeSorulari(level, r),
     'ergatif' => _ergatifDuzeyleri.contains(level) ? ergatifSorulari(r) : const <ExerciseModel>[],
+    'niha' => _nihaDuzeyleri.contains(level) ? nihaSorulari(r) : const <ExerciseModel>[],
+    'neyini' => _neyiniDuzeyleri.contains(level) ? neyiniSorulari(r) : const <ExerciseModel>[],
     _ => const <ExerciseModel>[],
   };
   if (sorular.isEmpty) return null;
-  final izafe = parca[0] == 'izafe';
+  final (kuBaslik, trBaslik, simge) = _basliklar[parca[0]]!;
   return LessonModel(
     id: id,
-    kurmanjTitle: izafe ? 'Veqetandek: -a an -ê?' : 'Ergatîf: Min an Ez?',
-    turkishTitle: izafe ? 'İzafe: dişil -a, eril -ê' : 'Geçmiş zamanda özne: min mi, ez mi?',
+    kurmanjTitle: kuBaslik,
+    turkishTitle: trBaslik,
     unitNumber: 0,
     lessonNumber: 0,
     level: kLessonLevels.indexOf(level) + 1,
     path: LessonPath.general,
     exercises: sorular,
     estimatedMinutes: 3,
-    emoji: izafe ? '🔗' : '⏳',
+    emoji: simge,
   );
 }
 
@@ -205,5 +228,85 @@ ExerciseModel _gecissizSorusu(Fiil f, Random rng) {
         've fiil özneyle uyuşur.\n'
         'Korpusta yalın özne + "${f.gecmis}" ${f.tanikYalin} kez.',
     cardId: f.kimlik.isEmpty ? null : f.kimlik,
+  );
+}
+
+// ── Şimdiki zaman: kişi ekleri ───────────────────────────────────────────────
+
+/// (özne, Türkçe özne, biçim seçici, korpus sayısı seçici). "Ew" çoğulda da
+/// kullanılır; belirsiz kalmasın diye çoğul yalnız em / hûn ile sorulur.
+final List<(String, String, String Function(Cekim), int Function(Cekim))> _nihaKisileri = [
+  ('Ez', 'ben', (c) => c.ez, (c) => c.nEz),
+  ('Tu', 'sen', (c) => c.tu, (c) => c.nTu),
+  ('Ew', 'o', (c) => c.ew, (c) => c.nEw),
+  ('Em', 'biz', (c) => c.pir, (c) => c.nPir),
+  ('Hûn', 'siz', (c) => c.pir, (c) => c.nPir),
+];
+
+List<ExerciseModel> nihaSorulari(Random rng) {
+  final fiiller = List<Cekim>.of(kCekimler)..shuffle(rng);
+  return [for (final c in fiiller.take(kBicimSoruSayisi)) _nihaSorusu(c, rng)];
+}
+
+ExerciseModel _nihaSorusu(Cekim c, Random rng) {
+  final (ozne, ozneTr, bicim, sayi) = _nihaKisileri[rng.nextInt(_nihaKisileri.length)];
+  final dogruBicim = bicim(c);
+  // Yanlış seçenekler aynı fiilin öteki kişi biçimleri: soru yalnız kişi ekini sınar.
+  final yanlis = {c.ez, c.tu, c.ew, c.pir}..remove(dogruBicim);
+  final dogru = '$ozne $dogruBicim.';
+  final secenekler = <String>[
+    dogru,
+    for (final b in (yanlis.toList()..shuffle(rng)).take(2)) '$ozne $b.',
+  ]..shuffle(rng);
+  return ExerciseModel(
+    id: '${kBicimOneki}niha_${c.mastar}_$ozne',
+    type: ExerciseType.multipleChoice,
+    kurmanjPrompt: 'Kîjan rast e?',
+    turkishPrompt: '"${c.mastar}" (${c.tr.toLowerCase()}), şimdiki zaman. Özne: $ozneTr',
+    options: secenekler,
+    correctAnswer: dogru,
+    correctIndex: secenekler.indexOf(dogru),
+    grammarNote: 'Şimdiki zaman: di- + kök + kişi eki — ez -im, tu -î, ew -e, em/hûn/ew -in '
+        '(${c.ez}, ${c.tu}, ${c.ew}, ${c.pir}).\n'
+        'Korpusta "$dogruBicim" ${sayi(c)} kez.',
+    cardId: c.kimlik.isEmpty ? null : c.kimlik,
+  );
+}
+
+// ── Şimdiki zaman: olumsuzluk ────────────────────────────────────────────────
+
+List<ExerciseModel> neyiniSorulari(Random rng) {
+  // (fiil, özne, olumlu, olumsuz, korpus sayısı) — yalnız olumsuzu tanıklı biçimler
+  final adaylar = <(Cekim, String, String, String, int)>[
+    for (final c in kCekimler) ...[
+      if (c.neyiniEz != null) (c, 'Ez', c.ez, c.neyiniEz!, c.nNeyiniEz),
+      if (c.neyiniEw != null) (c, 'Ew', c.ew, c.neyiniEw!, c.nNeyiniEw),
+    ],
+  ]..shuffle(rng);
+  // Aynı fiil iki kez gelmesin (ez ve ew biçimi aynı kuralı sınar).
+  final gorulen = <String>{};
+  final secilen = [
+    for (final a in adaylar)
+      if (gorulen.add(a.$1.mastar)) a,
+  ].take(kBicimSoruSayisi);
+  return [for (final a in secilen) _neyiniSorusu(a, rng)];
+}
+
+ExerciseModel _neyiniSorusu((Cekim, String, String, String, int) a, Random rng) {
+  final (c, ozne, olumlu, olumsuz, sayi) = a;
+  final dogru = '$ozne $olumsuz.';
+  // Yanlış seçenekler dilbilgisine aykırı: di- kalıp ne-/na- eklenmiş (nediçim, nadiçim).
+  final secenekler = <String>[dogru, '$ozne ne$olumlu.', '$ozne na$olumlu.']..shuffle(rng);
+  return ExerciseModel(
+    id: '${kBicimOneki}neyini_${c.mastar}_$ozne',
+    type: ExerciseType.multipleChoice,
+    kurmanjPrompt: 'Kîjan rast e?',
+    turkishPrompt: '"$ozne $olumlu." cümlesinin olumsuzu (şimdiki zaman)',
+    options: secenekler,
+    correctAnswer: dogru,
+    correctIndex: secenekler.indexOf(dogru),
+    grammarNote: 'Şimdiki zamanda olumsuzluk: di- düşer, yerine na- gelir ($olumlu → $olumsuz).\n'
+        'Korpusta "$olumsuz" $sayi kez.',
+    cardId: c.kimlik.isEmpty ? null : c.kimlik,
   );
 }

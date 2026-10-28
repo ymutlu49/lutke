@@ -786,7 +786,7 @@ const _grammarTopics = <_GrammarTopic>[
     rules: [
       'Her navdêrek Kurmancî ya nêr (erkek) an mê (dişi) ye.',
       'Zayend bi bîrkirinê tê naskirin — ne qaîdeyek giştî heye.',
-      'Nêr: nan, dest, dil, bav, bira, roj, çem',
+      'Nêr: nan, dest, dil, bav, bira, çem',
       'Mê: mal, av, dar, pirtûk, kitêb, dê, xwişk, ax',
     ],
     examples: [
@@ -838,7 +838,8 @@ const _grammarTopics = <_GrammarTopic>[
       'Nêr: -ê (destê min = elim)',
       'Mê: -a (mala min = evim)',
       'Pirjimar: -ên (malên me = evlerimiz)',
-      'Veqetandek di navbera navdêr û cinavkan de tê.',
+      'Veqetandek di navbera navdêr û cînavkê, navdêr û navdêrê, navdêr û rengdêrê de tê:',
+      '  mala min, mala bavê min, mala mezin',
     ],
     examples: [
       _GrammarExample(ku: 'destê min', tr: 'elim', note: 'dest (nêr) + -ê + min'),
@@ -866,45 +867,214 @@ const _grammarTopics = <_GrammarTopic>[
     ],
   ),
 
-  // 4. Cinavk
+  // 4. Cînavk
   _GrammarTopic(
     icon: Icons.person_outline_rounded,
     color: AppColors.success,
-    titleKu: 'Cinavk',
+    // Terimler kaynak dilbilgilerinden (Samî Tan, Selîm Biçûk, Fêrkera Kurdî): rewşa xwerû/tewandî,
+    // kirde (242 geçiş, 8 kaynak; "biker" yalnız Fêrkera'da 18), gerguhêz/negerguhêz, cînavk.
+    // Önceki "rewşa rast/berz", "navokî", "kerdox", "veguhêzî" korpusta tanıksızdı (2026-10-24 denetimi).
+    titleKu: 'Cînavk',
     titleTr: 'Zamirler',
     level: 'A1',
     rules: [
-      'Cinavkên kes — rewşa rast (navokî):',
+      'Cînavkên kesî — rewşa xwerû:',
       '  ez (ben), tu (sen), ew (o)',
       '  em (biz), hûn (siz), ew (onlar)',
-      'Rewşa berz (tewang):',
+      'Rewşa tewandî:',
       '  min (beni/benim), te (seni/senin), wî/wê (onu/onun)',
       '  me (bizi/bizim), we (sizi/sizin), wan (onları/onların)',
-      'Rewşa berz di dema borî de ji bo kerdox tê bikaranîn!',
+      'Di dema borî de, bi lêkerên gerguhêz, kirde di rewşa tewandî de ye!',
     ],
     examples: [
-      _GrammarExample(ku: 'Ez dixwînim.', tr: 'Ben okuyorum.', note: 'Niha: cinavka rast'),
-      _GrammarExample(ku: 'Min xwend.', tr: 'Ben okudum.', note: 'Borî: cinavka berz (ergatîf!)'),
+      _GrammarExample(ku: 'Ez dixwînim.', tr: 'Ben okuyorum.', note: 'Niha: cînavka xwerû'),
+      _GrammarExample(ku: 'Min xwend.', tr: 'Ben okudum.', note: 'Borî: cînavka tewandî (ergatîf!)'),
       _GrammarExample(ku: 'Ew diaxive.', tr: 'O konuşuyor.'),
       _GrammarExample(ku: 'Wî got.', tr: 'O (erkek) söyledi.'),
     ],
-    tip: 'Di dema borî de kerdox di rewşa berz de ye. Ev ergatîf e — ji Tirkî cuda ye!',
+    tip: 'Di dema borî de kirde di rewşa tewandî de ye. Ev ergatîf e — ji Tirkî cuda ye!',
     quizQuestions: [
       // Rule recognition
       _QuizQuestion(question: 'Ez, tu, ew — kîjan pirjimar e?', options: ['em', 'tu', 'ew'], correctIndex: 0),
-      _QuizQuestion(question: '"min" di kîjan rewşê de ye?', options: ['rast (navokî)', 'berz (tewang)'], correctIndex: 1),
+      _QuizQuestion(question: '"min" di kîjan rewşê de ye?', options: ['xwerû', 'tewandî'], correctIndex: 1),
       // Fill in the blank
       _QuizQuestion(question: '___ dixwînim (ben)', options: ['Ez', 'Min', 'Em'], correctIndex: 0),
       _QuizQuestion(question: '___ got. (O — erkek, borî)', options: ['Ew', 'Wê', 'Wî'], correctIndex: 2),
-      _QuizQuestion(question: '___ xwend. (Sen — borî, veguhêzî)', options: ['Tu', 'Te', 'We'], correctIndex: 1),
+      _QuizQuestion(question: '___ xwend. (Sen — borî, gerguhêz)', options: ['Tu', 'Te', 'We'], correctIndex: 1),
       // Error detection
       _QuizQuestion(question: 'Kîjan rast e (niha)?', options: ['Min dixwînim', 'Ez dixwînim', 'Me dixwînim'], correctIndex: 1),
-      _QuizQuestion(question: 'Kîjan rast e (borî, veguhêzî)?', options: ['Ez dît', 'Min dît', 'Ê dît'], correctIndex: 1),
+      _QuizQuestion(question: 'Kîjan rast e (borî, gerguhêz)?', options: ['Ez dît', 'Min dît', 'Ê dît'], correctIndex: 1),
       // Transformation (niha → borî)
-      _QuizQuestion(question: '"Ez dibînim" → borîya veguhêzî?', options: ['Ez dît', 'Min dît', 'Min dibînim'], correctIndex: 1),
-      _QuizQuestion(question: '"Em diçin" → dema borî? (neveguhêzî)', options: ['Em çûn', 'Me çûn', 'Em çû'], correctIndex: 0),
+      _QuizQuestion(question: '"Ez dibînim" → dema borî (gerguhêz)?', options: ['Ez dît', 'Min dît', 'Min dibînim'], correctIndex: 1),
+      _QuizQuestion(question: '"Em diçin" → dema borî? (negerguhêz)', options: ['Em çûn', 'Me çûn', 'Em çû'], correctIndex: 0),
       // Applied
-      _QuizQuestion(question: 'Cinavka "hûn" tê çi wateyê?', options: ['biz', 'siz', 'onlar'], correctIndex: 1),
+      _QuizQuestion(question: 'Cînavka "hûn" tê çi wateyê?', options: ['biz', 'siz', 'onlar'], correctIndex: 1),
+    ],
+  ),
+
+  // ── 2026-10-28: kaynak kitaplarda (Fêrkera Kurdî ilk 14 ders, MEB A1 programı) öğretilip
+  // burada olmayan konular. Her örnek ve doğru cevap tanık korpusunda sayıldı; tanıksız
+  // olanların yerine Fêrkera'nın kendi örnekleri kondu (docs/olcum/kaynak_kitap_denetimi.md).
+
+  // 4a. Hevokên Navdêrî — Fêrkera Kurdî 2.–3. ders
+  _GrammarTopic(
+    icon: Icons.short_text_rounded,
+    color: const Color(0xFF5C6BC0),
+    titleKu: 'Hevokên Navdêrî',
+    titleTr: 'Ad Cümleleri (bûn: im, î, e, in)',
+    level: 'A1',
+    rules: [
+      'Lêkera "bûn" piştî navdêr an rengdêrê tê û cuda tê nivîsîn:',
+      '  piştî tîpên bêdeng: ez … im, tu … î, ew … e, em/hûn/ew … in',
+      '  piştî tîpên dengdêr: ez … me, tu … yî, ew … ye, em/hûn/ew … ne',
+      'Neyînî bi du awayan:',
+      '  bi "ne": Şîlan ne mamoste ye.',
+      '  bi "nîne / nînin": Şîlan mamoste nîne. — Sêv sor nînin.',
+      'Pirs: Azad xort e? — Gelo ew xwendekar e?',
+    ],
+    examples: [
+      _GrammarExample(ku: 'Ez xwendekar im.', tr: 'Ben öğrenciyim.', note: 'Piştî tîpa bêdeng: im'),
+      _GrammarExample(ku: 'Rêzan zana ye.', tr: 'Rêzan bilgilidir.', note: 'Piştî tîpa dengdêr: ye'),
+      _GrammarExample(ku: 'Em heval in.', tr: 'Biz arkadaşız.'),
+      _GrammarExample(ku: 'Şîlan ne mamoste ye.', tr: 'Şîlan öğretmen değil.', note: 'Neyînî: ne'),
+    ],
+    tip: 'Lêkera "bûn" cuda tê nivîsîn: "xwendekar im", ne "xwendekarim".',
+    quizQuestions: [
+      _QuizQuestion(question: 'Rêzan xwendekar __.', options: ['e', 'ye', 'in'], correctIndex: 0),
+      _QuizQuestion(question: 'Rêzan zana __.', options: ['e', 'ye', 'ne'], correctIndex: 1),
+      _QuizQuestion(question: 'Ez mamoste __.', options: ['im', 'me', 'e'], correctIndex: 1),
+      _QuizQuestion(question: 'Em heval __.', options: ['e', 'in', 'ne'], correctIndex: 1),
+      _QuizQuestion(question: 'Tu mamoste __.', options: ['î', 'yî', 'ye'], correctIndex: 1),
+      _QuizQuestion(question: 'Kîjan rast e?', options: ['Ez xwendekar im.', 'Ez xwendekarim.', 'Ez xwendekar e.'], correctIndex: 0),
+      _QuizQuestion(question: '"Şîlan mamoste ye." → neyînî?', options: ['Şîlan ne mamoste ye.', 'Şîlan na mamoste ye.', 'Şîlan mamoste ne ye.'], correctIndex: 0),
+      _QuizQuestion(question: '"Sêv sor in." → neyînî (bi "nînin")?', options: ['Sêv sor nînin.', 'Sêv sor nîne.', 'Sêv nînin sor.'], correctIndex: 0),
+    ],
+  ),
+
+  // 4b. Cînavên Nîşanê — Fêrkera Kurdî 10. ders
+  _GrammarTopic(
+    icon: Icons.near_me_rounded,
+    color: const Color(0xFF26A69A),
+    titleKu: 'Cînavên Nîşanê',
+    titleTr: 'İşaret Zamirleri (ev, ew, vê, vî, van)',
+    level: 'A1',
+    rules: [
+      'Nêzîk: ev (bu) — Dûr: ew (şu, o)',
+      'Bi navdêrê re: ev pirtûk, ew pirtûk',
+      'Rewşa tewandî (bi daçekan re, wek bireser):',
+      '  nêzîk: vê (mê), vî (nêr), van (pirjimar)',
+      '  dûr: wê (mê), wî (nêr), wan (pirjimar)',
+      '  Navdêr jî ditewe: vê pirtûkê, vî gundî, van zarokan',
+    ],
+    examples: [
+      _GrammarExample(ku: 'Ev çi ye?', tr: 'Bu ne?'),
+      _GrammarExample(ku: 'di vê malê de', tr: 'bu evde', note: 'mê: vê … -ê'),
+      _GrammarExample(ku: 'ji vî gundî', tr: 'bu köyden', note: 'nêr: vî … -î'),
+      _GrammarExample(ku: 'bi van zarokan re', tr: 'bu çocuklarla', note: 'pirjimar: van … -an'),
+    ],
+    tip: 'Bi daçekan re cînava nîşanê û navdêr bi hev re ditewin: di vê malê de, ji vî gundî.',
+    quizQuestions: [
+      _QuizQuestion(question: 'Nêzîk: __ pirtûk (bu kitap)', options: ['ev', 'ew', 'vê'], correctIndex: 0),
+      _QuizQuestion(question: 'Di __ malê de (bu evde)', options: ['ev', 'vê', 'vî'], correctIndex: 1),
+      _QuizQuestion(question: 'Ji __ gundî (bu köyden)', options: ['vê', 'vî', 'van'], correctIndex: 1),
+      _QuizQuestion(question: 'Bi __ zarokan re (bu çocuklarla)', options: ['vî', 'vê', 'van'], correctIndex: 2),
+      _QuizQuestion(question: '"vê" ji bo kîjan zayendê ye?', options: ['nêr', 'mê', 'pirjimar'], correctIndex: 1),
+      _QuizQuestion(question: 'Kîjan rast e (bu evde)?', options: ['di vê malê de', 'di vî malê de', 'di ev malê de'], correctIndex: 0),
+      _QuizQuestion(question: '"Ev çi ye?" tê çi wateyê?', options: ['Bu ne?', 'Bu kim?', 'Bu nerede?'], correctIndex: 0),
+    ],
+  ),
+
+  // 4c. Peyvên Pirsê — MEB A1 kazanımı (çi, li ku, kengî, çawa, çima, kî)
+  _GrammarTopic(
+    icon: Icons.help_outline_rounded,
+    color: const Color(0xFFAB47BC),
+    titleKu: 'Peyvên Pirsê',
+    titleTr: 'Soru Sözcükleri',
+    level: 'A1',
+    rules: [
+      'çi (ne) · kî (kim) · kîjan (hangi)',
+      'kengî (ne zaman) · çawa (nasıl) · çima (neden)',
+      'li ku (nerede) · ji ku (nereden) · çend (kaç)',
+      'Peyva pirsê li cihê bersivê tê:',
+      '  Navê te çi ye? — Navê min Amed e.',
+    ],
+    examples: [
+      _GrammarExample(ku: 'Navê te çi ye?', tr: 'Adın ne?'),
+      _GrammarExample(ku: 'Ew kî ye?', tr: 'O kim?'),
+      _GrammarExample(ku: 'Tu ji ku yî?', tr: 'Nerelisin?'),
+      _GrammarExample(ku: 'Tu çend salî yî?', tr: 'Kaç yaşındasın?'),
+    ],
+    tip: 'Ew kî ye? — Ew Amed e. · Navê te çi ye? — Navê min Amed e.',
+    quizQuestions: [
+      _QuizQuestion(question: '"kengî" tê çi wateyê?', options: ['ne zaman', 'nasıl', 'neden'], correctIndex: 0),
+      _QuizQuestion(question: '"çima" tê çi wateyê?', options: ['nerede', 'neden', 'kim'], correctIndex: 1),
+      _QuizQuestion(question: 'Navê te __ ye?', options: ['çi', 'kî', 'çend'], correctIndex: 0),
+      _QuizQuestion(question: 'Ew __ ye? — Ew Amed e.', options: ['çi', 'kî', 'kengî'], correctIndex: 1),
+      _QuizQuestion(question: 'Tu __ yî? — Ez baş im.', options: ['çawa', 'çi', 'kî'], correctIndex: 0),
+      _QuizQuestion(question: 'Tu __ salî yî?', options: ['çend', 'çi', 'kîjan'], correctIndex: 0),
+      _QuizQuestion(question: '"kîjan" tê çi wateyê?', options: ['hangi', 'kaç', 'kim'], correctIndex: 0),
+    ],
+  ),
+
+  // 4d. Jimar û Saet — Fêrkera Kurdî 4.–5. ders
+  _GrammarTopic(
+    icon: Icons.schedule_rounded,
+    color: const Color(0xFFFFA000),
+    titleKu: 'Jimar û Saet',
+    titleTr: 'Sayılar ve Saat',
+    level: 'A1',
+    rules: [
+      'yek, du, sê, çar, pênc, şeş, heft, heşt, neh, deh',
+      'yanzdeh, diwazdeh, sêzdeh, çardeh, panzdeh, şanzdeh, hivdeh, hejdeh, nozdeh, bîst',
+      'Di navbera jimaran de "û": bîst û yek (21), sed û deh (110)',
+      'Saet çend e? — Saet heşt e.',
+      '  Saet heft û nîv e. (7.30) — Saet heşt û çaryek e. (8.15)',
+      '  Saet didu kêm deh deqîqe ye. (2\'ye 10 var)',
+    ],
+    examples: [
+      _GrammarExample(ku: 'Saet çend e?', tr: 'Saat kaç?'),
+      _GrammarExample(ku: 'Saet heft û nîv e.', tr: 'Saat yedi buçuk.'),
+      _GrammarExample(ku: 'bîst û yek', tr: 'yirmi bir', note: 'jimar + û + jimar'),
+      _GrammarExample(ku: 'Saet didu ye.', tr: 'Saat iki.', note: 'Di saetê de: didu, sisê'),
+    ],
+    tip: 'Di gotina saetê de "du" û "sê" wek "didu" û "sisê" tên gotin: Saet didu ye.',
+    quizQuestions: [
+      _QuizQuestion(question: '21 = ?', options: ['bîst û yek', 'yek û bîst', 'bîstyek'], correctIndex: 0),
+      _QuizQuestion(question: '15 = ?', options: ['pêncdeh', 'panzdeh', 'deh û pênc'], correctIndex: 1),
+      _QuizQuestion(question: 'Saet __ e? (Saat kaç?)', options: ['çend', 'çi', 'kengî'], correctIndex: 0),
+      _QuizQuestion(question: 'Saet heft û __ e. (yedi buçuk)', options: ['nîv', 'çaryek', 'deh'], correctIndex: 0),
+      _QuizQuestion(question: 'Saet heşt û __ e. (sekizi çeyrek geçiyor)', options: ['nîv', 'çaryek', 'kêm'], correctIndex: 1),
+      _QuizQuestion(question: 'Kîjan rast e (Saat iki)?', options: ['Saet didu ye.', 'Saet du e.', 'Saet didu e.'], correctIndex: 0),
+      _QuizQuestion(question: '100 = ?', options: ['sed', 'hezar', 'deh'], correctIndex: 0),
+    ],
+  ),
+
+  // 4e. Hebûn: heye / hene — Kurmanji Complete; korpus "Min kitêbek heye"
+  _GrammarTopic(
+    icon: Icons.inventory_2_rounded,
+    color: const Color(0xFF8D6E63),
+    titleKu: 'Hebûn: heye / hene',
+    titleTr: 'Var / Yok: iyelik',
+    level: 'A1',
+    rules: [
+      'Xwedîtî: cînavk an navdêr di rewşa tewandî de + heye (yekjimar) / hene (pirjimar)',
+      '  Min kitêbek heye. (Bir kitabım var.)',
+      '  Min zarok hene. (Çocuklarım var.)',
+      'Neyînî: tune (Tune ye. = Yok.)',
+    ],
+    examples: [
+      _GrammarExample(ku: 'Min kitêbek heye.', tr: 'Bir kitabım var.', note: 'min (tewandî) + heye'),
+      _GrammarExample(ku: 'Min hevalek heye.', tr: 'Bir arkadaşım var.'),
+      _GrammarExample(ku: 'Min zarok hene.', tr: 'Çocuklarım var.', note: 'pirjimar: hene'),
+      _GrammarExample(ku: 'Tune ye.', tr: 'Yok.'),
+    ],
+    tip: '"Min kitêbek heye" — xwedî "min" e (tewandî), ne "ez".',
+    quizQuestions: [
+      _QuizQuestion(question: '__ kitêbek heye. (Bir kitabım var.)', options: ['Min', 'Ez', 'Em'], correctIndex: 0),
+      _QuizQuestion(question: 'Min zarok __. (Çocuklarım var.)', options: ['heye', 'hene', 'in'], correctIndex: 1),
+      _QuizQuestion(question: 'Min hevalek __.', options: ['heye', 'hene', 'e'], correctIndex: 0),
+      _QuizQuestion(question: 'Kîjan rast e (Bir kitabım var)?', options: ['Min kitêbek heye.', 'Ez kitêbek heye.', 'Min kitêbek hene.'], correctIndex: 0),
+      _QuizQuestion(question: '"heye" — neyînî?', options: ['tune', 'nake', 'nayê'], correctIndex: 0),
     ],
   ),
 
@@ -959,27 +1129,29 @@ const _grammarTopics = <_GrammarTopic>[
     titleTr: 'Fiiller — Geçmiş Zaman',
     level: 'A2',
     rules: [
-      'Avahiya ergatîf: Di dema borî de kerdox rewşa berz (tewandî) digire!',
-      'Lêkerên veguhêzî (transîtîf): MIN dît. (Ben gördüm.)',
-      '  Kerdox (min) di rewşa berz de ye.',
-      'Lêkerên neveguhêzî (întransîtîf): EZ çûm. (Ben gittim.)',
-      '  Kerdox (ez) di rewşa rast de dimîne.',
+      'Avahiya ergatîf: Di dema borî de kirde (bi lêkerên gerguhêz) di rewşa tewandî de ye!',
+      'Lêkerên gerguhêz (transîtîf): MIN dît. (Ben gördüm.)',
+      '  Kirde (min) di rewşa tewandî de ye.',
+      '  Lêker li gorî bireserê tê kişandin, ne li gorî kirdeyê:',
+      '  Min ew dît. (Onu gördüm.) — Min tu dîtî. (Seni gördüm.)',
+      'Lêkerên negerguhêz (întransîtîf): EZ çûm. (Ben gittim.)',
+      '  Kirde (ez) di rewşa xwerû de dimîne.',
       'Koka borî ji rader tê çêkirin:',
       '  xwendin → xwend, dîtin → dît, çûn → çû',
     ],
     examples: [
-      _GrammarExample(ku: 'Min dît.', tr: 'Ben gördüm.', note: 'Veguhêzî: min (berz) + dît'),
-      _GrammarExample(ku: 'Te xwend.', tr: 'Sen okudun.', note: 'Veguhêzî: te (berz) + xwend'),
-      _GrammarExample(ku: 'Ez çûm.', tr: 'Ben gittim.', note: 'Neveguhêzî: ez (rast) + çûm'),
-      _GrammarExample(ku: 'Em hatin.', tr: 'Biz geldik.', note: 'Neveguhêzî: em (rast) + hatin'),
+      _GrammarExample(ku: 'Min dît.', tr: 'Ben gördüm.', note: 'Gerguhêz: min (tewandî) + dît'),
+      _GrammarExample(ku: 'Te xwend.', tr: 'Sen okudun.', note: 'Gerguhêz: te (tewandî) + xwend'),
+      _GrammarExample(ku: 'Ez çûm.', tr: 'Ben gittim.', note: 'Negerguhêz: ez (xwerû) + çûm'),
+      _GrammarExample(ku: 'Em hatin.', tr: 'Biz geldik.', note: 'Negerguhêz: em (xwerû) + hatin'),
     ],
-    tip: 'Ergatîf yek ji taybetiyên herî cuda yên Kurmancî ye. "MIN dît" = Ben gördüm — "min" ne "beni" ye, kerdox e!',
+    tip: 'Ergatîf yek ji taybetiyên herî cuda yên Kurmancî ye. "MIN dît" = Ben gördüm — "min" ne "beni" ye, kirde ye!',
     quizQuestions: [
       // Rule recognition
-      _QuizQuestion(question: 'Di borî de kerdox di kîjan rewşê de ye (lêkerên veguhêzî)?', options: ['rast', 'berz (ergatîf)'], correctIndex: 1),
-      _QuizQuestion(question: '"Ez çûm" — kîjan celeb lêker e?', options: ['veguhêzî', 'neveguhêzî'], correctIndex: 1),
-      // Fill in the blank
-      _QuizQuestion(question: 'Min ew ____', options: ['dît', 'dîtim', 'dîtin'], correctIndex: 0),
+      _QuizQuestion(question: 'Di borî de kirde di kîjan rewşê de ye (lêkerên gerguhêz)?', options: ['xwerû', 'tewandî (ergatîf)'], correctIndex: 1),
+      _QuizQuestion(question: '"Ez çûm" — kîjan celeb lêker e?', options: ['gerguhêz', 'negerguhêz'], correctIndex: 1),
+      // Fill in the blank — "ew" tekil de çoğul da olabilir; anlam verilmezse "dîtin" de doğru olurdu
+      _QuizQuestion(question: 'Min ew ____ (onu gördüm)', options: ['dît', 'dîtim', 'dîtin'], correctIndex: 0),
       _QuizQuestion(question: '____ xwend. (Sen okudun)', options: ['Tu', 'Te', 'We'], correctIndex: 1),
       _QuizQuestion(question: 'Ez ____ (gittim)', options: ['çû', 'çûm', 'çûn'], correctIndex: 1),
       // Error detection
@@ -1005,14 +1177,14 @@ const _grammarTopics = <_GrammarTopic>[
       '  dixwînim → naxwînim (okumuyorum)',
       'Dema borî: ne- pêşgir e:',
       '  xwend → nexwend (okumadı)',
-      'Fermankar (emir): me- an ne-:',
+      'Raweya fermanî (emir): me- an ne-:',
       '  mexwîne! (okuma!), meçe! (gitme!)',
     ],
     examples: [
       _GrammarExample(ku: 'Ez naxwînim.', tr: 'Ben okumuyorum.'),
       _GrammarExample(ku: 'Tu naçî.', tr: 'Sen gitmiyorsun.'),
       _GrammarExample(ku: 'Wî nexwend.', tr: 'O okumadı.'),
-      _GrammarExample(ku: 'Mexwîne!', tr: 'Okuma!', note: 'Fermankar — neyînî'),
+      _GrammarExample(ku: 'Mexwîne!', tr: 'Okuma!', note: 'Fermanî — neyînî'),
     ],
     tip: 'Niha: di- → na-. Borî: ne- li pêşiya kokê. Du qaîdeyên hêsan!',
     quizQuestions: [
@@ -1030,7 +1202,7 @@ const _grammarTopics = <_GrammarTopic>[
       _QuizQuestion(question: '"Ez diçim" → neyînî?', options: ['Ez naçim', 'Ez neçim', 'Ez nediçim'], correctIndex: 0),
       _QuizQuestion(question: '"Min dît" → neyînî?', options: ['Min nedît', 'Min nadît', 'Ez nedîtim'], correctIndex: 0),
       // Applied
-      _QuizQuestion(question: '"Mexwîne!" çi ye?', options: ['pirsyar', 'fermankar neyînî', 'dema niha'], correctIndex: 1),
+      _QuizQuestion(question: '"Mexwîne!" çi ye?', options: ['pirsyar', 'fermanî neyînî', 'dema niha'], correctIndex: 1),
     ],
   ),
 
@@ -1086,22 +1258,25 @@ const _grammarTopics = <_GrammarTopic>[
     titleKu: 'Pirjimar',
     titleTr: 'Çoğul',
     level: 'A2',
+    // 2026-10-24: önceki sürüm "-an = çoğul" öğretiyordu ("zarok → zarokan = çocuklar"). Samî Tan:
+    // yalın durumdaki çoğulun eki yoktur, -an çoğul adların eğik durumunu kurar (Rêzimana Kurmancî,
+    // korpus satır 2307 ve 2529). Yanlış kural "Zarokan hatin" hatasına götürürdü.
     rules: [
-      'Paşgira pirjimarê ya tewandî (oblique): -an',
-      '  zarok → zarokan (çocukları/çocuklara)',
-      '  kitêb → kitêban',
-      '  mirov → mirovan',
-      'Paşgira veqetandek ya pirjimarê: -ên',
+      'Di rewşa xwerû de pirjimar paşgir nagire:',
+      '  Zarok hatin. (Çocuklar geldi.) — lêker pirjimar e',
+      'Paşgira pirjimarê ya rewşa tewandî: -an',
+      '  ji zarokan re (çocuklara), kitêb → kitêban, mirov → mirovan',
+      'Paşgira veqetandekê ya pirjimarê: -ên',
       '  malên me (evlerimiz)',
       '  kitêbên wan (onların kitapları)',
     ],
     examples: [
-      _GrammarExample(ku: 'zarok → zarokan', tr: 'çocuk → çocuklar'),
-      _GrammarExample(ku: 'dar → daran', tr: 'ağaç → ağaçlar'),
+      _GrammarExample(ku: 'Zarok hatin.', tr: 'Çocuklar geldi.', note: 'Xwerû: paşgir tune, lêker pirjimar e'),
+      _GrammarExample(ku: 'zarok → zarokan', tr: 'çocuk → çocukları / çocuklara', note: 'Tewandî: -an'),
       _GrammarExample(ku: 'malên me', tr: 'evlerimiz', note: 'Pirjimar veqetandek: -ên'),
       _GrammarExample(ku: 'kitêbên wî', tr: 'onun kitapları', note: 'Pirjimar veqetandek: -ên'),
     ],
-    tip: 'Piranî: navdêr + -an = pirjimar. Hêsan e!',
+    tip: 'Pirjimara rewşa xwerû paşgir nagire (Zarok hatin). -an tenê di rewşa tewandî de tê (ji zarokan re).',
     quizQuestions: [
       // Rule recognition
       _QuizQuestion(question: 'Paşgira pirjimarê ya tewandî kîjan e?', options: ['-ê', '-an', '-ên'], correctIndex: 1),
@@ -1111,13 +1286,106 @@ const _grammarTopics = <_GrammarTopic>[
       _QuizQuestion(question: 'kitêb + an = ____', options: ['kitêbên', 'kitêban', 'kitêba'], correctIndex: 1),
       _QuizQuestion(question: 'mal + ên me = ____ me (evlerimiz)', options: ['malên', 'malan', 'mala'], correctIndex: 0),
       // Error detection
-      _QuizQuestion(question: 'Kîjan paşgira pirjimarê ya tewandî ye?', options: ['-an', '-a', '-ê'], correctIndex: 0),
+      _QuizQuestion(question: 'Kîjan rast e (Çocuklar geldi)?', options: ['Zarok hatin.', 'Zarokan hatin.', 'Zarokên hatin.'], correctIndex: 0),
       _QuizQuestion(question: 'Kîjan rast e (onların kitapları)?', options: ['kitêban wan', 'kitêbên wan', 'kitêba wan'], correctIndex: 1),
       // Transformation (yek → pirjimar)
       _QuizQuestion(question: '"mirov" → forma pirjimar a tewandî?', options: ['mirovan', 'mirovên', 'mirova'], correctIndex: 0),
       _QuizQuestion(question: '"daran" ji kîjan peyvê ye?', options: ['dar', 'dara', 'darê'], correctIndex: 0),
       // Applied
       _QuizQuestion(question: '"kitêbên wî" — veqetandeka pirjimarê çi ye?', options: ['-ê', '-a', '-ên'], correctIndex: 2),
+    ],
+  ),
+
+  // 9a. Tewang — Fêrkera Kurdî 12. ders (mê -ê, nêr -î, tewanga navîn)
+  _GrammarTopic(
+    icon: Icons.swap_vert_rounded,
+    color: const Color(0xFF7E57C2),
+    titleKu: 'Tewang: -ê, -î, -an',
+    titleTr: 'Eğik Durum (tekil ve çoğul)',
+    level: 'A2',
+    rules: [
+      'Bi daçekan re navdêr di rewşa tewandî de ye:',
+      '  mê: -ê (di malê de)',
+      '  nêr: -î (li gundî) — di axaftinê de pir caran nayê gotin (ji gund)',
+      '  pirjimar: -an (ji zarokan re)',
+      'Tewanga navîn: bajar → ji bajêr',
+    ],
+    examples: [
+      _GrammarExample(ku: 'di malê de', tr: 'evde', note: 'mal (mê) → malê'),
+      _GrammarExample(ku: 'li gundî', tr: 'köyde', note: 'gund (nêr) → gundî'),
+      _GrammarExample(ku: 'ji bajêr', tr: 'şehirden', note: 'bajar → bajêr'),
+      _GrammarExample(ku: 'ji zarokan re', tr: 'çocuklara', note: 'pirjimar → -an'),
+    ],
+    tip: 'Mê -ê, nêr -î, pirjimar -an: zayenda navdêran bi bîr bîne!',
+    quizQuestions: [
+      _QuizQuestion(question: 'Kîjan rast e (evde)?', options: ['di malê de', 'di malî de', 'di malan de'], correctIndex: 0),
+      _QuizQuestion(question: 'Ji zarok__ re (çocuklara)', options: ['ê', 'î', 'an'], correctIndex: 2),
+      _QuizQuestion(question: 'Kîjan rast e (şehirden)?', options: ['ji bajêr', 'ji bajara', 'ji bajaran'], correctIndex: 0),
+      _QuizQuestion(question: 'Qertafa tewangê ya navdêrên mê?', options: ['-ê', '-î', '-an'], correctIndex: 0),
+      _QuizQuestion(question: 'Qertafa tewangê ya navdêrên nêr?', options: ['-ê', '-î', '-an'], correctIndex: 1),
+    ],
+  ),
+
+  // 9b. Banglêkirin — Fêrkera Kurdî 8. ders (-o, -ê, -ino, gelî)
+  _GrammarTopic(
+    icon: Icons.campaign_rounded,
+    color: const Color(0xFFEF5350),
+    titleKu: 'Banglêkirin',
+    titleTr: 'Seslenme (bavo!, dayê!)',
+    level: 'A2',
+    rules: [
+      'Qertafên rewşa banglêkirinê ev in:',
+      '  nêr: -o (bavo!, kuro!)',
+      '  mê: -ê (dayê!, keçê!)',
+      '  pirjimar: -ino (hevalino!) an "gelî … -an" (gelî hevalan!)',
+    ],
+    examples: [
+      _GrammarExample(ku: 'Bavo!', tr: 'Baba!', note: 'nêr: -o'),
+      _GrammarExample(ku: 'Keçê!', tr: 'Kızım! / Kız!', note: 'mê: -ê'),
+      _GrammarExample(ku: 'Hevalino!', tr: 'Arkadaşlar!', note: 'pirjimar: -ino'),
+      _GrammarExample(ku: 'Gelî hevalan!', tr: 'Ey arkadaşlar!', note: 'gelî + -an'),
+    ],
+    tip: 'Nêr -o, mê -ê, pirjimar -ino.',
+    quizQuestions: [
+      _QuizQuestion(question: 'Gazîkirina "bav"?', options: ['bavo', 'bavê', 'bavino'], correctIndex: 0),
+      _QuizQuestion(question: 'Gazîkirina "keç"?', options: ['keço', 'keçê', 'keçino'], correctIndex: 1),
+      _QuizQuestion(question: 'Gazîkirina "kur"?', options: ['kuro', 'kurê', 'kurino'], correctIndex: 0),
+      _QuizQuestion(question: 'Gazîkirina "heval" (pirjimar)?', options: ['hevalo', 'hevalê', 'hevalino'], correctIndex: 2),
+      _QuizQuestion(question: 'Gelî __! (Arkadaşlar!)', options: ['heval', 'hevalan', 'hevalên'], correctIndex: 1),
+      _QuizQuestion(question: '"-o" ji bo kîjan zayendê ye?', options: ['nêr', 'mê', 'pirjimar'], correctIndex: 0),
+    ],
+  ),
+
+  // 9c. Dema Bê û Fermanî — REBER: ayrı yazım "ez ê, tu yê"; Samî Tan "Tu yê bixwî"
+  _GrammarTopic(
+    icon: Icons.update_rounded,
+    color: const Color(0xFF0097A7),
+    titleKu: 'Dema Bê û Fermanî',
+    titleTr: 'Gelecek Zaman ve Emir',
+    level: 'A2',
+    rules: [
+      'Dema bê: ê / yê + bi- + kok + -im, -î, -e, -in',
+      '  Ez ê biçim. — Tu yê bixwî. — Em ê biçin.',
+      '  Neyînî: bi- → ne-: Ez ê neçim.',
+      'Fermanî: bi- + koka dema niha + -e (yekjimar) / -in (pirjimar)',
+      '  bixwîne! — bixwînin!',
+      '  Awarte: hatin → were! / werin!',
+    ],
+    examples: [
+      _GrammarExample(ku: 'Ez ê biçim.', tr: 'Gideceğim.'),
+      _GrammarExample(ku: 'Tu yê bixwî.', tr: 'Yiyeceksin.', note: 'piştî "tu": yê'),
+      _GrammarExample(ku: 'Bixwîne!', tr: 'Oku!', note: 'Fermanî, yekjimar'),
+      _GrammarExample(ku: 'Werin!', tr: 'Gelin!', note: 'Fermanî, pirjimar'),
+    ],
+    tip: '"ê" ji cînavkê cuda tê nivîsîn: ez ê, tu yê, em ê.',
+    quizQuestions: [
+      _QuizQuestion(question: '"Ez diçim" → dema bê?', options: ['Ez ê biçim.', 'Ez ê diçim.', 'Min ê biçim.'], correctIndex: 0),
+      _QuizQuestion(question: 'Kîjan rast e (yiyeceksin)?', options: ['Tu yê bixwî.', 'Tu yê dixwî.', 'Te yê bixwî.'], correctIndex: 0),
+      _QuizQuestion(question: '"Ez ê biçim" → neyînî?', options: ['Ez ê neçim.', 'Ez ê naçim.', 'Ez ê nediçim.'], correctIndex: 0),
+      _QuizQuestion(question: '"xwendin" → fermanî (yekjimar)?', options: ['bixwîne!', 'dixwîne!', 'bixwînin!'], correctIndex: 0),
+      _QuizQuestion(question: '"xwendin" → fermanî (pirjimar)?', options: ['bixwîne!', 'bixwînin!', 'dixwînin!'], correctIndex: 1),
+      _QuizQuestion(question: '"hatin" → fermanî (yekjimar)?', options: ['were!', 'hat!', 'tê!'], correctIndex: 0),
+      _QuizQuestion(question: '"Werin!" tê çi wateyê?', options: ['Gelin!', 'Gel!', 'Gidin!'], correctIndex: 0),
     ],
   ),
 
@@ -1143,7 +1411,9 @@ const _grammarTopics = <_GrammarTopic>[
       _GrammarExample(ku: 'Roj baş! Tu çawa yî?', tr: 'Günaydın! Nasılsın?'),
       _GrammarExample(ku: 'Ez baş im, spas. Tu?', tr: 'İyiyim, teşekkürler. Sen?'),
       _GrammarExample(ku: 'Navê min Amed e.', tr: 'Adım Amed.'),
-      _GrammarExample(ku: 'Xatirê te! Sibê bibînim.', tr: 'Hoşça kal! Yarın görüşelim.'),
+      // Fêrkera Kurdî 1. ders: veda "Bi xatirê te" — karşılığı "Oxir be" (korpus 18 / 14 geçiş).
+      // Önceki "Xatirê te! Sibê bibînim." editör kararı bekleyenler listesindeydi; "Sibê bibînim" tanıksız.
+      _GrammarExample(ku: 'Bi xatirê te! — Oxir be!', tr: 'Hoşça kal! — Güle güle!'),
     ],
     tip: '"Spas" (teşekkür) û "bi xêr hatî" (hoşgeldin) — her roj bikar bîne!',
     quizQuestions: [
@@ -1158,7 +1428,7 @@ const _grammarTopics = <_GrammarTopic>[
       _QuizQuestion(question: 'Kîjan rast e (Nasılsın?)?', options: ['Tu çawa yî?', 'Tu çi yî?', 'Tu kî yî?'], correctIndex: 0),
       _QuizQuestion(question: 'Kîjan rast e (Hoşça kal)?', options: ['Roj baş!', 'Bi xatirê te!', 'Spas!'], correctIndex: 1),
       // Transformation / response
-      _QuizQuestion(question: '"Tu çawa yî?" → Bersiv?', options: ['Navê min Amed e.', 'Ez başim, spas.', 'Roj baş!'], correctIndex: 1),
+      _QuizQuestion(question: '"Tu çawa yî?" → Bersiv?', options: ['Navê min Amed e.', 'Ez baş im, spas.', 'Roj baş!'], correctIndex: 1),
       _QuizQuestion(question: '"Tu çawa yî?" tê çi wateyê?', options: ['Adın ne?', 'Nasılsın?', 'Nerelisin?'], correctIndex: 1),
       // Applied
       _QuizQuestion(question: '"Bi xatirê te!" tê çi wateyê?', options: ['Hoşgeldin!', 'Teşekkürler!', 'Hoşça kal!'], correctIndex: 2),

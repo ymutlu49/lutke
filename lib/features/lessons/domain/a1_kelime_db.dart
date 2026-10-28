@@ -3074,6 +3074,21 @@ const kA1FerkeraDersler = [
    her:['Firîngî sor e.', 'Pîrê firîngî dixwe.'],
    gen:['Firîngiyên sor hene.', 'Firîngî û birinc hene.']),
 
+  // 2026-10-28, kaynak kitap denetimi: Fêrkera Kurdî'de (1.–2. ve 12. ders) öğretilip Lütke'de
+  // kendi kaydı olmayan iki sözcük; içerikte onlarca kez geçiyorlardı. Örnek cümleler Lütke'nin
+  // denetlenmiş ve seslendirilmiş mevcut cümleleri (yeni cümle yazılmadı).
+  (id:'a1_fk_23', ku:'Heval', tr:'Arkadaş', en:'Friend',
+   cins:'nêr', ez:'hevalê', kat:'malbat', zor:0.90,
+   not:'Heval — arkadaş. Ortak cinsli: erkek arkadaş için "hevalê min", kız arkadaş için "hevala min" (korpusta hevalekî 73, hevaleke 21). Mînak: Tu hevalê min î.',
+   her:['Tu hevalê min î.', 'Bi xêr hatî, heval!'],
+   gen:['Silav, heval!', 'Heval hat.']),
+
+  (id:'a1_fk_24', ku:'Pîroz', tr:'Kutlu, mübarek', en:'Blessed (in greetings)',
+   cins:'bêcins', ez:null, kat:'silav', zor:0.88,
+   not:'Pîroz — kutlu, mübarek. Kutlamada "… pîroz be!": Cejn pîroz be! (Bayramın kutlu olsun!) Fêrkera Kurdî 12. ders (Cejn).',
+   her:['Cejn pîroz be!', 'Sala nû pîroz be!'],
+   gen:['Pîroz be!', 'Cejna we pîroz be!']),
+
 ];
 
 // ════════════════════════════════════════════════════════════
